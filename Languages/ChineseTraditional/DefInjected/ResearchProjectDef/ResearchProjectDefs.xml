@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!--<AutomationBasics.label>PRF：基础自动化</AutomationBasics.label>-->
+  <!--<AutomationBasics.description>学习自动化机械的基础知识，迈向通往工业化殖民地的大门。</AutomationBasics.description>-->
+
+  <!--<PRMachineLearning.label>PRF：机械学习</PRMachineLearning.label>-->
+  <!--<PRMachineLearning.description>让工作站通过机械学习提高工作效率。</PRMachineLearning.description>-->
+
+
+  <!-- General -->
+
+  <!--<AnimalStations.label>PRF：自动饲养站</AnimalStations.label>-->
+  <!--<AnimalStations.description>动物饲养站科技允许自动从动物身上获取资源。</AnimalStations.description>-->
+
+  <!--<FarmingSprinklers.label>PRF：洒水器</FarmingSprinklers.label>-->
+  <!--<FarmingSprinklers.description>学习如何制作洒水奇，帮助植物更快（轻微的）生长。</FarmingSprinklers.description>-->
+
+  <!--<AutomaticFarming.label>PRF：自动化农场</AutomaticFarming.label>-->
+  <!--<AutomaticFarming.description>学习如何建造耕作机用于维护中等大小的农田。</AutomaticFarming.description>-->
+
+  <!--<AutonomousMining.label>PRF: 自动采矿</AutonomousMining.label>-->
+  <!--<AutonomousMining.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</AutonomousMining.description>-->
+
+  <!--<SelfCooking.label>PRF：自动化烹饪</SelfCooking.label>-->
+  <!--<SelfCooking.description>可以建造自动烹机，它就像是你的私人厨师，但不会因为各种奇葩理由而精神失常。</SelfCooking.description>-->
+
+  <!--<MagneticTape.label>PRF：磁带</MagneticTape.label>-->
+  <!--<MagneticTape.description>学习如何制作和使用旧式磁带来存储指令。 你可以在加工台上制作数据磁盘。</MagneticTape.description>-->
+
+  <!--<UniversalAutocrafting.label>PRF：通用自动化制造</UniversalAutocrafting.label>-->
+  <!--<UniversalAutocrafting.description>可以建造自动化制造设施，它就像是你的私人工匠，但不会因为各种奇葩理由而精神失常。</UniversalAutocrafting.description>-->
+
+  <!--<PRFCrates.label>PRF: 储存箱</PRFCrates.label>-->
+  <!--<PRFCrates.description>允许殖民者建造大储存箱以获得更紧凑的存储空间。</PRFCrates.description>-->
+
+  <!--<PRFStorage.label>Efficient storage</PRFStorage.label>-->
+  <!--<PRFStorage.description>Allows colonists to build even better powered storage solutions.</PRFStorage.description>-->
+
+  <!--<PRFStorageIO.label>Wireless item transfer</PRFStorageIO.label>-->
+  <!--<PRFStorageIO.description>Allows colonists to build machines that can transfer items to and from industrial storage units.</PRFStorageIO.description>-->
+
+
+</LanguageData>

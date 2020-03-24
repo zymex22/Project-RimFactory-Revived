@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PRF_DeepQuarry.label>深礦機</PRF_DeepQuarry.label>
+  <PRF_DeepQuarry.description>自動採礦機，不斷從地下挖掘礦物，包括石塊、原材料等。每6小時生產一次隨機資源。</PRF_DeepQuarry.description>
+  <PRF_DeepQuarry_Blueprint.label>深礦機（藍圖）</PRF_DeepQuarry_Blueprint.label>
+  <PRF_DeepQuarry_Frame.label>深礦機（建造中）</PRF_DeepQuarry_Frame.label>
+  <PRF_DeepQuarry_Frame.description>自動採礦機，不斷從地下挖掘礦物，包括石塊、原材料等。每6小時生產一次隨機資源。</PRF_DeepQuarry_Frame.description>
+
+  <FuelingMachine.label>燃料補充機</FuelingMachine.label>
+  <FuelingMachine.description>裝了機械手臂的機器，可以自動為建築物供料.</FuelingMachine.description>
+  <FuelingMachine_Blueprint.label>燃料補充機（藍圖）</FuelingMachine_Blueprint.label>
+  <FuelingMachine_Frame.label>燃料補充機（建造中）</FuelingMachine_Frame.label>
+  <FuelingMachine_Frame.description>裝了機械手臂的機器，可以自動為建築物供料.</FuelingMachine_Frame.description>
+
+</LanguageData>
+

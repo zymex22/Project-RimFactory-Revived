@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MachineLearningAssembler.label>機械學習工作站</MachineLearningAssembler.label>
+  <MachineLearningAssembler.description>一個由電腦控制的自動工作站。剛獲得配方時工作效率較低，隨著工作時間增長逐漸提高效率。</MachineLearningAssembler.description>
+  <MachineLearningAssembler_Blueprint.label>機械學習工作站(藍圖)</MachineLearningAssembler_Blueprint.label>
+  <MachineLearningAssembler_Blueprint_Install.label>機械學習工作站(藍圖)</MachineLearningAssembler_Blueprint_Install.label>
+  <MachineLearningAssembler_Frame.label>機械學習工作站(建造中)</MachineLearningAssembler_Frame.label>
+  <MachineLearningAssembler_Frame.description>一個由電腦控制的自動工作站。剛獲得配方時工作效率較低，隨著工作時間增長逐漸提高效率。</MachineLearningAssembler_Frame.description>
+
+  <UniversalAssembler.label>通用工作站</UniversalAssembler.label>
+  <UniversalAssembler.description>一個由電腦控制的工作站。從配方資料庫中讀取配方指令。</UniversalAssembler.description>
+  <UniversalAssembler_Blueprint.label>通用工作站（藍圖）</UniversalAssembler_Blueprint.label>
+  <UniversalAssembler_Blueprint_Install.label>通用工作站（藍圖）</UniversalAssembler_Blueprint_Install.label>
+  <UniversalAssembler_Frame.label>通用工作站（建造中）</UniversalAssembler_Frame.label>
+  <UniversalAssembler_Frame.description>一個由電腦控制的工作站。從配方資料庫中讀取配方指令。</UniversalAssembler_Frame.description>
+
+  <SelfCooker.label>自動烹飪機</SelfCooker.label>
+  <SelfCooker.description>一個會自己做飯的自動烹飪機，你只需要看著它做飯就行了。</SelfCooker.description>
+  <SelfCooker_Blueprint.label>自動烹飪機（藍圖）</SelfCooker_Blueprint.label>
+  <SelfCooker_Blueprint_Install.label>自動烹飪機（藍圖）</SelfCooker_Blueprint_Install.label>
+  <SelfCooker_Frame.label>自動烹飪機（建造中）</SelfCooker_Frame.label>
+  <SelfCooker_Frame.description>一個會自己做飯的自動烹飪機，你只需要看著它做飯就行了。</SelfCooker_Frame.description>
+
+  <!-- Recipe database -->
+
+  <RecipeDatabase.label>配方資料庫</RecipeDatabase.label>
+  <RecipeDatabase.description>存儲配方供智慧工作站使用，並從相鄰的工作臺中匯出配方。 我不知道這麼多按鈕幹...</RecipeDatabase.description>
+  <RecipeDatabase_Blueprint.label>配方資料庫（藍圖）</RecipeDatabase_Blueprint.label>
+  <RecipeDatabase_Blueprint_Install.label>配方資料庫（藍圖）</RecipeDatabase_Blueprint_Install.label>
+  <RecipeDatabase_Frame.label>配方資料庫（建造中）</RecipeDatabase_Frame.label>
+  <RecipeDatabase_Frame.description>存儲配方供智慧工作站使用，並從相鄰的工作臺中匯出配方。 我不知道這麼多按鈕幹...</RecipeDatabase_Frame.description>
+
+</LanguageData>
+

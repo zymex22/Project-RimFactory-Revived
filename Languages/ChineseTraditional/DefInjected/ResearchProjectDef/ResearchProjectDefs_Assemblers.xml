@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SelfCooking.label>PRF：自動化烹飪</SelfCooking.label>
+  <SelfCooking.description>可以建造自動烹飪機，它就像是你的私人廚師，但不會因為各種奇葩理由而精神失常。</SelfCooking.description>
+
+  <MagneticTape.label>PRF：磁帶</MagneticTape.label>
+  <MagneticTape.description>學習如何製作和使用舊式磁帶來存儲指令。 你可以在加工臺上製作資料磁片。</MagneticTape.description>
+
+  <UniversalAutocrafting.label>PRF：通用自動化製造</UniversalAutocrafting.label>
+  <UniversalAutocrafting.description>可以建造自動化製造設施，它就像是你的私人工匠，但不會因為各種奇葩理由而精神失常。</UniversalAutocrafting.description>
+
+  <SelfCorrectingAssemblers.label>自校正彙編器</SelfCorrectingAssemblers.label>
+  <SelfCorrectingAssemblers.description>學習如何製作一種新型的彙編程序，以緩慢提高創建速度.</SelfCorrectingAssemblers.description>
+
+</LanguageData>
+

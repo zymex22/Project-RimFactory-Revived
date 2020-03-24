@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <Shearer.label>自動剪毛站</Shearer.label>
+  <Shearer.description>自動剪毛站是一個2x2的飼養箱，但在箱子下方是一套機器臂和剪刀用於剪毛，並將毛料放在動物站立的地方。 適用於任何已被馴服的動物。</Shearer.description>
+  <Shearer_Blueprint.label>自動剪毛站（藍圖）</Shearer_Blueprint.label>
+  <Shearer_Frame.label>自動剪毛站（建造中）</Shearer_Frame.label>
+  <Shearer_Frame.description>自動剪毛站是一個2x2的飼養箱，但在箱子下方是一套機器臂和剪刀用於剪毛，並將毛料放在動物站立的地方。 適用於任何已被馴服的動物。</Shearer_Frame.description>
+
+  <Milker.label>自動擠奶站</Milker.label>
+  <Milker.description>自動擠奶站是一個2x2的飼養箱，在箱子下面是一組複雜的機器臂和收集結構，用於採集動物的奶。 適用於任何已被馴服的動物。</Milker.description>
+  <Milker_Blueprint.label>自動擠奶站（藍圖）</Milker_Blueprint.label>
+  <Milker_Frame.label>自動擠奶站（建造中）</Milker_Frame.label>
+  <Milker_Frame.description>自動擠奶站是一個2x2的飼養箱，在箱子下面是一組複雜的機器臂和收集結構，用於獲動物的奶。 適用於任何已被馴服的動物。</Milker_Frame.description>
+
+  <GenericAnimalHarvester.label>通用動物飼養站</GenericAnimalHarvester.label>
+  <GenericAnimalHarvester.description>可以從動物身上擠奶/剪毛的高級版本自動飼養站。</GenericAnimalHarvester.description>
+  <GenericAnimalHarvester_Blueprint.label>通用動物飼養站（藍圖）</GenericAnimalHarvester_Blueprint.label>
+  <GenericAnimalHarvester_Frame.label>通用動物飼養站（建造中）</GenericAnimalHarvester_Frame.label>
+  <GenericAnimalHarvester_Frame.description>可以從動物身上擠奶/剪毛的高級版本自動飼養站。</GenericAnimalHarvester_Frame.description>
+
+</LanguageData>
+

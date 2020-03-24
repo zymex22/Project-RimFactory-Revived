@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Cultivator -->
+
+  <CultivatorTools_DroneCultivator.label>耕作機</CultivatorTools_DroneCultivator.label>
+  <CultivatorTools_DroneCultivator.description>耕種機可以在周圍11個方格內自動種植和收穫作物。 它不會受到任何屬性修正的影響。</CultivatorTools_DroneCultivator.description>
+  <CultivatorTools_DroneCultivator_Blueprint.label>耕作機（藍圖）</CultivatorTools_DroneCultivator_Blueprint.label>
+  <CultivatorTools_DroneCultivator_Frame.label>耕作機（建造中）</CultivatorTools_DroneCultivator_Frame.label>
+  <CultivatorTools_DroneCultivator_Frame.description>耕種機可以在周圍11個方格內自動種植和收穫作物。 它不會受到任何屬性修正的影響。</CultivatorTools_DroneCultivator_Frame.description>
+
+  <CultivatorTools_CultivatorWithLamp.label>太陽燈耕作機</CultivatorTools_CultivatorWithLamp.label>
+  <CultivatorTools_CultivatorWithLamp.description>自帶太陽燈的耕種機，可以在周圍11個方格內自動種植和收穫作物。 它不會受到任何屬性修正的影響。</CultivatorTools_CultivatorWithLamp.description>
+  <CultivatorTools_CultivatorWithLamp_Blueprint.label>太陽燈耕作機（藍圖）</CultivatorTools_CultivatorWithLamp_Blueprint.label>
+  <CultivatorTools_CultivatorWithLamp_Frame.label>太陽燈耕作機（建造中）</CultivatorTools_CultivatorWithLamp_Frame.label>
+  <CultivatorTools_CultivatorWithLamp_Frame.description>自帶太陽燈的耕種機，可以在周圍11個方格內自動種植和收穫作物。 它不會受到任何屬性修正的影響。</CultivatorTools_CultivatorWithLamp_Frame.description>
+
+  <!-- Sprinkler -->
+
+  <CultivatorTools_Sprinkler.label>灑水器</CultivatorTools_Sprinkler.label>
+  <CultivatorTools_Sprinkler.description>一個大範圍的灑水器，每次灑水增加植物生長一小時。 效果是可堆迭的，即使植物休息也可以起作用。</CultivatorTools_Sprinkler.description>
+  <CultivatorTools_Sprinkler_Blueprint.label>灑水器（藍圖）</CultivatorTools_Sprinkler_Blueprint.label>
+  <CultivatorTools_Sprinkler_Frame.label>灑水器（建造中）</CultivatorTools_Sprinkler_Frame.label>
+  <CultivatorTools_Sprinkler_Frame.description>一個大範圍的灑水器，每次灑水增加植物生長一小時。 效果是可堆迭的，即使植物休息也可以起作用。</CultivatorTools_Sprinkler_Frame.description>
+
+</LanguageData>
+

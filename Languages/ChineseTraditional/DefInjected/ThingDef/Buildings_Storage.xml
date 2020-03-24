@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <StockpileCrate.label>儲存箱</StockpileCrate.label>
+  <StockpileCrate.description>一個巨大的儲存箱，最多可以保存10個物品，存放在箱子裡的物品不會變質。</StockpileCrate.description>
+  <StockpileCrate_Blueprint.label>儲存箱（藍圖）</StockpileCrate_Blueprint.label>
+  <StockpileCrate_Frame.label>儲存箱（建造中）</StockpileCrate_Frame.label>
+  <StockpileCrate_Frame.description>一個巨大的儲存箱，最多可以保存10個物品，存放在箱子裡的物品不會變質。</StockpileCrate_Frame.description>
+
+  <StockpileCrateReinforced.label>強化儲存箱</StockpileCrateReinforced.label>
+  <StockpileCrateReinforced.description>一個巨大的儲存箱，最多可以保存25個物品，存放在箱子裡的物品不會變質。</StockpileCrateReinforced.description>
+  <StockpileCrateReinforced_Blueprint.label>強化儲存箱（藍圖）</StockpileCrateReinforced_Blueprint.label>
+  <StockpileCrateReinforced_Frame.label>強化儲存箱（建造中）</StockpileCrateReinforced_Frame.label>
+  <StockpileCrateReinforced_Frame.description>一個巨大的儲存箱，最多可以保存25個物品，存放在箱子裡的物品不會變質。</StockpileCrateReinforced_Frame.description>
+
+  <IndustrialStorageUnit.label>工業存儲單元</IndustrialStorageUnit.label>
+  <IndustrialStorageUnit.description>這個裝置將物品儲存為全息圖，允許在其中存儲無限量的資訊。當你的殖民地失去電力時，物品會安全的儲存在裡面，但殖民者不能訪問它們。</IndustrialStorageUnit.description>
+  <IndustrialStorageUnit_Blueprint.label>工業存儲單元（藍圖）</IndustrialStorageUnit_Blueprint.label>
+  <IndustrialStorageUnit_Frame.label>工業存儲單元（建造中）</IndustrialStorageUnit_Frame.label>
+  <IndustrialStorageUnit_Frame.description>這個裝置將物品儲存為全息圖，允許在其中存儲無限量的資訊。當你的殖民地失去電力時，物品會安全的儲存在裡面，但殖民者不能訪問它們。</IndustrialStorageUnit_Frame.description>
+
+<PRFCargoPlatform.label>存儲平台</PRFCargoPlatform.label>
+  <PRFCargoPlatform.description>這個裝置將物品儲存為全息圖，允許在其中存儲無限量的資訊(每個堆疊 10w)。當你的殖民地失去電力時，物品會安全的儲存在裡面，但殖民者不能訪問它們。</PRFCargoPlatform.description>
+  <PRFCargoPlatform_Blueprint.label>存儲平台（藍圖）</PRFCargoPlatform_Blueprint.label>
+  <PRFCargoPlatform_Frame.label>存儲平台（建造中）</PRFCargoPlatform_Frame.label>
+  <PRFCargoPlatform_Frame.description>這個裝置將物品儲存為全息圖，允許在其中存儲無限量的資訊(每個堆疊 10w)。當你的殖民地失去電力時，物品會安全的儲存在裡面，但殖民者不能訪問它們。</PRFCargoPlatform_Frame.description>
+
+</LanguageData>
+
