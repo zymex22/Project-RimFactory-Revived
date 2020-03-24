@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <Shearer.label>Косарь</Shearer.label>
+  <Shearer.description>Ящик для кормления 2x2 для ваших прирученных животных, но под коробкой находится набор роботизированных рук и ножниц для сбора шерсти с минимальной инвазивностью. Падает шерсть, где стоит животное. Работает на любом прирученном животном.</Shearer.description>
+
+  <Milker.label>Дояр</Milker.label>
+  <Milker.description>Ящик для кормления 2x2 для ваших прирученных животных, но под коробкой находится набор роботизированных рук и сборщиков для сбора молока с минимальной инвазивностью. Падает шерсть, где стоит животное. Работает на любом прирученном животном.</Milker.description>
+
+  <GenericAnimalHarvester.label>Универсальный комбайн для животных</GenericAnimalHarvester.label>
+  <GenericAnimalHarvester.description>Более продвинутая версия дойщика/косаря, которая может собирать любой продукт у животного.</GenericAnimalHarvester.description>
+
+</LanguageData>

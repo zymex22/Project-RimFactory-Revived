@@ -1,0 +1,27 @@
+<LanguageData>
+
+  <PRFRoboticArm.label>роботизированная рука</PRFRoboticArm.label>
+  <PRFRoboticArm.description>Рука робота питается от электродвигателя. Используется в строительстве некоторых зданий автоматизации.</PRFRoboticArm.description>
+
+  <PRFWeakAIChip.label>слабый ИИ-чип</PRFWeakAIChip.label>
+  <PRFWeakAIChip.description>Блок обработки тензоров, содержащий самый рудиментарный ИИ.</PRFWeakAIChip.description>
+
+  <PRFMachineFrame.label>фрейм машины</PRFMachineFrame.label>
+  <PRFMachineFrame.description>Пустая оболочка среднего размера.</PRFMachineFrame.description>
+
+  <PRFMachineFrameSmall.label>маленький фрейм машины</PRFMachineFrameSmall.label>
+  <PRFMachineFrameSmall.description>Пустая оболочка маленького размера.</PRFMachineFrameSmall.description>
+
+  <PRFMachineFrameLarge.label>большой фрейм машины</PRFMachineFrameLarge.label>
+  <PRFMachineFrameLarge.description>Пустая оболочка большого размера.</PRFMachineFrameLarge.description>
+
+  <PRFDroneModule.label>модуль дрона</PRFDroneModule.label>
+  <PRFDroneModule.description>Спящая квадроскопическая рама, способная выполнять полет на низкой высоте.</PRFDroneModule.description>
+
+  <Paperclip.label>Скрепка</Paperclip.label>
+  <Paperclip.description>Маленький металлический предмет весом ровно 1 грамм. Скрепки идеально подходят как промежуточный ресурс для атомной и молекулярной рекомбинации.</Paperclip.description>
+
+  <PRFComputronium.label>Компьютрониум</PRFComputronium.label>
+  <PRFComputronium.description>Кластер электроники, способный выполнять несколько операций параллельной операции с плавающей запятой в секунду. Не содержащий ИИ сам по себе, он, вероятно, изготовлен для размещения искусственного суперинтеллекта.</PRFComputronium.description>
+
+</LanguageData>

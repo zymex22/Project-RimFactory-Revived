@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PRFCrates.label>Cкладские ящики</PRFCrates.label>
+  <PRFCrates.description>Позволяет колонистам строить большие ящики для более компактного хранения.</PRFCrates.description>
+  
+  <PRFStorage.label>Cкладские ящики II</PRFStorage.label>
+  <PRFStorage.description>Позволяет колонистам строить укрепленные складские ящики.</PRFStorage.description>
+
+  <PRFStorageIO.label>Беспроводная передача предметов</PRFStorageIO.label>
+  <PRFStorageIO.description>Позволяет колонистам строить грузовые платформы и порты ввода-вывода. Порты ввода-вывода могут передавать объекты удаленно на грузовые платформы и обратно.</PRFStorageIO.description>
+  
+</LanguageData>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CultivatorTools_DroneCultivator.label>Культиватор</CultivatorTools_DroneCultivator.label>
+  <CultivatorTools_DroneCultivator.description>Здание, которое может самостоятельно сажать и собирать урожай в 11-ти квадратных клетках вокруг него. Не будут затронуты никакие модификаторы.</CultivatorTools_DroneCultivator.description>
+
+  <CultivatorTools_CultivatorWithLamp.label>Культиватор (с солнечной лампой)</CultivatorTools_CultivatorWithLamp.label>
+  <CultivatorTools_CultivatorWithLamp.description>Здание, которое может самостоятельно сажать и собирать урожай в 11-ти квадратных клетках вокруг него. Имеет солнечную лампу Не будут затронуты никакие модификаторы.</CultivatorTools_CultivatorWithLamp.description>
+
+  <CultivatorTools_Sprinkler.label>Спринклер</CultivatorTools_Sprinkler.label>
+  <CultivatorTools_Sprinkler.description>Здание, которое поливает растения в расширяющейся радиусе, увеличивая их рост на один час за раунд. Эффекты наращиваемые, и она работает даже тогда, когда растения отдыхают.</CultivatorTools_Sprinkler.description>
+
+</LanguageData>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <StockpileCrate.label>Cкладской ящик</StockpileCrate.label>
+  <StockpileCrate.description>Гигантский ящик, который может хранить 25 стаков. Предметы, хранящиеся в ящике, не ухудшаются.</StockpileCrate.description>
+
+  <StockpileCrateReinforced.label>Уплотненный складской ящик</StockpileCrateReinforced.label>
+  <StockpileCrateReinforced.description>Гигантский ящик, который может хранить 100 стаков. Предметы, хранящиеся в ящике, не ухудшаются.</StockpileCrateReinforced.description>
+  
+  <IndustrialStorageUnit.label>Промышленное хранилище (устаревшее)</IndustrialStorageUnit.label>
+  <IndustrialStorageUnit.description>Это здание будет устаревшим в релизе. Пожалуйста, используйте грузовую платформу.</IndustrialStorageUnit.description>
+  
+  <PRFCargoPlatform.label>Грузавая платформа</PRFCargoPlatform.label>
+  <PRFCargoPlatform.description>Хранит бесконечное количество предметов. Потребляет 10 Вт энергии за каждый стак, который он держит. Когда ваша колония теряет силу, предметы будут сохранены внутри, но здание перестанет тянуть предметы в центральную ячейку.</PRFCargoPlatform.description>
+
+</LanguageData>

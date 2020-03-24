@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <MachineLearningAssembler.label>Самокорректирующий сборщик</MachineLearningAssembler.label>
+  <MachineLearningAssembler.description>Автоматический крафтер управляется компьютером. Медленно улучшается рецепт, тем больше он их завершает. Тем не менее, он также становится немного хуже с течением времени.</MachineLearningAssembler.description>
+
+  <UniversalAssembler.label>Универсальный сборщик</UniversalAssembler.label>
+  <UniversalAssembler.description>Автоматический крафтер управляется компьютером. Читает инструкции рецептов из базы данных рецептов.</UniversalAssembler.description>
+
+  <SelfCooker.label>Автоматическая плита</SelfCooker.label>
+  <SelfCooker.description>Машина, которая может самостоятельно готовить еду. Просто посмотри на это!</SelfCooker.description>
+
+  <RecipeDatabase.label>База данных рецептов</RecipeDatabase.label>
+  <RecipeDatabase.description>Сохраняет рецепты для использования интеллектуальными ассемблерами и импортирует рецепты из смежных рабочих таблиц. Интересно, что все кнопки делают ...</RecipeDatabase.description>
+
+</LanguageData>
