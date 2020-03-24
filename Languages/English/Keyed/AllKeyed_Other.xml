@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <PRF_TotalStacksNum>Total number of stacks: {0}</PRF_TotalStacksNum>
+  <PRFItemsTab>Items</PRFItemsTab>
+  <PRFStorageBuildingGainsName>This storage building is now called {0}.</PRFStorageBuildingGainsName>
+  <PRFItemsTabLabel>All items ({0} stacks total, showing {1} result(s))</PRFItemsTabLabel>
+  <PRFItemsTabLabel_Crate>All items ({0}/{1} stacks total, showing {2} result(s))</PRFItemsTabLabel_Crate>
+  <PRFRenameMassStorageUnitLabel>Rename</PRFRenameMassStorageUnitLabel>
+  <PRFRenameMassStorageUnitDesc>Rename this building.</PRFRenameMassStorageUnitDesc>
+  <PRFMassStorageUIThingLabel>{0} stacks</PRFMassStorageUIThingLabel>
+  <PRFCrateUIThingLabel>{0}/{1} stacks</PRFCrateUIThingLabel>
+  <PRFMassStorageRightClickSelectPawn>Select colonist...</PRFMassStorageRightClickSelectPawn>
+  
+  <PRFReorganize>Reorganize</PRFReorganize>
+  <PRFIOOutputSettings>Output settings...</PRFIOOutputSettings>
+  <PRFReorganize_Desc>Re-register I/O ports, reorganize and re-stack items.</PRFReorganize_Desc>
+  <PRFReorganize_Message>Reorganize complete.</PRFReorganize_Message>
+  <PRFIOMode>I/O mode</PRFIOMode>
+  <PRFIOInput>Input</PRFIOInput>
+  <PRFIOOutput>Output</PRFIOOutput>
+  <PRFBoundStorageBuilding>Item source</PRFBoundStorageBuilding>
+  <IOPort_Minimum_UseTooltip>When this is enabled, the I/O port will return the outputted item to the cargo platform if the item has less than X stack size. It will also only take items if there are enough items in storage to exceed the minimum.</IOPort_Minimum_UseTooltip>
+  <IOPort_Maximum_UseTooltip>When this is enabled, the I/O port will stop taking items if either the stack is full, or the stack size is greater than or equal to X.</IOPort_Maximum_UseTooltip>
+  
+  <PRFNoDesc>No description.</PRFNoDesc>
+  
+  <PaperclipFuelConsumption>Fuel consumption: {0} paperclips/second</PaperclipFuelConsumption>
+  <PaperclipProductionPerSecond>Paperclip production: {0} paperclips/second</PaperclipProductionPerSecond>
+  <PaperclipGeneratorEfficiency>Current efficiency: {0}%/{1}%</PaperclipGeneratorEfficiency>
+  <PaperclipsRunOutIn>Runs out of paperclips in: {0}</PaperclipsRunOutIn>
+  <SetPaperclipConsumptionPerSecond>Adjust paperclip consumption</SetPaperclipConsumptionPerSecond>
+  <SetPaperclipProductionPerSecond>Adjust paperclip production</SetPaperclipProductionPerSecond>
+  <SetPaperclipConsumptionPerSecond_Desc>Change the number of paperclips consumed per second.</SetPaperclipConsumptionPerSecond_Desc>
+  <SetPaperclipProductionPerSecond_Desc>Change the number of paperclips produced per second.</SetPaperclipProductionPerSecond_Desc>
+  
+  <AtomicReconstructorProgress>Reconstruction progress: {0}</AtomicReconstructorProgress>
+  <PRFAtomicReconstructionTab>Config</PRFAtomicReconstructionTab>
+  <AtomicReconstructionTab_NowProducing>Producing:</AtomicReconstructionTab_NowProducing>
+  <AtomicReconstructionTab_PaperclipCost>Paperclip cost:</AtomicReconstructionTab_PaperclipCost>
+  <AtomicReconstructionTab_ConsumptionPerSecond>Consumption per second:</AtomicReconstructionTab_ConsumptionPerSecond>
+  <AtomicReconstructionTab_Progress>Progress:</AtomicReconstructionTab_Progress>
+  <AtomicReconstructionTab_Speed>Speed multiplier: {0} (Paperclip consumption modifier: {1}x)</AtomicReconstructionTab_Speed>
+  
+  <PRF_ArchoCipher_BankOverflow>The AI chip from your paperclip duplicator has sent you a message:\n\Congratulations! You have achieved the maximum balance of paperclips in your duplicator. The real question is: What are you going to do with all these paperclips?</PRF_ArchoCipher_BankOverflow>
+  
+  <PRF_TimeLeftToDisintegrate>Time left until disintegrate: {0}</PRF_TimeLeftToDisintegrate>
+  <PRF_DisintegrationMessage>{0} has disintegrated.</PRF_DisintegrationMessage>
+  <PRFPaperclipDuplicatorTab>Duplicator</PRFPaperclipDuplicatorTab>
+  <PaperclipsInDuplicator>Paperclips in duplicator: {0}</PaperclipsInDuplicator>
+  <PaperclipsInStorageUnit>Paperclips in storage unit: {0}</PaperclipsInStorageUnit>
+  <PRFDepositWithdraw>Deposit/Withdraw</PRFDepositWithdraw>
+  <PRFDepositWithdrawMode>Mode:</PRFDepositWithdrawMode>
+  <PRFDeposit>Deposit</PRFDeposit>
+  <PRFWithdraw>Withdraw</PRFWithdraw>
+  <PRFAmount>Amount</PRFAmount>
+  <PRFNotEnoughPaperclips>Not enough paperclips.</PRFNotEnoughPaperclips>
+  <PRFInputInvalid>Invalid input.</PRFInputInvalid>
+  <PRFNoBoundStorageUnit>No bound storage unit.</PRFNoBoundStorageUnit>
+  <PRFBoundStorageUnitNotAvailableForIO>Bound storage unit is not available for item transfer.</PRFBoundStorageUnitNotAvailableForIO>
+  <SuccessfullyDepositedPaperclips>Successfully deposited {0} paperclips.</SuccessfullyDepositedPaperclips>
+  <SuccessfullyWithdrawnPaperclips>Succesfully withdrawn {0} paperclips.</SuccessfullyWithdrawnPaperclips>
+  
+  <PRFDroneStation_NumberOfDrones>Stored drones: {0}</PRFDroneStation_NumberOfDrones>
+  <PRFDroneName>Drone</PRFDroneName>
+  <PRFDroneStationLockdown>Lockdown</PRFDroneStationLockdown>
+  <PRFDroneStationLockdownDesc>Recall all active drones and disable drone station.</PRFDroneStationLockdownDesc>
+</LanguageData>
