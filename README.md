@@ -21,10 +21,10 @@ Any bugs, suggestion or other are VERY welcome as i cant test i all myself.
 
 Question
 Do you want all in one mod? or 4 seprate mods like PFR 1.0 did
--Core (this one)
--Storage (not up yet)
--Drones (not up yet)
--Insanity (not up yet)
+- Core (this one)
+- Storage (not up yet)
+- Drones (not up yet)
+- Insanity (not up yet)
 I can add them 1 by 1 if wanted?
 i think drones should be in, let me know what you think?
 
