@@ -1,5 +1,5 @@
 # Project-RimFactory-Revived
-# WIP - Unstable - Beta
+## WIP - Unstable - Beta
 Please know by using this mod theres a risk of things being removed or break.
 Until a stable release are ready.
 
@@ -20,8 +20,7 @@ I hope this mod can be a Continuation of Spdskatr excellent mod.
 Any bugs, suggestion or other are VERY welcome as i cant test i all myself.
 Feel free to help me update/build upon this version and lets make PRF return to rimworld!
 Im not capble to do any c# work, so if you are? feel free to help me!
-
-# Question
+## Question
 Do you want all in one mod? or 4 seprate mods like PFR 1.0 did
 - Core (this one)
 - Storage (not up yet)
