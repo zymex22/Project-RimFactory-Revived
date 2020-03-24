@@ -12,10 +12,10 @@ I hope this mod can be a Continuation of Spdskatr excellent mod.
 
 
 New in this version:
--Patch for Industrial rollers (clean up and merge menus)
--Grouped items to fill up less.
--Architech menu icon
--updated version, harmony and a few other things.
+- Patch for Industrial rollers (clean up and merge menus)
+- Grouped items to fill up less.
+- Architech menu icon
+- updated version, harmony and a few other things.
 
 Any bugs, suggestion or other are VERY welcome as i cant test i all myself.
 
