@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>Project RimFactory Revived</name>
-  <author>Spdskatr</author>
+  <author>zymex</author>
   <supportedVersions>
     <li>1.1</li>
   </supportedVersions>
@@ -58,5 +58,6 @@ Russian translation by Natsu_Zirok
   </modDependencies>
   <loadAfter>
     <li>brrainz.harmony</li>
+    <li>historic.IndustrialRollers</li>
   </loadAfter>
 </ModMetaData>
