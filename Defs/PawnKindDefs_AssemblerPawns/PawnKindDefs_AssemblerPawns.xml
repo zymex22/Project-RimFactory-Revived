@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <PawnKindDef>
+    <defName>PRFSlavePawn</defName>
+    <label>slave</label>
+    <combatPower>30</combatPower>
+    <race>Human</race>
+    <baseRecruitDifficulty>0.60</baseRecruitDifficulty>
+    <backstoryCategories>
+      <li>Slave</li>
+    </backstoryCategories>
+    <defaultFactionType>OutlanderCivil</defaultFactionType>
+    <itemQuality>Shoddy</itemQuality>
+    <backstoryCryptosleepCommonality>0.2</backstoryCryptosleepCommonality>
+    <isFighter>false</isFighter>
+    <chemicalAddictionChance>0.05</chemicalAddictionChance>
+    <gearHealthRange>
+      <min>0.2</min>
+      <max>0.8</max>
+    </gearHealthRange>
+    <apparelTags>
+      <li>Outlander</li>
+    </apparelTags>
+    <apparelMoney>
+      <min>150</min>
+      <max>300</max>
+    </apparelMoney>
+    <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
+    <techHediffsMoney>
+      <min>0</min>
+      <max>35</max>
+    </techHediffsMoney>
+    <techHediffsTags>
+      <li>Poor</li>
+    </techHediffsTags>
+    <techHediffsChance>0.01</techHediffsChance>
+    <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
+    <invNutrition>1</invNutrition>
+    <invFoodDef>Pemmican</invFoodDef>
+  </PawnKindDef>
+</Defs>

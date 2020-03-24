@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>PRF_DeepQuarry</defName>
+    <label>deep quarry</label>
+    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <graphicData>
+      <texPath>Industry/DeepQuarry</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+	  <drawSize>(4, 4)</drawSize>
+    </graphicData>
+	<size>(2, 2)</size>
+    <altitudeLayer>LayingPawn</altitudeLayer>
+    <passability>Impassable</passability>
+    <fillPercent>0.5</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 6 hours.</description>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+	  <li Class="CompProperties_Flickable" />
+	  <li><compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass></li>
+	  <li><compClass>ProjectRimFactory.Common.CompPRFHelp</compClass></li>
+    </comps>
+    <tickerType>Long</tickerType>
+    <rotatable>false</rotatable>
+    <designationCategory>Automation</designationCategory>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>AutonomousMining</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>FuelingMachine</defName>
+    <label>fueling machine</label>
+    <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
+    <graphicData>
+      <texPath>Industry/FuelingMachine</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+      <drawSize>(2, 2)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>450</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+	  <Mass>15</Mass>
+    </statBases>
+    <description>A robotic arm built on a small machine frame that can automatically fuel the building in front of it.</description>
+    <costList>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+	<minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories><li>BuildingsAutomation</li></thingCategories>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>50</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+	  <li><compClass>ProjectRimFactory.Common.CompPRFHelp</compClass></li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <rotatable>true</rotatable>
+    <designationCategory>Automation</designationCategory>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>AutomationBasics</li>
+    </researchPrerequisites>
+    <placeWorkers>
+      <li>ProjectRimFactory.Industry.PlaceWorker_FuelingMachine</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>Battery10k</defName>
+    <label>10k battery</label>
+    <thingClass>Building_Battery</thingClass>
+    <graphicData>
+      <texPath>Industry/Battery/Battery10k</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2,3)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <blockWind>true</blockWind>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.40</fillPercent>
+    <tickerType>Normal</tickerType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories><li>BuildingsPower</li></thingCategories>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Mass>40</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>-40</Beauty>
+    </statBases>
+    <description>A battery that can store 10000Wd of power.</description>
+    <size>(1,2)</size>
+    <costList>
+      <Steel>200</Steel>
+      <Plasteel>20</Plasteel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>10000</storedEnergyMax>
+        <efficiency>0.5</efficiency>
+
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Power</designationCategory>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>AutomationBasics</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>Battery100k</defName>
+    <label>100k battery</label>
+    <thingClass>Building_Battery</thingClass>
+    <graphicData>
+      <texPath>Industry/Battery/Battery100k</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2,3)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <blockWind>true</blockWind>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.40</fillPercent>
+    <tickerType>Normal</tickerType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories><li>BuildingsPower</li></thingCategories>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Mass>40</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>-40</Beauty>
+    </statBases>
+    <description>A battery that can store 100000Wd of power. Has 100% efficiency.</description>
+    <size>(1,2)</size>
+    <costList>
+      <Steel>500</Steel>
+      <Plasteel>60</Plasteel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>100000</storedEnergyMax>
+        <efficiency>1</efficiency>
+
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <designationCategory>Power</designationCategory>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>PRFGoldbachConjecture</li>
+    </researchPrerequisites>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <DesignatorDropdownGroupDef>
+    <defName>assembler_gr</defName>
+  </DesignatorDropdownGroupDef>
+
+  <ThingDef Name="AssemblerBase" ParentName="PRFBuildingBase" Abstract="True">
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Mass>70</Mass>
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <size>(3,3)</size>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <tickerType>Normal</tickerType>
+    <rotatable>true</rotatable>
+    <neverMultiSelect>true</neverMultiSelect>
+    <designationCategory>Automation</designationCategory>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
+    <comps>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="AssemblerBase">
+    <defName>MachineLearningAssembler</defName>
+    <label>self-correcting assembler</label>
+    <designationCategory>Automation</designationCategory>
+    <designatorDropdown>assembler_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
+    <graphicData>
+      <texPath>SAL3/smart_assembler</texPath>
+    </graphicData>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Plasteel>10</Plasteel>
+      <Steel>150</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <description>An auto-crafter controlled by a computer. Slowly gets better at recipes the more it completes them. However, it also gets a bit worse over time.</description>
+    <statBases>
+      <WorkToBuild>3000</WorkToBuild>
+      <MarketValue>1250</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>700</basePowerConsumption>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>SelfCorrectingAssemblers</li>
+    </researchPrerequisites>
+    <rotatable>false</rotatable>
+  </ThingDef>
+
+  <ThingDef ParentName="AssemblerBase">
+    <defName>UniversalAssembler</defName>
+    <label>universal assembler</label>
+    <designationCategory>Automation</designationCategory>
+    <designatorDropdown>assembler_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>
+    <graphicData>
+      <texPath>SAL3/smart_assembler</texPath>
+    </graphicData>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Steel>120</Steel>
+      <Plasteel>10</Plasteel>
+    </costList>
+    <description>An auto-crafter controlled by a computer. Reads recipe instructions from a recipe database.</description>
+    <statBases>
+      <WorkToBuild>2500</WorkToBuild>
+      <MarketValue>1000</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>625</basePowerConsumption>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>UniversalAutocrafting</li>
+    </researchPrerequisites>
+    <rotatable>false</rotatable>
+  </ThingDef>
+
+  <ThingDef ParentName="AssemblerBase">
+    <defName>SelfCooker</defName>
+    <label>self cooker</label>
+    <designationCategory>Automation</designationCategory>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>SAL3/AutoCooker</texPath>
+    </graphicData>
+    <statBases>
+      <WorkToBuild>2000</WorkToBuild>
+      <MarketValue>700</MarketValue>
+    </statBases>
+    <description>A machine that can cook meals all by itself. Just look at it go!</description>
+    <costStuffCount>100</costStuffCount>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Steel>10</Steel>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+    </comps>
+    <building>
+      <isMealSource>true</isMealSource>
+    </building>
+    <researchPrerequisites>
+      <li>SelfCooking</li>
+    </researchPrerequisites>
+    <rotatable>false</rotatable>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <importRecipesFrom>ElectricStove</importRecipesFrom>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!--Recipe database-->
+
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>RecipeDatabase</defName>
+    <label>recipe database</label>
+    <designatorDropdown>assembler_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
+    <graphicData>
+      <texPath>SAL3/DISK_HARDWARE4</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>800</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Mass>25</Mass>
+    </statBases>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <description>Stores recipes for use by smart assemblers, and imports recipes from adjacent work tables. I wonder what all the buttons do...</description>
+    <costList>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <Steel>20</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <RimFactory_Data_Disk>1</RimFactory_Data_Disk>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <neverMultiSelect>true</neverMultiSelect>
+    <designationCategory>Automation</designationCategory>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>MagneticTape</li>
+    </researchPrerequisites>
+    <rotatable>false</rotatable>
+  </ThingDef>
+</Defs>

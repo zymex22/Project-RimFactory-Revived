@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Tier 1 -->
+  <ResearchProjectDef>
+    <defName>AutonomousMining</defName>
+	<tab>Automation</tab>
+    <techLevel>Industrial</techLevel>
+    <baseCost>3500</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+	<prerequisites>
+	  <li>AutomationBasics</li>
+	</prerequisites>
+	<label>autonomous mining</label>
+    <researchViewX>1</researchViewX>
+    <researchViewY>1</researchViewY>
+	<description>Make buildings that can extract random minerals and rocks from deep underground.</description>
+  </ResearchProjectDef>
+  
+  <!-- Tier 2 -->
+  <ResearchProjectDef>
+    <defName>PaperclipProduction</defName>
+    <label>paperclip production</label>
+    <description>Allows colonists to build a factory that creates paperclips from any matter, and a machine that generates power from paperclips.</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>1000</baseCost>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>PRFMachineLearning</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>4</researchViewX>
+    <researchViewY>4</researchViewY>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>PaperclipGeneratorSelfImprovement</defName>
+    <label>paperclip power generator: self-improvement</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>2250</baseCost>
+    <description>Paperclip power generator slowly produces more power per paperclip (up to 500%) unless flicked or out of fuel.</description>
+    <prerequisites>
+      <li>PRFGoldbachConjecture</li>
+      <li>PaperclipProduction</li>
+    </prerequisites>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>5</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>PaperclipGeneratorKugelblitz</defName>
+    <label>paperclip power generator: kugelblitz</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>5000</baseCost>
+    <description>Paperclip power generator maximum efficiency increased up to 1000%.</description>
+    <prerequisites>
+      <li>PaperclipGeneratorSelfImprovement</li>
+    </prerequisites>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>6</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+  
+  <ResearchProjectDef>
+    <defName>PaperclipGeneratorQuantumFoamManipulation</defName> <!-- Keep this def name for backwards compatibility -->
+    <label>paperclip power generator: quantum foam manipulation</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>10000</baseCost>
+    <description>Paperclip power generator maximum efficiency increased up to 2500%.</description>
+    <prerequisites>
+      <li>PaperclipGeneratorKugelblitz</li>
+    </prerequisites>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>7</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+</Defs>

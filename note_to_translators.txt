@@ -1,0 +1,9 @@
+Welcome to my source code :P
+
+ALl the translation files are located in the Project RimFactory Core mod - this
+way you don't need to release a translation for each mod separately. The files
+are located in the mod's Languages folder, as usual.
+
+If you have any questions, feel free to message me on the development Discord.
+
+- Spdskatr
