@@ -37,6 +37,7 @@ i think drones should be in, let me know what you think?
 - Drone texture by Xen
 - X/Y/Z-Composite and drone station texture by Scythe
 - Chinese Traditional translation by AbnerChen
+- Assemblies to 1.1 AbnerChen see: https://github.com/cwc02777/ProjectRimFactory
 - Chinese Simplified  translation by Dango998
 - Russian translation by Natsu_Zirok
 - Spdskatr - Rimfactory original! see:
