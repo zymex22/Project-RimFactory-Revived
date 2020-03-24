@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <FarmingSprinklers.label>PRF：洒水器</FarmingSprinklers.label>
+  <FarmingSprinklers.description>学习如何制作洒水器，帮助植物更快（轻微的）生长。</FarmingSprinklers.description>
+
+  <AutomaticFarming.label>PRF：自动化农场</AutomaticFarming.label>
+  <AutomaticFarming.description>学习如何建造耕作机用于维护中等大小的农田。</AutomaticFarming.description>
+
+
+</LanguageData>

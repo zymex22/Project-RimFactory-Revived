@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SALMessage_NoDataDiskFound>请先插入数据磁带。</SALMessage_NoDataDiskFound>
+  <SearchingForIngredients>寻找配料...</SearchingForIngredients>
+  <SAL3_BillReport>当前清单: {0} ({1} 剩余工作量)</SAL3_BillReport>
+  <SAL3_Products>等待被放置的产品: {0}</SAL3_Products>
+  <SALMessage_NoRecipes>没有找到配方</SALMessage_NoRecipes>
+  <SALDataStartEncoding>导出配方...</SALDataStartEncoding>
+  <SALDataStartEncoding_Desc>从附近的工作台中导出新的配方。</SALDataStartEncoding_Desc>
+  <SALDataCancelBills>取消清单</SALDataCancelBills>
+  <AdjustDirection_Output>调整输出方向</AdjustDirection_Output>
+  <SAL_Name>一个机械</SAL_Name>
+  <SALInspect_RecipeReport>当前清单: {0}\n剩余工作量: {1}</SALInspect_RecipeReport>
+  <SAL3_StoredRecipes>储存的配方: {0}</SAL3_StoredRecipes>
+  <SAL3Alert_SomeBillsRemoved>有些清单/配方已经被删除，因此智能工作站无法使用。</SAL3Alert_SomeBillsRemoved>
+  <SAL3_BillsTabLabel>清单</SAL3_BillsTabLabel>
+  <AssemblerIdle>空闲</AssemblerIdle>
+  <SALToggleForbidden>允许使用禁用物品</SALToggleForbidden>
+  <SALToggleForbidden_Desc>允许/禁止自动工作站拿取禁止物品。打勾表示允许。</SALToggleForbidden_Desc>
+  <SALCurrentProductionSpeed>当前配方的生产效率 ({0}): {1}</SALCurrentProductionSpeed>
+  <DeepQuarry_TotalSoFar>迄今为止开采的岩石总数： {0}</DeepQuarry_TotalSoFar>
+  <SmartHopper_SetTargetAmount>设定目标数量</SmartHopper_SetTargetAmount>
+  <SmartHopper_Minimum>
+当前物品最小限制： {0}</SmartHopper_Minimum>
+  <SmartHopper_Maximum>当前物品最大限制： {0}</SmartHopper_Maximum>
+  <SmartHopper_Minimum_UseTooltip>【使用最小值】被勾选时，如果智能进料口上堆叠的物品少于设定数量，它会禁用物品。</SmartHopper_Minimum_UseTooltip>
+  <SmartHopper_Maximum_UseTooltip>【使用最大值】被勾选时，如果智能进料口上堆叠的物品已满或者超过设定数量，它会停止拿取物品。</SmartHopper_Maximum_UseTooltip>
+  <SmartHopper_Minimum_ToolTip>【最小值】会同时影响物品的堆叠和拿取。</SmartHopper_Minimum_ToolTip>
+  <SmartHopper_Maximum_ToolTip>【最大值】仅影响智能进料口的存储上限，它会试图达到设定的存储值。</SmartHopper_Maximum_ToolTip>
+
+  <!--Mod settings-->
+  <ProjectRimFactoryModName>边缘工厂</ProjectRimFactoryModName>
+
+</LanguageData>

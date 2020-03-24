@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <PRF_TotalStacksNum>总堆叠数： {0}</PRF_TotalStacksNum>
+  <PRFItemsTab>物品</PRFItemsTab>
+  <PRFStorageUnitIOTab>I/O</PRFStorageUnitIOTab>
+  <PRFStorageBuildingGainsName>这个存储建筑现在叫做 {0}.</PRFStorageBuildingGainsName>
+  <PRFItemsTabLabel>所有物品 ({0} 总堆叠)</PRFItemsTabLabel>
+  <PRFItemsTabLabel_Crate>所有物品 ({0}/{1} 总堆叠)</PRFItemsTabLabel_Crate>
+  <PRFRenameMassStorageUnitLabel>重命名</PRFRenameMassStorageUnitLabel>
+  <PRFRenameMassStorageUnitDesc>重命名这个建筑。</PRFRenameMassStorageUnitDesc>
+  <PRFIOMode>I/O 模式</PRFIOMode>
+  <PRFBoundStorageBuilding>物品来源</PRFBoundStorageBuilding>
+  <PRFOutputItem>当前输出: {0}</PRFOutputItem>
+  <PRFNoDesc>没有说明。</PRFNoDesc>
+  <PRFStoredChunks>储存堆块: {0}</PRFStoredChunks>
+
+</LanguageData>

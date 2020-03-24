@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <StockpileCrate.label>储存箱</StockpileCrate.label>
+  <StockpileCrate.description>一个巨大的储存箱，最多可以保存10个物品，存放在箱子里的物品不会变质。</StockpileCrate.description>
+  <StockpileCrate_Blueprint.label>储存箱（蓝图）</StockpileCrate_Blueprint.label>
+  <StockpileCrate_Frame.label>储存箱（建造中）</StockpileCrate_Frame.label>
+  <StockpileCrate_Frame.description>一个巨大的储存箱，最多可以保存10个物品，存放在箱子里的物品不会变质。</StockpileCrate_Frame.description>
+
+  <StockpileCrateReinforced.label>强化储存箱</StockpileCrateReinforced.label>
+  <StockpileCrateReinforced.description>一个巨大的储存箱，最多可以保存25个物品，存放在箱子里的物品不会变质。</StockpileCrateReinforced.description>
+  <StockpileCrateReinforced_Blueprint.label>强化储存箱（蓝图）</StockpileCrateReinforced_Blueprint.label>
+  <StockpileCrateReinforced_Frame.label>强化储存箱（建造中）</StockpileCrateReinforced_Frame.label>
+  <StockpileCrateReinforced_Frame.description>一个巨大的储存箱，最多可以保存25个物品，存放在箱子里的物品不会变质。</StockpileCrateReinforced_Frame.description>
+
+  <IndustrialStorageUnit.label>工业存储单元</IndustrialStorageUnit.label>
+  <IndustrialStorageUnit.description>这个装置将物品储存为全息图，允许在其中存储无限量的信息。当你的殖民地失去电力时，物品会安全的储存在里面，但殖民者不能访问它们。</IndustrialStorageUnit.description>
+  <IndustrialStorageUnit_Blueprint.label>工业存储单元（蓝图）</IndustrialStorageUnit_Blueprint.label>
+  <IndustrialStorageUnit_Frame.label>工业存储单元（建造中）</IndustrialStorageUnit_Frame.label>
+  <IndustrialStorageUnit_Frame.description>这个装置将物品储存为全息图，允许在其中存储无限量的信息。当你的殖民地失去电力时，物品会安全的储存在里面，但殖民者不能访问它们。</IndustrialStorageUnit_Frame.description>
+
+
+</LanguageData>

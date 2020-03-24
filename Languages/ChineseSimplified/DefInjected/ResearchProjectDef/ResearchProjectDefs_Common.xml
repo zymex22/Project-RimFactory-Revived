@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <AutomationBasics.label>PRF：基础自动化</AutomationBasics.label>
+  <AutomationBasics.description>学习自动化机械的基础知识，迈向通往工业化殖民地的大门。</AutomationBasics.description>
+
+  <PRFMachineLearning.label>PRF：机械学习</PRFMachineLearning.label>
+  <PRFMachineLearning.description>让工作站通过机械学习提高工作效率。</PRFMachineLearning.description>
+
+
+</LanguageData>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PRFCrates.label>PRF: 储存箱</PRFCrates.label>
+  <PRFCrates.description>允许殖民者建造大储存箱以获得更紧凑的存储空间。</PRFCrates.description>
+
+  <PRFStorage.label>PRF: 高效存储</PRFStorage.label>
+  <PRFStorage.description>允许殖民者使用更好的存储方案。</PRFStorage.description>
+
+  <PRFStorageIO.label>PRF: 物品转移</PRFStorageIO.label>
+  <PRFStorageIO.description>运行殖民者建造可以从工业储存单元中转移物品的机器。</PRFStorageIO.description>
+
+
+</LanguageData>

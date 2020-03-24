@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PRF_DeepQuarry.label>深矿机</PRF_DeepQuarry.label>
+  <PRF_DeepQuarry.description>自动采矿机，不断从地下挖掘矿物，包括石块、原材料等。每6小时生产一次随机资源。</PRF_DeepQuarry.description>
+  <PRF_DeepQuarry_Blueprint.label>深矿机（蓝图）</PRF_DeepQuarry_Blueprint.label>
+  <PRF_DeepQuarry_Frame.label>深矿机（建造中）</PRF_DeepQuarry_Frame.label>
+  <PRF_DeepQuarry_Frame.description>自动采矿机，不断从地下挖掘矿物，包括石块、原材料等。每6小时生产一次随机资源。</PRF_DeepQuarry_Frame.description>
+
+
+</LanguageData>
