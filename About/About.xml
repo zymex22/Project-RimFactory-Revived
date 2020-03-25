@@ -60,4 +60,7 @@ Russian translation by Natsu_Zirok
     <li>brrainz.harmony</li>
     <li>historic.IndustrialRollers</li>
   </loadAfter>
+  <incompatibleWith>
+    <li>Spdskatr.ssBiggerBatteries</li>
+  </incompatibleWith>
 </ModMetaData>
