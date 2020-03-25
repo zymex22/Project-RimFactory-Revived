@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <DesignatorDropdownGroupDef>
+    <defName>prfstorage_gr</defName>
+  </DesignatorDropdownGroupDef>
+
+  <ThingDef ParentName="PRFBuildingBase" Name="PRFMassStorageBase" Abstract="True">
+    <thingClass>ProjectRimFactory.Storage.Building_Crate</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>Gas</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>150</pathCost>
+    <blockWind>true</blockWind>
+    <fillPercent>1.0</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <rotatable>false</rotatable>
+    <canOverlapZones>false</canOverlapZones>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Foods</li>
+            <li>Manufactured</li>
+            <li>ResourcesRaw</li>
+            <li>Items</li>
+            <li>BuildingsArt</li>
+            <li>Weapons</li>
+            <li>Apparel</li>
+            <li>BodyParts</li>
+          </categories>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+      <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
+    </inspectorTabs>
+    <comps>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="PRFMassStorageBase">
+    <defName>StockpileCrate</defName>
+    <label>stockpile crate</label>
+    <uiIconScale>0.7</uiIconScale>
+    <designatorDropdown>prfstorage_gr</designatorDropdown>
+    <graphicData>
+      <texPath>Storage/Wood_Crate</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>A giant crate that can store 25 stacks. Items stored in the crate do not deteriorate.</description>
+    <size>(2,2)</size>
+    <costList>
+      <WoodLog>80</WoodLog>
+      <Steel>20</Steel>
+    </costList>
+    <constructEffect>ConstructWood</constructEffect>
+    <researchPrerequisites>
+      <li>PRFCrates</li>
+    </researchPrerequisites>
+    <designationCategory>Automation</designationCategory>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
+        <limit>25</limit>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="PRFMassStorageBase">
+    <defName>StockpileCrateReinforced</defName>
+    <label>reinforced stockpile crate</label>
+    <uiIconScale>0.7</uiIconScale>
+    <designatorDropdown>prfstorage_gr</designatorDropdown>
+    <graphicData>
+      <texPath>Storage/Metal_Crate</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>2500</WorkToBuild>
+      <Flammability>0.1</Flammability>
+    </statBases>
+    <description>A giant crate that can store 100 stacks. Items stored in the crate do not deteriorate.</description>
+    <canOverlapZones>false</canOverlapZones>
+    <size>(2,2)</size>
+    <costList>
+      <Steel>100</Steel>
+    </costList>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>PRFStorage</li>
+    </researchPrerequisites>
+    <designationCategory>Automation</designationCategory>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
+        <limit>100</limit>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="PRFMassStorageBase">
+    <defName>IndustrialStorageUnit</defName>
+    <label>industrial storage unit (deprecated)</label>
+    <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
+    <graphicData>
+      <texPath>Storage/industrial_storage_unit</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>2500</WorkToBuild>
+      <Flammability>0.1</Flammability>
+    </statBases>
+    <description>This building will be deprecated in the release. Please use the cargo platform.</description>
+    <canOverlapZones>false</canOverlapZones>
+    <blockWind>true</blockWind>
+    <size>(3,3)</size>
+    <!--costList>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Steel>200</Steel>
+	  <Gold>20</Gold>
+	  <Uranium>20</Uranium>
+	  <ComponentIndustrial>10</ComponentIndustrial>
+    </costList-->
+    <constructEffect>ConstructMetal</constructEffect>
+    <researchPrerequisites>
+      <li>PRFStorage</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+      </li>
+    </comps>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
+    </modExtensions>
+    <designationCategory>Automation</designationCategory>
+  </ThingDef>
+
+  <ThingDef ParentName="PRFMassStorageBase">
+    <defName>PRFCargoPlatform</defName>
+    <label>cargo platform</label>
+    <uiIconScale>0.9</uiIconScale>
+    <designatorDropdown>prfstorage_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
+    <graphicData>
+      <texPath>Storage/CargoPlatform</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>2500</WorkToBuild>
+      <Flammability>0.1</Flammability>
+    </statBases>
+    <description>Stores endless amounts of items. Consumes 10 watts of power per stack it holds. When your colony loses power, items will be safely stored inside, but the building will stop pulling the items into the central cell.</description>
+    <canOverlapZones>false</canOverlapZones>
+    <blockWind>true</blockWind>
+    <size>(3,3)</size>
+    <pathCost>0</pathCost>
+    <costList>
+      <Steel>300</Steel>
+      <Gold>50</Gold>
+      <Uranium>20</Uranium>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
+    <constructEffect>ConstructMetal</constructEffect>
+    <tickerType>Normal</tickerType>
+    <researchPrerequisites>
+      <li>PRFStorage</li>
+    </researchPrerequisites>
+    <designationCategory>Automation</designationCategory>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+      </li>
+    </comps>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
+    </modExtensions>
+  </ThingDef>
+</Defs>

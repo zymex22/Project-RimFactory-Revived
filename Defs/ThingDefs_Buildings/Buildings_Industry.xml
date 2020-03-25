@@ -21,8 +21,8 @@
     </statBases>
     <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 6 hours.</description>
     <costList>
-      <Steel>100</Steel>
-      <ComponentIndustrial>3</ComponentIndustrial>
+      <Steel>250</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
     <comps>
       <li Class="CompProperties_Power">

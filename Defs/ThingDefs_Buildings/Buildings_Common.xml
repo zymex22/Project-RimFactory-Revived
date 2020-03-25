@@ -6,7 +6,7 @@
     <label>AI research bench</label>
     <description>A high-tech bench with an AI module installed. Required for tier 2 automation research and is not a replacement for the hi-tech research bench. Requires power.</description>
     <thingClass>Building_ResearchBench</thingClass>
-    <size>(5,2)</size>
+    <size>(3,1)</size>
     <stuffCategories>
       <li>Metallic</li>
     </stuffCategories>
@@ -14,13 +14,13 @@
     <costList>
       <Steel>100</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-	  <PRFWeakAIChip>3</PRFWeakAIChip>
+      <PRFWeakAIChip>3</PRFWeakAIChip>
     </costList>
     <graphicData>
       <texPath>Common/ResearchBenchAI</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <shaderType>CutoutComplex</shaderType>
-      <drawSize>(7,4)</drawSize>
+      <drawSize>(4,2)</drawSize>
       <damageData>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
@@ -60,8 +60,8 @@
       <li>PlaceWorker_ShowFacilitiesConnections</li>
     </placeWorkers>
     <researchPrerequisites>
-	  <li>PRFMachineLearning</li>
-	</researchPrerequisites>
+      <li>PRFMachineLearning</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <ThingDef ParentName="BenchBase">
@@ -122,9 +122,11 @@
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <constructEffect>ConstructMetal</constructEffect>
-    <researchPrerequisites><li>AutomationBasics</li></researchPrerequisites>
-		<placeWorkers>
-			<li>PlaceWorker_ShowFacilitiesConnections</li>
-		</placeWorkers>
+    <researchPrerequisites>
+      <li>AutomationBasics</li>
+    </researchPrerequisites>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
   </ThingDef>
 </Defs>

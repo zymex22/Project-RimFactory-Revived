@@ -156,7 +156,6 @@
   <ThingDef ParentName="PRFBuildingBase">
     <defName>RecipeDatabase</defName>
     <label>recipe database</label>
-    <designatorDropdown>assembler_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
     <graphicData>
       <texPath>SAL3/DISK_HARDWARE4</texPath>
