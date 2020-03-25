@@ -22,7 +22,12 @@
 						defName="FuelingMachine" or 
 						defName="SAL_SmartHopper" or 
 						defName="Shearer" or
-						defName="Milker" or 
+						defName="Milker" or
+						defName="PRFStorageUnitIOPort" or
+						defName="StockpileCrate" or
+						defName="StockpileCrateReinforced" or
+						defName="IndustrialStorageUnit" or
+						defName="PRFCargoPlatform" or
 						defName="GenericAnimalHarvester"]/designationCategory
 					</xpath>
 					<value>
@@ -59,27 +64,7 @@
 			</operations>
 		</match>
 	</Operation>
-
-	<Operation Class="PatchOperationFindMod">
-		<mods>
-			<li>Industrial Rollers</li>
-			<li>Project RimFactory - Storage</li>
-		</mods>
-		<match Class="PatchOperationSequence">
-			<success>Always</success>
-			<operations>
-				<li Class="PatchOperationReplace">
-					<xpath>Defs/ThingDef[
-						defName="PRFMassStorageBase" or 
-						defName="PRFStorageUnitIOPort"]/designationCategory
-					</xpath>
-					<value>
-					<designationCategory>Industrial</designationCategory>
-					</value>
-				</li>
-			</operations>
-		</match>
-	</Operation>-->	
+	</Operation> -->	
 
 
 
