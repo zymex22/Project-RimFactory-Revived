@@ -9,6 +9,10 @@ I always loved those 2 mods, and now i have the chance to update one of them
 - 3 Cultivators to plant and harvest your crops and make them grow faster
 - 5 Auto-Assemblers that will auto craft, cook stuff for you
 - 1 deep drilling machine that will mine random blocks for you
+- 1 auto fueling unit
+- 1 smart hopper
+- 4 storage management itmes
+
 and more...
 this might change but list from original mod.
 
