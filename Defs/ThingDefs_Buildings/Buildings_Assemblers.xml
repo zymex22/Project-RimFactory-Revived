@@ -29,7 +29,7 @@
     <tickerType>Normal</tickerType>
     <rotatable>true</rotatable>
     <neverMultiSelect>true</neverMultiSelect>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <drawGUIOverlay>true</drawGUIOverlay>
     <inspectorTabs>
@@ -49,7 +49,7 @@
   <ThingDef ParentName="AssemblerBase">
     <defName>MachineLearningAssembler</defName>
     <label>self-correcting assembler</label>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <designatorDropdown>assembler_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -83,7 +83,7 @@
   <ThingDef ParentName="AssemblerBase">
     <defName>UniversalAssembler</defName>
     <label>universal assembler</label>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <designatorDropdown>assembler_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>
     <graphicData>
@@ -115,7 +115,7 @@
   <ThingDef ParentName="AssemblerBase">
     <defName>SelfCooker</defName>
     <label>self cooker</label>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>SAL3/AutoCooker</texPath>
@@ -186,7 +186,7 @@
     </costList>
     <tickerType>Normal</tickerType>
     <neverMultiSelect>true</neverMultiSelect>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <comps>

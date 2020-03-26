@@ -50,7 +50,7 @@
     </comps>
     <tickerType>Normal</tickerType>
     <rotatable>true</rotatable>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <modExtensions>
@@ -121,7 +121,7 @@
     </comps>
     <tickerType>Normal</tickerType>
     <rotatable>true</rotatable>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <modExtensions>
@@ -184,7 +184,7 @@
     <specialDisplayRadius>12</specialDisplayRadius>
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>

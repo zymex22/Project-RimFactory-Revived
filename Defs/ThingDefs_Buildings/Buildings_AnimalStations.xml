@@ -57,7 +57,7 @@
     <rotatable>true</rotatable>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <building>
       <ai_chillDestination>false</ai_chillDestination>
       <fixedStorageSettings>
@@ -146,7 +146,7 @@
     <rotatable>true</rotatable>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <building>
       <ai_chillDestination>false</ai_chillDestination>
       <fixedStorageSettings>
@@ -235,7 +235,7 @@
     <rotatable>true</rotatable>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <building>
       <ai_chillDestination>false</ai_chillDestination>
       <fixedStorageSettings>

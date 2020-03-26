@@ -61,7 +61,7 @@
     <tickerType>Normal</tickerType>
     <rotatable>true</rotatable>
     <neverMultiSelect>true</neverMultiSelect>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
     <constructEffect>ConstructMetal</constructEffect>

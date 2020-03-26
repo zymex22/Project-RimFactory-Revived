@@ -40,7 +40,7 @@
     </comps>
     <tickerType>Long</tickerType>
     <rotatable>false</rotatable>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
@@ -96,7 +96,7 @@
     </comps>
     <tickerType>Normal</tickerType>
     <rotatable>true</rotatable>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>

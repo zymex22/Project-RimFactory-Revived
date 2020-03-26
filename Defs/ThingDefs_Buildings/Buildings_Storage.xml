@@ -9,7 +9,7 @@
     <thingClass>ProjectRimFactory.Storage.Building_Crate</thingClass>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
+          </graphicData>
     <altitudeLayer>Gas</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <pathCost>150</pathCost>
@@ -66,8 +66,9 @@
     <uiIconScale>0.7</uiIconScale>
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <graphicData>
-      <texPath>Storage/Wood_Crate</texPath>
-      <drawSize>(3,3)</drawSize>
+      <texPath>Storage/Wood_Crate6</texPath>
+      <drawSize>(2.8,2.6)</drawSize>
+      <color>(133,97,67,256)</color>
     </graphicData>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
@@ -84,7 +85,7 @@
     <researchPrerequisites>
       <li>PRFCrates</li>
     </researchPrerequisites>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
@@ -99,8 +100,9 @@
     <uiIconScale>0.7</uiIconScale>
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <graphicData>
-      <texPath>Storage/Metal_Crate</texPath>
-      <drawSize>(3,3)</drawSize>
+      <texPath>Storage/Steel_Crate</texPath>
+      <drawSize>(2.8,2.6)</drawSize>
+      <color>(102,102,105,256)</color>
     </graphicData>
     <statBases>
       <MaxHitPoints>300</MaxHitPoints>
@@ -118,7 +120,7 @@
     <researchPrerequisites>
       <li>PRFStorage</li>
     </researchPrerequisites>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
         <limit>100</limit>
@@ -164,7 +166,7 @@
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
     </modExtensions>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
   </ThingDef>
 
   <ThingDef ParentName="PRFMassStorageBase">
@@ -198,7 +200,7 @@
     <researchPrerequisites>
       <li>PRFStorage</li>
     </researchPrerequisites>
-    <designationCategory>Automation</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
