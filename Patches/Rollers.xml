@@ -2,7 +2,7 @@
 <Patch>
 
 	<!--If Industrial rollers are installed -->
-	<Operation Class="PatchOperationFindMod">
+	<!--<Operation Class="PatchOperationFindMod">
 		<mods>
 			<li>Industrial Rollers</li>
 		</mods>
@@ -41,7 +41,7 @@
 				</li>				
 			</operations>
 		</match>
-	</Operation>
+	</Operation>-->
 
 	<!--<Operation Class="PatchOperationFindMod">
 		<mods>
