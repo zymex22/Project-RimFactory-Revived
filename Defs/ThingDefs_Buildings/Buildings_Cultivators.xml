@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!--================================================================== Cultivator -->
 
   <DesignatorDropdownGroupDef>
     <defName>Cultivator_gr</defName>
   </DesignatorDropdownGroupDef>
 
+  <!--=========================== Basic Cultivator ==================================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>CultivatorTools_DroneCultivator</defName>
     <label>cultivator</label>
@@ -44,6 +44,7 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>500</basePowerConsumption>
       </li>
+      <li Class="CompProperties_Flickable" />
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
@@ -70,7 +71,7 @@
     </placeWorkers>
   </ThingDef>
 
-
+  <!--=========================== Sun Cultivator ==================================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>CultivatorTools_CultivatorWithLamp</defName>
     <label>cultivator (with sun lamp)</label>
@@ -140,7 +141,80 @@
       <li>AutomaticFarming</li>
     </researchPrerequisites>
   </ThingDef>
-  <!--============================================================= Sprinkler -->
+
+  <!--=========================== B18 Sun Cultivator ==================================-->
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>CultivatorTools_b18Cultivator</defName>
+    <label>B18 Sun Cultivator (unstable)</label>
+    <designatorDropdown>Cultivator_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
+    <graphicData>
+      <texPath>CultivatorWithSunLamp</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>450</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>MIGT BE DELETED/unstable, this is a B18 Cultivator, it works better for hydroponics as it has a Output slot.</description>
+    <costList>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFDroneModule>2</PRFDroneModule>
+      <Steel>65</Steel>
+      <Plasteel>20</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>3200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <overlightRadius>9</overlightRadius>
+        <glowRadius>14</glowRadius>
+        <glowColor>(370,370,370,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <rotatable>true</rotatable>
+    <designationCategory>Industrial</designationCategory>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <squareAreaRadius>5</squareAreaRadius>
+      </li>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <maxNumDrones>2</maxNumDrones>
+        <displayDormantDrones>false</displayDormantDrones>
+      </li>
+    </modExtensions>
+    <placeWorkers>
+      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>AutomaticFarming</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!--=========================== Sprinkler ==================================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>CultivatorTools_Sprinkler</defName>
     <label>sprinkler</label>

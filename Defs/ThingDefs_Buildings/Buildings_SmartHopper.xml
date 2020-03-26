@@ -52,7 +52,6 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        
         <basePowerConsumption>200</basePowerConsumption>
       </li>
 	  <li Class="CompProperties_Flickable" />
@@ -65,7 +64,7 @@
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
     <constructEffect>ConstructMetal</constructEffect>
-	<minifiedDef>MinifiedThing</minifiedDef>
+	  <minifiedDef>MinifiedThing</minifiedDef>
     <thingCategories><li>BuildingsAutomation</li></thingCategories>
     <specialDisplayRadius>5</specialDisplayRadius><!--A.K.A. Search radius-->
     <researchPrerequisites>
