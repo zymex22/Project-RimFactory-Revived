@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+<!--Smart Puller-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>SAL_SmartHopper</defName>
-    <label>smart hopper</label>
+    <label>Smart Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
     <graphicData>
       <texPath>Things/Building/Production/Hopper</texPath>
@@ -44,7 +45,7 @@
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
-    <description>A hopper that can take items from nearby stockpiles and can be programmed to take a certain amount of one item. It has a range of 5 tiles. Unfortunately, it does not work as a hopper for the nurient paste dispenser.</description>
+    <description>A Vacuum Hopper that take in any items on stockpiles within 5 tile range, even different stockpiles, as long their cells are in range. It can be setup to specific type and amount, and hold onto it until pulled away.</description>
     <costList>
       <Steel>20</Steel>
       <ComponentIndustrial>3</ComponentIndustrial>

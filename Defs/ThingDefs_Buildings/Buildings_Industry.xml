@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+  <!--Quarry-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>PRF_DeepQuarry</defName>
     <label>deep quarry</label>
@@ -7,9 +8,9 @@
     <graphicData>
       <texPath>Industry/DeepQuarry</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(4, 4)</drawSize>
-    </graphicData>
-    <size>(2, 2)</size>
+      <drawSize>(2.5,2.5)</drawSize>
+      </graphicData>
+    <size>(2,2)</size>
     <altitudeLayer>LayingPawn</altitudeLayer>
     <passability>Impassable</passability>
     <fillPercent>0.5</fillPercent>

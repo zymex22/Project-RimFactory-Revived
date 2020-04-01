@@ -4,7 +4,11 @@
   <DesignatorDropdownGroupDef>
     <defName>assembler_gr</defName>
   </DesignatorDropdownGroupDef>
+  <DesignatorDropdownGroupDef>
+    <defName>assembler_food_gr</defName>
+  </DesignatorDropdownGroupDef>
 
+  <!--====================AssemblerBase====================-->
   <ThingDef Name="AssemblerBase" ParentName="PRFBuildingBase" Abstract="True">
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
@@ -46,14 +50,15 @@
     </comps>
   </ThingDef>
 
+  <!--====================Selfcorrecting assembler====================-->
   <ThingDef ParentName="AssemblerBase">
     <defName>MachineLearningAssembler</defName>
-    <label>self-correcting assembler</label>
+    <label>Self-Correcting Assembler</label>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>assembler_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
-      <texPath>SAL3/smart_assembler</texPath>
+      <texPath>SAL3/correcting_assembler</texPath>
     </graphicData>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
@@ -80,9 +85,10 @@
     <rotatable>false</rotatable>
   </ThingDef>
 
+  <!--====================Universal assembler====================-->
   <ThingDef ParentName="AssemblerBase">
     <defName>UniversalAssembler</defName>
-    <label>universal assembler</label>
+    <label>Universal Assembler</label>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>assembler_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>
@@ -112,54 +118,15 @@
     <rotatable>false</rotatable>
   </ThingDef>
 
-  <ThingDef ParentName="AssemblerBase">
-    <defName>SelfCooker</defName>
-    <label>self cooker</label>
-    <designationCategory>Industrial</designationCategory>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
-    <graphicData>
-      <texPath>SAL3/AutoCooker</texPath>
-    </graphicData>
-    <statBases>
-      <WorkToBuild>2000</WorkToBuild>
-      <MarketValue>700</MarketValue>
-    </statBases>
-    <description>A machine that can cook meals all by itself. Just look at it go!</description>
-    <costStuffCount>100</costStuffCount>
-    <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <Steel>10</Steel>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
-      </li>
-    </comps>
-    <building>
-      <isMealSource>true</isMealSource>
-    </building>
-    <researchPrerequisites>
-      <li>SelfCooking</li>
-    </researchPrerequisites>
-    <rotatable>false</rotatable>
-    <modExtensions>
-      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>ElectricStove</importRecipesFrom>
-      </li>
-    </modExtensions>
-  </ThingDef>
-
-  <!--Recipe database-->
-
+  <!--====================Recipe database====================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>RecipeDatabase</defName>
-    <label>recipe database</label>
+    <label>Recipe Database</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
     <graphicData>
       <texPath>SAL3/DISK_HARDWARE4</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
@@ -203,4 +170,94 @@
     </researchPrerequisites>
     <rotatable>false</rotatable>
   </ThingDef>
+
+  <!--====================Cooker====================-->
+  <ThingDef ParentName="AssemblerBase">
+    <defName>SelfCooker</defName>
+    <label>Self Cooker</label>
+    <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>assembler_food_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>SAL3/AutoCooker</texPath>
+    </graphicData>
+    <statBases>
+      <WorkToBuild>2000</WorkToBuild>
+      <MarketValue>700</MarketValue>
+    </statBases>
+    <description>A machine that can cook meals all by itself. Just look at it go!</description>
+    <costStuffCount>100</costStuffCount>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Steel>10</Steel>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+    </comps>
+    <recipes>
+      <li>MakeNutrientPaste</li>
+      <li>MakeNutrientPasteBulk</li>
+    </recipes>
+    <building>
+      <isMealSource>true</isMealSource>
+    </building>
+    <researchPrerequisites>
+      <li>SelfCooking</li>
+    </researchPrerequisites>
+    <rotatable>false</rotatable>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <importRecipesFrom>ElectricStove</importRecipesFrom>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!--====================Meat Grinder====================-->
+  <ThingDef ParentName="AssemblerBase">
+    <defName>MeatGrinder</defName>
+    <label>Self Meat Grinder</label>
+    <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>assembler_food_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>SAL3/smart_butcher</texPath>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <statBases>
+      <WorkToBuild>2000</WorkToBuild>
+      <MarketValue>700</MarketValue>
+    </statBases>
+    <size>(2,2)</size>
+    <description>This is a machine designed to Put Dead animals in and spit out Raw Meat and other good stuff. Properly best to move stuff away from output fast so this crazy looking machine wont be cloged? I/O or Rollers?</description>
+    <costStuffCount>100</costStuffCount>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Steel>10</Steel>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+    </comps>
+    <!--<recipes></recipes>-->
+    <building>
+      <isMealSource>true</isMealSource>
+    </building>
+    <researchPrerequisites>
+      <li>SelfCooking</li>
+    </researchPrerequisites>
+    <rotatable>false</rotatable>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <importRecipesFrom>TableButcher</importRecipesFrom>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
 </Defs>

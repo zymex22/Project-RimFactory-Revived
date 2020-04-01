@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-
+  <!--==================== Dropdown Groups ====================-->
   <DesignatorDropdownGroupDef>
     <defName>prfstorage_gr</defName>
   </DesignatorDropdownGroupDef>
-
+  <!--==================== Base ====================-->
   <ThingDef ParentName="PRFBuildingBase" Name="PRFMassStorageBase" Abstract="True">
     <thingClass>ProjectRimFactory.Storage.Building_Crate</thingClass>
+    <!-- <minifiedDef>MinifiedThing</minifiedDef> -->
+    <!-- <thingCategories></thingCategories> -->
+    <tradeTags>
+      <li>Furniture</li>
+    </tradeTags>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
-          </graphicData>
+    </graphicData>
     <altitudeLayer>Gas</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <pathCost>150</pathCost>
@@ -23,7 +28,7 @@
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
       <fixedStorageSettings>
-        <priority>Normal</priority>
+        <priority>Important</priority>
         <filter>
           <categories>
             <li>Root</li>
@@ -31,8 +36,8 @@
         </filter>
       </fixedStorageSettings>
       <defaultStorageSettings>
-        <priority>Normal</priority>
-        <filter>
+        <priority>Important</priority>
+        <!--<filter>
           <categories>
             <li>Foods</li>
             <li>Manufactured</li>
@@ -43,7 +48,7 @@
             <li>Apparel</li>
             <li>BodyParts</li>
           </categories>
-        </filter>
+        </filter>-->
       </defaultStorageSettings>
     </building>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
@@ -60,6 +65,7 @@
     </comps>
   </ThingDef>
 
+  <!--==================== Wood Crate ====================-->
   <ThingDef ParentName="PRFMassStorageBase">
     <defName>StockpileCrate</defName>
     <label>stockpile crate</label>
@@ -71,9 +77,11 @@
       <color>(133,97,67,256)</color>
     </graphicData>
     <statBases>
+      <Mass>10</Mass>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>1000</WorkToBuild>
       <Flammability>1.0</Flammability>
+      <Beauty>-0.1</Beauty>
     </statBases>
     <description>A giant crate that can store 25 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,2)</size>
@@ -94,6 +102,7 @@
     </modExtensions>
   </ThingDef>
 
+  <!--====================Steel Crate====================-->
   <ThingDef ParentName="PRFMassStorageBase">
     <defName>StockpileCrateReinforced</defName>
     <label>reinforced stockpile crate</label>
@@ -105,12 +114,13 @@
       <color>(102,102,105,256)</color>
     </graphicData>
     <statBases>
+      <Mass>10</Mass>
       <MaxHitPoints>300</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
       <Flammability>0.1</Flammability>
+      <Beauty>-0.5</Beauty>
     </statBases>
     <description>A giant crate that can store 100 stacks. Items stored in the crate do not deteriorate.</description>
-    <canOverlapZones>false</canOverlapZones>
     <size>(2,2)</size>
     <costList>
       <Steel>100</Steel>
@@ -128,6 +138,7 @@
     </modExtensions>
   </ThingDef>
 
+  <!--==================== Old ====================-->
   <ThingDef ParentName="PRFMassStorageBase">
     <defName>IndustrialStorageUnit</defName>
     <label>industrial storage unit (deprecated)</label>
@@ -137,12 +148,12 @@
       <drawSize>(3,3)</drawSize>
     </graphicData>
     <statBases>
+      <Mass>15</Mass>
       <MaxHitPoints>300</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
       <Flammability>0.1</Flammability>
     </statBases>
     <description>This building will be deprecated in the release. Please use the cargo platform.</description>
-    <canOverlapZones>false</canOverlapZones>
     <blockWind>true</blockWind>
     <size>(3,3)</size>
     <!--costList>
@@ -169,6 +180,7 @@
     <designationCategory>Industrial</designationCategory>
   </ThingDef>
 
+  <!--==================== Cargo Platform ====================-->
   <ThingDef ParentName="PRFMassStorageBase">
     <defName>PRFCargoPlatform</defName>
     <label>cargo platform</label>
@@ -180,15 +192,16 @@
       <drawSize>(3,3)</drawSize>
     </graphicData>
     <statBases>
+      <Mass>15</Mass>
       <MaxHitPoints>300</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
       <Flammability>0.1</Flammability>
+      <Beauty>0.5</Beauty>
     </statBases>
     <description>Stores endless amounts of items. Consumes 10 watts of power per stack it holds. When your colony loses power, items will be safely stored inside, but the building will stop pulling the items into the central cell.</description>
-    <canOverlapZones>false</canOverlapZones>
     <blockWind>true</blockWind>
     <size>(3,3)</size>
-    <pathCost>0</pathCost>
+    <pathCost>150</pathCost>
     <costList>
       <Steel>300</Steel>
       <Gold>50</Gold>

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+
+  <DesignatorDropdownGroupDef>
+    <defName>AnimalStations_gr</defName>
+  </DesignatorDropdownGroupDef>
+
   <ThingDef>
     <category>Building</category>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Shearer</thingClass>
@@ -16,6 +21,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2,2)</drawSize>
       <shaderType>CutoutComplex</shaderType>
+      <color>(133,97,67,256)</color>
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Standable</passability>
@@ -31,18 +37,14 @@
     </statBases>
     <tickerType>Rare</tickerType>
     <description>A 2x2 feeding box for your farm animals, but underneath the box is a set of robotic arms and shears to shear wool with minimal invasiveness. Drops wool where the animal is standing. Works on any tamed animal.</description>
+    <designatorDropdown>AnimalStations_gr</designatorDropdown>
     <size>(2,2)</size>
-    <costStuffCount>50</costStuffCount>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <Hay>50</Hay>
+      <WoodLog>50</WoodLog>
       <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
-    <stuffCategories>
-      <li>Woody</li>
-      <li>Metallic</li>
-      <li>Stony</li>
-    </stuffCategories>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -105,6 +107,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2,2)</drawSize>
       <shaderType>CutoutComplex</shaderType>
+      <color>(133,97,67,256)</color>
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Standable</passability>
@@ -120,18 +123,14 @@
     </statBases>
     <tickerType>Rare</tickerType>
     <description>A 2x2 feeding box for your farm animals, but underneath the box is a complicated set of robotic arms and collecting machinery that harvest animals' milk with minimal invasiveness. Works on any tamed animal.</description>
+    <designatorDropdown>AnimalStations_gr</designatorDropdown>
     <size>(2,2)</size>
-    <costStuffCount>50</costStuffCount>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <Hay>50</Hay>
+      <WoodLog>50</WoodLog>
       <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
-    <stuffCategories>
-      <li>Woody</li>
-      <li>Metallic</li>
-      <li>Stony</li>
-    </stuffCategories>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -194,6 +193,7 @@
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2,2)</drawSize>
       <shaderType>CutoutComplex</shaderType>
+      <color>(133,97,67,256)</color>
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Standable</passability>
@@ -209,18 +209,14 @@
     </statBases>
     <tickerType>Rare</tickerType>
     <description>A more advanced version of the milker/shearer that can harvest any product from an animal.</description>
+    <designatorDropdown>AnimalStations_gr</designatorDropdown>
     <size>(2,2)</size>
-    <costStuffCount>50</costStuffCount>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <Hay>50</Hay>
+      <WoodLog>50</WoodLog>
       <PRFRoboticArm>4</PRFRoboticArm>
     </costList>
-    <stuffCategories>
-      <li>Woody</li>
-      <li>Metallic</li>
-      <li>Stony</li>
-    </stuffCategories>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
