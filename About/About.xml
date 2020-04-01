@@ -17,7 +17,7 @@ This mod is together with Industrial Rollers an Awesome way to automate and crea
 I always loved those 2 mods, and now i have the chance to update one of them
 
 - 3 Animal Stations to milk, shear, and harvest
-- 3 Cultivators to plant and harvest your crops and make them grow faster
+- 4 Cultivators to plant and harvest your crops and make them grow faster
 - 5 Auto-Assemblers that will auto craft, cook stuff for you
 - 1 deep drilling machine that will mine random blocks for you
 and more...
@@ -43,12 +43,18 @@ New in this version:
 - updated assemblies by AbnerChen
 - Working with AutoSort in 1.1
 - Balanced research and cost of Deep Drilling.
-- New textures aniamal station,
+- New textures for many items.
 - Updated texture for storage crates by Chicken Plucker(more will come)
 - Included Rest of SS bigger battieries instead of just 2.
 - Research AI bench now only 3x1 instead of 5x2
 - Included PRF - Storage into Core again.
 - Moved PaperClips research out of core into Insanity (not out yet)
+- New Assembler Auto Meat Grinder
+- New Assembler Auto food Prepper (VGP only atm)
+- Reduced size of old textures
+- Edited description on Smart hopper and I/O Port
+- Recipe for Nutrient paste meal and put in selfcooker (original Spdskatr todo Honored)
+- Played around with storage containers settings(might solve problems? but properly not)
 
 Any bugs, suggestion or other are VERY welcome as i cant test i all myself.
 
@@ -64,13 +70,16 @@ Do you want all in one mod? or 4 seprate mods like PFR 1.0 did (updated for now)
 
 
 Credits:
-assemblies for 1.1: AbnerChen
-Data disk and tape player textures by totobrother
 Wood crate texture: Chicken Plucker 2 years ago and updated 2020!
-Robotic arm texture: Shotgunfrenzy
-Drone texture: Xen
-X/Y/Z-Composite + drone station texture: Scythe
 Spdskatr - Rimfactory original! see: https://github.com/spdskatr/ProjectRimFactory
+
+Coders helped on this:
+Spdskatr, AbnerChen, 
+
+Artist who have contributed to this mod:
+totobrother, Chicken Plucker, unnamed alien, Shotgunfrenzy, Xen, spdskatr, zymex, scythe
+
+-Thanks to all that have worked on this mod
 
 Translaters: (might need update after release)
 Russian: Natsu_Zirok, Chinese Simplified: Dango998, Chinese Traditional: AbnerChen
@@ -82,12 +91,19 @@ Russian: Natsu_Zirok, Chinese Simplified: Dango998, Chinese Traditional: AbnerCh
       <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
       <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
     </li>
+    <li>
+      <packageId>UnlimitedHugs.HugsLib</packageId>
+      <displayName>HugsLib</displayName>
+      <downloadUrl>https://github.com/UnlimitedHugs/RimworldHugsLib/releases/latest</downloadUrl>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/818773962</steamWorkshopUrl>
+    </li>
   </modDependencies>
   <loadAfter>
     <li>brrainz.harmony</li>
+    <li>UnlimitedHugs.HugsLib</li>
     <li>historic.IndustrialRollers</li>
   </loadAfter>
   <incompatibleWith>
-    <li>Spdskatr.ssBiggerBatteries</li>
+    <li>SS Bigger Batteries</li>
   </incompatibleWith>
 </ModMetaData>
