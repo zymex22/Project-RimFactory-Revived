@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!--VGP Gourmet Food Prepper -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>VGP Garden Gourmet</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<ThingDef ParentName="AssemblerBase">
+							<defName>SelfPrepper</defName>
+							<label>Auto Food Prepper</label>
+							<size>(2,2)</size>
+							<designationCategory>Industrial</designationCategory>
+							<designatorDropdown>assembler_food_gr</designatorDropdown>
+							<thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+							<graphicData>
+								<texPath>SAL3/smart_prepper</texPath>
+								<drawSize>(2,2)</drawSize>
+							</graphicData>
+							<statBases>
+								<WorkToBuild>2000</WorkToBuild>
+								<MarketValue>700</MarketValue>
+							</statBases>
+							<description>This is a machine designed to prep raw resources like wheat, sugarcane into ingredients for cooking(VGP only atm.)</description>
+							<costStuffCount>100</costStuffCount>
+							<costList>
+								<PRFRoboticArm>2</PRFRoboticArm>
+								<PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+								<Steel>10</Steel>
+							</costList>
+							<comps>
+								<li Class="CompProperties_Power">
+									<compClass>CompPowerTrader</compClass>
+									<basePowerConsumption>400</basePowerConsumption>
+								</li>
+							</comps>
+							<recipes>
+								<li>Maketofu</li>
+								<li>Makebulktofu</li>
+								<li>MakePolenta</li>
+								<li>MakebulkPolenta</li>
+								<li>Make_PsychiteTea</li>
+								<li>CraftFlour</li>
+								<li>GroundSugar</li>
+								<li>CraftCornmeal</li>
+								<li>CraftBulkFlour</li>
+								<li>CraftBulkSugar</li>
+								<li>CraftBulkCornMeal</li>
+								<li>Makesoycheese</li>
+								<li>MakeBulksoycheese</li>
+								<li>Makesoymilk</li>
+								<li>PickleVegetable</li>
+								<li>BulkPickleVegetable</li>
+								<li>SaltMeat</li>
+								<li>BulkSaltMeat</li>
+								<li>VG_VeganEgg</li>
+							</recipes>
+							<building>
+								<isMealSource>true</isMealSource>
+							</building>
+							<researchPrerequisites>
+								<li>SelfCooking</li>
+							</researchPrerequisites>
+							<rotatable>false</rotatable>
+							<!--<modExtensions>
+								<li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+									<importRecipesFrom>ElectricStove</importRecipesFrom></li>
+							</modExtensions>-->
+						</ThingDef>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
