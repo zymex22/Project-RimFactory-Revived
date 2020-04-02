@@ -2,22 +2,28 @@
 <LanguageData>
 
   <StockpileCrate.label>储存箱</StockpileCrate.label>
-  <StockpileCrate.description>一个巨大的储存箱，最多可以保存10个物品，存放在箱子里的物品不会变质。</StockpileCrate.description>
+  <StockpileCrate.description>一个巨大的储存箱，最多可以保存25个物品，存放在箱子里的物品不会老化。</StockpileCrate.description>
   <StockpileCrate_Blueprint.label>储存箱（蓝图）</StockpileCrate_Blueprint.label>
   <StockpileCrate_Frame.label>储存箱（建造中）</StockpileCrate_Frame.label>
-  <StockpileCrate_Frame.description>一个巨大的储存箱，最多可以保存10个物品，存放在箱子里的物品不会变质。</StockpileCrate_Frame.description>
+  <StockpileCrate_Frame.description>一个巨大的储存箱，最多可以保存25个物品，存放在箱子里的物品不会老化。</StockpileCrate_Frame.description>
 
   <StockpileCrateReinforced.label>强化储存箱</StockpileCrateReinforced.label>
-  <StockpileCrateReinforced.description>一个巨大的储存箱，最多可以保存25个物品，存放在箱子里的物品不会变质。</StockpileCrateReinforced.description>
+  <StockpileCrateReinforced.description>一个巨大的储存箱，最多可以保存100个物品，存放在箱子里的物品不会老化。</StockpileCrateReinforced.description>
   <StockpileCrateReinforced_Blueprint.label>强化储存箱（蓝图）</StockpileCrateReinforced_Blueprint.label>
   <StockpileCrateReinforced_Frame.label>强化储存箱（建造中）</StockpileCrateReinforced_Frame.label>
-  <StockpileCrateReinforced_Frame.description>一个巨大的储存箱，最多可以保存25个物品，存放在箱子里的物品不会变质。</StockpileCrateReinforced_Frame.description>
+  <StockpileCrateReinforced_Frame.description>一个巨大的储存箱，最多可以保存100个物品，存放在箱子里的物品不会老化。</StockpileCrateReinforced_Frame.description>
 
-  <IndustrialStorageUnit.label>工业存储单元</IndustrialStorageUnit.label>
-  <IndustrialStorageUnit.description>这个装置将物品储存为全息图，允许在其中存储无限量的信息。当你的殖民地失去电力时，物品会安全的储存在里面，但殖民者不能访问它们。</IndustrialStorageUnit.description>
-  <IndustrialStorageUnit_Blueprint.label>工业存储单元（蓝图）</IndustrialStorageUnit_Blueprint.label>
-  <IndustrialStorageUnit_Frame.label>工业存储单元（建造中）</IndustrialStorageUnit_Frame.label>
-  <IndustrialStorageUnit_Frame.description>这个装置将物品储存为全息图，允许在其中存储无限量的信息。当你的殖民地失去电力时，物品会安全的储存在里面，但殖民者不能访问它们。</IndustrialStorageUnit_Frame.description>
+  <IndustrialStorageUnit.label>工业储存单元 (弃用)</IndustrialStorageUnit.label>
+  <IndustrialStorageUnit.description>此版本将在发布中弃用。 请使用货物平台。</IndustrialStorageUnit.description>
+  <IndustrialStorageUnit_Blueprint.label>工业储存单元 (弃用)（蓝图）</IndustrialStorageUnit_Blueprint.label>
+  <IndustrialStorageUnit_Frame.label>工业储存单元 (弃用)（建造中）</IndustrialStorageUnit_Frame.label>
+  <IndustrialStorageUnit_Frame.description>此版本将在发布中弃用。 请使用货物平台。</IndustrialStorageUnit_Frame.description>
+
+  <PRFCargoPlatform.label>仓储平台</PRFCargoPlatform.label>
+  <PRFCargoPlatform.description>可存储无限的物品。每个存储的物品将增加10w电力消耗。当你的殖民地停电时物品将会安全的存储在平台内，但无法继续存放物品。</PRFCargoPlatform.description>
+  <PRFCargoPlatform_Blueprint.label>仓储平台（蓝图）</PRFCargoPlatform_Blueprint.label>
+  <PRFCargoPlatform_Frame.label>仓储平台（建造中）</PRFCargoPlatform_Frame.label>
+  <PRFCargoPlatform_Frame.description>可存储无限的物品。每个存储的物品将增加10w电力消耗。当你的殖民地停电时物品将会安全的存储在平台内，但无法继续存放物品。</PRFCargoPlatform_Frame.description>
 
 
 </LanguageData>

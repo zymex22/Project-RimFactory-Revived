@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <PRFStorageUnitIOPort.label>存储单元I/O接口</PRFStorageUnitIOPort.label>
-  <PRFStorageUnitIOPort.description>一种重新设计的智能进料口，可以从工业存储单元中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPort.description>
-  <PRFStorageUnitIOPort_Blueprint.label>存储单元I/O接口（蓝图）</PRFStorageUnitIOPort_Blueprint.label>
-  <PRFStorageUnitIOPort_Blueprint_Install.label>存储单元I/O接口（蓝图）</PRFStorageUnitIOPort_Blueprint_Install.label>
-  <PRFStorageUnitIOPort_Frame.label>存储单元I/O接口（建造中）</PRFStorageUnitIOPort_Frame.label>
-  <PRFStorageUnitIOPort_Frame.description>一种重新设计的智能进料口，可以从工业存储单元中存取物品。（译者注：I/O即‘输入与输出’的缩写。） </PRFStorageUnitIOPort_Frame.description>
+  <PRFStorageUnitIOPort.label>仓储平台I/O接口</PRFStorageUnitIOPort.label>
+  <PRFStorageUnitIOPort.description>一种重新设计的智能进料口，可以从仓储平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPort.description>
+  <PRFStorageUnitIOPort_Blueprint.label>仓储平台I/O接口（蓝图）</PRFStorageUnitIOPort_Blueprint.label>
+  <PRFStorageUnitIOPort_Blueprint_Install.label>仓储平台I/O接口（蓝图）</PRFStorageUnitIOPort_Blueprint_Install.label>
+  <PRFStorageUnitIOPort_Frame.label>仓储平台I/O接口（建造中）</PRFStorageUnitIOPort_Frame.label>
+  <PRFStorageUnitIOPort_Frame.description>一种重新设计的智能进料口，可以从仓储平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPort_Frame.description>
 
 
 </LanguageData>

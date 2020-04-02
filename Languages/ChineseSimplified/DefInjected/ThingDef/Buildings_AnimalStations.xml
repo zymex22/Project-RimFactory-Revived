@@ -2,16 +2,16 @@
 <LanguageData>
 
   <Shearer.label>自动剪毛站</Shearer.label>
-  <Shearer.description>自动剪毛站是一个2x2的饲养箱，但在箱子下方是一套机器臂和剪刀用于剪毛，并将毛料放在动物站立的地方。 适用于任何已被驯服的动物。</Shearer.description>
+  <Shearer.description>自动剪毛站看上去是一个2x2的饲料箱，在箱子下方是一套机器臂和剪刀，它将以最轻柔的方式进行剪毛工作，并将毛料放在动物站立的地方。 适用于任何已被驯服的动物。</Shearer.description>
   <Shearer_Blueprint.label>自动剪毛站（蓝图）</Shearer_Blueprint.label>
   <Shearer_Frame.label>自动剪毛站（建造中）</Shearer_Frame.label>
   <Shearer_Frame.description>自动剪毛站是一个2x2的饲养箱，但在箱子下方是一套机器臂和剪刀用于剪毛，并将毛料放在动物站立的地方。 适用于任何已被驯服的动物。</Shearer_Frame.description>
 
   <Milker.label>自动挤奶站</Milker.label>
-  <Milker.description>自动挤奶站是一个2x2的饲养箱，在箱子下面是一组复杂的机器臂和收集结构，用于采集动物的奶。 适用于任何已被驯服的动物。</Milker.description>
+  <Milker.description>自动挤奶站是一个2x2的饲养箱，在箱子下面是一组复杂的机器臂和收集器，用于采集动物的奶。 适用于任何已被驯服的动物。</Milker.description>
   <Milker_Blueprint.label>自动挤奶站（蓝图）</Milker_Blueprint.label>
   <Milker_Frame.label>自动挤奶站（建造中）</Milker_Frame.label>
-  <Milker_Frame.description>自动挤奶站是一个2x2的饲养箱，在箱子下面是一组复杂的机器臂和收集结构，用于获动物的奶。 适用于任何已被驯服的动物。</Milker_Frame.description>
+  <Milker_Frame.description>自动挤奶站是一个2x2的饲养箱，在箱子下面是一组复杂的机器臂和收集器，用于采集动物的奶。 适用于任何已被驯服的动物。</Milker_Frame.description>
 
   <GenericAnimalHarvester.label>通用动物饲养站</GenericAnimalHarvester.label>
   <GenericAnimalHarvester.description>可以从动物身上挤奶/剪毛的高级版本自动饲养站。</GenericAnimalHarvester.description>

@@ -1,36 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <MachineLearningAssembler.label>机械学习工作站</MachineLearningAssembler.label>
-  <MachineLearningAssembler.description>一个由计算机控制的自动工作站。刚获得配方时工作效率较低，随着工作时间增长逐渐提高效率。</MachineLearningAssembler.description>
-  <MachineLearningAssembler_Blueprint.label>机械学习工作站(蓝图)</MachineLearningAssembler_Blueprint.label>
-  <MachineLearningAssembler_Blueprint_Install.label>机械学习工作站(蓝图)</MachineLearningAssembler_Blueprint_Install.label>
-  <MachineLearningAssembler_Frame.label>机械学习工作站(建造中)</MachineLearningAssembler_Frame.label>
-  <MachineLearningAssembler_Frame.description>一个由计算机控制的自动工作站。刚获得配方时工作效率较低，随着工作时间增长逐渐提高效率。</MachineLearningAssembler_Frame.description>
+  <MachineLearningAssembler.label>自修正工作站</MachineLearningAssembler.label>
+  <MachineLearningAssembler.description>计算机控制的自动工作站。执行配方时初始工作效率较低，但会随着工作时间的增长逐渐提高效率。</MachineLearningAssembler.description>
+  <MachineLearningAssembler_Blueprint.label>自修正工作站(蓝图)</MachineLearningAssembler_Blueprint.label>
+  <MachineLearningAssembler_Blueprint_Install.label>自修正工作站(蓝图)</MachineLearningAssembler_Blueprint_Install.label>
+  <MachineLearningAssembler_Frame.label>自修正工作站(建造中)</MachineLearningAssembler_Frame.label>
+  <MachineLearningAssembler_Frame.description>计算机控制的自动工作站。执行配方时初始工作效率较低，但会随着工作时间的增长逐渐提高效率。</MachineLearningAssembler_Frame.description>
 
   <UniversalAssembler.label>通用工作站</UniversalAssembler.label>
-  <UniversalAssembler.description>一个由计算机控制的工作站。从配方数据库中读取配方指令。</UniversalAssembler.description>
+  <UniversalAssembler.description>由计算机控制的工作站。需要从配方数据库中读取配方才能正常工作。</UniversalAssembler.description>
   <UniversalAssembler_Blueprint.label>通用工作站（蓝图）</UniversalAssembler_Blueprint.label>
   <UniversalAssembler_Blueprint_Install.label>通用工作站（蓝图）</UniversalAssembler_Blueprint_Install.label>
   <UniversalAssembler_Frame.label>通用工作站（建造中）</UniversalAssembler_Frame.label>
-  <UniversalAssembler_Frame.description>一个由计算机控制的工作站。从配方数据库中读取配方指令。</UniversalAssembler_Frame.description>
+  <UniversalAssembler_Frame.description>由计算机控制的工作站。需要从配方数据库中读取配方才能正常工作。</UniversalAssembler_Frame.description>
 
   <SelfCooker.label>自动烹饪机</SelfCooker.label>
-  <SelfCooker.description>一个会自己做饭的自动烹饪机，你只需要看着它做饭就行了。</SelfCooker.description>
+  <SelfCooker.description>一台会自己做饭的自动烹饪机，你只需要在一旁看着！</SelfCooker.description>
   <SelfCooker_Blueprint.label>自动烹饪机（蓝图）</SelfCooker_Blueprint.label>
   <SelfCooker_Blueprint_Install.label>自动烹饪机（蓝图）</SelfCooker_Blueprint_Install.label>
   <SelfCooker_Frame.label>自动烹饪机（建造中）</SelfCooker_Frame.label>
-  <SelfCooker_Frame.description>一个会自己做饭的自动烹饪机，你只需要看着它做饭就行了。</SelfCooker_Frame.description>
+  <SelfCooker_Frame.description>一台会自己做饭的自动烹饪机，你只需要在一旁看着！</SelfCooker_Frame.description>
+
+  <MeatGrinder.label>自动屠宰机</MeatGrinder.label>
+  <MeatGrinder.description>一台会自己屠宰的自动屠宰机，你只需要在一旁看着！</MeatGrinder.description>
+  <MeatGrinder_Blueprint.label>自动屠宰机（蓝图）</MeatGrinder_Blueprint.label>
+  <MeatGrinder_Blueprint_Install.label>自动屠宰机（蓝图）</MeatGrinder_Blueprint_Install.label>
+  <MeatGrinder_Frame.label>自动屠宰机（建造中）</MeatGrinder_Frame.label>
+  <MeatGrinder_Frame.description>一台会自己屠宰的自动屠宰机，你只需要在一旁看着！</MeatGrinder_Frame.description>
+
+  <SelfPrepper.label>自动食物加工机</SelfPrepper.label>
+  <SelfPrepper.description>一台会自己食物的自动食物加工机，你只需要在一旁看着！</SelfPrepper.description>
+  <SelfPrepper_Blueprint.label>自动食物加工机（蓝图）</SelfPrepper_Blueprint.label>
+  <SelfPrepper_Blueprint_Install.label>自动食物加工机（蓝图）</SelfPrepper_Blueprint_Install.label>
+  <SelfPrepper_Frame.label>自动食物加工机（建造中）</SelfPrepper_Frame.label>
+  <SelfPrepper_Frame.description>一台会自己食物的自动食物加工机，你只需要在一旁看着！</SelfPrepper_Frame.description>
 
 
   <!-- Recipe database -->
 
   <RecipeDatabase.label>配方数据库</RecipeDatabase.label>
-  <RecipeDatabase.description>存储配方供智能工作站使用，并从相邻的工作台中导出配方。 我不知道这么多按钮干...</RecipeDatabase.description>
+  <RecipeDatabase.description>存储配方供智能工作站使用，也可以从相邻的工作台中导出配方。 我想知道这些按钮都是干什么用的...</RecipeDatabase.description>
   <RecipeDatabase_Blueprint.label>配方数据库（蓝图）</RecipeDatabase_Blueprint.label>
   <RecipeDatabase_Blueprint_Install.label>配方数据库（蓝图）</RecipeDatabase_Blueprint_Install.label>
   <RecipeDatabase_Frame.label>配方数据库（建造中）</RecipeDatabase_Frame.label>
-  <RecipeDatabase_Frame.description>存储配方供智能工作站使用，并从相邻的工作台中导出配方。 我不知道这么多按钮干...</RecipeDatabase_Frame.description>
+  <RecipeDatabase_Frame.description>存储配方供智能工作站使用，也可以从相邻的工作台中导出配方。 我想知道这些按钮都是干什么用的...</RecipeDatabase_Frame.description>
 
 
 </LanguageData>
