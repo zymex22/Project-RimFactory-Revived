@@ -107,6 +107,7 @@
       <MarketValue>1000</MarketValue>
     </statBases>
     <comps>
+      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>625</basePowerConsumption>
@@ -193,6 +194,7 @@
       <Steel>10</Steel>
     </costList>
     <comps>
+      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>400</basePowerConsumption>
@@ -240,6 +242,7 @@
       <Steel>10</Steel>
     </costList>
     <comps>
+      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>400</basePowerConsumption>

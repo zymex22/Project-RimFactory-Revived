@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-<!--Smart Puller-->
+  <!--Smart Puller-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>SAL_SmartHopper</defName>
     <label>Smart Hopper</label>
@@ -51,12 +51,15 @@
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
     <comps>
+      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>200</basePowerConsumption>
       </li>
-	  <li Class="CompProperties_Flickable" />
-	  <li><compClass>ProjectRimFactory.Common.CompPRFHelp</compClass></li>
+      <li Class="CompProperties_Flickable" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
     </comps>
     <tickerType>Normal</tickerType>
     <rotatable>true</rotatable>
@@ -65,9 +68,11 @@
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
     <constructEffect>ConstructMetal</constructEffect>
-	  <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories><li>BuildingsAutomation</li></thingCategories>
-    <specialDisplayRadius>5</specialDisplayRadius><!--A.K.A. Search radius-->
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <specialDisplayRadius>5</specialDisplayRadius>    <!--A.K.A. Search radius-->
     <researchPrerequisites>
       <li>AutomationBasics</li>
     </researchPrerequisites>

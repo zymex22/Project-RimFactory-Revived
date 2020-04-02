@@ -142,7 +142,7 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!--=========================== B18 Sun Cultivator ==================================-->
+  <!--=========================== B18 Cultivator ==================================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>CultivatorTools_b18Cultivator</defName>
     <label>Mk1 Cultivator(b18)</label>
@@ -245,7 +245,9 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Breakdownable"/>
       <li>
+      
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>

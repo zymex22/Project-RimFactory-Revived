@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-<!--I/O HOPPER-->
+  <!--I/O HOPPER-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>PRFStorageUnitIOPort</defName>
     <label>Storage Unit I/O Port</label>
@@ -51,6 +51,7 @@
       <ComponentIndustrial>4</ComponentIndustrial>
     </costList>
     <comps>
+      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>300</basePowerConsumption>

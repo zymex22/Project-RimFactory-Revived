@@ -31,6 +31,7 @@
 
         <basePowerConsumption>300</basePowerConsumption>
       </li>
+      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable" />
       <li>
         <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
@@ -90,6 +91,7 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>50</basePowerConsumption>
       </li>
+      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable" />
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
