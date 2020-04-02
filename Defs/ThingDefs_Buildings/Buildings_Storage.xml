@@ -187,6 +187,7 @@
     <uiIconScale>0.9</uiIconScale>
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
+    <passability>Impassable</passability>
     <graphicData>
       <texPath>Storage/CargoPlatform</texPath>
       <drawSize>(3,3)</drawSize>
@@ -225,4 +226,6 @@
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
     </modExtensions>
   </ThingDef>
+
+
 </Defs>
