@@ -121,7 +121,7 @@
   </ThingDef>
 
 
-  <!--====================Recipe database====================-->
+  <!--==================== Recipe database ====================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>RecipeDatabase</defName>
     <label>Recipe Database</label>
@@ -229,7 +229,7 @@
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>SAL3/smart_butcher</texPath>
-      <drawSize>(2,2)</drawSize>
+      <drawSize>(2.1,2.1)</drawSize>
     </graphicData>
     <statBases>
       <WorkToBuild>2000</WorkToBuild>
@@ -280,9 +280,7 @@
       </damageData>
     </graphicData>
     <size>(1,1)</size>
-    <minifiedDef>MinifiedThing</minifiedDef>
     <altitudeLayer>Building</altitudeLayer>
-    <passability>Impassable</passability>
     <fillPercent>1.0</fillPercent>
     <pathCost>60</pathCost>
     <uiIconScale>0.6</uiIconScale>
@@ -294,10 +292,9 @@
       <MarketValue>150</MarketValue>
     </statBases>
     <costList>
-      <WoodLog>30</WoodLog>
       <PRFRoboticArm>1</PRFRoboticArm>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <Steel>90</Steel>
+      <Steel>100</Steel>
     </costList>
     <comps>
       <li Class="CompProperties_Breakdownable"/>
@@ -318,6 +315,5 @@
       <li>SelfCooking</li>
     </researchPrerequisites>
   </ThingDef>
-
 
 </Defs>

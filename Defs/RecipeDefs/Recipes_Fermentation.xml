@@ -4,14 +4,14 @@
   <!--================ Beer 6-pack =====================-->
   <RecipeDef>
     <defName>BrewBeer_sixpack</defName>
-    <label>Brew beer x6 (6-pack)</label>
-    <description>Brew beer x6 (6-pack)</description>
+    <label>Brew beer x10</label>
+    <description>Brew beer x10</description>
     <jobString>Brewing Beer</jobString>
     <effectWorking>Cook</effectWorking>
     <workSkill>Cooking</workSkill>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
-    <workAmount>132000</workAmount>
+    <workAmount>600000</workAmount>
     <ingredients>
       <li>
         <filter>
@@ -19,7 +19,7 @@
             <li>Wort</li>
           </thingDefs>
         </filter>
-        <count>6</count>
+        <count>10</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -28,21 +28,21 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <Beer>6</Beer>
+      <Beer>10</Beer>
     </products>
   </RecipeDef>
 
   <!--================ Brew beer x24 (case) =====================-->
   <RecipeDef>
     <defName>BrewBeer_case</defName>
-    <label>Brew beer x24 (case)</label>
-    <description>Brew beer x24 (case)</description>
+    <label>Brew beer x25</label>
+    <description>Brew beer x25</description>
     <jobString>Brewing Beer</jobString>
     <effectWorking>Cook</effectWorking>
     <workSkill>Cooking</workSkill>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
-    <workAmount>405000</workAmount>
+    <workAmount>600000</workAmount>
     <ingredients>
       <li>
         <filter>
@@ -50,7 +50,7 @@
             <li>Wort</li>
           </thingDefs>
         </filter>
-        <count>24</count>
+        <count>25</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -59,7 +59,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <Beer>24</Beer>
+      <Beer>25</Beer>
     </products>
   </RecipeDef>
 
@@ -67,14 +67,14 @@
   <!--================ Brew beer x80 (pony keg) =====================-->
   <RecipeDef>
     <defName>BrewBeer_keg</defName>
-    <label>Brew beer x80 (pony keg)</label>
-    <description>Brew beer x80 (pony keg)</description>
+    <label>Brew beer x50</label>
+    <description>Brew beer x50</description>
     <jobString>Brewing Beer</jobString>
     <effectWorking>Cook</effectWorking>
     <workSkill>Cooking</workSkill>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
-    <workAmount>960000</workAmount>
+    <workAmount>600000</workAmount>
     <ingredients>
       <li>
         <filter>
@@ -82,7 +82,7 @@
             <li>Wort</li>
           </thingDefs>
         </filter>
-        <count>80</count>
+        <count>50</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -91,7 +91,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <Beer>80</Beer>
+      <Beer>50</Beer>
     </products>
   </RecipeDef>
 

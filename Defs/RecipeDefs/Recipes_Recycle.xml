@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--  Apparel  -->
+  <RecipeDef>
+    <defName>Recycle_Apparel</defName>
+    <label>Recycle apparel</label>
+    <description>Recycle apparel back to raw resources.</description>
+    <jobString>Recycling apparel.</jobString>
+    <workAmount>1600</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Tailor</effectWorking>
+    <soundWorking>Recipe_Tailor</soundWorking>
+    <workSkill>Crafting</workSkill>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Apparel</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <specialProducts>
+      <li>Smelted</li>
+    </specialProducts>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Apparel</li>
+      </categories>
+    </fixedIngredientFilter>
+    <recipeUsers>
+      <li>PRF_Recycler</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <!--  Weapon  -->
+  <RecipeDef>
+    <defName>RecycleWeapon</defName>
+    <label>Recycle weapon</label>
+    <description>Recycle Weapons back to raw resources.</description>
+    <jobString>Smelting weapon.</jobString>
+    <workAmount>1600</workAmount>
+    <workSpeedStat>SmeltingSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <specialProducts>
+      <li>Smelted</li>
+    </specialProducts>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>Weapons</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>Weapons</li>
+      </categories>
+    </fixedIngredientFilter>
+    <recipeUsers>
+      <li>PRF_Recycler</li>
+    </recipeUsers>
+  </RecipeDef>
+
+</Defs>
