@@ -7,7 +7,7 @@
     <race>Human</race>
     <baseRecruitDifficulty>0.60</baseRecruitDifficulty>
     <backstoryCategories>
-      <li>Tribal</li>
+      <li>Slave</li>
     </backstoryCategories>
     <defaultFactionType>OutlanderCivil</defaultFactionType>
     <itemQuality>Shoddy</itemQuality>
