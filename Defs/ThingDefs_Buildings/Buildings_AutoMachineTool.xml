@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!-- *** Miner *** -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>Building_AutoMachineTool_Miner</defName>
+    <label>AutoMiner</label>
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
+    <description>Automatic mining of designated ore.
+It consumes enormous electricity.</description>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <tickerType>Never</tickerType>
+    <category>Building</category>
+    <selectable>true</selectable>
+
+    <!-- should set. -->
+    <graphicData>
+      <texPath>AutoMachineTool/Buildings/Miner</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <costList>
+      <Steel>1</Steel>
+    </costList>
+    <statBases>
+      <WorkToBuild>100</WorkToBuild>
+    </statBases>
+    <researchPrerequisites>
+    </researchPrerequisites>
+    <designationCategory>Industrial</designationCategory>
+    <size>(1,1)</size>
+    
+    
+    <fillPercent>0.5</fillPercent>
+    <constructEffect>ConstructMetal</constructEffect>
+    <passability>PassThroughOnly</passability>
+    <rotatable>false</rotatable>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+    
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+    </placeWorkers>
+    
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>
+    </inspectorTabs>
+    
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>1</speedFactor>
+        <minPower>10000</minPower>
+        <maxPower>1000000</maxPower>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_MinerOutputCellResolver</outputCellResolverType>
+      </li>
+    </modExtensions>
+  </ThingDef>
+  
+  <!-- *** Puller *** -->
+  <ThingDef Name="Building_AutoMachineTool_Puller_Base" Parent="BuildingBase" Abstract="true">
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+    <tickerType>Never</tickerType>
+    <category>Building</category>
+    <selectable>true</selectable>
+
+    <!-- should set. -->
+    <graphicData>
+      <texPath>AutoMachineTool/Buildings/Puller</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_Selectable</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <costList>
+      <Steel>1</Steel>
+    </costList>
+    <statBases>
+      <WorkToBuild>100</WorkToBuild>
+    </statBases>
+    <researchPrerequisites>
+    </researchPrerequisites>
+    <designationCategory>Industrial</designationCategory>
+    <size>(1,1)</size>
+    
+    
+    <fillPercent>0.5</fillPercent>
+    <constructEffect>ConstructMetal</constructEffect>
+    <passability>Standable</passability>
+    <rotatable>true</rotatable>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>1</speedFactor>
+        <minPower>200</minPower>
+        <maxPower>10000</maxPower>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</outputCellResolverType>
+        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</inputCellResolverType>
+      </li>
+    </modExtensions>
+
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_PullerFilter</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
+    </inspectorTabs>
+
+  </ThingDef>
+
+  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
+    <defName>Building_AutoMachineTool_Puller</defName>
+    <label>Item Puller</label>
+    <passability>Impassable</passability>
+    <description>Place it next to the pulling zone. Pull out from the opposite side of the installed orientation and output it in the installed orientation.
+Since the drawing machine is in a non-operating state in the post-installation state, it selects the drawing machine and put it in the operating state from the button.</description>
+    <altitudeLayer>Building</altitudeLayer>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
+    <defName>Building_AutoMachineTool_Puller_Wall</defName>
+    <label>Wall embedding Item Puller</label>
+    <description>Place it next to the pulling zone. Pull out from the opposite side of the installed orientation and output it in the installed orientation.(In the wall)
+Since the drawing machine is in a non-operating state in the post-installation state, it selects the drawing machine and put it in the operating state from the button.</description>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    <clearBuildingArea>false</clearBuildingArea>
+    <graphicData>
+      <drawSize>(0.8,0.8)</drawSize>
+    </graphicData>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
+    </placeWorkers>
+  </ThingDef>
+  
+  <!-- *** Slaughterhouse *** -->
+  <ThingDef Parent="BuildingBase">
+    <defName>Building_AutoMachineTool_Slaughterhouse</defName>
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
+    <label>Slaughterhouse</label>
+    <description>Place the Slaughterhouse near animals passing through or staying.
+Select the Slaughterhouse and set slaughter from the setting tab.
+Slaughterhouse starts slaughter animals within range.</description>
+    <altitudeLayer>Building</altitudeLayer>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <tickerType>Never</tickerType>
+    <category>Building</category>
+    <selectable>true</selectable>
+    
+    <!-- should set. -->
+    <statBases>
+      <WorkToBuild>100</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <texPath>AutoMachineTool/Buildings/Slaughterhouse</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <costList>
+      <Steel>1</Steel>
+    </costList>
+    <researchPrerequisites>
+    </researchPrerequisites>
+    <designationCategory>Industrial</designationCategory>
+    
+    
+    <fillPercent>1</fillPercent>
+    <constructEffect>ConstructMetal</constructEffect>
+    <passability>Impassable</passability>
+    <rotatable>true</rotatable>
+    <size>(1,1)</size>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+    <blockWind>true</blockWind>
+    <coversFloor>true</coversFloor>
+    <blockLight>true</blockLight>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>1.0</staticSunShadowHeight>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>
+    </building>
+
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_TargetCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+    </placeWorkers>
+
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_RangePowerSupply</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_Slaughterhouse</li>
+    </inspectorTabs>
+
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>1</speedFactor>
+        <minPower>500</minPower>
+        <maxPower>20000</maxPower>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_SlaughterhouseTargetCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.OutputCellResolver</outputCellResolverType>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+  <!-- Effects. Should change xml location. -->
+  <EffecterDef>
+    <defName>AutoMachineTool_Effect_ProgressBar</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_ProgressBar</subEffecterClass>
+        <moteDef>AutoMachineTool_Mote_ProgressBar</moteDef>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>AutoMachineTool_Mote_ProgressBar</defName>
+    <graphicData>
+      <texPath>Things/Mote/Transparent</texPath>
+    </graphicData>
+    <thingClass>ProjectRimFactory.AutoMachineTool.MoteProgressBar2</thingClass>
+    <altitudeLayer>MetaOverlays</altitudeLayer>
+    <mote>
+      <solidTime>240</solidTime>
+    </mote>
+  </ThingDef>
+</Defs>
