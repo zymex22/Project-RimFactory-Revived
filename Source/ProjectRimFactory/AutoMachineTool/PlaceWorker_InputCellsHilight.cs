@@ -24,9 +24,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 return;
             }
 
-            ext.InputCellResolver.InputCell(center, map, rot).ForEach(c =>
+            ext.InputCellResolver.InputCell(center, def.Size, map, rot).ForEach(c =>
                 GenDraw.DrawFieldEdges(new List<IntVec3>().Append(c), ext.InputCellResolver.GetColor(c, map, rot, CellPattern.InputCell)));
-            ext.InputCellResolver.InputZoneCells(center, map, rot)
+            ext.InputCellResolver.InputZoneCells(center, def.Size, map, rot)
                 .Select(c => new { Cell = c, Color = ext.InputCellResolver.GetColor(c, map, rot, CellPattern.InputZone) })
                 .GroupBy(a => a.Color)
                 .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));

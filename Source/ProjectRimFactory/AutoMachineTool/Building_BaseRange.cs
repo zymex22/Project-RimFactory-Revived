@@ -17,6 +17,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         int GetRange();
         IntVec3 Position { get; }
+        IntVec2 Size { get; }
         Rot4 Rotation { get; }
         IEnumerable<IntVec3> GetAllTargetCells();
     }
@@ -41,6 +42,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
             }
         }
+
+        public IntVec2 Size => this.def.Size;
 
         public virtual bool SpeedSetting => true;
 
@@ -90,7 +93,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             if (this.allTargetCellsCache == null)
             {
-                this.allTargetCellsCache = this.RangeExtension.TargetCellResolver.GetRangeCells(this.Position, this.Map, this.Rotation, this.GetRange()).ToHashSet();
+                this.allTargetCellsCache = this.RangeExtension.TargetCellResolver.GetRangeCells(this.Position, this.RotatedSize, this.Map, this.Rotation, this.GetRange()).ToHashSet();
                 if (this.targetEnumrationCount > 0)
                 {
                     this.splittedTargetCells = this.allTargetCellsCache.ToList().Grouped(this.targetEnumrationCount);

@@ -76,16 +76,16 @@ namespace ProjectRimFactory.AutoMachineTool
 
     public interface IInputCellResolver
     {
-        Option<IntVec3> InputCell(IntVec3 cell, Map map, Rot4 rot);
-        IEnumerable<IntVec3> InputZoneCells(IntVec3 cell, Map map, Rot4 rot);
+        Option<IntVec3> InputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot);
+        IEnumerable<IntVec3> InputZoneCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot);
         ModExtension_WorkIORange Parent { get; set; }
         Color GetColor(IntVec3 cell, Map map, Rot4 rot, CellPattern cellPattern);
     }
 
     public interface IOutputCellResolver
     {
-        Option<IntVec3> OutputCell(IntVec3 cell, Map map, Rot4 rot);
-        IEnumerable<IntVec3> OutputZoneCells(IntVec3 cell, Map map, Rot4 rot);
+        Option<IntVec3> OutputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot);
+        IEnumerable<IntVec3> OutputZoneCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot);
         ModExtension_WorkIORange Parent { get; set; }
         Color GetColor(IntVec3 cell, Map map, Rot4 rot, CellPattern cellPattern);
     }
@@ -94,16 +94,16 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public ModExtension_WorkIORange Parent { get; set; }
 
-        public virtual Option<IntVec3> OutputCell(IntVec3 cell, Map map, Rot4 rot)
+        public virtual Option<IntVec3> OutputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
         {
-            return Option(cell + rot.Opposite.FacingCell);
+            return Option(FacingCell(center, size, rot.Opposite));
         }
 
         private static readonly List<IntVec3> EmptyList = new List<IntVec3>();
 
-        public virtual IEnumerable<IntVec3> OutputZoneCells(IntVec3 cell, Map map, Rot4 rot)
+        public virtual IEnumerable<IntVec3> OutputZoneCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
         {
-            return this.OutputCell(cell, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
+            return this.OutputCell(center, size, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
         }
 
         public virtual Color GetColor(IntVec3 cell, Map map, Rot4 rot, CellPattern cellPattern)
@@ -114,7 +114,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
     public interface ITargetCellResolver
     {
-        IEnumerable<IntVec3> GetRangeCells(IntVec3 pos, Map map, Rot4 rot, int range);
+        IEnumerable<IntVec3> GetRangeCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot, int range);
         Color GetColor(IntVec3 cell, Map map, Rot4 rot, CellPattern cellPattern);
         ModExtension_WorkIORange Parent { get; set; }
         int GetRange(float power);
@@ -149,7 +149,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return cellPattern.ToColor();
         }
 
-        public abstract IEnumerable<IntVec3> GetRangeCells(IntVec3 pos, Map map, Rot4 rot, int range);
+        public abstract IEnumerable<IntVec3> GetRangeCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot, int range);
     }
 
     public enum CellPattern {

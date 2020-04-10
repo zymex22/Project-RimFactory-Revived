@@ -112,10 +112,10 @@ namespace ProjectRimFactory.AutoMachineTool
 
     public class Building_SlaughterhouseTargetCellResolver : BaseTargetCellResolver
     {
-        public override IEnumerable<IntVec3> GetRangeCells(IntVec3 pos, Map map, Rot4 rot, int range)
+        public override IEnumerable<IntVec3> GetRangeCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot, int range)
         {
-            return FacingRect(pos, rot, range)
-                .Where(c => (pos + rot.FacingCell).GetRoom(map) == c.GetRoom(map));
+            return FacingRect(center, size, rot, range)
+                .Where(c => FacingCell(center, size, rot).GetRoom(map) == c.GetRoom(map));
         }
 
         public override int GetRange(float power)

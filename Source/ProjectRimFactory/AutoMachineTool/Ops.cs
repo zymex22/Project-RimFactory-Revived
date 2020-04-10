@@ -276,18 +276,38 @@ namespace ProjectRimFactory.AutoMachineTool
             return copy;
         }
 
+        public static IntVec3 FacingCell(IntVec3 center, IntVec2 size, Rot4 rot)
+        {
+            var list = GenAdj.CellsOccupiedBy(center, rot, size).ToList();
+            var minX = list.Min(c => c.x);
+            var maxX = list.Max(c => c.x);
+            var minZ = list.Min(c => c.z);
+            var maxZ = list.Max(c => c.z);
+            var x = rot.FacingCell.x == 0 ? center.x : (rot.FacingCell.x > 0 ? maxX + 1 : minX - 1);
+            var z = rot.FacingCell.z == 0 ? center.z : (rot.FacingCell.z > 0 ? maxZ + 1 : minZ - 1);
+            return new IntVec3(x, center.y, z);
+        }
+
         public static IEnumerable<IntVec3> FacingRect(IntVec3 pos, Rot4 dir, int range)
         {
-            var rightAngle = dir;
-            rightAngle.Rotate(RotationDirection.Clockwise);
-            var ret = new List<IntVec3>();
-            var xoffset = dir.FacingCell.x * range + dir.FacingCell.x + pos.x;
-            var zoffset = dir.FacingCell.z * range + dir.FacingCell.z + pos.z;
+            return FacingRect(pos, new IntVec2(1, 1), dir, range);
+        }
+
+        public static IEnumerable<IntVec3> FacingRect(Thing thing, Rot4 dir, int range)
+        {
+            return FacingRect(thing.Position, thing.RotatedSize, dir, range);
+        }
+
+        public static IEnumerable<IntVec3> FacingRect(IntVec3 center, IntVec2 size, Rot4 dir, int range)
+        {
+            var facing = FacingCell(center, size, dir);
+            var xoffset = dir.FacingCell.x * range + facing.x;
+            var zoffset = dir.FacingCell.z * range + facing.z;
             for (int x = -range; x <= range; x++)
             {
                 for (int z = -range; z <= range; z++)
                 {
-                    yield return new IntVec3(x + xoffset, pos.y, z + zoffset);
+                    yield return new IntVec3(x + xoffset, center.y, z + zoffset);
                 }
             }
         }

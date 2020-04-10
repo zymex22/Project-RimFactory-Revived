@@ -115,26 +115,26 @@ namespace ProjectRimFactory.AutoMachineTool
             return cellPattern.ToColor();
         }
 
-        public Option<IntVec3> InputCell(IntVec3 cell, Map map, Rot4 rot)
+        public Option<IntVec3> InputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
         {
-            return Option(cell + rot.Opposite.FacingCell);
+            return Option(FacingCell(center, size, rot.Opposite));
         }
 
         private static readonly List<IntVec3> EmptyList = new List<IntVec3>();
 
-        public IEnumerable<IntVec3> InputZoneCells(IntVec3 cell, Map map, Rot4 rot)
+        public IEnumerable<IntVec3> InputZoneCells(IntVec3 cell, IntVec2 size, Map map, Rot4 rot)
         {
-            return InputCell(cell, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
+            return InputCell(cell, size, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
         }
 
-        public Option<IntVec3> OutputCell(IntVec3 cell, Map map, Rot4 rot)
+        public Option<IntVec3> OutputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
         {
-            return Option(cell + rot.FacingCell);
+            return Option(FacingCell(center, size, rot));
         }
 
-        public IEnumerable<IntVec3> OutputZoneCells(IntVec3 cell, Map map, Rot4 rot)
+        public IEnumerable<IntVec3> OutputZoneCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
         {
-            return OutputCell(cell, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
+            return OutputCell(center, size, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
         }
     }
 }
