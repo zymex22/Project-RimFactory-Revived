@@ -302,6 +302,7 @@
     <Compile Include="Industry\DefModExtension_AtomicReconstructorResearchPrerequisite.cs" />
     <Compile Include="Industry\PaperclipsUtility.cs" />
     <Compile Include="Industry\PlaceWorker_FuelingMachine.cs" />
+    <Compile Include="Industry\Utilities.cs" />
     <Compile Include="Industry\UI\ITab_AtomicReconstruction.cs" />
     <Compile Include="Industry\UI\ITab_PaperclipDuplicator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
