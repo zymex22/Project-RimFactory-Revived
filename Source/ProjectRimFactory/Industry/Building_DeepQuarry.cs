@@ -11,7 +11,7 @@ namespace ProjectRimFactory.Industry
 {
     public class Building_DeepQuarry : Building
     {
-        public const float ProduceMtbHours = 6f;
+        public float GetProduceMtbHours { get { return def.GetModExtension<DeepQuarryDefModExtension>().TickCount; } }
         static IEnumerable<ThingDef> cachedPossibleRockDefCandidates;
         protected static IEnumerable<ThingDef> PossibleRockDefCandidates
         {
@@ -31,7 +31,7 @@ namespace ProjectRimFactory.Industry
 
         public override void TickLong()
         {
-            if (GetComp<CompPowerTrader>()?.PowerOn != false && Rand.MTBEventOccurs(ProduceMtbHours, GenDate.TicksPerHour, GenTicks.TickLongInterval))
+            if (GetComp<CompPowerTrader>()?.PowerOn != false && Rand.MTBEventOccurs(GetProduceMtbHours, GenDate.TicksPerHour, GenTicks.TickLongInterval))
             {
                 GenerateChunk();
             }
