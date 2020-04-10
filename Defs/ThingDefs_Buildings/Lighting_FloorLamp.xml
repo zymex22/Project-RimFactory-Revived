@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DesignatorDropdownGroupDef>
+    <defName>floor_lights</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!-- ================= Base ================= -->
+  <TerrainDef Name="FloorLamp" Abstract="True">
+    <thingClass>Building</thingClass>
+    <category>Building</category>
+    <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>floor_lights</designatorDropdown>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Floor</altitudeLayer>
+    <passability>Standable</passability>
+    <selectable>true</selectable>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(113,141,117,0)</glowColor>
+      </li>
+    </comps>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <placingDraggableDimensions>1</placingDraggableDimensions>
+    <size>(1,1)</size>
+    <researchPrerequisites>
+      <li>AutomationBasics</li>
+    </researchPrerequisites>
+  </TerrainDef>
+
+
+  <!-- ================= Yellow Arrow ================= -->
+  <ThingDef ParentName="FloorLamp">
+    <defName>Lighting_FloorLampArrow</defName>
+    <label>Yellow Floor Sign Arrow</label>
+    <graphicData>
+      <texPath>Misc/FloorLamp</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>110</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <description>Weak florescent Floor sign in a Arrow shape to show direction or emergency exit?</description>
+    <costList>
+      <Steel>10</Steel>
+    </costList>
+  </ThingDef>
+
+  <!-- ================= Red Arrow =================== -->
+  <ThingDef ParentName="FloorLamp">
+    <defName>Lighting_RedFloorLampArrow</defName>
+    <label>Red Floor Sign Arrow</label>
+    <graphicData>
+      <texPath>Misc/FloorLampR</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>110</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <description>Weak florescent Floor sign in a Arrow shape to show direction or emergency exit?</description>
+    <costList>
+      <Steel>10</Steel>
+    </costList>
+  </ThingDef>
+
+  <!-- ================= Green Arrow ================= -->
+  <ThingDef ParentName="FloorLamp">
+    <defName>Lighting_GreenFloorLampArrow</defName>
+    <label>Green Floor Sign Arrow</label>
+    <graphicData>
+      <texPath>Misc/FloorLampGR</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>110</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <description>Weak florescent Floor sign in a Arrow shape to show direction or emergency exit?</description>
+    <costList>
+      <Steel>10</Steel>
+    </costList>
+  </ThingDef>
+
+  <!-- ================= Red X ======================= -->
+  <ThingDef ParentName="FloorLamp">
+    <defName>Lighting_FloorLampX</defName>
+    <label>Red Floor Sign X</label>
+    <graphicData>
+      <texPath>Misc/FloorLampX</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>110</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <description>Weak florescent Floor sign in a X shape</description>
+    <costList>
+      <Steel>10</Steel>
+    </costList>
+  </ThingDef>
+
+
+</Defs>

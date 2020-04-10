@@ -27,7 +27,7 @@
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
       <WorkToBuild>450</WorkToBuild>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>250</MaxHitPoints>
       <Flammability>1.0</Flammability>
     </statBases>
     <description>A building that now using Drones that can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.</description>
@@ -66,7 +66,7 @@
     <researchPrerequisites>
       <li>AutomaticFarming</li>
     </researchPrerequisites>
-    <placeWorkers>
+    <placeWorkers> <!-- Restrictor when placing the building. -->
       <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
     </placeWorkers>
   </ThingDef>
@@ -93,7 +93,7 @@
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
       <WorkToBuild>450</WorkToBuild>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>250</MaxHitPoints>
       <Flammability>1.0</Flammability>
     </statBases>
     <description>A building that now using Drones that can autonomously plant and harvest crops in a 11 cell square around it. Has a sun lamp. Will not be affected by any stat modifiers.</description>
@@ -110,10 +110,10 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>3200</basePowerConsumption>
       </li>
-      <li Class="CompProperties_Glower">
+      <li Class="CompProperties_Glower"> <!-- CompGlower: Color of light it will emit. RGBA: (r, g, b, 0) -->
         <overlightRadius>9</overlightRadius>
-        <glowRadius>14</glowRadius>
-        <glowColor>(370,370,370,0)</glowColor>
+        <glowRadius>14</glowRadius> <!-- CompGlower: Lit radius. -->
+        <glowColor>(370,370,370,0)</glowColor> <!-- RGBA: (r, g, b, 0) last arent needed -->
       </li>
       <li Class="CompProperties_Flickable" />
       <li>
@@ -164,7 +164,7 @@
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
       <WorkToBuild>450</WorkToBuild>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
     </statBases>
     <description>This is an old and early mk1 Cultivator delivered with technology from old B18's colonists. its slower, smaller field and can break, but it can get the job done. it might have it's uses also? hydroponics? 9 square field</description>
@@ -229,7 +229,7 @@
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
       <WorkToBuild>450</WorkToBuild>
-      <MaxHitPoints>100</MaxHitPoints>
+      <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
     </statBases>
     <description>A building that waters plants in an expanding radius, increasing their growth by one hour per round. Effects are stackable, and it works even when plants are resting.</description>
