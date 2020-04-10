@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <!-- common -->
+  <PRF.AutoMachineTool.MustInWall>It must be installed in the wall.</PRF.AutoMachineTool.MustInWall>
+  <PRF.AutoMachineTool.SelectOutputDirectionLabel>Output setting</PRF.AutoMachineTool.SelectOutputDirectionLabel>
+  <PRF.AutoMachineTool.SelectOutputDirectionDesc>Specify the output destination of the finished product. If the output destination is part of the stockpiling zone and the finished product can be stored, it is output in it.
+Even if the output destination is in the stockpiling zone, the finished product can not be placed, but it is placed in the cell specified as the output destination.</PRF.AutoMachineTool.SelectOutputDirectionDesc>
+  
+  <PRF.AutoMachineTool.StatWorking>working. [{0} / {1} ({2} %)]</PRF.AutoMachineTool.StatWorking>
+  <PRF.AutoMachineTool.StatWorkingNotParam>working.</PRF.AutoMachineTool.StatWorkingNotParam>
+  <PRF.AutoMachineTool.StatReady>ready.</PRF.AutoMachineTool.StatReady>
+  <PRF.AutoMachineTool.StatPlacing>placing. [pending placement {0}]</PRF.AutoMachineTool.StatPlacing>
+  
+  <!-- PowerTab -->
+  <PRF.AutoMachineTool.SupplyPower.TabName>Power</PRF.AutoMachineTool.SupplyPower.TabName>
+  <PRF.AutoMachineTool.SupplyPower.Description>Set the power to be supplied. If the power supply amount is large, it takes less time to work.</PRF.AutoMachineTool.SupplyPower.Description>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabel>Supply power</PRF.AutoMachineTool.SupplyPower.ValueLabel>
+  <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Set the power to be supplied. If the power supply amount is large, the range of work can be widened.</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Supply power(for speed)</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Supply power(for range)</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
+  <PRF.AutoMachineTool.SupplyPower.SunLampText>Sun Lamp(power:2000)</PRF.AutoMachineTool.SupplyPower.SunLampText>
+  
+  <!-- LimitationTab -->
+  <PRF.AutoMachineTool.ProductLimitation.TabName>Limitation</PRF.AutoMachineTool.ProductLimitation.TabName>
+  <PRF.AutoMachineTool.ProductLimitation.Description>Processing stops when the number of products and items to be pull exceeds the set value. You can specify the zone number of stock.In case of zone designation, check if it can be placed in that zone.</PRF.AutoMachineTool.ProductLimitation.Description>
+  <PRF.AutoMachineTool.ProductLimitation.ValueLabel>limit count</PRF.AutoMachineTool.ProductLimitation.ValueLabel>
+  <PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>do limit</PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>
+  <PRF.AutoMachineTool.EntierMap>Entier map</PRF.AutoMachineTool.EntierMap>
+  <PRF.AutoMachineTool.CountZone>Stock count zone</PRF.AutoMachineTool.CountZone>
+  
+  <!-- Slaughterhouse SettingTab -->
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>Setting</PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.Description>Setting for slaughter target</PRF.AutoMachineTool.Slaughterhouse.Setting.Description>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>slaughter animals if checked.</PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>slaughter bonded animals if checked.</PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>slaughter pregnancy animals if checked.</PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>slaughter trained animals if checked.</PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>Specify the number of {0} {1} to keep without slaughter.</PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>
+  <PRF.AutoMachineTool.Male>male</PRF.AutoMachineTool.Male>
+  <PRF.AutoMachineTool.Female>female</PRF.AutoMachineTool.Female>
+  <PRF.AutoMachineTool.Adult>adult</PRF.AutoMachineTool.Adult>
+  <PRF.AutoMachineTool.Young>young</PRF.AutoMachineTool.Young>
+  <PRF.AutoMachineTool.RaceName>race name</PRF.AutoMachineTool.RaceName>
+  
+  <!-- ItemPuller -->
+  <PRF.AutoMachineTool.Puller.SwitchActiveLabel>Switch operating status</PRF.AutoMachineTool.Puller.SwitchActiveLabel>
+  <PRF.AutoMachineTool.Puller.SwitchActiveDesc>Switch the operating status.</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
+  <!-- FilterTab(puller) -->
+  <PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>Filter</PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>
+  <PRF.AutoMachineTool.Puller.OutputItemFilter.Description>Set the filter for the item to be pulled out.</PRF.AutoMachineTool.Puller.OutputItemFilter.Description>
+  <PRF.AutoMachineTool.Puller.FilterCopyFrom>Select copy from</PRF.AutoMachineTool.Puller.FilterCopyFrom>
+  
+  <!-- AutoMiner -->
+  <PRF.AutoMachineTool.AutoMiner.MineOre>Mining {0}</PRF.AutoMachineTool.AutoMiner.MineOre>
+  
+</LanguageData>
