@@ -102,7 +102,8 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 working.health.DropBloodFilth();
             }
-            working.Kill(null);
+            Map.designationManager.AddDesignation(new Designation(working, DesignationDefOf.Slaughter));
+            working.Kill(new DamageInfo(DamageDefOf.ExecutionCut, 0));
             products = new List<Thing>().Append(working.Corpse);
             working.Corpse.DeSpawn();
             working.Corpse.SetForbidden(false);
