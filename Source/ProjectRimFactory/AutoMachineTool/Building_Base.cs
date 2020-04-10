@@ -415,7 +415,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public virtual IntVec3 OutputCell()
         {
-            return (this.Position + this.Rotation.Opposite.FacingCell);
+            return FacingCell(this.Position, this.def.Size, this.Rotation.Opposite);
         }
 
         public override string GetInspectString()
