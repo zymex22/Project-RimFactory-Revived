@@ -4,7 +4,7 @@
   <!--====================Animal Base====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
   <ThingDef Name="AnimalBase" ParentName="PRFBuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRFBuildingBase -->
     <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
-    <category>Building</category> <!-- Designates a category to be used internally -->
+    <category>Building</category>    <!-- Designates a category to be used internally -->
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
@@ -27,7 +27,7 @@
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
-    <surfaceType>Item</surfaceType> <!-- What kind of object can be placed on building? -->
+    <surfaceType>Item</surfaceType>    <!-- What kind of object can be placed on building? -->
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
@@ -50,7 +50,7 @@
 
 
 
-  <DesignatorDropdownGroupDef> <!-- Create dropdown for animal station to group -->
+  <DesignatorDropdownGroupDef>    <!-- Create dropdown for animal station to group -->
     <defName>AnimalStations_gr</defName>
   </DesignatorDropdownGroupDef>
 
@@ -60,24 +60,24 @@
     <label>shearer</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Shearer</thingClass>
     <graphicData>
-      <texPath>Farm/Shearer</texPath> <!-- path to texture -->
-      <graphicClass>Graphic_Single</graphicClass> <!-- only 1 rotation -->
-      <drawSize>(2,2)</drawSize> <!-- texture size -->
-      <shaderType>CutoutComplex</shaderType> <!-- for mask to change color when stuffed -->
-      <color>(133,97,67,256)</color> <!--change color on maske manually -->
+      <texPath>Farm/Shearer</texPath>      <!-- path to texture -->
+      <graphicClass>Graphic_Single</graphicClass>      <!-- only 1 rotation -->
+      <drawSize>(2,2)</drawSize>      <!-- texture size -->
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(133,97,67,256)</color>      <!--change color on maske manually -->
     </graphicData>
-    <passability>Standable</passability> <!-- let pawn stand ontop -->
-    <blockWind>true</blockWind> <!-- 	Whether this building can block wind or not. -->
+    <passability>Standable</passability>    <!-- let pawn stand ontop -->
+    <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <scatterableOnMapGen>false</scatterableOnMapGen>
-    <blockLight>true</blockLight> <!-- 	Whether this building can block light or not. -->
+    <blockLight>true</blockLight>    <!-- 	Whether this building can block light or not. -->
     <statBases>
-      <Mass>50</Mass> <!-- weight when minified -->
+      <Mass>50</Mass>      <!-- weight when minified -->
       <MaxHitPoints>100</MaxHitPoints>
-      <WorkToBuild>200</WorkToBuild> <!-- time to build -->
+      <WorkToBuild>200</WorkToBuild>      <!-- time to build -->
     </statBases>
-    <tickerType>Rare</tickerType> <!-- Decides the tick type. Never, Normal(1 per 1 tick), Rare(1 per 250 tick), Long(x per xxx tick) -->
+    <tickerType>Rare</tickerType>    <!-- Decides the tick type. Never, Normal(1 per 1 tick), Rare(1 per 250 tick), Long(x per xxx tick) -->
     <description>(Tier 1) A 2x2 feeding box for your farm animals, but underneath the box is a set of robotic arms and shears to shear wool with minimal invasiveness. Drops wool where the animal is standing. Works on any tamed animal.</description>
-    <designatorDropdown>AnimalStations_gr</designatorDropdown> <!-- assign dropdown group -->
+    <designatorDropdown>AnimalStations_gr</designatorDropdown>    <!-- assign dropdown group -->
     <size>(2,2)</size>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
@@ -220,7 +220,7 @@
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <Hay>50</Hay>
-      <WoodLog>50</WoodLog>
+      <WoodLog>75</WoodLog>
       <PRFRoboticArm>4</PRFRoboticArm>
     </costList>
     <comps>
@@ -263,5 +263,91 @@
   </ThingDef>
 
   <!--===================================== Slaugter House T2 =====================================-->
+  <ThingDef Parent="PRFBuildingBase">
+    <defName>Building_AutoMachineTool_Slaughterhouse</defName>
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
+    <label>T2 Auto Slaughter</label>
+    <description>(tier 2) Auto slaugter tamed animals in range, can be set for limits and let only female survive and such.</description>
+    <altitudeLayer>Building</altitudeLayer>
+    <tickerType>Never</tickerType>
+    <category>Building</category>
+    <selectable>true</selectable>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <statBases>
+      <Mass>70</Mass>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>200</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <texPath>Farm/Slaughter</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Steel>120</Steel>
+      <Plasteel>10</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>AnimalStations</li>
+    </researchPrerequisites>
+    <designationCategory>Industrial</designationCategory>
+    <fillPercent>1</fillPercent>
+    <constructEffect>ConstructMetal</constructEffect>
+    <passability>Impassable</passability>
+    <rotatable>true</rotatable>
+    <size>(3,3)</size>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+    <blockWind>true</blockWind>
+    <coversFloor>true</coversFloor>
+    <blockLight>true</blockLight>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>1.0</staticSunShadowHeight>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>
+    </building>
+
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+    </comps>
+
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_TargetCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+    </placeWorkers>
+
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_RangePowerSupply</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_Slaughterhouse</li>
+    </inspectorTabs>
+
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>1</speedFactor>
+        <minPower>500</minPower>
+        <maxPower>20000</maxPower>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>
+        <maxPower>2000</maxPower>
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_SlaughterhouseTargetCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.OutputCellResolver</outputCellResolverType>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
 
 </Defs>

@@ -1,86 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <!-- Group / dropdown def -->
-  <DesignatorDropdownGroupDef>
-    <defName>Pusher_gr</defName>
-  </DesignatorDropdownGroupDef>
-
-  <!-- *** Miner *** -->
-  <ThingDef ParentName="PRFBuildingBase">
-    <defName>Building_AutoMachineTool_Miner</defName>
-    <label>T3 Plasma Drill</label>
-    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
-    <description>With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed</description>
-    <tickerType>Never</tickerType>
-    <category>Building</category>
-    <selectable>true</selectable>
-
-    <!-- should set. -->
-    <graphicData>
-      <texPath>AutoMachineTool/Buildings/Miner</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(3,3)</drawSize>
-    </graphicData>
-    <costList>
-      <Steel>1000</Steel>
-      <ComponentIndustrial>50</ComponentIndustrial>
-      <Plasteel>100</Plasteel>
-      <PRFMachineFrame>1</PRFMachineFrame>
-    </costList>
-    <statBases>
-      <WorkToBuild>10000</WorkToBuild>
-      <MaxHitPoints>800</MaxHitPoints>
-      <Flammability>0.5</Flammability>
-    </statBases>
-    <researchPrerequisites>
-      <li>AutonomousMining</li>
-    </researchPrerequisites>
-    <designationCategory>Industrial</designationCategory>
-    <size>(3,3)</size>
-
-
-    <fillPercent>0.5</fillPercent>
-    <constructEffect>ConstructMetal</constructEffect>
-    <passability>PassThroughOnly</passability>
-    <rotatable>false</rotatable>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
-
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
-        <shortCircuitInRain>false</shortCircuitInRain>
-      </li>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
-      <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_Flickable"/>
-    </comps>
-
-    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-    </placeWorkers>
-
-    <inspectorTabs>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>
-    </inspectorTabs>
-
-    <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>1</speedFactor>
-        <minPower>10000</minPower>
-        <maxPower>1000000</maxPower>
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_MinerOutputCellResolver</outputCellResolverType>
-      </li>
-    </modExtensions>
-  </ThingDef>
-
   <!-- *** Puller *** -->
   <ThingDef Name="Building_AutoMachineTool_Puller_Base" Parent="PRFBuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
@@ -88,7 +8,7 @@
     <tickerType>Never</tickerType>
     <category>Building</category>
     <selectable>true</selectable>
-    <designatorDropdown>Pusher_gr</designatorDropdown>
+    <designatorDropdown>Pullers_gr</designatorDropdown>
 
     <!-- should set. -->
     <graphicData>
@@ -193,90 +113,6 @@ Since the drawing machine is in a non-operating state in the post-installation s
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
-  </ThingDef>
-
-  <!-- *** Slaughterhouse *** -->
-  <ThingDef Parent="PRFBuildingBase">
-    <defName>Building_AutoMachineTool_Slaughterhouse</defName>
-    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
-    <label>T2 Auto Slaughter</label>
-    <description>Auto slaugter tamed animals in range, can be set for limits and let only female survive and such.</description>
-    <altitudeLayer>Building</altitudeLayer>
-    <tickerType>Never</tickerType>
-    <category>Building</category>
-    <selectable>true</selectable>
-
-    <!-- should set. -->
-    <statBases>
-      <WorkToBuild>100</WorkToBuild>
-    </statBases>
-    <graphicData>
-      <texPath>AutoMachineTool/Buildings/Slaughterhouse</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1,1)</drawSize>
-    </graphicData>
-    <costList>
-      <Steel>1</Steel>
-    </costList>
-    <researchPrerequisites>
-      <li>AnimalStations</li>
-    </researchPrerequisites>
-    <designationCategory>Industrial</designationCategory>
-
-
-    <fillPercent>1</fillPercent>
-    <constructEffect>ConstructMetal</constructEffect>
-    <passability>Impassable</passability>
-    <rotatable>true</rotatable>
-    <size>(1,1)</size>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
-    <blockWind>true</blockWind>
-    <coversFloor>true</coversFloor>
-    <blockLight>true</blockLight>
-    <canOverlapZones>false</canOverlapZones>
-    <castEdgeShadows>true</castEdgeShadows>
-    <staticSunShadowHeight>1.0</staticSunShadowHeight>
-    <building>
-      <canPlaceOverWall>true</canPlaceOverWall>
-    </building>
-
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
-        <shortCircuitInRain>false</shortCircuitInRain>
-      </li>
-      <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_Flickable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
-    </comps>
-
-    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_TargetCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-    </placeWorkers>
-
-    <inspectorTabs>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_RangePowerSupply</li>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_Slaughterhouse</li>
-    </inspectorTabs>
-
-    <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>1</speedFactor>
-        <minPower>500</minPower>
-        <maxPower>20000</maxPower>
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>
-        <maxPower>2000</maxPower>
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_SlaughterhouseTargetCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.OutputCellResolver</outputCellResolverType>
-      </li>
-    </modExtensions>
   </ThingDef>
 
 

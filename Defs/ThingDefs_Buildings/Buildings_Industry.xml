@@ -77,11 +77,11 @@
         <heatPerSecond>10</heatPerSecond>
       </li>
     </comps>
-    <!-- <modExtensions>
+    <modExtensions>
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
         <TickCount>6</TickCount>
       </li>
-    </modExtensions> -->
+    </modExtensions>
     <tickerType>Long</tickerType>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <castEdgeShadows>false</castEdgeShadows>
@@ -98,7 +98,7 @@
     <designatorDropdown>miners_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/DeepQuarry</texPath>
-     <graphicClass>Graphic_Multi</graphicClass>
+      <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(2.5,2.5)</drawSize>
     </graphicData>
     <size>(2,2)</size>
@@ -133,11 +133,11 @@
         <heatPerSecond>5</heatPerSecond>
       </li>
     </comps>
-   <!-- <modExtensions>
+    <modExtensions>
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
         <TickCount>3</TickCount>
       </li>
-    </modExtensions> -->
+    </modExtensions>
     <tickerType>Long</tickerType>
     <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
@@ -147,54 +147,74 @@
     </researchPrerequisites>
   </ThingDef>
 
-   <!--==================== Quarry T3 ====================-->
+  <!--==================== Quarry T3 ====================-->
   <ThingDef ParentName="IndustrialBase">
-    <defName>PRF_DeepQuarry_mkIII</defName>
+    <defName>Building_AutoMachineTool_Miner</defName>
     <label>T3 Plasma Drill</label>
-    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
+    <description>(tier 3) With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed</description>
+    <tickerType>Never</tickerType>
     <designatorDropdown>miners_gr</designatorDropdown>
+    <category>Building</category>
+    <selectable>true</selectable>
     <graphicData>
       <texPath>Industry/DrillT3</texPath>
-     <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(2,2)</drawSize>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
     </graphicData>
-    <size>(2,2)</size>
-    <altitudeLayer>LayingPawn</altitudeLayer>
-    <passability>Impassable</passability>
-    <castEdgeShadows>true</castEdgeShadows>
-    <statBases>
-      <WorkToBuild>10000</WorkToBuild>
-      <MaxHitPoints>800</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-    </statBases>
-    <description>Tech newest glitter technology this plasma drill deliver fast and precise work</description>
     <costList>
       <Steel>1000</Steel>
       <ComponentIndustrial>50</ComponentIndustrial>
       <Plasteel>100</Plasteel>
       <PRFMachineFrame>1</PRFMachineFrame>
     </costList>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>800</basePowerConsumption>
-      </li>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>5</heatPerSecond>
-      </li>
-    </comps>
-    <tickerType>Long</tickerType>
-    <staticSunShadowHeight>1</staticSunShadowHeight>
-    <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
+    <statBases>
+      <WorkToBuild>10000</WorkToBuild>
+      <MaxHitPoints>800</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
     <researchPrerequisites>
       <li>AutonomousMining</li>
     </researchPrerequisites>
-  </ThingDef>
+    <size>(3,3)</size>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>20</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
 
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+    </placeWorkers>
+
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>
+    </inspectorTabs>
+
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>1</speedFactor>
+        <minPower>1500</minPower>
+        <maxPower>5000</maxPower>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_MinerOutputCellResolver</outputCellResolverType>
+      </li>
+    </modExtensions>
+  </ThingDef>
 
   <!--==================== Recycler ====================-->
   <ThingDef ParentName="IndustrialBase">
@@ -217,7 +237,7 @@
       <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
       <Flammability>1.0</Flammability>
-      
+
     </statBases>
     <description>A Recycler that Turn almost any apperal and weapons back to useable raw recources, in cost of some materials lost</description>
     <costList>
