@@ -26,6 +26,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public IEnumerable<RecipeDef> AllRecipes => this.def.AllRecipes;
 
+        public IEnumerable<RecipeDef> GetAllRecipes()
+        {
+            return this.AllRecipes;
+        }
+
         public bool IsRemovable(RecipeDef recipe)
         {
             return false;
@@ -189,7 +194,8 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         static RecipeRegister()
         {
-            if(DefDatabase<ThingDef>.GetNamedSilentFail("Building_AutoMachineTool_Miner") != null)
+            var minerDef = DefDatabase<ThingDef>.GetNamedSilentFail("Building_AutoMachineTool_Miner");
+            if (minerDef != null)
             {
                 var mineables = DefDatabase<ThingDef>.AllDefs
                     .Where(d => d.mineable && d.building != null && d.building.mineableThing != null && d.building.mineableYield > 0)
@@ -208,7 +214,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 var recipeDefs = mineables.Select(CreateMiningRecipe).ToList();
 
                 DefDatabase<RecipeDef>.Add(recipeDefs);
-                DefDatabase<ThingDef>.GetNamed("Building_AutoMachineTool_Miner").recipes = recipeDefs;
+                minerDef.recipes = recipeDefs;
             }
         }
 
