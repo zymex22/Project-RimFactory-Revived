@@ -26,12 +26,13 @@
 							<statBases>
 								<WorkToBuild>2000</WorkToBuild>
 								<MarketValue>700</MarketValue>
+								<MaxHitPoints>200</MaxHitPoints>
 							</statBases>
 							<description>This is a machine designed to prep raw resources like wheat, sugarcane into ingredients for cooking(VGP only atm.)</description>
 							<costStuffCount>100</costStuffCount>
 							<costList>
 								<PRFRoboticArm>2</PRFRoboticArm>
-								<PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+								<PRFMachineFrame>1</PRFMachineFrame>
 								<Steel>10</Steel>
 							</costList>
 							<comps>
@@ -60,6 +61,7 @@
 								<li>SaltMeat</li>
 								<li>BulkSaltMeat</li>
 								<li>VG_VeganEgg</li>
+								<li>Make_Wort</li>
 							</recipes>
 							<building>
 								<isMealSource>true</isMealSource>

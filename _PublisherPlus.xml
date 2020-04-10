@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Excluded>
+    <exclude>H:\steam\steamapps\common\RimWorld\Mods\PRF_Core\Textures\DISK_HARDWARE.psd</exclude>
+    <exclude>H:\steam\steamapps\common\RimWorld\Mods\PRF_Core\Textures\drill.psd</exclude>
+    <exclude>H:\steam\steamapps\common\RimWorld\Mods\PRF_Core\Textures\Harvester.ase</exclude>
+    <exclude>H:\steam\steamapps\common\RimWorld\Mods\PRF_Core\Textures\Industry\table - Kopi.png</exclude>
+    <exclude>H:\steam\steamapps\common\RimWorld\Mods\PRF_Core\Textures\Milker.ase</exclude>
+    <exclude>H:\steam\steamapps\common\RimWorld\Mods\PRF_Core\Textures\shear.ase</exclude>
+    <exclude>H:\steam\steamapps\common\RimWorld\Mods\PRF_Core\Textures\table - Kopi.psd</exclude>
+  </Excluded>
+</Configuration>
