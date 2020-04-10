@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+
+  <!-- Group / dropdown def -->
+  <DesignatorDropdownGroupDef>
+    <defName>Pusher_gr</defName>
+  </DesignatorDropdownGroupDef>
+
   <!-- *** Miner *** -->
-  <ThingDef ParentName="BuildingBase">
+  <ThingDef ParentName="PRFBuildingBase">
     <defName>Building_AutoMachineTool_Miner</defName>
-    <label>AutoMiner</label>
+    <label>T3 Plasma Drill</label>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
-    <description>Automatic mining of designated ore.
-It consumes enormous electricity.</description>
-    <drawerType>MapMeshAndRealTime</drawerType>
+    <description>With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed</description>
     <tickerType>Never</tickerType>
     <category>Building</category>
     <selectable>true</selectable>
@@ -16,31 +20,40 @@ It consumes enormous electricity.</description>
     <graphicData>
       <texPath>AutoMachineTool/Buildings/Miner</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1,1)</drawSize>
+      <drawSize>(3,3)</drawSize>
     </graphicData>
     <costList>
-      <Steel>1</Steel>
+      <Steel>1000</Steel>
+      <ComponentIndustrial>50</ComponentIndustrial>
+      <Plasteel>100</Plasteel>
+      <PRFMachineFrame>1</PRFMachineFrame>
     </costList>
     <statBases>
-      <WorkToBuild>100</WorkToBuild>
+      <WorkToBuild>10000</WorkToBuild>
+      <MaxHitPoints>800</MaxHitPoints>
+      <Flammability>0.5</Flammability>
     </statBases>
     <researchPrerequisites>
+      <li>AutonomousMining</li>
     </researchPrerequisites>
     <designationCategory>Industrial</designationCategory>
-    <size>(1,1)</size>
-    
-    
+    <size>(3,3)</size>
+
+
     <fillPercent>0.5</fillPercent>
     <constructEffect>ConstructMetal</constructEffect>
     <passability>PassThroughOnly</passability>
     <rotatable>false</rotatable>
     <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
-    
+
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
@@ -50,12 +63,12 @@ It consumes enormous electricity.</description>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
     </placeWorkers>
-    
+
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
       <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>
     </inspectorTabs>
-    
+
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
         <speedFactor>1</speedFactor>
@@ -67,14 +80,15 @@ It consumes enormous electricity.</description>
       </li>
     </modExtensions>
   </ThingDef>
-  
+
   <!-- *** Puller *** -->
-  <ThingDef Name="Building_AutoMachineTool_Puller_Base" Parent="BuildingBase" Abstract="true">
+  <ThingDef Name="Building_AutoMachineTool_Puller_Base" Parent="PRFBuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <tickerType>Never</tickerType>
     <category>Building</category>
     <selectable>true</selectable>
+    <designatorDropdown>Pusher_gr</designatorDropdown>
 
     <!-- should set. -->
     <graphicData>
@@ -92,8 +106,8 @@ It consumes enormous electricity.</description>
     </researchPrerequisites>
     <designationCategory>Industrial</designationCategory>
     <size>(1,1)</size>
-    
-    
+
+
     <fillPercent>0.5</fillPercent>
     <constructEffect>ConstructMetal</constructEffect>
     <passability>Standable</passability>
@@ -101,7 +115,7 @@ It consumes enormous electricity.</description>
     <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
 
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    
+
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
         <speedFactor>1</speedFactor>
@@ -124,7 +138,8 @@ It consumes enormous electricity.</description>
 
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller</defName>
-    <label>Item Puller</label>
+    <label>PRF Item Pusher</label>
+
     <passability>Impassable</passability>
     <description>Place it next to the pulling zone. Pull out from the opposite side of the installed orientation and output it in the installed orientation.
 Since the drawing machine is in a non-operating state in the post-installation state, it selects the drawing machine and put it in the operating state from the button.</description>
@@ -137,6 +152,9 @@ Since the drawing machine is in a non-operating state in the post-installation s
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
     </comps>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
@@ -144,9 +162,10 @@ Since the drawing machine is in a non-operating state in the post-installation s
     </placeWorkers>
   </ThingDef>
 
+  <!-- Wall Pusher -->
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller_Wall</defName>
-    <label>Wall embedding Item Puller</label>
+    <label>PRF Pusher In-Wall</label>
     <description>Place it next to the pulling zone. Pull out from the opposite side of the installed orientation and output it in the installed orientation.(In the wall)
 Since the drawing machine is in a non-operating state in the post-installation state, it selects the drawing machine and put it in the operating state from the button.</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
@@ -161,6 +180,9 @@ Since the drawing machine is in a non-operating state in the post-installation s
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
     </comps>
     <clearBuildingArea>false</clearBuildingArea>
     <graphicData>
@@ -172,21 +194,18 @@ Since the drawing machine is in a non-operating state in the post-installation s
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
   </ThingDef>
-  
+
   <!-- *** Slaughterhouse *** -->
-  <ThingDef Parent="BuildingBase">
+  <ThingDef Parent="PRFBuildingBase">
     <defName>Building_AutoMachineTool_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
-    <label>Slaughterhouse</label>
-    <description>Place the Slaughterhouse near animals passing through or staying.
-Select the Slaughterhouse and set slaughter from the setting tab.
-Slaughterhouse starts slaughter animals within range.</description>
+    <label>T2 Auto Slaughter</label>
+    <description>Auto slaugter tamed animals in range, can be set for limits and let only female survive and such.</description>
     <altitudeLayer>Building</altitudeLayer>
-    <drawerType>MapMeshAndRealTime</drawerType>
     <tickerType>Never</tickerType>
     <category>Building</category>
     <selectable>true</selectable>
-    
+
     <!-- should set. -->
     <statBases>
       <WorkToBuild>100</WorkToBuild>
@@ -200,10 +219,11 @@ Slaughterhouse starts slaughter animals within range.</description>
       <Steel>1</Steel>
     </costList>
     <researchPrerequisites>
+      <li>AnimalStations</li>
     </researchPrerequisites>
     <designationCategory>Industrial</designationCategory>
-    
-    
+
+
     <fillPercent>1</fillPercent>
     <constructEffect>ConstructMetal</constructEffect>
     <passability>Impassable</passability>
@@ -228,6 +248,9 @@ Slaughterhouse starts slaughter animals within range.</description>
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
     </comps>
 
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
@@ -248,6 +271,8 @@ Slaughterhouse starts slaughter animals within range.</description>
         <maxPower>20000</maxPower>
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>
+        <maxPower>2000</maxPower>
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_SlaughterhouseTargetCellResolver</targetCellResolverType>
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.OutputCellResolver</outputCellResolverType>
       </li>

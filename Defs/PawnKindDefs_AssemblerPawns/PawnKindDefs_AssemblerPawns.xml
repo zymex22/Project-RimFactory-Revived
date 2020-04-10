@@ -5,10 +5,16 @@
     <label>slave</label>
     <combatPower>30</combatPower>
     <race>Human</race>
-    <baseRecruitDifficulty>0.60</baseRecruitDifficulty>
-    <backstoryCategories>
-      <li>Slave</li>
-    </backstoryCategories>
+    <baseRecruitDifficulty>0.30</baseRecruitDifficulty>
+    <backstoryFiltersOverride>
+      <li>
+        <categories>
+          <li>Offworld</li>
+          <li>Outlander</li>
+          <li>Outsider</li>
+        </categories>
+      </li>
+    </backstoryFiltersOverride>
     <defaultFactionType>OutlanderCivil</defaultFactionType>
     <itemQuality>Shoddy</itemQuality>
     <backstoryCryptosleepCommonality>0.2</backstoryCryptosleepCommonality>

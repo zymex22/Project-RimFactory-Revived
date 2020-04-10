@@ -7,14 +7,9 @@
   <!--==================== Base ====================-->
   <ThingDef ParentName="PRFBuildingBase" Name="PRFMassStorageBase" Abstract="True">
     <thingClass>ProjectRimFactory.Storage.Building_Crate</thingClass>
-    <!-- <minifiedDef>MinifiedThing</minifiedDef> -->
-    <!-- <thingCategories></thingCategories> -->
     <tradeTags>
       <li>Furniture</li>
     </tradeTags>
-    <graphicData>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
     <altitudeLayer>Gas</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <pathCost>150</pathCost>
@@ -51,6 +46,10 @@
         </filter>-->
       </defaultStorageSettings>
     </building>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <minifiedDef>MinifiedThing</minifiedDef>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
@@ -72,9 +71,10 @@
     <uiIconScale>0.7</uiIconScale>
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
       <texPath>Storage/Wood_Crate6</texPath>
       <drawSize>(2.8,2.6)</drawSize>
-      <color>(133,97,67,256)</color>
+      <color>(133,97,67,256)</color>      <!-- used to set wood color because stuffed isnt used -->
     </graphicData>
     <statBases>
       <Mass>10</Mass>
@@ -83,7 +83,7 @@
       <Flammability>1.0</Flammability>
       <Beauty>-0.1</Beauty>
     </statBases>
-    <description>A giant crate that can store 25 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>(Tier 1 crate) A giant crate that can store 25 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,2)</size>
     <costList>
       <WoodLog>80</WoodLog>
@@ -109,18 +109,19 @@
     <uiIconScale>0.7</uiIconScale>
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
       <texPath>Storage/Steel_Crate</texPath>
       <drawSize>(2.8,2.6)</drawSize>
       <color>(102,102,105,256)</color>
     </graphicData>
     <statBases>
       <Mass>10</Mass>
-      <MaxHitPoints>300</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
       <Flammability>0.1</Flammability>
       <Beauty>-0.5</Beauty>
     </statBases>
-    <description>A giant crate that can store 100 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>(Tier 2 crate) A giant crate that can store 100 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,2)</size>
     <costList>
       <Steel>100</Steel>
@@ -139,11 +140,13 @@
   </ThingDef>
 
   <!--==================== Old ====================-->
+  <!--==================== cant be seen ingame anymore ====================-->
   <ThingDef ParentName="PRFMassStorageBase">
     <defName>IndustrialStorageUnit</defName>
     <label>industrial storage unit (deprecated)</label>
     <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
     <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
       <texPath>Storage/industrial_storage_unit</texPath>
       <drawSize>(3,3)</drawSize>
     </graphicData>
@@ -177,7 +180,6 @@
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
     </modExtensions>
-    <designationCategory>Industrial</designationCategory>
   </ThingDef>
 
   <!--==================== Cargo Platform ====================-->
@@ -188,12 +190,18 @@
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
     <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>      <!-- for being able to swap between textures each rotation -->
       <texPath>Storage/CargoPlatform</texPath>
       <drawSize>(3,3)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
     </graphicData>
+    <rotatable>True</rotatable>    <!-- for being able to swap between textures each rotation -->
     <statBases>
       <Mass>15</Mass>
-      <MaxHitPoints>300</MaxHitPoints>
+      <MaxHitPoints>450</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
       <Flammability>0.1</Flammability>
       <Beauty>0.5</Beauty>
