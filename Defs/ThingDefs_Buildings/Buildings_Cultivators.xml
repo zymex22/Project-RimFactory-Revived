@@ -62,6 +62,9 @@
         <maxNumDrones>2</maxNumDrones>
         <displayDormantDrones>true</displayDormantDrones>
       </li>
+      <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
+        <hauling>true</hauling>
+      </li>
     </modExtensions>
     <researchPrerequisites>
       <li>AutomaticFarming</li>
