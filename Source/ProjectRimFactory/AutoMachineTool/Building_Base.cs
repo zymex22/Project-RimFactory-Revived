@@ -434,7 +434,7 @@ namespace ProjectRimFactory.AutoMachineTool
                         msg += "PRF.AutoMachineTool.StatWorking".Translate(
                             Mathf.RoundToInt(Math.Min(this.CurrentWorkAmount, this.totalWorkAmount)),
                             Mathf.RoundToInt(this.totalWorkAmount),
-                            Mathf.RoundToInt(Mathf.Clamp01(this.CurrentWorkAmount / this.totalWorkAmount)) * 100);
+                            Mathf.RoundToInt(Mathf.Clamp01(this.CurrentWorkAmount / this.totalWorkAmount) * 100));
                     }
                     break;
                 case WorkingState.Ready:
