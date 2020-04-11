@@ -63,13 +63,13 @@
         <displayDormantDrones>true</displayDormantDrones>
       </li>
       <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
-        <hauling>true</hauling>
+        <hauling>true</hauling>        <!-- make false to no output again -->
       </li>
     </modExtensions>
     <researchPrerequisites>
       <li>AutomaticFarming</li>
     </researchPrerequisites>
-    <placeWorkers> <!-- Restrictor when placing the building. -->
+    <placeWorkers>      <!-- Restrictor when placing the building. -->
       <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
     </placeWorkers>
   </ThingDef>
@@ -113,10 +113,10 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>3200</basePowerConsumption>
       </li>
-      <li Class="CompProperties_Glower"> <!-- CompGlower: Color of light it will emit. RGBA: (r, g, b, 0) -->
+      <li Class="CompProperties_Glower">        <!-- CompGlower: Color of light it will emit. RGBA: (r, g, b, 0) -->
         <overlightRadius>9</overlightRadius>
-        <glowRadius>14</glowRadius> <!-- CompGlower: Lit radius. -->
-        <glowColor>(370,370,370,0)</glowColor> <!-- RGBA: (r, g, b, 0) last arent needed -->
+        <glowRadius>14</glowRadius>        <!-- CompGlower: Lit radius. -->
+        <glowColor>(370,370,370,0)</glowColor>        <!-- RGBA: (r, g, b, 0) last arent needed -->
       </li>
       <li Class="CompProperties_Flickable" />
       <li>
@@ -135,6 +135,9 @@
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <maxNumDrones>2</maxNumDrones>
         <displayDormantDrones>false</displayDormantDrones>
+      </li>
+      <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
+        <hauling>true</hauling>        <!-- make false to no output again -->
       </li>
     </modExtensions>
     <placeWorkers>
@@ -216,6 +219,7 @@
     <defName>CultivatorTools_Sprinkler</defName>
     <label>sprinkler</label>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
+    <designatorDropdown>Cultivator_gr</designatorDropdown>
     <graphicData>
       <texPath>Farm/CultivatorTools_Sprinkler</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -250,7 +254,7 @@
       <li Class="CompProperties_Flickable" />
       <li Class="CompProperties_Breakdownable"/>
       <li>
-      
+
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>

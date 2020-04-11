@@ -213,11 +213,11 @@
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_MinerOutputCellResolver</outputCellResolverType>
       </li>
-<!--
+      <!--
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
         <effectWorking>Drill</effectWorking>
       </li>
--->
+      -->
     </modExtensions>
   </ThingDef>
 
