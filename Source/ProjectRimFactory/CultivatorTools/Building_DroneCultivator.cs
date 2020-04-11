@@ -20,6 +20,8 @@ namespace ProjectRimFactory.CultivatorTools
         int dronesLeft;
         List<IntVec3> cachedCoverageCells;
 
+        public bool DroneHauling => this.def.GetModExtension<DefModExtension_DoneBehavior>()?.hauling ?? false;
+
         public override int DronesLeft { get => dronesLeft - spawnedDrones.Count; }
         public override void Notify_DroneLost()
         {
@@ -66,7 +68,7 @@ namespace ProjectRimFactory.CultivatorTools
                             }
                         }
                     }
-                    else if(t.def == plantToGrowSettable.GetPlantDefToGrow().plant.harvestedThingDef)
+                    else if (this.DroneHauling && t.def == plantToGrowSettable.GetPlantDefToGrow().plant.harvestedThingDef)
                     {
                         if (!Map.reservationManager.IsReservedByAnyoneOf(t, this.Faction) && !Map.reservationManager.IsReservedByAnyoneOf(this.OutputSlot, this.Faction))
                         {
@@ -165,14 +167,17 @@ namespace ProjectRimFactory.CultivatorTools
                 icon = ContentFinder<Texture2D>.Get("UI/Designators/ZoneCreate_Growing"),
                 defaultLabel = "CommandSunLampMakeGrowingZoneLabel".Translate()
             };
-            yield return new Command_Action
+            if (DroneHauling)
             {
-                icon = ContentFinder<Texture2D>.Get("UI/Misc/Compass"),
-                defaultLabel = "CultivatorTools_AdjustDirection_Output".Translate(),
-                defaultDesc = "CultivatorTools_AdjustDirection_Desc".Translate(outputRotation.AsCompassDirection()),
-                activateSound = SoundDefOf.Click,
-                action = () => outputRotation.Rotate(RotationDirection.Clockwise)
-            };
+                yield return new Command_Action
+                {
+                    icon = ContentFinder<Texture2D>.Get("UI/Misc/Compass"),
+                    defaultLabel = "CultivatorTools_AdjustDirection_Output".Translate(),
+                    defaultDesc = "CultivatorTools_AdjustDirection_Desc".Translate(outputRotation.AsCompassDirection()),
+                    activateSound = SoundDefOf.Click,
+                    action = () => outputRotation.Rotate(RotationDirection.Clockwise)
+                };
+            }
         }
 
         protected void MakeMatchingGrowZone()
@@ -188,7 +193,10 @@ namespace ProjectRimFactory.CultivatorTools
             base.DrawExtraSelectionOverlays();
             GenDraw.DrawFieldEdges(cachedCoverageCells);
 
-            GenDraw.DrawFieldEdges(new List<IntVec3> { OutputSlot }, Color.cyan);
+            if (this.DroneHauling)
+            {
+                GenDraw.DrawFieldEdges(new List<IntVec3> { OutputSlot }, Color.cyan);
+            }
         }
 
         public override void ExposeData()
@@ -196,5 +204,10 @@ namespace ProjectRimFactory.CultivatorTools
             base.ExposeData();
             Scribe_Values.Look(ref dronesLeft, "dronesLeft");
         }
+    }
+
+    public class DefModExtension_DoneBehavior : DefModExtension
+    {
+        public bool hauling = false;
     }
 }
