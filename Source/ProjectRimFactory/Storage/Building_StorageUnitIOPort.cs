@@ -24,6 +24,10 @@ namespace ProjectRimFactory.Storage
 
         CompPowerTrader powerComp;
 
+        public override Graphic Graphic => this.IOMode == StorageIOMode.Input ?
+            base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().inColor, Color.white) :
+            base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().outColor, Color.white);
+
         public StorageIOMode IOMode
         {
             get
@@ -308,5 +312,11 @@ namespace ProjectRimFactory.Storage
                 };
             }
         }
+    }
+
+    public class DefModExtension_StorageUnitIOPortColor : DefModExtension
+    {
+        public Color inColor;
+        public Color outColor;
     }
 }

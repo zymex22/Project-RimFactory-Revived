@@ -84,6 +84,7 @@
     <defName>PRFStorageUnitIOPort</defName>
     <label>Storage Unit I/O Port</label>
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
     <graphicData>
       <texPath>Things/Building/Production/Hopper</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -153,6 +154,12 @@
     <researchPrerequisites>
       <li>PRFStorageIO</li>
     </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">
+        <inColor>(1, 0, 0, 1)</inColor>
+        <outColor>(0, 1, 0, 1)</outColor>
+      </li>
+    </modExtensions>
   </ThingDef>
 
 </Defs>
