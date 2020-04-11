@@ -263,16 +263,17 @@
   </ThingDef>
 
   <!--===================================== Slaugter House T2 =====================================-->
-  <ThingDef Parent="PRFBuildingBase">
+  <ThingDef Parent="AnimalBase">
     <defName>Building_AutoMachineTool_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
     <label>T2 Auto Slaughter</label>
+    <designatorDropdown>AnimalStations_gr</designatorDropdown>
     <description>(tier 2) Auto slaugter tamed animals in range, can be set for limits and let only female survive and such.</description>
     <altitudeLayer>Building</altitudeLayer>
     <tickerType>Never</tickerType>
     <category>Building</category>
     <selectable>true</selectable>
-    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <statBases>
       <Mass>70</Mass>
       <MaxHitPoints>200</MaxHitPoints>
@@ -281,7 +282,7 @@
     <graphicData>
       <texPath>Farm/Slaughter</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(3,3)</drawSize>
+      <drawSize>(3.2,3.2)</drawSize>
     </graphicData>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
@@ -315,6 +316,10 @@
         <basePowerConsumption>0</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>10</heatPerSecond>
+      </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
       <li>
@@ -336,8 +341,8 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
         <speedFactor>1</speedFactor>
-        <minPower>500</minPower>
-        <maxPower>20000</maxPower>
+        <minPower>750</minPower>
+        <maxPower>2000</maxPower>
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <minPower>0</minPower>

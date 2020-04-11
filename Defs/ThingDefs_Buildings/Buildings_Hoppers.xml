@@ -3,7 +3,7 @@
   <!--============================== Smart Puller ==============================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>SAL_SmartHopper</defName>
-    <label>Smart Hopper</label>
+    <label>(tier 2) Smart Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
     <graphicData>
       <texPath>Things/Building/Production/Hopper</texPath>
@@ -86,8 +86,9 @@
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <graphicData>
-      <texPath>Things/Building/Production/Hopper</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
+      <texPath>Storage/IO_Port</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
       <damageData>
         <rect>(0.05,0.1,0.9,0.9)</rect>
         <cornerTL>Damage/Corner</cornerTL>
@@ -125,7 +126,7 @@
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
-    <description>A Connection port for your storage Cargo Platforms. It can be set to Input/output from any Platform remotely in any range within the map.</description>
+    <description>(tier 3)A Connection port for your storage Cargo Platforms. It can be set to Input/output from any Platform remotely in any range within the map.</description>
     <costList>
       <Steel>80</Steel>
       <ComponentIndustrial>4</ComponentIndustrial>
@@ -140,9 +141,13 @@
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
+            <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
     </comps>
     <tickerType>Normal</tickerType>
-    <rotatable>true</rotatable>
+    <rotatable>false</rotatable>
     <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
@@ -156,8 +161,8 @@
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">
-        <inColor>(1, 0, 0, 1)</inColor>
-        <outColor>(0, 1, 0, 1)</outColor>
+        <inColor>(144, 222, 255, 255)</inColor>
+        <outColor>(0, 255, 0, 255)</outColor>
       </li>
     </modExtensions>
   </ThingDef>

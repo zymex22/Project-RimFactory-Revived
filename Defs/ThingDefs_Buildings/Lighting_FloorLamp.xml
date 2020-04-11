@@ -50,7 +50,7 @@
     </statBases>
     <description>Weak florescent Floor sign in a Arrow shape to show direction or emergency exit?</description>
     <costList>
-      <Steel>10</Steel>
+      <Steel>2</Steel>
     </costList>
   </ThingDef>
 
@@ -70,7 +70,7 @@
     </statBases>
     <description>Weak florescent Floor sign in a Arrow shape to show direction or emergency exit?</description>
     <costList>
-      <Steel>10</Steel>
+      <Steel>2</Steel>
     </costList>
   </ThingDef>
 
@@ -90,7 +90,7 @@
     </statBases>
     <description>Weak florescent Floor sign in a Arrow shape to show direction or emergency exit?</description>
     <costList>
-      <Steel>10</Steel>
+      <Steel>2</Steel>
     </costList>
   </ThingDef>
 
@@ -110,7 +110,7 @@
     </statBases>
     <description>Weak florescent Floor sign in a X shape</description>
     <costList>
-      <Steel>10</Steel>
+      <Steel>2</Steel>
     </costList>
   </ThingDef>
 
