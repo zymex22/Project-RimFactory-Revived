@@ -197,6 +197,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var minerDef = DefDatabase<ThingDef>.GetNamedSilentFail("Building_AutoMachineTool_Miner");
             if (minerDef != null)
             {
+                var effecter = minerDef.GetModExtension<ModExtension_EffectWorking>()?.effectWorking;
                 var mineables = DefDatabase<ThingDef>.AllDefs
                     .Where(d => d.mineable && d.building != null && d.building.mineableThing != null && d.building.mineableYield > 0)
                     .Where(d => d.building.isResourceRock || d.building.isNaturalRock)
@@ -211,14 +212,14 @@ namespace ProjectRimFactory.AutoMachineTool
                         .Where(d => !mineablesSet.Contains(d))
                         .Select(d => new ThingDefCountClass(d, d.deepCountPerPortion)));
 
-                var recipeDefs = mineables.Select(CreateMiningRecipe).ToList();
+                var recipeDefs = mineables.Select(m => CreateMiningRecipe(m, effecter)).ToList();
 
                 DefDatabase<RecipeDef>.Add(recipeDefs);
                 minerDef.recipes = recipeDefs;
             }
         }
 
-        private static RecipeDef CreateMiningRecipe(ThingDefCountClass defCount)
+        private static RecipeDef CreateMiningRecipe(ThingDefCountClass defCount, EffecterDef effecter)
         {
             RecipeDef r = new RecipeDef();
             r.defName = "Recipe_AutoMachineTool_Mine_" + defCount.thingDef.defName;
@@ -235,7 +236,7 @@ namespace ProjectRimFactory.AutoMachineTool
             r.products = new List<ThingDefCountClass>().Append(defCount);
             r.defaultIngredientFilter = new ThingFilter();
 
-            r.effectWorking = EffecterDefOf.Drill;
+            r.effectWorking = effecter;
 
             return r;
         }
