@@ -13,6 +13,10 @@ namespace ProjectRimFactory.CultivatorTools
 {
     public class Building_DroneCultivator : Building_DroneStation
     {
+        public Rot4 outputRotation = Rot4.North;
+
+        public IntVec3 OutputSlot => Position + outputRotation.FacingCell * (this.def.GetModExtension<CultivatorDefModExtension>().squareAreaRadius + 1);
+
         int dronesLeft;
         List<IntVec3> cachedCoverageCells;
 
@@ -60,6 +64,18 @@ namespace ProjectRimFactory.CultivatorTools
                             {
                                 return job;
                             }
+                        }
+                    }
+                    else if(t.def == plantToGrowSettable.GetPlantDefToGrow().plant.harvestedThingDef)
+                    {
+                        if (!Map.reservationManager.IsReservedByAnyoneOf(t, this.Faction) && !Map.reservationManager.IsReservedByAnyoneOf(this.OutputSlot, this.Faction))
+                        {
+                            var job = JobMaker.MakeJob(JobDefOf.HaulToCell, t, this.OutputSlot);
+                            job.count = 99999;
+                            job.haulOpportunisticDuplicates = false;
+                            job.haulMode = HaulMode.ToCellNonStorage;
+                            job.ignoreDesignations = true;
+                            return job;
                         }
                     }
                 }
@@ -149,6 +165,14 @@ namespace ProjectRimFactory.CultivatorTools
                 icon = ContentFinder<Texture2D>.Get("UI/Designators/ZoneCreate_Growing"),
                 defaultLabel = "CommandSunLampMakeGrowingZoneLabel".Translate()
             };
+            yield return new Command_Action
+            {
+                icon = ContentFinder<Texture2D>.Get("UI/Misc/Compass"),
+                defaultLabel = "CultivatorTools_AdjustDirection_Output".Translate(),
+                defaultDesc = "CultivatorTools_AdjustDirection_Desc".Translate(outputRotation.AsCompassDirection()),
+                activateSound = SoundDefOf.Click,
+                action = () => outputRotation.Rotate(RotationDirection.Clockwise)
+            };
         }
 
         protected void MakeMatchingGrowZone()
@@ -163,6 +187,8 @@ namespace ProjectRimFactory.CultivatorTools
         {
             base.DrawExtraSelectionOverlays();
             GenDraw.DrawFieldEdges(cachedCoverageCells);
+
+            GenDraw.DrawFieldEdges(new List<IntVec3> { OutputSlot }, Color.cyan);
         }
 
         public override void ExposeData()
