@@ -241,15 +241,4 @@ namespace ProjectRimFactory.AutoMachineTool
             return r;
         }
     }
-
-    public class Building_MinerOutputCellResolver : OutputCellResolver
-    {
-        public override Option<IntVec3> OutputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
-        {
-            return center.GetThingList(map)
-                .SelectMany(b => Option(b as Building_Miner))
-                .FirstOption()
-                .Select(b => b.OutputCell());
-        }
-    }
 }
