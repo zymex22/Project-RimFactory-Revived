@@ -15,8 +15,6 @@ namespace ProjectRimFactory.AutoMachineTool
 {
     public class Building_ItemPuller : Building_BaseLimitation<Thing>
     {
-        protected virtual int PullCount { get => Math.Max(Mathf.RoundToInt(this.SupplyPowerForSpeed / 100f), 1); }
-
         public ThingFilter Filter { get => this.filter; }
 
         private ThingFilter filter = new ThingFilter();
@@ -92,15 +90,15 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
+            workAmount = 120;
             target = TargetThing().GetOrDefault(null);
-            workAmount = Math.Min(target?.stackCount ?? 0f, PullCount) * 10f;
             return target != null;
         }
 
         protected override bool FinishWorking(Thing working, out List<Thing> products)
         {
             var target = new List<Thing>();
-            target.Append(working.SplitOff(Math.Min(working.stackCount, this.PullCount)));
+            target.Append(working);
             products = target;
             return true;
         }
