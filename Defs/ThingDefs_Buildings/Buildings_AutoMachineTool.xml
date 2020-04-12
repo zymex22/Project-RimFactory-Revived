@@ -50,7 +50,7 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>750</speedFactor>
+        <speedFactor>1</speedFactor>
         <minPower>100</minPower>
         <maxPower>1000</maxPower>
       </li>
