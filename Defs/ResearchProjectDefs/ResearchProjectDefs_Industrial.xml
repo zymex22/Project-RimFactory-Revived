@@ -5,19 +5,55 @@
     <defName>AutonomousMining</defName>
     <tab>Automation</tab>
     <techLevel>Industrial</techLevel>
-    <baseCost>3500</baseCost>
+    <baseCost>2000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>AutomationBasics</li>
-      <li>DeepDrilling</li>
+    </prerequisites>
+    <label>autonomous mining Tier 1</label>
+    <researchViewX>1</researchViewX>
+    <researchViewY>1</researchViewY>
+    <description>Make buildings that can extract random minerals and rocks from deep underground.</description>
+  </ResearchProjectDef>
+
+    <!-- Tier 2 -->
+  <ResearchProjectDef>
+    <defName>AutonomousMining_II</defName>
+    <tab>Automation</tab>
+    <techLevel>Industrial</techLevel>
+    <baseCost>3000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>AutonomousMining</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <label>autonomous mining</label>
-    <researchViewX>1</researchViewX>
+    <label>autonomous mining Tier 2</label>
+    <researchViewX>2</researchViewX>
     <researchViewY>1</researchViewY>
     <description>Make buildings that can extract random minerals and rocks from deep underground.</description>
+  </ResearchProjectDef>
+
+
+    <!-- Tier 3 -->
+  <ResearchProjectDef>
+    <defName>AutonomousMining_III</defName>
+    <tab>Automation</tab>
+    <techLevel>Industrial</techLevel>
+    <baseCost>4000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>AutonomousMining_II</li>
+      <li>PRFGoldbachConjecture</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <label>autonomous mining Tier 3</label>
+    <researchViewX>3</researchViewX>
+    <researchViewY>1</researchViewY>
+    <description>Make buildings that can extract exact minerals and rocks from deep underground.</description>
   </ResearchProjectDef>
   
 </Defs>

@@ -6,7 +6,7 @@
   </DesignatorDropdownGroupDef>
 
   <!-- ================= Base ================= -->
-  <TerrainDef Name="FloorLamp" Abstract="True">
+  <TerrainDef Name="FloorSign" Abstract="True">
     <thingClass>Building</thingClass>
     <category>Building</category>
     <designationCategory>Industrial</designationCategory>
@@ -19,6 +19,9 @@
       <li Class="CompProperties_Glower">
         <glowRadius>2</glowRadius>
         <glowColor>(113,141,117,0)</glowColor>
+      </li>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>
     <building>
@@ -35,7 +38,7 @@
 
 
   <!-- ================= Yellow Arrow ================= -->
-  <ThingDef ParentName="FloorLamp">
+  <ThingDef ParentName="FloorSign">
     <defName>Lighting_FloorLampArrow</defName>
     <label>Yellow Floor Sign Arrow</label>
     <graphicData>
@@ -55,7 +58,7 @@
   </ThingDef>
 
   <!-- ================= Red Arrow =================== -->
-  <ThingDef ParentName="FloorLamp">
+  <ThingDef ParentName="FloorSign">
     <defName>Lighting_RedFloorLampArrow</defName>
     <label>Red Floor Sign Arrow</label>
     <graphicData>
@@ -75,7 +78,7 @@
   </ThingDef>
 
   <!-- ================= Green Arrow ================= -->
-  <ThingDef ParentName="FloorLamp">
+  <ThingDef ParentName="FloorSign">
     <defName>Lighting_GreenFloorLampArrow</defName>
     <label>Green Floor Sign Arrow</label>
     <graphicData>
@@ -95,7 +98,7 @@
   </ThingDef>
 
   <!-- ================= Red X ======================= -->
-  <ThingDef ParentName="FloorLamp">
+  <ThingDef ParentName="FloorSign">
     <defName>Lighting_FloorLampX</defName>
     <label>Red Floor Sign X</label>
     <graphicData>

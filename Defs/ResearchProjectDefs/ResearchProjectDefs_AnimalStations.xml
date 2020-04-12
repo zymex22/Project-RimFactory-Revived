@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!--General-->
-
+  <!-- Tier 1 -->
   <ResearchProjectDef>
     <defName>AnimalStations</defName>
-    <label>animal stations</label>
+    <label>animal stations tier 1</label>
     <techLevel>Industrial</techLevel>
-    <baseCost>1500</baseCost>
+    <baseCost>1200</baseCost>
     <description>Animal station technology allows animals with harvestable resources to be harvested automatically.</description>
     <prerequisites>
       <li>AutomationBasics</li>
@@ -16,4 +15,21 @@
     <researchViewX>1</researchViewX>
     <researchViewY>5</researchViewY>
   </ResearchProjectDef>
+
+    <!-- Tier 2 -->
+  <ResearchProjectDef>
+    <defName>AnimalStations_II</defName>
+    <label>animal stations tier2</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>1500</baseCost>
+    <description>Animal station technology allows animals with harvestable resources to be harvested automatically.</description>
+    <prerequisites>
+      <li>AnimalStations</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>5</researchViewY>
+  </ResearchProjectDef>
+
 </Defs>

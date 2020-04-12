@@ -56,7 +56,7 @@
       <Beauty>-25</Beauty>
       <Mass>35</Mass>
     </statBases>
-    <description>An early automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 6 hours.(can cause Infestation!)</description>
+    <description>An early automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 8 hours.(can cause Infestation!)</description>
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -79,7 +79,7 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
-        <TickCount>6</TickCount>
+        <TickCount>8</TickCount>
       </li>
     </modExtensions>
     <tickerType>Long</tickerType>
@@ -143,7 +143,7 @@
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <researchPrerequisites>
-      <li>AutonomousMining</li>
+      <li>AutonomousMining_II</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -160,7 +160,7 @@
     <graphicData>
       <texPath>Industry/DrillT3</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(3,3)</drawSize>
+      <drawSize>(3.3,3.3)</drawSize>
     </graphicData>
     <costList>
       <Steel>1000</Steel>
@@ -174,7 +174,7 @@
       <Flammability>0.5</Flammability>
     </statBases>
     <researchPrerequisites>
-      <li>AutonomousMining</li>
+      <li>AutonomousMining_III</li>
     </researchPrerequisites>
     <size>(3,3)</size>
     <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
@@ -200,15 +200,15 @@
     </placeWorkers>
 
     <inspectorTabs>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>      <!-- Power boost -->
+      <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>      <!-- AutomachineTool ITab not PRF -->
     </inspectorTabs>
 
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>1</speedFactor>
-        <minPower>1500</minPower>
-        <maxPower>5000</maxPower>
+        <speedFactor>20</speedFactor>        <!-- Speed multiplier for mining -->
+        <minPower>1500</minPower>        <!-- minimum boost power -->
+        <maxPower>5000</maxPower>        <!-- maximum boost power -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
@@ -216,8 +216,8 @@
       <!--
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
         <effectWorking>Drill</effectWorking>
-      </li>
-      -->
+      </li>  
+      --> <!-- If want Smoke effect on or not comment out to remove smoke -->
     </modExtensions>
   </ThingDef>
 
@@ -282,6 +282,7 @@
     <defName>FuelingMachine</defName>
     <label>fueling machine</label>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
+    <designatorDropdown>Pullers_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/FuelingMachine</texPath>
       <graphicClass>Graphic_Multi</graphicClass>

@@ -238,7 +238,7 @@
   <!--====================Meat Grinder====================-->
   <ThingDef ParentName="AssemblerBase">
     <defName>MeatGrinder</defName>
-    <label>Self Meat Grinder</label>
+    <label>Auto Meat Grinder</label>
     <designatorDropdown>assembler_food_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>

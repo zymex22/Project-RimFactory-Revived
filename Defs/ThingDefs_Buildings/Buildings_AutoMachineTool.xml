@@ -25,8 +25,6 @@
       <Mass>20</Mass>
       <Beauty>-2</Beauty>
     </statBases>
-    <researchPrerequisites>
-    </researchPrerequisites>
     <designationCategory>Industrial</designationCategory>
     <size>(1,1)</size>
     <fillPercent>0.5</fillPercent>
@@ -64,12 +62,15 @@
       <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
     </inspectorTabs>
+    <researchPrerequisites>
+      <li>ADVrollers</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <!--======================================= Item Pusher ===============================================-->
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller</defName>
-    <label>Item Pusher</label>
+    <label>T2 Item Pusher</label>
 
     <passability>Impassable</passability>
     <description>(Tier 2) A pusher That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
@@ -83,7 +84,7 @@
   <!--======================================= Wall Item Pusher ===============================================-->
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller_Wall</defName>
-    <label>Pusher In-Wall</label>
+    <label>T2 In-Wall Pusher</label>
     <description>(Tier 2) A pusher That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <building>

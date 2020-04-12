@@ -257,7 +257,7 @@
       <li>ITab_Storage</li>
     </inspectorTabs>
     <researchPrerequisites>
-      <li>AnimalStations</li>
+      <li>AnimalStations_II</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
   </ThingDef>
@@ -266,7 +266,7 @@
   <ThingDef Parent="AnimalBase">
     <defName>Building_AutoMachineTool_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
-    <label>T2 Auto Slaughter</label>
+    <label>Auto Slaughter House</label>
     <designatorDropdown>AnimalStations_gr</designatorDropdown>
     <description>(tier 2) Auto slaugter tamed animals in range, can be set for limits and let only female survive and such.</description>
     <altitudeLayer>Building</altitudeLayer>
@@ -282,7 +282,7 @@
     <graphicData>
       <texPath>Farm/Slaughter</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(3.2,3.2)</drawSize>
+      <drawSize>(3.3,3.3)</drawSize>
     </graphicData>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
@@ -291,7 +291,7 @@
       <Plasteel>10</Plasteel>
     </costList>
     <researchPrerequisites>
-      <li>AnimalStations</li>
+      <li>AnimalStations_II</li>
     </researchPrerequisites>
     <designationCategory>Industrial</designationCategory>
     <fillPercent>1</fillPercent>
