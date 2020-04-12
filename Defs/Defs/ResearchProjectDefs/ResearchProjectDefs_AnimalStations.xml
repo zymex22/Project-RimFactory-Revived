@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--General-->
+
+  <ResearchProjectDef>
+    <defName>AnimalStations</defName>
+    <label>animal stations</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>1500</baseCost>
+    <description>Animal station technology allows animals with harvestable resources to be harvested automatically.</description>
+    <prerequisites>
+      <li>AutomationBasics</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>1</researchViewX>
+    <researchViewY>5</researchViewY>
+  </ResearchProjectDef>
+</Defs>

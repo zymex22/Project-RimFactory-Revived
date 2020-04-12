@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="PRFResourceBase">
+    <defName>PRFRoboticArm</defName>
+    <label>robotic arm</label>
+    <description>A robotic arm powered by an electric motor. Used in the construction of some automation buildings.</description>
+    <graphicData>
+      <texPath>Common/RoboticArm</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>1000</WorkToMake>
+      <Mass>2</Mass>
+    </statBases>
+    <costList>
+      <Steel>20</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <recipeUsers>
+        <li>TableRoboticMachining</li>
+        <li>TableMachining</li>
+      </recipeUsers>
+    </recipeMaker>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+  <ThingDef ParentName="PRFResourceBase">
+    <defName>PRFWeakAIChip</defName>
+    <label>weak AI chip</label>
+    <description>A tensor processing unit containing the most rudimentary AI.</description>
+    <graphicData>
+      <texPath>Common/WeakAICore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>2000</WorkToMake>
+      <Mass>1</Mass>
+    </statBases>
+    <costList>
+      <Steel>10</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <recipeUsers>
+        <li>TableRoboticMachining</li>
+      </recipeUsers>
+	  <researchPrerequisite>PRFMachineLearning</researchPrerequisite>
+    </recipeMaker>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+  <ThingDef ParentName="PRFResourceBase">
+    <defName>PRFMachineFrame</defName>
+    <label>machine frame</label>
+    <description>The empty shell of a medium-sized automation building.</description>
+    <graphicData>
+      <texPath>Common/MachineFrame</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>150</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>3000</WorkToMake>
+      <Mass>20</Mass>
+    </statBases>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <costList>
+      <Steel>40</Steel>
+      <Plasteel>10</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <recipeUsers>
+        <li>TableRoboticMachining</li>
+      </recipeUsers>
+    </recipeMaker>
+    <tradeability>Sellable</tradeability>
+    <stackLimit>5</stackLimit>
+  </ThingDef>
+  <ThingDef ParentName="PRFResourceBase">
+    <defName>PRFMachineFrameSmall</defName>
+    <label>small machine frame</label>
+    <description>The empty shell of a small automation building.</description>
+    <graphicData>
+      <texPath>Common/MachineFrameSmall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>80</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>10</Mass>
+    </statBases>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <costList>
+      <Steel>30</Steel>
+      <Plasteel>5</Plasteel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <recipeUsers>
+        <li>TableRoboticMachining</li>
+      </recipeUsers>
+    </recipeMaker>
+    <tradeability>Sellable</tradeability>
+    <stackLimit>5</stackLimit>
+  </ThingDef>
+  <ThingDef ParentName="PRFResourceBase">
+    <defName>PRFMachineFrameLarge</defName>
+    <label>large machine frame</label>
+    <description>The empty shell of a large automation building.</description>
+    <graphicData>
+      <texPath>Common/MachineFrameLarge</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>300</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToMake>4800</WorkToMake>
+      <Mass>40</Mass>
+    </statBases>
+    <costList>
+      <Steel>80</Steel>
+      <Plasteel>20</Plasteel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <recipeUsers>
+        <li>TableRoboticMachining</li>
+      </recipeUsers>
+    </recipeMaker>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+    <stackLimit>5</stackLimit>
+  </ThingDef>
+  <ThingDef ParentName="PRFResourceBase">
+    <defName>PRFDroneModule</defName>
+    <label>drone module</label>
+    <description>A dormant quadcopter frame capable of low-altitude flight.</description>
+    <graphicData>
+      <texPath>Common/DroneModule</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>500</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Mass>2</Mass>
+      <WorkToMake>2000</WorkToMake>
+    </statBases>
+    <costList>
+      <Plasteel>10</Plasteel>
+      <Steel>30</Steel>
+    </costList>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <recipeUsers>
+        <li>TableRoboticMachining</li>
+      </recipeUsers>
+    </recipeMaker>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+    <stackLimit>75</stackLimit>
+  </ThingDef>
+
+</Defs>

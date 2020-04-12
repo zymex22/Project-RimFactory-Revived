@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--==================== Industrial Base ====================-->
+  <ThingDef Name="IndustrialBase" ParentName="PRFBuildingBase" Abstract="True">
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Mass>70</Mass>
+    </statBases>
+    <passability>PassThroughOnly</passability>
+    <altitudeLayer>Building</altitudeLayer>
+    <constructEffect>ConstructMetal</constructEffect>
+    <rotatable>false</rotatable>
+    <pathCost>70</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <designationCategory>Industrial</designationCategory>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <building>
+      <uninstallWork>1800</uninstallWork>
+    </building>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <comps>
+      <li Class="CompProperties_Flickable" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <DesignatorDropdownGroupDef>
+    <defName>miners_gr</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!--==================== Quarry T1 ====================-->
+  <ThingDef ParentName="IndustrialBase">
+    <defName>PRF_DeepQuarry_mkI</defName>
+    <label>T1 Auger drill</label>
+    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <designatorDropdown>miners_gr</designatorDropdown>
+    <graphicData>
+      <texPath>Industry/Drill</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <filthLeaving>Filth_RubbleRock</filthLeaving>
+    <size>(2,2)</size>
+    <statBases>
+      <WorkToBuild>10000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <Beauty>-25</Beauty>
+      <Mass>35</Mass>
+    </statBases>
+    <description>An early automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 6 hours.(can cause Infestation!)</description>
+    <costList>
+      <Steel>250</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRFMachineFrame>1</PRFMachineFrame>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_CreatesInfestations" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>10</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
+        <TickCount>6</TickCount>
+      </li>
+    </modExtensions>
+    <tickerType>Long</tickerType>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <castEdgeShadows>false</castEdgeShadows>
+    <researchPrerequisites>
+      <li>AutonomousMining</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Quarry T2 ====================-->
+  <ThingDef ParentName="IndustrialBase">
+    <defName>PRF_DeepQuarry</defName>
+    <label>T2 Pulse Drill</label>
+    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <designatorDropdown>miners_gr</designatorDropdown>
+    <graphicData>
+      <texPath>Industry/DeepQuarry</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2.5,2.5)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <altitudeLayer>LayingPawn</altitudeLayer>
+    <passability>Impassable</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>350</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <rotatable>true</rotatable>
+    <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 3 hours.(can cause infestation)</description>
+    <costList>
+      <Steel>400</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <Plasteel>10</Plasteel>
+      <PRFMachineFrame>1</PRFMachineFrame>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>800</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_CreatesInfestations" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
+        <TickCount>3</TickCount>
+      </li>
+    </modExtensions>
+    <tickerType>Long</tickerType>
+    <filthLeaving>Filth_RubbleRock</filthLeaving>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>AutonomousMining</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Quarry T3 ====================-->
+  <ThingDef ParentName="IndustrialBase">
+    <defName>Building_AutoMachineTool_Miner</defName>
+    <label>T3 Plasma Drill</label>
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
+    <description>(tier 3) With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed</description>
+    <tickerType>Never</tickerType>
+    <designatorDropdown>miners_gr</designatorDropdown>
+    <category>Building</category>
+    <selectable>true</selectable>
+    <graphicData>
+      <texPath>Industry/DrillT3</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <costList>
+      <Steel>1000</Steel>
+      <ComponentIndustrial>50</ComponentIndustrial>
+      <Plasteel>100</Plasteel>
+      <PRFMachineFrame>1</PRFMachineFrame>
+    </costList>
+    <statBases>
+      <WorkToBuild>10000</WorkToBuild>
+      <MaxHitPoints>800</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <researchPrerequisites>
+      <li>AutonomousMining</li>
+    </researchPrerequisites>
+    <size>(3,3)</size>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>20</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+    </placeWorkers>
+
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>
+    </inspectorTabs>
+
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>1</speedFactor>
+        <minPower>1500</minPower>
+        <maxPower>5000</maxPower>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
+      </li>
+      <!--
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
+        <effectWorking>Drill</effectWorking>
+      </li>
+      -->
+    </modExtensions>
+  </ThingDef>
+
+  <!--==================== Recycler ====================-->
+  <ThingDef ParentName="IndustrialBase">
+    <defName>PRF_Recycler</defName>
+    <label>Smart Recycler</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>Industry/smart_recycler</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.1,2.1)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <altitudeLayer>LayingPawn</altitudeLayer>
+    <passability>Impassable</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+
+    </statBases>
+    <description>A Recycler that Turn almost any apperal and weapons back to useable raw recources, in cost of some materials lost</description>
+    <costList>
+      <Steel>250</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFRoboticArm>2</PRFRoboticArm>
+    </costList>
+    <recipes>
+      <li>RecycleWeapon</li>
+      <li>Recycle_Apparel</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>UniversalAutocrafting</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Fueling Machine ====================-->
+  <ThingDef ParentName="IndustrialBase">
+    <defName>FuelingMachine</defName>
+    <label>fueling machine</label>
+    <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
+    <graphicData>
+      <texPath>Industry/FuelingMachine</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <passability>PassThroughOnly</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>450</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Mass>15</Mass>
+    </statBases>
+    <description>A robotic arm built on a small machine frame that can automatically fuel the building in front of it.</description>
+    <costList>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>50</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <rotatable>true</rotatable>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>AutomationBasics</li>
+    </researchPrerequisites>
+    <placeWorkers>
+      <li>ProjectRimFactory.Industry.PlaceWorker_FuelingMachine</li>
+    </placeWorkers>
+  </ThingDef>
+
+</Defs>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <DesignatorDropdownGroupDef>    <!-- Create Downdown group, one for each dropdown -->
+    <defName>assembler_gr</defName>
+  </DesignatorDropdownGroupDef>
+  <DesignatorDropdownGroupDef>
+    <defName>assembler_food_gr</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!--====================AssemblerBase====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
+  <ThingDef Name="AssemblerBase" ParentName="PRFBuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRFBuildingBase -->
+    <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
+      <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
+      <Beauty>-1</Beauty>      <!-- +is good -is bad ;) -->
+      <Mass>70</Mass>      <!-- mass in kg -->
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
+      <drawSize>(3,3)</drawSize>      <!-- Scale texture up/down to fit -->
+      <!-- <shaderType></shaderType> -->      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+    <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
+    <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
+    <canOverlapZones>false</canOverlapZones>    <!-- zones as in storage zones, growing zones, etc -->
+    <castEdgeShadows>true</castEdgeShadows>
+    <size>(3,3)</size>    <!-- Ingame cell/ground size (x,y) -->
+    <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
+    <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
+    <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
+    <neverMultiSelect>true</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
+    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
+    <drawGUIOverlay>true</drawGUIOverlay>    <!-- Whether GUI will show up when you select this thing. -->
+    <inspectorTabs>      <!-- A list of ITabs that will show up in the inspector when you select this item. These ITabs are for example the "Bills" buttons (ITab_Bills) and the art description (ITab_Art). -->
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>      <!-- Setup bills for assemblers -->
+    </inspectorTabs>
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>        <!-- set output if thingclass allows it -->
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <!-- option to power off -->
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!--====================Universal assembler====================-->
+  <ThingDef ParentName="AssemblerBase">
+    <defName>UniversalAssembler</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
+    <label>Universal Assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
+    <designatorDropdown>assembler_gr</designatorDropdown>    <!-- Use Dropdown Group -->
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>    <!-- What C# class to call when doing anything with this thing. Unless you know what you're doing, it's suggested to use the same thingClass similar things use. -->
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>      <!-- for being able to swap between textures each rotation -->
+      <texPath>SAL3/smart_assembler</texPath>      <!-- The path relative to ../Textures/ in which this thing's texture is stored. -->
+    </graphicData>
+    <costList>      <!-- cost list for fixed prices, uses def names -->
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Steel>120</Steel>
+      <Plasteel>10</Plasteel>
+    </costList>
+    <description>An auto-crafter controlled by a computer. Reads recipe instructions from a recipe database.</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>2500</WorkToBuild>
+      <MarketValue>1000</MarketValue>      <!-- 	The "market value" of this thing. Please note that sellPriceFactor halves this value when selling the thing, and that the Social skill influences the actual value. -->
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <!-- enable breakdown of machines -->
+      <li Class="CompProperties_Power">        <!-- enable Power usage -->
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>625</basePowerConsumption>        <!-- set power uge -->
+      </li>
+      <li Class="CompProperties_HeatPusher">        <!-- Produce fixed amount of heat while on -->
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>3</heatPerSecond>        <!-- Vanilla stove create 5 -->
+      </li>
+    </comps>
+    <researchPrerequisites>      <!-- Needed Research to see in menus -->
+      <li>UniversalAutocrafting</li>
+    </researchPrerequisites>
+    <rotatable>true</rotatable>    <!-- for being able to swap between textures each rotation -->
+  </ThingDef>
+
+
+  <!--====================Selfcorrecting assembler====================-->
+  <ThingDef ParentName="AssemblerBase">
+    <defName>MachineLearningAssembler</defName>
+    <label>Self-Correcting Assembler</label>
+    <designatorDropdown>assembler_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>      <!-- for being able to swap between textures each rotation -->
+      <texPath>SAL3/correcting_assembler</texPath>
+    </graphicData>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Plasteel>10</Plasteel>
+      <Steel>150</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <description>An auto-crafter controlled by a computer. Slowly gets better at recipes the more it completes them. However, it also gets a bit worse over time.</description>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <MarketValue>1250</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>700</basePowerConsumption>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>SelfCorrectingAssemblers</li>
+    </researchPrerequisites>
+    <rotatable>true</rotatable>    <!-- for being able to swap between textures each rotation -->
+  </ThingDef>
+
+
+  <!--==================== Recipe database ====================-->
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>RecipeDatabase</defName>
+    <label>Recipe Database</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
+    <graphicData>
+      <texPath>SAL3/DISK_HARDWARE4</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>800</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Mass>25</Mass>
+    </statBases>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <description>Stores recipes for use by smart assemblers, and imports recipes from adjacent work tables. I wonder what all the buttons do...</description>
+    <costList>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <Steel>20</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <RimFactory_Data_Disk>1</RimFactory_Data_Disk>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <neverMultiSelect>true</neverMultiSelect>
+    <designationCategory>Industrial</designationCategory>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>MagneticTape</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--====================Cooker====================-->
+  <ThingDef ParentName="AssemblerBase">
+    <defName>SelfCooker</defName>
+    <label>Self Cooker</label>
+    <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>assembler_food_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Multi</graphicClass>      <!-- for being able to swap between textures each rotation -->
+      <texPath>SAL3/AutoCooker</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <MarketValue>700</MarketValue>
+    </statBases>
+    <description>A machine that can cook meals all by itself. Just look at it go!</description>
+    <costStuffCount>100</costStuffCount>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Steel>10</Steel>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+    </comps>
+    <recipes>      <!-- Defines recipe to make it in ThingDef directly.	 (extra from importrecipesfrom) -->
+      <li>MakeNutrientPaste</li>
+      <li>MakeNutrientPasteBulk</li>
+    </recipes>
+    <building>
+      <isMealSource>true</isMealSource>
+    </building>
+    <researchPrerequisites>
+      <li>SelfCooking</li>
+    </researchPrerequisites>
+    <rotatable>true</rotatable>    <!-- for being able to swap between textures each rotation -->
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <importRecipesFrom>ElectricStove</importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!--====================Meat Grinder====================-->
+  <ThingDef ParentName="AssemblerBase">
+    <defName>MeatGrinder</defName>
+    <label>Self Meat Grinder</label>
+    <designatorDropdown>assembler_food_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>SAL3/smart_butcher</texPath>
+      <drawSize>(2.1,2.1)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>2500</WorkToBuild>
+      <MarketValue>700</MarketValue>
+      <Beauty>-25</Beauty>      <!-- this is pretty grose -->
+      <Cleanliness>0</Cleanliness>      <!-- INFO -->
+    </statBases>
+    <size>(2,2)</size>
+    <description>This is a machine designed to Put Dead animals in and spit out Raw Meat and other good stuff. Properly best to move stuff away from output fast so this crazy looking machine wont be cloged? I/O or Rollers?</description>
+    <costStuffCount>100</costStuffCount>
+    <surfaceType>Item</surfaceType>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrame>1</PRFMachineFrame>
+      <Steel>10</Steel>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>2</heatPerSecond>
+      </li>
+    </comps>
+    <!--<recipes></recipes>-->
+    <researchPrerequisites>
+      <li>SelfCooking</li>
+    </researchPrerequisites>
+    <rotatable>false</rotatable>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <importRecipesFrom>TableButcher</importRecipesFrom>
+      </li>
+    </modExtensions>
+    <placeWorkers>      <!-- Restrictor when placing the building. -->
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <!--====================Fermenting Barrel====================-->
+  <ThingDef ParentName="AssemblerBase">
+    <defName>PRFFermentingBarrel</defName>
+    <label>Automated Fermenting Barrel</label>
+    <designatorDropdown>assembler_food_gr</designatorDropdown>
+    <description>An automated barrel machine for fermenting raw wort into beer. This machine is temperature controlled and kept between 7C ~ 32C to maintain the best brewing quality. Best to move beer away from the output as soon as possible. I/O or Rollers?</description>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>SAL3/brewer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.8,1.8)</drawSize>
+      <damageData>
+        <rect>(0.05,0.05,0.95,0.95)</rect>
+      </damageData>
+    </graphicData>
+    <size>(1,1)</size>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>1.0</fillPercent>
+    <pathCost>60</pathCost>
+    <uiIconScale>0.6</uiIconScale>
+    <statBases>
+      <WorkToBuild>600</WorkToBuild>
+      <Mass>17</Mass>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <MarketValue>150</MarketValue>
+    </statBases>
+    <costList>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <Steel>100</Steel>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>100</basePowerConsumption>
+      </li>
+    </comps>
+    <recipes>
+      <li>BrewBeer_sixpack</li>
+      <li>BrewBeer_case</li>
+      <li>BrewBeer_keg</li>
+    </recipes>
+    <rotatable>False</rotatable>
+    <designationCategory>Industrial</designationCategory>
+    <researchPrerequisites>
+      <li>Brewing</li>
+      <li>SelfCooking</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>
