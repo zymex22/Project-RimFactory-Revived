@@ -18,10 +18,57 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private Dictionary<ThingDef, SlaughterSettings> slaughterSettings = new Dictionary<ThingDef, SlaughterSettings>();
 
+        private int outputIndex = 0;
+
+        private IntVec3[] adjacent;
+
+        public override IntVec3 OutputCell()
+        {
+            return this.adjacent[this.outputIndex];
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+
+            this.adjacent = GenAdj.CellsAdjacent8Way(this).ToArray();
+            if (!respawningAfterLoad)
+            {
+                this.outputIndex = Mathf.Max(0, this.adjacent.FirstIndexOf(c => c == base.OutputCell()));
+            }
+        }
+
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (var g in base.GetGizmos())
+            {
+                yield return g;
+            }
+
+            var direction = new Command_Action();
+            direction.action = () =>
+            {
+                if (this.outputIndex + 1 >= this.adjacent.Count())
+                {
+                    this.outputIndex = 0;
+                }
+                else
+                {
+                    this.outputIndex++;
+                }
+            };
+            direction.activateSound = SoundDefOf.Checkbox_TurnedOn;
+            direction.defaultLabel = "PRF.AutoMachineTool.SelectOutputDirectionLabel".Translate();
+            direction.defaultDesc = "PRF.AutoMachineTool.SelectOutputDirectionDesc".Translate();
+            direction.icon = RS.OutputDirectionIcon;
+            yield return direction;
+        }
+
         public override void ExposeData()
         {
             base.ExposeData();
 
+            Scribe_Values.Look<int>(ref this.outputIndex, "outputIndex");
             Scribe_Collections.Look<ThingDef, SlaughterSettings>(ref this.slaughterSettings, "slaughterSettings", LookMode.Def, LookMode.Deep);
         }
 

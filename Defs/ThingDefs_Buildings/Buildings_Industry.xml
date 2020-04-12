@@ -211,7 +211,7 @@
         <maxPower>5000</maxPower>
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_MinerOutputCellResolver</outputCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
       </li>
       <!--
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">

@@ -112,6 +112,17 @@ namespace ProjectRimFactory.AutoMachineTool
         }
     }
 
+    public class ProductOutputCellResolver : OutputCellResolver
+    {
+        public override Option<IntVec3> OutputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
+        {
+            return center.GetThingList(map)
+                .SelectMany(b => Option(b as IProductOutput))
+                .FirstOption()
+                .Select(b => b.OutputCell());
+        }
+    }
+
     public interface ITargetCellResolver
     {
         IEnumerable<IntVec3> GetRangeCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot, int range);

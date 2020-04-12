@@ -348,7 +348,7 @@
         <minPower>0</minPower>
         <maxPower>2000</maxPower>
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_SlaughterhouseTargetCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.OutputCellResolver</outputCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
       </li>
     </modExtensions>
   </ThingDef>
