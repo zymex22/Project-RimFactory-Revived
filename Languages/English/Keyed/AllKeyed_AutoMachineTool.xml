@@ -15,7 +15,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <!-- PowerTab -->
   <PRF.AutoMachineTool.SupplyPower.TabName>Power</PRF.AutoMachineTool.SupplyPower.TabName>
   <PRF.AutoMachineTool.SupplyPower.Description>Set the power usage. More power = faster workspeed</PRF.AutoMachineTool.SupplyPower.Description>
-  <PRF.AutoMachineTool.SupplyPower.ValueLabel>Supply power</PRF.AutoMachineTool.SupplyPower.ValueLabel>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabel>Boost Power</PRF.AutoMachineTool.SupplyPower.ValueLabel>
   <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Set the power usage. More power = bigger Range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
   <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Boost Power(speed)</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
   <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Boost Power(range)</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
