@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <PRF_DeepQuarry.label>深矿机</PRF_DeepQuarry.label>
+  <PRF_DeepQuarry.label>深矿机（中）</PRF_DeepQuarry.label>
   <PRF_DeepQuarry.description>自动采矿机，不断从地下挖掘矿物，包括石块、原材料和零部件。每6小时生产一次随机资源。</PRF_DeepQuarry.description>
-  <PRF_DeepQuarry_Blueprint.label>深矿机（蓝图）</PRF_DeepQuarry_Blueprint.label>
-  <PRF_DeepQuarry_Frame.label>深矿机（建造中）</PRF_DeepQuarry_Frame.label>
+  <PRF_DeepQuarry_Blueprint.label>深矿机（中）（蓝图）</PRF_DeepQuarry_Blueprint.label>
+  <PRF_DeepQuarry_Frame.label>深矿机（中）（建造中）</PRF_DeepQuarry_Frame.label>
   <PRF_DeepQuarry_Frame.description>自动采矿机，不断从地下挖掘矿物，包括石块、原材料和零部件。每6小时生产一次随机资源。</PRF_DeepQuarry_Frame.description>
 
   <PaperclipFactory.label>回形针工厂</PaperclipFactory.label>
@@ -95,6 +95,24 @@
   <PRFPaperclipDuplicator_Blueprint.label>回形针复制器（蓝图）</PRFPaperclipDuplicator_Blueprint.label>
   <PRFPaperclipDuplicator_Frame.label>回形针复制器（建造中）</PRFPaperclipDuplicator_Frame.label>
   <PRFPaperclipDuplicator_Frame.description>巴拿赫-塔斯基复制机能够复制回形针，存储在其中的回形针每天增加5%，任何篡改回形针复制器的企图都会破坏所有存储的回形针。</PRFPaperclipDuplicator_Frame.description>
+
+  <PRF_Recycler.label>自动电熔炼器</PRF_Recycler.label>
+  <PRF_Recycler.description>回收商可以将几乎所有服装和武器转换为可用的原始资源，并损失一些材料。</PRF_Recycler.description>
+  <PRF_Recycler_Blueprint.label>自动电熔炼器（蓝图）</PRF_Recycler_Blueprint.label>
+  <PRF_Recycler_Frame.label>自动电熔炼器（建造中）</PRF_Recycler_Frame.label>
+  <PRF_Recycler_Frame.description>回收商可以将几乎所有服装和武器转换为可用的原始资源，并损失一些材料。</PRF_Recycler_Frame.description>
+
+  <PRF_DeepQuarry_mkI.label>深矿机（小）</PRF_DeepQuarry_mkI.label>
+  <PRF_DeepQuarry_mkI.description>一家早期的自动化采石场，不断从地面提取资源，包括岩石块，材料和组件。 大约每8小时产生一次随机资源。（可能会引起侵扰！）</PRF_DeepQuarry_mkI.description>
+  <PRF_DeepQuarry_mkI_Blueprint.label>深矿机（小）（蓝图）</PRF_DeepQuarry_mkI_Blueprint.label>
+  <PRF_DeepQuarry_mkI_Frame.label>深矿机（小）（建造中）</PRF_DeepQuarry_mkI_Frame.label>
+  <PRF_DeepQuarry_mkI_Frame.description>一家早期的自动化采石场，不断从地面提取资源，包括岩石块，材料和组件。 大约每8小时产生一次随机资源。（可能会引起侵扰！）</PRF_DeepQuarry_mkI_Frame.description>
+
+  <Building_AutoMachineTool_Miner.label>深矿机（大）</Building_AutoMachineTool_Miner.label>
+  <Building_AutoMachineTool_Miner.description>利用最新的间隔技术，自动采矿比以往任何时候都更精确，现在可以调整要开采的矿石，甚至可以平衡速度的功率</Building_AutoMachineTool_Miner.description>
+  <Building_AutoMachineTool_Miner_Blueprint.label>深矿机（大）（蓝图）</Building_AutoMachineTool_Miner_Blueprint.label>
+  <Building_AutoMachineTool_Miner_Frame.label>深矿机（大）（建造中）</Building_AutoMachineTool_Miner_Frame.label>
+  <Building_AutoMachineTool_Miner_Frame.description>利用最新的间隔技术，自动采矿比以往任何时候都更精确，现在可以调整要开采的矿石，甚至可以平衡速度的功率</Building_AutoMachineTool_Miner_Frame.description>
 
 
 </LanguageData>

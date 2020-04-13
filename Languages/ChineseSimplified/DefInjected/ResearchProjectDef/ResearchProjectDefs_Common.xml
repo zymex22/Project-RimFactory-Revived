@@ -66,5 +66,7 @@
   <VeryLargeBatteries.label>非常大的电池</VeryLargeBatteries.label>
   <VeryLargeBatteries.description>学习其他的储能方法，并创建紧凑的64k和256k电池单元，用于大容量储能。</VeryLargeBatteries.description>
 
+  <ADVrollers.label>先进传送带</ADVrollers.label>
+  <ADVrollers.description>先进的压路机和推进器是第二层红外线压路机</ADVrollers.description>
 
 </LanguageData>

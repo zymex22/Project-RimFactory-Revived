@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+    <Lighting_FloorLampArrow.label>黄色标志箭头</Lighting_FloorLampArrow.label>
+    <Lighting_FloorLampArrow.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_FloorLampArrow.description>
+    <Lighting_FloorLampArrow_Blueprint.label>黄色标志箭头 (蓝图)</Lighting_FloorLampArrow_Blueprint.label>
+    <Lighting_FloorLampArrow_Frame.label>黄色标志箭头 (建造中)</Lighting_FloorLampArrow_Frame.label>
+    <Lighting_FloorLampArrow_Frame.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_FloorLampArrow_Frame.description>
+  <!-- ================= Red Arrow =================== -->
+
+    <Lighting_RedFloorLampArrow.label>红色标志箭头</Lighting_RedFloorLampArrow.label>
+    <Lighting_RedFloorLampArrow.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_RedFloorLampArrow.description>
+    <Lighting_RedFloorLampArrow_Blueprint.label>红色标志箭头 (蓝图)</Lighting_RedFloorLampArrow_Blueprint.label>
+    <Lighting_RedFloorLampArrow_Frame.label>红色标志箭头 (建造中)</Lighting_RedFloorLampArrow_Frame.label>
+    <Lighting_RedFloorLampArrow_Frame.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_RedFloorLampArrow_Frame.description>
+  <!-- ================= Green Arrow ================= -->
+
+    <Lighting_GreenFloorLampArrow.label>绿色标志箭头</Lighting_GreenFloorLampArrow.label>
+    <Lighting_GreenFloorLampArrow.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_GreenFloorLampArrow.description>
+    <Lighting_GreenFloorLampArrow_Blueprint.label>绿色标志箭头 (蓝图)</Lighting_GreenFloorLampArrow_Blueprint.label>
+    <Lighting_GreenFloorLampArrow_Frame.label>绿色标志箭头 (建造中)</Lighting_GreenFloorLampArrow_Frame.label>
+    <Lighting_GreenFloorLampArrow_Frame.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_GreenFloorLampArrow_Frame.description>
+  <!-- ================= Red X ======================= -->
+
+    <Lighting_FloorLampX.label>红色X地板</Lighting_FloorLampX.label>
+    <Lighting_FloorLampX.description>X形弱荧光地板标志</Lighting_FloorLampX.description>
+    <Lighting_FloorLampX_Blueprint.label>红色X地板 (蓝图)</Lighting_FloorLampX_Blueprint.label>
+    <Lighting_FloorLampX_Frame.label>红色X地板 (建造中)</Lighting_FloorLampX_Frame.label>
+    <Lighting_FloorLampX_Frame.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_FloorLampX_Frame.description>
+
+
+</LanguageData>
