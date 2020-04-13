@@ -341,7 +341,7 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
         <speedFactor>1</speedFactor>
-        <minPower>750</minPower>
+        <minPower>700</minPower>
         <maxPower>2000</maxPower>
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
