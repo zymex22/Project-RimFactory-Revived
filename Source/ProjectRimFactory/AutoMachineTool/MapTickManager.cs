@@ -93,6 +93,25 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
+        public override void MapComponentUpdate()
+        {
+            base.MapComponentUpdate();
+
+            // ここでいいのか・・・？
+            Option(Find.MainTabsRoot.OpenTab)
+                .Select(r => r.TabWindow)
+                .SelectMany(w => Option(w as MainTabWindow_Architect))
+                .SelectMany(a => Option(a.selectedDesPanel))
+                .Where(p => p.def.defName == "Industrial")
+                .ForEach(p => OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame());
+
+            if (Find.Selector.FirstSelectedObject as IBeltConbeyorLinkable != null)
+            {
+                OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
+            }
+        }
+
+
         private Dictionary<int, HashSet<Action>> tickActionsDict = new Dictionary<int, HashSet<Action>>();
 
         private HashSet<Func<bool>> eachTickActions = new HashSet<Func<bool>>();

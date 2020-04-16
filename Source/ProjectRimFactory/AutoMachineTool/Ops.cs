@@ -227,7 +227,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     return true;
             }
             var o = cell.SlotGroupCells(map).Where(c => c.IsValidStorageFor(map, t))
-//                .Where(c => c.GetThingList(map).Where(b => b.def.category == ThingCategory.Building).All(b => !(b is IConveyor)))
+                .Where(c => c.GetThingList(map).Where(b => b.def.category == ThingCategory.Building).All(b => !(b is Building_BeltConveyor)))
                 .FirstOption();
             if (o.HasValue)
             {

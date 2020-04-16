@@ -12,6 +12,18 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.StatReady>Ready.</PRF.AutoMachineTool.StatReady>
   <PRF.AutoMachineTool.StatPlacing>Placing. [pending placement {0}]</PRF.AutoMachineTool.StatPlacing>
   
+  <PRF.AutoMachineTool.Priority>priority</PRF.AutoMachineTool.Priority>
+  
+  <PRF.AutoMachineTool.OutputDirection>Output destination. [{0}]</PRF.AutoMachineTool.OutputDirection>
+  <PRF.AutoMachineTool.OutputDirection.N>North</PRF.AutoMachineTool.OutputDirection.N>
+  <PRF.AutoMachineTool.OutputDirection.NE>Northeast</PRF.AutoMachineTool.OutputDirection.NE>
+  <PRF.AutoMachineTool.OutputDirection.E>East</PRF.AutoMachineTool.OutputDirection.E>
+  <PRF.AutoMachineTool.OutputDirection.SE>Southeast</PRF.AutoMachineTool.OutputDirection.SE>
+  <PRF.AutoMachineTool.OutputDirection.S>South</PRF.AutoMachineTool.OutputDirection.S>
+  <PRF.AutoMachineTool.OutputDirection.SW>Southwest</PRF.AutoMachineTool.OutputDirection.SW>
+  <PRF.AutoMachineTool.OutputDirection.W>West</PRF.AutoMachineTool.OutputDirection.W>
+  <PRF.AutoMachineTool.OutputDirection.NW>Northwest</PRF.AutoMachineTool.OutputDirection.NW>
+  
   <!-- PowerTab -->
   <PRF.AutoMachineTool.SupplyPower.TabName>Power</PRF.AutoMachineTool.SupplyPower.TabName>
   <PRF.AutoMachineTool.SupplyPower.Description>Set the power usage. More power = faster workspeed</PRF.AutoMachineTool.SupplyPower.Description>
@@ -53,5 +65,16 @@ Even if the output destination is in the stockpiling zone, the finished product 
   
   <!-- AutoMiner -->
   <PRF.AutoMachineTool.AutoMiner.MineOre>Mining {0}</PRF.AutoMachineTool.AutoMiner.MineOre>
+  
+  <!-- BeltConveyor -->
+  <PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>very high</PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>
+  <PRF.AutoMachineTool.Conveyor.DirectionPriority.High>high</PRF.AutoMachineTool.Conveyor.DirectionPriority.High>
+  <PRF.AutoMachineTool.Conveyor.DirectionPriority.Normal>normal</PRF.AutoMachineTool.Conveyor.DirectionPriority.Normal>
+  <PRF.AutoMachineTool.Conveyor.DirectionPriority.Low>low</PRF.AutoMachineTool.Conveyor.DirectionPriority.Low>
+  <!-- FilterTab(BeltConveyor) -->
+  <PRF.AutoMachineTool.Conveyor.OutputItemFilter.TabName>Filter</PRF.AutoMachineTool.Conveyor.OutputItemFilter.TabName>
+  <PRF.AutoMachineTool.Conveyor.OutputItemFilter.Description>Set the filter for items in the output direction. direction</PRF.AutoMachineTool.Conveyor.OutputItemFilter.Description>
+  <PRF.AutoMachineTool.Conveyor.OutputItemFilter.NothingOutputDestination>(Disconnected)</PRF.AutoMachineTool.Conveyor.OutputItemFilter.NothingOutputDestination>
+  <PRF.AutoMachineTool.Conveyor.FilterCopyFrom>Select copy from</PRF.AutoMachineTool.Conveyor.FilterCopyFrom>
   
 </LanguageData>

@@ -74,6 +74,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
 
             this.MapManager.NextAction(this.SetPower);
+            this.MapManager.AfterAction(5, this.SetPower);
         }
 
         protected override bool IsActive()
@@ -90,9 +91,12 @@ namespace ProjectRimFactory.AutoMachineTool
             base.DeSpawn();
         }
 
-
         protected virtual void SetPower()
         {
+            if(this.powerComp == null)
+            {
+                return;
+            }
             if (this.SupplyPowerForSpeed != this.powerComp.PowerOutput)
             {
                 this.powerComp.PowerOutput = -this.SupplyPowerForSpeed;
@@ -104,6 +108,14 @@ namespace ProjectRimFactory.AutoMachineTool
         protected virtual float Factor2()
         {
             return 0.1f;
+        }
+
+        protected override void ReceiveCompSignal(string signal)
+        {
+            if (signal == CompPowerTrader.PowerTurnedOffSignal || signal == CompPowerTrader.PowerTurnedOnSignal)
+            {
+                this.SetPower();
+            }
         }
     }
 }

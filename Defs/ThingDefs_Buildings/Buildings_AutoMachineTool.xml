@@ -100,6 +100,259 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
   </ThingDef>
+  
+  
+  <!--======================================= Conveyor base ===============================================-->
+  <ThingDef Name="Building_AutoMachineTool_BeltConveyor_Base" ParentName="BuildingBase" Abstract="true">
+    <category>Building</category>
+    <designationCategory>Industrial</designationCategory>
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+
+    <costList>
+      <Steel>1</Steel>
+    </costList>
+    <statBases>
+      <WorkToBuild>10</WorkToBuild>
+    </statBases>
+    <researchPrerequisites>
+    </researchPrerequisites>
+
+    <size>(1,1)</size>
+    <passability>Standable</passability>
+    <selectable>True</selectable>
+    <rotatable>true</rotatable>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <placingDraggableDimensions>1</placingDraggableDimensions>
+
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <placeWorkers>
+    </placeWorkers>
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_ConveyorFilter</li>
+    </inspectorTabs>
+    
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>1</speedFactor>
+        <minPower>10</minPower>
+        <maxPower>10</maxPower>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!--======================================= Conveyor normal ===============================================-->
+  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+    <defName>Building_AutoMachineTool_BeltConveyor</defName>
+    <label>BeltConveyor</label>
+    <description>Place it in the direction you want to carry.
+Place the item on top. (Item Puller and AutoMachineTool can be used.)
+The belt conveyors are connected by vertically adjoining the orientation.</description>
+    <altitudeLayer>Building</altitudeLayer>
+    
+    <pathCost>30</pathCost>
+    <clearBuildingArea>false</clearBuildingArea>
+    
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    <uiIconPath>AutoMachineTool/Buildings/BeltConveyorIcon</uiIconPath>
+    <graphicData>
+      <texPath>AutoMachineTool/Buildings/BeltConveyor</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+      <drawRotated>true</drawRotated>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+    <building>
+      <blueprintGraphicData>
+        <texPath>AutoMachineTool/Buildings/BeltConveyor</texPath>
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+        <drawRotated>true</drawRotated>
+        <drawSize>(1, 1)</drawSize>
+      </blueprintGraphicData>
+    </building>
+  </ThingDef>
+
+  <!--======================================= Conveyor wall ===============================================-->
+  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+    <defName>Building_AutoMachineTool_BeltConveyor_Wall</defName>
+    <label>Wall embedding BeltConveyor</label>
+    <description>Place it in the direction you want to carry.(In the wall)
+Place the item on top. (Item Puller and AutoMachineTool can be used.)
+The belt conveyors are connected by vertically adjoining the orientation.</description>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    
+    <pathCost>0</pathCost>
+    <fillPercent>0.0</fillPercent>
+    
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    <clearBuildingArea>false</clearBuildingArea>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
+    </placeWorkers>
+    <uiIconPath>AutoMachineTool/Buildings/BeltConveyorIcon</uiIconPath>
+    <graphicData>
+      <texPath>AutoMachineTool/Buildings/BeltConveyor</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+      <drawRotated>true</drawRotated>
+      <drawSize>(0.8,0.8)</drawSize>
+    </graphicData>
+    <building>
+      <isEdifice>false</isEdifice>
+      <blueprintGraphicData>
+        <texPath>AutoMachineTool/Buildings/BeltConveyor</texPath>
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+        <drawRotated>true</drawRotated>
+        <drawSize>(0.8,0.8)</drawSize>
+      </blueprintGraphicData>
+    </building>
+  </ThingDef>
+
+  <!--======================================= Conveyor underground ===============================================-->
+  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+    <defName>Building_AutoMachineTool_BeltConveyor_Underground</defName>
+    <label>Underground BeltConveyor</label>
+    <description>Underground BeltConveyor carries items in the basement.
+Underground BeltConveyor can not move items on the ground as it is.
+Connect to the underground conveyor entrance and exit and use.</description>
+    <altitudeLayer>FloorEmplacement</altitudeLayer>
+    
+    <pathCost>0</pathCost>
+    <fillPercent>0.0</fillPercent>
+    <clearBuildingArea>false</clearBuildingArea>
+
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
+        <underground>true</underground>
+      </li>
+    </modExtensions>
+    <uiIconPath>AutoMachineTool/Buildings/BeltConveyorUGIcon</uiIconPath>
+    <graphicData>
+      <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+      <drawRotated>true</drawRotated>
+    </graphicData>
+    <building>
+      <isEdifice>false</isEdifice>
+      <blueprintGraphicData>
+        <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+        <drawRotated>true</drawRotated>
+      </blueprintGraphicData>
+    </building>
+  </ThingDef>
+
+  <!--======================================= Conveyor underground connector base ===============================================-->
+  <ThingDef Name="Building_AutoMachineTool_BeltConveyorUGConnector_Base" Parent="BuildingBase" Abstract="true">
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
+    <category>Building</category>
+    <designationCategory>Industrial</designationCategory>
+    <altitudeLayer>Building</altitudeLayer>
+
+    <statBases>
+      <WorkToBuild>10</WorkToBuild>
+    </statBases>
+    <costList>
+      <Steel>1</Steel>
+    </costList>
+    <researchPrerequisites>
+    </researchPrerequisites>
+
+    <size>(1,1)</size>
+    <passability>Standable</passability>
+    <selectable>True</selectable>
+    <rotatable>true</rotatable>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <pathCost>30</pathCost>
+    
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+
+    <inspectorTabs>
+    </inspectorTabs>
+    
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>1</speedFactor>
+        <minPower>10</minPower>
+        <maxPower>10</maxPower>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!--======================================= Conveyor underground connector to underground ===============================================-->
+  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
+    <defName>Building_AutoMachineTool_BeltConveyor_ToUnderground</defName>
+    <label>Underground conveyor entrance</label>
+    <description>Connect the ground belt conveyor and underground conveyor.
+It is the entrance to the underground conveyor.</description>
+    
+    <graphicData>
+      <texPath>AutoMachineTool/Buildings/ConveyorToUnderground</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <drawRotated>true</drawRotated>
+    </graphicData>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
+        <toUnderground>true</toUnderground>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!--======================================= Conveyor underground connector to floor ===============================================-->
+  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
+    <defName>Building_AutoMachineTool_BeltConveyor_ToFloor</defName>
+    <label>Underground conveyor exit</label>
+    <description>Connect the ground belt conveyor and underground conveyor.
+It is an exit to the underground conveyor.</description>
+
+    <graphicData>
+      <texPath>AutoMachineTool/Buildings/ConveyorToFloor</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <drawRotated>true</drawRotated>
+    </graphicData>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
+        <toUnderground>false</toUnderground>
+      </li>
+    </modExtensions>
+  </ThingDef>
 
   <!--======================================= Effect ===============================================-->
   <!-- Effects. Should change xml location. -->
