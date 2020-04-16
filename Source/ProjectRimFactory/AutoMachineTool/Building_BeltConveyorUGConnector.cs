@@ -13,7 +13,7 @@ using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    class Building_BeltConveyorUGConnecter : Building_BaseMachine<Thing>, IBeltConbeyorLinkable
+    class Building_BeltConveyorUGConnector : Building_BaseMachine<Thing>, IBeltConbeyorLinkable
     {
         private ModExtension_Conveyor Extension { get { return this.def.GetModExtension<ModExtension_Conveyor>(); } }
         public override float SupplyPowerForSpeed { get => Building_BeltConveyor.supplyPower; set => Building_BeltConveyor.supplyPower = (int)value; }
@@ -226,7 +226,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public static bool IsConveyorUGConnecterDef(ThingDef def)
         {
-            return typeof(Building_BeltConveyorUGConnecter).IsAssignableFrom(def.thingClass);
+            return typeof(Building_BeltConveyorUGConnector).IsAssignableFrom(def.thingClass);
         }
 
         public static bool ToUndergroundDef(ThingDef def)

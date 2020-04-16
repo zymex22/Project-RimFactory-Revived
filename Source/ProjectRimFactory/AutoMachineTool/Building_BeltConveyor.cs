@@ -25,7 +25,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public static string ToText(this DirectionPriority pri)
         {
-            return ("NR_AutoMachineTool_Conveyor.DirectionPriority." + pri.ToString()).Translate();
+            return ("PRF.AutoMachineTool.Conveyor.DirectionPriority." + pri.ToString()).Translate();
         }
     }
 
@@ -452,25 +452,25 @@ namespace ProjectRimFactory.AutoMachineTool
                         other.Position + other.Rotation.FacingCell == t.Position ||
                         other.Position + other.Rotation.Opposite.FacingCell == t.Position);
                 }
-                else if (Building_BeltConveyorUGConnecter.IsConveyorUGConnecterDef(otherDef))
+                else if (Building_BeltConveyorUGConnector.IsConveyorUGConnecterDef(otherDef))
                 {
                     return t.Position + t.Rotation.FacingCell == other.Position ||
-                        (other.Position + other.Rotation.FacingCell == t.Position && ug == Building_BeltConveyorUGConnecter.ToUndergroundDef(otherDef)) ||
-                        (other.Position + other.Rotation.Opposite.FacingCell == t.Position && ug != Building_BeltConveyorUGConnecter.ToUndergroundDef(otherDef));
+                        (other.Position + other.Rotation.FacingCell == t.Position && ug == Building_BeltConveyorUGConnector.ToUndergroundDef(otherDef)) ||
+                        (other.Position + other.Rotation.Opposite.FacingCell == t.Position && ug != Building_BeltConveyorUGConnector.ToUndergroundDef(otherDef));
                 }
             }
-            else if (Building_BeltConveyorUGConnecter.IsConveyorUGConnecterDef(thisDef))
+            else if (Building_BeltConveyorUGConnector.IsConveyorUGConnecterDef(thisDef))
             {
-                var toUg = Building_BeltConveyorUGConnecter.ToUndergroundDef(thisDef);
+                var toUg = Building_BeltConveyorUGConnector.ToUndergroundDef(thisDef);
                 if (Building_BeltConveyor.IsBeltConveyorDef(otherDef))
                 {
                     return (t.Position + t.Rotation.FacingCell == other.Position && toUg == Building_BeltConveyor.IsUndergroundDef(otherDef)) ||
                         (t.Position + t.Rotation.Opposite.FacingCell == other.Position && toUg != Building_BeltConveyor.IsUndergroundDef(otherDef));
                 }
-                else if (Building_BeltConveyorUGConnecter.IsConveyorUGConnecterDef(otherDef))
+                else if (Building_BeltConveyorUGConnector.IsConveyorUGConnecterDef(otherDef))
                 {
-                    return (t.Position + t.Rotation.FacingCell == other.Position && toUg != Building_BeltConveyorUGConnecter.ToUndergroundDef(otherDef)) ||
-                        (t.Position + t.Rotation.Opposite.FacingCell == other.Position && toUg != Building_BeltConveyorUGConnecter.ToUndergroundDef(otherDef));
+                    return (t.Position + t.Rotation.FacingCell == other.Position && toUg != Building_BeltConveyorUGConnector.ToUndergroundDef(otherDef)) ||
+                        (t.Position + t.Rotation.Opposite.FacingCell == other.Position && toUg != Building_BeltConveyorUGConnector.ToUndergroundDef(otherDef));
                 }
             }
             return false;
