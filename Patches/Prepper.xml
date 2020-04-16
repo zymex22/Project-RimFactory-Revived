@@ -78,7 +78,7 @@
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">
-					<xpath>Defs/ThingDef[defName="SelfCooker"]/recipes</xpath>
+					<xpath>/Defs/ThingDef[defName="SelfCooker"]/recipes</xpath>
 					<value>
 							<li>BakeBread</li>
 							<li>Bakesweetroll</li>
