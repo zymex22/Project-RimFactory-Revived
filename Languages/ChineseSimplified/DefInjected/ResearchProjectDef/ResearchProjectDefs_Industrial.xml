@@ -6,6 +6,12 @@
   <AutonomousMining.label>PRF: 自动采矿</AutonomousMining.label>
   <AutonomousMining.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</AutonomousMining.description>
 
+  <AutonomousMining_II.label>PRF: 自动采矿II型</AutonomousMining_II.label>
+  <AutonomousMining_II.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</AutonomousMining_II.description>
+
+  <AutonomousMining_III.label>PRF: 自动采矿III型</AutonomousMining_III.label>
+  <AutonomousMining_III.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</AutonomousMining_III.description>
+
 
   <!-- Tier 2 -->
 

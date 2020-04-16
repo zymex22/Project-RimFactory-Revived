@@ -36,6 +36,12 @@
   <SelfPrepper_Frame.label>自动食物加工机（建造中）</SelfPrepper_Frame.label>
   <SelfPrepper_Frame.description>一台会自己食物的自动食物加工机，你只需要在一旁看着！</SelfPrepper_Frame.description>
 
+  <PRFFermentingBarrel.label>自动发酵桶</PRFFermentingBarrel.label>
+  <PRFFermentingBarrel.description>把生麦汁发酵成啤酒的自动桶式机器。本机温度控制在7C~32C之间，以保持最佳的酿造质量。最好尽快把啤酒从产量上撤下来。I/O或传送带？</PRFFermentingBarrel.description>
+  <PRFFermentingBarrel_Blueprint.label>自动发酵桶（蓝图）</PRFFermentingBarrel_Blueprint.label>
+  <PRFFermentingBarrel_Blueprint_Install.label>自动食物加工机（蓝图）</PRFFermentingBarrel_Blueprint_Install.label>
+  <PRFFermentingBarrel_Frame.label>自动发酵桶（建造中）</PRFFermentingBarrel_Frame.label>
+  <PRFFermentingBarrel_Frame.description>把生麦汁发酵成啤酒的自动桶式机器。本机温度控制在7C~32C之间，以保持最佳的酿造质量。最好尽快把啤酒从产量上撤下来。I/O或传送带？</PRFFermentingBarrel_Frame.description>
 
   <!-- Recipe database -->
 

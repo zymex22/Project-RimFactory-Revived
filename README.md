@@ -5,16 +5,32 @@
 This mod is together with Industrial Rollers an Awesome way to automate and create factories and such in Rimworld.
 I always loved those 2 mods, and now i have the chance to update one of them
 
-- 3 Animal Stations to milk, shear, and harvest
-- 3 Cultivators to plant and harvest your crops and make them grow faster
-- 5 Auto-Assemblers that will auto craft, cook stuff for you
-- 1 deep drilling machine that will mine random blocks for you
-- 1 auto fueling unit
-- 1 smart hopper
-- 4 storage management itmes
+Kitchen
+- 3 New Machines
 
-and more...
-this might change but list from original mod.
+Resource gathering
+- 3 new miners / quarry / deep drills
+
+Farming and Animals
+- 4 New Growing machines/harvesters
+- 1 New Animal manager
+- 3 New Animal Harvesters
+
+Automations
+- 1 new hopper
+- 2 new pusher / fueling machines
+
+Production
+- 2 new assemblers + 1 recorder
+- 1 recycler to recycle apperal, weapons, armor
+
+Storage management
+- 3 new storage units
+- 1 in/out port for wireless storage
+
+Other
+- 2 new striped factory floors
+- 4 new Floor signs for factory feel
 
 ## Disclaimer
 This was my Favorite mod in B18 and B19 and there never really came a 1.0 or 1.1
@@ -69,6 +85,7 @@ Do you want all in one mod? or 4 seprate mods like PFR 1.0 did (updated for now)
 - Drone texture: Xen
 - X/Y/Z-Composite + drone station texture: Scythe
 - Spdskatr - Rimfactory original! see: https://github.com/spdskatr/ProjectRimFactory
+- Nobo - NR_AutoMachineTools for assemblies work
 
 Translaters: (might need update after release)
 Russian: Natsu_Zirok, Chinese Simplified: Dango998, Chinese Traditional: AbnerChen

@@ -166,7 +166,7 @@
       <Steel>1000</Steel>
       <ComponentIndustrial>50</ComponentIndustrial>
       <Plasteel>100</Plasteel>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
     </costList>
     <statBases>
       <WorkToBuild>10000</WorkToBuild>

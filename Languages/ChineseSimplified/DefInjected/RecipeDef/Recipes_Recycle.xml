@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!--  Apparel  -->
+
+    <Recycle_Apparel.label>熔炼衣物</Recycle_Apparel.label>
+    <Recycle_Apparel.description>用强热和电磁铁将装甲的衣物分解成有用的资源.</Recycle_Apparel.description>
+    <Recycle_Apparel.jobString>正在熔炼衣物.</Recycle_Apparel.jobString>
+
+
+  <!--  Weapon  -->
+
+    <RecycleWeapon.label>熔炼武器</RecycleWeapon.label>
+    <RecycleWeapon.description>用强热和电磁铁将武器分解成有用的金属.</RecycleWeapon.description>
+    <RecycleWeapon.jobString>正在熔炼武器.</RecycleWeapon.jobString>
+
+</LanguageData>

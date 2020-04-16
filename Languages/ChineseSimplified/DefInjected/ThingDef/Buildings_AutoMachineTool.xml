@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+
+  <!--======================================= Item Pusher ===============================================-->
+
+    <Building_AutoMachineTool_Puller.label>自动捡货机</Building_AutoMachineTool_Puller.label>
+    <Building_AutoMachineTool_Puller.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</Building_AutoMachineTool_Puller.description>
+    <Building_AutoMachineTool_Puller_Blueprint.label>自动捡货机（蓝图）</Building_AutoMachineTool_Puller_Blueprint.label>
+    <Building_AutoMachineTool_Puller_Blueprint_Install.label>自动捡货机（蓝图）</Building_AutoMachineTool_Puller_Blueprint_Install.label>
+    <Building_AutoMachineTool_Puller_Frame.label>自动捡货机（建造中）</Building_AutoMachineTool_Puller_Frame.label>
+    <Building_AutoMachineTool_Puller_Frame.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</Building_AutoMachineTool_Puller_Frame.description>
+
+  <!--======================================= Wall Item Pusher ===============================================-->
+    <Building_AutoMachineTool_Puller_Wall.label>过墙自动捡货机</Building_AutoMachineTool_Puller_Wall.label>
+    <Building_AutoMachineTool_Puller_Wall.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</Building_AutoMachineTool_Puller_Wall.description>
+    <Building_AutoMachineTool_Puller_Wall_Blueprint.label>过墙自动捡货机（蓝图）</Building_AutoMachineTool_Puller_Wall_Blueprint.label>
+    <Building_AutoMachineTool_Puller_Wall_Blueprint_Install.label>过墙自动捡货机（蓝图）</Building_AutoMachineTool_Puller_Wall_Blueprint_Install.label>
+    <Building_AutoMachineTool_Puller_Wall_Frame.label>过墙自动捡货机（建造中）</Building_AutoMachineTool_Puller_Wall_Frame.label>
+    <Building_AutoMachineTool_Puller_Wall_Frame.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</Building_AutoMachineTool_Puller_Wall_Frame.description>
+
+
+</Defs>

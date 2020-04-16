@@ -13,11 +13,11 @@
   <StockpileCrateReinforced_Frame.label>强化储存箱（建造中）</StockpileCrateReinforced_Frame.label>
   <StockpileCrateReinforced_Frame.description>一个巨大的储存箱，最多可以保存100个物品，存放在箱子里的物品不会老化。</StockpileCrateReinforced_Frame.description>
 
-  <IndustrialStorageUnit.label>工业储存单元 (弃用)</IndustrialStorageUnit.label>
-  <IndustrialStorageUnit.description>此版本将在发布中弃用。 请使用货物平台。</IndustrialStorageUnit.description>
-  <IndustrialStorageUnit_Blueprint.label>工业储存单元 (弃用)（蓝图）</IndustrialStorageUnit_Blueprint.label>
-  <IndustrialStorageUnit_Frame.label>工业储存单元 (弃用)（建造中）</IndustrialStorageUnit_Frame.label>
-  <IndustrialStorageUnit_Frame.description>此版本将在发布中弃用。 请使用货物平台。</IndustrialStorageUnit_Frame.description>
+  <IndustrialStorageUnit.label>工业储存单元 (不推荐使用)</IndustrialStorageUnit.label>
+  <IndustrialStorageUnit.description>此版本将在发布中不推荐使用。 请使用货物平台。</IndustrialStorageUnit.description>
+  <IndustrialStorageUnit_Blueprint.label>工业储存单元 (不推荐使用)（蓝图）</IndustrialStorageUnit_Blueprint.label>
+  <IndustrialStorageUnit_Frame.label>工业储存单元 (不推荐使用)（建造中）</IndustrialStorageUnit_Frame.label>
+  <IndustrialStorageUnit_Frame.description>此版本将在发布中不推荐使用。 请使用货物平台。</IndustrialStorageUnit_Frame.description>
 
   <PRFCargoPlatform.label>仓储平台</PRFCargoPlatform.label>
   <PRFCargoPlatform.description>可存储无限的物品。每个存储的物品将增加10w电力消耗。当你的殖民地停电时物品将会安全的存储在平台内，但无法继续存放物品。</PRFCargoPlatform.description>

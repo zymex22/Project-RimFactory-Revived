@@ -19,5 +19,12 @@
   <GenericAnimalHarvester_Frame.label>通用动物饲养站（建造中）</GenericAnimalHarvester_Frame.label>
   <GenericAnimalHarvester_Frame.description>可以从动物身上挤奶/剪毛的高级版本自动饲养站。</GenericAnimalHarvester_Frame.description>
 
+  <Building_AutoMachineTool_Slaughterhouse.label>自动宰杀场</Building_AutoMachineTool_Slaughterhouse.label>
+  <Building_AutoMachineTool_Slaughterhouse.description>可以设置范围自动屠宰驯化的动物，并设置极限，只让雌性存活。</Building_AutoMachineTool_Slaughterhouse.description>
+  <Building_AutoMachineTool_Slaughterhouse_Blueprint.label>自动宰杀场（蓝图）</Building_AutoMachineTool_Slaughterhouse_Blueprint.label>
+  <Building_AutoMachineTool_Slaughterhouse_Frame.label>自动宰杀场（建造中）</Building_AutoMachineTool_Slaughterhouse_Frame.label>
+  <Building_AutoMachineTool_Slaughterhouse_Frame.description>可以设置范围自动屠宰驯化的动物，并设置极限，只让雌性存活。</Building_AutoMachineTool_Slaughterhouse_Frame.description>
+
+
 
 </LanguageData>

@@ -63,7 +63,7 @@
         <displayDormantDrones>true</displayDormantDrones>
       </li>
       <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
-        <hauling>true</hauling>        <!-- make false to no output again -->
+        <hauling>false</hauling>        <!-- make false to no output again -->
       </li>
     </modExtensions>
     <researchPrerequisites>
@@ -137,7 +137,7 @@
         <displayDormantDrones>false</displayDormantDrones>
       </li>
       <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
-        <hauling>true</hauling>        <!-- make false to no output again -->
+        <hauling>false</hauling>        <!-- make false to no output again -->
       </li>
     </modExtensions>
     <placeWorkers>
