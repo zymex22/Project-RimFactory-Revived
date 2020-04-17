@@ -38,6 +38,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.ProductLimitation.Description>Processing stops when the number of products and items exceeds the limit value. You can specify the zone. please check if it can be placed in that zone.</PRF.AutoMachineTool.ProductLimitation.Description>
   <PRF.AutoMachineTool.ProductLimitation.ValueLabel>Limit Value</PRF.AutoMachineTool.ProductLimitation.ValueLabel>
   <PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>Activate limit</PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>
+  <PRF.AutoMachineTool.ProductLimitation.CountStacks>Count stacks</PRF.AutoMachineTool.ProductLimitation.CountStacks>
   <PRF.AutoMachineTool.EntierMap>No zone - DO FOREVER</PRF.AutoMachineTool.EntierMap>
   <PRF.AutoMachineTool.CountZone>For what zone?</PRF.AutoMachineTool.CountZone>
   
