@@ -45,6 +45,9 @@
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
+      <li>
+        <compClass>ProjectRimFactory.AutoMachineTool.Comp_CopyAndPaste</compClass>
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
