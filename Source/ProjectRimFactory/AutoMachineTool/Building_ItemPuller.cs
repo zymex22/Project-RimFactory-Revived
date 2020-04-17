@@ -25,6 +25,8 @@ namespace ProjectRimFactory.AutoMachineTool
         private StorageSettings storageSettings;
         public StorageSettings StorageSettings => this.storageSettings;
 
+        private bool ForcePlace => this.def.GetModExtension<ModExtension_Testing>()?.forcePlacing ?? false;
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -47,6 +49,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.filter.SetAllowAll(null);
                 this.storageSettings = new StorageSettings { filter = this.filter };
             }
+            this.forcePlace = this.ForcePlace;
         }
 
         protected override TargetInfo ProgressBarTarget()
