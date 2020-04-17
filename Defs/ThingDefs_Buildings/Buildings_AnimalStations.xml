@@ -2,7 +2,7 @@
 <Defs>
 
   <!--====================Animal Base====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
-  <ThingDef Name="AnimalBase" ParentName="PRFBuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRFBuildingBase -->
+  <ThingDef Name="prf_AnimalBase" ParentName="PRFBuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRFBuildingBase -->
     <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
     <category>Building</category>    <!-- Designates a category to be used internally -->
     <statBases>
@@ -55,9 +55,9 @@
   </DesignatorDropdownGroupDef>
 
   <!--===================================== Shearer T1 =====================================-->
-  <ThingDef ParentName="AnimalBase">
+  <ThingDef ParentName="prf_AnimalBase">
     <defName>Shearer</defName>
-    <label>shearer</label>
+    <label>Shearer</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Shearer</thingClass>
     <graphicData>
       <texPath>Farm/Shearer</texPath>      <!-- path to texture -->
@@ -124,9 +124,9 @@
   </ThingDef>
 
   <!--===================================== Milker T1 =====================================-->
-  <ThingDef ParentName="AnimalBase">
+  <ThingDef ParentName="prf_AnimalBase">
     <defName>Milker</defName>
-    <label>milker</label>
+    <label>Milker</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Milker</thingClass>
     <graphicData>
       <texPath>Farm/Milker</texPath>
@@ -193,9 +193,9 @@
   </ThingDef>
 
   <!--===================================== Generic Harvester T2 =====================================-->
-  <ThingDef ParentName="AnimalBase">
+  <ThingDef ParentName="prf_AnimalBase">
     <defName>GenericAnimalHarvester</defName>
-    <label>generic animal harvester</label>
+    <label>Generic animal harvester</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
       <texPath>Farm/Harvester</texPath>
@@ -263,7 +263,7 @@
   </ThingDef>
 
   <!--===================================== Slaugter House T2 =====================================-->
-  <ThingDef Parent="AnimalBase">
+  <ThingDef Parent="prf_AnimalBase">
     <defName>Building_AutoMachineTool_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
     <label>Auto Slaughter House</label>
