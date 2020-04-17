@@ -67,6 +67,9 @@
         <outputZone>(1, 0.92, 0.016, 0.5)</outputZone>
         -->
       </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
+        <forcePlacing>false</forcePlacing>
+      </li>
     </modExtensions>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_PullerFilter</li>
