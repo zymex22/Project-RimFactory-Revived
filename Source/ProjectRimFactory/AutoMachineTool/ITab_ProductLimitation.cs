@@ -15,12 +15,13 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         int ProductLimitCount { get; set; }
         bool ProductLimitation { get; set; }
+        bool CountStacks { get; set; }
         Option<SlotGroup> TargetSlotGroup { get; set; }
     }
 
     class ITab_ProductLimitation : ITab
     {
-        private static readonly Vector2 WinSize = new Vector2(400f, 240f);
+        private static readonly Vector2 WinSize = new Vector2(400f, 270f);
 
         public ITab_ProductLimitation()
         {
@@ -48,6 +49,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var description = "PRF.AutoMachineTool.ProductLimitation.Description".Translate();
             var label = "PRF.AutoMachineTool.ProductLimitation.ValueLabel".Translate();
             var checkBoxLabel = "PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel".Translate();
+            var stackCountLabel = "PRF.AutoMachineTool.ProductLimitation.CountStacks".Translate();
 
             Listing_Standard list = new Listing_Standard();
             Rect inRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
@@ -70,6 +72,12 @@ namespace ProjectRimFactory.AutoMachineTool
             int limit = this.Machine.ProductLimitCount;
             Widgets.Label(rect.LeftHalf(), label);
             Widgets.TextFieldNumeric<int>(rect.RightHalf(), ref limit, ref buf, 1, 1000000);
+            list.Gap();
+
+            rect = list.GetRect(30f);
+            bool countStacks = this.Machine.CountStacks;
+            Widgets.CheckboxLabeled(rect, stackCountLabel, ref countStacks);
+            this.Machine.CountStacks = countStacks;
             list.Gap();
 
             rect = list.GetRect(30f);
