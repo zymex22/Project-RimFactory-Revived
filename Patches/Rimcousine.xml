@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!--VGP Gourmet Food Prepper -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>[1.0, 1.1] RimCuisine 2 Core</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd"> <!-- adding recipes to food prepper -->
+					<xpath>/Defs/ThingDef[defName="SelfPrepper"]/recipes</xpath>
+					<value>
+						<li>RC2_ProcessSugarBeets</li>
+						<li>RC2_ProcessSugarBeetsBulk</li>
+						<li>RC2_ProcessSugarcane</li>
+						<li>RC2_ProcessSugarcaneBulk</li>
+						<li>RC2_ProcessGrain</li>
+						<li>RC2_ProcessGrainBulk</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
