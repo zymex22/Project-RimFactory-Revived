@@ -18,9 +18,11 @@ namespace ProjectRimFactory.AutoMachineTool
         public bool ProductLimitation { get => this.productLimitation; set => this.productLimitation = value; }
         private Option<SlotGroup> targetSlotGroup = Nothing<SlotGroup>();
         public Option<SlotGroup> TargetSlotGroup { get => targetSlotGroup; set => targetSlotGroup = value; }
+        public bool CountStacks { get => this.countStacks; set => this.countStacks = value; }
 
         private int productLimitCount = 100;
         private bool productLimitation = false;
+        private bool countStacks = false;
 
         private ILoadReferenceable slotGroupParent = null;
         private string slotGroupParentLabel = null;
@@ -31,6 +33,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
             Scribe_Values.Look<int>(ref this.productLimitCount, "productLimitCount", 100);
             Scribe_Values.Look<bool>(ref this.productLimitation, "productLimitation", false);
+            Scribe_Values.Look<bool>(ref this.countStacks, "countStacks", false);
+            
             if (Scribe.mode == LoadSaveMode.Saving)
             {
                 this.slotGroupParentLabel = this.targetSlotGroup.Select(s => s.parent.SlotYielderLabel()).GetOrDefault(null);
@@ -53,8 +57,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 return false;
             }
             this.targetSlotGroup = this.targetSlotGroup.Where(s => this.Map.haulDestinationManager.AllGroups.Any(a => a == s));
-            return this.targetSlotGroup.Fold(() => this.Map.resourceCounter.GetCount(def) >= this.ProductLimitCount)
-                (s => s.HeldThings.Where(t => t.def == def).Select(t => t.stackCount).Sum() >= this.ProductLimitCount || !s.Settings.filter.Allows(def) || !s.CellsList.Any(c => c.GetFirstItem(this.Map) == null || c.GetFirstItem(this.Map).def == def));
+            return this.targetSlotGroup.Fold(() => this.CountFromMap(def) >= this.ProductLimitCount)
+                (s => this.CountFromSlot(s, def) >= this.ProductLimitCount || !s.Settings.filter.Allows(def) || !s.CellsList.Any(c => c.GetFirstItem(this.Map) == null || c.GetFirstItem(this.Map).def == def));
         }
 
         public bool IsLimit(Thing thing)
@@ -64,8 +68,18 @@ namespace ProjectRimFactory.AutoMachineTool
                 return false;
             }
             this.targetSlotGroup = this.targetSlotGroup.Where(s => this.Map.haulDestinationManager.AllGroups.Any(a => a == s));
-            return this.targetSlotGroup.Fold(() => this.Map.resourceCounter.GetCount(thing.def) >= this.ProductLimitCount)
-                (s => s.HeldThings.Where(t => t.def == thing.def).Select(t => t.stackCount).Sum() >= this.ProductLimitCount || !s.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
+            return this.targetSlotGroup.Fold(() => this.CountFromMap(thing.def) >= this.ProductLimitCount)
+                (s => this.CountFromSlot(s, thing.def) >= this.ProductLimitCount || !s.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
+        }
+
+        private int CountFromMap(ThingDef def)
+        {
+            return this.countStacks ? this.Map.listerThings.ThingsOfDef(def).Count : this.Map.resourceCounter.GetCount(def);
+        }
+
+        private int CountFromSlot(SlotGroup s, ThingDef def)
+        {
+            return this.countStacks ? s.HeldThings.Where(t => t.def == def).Count() : s.HeldThings.Where(t => t.def == def).Select(t => t.stackCount).Sum();
         }
     }
 }
