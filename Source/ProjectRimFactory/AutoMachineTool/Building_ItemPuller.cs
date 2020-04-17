@@ -21,6 +21,8 @@ namespace ProjectRimFactory.AutoMachineTool
         private bool active = false;
         public override Graphic Graphic => Option(base.Graphic as Graphic_Selectable).Fold(base.Graphic)(g => g.Get(this.def.graphicData.texPath + "/Puller" + (this.active ? "1" : "0")));
 
+        private bool ForcePlace => this.def.GetModExtension<ModExtension_Testing>()?.forcePlacing ?? false;
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -40,7 +42,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.filter = new ThingFilter();
                 this.filter.SetAllowAll(null);
             }
-            this.forcePlace = false;
+            this.forcePlace = this.ForcePlace;
         }
 
         protected override TargetInfo ProgressBarTarget()

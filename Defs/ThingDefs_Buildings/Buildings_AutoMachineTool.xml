@@ -56,6 +56,9 @@
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</outputCellResolverType>
         <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</inputCellResolverType>
       </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
+        <forcePlacing>false</forcePlacing>
+      </li>
     </modExtensions>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_PullerFilter</li>
