@@ -117,5 +117,45 @@
     </costList>
   </ThingDef>
 
+    <!-- ================= Input ======================= -->
+  <ThingDef ParentName="FloorSign">
+    <defName>Lighting_FloorInput</defName>
+    <label>Input Sign</label>
+    <graphicData>
+      <texPath>Misc/Input</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>110</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <description>Weak florescent Floor sign in a input shape</description>
+    <costList>
+      <Steel>2</Steel>
+    </costList>
+  </ThingDef>
+
+    <!-- ================= Output ======================= -->
+  <ThingDef ParentName="FloorSign">
+    <defName>Lighting_FloorOutput</defName>
+    <label>Output Sign</label>
+    <graphicData>
+      <texPath>Misc/Output</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>110</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <description>Weak florescent Floor sign in a output shape</description>
+    <costList>
+      <Steel>2</Steel>
+    </costList>
+  </ThingDef>
+
 
 </Defs>
