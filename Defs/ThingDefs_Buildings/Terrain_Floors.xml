@@ -2,8 +2,6 @@
 <Defs>
 
   <!-- ================= From Floored - Credit to EsseCoisa and Curundir ================= -->
-
-
   <TerrainDef Name="FloorBase_prf" ParentName="FloorBase" Abstract="True">
     <layerable>true</layerable>    <!-- Optional. If true, the player can build the terrain (floor) on top of an existing floor -->
     <affordances>      <!-- Defines affordance types for the terrain  Vanilla affordances:	Diggable,	GrowSoil,	Heavy, Light,	SmoothHard -->

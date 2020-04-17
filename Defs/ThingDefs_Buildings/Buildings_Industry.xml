@@ -2,7 +2,7 @@
 <Defs>
 
   <!--==================== Industrial Base ====================-->
-  <ThingDef Name="IndustrialBase" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_IndustrialBase" ParentName="PRFBuildingBase" Abstract="True">
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
@@ -37,7 +37,7 @@
   </DesignatorDropdownGroupDef>
 
   <!--==================== Quarry T1 ====================-->
-  <ThingDef ParentName="IndustrialBase">
+  <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_DeepQuarry_mkI</defName>
     <label>T1 Auger drill</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
@@ -91,7 +91,7 @@
   </ThingDef>
 
   <!--==================== Quarry T2 ====================-->
-  <ThingDef ParentName="IndustrialBase">
+  <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_DeepQuarry</defName>
     <label>T2 Pulse Drill</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
@@ -148,7 +148,7 @@
   </ThingDef>
 
   <!--==================== Quarry T3 ====================-->
-  <ThingDef ParentName="IndustrialBase">
+  <ThingDef ParentName="PRF_IndustrialBase">
     <defName>Building_AutoMachineTool_Miner</defName>
     <label>T3 Plasma Drill</label>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
@@ -217,12 +217,12 @@
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
         <effectWorking>Drill</effectWorking>
       </li>  
-      --> <!-- If want Smoke effect on or not comment out to remove smoke -->
+      -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
     </modExtensions>
   </ThingDef>
 
   <!--==================== Recycler ====================-->
-  <ThingDef ParentName="IndustrialBase">
+  <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_Recycler</defName>
     <label>Smart Recycler</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
@@ -278,7 +278,7 @@
   </ThingDef>
 
   <!--==================== Fueling Machine ====================-->
-  <ThingDef ParentName="IndustrialBase">
+  <ThingDef ParentName="PRF_IndustrialBase">
     <defName>FuelingMachine</defName>
     <label>fueling machine</label>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
