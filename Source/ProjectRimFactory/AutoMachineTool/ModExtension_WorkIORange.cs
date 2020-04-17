@@ -72,6 +72,39 @@ namespace ProjectRimFactory.AutoMachineTool
                 return this.inputCellResolver;
             }
         }
+
+        public Color GetCellPatternColor(CellPattern pat)
+        {
+            switch (pat)
+            {
+                case CellPattern.BlurprintMin:
+                    return this.blueprintMin;
+                case CellPattern.BlurprintMax:
+                    return this.blueprintMax;
+                case CellPattern.Instance:
+                    return this.instance;
+                case CellPattern.OtherInstance:
+                    return this.otherInstance;
+                case CellPattern.OutputCell:
+                    return this.outputCell;
+                case CellPattern.OutputZone:
+                    return this.outputZone;
+                case CellPattern.InputCell:
+                    return this.inputCell;
+                case CellPattern.InputZone:
+                    return this.inputZone;
+            }
+            return Color.white;
+        }
+
+        public Color blueprintMin = Color.white;
+        public Color blueprintMax = Color.gray.A(0.6f);
+        public Color instance = Color.white;
+        public Color otherInstance = Color.white.A(0.35f);
+        public Color inputCell = Color.white;
+        public Color inputZone = Color.white.A(0.5f);
+        public Color outputCell = Color.yellow;
+        public Color outputZone = Color.yellow.A(0.5f);
     }
 
     public interface IInputCellResolver
@@ -108,7 +141,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public virtual Color GetColor(IntVec3 cell, Map map, Rot4 rot, CellPattern cellPattern)
         {
-            return cellPattern.ToColor();
+            return this.Parent.GetCellPatternColor(cellPattern);
         }
     }
 
@@ -157,7 +190,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public virtual Color GetColor(IntVec3 cell, Map map, Rot4 rot, CellPattern cellPattern)
         {
-            return cellPattern.ToColor();
+            return this.Parent.GetCellPatternColor(cellPattern);
         }
 
         public abstract IEnumerable<IntVec3> GetRangeCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot, int range);
@@ -173,32 +206,4 @@ namespace ProjectRimFactory.AutoMachineTool
         InputCell,
         InputZone,
     }
-
-    public static class CellPatternExtensions
-    {
-        public static Color ToColor(this CellPattern pat)
-        {
-            switch (pat)
-            {
-                case CellPattern.BlurprintMin:
-                    return Color.white;
-                case CellPattern.BlurprintMax:
-                    return Color.gray.A(0.6f);
-                case CellPattern.Instance:
-                    return Color.white;
-                case CellPattern.OtherInstance:
-                    return Color.white.A(0.35f);
-                case CellPattern.OutputCell:
-                    return Color.blue;
-                case CellPattern.OutputZone:
-                    return Color.blue.A(0.5f);
-                case CellPattern.InputCell:
-                    return Color.magenta;
-                case CellPattern.InputZone:
-                    return Color.magenta.A(0.5f);
-            }
-            return Color.white;
-        }
-    }
-
 }

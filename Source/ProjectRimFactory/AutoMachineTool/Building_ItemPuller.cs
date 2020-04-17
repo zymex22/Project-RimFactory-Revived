@@ -110,7 +110,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public Color GetColor(IntVec3 cell, Map map, Rot4 rot, CellPattern cellPattern)
         {
-            return cellPattern.ToColor();
+            return this.Parent.GetCellPatternColor(cellPattern);
         }
 
         public Option<IntVec3> InputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot)

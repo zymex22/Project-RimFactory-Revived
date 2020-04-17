@@ -349,6 +349,12 @@
         <maxPower>2000</maxPower>
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_SlaughterhouseTargetCellResolver</targetCellResolverType>
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
+        <!-- for targetCellResolverType
+        <blueprintMin>(1, 1, 1, 1)</blueprintMin>
+        <blueprintMax>(0.5, 0.5, 0.5, 0.6)</blueprintMax>
+        <instance>(1, 1, 1, 1)</instance>
+        <otherInstance>(1, 1, 1, 0.35)</otherInstance>
+        -->
       </li>
     </modExtensions>
   </ThingDef>
