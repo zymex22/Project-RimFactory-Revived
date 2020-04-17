@@ -40,6 +40,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.filter = new ThingFilter();
                 this.filter.SetAllowAll(null);
             }
+            this.forcePlace = false;
         }
 
         protected override TargetInfo ProgressBarTarget()
