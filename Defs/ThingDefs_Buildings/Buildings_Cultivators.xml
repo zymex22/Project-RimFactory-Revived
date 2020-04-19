@@ -44,13 +44,14 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>500</basePowerConsumption>
       </li>
+      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable" />
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>
     <tickerType>Normal</tickerType>
-    <rotatable>true</rotatable>
+    <rotatable>false</rotatable>
     <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
@@ -59,15 +60,15 @@
         <squareAreaRadius>5</squareAreaRadius>
       </li>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
-        <maxNumDrones>2</maxNumDrones>
-        <displayDormantDrones>true</displayDormantDrones>
+        <maxNumDrones>2</maxNumDrones>        <!-- How many drones should be used? -->
+        <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
       </li>
       <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
         <hauling>false</hauling>        <!-- make false to no output again -->
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>FarmingSprinklers</li>
+      <li>FarmingSprinklers</li>      <!-- farming level 1 -->
     </researchPrerequisites>
     <placeWorkers>      <!-- Restrictor when placing the building. -->
       <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
@@ -82,7 +83,8 @@
     <thingClass>ProjectRimFactory.CultivatorTools.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorWithSunLamp</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.1,1.1)</drawSize>
       <damageData>
         <rect>(0.05,0.1,0.9,0.9)</rect>
         <cornerTL>Damage/Corner</cornerTL>
@@ -111,20 +113,25 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>3200</basePowerConsumption>
+        <basePowerConsumption>3100</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">        <!-- CompGlower: Color of light it will emit. RGBA: (r, g, b, 0) -->
         <overlightRadius>9</overlightRadius>
         <glowRadius>14</glowRadius>        <!-- CompGlower: Lit radius. -->
         <glowColor>(370,370,370,0)</glowColor>        <!-- RGBA: (r, g, b, 0) last arent needed -->
       </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>3</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable" />
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>
     <tickerType>Normal</tickerType>
-    <rotatable>true</rotatable>
+    <rotatable>false</rotatable>
     <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
@@ -134,7 +141,7 @@
       </li>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <maxNumDrones>2</maxNumDrones>
-        <displayDormantDrones>false</displayDormantDrones>
+        <displayDormantDrones>true</displayDormantDrones>
       </li>
       <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
         <hauling>false</hauling>        <!-- make false to no output again -->
@@ -144,14 +151,14 @@
       <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
     </placeWorkers>
     <researchPrerequisites>
-      <li>AutomaticFarming1</li>
+      <li>AutomaticFarming1</li>      <!-- farming level 2 -->
     </researchPrerequisites>
   </ThingDef>
 
-  <!--=========================== Spacer Cultivator ==================================-->
+  <!--=========================== Spacer Cultivator Sun ==================================-->
   <ThingDef ParentName="PRFBuildingBase">
-    <defName>CultivatorTools_b18Cultivator</defName>
-    <label>Mechanites Cultivator</label>
+    <defName>CultivatorTools_b18CultivatorSun</defName>
+    <label>Mechanites Cultivator (sun lamp)</label>
     <designatorDropdown>Cultivator_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
@@ -173,7 +180,7 @@
       <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also out onto a cell for further processing.</description>
+    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>3</PRFRoboticArm>
@@ -197,11 +204,11 @@
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
-      <li Class="CompProperties_Schedule">        <!-- Match plant growing times -->
-        <startTime>0.25</startTime>
+      <!-- <li Class="CompProperties_Schedule"> -->      <!-- Match plant growing times -->
+      <!-- <startTime>0.25</startTime>
         <endTime>0.8</endTime>
         <offMessage>Off for plant resting period</offMessage>
-      </li>
+      </li> -->
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>4</heatPerSecond>
@@ -222,7 +229,84 @@
       <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
     </placeWorkers>
     <researchPrerequisites>
-      <li>AutomaticFarming</li>
+      <li>AutomaticFarming</li>      <!-- farming level 3 -->
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=========================== Spacer Cultivator ==================================-->
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>CultivatorTools_b18Cultivator</defName>
+    <label>Mechanites Cultivator</label>
+    <designatorDropdown>Cultivator_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/Cultivator2</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>450</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
+    <costList>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFRoboticArm>3</PRFRoboticArm>
+      <Steel>100</Steel>
+      <Plasteel>30</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>600</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+      <!-- <li Class="CompProperties_Schedule"> -->      <!-- Match plant growing times -->
+      <!-- <startTime>0.25</startTime>
+        <endTime>0.8</endTime>
+        <offMessage>Off for plant resting period</offMessage>
+      </li> -->
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>1</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower"> 
+        <glowRadius>2</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor> <!-- Set to Tier 3 small glow instead of sunlamp -->
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <rotatable>true</rotatable>
+    <designationCategory>Industrial</designationCategory>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <squareAreaRadius>5</squareAreaRadius>
+        <TickFrequencyDivisor>50</TickFrequencyDivisor>
+      </li>
+    </modExtensions>
+    <placeWorkers>
+      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>AutomaticFarming</li>      <!-- farming level 3 -->
     </researchPrerequisites>
   </ThingDef>
 
@@ -276,11 +360,11 @@
         <offMessage>Off for plant resting period</offMessage>
       </li>
     </comps>
-    <specialDisplayRadius>12</specialDisplayRadius> <!-- Radius -->
+    <specialDisplayRadius>12</specialDisplayRadius>    <!-- Radius -->
     <modExtensions>
       <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
-        <TickFrequencyDivisor>50</TickFrequencyDivisor> <!--  Do every X ticks (original prf 50) -->
-        <GrowRate>2500</GrowRate> <!-- How much add per run (original prf 2500/1h per round) -->
+        <TickFrequencyDivisor>50</TickFrequencyDivisor>        <!--  Do every X ticks (original prf 50) -->
+        <GrowRate>2000</GrowRate>        <!-- How much time add per run (original prf 2500/1h per round) -->
       </li>
     </modExtensions>
     <tickerType>Normal</tickerType>
@@ -289,7 +373,7 @@
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>AutomaticFarming1</li>
+      <li>AutomaticFarming1</li>      <!-- farming level 2 -->
     </researchPrerequisites>
   </ThingDef>
 </Defs>
