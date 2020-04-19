@@ -9,6 +9,7 @@ namespace ProjectRimFactory.CultivatorTools
     {
         public int TickFrequencyDivisor = 200;
         public int squareAreaRadius;
+        public int GrowRate = 2500;
     }
     public static class Utilities
     {

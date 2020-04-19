@@ -5,7 +5,9 @@ namespace ProjectRimFactory.CultivatorTools
 {
     public class Building_Sprinkler : Building_RadialCellIterator
     {
-        public override int TickRate => 50;
+        public override int TickRate => def.GetModExtension<CultivatorDefModExtension>()?.TickFrequencyDivisor ?? 50;
+
+        private int GrowRate => def.GetModExtension<CultivatorDefModExtension>()?.GrowRate ?? 2500;
 
         public override bool DoIterationWork(IntVec3 c)
         {
@@ -13,7 +15,7 @@ namespace ProjectRimFactory.CultivatorTools
             if (plant != null && !Map.reservationManager.IsReservedByAnyoneOf(plant, Faction))
             {
                 var rate = GetGrowthRatePerTickFor(plant);
-                plant.Growth += rate * 2500;//Growth sped up by 1hr
+                plant.Growth += rate * this.GrowRate;//Growth sped up by 1hr
             }
             return true;
         }
