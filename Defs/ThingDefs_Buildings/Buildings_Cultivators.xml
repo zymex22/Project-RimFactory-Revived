@@ -267,5 +267,11 @@
     <researchPrerequisites>
       <li>FarmingSprinklers</li>
     </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <TickFrequencyDivisor>50</TickFrequencyDivisor>
+        <GrowRate>2500</GrowRate>
+      </li>
+    </modExtensions>
   </ThingDef>
 </Defs>
