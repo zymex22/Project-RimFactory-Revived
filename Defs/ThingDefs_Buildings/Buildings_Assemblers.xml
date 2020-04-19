@@ -9,7 +9,7 @@
   </DesignatorDropdownGroupDef>
 
   <!--====================AssemblerBase====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
-  <ThingDef Name="AssemblerBase" ParentName="PRFBuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRFBuildingBase -->
+  <ThingDef Name="PRF_AssemblerBase" ParentName="PRFBuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRFBuildingBase -->
     <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
@@ -56,7 +56,7 @@
   </ThingDef>
 
   <!--====================Universal assembler====================-->
-  <ThingDef ParentName="AssemblerBase">
+  <ThingDef ParentName="PRF_AssemblerBase">
     <defName>UniversalAssembler</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
     <label>Universal Assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
     <designatorDropdown>assembler_gr</designatorDropdown>    <!-- Use Dropdown Group -->
@@ -97,7 +97,7 @@
 
 
   <!--====================Selfcorrecting assembler====================-->
-  <ThingDef ParentName="AssemblerBase">
+  <ThingDef ParentName="PRF_AssemblerBase">
     <defName>MachineLearningAssembler</defName>
     <label>Self-Correcting Assembler</label>
     <designatorDropdown>assembler_gr</designatorDropdown>
@@ -184,7 +184,7 @@
   </ThingDef>
 
   <!--====================Cooker====================-->
-  <ThingDef ParentName="AssemblerBase">
+  <ThingDef ParentName="PRF_AssemblerBase">
     <defName>SelfCooker</defName>
     <label>Self Cooker</label>
     <designationCategory>Industrial</designationCategory>
@@ -236,7 +236,7 @@
   </ThingDef>
 
   <!--====================Meat Grinder====================-->
-  <ThingDef ParentName="AssemblerBase">
+  <ThingDef ParentName="PRF_AssemblerBase">
     <defName>MeatGrinder</defName>
     <label>Auto Meat Grinder</label>
     <designatorDropdown>assembler_food_gr</designatorDropdown>
@@ -294,7 +294,7 @@
   </ThingDef>
 
   <!--====================Fermenting Barrel====================-->
-  <ThingDef ParentName="AssemblerBase">
+  <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRFFermentingBarrel</defName>
     <label>Automated Fermenting Barrel</label>
     <designatorDropdown>assembler_food_gr</designatorDropdown>
@@ -346,7 +346,7 @@
   </ThingDef>
 
   <!--==================== Food Prepper ====================-->
-  <ThingDef ParentName="AssemblerBase">
+  <ThingDef ParentName="PRF_AssemblerBase">
     <defName>SelfPrepper</defName>
     <label>Auto Food Prepper</label>
     <size>(2,2)</size>

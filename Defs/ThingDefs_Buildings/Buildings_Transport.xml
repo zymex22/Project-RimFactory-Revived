@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--======================================= Pusher base ===============================================-->
+  <ThingDef Name="Building_AutoMachineTool_Puller_Base" ParentName="PRFBuildingBase" Abstract="true">
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+    <tickerType>Never</tickerType>
+    <category>Building</category>
+    <selectable>true</selectable>
+    <designatorDropdown>Pullers_gr</designatorDropdown>
+    <graphicData>
+      <texPath>AutoMachineTool/Buildings/Puller</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_Selectable</graphicClass>
+      <drawSize>(1.2,1.2)</drawSize>
+    </graphicData>
+    <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <MaxHitPoints>120</MaxHitPoints>
+      <WorkToBuild>300</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Mass>20</Mass>
+      <Beauty>-2</Beauty>
+    </statBases>
+    <designationCategory>Industrial</designationCategory>
+    <size>(1,1)</size>
+    <fillPercent>0.5</fillPercent>
+    <constructEffect>ConstructMetal</constructEffect>
+    <passability>Standable</passability>
+    <rotatable>true</rotatable>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>60</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+      <li>
+        <compClass>ProjectRimFactory.AutoMachineTool.Comp_CopyAndPaste</compClass>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>31</speedFactor>
+        <minPower>100</minPower>
+        <maxPower>1000</maxPower>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</outputCellResolverType>
+        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</inputCellResolverType>
+        <!-- for inputCellResolverType
+        <inputCell>(1, 1, 1, 1)</inputCell>
+        <inputZone>(1, 1, 1, 0.5)</inputZone>
+        -->
+        <!-- for outputCellResolverType
+        <outputCell>(1, 0.92, 0.016, 1)</outputCell>
+        <outputZone>(1, 0.92, 0.016, 0.5)</outputZone>
+        -->
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
+        <forcePlacing>false</forcePlacing>
+      </li>
+    </modExtensions>
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_PullerFilter</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
+    </inspectorTabs>
+    <researchPrerequisites>
+      <li>ADVrollers</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--======================================= Item Pusher ===============================================-->
+  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
+    <defName>Building_AutoMachineTool_Puller</defName>
+    <label>T2 Item Pusher</label>
+
+    <passability>Impassable</passability>
+    <description>(Tier 2) A pusher That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
+    <altitudeLayer>Building</altitudeLayer>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <!--======================================= Wall Item Pusher ===============================================-->
+  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
+    <defName>Building_AutoMachineTool_Puller_Wall</defName>
+    <label>T2 In-Wall Pusher</label>
+    <description>(Tier 2) A pusher That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <clearBuildingArea>false</clearBuildingArea>
+    <graphicData>
+      <drawSize>(0.9,0.9)</drawSize>
+    </graphicData>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
+    </placeWorkers>
+  </ThingDef>
+
+</Defs>

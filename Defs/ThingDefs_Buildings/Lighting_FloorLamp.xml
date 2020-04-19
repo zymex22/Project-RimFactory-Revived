@@ -6,7 +6,7 @@
   </DesignatorDropdownGroupDef>
 
   <!-- ================= Base ================= -->
-  <TerrainDef Name="FloorSign" Abstract="True">
+  <TerrainDef Name="PRF_FloorSign" Abstract="True">
     <thingClass>Building</thingClass>
     <category>Building</category>
     <designationCategory>Industrial</designationCategory>
@@ -38,7 +38,7 @@
 
 
   <!-- ================= Yellow Arrow ================= -->
-  <ThingDef ParentName="FloorSign">
+  <ThingDef ParentName="PRF_FloorSign">
     <defName>Lighting_FloorLampArrow</defName>
     <label>Yellow Floor Sign Arrow</label>
     <graphicData>
@@ -58,7 +58,7 @@
   </ThingDef>
 
   <!-- ================= Red Arrow =================== -->
-  <ThingDef ParentName="FloorSign">
+  <ThingDef ParentName="PRF_FloorSign">
     <defName>Lighting_RedFloorLampArrow</defName>
     <label>Red Floor Sign Arrow</label>
     <graphicData>
@@ -78,7 +78,7 @@
   </ThingDef>
 
   <!-- ================= Green Arrow ================= -->
-  <ThingDef ParentName="FloorSign">
+  <ThingDef ParentName="PRF_FloorSign">
     <defName>Lighting_GreenFloorLampArrow</defName>
     <label>Green Floor Sign Arrow</label>
     <graphicData>
@@ -98,7 +98,7 @@
   </ThingDef>
 
   <!-- ================= Red X ======================= -->
-  <ThingDef ParentName="FloorSign">
+  <ThingDef ParentName="PRF_FloorSign">
     <defName>Lighting_FloorLampX</defName>
     <label>Red Floor Sign X</label>
     <graphicData>
@@ -118,7 +118,7 @@
   </ThingDef>
 
     <!-- ================= Input ======================= -->
-  <ThingDef ParentName="FloorSign">
+  <ThingDef ParentName="PRF_FloorSign">
     <defName>Lighting_FloorInput</defName>
     <label>Input Sign</label>
     <graphicData>
@@ -138,7 +138,7 @@
   </ThingDef>
 
     <!-- ================= Output ======================= -->
-  <ThingDef ParentName="FloorSign">
+  <ThingDef ParentName="PRF_FloorSign">
     <defName>Lighting_FloorOutput</defName>
     <label>Output Sign</label>
     <graphicData>

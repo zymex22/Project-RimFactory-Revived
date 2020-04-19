@@ -2,10 +2,10 @@
 <Defs>
   <ResearchProjectDef>
     <defName>FarmingSprinklers</defName>
-    <label>sprinklers</label>
+    <label>Automatic farming I</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1750</baseCost>
-    <description>Learn how to create sprinklers for a slight increase in plant growth.</description>
+    <description>Basic Cultivation tools with use of drone</description>
     <prerequisites>
       <li>AutomationBasics</li>
     </prerequisites>
@@ -17,10 +17,10 @@
 
   <ResearchProjectDef>
     <defName>AutomaticFarming1</defName>
-    <label>automatic farming 1</label>
+    <label>Automatic farming II</label>
     <techLevel>Industrial</techLevel>
     <baseCost>2250</baseCost>
-    <description>Learn how to create simple cultivators which can automatically take care of a small-sized plot of farmland.</description>
+    <description>Learn how to improve farming skills further by adding sunlamps and sprinklers to your cultivation.</description>
     <prerequisites>
       <li>FarmingSprinklers</li>
     </prerequisites>
@@ -32,10 +32,10 @@
   
   <ResearchProjectDef>
     <defName>AutomaticFarming</defName>
-    <label>automatic farming 2</label>
+    <label>Automatic farming III</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3000</baseCost>
-    <description>Learn how to create cultivators which can automatically take care of a medium-sized plot of farmland.</description>
+    <description>Learn how to farm in spacer style with use of Mechanites to farm plots for you</description>
     <prerequisites>
       <li>AutomaticFarming1</li>
     </prerequisites>

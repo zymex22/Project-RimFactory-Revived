@@ -1,163 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <!--======================================= Pusher base ===============================================-->
-  <ThingDef Name="Building_AutoMachineTool_Puller_Base" Abstract="true">
-    <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
-    <drawerType>RealtimeOnly</drawerType>
-    <tickerType>Never</tickerType>
-    <category>Building</category>
-    <selectable>true</selectable>
-    <designatorDropdown>Pullers_gr</designatorDropdown>
-    <graphicData>
-      <texPath>AutoMachineTool/Buildings/Puller</texPath>
-      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_Selectable</graphicClass>
-      <drawSize>(1.2,1.2)</drawSize>
-    </graphicData>
-    <costList>
-      <Steel>150</Steel>
-      <ComponentIndustrial>10</ComponentIndustrial>
-    </costList>
-    <statBases>
-      <MaxHitPoints>120</MaxHitPoints>
-      <WorkToBuild>300</WorkToBuild>
-      <Flammability>0</Flammability>
-      <Mass>20</Mass>
-      <Beauty>-2</Beauty>
-    </statBases>
-    <designationCategory>Industrial</designationCategory>
-    <size>(1,1)</size>
-    <fillPercent>0.5</fillPercent>
-    <constructEffect>ConstructMetal</constructEffect>
-    <passability>Standable</passability>
-    <rotatable>true</rotatable>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
-    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>60</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_Flickable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
-      <li>
-        <compClass>ProjectRimFactory.AutoMachineTool.Comp_CopyAndPaste</compClass>
-      </li>
-    </comps>
-    <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>31</speedFactor>
-        <minPower>100</minPower>
-        <maxPower>1000</maxPower>
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</outputCellResolverType>
-        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</inputCellResolverType>
-        <!-- for inputCellResolverType
-        <inputCell>(1, 1, 1, 1)</inputCell>
-        <inputZone>(1, 1, 1, 0.5)</inputZone>
-        -->
-        <!-- for outputCellResolverType
-        <outputCell>(1, 0.92, 0.016, 1)</outputCell>
-        <outputZone>(1, 0.92, 0.016, 0.5)</outputZone>
-        -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
-        <forcePlacing>false</forcePlacing>
-      </li>
-    </modExtensions>
-    <inspectorTabs>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_PullerFilter</li>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
-    </inspectorTabs>
-    <researchPrerequisites>
-      <li>ADVrollers</li>
-    </researchPrerequisites>
-  </ThingDef>
-
-  <!--======================================= Item Pusher ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
-    <defName>Building_AutoMachineTool_Puller</defName>
-    <label>T2 Item Pusher</label>
-
-    <passability>Impassable</passability>
-    <description>(Tier 2) A pusher That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
-    <altitudeLayer>Building</altitudeLayer>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
-  </ThingDef>
-
-  <!--======================================= Wall Item Pusher ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
-    <defName>Building_AutoMachineTool_Puller_Wall</defName>
-    <label>T2 In-Wall Pusher</label>
-    <description>(Tier 2) A pusher That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
-    <altitudeLayer>BuildingOnTop</altitudeLayer>
-    <building>
-      <isEdifice>false</isEdifice>
-    </building>
-    <clearBuildingArea>false</clearBuildingArea>
-    <graphicData>
-      <drawSize>(0.9,0.9)</drawSize>
-    </graphicData>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
-  </ThingDef>
-  
-  
   <!--======================================= Conveyor base ===============================================-->
-  <ThingDef Name="Building_AutoMachineTool_BeltConveyor_Base" ParentName="BuildingBase" Abstract="true">
+  <ThingDef Name="Building_AutoMachineTool_BeltConveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
     <category>Building</category>
     <designationCategory>Industrial</designationCategory>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <drawerType>MapMeshAndRealTime</drawerType>
-
     <costList>
-      <Steel>1</Steel>
+      <Steel>15</Steel>
     </costList>
     <statBases>
-      <WorkToBuild>10</WorkToBuild>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>80</WorkToBuild>
+      <Flammability>0.4</Flammability>
+      <Beauty>-0.5</Beauty>
     </statBases>
+    <!-- <minifiedDef>MinifiedThing</minifiedDef> -->
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
     <researchPrerequisites>
     </researchPrerequisites>
-
     <size>(1,1)</size>
+    <pathCost>70</pathCost>
     <passability>Standable</passability>
     <selectable>True</selectable>
     <rotatable>true</rotatable>
     <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <drawGUIOverlay>true</drawGUIOverlay>
     <placingDraggableDimensions>1</placingDraggableDimensions>
-
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
     </placeWorkers>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ConveyorFilter</li>
     </inspectorTabs>
-    
+
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>1</speedFactor>
-        <minPower>10</minPower>
-        <maxPower>10</maxPower>
+        <speedFactor>2.8</speedFactor>
+        <minPower>5</minPower>
+        <maxPower>5</maxPower>
       </li>
     </modExtensions>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
   </ThingDef>
 
   <!--======================================= Conveyor normal ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+  <!-- <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor</defName>
     <label>BeltConveyor</label>
     <description>Place it in the direction you want to carry.
@@ -192,10 +83,10 @@ The belt conveyors are connected by vertically adjoining the orientation.</descr
         <drawSize>(1, 1)</drawSize>
       </blueprintGraphicData>
     </building>
-  </ThingDef>
+  </ThingDef> -->
 
   <!--======================================= Conveyor wall ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+  <!--  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Wall</defName>
     <label>Wall embedding BeltConveyor</label>
     <description>Place it in the direction you want to carry.(In the wall)
@@ -235,10 +126,10 @@ The belt conveyors are connected by vertically adjoining the orientation.</descr
         <drawSize>(0.8,0.8)</drawSize>
       </blueprintGraphicData>
     </building>
-  </ThingDef>
+  </ThingDef> -->
 
   <!--======================================= Conveyor underground ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+  <!-- <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Underground</defName>
     <label>Underground BeltConveyor</label>
     <description>Underground BeltConveyor carries items in the basement.
@@ -278,10 +169,10 @@ Connect to the underground conveyor entrance and exit and use.</description>
         <drawRotated>true</drawRotated>
       </blueprintGraphicData>
     </building>
-  </ThingDef>
+  </ThingDef> -->
 
   <!--======================================= Conveyor underground connector base ===============================================-->
-  <ThingDef Name="Building_AutoMachineTool_BeltConveyorUGConnector_Base" Parent="BuildingBase" Abstract="true">
+  <!-- <ThingDef Name="Building_AutoMachineTool_BeltConveyorUGConnector_Base" Parent="BuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <category>Building</category>
     <designationCategory>Industrial</designationCategory>
@@ -326,10 +217,10 @@ Connect to the underground conveyor entrance and exit and use.</description>
         <maxPower>10</maxPower>
       </li>
     </modExtensions>
-  </ThingDef>
+  </ThingDef> -->
 
   <!--======================================= Conveyor underground connector to underground ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
+  <!-- <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_ToUnderground</defName>
     <label>Underground conveyor entrance</label>
     <description>Connect the ground belt conveyor and underground conveyor.
@@ -346,10 +237,10 @@ It is the entrance to the underground conveyor.</description>
         <toUnderground>true</toUnderground>
       </li>
     </modExtensions>
-  </ThingDef>
+  </ThingDef> -->
 
   <!--======================================= Conveyor underground connector to floor ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
+  <!-- <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_ToFloor</defName>
     <label>Underground conveyor exit</label>
     <description>Connect the ground belt conveyor and underground conveyor.
@@ -366,29 +257,7 @@ It is an exit to the underground conveyor.</description>
         <toUnderground>false</toUnderground>
       </li>
     </modExtensions>
-  </ThingDef>
+  </ThingDef> -->
 
-  <!--======================================= Effect ===============================================-->
-  <!-- Effects. Should change xml location. -->
-  <EffecterDef>
-    <defName>AutoMachineTool_Effect_ProgressBar</defName>
-    <children>
-      <li>
-        <subEffecterClass>SubEffecter_ProgressBar</subEffecterClass>
-        <moteDef>AutoMachineTool_Mote_ProgressBar</moteDef>
-      </li>
-    </children>
-  </EffecterDef>
 
-  <ThingDef ParentName="MoteBase">
-    <defName>AutoMachineTool_Mote_ProgressBar</defName>
-    <graphicData>
-      <texPath>Things/Mote/Transparent</texPath>
-    </graphicData>
-    <thingClass>ProjectRimFactory.AutoMachineTool.MoteProgressBar2</thingClass>
-    <altitudeLayer>MetaOverlays</altitudeLayer>
-    <mote>
-      <solidTime>240</solidTime>
-    </mote>
-  </ThingDef>
 </Defs>

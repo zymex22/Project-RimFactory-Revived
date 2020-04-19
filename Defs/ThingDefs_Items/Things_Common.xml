@@ -65,7 +65,7 @@
       <recipeUsers>
         <li>TableRoboticMachining</li>
       </recipeUsers>
-	  <researchPrerequisite>PRFMachineLearning</researchPrerequisite>
+      <researchPrerequisite>PRFMachineLearning</researchPrerequisite>
     </recipeMaker>
     <thingCategories>
       <li>Items</li>
