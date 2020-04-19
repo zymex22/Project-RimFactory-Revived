@@ -158,6 +158,19 @@ namespace ProjectRimFactory.AutoMachineTool
         private ThingLister thingsList;
 
         public ThingLister ThingsList => thingsList;
+
+#if DEBUG
+        public override void MapComponentOnGUI()
+        {
+            base.MapComponentOnGUI();
+
+            if(Widgets.ButtonText(new Rect(200, 10, 150, 20), "Test(debug)"))
+            {
+                this.map.wealthWatcher.ForceRecount();
+                L("wealth items : " + this.map.wealthWatcher.WealthItems);
+            }
+        }
+#endif
     }
 
     public class ThingLister

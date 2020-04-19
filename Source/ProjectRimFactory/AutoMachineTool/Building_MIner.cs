@@ -238,6 +238,13 @@ namespace ProjectRimFactory.AutoMachineTool
 
             r.effectWorking = effecter;
 
+            // ChunkStone が Recipe の WorkAmount 経由で価値を設定されてしまうため、BaseMarketValue に0を設定して、計算されないようにする。
+            // <see cref="StatWorker_MarketValue.CalculatedBaseMarketValue(BuildableDef, ThingDef)"/>
+            if (!defCount.thingDef.statBases.StatListContains(StatDefOf.MarketValue) && defCount.count == 1)
+            {
+                defCount.thingDef.BaseMarketValue = 0;
+            }
+
             return r;
         }
     }
