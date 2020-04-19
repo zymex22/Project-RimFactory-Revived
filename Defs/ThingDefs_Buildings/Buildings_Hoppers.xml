@@ -3,7 +3,7 @@
   <!--============================== Smart Puller ==============================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>SAL_SmartHopper</defName>
-    <label>(tier 2) Smart Hopper</label>
+    <label>Smart Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
     <graphicData>
       <texPath>Things/Building/Production/Hopper</texPath>
@@ -141,7 +141,7 @@
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
-            <li Class="CompProperties_Glower">
+      <li Class="CompProperties_Glower">
         <glowRadius>2</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>

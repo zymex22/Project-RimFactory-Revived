@@ -9,8 +9,8 @@
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
 			<operations>
-				<li Class="PatchOperationAdd"> <!-- adding recipes to food prepper -->
-					<xpath>/Defs/ThingDef[defName="SelfPrepper"]/recipes</xpath>
+				<li Class="PatchOperationAdd">					<!-- adding recipes to food prepper -->
+					<xpath>/Defs/ThingDef[defName="SelfPrepper"]/recipes</xpath>					<!-- always start by /Defs not */Defs, Defs/ or anything else, fastest way to search -->
 					<value>
 						<li>RC2_ProcessSugarBeets</li>
 						<li>RC2_ProcessSugarBeetsBulk</li>

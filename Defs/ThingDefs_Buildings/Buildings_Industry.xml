@@ -244,7 +244,7 @@
       <Flammability>1.0</Flammability>
 
     </statBases>
-    <description>A Recycler that Turn almost any apperal and weapons back to useable raw recources, in cost of some materials lost</description>
+    <description>A recycler that turns almost any apparel and weapons into usable resources, at the cost of some lost materials.</description>
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
