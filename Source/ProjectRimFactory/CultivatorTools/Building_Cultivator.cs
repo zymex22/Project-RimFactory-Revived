@@ -13,7 +13,7 @@ namespace ProjectRimFactory.CultivatorTools
     public class Building_Cultivator : Building_SquareCellIterator
     {
         public Rot4 outputRotation = Rot4.North;
-        
+
         public IntVec3 OutputSlot => Position + GenAdj.CardinalDirections[outputRotation.AsInt];
 
         #region Abstract stuff
@@ -148,7 +148,8 @@ namespace ProjectRimFactory.CultivatorTools
             };
             yield return new Command_Action
             {
-                icon = ContentFinder<Texture2D>.Get("UI/Misc/Compass"),
+                icon = TexUI.RotRightTex,
+                defaultIconColor = Color.green,
                 defaultLabel = "CultivatorTools_AdjustDirection_Output".Translate(),
                 defaultDesc = "CultivatorTools_AdjustDirection_Desc".Translate(outputRotation.AsCompassDirection()),
                 activateSound = SoundDefOf.Click,
@@ -189,7 +190,7 @@ namespace ProjectRimFactory.CultivatorTools
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(new List<IntVec3> { OutputSlot }, Color.cyan);
+            GenDraw.DrawFieldEdges(new List<IntVec3> { OutputSlot }, Color.yellow);
         }
     }
 }
