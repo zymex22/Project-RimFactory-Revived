@@ -254,6 +254,7 @@
     <recipes>
       <li>RecycleWeapon</li>
       <li>Recycle_Apparel</li>
+      <li>prfDestroyChunks</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Power">

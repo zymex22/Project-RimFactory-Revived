@@ -68,6 +68,22 @@
     <researchViewY>4</researchViewY>
   </ResearchProjectDef>
 
+  <ResearchProjectDef>
+    <defName>PRFRollers</defName>
+    <label>Improved Rollers</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>1000</baseCost>
+    <description>Second Tiered improved Rollers, More options then Industrial Rollers</description>
+    <prerequisites>
+      <li>Machining</li>
+      <li>MicroelectronicsBasics</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>4</researchViewX>
+    <researchViewY>6</researchViewY>
+  </ResearchProjectDef>
+
 
 
   <!-- Batteries Taken from SS bigger batteries-->

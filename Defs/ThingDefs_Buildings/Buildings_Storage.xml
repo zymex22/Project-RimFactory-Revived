@@ -32,18 +32,6 @@
       </fixedStorageSettings>
       <defaultStorageSettings>
         <priority>Important</priority>
-        <!--<filter>
-          <categories>
-            <li>Foods</li>
-            <li>Manufactured</li>
-            <li>ResourcesRaw</li>
-            <li>Items</li>
-            <li>BuildingsArt</li>
-            <li>Weapons</li>
-            <li>Apparel</li>
-            <li>BodyParts</li>
-          </categories>
-        </filter>-->
       </defaultStorageSettings>
     </building>
     <thingCategories>

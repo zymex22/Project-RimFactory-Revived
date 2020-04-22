@@ -77,6 +77,10 @@
       <WorkToBuild>2500</WorkToBuild>
       <MarketValue>1000</MarketValue>      <!-- 	The "market value" of this thing. Please note that sellPriceFactor halves this value when selling the thing, and that the Social skill influences the actual value. -->
     </statBases>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
+    </building>
+    <!-- <passability>Impassable</passability> -->    <!-- to be able to build them as walls -->
     <comps>
       <li Class="CompProperties_Breakdownable"/>
       <!-- enable breakdown of machines -->
@@ -120,6 +124,10 @@
       <WorkToBuild>3000</WorkToBuild>
       <MarketValue>1250</MarketValue>
     </statBases>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
+    </building>
+    <!-- <passability>Impassable</passability> -->    <!-- to be able to build them as walls -->
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -138,6 +146,7 @@
     <defName>RecipeDatabase</defName>
     <label>Recipe Database</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
+    <designatorDropdown>assembler_gr</designatorDropdown>
     <graphicData>
       <texPath>SAL3/DISK_HARDWARE4</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -222,8 +231,10 @@
       <li>MakeNutrientPasteBulk</li>
     </recipes>
     <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
       <isMealSource>true</isMealSource>
     </building>
+    <passability>Impassable</passability>    <!-- to be able to build them as walls -->
     <researchPrerequisites>
       <li>SelfCooking</li>
     </researchPrerequisites>
@@ -379,6 +390,7 @@
       <li>Make_Wort</li>
     </recipes>
     <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
       <isMealSource>true</isMealSource>
     </building>
     <researchPrerequisites>

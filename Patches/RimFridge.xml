@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!--RimFridge -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>[KV] RimFridge - 1.1</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<ThingDef ParentName="PRFBuildingBase">
+							<defName>PRFStorageUnitIOPortFridge</defName>
+							<label>I/O Fridge Port</label>
+							<thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
+							<designatorDropdown>IO_gr</designatorDropdown>
+							<drawerType>RealtimeOnly</drawerType>
+							<graphicData>
+								<texPath>Storage/IO_Fridge</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<shaderType>CutoutComplex</shaderType>
+							</graphicData>
+							<altitudeLayer>Building</altitudeLayer>
+							<passability>PassThroughOnly</passability>
+							<tickerType>Rare</tickerType>
+							<fillPercent>0.5</fillPercent>
+							<pathCost>70</pathCost>
+							<building>
+								<preventDeteriorationInside>true</preventDeteriorationInside>
+								<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+								<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+								<fixedStorageSettings>
+									<priority>Normal</priority>
+									<filter>
+										<categories>
+											<li>AnimalProductRaw</li>
+											<li>Corpses</li>
+											<li>Drugs</li>
+											<li>EggsFertilized</li>
+											<li>EggsUnfertilized</li>
+											<li>Foods</li>
+											<li>Medicine</li>
+											<li>PlantMatter</li>
+											<li>PlantFoodRaw</li>
+											<li>BodyParts</li>
+										</categories>
+										<specialFiltersToDisallow>
+											<li>AllowRotten</li>
+										</specialFiltersToDisallow>
+									</filter>
+								</fixedStorageSettings>
+								<defaultStorageSettings>
+									<priority>Normal</priority>
+									<filter>
+										<categories>
+											<li>FoodMeals</li>
+										</categories>
+										<disallowedThingDefs>
+											<li>MealSurvivalPack</li>
+										</disallowedThingDefs>
+									</filter>
+								</defaultStorageSettings>
+							</building>
+							<inspectorTabs>
+								<li>ProjectRimFactory.Storage.UI.ITab_IOPortStorage</li>
+							</inspectorTabs>
+							<castEdgeShadows>true</castEdgeShadows>
+							<statBases>
+								<WorkToBuild>600</WorkToBuild>
+								<MaxHitPoints>100</MaxHitPoints>
+								<Flammability>1.0</Flammability>
+								<Mass>30</Mass>
+							</statBases>
+							<description>(tier 3) \n A Connection port for your storage Cargo Platforms. It can be set to Input/output from any Platform remotely in any range within the map.</description>
+							<costList>
+								<Steel>80</Steel>
+								<ComponentIndustrial>4</ComponentIndustrial>
+							</costList>
+							<comps>
+								<li Class="CompProperties_Power">
+									<compClass>CompPowerTrader</compClass>
+									<basePowerConsumption>375</basePowerConsumption>
+								</li>
+								<li Class="CompProperties_Flickable"/>
+								<li Class="CompProperties_Breakdownable"/>
+								<li Class="CompProperties_Glower">
+									<glowRadius>2.5</glowRadius>
+									<glowColor>(89,188,255,0)</glowColor>
+								</li>
+								<li Class="RimFridge.CompProperties_Refrigerator">
+									<drinksBestCold>
+										<li>Beer</li>
+										<li>RC2_Ale</li>
+										<li>RC2_Cider</li>
+										<li>RC2_Grog</li>
+										<li>RC2_Stout</li>
+									</drinksBestCold>
+									<findAllRottableForFilters>false</findAllRottableForFilters>
+								</li>
+								<li>
+									<compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+								</li>
+							</comps>
+							<rotatable>false</rotatable>
+							<designationCategory>Industrial</designationCategory>
+							<category>Building</category>
+							<staticSunShadowHeight>0.3</staticSunShadowHeight>
+							<surfaceType>Item</surfaceType>
+							<constructEffect>ConstructMetal</constructEffect>
+							<minifiedDef>MinifiedThing</minifiedDef>
+							<thingCategories>
+								<li>BuildingsFurniture</li>
+							</thingCategories>
+							<researchPrerequisites>
+								<li>PRFStorageIO</li>
+								<li>AirConditioning</li>
+							</researchPrerequisites>
+							<modExtensions>
+								<li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">
+									<inColor>(144, 222, 255, 255)</inColor>
+									<outColor>(215, 169, 72, 255)</outColor>
+								</li>
+							</modExtensions>
+						</ThingDef>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

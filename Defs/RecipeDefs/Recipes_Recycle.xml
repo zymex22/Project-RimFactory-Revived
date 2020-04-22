@@ -68,4 +68,33 @@
     </recipeUsers>
   </RecipeDef>
 
+  <!--  Destroy Stone Chunks  -->
+
+  <RecipeDef>
+    <defName>prfDestroyChunks</defName>
+    <label>Destroy Stone Chunks</label>
+    <description>Crush unwanted stone chunks to completely destroy it.</description>
+    <jobString>Chrushing</jobString>
+    <workAmount>60</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <requiredGiverWorkType>Hauling</requiredGiverWorkType>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>StoneChunks</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>StoneChunks</li>
+      </categories>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
 </Defs>

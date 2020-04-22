@@ -354,11 +354,6 @@
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
-      <li Class="CompProperties_Schedule">        <!-- Match plant growing times -->
-        <startTime>0.25</startTime>
-        <endTime>0.8</endTime>
-        <offMessage>Off for plant resting period</offMessage>
-      </li>
     </comps>
     <specialDisplayRadius>12</specialDisplayRadius>    <!-- Radius -->
     <modExtensions>
@@ -375,11 +370,5 @@
     <researchPrerequisites>
       <li>AutomaticFarming1</li>      <!-- farming level 2 -->
     </researchPrerequisites>
-    <modExtensions>
-      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
-        <TickFrequencyDivisor>50</TickFrequencyDivisor>
-        <GrowRate>2500</GrowRate>
-      </li>
-    </modExtensions>
   </ThingDef>
 </Defs>

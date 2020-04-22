@@ -12,7 +12,7 @@
     <graphicData>
       <texPath>AutoMachineTool/Buildings/Puller</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_Selectable</graphicClass>
-      <drawSize>(1.2,1.2)</drawSize>
+      <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
     <costList>
       <Steel>150</Steel>
@@ -81,13 +81,13 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!--======================================= Item Pusher ===============================================-->
+  <!--======================================= Item Puller ===============================================-->
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller</defName>
-    <label>T2 Item Pusher</label>
+    <label>Item Puller</label>
 
     <passability>Impassable</passability>
-    <description>(Tier 2) A pusher That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
+    <description>(Tier 2) A Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
@@ -95,11 +95,11 @@
     </placeWorkers>
   </ThingDef>
 
-  <!--======================================= Wall Item Pusher ===============================================-->
+  <!--======================================= Wall Item Puller ===============================================-->
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller_Wall</defName>
-    <label>T2 In-Wall Pusher</label>
-    <description>(Tier 2) A pusher That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
+    <label>Wall Item Puller</label>
+    <description>(Tier 2) A Over wall item Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <building>
       <isEdifice>false</isEdifice>
