@@ -185,7 +185,7 @@ namespace ProjectRimFactory.Storage
             if (powerComp.PowerOn)
             {
                 Thing item = Position.GetFirstItem(Map);
-                if (mode == StorageIOMode.Input && item != null && boundStorageUnit != null && boundStorageUnit.settings.AllowedToAccept(item) && boundStorageUnit.CanReceiveIO)
+                if (mode == StorageIOMode.Input && item != null && boundStorageUnit != null && boundStorageUnit.settings.AllowedToAccept(item) && boundStorageUnit.CanReceiveIO && boundStorageUnit.CanStoreMoreItems)
                 {
                     foreach (IntVec3 cell in boundStorageUnit.AllSlotCells())
                     {

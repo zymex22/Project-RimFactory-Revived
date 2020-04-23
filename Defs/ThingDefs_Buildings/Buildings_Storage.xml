@@ -219,6 +219,9 @@
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
+      <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
+        <limit>100</limit>
+      </li>
     </modExtensions>
   </ThingDef>
 

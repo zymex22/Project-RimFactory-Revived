@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Verse;
+using ProjectRimFactory.Storage.Editables;
+using ProjectRimFactory.AutoMachineTool;
 
 namespace ProjectRimFactory.Storage
 {
     public class Building_MassStorageUnitPowered : Building_MassStorageUnit
     {
-        public override bool CanStoreMoreItems => GetComp<CompPowerTrader>().PowerOn;
+        public override bool CanStoreMoreItems => GetComp<CompPowerTrader>().PowerOn && 
+            (!def.HasModExtension<DefModExtension_Crate>() || Position.GetThingList(Map).Count(t => t.def.category == ThingCategory.Item) < (def.GetModExtension<DefModExtension_Crate>()?.limit ?? int.MaxValue));
         public override bool CanReceiveIO => base.CanReceiveIO && GetComp<CompPowerTrader>().PowerOn;
 
         public override void Notify_ReceivedThing(Thing newItem)
@@ -49,6 +52,18 @@ namespace ProjectRimFactory.Storage
             }
         }
 
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            this.Map.haulDestinationManager.RemoveHaulDestination(this);
+        }
+
+        public override void PostMapInit()
+        {
+            base.PostMapInit();
+            this.RefreshStorage();
+        }
+
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (Gizmo g in base.GetGizmos()) yield return g;
@@ -63,6 +78,13 @@ namespace ProjectRimFactory.Storage
                     }
                 };
             }
+        }
+
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            this.StoredItems.Where(t => !t.Destroyed).ForEach(x => x.Destroy());
+            this.Map.haulDestinationManager.AddHaulDestination(this);
+            base.DeSpawn(mode);
         }
 
         protected virtual IEnumerable<FloatMenuOption> DebugActions()
