@@ -92,5 +92,18 @@ namespace ProjectRimFactory.Storage
             yield return new FloatMenuOption("Update power consumption", UpdatePowerConsumption);
             yield return new FloatMenuOption("Log item count", () => Log.Message(StoredItemsCount.ToString()));
         }
+
+        public override string GetUIThingLabel()
+        {
+            if ((def.GetModExtension<DefModExtension_Crate>()?.limit).HasValue)
+            {
+                return "PRFCrateUIThingLabel".Translate(StoredItemsCount, def.GetModExtension<DefModExtension_Crate>().limit);
+            }
+            else
+            {
+                return base.GetUIThingLabel();
+            }
+            
+        }
     }
 }
