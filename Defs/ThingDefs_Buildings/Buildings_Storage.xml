@@ -221,6 +221,7 @@
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
         <limit>100</limit>
+        <destroyContainsItems>false</destroyContainsItems>
       </li>
     </modExtensions>
   </ThingDef>

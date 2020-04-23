@@ -82,7 +82,10 @@ namespace ProjectRimFactory.Storage
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            this.StoredItems.Where(t => !t.Destroyed).ForEach(x => x.Destroy());
+            if (def.GetModExtension<DefModExtension_Crate>()?.destroyContainsItems ?? false)
+            {
+                this.StoredItems.Where(t => !t.Destroyed).ForEach(x => x.Destroy());
+            }
             this.Map.haulDestinationManager.AddHaulDestination(this);
             base.DeSpawn(mode);
         }
