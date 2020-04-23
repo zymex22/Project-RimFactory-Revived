@@ -38,6 +38,7 @@
     <placingDraggableDimensions>1</placingDraggableDimensions>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Arrow</li>
     </placeWorkers>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ConveyorFilter</li>
