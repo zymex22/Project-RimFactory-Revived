@@ -79,6 +79,9 @@
     <researchPrerequisites>
       <li>ADVrollers</li>
     </researchPrerequisites>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Arrow</li>
+    </placeWorkers>
   </ThingDef>
 
   <!--======================================= Item Puller ===============================================-->

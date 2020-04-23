@@ -18,8 +18,8 @@ namespace ProjectRimFactory.Common
             try
             {
                 settings = GetSettings<ProjectRimFactory_ModSettings>();
-                Harmony instance = new Harmony("com.spdskatr.projectrimfactory");
-                instance.PatchAll(Assembly.GetExecutingAssembly());
+                this.HarmonyInstance = new Harmony("com.spdskatr.projectrimfactory");
+                this.HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
                 Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");
                 NoMessySpawns.Instance.Add(ShouldSuppressDisplace, (Building_MassStorageUnit b, Map map) => true);
             }
@@ -29,6 +29,11 @@ namespace ProjectRimFactory.Common
             }
         }
 
+        public Harmony HarmonyInstance
+        {
+            get;
+            private set;
+        }
  
 
         public ProjectRimFactory_ModSettings settings;
