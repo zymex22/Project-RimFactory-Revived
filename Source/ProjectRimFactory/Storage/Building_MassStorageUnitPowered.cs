@@ -103,7 +103,18 @@ namespace ProjectRimFactory.Storage
             {
                 return base.GetUIThingLabel();
             }
-            
+        }
+
+        public override string GetITabString(int itemsSelected)
+        {
+            if ((def.GetModExtension<DefModExtension_Crate>()?.limit).HasValue)
+            {
+                return "PRFItemsTabLabel_Crate".Translate(StoredItemsCount, def.GetModExtension<DefModExtension_Crate>().limit, itemsSelected);
+            }
+            else
+            {
+                return base.GetITabString(itemsSelected);
+            }
         }
     }
 }
