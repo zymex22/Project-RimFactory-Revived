@@ -166,6 +166,12 @@ namespace ProjectRimFactory.Storage
             }
         }
 
+        public void OutputItem(Thing item)
+        {
+            var outputCell = this.GetComp<ProjectRimFactory.Common.CompOutputAdjustable>()?.CurrentCell ?? this.Position + new IntVec3(0, 0, -2);
+            GenPlace.TryPlaceThing(item.SplitOff(item.stackCount), outputCell, this.Map, ThingPlaceMode.Near);
+        }
+
         public virtual void RefreshStorage()
         {
             items = new List<Thing>();

@@ -130,6 +130,7 @@
     </building>
     <inspectorTabs>
       <li>ProjectRimFactory.Storage.UI.ITab_IOPortStorage</li>
+      <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
     </inspectorTabs>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>

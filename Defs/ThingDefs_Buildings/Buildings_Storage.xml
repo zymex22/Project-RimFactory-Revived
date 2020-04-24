@@ -215,6 +215,9 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>
       </li>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
     </comps>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <modExtensions>
