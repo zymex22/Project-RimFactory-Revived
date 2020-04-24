@@ -106,7 +106,7 @@
     <passability>Impassable</passability>
     <description>(Tier 2) A Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
     <altitudeLayer>Building</altitudeLayer>
-    <placeWorkers Inherits="false">
+    <placeWorkers Inherit="false">
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
