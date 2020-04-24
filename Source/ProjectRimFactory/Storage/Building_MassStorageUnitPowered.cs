@@ -78,9 +78,8 @@ namespace ProjectRimFactory.Storage
         {
             if (def.GetModExtension<DefModExtension_Crate>()?.destroyContainsItems ?? false)
             {
-                this.StoredItems.Where(t => !t.Destroyed).ForEach(x => x.Destroy());
+                this.StoredItems.ToList().Where(t => !t.Destroyed).ForEach(x => x.Destroy());
             }
-            this.Map.haulDestinationManager.AddHaulDestination(this);
             base.DeSpawn(mode);
         }
 
