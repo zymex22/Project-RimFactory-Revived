@@ -63,6 +63,22 @@ namespace ProjectRimFactory.AutoMachineTool
         }
     }
 
+    [HarmonyPatch(typeof(Thing), "Print")]
+    class Patch_Thing_Print
+    {
+        static bool Prefix(Thing __instance, SectionLayer layer)
+        {
+            if (__instance.def.category == ThingCategory.Item)
+            {
+                if (PatchUtil.InMassStorageUnitPowered(__instance.Map, __instance.Position))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     /*
     [HarmonyPatch(typeof(FloatMenuMakerMap), "AddHumanlikeOrders")]
     class Patch_FloatMenuMakerMap_AddHumanlikeOrders
@@ -91,6 +107,21 @@ namespace ProjectRimFactory.AutoMachineTool
             return true;
         }
     }
+
+    [HarmonyPatch(typeof(Building_Storage), "Accepts")]
+    class Patch_Building_Storage_Accepts
+    {
+        static bool Prefix(Building_Storage __instance, out bool __result)
+        {
+            __result = false;
+            if (__instance is Building_MassStorageUnitPowered)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+
 
     static class PatchUtil
     {

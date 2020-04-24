@@ -99,6 +99,8 @@ namespace ProjectRimFactory.Storage.UI
                             Find.WindowStack.Add(new FloatMenu(ChoicesForThing(thing, p)));
                         }));
                     }
+                    opts.Add(new FloatMenuOption("PRFOutputItems".Translate(), () => SelBuilding.StoredItems.Where(i => i == thing)
+                        .ToList().ForEach(t => GenSpawn.Spawn(t.SplitOff(t.stackCount), this.SelBuilding.Position + new IntVec3(0, 0, -2), this.SelBuilding.Map))));
                     Find.WindowStack.Add(new FloatMenu(opts));
                 }
                 else

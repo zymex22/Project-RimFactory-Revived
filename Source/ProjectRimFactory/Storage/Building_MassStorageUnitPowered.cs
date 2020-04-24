@@ -52,12 +52,6 @@ namespace ProjectRimFactory.Storage
             }
         }
 
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        {
-            base.SpawnSetup(map, respawningAfterLoad);
-            this.Map.haulDestinationManager.RemoveHaulDestination(this);
-        }
-
         public override void PostMapInit()
         {
             base.PostMapInit();

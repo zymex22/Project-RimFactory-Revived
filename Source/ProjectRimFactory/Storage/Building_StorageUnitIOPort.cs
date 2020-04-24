@@ -278,8 +278,8 @@ namespace ProjectRimFactory.Storage
                 {
                     Find.WindowStack.Add(new FloatMenu(new List<FloatMenuOption>()
                     {
-                        new FloatMenuOption("PRFIOInput".Translate(), () => IOMode = StorageIOMode.Input),
-                        new FloatMenuOption("PRFIOOutput".Translate(), () => IOMode = StorageIOMode.Output)
+                        new FloatMenuOption("PRFIOInput".Translate(), () => SelectedPorts().ToList().ForEach(p => p.IOMode = StorageIOMode.Input)),
+                        new FloatMenuOption("PRFIOOutput".Translate(), () => SelectedPorts().ToList().ForEach(p => p.IOMode = StorageIOMode.Output))
                     }));
                 },
                 icon = HopperTex
@@ -292,7 +292,7 @@ namespace ProjectRimFactory.Storage
                     List<FloatMenuOption> list = new List<FloatMenuOption>(
                         from Building_MassStorageUnit b in Find.CurrentMap.listerBuildings.AllBuildingsColonistOfClass<Building_MassStorageUnit>()
                         where b.def.GetModExtension<DefModExtension_CanUseStorageIOPorts>() != null
-                        select new FloatMenuOption(b.LabelCap, () => BoundStorageUnit = b)
+                        select new FloatMenuOption(b.LabelCap, () => SelectedPorts().ToList().ForEach(p => p.BoundStorageUnit = b))
                     );
                     if (list.Count == 0)
                     {
@@ -308,9 +308,19 @@ namespace ProjectRimFactory.Storage
                 {
                     icon = ContentFinder<Texture2D>.Get("UI/Commands/SetTargetFuelLevel"),
                     defaultLabel = "PRFIOOutputSettings".Translate(),
-                    action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings))
+                    action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings, () => SelectedPorts().Where(p => p.IOMode == StorageIOMode.Output).ToList().ForEach(p => this.OutputSettings.Copy(p.OutputSettings))))
                 };
             }
+        }
+
+        private IEnumerable<Building_StorageUnitIOPort> SelectedPorts()
+        {
+            var l = Find.Selector.SelectedObjects.Where(o => o is Building_StorageUnitIOPort).Select(o => (Building_StorageUnitIOPort)o).ToList();
+            if (!l.Contains(this))
+            {
+                l.Add(this);
+            }
+            return l;
         }
     }
 
