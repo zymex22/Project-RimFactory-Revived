@@ -34,8 +34,8 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else
             {
-                var min = ext.TargetCellResolver.GetRangeCells(center, def.size, map, rot, ext.TargetCellResolver.MinRange());
-                var max = ext.TargetCellResolver.GetRangeCells(center, def.size, map, rot, ext.TargetCellResolver.MaxRange());
+                var min = ext.TargetCellResolver.GetRangeCells(def, center, def.size, map, rot, ext.TargetCellResolver.MinRange());
+                var max = ext.TargetCellResolver.GetRangeCells(def, center, def.size, map, rot, ext.TargetCellResolver.MaxRange());
                 min.Select(c => new { Cell = c, Color = ext.TargetCellResolver.GetColor(c, map, rot, CellPattern.BlurprintMin) })
                     .Concat(max.Select(c => new { Cell = c, Color = ext.TargetCellResolver.GetColor(c, map, rot, CellPattern.BlurprintMax) }))
                     .GroupBy(a => a.Color)
