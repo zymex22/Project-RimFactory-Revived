@@ -56,8 +56,8 @@
         <maxPower>1000</maxPower>
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</outputCellResolverType>
-        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerCellResolver</inputCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerOutputCellResolver</outputCellResolverType>
+        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerInputCellResolver</inputCellResolverType>
         <!-- for inputCellResolverType
         <inputCell>(1, 1, 1, 1)</inputCell>
         <inputZone>(1, 1, 1, 0.5)</inputZone>
@@ -96,6 +96,25 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
+  </ThingDef>
+  
+  <!--======================================= Item Puller (Side output) ===============================================-->
+  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
+    <defName>Building_AutoMachineTool_Puller_Side</defName>
+    <label>Item Puller (Side)</label>
+
+    <passability>Impassable</passability>
+    <description>(Tier 2) A Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
+    <altitudeLayer>Building</altitudeLayer>
+    <placeWorkers Inherit="false">
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
+    </placeWorkers>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+        <outputSides>true</outputSides>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <!--======================================= Wall Item Puller ===============================================-->

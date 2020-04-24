@@ -19,7 +19,17 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private ThingFilter filter = new ThingFilter();
         private bool active = false;
-        public override Graphic Graphic => Option(base.Graphic as Graphic_Selectable).Fold(base.Graphic)(g => g.Get(this.def.graphicData.texPath + "/Puller" + (this.active ? "1" : "0")));
+        public override Graphic Graphic => Option(base.Graphic as Graphic_Selectable).Fold(base.Graphic)(g => g.Get(this.GetTexPath()));
+
+        public string GetTexPath()
+        {
+            var path = this.def.graphicData.texPath + "/Puller" + (this.active ? "1" : "0");
+            if (this.OutputSides)
+            {
+                path += this.right ? "_r" : "_l";
+            }
+            return path;
+        }
 
         [Unsaved]
         private StorageSettings storageSettings;
@@ -27,12 +37,17 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private bool ForcePlace => this.def.GetModExtension<ModExtension_Testing>()?.forcePlacing ?? false;
 
+        private bool right = false;
+
+        private bool OutputSides => this.def.GetModExtension<ModExtension_Puller>()?.outputSides ?? false;
+
         public override void ExposeData()
         {
             base.ExposeData();
 
             Scribe_Deep.Look<ThingFilter>(ref this.filter, "filter");
             Scribe_Values.Look<bool>(ref this.active, "active", false);
+            Scribe_Values.Look<bool>(ref this.right, "right", false);
 
             if (this.filter == null) this.filter = new ThingFilter();
 
@@ -69,7 +84,19 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override IntVec3 OutputCell()
         {
-            return (this.Position + this.Rotation.FacingCell);
+            if(this.OutputSides)
+            {
+                RotationDirection dir = RotationDirection.Clockwise;
+                if (!this.right)
+                {
+                    dir = RotationDirection.Counterclockwise;
+                }
+                return this.Position + this.Rotation.RotateAsNew(dir).FacingCell;
+            }
+            else
+            {
+                return this.Position + this.Rotation.FacingCell;
+            }
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -79,13 +106,24 @@ namespace ProjectRimFactory.AutoMachineTool
                 yield return g;
             }
 
-            var act = new Command_Toggle();
-            act.isActive = () => this.active;
-            act.toggleAction = () => this.active = !this.active;
-            act.defaultLabel = "PRF.AutoMachineTool.Puller.SwitchActiveLabel".Translate();
-            act.defaultDesc = "PRF.AutoMachineTool.Puller.SwitchActiveDesc".Translate();
-            act.icon = RS.PlayIcon;
-            yield return act;
+            yield return new Command_Toggle()
+            {
+                isActive = () => this.active,
+                toggleAction = () => this.active = !this.active,
+                defaultLabel = "PRF.AutoMachineTool.Puller.SwitchActiveLabel".Translate(),
+                defaultDesc = "PRF.AutoMachineTool.Puller.SwitchActiveDesc".Translate(),
+                icon = RS.PlayIcon
+            };
+            if (this.OutputSides)
+            {
+                yield return new Command_Action()
+                {
+                    action = () => this.right = !this.right,
+                    defaultLabel = "PRF.AutoMachineTool.Puller.SwitchOutputSideLabel".Translate(),
+                    defaultDesc = "PRF.AutoMachineTool.Puller.SwitchOutputSideDesc".Translate(),
+                    icon = RS.OutputDirectionIcon
+                };
+            }
         }
 
         protected override bool IsActive()
@@ -114,7 +152,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
     }
 
-    public class Building_ItemPullerCellResolver : IOutputCellResolver, IInputCellResolver
+    public class Building_ItemPullerInputCellResolver : IInputCellResolver
     {
         public ModExtension_WorkIORange Parent { get; set; }
 
@@ -123,26 +161,35 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.Parent.GetCellPatternColor(cellPattern);
         }
 
-        public Option<IntVec3> InputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
+        public Option<IntVec3> InputCell(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot)
         {
             return Option(FacingCell(center, size, rot.Opposite));
         }
 
         private static readonly List<IntVec3> EmptyList = new List<IntVec3>();
 
-        public IEnumerable<IntVec3> InputZoneCells(IntVec3 cell, IntVec2 size, Map map, Rot4 rot)
+        public IEnumerable<IntVec3> InputZoneCells(ThingDef def, IntVec3 cell, IntVec2 size, Map map, Rot4 rot)
         {
-            return InputCell(cell, size, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
+            return InputCell(def, cell, size, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
         }
+    }
 
-        public Option<IntVec3> OutputCell(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
+    public class Building_ItemPullerOutputCellResolver : ProductOutputCellResolver
+    {
+        public override Option<IntVec3> OutputCell(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot)
         {
-            return Option(FacingCell(center, size, rot));
-        }
+            IntVec3 defaultCell = IntVec3.Zero;
+            if (def.GetModExtension<ModExtension_Puller>()?.outputSides ?? false)
+            {
+                defaultCell = center + rot.RotateAsNew(RotationDirection.Counterclockwise).FacingCell;
 
-        public IEnumerable<IntVec3> OutputZoneCells(IntVec3 center, IntVec2 size, Map map, Rot4 rot)
-        {
-            return OutputCell(center, size, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
+            }
+            else
+            {
+                defaultCell = center + rot.FacingCell;
+            }
+
+            return Option(base.OutputCell(def, center, size, map, rot).GetOrDefault(defaultCell));
         }
     }
 }
