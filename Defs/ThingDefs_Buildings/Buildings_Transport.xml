@@ -98,13 +98,13 @@
     </placeWorkers>
   </ThingDef>
   
-  <!--======================================= Item Puller (Side output) ===============================================-->
+  <!--======================================= Item Angle Puller===============================================-->
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller_Side</defName>
-    <label>Item Puller (Side)</label>
+    <label>Item Angle Puller</label>
 
     <passability>Impassable</passability>
-    <description>(Tier 2) A Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
+    <description>(Tier 2) A 90 degree angled Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases, can swap left/right after placed.</description>
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers Inherit="false">
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>

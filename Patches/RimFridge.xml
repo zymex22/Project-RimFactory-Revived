@@ -131,4 +131,128 @@
 		</match>
 	</Operation>
 
+	<!-- Smart puller Fridge -->
+	<!-- Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>[KV] RimFridge - 1.1</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<ThingDef ParentName="PRFBuildingBase">
+							<defName>SAL_SmartHopperFridge</defName>
+							<label>Vacuum Fridge Hopper</label>
+							<thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
+							<designatorDropdown>Hoppers_gr</designatorDropdown>
+							<graphicData>
+								<texPath>Storage/vacuumFridge</texPath>
+								<graphicClass>Graphic_Multi</graphicClass>
+							</graphicData>
+							<altitudeLayer>Building</altitudeLayer>
+							<passability>PassThroughOnly</passability>
+							<fillPercent>0.5</fillPercent>
+							<pathCost>70</pathCost>
+							<building>
+								<preventDeteriorationInside>true</preventDeteriorationInside>
+								<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+								<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+								<fixedStorageSettings>
+									<priority>Normal</priority>
+									<filter>
+										<categories>
+											<li>AnimalProductRaw</li>
+											<li>Corpses</li>
+											<li>Drugs</li>
+											<li>EggsFertilized</li>
+											<li>EggsUnfertilized</li>
+											<li>Foods</li>
+											<li>Medicine</li>
+											<li>PlantMatter</li>
+											<li>PlantFoodRaw</li>
+											<li>BodyParts</li>
+										</categories>
+										<specialFiltersToDisallow>
+											<li>AllowRotten</li>
+										</specialFiltersToDisallow>
+									</filter>
+								</fixedStorageSettings>
+								<defaultStorageSettings>
+									<priority>Normal</priority>
+									<filter>
+										<categories>
+											<li>FoodMeals</li>
+										</categories>
+										<disallowedThingDefs>
+											<li>MealSurvivalPack</li>
+										</disallowedThingDefs>
+									</filter>
+								</defaultStorageSettings>
+							</building>
+							<inspectorTabs>
+								<li>ITab_Storage</li>
+							</inspectorTabs>
+							<castEdgeShadows>true</castEdgeShadows>
+							<statBases>
+								<WorkToBuild>450</WorkToBuild>
+								<MaxHitPoints>100</MaxHitPoints>
+								<Flammability>1.0</Flammability>
+								<Mass>30</Mass>
+							</statBases>
+							<description>A Vacuum Hopper that take in any items on stockpiles within 5 tile range, even different stockpiles, as long their cells are in range. It can be setup to specific type and amount, and hold onto it until pulled away.</description>
+							<costList>
+								<Steel>20</Steel>
+								<ComponentIndustrial>3</ComponentIndustrial>
+							</costList>
+							<comps>
+								<li Class="CompProperties_Power">
+									<compClass>CompPowerTrader</compClass>
+									<basePowerConsumption>275</basePowerConsumption>
+								</li>
+								<li Class="CompProperties_Flickable"/>
+								<li Class="CompProperties_Breakdownable"/>
+								<li Class="CompProperties_Glower">
+									<glowRadius>2.5</glowRadius>
+									<glowColor>(89,188,255,0)</glowColor>
+								</li>
+								<li Class="RimFridge.CompProperties_Refrigerator">
+									<drinksBestCold>
+										<li>Beer</li>
+										<li>RC2_Ale</li>
+										<li>RC2_Cider</li>
+										<li>RC2_Grog</li>
+										<li>RC2_Stout</li>
+									</drinksBestCold>
+									<findAllRottableForFilters>false</findAllRottableForFilters>
+								</li>
+								<li>
+									<compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+								</li>
+							</comps>
+							<tickerType>Rare</tickerType>
+							<rotatable>true</rotatable>
+							<neverMultiSelect>true</neverMultiSelect>
+							<designationCategory>Industrial</designationCategory>
+							<staticSunShadowHeight>0.3</staticSunShadowHeight>
+							<surfaceType>Item</surfaceType>
+							<constructEffect>ConstructMetal</constructEffect>
+							<minifiedDef>MinifiedThing</minifiedDef>
+							<thingCategories>
+								<li>BuildingsAutomation</li>
+							</thingCategories>
+							<specialDisplayRadius>5</specialDisplayRadius>
+							<researchPrerequisites>
+								<li>AirConditioning</li>
+								<li>AutomationBasics</li>
+							</researchPrerequisites>
+						</ThingDef>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation> -->
+
+
 </Patch>

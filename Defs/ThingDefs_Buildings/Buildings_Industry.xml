@@ -242,7 +242,6 @@
       <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
       <Flammability>1.0</Flammability>
-
     </statBases>
     <description>A recycler that turns almost any apparel and weapons into usable resources, at the cost of some lost materials.</description>
     <costList>
@@ -277,6 +276,85 @@
       <li>UniversalAutocrafting</li>
     </researchPrerequisites>
   </ThingDef>
+
+  <!--==================== T1 Furnace ====================-->
+  <!--<ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_FurnaceI</defName>
+    <label>Blast Furnace</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>Industry/smart_recycler</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2.1,2.1)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <altitudeLayer>LayingPawn</altitudeLayer>
+    <passability>Impassable</passability>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <castEdgeShadows>true</castEdgeShadows>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>3500</WorkToBuild>
+      <MaxHitPoints>180</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>A early Furnace made to burn unwanted things and smelt raw rescourses into usefull materials</description>
+    <costList>
+      <Steel>170</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <recipes>
+      <li>CremateCorpse</li>
+      <li>BurnApparel</li>
+      <li>BurnWeapon</li>
+      <li>BurnDrugs</li>
+      <li>DestroyWeapon</li>
+      <li>DestroyApparel</li>
+      <li>ExtractMetalFromSlag</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>160.0</fuelConsumptionRate>
+        <fuelCapacity>50.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>12</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
+      </li>
+    </comps>
+    <building>
+      <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
+    </building>
+    <tickerType>Normal</tickerType>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <importRecipesFrom>ElectricSmelter</importRecipesFrom>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>Smithing</li>
+    </researchPrerequisites>
+  </ThingDef> -->
+
 
   <!--==================== Fueling Machine ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
