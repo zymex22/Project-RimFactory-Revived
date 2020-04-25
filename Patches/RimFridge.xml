@@ -25,7 +25,7 @@
 							</graphicData>
 							<altitudeLayer>Building</altitudeLayer>
 							<passability>PassThroughOnly</passability>
-							<tickerType>Rare</tickerType>
+							<tickerType>Normal</tickerType>
 							<fillPercent>0.5</fillPercent>
 							<pathCost>70</pathCost>
 							<building>
@@ -102,6 +102,9 @@
 								</li>
 								<li>
 									<compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+								</li>
+								<li>
+									<compClass>ProjectRimFactory.Common.CompCallTickRareFromTick</compClass>
 								</li>
 							</comps>
 							<rotatable>false</rotatable>
