@@ -62,7 +62,7 @@
   <!--===================================== Shearer T1 =====================================-->
   <ThingDef ParentName="prf_AnimalBase">
     <defName>Shearer</defName>
-    <label>Shearer</label>
+    <label>shearer</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Shearer</thingClass>
     <graphicData>
       <texPath>Farm/Shearer</texPath>      <!-- path to texture -->
@@ -79,12 +79,12 @@
       <WorkToBuild>200</WorkToBuild>      <!-- time to build -->
     </statBases>
     <tickerType>Rare</tickerType>    <!-- Decides the tick type. Never, Normal(1 per 1 tick), Rare(1 per 250 tick), Long(x per xxx tick) -->
-    <description>(Tier 1 Automation) \n A 2x2 feeding box for your farm animals, but underneath the box is a set of robotic arms and shears to shear wool with minimal invasiveness. Drops wool where the animal is standing. Works on any tamed animal.</description>    <!-- use \n for next line -->
+    <description>A station with motion detecting industrial-size shearing clippers. Swiftly and automatically extracts wool from your colony's animals.\n\nKeep it stocked with food to lure the animals in for processing. Drops the produce where the sheared creature is standing.</description>    <!-- use \n for next line -->
     <size>(2,2)</size>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <Hay>50</Hay>
-      <WoodLog>50</WoodLog>
+      <Steel>50</Steel>
       <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
     <comps>
@@ -130,7 +130,7 @@
   <!--===================================== Milker T1 =====================================-->
   <ThingDef ParentName="prf_AnimalBase">
     <defName>Milker</defName>
-    <label>Milker</label>
+    <label>milker</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Milker</thingClass>
     <graphicData>
       <texPath>Farm/Milker</texPath>
@@ -147,12 +147,12 @@
       <WorkToBuild>200</WorkToBuild>
     </statBases>
     <tickerType>Rare</tickerType>
-    <description>(Tier 1 Automation) \n A 2x2 feeding box for your farm animals, but underneath the box is a complicated set of robotic arms and collecting machinery that harvest animals' milk with minimal invasiveness. Works on any tamed animal.</description>
+    <description>A station equipped with servo-motorized tubes, which seek out mammary glands to milk your farm animals.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the milked creature is standing.</description>
     <size>(2,2)</size>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <Hay>50</Hay>
-      <WoodLog>50</WoodLog>
+      <Steel>50</Steel>
       <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
     <comps>
@@ -198,7 +198,7 @@
   <!--===================================== Generic Harvester T2 =====================================-->
   <ThingDef ParentName="prf_AnimalBase">
     <defName>GenericAnimalHarvester</defName>
-    <label>Generic animal harvester</label>
+    <label>generic animal harvesterr</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
       <texPath>Farm/Harvester</texPath>
@@ -215,13 +215,14 @@
       <WorkToBuild>200</WorkToBuild>
     </statBases>
     <tickerType>Rare</tickerType>
-    <description>(Tier 2 Automation) \n A more advanced version of the milker/shearer that can harvest any product from an animal.</description>
+    <description>A sophisticated facility boasting a variety of tools to gently extract any kind of animal products, even from the more exotic species.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the animal is standing.</description>
     <size>(2,2)</size>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <Hay>50</Hay>
-      <WoodLog>75</WoodLog>
+      <Steel>75</Steel>
       <PRFRoboticArm>4</PRFRoboticArm>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <comps>
       <li>
@@ -264,13 +265,13 @@
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
   </ThingDef>
 
-  <!--===================================== Slaugter House T2 =====================================-->
+  <!--===================================== Animal Manager / Slaugter House T2 =====================================-->
   <ThingDef ParentName="prf_AnimalBase">
     <defName>Building_AutoMachineTool_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
-    <label>Animal Manager</label>
+    <label>animal manager</label>
     <designatorDropdown>AnimalStations_gr</designatorDropdown>
-    <description>(Tier 2 Automation) \n Auto slaugter tamed animals in range, can be set for limits and let only female survive and such.</description>    <!-- use \n for next line -->
+    <description>An automatic slaughterhouse. Uses cameras and a rudimentary computer to keep track of your animal population, and to keep it within your defined limits.</description>
     <altitudeLayer>Building</altitudeLayer>
     <tickerType>Never</tickerType>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
@@ -283,13 +284,14 @@
       <texPath>Farm/Slaughter</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3.5,3.4)</drawSize>
-      <drawRotated>false</drawRotated> <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
+      <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <rotatable>true</rotatable>
     <researchPrerequisites>
