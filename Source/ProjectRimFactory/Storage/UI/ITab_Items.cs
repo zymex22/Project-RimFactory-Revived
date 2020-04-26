@@ -110,7 +110,7 @@ namespace ProjectRimFactory.Storage.UI
                     if (this.IOPortSelected)
                     {
                         opts.Add(new FloatMenuOption("PRFOutputItems".Translate(), () => SelectedMassStorageUnit.StoredItems.Where(i => i == thing)
-                            .ToList().ForEach(t => GenPlace.TryPlaceThing(t.SplitOff(t.stackCount), this.SelectedIOPort.Position, this.SelectedIOPort.Map, ThingPlaceMode.Near))));
+                            .ToList().ForEach(t => this.SelectedIOPort.OutputItem(t))));
                     }
                     else
                     {
