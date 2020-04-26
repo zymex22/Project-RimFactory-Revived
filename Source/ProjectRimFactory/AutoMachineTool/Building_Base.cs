@@ -28,7 +28,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         private WorkingState state;
         private static HashSet<T> workingSet = new HashSet<T>();
-        private T working;
+        protected T working;
         protected List<Thing> products = new List<Thing>();
         private float totalWorkAmount;
         private int workStartTick;
