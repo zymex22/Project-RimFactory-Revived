@@ -41,8 +41,17 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private bool OutputSides => this.def.GetModExtension<ModExtension_Puller>()?.outputSides ?? false;
 
+        private bool pickupConveyor = false;
+
+        protected override bool WorkingIsDespawned()
+        {
+            return false;
+        }
+
         public override void ExposeData()
         {
+            Scribe_Values.Look<bool>(ref this.pickupConveyor, "pickupConveyor", false);
+
             base.ExposeData();
 
             Scribe_Deep.Look<ThingFilter>(ref this.filter, "filter");
@@ -67,6 +76,12 @@ namespace ProjectRimFactory.AutoMachineTool
             this.forcePlace = this.ForcePlace;
         }
 
+        protected override void Reset()
+        {
+            base.Reset();
+            this.pickupConveyor = false;
+        }
+
         protected override TargetInfo ProgressBarTarget()
         {
             return this;
@@ -74,11 +89,29 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private Option<Thing> TargetThing()
         {
+            var conveyor = this.GetPickableConveyor();
+            if (conveyor.HasValue)
+            {
+                this.pickupConveyor = true;
+                return Option(conveyor.Value.Carrying());
+            }
             return (this.Position + this.Rotation.Opposite.FacingCell).SlotGroupCells(this.Map)
                 .SelectMany(c => c.GetThingList(this.Map))
                 .Where(t => t.def.category == ThingCategory.Item)
                 .Where(t => this.filter.Allows(t))
                 .Where(t => !this.IsLimit(t))
+                .FirstOption();
+        }
+
+        private Option<Building_BeltConveyor> GetPickableConveyor()
+        {
+            return (this.Position + this.Rotation.Opposite.FacingCell).GetThingList(this.Map)
+                .Where(t => t.def.category == ThingCategory.Building)
+                .SelectMany(t => Option(t as Building_BeltConveyor))
+                .Where(b => !b.IsUnderground)
+                .Where(b => b.Carrying() != null)
+                .Where(b => this.filter.Allows(b.Carrying()))
+                .Where(b => !this.IsLimit(b.Carrying()))
                 .FirstOption();
         }
 
@@ -133,7 +166,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Thing working)
         {
-            return !working.Spawned || working.Destroyed;
+            return this.pickupConveyor ? !this.GetPickableConveyor().HasValue : !working.Spawned || working.Destroyed;
         }
 
         protected override bool TryStartWorking(out Thing target, out float workAmount)
@@ -146,7 +179,22 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool FinishWorking(Thing working, out List<Thing> products)
         {
             var target = new List<Thing>();
-            target.Append(working);
+            if (this.pickupConveyor)
+            {
+                var pickup = GetPickableConveyor().Select(c => c.Pickup());
+                if (pickup.HasValue)
+                {
+                    target.Append(pickup.Value);
+                }
+                else
+                {
+                    this.ForceReady();
+                }
+            }
+            else
+            {
+                target.Append(working);
+            }
             products = target;
             return true;
         }

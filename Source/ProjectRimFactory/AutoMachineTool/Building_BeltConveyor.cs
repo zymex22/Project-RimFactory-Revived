@@ -475,5 +475,30 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return false;
         }
+
+        public Thing Carrying()
+        {
+            if (this.State == WorkingState.Working)
+            {
+                return this.Working;
+            }
+            else if (this.State == WorkingState.Placing)
+            {
+                return this.products.FirstOption().GetOrDefault(null);
+            }
+            return null;
+        }
+
+        public Thing Pickup()
+        {
+            var pickup = this.Carrying();
+            if (pickup != null)
+            {
+                this.products.Clear();
+                this.working = null;
+                this.ForceReady();
+            }
+            return pickup;
+        }
     }
 }
