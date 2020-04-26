@@ -11,9 +11,9 @@ namespace ProjectRimFactory.Storage
 {
     public class Building_MassStorageUnitPowered : Building_MassStorageUnit
     {
-        public override bool CanStoreMoreItems => GetComp<CompPowerTrader>().PowerOn && 
+        public override bool CanStoreMoreItems => GetComp<CompPowerTrader>().PowerOn && this.Spawned &&
             (!def.HasModExtension<DefModExtension_Crate>() || Position.GetThingList(Map).Count(t => t.def.category == ThingCategory.Item) < (def.GetModExtension<DefModExtension_Crate>()?.limit ?? int.MaxValue));
-        public override bool CanReceiveIO => base.CanReceiveIO && GetComp<CompPowerTrader>().PowerOn;
+        public override bool CanReceiveIO => base.CanReceiveIO && GetComp<CompPowerTrader>().PowerOn && this.Spawned;
 
         public override void Notify_ReceivedThing(Thing newItem)
         {
@@ -76,9 +76,12 @@ namespace ProjectRimFactory.Storage
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            if (def.GetModExtension<DefModExtension_Crate>()?.destroyContainsItems ?? false)
+            if (mode == DestroyMode.Deconstruct)
             {
-                this.StoredItems.ToList().Where(t => !t.Destroyed).ForEach(x => x.Destroy());
+                if (def.GetModExtension<DefModExtension_Crate>()?.destroyContainsItems ?? false)
+                {
+                    this.StoredItems.ToList().Where(t => !t.Destroyed).ForEach(x => x.Destroy());
+                }
             }
             base.DeSpawn(mode);
         }
