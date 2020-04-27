@@ -93,7 +93,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             if (this.allTargetCellsCache == null)
             {
-                this.allTargetCellsCache = this.RangeExtension.TargetCellResolver.GetRangeCells(this.Position, this.RotatedSize, this.Map, this.Rotation, this.GetRange()).ToHashSet();
+                this.allTargetCellsCache = this.RangeExtension.TargetCellResolver.GetRangeCells(this.def, this.Position, this.RotatedSize, this.Map, this.Rotation, this.GetRange()).ToHashSet();
                 if (this.targetEnumrationCount > 0)
                 {
                     this.splittedTargetCells = this.allTargetCellsCache.ToList().Grouped(this.targetEnumrationCount);

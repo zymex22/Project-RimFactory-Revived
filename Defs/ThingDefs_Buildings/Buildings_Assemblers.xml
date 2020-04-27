@@ -207,8 +207,9 @@
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
       <MarketValue>700</MarketValue>
+      <Cleanliness>20</Cleanliness> 
     </statBases>
-    <description>A machine that can cook meals all by itself. Just look at it go!</description>
+    <description>A machine that can cook meals all by itself. Just look at it go! (rarely making any mistakes)</description>
     <costStuffCount>100</costStuffCount>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
@@ -232,7 +233,7 @@
     </recipes>
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
-      <isMealSource>true</isMealSource>
+      <isMealSource>true</isMealSource> <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
     </building>
     <passability>Impassable</passability>    <!-- to be able to build them as walls -->
     <researchPrerequisites>

@@ -8,6 +8,9 @@ using Verse;
 using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using System.Reflection;
+using HarmonyLib;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -27,6 +30,25 @@ namespace ProjectRimFactory.AutoMachineTool
         IEnumerable<RecipeDef> AllRecipes { get; }
         bool IsRemovable(RecipeDef recipe);
         void RemoveRecipe(RecipeDef recipe);
+    }
+
+    [StaticConstructorOnStartup]
+    public class ITab_Bill2_Patcher
+    {
+        static ITab_Bill2_Patcher()
+        {
+            var method = AccessTools.Method(typeof(ITab_Bills2), "FillTab");
+            var harmony = LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().HarmonyInstance;
+            LoadedModManager.RunningMods.Where(c => c.PackageId.ToLower() == "Dubwise.DubsMintMenus".ToLower())
+                .FirstOption()
+                .ForEach(mint =>
+                    mint.assemblies.loadedAssemblies
+                        .SelectMany(a => Option(a.GetType("DubsMintMenus.HarmonyPatches")))
+                        .SelectMany(a => Option(a.GetMethod("Prefix")))
+                        .FirstOption()
+                        .ForEach(m => harmony.Patch(method, new HarmonyMethod(m)))
+                );
+        }
     }
 
     // TODO:本体更新時に合わせる.

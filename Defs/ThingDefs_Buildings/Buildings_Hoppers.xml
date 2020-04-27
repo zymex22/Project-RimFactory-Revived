@@ -17,7 +17,7 @@
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
     <designatorDropdown>Hoppers_gr</designatorDropdown>
     <graphicData>
-      <texPath>Things/Building/Production/Hopper</texPath>
+      <texPath>Storage/vacuum</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <damageData>
         <rect>(0.05,0.1,0.9,0.9)</rect>
@@ -93,7 +93,7 @@
   <!--============================== I/O HOPPER ==============================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>PRFStorageUnitIOPort</defName>
-    <label>Storage Unit I/O Port</label>
+    <label>I/O Port</label>
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <designatorDropdown>IO_gr</designatorDropdown>

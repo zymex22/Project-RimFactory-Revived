@@ -31,6 +31,7 @@ namespace ProjectRimFactory.AutoMachineTool
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
 
             StoragePawnAccessSwitchIcon = ContentFinder<Texture2D>.Get("Storage/dsu", true);
+            Arrow = ContentFinder<Texture2D>.Get("UI/Overlays/Arrow", true);
         }
 
         public static readonly Texture2D PregnantIcon;
@@ -49,5 +50,6 @@ namespace ProjectRimFactory.AutoMachineTool
         public static readonly Texture2D DeleteX;
 
         public static readonly Texture2D StoragePawnAccessSwitchIcon;
+        public static readonly Texture2D Arrow;
     }
 }
