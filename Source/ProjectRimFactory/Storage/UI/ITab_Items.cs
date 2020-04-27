@@ -21,7 +21,7 @@ namespace ProjectRimFactory.Storage.UI
         }
         public Building_MassStorageUnit SelectedMassStorageUnit => this.IOPortSelected ? this.SelectedIOPort.BoundStorageUnit : (Building_MassStorageUnit)this.SelThing;
 
-        public override bool IsVisible => IOPortSelected ? this.SelectedIOPort.BoundStorageUnit != null : true;
+        public override bool IsVisible => IOPortSelected ? this.SelectedIOPort.BoundStorageUnit?.CanReceiveIO ?? false : true;
 
         protected bool IOPortSelected => this.SelThing is Building_StorageUnitIOPort;
 

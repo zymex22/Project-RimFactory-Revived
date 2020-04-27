@@ -29,6 +29,8 @@ namespace ProjectRimFactory.AutoMachineTool
             PlayIcon = ContentFinder<Texture2D>.Get("AutoMachineTool/UI/Play", true);
 
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
+
+            StoragePawnAccessSwitchIcon = ContentFinder<Texture2D>.Get("Storage/dsu", true);
         }
 
         public static readonly Texture2D PregnantIcon;
@@ -45,5 +47,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public static readonly Texture2D PlayIcon;
 
         public static readonly Texture2D DeleteX;
+
+        public static readonly Texture2D StoragePawnAccessSwitchIcon;
     }
 }

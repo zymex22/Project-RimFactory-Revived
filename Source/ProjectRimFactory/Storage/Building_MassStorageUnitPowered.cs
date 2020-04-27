@@ -15,6 +15,12 @@ namespace ProjectRimFactory.Storage
             (!def.HasModExtension<DefModExtension_Crate>() || Position.GetThingList(Map).Count(t => t.def.category == ThingCategory.Item) < (def.GetModExtension<DefModExtension_Crate>()?.limit ?? int.MaxValue));
         public override bool CanReceiveIO => base.CanReceiveIO && GetComp<CompPowerTrader>().PowerOn && this.Spawned;
 
+        public override bool ForbidPawnInput => this.ForbidPawnAccess || !this.pawnAccess || !this.CanStoreMoreItems;
+
+        public override bool ForbidPawnOutput => this.ForbidPawnAccess || !this.pawnAccess;
+
+        private bool pawnAccess = true;
+
         public override void Notify_ReceivedThing(Thing newItem)
         {
             base.Notify_ReceivedThing(newItem);
@@ -28,6 +34,12 @@ namespace ProjectRimFactory.Storage
         public void UpdatePowerConsumption()
         {
             GetComp<CompPowerTrader>().PowerOutput = -10 * StoredItemsCount;
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref pawnAccess, "pawnAccess", true);
         }
 
         protected override void ReceiveCompSignal(string signal)
@@ -70,6 +82,18 @@ namespace ProjectRimFactory.Storage
                     {
                         Find.WindowStack.Add(new FloatMenu(new List<FloatMenuOption>(DebugActions())));
                     }
+                };
+            }
+
+            if (!this.ForbidPawnAccess)
+            {
+                yield return new Command_Toggle()
+                {
+                    defaultLabel = "PRFPawnAccessLabel".Translate(),
+                    isActive = () => this.pawnAccess,
+                    toggleAction = () => this.pawnAccess = !this.pawnAccess,
+                    defaultDesc = "PRFPawnAccessDesc".Translate(),
+                    icon = RS.StoragePawnAccessSwitchIcon
                 };
             }
         }

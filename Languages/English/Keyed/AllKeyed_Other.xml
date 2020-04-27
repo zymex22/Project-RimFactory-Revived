@@ -66,4 +66,6 @@
   <PRFDroneStationLockdownDesc>Recall all active drones and disable drone station.</PRFDroneStationLockdownDesc>
   
   <PRFOutputItems>output item</PRFOutputItems>
+  <PRFPawnAccessLabel>pawn access</PRFPawnAccessLabel>
+  <PRFPawnAccessDesc>pawn access</PRFPawnAccessDesc>
 </LanguageData>

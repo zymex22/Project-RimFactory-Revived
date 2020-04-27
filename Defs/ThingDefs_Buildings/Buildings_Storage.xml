@@ -86,6 +86,7 @@
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
         <limit>25</limit>
+        <hideItems>true</hideItems>
       </li>
     </modExtensions>
   </ThingDef>
@@ -123,6 +124,7 @@
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
         <limit>100</limit>
+        <hideItems>true</hideItems>
       </li>
     </modExtensions>
   </ThingDef>
@@ -223,8 +225,10 @@
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
-        <limit>100</limit>
-        <destroyContainsItems>false</destroyContainsItems>
+        <limit>500</limit>
+        <destroyContainsItems>true</destroyContainsItems>
+        <hideItems>true</hideItems>
+        <forbidPawnAccess>false</forbidPawnAccess>
       </li>
     </modExtensions>
   </ThingDef>

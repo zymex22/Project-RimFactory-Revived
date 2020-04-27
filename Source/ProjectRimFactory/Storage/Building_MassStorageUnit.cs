@@ -27,6 +27,16 @@ namespace ProjectRimFactory.Storage
         public override string LabelCap => uniqueName ?? base.LabelCap;
         public virtual bool CanReceiveIO => true;
 
+        public virtual bool HideItems => this.def.GetModExtension<DefModExtension_Crate>()?.hideItems ?? false;
+
+        public bool ForbidPawnAccess => this.def.GetModExtension<DefModExtension_Crate>()?.forbidPawnAccess ?? false;
+
+        public virtual bool ForbidPawnInput => this.ForbidPawnAccess;
+
+        public virtual bool ForbidPawnOutput => this.ForbidPawnAccess;
+
+        public virtual bool NoRightClickMenu => this.ForbidPawnOutput;
+
         public void DeregisterPort(Building_StorageUnitIOPort port)
         {
             ports.Remove(port);

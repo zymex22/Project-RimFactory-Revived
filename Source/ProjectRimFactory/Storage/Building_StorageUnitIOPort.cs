@@ -325,21 +325,24 @@ namespace ProjectRimFactory.Storage
 
         public void OutputItem(Thing thing)
         {
-            Thing currentItem = Position.GetFirstItem(Map);
-            if(currentItem == null)
+            if (this.boundStorageUnit?.CanReceiveIO ?? false)
             {
-                if (this.settings.AllowedToAccept(thing) && OutputSettings.SatisfiesMin(thing.stackCount))
+                Thing currentItem = Position.GetFirstItem(Map);
+                if (currentItem == null)
                 {
-                    GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near);
+                    if (this.settings.AllowedToAccept(thing) && OutputSettings.SatisfiesMin(thing.stackCount))
+                    {
+                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near);
+                    }
+                    else
+                    {
+                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null, pos => pos != this.Position);
+                    }
                 }
                 else
                 {
-                    GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null, pos => pos != this.Position);
+                    GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near);
                 }
-            }
-            else
-            {
-                GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near);
             }
         }
     }
