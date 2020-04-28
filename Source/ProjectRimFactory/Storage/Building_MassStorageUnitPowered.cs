@@ -6,7 +6,6 @@ using System.Text;
 using Verse;
 using ProjectRimFactory.Storage.Editables;
 using UnityEngine;
-using RimWorld;
 
 namespace ProjectRimFactory.Storage
 {
