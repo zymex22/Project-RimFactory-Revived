@@ -39,7 +39,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
         public static int ApparentPathCost(ThingDef def, IntVec3 c, Map map)
         {
-            Building b = c.GetFirstBuilding(map);
+            Building b = c.GetFirst<Building_MassStorageUnit>(map);
             if (b is Building_MassStorageUnit)
             {
                 return (b.def == def) ? b.def.pathCost : 0;
