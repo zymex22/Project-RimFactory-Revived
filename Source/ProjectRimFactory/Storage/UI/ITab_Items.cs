@@ -19,15 +19,22 @@ namespace ProjectRimFactory.Storage.UI
             size = new Vector2(480f, 480f);
             labelKey = "PRFItemsTab";
         }
-        public Building_MassStorageUnit SelBuilding => (Building_MassStorageUnit)SelThing;
+        public Building_MassStorageUnit SelectedMassStorageUnit => this.IOPortSelected ? this.SelectedIOPort.BoundStorageUnit : (Building_MassStorageUnit)this.SelThing;
+
+        public override bool IsVisible => IOPortSelected ? this.SelectedIOPort.BoundStorageUnit?.CanReceiveIO ?? false : true;
+
+        protected bool IOPortSelected => this.SelThing is Building_StorageUnitIOPort;
+
+        protected Building_StorageUnitIOPort SelectedIOPort => this.SelThing as Building_StorageUnitIOPort;
+
         protected override void FillTab()
         {
             Text.Font = GameFont.Small;
             Rect rect = new Rect(0f, 0f, size.x, size.y).ContractedBy(10f);
-            IEnumerable<Thing> selected = from Thing t in SelBuilding.StoredItems
+            IEnumerable<Thing> selected = from Thing t in SelectedMassStorageUnit.StoredItems
                                           where string.IsNullOrEmpty(searchQuery) || t.Label.ToLower().Contains(searchQuery.ToLower())
                                           select t;
-            Widgets.Label(new Rect(rect.x, rect.y, rect.width, 25f), SelBuilding.GetITabString(Math.Min(500, selected.Count())));
+            Widgets.Label(new Rect(rect.x, rect.y, rect.width, 25f), SelectedMassStorageUnit.GetITabString(Math.Min(500, selected.Count())));
             searchQuery = Widgets.TextArea(new Rect(rect.x, rect.y + 25f, rect.width, 25f), searchQuery ?? string.Empty, false);
             Rect position = new Rect(rect);
             GUI.BeginGroup(position);
@@ -98,6 +105,17 @@ namespace ProjectRimFactory.Storage.UI
                         {
                             Find.WindowStack.Add(new FloatMenu(ChoicesForThing(thing, p)));
                         }));
+                    }
+
+                    if (this.IOPortSelected)
+                    {
+                        opts.Add(new FloatMenuOption("PRFOutputItems".Translate(), () => SelectedMassStorageUnit.StoredItems.Where(i => i == thing)
+                            .ToList().ForEach(t => this.SelectedIOPort.OutputItem(t))));
+                    }
+                    else
+                    {
+                        opts.Add(new FloatMenuOption("PRFOutputItems".Translate(), () => SelectedMassStorageUnit.StoredItems.Where(i => i == thing)
+                            .ToList().ForEach(t => this.SelectedMassStorageUnit.OutputItem(t))));
                     }
                     Find.WindowStack.Add(new FloatMenu(opts));
                 }

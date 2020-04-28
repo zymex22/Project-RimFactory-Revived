@@ -100,6 +100,7 @@
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
         <limit>32</limit>
+        <hideItems>true</hideItems>
       </li>
     </modExtensions>
   </ThingDef>
@@ -175,6 +176,7 @@
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
         <limit>128</limit>
+        <hideItems>true</hideItems>
       </li>
     </modExtensions>
   </ThingDef>
@@ -271,10 +273,20 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>
       </li>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
     </comps>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
+      <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
+        <limit>500</limit>
+        <destroyContainsItems>true</destroyContainsItems>
+        <hideItems>true</hideItems>
+        <forbidPawnAccess>false</forbidPawnAccess>
+        <hideRightClickMenus>true</hideRightClickMenus>
+      </li>
     </modExtensions>
   </ThingDef>
 

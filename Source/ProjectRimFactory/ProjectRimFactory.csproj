@@ -266,6 +266,7 @@
     <Compile Include="Common\CompCallTickRareFromTick.cs" />
     <Compile Include="Common\CompOutputAdjustable.cs" />
     <Compile Include="Common\CompPRFHelp.cs" />
+    <Compile Include="Common\HarmonyPatches\PatchStorage.cs" />
     <Compile Include="Common\HarmonyPatches\PathGridPatch.cs" />
     <Compile Include="Common\HarmonyPatches\RacePropertiesPatch.cs" />
     <Compile Include="Common\PatchOperationRTFuseInsertionHook.cs" />

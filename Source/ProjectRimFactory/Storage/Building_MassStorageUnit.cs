@@ -27,6 +27,16 @@ namespace ProjectRimFactory.Storage
         public override string LabelCap => uniqueName ?? base.LabelCap;
         public virtual bool CanReceiveIO => true;
 
+        public virtual bool HideItems => this.def.GetModExtension<DefModExtension_Crate>()?.hideItems ?? false;
+
+        public virtual bool HideRightClickMenus => this.def.GetModExtension<DefModExtension_Crate>()?.hideRightClickMenus ?? false;
+
+        public bool ForbidPawnAccess => this.def.GetModExtension<DefModExtension_Crate>()?.forbidPawnAccess ?? false;
+
+        public virtual bool ForbidPawnInput => this.ForbidPawnAccess;
+
+        public virtual bool ForbidPawnOutput => this.ForbidPawnAccess;
+
         public void DeregisterPort(Building_StorageUnitIOPort port)
         {
             ports.Remove(port);
@@ -164,6 +174,12 @@ namespace ProjectRimFactory.Storage
             {
                 GenMapUI.DrawThingLabel(this, GetUIThingLabel());
             }
+        }
+
+        public void OutputItem(Thing item)
+        {
+            var outputCell = this.GetComp<ProjectRimFactory.Common.CompOutputAdjustable>()?.CurrentCell ?? this.Position + new IntVec3(0, 0, -2);
+            GenPlace.TryPlaceThing(item.SplitOff(item.stackCount), outputCell, this.Map, ThingPlaceMode.Near);
         }
 
         public virtual void RefreshStorage()
