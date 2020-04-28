@@ -16,7 +16,8 @@ namespace ProjectRimFactory.Storage
     public class Building_StorageUnitIOPort : Building_Storage
     {
         public static readonly Texture2D CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
-        public static readonly Texture2D HopperTex = ContentFinder<Texture2D>.Get("Things/Building/Production/Hopper_south");
+        public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("Storage/IoIcon");
+
         public StorageIOMode mode;
         Building_MassStorageUnit boundStorageUnit;
         protected StorageSettings outputStoreSettings;
@@ -282,7 +283,7 @@ namespace ProjectRimFactory.Storage
                         new FloatMenuOption("PRFIOOutput".Translate(), () => SelectedPorts().ToList().ForEach(p => p.IOMode = StorageIOMode.Output))
                     }));
                 },
-                icon = HopperTex
+                icon = IOModeTex
             };
             yield return new Command_Action()
             {
@@ -332,16 +333,16 @@ namespace ProjectRimFactory.Storage
                 {
                     if (this.settings.AllowedToAccept(thing) && OutputSettings.SatisfiesMin(thing.stackCount))
                     {
-                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near);
+                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null, pos => pos == this.Position || !(pos.GetFirstBuilding(this.Map) is Building_StorageUnitIOPort));
                     }
                     else
                     {
-                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null, pos => pos != this.Position);
+                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null, pos => !(pos.GetFirstBuilding(this.Map) is Building_StorageUnitIOPort));
                     }
                 }
                 else
                 {
-                    GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near);
+                    GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null, pos => !(pos.GetFirstBuilding(this.Map) is Building_StorageUnitIOPort));
                 }
             }
         }

@@ -29,13 +29,13 @@ namespace ProjectRimFactory.Storage
 
         public virtual bool HideItems => this.def.GetModExtension<DefModExtension_Crate>()?.hideItems ?? false;
 
+        public virtual bool HideRightClickMenus => this.def.GetModExtension<DefModExtension_Crate>()?.hideRightClickMenus ?? false;
+
         public bool ForbidPawnAccess => this.def.GetModExtension<DefModExtension_Crate>()?.forbidPawnAccess ?? false;
 
         public virtual bool ForbidPawnInput => this.ForbidPawnAccess;
 
         public virtual bool ForbidPawnOutput => this.ForbidPawnAccess;
-
-        public virtual bool NoRightClickMenu => this.ForbidPawnOutput;
 
         public void DeregisterPort(Building_StorageUnitIOPort port)
         {

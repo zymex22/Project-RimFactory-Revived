@@ -52,7 +52,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static bool Prefix(Vector3 clickPos, Pawn pawn, out List<FloatMenuOption> __result)
         {
             __result = new List<FloatMenuOption>();
-            if (PatchStorageUtil.GetMassStorageUnit(pawn.Map, clickPos.ToIntVec3())?.NoRightClickMenu ?? false)
+            if (PatchStorageUtil.GetMassStorageUnit(pawn.Map, clickPos.ToIntVec3())?.HideRightClickMenus ?? false)
             {
                 return false;
             }
@@ -101,7 +101,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             {
                 if (PatchStorageUtil.GetMassStorageUnit(__instance.Map, __instance.Position)?.HideItems ?? false)
                 {
-                    Log.Message("hide");
                     return false;
                 }
             }

@@ -285,6 +285,7 @@
         <destroyContainsItems>true</destroyContainsItems>
         <hideItems>true</hideItems>
         <forbidPawnAccess>false</forbidPawnAccess>
+        <hideRightClickMenus>true</hideRightClickMenus>
       </li>
     </modExtensions>
   </ThingDef>

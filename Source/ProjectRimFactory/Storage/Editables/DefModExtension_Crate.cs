@@ -12,5 +12,6 @@ namespace ProjectRimFactory.Storage.Editables
         public bool destroyContainsItems = false;
         public bool hideItems = false;
         public bool forbidPawnAccess = false;
+        public bool hideRightClickMenus = false;
     }
 }

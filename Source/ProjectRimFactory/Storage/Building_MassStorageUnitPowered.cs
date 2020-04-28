@@ -5,12 +5,16 @@ using System.Linq;
 using System.Text;
 using Verse;
 using ProjectRimFactory.Storage.Editables;
-using ProjectRimFactory.AutoMachineTool;
+using UnityEngine;
+using RimWorld;
 
 namespace ProjectRimFactory.Storage
 {
+    [StaticConstructorOnStartup]
     public class Building_MassStorageUnitPowered : Building_MassStorageUnit
     {
+        private static Texture2D StoragePawnAccessSwitchIcon = ContentFinder<Texture2D>.Get("Storage/dsu", true);
+
         public override bool CanStoreMoreItems => GetComp<CompPowerTrader>().PowerOn && this.Spawned &&
             (!def.HasModExtension<DefModExtension_Crate>() || Position.GetThingList(Map).Count(t => t.def.category == ThingCategory.Item) < (def.GetModExtension<DefModExtension_Crate>()?.limit ?? int.MaxValue));
         public override bool CanReceiveIO => base.CanReceiveIO && GetComp<CompPowerTrader>().PowerOn && this.Spawned;
@@ -93,7 +97,7 @@ namespace ProjectRimFactory.Storage
                     isActive = () => this.pawnAccess,
                     toggleAction = () => this.pawnAccess = !this.pawnAccess,
                     defaultDesc = "PRFPawnAccessDesc".Translate(),
-                    icon = RS.StoragePawnAccessSwitchIcon
+                    icon = StoragePawnAccessSwitchIcon
                 };
             }
         }
@@ -104,7 +108,7 @@ namespace ProjectRimFactory.Storage
             {
                 if (def.GetModExtension<DefModExtension_Crate>()?.destroyContainsItems ?? false)
                 {
-                    this.StoredItems.ToList().Where(t => !t.Destroyed).ForEach(x => x.Destroy());
+                    this.StoredItems.Where(t => !t.Destroyed).ToList().ForEach(x => x.Destroy());
                 }
             }
             base.DeSpawn(mode);
