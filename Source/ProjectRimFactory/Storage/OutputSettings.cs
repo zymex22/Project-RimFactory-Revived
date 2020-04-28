@@ -41,6 +41,17 @@ namespace ProjectRimFactory.Storage
                 return Math.Min(limit, max) - currentCount;
             return limit - currentCount;
         }
+
+        public void Copy(OutputSettings other)
+        {
+            other.minTooltip = this.minTooltip;
+            other.maxTooltip = this.maxTooltip;
+            other.useMin = this.useMin;
+            other.useMax = this.useMax;
+            other.min = this.min;
+            other.max = this.max;
+        }
+
         public string minTooltip;
         public string maxTooltip;
         public bool useMin;

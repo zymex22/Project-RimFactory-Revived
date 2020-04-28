@@ -29,6 +29,7 @@ namespace ProjectRimFactory.AutoMachineTool
             PlayIcon = ContentFinder<Texture2D>.Get("AutoMachineTool/UI/Play", true);
 
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
+
             Arrow = ContentFinder<Texture2D>.Get("UI/Overlays/Arrow", true);
         }
 

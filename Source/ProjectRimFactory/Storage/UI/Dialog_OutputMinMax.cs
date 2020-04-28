@@ -14,7 +14,7 @@ namespace ProjectRimFactory.Storage.UI
         private const float TitleLabelHeight = 32f;
         string minBufferString, maxBufferString;
 
-        public Dialog_OutputMinMax(OutputSettings settings)
+        public Dialog_OutputMinMax(OutputSettings settings, Action postClose = null)
         {
             outputSettings = settings;
             doCloseX = true;
@@ -25,7 +25,10 @@ namespace ProjectRimFactory.Storage.UI
             drawShadow = true;
             focusWhenOpened = true;
             forcePause = true;
+            this.postClose = postClose;
         }
+
+        private Action postClose;
         
         public override Vector2 InitialSize
         {
@@ -82,6 +85,12 @@ namespace ProjectRimFactory.Storage.UI
                 Widgets.TextFieldNumeric(rectRight, ref outputSettings.max, ref maxBufferString, 0);
             }
             list.End();
+        }
+
+        public override void PostClose()
+        {
+            base.PostClose();
+            this.postClose?.Invoke();
         }
     }
 }
