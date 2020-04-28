@@ -277,42 +277,69 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!--==================== T1 Furnace ====================-->
-  <!--<ThingDef ParentName="PRF_IndustrialBase">
-    <defName>PRF_FurnaceI</defName>
-    <label>Blast Furnace</label>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
-    <graphicData>
-      <texPath>Industry/smart_recycler</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(2.1,2.1)</drawSize>
-    </graphicData>
-    <size>(2,2)</size>
-    <altitudeLayer>LayingPawn</altitudeLayer>
-    <passability>Impassable</passability>
+
+  <!--==================== Furnace Base ====================-->
+  <ThingDef Name="PRF_FurnaceBase" ParentName="PRF_IndustrialBase" Abstract="True">
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <castEdgeShadows>true</castEdgeShadows>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>LayingPawn</altitudeLayer>
+    <passability>Impassable</passability>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
     <inspectorTabs>
       <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
     </inspectorTabs>
     <statBases>
       <WorkToBuild>3500</WorkToBuild>
-      <MaxHitPoints>180</MaxHitPoints>
+      <MaxHitPoints>250</MaxHitPoints>
       <Flammability>1.0</Flammability>
+    </statBases>
+    <comps>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <designatorDropdown>furnace_gr</designatorDropdown>
+    <!-- <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <importRecipesFrom>TableRoboticMachining</importRecipesFrom>
+      </li>
+    </modExtensions> -->
+  </ThingDef>
+
+
+
+  <DesignatorDropdownGroupDef>
+    <defName>furnace_gr</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!--==================== T0 Furnace ====================-->
+  <ThingDef ParentName="PRF_FurnaceBase">
+    <defName>PRF_FurnaceI</defName>
+    <label>Blast Furnace</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>Industry/smelter_t0</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(5.1,5.8)</drawSize>
+    </graphicData>
+    <size>(5,5)</size>
+    <statBases>
+      <Cleanliness>-5</Cleanliness>
+      <Beauty>-10</Beauty>
     </statBases>
     <description>A early Furnace made to burn unwanted things and smelt raw rescourses into usefull materials</description>
     <costList>
-      <Steel>170</Steel>
+      <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
     <recipes>
-      <li>CremateCorpse</li>
       <li>BurnApparel</li>
-      <li>BurnWeapon</li>
-      <li>BurnDrugs</li>
       <li>DestroyWeapon</li>
       <li>DestroyApparel</li>
       <li>ExtractMetalFromSlag</li>
+      <li>MakeMediumFrame</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Refuelable">
@@ -326,9 +353,69 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
-      <li Class="CompProperties_Breakdownable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>12</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>8</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
+      </li>
+    </comps>
+    <building>
+      <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
+    </building>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>Smithing</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== T1 Furnace ====================-->
+  <ThingDef ParentName="PRF_FurnaceBase">
+    <defName>PRF_FurnaceII</defName>
+    <label>Steel Furnace</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>Industry/smelter_t1</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.1,3.1)</drawSize>
+    </graphicData>
+    <size>(3,3)</size>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Cleanliness>-1</Cleanliness>
+      <Beauty>-1</Beauty>
+    </statBases>
+    <description>A early Furnace made to burn unwanted things and smelt raw rescourses into usefull materials</description>
+    <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+    </costList>
+    <recipes>
+      <li>CremateCorpse</li>
+      <li>BurnApparel</li>
+      <li>BurnWeapon</li>
+      <li>BurnDrugs</li>
+      <li>DestroyWeapon</li>
+      <li>DestroyApparel</li>
+      <li>ExtractMetalFromSlag</li>
+      <li>MakeSmallFrame</li>
+      <li>MakeMediumFrame</li>
+      <li>MakeLargeFrame</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>80.0</fuelConsumptionRate>
+        <fuelCapacity>50.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
@@ -342,9 +429,64 @@
     <building>
       <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
     </building>
-    <tickerType>Normal</tickerType>
-    <staticSunShadowHeight>1</staticSunShadowHeight>
-    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>Smithing</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== T2 Furnace ====================-->
+  <ThingDef ParentName="PRF_FurnaceBase">
+    <defName>PRF_FurnaceIII</defName>
+    <label>Electric Furnace</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>Industry/smelter_t2</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3.1,3.1)</drawSize>
+    </graphicData>
+    <size>(3,3)</size>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <Cleanliness>1</Cleanliness>
+      <Beauty>1</Beauty>
+    </statBases>
+    <description>A early Furnace made to burn unwanted things and smelt raw rescourses into usefull materials</description>
+    <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+    </costList>
+    <recipes>
+      <li>CremateCorpse</li>
+      <li>BurnApparel</li>
+      <li>BurnWeapon</li>
+      <li>BurnDrugs</li>
+      <li>prfDestroyChunks</li>
+      <li>MakeSmallFrame</li>
+      <li>MakeMediumFrame</li>
+      <li>MakeLargeFrame</li>
+      <li>ButcherCorpseDrone</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>50</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>12</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
+      </li>
+    </comps>
+    <building>
+      <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
+    </building>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <importRecipesFrom>ElectricSmelter</importRecipesFrom>
@@ -353,7 +495,7 @@
     <researchPrerequisites>
       <li>Smithing</li>
     </researchPrerequisites>
-  </ThingDef> -->
+  </ThingDef>
 
 
   <!--==================== Fueling Machine ====================-->
