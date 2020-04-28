@@ -17,7 +17,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             IntVec3 pos = __instance.Position;
             if (__instance.def.category == ThingCategory.Item && pos.IsValid && __instance.Map != null)
             {
-                if (pos.GetFirstBuilding(__instance.Map) is Building_MassStorageUnit b)
+                if (pos.GetFirst<Building_MassStorageUnit>(__instance.Map) is Building_MassStorageUnit b)
                 {
                     __state = b;
                 }

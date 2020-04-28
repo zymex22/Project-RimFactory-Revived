@@ -112,7 +112,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         public static Building_MassStorageUnit GetMassStorageUnit(Map map, IntVec3 pos)
         {
-            return pos.IsValid ? pos.GetThingList(map).Where(t => t is Building_MassStorageUnit).Select(t => (Building_MassStorageUnit)t).FirstOrDefault() : null;
+            return pos.IsValid ? pos.GetFirst<Building_MassStorageUnit>(map) : null;
         }
     }
 }
