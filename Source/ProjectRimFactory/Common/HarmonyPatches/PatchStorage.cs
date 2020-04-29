@@ -20,7 +20,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             __result = true;
             if (t != null && t.Map != null && t.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetMassStorageUnit(t.Map, t.Position)?.ForbidPawnOutput ?? false)
+                if (PatchStorageUtil.Get<IForbidPawnOutputItem>(t.Map, t.Position)?.ForbidPawnOutput ?? false)
                 {
                     return false;
                 }
@@ -35,7 +35,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static bool Prefix(Building_Storage __instance, Thing t, out bool __result)
         {
             __result = false;
-            if (PatchStorageUtil.GetMassStorageUnit(__instance.Map, __instance.Position)?.ForbidPawnInput ?? false)
+            if (PatchStorageUtil.Get<IForbidPawnInputItem>(__instance.Map, __instance.Position)?.ForbidPawnInput ?? false)
             {
                 if (!__instance.slotGroup.HeldThings.Contains(t))
                 {
@@ -52,7 +52,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static bool Prefix(Vector3 clickPos, Pawn pawn, out List<FloatMenuOption> __result)
         {
             __result = new List<FloatMenuOption>();
-            if (PatchStorageUtil.GetMassStorageUnit(pawn.Map, clickPos.ToIntVec3())?.HideRightClickMenus ?? false)
+            if (PatchStorageUtil.Get<IHideRightClickMenu>(pawn.Map, clickPos.ToIntVec3())?.HideRightClickMenus ?? false)
             {
                 return false;
             }
@@ -67,7 +67,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetMassStorageUnit(__instance.Map, __instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ?? false)
                 {
                     return false;
                 }
@@ -83,7 +83,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetMassStorageUnit(__instance.Map, __instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ?? false)
                 {
                     return false;
                 }
@@ -99,7 +99,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetMassStorageUnit(__instance.Map, __instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ?? false)
                 {
                     return false;
                 }
@@ -110,9 +110,49 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     static class PatchStorageUtil
     {
-        public static Building_MassStorageUnit GetMassStorageUnit(Map map, IntVec3 pos)
+        private static Dictionary<Tuple<Map, IntVec3, Type>, object> cache = new Dictionary<Tuple<Map, IntVec3, Type>, object>();
+        private static int lastTick = 0;
+
+        public static T Get<T>(Map map, IntVec3 pos) where T : class
         {
-            return pos.IsValid ? pos.GetFirst<Building_MassStorageUnit>(map) : null;
+            return pos.IsValid ? pos.GetFirst<T>(map) : null;
         }
+
+        public static T GetWithTickCache<T>(Map map, IntVec3 pos) where T : class
+        {
+            if (Find.TickManager.TicksGame != lastTick)
+            {
+                cache.Clear();
+                lastTick = Find.TickManager.TicksGame;
+            }
+            var key = new Tuple<Map, IntVec3, Type>(map, pos, typeof(T));
+            if (!cache.TryGetValue(key, out object val))
+            {
+                val = Get<T>(map, pos);
+                cache.Add(key, val);
+            }
+
+            return (T)val;
+        }
+    }
+
+    public interface IHideItem
+    {
+        bool HideItems { get; }
+    }
+
+    public interface IHideRightClickMenu
+    {
+        bool HideRightClickMenus { get; }
+    }
+
+    public interface IForbidPawnOutputItem
+    {
+        bool ForbidPawnOutput { get; }
+    }
+
+    public interface IForbidPawnInputItem : ISlotGroupParent, IHaulDestination
+    {
+        bool ForbidPawnInput { get; }
     }
 }
