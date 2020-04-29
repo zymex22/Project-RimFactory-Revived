@@ -154,7 +154,7 @@
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Storage/Steel_Crate</texPath>
+      <texPath>Storage/Steel_Crate_tiny</texPath>
       <drawSize>(2.8,1.3)</drawSize>
       <color>(102,102,105,256)</color>
       <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
