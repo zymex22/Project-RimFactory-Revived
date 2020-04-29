@@ -329,17 +329,16 @@
       <Cleanliness>-5</Cleanliness>
       <Beauty>-10</Beauty>
     </statBases>
-    <description>A early Furnace made to burn unwanted things and smelt raw rescourses into usefull materials</description>
+    <description>A early Furnace. made to burn unwanted things and smelt raw rescourses into usefull materials also capable of burning stones into usefull bricks</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
     <recipes>
       <li>BurnApparel</li>
-      <li>DestroyWeapon</li>
-      <li>DestroyApparel</li>
       <li>ExtractMetalFromSlag</li>
       <li>MakeMediumFrame</li>
+      <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Refuelable">
@@ -368,6 +367,7 @@
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>Smithing</li>
+      <li>Stonecutting</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -398,8 +398,6 @@
       <li>BurnApparel</li>
       <li>BurnWeapon</li>
       <li>BurnDrugs</li>
-      <li>DestroyWeapon</li>
-      <li>DestroyApparel</li>
       <li>ExtractMetalFromSlag</li>
       <li>MakeSmallFrame</li>
       <li>MakeMediumFrame</li>
@@ -431,7 +429,7 @@
     </building>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <researchPrerequisites>
-      <li>Smithing</li>
+      <li>AutomationBasics</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -459,8 +457,6 @@
     </costList>
     <recipes>
       <li>CremateCorpse</li>
-      <li>BurnApparel</li>
-      <li>BurnWeapon</li>
       <li>BurnDrugs</li>
       <li>prfDestroyChunks</li>
       <li>MakeSmallFrame</li>
@@ -493,7 +489,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>Smithing</li>
+      <li>UniversalAutocrafting</li>
     </researchPrerequisites>
   </ThingDef>
 

@@ -48,7 +48,7 @@
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
-    <workAmount>30</workAmount>
+    <workAmount>1800</workAmount>
     <ingredients>
       <li>
         <filter>
@@ -103,7 +103,7 @@
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
-    <workAmount>50</workAmount>
+    <workAmount>3000</workAmount>
     <ingredients>
       <li>
         <filter>
@@ -158,7 +158,7 @@
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
-    <workAmount>80</workAmount>
+    <workAmount>4800</workAmount>
     <ingredients>
       <li>
         <filter>
