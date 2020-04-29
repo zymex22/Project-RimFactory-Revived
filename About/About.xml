@@ -98,10 +98,13 @@ Russian: Natsu_Zirok, Chinese Simplified: Dango998, Chinese Traditional: AbnerCh
       <steamWorkshopUrl>steam://url/CommunityFilePage/818773962</steamWorkshopUrl>
     </li>
   </modDependencies>
+  <loadBefore>    <!-- Load this mod BEFORE: (packageId) -->
+  </loadBefore>
   <loadAfter>
     <li>brrainz.harmony</li>
     <li>UnlimitedHugs.HugsLib</li>
     <li>historic.IndustrialRollers</li>
+    <li>essecoisa.Floored</li>
   </loadAfter>
   <incompatibleWith>
     <li>SS Bigger Batteries</li>
