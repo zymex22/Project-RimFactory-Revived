@@ -126,7 +126,7 @@
       <Flammability>1.0</Flammability>
       <Beauty>-0.5</Beauty>
     </statBases>
-    <description>(Tier 1 crate) A giant crate that can store 32 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>A giant crate that can store 32 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,2)</size>
     <costList>
       <WoodLog>80</WoodLog>
@@ -166,7 +166,7 @@
       <Flammability>0.1</Flammability>
       <Beauty>-0.1</Beauty>
     </statBases>
-    <description>(Tier 2 crate) A small steel crate that can store 64 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>A small steel crate that can store 64 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,1)</size>
     <rotatable>true</rotatable>
     <costList>
@@ -206,7 +206,7 @@
       <Flammability>0.1</Flammability>
       <Beauty>-0.2</Beauty>
     </statBases>
-    <description>(Tier 2 crate) A giant crate that can store 128 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>A giant crate that can store 128 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,2)</size>
     <costList>
       <Steel>120</Steel>
@@ -271,7 +271,7 @@
   <!--==================== Cargo Platform / Digital Storage Unit ====================-->
   <ThingDef ParentName="PRFMassStorageBase">
     <defName>PRFCargoPlatform</defName>
-    <label>Digital Storage Unit</label>
+    <label>digital storage unit</label>
     <uiIconScale>0.9</uiIconScale>
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
@@ -289,10 +289,10 @@
       <Mass>15</Mass>
       <MaxHitPoints>450</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
-      <Flammability>0.1</Flammability>
+      <Flammability>0.05</Flammability>
       <Beauty>0.5</Beauty>
     </statBases>
-    <description>Stores upto 768stack in a single DSU. Consumes 10 watts of power per stack it holds. When your colony loses power, items will be safely stored inside, but the building will stop pulling the items into the central cell.</description>
+    <description>Stores up to 768 stacks. Consumes 10 W of power per stack of items. When your colony loses power, items already inside will be safe, but the building will not be able to store more.</description>
     <blockWind>true</blockWind>
     <size>(3,3)</size>
     <pathCost>150</pathCost>

@@ -58,7 +58,7 @@
   <!--====================Universal assembler====================-->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>UniversalAssembler</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
-    <label>Universal Assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
+    <label>assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
     <designatorDropdown>assembler_gr</designatorDropdown>    <!-- Use Dropdown Group -->
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>    <!-- What C# class to call when doing anything with this thing. Unless you know what you're doing, it's suggested to use the same thingClass similar things use. -->
     <graphicData>
@@ -71,7 +71,7 @@
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
     </costList>
-    <description>An auto-crafter controlled by a computer. Reads recipe instructions from a recipe database.</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
+    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
@@ -103,7 +103,7 @@
   <!--====================Selfcorrecting assembler====================-->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>MachineLearningAssembler</defName>
-    <label>Self-Correcting Assembler</label>
+    <label>adaptive assembler</label>
     <designatorDropdown>assembler_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -118,7 +118,7 @@
       <Steel>150</Steel>
       <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
-    <description>An auto-crafter controlled by a computer. Slowly gets better at recipes the more it completes them. However, it also gets a bit worse over time.</description>
+    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.</description>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -144,7 +144,7 @@
   <!--==================== Recipe database ====================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>RecipeDatabase</defName>
-    <label>Recipe Database</label>
+    <label>recipe database</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
     <designatorDropdown>assembler_gr</designatorDropdown>
     <graphicData>
@@ -169,7 +169,7 @@
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
-    <description>Stores recipes for use by smart assemblers, and imports recipes from adjacent work tables. I wonder what all the buttons do...</description>
+    <description>Imports recipes from adjacent work tables. Uploads recipes to adjacent assemblers.\n\nI wonder what all these other buttons do...</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <Steel>20</Steel>
@@ -195,7 +195,7 @@
   <!--====================Cooker====================-->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>SelfCooker</defName>
-    <label>Self Cooker</label>
+    <label>industrial cooker</label>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>assembler_food_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
@@ -207,9 +207,9 @@
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
       <MarketValue>700</MarketValue>
-      <Cleanliness>20</Cleanliness> 
+      <Cleanliness>20</Cleanliness>
     </statBases>
-    <description>A machine that can cook meals all by itself. Just look at it go! (rarely making any mistakes)</description>
+    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go!</description>
     <costStuffCount>100</costStuffCount>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
@@ -233,7 +233,7 @@
     </recipes>
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
-      <isMealSource>true</isMealSource> <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
+      <isMealSource>true</isMealSource>      <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
     </building>
     <passability>Impassable</passability>    <!-- to be able to build them as walls -->
     <researchPrerequisites>
@@ -250,7 +250,7 @@
   <!--====================Meat Grinder====================-->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>MeatGrinder</defName>
-    <label>Auto Meat Grinder</label>
+    <label>meat grinder</label>
     <designatorDropdown>assembler_food_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
@@ -271,7 +271,7 @@
       <Cleanliness>0</Cleanliness>      <!-- INFO -->
     </statBases>
     <size>(2,2)</size>
-    <description>This is a machine designed to Put Dead animals in and spit out Raw Meat and other good stuff. Properly best to move stuff away from output fast so this crazy looking machine wont be cloged? I/O or Rollers?</description>
+    <description>Precise grinder which processes corpses into piles of usable materials: meat, leather, etc.</description>
     <costStuffCount>100</costStuffCount>
     <surfaceType>Item</surfaceType>
     <costList>
@@ -308,9 +308,9 @@
   <!--====================Fermenting Barrel====================-->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRFFermentingBarrel</defName>
-    <label>Automated Fermenting Barrel</label>
+    <label>fermenting tank</label>
     <designatorDropdown>assembler_food_gr</designatorDropdown>
-    <description>An automated barrel machine for fermenting raw wort into beer. This machine is temperature controlled and kept between 7C ~ 32C to maintain the best brewing quality. Best to move beer away from the output as soon as possible. I/O or Rollers?</description>
+    <description>Fully automated fermenting. Self-regulates temperature to maintain the best quality.</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>SAL3/brewer</texPath>
@@ -360,7 +360,7 @@
   <!--==================== Food Prepper ====================-->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>SelfPrepper</defName>
-    <label>Auto Food Prepper</label>
+    <label>industrial food processor</label>
     <size>(2,2)</size>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>assembler_food_gr</designatorDropdown>
@@ -374,7 +374,7 @@
       <MarketValue>700</MarketValue>
       <MaxHitPoints>200</MaxHitPoints>
     </statBases>
-    <description>This is a machine designed to prep raw resources like wheat, sugarcane into ingredients for cooking, also making barley into wort, with supported mods like vgp it will have more recipes in it.</description>
+    <description>A machine designed to boil, grind, or mill raw food resources into ingredients more suitable for cooking and brewing.</description>
     <costStuffCount>100</costStuffCount>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>

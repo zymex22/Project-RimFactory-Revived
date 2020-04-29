@@ -299,7 +299,14 @@
         <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
       </li>
       <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>12</heatPerSecond>
+      </li>
     </comps>
+    <building>
+      <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
+    </building>
     <designatorDropdown>furnace_gr</designatorDropdown>
     <!-- <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
@@ -352,18 +359,11 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>12</heatPerSecond>
-      </li>
       <li Class="CompProperties_Glower">
         <glowRadius>8</glowRadius>
         <glowColor>(217,112,33,0)</glowColor>
       </li>
     </comps>
-    <building>
-      <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
-    </building>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>Smithing</li>
@@ -387,7 +387,7 @@
       <Cleanliness>-1</Cleanliness>
       <Beauty>-1</Beauty>
     </statBases>
-    <description>A early Furnace made to burn unwanted things and smelt raw rescourses into usefull materials</description>
+    <description>Advanced Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -415,18 +415,11 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>12</heatPerSecond>
-      </li>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>
         <glowColor>(217,112,33,0)</glowColor>
       </li>
     </comps>
-    <building>
-      <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
-    </building>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>AutomationBasics</li>
@@ -449,7 +442,7 @@
       <Cleanliness>1</Cleanliness>
       <Beauty>1</Beauty>
     </statBases>
-    <description>A early Furnace made to burn unwanted things and smelt raw rescourses into usefull materials</description>
+    <description>Advanced Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -458,7 +451,6 @@
     <recipes>
       <li>CremateCorpse</li>
       <li>BurnDrugs</li>
-      <li>prfDestroyChunks</li>
       <li>MakeSmallFrame</li>
       <li>MakeMediumFrame</li>
       <li>MakeLargeFrame</li>
@@ -470,18 +462,11 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>50</basePowerConsumption>
       </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>12</heatPerSecond>
-      </li>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>
         <glowColor>(217,112,33,0)</glowColor>
       </li>
     </comps>
-    <building>
-      <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
-    </building>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">

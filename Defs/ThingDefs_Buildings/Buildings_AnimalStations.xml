@@ -198,7 +198,7 @@
   <!--===================================== Generic Harvester T2 =====================================-->
   <ThingDef ParentName="prf_AnimalBase">
     <defName>GenericAnimalHarvester</defName>
-    <label>generic animal harvesterr</label>
+    <label>generic animal harvester</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
       <texPath>Farm/Harvester</texPath>

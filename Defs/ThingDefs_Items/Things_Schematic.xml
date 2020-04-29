@@ -50,7 +50,7 @@
   <!--==================================== Small frame ===============================-->
   <ThingDef ParentName="PRFResourceBase">
     <defName>PRFMachineFrameSmall</defName>
-    <label>small machine frame</label>
+    <label>simple machine frame</label>
     <description>The empty shell of a small automation building.</description>
     <graphicData>
       <texPath>Common/MachineFrameSmall</texPath>
@@ -130,8 +130,8 @@
   <!--==================================== Large frame ===============================-->
   <ThingDef ParentName="PRFResourceBase">
     <defName>PRFMachineFrameLarge</defName>
-    <label>large machine frame</label>
-    <description>The empty shell of a large automation building.</description>
+    <label>adv. machine frame</label>
+    <description>The empty shell of a advanced automation building.</description>
     <graphicData>
       <texPath>Common/MachineFrameLarge</texPath>
       <graphicClass>Graphic_Single</graphicClass>

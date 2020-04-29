@@ -39,10 +39,10 @@
     <researchPrerequisite>MagneticTape</researchPrerequisite>
   </RecipeDef>
 
-  <!--==================================== Small frame ==============================-->
+  <!--==================================== Simple frame ==============================-->
   <RecipeDef>
     <defName>MakeSmallFrame</defName>
-    <label>make small machine frame</label>
+    <label>make simple machine frame</label>
     <description>Make a small machine frames for factory buildings</description>
     <jobString>Making frame</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -56,7 +56,7 @@
             <li>ComponentIndustrial</li>
           </thingDefs>
         </filter>
-        <count>2</count>
+        <count>5</count>
       </li>
       <li>
         <filter>
@@ -66,27 +66,18 @@
         </filter>
         <count>30</count>
       </li>
-      <li>
-        <filter>
-          <thingDefs>
-            <li>Plasteel</li>
-          </thingDefs>
-        </filter>
-        <count>5</count>
-      </li>
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
         <li>ComponentIndustrial</li>
         <li>Steel</li>
-        <li>Plasteel</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </products>
     <skillRequirements>
-      <Crafting>8</Crafting>
+      <Crafting>6</Crafting>
     </skillRequirements>
     <workSkill>Crafting</workSkill>
     <recipeUsers>
@@ -97,8 +88,8 @@
   <!--==================================== Medium frame ==============================-->
   <RecipeDef>
     <defName>MakeMediumFrame</defName>
-    <label>make medium machine frame</label>
-    <description>Make a medium machine frames for factory buildings</description>
+    <label>make machine frame</label>
+    <description>Make a machine frame for factory buildings</description>
     <jobString>Making frame</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
@@ -111,7 +102,7 @@
             <li>ComponentIndustrial</li>
           </thingDefs>
         </filter>
-        <count>3</count>
+        <count>10</count>
       </li>
       <li>
         <filter>
@@ -119,7 +110,7 @@
             <li>Steel</li>
           </thingDefs>
         </filter>
-        <count>40</count>
+        <count>50</count>
       </li>
       <li>
         <filter>
@@ -127,7 +118,7 @@
             <li>Plasteel</li>
           </thingDefs>
         </filter>
-        <count>10</count>
+        <count>5</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>
@@ -149,11 +140,11 @@
     </recipeUsers>
   </RecipeDef>
 
-  <!--==================================== Large frame ==============================-->
+  <!--==================================== adv. frame ==============================-->
   <RecipeDef>
     <defName>MakeLargeFrame</defName>
-    <label>make large machine frame</label>
-    <description>Make a large machine frames for factory buildings</description>
+    <label>make adv. machine frame</label>
+    <description>Make a advanced machine frames for factory buildings</description>
     <jobString>Making frame</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
@@ -163,10 +154,10 @@
       <li>
         <filter>
           <thingDefs>
-            <li>ComponentIndustrial</li>
+            <li>ComponentSpacer</li>
           </thingDefs>
         </filter>
-        <count>4</count>
+        <count>2</count>
       </li>
       <li>
         <filter>
@@ -187,7 +178,7 @@
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>ComponentIndustrial</li>
+        <li>ComponentSpacer</li>
         <li>Steel</li>
         <li>Plasteel</li>
       </thingDefs>
