@@ -9,6 +9,6 @@ namespace ProjectRimFactory.SAL3.Exposables
     public class AssemblerDefModExtension : DefModExtension
     {
         public float workSpeedBaseFactor = 1f;
-        public ThingDef importRecipesFrom;
+        public List<ThingDef> importRecipesFrom;
     }
 }
