@@ -242,7 +242,9 @@
     <rotatable>true</rotatable>    <!-- for being able to swap between textures each rotation -->
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>ElectricStove</importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
+        <importRecipesFrom>
+          <li>ElectricStove</li>
+        </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
       </li>
     </modExtensions>
   </ThingDef>
@@ -297,7 +299,9 @@
     <rotatable>false</rotatable>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>TableButcher</importRecipesFrom>
+        <importRecipesFrom>
+          <li>TableButcher</li>
+        </importRecipesFrom>
       </li>
     </modExtensions>
     <placeWorkers>      <!-- Restrictor when placing the building. -->
@@ -400,7 +404,9 @@
     <rotatable>false</rotatable>
     <!--<modExtensions>
 								<li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-									<importRecipesFrom>ElectricStove</importRecipesFrom></li>
+									<importRecipesFrom>
+										<li>ElectricStove</li>
+									</importRecipesFrom></li>
 							</modExtensions>-->
   </ThingDef>
 

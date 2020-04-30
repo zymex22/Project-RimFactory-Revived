@@ -13,13 +13,18 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
     {
         public override IEnumerable<RecipeDef> GetAllRecipes()
         {
+            HashSet<RecipeDef> recipes = new HashSet<RecipeDef>();
             // Imports recipes from modextension and recipes tag
             AssemblerDefModExtension extension = def.GetModExtension<AssemblerDefModExtension>();
-            if (extension?.importRecipesFrom != null)
+            if ((extension?.importRecipesFrom?.Count ?? 0) > 0)
             {
-                foreach (RecipeDef r in extension.importRecipesFrom.AllRecipes)
+                foreach (RecipeDef r in extension.importRecipesFrom.SelectMany(t => t.AllRecipes))
                 {
-                    yield return r;
+                    if (!recipes.Contains(r))
+                    {
+                        recipes.Add(r);
+                        yield return r;
+                    }
                 }
             }
             if (def.recipes != null)
