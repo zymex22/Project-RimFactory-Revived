@@ -10,7 +10,7 @@ namespace ProjectRimFactory.Common
 {
     public static class GridsUtilityExt
     {
-        public static T GetFirst<T>(this IntVec3 c, Map map) where T : Thing
+        public static T GetFirst<T>(this IntVec3 c, Map map) where T : class
         {
             foreach (var th in map.thingGrid.ThingsListAt(c))
             {

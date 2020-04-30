@@ -8,11 +8,12 @@ using ProjectRimFactory.Storage.Editables;
 using UnityEngine;
 using ProjectRimFactory.Storage.UI;
 using System.Collections;
+using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.Storage
 {
     [StaticConstructorOnStartup]
-    public abstract class Building_MassStorageUnit : Building_Storage
+    public abstract class Building_MassStorageUnit : Building_Storage, IHideItem, IHideRightClickMenu, IForbidPawnOutputItem, IForbidPawnInputItem
     {
         static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename", true);
 
