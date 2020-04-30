@@ -310,7 +310,9 @@
     <designatorDropdown>furnace_gr</designatorDropdown>
     <!-- <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>TableRoboticMachining</importRecipesFrom>
+        <importRecipesFrom>
+          <li>TableRoboticMachining</li>
+        </importRecipesFrom>
       </li>
     </modExtensions> -->
   </ThingDef>
@@ -470,7 +472,9 @@
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>ElectricSmelter</importRecipesFrom>
+        <importRecipesFrom>
+          <li>ElectricSmelter</li>
+        </importRecipesFrom>
       </li>
     </modExtensions>
     <researchPrerequisites>
