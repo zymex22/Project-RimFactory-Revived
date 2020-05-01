@@ -233,7 +233,8 @@
         <minGlowColor>(100,0,0,10)</minGlowColor>
         <maxGlowColor>(230,0,0,100)</maxGlowColor>
         <intervalTicks>30</intervalTicks>
-        <!-- easingType : EasingLinear, EasingSineInOut, EasingQuadInOut, EasingCubicInOut, EasingExpInOut, EasingElasticInOut, EasingBounceInOut, EasingQuadIn, EasingCubicIn -->
+        <!-- easingType : EasingLinear, EasingSineInOut, EasingQuadInOut, EasingCubicInOut, EasingExpInOut, EasingElasticInOut, EasingBounceInOut, EasingQuadIn, EasingQuadOut, EasingCubicIn, EasingCubicOut
+        https://easings.net/en -->
         <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
       </li>
     </comps>
