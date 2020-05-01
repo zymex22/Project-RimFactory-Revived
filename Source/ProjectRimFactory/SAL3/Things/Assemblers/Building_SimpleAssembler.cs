@@ -20,7 +20,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             {
                 foreach (RecipeDef r in extension.importRecipesFrom.SelectMany(t => t.AllRecipes))
                 {
-                    if (!recipes.Contains(r) && r.skillRequirements == null || r.skillRequirements.All(s => s.minLevel <= this.SkillLevel))
+                    if (!recipes.Contains(r) && (r.skillRequirements == null || r.skillRequirements.All(s => s.minLevel <= this.SkillLevel)))
                     {
                         recipes.Add(r);
                         yield return r;
