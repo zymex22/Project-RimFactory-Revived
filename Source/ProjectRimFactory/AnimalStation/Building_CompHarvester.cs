@@ -4,6 +4,7 @@ using RimWorld;
 using UnityEngine;
 using System.Reflection;
 using System.Linq;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AnimalStation
 {
@@ -46,7 +47,9 @@ namespace ProjectRimFactory.AnimalStation
                             amount -= num;
                             Thing thing = ThingMaker.MakeThing(resource, null);
                             thing.stackCount = num;
-                            GenPlace.TryPlaceThing(thing, p.Position, p.Map, ThingPlaceMode.Near, null);
+                            GenPlace.TryPlaceThing(thing,
+                                this.GetComp<CompOutputAdjustable>()?.CurrentCell ?? p.Position,
+                                p.Map, ThingPlaceMode.Near, null);
                         }
                         Fullness.SetValue(comp, 0f);
                     }
