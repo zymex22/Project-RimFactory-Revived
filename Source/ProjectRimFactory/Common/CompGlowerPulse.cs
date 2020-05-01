@@ -56,9 +56,12 @@ namespace ProjectRimFactory.Common
         {
             this.compClass = typeof(CompGlowerPulse);
         }
+        public int lastTick = 0;
 
         public float minGlowRadius = 10f;
         public float maxGlowRadius = 15f;
+
+        private int lag = Rand.Int % 60;
 
         public ColorInt minGlowColor = new ColorInt(255, 255, 255, 0) * 0.45f;
         public ColorInt maxGlowColor = new ColorInt(255, 255, 255, 0) * 1.45f;
@@ -73,6 +76,11 @@ namespace ProjectRimFactory.Common
 
         public void Update()
         {
+            if (this.lastTick == Find.TickManager.TicksGame)
+            {
+                return;
+            }
+            this.lastTick = Find.TickManager.TicksGame;
             if (this.Glows)
             {
                 if (this.easing == null)
@@ -86,7 +94,7 @@ namespace ProjectRimFactory.Common
                         this.easing = new EasingLinear();
                     }
                 }
-                var time = (Find.TickManager.TicksGame % (this.intervalTicks * 2)) / this.intervalTicks;
+                var time = ((Find.TickManager.TicksGame + lag) % (this.intervalTicks * 2)) / this.intervalTicks;
                 if (time > 1.0f)
                 {
                     time = 2.0f - time;
