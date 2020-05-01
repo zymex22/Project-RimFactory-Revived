@@ -199,6 +199,7 @@
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>assembler_food_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
     <graphicData>
       <graphicClass>Graphic_Multi</graphicClass>      <!-- for being able to swap between textures each rotation -->
       <texPath>SAL3/AutoCooker</texPath>
@@ -226,6 +227,15 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <minGlowRadius>3</minGlowRadius>
+        <maxGlowRadius>6</maxGlowRadius>
+        <minGlowColor>(100,0,0,10)</minGlowColor>
+        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <intervalTicks>30</intervalTicks>
+        <!-- easingType : EasingLinear, EasingSineInOut, EasingQuadInOut, EasingCubicInOut, EasingExpInOut, EasingElasticInOut, EasingBounceInOut -->
+        <easingType>ProjectRimFactory.Common.EasingCubicInOut</easingType>
+      </li>
     </comps>
     <recipes>      <!-- Defines recipe to make it in ThingDef directly.	 (extra from importrecipesfrom) -->
       <li>MakeNutrientPaste</li>
@@ -245,6 +255,14 @@
         <importRecipesFrom>
           <li>ElectricStove</li>
         </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
+        <workSpeedBaseFactor>1</workSpeedBaseFactor>
+        <skillLevel>20</skillLevel>
+        <workingGraphidData>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <texPath>SAL3/AutoCookerWorking</texPath>
+          <drawSize>(3,3)</drawSize>
+        </workingGraphidData>
+        <drawStatus>false</drawStatus>
       </li>
     </modExtensions>
   </ThingDef>

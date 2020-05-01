@@ -16,6 +16,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                    let h = t as Building_RecipeHolder
                    where h != null
                    from RecipeDef recipe in h.recipes
+                   where recipe.skillRequirements == null || recipe.skillRequirements.All(s => s.minLevel <= this.SkillLevel)
                    select recipe;
         }
 
