@@ -13,15 +13,15 @@ namespace ProjectRimFactory.SAL3.Exposables
         public int skillLevel = 20;
         public bool drawStatus = false;
 
-        public GraphicData workingGraphidData;
+        public GraphicData workingGraphicData;
 
         public Graphic WorkingGrahic
         {
             get
             {
-                if(workingGraphidData != null)
+                if(workingGraphicData != null)
                 {
-                    return workingGraphidData.Graphic;
+                    return workingGraphicData.Graphic;
                 }
                 return null;
             }
