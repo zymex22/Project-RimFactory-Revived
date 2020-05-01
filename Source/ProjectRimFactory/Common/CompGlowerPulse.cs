@@ -135,11 +135,27 @@ namespace ProjectRimFactory.Common
         }
     }
 
+    public class EasingQuadIn : IEasing
+    {
+        public float GetValue(float t)
+        {
+            return t * t;
+        }
+    }
+
     public class EasingCubicInOut : IEasing
     {
         public float GetValue(float t)
         {
             return t < 0.5f ? 4 * t * t * t : 1 - Mathf.Pow(-2 * t + 2, 3) / 2;
+        }
+    }
+
+    public class EasingCubicIn : IEasing
+    {
+        public float GetValue(float t)
+        {
+            return t * t * t;
         }
     }
 

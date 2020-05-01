@@ -233,8 +233,8 @@
         <minGlowColor>(100,0,0,10)</minGlowColor>
         <maxGlowColor>(230,0,0,100)</maxGlowColor>
         <intervalTicks>30</intervalTicks>
-        <!-- easingType : EasingLinear, EasingSineInOut, EasingQuadInOut, EasingCubicInOut, EasingExpInOut, EasingElasticInOut, EasingBounceInOut -->
-        <easingType>ProjectRimFactory.Common.EasingCubicInOut</easingType>
+        <!-- easingType : EasingLinear, EasingSineInOut, EasingQuadInOut, EasingCubicInOut, EasingExpInOut, EasingElasticInOut, EasingBounceInOut, EasingQuadIn, EasingCubicIn -->
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
       </li>
     </comps>
     <recipes>      <!-- Defines recipe to make it in ThingDef directly.	 (extra from importrecipesfrom) -->
