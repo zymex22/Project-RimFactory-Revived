@@ -9,6 +9,7 @@ using ProjectRimFactory.SAL3.Tools;
 using UnityEngine;
 using ProjectRimFactory.Common;
 using ProjectRimFactory.SAL3.Exposables;
+using Verse.Sound;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers
 {
@@ -37,6 +38,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
         }
 
+        public override Graphic Graphic => this.currentBillReport == null ? base.Graphic : this.def.GetModExtension<AssemblerDefModExtension>()?.WorkingGrahic ?? base.Graphic;
+
+        public bool DrawStatus => this.def.GetModExtension<AssemblerDefModExtension>()?.drawStatus ?? true;
+
         // Pawn
 
         public Pawn buildingPawn;
@@ -45,13 +50,14 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         {
             try
             {
-               
+
                 Pawn p = PawnGenerator.GeneratePawn(PRFDefOf.PRFSlavePawn, Faction.OfPlayer);
                 p.Name = new NameTriple("...", "SAL_Name".Translate(), "...");
                 //Assign skills
                 foreach (var s in p.skills.skills)
                 {
-                    s.levelInt = s.def == SkillDefOf.Artistic ? 0 : 10;
+                    // s.levelInt = s.def == SkillDefOf.Artistic ? 0 : 10;
+                    s.Level = this.SkillLevel;
                 }
                 //Assign Pawn's mapIndexOrState to building's mapIndexOrState
                 ReflectionUtility.mapIndexOrState.SetValue(p, ReflectionUtility.mapIndexOrState.GetValue(this));
@@ -245,7 +251,48 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     }
                 }
             }
+            // Effect.
+            if (currentBillReport != null)
+            {
+                var ext = this.def.GetModExtension<AssemblerDefModExtension>();
+                if (this.effecter == null)
+                {
+                    this.effecter = (ext == null ? currentBillReport.bill.recipe?.effectWorking : ext.GetEffecter(this.currentBillReport.bill.recipe))?.Spawn();
+                }
+                if(this.sound == null)
+                {
+                    this.sound = (ext == null ? currentBillReport.bill.recipe?.soundWorking : ext.GetSound(this.currentBillReport.bill.recipe))?.TrySpawnSustainer(this);
+                }
+                this.effecter?.EffectTick(this, this);
+                this.sound?.SustainerUpdate();
+                if (this.GetComp<CompGlowerPulse>() != null)
+                {
+                    this.GetComp<CompGlowerPulse>().Glows = true;
+                }
+            }
+            else
+            {
+                if (this.effecter != null)
+                {
+                    this.effecter.Cleanup();
+                    this.effecter = null;
+                }
+                if(this.sound != null)
+                {
+                    this.sound.End();
+                    this.sound = null;
+                }
+                if (this.GetComp<CompGlowerPulse>() != null)
+                {
+                    this.GetComp<CompGlowerPulse>().Glows = false;
+                }
+            }
         }
+
+        [Unsaved]
+        private Effecter effecter = null;
+        [Unsaved]
+        private Sustainer sound = null;
 
         protected virtual BillReport CheckBills()
         {
@@ -317,6 +364,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         public virtual bool AllowForbidden => allowForbidden;
         protected virtual float ProductionSpeedFactor => def.GetModExtension<AssemblerDefModExtension>()?.workSpeedBaseFactor ?? 1f;
 
+        protected virtual int SkillLevel => def.GetModExtension<AssemblerDefModExtension>()?.skillLevel ?? 20;
+
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
@@ -325,7 +374,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         public override void DrawGUIOverlay()
         {
             base.DrawGUIOverlay();
-            if (Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
+            if (this.DrawStatus && Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
             {
                 GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), currentBillReport == null ? "AssemblerIdle".Translate().RawText : currentBillReport.bill.LabelCap, Color.white);
             }
