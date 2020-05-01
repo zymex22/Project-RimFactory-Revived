@@ -278,7 +278,7 @@
         </overrideRecipeEffecter>
         <!-- Effect that is used when RecipeDef.effectWorking and RecipeDef.soundWorking does not exist or is not defined in overrideRecipeEffecter. -->
         <defaultEffecter>Drill</defaultEffecter>
-        <!-- <defaultSound></defaultEffecter> -->
+        <!-- <defaultSound></defaultSound> -->
       </li>
     </modExtensions>
   </ThingDef>
