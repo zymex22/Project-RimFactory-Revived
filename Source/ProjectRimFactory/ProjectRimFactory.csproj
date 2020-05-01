@@ -263,6 +263,8 @@
     <Compile Include="Archo\WorldComponent_NotificatonManager.cs" />
     <Compile Include="AutoMachineTool\**\*.cs" />
     <Compile Include="Common\Cache.cs" />
+    <Compile Include="Common\CompGlowerPulse.cs" />
+    <Compile Include="Common\CompEffecter.cs" />
     <Compile Include="Common\CompCallTickRareFromTick.cs" />
     <Compile Include="Common\CompOutputAdjustable.cs" />
     <Compile Include="Common\CompPRFHelp.cs" />
