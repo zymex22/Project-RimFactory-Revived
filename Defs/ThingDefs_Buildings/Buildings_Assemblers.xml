@@ -264,6 +264,21 @@
           <drawSize>(3,3)</drawSize>
         </workingGraphicData>
         <drawStatus>false</drawStatus>
+        <doEffect>true</doEffect>
+        <!-- List of Recipe and Effecter to overwrite. -->
+        <overrideRecipeEffecter>
+          <!--
+          <RecipeDef.defName Effecter="EffecterDef.defName" Sound="SoundDef.defName" />
+          RecipeDef - see RimWorld\Data\Core\Defs\RecipeDefs\Recipes_*.xml
+          EffecterDef - see RimWorld\Data\Core\Defs\Effects\Effecter_*.xml
+          SoundDef - see RimWorld\Data\Core\Defs\SoundDefs\*_Sustainers_*.xml
+          -->
+          <CookMealSimple Effecter="Repair" />
+          <CookMealSimpleBulk Effecter="ButcherFlesh" Sound="Recipe_ButcherCorpseFlesh" />
+        </overrideRecipeEffecter>
+        <!-- Effect that is used when RecipeDef.effectWorking and RecipeDef.soundWorking does not exist or is not defined in overrideRecipeEffecter. -->
+        <defaultEffecter>Drill</defaultEffecter>
+        <!-- <defaultSound></defaultEffecter> -->
       </li>
     </modExtensions>
   </ThingDef>
