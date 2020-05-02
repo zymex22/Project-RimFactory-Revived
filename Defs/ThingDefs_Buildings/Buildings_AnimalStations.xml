@@ -82,7 +82,7 @@
     <description>A station with motion detecting industrial-size shearing clippers. Swiftly and automatically extracts wool from your colony's animals.\n\nKeep it stocked with food to lure the animals in for processing. Drops the produce where the sheared creature is standing.</description>    <!-- use \n for next line -->
     <size>(2,2)</size>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <Hay>50</Hay>
       <Steel>50</Steel>
       <PRFRoboticArm>2</PRFRoboticArm>
@@ -150,7 +150,7 @@
     <description>A station equipped with servo-motorized tubes, which seek out mammary glands to milk your farm animals.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the milked creature is standing.</description>
     <size>(2,2)</size>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <Hay>50</Hay>
       <Steel>50</Steel>
       <PRFRoboticArm>2</PRFRoboticArm>
@@ -288,7 +288,7 @@
     </graphicData>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRFMachineFrame>1</PRFMachineFrame>
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
       <PRFWeakAIChip>1</PRFWeakAIChip>

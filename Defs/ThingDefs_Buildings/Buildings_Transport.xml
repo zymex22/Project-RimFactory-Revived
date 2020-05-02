@@ -88,7 +88,10 @@
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller</defName>
     <label>Item Puller</label>
-
+    <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
     <passability>Impassable</passability>
     <description>(Tier 2) A Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
     <altitudeLayer>Building</altitudeLayer>
@@ -97,7 +100,7 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
   </ThingDef>
-  
+
   <!--======================================= Item Angle Puller===============================================-->
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller_Side</defName>

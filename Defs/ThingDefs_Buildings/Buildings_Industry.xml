@@ -60,7 +60,7 @@
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
@@ -310,9 +310,7 @@
     <designatorDropdown>furnace_gr</designatorDropdown>
     <!-- <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>
-          <li>TableRoboticMachining</li>
-        </importRecipesFrom>
+        <importRecipesFrom>TableRoboticMachining</importRecipesFrom>
       </li>
     </modExtensions> -->
   </ThingDef>
@@ -366,6 +364,11 @@
         <glowColor>(217,112,33,0)</glowColor>
       </li>
     </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <workSpeedBaseFactor>1</workSpeedBaseFactor>
+      </li>
+    </modExtensions>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>Smithing</li>
@@ -393,7 +396,7 @@
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <recipes>
       <li>CremateCorpse</li>
@@ -422,6 +425,11 @@
         <glowColor>(217,112,33,0)</glowColor>
       </li>
     </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <workSpeedBaseFactor>1.5</workSpeedBaseFactor>
+      </li>
+    </modExtensions>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>AutomationBasics</li>
@@ -472,6 +480,7 @@
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <workSpeedBaseFactor>2</workSpeedBaseFactor>
         <importRecipesFrom>
           <li>ElectricSmelter</li>
         </importRecipesFrom>

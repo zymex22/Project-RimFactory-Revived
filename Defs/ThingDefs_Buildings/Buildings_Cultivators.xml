@@ -182,7 +182,7 @@
     </statBases>
     <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFMachineFrame>1</PRFMachineFrame>
       <PRFRoboticArm>3</PRFRoboticArm>
       <Steel>100</Steel>
       <Plasteel>30</Plasteel>
@@ -260,7 +260,7 @@
     </statBases>
     <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFMachineFrame>1</PRFMachineFrame>
       <PRFRoboticArm>3</PRFRoboticArm>
       <Steel>100</Steel>
       <Plasteel>30</Plasteel>
@@ -286,9 +286,9 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>1</heatPerSecond>
       </li>
-      <li Class="CompProperties_Glower"> 
+      <li Class="CompProperties_Glower">
         <glowRadius>2</glowRadius>
-        <glowColor>(115,198,206,0)</glowColor> <!-- Set to Tier 3 small glow instead of sunlamp -->
+        <glowColor>(115,198,206,0)</glowColor>        <!-- Set to Tier 3 small glow instead of sunlamp -->
       </li>
     </comps>
     <tickerType>Normal</tickerType>
