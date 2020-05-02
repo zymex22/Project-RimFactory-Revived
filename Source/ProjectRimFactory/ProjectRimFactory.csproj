@@ -322,6 +322,7 @@
     <Compile Include="SAL3\Things\Assemblers\Special\WorkSpeedFactorManager.cs" />
     <Compile Include="SAL3\Things\Building_RecipeHolder.cs" />
     <Compile Include="SAL3\Things\Building_SmartHopper.cs" />
+    <Compile Include="SAL3\Things\CompRecipeImportRange.cs" />
     <Compile Include="SAL3\Tools\BaseCountUtility.cs" />
     <Compile Include="SAL3\Things\Assemblers\Building_SimpleAssembler.cs" />
     <Compile Include="SAL3\Tools\CellUtility.cs" />

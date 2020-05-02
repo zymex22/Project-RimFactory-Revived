@@ -92,6 +92,10 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>3</heatPerSecond>        <!-- Vanilla stove create 5 -->
       </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>5</range>
+        <ghostColor>(0,0,1,1)</ghostColor>
+      </li>
     </comps>
     <researchPrerequisites>      <!-- Needed Research to see in menus -->
       <li>UniversalAutocrafting</li>
@@ -185,6 +189,10 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>5</range>
+        <ghostColor>(0,0,1,1)</ghostColor>
       </li>
     </comps>
     <researchPrerequisites>
