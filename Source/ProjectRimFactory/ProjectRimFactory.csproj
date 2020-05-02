@@ -272,6 +272,7 @@
     <Compile Include="Common\HarmonyPatches\PatchStorage.cs" />
     <Compile Include="Common\HarmonyPatches\PathGridPatch.cs" />
     <Compile Include="Common\HarmonyPatches\RacePropertiesPatch.cs" />
+    <Compile Include="Common\HarmonyPatches\Patch_GenRecipe_MakeRecipeProducts.cs" />
     <Compile Include="Common\PatchOperationRTFuseInsertionHook.cs" />
     <Compile Include="Common\PRFDefOf.cs" />
     <Compile Include="Common\ProjectRimFactory_ModComponent.cs" />
