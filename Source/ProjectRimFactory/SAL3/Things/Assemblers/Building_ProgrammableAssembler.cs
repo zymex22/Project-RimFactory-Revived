@@ -224,7 +224,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 }
                 if (currentBillReport != null)
                 {
-                    currentBillReport.workLeft -= 10f * ProductionSpeedFactor;
+                    currentBillReport.workLeft -= 10f * ProductionSpeedFactor * this.TryGetComp<CompPowerWorkSpeed>()?.GetSpeedFactor() ?? 1f;
                     if (currentBillReport.workLeft <= 0)
                     {
                         try

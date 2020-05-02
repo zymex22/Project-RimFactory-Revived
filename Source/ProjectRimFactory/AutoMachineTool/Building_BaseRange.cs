@@ -9,6 +9,7 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using System.Collections;
+using ProjectRimFactory.Common;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
@@ -22,7 +23,7 @@ namespace ProjectRimFactory.AutoMachineTool
         IEnumerable<IntVec3> GetAllTargetCells();
     }
 
-    public abstract class Building_BaseRange<T> : Building_BaseLimitation<T>, IRange, IRangePowerSupplyMachine where T : Thing
+    public abstract class Building_BaseRange<T> : Building_BaseLimitation<T>, IRange, IRangePowerSupplyMachineHolder, IRangePowerSupplyMachine where T : Thing
     {
         public int MinPowerForRange => this.RangeExtension.minPower;
         public int MaxPowerForRange => this.RangeExtension.maxPower;
@@ -65,6 +66,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.SetPower();
             }
         }
+
+        public IRangePowerSupplyMachine RangePowerSupplyMachine => this;
 
         [Unsaved]
         protected int targetEnumrationCount = 100;

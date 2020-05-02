@@ -263,6 +263,7 @@
     <Compile Include="Archo\WorldComponent_NotificatonManager.cs" />
     <Compile Include="AutoMachineTool\**\*.cs" />
     <Compile Include="Common\Cache.cs" />
+    <Compile Include="Common\CompPowerWorkSpeed.cs" />
     <Compile Include="Common\CompGlowerPulse.cs" />
     <Compile Include="Common\CompEffecter.cs" />
     <Compile Include="Common\CompCallTickRareFromTick.cs" />
@@ -272,6 +273,8 @@
     <Compile Include="Common\HarmonyPatches\PatchStorage.cs" />
     <Compile Include="Common\HarmonyPatches\PathGridPatch.cs" />
     <Compile Include="Common\HarmonyPatches\RacePropertiesPatch.cs" />
+    <Compile Include="Common\ITab_PowerSupply.cs" />
+    <Compile Include="Common\ITab_RangePowerSupply.cs" />
     <Compile Include="Common\PatchOperationRTFuseInsertionHook.cs" />
     <Compile Include="Common\PRFDefOf.cs" />
     <Compile Include="Common\ProjectRimFactory_ModComponent.cs" />

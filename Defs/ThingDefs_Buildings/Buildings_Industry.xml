@@ -200,7 +200,7 @@
     </placeWorkers>
 
     <inspectorTabs>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>      <!-- Power boost -->
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
       <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>      <!-- AutomachineTool ITab not PRF -->
     </inspectorTabs>
 

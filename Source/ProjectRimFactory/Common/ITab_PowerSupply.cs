@@ -9,9 +9,14 @@ using Verse.AI;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
-namespace ProjectRimFactory.AutoMachineTool
+namespace ProjectRimFactory.Common
 {
-    interface IPowerSupplyMachine
+    public interface IPowerSupplyMachineHolder
+    {
+        IPowerSupplyMachine PowerSupplyMachine { get; }
+    }
+
+    public interface IPowerSupplyMachine
     {
         int MinPowerForSpeed { get; }
         int MaxPowerForSpeed { get; }
@@ -32,10 +37,9 @@ namespace ProjectRimFactory.AutoMachineTool
         
         private string description;
         
-        public IPowerSupplyMachine Machine
-        {
-            get => (IPowerSupplyMachine)this.SelThing;
-        }
+        public IPowerSupplyMachine Machine => (this.SelThing as IPowerSupplyMachineHolder)?.PowerSupplyMachine;
+
+        public override bool IsVisible => this.Machine != null;
 
         protected override void FillTab()
         {

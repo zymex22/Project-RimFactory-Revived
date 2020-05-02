@@ -9,8 +9,13 @@ using Verse.AI;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
-namespace ProjectRimFactory.AutoMachineTool
+namespace ProjectRimFactory.Common
 {
+    public interface IRangePowerSupplyMachineHolder
+    {
+        IRangePowerSupplyMachine RangePowerSupplyMachine { get; }
+    }
+
     public interface IRangePowerSupplyMachine
     {
         int MinPowerForSpeed { get; }
@@ -43,7 +48,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private string descriptionForRange;
 
-        private IRangePowerSupplyMachine Machine { get => (IRangePowerSupplyMachine)this.SelThing; }
+        private IRangePowerSupplyMachine Machine => (this.SelThing as IRangePowerSupplyMachineHolder)?.RangePowerSupplyMachine;
+
+        public override bool IsVisible => this.Machine != null;
 
         protected override void FillTab()
         {
