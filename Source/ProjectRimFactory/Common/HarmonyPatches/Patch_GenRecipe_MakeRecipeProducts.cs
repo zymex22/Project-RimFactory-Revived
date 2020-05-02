@@ -81,10 +81,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             // However, string comparison in C# is already super fast, so it's
             //   probably all fine.
             if ((billGiver as Building)?.def.defName=="PRF_SpacerCooker") {
-                Log.Message("Using Spacer Cooker - skipping poison test");
+                // Log.Message("Using Spacer Cooker - skipping poison test");
                 return true;
             }
-            Log.Message("Not using space cooker for this recipe");
+            // Log.Message("Not using space cooker for this recipe");
             return false;
         }
     }
