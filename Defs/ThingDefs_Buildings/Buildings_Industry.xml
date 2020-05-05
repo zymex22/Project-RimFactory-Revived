@@ -303,6 +303,16 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>12</heatPerSecond>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <minGlowRadius>1</minGlowRadius>
+        <maxGlowRadius>3</maxGlowRadius>
+        <minGlowColor>(100,0,0,10)</minGlowColor>
+        <maxGlowColor>(230,0,0,80)</maxGlowColor>
+        <intervalTicks>30</intervalTicks>
+        <!-- easingType : EasingLinear, EasingSineInOut, EasingQuadInOut, EasingCubicInOut, EasingExpInOut, EasingElasticInOut, EasingBounceInOut, EasingQuadIn, EasingQuadOut, EasingCubicIn, EasingCubicOut
+        https://easings.net/en -->
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
+      </li>
     </comps>
     <building>
       <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
@@ -327,7 +337,7 @@
     <label>Blast Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
-      <texPath>Industry/smelter_t0</texPath>
+      <texPath>Industry/smelter_t0off</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(5.1,5.8)</drawSize>
     </graphicData>
@@ -344,7 +354,7 @@
     <recipes>
       <li>BurnApparel</li>
       <li>ExtractMetalFromSlag</li>
-      <li>MakeMediumFrame</li>
+      <li>MakeSmallFrame</li>
       <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
@@ -367,6 +377,12 @@
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <workSpeedBaseFactor>1</workSpeedBaseFactor>
+        <doEffect>false</doEffect>
+        <workingGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Industry/smelter_t0</texPath>
+          <drawSize>(5.1,5.8)</drawSize>
+        </workingGraphicData>
       </li>
     </modExtensions>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
@@ -379,10 +395,10 @@
   <!--==================== T1 Furnace ====================-->
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceII</defName>
-    <label>Steel Furnace</label>
+    <label>industrial Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
-      <texPath>Industry/smelter_t1</texPath>
+      <texPath>Industry/smelter_t1off</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
@@ -392,7 +408,7 @@
       <Cleanliness>-1</Cleanliness>
       <Beauty>-1</Beauty>
     </statBases>
-    <description>Advanced Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
+    <description>Advanced industrial Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -407,6 +423,7 @@
       <li>MakeSmallFrame</li>
       <li>MakeMediumFrame</li>
       <li>MakeLargeFrame</li>
+      <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Refuelable">
@@ -427,6 +444,12 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <doEffect>false</doEffect>
+        <workingGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Industry/smelter_t1</texPath>
+          <drawSize>(3.1,3.1)</drawSize>
+        </workingGraphicData>
         <workSpeedBaseFactor>1.5</workSpeedBaseFactor>
       </li>
     </modExtensions>
@@ -442,7 +465,7 @@
     <label>Electric Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
-      <texPath>Industry/smelter_t2</texPath>
+      <texPath>Industry/smelter_t2off</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
@@ -484,6 +507,12 @@
         <importRecipesFrom>
           <li>ElectricSmelter</li>
         </importRecipesFrom>
+        <doEffect>false</doEffect>
+        <workingGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Industry/smelter_t2</texPath>
+          <drawSize>(3.1,3.1)</drawSize>
+        </workingGraphicData>
       </li>
     </modExtensions>
     <researchPrerequisites>
