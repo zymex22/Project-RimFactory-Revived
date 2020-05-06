@@ -131,10 +131,9 @@
     </placeWorkers>
   </ThingDef>
 
-  <!-- ############################################# Industrial Lamp ##################################################### -->
-  <ThingDef ParentName="LampBase">
-    <defName>PRF_IndustrialLamp</defName>
-    <label>Industrial Lamp</label>
+  <!-- ############################################# Industrial LampBase ##################################################### -->
+  <ThingDef Name="PRF_LampBase" ParentName="LampBase" Abstract="True">
+
     <description>An industrial light to light up large space, works both in and outside.</description>
     <fillPercent>0.50</fillPercent>
     <graphicData>
@@ -163,10 +162,6 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>1</heatPerSecond>
       </li>
-      <li Class="CompProperties_Glower">
-        <glowRadius>20</glowRadius>
-        <glowColor>(252,187,113,0)</glowColor>
-      </li>
     </comps>
     <placeWorkers>
       <li>PlaceWorker_NotUnderRoof</li>
@@ -178,5 +173,74 @@
     <specialDisplayRadius>18</specialDisplayRadius>
   </ThingDef>
 
+  <!-- ############################################# Industrial Lamp White ##################################################### -->
+  <ThingDef ParentName="PRF_LampBase">
+    <defName>PRF_IndustrialLampWhite</defName>
+    <label>Industrial Lamp</label>
+    <li Class="CompProperties_Glower">
+      <glowRadius>20</glowRadius>
+      <glowColor>(252,187,113,0)</glowColor>
+    </li>
+  </ThingDef>
+
+  <!-- ############################################# Industrial Lamp Red ##################################################### -->
+  <ThingDef ParentName="PRF_LampBase">
+    <defName>PRF_IndustrialLampRed</defName>
+    <label>Industrial Lamp</label>
+    <li Class="CompProperties_Glower">
+      <glowRadius>20</glowRadius>
+      <glowColor>(255,0,0,0)</glowColor>
+    </li>
+  </ThingDef>
+
+  <!-- ############################################# Industrial Lamp Blue ##################################################### -->
+  <ThingDef ParentName="PRF_LampBase">
+    <defName>PRF_IndustrialLampBlue</defName>
+    <label>Industrial Lamp</label>
+    <li Class="CompProperties_Glower">
+      <glowRadius>20</glowRadius>
+      <glowColor>(0,0,255,0)</glowColor>
+    </li>
+  </ThingDef>
+
+  <!-- ############################################# Industrial Lamp green ##################################################### -->
+  <ThingDef ParentName="PRF_LampBase">
+    <defName>PRF_IndustrialLampGreen</defName>
+    <label>Industrial Lamp</label>
+    <li Class="CompProperties_Glower">
+      <glowRadius>20</glowRadius>
+      <glowColor>(0,255,0,0)</glowColor>
+    </li>
+  </ThingDef>
+
+    <!-- ############################################# Industrial Lamp Cyan ##################################################### -->
+  <ThingDef ParentName="PRF_LampBase">
+    <defName>PRF_IndustrialLampCyan</defName>
+    <label>Industrial Lamp</label>
+    <li Class="CompProperties_Glower">
+      <glowRadius>20</glowRadius>
+      <glowColor>(0,255,255,0)</glowColor>
+    </li>
+  </ThingDef>
+
+  <!-- ############################################# Industrial Lamp Yellow ##################################################### -->
+  <ThingDef ParentName="PRF_LampBase">
+    <defName>PRF_IndustrialLampYellow</defName>
+    <label>Industrial Lamp</label>
+    <li Class="CompProperties_Glower">
+      <glowRadius>20</glowRadius>
+      <glowColor>(255,255,0,0)</glowColor>
+    </li>
+  </ThingDef>
+
+  <!-- ############################################# Industrial Lamp Magenta ##################################################### -->
+  <ThingDef ParentName="PRF_LampBase">
+    <defName>PRF_IndustrialLampMagenta</defName>
+    <label>Industrial Lamp</label>
+    <li Class="CompProperties_Glower">
+      <glowRadius>20</glowRadius>
+      <glowColor>(252,0,255,0)</glowColor>
+    </li>
+  </ThingDef>
 
 </Defs>
