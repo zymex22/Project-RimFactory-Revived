@@ -189,7 +189,7 @@
         <heatPerSecond>20</heatPerSecond>
       </li>
       <li Class="CompProperties_Glower">
-        <glowRadius>5</glowRadius>
+        <glowRadius>6</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
     </comps>
@@ -213,11 +213,9 @@
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
       </li>
-      <!--
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
+      <!--  <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
         <effectWorking>Drill</effectWorking>
-      </li>  
-      -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
+      </li>        -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
     </modExtensions>
   </ThingDef>
 
@@ -251,9 +249,10 @@
       <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
     <recipes>
-      <li>RecycleWeapon</li>
-      <li>Recycle_Apparel</li>
-      <li>prfDestroyChunks</li>
+      <li>PRF_Recycle_Weapon</li>
+      <li>PRF_Recycle_Apparel</li>
+      <!-- <li>PRF_Destroy_Art</li> -->
+      <li>PRF_Destroy_Chunks</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Power">
@@ -309,9 +308,7 @@
         <minGlowColor>(100,0,0,10)</minGlowColor>
         <maxGlowColor>(230,0,0,80)</maxGlowColor>
         <intervalTicks>30</intervalTicks>
-        <!-- easingType : EasingLinear, EasingSineInOut, EasingQuadInOut, EasingCubicInOut, EasingExpInOut, EasingElasticInOut, EasingBounceInOut, EasingQuadIn, EasingQuadOut, EasingCubicIn, EasingCubicOut
-        https://easings.net/en -->
-        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>        <!-- easingType : see more here: https://easings.net or in top of assembler file -->
       </li>
     </comps>
     <building>
@@ -378,6 +375,7 @@
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <workSpeedBaseFactor>1</workSpeedBaseFactor>
         <doEffect>false</doEffect>
+        <drawStatus>true</drawStatus>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>Industry/smelter_t0</texPath>
@@ -445,6 +443,7 @@
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <doEffect>false</doEffect>
+        <drawStatus>true</drawStatus>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>Industry/smelter_t1</texPath>
@@ -508,6 +507,7 @@
           <li>ElectricSmelter</li>
         </importRecipesFrom>
         <doEffect>false</doEffect>
+        <drawStatus>true</drawStatus>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>Industry/smelter_t2</texPath>

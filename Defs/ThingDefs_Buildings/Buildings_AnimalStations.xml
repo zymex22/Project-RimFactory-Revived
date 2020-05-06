@@ -24,7 +24,7 @@
     <castEdgeShadows>true</castEdgeShadows>
     <size>(2,2)</size>    <!-- Ingame cell/ground size (x,y) -->
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
-    <blockLight>true</blockLight>    <!-- 	Whether this building can block light or not. -->
+    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <scatterableOnMapGen>false</scatterableOnMapGen>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>    <!-- Show input/output cells when selected -->
