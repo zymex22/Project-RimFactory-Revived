@@ -131,7 +131,7 @@
     </building>
     <clearBuildingArea>false</clearBuildingArea>
     <graphicData>
-      <drawSize>(0.9,0.9)</drawSize>
+      <drawSize>(1.1)</drawSize>
     </graphicData>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>

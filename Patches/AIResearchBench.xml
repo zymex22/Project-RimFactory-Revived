@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<!-- Vanilla Furniture Expanded -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Furniture Expanded</li>
+		</mods>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="AIResearchBench"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+			<value>
+				<li>Misc_FileCabinet</li>
+			</value>
+		</match>
+	</Operation>
+
+
+	<!-- Brain In a Jar -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Brain In a Jar</li>
+		</mods>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="AIResearchBench"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+			<value>
+				<li>BrainInAJar</li>
+				<li>MiniBrainJar</li>
+				<li>DualBrain</li>
+				<li>QuadBrain</li>
+				<li>MasterBrain</li>
+			</value>
+		</match>
+	</Operation>
+
+	<!-- High Tech Laboratory Facilities (Continued) -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>High Tech Laboratory Facilities (Continued)</li>
+		</mods>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="AIResearchBench"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+			<value>
+				<li>LabTerminal</li>
+				<li>LabStation</li>
+			</value>
+		</match>
+	</Operation>
+
+</Patch>
