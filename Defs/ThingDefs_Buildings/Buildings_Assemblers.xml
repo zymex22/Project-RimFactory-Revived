@@ -245,7 +245,31 @@
         https://easings.net/en -->
         <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- speed settings -->
+        <speedSetting>true</speedSetting>
+        <minPowerForSpeed>0</minPowerForSpeed>
+        <minSpeedFactor>1</minSpeedFactor>
+        <maxPowerForSpeed>3000</maxPowerForSpeed>
+        <maxSpeedFactor>2</maxSpeedFactor>
+        <!-- range settings -->
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>1</minRange>
+        <maxPowerForRange>1000</maxPowerForRange>
+        <maxRange>3</maxRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+        <!-- range color settings
+        <blueprintMin>(1,1,1,1)</blueprintMin>
+        <blueprintMax>(0.5,0.5,0.5,0.6)</blueprintMax>
+        <instance>(1,1,1,1)</instance>
+        <otherInstance>(1,1,1,0.35)</otherInstance>
+        -->
+      </li>
     </comps>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
     <recipes>      <!-- Defines recipe to make it in ThingDef directly.	 (extra from importrecipesfrom) -->
       <li>MakeNutrientPaste</li>
       <li>MakeNutrientPasteBulk</li>

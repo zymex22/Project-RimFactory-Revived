@@ -263,18 +263,17 @@
     <Compile Include="Archo\WorldComponent_NotificatonManager.cs" />
     <Compile Include="AutoMachineTool\**\*.cs" />
     <Compile Include="Common\Cache.cs" />
-    <Compile Include="Common\CompPowerWorkSpeed.cs" />
     <Compile Include="Common\CompGlowerPulse.cs" />
     <Compile Include="Common\CompEffecter.cs" />
     <Compile Include="Common\CompCallTickRareFromTick.cs" />
     <Compile Include="Common\CompOutputAdjustable.cs" />
+    <Compile Include="Common\CompPowerWorkSetting.cs" />
     <Compile Include="Common\CompPRFHelp.cs" />
     <Compile Include="Common\GridsUtilityExt.cs" />
     <Compile Include="Common\HarmonyPatches\PatchStorage.cs" />
     <Compile Include="Common\HarmonyPatches\PathGridPatch.cs" />
     <Compile Include="Common\HarmonyPatches\RacePropertiesPatch.cs" />
     <Compile Include="Common\ITab_PowerSupply.cs" />
-    <Compile Include="Common\ITab_RangePowerSupply.cs" />
     <Compile Include="Common\PatchOperationRTFuseInsertionHook.cs" />
     <Compile Include="Common\PRFDefOf.cs" />
     <Compile Include="Common\ProjectRimFactory_ModComponent.cs" />
@@ -283,6 +282,7 @@
     <Compile Include="Common\HarmonyPatches\SetPositionPatch.cs" />
     <Compile Include="Common\ThingCategoryDefUtility.cs" />
     <Compile Include="Common\HarmonyPatches\VolumePerUnitPatch.cs" />
+    <Compile Include="Common\Util.cs" />
     <Compile Include="CultivatorTools\Building_Cultivator.cs" />
     <Compile Include="CultivatorTools\Building_DroneCultivator.cs" />
     <Compile Include="CultivatorTools\Building_RadialCellIterator.cs" />

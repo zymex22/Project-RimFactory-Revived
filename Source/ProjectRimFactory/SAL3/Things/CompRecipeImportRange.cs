@@ -14,7 +14,7 @@ namespace ProjectRimFactory.SAL3.Things
     {
         public CompProperties_RecipeImportRange Props => (CompProperties_RecipeImportRange)this.props;
 
-        public IEnumerable<IntVec3> CellsWithinRange()
+        public IEnumerable<IntVec3> RangeCells()
         {
             return this.Props.CellsWithinRange(this.parent.Position);
         }

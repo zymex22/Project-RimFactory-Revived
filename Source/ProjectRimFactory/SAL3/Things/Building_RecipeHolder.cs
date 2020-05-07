@@ -18,7 +18,7 @@ namespace ProjectRimFactory.SAL3.Things
         protected float workAmount;
         public List<RecipeDef> recipes = new List<RecipeDef>();
         //================================ Misc
-        public IEnumerable<Building_WorkTable> Tables => from IntVec3 cell in this.GetComp<CompRecipeImportRange>()?.CellsWithinRange() ?? GenAdj.CellsAdjacent8Way(this)
+        public IEnumerable<Building_WorkTable> Tables => from IntVec3 cell in this.GetComp<CompRecipeImportRange>()?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)
                                                          from Thing t in cell.GetThingList(Map)
                                                          let building = t as Building_WorkTable
                                                          where building != null

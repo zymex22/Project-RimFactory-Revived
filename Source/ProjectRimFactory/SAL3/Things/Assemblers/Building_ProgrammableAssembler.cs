@@ -13,7 +13,7 @@ using Verse.Sound;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers
 {
-    public abstract class Building_ProgrammableAssembler : Building_DynamicBillGiver
+    public abstract class Building_ProgrammableAssembler : Building_DynamicBillGiver, IPowerSupplyMachineHolder
     {
         protected class BillReport : IExposable
         {
@@ -224,7 +224,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 }
                 if (currentBillReport != null)
                 {
-                    currentBillReport.workLeft -= 10f * ProductionSpeedFactor * this.TryGetComp<CompPowerWorkSpeed>()?.GetSpeedFactor() ?? 1f;
+                    currentBillReport.workLeft -= 10f * ProductionSpeedFactor * this.TryGetComp<CompPowerWorkSetting>()?.GetSpeedFactor() ?? 1f;
                     if (currentBillReport.workLeft <= 0)
                     {
                         try
@@ -366,10 +366,15 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         protected virtual int SkillLevel => def.GetModExtension<AssemblerDefModExtension>()?.skillLevel ?? 20;
 
+        public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
+
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(IngredientStackCells.ToList());
+            if (this.GetComp<CompPowerWorkSetting>() == null)
+            {
+                GenDraw.DrawFieldEdges(IngredientStackCells.ToList());
+            }
         }
         public override void DrawGUIOverlay()
         {
