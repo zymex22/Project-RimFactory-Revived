@@ -10,6 +10,7 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -29,7 +30,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
     }
 
-    class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConbeyorLinkable
+    class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConbeyorLinkable, IHideItem, IHideRightClickMenu, IForbidPawnOutputItem
     {
         public Building_BeltConveyor()
         {
@@ -72,6 +73,14 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public bool IsStuck => this.stuck;
 
+        public bool IsUnderground { get => Option(this.Extension).Fold(false)(x => x.underground); }
+
+        public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
+
+        public bool HideRightClickMenus => !this.IsUnderground && this.State != WorkingState.Ready;
+
+        public bool ForbidPawnOutput => !this.IsUnderground && this.State != WorkingState.Ready;
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -100,6 +109,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            this.showProgressBar = false;
 
             if (!respawningAfterLoad)
             {
@@ -132,6 +142,10 @@ namespace ProjectRimFactory.AutoMachineTool
             if (this.State != WorkingState.Ready)
             {
                 this.FilterSetting();
+                if (this.working != null)
+                {
+                    this.products.Add(this.working);
+                }
             }
             base.Reset();
         }
@@ -205,7 +219,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 return false;
             if (this.State == WorkingState.Ready)
             {
-                if (t.Spawned) t.DeSpawn();
+                if (t.Spawned && this.IsUnderground) t.DeSpawn();
+                t.Position = this.Position;
                 this.dest = rot;
                 this.ForceStartWork(t, 1f);
                 return true;
@@ -272,6 +287,10 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool PlaceProduct(ref List<Thing> products)
         {
             var thing = products[0];
+            if (this.WorkInterruption(thing))
+            {
+                return true;
+            }
             var next = this.LinkTargetConveyor().Where(o => o.Position == this.dest.FacingCell + this.Position).FirstOption();
             if (next.HasValue)
             {
@@ -380,8 +399,6 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-        public bool IsUnderground { get => Option(this.Extension).Fold(false)(x => x.underground); }
-
         private void NotifyAroundSender()
         {
             new Rot4[] { this.Rotation.Opposite, this.Rotation.Opposite.RotateAsNew(RotationDirection.Clockwise), this.Rotation.Opposite.RotateAsNew(RotationDirection.Counterclockwise) }
@@ -394,7 +411,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Thing working)
         {
-            return false;
+            return this.IsUnderground ? false : !working.Spawned || working.Position != this.Position;
         }
 
         protected override bool TryStartWorking(out Thing target, out float workAmount)
@@ -411,7 +428,8 @@ namespace ProjectRimFactory.AutoMachineTool
             if (target != null)
             {
                 this.dest = Destination(target, true);
-                if (target.Spawned) target.DeSpawn();
+                if (target.Spawned && this.IsUnderground) target.DeSpawn();
+                target.Position = this.Position;
             }
             return target != null;
         }

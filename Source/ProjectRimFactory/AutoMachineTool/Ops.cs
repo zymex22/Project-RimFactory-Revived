@@ -216,6 +216,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             if (cell.GetThingList(map).Where(ti => ti.def.category == ThingCategory.Item).Count() == 0)
             {
+                if (t.Spawned) t.DeSpawn();
                 GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct);
                 if (forbid) t.SetForbidden(forbid);
                 effect(t);
@@ -231,6 +232,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 .FirstOption();
             if (o.HasValue)
             {
+                if (t.Spawned) t.DeSpawn();
                 GenPlace.TryPlaceThing(t, o.Value, map, ThingPlaceMode.Near);
                 if (forbid) t.SetForbidden(forbid);
                 effect(t);
