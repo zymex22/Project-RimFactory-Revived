@@ -282,7 +282,7 @@
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <castEdgeShadows>true</castEdgeShadows>
     <tickerType>Normal</tickerType>
-    <altitudeLayer>LayingPawn</altitudeLayer>
+    <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <inspectorTabs>
@@ -333,10 +333,11 @@
     <defName>PRF_FurnaceI</defName>
     <label>Blast Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <altitudeLayer>Gas</altitudeLayer>
     <graphicData>
       <texPath>Industry/smelter_t0off</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(5.1,5.8)</drawSize>
+      <drawSize>(5,7.9)</drawSize>
     </graphicData>
     <size>(5,5)</size>
     <statBases>
@@ -379,7 +380,7 @@
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>Industry/smelter_t0</texPath>
-          <drawSize>(5.1,5.8)</drawSize>
+          <drawSize>(5,7.9)</drawSize>
         </workingGraphicData>
       </li>
     </modExtensions>
