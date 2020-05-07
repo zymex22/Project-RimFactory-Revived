@@ -60,8 +60,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 //Assign skills
                 foreach (var s in p.skills.skills)
                 {
-                    // s.levelInt = s.def == SkillDefOf.Artistic ? 0 : 10;
-                    s.Level = this.SkillLevel;
+                    s.Level = s.def == SkillDefOf.Artistic ? this.ArtSkillLevel : this.SkillLevel;
                 }
                 //Assign Pawn's mapIndexOrState to building's mapIndexOrState
                 ReflectionUtility.mapIndexOrState.SetValue(p, ReflectionUtility.mapIndexOrState.GetValue(this));
@@ -194,6 +193,12 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             if (buildingPawn == null)
                 DoPawn();
 
+            this.buildingPawn?.skills.skills.ForEach(s =>
+            {
+                s.Level = s.def == SkillDefOf.Artistic ? this.ArtSkillLevel : this.SkillLevel;
+                ReflectionUtility.cachedTotallyDisabled.SetValue(s, BoolUnknown.Unknown);
+            });
+
             //Assign Pawn's mapIndexOrState to building's mapIndexOrState
             ReflectionUtility.mapIndexOrState.SetValue(buildingPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
             //Assign Pawn's position without nasty errors
@@ -228,7 +233,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 }
                 if (currentBillReport != null)
                 {
-                    currentBillReport.workLeft -= 10f * ProductionSpeedFactor * this.TryGetComp<CompPowerWorkSetting>()?.GetSpeedFactor() ?? 1f;
+                    currentBillReport.workLeft -= 10f * ProductionSpeedFactor * (this.TryGetComp<CompPowerWorkSetting>()?.GetSpeedFactor() ?? 1f);
                     if (currentBillReport.workLeft <= 0)
                     {
                         try
@@ -368,7 +373,21 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         public virtual bool AllowForbidden => allowForbidden;
         protected virtual float ProductionSpeedFactor => def.GetModExtension<AssemblerDefModExtension>()?.workSpeedBaseFactor ?? 1f;
 
-        protected virtual int SkillLevel => def.GetModExtension<AssemblerDefModExtension>()?.skillLevel ?? 20;
+        protected virtual int SkillLevel => def.GetModExtension<AssemblerDefModExtension>()?.skillLevel ?? 0;
+
+        protected virtual int ArtSkillLevel => def.GetModExtension<AssemblerDefModExtension>()?.artSkillLevel ?? 10;
+
+        protected virtual bool SatisfiesSkillRequirements(RecipeDef recipe)
+        {
+            if (this.buildingPawn != null && this.buildingPawn.skills != null)
+            {
+                return recipe.PawnSatisfiesSkillRequirements(this.buildingPawn);
+            }
+            else
+            {
+                return recipe.skillRequirements?.All(s => s.minLevel <= (s.skill == SkillDefOf.Artistic ? this.ArtSkillLevel : this.SkillLevel)) ?? true;
+            }
+        }
 
         public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
 

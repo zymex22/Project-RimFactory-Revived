@@ -290,6 +290,7 @@
         </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
         <workSpeedBaseFactor>1</workSpeedBaseFactor>
         <skillLevel>20</skillLevel>
+        <artSkillLevel>10</artSkillLevel>
         <workingGraphicData>
           <graphicClass>Graphic_Multi</graphicClass>
           <texPath>SAL3/AutoCookerWorking</texPath>
