@@ -19,6 +19,7 @@ namespace ProjectRimFactory.SAL3.Exposables
         public SoundDef defaultSound;
 
         public GraphicData workingGraphicData;
+        public GraphicData powerOffGraphicData;
 
         public Graphic WorkingGrahic
         {
@@ -27,6 +28,18 @@ namespace ProjectRimFactory.SAL3.Exposables
                 if (workingGraphicData != null)
                 {
                     return workingGraphicData.Graphic;
+                }
+                return null;
+            }
+        }
+
+        public Graphic PowerOffGrahic
+        {
+            get
+            {
+                if (powerOffGraphicData != null)
+                {
+                    return powerOffGraphicData.Graphic;
                 }
                 return null;
             }

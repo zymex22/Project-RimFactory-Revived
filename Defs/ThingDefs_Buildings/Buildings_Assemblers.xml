@@ -295,6 +295,11 @@
           <texPath>SAL3/AutoCookerWorking</texPath>
           <drawSize>(3,3)</drawSize>
         </workingGraphicData>
+        <powerOffGraphicData>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <texPath>SAL3/AutoCookerPowerOff</texPath>
+          <drawSize>(3,3)</drawSize>
+        </powerOffGraphicData>
         <drawStatus>false</drawStatus>
         <doEffect>true</doEffect>
         <!-- List of Recipe and Effecter to overwrite. -->

@@ -38,7 +38,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
         }
 
-        public override Graphic Graphic => this.currentBillReport == null ? base.Graphic : this.def.GetModExtension<AssemblerDefModExtension>()?.WorkingGrahic ?? base.Graphic;
+        public override Graphic Graphic => (this.GetComp<CompPowerTrader>()?.PowerOn ?? true) 
+            ? (this.currentBillReport == null 
+                ? base.Graphic 
+                : this.def.GetModExtension<AssemblerDefModExtension>()?.WorkingGrahic ?? base.Graphic) 
+            : this.def.GetModExtension<AssemblerDefModExtension>()?.PowerOffGrahic ?? base.Graphic;
 
         public bool DrawStatus => this.def.GetModExtension<AssemblerDefModExtension>()?.drawStatus ?? true;
 
