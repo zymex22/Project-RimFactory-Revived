@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <PRF.Settings.RequireReboot>require reboot to apply the setting..</PRF.Settings.RequireReboot>
+  <PRF.Settings.Select>Select</PRF.Settings.Select>
+  
+  <PRF.Settings.TurnOffHelpButton.Label>turn off help button</PRF.Settings.TurnOffHelpButton.Label>
+  <PRF.Settings.TurnOffHelpButton.Desc>turn off help button</PRF.Settings.TurnOffHelpButton.Desc>
+  
+  <PRF.Settings.TurnOffPulseGlowerEffect.Label>turn off pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Label>
+  <PRF.Settings.TurnOffPulseGlowerEffect.Desc>turn off pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Desc>
+  
+  <PRF.Settings.TurnOffSwapTexture.Label>turn off swap texture</PRF.Settings.TurnOffSwapTexture.Label>
+  <PRF.Settings.TurnOffSwapTexture.Label>turn off swap texture</PRF.Settings.TurnOffSwapTexture.Label>
+
+</LanguageData>

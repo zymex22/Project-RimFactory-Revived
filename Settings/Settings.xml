@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SettingRows>
+
+  <!-- help button -->
+  <Row Class="ProjectRimFactory.Common.PatchItem">
+    <!-- save key. not duplicate -->
+    <key>turn.off.help.button</key>
+    <!-- label and description strings key. see Language/*/AllKeyed_Settings.xml -->
+    <label>PRF.Settings.TurnOffHelpButton.Label</label>
+    <description>PRF.Settings.TurnOffHelpButton.Desc</description>
+    <!-- PatchOperation executed at check on -->
+    <Patch>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/comps/li[compClass="ProjectRimFactory.Common.CompPRFHelp"]</xpath>
+      </Operation>
+    </Patch>
+  </Row>
+
+  <!-- GlowerPulse animation -->
+  <Row Class="ProjectRimFactory.Common.PatchItem">
+    <key>turn.off.glower.pulse.effect</key>
+    <label>PRF.Settings.TurnOffPulseGlowerEffect.Label</label>
+    <description>PRF.Settings.TurnOffPulseGlowerEffect.Desc</description>
+    <Patch>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/comps/li[@Class="ProjectRimFactory.Common.CompProperties_GlowerPulse"]/pulse</xpath>
+      </Operation>
+      <Operation Class="PatchOperationAdd">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/comps/li[@Class="ProjectRimFactory.Common.CompProperties_GlowerPulse"]</xpath>
+        <value>
+          <pulse>false</pulse>
+        </value>
+      </Operation>
+    </Patch>
+  </Row>
+
+  <!-- swap texture -->
+  <Row Class="ProjectRimFactory.Common.PatchItem">
+    <key>turn.off.swap.texture</key>
+    <label>PRF.Settings.TurnOffSwapTexture.Label</label>
+    <description>PRF.Settings.TurnOffSwapTexture.Desc</description>
+    <Patch>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/workingGraphicData</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/powerOffGraphicData</xpath>
+      </Operation>
+    </Patch>
+  </Row>
+
+
+  <!-- ******************** SAMPLES ******************** -->
+  <!-- Gap row -->
+  <Row Class="ProjectRimFactory.Common.GapRow">
+    <height>50</height>
+  </Row>
+
+  <!-- Gap line row -->
+  <Row Class="ProjectRimFactory.Common.GapLineRow">
+    <height>10</height>
+    <color>(1,0,0,1)</color>
+  </Row>
+
+  <!-- Draw text row -->
+  <Row Class="ProjectRimFactory.Common.TextRow">
+    <!-- Tiny, Small, Medium -->
+    <font>Medium</font>
+    <!-- UpperLeft, UpperCenter, UpperRight, MiddleLeft, MiddleCenter, MiddleRight, LowerLeft, LowerCenter, LowerRight -->
+    <anchor>MiddleCenter</anchor>
+    <!-- text(key) -->
+    <text>****** SAMPLES ******</text>
+  </Row>
+
+  <!-- Gap row default -->
+  <Row Class="ProjectRimFactory.Common.GapRow" />
+  
+  <!-- Gap line row default -->
+  <Row Class="ProjectRimFactory.Common.GapLineRow" />
+
+  <!-- Draw Patch text value setting row -->
+  <Row Class="ProjectRimFactory.Common.PatchTextValueItem">
+    <key>cooker.name.test</key>
+    <label>self cooker name</label>
+    <description>self cooler name</description>
+    <!-- PatchOperation executed at check on -->
+    <Patch>
+      <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="SelfCooker"]/label</xpath>
+        <value>
+          <!-- ${value} is replaced with the entered value. -->
+          <label>${value}</label>
+        </value>
+      </Operation>
+    </Patch>
+  </Row>
+  
+  <!-- Draw Patch float value setting row -->
+  <Row Class="ProjectRimFactory.Common.PatchFloatValueItem">
+    <key>cooker.speed.test</key>
+    <label>self cooker speed factor</label>
+    <description>self cooker speed factor</description>
+    <minValue>0</minValue>
+    <maxValue>10</maxValue>
+    <roundTo>0.1</roundTo>
+    <!-- PatchOperation executed at check on -->
+    <Patch>
+      <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="SelfCooker"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/workSpeedBaseFactor</xpath>
+        <value>
+          <!-- ${value} is replaced with the entered value. -->
+          <workSpeedBaseFactor>${value}</workSpeedBaseFactor>
+        </value>
+      </Operation>
+    </Patch>
+  </Row>
+  
+  <!-- Draw Patch int value setting row -->
+  <Row Class="ProjectRimFactory.Common.PatchIntValueItem">
+    <key>cooker.skilllevel.test</key>
+    <label>self cooker skill level</label>
+    <description>self cooker skill level</description>
+    <minValue>0</minValue>
+    <maxValue>20</maxValue>
+    <roundTo>1</roundTo>
+    <!-- PatchOperation executed at check on -->
+    <Patch>
+      <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="SelfCooker"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/skillLevel</xpath>
+        <value>
+          <!-- ${value} is replaced with the entered value. -->
+          <skillLevel>${value}</skillLevel>
+        </value>
+      </Operation>
+    </Patch>
+  </Row>
+  
+  <!-- Gap row default -->
+  <Row Class="ProjectRimFactory.Common.GapRow" />
+  
+  <!-- Draw Patch enum value setting row -->
+  <Row Class="ProjectRimFactory.Common.PatchEnumValueItem">
+    <key>cooker.drawerType.test</key>
+    <label>self cooker drawer type</label>
+    <description>self cooker drawer type</description>
+    <enumType>DrawerType</enumType>
+    <!-- PatchOperation executed at check on -->
+    <Patch>
+      <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="SelfCooker"]/drawerType</xpath>
+        <value>
+          <!-- ${value} is replaced with the entered value. -->
+          <drawerType>${value}</drawerType>
+        </value>
+      </Operation>
+    </Patch>
+  </Row>
+  
+  <!-- Draw Patch selection value setting row -->
+  <Row Class="ProjectRimFactory.Common.PatchSelectValueItem">
+    <key>cooker.basePower.test</key>
+    <label>self cooker base power</label>
+    <description>self cooker base power</description>
+    <!-- option list -->
+    <options>
+      <li>100</li>
+      <li>200</li>
+      <li>300</li>
+      <li>400</li>
+      <li>500</li>
+    </options>
+    <!-- PatchOperation executed at check on -->
+    <Patch>
+      <Operation Class="PatchOperationReplace">
+        <xpath>/Defs/ThingDef[defName="SelfCooker"]/comps/li [@Class="CompProperties_Power"]/basePowerConsumption</xpath>
+        <value>
+          <!-- ${value} is replaced with the entered value. -->
+          <basePowerConsumption>${value}</basePowerConsumption>
+        </value>
+      </Operation>
+    </Patch>
+  </Row>
+
+</SettingRows>
