@@ -10,6 +10,7 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -19,16 +20,20 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private ThingFilter filter = new ThingFilter();
         private bool active = false;
-        public override Graphic Graphic => Option(base.Graphic as Graphic_Selectable).Fold(base.Graphic)(g => g.Get(this.GetTexPath()));
+        public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
 
-        public string GetTexPath()
+        private string GetGraphicName()
         {
-            var path = this.def.graphicData.texPath + "/Puller" + (this.active ? "1" : "0");
+            string name = null;
             if (this.OutputSides)
             {
-                path += this.right ? "_r" : "_l";
+                name += this.right ? "Right" : "Left";
             }
-            return path;
+            if (this.active)
+            {
+                name += "Working";
+            }
+            return name;
         }
 
         [Unsaved]
