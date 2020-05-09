@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
-  <PRF.Settings.RequireReboot>require reboot to apply the setting..</PRF.Settings.RequireReboot>
+  <PRF.Settings.RequireReboot>require reboot to apply the setting.</PRF.Settings.RequireReboot>
   <PRF.Settings.Select>Select</PRF.Settings.Select>
+  <PRF.Settings.TopMessage><![CDATA[<size=50>all setting <b><i><color=red>require restart</color></i></b></size>]]></PRF.Settings.TopMessage>
   
   <PRF.Settings.TurnOffHelpButton.Label>turn off help button</PRF.Settings.TurnOffHelpButton.Label>
   <PRF.Settings.TurnOffHelpButton.Desc>turn off help button</PRF.Settings.TurnOffHelpButton.Desc>

@@ -106,6 +106,8 @@ namespace ProjectRimFactory.Common
         public GameFont font = GameFont.Small;
         public TextAnchor anchor = TextAnchor.MiddleRight;
         public string text = "";
+        public float height;
+        public Color backgroundColor = Color.clear;
         public void Draw(Listing_Standard list)
         {
             var tmp = Text.Font;
@@ -114,7 +116,19 @@ namespace ProjectRimFactory.Common
             {
                 Text.Font = this.font;
                 Text.Anchor = this.anchor;
-                list.Label(this.text.Translate());
+                var h = this.height;
+                var t = this.text.Translate();
+                if (h == 0)
+                {
+                    h = Text.CalcHeight(t, list.ColumnWidth);
+                }
+
+                var rect = list.GetRect(h);
+                if (this.backgroundColor != Color.clear)
+                {
+                    Widgets.DrawRectFast(rect, Color.gray);
+                }
+                Widgets.Label(rect, this.text.Translate());
             }
             finally
             {

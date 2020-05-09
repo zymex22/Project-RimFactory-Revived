@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SettingRows>
 
+  <Row Class="ProjectRimFactory.Common.TextRow">
+    <font>Medium</font>
+    <anchor>MiddleCenter</anchor>
+    <height>70</height>
+    <backgroundColor>(0.5,0.5,0.5,1)</backgroundColor>
+    <!-- rich text https://docs.unity3d.com/560/Documentation/Manual/StyledText.html -->
+    <text>PRF.Settings.TopMessage</text>
+  </Row>
+  
+  <Row Class="ProjectRimFactory.Common.GapRow" />
+
   <!-- help button -->
   <Row Class="ProjectRimFactory.Common.PatchItem">
     <!-- save key. not duplicate -->
