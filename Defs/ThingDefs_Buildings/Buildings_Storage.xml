@@ -23,7 +23,7 @@
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
       <fixedStorageSettings>
-        <priority>Preferred</priority>
+        <priority>Normal</priority>
         <filter>
           <categories>
             <li>Root</li>
@@ -31,7 +31,7 @@
         </filter>
       </fixedStorageSettings>
       <defaultStorageSettings>
-        <priority>Preferred</priority>
+        <priority>Normal</priority>
         <filter>
           <categories>
             <li>Manufactured</li>

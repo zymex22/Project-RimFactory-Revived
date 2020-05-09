@@ -31,7 +31,7 @@
     <pathCost>70</pathCost>
     <building>
       <fixedStorageSettings>
-        <priority>Important</priority>
+        <priority>Preferred</priority>
         <filter>
           <categories>
             <li>Root</li>
@@ -39,7 +39,7 @@
         </filter>
       </fixedStorageSettings>
       <defaultStorageSettings>
-        <priority>Important</priority>
+        <priority>Preferred</priority>
         <filter>
           <categories>
           </categories>

@@ -281,7 +281,7 @@ It is an exit to the underground conveyor.</description>
 
 
   <!--======================================= Wall light ===============================================-->
-  <ThingDef ParentName="BuildingBase">
+  <!-- <ThingDef ParentName="BuildingBase">
     <defName>Building_AutoMachineTool_WallLight</defName>
     <label>WallLight</label>
     <thingClass>Building</thingClass>
@@ -337,6 +337,6 @@ It is an exit to the underground conveyor.</description>
     <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <researchPrerequisites>
     </researchPrerequisites>
-  </ThingDef>
+  </ThingDef> -->
 
 </Defs>

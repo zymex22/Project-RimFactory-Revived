@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <!--======================================= Pusher base ===============================================-->
+  <!--======================================= Item Puller base ===============================================-->
   <ThingDef Name="Building_AutoMachineTool_Puller_Base" ParentName="PRFBuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
     <drawerType>RealtimeOnly</drawerType>
@@ -20,6 +20,10 @@
       <Mass>20</Mass>
       <Beauty>-2</Beauty>
     </statBases>
+    <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
     <designationCategory>Industrial</designationCategory>
     <size>(1,1)</size>
     <fillPercent>0.5</fillPercent>
@@ -96,7 +100,7 @@
     </placeWorkers>
     <graphicData>
       <texPath>AutoMachineTool/Buildings/Puller</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
     <modExtensions>
@@ -105,7 +109,7 @@
           <Working>
             <graphicData>
               <texPath>AutoMachineTool/Buildings/PullerWorking</texPath>
-              <graphicClass>Graphic_Single</graphicClass>
+              <graphicClass>Graphic_Multi</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
           </Working>
