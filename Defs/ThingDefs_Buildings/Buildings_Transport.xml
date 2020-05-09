@@ -103,7 +103,7 @@
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
-            <graphicData GraphicName="Working">
+            <graphicData>
               <texPath>AutoMachineTool/Buildings/PullerWorking</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
@@ -137,14 +137,14 @@
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Left>
-            <graphicData GraphicName="Left">
+            <graphicData>
               <texPath>AutoMachineTool/Buildings/PullerL</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
           </Left>
           <Right>
-            <graphicData GraphicName="Right">
+            <graphicData>
               <texPath>AutoMachineTool/Buildings/PullerR</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
