@@ -11,6 +11,12 @@
   <PRF.Settings.TurnOffPulseGlowerEffect.Desc>turn off pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Desc>
   
   <PRF.Settings.TurnOffSwapTexture.Label>turn off swap texture</PRF.Settings.TurnOffSwapTexture.Label>
-  <PRF.Settings.TurnOffSwapTexture.Label>turn off swap texture</PRF.Settings.TurnOffSwapTexture.Label>
+  <PRF.Settings.TurnOffSwapTexture.Desc>turn off swap texture</PRF.Settings.TurnOffSwapTexture.Desc>
+  
+  <PRF.Settings.TurnOffDrawStatus.Label>turn off assembler draw status</PRF.Settings.TurnOffDrawStatus.Label>
+  <PRF.Settings.TurnOffDrawStatus.Desc>turn off assembler draw status</PRF.Settings.TurnOffDrawStatus.Desc>
+  
+  <PRF.Settings.TurnOffDoEffect.Label>turn off assembler effect</PRF.Settings.TurnOffDoEffect.Label>
+  <PRF.Settings.TurnOffDoEffect.Desc>turn off assembler effect</PRF.Settings.TurnOffDoEffect.Desc>
 
 </LanguageData>

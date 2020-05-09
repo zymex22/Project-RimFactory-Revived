@@ -18,7 +18,7 @@ namespace ProjectRimFactory.Common
             try
             {
                 ProjectRimFactory_ModSettings.LoadXml(content);
-                Settings = GetSettings<ProjectRimFactory_ModSettings>();
+                this.Settings = GetSettings<ProjectRimFactory_ModSettings>();
                 this.HarmonyInstance = new Harmony("com.spdskatr.projectrimfactory");
                 this.HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
                 Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");

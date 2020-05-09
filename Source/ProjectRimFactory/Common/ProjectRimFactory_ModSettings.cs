@@ -41,7 +41,7 @@ namespace ProjectRimFactory.Common
                 .Select(n => n as XmlElement)
                 .Where(e => e != null)
                 .Select(e => DirectXmlToObject.ObjectFromXml<ISettingRow>(e, false))
-                .Where(r => (r as ISettingItem)?.IsValidConfig() ?? true);
+                .Where(r => (r as ISettingItem)?.Initialize() ?? true);
         }
 
         public override void ExposeData()
@@ -93,7 +93,7 @@ namespace ProjectRimFactory.Common
         void ExposeData();
         void Apply();
         bool RequireReboot { get; }
-        bool IsValidConfig();
+        bool Initialize();
     }
 
     public interface IPatchItem : ISettingItem
@@ -174,7 +174,7 @@ namespace ProjectRimFactory.Common
 
         public abstract void Apply();
 
-        public virtual bool IsValidConfig()
+        public virtual bool Initialize()
         {
             return true;
         }
@@ -250,7 +250,6 @@ namespace ProjectRimFactory.Common
     public abstract class PatchValueItem : PatchSettingItem
     {
         public bool checkOn = false;
-
         protected bool currentCheckOn;
 
         protected abstract string ReplaceText { get; }
@@ -297,22 +296,43 @@ namespace ProjectRimFactory.Common
         }
     }
 
-    public class PatchTextValueItem : PatchValueItem
+    public abstract class PatchValueItem<T> : PatchValueItem
     {
-        public string value = "";
+        public T value;
 
-        private string currentValue;
+        protected T currentValue;
 
         public override void Apply()
         {
             base.Apply();
-            if(this.value != this.currentValue)
+            if (!object.Equals(this.value, this.currentValue))
             {
                 this.RequireReboot = true;
                 this.value = this.currentValue;
             }
         }
 
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look<T>(ref this.value, this.key);
+            if (Scribe.mode != LoadSaveMode.Saving)
+            {
+                this.currentValue = this.value;
+            }
+        }
+
+        protected override string ReplaceText => this.value.ToString();
+
+        public override bool Initialize()
+        {
+            this.currentValue = this.value;
+            return base.Initialize();
+        }
+    }
+
+    public class PatchTextValueItem : PatchValueItem<string>
+    {
         public override void Draw(Listing_Standard list)
         {
             var rect = list.GetRect(Text.LineHeight);
@@ -322,41 +342,15 @@ namespace ProjectRimFactory.Common
             this.currentValue = Widgets.TextField(rect.RightHalf(), this.currentValue);
             list.Gap(list.verticalSpacing);
         }
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look<string>(ref this.value, this.key);
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                this.currentValue = this.value;
-            }
-        }
-
-        protected override string ReplaceText => this.value;
     }
 
-    public class PatchFloatValueItem : PatchValueItem
+    public class PatchFloatValueItem : PatchValueItem<float>
     {
-        public float value = 0f;
-
         public float minValue = 0f;
 
         public float maxValue = 100000f;
 
         public float roundTo = -1;
-
-        private float currentValue;
-
-        public override void Apply()
-        {
-            base.Apply();
-            if (this.value != this.currentValue)
-            {
-                this.RequireReboot = true;
-                this.value = this.currentValue;
-            }
-        }
 
         public override void Draw(Listing_Standard list)
         {
@@ -371,41 +365,15 @@ namespace ProjectRimFactory.Common
             this.currentValue = Widgets.HorizontalSlider(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
             list.Gap(list.verticalSpacing);
         }
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look<float>(ref this.value, this.key);
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                this.currentValue = this.value;
-            }
-        }
-
-        protected override string ReplaceText => this.value.ToString();
     }
 
-    public class PatchIntValueItem : PatchValueItem
+    public class PatchIntValueItem : PatchValueItem<int>
     {
-        public int value = 0;
-
         public int minValue = 0;
 
         public int maxValue = 100000;
 
         public int roundTo = 1;
-
-        private int currentValue;
-
-        public override void Apply()
-        {
-            base.Apply();
-            if (this.value != this.currentValue)
-            {
-                this.RequireReboot = true;
-                this.value = this.currentValue;
-            }
-        }
 
         public override void Draw(Listing_Standard list)
         {
@@ -420,47 +388,27 @@ namespace ProjectRimFactory.Common
             this.currentValue = (int)Widgets.HorizontalSlider(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
             list.Gap(list.verticalSpacing);
         }
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look<int>(ref this.value, this.key);
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                this.currentValue = this.value;
-            }
-        }
-
-        protected override string ReplaceText => this.value.ToString();
     }
 
-    public class PatchEnumValueItem : PatchValueItem
+    public class PatchBoolValueItem : PatchValueItem<bool>
     {
-        public int value = 0;
+        public override void Draw(Listing_Standard list)
+        {
+            var rect = list.GetRect(Text.LineHeight);
+            var left = rect.LeftHalf();
+            Widgets.Label(left.LeftHalf(), new GUIContent(this.label.Translate(), this.description.Translate()));
+            Widgets.Checkbox(left.RightHalf().position, ref this.currentCheckOn);
 
-        private int currentValue;
+            Widgets.Checkbox(rect.RightHalf().position, ref this.currentValue);
+            list.Gap(list.verticalSpacing);
+        }
+    }
 
+    public class PatchEnumValueItem : PatchValueItem<int>
+    {
         public Type enumType;
 
-        public override void Apply()
-        {
-            base.Apply();
-            if (this.value != this.currentValue)
-            {
-                this.RequireReboot = true;
-                this.value = this.currentValue;
-            }
-        }
-
-        public object GetCurrentEnumValue()
-        {
-            return this.enumType.GetEnumValues().Cast<object>().ToList()[this.currentValue];
-        }
-
-        public object GetEnumValue()
-        {
-            return this.enumType.GetEnumValues().Cast<object>().ToList()[this.value];
-        }
+        public List<object> EnumValues => this.enumType.GetEnumValues().Cast<object>().ToList();
 
         public override void Draw(Listing_Standard list)
         {
@@ -468,7 +416,7 @@ namespace ProjectRimFactory.Common
             var left = rect.LeftHalf();
             Widgets.Label(left.LeftHalf(), new GUIContent(this.label.Translate(), this.description.Translate()));
             Widgets.Checkbox(left.RightHalf().position, ref this.currentCheckOn);
-            if (Widgets.ButtonText(rect.RightHalf(), "PRF.Settings.Select".Translate() + " (" + GetCurrentEnumValue() + ")"))
+            if (Widgets.ButtonText(rect.RightHalf(), "PRF.Settings.Select".Translate() + " (" + this.EnumValues[this.currentValue] + ")"))
             {
                 Find.WindowStack.Add(new FloatMenu(this.enumType.GetEnumValues().Cast<object>().Select((o, idx) => new FloatMenuOption(o.ToString(), () => this.currentValue = idx)).ToList()));
             }
@@ -476,21 +424,13 @@ namespace ProjectRimFactory.Common
             list.Gap(list.verticalSpacing);
         }
 
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look<int>(ref this.value, this.key);
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                this.currentValue = this.value;
-            }
-        }
+        protected override string ReplaceText => this.EnumValues[this.value].ToString();
 
-        protected override string ReplaceText => this.GetEnumValue().ToString();
-
-        public override bool IsValidConfig()
+        public override bool Initialize()
         {
-            if(enumType == null || this.enumType.GetEnumValues().Cast<object>().Count() ==  0)
+            if (!base.Initialize())
+                return false;
+            if (enumType == null || this.enumType.GetEnumValues().Cast<object>().Count() ==  0)
             {
                 Log.Error("invalid enumType on Settings.xml");
                 return false;
@@ -499,23 +439,9 @@ namespace ProjectRimFactory.Common
         }
     }
 
-    public class PatchSelectValueItem : PatchValueItem
+    public class PatchSelectValueItem : PatchValueItem<int>
     {
-        public int value = 0;
-
-        private int currentValue;
-
         public List<string> options;
-
-        public override void Apply()
-        {
-            base.Apply();
-            if (this.value != this.currentValue)
-            {
-                this.RequireReboot = true;
-                this.value = this.currentValue;
-            }
-        }
 
         public override void Draw(Listing_Standard list)
         {
@@ -531,20 +457,12 @@ namespace ProjectRimFactory.Common
             list.Gap(list.verticalSpacing);
         }
 
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look<int>(ref this.value, this.key);
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                this.currentValue = this.value;
-            }
-        }
-
         protected override string ReplaceText => this.options[this.value].ToString();
 
-        public override bool IsValidConfig()
+        public override bool Initialize()
         {
+            if (!base.Initialize())
+                return false;
             if (this.options == null || this.options.Count == 0)
             {
                 Log.Error("invalid selectionList on Settings.xml");
