@@ -116,6 +116,28 @@
     </Patch>
   </Row>
 
+  <!-- Recipe DB Range -->
+  <Row Class="ProjectRimFactory.Common.PatchIntValueItem">
+    <key>set.range.recipe.db</key>
+    <label>PRF.Settings.recipeDB.Label</label>
+    <description>PRF.Settings.recipeDB.Desc</description>
+    <minValue>2</minValue>
+    <maxValue>32</maxValue>
+    <roundTo>1</roundTo>
+    <value>2</value>
+    <!-- PatchOperation executed at check on -->
+    <Patch>
+      <Operation Class="PatchOperationReplace">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/comps/li[@Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange"]/range</xpath>
+        <value>
+          <!-- ${value} is replaced with the entered value. -->
+          <range>${value}</range>
+        </value>
+      </Operation>
+    </Patch>
+  </Row>
+
 
   <!-- Gap row -->
   <Row Class="ProjectRimFactory.Common.GapRow">
