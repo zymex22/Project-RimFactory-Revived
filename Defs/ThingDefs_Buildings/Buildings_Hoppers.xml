@@ -87,6 +87,13 @@
     <researchPrerequisites>
       <li>AutomationBasics</li>
     </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Settings">
+        <settings>
+          <pickupFromGround>true</pickupFromGround>
+        </settings>
+      </li>
+    </modExtensions>
   </ThingDef>
 
 

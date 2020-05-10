@@ -22,31 +22,6 @@
     <building>
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
-      <fixedStorageSettings>
-        <priority>Normal</priority>
-        <filter>
-          <categories>
-            <li>Root</li>
-          </categories>
-        </filter>
-      </fixedStorageSettings>
-      <defaultStorageSettings>
-        <priority>Normal</priority>
-        <filter>
-          <categories>
-            <li>Manufactured</li>
-            <li>ResourcesRaw</li>
-            <li>Items</li>
-            <li>BuildingsArt</li>
-            <li>Weapons</li>
-            <li>Apparel</li>
-            <li>BodyParts</li>
-          </categories>
-          <specialFiltersToDisallow>
-            <li>AllowRotten</li>            <!-- Disallow rotten by default -->
-          </specialFiltersToDisallow>
-        </filter>
-      </defaultStorageSettings>
     </building>
     <thingCategories>
       <li>BuildingsAutomation</li>
@@ -86,6 +61,33 @@
       <Flammability>1.0</Flammability>
       <Beauty>-0.5</Beauty>
     </statBases>
+    <building>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Manufactured</li>
+            <li>ResourcesRaw</li>
+            <li>Items</li>
+            <li>BuildingsArt</li>
+            <li>Weapons</li>
+            <li>Apparel</li>
+            <li>BodyParts</li>
+          </categories>
+          <specialFiltersToDisallow>
+            <li>AllowRotten</li>            <!-- Disallow rotten by default -->
+          </specialFiltersToDisallow>
+        </filter>
+      </defaultStorageSettings>
+    </building>
     <description>(Tier 1 crate) A small crate that can store 16 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,1)</size>
     <rotatable>true</rotatable>
@@ -126,6 +128,35 @@
       <Flammability>1.0</Flammability>
       <Beauty>-0.5</Beauty>
     </statBases>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Manufactured</li>
+            <li>ResourcesRaw</li>
+            <li>Items</li>
+            <li>BuildingsArt</li>
+            <li>Weapons</li>
+            <li>Apparel</li>
+            <li>BodyParts</li>
+          </categories>
+          <specialFiltersToDisallow>
+            <li>AllowRotten</li>            <!-- Disallow rotten by default -->
+          </specialFiltersToDisallow>
+        </filter>
+      </defaultStorageSettings>
+    </building>
     <description>A giant crate that can store 32 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,2)</size>
     <costList>
@@ -166,6 +197,35 @@
       <Flammability>0.1</Flammability>
       <Beauty>-0.1</Beauty>
     </statBases>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Manufactured</li>
+            <li>ResourcesRaw</li>
+            <li>Items</li>
+            <li>BuildingsArt</li>
+            <li>Weapons</li>
+            <li>Apparel</li>
+            <li>BodyParts</li>
+          </categories>
+          <specialFiltersToDisallow>
+            <li>AllowRotten</li>            <!-- Disallow rotten by default -->
+          </specialFiltersToDisallow>
+        </filter>
+      </defaultStorageSettings>
+    </building>
     <description>A small steel crate that can store 64 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,1)</size>
     <rotatable>true</rotatable>
@@ -206,6 +266,35 @@
       <Flammability>0.1</Flammability>
       <Beauty>-0.2</Beauty>
     </statBases>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Manufactured</li>
+            <li>ResourcesRaw</li>
+            <li>Items</li>
+            <li>BuildingsArt</li>
+            <li>Weapons</li>
+            <li>Apparel</li>
+            <li>BodyParts</li>
+          </categories>
+          <specialFiltersToDisallow>
+            <li>AllowRotten</li>            <!-- Disallow rotten by default -->
+          </specialFiltersToDisallow>
+        </filter>
+      </defaultStorageSettings>
+    </building>
     <description>A giant crate that can store 128 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,2)</size>
     <costList>
@@ -292,6 +381,35 @@
       <Flammability>0.05</Flammability>
       <Beauty>0.5</Beauty>
     </statBases>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Manufactured</li>
+            <li>ResourcesRaw</li>
+            <li>Items</li>
+            <li>BuildingsArt</li>
+            <li>Weapons</li>
+            <li>Apparel</li>
+            <li>BodyParts</li>
+          </categories>
+          <specialFiltersToDisallow>
+            <li>AllowRotten</li>            <!-- Disallow rotten by default -->
+          </specialFiltersToDisallow>
+        </filter>
+      </defaultStorageSettings>
+    </building>
     <description>Stores up to 768 stacks. Consumes 10 W of power per stack of items. When your colony loses power, items already inside will be safe, but the building will not be able to store more.</description>
     <blockWind>true</blockWind>
     <size>(3,3)</size>
