@@ -10,7 +10,6 @@ using Verse.Sound;
 using UnityEngine;
 using ProjectRimFactory.Common;
 using static ProjectRimFactory.AutoMachineTool.Ops;
-using System.Runtime.Remoting.Messaging;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
