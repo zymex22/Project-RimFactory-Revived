@@ -3,21 +3,36 @@
 
   <PRF.Settings.RequireReboot>require reboot to apply the setting.</PRF.Settings.RequireReboot>
   <PRF.Settings.Select>Select</PRF.Settings.Select>
-  <PRF.Settings.TopMessage><![CDATA[<size=50>all setting <b><i><color=red>require restart</color></i></b></size>]]></PRF.Settings.TopMessage>
-  
-  <PRF.Settings.TurnOffHelpButton.Label>turn off help button</PRF.Settings.TurnOffHelpButton.Label>
-  <PRF.Settings.TurnOffHelpButton.Desc>turn off help button</PRF.Settings.TurnOffHelpButton.Desc>
-  
-  <PRF.Settings.TurnOffPulseGlowerEffect.Label>turn off pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Label>
-  <PRF.Settings.TurnOffPulseGlowerEffect.Desc>turn off pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Desc>
-  
-  <PRF.Settings.TurnOffSwapTexture.Label>turn off swap texture</PRF.Settings.TurnOffSwapTexture.Label>
-  <PRF.Settings.TurnOffSwapTexture.Desc>turn off swap texture</PRF.Settings.TurnOffSwapTexture.Desc>
-  
-  <PRF.Settings.TurnOffDrawStatus.Label>turn off assembler draw status</PRF.Settings.TurnOffDrawStatus.Label>
-  <PRF.Settings.TurnOffDrawStatus.Desc>turn off assembler draw status</PRF.Settings.TurnOffDrawStatus.Desc>
-  
-  <PRF.Settings.TurnOffDoEffect.Label>turn off assembler effect</PRF.Settings.TurnOffDoEffect.Label>
-  <PRF.Settings.TurnOffDoEffect.Desc>turn off assembler effect</PRF.Settings.TurnOffDoEffect.Desc>
+  <PRF.Settings.TopMessage><![CDATA[<size=20>All setting changes <b><i><color=red>require a restart</color></i></b></size>]]></PRF.Settings.TopMessage>
+  <PRF.Settings.AssemblerMessage>Assembler Settings</PRF.Settings.AssemblerMessage>
+  <PRF.Settings.OtherMessage>Other Settings</PRF.Settings.OtherMessage>
+  <PRF.Settings.StorageMessage>Storage Settings</PRF.Settings.StorageMessage>
+
+  <PRF.Settings.TurnOffHelpButton.Label>Turn off help button</PRF.Settings.TurnOffHelpButton.Label>
+  <PRF.Settings.TurnOffHelpButton.Desc>Turn off help button</PRF.Settings.TurnOffHelpButton.Desc>
+
+  <PRF.Settings.TurnOffPulseGlowerEffect.Label>Turn off pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Label>
+  <PRF.Settings.TurnOffPulseGlowerEffect.Desc>Turn off pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Desc>
+
+  <PRF.Settings.TurnOffSwapTexture.Label>Turn off texture swap effect</PRF.Settings.TurnOffSwapTexture.Label>
+  <PRF.Settings.TurnOffSwapTexture.Desc>Turn off texture swap effect</PRF.Settings.TurnOffSwapTexture.Desc>
+
+  <PRF.Settings.TurnOffDrawStatus.Label>Turn off assembler status</PRF.Settings.TurnOffDrawStatus.Label>
+  <PRF.Settings.TurnOffDrawStatus.Desc>Turn off assembler status</PRF.Settings.TurnOffDrawStatus.Desc>
+
+  <PRF.Settings.TurnOffDoEffect.Label>Turn off assembler effects</PRF.Settings.TurnOffDoEffect.Label>
+  <PRF.Settings.TurnOffDoEffect.Desc>Turn off assembler effects</PRF.Settings.TurnOffDoEffect.Desc>
+
+  <PRF.Settings.TurnOffStorageDefault.Label>Turn off default storage settings</PRF.Settings.TurnOffStorageDefault.Label>
+  <PRF.Settings.TurnOffStorageDefault.Desc>Turn off default storage settings</PRF.Settings.TurnOffStorageDefault.Desc>
+
+  <PRF.Settings.TurnOffDsuDestroy.Label>Turn off Destroy DSU destroy items</PRF.Settings.TurnOffDsuDestroy.Label>
+  <PRF.Settings.TurnOffDsuDestroy.Desc>Turn off Destroy DSU destroy items</PRF.Settings.TurnOffDsuDestroy.Desc>
+
+  <PRF.Settings.DsuLimit.Label>Set Storage DSU limit</PRF.Settings.DsuLimit.Label>
+  <PRF.Settings.DsuLimit.Desc>Set Storage DSU limit</PRF.Settings.DsuLimit.Desc>
+
+  <PRF.Settings.VacuumHopper.Label>Turn off pickup from ground on vacuum hopper</PRF.Settings.VacuumHopper.Label>
+  <PRF.Settings.VacuumHopper.Desc>Turn off pickup from ground on vacuum hopper</PRF.Settings.VacuumHopper.Desc>
 
 </LanguageData>
