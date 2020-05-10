@@ -3,7 +3,7 @@
 
   <!--  Apparel  -->
   <RecipeDef>
-    <defName>Recycle_Apparel</defName>
+    <defName>PRF_Recycle_Apparel</defName>
     <label>Recycle apparel</label>
     <description>Recycle apparel back to raw resources.</description>
     <jobString>Recycling apparel.</jobString>
@@ -37,7 +37,7 @@
 
   <!--  Weapon  -->
   <RecipeDef>
-    <defName>RecycleWeapon</defName>
+    <defName>PRF_Recycle_Weapon</defName>
     <label>Recycle weapon</label>
     <description>Recycle Weapons back to raw resources.</description>
     <jobString>Smelting weapon.</jobString>
@@ -69,13 +69,12 @@
   </RecipeDef>
 
   <!--  Destroy Stone Chunks  -->
-
   <RecipeDef>
-    <defName>prfDestroyChunks</defName>
+    <defName>PRF_Destroy_Chunks</defName>
     <label>Destroy Stone Chunks</label>
     <description>Crush unwanted stone chunks to completely destroy it.</description>
     <jobString>Chrushing</jobString>
-    <workAmount>60</workAmount>
+    <workAmount>600</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <requiredGiverWorkType>Hauling</requiredGiverWorkType>
     <effectWorking>Cremate</effectWorking>
@@ -97,4 +96,37 @@
     </fixedIngredientFilter>
   </RecipeDef>
 
+  <!--  Destroy Art  -->
+ <!-- <RecipeDef>
+    <defName>PRF_Destroy_Art</defName>
+    <label>Destroy Art</label>
+    <description>Destroy Art!</description>
+    <jobString>Breaking art</jobString>
+    <workAmount>600</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <requiredGiverWorkType>Hauling</requiredGiverWorkType>
+    <effectWorking>Cremate</effectWorking>
+    <soundWorking>Recipe_Cremate</soundWorking>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>BuildingsArt</li>
+          </categories>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>BuildingsArt</li>
+      </categories>
+    </fixedIngredientFilter>
+    <recipeUsers>
+      <li>PRF_Recycler</li>
+    </recipeUsers>
+  </RecipeDef> -->
+
 </Defs>
+
+

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <PRF.Settings.RequireReboot>require reboot to apply the setting.</PRF.Settings.RequireReboot>
+  <PRF.Settings.Select>Select</PRF.Settings.Select>
+  <PRF.Settings.TopMessage><![CDATA[<size=50>all setting <b><i><color=red>require restart</color></i></b></size>]]></PRF.Settings.TopMessage>
+  
+  <PRF.Settings.TurnOffHelpButton.Label>turn off help button</PRF.Settings.TurnOffHelpButton.Label>
+  <PRF.Settings.TurnOffHelpButton.Desc>turn off help button</PRF.Settings.TurnOffHelpButton.Desc>
+  
+  <PRF.Settings.TurnOffPulseGlowerEffect.Label>turn off pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Label>
+  <PRF.Settings.TurnOffPulseGlowerEffect.Desc>turn off pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Desc>
+  
+  <PRF.Settings.TurnOffSwapTexture.Label>turn off swap texture</PRF.Settings.TurnOffSwapTexture.Label>
+  <PRF.Settings.TurnOffSwapTexture.Desc>turn off swap texture</PRF.Settings.TurnOffSwapTexture.Desc>
+  
+  <PRF.Settings.TurnOffDrawStatus.Label>turn off assembler draw status</PRF.Settings.TurnOffDrawStatus.Label>
+  <PRF.Settings.TurnOffDrawStatus.Desc>turn off assembler draw status</PRF.Settings.TurnOffDrawStatus.Desc>
+  
+  <PRF.Settings.TurnOffDoEffect.Label>turn off assembler effect</PRF.Settings.TurnOffDoEffect.Label>
+  <PRF.Settings.TurnOffDoEffect.Desc>turn off assembler effect</PRF.Settings.TurnOffDoEffect.Desc>
+
+</LanguageData>

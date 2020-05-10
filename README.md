@@ -1,36 +1,37 @@
 # Project-RimFactory-Revived
-## WIP - Unstable - Beta
+Still in Work-In-Progress
+but beggining to near its stable phase soon i hope
 
 ## This mod adds
 This mod is together with Industrial Rollers an Awesome way to automate and create factories and such in Rimworld.
 I always loved those 2 mods, and now i have the chance to update one of them
 
 Kitchen
-- 3 New Machines
-
+- 2 Auto cooker
+- 1 Meat grinder (New)
+- 1 Food prepper (support for other mods)(New)
+- 1 Auto Fermenting barrel (New)
 Resource gathering
-- 3 new miners / quarry / deep drills
-
+- 3 Miners / Quarry / Deep drills (New)
 Farming and Animals
-- 4 New Growing machines/harvesters
-- 1 New Animal manager
-- 3 New Animal Harvesters
-
+- 4 Cultivator machines/harvesters
+- 1 Sprinkler (Original)
+- 1 Animal manager / auto killer (New)
+- 3 Animal Harvesters (milk, egg, fur)
 Automations
-- 1 new hopper
-- 2 new pusher / fueling machines
-
+1 Smart Hopper
+- 1 Item Pusher (New)
+- 1 Fueling machine
 Production
-- 2 new assemblers + 1 recorder
-- 1 recycler to recycle apperal, weapons, armor
-
+- 2 Assemblers + 1 Recorder(copy bills)
+- 1 Recycler to recycle apperal, weapons & armor (New)
 Storage management
-- 3 new storage units
-- 1 in/out port for wireless storage
-
+- 2 Storage crates
+- 1 Digital Storage Unit
+- 1 In/Out port for Wireless Storage
 Other
-- 2 new striped factory floors
-- 4 new Floor signs for factory feel
+- 2 Striped factory floors (New)
+- 6 Floor signs (New)
 
 ## Disclaimer
 This was my Favorite mod in B18 and B19 and there never really came a 1.0 or 1.1
@@ -45,47 +46,23 @@ I sadly have no C# skills so can't build upon assemblies, so if some one wanna t
 
 
 # New in this version:
-- Patch for Industrial Rollers (clean up menus)
-- Changed Menu name to Industrial to merge menus with Industrial Rollers
-- Grouped items in Menu
-- Architech menu icon (support)
-- updated assemblies by AbnerChen
-- Working with AutoSort in 1.1
-- Balanced research and cost of Deep Drilling.
-- New textures aniamal station,
-- Updated texture for storage crates by Chicken Plucker(more will come)
-- Included Rest of SS bigger battieries instead of just 2.
-- Research AI bench now only 3x1 instead of 5x2
-- Included PRF - Storage into Core again.
-- Moved PaperClips research out of core into Insanity (not out yet)
-
-Known Errors:
-- When placing more then 1 assembler, it throw a backstory error, dunno why, but need assemblies updated.
-Should work anyways, just ignore that error.
-
+Most of the mod are updated by now either in balance or apperence also alot of new stuff have been added
 
 Any bugs, suggestion or other are VERY welcome as i cant test i all myself.
 Feel free to help me update/build upon this version and lets make PRF return to rimworld!
 Im not capble to do any c# work, so if you are? feel free to help me!
-## Question
-Do you want all in one mod? or 4 seprate mods like PFR 1.0 did (updated for now)
--Core (this one)
--Storage (In core now)
--Drones (will be seprate later)
--Insanity (will be seprate later, maybe.... seems like no one want it)
-
-- Should i Remove stuffed from animal stations and group them?
-- If yes what matrial shall it be made off?
 
 
 # Credits:
-- Data disk and tape player textures by totobrother
-- Wood crate texture: Chicken Plucker 2 years ago and updated 2020!
-- Robotic arm texture: Shotgunfrenzy
-- Drone texture: Xen
-- X/Y/Z-Composite + drone station texture: Scythe
-- Spdskatr - Rimfactory original! see: https://github.com/spdskatr/ProjectRimFactory
-- Nobo - NR_AutoMachineTools for assemblies work
+Huge thanks to Nobo for making alot of C# work on this mod to give it some new life.
+Also thanks to all those give feedback on steam and in my discord, it makes it all possible
 
+- Data disk and tape player textures by totobrother
+- Wood/steel crate texture: Chicken Plucker 2 years ago and updated 2020!
+- X/Y/Z-Composite + drone station texture: Scythe
+- Nobo: Alot of C# work
+- LWM: Fixing DS and help me solve small C# bugs
+- Spdskatr - Rimfactory original! see: https://github.com/spdskatr/ProjectRimFactory
+Old helpers: Xen, Shotgunfrenzy, Scythe
 Translaters: (might need update after release)
 Russian: Natsu_Zirok, Chinese Simplified: Dango998, Chinese Traditional: AbnerChen

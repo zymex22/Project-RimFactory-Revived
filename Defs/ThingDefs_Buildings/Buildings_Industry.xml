@@ -60,7 +60,7 @@
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
@@ -189,7 +189,7 @@
         <heatPerSecond>20</heatPerSecond>
       </li>
       <li Class="CompProperties_Glower">
-        <glowRadius>5</glowRadius>
+        <glowRadius>6</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
     </comps>
@@ -213,11 +213,9 @@
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
       </li>
-      <!--
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
+      <!--  <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
         <effectWorking>Drill</effectWorking>
-      </li>  
-      -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
+      </li>        -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
     </modExtensions>
   </ThingDef>
 
@@ -251,9 +249,10 @@
       <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
     <recipes>
-      <li>RecycleWeapon</li>
-      <li>Recycle_Apparel</li>
-      <li>prfDestroyChunks</li>
+      <li>PRF_Recycle_Weapon</li>
+      <li>PRF_Recycle_Apparel</li>
+      <!-- <li>PRF_Destroy_Art</li> -->
+      <li>PRF_Destroy_Chunks</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Power">
@@ -283,7 +282,7 @@
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <castEdgeShadows>true</castEdgeShadows>
     <tickerType>Normal</tickerType>
-    <altitudeLayer>LayingPawn</altitudeLayer>
+    <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <inspectorTabs>
@@ -303,6 +302,14 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>12</heatPerSecond>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <minGlowRadius>1</minGlowRadius>
+        <maxGlowRadius>3</maxGlowRadius>
+        <minGlowColor>(100,0,0,10)</minGlowColor>
+        <maxGlowColor>(230,0,0,80)</maxGlowColor>
+        <intervalTicks>30</intervalTicks>
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>        <!-- easingType : see more here: https://easings.net or in top of assembler file -->
+      </li>
     </comps>
     <building>
       <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
@@ -310,9 +317,7 @@
     <designatorDropdown>furnace_gr</designatorDropdown>
     <!-- <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>
-          <li>TableRoboticMachining</li>
-        </importRecipesFrom>
+        <importRecipesFrom>TableRoboticMachining</importRecipesFrom>
       </li>
     </modExtensions> -->
   </ThingDef>
@@ -328,10 +333,11 @@
     <defName>PRF_FurnaceI</defName>
     <label>Blast Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <altitudeLayer>Gas</altitudeLayer>
     <graphicData>
-      <texPath>Industry/smelter_t0</texPath>
+      <texPath>Industry/smelter_t0off</texPath>
       <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(5.1,5.8)</drawSize>
+      <drawSize>(5,7.9)</drawSize>
     </graphicData>
     <size>(5,5)</size>
     <statBases>
@@ -346,7 +352,7 @@
     <recipes>
       <li>BurnApparel</li>
       <li>ExtractMetalFromSlag</li>
-      <li>MakeMediumFrame</li>
+      <li>MakeSmallFrame</li>
       <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
@@ -366,6 +372,18 @@
         <glowColor>(217,112,33,0)</glowColor>
       </li>
     </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <workSpeedBaseFactor>1</workSpeedBaseFactor>
+        <doEffect>false</doEffect>
+        <drawStatus>true</drawStatus>
+        <workingGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Industry/smelter_t0</texPath>
+          <drawSize>(5,7.9)</drawSize>
+        </workingGraphicData>
+      </li>
+    </modExtensions>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>Smithing</li>
@@ -376,10 +394,10 @@
   <!--==================== T1 Furnace ====================-->
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceII</defName>
-    <label>Steel Furnace</label>
+    <label>industrial Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
-      <texPath>Industry/smelter_t1</texPath>
+      <texPath>Industry/smelter_t1off</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
@@ -389,11 +407,11 @@
       <Cleanliness>-1</Cleanliness>
       <Beauty>-1</Beauty>
     </statBases>
-    <description>Advanced Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
+    <description>Advanced industrial Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <recipes>
       <li>CremateCorpse</li>
@@ -404,6 +422,7 @@
       <li>MakeSmallFrame</li>
       <li>MakeMediumFrame</li>
       <li>MakeLargeFrame</li>
+      <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Refuelable">
@@ -422,6 +441,18 @@
         <glowColor>(217,112,33,0)</glowColor>
       </li>
     </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <doEffect>false</doEffect>
+        <drawStatus>true</drawStatus>
+        <workingGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Industry/smelter_t1</texPath>
+          <drawSize>(3.1,3.1)</drawSize>
+        </workingGraphicData>
+        <workSpeedBaseFactor>1.5</workSpeedBaseFactor>
+      </li>
+    </modExtensions>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>AutomationBasics</li>
@@ -434,7 +465,7 @@
     <label>Electric Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
-      <texPath>Industry/smelter_t2</texPath>
+      <texPath>Industry/smelter_t2off</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
@@ -472,9 +503,17 @@
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <workSpeedBaseFactor>2</workSpeedBaseFactor>
         <importRecipesFrom>
           <li>ElectricSmelter</li>
         </importRecipesFrom>
+        <doEffect>false</doEffect>
+        <drawStatus>true</drawStatus>
+        <workingGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Industry/smelter_t2</texPath>
+          <drawSize>(3.1,3.1)</drawSize>
+        </workingGraphicData>
       </li>
     </modExtensions>
     <researchPrerequisites>

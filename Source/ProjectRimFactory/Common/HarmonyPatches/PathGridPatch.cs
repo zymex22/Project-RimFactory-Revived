@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,7 @@ using System.Reflection.Emit;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    [HarmonyPatch(typeof(PathGrid), "CalculatedCostAt")]
+    //[HarmonyPatch(typeof(PathGrid), "CalculatedCostAt")]
     public static class PathGridPatch
     {
         [HarmonyTranspiler]
@@ -20,10 +20,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             FieldInfo match = typeof(Thing).GetField("def");
             FieldInfo match2 = typeof(BuildableDef).GetField("pathCost");
-            object previousOperand = null;
+            FieldInfo previousOperand = null;
             foreach (CodeInstruction instruction in previousInstructions)
             {
-                if (previousOperand == match && instruction.operand == match2)
+                if (previousOperand == match && (instruction.operand as FieldInfo) == match2)
                 {
                     yield return new CodeInstruction(OpCodes.Ldarg_1);
                     yield return new CodeInstruction(OpCodes.Ldarg_0);
@@ -34,7 +34,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 {
                     yield return instruction;
                 }
-                previousOperand = instruction.operand;
+                previousOperand = (instruction.operand as FieldInfo);
             }
         }
         public static int ApparentPathCost(ThingDef def, IntVec3 c, Map map)

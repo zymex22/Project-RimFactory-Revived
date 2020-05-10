@@ -23,7 +23,7 @@
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
       <fixedStorageSettings>
-        <priority>Preferred</priority>
+        <priority>Normal</priority>
         <filter>
           <categories>
             <li>Root</li>
@@ -31,7 +31,7 @@
         </filter>
       </fixedStorageSettings>
       <defaultStorageSettings>
-        <priority>Preferred</priority>
+        <priority>Normal</priority>
         <filter>
           <categories>
             <li>Manufactured</li>
@@ -154,7 +154,7 @@
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Storage/Steel_Crate_tiny</texPath>
+      <texPath>Storage/Steel_Crate</texPath>
       <drawSize>(2.8,1.3)</drawSize>
       <color>(102,102,105,256)</color>
       <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
