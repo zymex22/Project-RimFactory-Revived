@@ -90,7 +90,7 @@
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Settings">
         <settings>
-          <pickupFromGround>false</pickupFromGround>
+          <pickupFromGround>true</pickupFromGround>
         </settings>
       </li>
     </modExtensions>
