@@ -162,11 +162,14 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.products.ForEach(t =>
                 {
-                    if (t.Spawned)
+                    if (!t.Destroyed)
                     {
-                        t.DeSpawn();
+                        if (t.Spawned)
+                        {
+                            t.DeSpawn();
+                        }
+                        GenPlace.TryPlaceThing(t, this.Position, this.Map, ThingPlaceMode.Near);
                     }
-                    GenPlace.TryPlaceThing(t, this.Position, this.Map, ThingPlaceMode.Near);
                 });
             }
             this.CleanupWorkingEffect();
