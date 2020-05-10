@@ -17,7 +17,8 @@ namespace ProjectRimFactory.Common
         {
             try
             {
-                settings = GetSettings<ProjectRimFactory_ModSettings>();
+                ProjectRimFactory_ModSettings.LoadXml(content);
+                this.Settings = GetSettings<ProjectRimFactory_ModSettings>();
                 this.HarmonyInstance = new Harmony("com.spdskatr.projectrimfactory");
                 this.HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
                 Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");
@@ -29,18 +30,13 @@ namespace ProjectRimFactory.Common
             }
         }
 
-        public Harmony HarmonyInstance
-        {
-            get;
-            private set;
-        }
+        public Harmony HarmonyInstance { get; private set; }
  
-
-        public ProjectRimFactory_ModSettings settings;
+        public ProjectRimFactory_ModSettings Settings { get; private set; }
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            settings.DoWindowContents(inRect);
+            Settings.DoWindowContents(inRect);
         }
 
         public override string SettingsCategory()
@@ -50,7 +46,12 @@ namespace ProjectRimFactory.Common
 
         public override void WriteSettings()
         {
-            settings.Write();
+            this.Settings.Apply();
+            Settings.Write();
+            if (this.Settings.RequireReboot)
+            {
+                Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("PRF.Settings.RequireReboot".Translate(), () => GenCommandLine.Restart()));
+            }
         }
 
         public static bool ShouldSuppressDisplace(IntVec3 cell, Map map, bool respawningAfterLoad)

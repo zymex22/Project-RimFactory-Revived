@@ -16,8 +16,13 @@ namespace ProjectRimFactory.Common
         public override void CompTick()
         {
             base.CompTick();
-            this.Props.Update();
-            this.parent.Map.glowGrid.MarkGlowGridDirty(this.parent.Position);
+
+            if (this.needUpdate || this.Props.pulse)
+            {
+                this.Props.Update();
+                this.parent.Map.glowGrid.MarkGlowGridDirty(this.parent.Position);
+                this.needUpdate = false;
+            }
         }
 
         public override void PostExposeData()
@@ -46,8 +51,12 @@ namespace ProjectRimFactory.Common
             {
                 this.glows = value;
                 this.Props.Glows = value;
+                this.needUpdate = true;
             }
         }
+
+        [Unsaved]
+        private bool needUpdate = true;
     }
 
     public class CompProperties_GlowerPulse : CompProperties_Glower
@@ -74,6 +83,8 @@ namespace ProjectRimFactory.Common
 
         public bool Glows { get; set; }
 
+        public bool pulse = true;
+
         public void Update()
         {
             if (this.lastTick == Find.TickManager.TicksGame)
@@ -83,6 +94,12 @@ namespace ProjectRimFactory.Common
             this.lastTick = Find.TickManager.TicksGame;
             if (this.Glows)
             {
+                if (!pulse)
+                {
+                    this.glowColor = Color32.Lerp(minGlowColor.ToColor32, maxGlowColor.ToColor32, 0.5f).AsColorInt();
+                    this.glowRadius = Mathf.Lerp(minGlowRadius, maxGlowRadius, 0.5f);
+                    return;
+                }
                 if (this.easing == null)
                 {
                     if (this.easingType != null)
