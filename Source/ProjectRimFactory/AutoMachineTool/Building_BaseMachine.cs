@@ -8,17 +8,20 @@ using Verse;
 using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
+using ProjectRimFactory.Common;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public abstract class Building_BaseMachine<T> : Building_Base<T>, IPowerSupplyMachine, IBeltConbeyorSender where T : Thing
+    public abstract class Building_BaseMachine<T> : Building_Base<T>, IPowerSupplyMachineHolder, IPowerSupplyMachine, IBeltConbeyorSender where T : Thing
     {
         protected virtual float SpeedFactor => WorkSpeedExtension.speedFactor;
         protected virtual int? SkillLevel { get => null; }
 
         public virtual int MinPowerForSpeed => WorkSpeedExtension.minPower;
         public virtual int MaxPowerForSpeed => WorkSpeedExtension.maxPower;
+
+        public IPowerSupplyMachine RangePowerSupplyMachine => this;
 
         protected ModExtension_WorkSpeed WorkSpeedExtension => this.def.GetModExtension<ModExtension_WorkSpeed>();
 
@@ -104,6 +107,22 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         protected override float WorkAmountPerTick => 0.01f * this.SpeedFactor * this.SupplyPowerForSpeed * this.Factor2();
+
+        public virtual int MinPowerForRange => throw new NotImplementedException();
+
+        public virtual int MaxPowerForRange => throw new NotImplementedException();
+
+        public virtual float SupplyPowerForRange { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public virtual bool Glowable => false;
+
+        public virtual bool Glow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public virtual bool SpeedSetting => true;
+
+        public virtual bool RangeSetting => false;
+
+        public virtual float RangeInterval => throw new NotImplementedException();
 
         protected virtual float Factor2()
         {

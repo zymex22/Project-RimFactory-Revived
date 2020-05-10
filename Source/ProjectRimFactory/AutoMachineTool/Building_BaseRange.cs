@@ -9,6 +9,7 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using System.Collections;
+using ProjectRimFactory.Common;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
@@ -22,15 +23,15 @@ namespace ProjectRimFactory.AutoMachineTool
         IEnumerable<IntVec3> GetAllTargetCells();
     }
 
-    public abstract class Building_BaseRange<T> : Building_BaseLimitation<T>, IRange, IRangePowerSupplyMachine where T : Thing
+    public abstract class Building_BaseRange<T> : Building_BaseLimitation<T>, IRange, IPowerSupplyMachineHolder, IPowerSupplyMachine where T : Thing
     {
-        public int MinPowerForRange => this.RangeExtension.minPower;
-        public int MaxPowerForRange => this.RangeExtension.maxPower;
+        public override int MinPowerForRange => this.RangeExtension.minPower;
+        public override int MaxPowerForRange => this.RangeExtension.maxPower;
 
-        public virtual bool Glowable { get => false; }
+        public override bool Glowable { get => false; }
 
         private bool glow = false;
-        public virtual bool Glow
+        public override bool Glow
         {
             get => this.glow;
             set
@@ -45,13 +46,17 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public IntVec2 Size => this.def.Size;
 
-        public virtual bool SpeedSetting => true;
+        public override bool SpeedSetting => true;
+
+        public override bool RangeSetting => true;
+
+        public override float RangeInterval => 500;
 
         protected ModExtension_WorkIORange RangeExtension => this.def.GetModExtension<ModExtension_WorkIORange>();
 
         private float supplyPowerForRange;
 
-        public float SupplyPowerForRange
+        public override float SupplyPowerForRange
         {
             get => this.supplyPowerForRange;
             set

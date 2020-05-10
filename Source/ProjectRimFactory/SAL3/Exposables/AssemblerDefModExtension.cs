@@ -11,7 +11,8 @@ namespace ProjectRimFactory.SAL3.Exposables
     {
         public float workSpeedBaseFactor = 1f;
         public List<ThingDef> importRecipesFrom;
-        public int skillLevel = 20;
+        public int skillLevel = 0;
+        public int artSkillLevel = 10;
         public bool drawStatus = false;
         public bool doEffect = false;
         public List<RecipeEffecter> overrideRecipeEffecter = new List<RecipeEffecter>();
@@ -19,6 +20,7 @@ namespace ProjectRimFactory.SAL3.Exposables
         public SoundDef defaultSound;
 
         public GraphicData workingGraphicData;
+        public GraphicData powerOffGraphicData;
 
         public Graphic WorkingGrahic
         {
@@ -27,6 +29,18 @@ namespace ProjectRimFactory.SAL3.Exposables
                 if (workingGraphicData != null)
                 {
                     return workingGraphicData.Graphic;
+                }
+                return null;
+            }
+        }
+
+        public Graphic PowerOffGrahic
+        {
+            get
+            {
+                if (powerOffGraphicData != null)
+                {
+                    return powerOffGraphicData.Graphic;
                 }
                 return null;
             }

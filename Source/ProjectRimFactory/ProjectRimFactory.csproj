@@ -267,12 +267,14 @@
     <Compile Include="Common\CompEffecter.cs" />
     <Compile Include="Common\CompCallTickRareFromTick.cs" />
     <Compile Include="Common\CompOutputAdjustable.cs" />
+    <Compile Include="Common\CompPowerWorkSetting.cs" />
     <Compile Include="Common\CompPRFHelp.cs" />
     <Compile Include="Common\GridsUtilityExt.cs" />
     <Compile Include="Common\HarmonyPatches\ModPatch.cs" />
     <Compile Include="Common\HarmonyPatches\PatchStorage.cs" />
     <Compile Include="Common\HarmonyPatches\PathGridPatch.cs" />
     <Compile Include="Common\HarmonyPatches\RacePropertiesPatch.cs" />
+    <Compile Include="Common\ITab_PowerSupply.cs" />
     <Compile Include="Common\HarmonyPatches\Patch_GenRecipe_MakeRecipeProducts.cs" />
     <Compile Include="Common\ModExtension_Settings.cs" />
     <Compile Include="Common\ModExtension_Graphic.cs" />
@@ -284,6 +286,7 @@
     <Compile Include="Common\HarmonyPatches\SetPositionPatch.cs" />
     <Compile Include="Common\ThingCategoryDefUtility.cs" />
     <Compile Include="Common\HarmonyPatches\VolumePerUnitPatch.cs" />
+    <Compile Include="Common\Util.cs" />
     <Compile Include="CultivatorTools\Building_Cultivator.cs" />
     <Compile Include="CultivatorTools\Building_DroneCultivator.cs" />
     <Compile Include="CultivatorTools\Building_RadialCellIterator.cs" />
@@ -326,6 +329,7 @@
     <Compile Include="SAL3\Things\Assemblers\Special\WorkSpeedFactorManager.cs" />
     <Compile Include="SAL3\Things\Building_RecipeHolder.cs" />
     <Compile Include="SAL3\Things\Building_SmartHopper.cs" />
+    <Compile Include="SAL3\Things\CompRecipeImportRange.cs" />
     <Compile Include="SAL3\Tools\BaseCountUtility.cs" />
     <Compile Include="SAL3\Things\Assemblers\Building_SimpleAssembler.cs" />
     <Compile Include="SAL3\Tools\CellUtility.cs" />

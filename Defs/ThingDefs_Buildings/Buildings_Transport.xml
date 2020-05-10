@@ -72,7 +72,7 @@
     </modExtensions>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_PullerFilter</li>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_PowerSupply</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
     </inspectorTabs>
     <researchPrerequisites>

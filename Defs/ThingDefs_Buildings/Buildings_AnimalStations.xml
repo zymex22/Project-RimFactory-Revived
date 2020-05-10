@@ -325,7 +325,7 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>      <!-- Highlight Output cell when selected -->
     </placeWorkers>
     <inspectorTabs>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_RangePowerSupply</li>      <!-- Power option tab -->
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power option tab -->
       <li>ProjectRimFactory.AutoMachineTool.ITab_Slaughterhouse</li>      <!-- Slaugter setting tab -->
     </inspectorTabs>
     <modExtensions>
