@@ -35,4 +35,7 @@
   <PRF.Settings.VacuumHopper.Label>Turn off pickup from ground on vacuum hopper</PRF.Settings.VacuumHopper.Label>
   <PRF.Settings.VacuumHopper.Desc>Turn off pickup from ground on vacuum hopper</PRF.Settings.VacuumHopper.Desc>
 
+  <PRF.Settings.recipeDB.Label>Set range for Recipe DB</PRF.Settings.recipeDB.Label>
+  <PRF.Settings.recipeDB.Desc>Set range for Recipe DB</PRF.Settings.recipeDB.Desc>
+
 </LanguageData>
