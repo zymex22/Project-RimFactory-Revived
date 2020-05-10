@@ -13,41 +13,35 @@ namespace ProjectRimFactory.Common
     {
         public static void LoadXml(ModContentPack content)
         {
-            rows = ParseSettingRows(content).ToList();
+            root = ParseSettingRows(content);
+            root.Initialize();
         }
 
-        private static List<ISettingRow> rows;
+        private static ContainerRow root;
 
-        public static IEnumerable<ISettingItem> SettingItems => rows.Select(r => r as ISettingItem).Where(i => i != null);
-
-        public static IEnumerable<IPatchItem> PatchItems => rows.Select(r => r as IPatchItem).Where(i => i != null);
-
-        private static IEnumerable<ISettingRow> ParseSettingRows(ModContentPack content)
+        private static ContainerRow ParseSettingRows(ModContentPack content)
         {
-            var xmlDoc = DirectXmlLoader.XmlAssetsInModFolder(content, "Settings").Where(x => x.name == "Settings.xml").ToList().FirstOrDefault();
-            if (xmlDoc == null)
+            var r = new ContainerRow();
+            var xmlDoc = DirectXmlLoader.XmlAssetsInModFolder(content, "Settings")?.Where(x => x.name == "Settings.xml")?.ToList().FirstOrDefault();
+            if (xmlDoc == null || xmlDoc.xmlDoc == null)
             {
-                Log.Error("Settings/Settings.xml not found.");
-                return Enumerable.Empty<ISettingRow>();
+                Log.Error("Settings/Settings.xml not found or invalid xml.");
+                return r;
             }
             var rootElem = xmlDoc.xmlDoc.DocumentElement;
             if (rootElem.Name != "SettingRows")
             {
                 Log.Error("SettingRows not found. name=" + rootElem.Name);
-                return Enumerable.Empty<ISettingRow>();
+                return r;
             }
-            return rootElem.ChildNodes.Cast<XmlNode>()
-                .Where(n => n.NodeType == XmlNodeType.Element)
-                .Select(n => n as XmlElement)
-                .Where(e => e != null)
-                .Select(e => DirectXmlToObject.ObjectFromXml<ISettingRow>(e, false))
-                .Where(r => (r as ISettingItem)?.Initialize() ?? true);
+            r.Rows.LoadDataFromXmlCustom(rootElem);
+            return r;
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
-            SettingItems.ToList().ForEach(i => i.ExposeData());
+            root.ExposeData();
         }
 
         public void DoWindowContents(Rect inRect)
@@ -63,7 +57,7 @@ namespace ProjectRimFactory.Common
             Widgets.BeginScrollView(outRect, ref this.scrollPosition, viewRect);
             var list = new Listing_Standard();
             list.Begin(viewRect);
-            rows.ForEach(r => r.Draw(list));
+            root.Draw(list);
             list.End();
             Widgets.EndScrollView();
 
@@ -75,107 +69,50 @@ namespace ProjectRimFactory.Common
 
         public void Apply()
         {
-            SettingItems.ToList().ForEach(i => i.Apply());
+            root.Apply();
         }
 
-        public bool RequireReboot => SettingItems.Any(i => i.RequireReboot);
+        public bool RequireReboot => root.RequireReboot;
 
-        public virtual IEnumerable<PatchOperation> Patches => PatchItems.SelectMany(i => i.GetValidPatches());
+        public virtual IEnumerable<PatchOperation> Patches => root.GetValidPatches();
     }
 
     public interface ISettingRow
     {
         void Draw(Listing_Standard list);
-    }
-
-    public interface ISettingItem : ISettingRow
-    {
         void ExposeData();
         void Apply();
         bool RequireReboot { get; }
         bool Initialize();
-    }
-
-    public interface IPatchItem : ISettingItem
-    {
         IEnumerable<PatchOperation> GetValidPatches();
     }
 
-    public class TextRow : ISettingRow
+    public abstract class SettingRow : ISettingRow
     {
-        public GameFont font = GameFont.Small;
-        public TextAnchor anchor = TextAnchor.MiddleRight;
-        public string text = "";
-        public float height;
-        public Color backgroundColor = Color.clear;
-        public void Draw(Listing_Standard list)
-        {
-            var tmp = Text.Font;
-            var tmpAnc = Text.Anchor;
-            try
-            {
-                Text.Font = this.font;
-                Text.Anchor = this.anchor;
-                var h = this.height;
-                var t = this.text.Translate();
-                if (h == 0)
-                {
-                    h = Text.CalcHeight(t, list.ColumnWidth);
-                }
+        public bool RequireReboot => false;
 
-                var rect = list.GetRect(h);
-                if (this.backgroundColor != Color.clear)
-                {
-                    Widgets.DrawRectFast(rect, Color.gray);
-                }
-                Widgets.Label(rect, this.text.Translate());
-            }
-            finally
-            {
-                Text.Font = tmp;
-                Text.Anchor = tmpAnc;
-            }
+        public void Apply()
+        {
+        }
+
+        public abstract void Draw(Listing_Standard list);
+
+        public void ExposeData()
+        {
+        }
+
+        public IEnumerable<PatchOperation> GetValidPatches()
+        {
+            return Enumerable.Empty<PatchOperation>();
+        }
+
+        public bool Initialize()
+        {
+            return true;
         }
     }
 
-    public class GapLineRow : ISettingRow
-    {
-        public float height = 12f;
-        public Color color = Color.clear;
-        public void Draw(Listing_Standard list)
-        {
-            Color tmp = GUI.color;
-            try
-            {
-                if(this.color != Color.clear)
-                {
-                    GUI.color = this.color;
-                }
-                if (height != 0f)
-                {
-                    list.GapLine(height);
-                }
-            }
-            finally
-            {
-                GUI.color = tmp;
-            }
-        }
-    }
-
-    public class GapRow : ISettingRow
-    {
-        public float height = 12f;
-        public void Draw(Listing_Standard list)
-        {
-            if (height != 0f)
-            {
-                list.Gap(this.height);
-            }
-        }
-    }
-
-    public abstract class SettingItem : ISettingItem
+    public abstract class SettingItemBase : ISettingRow
     {
         public string key;
         public string label;
@@ -192,12 +129,20 @@ namespace ProjectRimFactory.Common
         {
             return true;
         }
+
+        public abstract IEnumerable<PatchOperation> GetValidPatches();
     }
 
-    public abstract class PatchSettingItem : SettingItem, IPatchItem
+    public abstract class SettingItem : SettingItemBase
     {
-        public abstract IEnumerable<PatchOperation> GetValidPatches();
+        public override IEnumerable<PatchOperation> GetValidPatches()
+        {
+            return Enumerable.Empty<PatchOperation>();
+        }
+    }
 
+    public abstract class PatchSettingItem : SettingItemBase
+    {
         public PatchElement Patch;
 
         protected IEnumerable<PatchOperation> Patches => this.Patch?.Patches ?? Enumerable.Empty<PatchOperation>();
@@ -226,6 +171,239 @@ namespace ProjectRimFactory.Common
 
         public XmlNode rootNode;
     }
+
+    public abstract class ContainerRowBase : ISettingRow
+    {
+        protected List<ISettingRow> rows = new List<ISettingRow>();
+
+        public bool RequireReboot => this.rows.Any(r => r.RequireReboot);
+
+        public void Apply()
+        {
+            this.rows.ForEach(r => r.Apply());
+        }
+
+        public abstract void Draw(Listing_Standard list);
+
+        public void ExposeData()
+        {
+            this.rows.ForEach(r => r.ExposeData());
+        }
+
+        public IEnumerable<PatchOperation> GetValidPatches()
+        {
+            return this.rows.SelectMany(r => r.GetValidPatches());
+        }
+
+        public abstract bool Initialize();
+    }
+
+    public class RowsElement
+    {
+        public List<ISettingRow> rows;
+
+        public void LoadDataFromXmlCustom(XmlNode xmlRoot)
+        {
+            this.rows = LoadDataFromXml(xmlRoot);
+        }
+
+        public static List<ISettingRow> LoadDataFromXml(XmlNode xmlRoot)
+        {
+            return xmlRoot.ChildNodes.Cast<XmlNode>()
+                .Where(n => n.NodeType == XmlNodeType.Element)
+                .Select(n => n as XmlElement)
+                .Where(e => e != null)
+                .Where(e => e.Name == "Row")
+                .Select(e => DirectXmlToObject.ObjectFromXml<ISettingRow>(e, false))
+                .ToList();
+        }
+    }
+
+    public class ContainerRow : ContainerRowBase
+    {
+        public RowsElement Rows = new RowsElement();
+
+        public Color backgroundColor = Color.clear;
+
+        private float lastHeight = 100000;
+
+        public override void Draw(Listing_Standard list)
+        {
+            var rect = list.GetRect(this.lastHeight);
+            if (this.backgroundColor != Color.clear)
+            {
+                Widgets.DrawRectFast(rect, this.backgroundColor);
+            }
+            var child = new Listing_Standard();
+            child.Begin(rect);
+            this.rows.ForEach(r => r.Draw(child));
+            child.End();
+            this.lastHeight = child.CurHeight;
+            list.Gap(list.verticalSpacing);
+        }
+
+        public override bool Initialize()
+        {
+            if(this.Rows == null || this.Rows.rows == null)
+            {
+                return false;
+            }
+            this.rows = this.Rows.rows.Where(r => r.Initialize()).ToList();
+            return this.rows.Count > 0;
+        }
+    }
+
+    public class SplitRow : ContainerRowBase
+    {
+        public float rate = 0.5f;
+
+        public ISettingRow LeftRow;
+
+        public ISettingRow RightRow;
+
+        private float lastHeight = 300;
+
+        public Color leftBackgroundColor = Color.clear;
+
+        public Color rightBackgroundColor = Color.clear;
+
+        public override void Draw(Listing_Standard list)
+        {
+            var rect = list.GetRect(this.lastHeight);
+
+            var lr = new[]{
+                new { Row = this.LeftRow, List = new Listing_Standard(), Rect = rect.LeftPart(this.rate), BGColor = this.leftBackgroundColor },
+                new { Row = this.RightRow, List = new Listing_Standard(), Rect = rect.RightPart(1f - this.rate), BGColor = this.rightBackgroundColor }
+            }.ToList();
+
+            lr.ForEach(s =>
+            {
+                if (s.BGColor != Color.clear)
+                {
+                    Widgets.DrawRectFast(s.Rect, s.BGColor);
+                }
+                s.List.Begin(s.Rect);
+                s.Row.Draw(s.List);
+                s.List.End();
+            });
+            this.lastHeight = lr.Select(s => s.List.CurHeight).Max();
+
+            list.Gap(list.verticalSpacing);
+        }
+
+        public override bool Initialize()
+        {
+            this.rows = new ISettingRow[] { this.LeftRow, this.RightRow }.Where(r => r.Initialize()).ToList();
+            return this.rows.Count > 0;
+        }
+    }
+
+    public class TextRow : SettingRow
+    {
+        public GameFont font = GameFont.Small;
+        public TextAnchor anchor = TextAnchor.MiddleLeft;
+        public string text = "";
+        public float height;
+        public Color backgroundColor = Color.clear;
+        public bool noTranslate = false;
+        public override void Draw(Listing_Standard list)
+        {
+            var tmp = Text.Font;
+            var tmpAnc = Text.Anchor;
+            try
+            {
+                Text.Font = this.font;
+                Text.Anchor = this.anchor;
+                var h = this.height;
+                var t = this.text.Translate();
+                if (h == 0)
+                {
+                    h = Text.CalcHeight(t, list.ColumnWidth);
+                }
+
+                var rect = list.GetRect(h);
+                if (this.backgroundColor != Color.clear)
+                {
+                    Widgets.DrawRectFast(rect, this.backgroundColor);
+                }
+                var label = this.text.Translate();
+                if (noTranslate)
+                {
+                    label = this.text;
+                }
+                Widgets.Label(rect, label);
+                list.Gap(list.verticalSpacing);
+            }
+            finally
+            {
+                Text.Font = tmp;
+                Text.Anchor = tmpAnc;
+            }
+        }
+    }
+
+    public class ImageRow : SettingRow
+    {
+        public string texPath;
+        public float height;
+        public Color backgroundColor = Color.clear;
+
+        public override void Draw(Listing_Standard list)
+        {
+            var tex = ContentFinder<Texture2D>.Get(this.texPath, true);
+            float h = this.height;
+            if(h == 0)
+            {
+                h = tex.height;
+            }
+            var rect = list.GetRect(h);
+            if (this.backgroundColor != Color.clear)
+            {
+                Widgets.DrawRectFast(rect, this.backgroundColor);
+            }
+
+            Widgets.DrawTextureFitted(rect, tex, 1);
+            list.Gap(list.verticalSpacing);
+        }
+    }
+
+    public class GapLineRow : SettingRow
+    {
+        public float height = 12f;
+        public Color color = Color.clear;
+        public override void Draw(Listing_Standard list)
+        {
+            Color tmp = GUI.color;
+            try
+            {
+                if(this.color != Color.clear)
+                {
+                    GUI.color = this.color;
+                }
+                if (height != 0f)
+                {
+                    list.GapLine(height);
+                }
+            }
+            finally
+            {
+                GUI.color = tmp;
+            }
+        }
+    }
+
+    public class GapRow : SettingRow
+    {
+        public float height = 12f;
+        public override void Draw(Listing_Standard list)
+        {
+            if (height != 0f)
+            {
+                list.Gap(this.height);
+            }
+        }
+    }
+
 
     public class PatchItem : PatchSettingItem
     {

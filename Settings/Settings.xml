@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Row Classes :
+    Rendering Operation.
+    - ProjectRimFactory.Common.TextRow               : Draw text content.
+    - ProjectRimFactory.Common.ImageRow              : Draw texture.
+    - ProjectRimFactory.Common.GapRow                : Insert Gap.
+    - ProjectRimFactory.Common.GapLineRow            : Insert Gap and Draw Line.
+
+    Rayout Operation.
+    - ProjectRimFactory.Common.ContainerRow          : Rows collection container.
+    - ProjectRimFactory.Common.SplitRow              : Split Row left and right
+
+    Patching Operation.
+    - ProjectRimFactory.Common.PatchItem             : On / Off setting for patch applying.
+    - ProjectRimFactory.Common.PatchTextValueItem    : On / Off setting for patch applying and text replacing.
+    - ProjectRimFactory.Common.PatchFloatValueItem   : On / Off setting for patch applying and float value replacing.
+    - ProjectRimFactory.Common.PatchIntValueItem     : On / Off setting for patch applying and integer value replacing.
+    - ProjectRimFactory.Common.PatchBoolValueItem    : On / Off setting for patch applying and boolean value replacing.
+    - ProjectRimFactory.Common.PatchEnumValueItem    : On / Off setting for patch applying and enum value replacing.
+    - ProjectRimFactory.Common.PatchSelectValueItem  : On / Off setting for patch applying and selection value replacing.
+-->
 <SettingRows>
 
   <Row Class="ProjectRimFactory.Common.TextRow">
@@ -117,14 +138,45 @@
     <color>(1,0,0,1)</color>
   </Row>
 
+  <!-- ==== RENDERING SAMPLES ==== -->
   <!-- Draw text row -->
+  <Row Class="ProjectRimFactory.Common.TextRow">
+    <font>Medium</font>
+    <anchor>MiddleCenter</anchor>
+    <text>****** RENDERING SAMPLES ******</text>
+  </Row>
+  
   <Row Class="ProjectRimFactory.Common.TextRow">
     <!-- Tiny, Small, Medium -->
     <font>Medium</font>
     <!-- UpperLeft, UpperCenter, UpperRight, MiddleLeft, MiddleCenter, MiddleRight, LowerLeft, LowerCenter, LowerRight -->
     <anchor>MiddleCenter</anchor>
+    <!-- background color -->
+    <backgroundColor>(0.5,0,0,1)</backgroundColor>
+    <!-- height -->
+    <height>30</height>
     <!-- text(key) -->
-    <text>****** SAMPLES ******</text>
+    <text>render text</text>
+  </Row>
+  
+  <Row Class="ProjectRimFactory.Common.TextRow">
+    <height>70</height>
+    <!-- If the Key is not found in the translate process, the tag will be removed. -->
+    <!-- Not required if the Key is entered correctly -->
+    <noTranslate>true</noTranslate>
+    <!-- rich text https://docs.unity3d.com/560/Documentation/Manual/StyledText.html -->
+    <text><![CDATA[rich text sample <size=30>size30</size> <size=20>size20 <b>bold</b> <i>italic</i> <color=red>red</color>
+</size><size=15><b><i><color=green>size15,bold,italic,green</color></i></b></size>]]></text>
+  </Row>
+  
+  <!-- Draw texture row -->
+  <Row Class="ProjectRimFactory.Common.ImageRow">
+    <!-- texture path -->
+    <texPath>Industry/AtomicReconstructor</texPath>
+    <!-- height -->
+    <height>100</height>
+    <!-- background color -->
+    <backgroundColor>(0,0.5,0,1)</backgroundColor>
   </Row>
 
   <!-- Gap row default -->
@@ -133,6 +185,25 @@
   <!-- Gap line row default -->
   <Row Class="ProjectRimFactory.Common.GapLineRow" />
 
+  <!-- Gap row -->
+  <Row Class="ProjectRimFactory.Common.GapRow">
+    <height>50</height>
+  </Row>
+  
+  <!-- Gap line row -->
+  <Row Class="ProjectRimFactory.Common.GapLineRow">
+    <height>10</height>
+    <color>(1,0,0,1)</color>
+  </Row>
+
+  <!-- ==== PATCH AND REPLACE SAMPLES ==== -->
+  <!-- Draw text row -->
+  <Row Class="ProjectRimFactory.Common.TextRow">
+    <font>Medium</font>
+    <anchor>MiddleCenter</anchor>
+    <text>****** PATCH AND REPLACE SAMPLES ******</text>
+  </Row>
+  
   <!-- Draw Patch text value setting row -->
   <Row Class="ProjectRimFactory.Common.PatchTextValueItem">
     <key>cooker.name.test</key>
@@ -258,6 +329,85 @@
         </value>
       </Operation>
     </Patch>
+  </Row>
+
+  <Row Class="ProjectRimFactory.Common.GapRow">
+    <height>50</height>
+  </Row>
+  
+  <!-- Gap line row -->
+  <Row Class="ProjectRimFactory.Common.GapLineRow">
+    <height>10</height>
+    <color>(1,0,0,1)</color>
+  </Row>
+  
+  <!-- ==== LAYOUT SAMPLES ==== -->
+  <Row Class="ProjectRimFactory.Common.TextRow">
+    <font>Medium</font>
+    <anchor>MiddleCenter</anchor>
+    <text>****** LAYOUT SAMPLES ******</text>
+  </Row>
+  
+  <!-- Split Left and Right -->
+  <Row Class="ProjectRimFactory.Common.SplitRow">
+    <!-- left size rate -->
+    <!-- left : right = 3 : 7 -->
+    <rate>0.3</rate>
+    
+    <!-- Background color -->
+    <leftBackgroundColor>(0.3,0,0,1)</leftBackgroundColor>
+    <rightBackgroundColor>(0,0.3,0,1)</rightBackgroundColor>
+    
+    <!-- Left -->
+    <!-- Same as Row Element -->
+    <LeftRow Class="ProjectRimFactory.Common.ImageRow">
+      <texPath>Industry/AtomicReconstructor</texPath>
+      <height>100</height>
+    </LeftRow>
+    
+    <!-- Right -->
+    <!-- Split Nesting -->
+    <RightRow Class="ProjectRimFactory.Common.SplitRow">
+
+      <!-- Background color -->
+      <leftBackgroundColor>(0,0.3,0,1)</leftBackgroundColor>
+      <rightBackgroundColor>(0.3,0.3,0,1)</rightBackgroundColor>
+
+      <!-- Left -->
+      <!-- Row Container -->
+      <LeftRow Class="ProjectRimFactory.Common.ContainerRow">
+        <backgroundColor>(0.3,0,1,1)</backgroundColor>
+        <Rows>
+          <Row Class="ProjectRimFactory.Common.TextRow">
+            <text>TestList1</text>
+          </Row>
+          <Row Class="ProjectRimFactory.Common.GapRow" />
+          <Row Class="ProjectRimFactory.Common.TextRow">
+            <text>TestList2</text>
+          </Row>
+        </Rows>
+      </LeftRow>
+
+      <!-- Right -->
+      <RightRow Class="ProjectRimFactory.Common.PatchItem">
+        <key>turn.off.do.effect2</key>
+        <label>PRF.Settings.TurnOffDoEffect.Label</label>
+        <description>PRF.Settings.TurnOffDoEffect.Desc</description>
+        <Patch>
+          <Operation Class="PatchOperationRemove">
+            <success>Always</success>
+            <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/doEffect</xpath>
+          </Operation>
+          <Operation Class="PatchOperationAdd">
+            <success>Always</success>
+            <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]</xpath>
+            <value>
+              <doEffect>false</doEffect>
+            </value>
+          </Operation>
+        </Patch>
+      </RightRow>
+    </RightRow>
   </Row>
 
 </SettingRows>
