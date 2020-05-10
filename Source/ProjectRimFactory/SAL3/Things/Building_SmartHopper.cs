@@ -7,6 +7,7 @@ using ProjectRimFactory.SAL3.UI;
 using ProjectRimFactory.SAL3.Tools;
 using ProjectRimFactory.Storage;
 using ProjectRimFactory.Storage.UI;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.SAL3.Things
 {
@@ -22,6 +23,8 @@ namespace ProjectRimFactory.SAL3.Things
 
         public Thing StoredThing => Position.GetFirstItem(Map);
 
+        protected bool PickupFromGround => this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false;
+
         public IEnumerable<IntVec3> CellsToSelect
         {
             get
@@ -32,7 +35,7 @@ namespace ProjectRimFactory.SAL3.Things
                 }
 
                 var resultCache = from IntVec3 c in GenRadial.RadialCellsAround(Position, def.specialDisplayRadius, false)
-                                  where c.HasSlotGroupParent(Map)
+                                  where this.PickupFromGround || c.HasSlotGroupParent(Map)
                                   select c;
                 cachedDetectorCells = resultCache;
                 return resultCache;
@@ -173,7 +176,8 @@ namespace ProjectRimFactory.SAL3.Things
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(CellsToSelect.ToList(), Color.green);
+            if (!this.PickupFromGround)
+                GenDraw.DrawFieldEdges(CellsToSelect.ToList(), Color.green);
         }
 
         public override IEnumerable<Gizmo> GetGizmos()

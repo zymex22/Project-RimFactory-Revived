@@ -274,6 +274,7 @@
     <Compile Include="Common\HarmonyPatches\PathGridPatch.cs" />
     <Compile Include="Common\HarmonyPatches\RacePropertiesPatch.cs" />
     <Compile Include="Common\HarmonyPatches\Patch_GenRecipe_MakeRecipeProducts.cs" />
+    <Compile Include="Common\ModExtension_Settings.cs" />
     <Compile Include="Common\ModExtension_Graphic.cs" />
     <Compile Include="Common\PatchOperationRTFuseInsertionHook.cs" />
     <Compile Include="Common\PRFDefOf.cs" />
