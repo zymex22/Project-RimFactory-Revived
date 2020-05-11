@@ -76,10 +76,44 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>10</heatPerSecond>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <minGlowRadius>1</minGlowRadius>
+        <maxGlowRadius>3</maxGlowRadius>
+        <minGlowColor>(100,0,0,10)</minGlowColor>
+        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <intervalTicks>30</intervalTicks>
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
+        <effect>Drill</effect>
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
         <TickCount>8</TickCount>
+      </li>
+      <!--
+        excludeOres : exclude ore list.
+        bonusYield  : Bonus yield ore list. for example, steel chance=10% count=10, Plasteel chance=20% count=15.
+          <bonusYields>
+            <Steel Chance="0.1" Count="10" />
+            <Plasteel Chance="0.2" Count="15" />
+          </<bonusYields>
+        multiBonus  : check all bonus yield chance.
+          multiBonus outputs all bonuses that meet the chance. For example, if all Chance are 1, output all.
+          If multiBonus is false, Only the random one to meet the chance.
+      -->
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>ChunkSandstone</li>
+          <li>ChunkGranite</li>
+          <li>Steel</li>
+        </excludeOres>
+        <bonusYields>
+          <Steel Chance="0.1" Count="10" />
+          <Plasteel Chance="0.2" Count="15" />
+        </bonusYields>
+        <multiBonus>false</multiBonus>
       </li>
     </modExtensions>
     <tickerType>Long</tickerType>
@@ -132,10 +166,31 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <minGlowRadius>1</minGlowRadius>
+        <maxGlowRadius>3</maxGlowRadius>
+        <minGlowColor>(100,0,0,10)</minGlowColor>
+        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <intervalTicks>30</intervalTicks>
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
+        <effect>Drill</effect>
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
         <TickCount>3</TickCount>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>Steel</li>
+        </excludeOres>
+        <bonusYields>
+          <Steel Chance="0.2" Count="10" />
+          <Plasteel Chance="0.1" Count="15" />
+        </bonusYields>
+        <multiBonus>false</multiBonus>
       </li>
     </modExtensions>
     <tickerType>Long</tickerType>
@@ -192,6 +247,14 @@
         <glowRadius>6</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <minGlowRadius>1</minGlowRadius>
+        <maxGlowRadius>3</maxGlowRadius>
+        <minGlowColor>(100,0,0,10)</minGlowColor>
+        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <intervalTicks>30</intervalTicks>
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
+      </li>
     </comps>
 
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
@@ -216,6 +279,16 @@
       <!--  <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
         <effectWorking>Drill</effectWorking>
       </li>        -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>Steel</li>
+        </excludeOres>
+        <bonusYields>
+          <Steel Chance="0.2" Count="10" />
+          <Plasteel Chance="0.1" Count="15" />
+        </bonusYields>
+        <multiBonus>false</multiBonus>
+      </li>
     </modExtensions>
   </ThingDef>
 

@@ -44,16 +44,23 @@ namespace ProjectRimFactory.Industry
 
         public virtual void GenerateChunk()
         {
-            GenPlace.TryPlaceThing(GetChunkThingToPlace(), GetComp<CompOutputAdjustable>().CurrentCell, Map, ThingPlaceMode.Near);
+            GetChunkThingToPlace().ToList().ForEach(t => GenPlace.TryPlaceThing(t, GetComp<CompOutputAdjustable>().CurrentCell, Map, ThingPlaceMode.Near));
             ProducedChunksTotal++;
         }
 
-        protected virtual Thing GetChunkThingToPlace()
+        protected virtual IEnumerable<Thing> GetChunkThingToPlace()
         {
-            ThingDef rock = PossibleRockDefCandidates.RandomElementByWeight(d => d.building.isResourceRock ? d.building.mineableScatterCommonality * d.building.mineableScatterLumpSizeRange.Average * d.building.mineableDropChance : 3f);
+            ThingDef rock = PossibleRockDefCandidates
+                .Where(d => !this.def.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.building.mineableThing) ?? true)
+                .RandomElementByWeight(d => d.building.isResourceRock ? d.building.mineableScatterCommonality * d.building.mineableScatterLumpSizeRange.Average * d.building.mineableDropChance : 3f);
             Thing t = ThingMaker.MakeThing(rock.building.mineableThing);
             t.stackCount = rock.building.mineableYield;
-            return t;
+            yield return t;
+
+            foreach(var bonus in this.def.GetModExtension<ModExtension_Miner>()?.GetBonusYields(rock.building.mineableThing) ?? Enumerable.Empty<Thing>())
+            {
+                yield return bonus;
+            }
         }
 
         public override string GetInspectString()
