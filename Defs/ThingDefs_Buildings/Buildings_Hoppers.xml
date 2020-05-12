@@ -10,7 +10,7 @@
     <defName>Hoppers_gr</defName>
   </DesignatorDropdownGroupDef>
 
-  <!--============================== Smart Puller ==============================-->
+  <!--============================== Smart Puller / vacuum Hopper ==============================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>SAL_SmartHopper</defName>
     <label>Vacuum Hopper</label>
@@ -59,8 +59,8 @@
     </statBases>
     <description>A Vacuum Hopper that take in any items on stockpiles within 5 tile range, even different stockpiles, as long their cells are in range. It can be setup to specific type and amount, and hold onto it until pulled away.</description>
     <costList>
-      <Steel>20</Steel>
-      <ComponentIndustrial>3</ComponentIndustrial>
+      <Steel>30</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
     <comps>
       <li Class="CompProperties_Breakdownable"/>

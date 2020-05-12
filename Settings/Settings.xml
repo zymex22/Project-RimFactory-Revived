@@ -247,7 +247,7 @@
   </Row>
 
   <!-- Vacuum Hopper -->
-  <Row Class="ProjectRimFactory.Common.PatchItem">
+  <!-- <Row Class="ProjectRimFactory.Common.PatchItem">
     <key>turn.off.hopper.pickup</key>
     <label>PRF.Settings.VacuumHopper.Label</label>
     <description>PRF.Settings.VacuumHopper.Desc</description>
@@ -257,6 +257,6 @@
         <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Settings"]</xpath>
       </Operation>
     </Patch>
-  </Row>
+  </Row> -->
 
 </SettingRows>
