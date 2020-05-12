@@ -170,6 +170,8 @@ Mod extennsion for assemblers
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <drawStatus>true</drawStatus>
         <doEffect>false</doEffect>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>9</artSkillLevel>
       </li>
     </modExtensions>
   </ThingDef>
@@ -221,6 +223,8 @@ Mod extennsion for assemblers
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <drawStatus>true</drawStatus>
         <doEffect>false</doEffect>
+        <skillLevel>20</skillLevel>
+        <artSkillLevel>12</artSkillLevel>
       </li>
     </modExtensions>
     <researchPrerequisites>
@@ -519,6 +523,8 @@ Mod extennsion for assemblers
         </importRecipesFrom>
         <drawStatus>true</drawStatus>
         <doEffect>true</doEffect>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>0</artSkillLevel>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>SAL3/smart_butcher_working</texPath>
@@ -582,6 +588,8 @@ Mod extennsion for assemblers
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>0</artSkillLevel>
       </li>
     </modExtensions>
   </ThingDef>
@@ -632,6 +640,8 @@ Mod extennsion for assemblers
         </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>0</artSkillLevel>
       </li>
     </modExtensions>
   </ThingDef>
