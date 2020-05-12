@@ -11,7 +11,7 @@ using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.SAL3.Things
 {
-    public class Building_SmartHopper : Building, IStoreSettingsParent
+    public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder
     {
         private OutputSettings outputSettings;
 
@@ -23,7 +23,13 @@ namespace ProjectRimFactory.SAL3.Things
 
         public Thing StoredThing => Position.GetFirstItem(Map);
 
-        protected bool PickupFromGround => this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false;
+        protected bool PickupFromGround => (this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false) && pickupFromGround;
+
+        private bool pickupFromGround;
+
+        public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
+
+        private IEnumerable<IntVec3> CellsToTarget => (this.GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenRadial.RadialCellsAround(Position, this.def.specialDisplayRadius, false)).Where(c => c.GetFirst<Building_SmartHopper>(this.Map) == null);
 
         public IEnumerable<IntVec3> CellsToSelect
         {
@@ -34,7 +40,8 @@ namespace ProjectRimFactory.SAL3.Things
                     return cachedDetectorCells;
                 }
 
-                var resultCache = from IntVec3 c in GenRadial.RadialCellsAround(Position, def.specialDisplayRadius, false)
+                var resultCache = from IntVec3 c
+                                  in this.CellsToTarget
                                   where this.PickupFromGround || c.HasSlotGroupParent(Map)
                                   select c;
                 cachedDetectorCells = resultCache;
@@ -82,6 +89,10 @@ namespace ProjectRimFactory.SAL3.Things
                 settings = new StorageSettings();
                 settings.CopyFrom(GetParentStoreSettings());
             }
+            if (!respawningAfterLoad)
+            {
+                this.pickupFromGround = this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false;
+            }
         }
 
         public override void ExposeData()
@@ -89,6 +100,7 @@ namespace ProjectRimFactory.SAL3.Things
             base.ExposeData();
             Scribe_Deep.Look(ref outputSettings, "outputSettings", "SmartHopper_Minimum_UseTooltip", "SmartHopper_Maximum_UseTooltip");
             Scribe_Deep.Look(ref settings, "settings", this);
+            Scribe_Values.Look(ref this.pickupFromGround, "pickupFromGround");
         }
 
         public override string GetInspectString()
@@ -192,6 +204,16 @@ namespace ProjectRimFactory.SAL3.Things
                 defaultLabel = "SmartHopper_SetTargetAmount".Translate(),
                 action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings)),
             };
+            if (this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false)
+            {
+                yield return new Command_Toggle
+                {
+                    icon = ContentFinder<Texture2D>.Get("SAL3/PickupFromGround"),
+                    defaultLabel = "SmartHopper_PickupFromGround".Translate(),
+                    toggleAction = () => this.pickupFromGround = !this.pickupFromGround,
+                    isActive = () => this.pickupFromGround
+                };
+            }
         }
 
         public StorageSettings GetStoreSettings()

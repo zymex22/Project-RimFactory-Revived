@@ -48,6 +48,7 @@
     </building>
     <inspectorTabs>
       <li>ITab_Storage</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
@@ -71,6 +72,16 @@
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
+      <!-- Either specialDisplayRadius or CompProperties_PowerWorkSetting -->
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <speedSetting>false</speedSetting>
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>5</minRange>
+        <maxPowerForRange>500</maxPowerForRange>
+        <maxRange>10</maxRange>
+        <rangeType>ProjectRimFactory.Common.CircleRange</rangeType>
+      </li>
     </comps>
     <tickerType>Normal</tickerType>
     <rotatable>true</rotatable>
@@ -83,7 +94,7 @@
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
-    <specialDisplayRadius>5</specialDisplayRadius>    <!--A.K.A. Search radius-->
+    <!-- <specialDisplayRadius>5</specialDisplayRadius> -->   <!--A.K.A. Search radius-->
     <researchPrerequisites>
       <li>AutomationBasics</li>
     </researchPrerequisites>
