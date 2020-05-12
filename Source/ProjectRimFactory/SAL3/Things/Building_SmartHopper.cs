@@ -29,7 +29,7 @@ namespace ProjectRimFactory.SAL3.Things
 
         public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
 
-        private IEnumerable<IntVec3> CellsToTarget => this.GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenRadial.RadialCellsAround(Position, this.def.specialDisplayRadius, false);
+        private IEnumerable<IntVec3> CellsToTarget => (this.GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenRadial.RadialCellsAround(Position, this.def.specialDisplayRadius, false)).Where(c => c.GetFirst<Building_SmartHopper>(this.Map) == null);
 
         public IEnumerable<IntVec3> CellsToSelect
         {
