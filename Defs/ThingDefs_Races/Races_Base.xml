@@ -56,21 +56,22 @@
       <foodType>None</foodType>
     </race>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
-    
+
   </ThingDef>
-  
+
   <ThingDef ParentName="PRFDroneBase">
     <defName>PRFDrone</defName>
     <label>drone</label>
     <description>A small, low-flying drone.</description>
     <thingClass>ProjectRimFactory.Drones.Pawn_Drone</thingClass>
     <graphicData>
-		<texPath>Common/DroneModule</texPath>
-		<graphicClass>Graphic_Single</graphicClass>
-		<drawSize>1</drawSize>
-		<shadowData>
-		    <volume>(0.4, 0.4, 0.4)</volume>
-		</shadowData>
+      <texPath>Common/DroneModule</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>1</drawSize>
+      <shadowData>
+        <volume>(0.4, 0.4, 0.4)</volume>
+      </shadowData>
     </graphicData>
     <statBases>
       <MoveSpeed>6.6</MoveSpeed>
@@ -120,26 +121,27 @@
       <Plasteel>5</Plasteel>
     </butcherProducts>
   </ThingDef>
-  
+
   <PawnKindDef>
-		<defName>PRFDroneKind</defName>
-		<label>drone</label>
-		<race>PRFDrone</race>
-		<combatPower>160</combatPower>
-		<defaultFactionType>PlayerColony</defaultFactionType>
-		<aiAvoidCover>true</aiAvoidCover>
-        <isFighter>false</isFighter>
-		<lifeStages>
-			<li>
-				<bodyGraphicData>
-					<texPath>Common/DroneModule</texPath>
-					<graphicClass>Graphic_Single</graphicClass>
-					<drawSize>1</drawSize>
-					<shadowData>
-						<volume>(0.4, 0.4, 0.4)</volume>
-					</shadowData>
-				</bodyGraphicData>
-			</li>
-		</lifeStages>
+    <defName>PRFDroneKind</defName>
+    <label>drone</label>
+    <race>PRFDrone</race>
+    <combatPower>160</combatPower>
+    <defaultFactionType>PlayerColony</defaultFactionType>
+    <aiAvoidCover>true</aiAvoidCover>
+    <isFighter>false</isFighter>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Common/DroneModule</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>Transparent</shaderType>
+          <drawSize>1</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.4, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
   </PawnKindDef>
 </Defs>
