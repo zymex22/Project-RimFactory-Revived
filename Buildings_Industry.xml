@@ -311,6 +311,7 @@
         <heatPerSecond>12</heatPerSecond>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <pulse>false</pulse>
         <minGlowRadius>1</minGlowRadius>
         <maxGlowRadius>3</maxGlowRadius>
         <minGlowColor>(100,0,0,10)</minGlowColor>
