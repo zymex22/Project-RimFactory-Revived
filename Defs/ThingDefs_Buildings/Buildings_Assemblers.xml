@@ -42,15 +42,32 @@ Mod extennsion for assemblers
         easingType : EasingLinear, EasingSineInOut, EasingQuadInOut, EasingCubicInOut, EasingExpInOut, EasingElasticInOut, EasingBounceInOut, EasingQuadIn, EasingQuadOut, EasingCubicIn, EasingCubicOut https://easings.net/en
         <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>   Type pulse see above link for types
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        speed settings
+        <speedSetting>true</speedSetting>
+        <minPowerForSpeed>0</minPowerForSpeed>
+        <minSpeedFactor>1</minSpeedFactor>
+        <maxPowerForSpeed>3000</maxPowerForSpeed>
+        <maxSpeedFactor>2</maxSpeedFactor>
+        range settings
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>1</minRange>
+        <maxPowerForRange>1000</maxPowerForRange>
+        <maxRange>3</maxRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+        range color settings
+        <blueprintMin>(1,1,1,1)</blueprintMin>
+        <blueprintMax>(0.5,0.5,0.5,0.6)</blueprintMax>
+        <instance>(1,1,1,1)</instance>
+        <otherInstance>(1,1,1,0.35)</otherInstance>
+      </li>
   </comps>
     -->
 
 
   <DesignatorDropdownGroupDef>    <!-- Create Downdown group, one for each dropdown -->
     <defName>assembler_gr</defName>
-  </DesignatorDropdownGroupDef>
-  <DesignatorDropdownGroupDef>
-    <defName>assembler_food_gr</defName>
   </DesignatorDropdownGroupDef>
 
   <!--====================AssemblerBase====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
@@ -138,8 +155,8 @@ Mod extennsion for assemblers
         <heatPerSecond>3</heatPerSecond>        <!-- Vanilla stove create 5 -->
       </li>
       <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
-        <range>5</range>
-        <ghostColor>(0,0,1,1)</ghostColor>
+        <range>3</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
       </li>
     </comps>
     <researchPrerequisites>      <!-- Needed Research to see in menus -->
@@ -150,6 +167,8 @@ Mod extennsion for assemblers
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <drawStatus>true</drawStatus>
         <doEffect>false</doEffect>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>9</artSkillLevel>
       </li>
     </modExtensions>
   </ThingDef>
@@ -192,11 +211,17 @@ Mod extennsion for assemblers
         <glowRadius>6</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>4</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <drawStatus>true</drawStatus>
         <doEffect>false</doEffect>
+        <skillLevel>20</skillLevel>
+        <artSkillLevel>12</artSkillLevel>
       </li>
     </modExtensions>
     <researchPrerequisites>
@@ -252,362 +277,17 @@ Mod extennsion for assemblers
         <basePowerConsumption>250</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
-        <glowRadius>2</glowRadius>
+        <glowRadius>3</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
       <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
-        <range>5</range>
-        <ghostColor>(0,0,1,1)</ghostColor>
+        <range>2</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
       </li>
     </comps>
     <researchPrerequisites>
       <li>MagneticTape</li>
     </researchPrerequisites>
-  </ThingDef>
-
-  <!--==================== T1 Cooker ====================-->
-  <ThingDef ParentName="PRF_AssemblerBase">
-    <defName>SelfCooker</defName>
-    <label>industrial cooker</label>
-    <designationCategory>Industrial</designationCategory>
-    <designatorDropdown>assembler_food_gr</designatorDropdown>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
-    <drawerType>RealtimeOnly</drawerType>
-    <graphicData>
-      <graphicClass>Graphic_Single</graphicClass>      <!-- for being able to swap between textures each rotation -->
-      <texPath>SAL3/cooker1</texPath>
-    </graphicData>
-    <statBases>
-      <MaxHitPoints>250</MaxHitPoints>
-      <WorkToBuild>2000</WorkToBuild>
-      <MarketValue>700</MarketValue>
-      <Cleanliness>5</Cleanliness>
-    </statBases>
-    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
-    <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
-    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1x speed \n 5cleanliness \n cook level 10</description>
-    <costStuffCount>100</costStuffCount>
-    <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <Steel>10</Steel>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>5</heatPerSecond>
-      </li>
-    </comps>
-    <recipes>      <!-- Defines recipe to make it in ThingDef directly.	 (extra from importrecipesfrom) -->
-      <li>MakeNutrientPaste</li>
-      <li>MakeNutrientPasteBulk</li>
-    </recipes>
-    <building>
-      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
-      <isMealSource>true</isMealSource>      <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
-    </building>
-    <passability>Impassable</passability>    <!-- to be able to build them as walls -->
-    <researchPrerequisites>
-      <li>SelfCooking</li>
-    </researchPrerequisites>
-    <rotatable>false</rotatable>    <!-- for being able to swap between textures each rotation -->
-    <modExtensions>
-      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>
-          <li>ElectricStove</li>
-        </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
-        <workSpeedBaseFactor>1</workSpeedBaseFactor>
-        <skillLevel>10</skillLevel>
-        <drawStatus>true</drawStatus>
-        <doEffect>true</doEffect>
-      </li>
-    </modExtensions>
-  </ThingDef>
-
-  <!--==================== T3 Spacer Cooker ====================-->
-  <ThingDef ParentName="PRF_AssemblerBase">
-    <defName>PRF_SpacerCooker</defName>
-    <label>spacer cooker</label>
-    <designationCategory>Industrial</designationCategory>
-    <designatorDropdown>assembler_food_gr</designatorDropdown>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
-    <drawerType>RealtimeOnly</drawerType>
-    <graphicData>
-      <graphicClass>Graphic_Single</graphicClass>      <!-- for being able to swap between textures each rotation -->
-      <texPath>SAL3/SpacerCooker</texPath>
-    </graphicData>
-    <statBases>
-      <MaxHitPoints>250</MaxHitPoints>
-      <WorkToBuild>3000</WorkToBuild>
-      <MarketValue>700</MarketValue>
-      <Cleanliness>20</Cleanliness>
-    </statBases>
-    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
-    <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
-    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 2x speed \n 20cleanliness \n cook level 20</description>
-    <costStuffCount>100</costStuffCount>
-    <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <Steel>10</Steel>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>600</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_Glower">
-        <glowRadius>6</glowRadius>
-        <glowColor>(115,198,206,0)</glowColor>
-      </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>5</heatPerSecond>
-      </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
-        <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>3</maxGlowRadius>
-        <minGlowColor>(100,0,0,10)</minGlowColor>
-        <maxGlowColor>(230,0,0,100)</maxGlowColor>
-        <intervalTicks>30</intervalTicks>
-        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>        <!-- easingType : see more here: https://easings.net or in top of this file -->
-      </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <!-- speed settings -->
-        <speedSetting>true</speedSetting>
-        <minPowerForSpeed>0</minPowerForSpeed>
-        <minSpeedFactor>1</minSpeedFactor>
-        <maxPowerForSpeed>3000</maxPowerForSpeed>
-        <maxSpeedFactor>2</maxSpeedFactor>
-        <!-- range settings -->
-        <rangeSetting>true</rangeSetting>
-        <minPowerForRange>0</minPowerForRange>
-        <minRange>1</minRange>
-        <maxPowerForRange>1000</maxPowerForRange>
-        <maxRange>3</maxRange>
-        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
-        <!-- range color settings
-        <blueprintMin>(1,1,1,1)</blueprintMin>
-        <blueprintMax>(0.5,0.5,0.5,0.6)</blueprintMax>
-        <instance>(1,1,1,1)</instance>
-        <otherInstance>(1,1,1,0.35)</otherInstance>
-        -->
-      </li>
-    </comps>
-    <inspectorTabs>
-      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
-    </inspectorTabs>
-    <recipes>      <!-- Defines recipe to make it in ThingDef directly.	 (extra from importrecipesfrom) -->
-      <li>MakeNutrientPaste</li>
-      <li>MakeNutrientPasteBulk</li>
-    </recipes>
-    <building>
-      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
-      <isMealSource>true</isMealSource>      <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
-    </building>
-    <passability>Impassable</passability>    <!-- to be able to build them as walls -->
-    <researchPrerequisites>
-      <li>SelfCooking</li>
-      <li>SelfCorrectingAssemblers</li>
-    </researchPrerequisites>
-    <rotatable>true</rotatable>    <!-- for being able to swap between textures each rotation -->
-    <modExtensions>
-      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>          <!-- import same bills as vanilla electric stove have -->
-          <li>ElectricStove</li>
-        </importRecipesFrom>
-        <workSpeedBaseFactor>2</workSpeedBaseFactor>
-        <skillLevel>20</skillLevel>
-        <artSkillLevel>10</artSkillLevel>
-        <workingGraphicData>
-          <graphicClass>Graphic_Single</graphicClass>
-          <texPath>SAL3/SpacerCookerWorking</texPath>
-          <drawSize>(3,3)</drawSize>
-        </workingGraphicData>
-        <drawStatus>true</drawStatus>
-        <doEffect>true</doEffect>
-        <powerOffGraphicData>
-          <graphicClass>Graphic_Multi</graphicClass>
-          <texPath>SAL3/AutoCookerPowerOff</texPath>
-          <drawSize>(3,3)</drawSize>
-        </powerOffGraphicData>
-      </li>
-    </modExtensions>
-  </ThingDef>
-
-  <!--====================Meat Grinder====================-->
-  <ThingDef ParentName="PRF_AssemblerBase">
-    <defName>MeatGrinder</defName>
-    <label>meat grinder</label>
-    <designatorDropdown>assembler_food_gr</designatorDropdown>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
-    <graphicData>
-      <texPath>SAL3/smart_butcher</texPath>
-      <drawSize>(2.1,2.1)</drawSize>
-      <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
-    </graphicData>
-    <statBases>
-      <MaxHitPoints>200</MaxHitPoints>
-      <WorkToBuild>2500</WorkToBuild>
-      <MarketValue>700</MarketValue>
-      <Beauty>-25</Beauty>      <!-- this is pretty grose -->
-      <Cleanliness>0</Cleanliness>      <!-- INFO -->
-    </statBases>
-    <size>(2,2)</size>
-    <description>Precise grinder which processes corpses into piles of usable materials: meat, leather, etc.</description>
-    <costStuffCount>100</costStuffCount>
-    <surfaceType>Item</surfaceType>
-    <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <Steel>10</Steel>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>2</heatPerSecond>
-      </li>
-    </comps>
-    <!--<recipes></recipes>-->
-    <researchPrerequisites>
-      <li>SelfCooking</li>
-    </researchPrerequisites>
-    <rotatable>false</rotatable>
-    <modExtensions>
-      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>
-          <li>TableButcher</li>
-        </importRecipesFrom>
-        <drawStatus>true</drawStatus>
-        <doEffect>true</doEffect>
-        <workingGraphicData>
-          <graphicClass>Graphic_Single</graphicClass>
-          <texPath>SAL3/smart_butcher_working</texPath>
-          <drawSize>(2.1,2.1)</drawSize>
-        </workingGraphicData>
-      </li>
-    </modExtensions>
-    <placeWorkers>      <!-- Restrictor when placing the building. -->
-      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
-    </placeWorkers>
-  </ThingDef>
-
-  <!--====================Fermenting Barrel====================-->
-  <ThingDef ParentName="PRF_AssemblerBase">
-    <defName>PRFFermentingBarrel</defName>
-    <label>fermenting tank</label>
-    <designatorDropdown>assembler_food_gr</designatorDropdown>
-    <description>Fully automated fermenting. Self-regulates temperature to maintain the best quality.</description>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
-    <graphicData>
-      <texPath>SAL3/brewer</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1.8,1.8)</drawSize>
-    </graphicData>
-    <size>(1,1)</size>
-    <altitudeLayer>Building</altitudeLayer>
-    <fillPercent>1.0</fillPercent>
-    <pathCost>60</pathCost>
-    <uiIconScale>0.6</uiIconScale>
-    <statBases>
-      <WorkToBuild>600</WorkToBuild>
-      <Mass>17</Mass>
-      <MaxHitPoints>150</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <MarketValue>150</MarketValue>
-    </statBases>
-    <costList>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <Steel>100</Steel>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>100</basePowerConsumption>
-      </li>
-    </comps>
-    <recipes>
-      <li>BrewBeer_sixpack</li>
-      <li>BrewBeer_case</li>
-      <li>BrewBeer_keg</li>
-    </recipes>
-    <rotatable>False</rotatable>
-    <designationCategory>Industrial</designationCategory>
-    <researchPrerequisites>
-      <li>Brewing</li>
-      <li>SelfCooking</li>
-    </researchPrerequisites>
-    <modExtensions>
-      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <doEffect>false</doEffect>
-        <drawStatus>true</drawStatus>
-      </li>
-    </modExtensions>
-  </ThingDef>
-
-  <!--==================== Food Prepper ====================-->
-  <ThingDef ParentName="PRF_AssemblerBase">
-    <defName>SelfPrepper</defName>
-    <label>industrial food processor</label>
-    <size>(2,2)</size>
-    <designationCategory>Industrial</designationCategory>
-    <designatorDropdown>assembler_food_gr</designatorDropdown>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
-    <graphicData>
-      <texPath>SAL3/smart_prepper</texPath>
-      <drawSize>(2,2)</drawSize>
-    </graphicData>
-    <statBases>
-      <WorkToBuild>2000</WorkToBuild>
-      <MarketValue>700</MarketValue>
-      <MaxHitPoints>200</MaxHitPoints>
-    </statBases>
-    <description>A machine designed to boil, grind, or mill raw food resources into ingredients more suitable for cooking and brewing.</description>
-    <costStuffCount>100</costStuffCount>
-    <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <Steel>10</Steel>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
-      </li>
-    </comps>
-    <recipes>
-      <li>Make_Wort</li>
-    </recipes>
-    <building>
-      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
-    </building>
-    <researchPrerequisites>
-      <li>SelfCooking</li>
-    </researchPrerequisites>
-    <rotatable>false</rotatable>
-    <modExtensions>
-      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <doEffect>false</doEffect>
-        <drawStatus>true</drawStatus>
-      </li>
-    </modExtensions>
   </ThingDef>
 
 </Defs>

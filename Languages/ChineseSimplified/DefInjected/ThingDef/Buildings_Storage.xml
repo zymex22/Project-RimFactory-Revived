@@ -1,11 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
+  <StockpileCrateSmall.label>小储存箱</StockpileCrateSmall.label>
+  <StockpileCrateSmall.description>一个巨大的储存箱，最多可以保存16个物品，存放在箱子里的物品不会老化。</StockpileCrateSmall.description>
+  <StockpileCrateSmall_Blueprint.label>小储存箱（蓝图）</StockpileCrateSmall_Blueprint.label>
+  <StockpileCrateSmall_Frame.label>小储存箱（建造中）</StockpileCrateSmall_Frame.label>
+  <StockpileCrateSmall_Frame.description>一个巨大的储存箱，最多可以保存16个物品，存放在箱子里的物品不会老化。</StockpileCrateSmall_Frame.description>
+
   <StockpileCrate.label>储存箱</StockpileCrate.label>
   <StockpileCrate.description>一个巨大的储存箱，最多可以保存25个物品，存放在箱子里的物品不会老化。</StockpileCrate.description>
   <StockpileCrate_Blueprint.label>储存箱（蓝图）</StockpileCrate_Blueprint.label>
   <StockpileCrate_Frame.label>储存箱（建造中）</StockpileCrate_Frame.label>
   <StockpileCrate_Frame.description>一个巨大的储存箱，最多可以保存25个物品，存放在箱子里的物品不会老化。</StockpileCrate_Frame.description>
+
+  <StockpileCrateReinforcedTiny.label>小强化储存箱</StockpileCrateReinforcedTiny.label>
+  <StockpileCrateReinforcedTiny.description>一个巨大的储存箱，最多可以保存64个物品，存放在箱子里的物品不会老化。</StockpileCrateReinforcedTiny.description>
+  <StockpileCrateReinforcedTiny_Blueprint.label>小强化储存箱（蓝图）</StockpileCrateReinforcedTiny_Blueprint.label>
+  <StockpileCrateReinforcedTiny_Frame.label>小强化储存箱（建造中）</StockpileCrateReinforcedTiny_Frame.label>
+  <StockpileCrateReinforcedTiny_Frame.description>一个巨大的储存箱，最多可以保存64个物品，存放在箱子里的物品不会老化。</StockpileCrateReinforcedTiny_Frame.description>
 
   <StockpileCrateReinforced.label>强化储存箱</StockpileCrateReinforced.label>
   <StockpileCrateReinforced.description>一个巨大的储存箱，最多可以保存100个物品，存放在箱子里的物品不会老化。</StockpileCrateReinforced.description>

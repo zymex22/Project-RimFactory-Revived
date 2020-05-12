@@ -69,4 +69,8 @@
   <ADVrollers.label>先进传送带</ADVrollers.label>
   <ADVrollers.description>先进的压路机和推进器是第二层红外线压路机</ADVrollers.description>
 
+  <PRFRollers.label>高级传送带</PRFRollers.label>
+  <PRFRollers.description>第二层改进的压路机，然后是比工业压路机更先进</PRFRollers.description>
+
+
 </LanguageData>

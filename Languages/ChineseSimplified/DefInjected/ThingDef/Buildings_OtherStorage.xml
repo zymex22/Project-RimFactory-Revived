@@ -8,5 +8,12 @@
   <PRFStorageUnitIOPort_Frame.label>仓储平台I/O接口（建造中）</PRFStorageUnitIOPort_Frame.label>
   <PRFStorageUnitIOPort_Frame.description>一种重新设计的智能进料口，可以从仓储平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPort_Frame.description>
 
+  <PRFStorageUnitIOPortFridge.label>冰箱平台I/O接口</PRFStorageUnitIOPortFridge.label>
+  <PRFStorageUnitIOPortFridge.description>一种重新设计的智能进料口，可以从冰箱平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPortFridge.description>
+  <PRFStorageUnitIOPortFridge_Blueprint.label>冰箱平台I/O接口（蓝图）</PRFStorageUnitIOPortFridge_Blueprint.label>
+  <PRFStorageUnitIOPortFridge_Blueprint_Install.label>冰箱平台I/O接口（蓝图）</PRFStorageUnitIOPortFridge_Blueprint_Install.label>
+  <PRFStorageUnitIOPortFridge_Frame.label>冰箱平台I/O接口（建造中）</PRFStorageUnitIOPortFridge_Frame.label>
+  <PRFStorageUnitIOPortFridge_Frame.description>一种重新设计的智能进料口，可以从冰箱平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPortFridge_Frame.description>
+
 
 </LanguageData>

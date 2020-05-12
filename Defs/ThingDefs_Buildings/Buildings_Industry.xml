@@ -341,6 +341,14 @@
         <heatPerSecond>5</heatPerSecond>
       </li>
     </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>10</artSkillLevel>
+      </li>
+    </modExtensions>
     <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
@@ -376,6 +384,7 @@
         <heatPerSecond>12</heatPerSecond>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <pulse>false</pulse>
         <minGlowRadius>1</minGlowRadius>
         <maxGlowRadius>3</maxGlowRadius>
         <minGlowColor>(100,0,0,10)</minGlowColor>
@@ -592,57 +601,6 @@
     <researchPrerequisites>
       <li>UniversalAutocrafting</li>
     </researchPrerequisites>
-  </ThingDef>
-
-
-  <!--==================== Fueling Machine ====================-->
-  <ThingDef ParentName="PRF_IndustrialBase">
-    <defName>FuelingMachine</defName>
-    <label>fueling machine</label>
-    <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
-    <designatorDropdown>Pullers_gr</designatorDropdown>
-    <graphicData>
-      <texPath>Industry/FuelingMachine</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <damageData>
-        <rect>(0.05,0.1,0.9,0.9)</rect>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-      </damageData>
-      <drawSize>(2,2)</drawSize>
-    </graphicData>
-    <passability>PassThroughOnly</passability>
-    <castEdgeShadows>true</castEdgeShadows>
-    <statBases>
-      <WorkToBuild>450</WorkToBuild>
-      <MaxHitPoints>150</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <Mass>15</Mass>
-    </statBases>
-    <description>A robotic arm built on a small machine frame that can automatically fuel the building in front of it.</description>
-    <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <ComponentIndustrial>2</ComponentIndustrial>
-    </costList>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>50</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_Breakdownable"/>
-    </comps>
-    <tickerType>Normal</tickerType>
-    <rotatable>true</rotatable>
-    <staticSunShadowHeight>0.1</staticSunShadowHeight>
-    <researchPrerequisites>
-      <li>AutomationBasics</li>
-    </researchPrerequisites>
-    <placeWorkers>
-      <li>ProjectRimFactory.Industry.PlaceWorker_FuelingMachine</li>
-    </placeWorkers>
   </ThingDef>
 
 </Defs>

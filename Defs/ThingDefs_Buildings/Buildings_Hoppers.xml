@@ -10,7 +10,7 @@
     <defName>Hoppers_gr</defName>
   </DesignatorDropdownGroupDef>
 
-  <!--============================== Smart Puller ==============================-->
+  <!--============================== Smart Puller / vacuum Hopper ==============================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>SAL_SmartHopper</defName>
     <label>Vacuum Hopper</label>
@@ -48,6 +48,7 @@
     </building>
     <inspectorTabs>
       <li>ITab_Storage</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
@@ -58,8 +59,8 @@
     </statBases>
     <description>A Vacuum Hopper that take in any items on stockpiles within 5 tile range, even different stockpiles, as long their cells are in range. It can be setup to specific type and amount, and hold onto it until pulled away.</description>
     <costList>
-      <Steel>20</Steel>
-      <ComponentIndustrial>3</ComponentIndustrial>
+      <Steel>30</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
     <comps>
       <li Class="CompProperties_Breakdownable"/>
@@ -70,6 +71,16 @@
       <li Class="CompProperties_Flickable" />
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+      <!-- Either specialDisplayRadius or CompProperties_PowerWorkSetting -->
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <speedSetting>false</speedSetting>
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>5</minRange>
+        <maxPowerForRange>500</maxPowerForRange>
+        <maxRange>10</maxRange>
+        <rangeType>ProjectRimFactory.Common.CircleRange</rangeType>
       </li>
     </comps>
     <tickerType>Normal</tickerType>
@@ -83,7 +94,7 @@
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
-    <specialDisplayRadius>5</specialDisplayRadius>    <!--A.K.A. Search radius-->
+    <!-- <specialDisplayRadius>5</specialDisplayRadius> -->   <!--A.K.A. Search radius-->
     <researchPrerequisites>
       <li>AutomationBasics</li>
     </researchPrerequisites>
@@ -185,6 +196,56 @@
         <outColor>(215, 169, 72, 255)</outColor>
       </li>
     </modExtensions>
+  </ThingDef>
+
+  <!--==================== Fueling Machine ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>FuelingMachine</defName>
+    <label>fueling machine</label>
+    <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
+    <designatorDropdown>Pullers_gr</designatorDropdown>
+    <graphicData>
+      <texPath>Industry/FuelingMachine</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <passability>PassThroughOnly</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>450</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Mass>15</Mass>
+    </statBases>
+    <description>A robotic arm built on a small machine frame that can automatically fuel the building in front of it.</description>
+    <costList>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>50</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <rotatable>true</rotatable>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>AutomationBasics</li>
+    </researchPrerequisites>
+    <placeWorkers>
+      <li>ProjectRimFactory.Industry.PlaceWorker_FuelingMachine</li>
+    </placeWorkers>
   </ThingDef>
 
 </Defs>

@@ -21,5 +21,17 @@
   <MakeAIPersonaCoreFromWeakAIChips.description>融合10个弱AI芯片来制作AI伪人格核心。</MakeAIPersonaCoreFromWeakAIChips.description>
   <MakeAIPersonaCoreFromWeakAIChips.jobString>正在制作AI伪人格核心。</MakeAIPersonaCoreFromWeakAIChips.jobString>
 
+  <MakeSmallFrame.label>制作机械框架（小）</MakeSmallFrame.label>
+  <MakeSmallFrame.description>制作机械框架（小）。</MakeSmallFrame.description>
+  <MakeSmallFrame.jobString>正在制作机械框架（小）。</MakeSmallFrame.jobString>
+
+  <MakeMediumFrame.label>制作机械框架</MakeMediumFrame.label>
+  <MakeMediumFrame.description>制作机械框架。</MakeMediumFrame.description>
+  <MakeMediumFrame.jobString>正在制作机械框架。</MakeMediumFrame.jobString>
+
+  <MakeLargeFrame.label>制作机械框架（大）</MakeLargeFrame.label>
+  <MakeLargeFrame.description>制作机械框架（大）。</MakeLargeFrame.description>
+  <MakeLargeFrame.jobString>正在制作机械框架（大）。</MakeLargeFrame.jobString>
+
 
 </LanguageData>

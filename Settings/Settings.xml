@@ -41,7 +41,7 @@
 
   <!-- GlowerPulse animation -->
   <Row Class="ProjectRimFactory.Common.PatchItem">
-    <key>turn.off.glower.pulse.effect</key>
+    <key>turn.on.glower.pulse.effect</key>
     <label>PRF.Settings.TurnOffPulseGlowerEffect.Label</label>
     <description>PRF.Settings.TurnOffPulseGlowerEffect.Desc</description>
     <Patch>
@@ -53,7 +53,7 @@
         <success>Always</success>
         <xpath>/Defs/ThingDef/comps/li[@Class="ProjectRimFactory.Common.CompProperties_GlowerPulse"]</xpath>
         <value>
-          <pulse>false</pulse>
+          <pulse>true</pulse>
         </value>
       </Operation>
     </Patch>
@@ -111,6 +111,28 @@
         <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]</xpath>
         <value>
           <doEffect>false</doEffect>
+        </value>
+      </Operation>
+    </Patch>
+  </Row>
+
+  <!-- Recipe DB Range -->
+  <Row Class="ProjectRimFactory.Common.PatchIntValueItem">
+    <key>set.range.recipe.db</key>
+    <label>PRF.Settings.recipeDB.Label</label>
+    <description>PRF.Settings.recipeDB.Desc</description>
+    <minValue>2</minValue>
+    <maxValue>32</maxValue>
+    <roundTo>1</roundTo>
+    <value>2</value>
+    <!-- PatchOperation executed at check on -->
+    <Patch>
+      <Operation Class="PatchOperationReplace">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/comps/li[@Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange"]/range</xpath>
+        <value>
+          <!-- ${value} is replaced with the entered value. -->
+          <range>${value}</range>
         </value>
       </Operation>
     </Patch>
@@ -181,7 +203,7 @@
     <Patch>
       <Operation Class="PatchOperationReplace">
         <success>Always</success>
-        <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate"]/limit</xpath>
+        <xpath>/Defs/ThingDef[defName="PRFCargoPlatform"]/modExtensions/li[@Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate"]/limit</xpath>
         <value>
           <!-- ${value} is replaced with the entered value. -->
           <limit>${value}</limit>
@@ -225,7 +247,7 @@
   </Row>
 
   <!-- Vacuum Hopper -->
-  <Row Class="ProjectRimFactory.Common.PatchItem">
+  <!-- <Row Class="ProjectRimFactory.Common.PatchItem">
     <key>turn.off.hopper.pickup</key>
     <label>PRF.Settings.VacuumHopper.Label</label>
     <description>PRF.Settings.VacuumHopper.Desc</description>
@@ -235,6 +257,6 @@
         <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Settings"]</xpath>
       </Operation>
     </Patch>
-  </Row>
+  </Row> -->
 
 </SettingRows>

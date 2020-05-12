@@ -40,7 +40,9 @@
   <AtomicReconstructionTab_ConsumptionPerSecond>每秒消耗回形针：</AtomicReconstructionTab_ConsumptionPerSecond>
   <AtomicReconstructionTab_Progress>进度：</AtomicReconstructionTab_Progress>
   <AtomicReconstructionTab_Speed>速度增倍器：{0}（回形针消耗修正：{0} X {1} 倍）</AtomicReconstructionTab_Speed>
+  
   <PRF_ArchoCipher_BankOverflow>回形针复制器中的AI芯片向您发送了一条消息：\n\n恭喜你！你的回形针已经在复制器中实现了最大平衡。真正的问题是：你打算用这些回形针来做什么？</PRF_ArchoCipher_BankOverflow>
+ 
   <PRF_TimeLeftToDisintegrate>解体的时间: {0}</PRF_TimeLeftToDisintegrate>
   <PRF_DisintegrationMessage>{0} 解体了。</PRF_DisintegrationMessage>
   <PRFPaperclipDuplicatorTab>复制器</PRFPaperclipDuplicatorTab>
@@ -57,9 +59,13 @@
   <PRFBoundStorageUnitNotAvailableForIO>绑定的仓储单元无法使用物品转移功能。</PRFBoundStorageUnitNotAvailableForIO>
   <SuccessfullyDepositedPaperclips>成功存储 {0} 个回形针。</SuccessfullyDepositedPaperclips>
   <SuccessfullyWithdrawnPaperclips>成功取出 {0} 个回形针。</SuccessfullyWithdrawnPaperclips>
+  
   <PRFDroneStation_NumberOfDrones>存储的无人机：{0}</PRFDroneStation_NumberOfDrones>
   <PRFDroneName>无人机</PRFDroneName>
   <PRFDroneStationLockdown>关闭</PRFDroneStationLockdown>
   <PRFDroneStationLockdownDesc>召回所有活动在无人机并且禁止使用无人机站。</PRFDroneStationLockdownDesc>
-
+  
+  <PRFOutputItems>项目输出</PRFOutputItems>
+  <PRFPawnAccessLabel>人物访问</PRFPawnAccessLabel>
+  <PRFPawnAccessDesc>人物访问</PRFPawnAccessDesc>
 </LanguageData>

@@ -106,7 +106,7 @@ namespace ProjectRimFactory.Common
         {
             if(this.powerComp != null)
             {
-                this.powerComp.PowerOutput = this.powerComp.Props.basePowerConsumption - this.SupplyPowerForSpeed - this.SupplyPowerForRange;
+                this.powerComp.PowerOutput = -this.powerComp.Props.basePowerConsumption - this.SupplyPowerForSpeed - this.SupplyPowerForRange;
             }
         }
 

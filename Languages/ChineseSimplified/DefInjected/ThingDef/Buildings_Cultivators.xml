@@ -15,11 +15,17 @@
   <CultivatorTools_CultivatorWithLamp_Frame.label>太阳灯耕作机（建造中）</CultivatorTools_CultivatorWithLamp_Frame.label>
   <CultivatorTools_CultivatorWithLamp_Frame.description>自带太阳灯的耕种机，可以在周围11个方格内自动种植和收获作物。 它不会受到任何属性修正的影响。</CultivatorTools_CultivatorWithLamp_Frame.description>
 
-  <CultivatorTools_b18Cultivator.label>B18太阳灯耕作机（不稳定）</CultivatorTools_b18Cultivator.label>
-  <CultivatorTools_b18Cultivator.description>不稳定，这是B18太阳灯耕作机，它有一个输出槽，对水培更有效。</CultivatorTools_b18Cultivator.description>
-  <CultivatorTools_b18Cultivator_Blueprint.label>B18太阳灯耕作机（不稳定）（蓝图）</CultivatorTools_b18Cultivator_Blueprint.label>
-  <CultivatorTools_b18Cultivator_Frame.label>B18太阳灯耕作机（不稳定）（建造中）</CultivatorTools_b18Cultivator_Frame.label>
-  <CultivatorTools_b18Cultivator_Frame.description>不稳定，这是B18太阳灯耕作机，它有一个输出槽，对水培更有效。</CultivatorTools_b18Cultivator_Frame.description>
+  <CultivatorTools_b18Cultivator.label>高科技耕作机</CultivatorTools_b18Cultivator.label>
+  <CultivatorTools_b18Cultivator.description>这是一个高科技的耕地机，里面装有工人机械装置，可以播种，收获和维持生长区或水培设施。 它还将输出到单元中以进行进一步处理。</CultivatorTools_b18Cultivator.description>
+  <CultivatorTools_b18Cultivator_Blueprint.label>高科技耕作机（蓝图）</CultivatorTools_b18Cultivator_Blueprint.label>
+  <CultivatorTools_b18Cultivator_Frame.label>高科技耕作机（建造中）</CultivatorTools_b18Cultivator_Frame.label>
+  <CultivatorTools_b18Cultivator_Frame.description>这是一个高科技的耕地机，里面装有工人机械装置，可以播种，收获和维持生长区或水培设施。 它还将输出到单元中以进行进一步处理。</CultivatorTools_b18Cultivator_Frame.description>
+
+  <CultivatorTools_b18CultivatorSun.label>高科技耕作机（太阳灯）</CultivatorTools_b18CultivatorSun.label>
+  <CultivatorTools_b18CultivatorSun.description>这是一个高科技的耕地机，里面装有工人机械装置，可以播种，收获和维持生长区或水培设施。 它的侧面装有全光谱LED阳光。 它还将输出到单元中以进行进一步处理。</CultivatorTools_b18CultivatorSun.description>
+  <CultivatorTools_b18CultivatorSun_Blueprint.label>高科技耕作机（太阳灯）（蓝图）</CultivatorTools_b18CultivatorSun_Blueprint.label>
+  <CultivatorTools_b18CultivatorSun_Frame.label>高科技耕作机（太阳灯）（建造中）</CultivatorTools_b18CultivatorSun_Frame.label>
+  <CultivatorTools_b18CultivatorSun_Frame.description>这是一个高科技的耕地机，里面装有工人机械装置，可以播种，收获和维持生长区或水培设施。 它的侧面装有全光谱LED阳光。 它还将输出到单元中以进行进一步处理。</CultivatorTools_b18CultivatorSun_Frame.description>
 
 
   <!-- Sprinkler -->
