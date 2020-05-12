@@ -14,49 +14,71 @@ namespace ProjectRimFactory.Common
     public class ModExtension_Miner : DefModExtension
     {
         public List<ThingDef> excludeOres;
-        public List<MiningBonusYield> bonusYields;
-        public bool multiBonus = false;
+        public MiningBonusYieldList bonusYields;
 
         public bool IsExcluded(ThingDef def)
         {
             return this.excludeOres?.Contains(def) ?? false;
         }
-
-        public IEnumerable<Thing> GetBonusYields(ThingDef mineThingDef)
+        public Thing GetBonusYield(ThingDef mineThingDef)
         {
-            return this.bonusYields
-                ?.OrderBy(a => Guid.NewGuid())
-                .Where(b => b.def != mineThingDef)
-                .Where(b => Rand.Chance(b.Chance))
-                .Where((b, i) => this.multiBonus || i == 0)
-                .Select(this.MakeThing)
-                ?? Enumerable.Empty<Thing>();
+            return this.bonusYields?.GetBonusYield(mineThingDef);
+        }
+    }
+
+    public class MiningBonusYieldList
+    {
+        public List<MiningBonusYield> yields;
+
+        public float chance;
+
+        public void LoadDataFromXmlCustom(XmlNode xmlRoot)
+        {
+            if(xmlRoot.Attributes["Chance"] != null)
+            {
+                float.TryParse(xmlRoot.Attributes["Chance"].Value, out this.chance);
+            }
+            this.yields = xmlRoot.ChildNodes.Cast<XmlNode>().Where(n => n.NodeType == XmlNodeType.Element)
+                    .Select(n => n as XmlElement)
+                    .Where(e => e != null)
+                    .Select(e => DirectXmlToObject.ObjectFromXml<MiningBonusYield>(e, false))
+                    .ToList();
         }
 
-        private Thing MakeThing(MiningBonusYield bonus)
+        public Thing GetBonusYield(ThingDef miningDef)
         {
-            var t = ThingMaker.MakeThing(bonus.def);
-            t.stackCount = bonus.Count;
-            return t;
+            if (Rand.Chance(this.chance))
+            {
+                var yield = this.yields?
+//                    .Where(y => y.def != miningDef)
+                    .RandomElementByWeightWithFallback(y => y.Weight, null);
+                if(yield != null)
+                {
+                    var t = ThingMaker.MakeThing(yield.def);
+                    t.stackCount = yield.Count;
+                    return t;
+                }
+            }
+            return null;
         }
     }
 
     public class MiningBonusYield
     {
         public ThingDef def;
-        public float chance;
+        public float weight;
         public int count;
 
         public int Count => Mathf.Min(this.count, this.def.stackLimit);
 
-        public float Chance => this.chance;
+        public float Weight => this.weight;
 
         public void LoadDataFromXmlCustom(XmlNode xmlRoot)
         {
             DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, "def", xmlRoot.Name, null, null);
-            if (xmlRoot.Attributes["Chance"] != null)
+            if (xmlRoot.Attributes["Weight"] != null)
             {
-                float.TryParse(xmlRoot.Attributes["Chance"].Value, out this.chance);
+                float.TryParse(xmlRoot.Attributes["Weight"].Value, out this.weight);
             }
             if (xmlRoot.Attributes["Count"] != null)
             {

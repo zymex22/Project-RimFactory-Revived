@@ -94,26 +94,23 @@
       </li>
       <!--
         excludeOres : exclude ore list.
-        bonusYield  : Bonus yield ore list. for example, steel chance=10% count=10, Plasteel chance=20% count=15.
-          <bonusYields>
-            <Steel Chance="0.1" Count="10" />
-            <Plasteel Chance="0.2" Count="15" />
+        bonusYield  : Bonus yield ore list. for example, 10% bonus yield chanse, Steel bonus : Plasteel bonus = 1 : 2
+          <bonusYields Chance="0.1">
+            <Steel Weight="1" Count="10" />
+            <Plasteel Weight="2" Count="15" />
           </<bonusYields>
-        multiBonus  : check all bonus yield chance.
-          multiBonus outputs all bonuses that meet the chance. For example, if all Chance are 1, output all.
-          If multiBonus is false, Only the random one to meet the chance.
       -->
       <li Class="ProjectRimFactory.Common.ModExtension_Miner">
         <excludeOres>
-          <li>ChunkSandstone</li>
-          <li>ChunkGranite</li>
           <li>Steel</li>
+          <li>Gold</li>
+          <li>Uranium</li>
+          <li>Plasteel</li>
         </excludeOres>
-        <bonusYields>
-          <Steel Chance="0.1" Count="10" />
-          <Plasteel Chance="0.2" Count="15" />
+        <bonusYields Chance="0.1">
+          <Steel Weight="1" Count="20" />
+          <ChunkSlagSteel Weight="1" Count="1" />
         </bonusYields>
-        <multiBonus>false</multiBonus>
       </li>
     </modExtensions>
     <tickerType>Long</tickerType>
@@ -184,13 +181,21 @@
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Miner">
         <excludeOres>
-          <li>Steel</li>
+          <li>ComponentIndustrial</li>
+          <li>Plasteel</li>
+          <li>ChunkSandstone</li>
+          <li>ChunkGranite</li>
+          <li>ChunkLimestone</li>
+          <li>ChunkSlate</li>
+          <li>ChunkMarble</li>
         </excludeOres>
-        <bonusYields>
-          <Steel Chance="0.2" Count="10" />
-          <Plasteel Chance="0.1" Count="15" />
+        <bonusYields Chance="0.2">
+          <ChunkSandstone Weight="1" Count="1" />
+          <ChunkGranite Weight="1" Count="1" />
+          <ChunkLimestone Weight="1" Count="1" />
+          <ChunkSlate Weight="1" Count="1" />
+          <ChunkMarble Weight="1" Count="1" />
         </bonusYields>
-        <multiBonus>false</multiBonus>
       </li>
     </modExtensions>
     <tickerType>Long</tickerType>
@@ -281,13 +286,12 @@
       </li>        -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
       <li Class="ProjectRimFactory.Common.ModExtension_Miner">
         <excludeOres>
-          <li>Steel</li>
+          <li>ComponentIndustrial</li>
+          <li>Plasteel</li>
         </excludeOres>
-        <bonusYields>
-          <Steel Chance="0.2" Count="10" />
-          <Plasteel Chance="0.1" Count="15" />
+        <bonusYields Chance="0.01">
+          <InsectJelly Weight="1" Count="30" />
         </bonusYields>
-        <multiBonus>false</multiBonus>
       </li>
     </modExtensions>
   </ThingDef>
