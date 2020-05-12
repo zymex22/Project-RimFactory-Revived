@@ -114,5 +114,24 @@
   <Building_AutoMachineTool_Miner_Frame.label>深矿机（大）（建造中）</Building_AutoMachineTool_Miner_Frame.label>
   <Building_AutoMachineTool_Miner_Frame.description>利用最新的间隔技术，自动采矿比以往任何时候都更精确，现在可以调整要开采的矿石，甚至可以平衡速度的功率</Building_AutoMachineTool_Miner_Frame.description>
 
+  <PRF_FurnaceI.label>高炉</PRF_FurnaceI.label>
+  <PRF_FurnaceI.description>早期的熔炉。 用于燃烧不需要的东西并将原始资源冶炼成有用的材料，也可以将石头燃烧成有用的砖头</PRF_FurnaceI.description>
+  <PRF_FurnaceI_Blueprint.label>高炉（蓝图）</PRF_FurnaceI_Blueprint.label>
+  <PRF_FurnaceI_Frame.label>高炉（建造中）</PRF_FurnaceI_Frame.label>
+  <PRF_FurnaceI_Frame.description>早期的熔炉。 用于燃烧不需要的东西并将原始资源冶炼成有用的材料，也可以将石头燃烧成有用的砖头</PRF_FurnaceI_Frame.description>
+
+  <PRF_FurnaceII.label>钢炉</PRF_FurnaceII.label>
+  <PRF_FurnaceII.description>先进的钢炉、填充和冶炼原材料的炉子</PRF_FurnaceII.description>
+  <PRF_FurnaceII_Blueprint.label>钢炉（蓝图）</PRF_FurnaceII_Blueprint.label>
+  <PRF_FurnaceII_Frame.label>钢炉（建造中）</PRF_FurnaceII_Frame.label>
+  <PRF_FurnaceII_Frame.description>先进钢炉、填充和冶炼原材料的炉子</PRF_FurnaceII_Frame.description>
+  
+  <PRF_FurnaceIII.label>电熔矿炉</PRF_FurnaceIII.label>
+  <PRF_FurnaceIII.description>先进的钢炉、填充和冶炼原材料的炉子</PRF_FurnaceIII.description>
+  <PRF_FurnaceIII_Blueprint.label>电熔矿炉（蓝图）</PRF_FurnaceIII_Blueprint.label>
+  <PRF_FurnaceIII_Frame.label>电熔矿炉（建造中）</PRF_FurnaceIII_Frame.label>
+  <PRF_FurnaceIII_Frame.description>先进钢炉、填充和冶炼原材料的炉子</PRF_FurnaceIII_Frame.description>
+
+
 
 </LanguageData>

@@ -16,11 +16,18 @@
   <UniversalAssembler_Frame.description>由计算机控制的工作站。需要从配方数据库中读取配方才能正常工作。</UniversalAssembler_Frame.description>
 
   <SelfCooker.label>自动烹饪机</SelfCooker.label>
-  <SelfCooker.description>一台会自己做饭的自动烹饪机，你只需要在一旁看着！</SelfCooker.description>
+  <SelfCooker.description>各种各样的食品加工模块，可以将成分去皮，切碎，剁碎，混合，烹饪，蒸汽，烧烤和烘烤成或多或少的美味餐食和其他可食用产品。\n\n使用一站式解决方案来满足您所有殖民地的寄养需求，再也不会破坏一顿饭了。 只要看看就行！\n\n 制作速度X1\n 清洁度5 \n 烹饪等级 10</SelfCooker.description>
   <SelfCooker_Blueprint.label>自动烹饪机（蓝图）</SelfCooker_Blueprint.label>
   <SelfCooker_Blueprint_Install.label>自动烹饪机（蓝图）</SelfCooker_Blueprint_Install.label>
   <SelfCooker_Frame.label>自动烹饪机（建造中）</SelfCooker_Frame.label>
-  <SelfCooker_Frame.description>一台会自己做饭的自动烹饪机，你只需要在一旁看着！</SelfCooker_Frame.description>
+  <SelfCooker_Frame.description>各种各样的食品加工模块，可以将成分去皮，切碎，剁碎，混合，烹饪，蒸汽，烧烤和烘烤成或多或少的美味餐食和其他可食用产品。\n\n使用一站式解决方案来满足您所有殖民地的寄养需求，再也不会破坏一顿饭了。 只要看看就行！\n\n 制作速度X1\n 清洁度5 \n 烹饪等级 10</SelfCooker_Frame.description>
+
+  <PRF_SpacerCooker.label>先进自动烹饪机</PRF_SpacerCooker.label>
+  <PRF_SpacerCooker.description>各种各样的食品加工模块，可以将成分去皮，切碎，剁碎，混合，烹饪，蒸汽，烧烤和烘烤成或多或少的美味餐食和其他可食用产品。\n\n使用一站式解决方案来满足您所有殖民地的寄养需求，再也不会破坏一顿饭了。 只要看看就行！\n\n 制作速度X2\n 清洁度20 \n 烹饪等级 20</PRF_SpacerCooker.description>
+  <PRF_SpacerCooker_Blueprint.label>先进自动烹饪机（蓝图）</PRF_SpacerCooker_Blueprint.label>
+  <PRF_SpacerCooker_Blueprint_Install.label>自动烹饪机（蓝图）</PRF_SpacerCooker_Blueprint_Install.label>
+  <PRF_SpacerCooker_Frame.label>先进自动烹饪机（建造中）</PRF_SpacerCooker_Frame.label>
+  <PRF_SpacerCooker_Frame.description>各种各样的食品加工模块，可以将成分去皮，切碎，剁碎，混合，烹饪，蒸汽，烧烤和烘烤成或多或少的美味餐食和其他可食用产品。\n\n使用一站式解决方案来满足您所有殖民地的寄养需求，再也不会破坏一顿饭了。 只要看看就行！\n\n 制作速度X2\n 清洁度20 \n 烹饪等级 20</PRF_SpacerCooker_Frame.description>
 
   <MeatGrinder.label>自动屠宰机</MeatGrinder.label>
   <MeatGrinder.description>一台会自己屠宰的自动屠宰机，你只需要在一旁看着！</MeatGrinder.description>

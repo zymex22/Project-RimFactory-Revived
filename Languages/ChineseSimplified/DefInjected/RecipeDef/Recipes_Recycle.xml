@@ -14,4 +14,10 @@
     <RecycleWeapon.description>用强热和电磁铁将武器分解成有用的金属.</RecycleWeapon.description>
     <RecycleWeapon.jobString>正在熔炼武器.</RecycleWeapon.jobString>
 
+  <!--  Destroy Stone Chunks  -->
+
+    <prfDestroyChunks.label>熔炼石块</prfDestroyChunks.label>
+    <prfDestroyChunks.description>压碎不需要的石块将其完全摧毁.</prfDestroyChunks.description>
+    <prfDestroyChunks.jobString>正在熔炼石块.</prfDestroyChunks.jobString>
+    
 </LanguageData>

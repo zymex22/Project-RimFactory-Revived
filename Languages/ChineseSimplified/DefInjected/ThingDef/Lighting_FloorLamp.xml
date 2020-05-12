@@ -23,10 +23,23 @@
   <!-- ================= Red X ======================= -->
 
     <Lighting_FloorLampX.label>红色X地板</Lighting_FloorLampX.label>
-    <Lighting_FloorLampX.description>X形弱荧光地板标志</Lighting_FloorLampX.description>
+    <Lighting_FloorLampX.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_FloorLampX.description>
     <Lighting_FloorLampX_Blueprint.label>红色X地板 (蓝图)</Lighting_FloorLampX_Blueprint.label>
     <Lighting_FloorLampX_Frame.label>红色X地板 (建造中)</Lighting_FloorLampX_Frame.label>
     <Lighting_FloorLampX_Frame.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_FloorLampX_Frame.description>
+
+    <Lighting_FloorInput.label>输入符号地板</Lighting_FloorInput.label>
+    <Lighting_FloorInput.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_FloorInput.description>
+    <Lighting_FloorInput_Blueprint.label>输入符号地板 (蓝图)</Lighting_FloorInput_Blueprint.label>
+    <Lighting_FloorInput_Frame.label>输入符号地板 (建造中)</Lighting_FloorInput_Frame.label>
+    <Lighting_FloorInput_Frame.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_FloorInput_Frame.description>
+
+    <Lighting_FloorOutput.label>输出符号地板</Lighting_FloorOutput.label>
+    <Lighting_FloorOutput.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_FloorOutput.description>
+    <Lighting_FloorOutput_Blueprint.label>输出符号地板 (蓝图)</Lighting_FloorOutput_Blueprint.label>
+    <Lighting_FloorOutput_Frame.label>输出符号地板 (建造中)</Lighting_FloorOutput_Frame.label>
+    <Lighting_FloorOutput_Frame.description>用箭头形状的弱荧光地板标志指示方向或紧急出口？</Lighting_FloorOutput_Frame.description>
+
 
 
 </LanguageData>
