@@ -41,7 +41,7 @@
 
   <!-- GlowerPulse animation -->
   <Row Class="ProjectRimFactory.Common.PatchItem">
-    <key>turn.off.glower.pulse.effect</key>
+    <key>turn.on.glower.pulse.effect</key>
     <label>PRF.Settings.TurnOffPulseGlowerEffect.Label</label>
     <description>PRF.Settings.TurnOffPulseGlowerEffect.Desc</description>
     <Patch>
@@ -53,7 +53,7 @@
         <success>Always</success>
         <xpath>/Defs/ThingDef/comps/li[@Class="ProjectRimFactory.Common.CompProperties_GlowerPulse"]</xpath>
         <value>
-          <pulse>false</pulse>
+          <pulse>true</pulse>
         </value>
       </Operation>
     </Patch>
