@@ -76,10 +76,41 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>10</heatPerSecond>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <minGlowRadius>1</minGlowRadius>
+        <maxGlowRadius>3</maxGlowRadius>
+        <minGlowColor>(100,0,0,10)</minGlowColor>
+        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <intervalTicks>30</intervalTicks>
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
+        <effect>Drill</effect>
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
         <TickCount>8</TickCount>
+      </li>
+      <!--
+        excludeOres : exclude ore list.
+        bonusYield  : Bonus yield ore list. for example, 10% bonus yield chanse, Steel bonus : Plasteel bonus = 1 : 2
+          <bonusYields Chance="0.1">
+            <Steel Weight="1" Count="10" />
+            <Plasteel Weight="2" Count="15" />
+          </<bonusYields>
+      -->
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>Steel</li>
+          <li>Gold</li>
+          <li>Uranium</li>
+          <li>Plasteel</li>
+        </excludeOres>
+        <bonusYields Chance="0.1">
+          <Steel Weight="1" Count="20" />
+          <ChunkSlagSteel Weight="1" Count="1" />
+        </bonusYields>
       </li>
     </modExtensions>
     <tickerType>Long</tickerType>
@@ -132,10 +163,39 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <minGlowRadius>1</minGlowRadius>
+        <maxGlowRadius>3</maxGlowRadius>
+        <minGlowColor>(100,0,0,10)</minGlowColor>
+        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <intervalTicks>30</intervalTicks>
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
+        <effect>Drill</effect>
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
         <TickCount>3</TickCount>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>ComponentIndustrial</li>
+          <li>Plasteel</li>
+          <li>ChunkSandstone</li>
+          <li>ChunkGranite</li>
+          <li>ChunkLimestone</li>
+          <li>ChunkSlate</li>
+          <li>ChunkMarble</li>
+        </excludeOres>
+        <bonusYields Chance="0.2">
+          <ChunkSandstone Weight="1" Count="1" />
+          <ChunkGranite Weight="1" Count="1" />
+          <ChunkLimestone Weight="1" Count="1" />
+          <ChunkSlate Weight="1" Count="1" />
+          <ChunkMarble Weight="1" Count="1" />
+        </bonusYields>
       </li>
     </modExtensions>
     <tickerType>Long</tickerType>
@@ -192,6 +252,14 @@
         <glowRadius>6</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <minGlowRadius>1</minGlowRadius>
+        <maxGlowRadius>3</maxGlowRadius>
+        <minGlowColor>(100,0,0,10)</minGlowColor>
+        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <intervalTicks>30</intervalTicks>
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
+      </li>
     </comps>
 
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
@@ -216,6 +284,15 @@
       <!--  <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
         <effectWorking>Drill</effectWorking>
       </li>        -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>ComponentIndustrial</li>
+          <li>Plasteel</li>
+        </excludeOres>
+        <bonusYields Chance="0.01">
+          <InsectJelly Weight="1" Count="30" />
+        </bonusYields>
+      </li>
     </modExtensions>
   </ThingDef>
 

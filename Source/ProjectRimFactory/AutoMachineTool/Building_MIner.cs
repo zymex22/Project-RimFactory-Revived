@@ -9,6 +9,7 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -59,6 +60,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.readyOnStart = true;
             }
+            this.billStack.Bills.RemoveAll(b => this.def.GetModExtension<ModExtension_Miner>()?.IsExcluded(b.recipe.ProducedThingDef) ?? false);
         }
 
         protected override bool WorkInterruption(Building_Miner working)
@@ -83,7 +85,15 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool FinishWorking(Building_Miner working, out List<Thing> products)
         {
-            products = GenRecipe2.MakeRecipeProducts(this.workingBill.recipe, this, new List<Thing>(), null, this).ToList();
+            var bonus = this.def.GetModExtension<ModExtension_Miner>()?.GetBonusYield(this.workingBill.recipe.ProducedThingDef);
+            if (bonus == null)
+            {
+                products = GenRecipe2.MakeRecipeProducts(this.workingBill.recipe, this, new List<Thing>(), null, this).ToList();
+            }
+            else
+            {
+                products = new List<Thing>().Append(bonus);
+            }
             this.workingBill.Notify_IterationCompleted(null, new List<Thing>());
             this.workingBill = null;
             return true;
@@ -121,6 +131,11 @@ namespace ProjectRimFactory.AutoMachineTool
             this.workingEffect = Nothing<Effecter>();
 
             MapManager.RemoveEachTickAction(this.EffectTick);
+
+            if (this.GetComp<CompGlowerPulse>() != null)
+            {
+                this.GetComp<CompGlowerPulse>().Glows = false;
+            }
         }
 
         protected override void CreateWorkingEffect()
@@ -130,6 +145,10 @@ namespace ProjectRimFactory.AutoMachineTool
             this.workingEffect = this.workingEffect.Fold(() => Option(this.workingBill.recipe.effectWorking).Select(e => e.Spawn()))(e => Option(e));
 
             MapManager.EachTickAction(this.EffectTick);
+            if (this.GetComp<CompGlowerPulse>() != null)
+            {
+                this.GetComp<CompGlowerPulse>().Glows = true;
+            }
         }
 
         protected bool EffectTick()
@@ -144,9 +163,12 @@ namespace ProjectRimFactory.AutoMachineTool
             base.SpawnSetup(map, respawningAfterLoad);
 
             this.adjacent = GenAdj.CellsAdjacent8Way(this).ToArray();
+
+            if (this.GetComp<CompGlowerPulse>() != null)
+            {
+                this.GetComp<CompGlowerPulse>().Glows = false;
+            }
         }
-
-
 
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -202,6 +224,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     .Where(d => d.mineable && d.building != null && d.building.mineableThing != null && d.building.mineableYield > 0)
                     .Where(d => d.building.isResourceRock || d.building.isNaturalRock)
                     .Select(d => new ThingDefCountClass(d.building.mineableThing, d.building.mineableYield))
+                    .Where(d => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.thingDef) ?? true)
                     .ToList();
 
                 var mineablesSet = mineables.Select(d => d.thingDef).ToHashSet();

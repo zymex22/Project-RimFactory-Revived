@@ -7,28 +7,18 @@ using Verse;
 using RimWorld;
 using System.Diagnostics.Eventing.Reader;
 using HarmonyLib;
+using System.IO;
 
 namespace ProjectRimFactory.Common
 {
     public class CompGlowerPulse : CompGlower
     {
         public new CompProperties_GlowerPulse Props => (CompProperties_GlowerPulse)this.props;
-        public override void CompTick()
-        {
-            base.CompTick();
-
-            if (this.needUpdate || this.Props.pulse)
-            {
-                this.Props.Update();
-                this.parent.Map.glowGrid.MarkGlowGridDirty(this.parent.Position);
-                this.needUpdate = false;
-            }
-        }
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Values.Look<bool>(ref this.glows, "glows");
+            Scribe_Values.Look<bool>(ref this.glows, "glows", true);
             this.Props.Glows = this.glows;
         }
 
@@ -36,6 +26,28 @@ namespace ProjectRimFactory.Common
         {
             base.PostSpawnSetup(respawningAfterLoad);
             this.Props.Glows = this.glows;
+
+            this.tickerThing = NormalTickerThing.Spawn(this.parent);
+            this.tickerThing.tickAction = this.TickerTick;
+        }
+
+        public override void PostDeSpawn(Map map)
+        {
+            base.PostDeSpawn(map);
+
+            tickerThing.Destroy();
+        }
+
+        private NormalTickerThing tickerThing;
+
+        private void TickerTick()
+        {
+            if (this.needUpdate || this.Props.pulse)
+            {
+                this.Props.Update();
+                this.parent.Map.glowGrid.MarkGlowGridDirty(this.parent.Position);
+                this.needUpdate = false;
+            }
         }
 
         private bool glows = true;
