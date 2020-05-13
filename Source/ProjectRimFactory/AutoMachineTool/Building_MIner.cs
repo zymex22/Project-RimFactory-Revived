@@ -233,7 +233,8 @@ namespace ProjectRimFactory.AutoMachineTool
                     DefDatabase<ThingDef>.AllDefs
                         .Where(d => d.deepCommonality > 0f && d.deepCountPerPortion > 0)
                         .Where(d => !mineablesSet.Contains(d))
-                        .Select(d => new ThingDefCountClass(d, d.deepCountPerPortion)));
+                        .Select(d => new ThingDefCountClass(d, d.deepCountPerPortion))
+                        .Where(d => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.thingDef) ?? true));
 
                 var recipeDefs = mineables.Select(m => CreateMiningRecipe(m, effecter)).ToList();
 
