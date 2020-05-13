@@ -320,6 +320,7 @@
     <Compile Include="Industry\Utilities.cs" />
     <Compile Include="Industry\UI\ITab_AtomicReconstruction.cs" />
     <Compile Include="Industry\UI\ITab_PaperclipDuplicator.cs" />
+    <Compile Include="Industry\HarmonyPatches\Patch_CompCreatesInfestations_for_DeepQuarry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Drones\AI\JobGiver_DroneMain.cs" />
     <Compile Include="Drones\Building_DroneStation.cs" />
