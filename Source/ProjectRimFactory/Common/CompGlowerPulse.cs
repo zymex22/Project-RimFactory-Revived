@@ -11,7 +11,7 @@ using System.IO;
 
 namespace ProjectRimFactory.Common
 {
-    public class CompGlowerPulse : CompGlower
+    public class CompGlowerPulse : CompGlower, ITicker
     {
         public new CompProperties_GlowerPulse Props => (CompProperties_GlowerPulse)this.props;
 
@@ -27,20 +27,17 @@ namespace ProjectRimFactory.Common
             base.PostSpawnSetup(respawningAfterLoad);
             this.Props.Glows = this.glows;
 
-            this.tickerThing = NormalTickerThing.Spawn(this.parent);
-            this.tickerThing.tickAction = this.TickerTick;
+            this.parent.Map.GetComponent<PRFMapComponent>()?.AddTicker(this);
         }
 
         public override void PostDeSpawn(Map map)
         {
             base.PostDeSpawn(map);
 
-            tickerThing.Destroy();
+            map.GetComponent<PRFMapComponent>()?.RemoveTicker(this);
         }
 
-        private NormalTickerThing tickerThing;
-
-        private void TickerTick()
+        public void Tick()
         {
             if (this.needUpdate || this.Props.pulse)
             {

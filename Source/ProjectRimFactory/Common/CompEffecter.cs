@@ -9,7 +9,7 @@ using Verse.Sound;
 
 namespace ProjectRimFactory.Common
 {
-    public class CompEffecter : ThingComp
+    public class CompEffecter : ThingComp, ITicker
     {
         public CompProperties_Effecter Props => (CompProperties_Effecter)this.props;
 
@@ -19,15 +19,14 @@ namespace ProjectRimFactory.Common
 
             this.InitializeEffecter();
 
-            this.tickerThing = NormalTickerThing.Spawn(this.parent);
-            this.tickerThing.tickAction = this.TickerTick;
+            this.parent.Map.GetComponent<PRFMapComponent>()?.AddTicker(this);
         }
 
         private Effecter effecter;
 
         private Sustainer sound;
 
-        private void TickerTick()
+        public void Tick()
         {
             if (this.Enable && !this.powerOff)
             {
@@ -41,10 +40,8 @@ namespace ProjectRimFactory.Common
             base.PostDeSpawn(map);
 
             this.FinalizeEffecter();
-            this.tickerThing.Destroy();
+            map.GetComponent<PRFMapComponent>()?.RemoveTicker(this);
         }
-
-        private NormalTickerThing tickerThing;
 
         private bool enable = true;
 
@@ -112,39 +109,6 @@ namespace ProjectRimFactory.Common
         public CompProperties_Effecter()
         {
             this.compClass = typeof(CompEffecter);
-        }
-    }
-
-    [StaticConstructorOnStartup]
-    public class NormalTickerThing : Thing
-    {
-        public static string DefName = "PRFNormalTickerThing";
-        static NormalTickerThing()
-        {
-            ThingDef def = new ThingDef();
-            def.defName = DefName;
-            def.tickerType = TickerType.Normal;
-            def.altitudeLayer = AltitudeLayer.MoteLow;
-            def.useHitPoints = false;
-            def.isSaveable = false;
-            def.rotatable = false;
-            def.selectable = false;
-            def.thingClass = typeof(NormalTickerThing);
-            def.drawerType = DrawerType.None;
-            def.category = ThingCategory.None;
-            DefDatabase<ThingDef>.Add(def);
-        }
-
-        public Action tickAction;
-
-        public override void Tick()
-        {
-            this.tickAction?.Invoke();
-        }
-
-        public static NormalTickerThing Spawn(Thing parent)
-        {
-            return (NormalTickerThing)GenSpawn.Spawn(DefDatabase<ThingDef>.GetNamed(NormalTickerThing.DefName), parent.Position, parent.Map);
         }
     }
 }
