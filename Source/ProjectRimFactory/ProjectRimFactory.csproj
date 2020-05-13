@@ -281,6 +281,7 @@
     <Compile Include="Common\ModExtension_Graphic.cs" />
     <Compile Include="Common\PatchOperationRTFuseInsertionHook.cs" />
     <Compile Include="Common\PRFDefOf.cs" />
+    <Compile Include="Common\PRFMapComponent.cs" />
     <Compile Include="Common\ProjectRimFactory_ModComponent.cs" />
     <Compile Include="Common\ProjectRimFactory_ModSettings.cs" />
     <Compile Include="Common\HarmonyPatches\SaveCompressiblePatch.cs" />
