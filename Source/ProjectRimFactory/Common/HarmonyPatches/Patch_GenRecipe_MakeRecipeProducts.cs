@@ -6,6 +6,8 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 using System.Reflection.Emit; // for OpCodes in Harmony Transpiler
+using ProjectRimFactory.SAL3.Things.Assemblers;
+using System.Runtime.CompilerServices;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -27,11 +29,16 @@ namespace ProjectRimFactory.Common.HarmonyPatches
      */
     [HarmonyPatch]
     public static class Patch_GenRecipe_foodPoisoning {
+        /// <summary>
+        /// Doing this should find the inner iterator class no matter how the compiler calls it.
+        /// </summary>
+        private static readonly Type hiddenClass = AccessTools.FirstInner(
+            typeof(GenRecipe), 
+            type => type.HasAttribute<CompilerGeneratedAttribute>() && type.Name.Contains(nameof(GenRecipe.MakeRecipeProducts)));
         public static MethodBase TargetMethod() {
             // Decompiler showed the hidden inner class is "<MakeRecipeProducts>d__0"
-            Type hiddenClass = HarmonyLib.AccessTools.Inner(typeof(Verse.GenRecipe), "<MakeRecipeProducts>d__0");
             if (hiddenClass==null) {
-                Log.Error("Couldn't find d__0 - check decompiler to find proper inner class");
+                Log.Error("Couldn't find iterator class -- This should never be reached.");
                 return null;
             }
             // and we want the iterator's MoveNext:
@@ -40,38 +47,58 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             return iteratorMethod;
         }
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
-            var code = new List<CodeInstruction>(instructions);
-            bool codeHasStoredCompPoisonable=false;
-            int i=0; // 2 for loops, one i
-            for (; i<code.Count; i++) {
-                yield return code[i];
-                // Stloc_S 7 is where the CompFoodPoisonable is stored
-                if (code[i].opcode==OpCodes.Stloc_S && ((LocalBuilder)code[i].operand).LocalIndex == 7) {
-                    //Log.Message("Transpiler found CompPoisonable");
-                    codeHasStoredCompPoisonable=true;
+            var codeHasStoredCompPoisonable = false;
+            foreach (var instruction in instructions)
+            {
+                // =========== T3 cooker patch ==========
+                // Roughly patches
+                // if (compFoodPoisonable != null)
+                // to
+                // if (compFoodPoisonable != null && !UsingSpaceCooker(billGiver))
+                if (instruction.opcode == OpCodes.Stloc_S && ((LocalBuilder)instruction.operand).LocalIndex == 7)
+                {
+                    // CompFoodPoisonable stored, the next condition will be the food poison check.
+                    codeHasStoredCompPoisonable = true;
                 }
-                // and here is the jump away if it's null:
-                if (code[i].opcode==OpCodes.Brfalse_S && codeHasStoredCompPoisonable) {
-                    // Next up WOULD be doing the food poisoning check, but we add one more test:
-                    // Get the billGiver:
+                if (instruction.opcode == OpCodes.Brfalse_S && codeHasStoredCompPoisonable)
+                {
+                    // For this branch, we emit the original instruction first. 
+                    // If we don't have a CompFoodPoisonable, we still want to skip.
+
+                    yield return instruction;
+                    // Load billGiver onto the stack
                     yield return new CodeInstruction(OpCodes.Ldarg_0);
-                    //                                              vvv this is that hidden class again (from above)
-                    yield return new CodeInstruction(OpCodes.Ldfld, HarmonyLib.AccessTools
-                                  .Field(HarmonyLib.AccessTools.Inner(typeof(Verse.GenRecipe), "<MakeRecipeProducts>d__0"),
-                                                                                                 "billGiver"));
-                    // Okay, billGiver is on the stack; now call UsingSpaceCooker:
-                    yield return new CodeInstruction(OpCodes.Call, HarmonyLib.AccessTools
-                                                     .Method(typeof(Patch_GenRecipe_foodPoisoning), "UsingSpaceCooker"));
-                    // that puts either true of false on the stack.  If it's true, jump past the food poisoning test:
-                    yield return new CodeInstruction(OpCodes.Brtrue_S, (Label)code[i].operand);
-                    //Log.Message("Successfully Transpiled Verse.GenRecipe");
-                    i++; // advance past BrFalse.s to next instruction
-                    break;  // only do this once - probably unnecessary, but...
+                    yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(hiddenClass, "billGiver"));
+                    // Call our UsingSpaceCooker method
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
+                        typeof(Patch_GenRecipe_foodPoisoning),
+                        nameof(Patch_GenRecipe_foodPoisoning.UsingSpaceCooker)));
+                    // If that returned true, skip past the original condition
+                    yield return new CodeInstruction(OpCodes.Brtrue_S, (Label)instruction.operand);
+                    codeHasStoredCompPoisonable = false;
+
+                    // Emitted original instruction first for this branch.
+                    continue;
                 }
-            }
-            if (i==code.Count) Log.Warning("PRF: Removing Food Poisoning failed.");
-            for (;i<code.Count; i++) {
-                yield return code[i];
+
+                // =========== T1 cooker patch =========
+                // Roughly patches
+                // worker.GetRoom()
+                // to Patch_GenRecipe_foodPoisoning.GetRoomOfPawnOrGiver(worker, RegionType.Set_Passable, billGiver)
+
+                if (instruction.opcode == OpCodes.Call && (instruction.operand as MethodInfo) == AccessTools.Method(typeof(RegionAndRoomQuery), nameof(RegionAndRoomQuery.GetRoom)))
+                {
+                    // By the time we reach here, worker and the number 6 (signifying RegionType.Set_Passable)
+                    // Load billGiver onto the stack.
+                    yield return new CodeInstruction(OpCodes.Ldarg_0);
+                    yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(hiddenClass, "billGiver"));
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
+                        typeof(Patch_GenRecipe_foodPoisoning),
+                        nameof(Patch_GenRecipe_foodPoisoning.GetRoomOfPawnOrGiver)));
+
+                    continue; // Don't emit the original instruction.
+                }
+                yield return instruction;
             }
         }
         public static bool UsingSpaceCooker(IBillGiver billGiver) {
@@ -87,5 +114,23 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             // Log.Message("Not using space cooker for this recipe");
             return false;
         }
+
+        /// <summary>
+        /// If the billGiver is our SimpleAssembler, get the room of the output tile.
+        /// Else, retain origin behavior.
+        /// </summary>
+        /// <param name="pawn"></param>
+        /// <param name="allowedRegionTypes"></param>
+        /// <param name="billGiver"></param>
+        /// <returns></returns>
+        public static Room GetRoomOfPawnOrGiver(Pawn pawn, RegionType allowedRegionTypes, IBillGiver billGiver)
+        {
+            if (pawn.kindDef == PRFDefOf.PRFSlavePawn && billGiver is Building_SimpleAssembler assembler)
+            {
+                return RegionAndRoomQuery.RoomAt(assembler.OutputComp.CurrentCell, billGiver.Map, RegionType.Set_Passable);
+            }
+            return pawn.GetRoom(allowedRegionTypes);
+        }
+
     }
 }
