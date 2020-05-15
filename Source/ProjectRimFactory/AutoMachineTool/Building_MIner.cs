@@ -224,7 +224,12 @@ namespace ProjectRimFactory.AutoMachineTool
                     .Where(d => d.mineable && d.building != null && d.building.mineableThing != null && d.building.mineableYield > 0)
                     .Where(d => d.building.isResourceRock || d.building.isNaturalRock)
                     .Select(d => new ThingDefCountClass(d.building.mineableThing, d.building.mineableYield))
-                    .Where(d => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.thingDef) ?? true)
+                    // Create recipes for exluded items - for now - so players who had those recipes
+                    // don't get errors are save game load.
+                    // Once people have had this change for a while (Nov 2020?), can uncomment this line
+                    // and the line below - and the line farther down can be removed
+                    // If players can continue to add such recipes somehow, do not change these:
+                    //.Where(d => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.thingDef) ?? true)
                     .ToList();
 
                 var mineablesSet = mineables.Select(d => d.thingDef).ToHashSet();
@@ -234,12 +239,18 @@ namespace ProjectRimFactory.AutoMachineTool
                         .Where(d => d.deepCommonality > 0f && d.deepCountPerPortion > 0)
                         .Where(d => !mineablesSet.Contains(d))
                         .Select(d => new ThingDefCountClass(d, d.deepCountPerPortion))
-                        .Where(d => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.thingDef) ?? true));
+                        // this line can be uncommented when the above line is
+                        //.Where(d => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.thingDef) ?? true)
+                );
 
-                var recipeDefs = mineables.Select(m => CreateMiningRecipe(m, effecter)).ToList();
-
+                var recipeDefs = mineables.Select(m => CreateMiningRecipe(m, effecter)).ToList();                
                 DefDatabase<RecipeDef>.Add(recipeDefs);
-                minerDef.recipes = recipeDefs;
+                // These 3 lines remove exluded recipes from available bills:
+                var acceptableRecipeDefs=recipeDefs
+                    .FindAll(r => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(r.products[0].thingDef) ?? true);
+                minerDef.recipes = acceptableRecipeDefs;
+                //change those three lines to this when all recipes are done:
+                //minerDef.recipes = recipeDefs;
             }
         }
 
