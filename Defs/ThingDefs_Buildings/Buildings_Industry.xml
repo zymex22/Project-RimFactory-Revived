@@ -125,7 +125,7 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Long</tickerType>
+    <tickerType>Normal</tickerType>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <castEdgeShadows>false</castEdgeShadows>
     <researchPrerequisites>
@@ -211,7 +211,7 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Long</tickerType>
+    <tickerType>Normal</tickerType>
     <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
