@@ -406,15 +406,6 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>12</heatPerSecond>
       </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
-        <pulse>false</pulse>
-        <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>3</maxGlowRadius>
-        <minGlowColor>(100,0,0,10)</minGlowColor>
-        <maxGlowColor>(230,0,0,80)</maxGlowColor>
-        <intervalTicks>30</intervalTicks>
-        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>        <!-- easingType : see more here: https://easings.net or in top of assembler file -->
-      </li>
     </comps>
     <building>
       <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
@@ -462,7 +453,7 @@
     </recipes>
     <comps>
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>160.0</fuelConsumptionRate>
+        <fuelConsumptionRate>50.0</fuelConsumptionRate>
         <fuelCapacity>50.0</fuelCapacity>
         <fuelFilter>
           <thingDefs>
