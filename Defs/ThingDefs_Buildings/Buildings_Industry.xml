@@ -64,14 +64,13 @@
     </costList>
     <comps>
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>80.0</fuelConsumptionRate>
+        <fuelConsumptionRate>90.0</fuelConsumptionRate>
         <fuelCapacity>50.0</fuelCapacity>
         <fuelFilter>
           <thingDefs>
             <li>WoodLog</li>
           </thingDefs>
         </fuelFilter>
-        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Breakdownable"/>
@@ -476,7 +475,6 @@
             <li>WoodLog</li>
           </thingDefs>
         </fuelFilter>
-        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
