@@ -63,15 +63,9 @@
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <comps>
-      <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>90.0</fuelConsumptionRate>
-        <fuelCapacity>50.0</fuelCapacity>
-        <fuelFilter>
-          <thingDefs>
-            <li>WoodLog</li>
-          </thingDefs>
-        </fuelFilter>
-        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_CreatesInfestations" />

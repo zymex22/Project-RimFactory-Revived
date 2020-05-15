@@ -246,17 +246,38 @@
     </Patch>
   </Row>
 
-  <!-- Vacuum Hopper -->
-  <!-- <Row Class="ProjectRimFactory.Common.PatchItem">
-    <key>turn.off.hopper.pickup</key>
-    <label>PRF.Settings.VacuumHopper.Label</label>
-    <description>PRF.Settings.VacuumHopper.Desc</description>
+  <!-- Infestation -->
+  <Row Class="ProjectRimFactory.Common.PatchItem">
+    <key>turn.off.infestation</key>
+    <label>PRF.Settings.TurnOffInfestation.Label</label>
+    <description>PRF.Settings.TurnOffInfestation.Desc</description>
     <Patch>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Settings"]</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkI"]/comps/li[@compClass="CompProperties_CreatesInfestations"]</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry"]/comps/li[@compClass="CompProperties_CreatesInfestations"]</xpath>
       </Operation>
     </Patch>
-  </Row> -->
+  </Row>
+
+  <!-- Miners nerf -->
+  <Row Class="ProjectRimFactory.Common.PatchItem">
+    <key>turn.off.minersnerf</key>
+    <label>PRF.Settings.TurnOffMinerNerf.Label</label>
+    <description>PRF.Settings.TurnOffMinerNerf.Desc</description>
+    <Patch>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/bonusYields</xpath>
+      </Operation>
+    </Patch>
+  </Row>
 
 </SettingRows>
