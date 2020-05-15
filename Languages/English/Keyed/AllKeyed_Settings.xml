@@ -32,10 +32,13 @@
   <PRF.Settings.DsuLimit.Label>Set Storage DSU limit</PRF.Settings.DsuLimit.Label>
   <PRF.Settings.DsuLimit.Desc>Set Storage DSU limit</PRF.Settings.DsuLimit.Desc>
 
-  <PRF.Settings.VacuumHopper.Label>Turn off pickup from ground on vacuum hopper</PRF.Settings.VacuumHopper.Label>
-  <PRF.Settings.VacuumHopper.Desc>Turn off pickup from ground on vacuum hopper</PRF.Settings.VacuumHopper.Desc>
-
   <PRF.Settings.recipeDB.Label>Set range for Recipe DB</PRF.Settings.recipeDB.Label>
   <PRF.Settings.recipeDB.Desc>Set range for Recipe DB</PRF.Settings.recipeDB.Desc>
+
+  <PRF.Settings.TurnOffInfestation.Label>Turn off infestation on miners(kid mode)</PRF.Settings.TurnOffInfestation.Label>
+  <PRF.Settings.TurnOffInfestation.Desc>Turn off infestation on miners(kid mode)</PRF.Settings.TurnOffInfestation.Desc>
+
+  <PRF.Settings.TurnOffMinerNerf.Label>Turn Miners nerf(kid mode)</PRF.Settings.TurnOffMinerNerf.Label>
+  <PRF.Settings.TurnOffMinerNerf.Desc>Turn off  Miners nerf(kid mode)</PRF.Settings.TurnOffMinerNerf.Desc>
 
 </LanguageData>
