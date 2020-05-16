@@ -18,6 +18,7 @@
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Ground type to build on -->
     <drawGUIOverlay>true</drawGUIOverlay>
     <building>
       <uninstallWork>1800</uninstallWork>
@@ -139,7 +140,7 @@
       <drawSize>(2.5,2.5)</drawSize>
     </graphicData>
     <size>(2,2)</size>
-    <altitudeLayer>LayingPawn</altitudeLayer>
+    <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
@@ -326,7 +327,7 @@
       <drawSize>(2.1,2.1)</drawSize>
     </graphicData>
     <size>(2,2)</size>
-    <altitudeLayer>LayingPawn</altitudeLayer>
+    <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
     <castEdgeShadows>true</castEdgeShadows>
     <inspectorTabs>

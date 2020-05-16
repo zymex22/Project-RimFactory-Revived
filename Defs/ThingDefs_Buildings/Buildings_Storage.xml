@@ -10,7 +10,7 @@
     <tradeTags>
       <li>Furniture</li>
     </tradeTags>
-    <altitudeLayer>Gas</altitudeLayer>
+    <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <pathCost>150</pathCost>
     <blockWind>true</blockWind>

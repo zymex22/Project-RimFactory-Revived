@@ -4,32 +4,62 @@
   <DesignatorDropdownGroupDef>
     <defName>Cultivator_gr</defName>
   </DesignatorDropdownGroupDef>
-
-  <!--=========================== Basic Cultivator ==================================-->
-  <ThingDef ParentName="PRFBuildingBase">
-    <defName>CultivatorTools_DroneCultivator</defName>
-    <label>Drone Cultivator</label>
-    <designatorDropdown>Cultivator_gr</designatorDropdown>
-    <thingClass>ProjectRimFactory.CultivatorTools.Building_DroneCultivator</thingClass>
+  <!--=========================== Cultivator Base ==================================-->
+  <ThingDef Name="PRF_CultivatorBase" ParentName="PRFBuildingBase" Abstract="True">
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>      <!-- structure HP -->
+      <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
+      <Beauty>0</Beauty>      <!-- +is good -is bad ;) -->
+      <Mass>70</Mass>      <!-- mass in kg -->
+      <WorkToBuild>450</WorkToBuild>
+    </statBases>
     <graphicData>
-      <texPath>Farm/Cultivator</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
+      <shaderType>Transparent</shaderType>      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
       <damageData>
         <rect>(0.05,0.1,0.9,0.9)</rect>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
       </damageData>
     </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <fillPercent>0.5</fillPercent>
-    <pathCost>70</pathCost>
+    <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+    <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
+    <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
+    <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
+    <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
     <castEdgeShadows>true</castEdgeShadows>
-    <statBases>
-      <WorkToBuild>450</WorkToBuild>
-      <MaxHitPoints>250</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-    </statBases>
+    <size>(1,1)</size>    <!-- Ingame cell/ground size (x,y) -->
+    <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
+    <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
+    <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
+    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
+    <designatorDropdown>Cultivator_gr</designatorDropdown>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
+    <constructEffect>ConstructMetal</constructEffect>
+    <placeWorkers>
+      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
+    </placeWorkers>
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li Class="CompProperties_Flickable" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!--=========================== Basic Cultivator ==================================-->
+  <ThingDef ParentName="PRF_CultivatorBase">
+    <defName>CultivatorTools_DroneCultivator</defName>
+    <label>Drone Cultivator</label>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_DroneCultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/Cultivator</texPath>
+    </graphicData>
     <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
@@ -45,16 +75,7 @@
         <basePowerConsumption>500</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
     </comps>
-    <tickerType>Normal</tickerType>
-    <rotatable>false</rotatable>
-    <designationCategory>Industrial</designationCategory>
-    <staticSunShadowHeight>0.3</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
     <modExtensions>
       <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
         <squareAreaRadius>5</squareAreaRadius>
@@ -70,37 +91,17 @@
     <researchPrerequisites>
       <li>FarmingSprinklers</li>      <!-- farming level 1 -->
     </researchPrerequisites>
-    <placeWorkers>      <!-- Restrictor when placing the building. -->
-      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
-    </placeWorkers>
   </ThingDef>
 
   <!--=========================== Sun Cultivator ==================================-->
-  <ThingDef ParentName="PRFBuildingBase">
+  <ThingDef ParentName="PRF_CultivatorBase">
     <defName>CultivatorTools_CultivatorWithLamp</defName>
     <label>Drone Cultivator (sun lamp)</label>
-    <designatorDropdown>Cultivator_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorWithSunLamp</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
-      <damageData>
-        <rect>(0.05,0.1,0.9,0.9)</rect>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-      </damageData>
     </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <fillPercent>0.5</fillPercent>
-    <pathCost>70</pathCost>
-    <castEdgeShadows>true</castEdgeShadows>
-    <statBases>
-      <WorkToBuild>450</WorkToBuild>
-      <MaxHitPoints>250</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-    </statBases>
     <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Has a sun lamp. Will not be affected by any stat modifiers.</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
@@ -125,16 +126,7 @@
         <heatPerSecond>3</heatPerSecond>
       </li>
       <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
     </comps>
-    <tickerType>Normal</tickerType>
-    <rotatable>false</rotatable>
-    <designationCategory>Industrial</designationCategory>
-    <staticSunShadowHeight>0.3</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
     <modExtensions>
       <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
         <squareAreaRadius>5</squareAreaRadius>
@@ -147,38 +139,21 @@
         <hauling>false</hauling>        <!-- make false to no output again -->
       </li>
     </modExtensions>
-    <placeWorkers>
-      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
-    </placeWorkers>
     <researchPrerequisites>
       <li>AutomaticFarming1</li>      <!-- farming level 2 -->
     </researchPrerequisites>
   </ThingDef>
 
   <!--=========================== Spacer Cultivator Sun ==================================-->
-  <ThingDef ParentName="PRFBuildingBase">
+  <ThingDef ParentName="PRF_CultivatorBase">
     <defName>CultivatorTools_b18CultivatorSun</defName>
     <label>Mechanites Cultivator (sun lamp)</label>
-    <designatorDropdown>Cultivator_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorB18</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <damageData>
-        <rect>(0.05,0.1,0.9,0.9)</rect>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-      </damageData>
     </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <fillPercent>0.5</fillPercent>
-    <pathCost>70</pathCost>
-    <castEdgeShadows>true</castEdgeShadows>
     <statBases>
-      <WorkToBuild>450</WorkToBuild>
-      <MaxHitPoints>150</MaxHitPoints>
-      <Flammability>1.0</Flammability>
+      <MaxHitPoints>350</MaxHitPoints>
     </statBases>
     <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.</description>
     <costList>
@@ -201,62 +176,32 @@
         <glowColor>(200,25,197,0)</glowColor>        <!-- RGBA: (r, g, b, 0) last arent needed -->
       </li>
       <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
-      <!-- <li Class="CompProperties_Schedule"> -->      <!-- Match plant growing times -->
-      <!-- <startTime>0.25</startTime>
-        <endTime>0.8</endTime>
-        <offMessage>Off for plant resting period</offMessage>
-      </li> -->
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>4</heatPerSecond>
       </li>
     </comps>
-    <tickerType>Normal</tickerType>
-    <rotatable>true</rotatable>
-    <designationCategory>Industrial</designationCategory>
-    <staticSunShadowHeight>0.3</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
     <modExtensions>
       <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
         <squareAreaRadius>5</squareAreaRadius>
         <TickFrequencyDivisor>50</TickFrequencyDivisor>
       </li>
     </modExtensions>
-    <placeWorkers>
-      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
-    </placeWorkers>
     <researchPrerequisites>
       <li>AutomaticFarming</li>      <!-- farming level 3 -->
     </researchPrerequisites>
   </ThingDef>
 
   <!--=========================== Spacer Cultivator ==================================-->
-  <ThingDef ParentName="PRFBuildingBase">
+  <ThingDef ParentName="PRF_CultivatorBase">
     <defName>CultivatorTools_b18Cultivator</defName>
     <label>Mechanites Cultivator</label>
-    <designatorDropdown>Cultivator_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator2</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <damageData>
-        <rect>(0.05,0.1,0.9,0.9)</rect>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-      </damageData>
     </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <fillPercent>0.5</fillPercent>
-    <pathCost>70</pathCost>
-    <castEdgeShadows>true</castEdgeShadows>
     <statBases>
-      <WorkToBuild>450</WorkToBuild>
-      <MaxHitPoints>150</MaxHitPoints>
-      <Flammability>1.0</Flammability>
+      <MaxHitPoints>350</MaxHitPoints>
     </statBases>
     <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
     <costList>
@@ -273,38 +218,17 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>600</basePowerConsumption>
       </li>
-      <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
-      <!-- <li Class="CompProperties_Schedule"> -->      <!-- Match plant growing times -->
-      <!-- <startTime>0.25</startTime>
-        <endTime>0.8</endTime>
-        <offMessage>Off for plant resting period</offMessage>
-      </li> -->
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>1</heatPerSecond>
       </li>
-      <li Class="CompProperties_Glower">
-        <glowRadius>2</glowRadius>
-        <glowColor>(115,198,206,0)</glowColor>        <!-- Set to Tier 3 small glow instead of sunlamp -->
-      </li>
     </comps>
-    <tickerType>Normal</tickerType>
-    <rotatable>true</rotatable>
-    <designationCategory>Industrial</designationCategory>
-    <staticSunShadowHeight>0.3</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
     <modExtensions>
       <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
         <squareAreaRadius>5</squareAreaRadius>
         <TickFrequencyDivisor>50</TickFrequencyDivisor>
       </li>
     </modExtensions>
-    <placeWorkers>
-      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
-    </placeWorkers>
     <researchPrerequisites>
       <li>AutomaticFarming</li>      <!-- farming level 3 -->
     </researchPrerequisites>
