@@ -86,6 +86,8 @@ Mod extennsion for assemblers
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
+    <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
     <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
     <canOverlapZones>false</canOverlapZones>    <!-- zones as in storage zones, growing zones, etc -->
@@ -162,7 +164,7 @@ Mod extennsion for assemblers
     <researchPrerequisites>      <!-- Needed Research to see in menus -->
       <li>UniversalAutocrafting</li>
     </researchPrerequisites>
-    <rotatable>true</rotatable>    <!-- for being able to swap between textures each rotation -->
+    <rotatable>false</rotatable>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <drawStatus>true</drawStatus>
@@ -227,7 +229,7 @@ Mod extennsion for assemblers
     <researchPrerequisites>
       <li>SelfCorrectingAssemblers</li>
     </researchPrerequisites>
-    <rotatable>true</rotatable>    <!-- for being able to swap between textures each rotation -->
+    <rotatable>false</rotatable>
   </ThingDef>
 
 

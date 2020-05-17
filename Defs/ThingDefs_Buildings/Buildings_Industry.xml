@@ -3,21 +3,29 @@
 
   <!--==================== Industrial Base ====================-->
   <ThingDef Name="PRF_IndustrialBase" ParentName="PRFBuildingBase" Abstract="True">
-    <statBases>
-      <MaxHitPoints>150</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <Mass>70</Mass>
-    </statBases>
     <passability>PassThroughOnly</passability>
+    <blockLight>false</blockLight>
+    <blockWind>true</blockWind>
+    <designationCategory>Industrial</designationCategory>
     <altitudeLayer>Building</altitudeLayer>
     <constructEffect>ConstructMetal</constructEffect>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>0.8</Flammability>
+      <Mass>80</Mass>
+    </statBases>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <rotatable>false</rotatable>
     <pathCost>70</pathCost>
     <fillPercent>0.5</fillPercent>
-    <designationCategory>Industrial</designationCategory>
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Ground type to build on -->
+    <castEdgeShadows>true</castEdgeShadows>
     <drawGUIOverlay>true</drawGUIOverlay>
     <building>
       <uninstallWork>1800</uninstallWork>
@@ -39,14 +47,14 @@
   <!--==================== Quarry T1 ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_DeepQuarry_mkI</defName>
-    <label>T1 Auger drill</label>
+    <label>Auger drill(T1)</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <designatorDropdown>miners_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/Drill</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2,2)</drawSize>
     </graphicData>
+    <castEdgeShadows>false</castEdgeShadows>
     <filthLeaving>Filth_RubbleRock</filthLeaving>
     <size>(2,2)</size>
     <statBases>
@@ -77,10 +85,11 @@
         <heatPerSecond>10</heatPerSecond>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <pulse>false</pulse>
         <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>3</maxGlowRadius>
-        <minGlowColor>(100,0,0,10)</minGlowColor>
-        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <maxGlowRadius>2</maxGlowRadius>
+        <minGlowColor>(204,204,0,10)</minGlowColor>
+        <maxGlowColor>(255,255,0,80)</maxGlowColor>
         <intervalTicks>30</intervalTicks>
         <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
       </li>
@@ -94,7 +103,7 @@
       </li>
       <!--
         excludeOres : exclude ore list.
-        bonusYield  : Bonus yield ore list. for example, 10% bonus yield chanse, Steel bonus : Plasteel bonus = 1 : 2
+        bonusYield  : Bonus yield ore list. for example, 10% bonus yield chance, Steel bonus : Plasteel bonus = 1 : 2
           <bonusYields Chance="0.1">
             <Steel Weight="1" Count="10" />
             <Plasteel Weight="2" Count="15" />
@@ -102,20 +111,24 @@
       -->
       <li Class="ProjectRimFactory.Common.ModExtension_Miner">
         <excludeOres>
-          <li>Steel</li>
           <li>Gold</li>
           <li>Uranium</li>
+          <li>ComponentIndustrial</li>
+          <li>Steel</li>
           <li>Plasteel</li>
+          <li>Jade</li>
+          <li>Silver</li>
         </excludeOres>
-        <bonusYields Chance="0.1">
-          <Steel Weight="1" Count="20" />
+        <bonusYields Chance="0.18">
           <ChunkSlagSteel Weight="1" Count="1" />
+          <Gold Weight="0.02" Count="10" />
+          <Jade Weight="0.02" Count="10" />
+          <Silver Weight="0.02" Count="30" />
         </bonusYields>
       </li>
     </modExtensions>
     <tickerType>Long</tickerType>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
-    <castEdgeShadows>false</castEdgeShadows>
     <researchPrerequisites>
       <li>AutonomousMining</li>
     </researchPrerequisites>
@@ -124,24 +137,19 @@
   <!--==================== Quarry T2 ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_DeepQuarry</defName>
-    <label>T2 Pulse Drill</label>
+    <label>Pulse Drill(T2)</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <designatorDropdown>miners_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/DeepQuarry</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(2.5,2.5)</drawSize>
     </graphicData>
     <size>(2,2)</size>
-    <altitudeLayer>LayingPawn</altitudeLayer>
-    <passability>Impassable</passability>
-    <castEdgeShadows>true</castEdgeShadows>
     <statBases>
       <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>350</MaxHitPoints>
-      <Flammability>1.0</Flammability>
+      <Flammability>0.5</Flammability>
     </statBases>
-    <rotatable>true</rotatable>
     <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 3 hours.(can cause infestation)</description>
     <costList>
       <Steel>400</Steel>
@@ -164,10 +172,11 @@
         <heatPerSecond>5</heatPerSecond>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <pulse>false</pulse>
         <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>3</maxGlowRadius>
-        <minGlowColor>(100,0,0,10)</minGlowColor>
-        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <maxGlowRadius>2</maxGlowRadius>
+        <minGlowColor>(204,204,0,10)</minGlowColor>
+        <maxGlowColor>(255,255,0,80)</maxGlowColor>
         <intervalTicks>30</intervalTicks>
         <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
       </li>
@@ -189,7 +198,7 @@
           <li>ChunkSlate</li>
           <li>ChunkMarble</li>
         </excludeOres>
-        <bonusYields Chance="0.2">
+        <bonusYields Chance="0.1">
           <ChunkSandstone Weight="1" Count="1" />
           <ChunkGranite Weight="1" Count="1" />
           <ChunkLimestone Weight="1" Count="1" />
@@ -201,7 +210,6 @@
     <tickerType>Long</tickerType>
     <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
-    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>AutonomousMining_II</li>
     </researchPrerequisites>
@@ -210,16 +218,13 @@
   <!--==================== Quarry T3 ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>Building_AutoMachineTool_Miner</defName>
-    <label>T3 Plasma Drill</label>
+    <label>Plasma Drill(T3)</label>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
-    <description>(tier 3) With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed</description>
+    <description>With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed. It will set primary ore type and get bonus in rare ores and junk</description>
     <tickerType>Never</tickerType>
     <designatorDropdown>miners_gr</designatorDropdown>
-    <category>Building</category>
-    <selectable>true</selectable>
     <graphicData>
       <texPath>Industry/DrillT3</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3.3,3.3)</drawSize>
     </graphicData>
     <costList>
@@ -227,17 +232,17 @@
       <ComponentIndustrial>50</ComponentIndustrial>
       <Plasteel>100</Plasteel>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <statBases>
       <WorkToBuild>10000</WorkToBuild>
       <MaxHitPoints>800</MaxHitPoints>
-      <Flammability>0.5</Flammability>
+      <Flammability>0.2</Flammability>
     </statBases>
     <researchPrerequisites>
       <li>AutonomousMining_III</li>
     </researchPrerequisites>
     <size>(3,3)</size>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -253,30 +258,28 @@
         <glowColor>(115,198,206,0)</glowColor>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
+        <pulse>false</pulse>
         <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>3</maxGlowRadius>
-        <minGlowColor>(100,0,0,10)</minGlowColor>
-        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <maxGlowRadius>2</maxGlowRadius>
+        <minGlowColor>(115,198,206,10)</minGlowColor>
+        <maxGlowColor>(120,198,210,0,100)</maxGlowColor>
         <intervalTicks>30</intervalTicks>
         <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
       </li>
     </comps>
-
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
     </placeWorkers>
-
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
       <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>      <!-- AutomachineTool ITab not PRF -->
     </inspectorTabs>
-
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>20</speedFactor>        <!-- Speed multiplier for mining -->
-        <minPower>1500</minPower>        <!-- minimum boost power -->
-        <maxPower>5000</maxPower>        <!-- maximum boost power -->
+        <speedFactor>10</speedFactor>        <!-- Speed multiplier for mining -->
+        <minPower>3000</minPower>        <!-- minimum boost power -->
+        <maxPower>10000</maxPower>        <!-- maximum boost power -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
@@ -286,11 +289,23 @@
       </li>        -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
       <li Class="ProjectRimFactory.Common.ModExtension_Miner">
         <excludeOres>
+          <li>Gold</li>
+          <li>Uranium</li>
           <li>ComponentIndustrial</li>
           <li>Plasteel</li>
+          <li>Jade</li>
+          <li>Silver</li>
         </excludeOres>
-        <bonusYields Chance="0.01">
-          <InsectJelly Weight="1" Count="30" />
+        <bonusYields Chance="0.05">
+          <!-- Junks -->
+          <InsectJelly Weight="0.2" Count="30" />
+          <Steel Weight="0.2" Count="40" />
+          <!-- Rares -->
+          <Uranium Weight="0.9" Count="40" />
+          <Gold Weight="0.4" Count="40" />
+          <Jade Weight="0.4" Count="40" />
+          <Silver Weight="0.9" Count="40" />
+          <Plasteel Weight="0.01" Count="5" />
         </bonusYields>
       </li>
     </modExtensions>
@@ -300,16 +315,12 @@
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_Recycler</defName>
     <label>Smart Recycler</label>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
     <graphicData>
       <texPath>Industry/smart_recycler</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2.1,2.1)</drawSize>
     </graphicData>
     <size>(2,2)</size>
-    <altitudeLayer>LayingPawn</altitudeLayer>
-    <passability>Impassable</passability>
-    <castEdgeShadows>true</castEdgeShadows>
     <inspectorTabs>
       <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
     </inspectorTabs>
@@ -355,7 +366,6 @@
     </modExtensions>
     <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
-    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>UniversalAutocrafting</li>
     </researchPrerequisites>
@@ -364,19 +374,16 @@
 
   <!--==================== Furnace Base ====================-->
   <ThingDef Name="PRF_FurnaceBase" ParentName="PRF_IndustrialBase" Abstract="True">
-    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-    <castEdgeShadows>true</castEdgeShadows>
     <tickerType>Normal</tickerType>
-    <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
-    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <inspectorTabs>
       <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
     </inspectorTabs>
     <statBases>
       <WorkToBuild>3500</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
-      <Flammability>1.0</Flammability>
+      <Flammability>0.5</Flammability>
     </statBases>
     <comps>
       <li>
@@ -387,25 +394,11 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>12</heatPerSecond>
       </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
-        <pulse>false</pulse>
-        <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>3</maxGlowRadius>
-        <minGlowColor>(100,0,0,10)</minGlowColor>
-        <maxGlowColor>(230,0,0,80)</maxGlowColor>
-        <intervalTicks>30</intervalTicks>
-        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>        <!-- easingType : see more here: https://easings.net or in top of assembler file -->
-      </li>
     </comps>
     <building>
       <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
     </building>
     <designatorDropdown>furnace_gr</designatorDropdown>
-    <!-- <modExtensions>
-      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <importRecipesFrom>TableRoboticMachining</importRecipesFrom>
-      </li>
-    </modExtensions> -->
   </ThingDef>
 
 
@@ -422,7 +415,6 @@
     <altitudeLayer>Gas</altitudeLayer>
     <graphicData>
       <texPath>Industry/smelter_t0off</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(5,7.9)</drawSize>
     </graphicData>
     <size>(5,5)</size>
@@ -443,14 +435,13 @@
     </recipes>
     <comps>
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>160.0</fuelConsumptionRate>
+        <fuelConsumptionRate>50.0</fuelConsumptionRate>
         <fuelCapacity>50.0</fuelCapacity>
         <fuelFilter>
           <thingDefs>
             <li>WoodLog</li>
           </thingDefs>
         </fuelFilter>
-        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
@@ -484,7 +475,6 @@
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>Industry/smelter_t1off</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
     <size>(3,3)</size>
@@ -511,16 +501,10 @@
       <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
-      <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>80.0</fuelConsumptionRate>
-        <fuelCapacity>50.0</fuelCapacity>
-        <fuelFilter>
-          <thingDefs>
-            <li>WoodLog</li>
-          </thingDefs>
-        </fuelFilter>
-        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
-        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>250</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>
@@ -539,7 +523,6 @@
         <workSpeedBaseFactor>1.5</workSpeedBaseFactor>
       </li>
     </modExtensions>
-    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>AutomationBasics</li>
     </researchPrerequisites>
@@ -552,7 +535,6 @@
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>Industry/smelter_t2off</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
     <size>(3,3)</size>
@@ -579,7 +561,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>50</basePowerConsumption>
+        <basePowerConsumption>350</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>

@@ -9,6 +9,7 @@
   <ThingDef Name="Building_AutoMachineTool_BeltConveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
     <category>Building</category>
     <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>UgRollers_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <drawerType>MapMeshAndRealTime</drawerType>
     <costList>
@@ -147,8 +148,6 @@ The belt conveyors are connected by vertically adjoining the orientation.</descr
 Underground BeltConveyor can not move items on the ground as it is.
 Connect to the underground conveyor entrance and exit and use.</description>
     <altitudeLayer>FloorEmplacement</altitudeLayer>
-    <designatorDropdown>UgRollers_gr</designatorDropdown>
-
     <pathCost>0</pathCost>
     <fillPercent>0.0</fillPercent>
     <clearBuildingArea>false</clearBuildingArea>
@@ -184,10 +183,11 @@ Connect to the underground conveyor entrance and exit and use.</description>
   </ThingDef>
 
   <!--======================================= Conveyor underground connector base ===============================================-->
-  <ThingDef Name="Building_AutoMachineTool_BeltConveyorUGConnector_Base" Parent="BuildingBase" Abstract="true">
+  <ThingDef Name="Building_AutoMachineTool_BeltConveyorUGConnector_Base" Parent="PRFBuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <category>Building</category>
     <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>UgRollers_gr</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
 
     <statBases>
@@ -241,7 +241,6 @@ Connect to the underground conveyor entrance and exit and use.</description>
     <label>Underground belt entrance</label>
     <description>Connect the ground belt conveyor and underground conveyor.
 It is the entrance to the underground conveyor.</description>
-    <designatorDropdown>UgRollers_gr</designatorDropdown>
 
     <graphicData>
       <texPath>AutoMachineTool/Buildings/undergroundIn</texPath>
@@ -262,7 +261,6 @@ It is the entrance to the underground conveyor.</description>
     <label>Underground belt exit</label>
     <description>Connect the ground belt conveyor and underground conveyor.
 It is an exit to the underground conveyor.</description>
-    <designatorDropdown>UgRollers_gr</designatorDropdown>
 
     <graphicData>
       <texPath>AutoMachineTool/Buildings/undergroundOut</texPath>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 <!-- Base for all other bases/structures in PRF -->
-  <ThingDef Name="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRFBuildingBase" ParentName="BuildingBase" Abstract="True">
     <category>Building</category> <!-- Designates a category to be used internally. -->
     <thingClass>Building</thingClass> <!-- 	Provides an attachment to an internal class in the code. -->
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>

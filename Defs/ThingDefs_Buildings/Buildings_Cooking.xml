@@ -86,6 +86,8 @@ Mod extennsion for assemblers
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
+    <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
     <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
     <canOverlapZones>false</canOverlapZones>    <!-- zones as in storage zones, growing zones, etc -->
@@ -135,8 +137,6 @@ Mod extennsion for assemblers
       <MarketValue>700</MarketValue>
       <Cleanliness>5</Cleanliness>
     </statBases>
-    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
-    <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1x speed \n 5cleanliness \n cook level 10</description>
     <costStuffCount>100</costStuffCount>
     <costList>
@@ -163,7 +163,7 @@ Mod extennsion for assemblers
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
       <isMealSource>true</isMealSource>      <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
     </building>
-    <passability>Impassable</passability>    <!-- to be able to build them as walls -->
+    <passability>Impassable</passability>
     <researchPrerequisites>
       <li>SelfCooking</li>
     </researchPrerequisites>
@@ -199,8 +199,6 @@ Mod extennsion for assemblers
       <MarketValue>700</MarketValue>
       <Cleanliness>20</Cleanliness>
     </statBases>
-    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
-    <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 2x speed \n 20cleanliness \n cook level 20</description>
     <costStuffCount>100</costStuffCount>
     <costList>
@@ -263,12 +261,12 @@ Mod extennsion for assemblers
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
       <isMealSource>true</isMealSource>      <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
     </building>
-    <passability>Impassable</passability>    <!-- to be able to build them as walls -->
+    <passability>Impassable</passability>
     <researchPrerequisites>
       <li>SelfCooking</li>
       <li>SelfCorrectingAssemblers</li>
     </researchPrerequisites>
-    <rotatable>true</rotatable>    <!-- for being able to swap between textures each rotation -->
+    <rotatable>false</rotatable>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <importRecipesFrom>          <!-- import same bills as vanilla electric stove have -->
@@ -285,7 +283,7 @@ Mod extennsion for assemblers
         <drawStatus>true</drawStatus>
         <doEffect>true</doEffect>
         <powerOffGraphicData>
-          <graphicClass>Graphic_Multi</graphicClass>
+          <graphicClass>Graphic_Single</graphicClass>
           <texPath>SAL3/AutoCookerPowerOff</texPath>
           <drawSize>(3,3)</drawSize>
         </powerOffGraphicData>

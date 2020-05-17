@@ -9,24 +9,20 @@
       <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
       <Beauty>-1</Beauty>      <!-- +is good -is bad ;) -->
-      <Mass>50</Mass>      <!-- mass in kg -->
+      <Mass>80</Mass>      <!-- mass in kg -->
     </statBases>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
       <drawSize>(2,2)</drawSize>      <!-- Scale texture up/down to fit (x,y) -->
-      <!-- <shaderType></shaderType> -->      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
     </graphicData>
-    <!-- <altitudeLayer>Building</altitudeLayer> -->    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>Standable</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <fillPercent>0.9</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
     <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
-    <canOverlapZones>false</canOverlapZones>    <!-- zones as in storage zones, growing zones, etc -->
     <castEdgeShadows>true</castEdgeShadows>
     <size>(2,2)</size>    <!-- Ingame cell/ground size (x,y) -->
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
-    <scatterableOnMapGen>false</scatterableOnMapGen>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>    <!-- Show input/output cells when selected -->
     <thingCategories>
       <li>BuildingsAutomation</li>
@@ -66,7 +62,6 @@
     <thingClass>ProjectRimFactory.AnimalStation.Building_Shearer</thingClass>
     <graphicData>
       <texPath>Farm/Shearer</texPath>      <!-- path to texture -->
-      <graphicClass>Graphic_Single</graphicClass>      <!-- only 1 rotation -->
       <drawSize>(2.1)</drawSize>      <!-- texture size -->
       <!-- <shaderType>CutoutComplex</shaderType> -->      <!-- for mask to change color when stuffed -->
       <!-- <color>(133,97,67,256)</color> -->      <!--change color on maske manually -->
@@ -134,7 +129,6 @@
     <thingClass>ProjectRimFactory.AnimalStation.Building_Milker</thingClass>
     <graphicData>
       <texPath>Farm/Milker</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2.1)</drawSize>
       <!-- <shaderType>CutoutComplex</shaderType> -->
       <!-- <color>(133,97,67,256)</color> -->
@@ -202,7 +196,6 @@
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
       <texPath>Farm/Harvester</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2.1)</drawSize>
       <!-- <shaderType>CutoutComplex</shaderType> -->
       <!-- <color>(133,97,67,256)</color> -->
@@ -282,7 +275,6 @@
     </statBases>
     <graphicData>
       <texPath>Farm/Slaughter</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3.5,3.4)</drawSize>
       <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
