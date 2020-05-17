@@ -5,29 +5,28 @@
   -->
 
   <!--======================================= NR Wall light ===============================================-->
-  <!-- <ThingDef ParentName="BuildingBase">
-    <defName>Building_AutoMachineTool_WallLight</defName>
-    <label>WallLight</label>
-    <thingClass>Building</thingClass>
-    <description>Wall light.</description>
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>PRF_WallLight</defName>
+    <label>Wall Lamp</label>
+    <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\n Good for small rooms or other tight packed rooms</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
     <graphicData>
       <texPath>Misc/WallLight</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_WallLight</graphicClass>
-      <drawSize>(1, 1)</drawSize>
+      <drawSize>(1,1)</drawSize>
     </graphicData>
     <building>
       <blueprintGraphicData>
         <texPath>Misc/WallLight</texPath>
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_WallLight</graphicClass>
-        <drawSize>(1, 1)</drawSize>
+        <drawSize>(1,1)</drawSize>
       </blueprintGraphicData>
       <isEdifice>false</isEdifice>
     </building>
     <clearBuildingArea>false</clearBuildingArea>
     <constructEffect>ConstructMetal</constructEffect>
     <costList>
-      <Steel>1</Steel>
+      <Steel>20</Steel>
     </costList>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
@@ -38,7 +37,7 @@
     <statBases>
       <WorkToBuild>100</WorkToBuild>
       <MaxHitPoints>100</MaxHitPoints>
-      <Flammability>0</Flammability>
+      <Flammability>0.1</Flammability>
     </statBases>
     <size>(1,1)</size>
     <designationCategory>Industrial</designationCategory>
@@ -49,7 +48,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>50</basePowerConsumption>
+        <basePowerConsumption>30</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
@@ -58,10 +57,10 @@
         <glowColor>(217,217,208,0)</glowColor>
       </li>
     </comps>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <researchPrerequisites>
+      <li>Electricity</li>
     </researchPrerequisites>
-  </ThingDef> -->
+  </ThingDef>
 
 
   <!-- ======================================= Industrial LampBase =============================================== -->

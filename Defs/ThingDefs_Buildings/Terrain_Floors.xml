@@ -19,9 +19,9 @@
     </filthAcceptanceMask>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Optional. Defaults to Light. Defines which terrain affordance level is needed when placing a floor tile -->
     <researchPrerequisites>      <!-- Optional. The player will not be able to build the floor or terrain until completing one or more research projects -->
-      <li>AutomationBasics</li>
+      <li>Machining</li>
     </researchPrerequisites>
-    <edgeType>FadeRough</edgeType>    <!-- Defines the rendering method for terrain edges. Vanilla types:		Hard,	Fade,	FadeRough -->
+    <edgeType>Hard</edgeType>    <!-- Defines the rendering method for terrain edges. Vanilla types:		Hard,	Fade,	FadeRough -->
   </TerrainDef>
 
 

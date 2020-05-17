@@ -201,7 +201,7 @@
       <!-- <color>(133,97,67,256)</color> -->
     </graphicData>
     <passability>Standable</passability>
-    <altitudeLayer>Building</altitudeLayer>
+    <altitudeLayer>Gas</altitudeLayer>
     <statBases>
       <Mass>50</Mass>
       <MaxHitPoints>100</MaxHitPoints>
