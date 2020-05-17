@@ -93,11 +93,18 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>1</heatPerSecond>
       </li>
-      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_PickColor">
-        <!-- colors and label-keys are available in the C#, but you know,
-             I should probably make them accessible via XML. Next update -->
+      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
         <glowRadius>20</glowRadius>
         <glowColor>(252,187,113,0)</glowColor>
+        <key>PRF_White</key>
+        <moreColors>
+          <li><key>PRF_Red</key><color>(255,0,0,0)</color></li>
+          <li><key>PRF_Green</key><color>(0,255,0,0)</color></li>
+          <li><key>PRF_Blue</key><color>(0,0,255,0)</color></li>
+          <li><key>PRF_Cyan</key><color>(0,255,255,0)</color></li>
+          <li><key>PRF_Yellow</key><color>(255,255,0,0)</color></li>
+          <li><key>PRF_Magenta</key><color>(255,0,255,0)</color></li>
+        </moreColors>
       </li>
     </comps>
     <researchPrerequisites>

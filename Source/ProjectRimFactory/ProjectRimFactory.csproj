@@ -419,6 +419,7 @@
     <Compile Include="Storage\UI\Dialog_RenameMassStorageUnit.cs" />
     <Compile Include="Storage\UI\ITab_IOPortStorage.cs" />
     <Compile Include="Storage\UI\ITab_Items.cs" />
+    <Compile Include="Misc\CompGlower_ColorPick_Etc.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

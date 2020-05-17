@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+  <!-- Some languages are RtoL, and might want "(default) {0}" -->
+  <PRF_Default_Tag>{0} (default)</PRF_Default_Tag>
   <PRF_TotalStacksNum>Total number of stacks: {0}</PRF_TotalStacksNum>
   <PRFItemsTab>Items</PRFItemsTab>
   <PRFStorageBuildingGainsName>This storage building is now called {0}.</PRFStorageBuildingGainsName>
@@ -68,4 +70,13 @@
   <PRFOutputItems>output item</PRFOutputItems>
   <PRFPawnAccessLabel>pawn access</PRFPawnAccessLabel>
   <PRFPawnAccessDesc>pawn access</PRFPawnAccessDesc>
+  <!--Lamp colors-->
+  <PRF_ChangeColorGizmo>({0})\nChange Color?</PRF_ChangeColorGizmo>
+  <PRF_White>white</PRF_white>
+  <PRF_Red>red</PRF_red>
+  <PRF_Blue>blue</PRF_blue>
+  <PRF_Green>green</PRF_green>
+  <PRF_Cyan>cyan</PRF_cyan>
+  <PRF_Yellow>yellow</PRF_yellow>
+  <PRF_Magenta>magenta</PRF_magenta>
 </LanguageData>

@@ -34,7 +34,7 @@ namespace ProjectRimFactory.Misc {
      *      <li><key>YourMod_Peach</key><color>(252,112,113,0)</color></li>
      *      <li><key>...</key><color>...</color></li>
      *    </moreColors>
-     *    <groupId>711712</groupId><!--------VERY optional-->
+     *    <!--<groupId>711712</groupId>------VERY optional-->
      *         <!--^^^^You can use it to group gizmos that
      *             have different color options, if wanted-->
      *  </li>
