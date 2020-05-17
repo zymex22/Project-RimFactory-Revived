@@ -99,7 +99,7 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/Puller</texPath>
+      <texPath>Belts/Puller</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
@@ -108,7 +108,7 @@
         <graphicDataList>
           <Working>
             <graphicData>
-              <texPath>AutoMachineTool/Buildings/PullerWorking</texPath>
+              <texPath>Belts/PullerWorking</texPath>
               <graphicClass>Graphic_Multi</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
@@ -130,7 +130,7 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/PullerL</texPath>
+      <texPath>Belts/PullerL</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
@@ -142,28 +142,28 @@
         <graphicDataList>
           <Left>
             <graphicData>
-              <texPath>AutoMachineTool/Buildings/PullerL</texPath>
+              <texPath>Belts/PullerL</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
           </Left>
           <Right>
             <graphicData>
-              <texPath>AutoMachineTool/Buildings/PullerR</texPath>
+              <texPath>Belts/PullerR</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
           </Right>
           <LeftWorking>
             <graphicData>
-              <texPath>AutoMachineTool/Buildings/PullerLWorking</texPath>
+              <texPath>Belts/PullerLWorking</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
           </LeftWorking>
           <RightWorking>
             <graphicData>
-              <texPath>AutoMachineTool/Buildings/PullerRWorking</texPath>
+              <texPath>Belts/PullerRWorking</texPath>
               <graphicClass>Graphic_Single</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
@@ -189,18 +189,20 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/PullerWall</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Belts/PullerWall</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
+      <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
             <graphicData>
-              <texPath>AutoMachineTool/Buildings/PullerWallWorking</texPath>
-              <graphicClass>Graphic_Single</graphicClass>
+              <texPath>Belts/PullerWallWorking</texPath>
+              <graphicClass>Graphic_Multi</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
+              <drawRotated>false</drawRotated>              <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
             </graphicData>
           </Working>
         </graphicDataList>

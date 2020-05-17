@@ -6,7 +6,7 @@
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
-      <Mass>70</Mass>
+      <Mass>80</Mass>
     </statBases>
     <passability>PassThroughOnly</passability>
     <altitudeLayer>Building</altitudeLayer>
@@ -80,9 +80,9 @@
       <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
         <pulse>false</pulse>
         <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>3</maxGlowRadius>
-        <minGlowColor>(100,0,0,10)</minGlowColor>
-        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <maxGlowRadius>2</maxGlowRadius>
+        <minGlowColor>(204,204,0,10)</minGlowColor>
+        <maxGlowColor>(255,255,0,80)</maxGlowColor>
         <intervalTicks>30</intervalTicks>
         <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
       </li>
@@ -136,7 +136,7 @@
     <designatorDropdown>miners_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/DeepQuarry</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
+      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(2.5,2.5)</drawSize>
     </graphicData>
     <size>(2,2)</size>
@@ -148,7 +148,6 @@
       <MaxHitPoints>350</MaxHitPoints>
       <Flammability>1.0</Flammability>
     </statBases>
-    <rotatable>true</rotatable>
     <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 3 hours.(can cause infestation)</description>
     <costList>
       <Steel>400</Steel>
@@ -173,9 +172,9 @@
       <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
         <pulse>false</pulse>
         <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>3</maxGlowRadius>
-        <minGlowColor>(100,0,0,10)</minGlowColor>
-        <maxGlowColor>(230,0,0,100)</maxGlowColor>
+        <maxGlowRadius>2</maxGlowRadius>
+        <minGlowColor>(204,204,0,10)</minGlowColor>
+        <maxGlowColor>(255,255,0,80)</maxGlowColor>
         <intervalTicks>30</intervalTicks>
         <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
       </li>

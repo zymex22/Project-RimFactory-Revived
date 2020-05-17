@@ -10,15 +10,15 @@
     <label>WallLight</label>
     <thingClass>Building</thingClass>
     <description>Wall light.</description>
-    <uiIconPath>AutoMachineTool/Buildings/WallLightIcon</uiIconPath>
+    <uiIconPath>Misc/WallLightIcon</uiIconPath>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/WallLight</texPath>
+      <texPath>Misc/WallLight</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_WallLight</graphicClass>
       <drawSize>(1, 1)</drawSize>
     </graphicData>
     <building>
       <blueprintGraphicData>
-        <texPath>AutoMachineTool/Buildings/WallLight</texPath>
+        <texPath>Misc/WallLight</texPath>
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_WallLight</graphicClass>
         <drawSize>(1, 1)</drawSize>
       </blueprintGraphicData>

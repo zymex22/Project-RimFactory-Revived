@@ -266,7 +266,7 @@ Mod extennsion for assemblers
       <li>SelfCooking</li>
       <li>SelfCorrectingAssemblers</li>
     </researchPrerequisites>
-    <rotatable>true</rotatable>    <!-- for being able to swap between textures each rotation -->
+    <rotatable>false</rotatable>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <importRecipesFrom>          <!-- import same bills as vanilla electric stove have -->
@@ -283,7 +283,7 @@ Mod extennsion for assemblers
         <drawStatus>true</drawStatus>
         <doEffect>true</doEffect>
         <powerOffGraphicData>
-          <graphicClass>Graphic_Multi</graphicClass>
+          <graphicClass>Graphic_Single</graphicClass>
           <texPath>SAL3/AutoCookerPowerOff</texPath>
           <drawSize>(3,3)</drawSize>
         </powerOffGraphicData>
