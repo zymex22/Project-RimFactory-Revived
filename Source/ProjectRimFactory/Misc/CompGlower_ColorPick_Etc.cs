@@ -9,89 +9,154 @@ using Verse.AI;
 using UnityEngine;
 using System.Reflection.Emit;
 
-/***************************************************
- * A comp glower (and corresponding compproperty)  * IMPORTANT TODO:
- * that can switch between a set of colors.        * Replace all
- * Colors available ar defined here in the C# code * color names
- * (see lines 45-50)                               * and labels
- * Harcoded to accept basic stats from PRF lamp    * with translation
- * (see lines 35,36)                               * keys.
- * Any questions, blame LWM                        *
- **************************************************/
-
 namespace ProjectRimFactory.Misc {
+    /*********************************************************************
+     * Glower_ColorPick:
+     *   A comp that lets you change colors after a light source has
+     *   been built.
+     * To add this to your own mod:
+     * 1.  Use your own namespace (be polite).
+     * 2.  Change "PRF_ChangeColorGizmo" to point to your own translation
+     *     key.  It should look something like:
+     *     <YourMod_ChangeColorGizmo>({0})\nChange Color?</YourMod_ChangeColorGizmo>
+     *     Add translation keys for your colors!
+     *     <YourMod_White>white</YourMod_White>
+     *     (safer to do "YourMod_..." - you never know if some other modder
+     *      has already made "red" "Blood-colored" or "Red Wagon" or whatever)
+     * 3.  Compile this into your C# project!  (Assembly not included)
+     * 4.  Add the comp to your light source instead of CompGlower!
+     * <comps>
+     *  <li Class="YourNamespace.CompProperties_Glower_ColorPick">
+     *    <glowRadius>10</glowRadius><!--Just like vanilla-->
+     *    <glowColor>(255,255,255,0)</glowColor><!--default color-->
+     *    <key>YourMod_White</key><!--translation key to default color name-->
+     *    <moreColors>
+     *      <li><key>YourMod_Peach</key><color>(252,112,113,0)</color></li>
+     *      <li><key>...</key><color>...</color></li>
+     *    </moreColors>
+     *    <groupId>711712</groupId><!--------VERY optional-->
+     *         <!--^^^^You can use it to group gizmos that
+     *             have different color options, if wanted-->
+     *  </li>
+     * </comps>
+     *
+     * Enjoy!  --LWM
+     *********************************************************************/
     public class CompProperties_Glower_ColorPick : CompProperties_Glower {
         public CompProperties_Glower_ColorPick()
-          {
-            this.compClass = typeof(CompGlower_ColorPick);
-          }
+		{
+			this.compClass = typeof(CompGlower_ColorPick);
+		}
+        public override void ResolveReferences(ThingDef parentDef) {
+            base.ResolveReferences(parentDef);
+            // Use this opportunity to create a set of these compProperties, one for each color:
+            colorComps=new List<CompProperties_Glower_ColorPick>();
+            colorComps.Add(this);
+            if (moreColors.NullOrEmpty()) return;
+            foreach (var kc in moreColors) {
+                CompProperties_Glower_ColorPick nextColor=new CompProperties_Glower_ColorPick() {
+                    overlightRadius=this.overlightRadius,
+                    glowRadius=this.glowRadius,
+                    glowColor=kc.color,
+                    key=kc.key,
+                    colorComps=this.colorComps,
+                };
+                colorComps.Add(nextColor);
+            }
+        }
+        public string key="default"; // translation key for adjective
+        public List<KeyedColor> moreColors;
+        public List<CompProperties_Glower_ColorPick> colorComps;
+        // for multi-select:
+        //   you can give different groupIds to objects that can turn different colors, or
+        //   you can give them all the same and players will figure it out.  The code is
+        //   flexible.
+        public int groupId=711712;
+    }
+    public class KeyedColor {
+        // Note: we do translation keys (not labels) so they can be used
+        //  as an invariant save-data lookup
+        public string key; // translation key for adjective
+        public ColorInt color;
     }
 
-    [StaticConstructorOnStartup] // need to build available colors
     public class CompGlower_ColorPick : CompGlower {
-        static Dictionary<string, CompProperties_Glower> availableColors=null; //fill once defs are ready
-        //static public void InitOnDefsLoaded() { // this needs to be calld by a StaticConstructorOnStartup
-        static CompGlower_ColorPick() {
-            CompProperties_Glower_ColorPick white=DefDatabase<ThingDef>.GetNamed("PRF_IndustrialLamp", false)?.
-                GetCompProperties<CompProperties_Glower_ColorPick>();
-            if (white==null) {
-                white = new CompProperties_Glower_ColorPick();
-                white.glowRadius=20;
-                white.glowColor=new ColorInt(255,255,255);
+        public new CompProperties_Glower_ColorPick Props {
+            get {
+                return (props as CompProperties_Glower_ColorPick);
             }
-            availableColors=new Dictionary<string, CompProperties_Glower>();
-            // "white" has important things like radius, etc, so use it as a basis for other colors:
-            availableColors.Add("white (default)", white);
-            AddColor("red", new ColorInt(255,0,0), white);
-            AddColor("blue", new ColorInt(0,0,255), white);
-            AddColor("green", new ColorInt(0,255,0), white);
-            AddColor("cyan", new ColorInt(0,255,255), white);
-            AddColor("yellow", new ColorInt(255,255,0), white);
-            AddColor("magenta", new ColorInt(255,0,255), white);
         }
-        public CompGlower_ColorPick() : base() {  // constructor
-            // If several item use the comp glower, get them all on the same page to start:
-            this.props=availableColors.ElementAt(0).Value;
+        public override void PostExposeData() {
+            base.PostExposeData();
+            string origKey=Props.key;
+            string defaultKey=Props.colorComps[0].key;
+            string key=origKey;
+            Scribe_Values.Look(ref key, "glower_color", defaultKey);
+            if (key!=origKey) { // loaded new color
+                ChangeColor(key);
+            }
         }
-        static void AddColor(string name, ColorInt color, CompProperties_Glower_ColorPick basis) {
-            var cp=new CompProperties_Glower_ColorPick();
-            cp.glowColor=color;
-            cp.glowRadius=basis.glowRadius;
-            cp.overlightRadius=basis.overlightRadius;
-            availableColors.Add(name, cp);
+        public void ChangeColor(string key) {
+            if (key==Props.key) return;
+            bool found=false;
+            foreach(var c in Props.colorComps) {
+                if (c.key==key) {
+                    this.props=c;
+                    found=true;
+                    break;
+                }
+            }
+            if (!found) {
+                Log.Warning("CONFIG ERROR: could not find color "+key);
+                return;
+            }
+            if (parent.Spawned) {
+                parent.Map.glowGrid.DeRegisterGlower(this);
+                parent.Map.glowGrid.RegisterGlower(this);
+                //Log.Message(""+parent+" changing color to "+key);
+            }
         }
-        //color changer gizmo
+        public void ChangeColorAllSelected(string key) {
+            var selected=Find.Selector.SelectedObjects;
+            if (selected.NullOrEmpty()) return;
+            if (selected.Count < 2) return;
+            foreach (object o in selected) {
+                var c=(o as ThingWithComps)?.GetComp<CompGlower_ColorPick>();
+                if (c==null) continue;
+                foreach (var option in c.Props.colorComps) {
+                    if (option.key==key) {
+                        c.ChangeColor(key);
+                        break; // stop testing options
+                    }
+                }
+            }
+        }
         public override IEnumerable<Gizmo> CompGetGizmosExtra() {
             foreach (var g in base.CompGetGizmosExtra()) yield return g;
-            if (availableColors==null) yield break;
+            if (Props.colorComps==null || Props.colorComps.Count < 2) yield break;
             Color tmpColor=Props.glowColor.ToColor; // current color
             // don't blind anyone with bright icon:
             tmpColor.a=0.75f; // lowering "a" lowers how much color shows up
 
             yield return new Command_Action {
-                // don't display default color:
-                defaultLabel=((Props==availableColors.ElementAt(0).Value)?"Change Color?":("("+colorLabel+")\nChange Color?")),
+                defaultLabel="PRF_ChangeColorGizmo".Translate(this.Props.key.Translate()),
+                //           (color)\nChange Color?
                 defaultIconColor=tmpColor,
-                groupKey=711712,
+                groupKey=Props.groupId, // select multiple things at once
                 icon=Texture2D.whiteTexture, // nice bright white background
                 action=delegate() {
                     List<FloatMenuOption> mlist = new List<FloatMenuOption>();
-                    foreach (var kv in availableColors) {
-                        mlist.Add(new FloatMenuOption(kv.Key,
-                            delegate() {
-                              this.props=kv.Value;
-                              colorLabel=kv.Key;
-                              if (parent.Spawned) {
-                                  parent.Map.glowGrid.DeRegisterGlower(this);
-                                  parent.Map.glowGrid.RegisterGlower(this);
-                                  Log.Message(""+parent+" changing color to "+kv.Value.glowColor.ToColor);
-                              }
-                            }));
+                    foreach (var c in this.Props.colorComps) {
+                        mlist.Add(new FloatMenuOption(c.key.Translate(),
+                                                      delegate() {
+                                                          this.ChangeColor(c.key);
+                                                          ChangeColorAllSelected(c.key);
+                                                      }));
                     }
                     Find.WindowStack.Add(new FloatMenu(mlist));
                 }
             };
+            yield break;
         }
-        string colorLabel="";
     }
 }
