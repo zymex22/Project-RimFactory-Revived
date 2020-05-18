@@ -72,11 +72,11 @@
   <PRFPawnAccessDesc>pawn access</PRFPawnAccessDesc>
   <!--Lamp colors-->
   <PRF_ChangeColorGizmo>({0})\nChange Color?</PRF_ChangeColorGizmo>
-  <PRF_White>white</PRF_white>
-  <PRF_Red>red</PRF_red>
-  <PRF_Blue>blue</PRF_blue>
-  <PRF_Green>green</PRF_green>
-  <PRF_Cyan>cyan</PRF_cyan>
-  <PRF_Yellow>yellow</PRF_yellow>
-  <PRF_Magenta>magenta</PRF_magenta>
+  <PRF_White>white</PRF_White>
+  <PRF_Red>red</PRF_Red>
+  <PRF_Blue>blue</PRF_Blue>
+  <PRF_Green>green</PRF_Green>
+  <PRF_Cyan>cyan</PRF_Cyan>
+  <PRF_Yellow>yellow</PRF_Yellow>
+  <PRF_Magenta>magenta</PRF_Magenta>
 </LanguageData>
