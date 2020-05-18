@@ -143,7 +143,7 @@ namespace ProjectRimFactory.Misc {
                 //           (color)\nChange Color?
                 defaultIconColor=tmpColor,
                 groupKey=Props.groupId, // select multiple things at once
-                icon=Texture2D.whiteTexture, // nice bright white background
+                icon=ContentFinder<Texture2D>.Get("UI/Lamp", true), // nice bright white background
                 action=delegate() {
                     List<FloatMenuOption> mlist = new List<FloatMenuOption>();
                     foreach (var c in this.Props.colorComps) {

@@ -208,7 +208,7 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 yield return new Command_Toggle
                 {
-                    icon = ContentFinder<Texture2D>.Get("SAL3/PickupFromGround"),
+                    icon = ContentFinder<Texture2D>.Get("UI/PickupFromGround"),
                     defaultLabel = "SmartHopper_PickupFromGround".Translate(),
                     toggleAction = () => this.pickupFromGround = !this.pickupFromGround,
                     isActive = () => this.pickupFromGround

@@ -16,7 +16,7 @@ namespace ProjectRimFactory.Storage
     public class Building_StorageUnitIOPort : Building_Storage
     {
         public static readonly Texture2D CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
-        public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("Storage/IoIcon");
+        public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("UI/IoIcon");
 
         public StorageIOMode mode;
         Building_MassStorageUnit boundStorageUnit;

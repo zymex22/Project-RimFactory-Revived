@@ -25,8 +25,8 @@ namespace ProjectRimFactory.AutoMachineTool
             AdultIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Adult", true);
 
 
-            OutputDirectionIcon = ContentFinder<Texture2D>.Get("AutoMachineTool/UI/OutputDirection", true);
-            PlayIcon = ContentFinder<Texture2D>.Get("AutoMachineTool/UI/Play", true);
+            OutputDirectionIcon = ContentFinder<Texture2D>.Get("UI/OutputDirection", true);
+            PlayIcon = ContentFinder<Texture2D>.Get("UI/Play", true);
 
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
 
