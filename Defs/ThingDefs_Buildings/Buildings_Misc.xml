@@ -8,7 +8,7 @@
   <ThingDef ParentName="PRFBuildingBase">
     <defName>PRF_WallLight</defName>
     <label>Wall Lamp</label>
-    <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\n Good for small rooms or other tight packed rooms</description>
+    <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\n Good for small rooms or other tight packed rooms\nAlso capable of changeing color when placed if colored light are researched</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
     <graphicData>
       <texPath>Misc/WallLight</texPath>
@@ -52,9 +52,18 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
-      <li Class="CompProperties_Glower">
+      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
         <glowRadius>15</glowRadius>
-        <glowColor>(217,217,208,0)</glowColor>
+        <glowColor>(252,187,113,0)</glowColor>
+        <key>PRF_White</key>
+        <moreColors>
+          <li><key>PRF_Red</key><color>(255,0,0,0)</color></li>
+          <li><key>PRF_Green</key><color>(0,255,0,0)</color></li>
+          <li><key>PRF_Blue</key><color>(0,0,255,0)</color></li>
+          <li><key>PRF_Cyan</key><color>(0,255,255,0)</color></li>
+          <li><key>PRF_Yellow</key><color>(255,255,0,0)</color></li>
+          <li><key>PRF_Magenta</key><color>(255,0,255,0)</color></li>
+        </moreColors>
       </li>
     </comps>
     <researchPrerequisites>
@@ -64,10 +73,10 @@
 
 
   <!-- ======================================= Industrial LampBase =============================================== -->
-  <ThingDef Name="PRF_IndustrialLamp" ParentName="LampBase">
+  <ThingDef ParentName="LampBase">
     <defName>PRF_IndustrialLamp</defName>
     <label>Industrial Lamp</label>
-    <description>An industrial lamp to light up large spaces; it works both inside and outside.</description>
+    <description>An electrical wall lamp that lights an area.\nThis lamp are capable to light up a huge aread both indoor and outdoor to light up your factory hall.\nAlso capable of changeing color when placed if colored light are researched</description>
     <fillPercent>0.50</fillPercent>
     <graphicData>
       <texPath>Misc/IndustrialLamp</texPath>
