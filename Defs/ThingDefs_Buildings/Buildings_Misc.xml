@@ -65,6 +65,8 @@
 
   <!-- ======================================= Industrial LampBase =============================================== -->
   <ThingDef Name="PRF_IndustrialLamp" ParentName="LampBase">
+    <defName>PRF_IndustrialLamp</defName>
+    <label>Industrial Lamp</label>
     <description>An industrial lamp to light up large spaces; it works both inside and outside.</description>
     <fillPercent>0.50</fillPercent>
     <graphicData>
