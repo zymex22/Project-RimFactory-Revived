@@ -1,11 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 
-  This is just a lot of misc items not fit in other category of PRF and might be moved into a seprate mod later...
-  -->
 
-  <!--======================================= NR Wall light ===============================================-->
-  <ThingDef ParentName="PRFBuildingBase">
+  <!--   This is just a lot of misc items not fit in other category of PRF and might be moved into a seprate mod later...  -->
+  
+  <!--===================================== Base =====================================-->
+  <ThingDef Name="PRF_MiscBase" ParentName="PRFBuildingBase" Abstract="True">
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>      <!-- structure HP -->
+      <Flammability>0.9</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
+      <Beauty>0.1</Beauty>      <!-- +is good -is bad ;) -->
+      <Mass>5</Mass>      <!-- mass in kg -->
+      <WorkToBuild>100</WorkToBuild>
+    </statBases>
+    <useHitPoints>True</useHitPoints>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
+      <drawSize>(1,1)</drawSize>      <!-- Scale texture up/down to fit -->
+      <!-- <shaderType></shaderType> -->      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+    <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
+    <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
+    <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
+    <size>(1,1)</size>    <!-- Ingame cell/ground size (x,y) -->
+    <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <constructEffect>ConstructMetal</constructEffect>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
+    <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
+    <neverMultiSelect>false</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
+    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!--===================================== Misc. Dropdown =====================================-->
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_misc_gr</defName>    <!-- Create dropdown for animal station to group -->
+  </DesignatorDropdownGroupDef>
+
+  <!--======================================= NR Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->
+  <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_WallLight</defName>
     <label>Wall Lamp</label>
     <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\n Good for small rooms or other tight packed rooms\nAlso capable of changeing color when placed if colored light are researched</description>
@@ -13,6 +54,7 @@
     <graphicData>
       <texPath>Misc/WallLight</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_WallLight</graphicClass>
+      <shaderType>MoteGlow</shaderType>
       <drawSize>(1,1)</drawSize>
     </graphicData>
     <building>
@@ -24,7 +66,6 @@
       <isEdifice>false</isEdifice>
     </building>
     <clearBuildingArea>false</clearBuildingArea>
-    <constructEffect>ConstructMetal</constructEffect>
     <costList>
       <Steel>20</Steel>
     </costList>
@@ -33,18 +74,12 @@
     </placeWorkers>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <fillPercent>0</fillPercent>
-    <useHitPoints>True</useHitPoints>
     <statBases>
-      <WorkToBuild>100</WorkToBuild>
-      <MaxHitPoints>100</MaxHitPoints>
       <Flammability>0.1</Flammability>
     </statBases>
     <size>(1,1)</size>
-    <designationCategory>Industrial</designationCategory>
-    <passability>PassThroughOnly</passability>
-    <pathCost>70</pathCost>
+    <designatorDropdown>PRF_misc_gr</designatorDropdown>    <!-- assign dropdown group -->
     <surfaceType>Item</surfaceType>
-    <rotatable>false</rotatable>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -54,15 +89,16 @@
       <li Class="CompProperties_Flickable"/>
       <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
         <glowRadius>15</glowRadius>
-        <glowColor>(252,187,113,0)</glowColor>
-        <key>PRF_White</key>
+        <glowColor>(252,199,139,0)</glowColor>
+        <key>PRF_Warm_White</key>
         <moreColors>
-          <li><key>PRF_Red</key><color>(255,0,0,0)</color></li>
-          <li><key>PRF_Green</key><color>(0,255,0,0)</color></li>
-          <li><key>PRF_Blue</key><color>(0,0,255,0)</color></li>
-          <li><key>PRF_Cyan</key><color>(0,255,255,0)</color></li>
-          <li><key>PRF_Yellow</key><color>(255,255,0,0)</color></li>
-          <li><key>PRF_Magenta</key><color>(255,0,255,0)</color></li>
+          <li><key>PRF_Cool_White</key><color>(140,200,250,0)</color></li>
+          <li><key>PRF_Red</key><color>(217,80,80,0)</color></li>
+          <li><key>PRF_Green</key><color>(80,217,80,0)</color></li>
+          <li><key>PRF_Blue</key><color>(80,80,217,0)</color></li>
+          <li><key>PRF_Cyan</key><color>(10,245,245,0)</color></li>
+          <li><key>PRF_Yellow</key><color>(240,240,20,0)</color></li>
+          <li><key>PRF_Magenta</key><color>(245,10,245,0)</color></li>
         </moreColors>
       </li>
     </comps>
@@ -72,8 +108,8 @@
   </ThingDef>
 
 
-  <!-- ======================================= Industrial LampBase =============================================== -->
-  <ThingDef ParentName="LampBase">
+  <!-- ======================================= Industrial Lamp (comp by LWM) =============================================== -->
+  <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_IndustrialLamp</defName>
     <label>Industrial Lamp</label>
     <description>An electrical wall lamp that lights an area.\nThis lamp are capable to light up a huge aread both indoor and outdoor to light up your factory hall.\nAlso capable of changeing color when placed if colored light are researched</description>
@@ -88,7 +124,6 @@
       <ComponentIndustrial>1</ComponentIndustrial>
     </costList>
     <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>500</WorkToBuild>
       <Flammability>0</Flammability>
       <Mass>25</Mass>
@@ -105,23 +140,24 @@
         <heatPerSecond>1</heatPerSecond>
       </li>
       <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
-        <glowRadius>20</glowRadius>
-        <glowColor>(252,187,113,0)</glowColor>
-        <key>PRF_White</key>
+        <glowRadius>15</glowRadius>
+        <glowColor>(252,199,139,0)</glowColor>
+        <key>PRF_Warm_White</key>
         <moreColors>
-          <li><key>PRF_Red</key><color>(255,0,0,0)</color></li>
-          <li><key>PRF_Green</key><color>(0,255,0,0)</color></li>
-          <li><key>PRF_Blue</key><color>(0,0,255,0)</color></li>
-          <li><key>PRF_Cyan</key><color>(0,255,255,0)</color></li>
-          <li><key>PRF_Yellow</key><color>(255,255,0,0)</color></li>
-          <li><key>PRF_Magenta</key><color>(255,0,255,0)</color></li>
+          <li><key>PRF_Cool_White</key><color>(140,200,250,0)</color></li>
+          <li><key>PRF_Red</key><color>(217,80,80,0)</color></li>
+          <li><key>PRF_Green</key><color>(80,217,80,0)</color></li>
+          <li><key>PRF_Blue</key><color>(80,80,217,0)</color></li>
+          <li><key>PRF_Cyan</key><color>(10,245,245,0)</color></li>
+          <li><key>PRF_Yellow</key><color>(240,240,20,0)</color></li>
+          <li><key>PRF_Magenta</key><color>(245,10,245,0)</color></li>
         </moreColors>
       </li>
     </comps>
     <researchPrerequisites>
       <li>Electricity</li>
     </researchPrerequisites>
-    <designationCategory>Industrial</designationCategory>
-    <specialDisplayRadius>20</specialDisplayRadius>
+    <designatorDropdown>PRF_misc_gr</designatorDropdown>    <!-- assign dropdown group -->
+    <specialDisplayRadius>18</specialDisplayRadius>
   </ThingDef>
 </Defs>
