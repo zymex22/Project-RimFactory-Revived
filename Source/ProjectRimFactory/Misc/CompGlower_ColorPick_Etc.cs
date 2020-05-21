@@ -23,8 +23,11 @@ namespace ProjectRimFactory.Misc {
      *     <YourMod_White>white</YourMod_White>
      *     (safer to do "YourMod_..." - you never know if some other modder
      *      has already made "red" "Blood-colored" or "Red Wagon" or whatever)
-     * 3.  Compile this into your C# project!  (Assembly not included)
-     * 4.  Add the comp to your light source instead of CompGlower!
+     * 3.  Update the icon ("icon="... in the code) - either grab the one from
+     *     here, or add your own.  You can also go with a plain square:
+     *           "icon=Texture2D.Texture2D.whiteTexture,"
+     * 4.  Compile this into your C# project!  (Assembly not included)
+     * 5.  Add the comp to your light source instead of CompGlower!
      * <comps>
      *  <li Class="YourNamespace.CompProperties_Glower_ColorPick">
      *    <glowRadius>10</glowRadius><!--Just like vanilla-->
@@ -34,7 +37,11 @@ namespace ProjectRimFactory.Misc {
      *      <li><key>YourMod_Peach</key><color>(252,112,113,0)</color></li>
      *      <li><key>...</key><color>...</color></li>
      *    </moreColors>
-     *    <!--<groupId>711712</groupId>------VERY optional-->
+     *    <prerequisites>
+     *      <li>ColoredLights</li><!--research prereqs to be able to change colors-->
+     *      <li>Can add more here if you really want</li>
+     *    </prerequisites>
+     *    <`!--<groupId>711712</groupId>------VERY optional-->
      *         <!--^^^^You can use it to group gizmos that
      *             have different color options, if wanted-->
      *  </li>
@@ -67,6 +74,7 @@ namespace ProjectRimFactory.Misc {
         public string key="default"; // translation key for adjective
         public List<KeyedColor> moreColors;
         public List<CompProperties_Glower_ColorPick> colorComps;
+        public List<ResearchProjectDef> prerequisites=null;
         // for multi-select:
         //   you can give different groupIds to objects that can turn different colors, or
         //   you can give them all the same and players will figure it out.  The code is
@@ -98,6 +106,16 @@ namespace ProjectRimFactory.Misc {
         }
         public void ChangeColor(string key) {
             if (key==Props.key) return;
+            if (Props.prerequisites!=null) { // check research prereqs
+                // it's possible to trigger ChangeColor() if multiple
+                // things are selected, so this check is needed
+                for (int i = 0; i < Props.prerequisites.Count; i++) {
+                    if (!Props.prerequisites[i].IsFinished) return;
+                }
+            }
+            // It may end up possible to request color changes to
+            //   a color not available.  It's probably best to just
+            //   roll with it.
             bool found=false;
             foreach(var c in Props.colorComps) {
                 if (c.key==key) {
@@ -106,11 +124,7 @@ namespace ProjectRimFactory.Misc {
                     break;
                 }
             }
-            if (!found) {
-                Log.Warning("CONFIG ERROR: could not find color "+key);
-                return;
-            }
-            if (parent.Spawned) {
+            if (found && parent.Spawned) {
                 parent.Map.glowGrid.DeRegisterGlower(this);
                 parent.Map.glowGrid.RegisterGlower(this);
                 //Log.Message(""+parent+" changing color to "+key);
@@ -134,6 +148,11 @@ namespace ProjectRimFactory.Misc {
         public override IEnumerable<Gizmo> CompGetGizmosExtra() {
             foreach (var g in base.CompGetGizmosExtra()) yield return g;
             if (Props.colorComps==null || Props.colorComps.Count < 2) yield break;
+            if (Props.prerequisites!=null) { // check research prereqs
+                for (int i = 0; i < Props.prerequisites.Count; i++) {
+                    if (!Props.prerequisites[i].IsFinished) yield break;
+                }
+            }
             Color tmpColor=Props.glowColor.ToColor; // current color
             // don't blind anyone with bright icon:
             tmpColor.a=0.75f; // lowering "a" lowers how much color shows up
