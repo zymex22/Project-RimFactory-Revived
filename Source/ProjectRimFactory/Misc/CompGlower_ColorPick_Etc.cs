@@ -104,11 +104,13 @@ namespace ProjectRimFactory.Misc {
                 ChangeColor(key);
             }
         }
+
         public void ChangeColor(string key) {
             if (key==Props.key) return;
             if (Props.prerequisites!=null) { // check research prereqs
                 // it's possible to trigger ChangeColor() if multiple
-                // things are selected, so this check is needed
+                // things are selected, so this check is needed here,
+                // even if we check elsewhere
                 for (int i = 0; i < Props.prerequisites.Count; i++) {
                     if (!Props.prerequisites[i].IsFinished) return;
                 }
@@ -119,15 +121,30 @@ namespace ProjectRimFactory.Misc {
             bool found=false;
             foreach(var c in Props.colorComps) {
                 if (c.key==key) {
+                    //Log.Message(""+parent+" changing color to "+key);
                     this.props=c;
                     found=true;
                     break;
                 }
             }
-            if (found && parent.Spawned) {
-                parent.Map.glowGrid.DeRegisterGlower(this);
-                parent.Map.glowGrid.RegisterGlower(this);
-                //Log.Message(""+parent+" changing color to "+key);
+            if (parent.Spawned) {
+                // If the glower is currently lit, we need to refresh
+                //   the "glow grid".  One easy way to reliably check
+                //   whether it's on is to check the glow Grid to see
+                //   if the comp is registered there.
+                //   But.  It's a private field.  So.  Magic:
+                var grid=parent.Map?.glowGrid;
+                if (grid==null) return;
+                // note: reflection is slow, but we don't care: the user
+                // does not change colors 37847 times each second.
+                var privateField=typeof(Verse.GlowGrid).GetField("litGlowers", BindingFlags.GetField |
+                                                                 BindingFlags.NonPublic | BindingFlags.Instance);
+                HashSet<CompGlower> litGlowers=(HashSet<CompGlower>)privateField.GetValue(grid);
+                if (litGlowers.Contains(this)) {
+                    //Log.Message("    Re-registering comp with glowGrid");
+                    parent.Map.glowGrid.DeRegisterGlower(this);
+                    parent.Map.glowGrid.RegisterGlower(this);
+                }
             }
         }
         public void ChangeColorAllSelected(string key) {
