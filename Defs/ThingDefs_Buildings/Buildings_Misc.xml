@@ -100,6 +100,9 @@
           <li><key>PRF_Yellow</key><color>(240,240,20,0)</color></li>
           <li><key>PRF_Magenta</key><color>(245,10,245,0)</color></li>
         </moreColors>
+        <prerequisites>
+          <li>ColoredLights</li>
+        </prerequisites>
       </li>
     </comps>
     <researchPrerequisites>
@@ -152,6 +155,9 @@
           <li><key>PRF_Yellow</key><color>(240,240,20,0)</color></li>
           <li><key>PRF_Magenta</key><color>(245,10,245,0)</color></li>
         </moreColors>
+        <prerequisites>
+          <li>ColoredLights</li>
+        </prerequisites>
       </li>
     </comps>
     <researchPrerequisites>
