@@ -219,15 +219,6 @@ Mod extennsion for assemblers
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
       </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
-        <pulse>false</pulse>
-        <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>3</maxGlowRadius>
-        <minGlowColor>(100,0,0,10)</minGlowColor>
-        <maxGlowColor>(230,0,0,100)</maxGlowColor>
-        <intervalTicks>30</intervalTicks>
-        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>        <!-- easingType : see more here: https://easings.net or in top of this file -->
-      </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- speed settings -->
         <speedSetting>true</speedSetting>
@@ -239,7 +230,7 @@ Mod extennsion for assemblers
         <rangeSetting>true</rangeSetting>
         <minPowerForRange>0</minPowerForRange>
         <minRange>1</minRange>
-        <maxPowerForRange>1300</maxPowerForRange>
+        <maxPowerForRange>1500</maxPowerForRange>
         <maxRange>4</maxRange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
         <!-- range color settings

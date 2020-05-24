@@ -194,6 +194,9 @@ Mod extennsion for assemblers
       <Steel>150</Steel>
       <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
     <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.</description>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
@@ -216,6 +219,15 @@ Mod extennsion for assemblers
       <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
         <range>4</range>
         <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- range settings -->
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>1</minRange>
+        <maxPowerForRange>2000</maxPowerForRange>
+        <maxRange>5</maxRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
     </comps>
     <modExtensions>

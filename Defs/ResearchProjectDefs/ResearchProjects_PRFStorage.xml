@@ -28,7 +28,7 @@
   <ResearchProjectDef>
     <defName>PRFStorageIO</defName>
     <tab>Automation</tab>
-    <techLevel>Industrial</techLevel>
+    <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
     <label>Wireless item transfer</label>
     <researchViewX>5</researchViewX>

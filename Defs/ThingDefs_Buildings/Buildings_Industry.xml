@@ -84,15 +84,6 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>10</heatPerSecond>
       </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
-        <pulse>false</pulse>
-        <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>2</maxGlowRadius>
-        <minGlowColor>(204,204,0,10)</minGlowColor>
-        <maxGlowColor>(255,255,0,80)</maxGlowColor>
-        <intervalTicks>30</intervalTicks>
-        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
-      </li>
       <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
         <effect>Drill</effect>
       </li>
@@ -170,15 +161,6 @@
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
-      </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
-        <pulse>false</pulse>
-        <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>2</maxGlowRadius>
-        <minGlowColor>(204,204,0,10)</minGlowColor>
-        <maxGlowColor>(255,255,0,80)</maxGlowColor>
-        <intervalTicks>30</intervalTicks>
-        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
         <effect>Drill</effect>

@@ -40,7 +40,7 @@
   <ResearchProjectDef>
     <defName>AutonomousMining_III</defName>
     <tab>Automation</tab>
-    <techLevel>Industrial</techLevel>
+    <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>

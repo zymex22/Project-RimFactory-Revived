@@ -130,9 +130,26 @@
 						</ThingDef>
 					</value>
 				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="GenericAnimalHarvester"]/comps</xpath>
+					<value>
+							<li Class="RimFridge.CompProperties_Refrigerator">
+								<drinksBestCold>
+									<li>Beer</li>
+									<li>RC2_Ale</li>
+									<li>RC2_Cider</li>
+									<li>RC2_Grog</li>
+									<li>RC2_Stout</li>
+								</drinksBestCold>
+								<findAllRottableForFilters>false</findAllRottableForFilters>
+							</li>
+					</value>
+				</li>
 			</operations>
 		</match>
 	</Operation>
+
+
 
 	<!-- Smart puller Fridge -->
 	<!-- Operation Class="PatchOperationFindMod">

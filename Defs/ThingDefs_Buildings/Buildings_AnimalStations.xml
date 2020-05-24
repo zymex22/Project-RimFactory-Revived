@@ -229,7 +229,7 @@
     <building>
       <preventDeteriorationInside>true</preventDeteriorationInside>
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
-      <ai_chillDestination>false</ai_chillDestination>
+      <ai_chillDestination>true</ai_chillDestination>
       <fixedStorageSettings>
         <filter>
           <categories>

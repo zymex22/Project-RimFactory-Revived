@@ -54,7 +54,7 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs/ThingDef[defName="PRF_FurnaceIII"]/recipes</xpath>
 					<value>
-						<li>NECForgeSteelBulk</li>
+						<li>Owl_RefineSteel</li>
 					</value>
 				</li>
 			</operations>

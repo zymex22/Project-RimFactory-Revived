@@ -293,9 +293,6 @@
     </statBases>
     <description>This building will be deprecated in the release. Please use the cargo platform.</description>
     <size>(3,3)</size>
-    <researchPrerequisites>
-      <li>PRFStorage</li>
-    </researchPrerequisites>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
