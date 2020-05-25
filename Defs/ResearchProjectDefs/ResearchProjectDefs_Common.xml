@@ -24,8 +24,7 @@
     <baseCost>2000</baseCost>
     <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
     <prerequisites>
-      <li>AutomationBasics</li>
-      <li>AutomaticFarming</li>
+      <li>FarmingSprinklers</li>
       <li>MagneticTape</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>

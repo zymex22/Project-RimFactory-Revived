@@ -73,6 +73,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>300</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
@@ -416,15 +417,10 @@
       <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
-      <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>50.0</fuelConsumptionRate>
-        <fuelCapacity>50.0</fuelCapacity>
-        <fuelFilter>
-          <thingDefs>
-            <li>WoodLog</li>
-          </thingDefs>
-        </fuelFilter>
-        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>100</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>8</glowRadius>

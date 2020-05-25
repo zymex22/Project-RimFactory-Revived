@@ -9,6 +9,7 @@
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
 			<operations>
+				<!-- ============== Adding I/O Fridge Port =============== -->
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs</xpath>
 					<value>
@@ -47,6 +48,9 @@
 											<li>PlantFoodRaw</li>
 											<li>BodyParts</li>
 										</categories>
+										<thingDefs>
+											<li>Wort</li>
+										</thingDefs>
 										<specialFiltersToDisallow>
 											<li>AllowRotten</li>
 										</specialFiltersToDisallow>
@@ -130,56 +134,32 @@
 						</ThingDef>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs/ThingDef[defName="GenericAnimalHarvester"]/comps</xpath>
-					<value>
-							<li Class="RimFridge.CompProperties_Refrigerator">
-								<drinksBestCold>
-									<li>Beer</li>
-									<li>RC2_Ale</li>
-									<li>RC2_Cider</li>
-									<li>RC2_Grog</li>
-									<li>RC2_Stout</li>
-								</drinksBestCold>
-								<findAllRottableForFilters>false</findAllRottableForFilters>
-							</li>
-					</value>
-				</li>
-			</operations>
-		</match>
-	</Operation>
-
-
-
-	<!-- Smart puller Fridge -->
-	<!-- Operation Class="PatchOperationFindMod">
-		<mods>
-			<li>[KV] RimFridge - 1.1</li>
-		</mods>
-		<match Class="PatchOperationSequence">
-			<success>Always</success>
-			<operations>
+				<!-- ============== Adding Fridge Digital Storage Unit =============== -->
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs</xpath>
 					<value>
-						<ThingDef ParentName="PRFBuildingBase">
-							<defName>SAL_SmartHopperFridge</defName>
-							<label>Vacuum Fridge Hopper</label>
-							<thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
-							<designatorDropdown>Hoppers_gr</designatorDropdown>
+						<ThingDef ParentName="PRFMassStorageBase">
+							<defName>PRFCoolDSU</defName>
+							<label>cooled digital storage unit</label>
+							<uiIconScale>0.9</uiIconScale>
+							<thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
 							<graphicData>
-								<texPath>Storage/vacuumFridge</texPath>
-								<graphicClass>Graphic_Multi</graphicClass>
+								<texPath>Storage/CoolDSU</texPath>
+								<drawSize>(3,3)</drawSize>
+								<damageData>
+									<cornerTL>Damage/Corner</cornerTL>
+									<cornerTR>Damage/Corner</cornerTR>
+								</damageData>
 							</graphicData>
-							<altitudeLayer>Building</altitudeLayer>
-							<passability>PassThroughOnly</passability>
-							<fillPercent>0.5</fillPercent>
-							<pathCost>70</pathCost>
+							<statBases>
+								<Mass>15</Mass>
+								<MaxHitPoints>450</MaxHitPoints>
+								<WorkToBuild>5000</WorkToBuild>
+								<Flammability>0.05</Flammability>
+								<Beauty>0.5</Beauty>
+							</statBases>
 							<building>
-								<preventDeteriorationInside>true</preventDeteriorationInside>
-								<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
-								<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
-								<fixedStorageSettings>
+								<defaultStorageSettings>
 									<priority>Normal</priority>
 									<filter>
 										<categories>
@@ -194,48 +174,38 @@
 											<li>PlantFoodRaw</li>
 											<li>BodyParts</li>
 										</categories>
+										<thingDefs>
+											<li>Wort</li>
+										</thingDefs>
 										<specialFiltersToDisallow>
 											<li>AllowRotten</li>
 										</specialFiltersToDisallow>
 									</filter>
-								</fixedStorageSettings>
-								<defaultStorageSettings>
-									<priority>Normal</priority>
-									<filter>
-										<categories>
-											<li>FoodMeals</li>
-										</categories>
-										<disallowedThingDefs>
-											<li>MealSurvivalPack</li>
-										</disallowedThingDefs>
-									</filter>
 								</defaultStorageSettings>
 							</building>
-							<inspectorTabs>
-								<li>ITab_Storage</li>
-							</inspectorTabs>
-							<castEdgeShadows>true</castEdgeShadows>
-							<statBases>
-								<WorkToBuild>450</WorkToBuild>
-								<MaxHitPoints>100</MaxHitPoints>
-								<Flammability>1.0</Flammability>
-								<Mass>30</Mass>
-							</statBases>
-							<description>A Vacuum Hopper that take in any items on stockpiles within 5 tile range, even different stockpiles, as long their cells are in range. It can be setup to specific type and amount, and hold onto it until pulled away.</description>
+							<description>Fridge version of Digital Storage Unit, that can store food\n\nStores up to 512 stacks. Consumes 10 W of power per stack of items. When your colony loses power, items already inside will be safe, but the building will not be able to store more.\n\nThis is only available because RimFridge is installed.</description>
+							<size>(3,3)</size>
+							<pathCost>150</pathCost>
 							<costList>
-								<Steel>20</Steel>
-								<ComponentIndustrial>3</ComponentIndustrial>
+								<Steel>350</Steel>
+								<PRFWeakAIChip>1</PRFWeakAIChip>
+								<Gold>50</Gold>
+								<Uranium>20</Uranium>
+								<ComponentIndustrial>12</ComponentIndustrial>
 							</costList>
+							<constructEffect>ConstructMetal</constructEffect>
+							<tickerType>Normal</tickerType>
+							<researchPrerequisites>
+								<li>PRFStorageIO</li>
+							</researchPrerequisites>
 							<comps>
+								<li Class="CompProperties_Glower">
+									<glowRadius>6</glowRadius>
+									<glowColor>(115,198,206,0)</glowColor>
+								</li>
 								<li Class="CompProperties_Power">
 									<compClass>CompPowerTrader</compClass>
-									<basePowerConsumption>275</basePowerConsumption>
-								</li>
-								<li Class="CompProperties_Flickable"/>
-								<li Class="CompProperties_Breakdownable"/>
-								<li Class="CompProperties_Glower">
-									<glowRadius>2.5</glowRadius>
-									<glowColor>(89,188,255,0)</glowColor>
+									<basePowerConsumption>500</basePowerConsumption>
 								</li>
 								<li Class="RimFridge.CompProperties_Refrigerator">
 									<drinksBestCold>
@@ -248,31 +218,44 @@
 									<findAllRottableForFilters>false</findAllRottableForFilters>
 								</li>
 								<li>
-									<compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+									<compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+								</li>
+								<li>
+									<compClass>ProjectRimFactory.Common.CompCallTickRareFromTick</compClass>
 								</li>
 							</comps>
-							<tickerType>Rare</tickerType>
-							<rotatable>true</rotatable>
-							<neverMultiSelect>true</neverMultiSelect>
-							<designationCategory>Industrial</designationCategory>
-							<staticSunShadowHeight>0.3</staticSunShadowHeight>
-							<surfaceType>Item</surfaceType>
-							<constructEffect>ConstructMetal</constructEffect>
-							<minifiedDef>MinifiedThing</minifiedDef>
-							<thingCategories>
-								<li>BuildingsAutomation</li>
-							</thingCategories>
-							<specialDisplayRadius>5</specialDisplayRadius>
-							<researchPrerequisites>
-								<li>AirConditioning</li>
-								<li>AutomationBasics</li>
-							</researchPrerequisites>
+							<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+							<modExtensions>
+								<li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
+								<li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
+									<limit>512</limit>
+									<destroyContainsItems>false</destroyContainsItems>
+									<hideItems>true</hideItems>
+									<forbidPawnAccess>false</forbidPawnAccess>
+									<hideRightClickMenus>true</hideRightClickMenus>
+								</li>
+							</modExtensions>
 						</ThingDef>
+					</value>
+				</li>
+				<!-- ============== Adding fridge comp to Generic Animal Harvester =============== -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="GenericAnimalHarvester"]/comps</xpath>
+					<value>
+						<li Class="RimFridge.CompProperties_Refrigerator">
+							<drinksBestCold>
+								<li>Beer</li>
+								<li>RC2_Ale</li>
+								<li>RC2_Cider</li>
+								<li>RC2_Grog</li>
+								<li>RC2_Stout</li>
+							</drinksBestCold>
+							<findAllRottableForFilters>false</findAllRottableForFilters>
+						</li>
 					</value>
 				</li>
 			</operations>
 		</match>
-	</Operation> -->
-
+	</Operation>
 
 </Patch>

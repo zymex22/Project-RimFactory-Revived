@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
+<!-- ================================= Pawn Base =================================== -->
   <ThingDef Name="PRFBasePawn" Abstract="True">
     <thingClass>Pawn</thingClass>
     <category>Pawn</category>
@@ -33,7 +33,9 @@
     <drawGUIOverlay>true</drawGUIOverlay>
   </ThingDef>
 
-  <ThingDef ParentName="PRFBasePawn" Name="PRFDroneBase" Abstract="True">
+
+<!-- ================================= Drone Base =================================== -->
+  <ThingDef Name="PRFDroneBase" Abstract="True">
     <statBases>
       <PsychicSensitivity>0</PsychicSensitivity>
       <ToxicSensitivity>0</ToxicSensitivity>
@@ -41,7 +43,28 @@
       <ComfyTemperatureMin>-100</ComfyTemperatureMin>
       <ComfyTemperatureMax>250</ComfyTemperatureMax>
       <LeatherAmount>25</LeatherAmount>
+      <Mass>20</Mass>
     </statBases>
+    <inspectorTabs>
+      <li>ITab_Pawn_Health</li>
+      <li>ITab_Pawn_Needs</li>
+      <li>ITab_Pawn_Gear</li>
+      <!--
+			<li>ITab_Pawn_Character</li>
+			<li>ITab_Pawn_Training</li>
+			<li>ITab_Pawn_Guest</li>
+			<li>ITab_Pawn_Prisoner</li>
+			<li>ITab_Pawn_Social</li> 
+      <li>ITab_Pawn_FormingCaravan</li>
+      <li>ITab_Pawn_Log</li>
+			-->
+    </inspectorTabs>
+    <comps>
+      <li>
+        <compClass>CompAttachBase</compClass>
+      </li>
+    </comps>
+    <drawGUIOverlay>true</drawGUIOverlay>
     <race>
       <thinkTreeMain>Animal</thinkTreeMain>
       <thinkTreeConstant>AnimalConstant</thinkTreeConstant>
@@ -53,12 +76,21 @@
       <fleshType>PRFDroneFlesh</fleshType>
       <needsRest>false</needsRest>
       <hasGenders>false</hasGenders>
+      <makesFootprints>false</makesFootprints>
       <foodType>None</foodType>
     </race>
+    <thingClass>Pawn</thingClass>
+    <category>Pawn</category>
+    <selectable>true</selectable>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <useHitPoints>false</useHitPoints>
+    <hasTooltip>true</hasTooltip>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
-
   </ThingDef>
 
+
+<!-- ================================= Drone =================================== -->
   <ThingDef ParentName="PRFDroneBase">
     <defName>PRFDrone</defName>
     <label>drone</label>
@@ -122,6 +154,7 @@
     </butcherProducts>
   </ThingDef>
 
+<!-- ================================= Drone PawnKindDef =================================== -->
   <PawnKindDef>
     <defName>PRFDroneKind</defName>
     <label>drone</label>
