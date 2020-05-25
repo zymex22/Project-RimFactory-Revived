@@ -14,6 +14,18 @@ namespace ProjectRimFactory.Drones
     {
         public Building_DroneStation station;
 
+        // don't do anythin exciting when killed - just disappear:
+        public override void Kill(DamageInfo? dinfo, Hediff exactCulprit = null) {
+        // don't call base.Kill
+        this.Destroy();
+        }
+        
+        // or destroyed
+        public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
+        if (this.Spawned) this.DeSpawn();
+        // don't call base.Destroy();
+        }
+
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
