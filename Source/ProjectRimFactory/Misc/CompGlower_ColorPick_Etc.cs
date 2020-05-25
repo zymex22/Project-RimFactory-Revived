@@ -127,7 +127,7 @@ namespace ProjectRimFactory.Misc {
                     break;
                 }
             }
-            if (parent.Spawned) {
+            if (found && parent.Spawned) {
                 // If the glower is currently lit, we need to refresh
                 //   the "glow grid".  One easy way to reliably check
                 //   whether it's on is to check the glow Grid to see
