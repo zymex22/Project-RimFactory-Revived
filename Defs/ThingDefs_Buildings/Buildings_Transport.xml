@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+  <DesignatorDropdownGroupDef>
+    <defName>Pullers_gr</defName>
+  </DesignatorDropdownGroupDef>
+
   <!--======================================= Item Puller base ===============================================-->
   <ThingDef Name="Building_AutoMachineTool_Puller_Base" ParentName="PRFBuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>

@@ -1,6 +1,75 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
+  <DesignatorDropdownGroupDef>    <!-- create dropdown menu def -->
+    <defName>PRF_floors</defName>
+  </DesignatorDropdownGroupDef>
+
+  <DesignatorDropdownGroupDef>    <!-- create dropdown menu def -->
+    <defName>PRF_ConcreteFloor</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!-- ================= Colored Concrete floor ================= -->
+
+  <TerrainDef ParentName="FloorBase" Name="PRF_ConcreteFloorBase" Abstract="True">
+    <layerable>true</layerable>
+    <affordances>
+      <li>Light</li>
+      <li>Medium</li>
+      <li>Heavy</li>
+    </affordances>
+    <tags>
+      <li>Floor</li>
+    </tags>
+    <fertility>0</fertility>
+    <constructEffect>ConstructDirt</constructEffect>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designatorDropdown>PRF_ConcreteFloor</designatorDropdown>
+    <designationCategory>Floors</designationCategory>
+    <description>Rough concrete. It is cheap and quick to build\n\nThis Colored version take slightly longer to build but also less ugly\n\nThis is added by Project RimFactory</description>
+    <texturePath>Terrain/Surfaces/Concrete</texturePath>
+    <edgeType>Hard</edgeType>
+    <renderPrecedence>70</renderPrecedence>
+    <statBases>
+      <Beauty>0</Beauty>
+      <WorkToBuild>125</WorkToBuild>
+    </statBases>
+    <costList>
+      <Steel>1</Steel>
+    </costList>
+    <designationHotKey>Misc6</designationHotKey>
+    <researchPrerequisites>
+      <li>Stonecutting</li>
+    </researchPrerequisites>
+  </TerrainDef>
+
+  <TerrainDef ParentName="PRF_ConcreteFloorBase">
+    <defName>PRF_ConcreteYellow</defName>
+    <label>concrete yellow</label>
+    <color>(155, 120, 27)</color>
+    <texturePath>Misc/Concrete</texturePath>
+  </TerrainDef>
+
+  <TerrainDef ParentName="PRF_ConcreteFloorBase">
+    <defName>PRF_ConcreteBlack</defName>
+    <label>concrete black</label>
+    <color>(42, 42, 42)</color>
+  </TerrainDef>
+
+  <TerrainDef ParentName="PRF_ConcreteFloorBase">
+    <defName>PRF_ConcreteDarkGrey</defName>
+    <label>concrete dark grey</label>
+    <color>(90, 90, 87)</color>
+  </TerrainDef>
+
+    <TerrainDef ParentName="PRF_ConcreteFloorBase">
+    <defName>PRF_ConcreteWhite</defName>
+    <label>concrete white</label>
+    <color>(250, 250, 250)</color>
+    <texturePath>Misc/Concrete</texturePath>
+  </TerrainDef>
+  
+
   <!-- ================= From Floored - Credit to EsseCoisa and Curundir ================= -->
   <TerrainDef Name="FloorBase_prf" ParentName="FloorBase" Abstract="True">
     <layerable>true</layerable>    <!-- Optional. If true, the player can build the terrain (floor) on top of an existing floor -->
@@ -9,7 +78,7 @@
       <li>Medium</li>
       <li>Heavy</li>
     </affordances>
-    <designationCategory>Industrial</designationCategory>    <!-- Defines which category in the Architect tab contains the terrain or floor building order -->
+    <designationCategory>Floors</designationCategory>    <!-- Defines which category in the Architect tab contains the terrain or floor building order -->
     <fertility>0</fertility>    <!-- Defines the terrain's vertility multiplier. Can set to 0 to disable growing crops on the terrain -->
     <constructEffect>ConstructDirt</constructEffect>
     <filthAcceptanceMask>
@@ -26,17 +95,12 @@
 
 
 
-  <!-- ================= Tiled ================= -->
-
-  <DesignatorDropdownGroupDef>    <!-- create dropdown menu def -->
-    <defName>floor_gr</defName>
-  </DesignatorDropdownGroupDef>
-
+  <!-- ================= From Floored - Credit to EsseCoisa and Curundir ================= -->
   <TerrainDef ParentName="FloorBase_prf">
     <defName>StripedTile</defName>
     <label>striped tile Right</label>
     <renderPrecedence>240</renderPrecedence>
-    <description>A metal tile, painted with yellow stripes to indicate critical areas.</description>
+    <description>A metal tile, painted with yellow stripes to indicate critical areas.\n\nThis is added by Project RimFactory</description>
     <texturePath>Misc/CautionTile</texturePath>
     <color>(255, 255, 255)</color>    <!-- Optional. Defines a custom colour that is applied to the terrain texture. Usually uses RGB with this structure -->
     <statBases>
@@ -49,14 +113,14 @@
     </costList>
     <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc9</designationHotKey>    <!-- Optional. Defines a HotKey to use in the designation category menu when selecting the terrain -->
-    <designatorDropdown>floor_gr</designatorDropdown>    <!-- assign to dropdown menu -->
+    <designatorDropdown>PRF_floors</designatorDropdown>    <!-- assign to dropdown menu -->
   </TerrainDef>
 
   <TerrainDef ParentName="FloorBase_prf">
     <defName>StripedTileLeft</defName>
     <label>striped tile Left</label>
     <renderPrecedence>240</renderPrecedence>
-    <description>A metal tile, painted with yellow stripes to indicate critical areas.</description>
+    <description>A metal tile, painted with yellow stripes to indicate critical areas.\n\nThis is added by Project RimFactory</description>
     <texturePath>Misc/CautionTileLeft</texturePath>
     <color>(255, 255, 255)</color>
     <statBases>
@@ -69,7 +133,7 @@
     </costList>
     <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc9</designationHotKey>
-    <designatorDropdown>floor_gr</designatorDropdown>
+    <designatorDropdown>PRF_floors</designatorDropdown>
   </TerrainDef>
 
 </Defs>

@@ -6,12 +6,16 @@
     <defName>IO_gr</defName>
   </DesignatorDropdownGroupDef>
 
+    <DesignatorDropdownGroupDef>
+    <defName>PRF_Fuel_gr</defName>
+  </DesignatorDropdownGroupDef>
+
   <!--============================== Smart Puller / vacuum Hopper ==============================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>SAL_SmartHopper</defName>
     <label>Vacuum Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
-    <designatorDropdown>IO_gr</designatorDropdown>
+    <designatorDropdown>PRF_Fuel_gr</designatorDropdown>
     <graphicData>
       <texPath>Storage/vacuum</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -199,7 +203,7 @@
     <defName>FuelingMachine</defName>
     <label>fueling machine</label>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
-    <designatorDropdown>Pullers_gr</designatorDropdown>
+    <designatorDropdown>PRF_Fuel_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/FuelingMachine</texPath>
       <graphicClass>Graphic_Multi</graphicClass>

@@ -3,10 +3,6 @@
 
   <!--Clean up Industrial rollers -->
   <DesignatorDropdownGroupDef>
-    <defName>Pullers_gr</defName>
-  </DesignatorDropdownGroupDef>
-
-  <DesignatorDropdownGroupDef>
     <defName>Underground_gr</defName>
   </DesignatorDropdownGroupDef>
 

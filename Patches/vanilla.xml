@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+  <!--================================ Add concrete dropdown Menu ====================================== -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/TerrainDef[defName = "Concrete"]</xpath>
+    <value>
+      <designatorDropdown>PRF_ConcreteFloor</designatorDropdown>
+    </value>
+  </Operation>
+
+
+
+</Patch>

@@ -49,7 +49,8 @@
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_WallLight</defName>
     <label>Wall Lamp</label>
-    <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\n Good for small rooms or other tight packed rooms\nAlso capable of changeing color when placed if colored light are researched</description>
+    <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
+    <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\n Good for small rooms or other tight packed rooms\nAlso capable of changeing color when placed if colored light are researched\n\nThis is added by Project RimFactory</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
     <graphicData>
       <texPath>Misc/WallLight</texPath>
@@ -115,7 +116,8 @@
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_IndustrialLamp</defName>
     <label>Industrial Lamp</label>
-    <description>An electrical wall lamp that lights an area.\nThis lamp are capable to light up a huge aread both indoor and outdoor to light up your factory hall.\nAlso capable of changeing color when placed if colored light are researched</description>
+    <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
+    <description>An electrical wall lamp that lights an area.\nThis lamp are capable to light up a huge aread both indoor and outdoor to light up your factory hall.\nAlso capable of changeing color when placed if colored light are researched\n\nThis is added by Project RimFactory</description>
     <fillPercent>0.50</fillPercent>
     <graphicData>
       <texPath>Misc/IndustrialLamp</texPath>
