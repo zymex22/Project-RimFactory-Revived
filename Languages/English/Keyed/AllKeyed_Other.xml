@@ -71,8 +71,9 @@
   <PRFPawnAccessLabel>pawn access</PRFPawnAccessLabel>
   <PRFPawnAccessDesc>pawn access</PRFPawnAccessDesc>
   <!--Lamp colors-->
-  <PRF_ChangeColorGizmo>({0})\nChange Color?</PRF_ChangeColorGizmo>
-  <PRF_White>white</PRF_White>
+  <PRF_ChangeColorGizmo>Color ({0})</PRF_ChangeColorGizmo>
+  <PRF_Warm_White>warm white</PRF_Warm_White>
+  <PRF_Cool_White>cold white</PRF_Cool_White>
   <PRF_Red>red</PRF_Red>
   <PRF_Blue>blue</PRF_Blue>
   <PRF_Green>green</PRF_Green>

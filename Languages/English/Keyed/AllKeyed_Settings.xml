@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
-  <PRF.Settings.RequireReboot>require reboot to apply the setting.</PRF.Settings.RequireReboot>
+  <PRF.Settings.RequireReboot>Changes require reboot to apply the setting.</PRF.Settings.RequireReboot>
   <PRF.Settings.Select>Select</PRF.Settings.Select>
   <PRF.Settings.TopMessage><![CDATA[<size=20>All setting changes <b><i><color=red>require a restart</color></i></b></size>]]></PRF.Settings.TopMessage>
   <PRF.Settings.AssemblerMessage>Assembler Settings</PRF.Settings.AssemblerMessage>
@@ -17,28 +17,28 @@
   <PRF.Settings.TurnOffSwapTexture.Label>Turn off texture swap effect</PRF.Settings.TurnOffSwapTexture.Label>
   <PRF.Settings.TurnOffSwapTexture.Desc>Turn off texture swap effect</PRF.Settings.TurnOffSwapTexture.Desc>
 
-  <PRF.Settings.TurnOffDrawStatus.Label>Turn off assembler status</PRF.Settings.TurnOffDrawStatus.Label>
-  <PRF.Settings.TurnOffDrawStatus.Desc>Turn off assembler status</PRF.Settings.TurnOffDrawStatus.Desc>
+  <PRF.Settings.TurnOffDrawStatus.Label>Turn off working status</PRF.Settings.TurnOffDrawStatus.Label>
+  <PRF.Settings.TurnOffDrawStatus.Desc>Turn off working status</PRF.Settings.TurnOffDrawStatus.Desc>
 
-  <PRF.Settings.TurnOffDoEffect.Label>Turn off assembler effects</PRF.Settings.TurnOffDoEffect.Label>
-  <PRF.Settings.TurnOffDoEffect.Desc>Turn off assembler effects</PRF.Settings.TurnOffDoEffect.Desc>
+  <PRF.Settings.TurnOffDoEffect.Label>Turn off recipe effects</PRF.Settings.TurnOffDoEffect.Label>
+  <PRF.Settings.TurnOffDoEffect.Desc>Turn off recipe effects</PRF.Settings.TurnOffDoEffect.Desc>
 
   <PRF.Settings.TurnOffStorageDefault.Label>Turn off default storage settings</PRF.Settings.TurnOffStorageDefault.Label>
   <PRF.Settings.TurnOffStorageDefault.Desc>Turn off default storage settings</PRF.Settings.TurnOffStorageDefault.Desc>
 
-  <PRF.Settings.TurnOffDsuDestroy.Label>Turn off Destroy DSU destroy items</PRF.Settings.TurnOffDsuDestroy.Label>
-  <PRF.Settings.TurnOffDsuDestroy.Desc>Turn off Destroy DSU destroy items</PRF.Settings.TurnOffDsuDestroy.Desc>
+  <PRF.Settings.TurnOffDsuDestroy.Label>Turn off the item destruction function of DSU (Digital-Storage-Unit)</PRF.Settings.TurnOffDsuDestroy.Label>
+  <PRF.Settings.TurnOffDsuDestroy.Desc>Turn off the item destruction function of DSU (Digital-Storage-Unit)</PRF.Settings.TurnOffDsuDestroy.Desc>
 
-  <PRF.Settings.DsuLimit.Label>Set Storage DSU limit</PRF.Settings.DsuLimit.Label>
-  <PRF.Settings.DsuLimit.Desc>Set Storage DSU limit</PRF.Settings.DsuLimit.Desc>
+  <PRF.Settings.DsuLimit.Label>Set DSU storage limit</PRF.Settings.DsuLimit.Label>
+  <PRF.Settings.DsuLimit.Desc>Set DSU storage limit</PRF.Settings.DsuLimit.Desc>
 
   <PRF.Settings.recipeDB.Label>Set range for Recipe DB</PRF.Settings.recipeDB.Label>
   <PRF.Settings.recipeDB.Desc>Set range for Recipe DB</PRF.Settings.recipeDB.Desc>
 
-  <PRF.Settings.TurnOffInfestation.Label>Turn off infestation on miners(kid mode)</PRF.Settings.TurnOffInfestation.Label>
-  <PRF.Settings.TurnOffInfestation.Desc>Turn off infestation on miners(kid mode)</PRF.Settings.TurnOffInfestation.Desc>
+  <PRF.Settings.TurnOffInfestation.Label>Turn off infestation for miners(kiddy mode)</PRF.Settings.TurnOffInfestation.Label>
+  <PRF.Settings.TurnOffInfestation.Desc>Turn off infestation for miners(kiddy mode)</PRF.Settings.TurnOffInfestation.Desc>
 
-  <PRF.Settings.TurnOffMinerNerf.Label>Turn Miners nerf(kid mode)</PRF.Settings.TurnOffMinerNerf.Label>
-  <PRF.Settings.TurnOffMinerNerf.Desc>Turn off  Miners nerf(kid mode)</PRF.Settings.TurnOffMinerNerf.Desc>
+  <PRF.Settings.TurnOffMinerNerf.Label>Turn off Miners nerf(kiddy mode)</PRF.Settings.TurnOffMinerNerf.Label>
+  <PRF.Settings.TurnOffMinerNerf.Desc>Turn off Miners nerf(kiddy mode)</PRF.Settings.TurnOffMinerNerf.Desc>
 
 </LanguageData>
