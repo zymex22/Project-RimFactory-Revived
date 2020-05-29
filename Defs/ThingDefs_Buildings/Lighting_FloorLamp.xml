@@ -6,7 +6,7 @@
   </DesignatorDropdownGroupDef>
 
   <!-- ================= Base ================= -->
-  <TerrainDef Name="PRF_FloorSign" Abstract="True">
+  <ThingDef Name="PRF_FloorSign" Abstract="True">
     <thingClass>Building</thingClass>
     <category>Building</category>
     <designationCategory>Industrial</designationCategory>
@@ -34,7 +34,7 @@
     <researchPrerequisites>      <!-- Optional. The player will not be able to build the floor or terrain until completing one or more research projects -->
       <li>Machining</li>
     </researchPrerequisites>
-  </TerrainDef>
+  </ThingDef>
 
 
   <!-- ================= Yellow Arrow ================= -->
