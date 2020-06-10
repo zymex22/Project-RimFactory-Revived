@@ -30,7 +30,8 @@ namespace ProjectRimFactory.Industry
                     foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this))
                     {
                         List<Thing> l = Map.thingGrid.ThingsListAt(cell);
-                        foreach (Thing item in Map.thingGrid.ThingsListAt(cell)) {
+                        for (int i=l.Count-1; i>=0; i--) { // count down because items may be destroyed
+                            Thing item=l[i];
                             // Without this check, if there is something that is fueled by
                             //     minified Power Conduits (weird, but ...possible?), then
                             //     our FuelingMachine will happily rip conduits out of the
