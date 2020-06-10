@@ -16,19 +16,30 @@ namespace ProjectRimFactory.Industry
             base.Tick();
             if (this.IsHashIntervalTick(10) && GetComp<CompPowerTrader>().PowerOn)
             {
-                foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this))
-                {
-                    Thing item = cell.GetFirstItem(Map);
-                    if (item != null)
+                // Get what we are supposed to refuel:
+                //   (only refuel one thing - if you need to adjust this to fuel more
+                //    than one thing, make the loop here and put some breaking logic
+                //    instead of all the "return;"s below)
+                CompRefuelable refuelableComp=null;
+                foreach (Thing tmpThing in Map.thingGrid.ThingsListAt(FuelableCell)) {
+                    if (tmpThing is Building) refuelableComp=(tmpThing as Building).GetComp<CompRefuelable>();
+                    if (refuelableComp != null) break;
+                }
+                if (refuelableComp != null) {
+                    if (refuelableComp.Fuel >= refuelableComp.TargetFuelLevel) return; // fully fueled
+                    foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this))
                     {
-                        CompRefuelable refuelableComp = FuelableCell.GetFirstBuilding(Map)?.GetComp<CompRefuelable>();
-                        if (refuelableComp != null && refuelableComp.Fuel + 1 < refuelableComp.TargetFuelLevel && refuelableComp.Props.fuelFilter.Allows(item))
-                        {
-                            int num = Mathf.Min(item.stackCount, Mathf.CeilToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
-                            if (num > 0)
+                        List<Thing> l = Map.thingGrid.ThingsListAt(cell);
+                        foreach (Thing item in Map.thingGrid.ThingsListAt(cell)) {
+                            if (refuelableComp.Props.fuelFilter.Allows(item))
                             {
-                                refuelableComp.Refuel(num);
-                                item.SplitOff(num).Destroy();
+                                int num = Mathf.Min(item.stackCount, Mathf.CeilToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
+                                if (num > 0)
+                                {
+                                    refuelableComp.Refuel(num);
+                                    item.SplitOff(num).Destroy();
+                                }
+                                if (refuelableComp.Fuel >= refuelableComp.TargetFuelLevel) return; // fully fueled
                             }
                         }
                     }
