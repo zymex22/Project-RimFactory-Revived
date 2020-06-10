@@ -31,6 +31,13 @@ namespace ProjectRimFactory.Industry
                     {
                         List<Thing> l = Map.thingGrid.ThingsListAt(cell);
                         foreach (Thing item in Map.thingGrid.ThingsListAt(cell)) {
+                            // Without this check, if there is something that is fueled by
+                            //     minified Power Conduits (weird, but ...possible?), then
+                            //     our FuelingMachine will happily rip conduits out of the
+                            //     ground to fuel it.  I'm okay with this behavior.
+                            //     Feature.  Not a bug.
+                            // But if it ever causes a problem, uncomment this check:
+                            // if (item.def.category != ThingCategory.Item) continue;
                             if (refuelableComp.Props.fuelFilter.Allows(item))
                             {
                                 int num = Mathf.Min(item.stackCount, Mathf.CeilToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
