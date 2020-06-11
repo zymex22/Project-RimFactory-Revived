@@ -6,7 +6,7 @@
     <defName>IO_gr</defName>
   </DesignatorDropdownGroupDef>
 
-    <DesignatorDropdownGroupDef>
+  <DesignatorDropdownGroupDef>
     <defName>PRF_Fuel_gr</defName>
   </DesignatorDropdownGroupDef>
 
@@ -207,13 +207,9 @@
     <graphicData>
       <texPath>Industry/FuelingMachine</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <damageData>
-        <rect>(0.05,0.1,0.9,0.9)</rect>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-      </damageData>
-      <drawSize>(2,2)</drawSize>
+      <drawSize>(1.4)</drawSize>
     </graphicData>
+    <size>(1,1)</size>
     <passability>PassThroughOnly</passability>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
@@ -222,7 +218,7 @@
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
-    <description>A robotic arm built on a small machine frame that can automatically fuel the building in front of it.</description>
+    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it.\n\nWorks with "Refualable comp" buildings only</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>1</PRFRoboticArm>
@@ -246,6 +242,7 @@
     <placeWorkers>
       <li>ProjectRimFactory.Industry.PlaceWorker_FuelingMachine</li>
     </placeWorkers>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
   </ThingDef>
 
 </Defs>
