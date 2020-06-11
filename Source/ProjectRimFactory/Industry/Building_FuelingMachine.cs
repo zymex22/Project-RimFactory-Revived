@@ -12,9 +12,17 @@ namespace ProjectRimFactory.Industry
     {
         public IntVec3 FuelableCell => Rotation.FacingCell + Position;
         public override void Tick()
-        {
+        { // in case you *really* want to use Tick
             base.Tick();
-            if (this.IsHashIntervalTick(10) && GetComp<CompPowerTrader>().PowerOn)
+            if (this.IsHashIntervalTick(10)) Refuel();
+        }
+        public override void TickRare() { // prefer to use TickRare
+            base.TickRare();
+            Refuel();
+        }
+        public void Refuel()
+        {
+            if (GetComp<CompPowerTrader>().PowerOn)
             {
                 // Get what we are supposed to refuel:
                 //   (only refuel one thing - if you need to adjust this to fuel more
