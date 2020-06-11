@@ -120,14 +120,19 @@ namespace ProjectRimFactory.SAL3.Things
             ResetProgress();
             Map mapBefore = Map;
             // Do not remove ToList - It evaluates the enumerable
-            List<IntVec3> list = GenAdj.CellsAdjacent8Way(this).ToList();
+            List<IntVec3> cells = GenAdj.CellsAdjacent8Way(this).ToList();
             base.DeSpawn();
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < cells.Count; i++)
             {
-                IntVec3 cell = list[i];
-                if (cell.GetFirstBuilding(mapBefore) is Building_SmartAssembler building)
-                {
-                    building.Notify_RecipeHolderRemoved();
+                List<Thing> things = mapBefore.thingGrid.ThingsListAt(cells[i]);
+                for (int j=things.Count-1; j>=0; j--) {
+                    if (things[j] is Building_SmartAssembler) {
+                        (things[j] as Building_SmartAssembler).Notify_RecipeHolderRemoved();
+                        // break; // We can afford to be silly and check everything in this one cell.
+                        // despawning does not happen often, right?
+                        // maybe?
+                        break; // maybe not, who knows.
+                    }
                 }
             }
         }

@@ -217,7 +217,7 @@ namespace ProjectRimFactory.Storage
             if (powerComp.PowerOn)
             {
                 Thing currentItem = Position.GetFirstItem(Map);
-                bool storageSlotAvailable = currentItem == null || (settings.AllowedToAccept(currentItem) && 
+                bool storageSlotAvailable = currentItem == null || (settings.AllowedToAccept(currentItem) &&
                                                                     OutputSettings.SatisfiesMax(currentItem.stackCount, currentItem.def.stackLimit));
                 if (boundStorageUnit != null && boundStorageUnit.CanReceiveIO)
                 {
@@ -333,16 +333,38 @@ namespace ProjectRimFactory.Storage
                 {
                     if (this.settings.AllowedToAccept(thing) && OutputSettings.SatisfiesMin(thing.stackCount))
                     {
-                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null, pos => pos == this.Position || !(pos.GetFirstBuilding(this.Map) is Building_StorageUnitIOPort));
+                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null,
+                                               delegate (IntVec3 pos) {
+                                                   // Can place here or anywhere near here not in another IOPort
+                                                   if (pos == this.Position) return true;
+                                                   foreach (Thing t in this.Map.thingGrid.ThingsListAt(pos)) {
+                                                       if (t is Building_StorageUnitIOPort) return false;
+                                                   }
+                                                   return true;
+                                               });
                     }
                     else
                     {
-                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null, pos => !(pos.GetFirstBuilding(this.Map) is Building_StorageUnitIOPort));
+                        GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null,
+                                               // anywhere but on a storage unit io port.
+                                               delegate (IntVec3 pos) {
+                                                   foreach (Thing t in this.Map.thingGrid.ThingsListAt(pos)) {
+                                                       if (t is Building_StorageUnitIOPort) return false;
+                                                   }
+                                                   return true;
+                                               });
                     }
                 }
                 else
                 {
-                    GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null, pos => !(pos.GetFirstBuilding(this.Map) is Building_StorageUnitIOPort));
+                    GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), this.Position, this.Map, ThingPlaceMode.Near, null,
+                                               // anywhere but on a storage unit io port.
+                                               delegate (IntVec3 pos) {
+                                                   foreach (Thing t in this.Map.thingGrid.ThingsListAt(pos)) {
+                                                       if (t is Building_StorageUnitIOPort) return false;
+                                                   }
+                                                   return true;
+                                               });
                 }
             }
         }
