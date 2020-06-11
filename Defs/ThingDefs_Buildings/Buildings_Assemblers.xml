@@ -176,7 +176,7 @@ Mod extennsion for assemblers
   </ThingDef>
 
 
-  <!--====================Selfcorrecting assembler====================-->
+  <!--==================== adaptive assembler ====================-->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>MachineLearningAssembler</defName>
     <label>adaptive assembler</label>
@@ -221,6 +221,7 @@ Mod extennsion for assemblers
         <ghostColor>(0,1,1,1)</ghostColor>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <speedSetting>false</speedSetting>
         <!-- range settings -->
         <rangeSetting>true</rangeSetting>
         <minPowerForRange>0</minPowerForRange>

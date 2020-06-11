@@ -254,7 +254,6 @@ Mod extennsion for assemblers
     </building>
     <passability>Impassable</passability>
     <researchPrerequisites>
-      <li>SelfCooking</li>
       <li>SelfCorrectingAssemblers</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>

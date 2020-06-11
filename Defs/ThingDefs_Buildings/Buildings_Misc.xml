@@ -117,7 +117,7 @@
     <defName>PRF_IndustrialLamp</defName>
     <label>Industrial Lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
-    <description>An electrical wall lamp that lights an area.\nThis lamp are capable to light up a huge aread both indoor and outdoor to light up your factory hall.\nAlso capable of changeing color when placed if colored light are researched\n\nThis is added by Project RimFactory</description>
+    <description>An electrical lamp that lights an area.\nThis lamp are capable to light up a huge aread both indoor and outdoor to light up your factory hall.\nAlso capable of changeing color when placed if colored light are researched\n\nThis is added by Project RimFactory</description>
     <fillPercent>0.50</fillPercent>
     <graphicData>
       <texPath>Misc/IndustrialLamp</texPath>
@@ -145,7 +145,7 @@
         <heatPerSecond>1</heatPerSecond>
       </li>
       <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
-        <glowRadius>15</glowRadius>
+        <glowRadius>20</glowRadius>
         <glowColor>(252,199,139,0)</glowColor>
         <key>PRF_Warm_White</key>
         <moreColors>
@@ -168,4 +168,60 @@
     <designatorDropdown>PRF_misc_gr</designatorDropdown>    <!-- assign dropdown group -->
     <specialDisplayRadius>18</specialDisplayRadius>
   </ThingDef>
+
+
+  <!-- ======================================= Floor spotlight =============================================== -->
+  <ThingDef ParentName="PRF_MiscBase">
+    <defName>PRF_FloorSpotlight</defName>
+    <label>Floor Spotlight</label>
+    <altitudeLayer>Floor</altitudeLayer>
+    <passability>Standable</passability>
+    <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
+    <description>An electrical lamp that lights an area.\nThis lamp are capable to be used in and outdoor.\nAlso capable of changeing color when placed if colored light are researched\n\nThis is added by Project RimFactory</description>
+    <fillPercent>0.50</fillPercent>
+    <graphicData>
+      <texPath>Misc/FloorSpotlight</texPath>
+      <drawSize>(0.6)</drawSize>
+    </graphicData>
+    <tickerType>Rare</tickerType>
+    <costList>
+      <Steel>20</Steel>
+    </costList>
+    <statBases>
+      <WorkToBuild>250</WorkToBuild>
+      <Flammability>0</Flammability>
+      <Mass>10</Mass>
+    </statBases>
+    <size>(1,1)</size>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>25</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
+        <glowRadius>12</glowRadius>
+        <glowColor>(140,200,250,0)</glowColor>
+        <key>PRF_Cool_White</key>
+        <moreColors>
+          <li><key>PRF_Warm_White</key><color>(252,199,139,0)</color></li>
+          <li><key>PRF_Red</key><color>(217,80,80,0)</color></li>
+          <li><key>PRF_Green</key><color>(80,217,80,0)</color></li>
+          <li><key>PRF_Blue</key><color>(80,80,217,0)</color></li>
+          <li><key>PRF_Cyan</key><color>(10,245,245,0)</color></li>
+          <li><key>PRF_Yellow</key><color>(240,240,20,0)</color></li>
+          <li><key>PRF_Magenta</key><color>(245,10,245,0)</color></li>
+        </moreColors>
+        <prerequisites>
+          <li>ColoredLights</li>
+        </prerequisites>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>Electricity</li>
+    </researchPrerequisites>
+    <designatorDropdown>PRF_misc_gr</designatorDropdown>    <!-- assign dropdown group -->
+  </ThingDef>
+
+  
 </Defs>

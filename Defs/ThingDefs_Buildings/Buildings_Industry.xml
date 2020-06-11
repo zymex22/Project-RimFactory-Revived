@@ -432,6 +432,8 @@
         <workSpeedBaseFactor>1</workSpeedBaseFactor>
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>5</artSkillLevel>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>Industry/smelter_t0</texPath>
@@ -493,6 +495,8 @@
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
+        <skillLevel>15</skillLevel>
+        <artSkillLevel>5</artSkillLevel>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>Industry/smelter_t1</texPath>
@@ -555,6 +559,8 @@
         </importRecipesFrom>
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
+        <skillLevel>15</skillLevel>
+        <artSkillLevel>5</artSkillLevel>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>Industry/smelter_t2</texPath>
