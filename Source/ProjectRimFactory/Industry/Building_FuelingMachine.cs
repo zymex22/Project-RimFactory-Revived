@@ -12,9 +12,17 @@ namespace ProjectRimFactory.Industry
     {
         public IntVec3 FuelableCell => Rotation.FacingCell + Position;
         public override void Tick()
-        {
+        { // in case you *really* want to use Tick
             base.Tick();
-            if (this.IsHashIntervalTick(10) && GetComp<CompPowerTrader>().PowerOn)
+            if (this.IsHashIntervalTick(10)) Refuel();
+        }
+        public override void TickRare() { // prefer to use TickRare
+            base.TickRare();
+            Refuel();
+        }
+        public void Refuel()
+        {
+            if (GetComp<CompPowerTrader>().PowerOn)
             {
                 // Get what we are supposed to refuel:
                 //   (only refuel one thing - if you need to adjust this to fuel more
@@ -26,7 +34,10 @@ namespace ProjectRimFactory.Industry
                     if (refuelableComp != null) break;
                 }
                 if (refuelableComp != null) {
-                    if (refuelableComp.Fuel >= refuelableComp.TargetFuelLevel) return; // fully fueled
+                    // Check if there is already enough fuel:
+                    //  (because Fuel is a float, we check the current fuel + .99, so it
+                    //   only refuels when Fuel drops at least one full unit below taret level)
+                    if (refuelableComp.Fuel + 0.9999f >= refuelableComp.TargetFuelLevel) return; // fully fueled
                     foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this))
                     {
                         List<Thing> l = Map.thingGrid.ThingsListAt(cell);
@@ -41,13 +52,19 @@ namespace ProjectRimFactory.Industry
                             // if (item.def.category != ThingCategory.Item) continue;
                             if (refuelableComp.Props.fuelFilter.Allows(item))
                             {
-                                int num = Mathf.Min(item.stackCount, Mathf.CeilToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
-                                if (num > 0)
-                                {
+                                // round down to not waste fuel:
+                                int num = Mathf.Min(item.stackCount, Mathf.FloorToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
+                                if (num > 0) {
                                     refuelableComp.Refuel(num);
                                     item.SplitOff(num).Destroy();
+                                } else { // It's not quite 1 below TargetFuelLevel
+                                    // but we KNOW we are at least .9999f below TargetFuelLevel (see test above)
+                                    // So we call it close enough to 1:
+                                    refuelableComp.Refuel(1);
+                                    item.SplitOff(1).Destroy();
                                 }
-                                if (refuelableComp.Fuel >= refuelableComp.TargetFuelLevel) return; // fully fueled
+                                // check fuel as float (as above)
+                                if (refuelableComp.Fuel + 0.9999f >= refuelableComp.TargetFuelLevel) return; // fully fueled
                             }
                         }
                     }
