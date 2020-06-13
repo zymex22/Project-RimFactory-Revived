@@ -233,7 +233,7 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
-    <tickerType>Normal</tickerType>
+    <tickerType>Rare</tickerType>
     <rotatable>true</rotatable>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <researchPrerequisites>

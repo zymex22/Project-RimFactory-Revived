@@ -9,7 +9,7 @@
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
 			<operations>
-				<li Class="PatchOperationAdd"> <!-- adding recipes to food prepper -->
+				<li Class="PatchOperationAdd">					<!-- adding recipes to food prepper -->
 					<xpath>/Defs/ThingDef[defName="SelfPrepper"]/recipes</xpath>
 					<value>
 						<li>Maketofu</li>
@@ -33,8 +33,22 @@
 						<li>VG_VeganEgg</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd"> <!-- adding new food types to self cooker -->
+				<li Class="PatchOperationAdd">					<!-- adding new food types to self cooker -->
 					<xpath>/Defs/ThingDef[defName="SelfCooker"]/recipes</xpath>
+					<value>
+						<li>BakeBread</li>
+						<li>Bakesweetroll</li>
+						<li>Bakepizza</li>
+						<li>BakeCookies</li>
+						<li>Bakepolenta</li>
+						<li>BakeCornbread</li>
+						<li>Bakemuffin</li>
+						<li>BakeMeatPie</li>
+						<li>DryFruit</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">					<!-- adding new food types to self cooker -->
+					<xpath>/Defs/ThingDef[defName="PRF_SpacerCooker"]/recipes</xpath>
 					<value>
 						<li>BakeBread</li>
 						<li>Bakesweetroll</li>
