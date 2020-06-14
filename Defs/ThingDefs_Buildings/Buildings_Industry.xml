@@ -390,7 +390,7 @@
     <defName>furnace_gr</defName>
   </DesignatorDropdownGroupDef>
 
-  <!--==================== T0 Furnace ====================-->
+  <!--==================== T0 Blast Furnace ====================-->
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceI</defName>
     <label>Blast Furnace</label>
@@ -429,7 +429,7 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <workSpeedBaseFactor>1</workSpeedBaseFactor>
+        <workSpeedBaseFactor>0.5</workSpeedBaseFactor>
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
         <skillLevel>10</skillLevel>
@@ -448,7 +448,7 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!--==================== T1 Furnace ====================-->
+  <!--==================== T1 industrial Furnace ====================-->
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceII</defName>
     <label>industrial Furnace</label>
@@ -510,7 +510,7 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!--==================== T2 Furnace ====================-->
+  <!--==================== T2 Electric Furnace ====================-->
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceIII</defName>
     <label>Electric Furnace</label>

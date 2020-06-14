@@ -87,6 +87,41 @@
     </placeWorkers>
   </ThingDef>
 
+  <!--======================================= Growzone Puller ===============================================-->
+  <!-- <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
+    <defName>Building_AutoMachineTool_GrowZonePuller</defName>
+    <label>growzone Puller</label>
+    <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
+    <passability>Impassable</passability>
+    <description>(Tier 2) A Puller That can pull stuff from growzones and place it into a storage or onto a belt.</description>
+    <altitudeLayer>Building</altitudeLayer>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
+    </placeWorkers>
+    <graphicData>
+      <texPath>Belts/Growzone</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1.1,1.1)</drawSize>
+    </graphicData>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
+        <graphicDataList>
+          <Working>
+            <graphicData>
+              <texPath>Belts/GrowzoneWorking</texPath>
+              <graphicClass>Graphic_Multi</graphicClass>
+              <drawSize>(1.1,1.1)</drawSize>
+            </graphicData>
+          </Working>
+        </graphicDataList>
+      </li>
+    </modExtensions>
+  </ThingDef> -->
+
   <!--======================================= Item Puller ===============================================-->
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller</defName>
@@ -135,7 +170,7 @@
     </placeWorkers>
     <graphicData>
       <texPath>Belts/PullerL</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
     <modExtensions>
@@ -147,28 +182,28 @@
           <Left>
             <graphicData>
               <texPath>Belts/PullerL</texPath>
-              <graphicClass>Graphic_Single</graphicClass>
+              <graphicClass>Graphic_Multi</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
           </Left>
           <Right>
             <graphicData>
               <texPath>Belts/PullerR</texPath>
-              <graphicClass>Graphic_Single</graphicClass>
+              <graphicClass>Graphic_Multi</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
           </Right>
           <LeftWorking>
             <graphicData>
               <texPath>Belts/PullerLWorking</texPath>
-              <graphicClass>Graphic_Single</graphicClass>
+              <graphicClass>Graphic_Multi</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
           </LeftWorking>
           <RightWorking>
             <graphicData>
               <texPath>Belts/PullerRWorking</texPath>
-              <graphicClass>Graphic_Single</graphicClass>
+              <graphicClass>Graphic_Multi</graphicClass>
               <drawSize>(1.1,1.1)</drawSize>
             </graphicData>
           </RightWorking>
