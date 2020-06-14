@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+
+<!-- ================================== Robot arm ================================= -->
   <ThingDef ParentName="PRFResourceBase">
     <defName>PRFRoboticArm</defName>
     <label>robotic arm</label>
@@ -36,6 +38,8 @@
     </thingCategories>
     <tradeability>Sellable</tradeability>
   </ThingDef>
+
+  <!-- ================================== Weak Chip ================================= -->
   <ThingDef ParentName="PRFResourceBase">
     <defName>PRFWeakAIChip</defName>
     <label>weak AI chip</label>
@@ -72,6 +76,8 @@
     </thingCategories>
     <tradeability>Sellable</tradeability>
   </ThingDef>
+
+  <!-- ================================== Drone module ================================= -->
   <ThingDef ParentName="PRFResourceBase">
     <defName>PRFDroneModule</defName>
     <label>drone module</label>
@@ -84,7 +90,7 @@
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
     <statBases>
-      <MarketValue>500</MarketValue>
+      <MarketValue>400</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
       <Mass>2</Mass>
       <WorkToMake>2000</WorkToMake>
