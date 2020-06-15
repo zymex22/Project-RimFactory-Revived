@@ -119,6 +119,65 @@ Mod extennsion for assemblers
     </comps>
   </ThingDef>
 
+  <!--==================== Recipe database ====================-->
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>RecipeDatabase</defName>
+    <label>recipe database</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
+    <designatorDropdown>assembler_gr</designatorDropdown>
+    <graphicData>
+      <texPath>SAL3/DISK_HARDWARE4</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>800</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Mass>25</Mass>
+    </statBases>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <description>Imports recipes from adjacent work tables. Uploads recipes to adjacent assemblers.\n\nI wonder what all these other buttons do...</description>
+    <costList>
+      <PRFMachineFrame>1</PRFMachineFrame>
+      <Steel>20</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <RimFactory_Data_Disk>1</RimFactory_Data_Disk>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <neverMultiSelect>true</neverMultiSelect>
+    <designationCategory>Industrial</designationCategory>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>2</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>MagneticTape</li>
+    </researchPrerequisites>
+  </ThingDef>
+
   <!--====================Universal assembler====================-->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>UniversalAssembler</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
@@ -243,66 +302,6 @@ Mod extennsion for assemblers
       <li>SelfCorrectingAssemblers</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
-  </ThingDef>
-
-
-  <!--==================== Recipe database ====================-->
-  <ThingDef ParentName="PRFBuildingBase">
-    <defName>RecipeDatabase</defName>
-    <label>recipe database</label>
-    <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
-    <designatorDropdown>assembler_gr</designatorDropdown>
-    <graphicData>
-      <texPath>SAL3/DISK_HARDWARE4</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(1,1)</drawSize>
-    </graphicData>
-    <rotatable>true</rotatable>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <fillPercent>0.5</fillPercent>
-    <pathCost>70</pathCost>
-    <canOverlapZones>false</canOverlapZones>
-    <castEdgeShadows>true</castEdgeShadows>
-    <statBases>
-      <WorkToBuild>800</WorkToBuild>
-      <MaxHitPoints>150</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <Mass>25</Mass>
-    </statBases>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
-    <description>Imports recipes from adjacent work tables. Uploads recipes to adjacent assemblers.\n\nI wonder what all these other buttons do...</description>
-    <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
-      <Steel>20</Steel>
-      <ComponentIndustrial>1</ComponentIndustrial>
-      <RimFactory_Data_Disk>1</RimFactory_Data_Disk>
-    </costList>
-    <tickerType>Normal</tickerType>
-    <neverMultiSelect>true</neverMultiSelect>
-    <designationCategory>Industrial</designationCategory>
-    <staticSunShadowHeight>0.1</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>250</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_Glower">
-        <glowRadius>3</glowRadius>
-        <glowColor>(115,198,206,0)</glowColor>
-      </li>
-      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
-        <range>2</range>
-        <ghostColor>(0,1,1,1)</ghostColor>
-      </li>
-    </comps>
-    <researchPrerequisites>
-      <li>MagneticTape</li>
-    </researchPrerequisites>
   </ThingDef>
 
 </Defs>
