@@ -20,6 +20,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private ThingFilter filter = new ThingFilter();
         private bool active = false;
+        private bool takeForbiddenItems=true;
         public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
 
         private string GetGraphicName()
@@ -62,6 +63,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Deep.Look<ThingFilter>(ref this.filter, "filter");
             Scribe_Values.Look<bool>(ref this.active, "active", false);
             Scribe_Values.Look<bool>(ref this.right, "right", false);
+            Scribe_Values.Look<bool>(ref this.takeForbiddenItems, "takeForbidden", true);
 
             if (this.filter == null) this.filter = new ThingFilter();
 
@@ -100,24 +102,44 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.pickupConveyor = true;
                 return Option(conveyor.Value.Carrying());
             }
-            return (this.Position + this.Rotation.Opposite.FacingCell).SlotGroupCells(this.Map)
-                .SelectMany(c => c.GetThingList(this.Map))
-                .Where(t => t.def.category == ThingCategory.Item)
-                .Where(t => this.filter.Allows(t))
-                .Where(t => !this.IsLimit(t))
-                .FirstOption();
+            if (this.takeForbiddenItems)
+                return (this.Position + this.Rotation.Opposite.FacingCell).SlotGroupCells(this.Map)
+                    .SelectMany(c => c.GetThingList(this.Map))
+                    .Where(t => t.def.category == ThingCategory.Item)
+                    .Where(t => this.filter.Allows(t))
+                    .Where(t => !this.IsLimit(t))
+                    .FirstOption();
+            else
+                return (this.Position + this.Rotation.Opposite.FacingCell).SlotGroupCells(this.Map)
+                    .SelectMany(c => c.GetThingList(this.Map))
+                    .Where(t => t.def.category == ThingCategory.Item)
+                    .Where(t => !t.IsForbidden(Faction.OfPlayer))
+                    .Where(t => this.filter.Allows(t))
+                    .Where(t => !this.IsLimit(t))
+                    .FirstOption();
         }
 
         private Option<Building_BeltConveyor> GetPickableConveyor()
         {
-            return (this.Position + this.Rotation.Opposite.FacingCell).GetThingList(this.Map)
-                .Where(t => t.def.category == ThingCategory.Building)
-                .SelectMany(t => Option(t as Building_BeltConveyor))
-                .Where(b => !b.IsUnderground)
-                .Where(b => b.Carrying() != null)
-                .Where(b => this.filter.Allows(b.Carrying()))
-                .Where(b => !this.IsLimit(b.Carrying()))
-                .FirstOption();
+            if (this.takeForbiddenItems)
+                return (this.Position + this.Rotation.Opposite.FacingCell).GetThingList(this.Map)
+                    .Where(t => t.def.category == ThingCategory.Building)
+                    .SelectMany(t => Option(t as Building_BeltConveyor))
+                    .Where(b => !b.IsUnderground)
+                    .Where(b => b.Carrying() != null)
+                    .Where(b => this.filter.Allows(b.Carrying()))
+                    .Where(b => !this.IsLimit(b.Carrying()))
+                    .FirstOption();
+            else
+                return (this.Position + this.Rotation.Opposite.FacingCell).GetThingList(this.Map)
+                    .Where(t => t.def.category == ThingCategory.Building)
+                    .SelectMany(t => Option(t as Building_BeltConveyor))
+                    .Where(b => !b.IsUnderground)
+                    .Where(b => b.Carrying() != null)
+                    .Where(b => !b.Carrying().IsForbidden(Faction.OfPlayer))
+                    .Where(b => this.filter.Allows(b.Carrying()))
+                    .Where(b => !this.IsLimit(b.Carrying()))
+                    .FirstOption();
         }
 
         public override IntVec3 OutputCell()
@@ -151,6 +173,14 @@ namespace ProjectRimFactory.AutoMachineTool
                 defaultLabel = "PRF.AutoMachineTool.Puller.SwitchActiveLabel".Translate(),
                 defaultDesc = "PRF.AutoMachineTool.Puller.SwitchActiveDesc".Translate(),
                 icon = RS.PlayIcon
+            };
+            yield return new Command_Toggle()
+            {
+                isActive = () => this.takeForbiddenItems,
+                toggleAction = () => this.takeForbiddenItems = !this.takeForbiddenItems,
+                defaultLabel = "PRF.Puller.TakeForbiddenItems".Translate(),
+                defaultDesc  = "PRF.Puller.TakeForbiddenItemsDesc".Translate(),
+                icon = TexCommand.ForbidOff
             };
             if (this.OutputSides)
             {
@@ -187,6 +217,8 @@ namespace ProjectRimFactory.AutoMachineTool
             if (this.pickupConveyor)
             {
                 var pickup = GetPickableConveyor().Select(c => c.Pickup());
+                // Not needed (I think, as conveyors should only have forbidden items if allowed:
+                //if (pickup.HasValue && (this.takeForbiddenItems || !pickup.Value.IsForbidden(Faction.OfPlayer)))
                 if (pickup.HasValue)
                 {
                     target.Append(pickup.Value);
@@ -198,10 +230,20 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else
             {
-                target.Append(working);
+                if (this.takeForbiddenItems || !working.IsForidden(Faction.OfPlayer))
+                    target.Append(working);
             }
             products = target;
             return true;
+        }
+        protected override void Placing() {
+            // unforbid any items picked up before they are put down:
+            if (!products.NullOrVoid()) {
+                foreach (Thing t in products)
+                    if (t.IsForbidden(Faction.OfPlayer))
+                        t.SetForbidden(false);
+            }
+            base.Placing();
         }
     }
 
