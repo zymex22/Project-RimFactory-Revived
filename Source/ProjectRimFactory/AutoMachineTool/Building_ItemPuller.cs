@@ -230,7 +230,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else
             {
-                if (this.takeForbiddenItems || !working.IsForidden(Faction.OfPlayer))
+                if (this.takeForbiddenItems || !working.IsForbidden(Faction.OfPlayer))
                     target.Append(working);
             }
             products = target;
@@ -238,7 +238,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         protected override void Placing() {
             // unforbid any items picked up before they are put down:
-            if (!products.NullOrVoid()) {
+            if (!products.NullOrEmpty()) {
                 foreach (Thing t in products)
                     if (t.IsForbidden(Faction.OfPlayer))
                         t.SetForbidden(false);
