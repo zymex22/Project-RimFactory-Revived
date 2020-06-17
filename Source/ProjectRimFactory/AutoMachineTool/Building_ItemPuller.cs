@@ -21,7 +21,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected ThingFilter filter = new ThingFilter();
         protected bool active = false;
         protected bool takeForbiddenItems=true;
-        protected override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
+        public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
 
         private string GetGraphicName()
         {
