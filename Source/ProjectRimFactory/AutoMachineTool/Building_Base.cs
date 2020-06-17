@@ -143,7 +143,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             this.Reset();
             this.ClearActions();
-            base.DeSpawn();
+            base.DeSpawn(mode);
         }
 
         protected virtual bool IsActive()
@@ -382,14 +382,13 @@ namespace ProjectRimFactory.AutoMachineTool
         protected virtual bool PlaceProduct(ref List<Thing> products)
         {
             products = products.Aggregate(new List<Thing>(), (total, target) => {
-                var conveyor = OutputCell().GetThingList(this.Map).Where(t => t.def.category == ThingCategory.Building)
-                    .SelectMany(t => Option(t as IBeltConbeyorLinkable))
-                    .Where(b => !b.IsUnderground)
-                    .FirstOption();
-                if (conveyor.HasValue)
+                var conveyor = OutputCell().GetThingList(this.Map)
+                    .OfType<IBeltConbeyorLinkable>() // return any IBeltConbeyorLinkable
+                    .FirstOrDefault(b => !b.IsUnderground);
+                if (conveyor != null)
                 {
                     // コンベアがある場合、そっちに流す.
-                    if (conveyor.Value.ReceiveThing(false, target))
+                    if (conveyor.ReceiveThing(false, target))
                     {
                         return total;
                     }

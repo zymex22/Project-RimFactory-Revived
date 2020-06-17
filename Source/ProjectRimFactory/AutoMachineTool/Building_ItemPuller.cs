@@ -123,19 +123,15 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             if (this.takeForbiddenItems)
                 return (this.Position + this.Rotation.Opposite.FacingCell).GetThingList(this.Map)
-                    .Where(t => t.def.category == ThingCategory.Building)
-                    .SelectMany(t => Option(t as Building_BeltConveyor))
-                    .Where(b => !b.IsUnderground)
-                    .Where(b => b.Carrying() != null)
+                    .OfType<Building_BeltConveyor>() // get any conveyors, also casts to conveyors
+                    .Where(b => !b.IsUnderground && b.Carrying() != null)
                     .Where(b => this.filter.Allows(b.Carrying()))
                     .Where(b => !this.IsLimit(b.Carrying()))
                     .FirstOption();
             else
                 return (this.Position + this.Rotation.Opposite.FacingCell).GetThingList(this.Map)
-                    .Where(t => t.def.category == ThingCategory.Building)
-                    .SelectMany(t => Option(t as Building_BeltConveyor))
-                    .Where(b => !b.IsUnderground)
-                    .Where(b => b.Carrying() != null)
+                    .OfType<Building_BeltConveyor>() // get any conveyors, also casts to conveyors
+                    .Where(b => !b.IsUnderground && b.Carrying() != null)
                     .Where(b => !b.Carrying().IsForbidden(Faction.OfPlayer))
                     .Where(b => this.filter.Allows(b.Carrying()))
                     .Where(b => !this.IsLimit(b.Carrying()))
