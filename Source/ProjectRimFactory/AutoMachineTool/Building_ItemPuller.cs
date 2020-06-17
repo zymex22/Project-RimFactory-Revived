@@ -18,10 +18,10 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public ThingFilter Filter { get => this.filter; }
 
-        private ThingFilter filter = new ThingFilter();
-        private bool active = false;
-        private bool takeForbiddenItems=true;
-        public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
+        protected ThingFilter filter = new ThingFilter();
+        protected bool active = false;
+        protected bool takeForbiddenItems=true;
+        protected override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
 
         private string GetGraphicName()
         {
@@ -38,7 +38,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         [Unsaved]
-        private StorageSettings storageSettings;
+        protected StorageSettings storageSettings;
         public StorageSettings StorageSettings => this.storageSettings;
 
         private bool ForcePlace => this.def.GetModExtension<ModExtension_Testing>()?.forcePlacing ?? false;
@@ -94,7 +94,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return this;
         }
 
-        private Option<Thing> TargetThing()
+        protected virtual Option<Thing> TargetThing()
         {
             var conveyor = this.GetPickableConveyor();
             if (conveyor.HasValue)
