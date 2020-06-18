@@ -2,5 +2,6 @@
 <Configuration>
   <Excluded>
     <exclude>E:\steam\steamapps\common\RimWorld\Mods\Project-RimFactory-Revived-master\Source</exclude>
+    <exclude>E:\steam\steamapps\common\RimWorld\Mods\Project-RimFactory-Revived-master\Assemblies\0Harmony.dll</exclude>
   </Excluded>
 </Configuration>
