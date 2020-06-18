@@ -208,13 +208,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
                 return false;
             };
-
-            if (firstAbsorbStack)
-            {
-                if (absorb())
-                    return true;
-            }
-            if (cell.GetThingList(map).Where(ti => ti.def.category == ThingCategory.Item).Count() == 0)
+            // fast check:
+            if (!firstAbsorbStack && cell.GetThingList(map).Where(ti => ti.def.category == ThingCategory.Item).Count() == 0)
             {
                 if (t.Spawned) t.DeSpawn();
                 GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct);
@@ -222,10 +217,14 @@ namespace ProjectRimFactory.AutoMachineTool
                 effect(t);
                 return true;
             }
-            if (!firstAbsorbStack)
-            {
-                if (absorb())
-                    return true;
+            if (absorb())
+                return true;
+            // IsValidStorageFor should also work for multi-storage mods
+            if (StoreUtility.IsValidStorageFor(cell, map, t)) {
+                GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct);
+                if (forbid) t.SetForbidden(forbid);
+                effect(t);
+                return true;
             }
             var o = cell.SlotGroupCells(map).Where(c => c.IsValidStorageFor(map, t))
                 .Where(c => c.GetThingList(map).Where(b => b.def.category == ThingCategory.Building).All(b => !(b is Building_BeltConveyor)))
