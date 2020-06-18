@@ -5,8 +5,8 @@
         <label>Factory Entrepreneur</label>
         <description>A small group of scientist were sent to aid a newly founded factory.
 with cargo full of new equipment and supplies to that factory.
-On its way they hit a meteor shower and crashed into a naked planet.
-now they will have to build up a temporary factory here and gather resources to go back home.
+On its way their ship hit a meteor shower and crashed into a naked planet far from original destination and from home.
+Now they will have to build up a temporary factory here and gather resources to go back home.
 (BETA please post any error or suggestions)</description>
         <scenario>
             <summary>4 crashlanded scientists - Project RimFactory experiance</summary>
@@ -39,7 +39,7 @@ now they will have to build up a temporary factory here and gather resources to 
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
-                    <thingDef>MealSurvivalPack</thingDef>
+                    <thingDef>MealNutrientPaste</thingDef>
                     <count>50</count>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
@@ -52,11 +52,6 @@ now they will have to build up a temporary factory here and gather resources to 
                     <thingDef>ComponentIndustrial</thingDef>
                     <count>30</count>
                 </li>
-                <li Class="ScenPart_StartingAnimal">
-                    <def>StartingAnimal</def>
-                    <count>1</count>
-                    <bondToRandomPlayerPawnChance>1</bondToRandomPlayerPawnChance>
-                </li>
                 <li Class="ScenPart_ScatterThingsNearPlayerStart">
                     <def>ScatterThingsNearPlayerStart</def>
                     <thingDef>Steel</thingDef>
@@ -64,8 +59,8 @@ now they will have to build up a temporary factory here and gather resources to 
                 </li>
                 <li Class="ScenPart_ScatterThingsNearPlayerStart">
                     <def>ScatterThingsNearPlayerStart</def>
-                    <thingDef>WoodLog</thingDef>
-                    <count>300</count>
+                    <thingDef>Plasteel</thingDef>
+                    <count>20</count>
                 </li>
                 <li Class="ScenPart_ScatterThingsAnywhere">
                     <def>ScatterThingsAnywhere</def>
@@ -74,8 +69,8 @@ now they will have to build up a temporary factory here and gather resources to 
                 </li>
                 <li Class="ScenPart_ScatterThingsAnywhere">
                     <def>ScatterThingsAnywhere</def>
-                    <thingDef>Steel</thingDef>
-                    <count>720</count>
+                    <thingDef>ChunkSlagSteel</thingDef>
+                    <count>100</count>
                 </li>
                 <li Class="ScenPart_GameStartDialog">
                     <def>GameStartDialog</def>
