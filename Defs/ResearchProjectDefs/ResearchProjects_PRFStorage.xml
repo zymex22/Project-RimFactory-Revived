@@ -5,17 +5,18 @@
     <tab>Automation</tab>
     <techLevel>Industrial</techLevel>
     <baseCost>1500</baseCost>
-    <label>stockpile crates</label>
+    <label>Wooden stockpile crates</label>
     <researchViewX>0</researchViewX>
     <researchViewY>0</researchViewY>
     <description>Allows colonists to build large crates for more compact storage.</description>
   </ResearchProjectDef>
+
   <ResearchProjectDef>
     <defName>PRFStorage</defName>
     <tab>Automation</tab>
     <techLevel>Industrial</techLevel>
     <baseCost>3000</baseCost>
-    <label>stockpile crates II</label>
+    <label>Steel stockpile crates</label>
     <researchViewX>1</researchViewX>
     <researchViewY>0</researchViewY>
     <description>Allows colonists to build reinforced stockpile crates.</description>
@@ -25,12 +26,13 @@
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
   </ResearchProjectDef>
+  
   <ResearchProjectDef>
     <defName>PRFStorageIO</defName>
     <tab>Automation</tab>
     <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
-    <label>Wireless item transfer</label>
+    <label>Wireless item Storage</label>
     <researchViewX>5</researchViewX>
     <researchViewY>0</researchViewY>
     <description>Allows colonists to build cargo platforms and I/O ports. I/O ports can transfer items remotely to and from cargo platforms.</description>

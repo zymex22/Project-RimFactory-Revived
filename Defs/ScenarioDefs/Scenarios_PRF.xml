@@ -88,19 +88,11 @@ now they will have to build up a temporary factory here and gather resources to 
                 </li>
                 <li Class="ScenPart_StartingResearch">
                     <def>StartingResearch</def>
-                    <project>FarmingSprinklers</project>
-                </li>
-                <li Class="ScenPart_StartingResearch">
-                    <def>StartingResearch</def>
                     <project>PRFCrates</project>
                 </li>
                 <li Class="ScenPart_StartingResearch">
                     <def>StartingResearch</def>
                     <project>PRFRollers</project>
-                </li>
-                <li Class="ScenPart_StartingResearch">
-                    <def>StartingResearch</def>
-                    <project>ADVrollers</project>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>

@@ -54,35 +54,51 @@
 
   <ResearchProjectDef>
     <defName>ADVrollers</defName>
-    <label>Advanced Rollers and Pusher</label>
+    <label>Pullers And Pushers</label>
     <techLevel>Spacer</techLevel>
-    <baseCost>1500</baseCost>
-    <description>Advanced Rollers and pushers are a Tier 2 of IR Rollers</description>
+    <baseCost>500</baseCost>
+    <description>pusher and pullers, include both IR and PRF</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>AutomationBasics</li>
+      <li>PRFRollers</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
-    <researchViewY>4</researchViewY>
+    <researchViewX>2</researchViewX>
+    <researchViewY>6</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
     <defName>PRFRollers</defName>
-    <label>Improved Rollers</label>
+    <label>Belts and Rollers</label>
     <techLevel>Industrial</techLevel>
-    <baseCost>1000</baseCost>
-    <description>Second Tiered improved Rollers, More options then Industrial Rollers</description>
+    <baseCost>500</baseCost>
+    <description>Rollers and belts include both IR and PRF</description>
     <prerequisites>
       <li>Machining</li>
-      <li>MicroelectronicsBasics</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
+    <researchViewX>1</researchViewX>
     <researchViewY>6</researchViewY>
   </ResearchProjectDef>
 
+  <!-- Tier 3 -->
+  <ResearchProjectDef>
+    <defName>PRFMetalRefining</defName>
+    <label>Metal Refining</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>2500</baseCost>
+    <description>Unlocks metal refining and plasteel creation</description>
+    <prerequisites>
+      <li>PRFGoldbachConjecture</li>
+      <li>AdvancedFabrication</li>
+    </prerequisites>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>4</researchViewX>
+    <researchViewY>1</researchViewY>
+  </ResearchProjectDef>
 
 
   <!-- Batteries Taken from SS bigger batteries-->
