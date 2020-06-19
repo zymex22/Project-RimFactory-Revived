@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!--Vanilla Cooking Expanded -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Cooking Expanded</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">					<!-- adding recipes to food prepper -->
+					<xpath>/Defs/ThingDef[defName="SelfPrepper"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/importRecipesFrom</xpath>
+					<value>
+						<li>VCE_CondimentPrepTable</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
