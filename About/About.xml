@@ -47,6 +47,6 @@ See steampage for More info.
     <li>essecoisa.Floored</li>
   </loadAfter>
   <incompatibleWith>
-    <li>SS Bigger Batteries</li>
+    <li>Spdskatr.ssBiggerBatteries</li>
   </incompatibleWith>
 </ModMetaData>

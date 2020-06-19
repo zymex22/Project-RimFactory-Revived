@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Manifest>
-  <version>2.2.0</version>
+  <version>2.2.1</version>
   <manifestUri>https://raw.githubusercontent.com/zymex22/Project-RimFactory-Revived/master/About/Manifest.xml</manifestUri>
   <downloadUri>https://github.com/zymex22/Project-RimFactory-Revived/releases</downloadUri>
   <dependencies>
-    <li>Harmony</li>
-    <li>HugsLib</li>
+    <li>brrainz.harmony</li>
+    <li>UnlimitedHugs.HugsLib</li>
   </dependencies>
   <incompatibleWith>
-    <li>SS Bigger Batteries</li>
+    <li>Spdskatr.ssBiggerBatteries</li>
   </incompatibleWith>
   <loadAfter>
-    <li>Harmony</li>
-    <li>HugsLib</li>
-    <li>Industrial Rollers</li>
-    <li>Floored [1.0+]</li>
+    <li>brrainz.harmony</li>
+    <li>UnlimitedHugs.HugsLib</li>
+    <li>historic.IndustrialRollers</li>
+    <li>essecoisa.Floored</li>
   </loadAfter>
   <suggests>
-    <li>Industrial Rollers</li>
+    <li>historic.IndustrialRollers</li>
   </suggests>
   <showCrossPromotions>true</showCrossPromotions>
 
