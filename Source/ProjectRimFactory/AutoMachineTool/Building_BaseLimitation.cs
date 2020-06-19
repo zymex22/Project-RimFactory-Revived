@@ -50,26 +50,36 @@ namespace ProjectRimFactory.AutoMachineTool
             base.PostMapInit();
         }
 
+        /* Use IsLimit(Thing thing) below
+        [Obsolete("Warning, using IsLimit(ThingDef def) instead of (Thing t) does not work with all storage mods.")]
         public bool IsLimit(ThingDef def)
         {
             if (!this.ProductLimitation)
             {
                 return false;
             }
-            this.targetSlotGroup = this.targetSlotGroup.Where(s => this.Map.haulDestinationManager.AllGroups.Any(a => a == s));
-            return this.targetSlotGroup.Fold(() => this.CountFromMap(def) >= this.ProductLimitCount)
-                (s => this.CountFromSlot(s, def) >= this.ProductLimitCount || !s.Settings.filter.Allows(def) || !s.CellsList.Any(c => c.GetFirstItem(this.Map) == null || c.GetFirstItem(this.Map).def == def));
+            this.targetSlotGroup = this.targetSlotGroup.Where(s => this.Map.haulDestinationManager.AllGroups.Contains(s));
+            return this.targetSlotGroup.Fold(() => this.CountFromMap(def) >= this.ProductLimitCount) // no slotGroup
+                (s => !s.Settings.filter.Allows(def)
+                || this.CountFromSlot(s, def) >= this.ProductLimitCount 
+                || !s.CellsList.Any(c => c.GetFirstItem(this.Map) == null 
+                || c.GetFirstItem(this.Map).def == def)); // this is broken anyway.  What if it's a full stack?
         }
+        */
 
+        // TODO: This may need to be cached somehow! (possibly by map?)
+        // returns true if there IS something that limits adding this thing to storage.
         public bool IsLimit(Thing thing)
         {
             if (!this.ProductLimitation)
             {
                 return false;
             }
-            this.targetSlotGroup = this.targetSlotGroup.Where(s => this.Map.haulDestinationManager.AllGroups.Any(a => a == s));
-            return this.targetSlotGroup.Fold(() => this.CountFromMap(thing.def) >= this.ProductLimitCount)
-                (s => this.CountFromSlot(s, thing.def) >= this.ProductLimitCount || !s.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
+            //IsGoodStoreCell also checks for fire.  Let's use IsValidStorageFor instead!
+            this.targetSlotGroup = this.targetSlotGroup.Where(s => this.Map.haulDestinationManager.AllGroups.Contains(s);
+            return this.targetSlotGroup.Fold(() => this.CountFromMap(thing.def) >= this.ProductLimitCount) // no slotGroup
+                (s => this.CountFromSlot(s, thing.def) >= this.ProductLimitCount 
+                || !s.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
         }
 
         private int CountFromMap(ThingDef def)
