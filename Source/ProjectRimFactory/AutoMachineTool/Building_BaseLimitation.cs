@@ -76,7 +76,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 return false;
             }
             //IsGoodStoreCell also checks for fire.  Let's use IsValidStorageFor instead!
-            this.targetSlotGroup = this.targetSlotGroup.Where(s => this.Map.haulDestinationManager.AllGroups.Contains(s);
+            this.targetSlotGroup = this.targetSlotGroup.Where(
+                         s => this.Map.haulDestinationManager.AllGroups.Contains(s));
             return this.targetSlotGroup.Fold(() => this.CountFromMap(thing.def) >= this.ProductLimitCount) // no slotGroup
                 (s => this.CountFromSlot(s, thing.def) >= this.ProductLimitCount 
                 || !s.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
