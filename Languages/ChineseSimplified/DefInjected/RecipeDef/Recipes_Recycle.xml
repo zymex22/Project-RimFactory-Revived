@@ -3,21 +3,21 @@
 
   <!--  Apparel  -->
 
-    <Recycle_Apparel.label>熔炼衣物</Recycle_Apparel.label>
-    <Recycle_Apparel.description>用强热和电磁铁将装甲的衣物分解成有用的资源.</Recycle_Apparel.description>
-    <Recycle_Apparel.jobString>正在熔炼衣物.</Recycle_Apparel.jobString>
+    <PRF_Recycle_Apparel.label>熔炼衣物</PRF_Recycle_Apparel.label>
+    <PRF_Recycle_Apparel.description>用强热和电磁铁将装甲的衣物分解成有用的资源.</PRF_Recycle_Apparel.description>
+    <PRF_Recycle_Apparel.jobString>正在熔炼衣物.</PRF_Recycle_Apparel.jobString>
 
 
   <!--  Weapon  -->
 
-    <RecycleWeapon.label>熔炼武器</RecycleWeapon.label>
-    <RecycleWeapon.description>用强热和电磁铁将武器分解成有用的金属.</RecycleWeapon.description>
-    <RecycleWeapon.jobString>正在熔炼武器.</RecycleWeapon.jobString>
+    <PRF_Recycle_Weapon.label>熔炼武器</PRF_Recycle_Weapon.label>
+    <PRF_Recycle_Weapon.description>用强热和电磁铁将武器分解成有用的金属.</PRF_Recycle_Weapon.description>
+    <PRF_Recycle_Weapon.jobString>正在熔炼武器.</PRF_Recycle_Weapon.jobString>
 
   <!--  Destroy Stone Chunks  -->
 
-    <prfDestroyChunks.label>熔炼石块</prfDestroyChunks.label>
-    <prfDestroyChunks.description>压碎不需要的石块将其完全摧毁.</prfDestroyChunks.description>
-    <prfDestroyChunks.jobString>正在熔炼石块.</prfDestroyChunks.jobString>
+    <PRF_Destroy_Chunks.label>熔炼石块</PRF_Destroy_Chunks.label>
+    <PRF_Destroy_Chunks.description>压碎不需要的石块将其完全摧毁.</PRF_Destroy_Chunks.description>
+    <PRF_Destroy_Chunks.jobString>正在熔炼石块.</PRF_Destroy_Chunks.jobString>
     
 </LanguageData>

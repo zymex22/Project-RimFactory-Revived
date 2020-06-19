@@ -26,16 +26,19 @@
   <PRF.Settings.TurnOffStorageDefault.Label>关闭默认存储设置</PRF.Settings.TurnOffStorageDefault.Label>
   <PRF.Settings.TurnOffStorageDefault.Desc>关闭默认存储设置</PRF.Settings.TurnOffStorageDefault.Desc>
 
-  <PRF.Settings.TurnOffDsuDestroy.Label>关闭销毁DSU销毁物品</PRF.Settings.TurnOffDsuDestroy.Label>
-  <PRF.Settings.TurnOffDsuDestroy.Desc>关闭销毁DSU销毁物品</PRF.Settings.TurnOffDsuDestroy.Desc>
+  <PRF.Settings.TurnOffDsuDestroy.Label>关闭销毁DSU销毁物品（数字存储单元）</PRF.Settings.TurnOffDsuDestroy.Label>
+  <PRF.Settings.TurnOffDsuDestroy.Desc>关闭销毁DSU销毁物品（数字存储单元）</PRF.Settings.TurnOffDsuDestroy.Desc>
 
   <PRF.Settings.DsuLimit.Label>设置存储DSU限制</PRF.Settings.DsuLimit.Label>
   <PRF.Settings.DsuLimit.Desc>设置存储DSU限制</PRF.Settings.DsuLimit.Desc>
 
-  <PRF.Settings.VacuumHopper.Label>关闭真空料斗上的地面拾取器关闭真空料斗上的地面拾取器</PRF.Settings.VacuumHopper.Label>
-  <PRF.Settings.VacuumHopper.Desc>关闭真空料斗上的地面拾取器关闭真空料斗上的地面拾取器</PRF.Settings.VacuumHopper.Desc>
-
   <PRF.Settings.recipeDB.Label>设置配方数据库的范围</PRF.Settings.recipeDB.Label>
   <PRF.Settings.recipeDB.Desc>设置配方数据库的范围</PRF.Settings.recipeDB.Desc>
+
+  <PRF.Settings.TurnOffInfestation.Label>挖矿关闭虫巢 (高级模式)</PRF.Settings.TurnOffInfestation.Label>
+  <PRF.Settings.TurnOffInfestation.Desc>挖矿关闭虫巢 (高级模式)</PRF.Settings.TurnOffInfestation.Desc>
+
+  <PRF.Settings.TurnOffMinerNerf.Label>更多矿物 (高级模式)</PRF.Settings.TurnOffMinerNerf.Label>
+  <PRF.Settings.TurnOffMinerNerf.Desc>更多矿物 (高级模式)</PRF.Settings.TurnOffMinerNerf.Desc>
 
 </LanguageData>
