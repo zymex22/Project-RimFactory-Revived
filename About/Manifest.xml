@@ -3,4 +3,22 @@
   <version>2.2.0</version>
   <manifestUri>https://raw.githubusercontent.com/zymex22/Project-RimFactory-Revived/master/About/Manifest.xml</manifestUri>
   <downloadUri>https://github.com/zymex22/Project-RimFactory-Revived/releases</downloadUri>
+  <dependencies>
+    <li>Harmony</li>
+    <li>HugsLib</li>
+  </dependencies>
+  <incompatibleWith>
+    <li>SS Bigger Batteries</li>
+  </incompatibleWith>
+  <loadAfter>
+    <li>Harmony</li>
+    <li>HugsLib</li>
+    <li>Industrial Rollers</li>
+    <li>Floored [1.0+]</li>
+  </loadAfter>
+  <suggests>
+    <li>Industrial Rollers</li>
+  </suggests>
+  <showCrossPromotions>true</showCrossPromotions>
+
 </Manifest>
