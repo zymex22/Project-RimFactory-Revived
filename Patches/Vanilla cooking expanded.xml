@@ -15,6 +15,20 @@
 						<li>VCE_CondimentPrepTable</li>
 					</value>
 				</li>
+				<!-- <li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="SelfCooker"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/importRecipesFrom</xpath>
+					<value>
+						<li>VCE_DeepFrier</li>
+						<li>VCE_Grill</li>
+					</value>
+				</li> -->
+				<li Class="PatchOperationAdd">					<!-- adding new food types to self cooker -->
+					<xpath>/Defs/ThingDef[defName="PRF_SpacerCooker"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/importRecipesFrom</xpath>
+					<value>
+						<li>VCE_DeepFrier</li>
+						<li>VCE_Grill</li>
+					</value>
+				</li>
 			</operations>
 		</match>
 	</Operation>
