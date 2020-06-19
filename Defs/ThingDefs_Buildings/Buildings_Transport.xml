@@ -11,6 +11,7 @@
     <drawerType>RealtimeOnly</drawerType>
     <tickerType>Never</tickerType>
     <category>Building</category>
+    <uiIconScale>0.7</uiIconScale>
     <selectable>true</selectable>
     <designatorDropdown>Pullers_gr</designatorDropdown>
     <costList>

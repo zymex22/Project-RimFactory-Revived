@@ -298,6 +298,70 @@
     </modExtensions>
   </ThingDef>
 
+  <!--==================== Stoneworks ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_StoneWorks</defName>
+    <label>Industrial Stoneworks</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
+    <graphicData>
+      <texPath>Industry/StoneCutter</texPath>
+      <drawSize>(2.1,2.1)</drawSize>
+    </graphicData>
+    <uiIconScale>0.8</uiIconScale>
+    <designatorDropdown>PRF_industry_gr</designatorDropdown>
+    <size>(2,2)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>A CNC router like automated machine that are capable of turning stone into bricks and even abit mid skilled art too. \nArt level: 10</description>
+    <costList>
+      <Steel>400</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFRoboticArm>2</PRFRoboticArm>
+    </costList>
+    <recipes>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>10</artSkillLevel>
+        <importRecipesFrom>
+          <li>TableSculpting</li>
+          <li>TableStonecutter</li>
+        </importRecipesFrom>
+      </li>
+    </modExtensions>
+    <tickerType>Normal</tickerType>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>Stonecutting</li>
+      <li>Machining</li>
+      <li>AutomationBasics</li>
+    </researchPrerequisites>
+  </ThingDef>
+
   <!--==================== Recycler ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_Recycler</defName>
@@ -307,6 +371,7 @@
       <texPath>Industry/smart_recycler</texPath>
       <drawSize>(2.1,2.1)</drawSize>
     </graphicData>
+    <uiIconScale>0.8</uiIconScale>
     <designatorDropdown>PRF_industry_gr</designatorDropdown>
     <size>(2,2)</size>
     <inspectorTabs>
@@ -500,7 +565,6 @@
       <li>BurnApparel</li>
       <li>ExtractMetalFromSlag</li>
       <li>MakeSmallFrame</li>
-      <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Power">
@@ -564,7 +628,6 @@
       <li>MakeSmallFrame</li>
       <li>MakeMediumFrame</li>
       <li>MakeLargeFrame</li>
-      <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Power">

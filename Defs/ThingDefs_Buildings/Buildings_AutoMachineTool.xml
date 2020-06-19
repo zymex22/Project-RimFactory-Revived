@@ -12,6 +12,7 @@
     <designatorDropdown>UgRollers_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <drawerType>MapMeshAndRealTime</drawerType>
+    <uiIconScale>0.7</uiIconScale>
     <costList>
       <Steel>20</Steel>
     </costList>

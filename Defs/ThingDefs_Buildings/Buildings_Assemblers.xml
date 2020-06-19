@@ -130,6 +130,7 @@ Mod extennsion for assemblers
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1,1)</drawSize>
     </graphicData>
+    <uiIconScale>0.7</uiIconScale>
     <rotatable>true</rotatable>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>

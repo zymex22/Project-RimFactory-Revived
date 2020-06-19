@@ -16,6 +16,7 @@
     <label>Vacuum Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
     <designatorDropdown>PRF_Fuel_gr</designatorDropdown>
+    <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <texPath>Storage/vacuum</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -114,6 +115,7 @@
     <label>I/O Port</label>
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
+    <uiIconScale>0.7</uiIconScale>
     <designatorDropdown>IO_gr</designatorDropdown>
     <graphicData>
       <texPath>Storage/IO_Port</texPath>
@@ -209,6 +211,7 @@
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.4)</drawSize>
     </graphicData>
+    <uiIconScale>0.7</uiIconScale>
     <size>(1,1)</size>
     <passability>PassThroughOnly</passability>
     <castEdgeShadows>true</castEdgeShadows>
