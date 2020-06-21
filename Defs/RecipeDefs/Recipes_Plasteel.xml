@@ -11,7 +11,7 @@
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
-    <workAmount>12000</workAmount>
+    <workAmount>30000</workAmount>
     <workSkillLearnFactor>0.75</workSkillLearnFactor>
     <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
     <ingredients>
@@ -21,7 +21,7 @@
             <li>Steel</li>
           </thingDefs>
         </filter>
-        <count>80</count>
+        <count>20</count>
       </li>
       <li>
         <filter>
@@ -29,7 +29,7 @@
             <li>Chemfuel</li>
           </thingDefs>
         </filter>
-        <count>20</count>
+        <count>100</count>
       </li>
     </ingredients>
     <fixedIngredientFilter>

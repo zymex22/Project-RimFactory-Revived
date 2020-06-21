@@ -3,42 +3,45 @@
   <!-- Tier 1 -->
   <ResearchProjectDef>
     <defName>AutonomousMining</defName>
+    <label>Auger drill I</label>
     <tab>Automation</tab>
     <techLevel>Industrial</techLevel>
     <baseCost>2000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
-      <li>AutomationBasics</li>
+      <li>DeepDrilling</li>
+      <li>PRFEulersIdentity</li>
     </prerequisites>
-    <label>autonomous mining Tier 1</label>
     <researchViewX>1</researchViewX>
     <researchViewY>1</researchViewY>
-    <description>Make buildings that can extract random minerals and rocks from deep underground.</description>
+    <description>Make buildings that can extract random minerals and rocks from deep underground.(can cause infestation)</description>
   </ResearchProjectDef>
 
-    <!-- Tier 2 -->
+  <!-- Tier 2 -->
   <ResearchProjectDef>
     <defName>AutonomousMining_II</defName>
+    <label>Pulse Drill II</label>
     <tab>Automation</tab>
     <techLevel>Industrial</techLevel>
     <baseCost>3000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
+      <li>AutomationBasics</li>
       <li>AutonomousMining</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <label>autonomous mining Tier 2</label>
     <researchViewX>2</researchViewX>
     <researchViewY>1</researchViewY>
-    <description>Make buildings that can extract random minerals and rocks from deep underground.</description>
+    <description>Make buildings that can extract random minerals and rocks from deep underground.(can cause infestation)</description>
   </ResearchProjectDef>
 
 
-    <!-- Tier 3 -->
+  <!-- Tier 3 -->
   <ResearchProjectDef>
     <defName>AutonomousMining_III</defName>
+    <label>Plasma Drill III</label>
     <tab>Automation</tab>
     <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
@@ -50,10 +53,25 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <label>autonomous mining Tier 3</label>
     <researchViewX>3</researchViewX>
     <researchViewY>1</researchViewY>
-    <description>Make buildings that can extract exact minerals and rocks from deep underground.</description>
+    <description>A advanced miner that can select a main ore to mine for and get secondaries as rare/junk bonus chance(no infestation)</description>
   </ResearchProjectDef>
-  
+
+  <ResearchProjectDef>
+    <defName>PRFMetalRefining</defName>
+    <label>Metal Refining</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>4000</baseCost>
+    <description>A metal refinery able to produce rare metals through polymer lamination, by combining Chemfuel with steel to greate Plasteel</description>
+    <prerequisites>
+      <li>PRFGoldbachConjecture</li>
+      <li>AdvancedFabrication</li>
+    </prerequisites>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>4</researchViewX>
+    <researchViewY>4</researchViewY>
+  </ResearchProjectDef>
+
 </Defs>

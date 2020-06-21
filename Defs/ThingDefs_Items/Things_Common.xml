@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-<!-- ================================== Robot arm ================================= -->
+  <!-- ================================== Robot arm ================================= -->
   <ThingDef ParentName="PRFResourceBase">
     <defName>PRFRoboticArm</defName>
     <label>robotic arm</label>
@@ -33,6 +33,9 @@
         <li>TableMachining</li>
       </recipeUsers>
     </recipeMaker>
+    <researchPrerequisites>
+      <li>PRFEulersIdentity</li>
+    </researchPrerequisites>
     <thingCategories>
       <li>Items</li>
     </thingCategories>

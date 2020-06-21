@@ -7,9 +7,7 @@
   </supportedVersions>
   <packageId>spdskatr.projectrimfactory</packageId>
   <url>https://ludeon.com/forums/index.php?topic=30813.0</url>
-  <description>
-
-&lt;size=24&gt;Incompatible mods:&lt;/size&gt;
+  <description> &lt;size=24&gt;Incompatible mods:&lt;/size&gt;
   - Mend and Recycle (only on assemblers)
   - Technology Blueprints &amp; Reverse Engineering (t3 miner bill option)
   - Startup impact (only if mod settings are used)
@@ -19,8 +17,7 @@ see more info here: https://github.com/zymex22/Project-RimFactory-Revived/wiki/I
 [Link to GitHub]
 https://github.com/zymex22/Project-RimFactory-Revived
 
-[Link to Steampage]
-https://steamcommunity.com/sharedfiles/filedetails/?id=203397970
+[Link to Steampage] https://steamcommunity.com/sharedfiles/filedetails/?id=203397970
 See steampage for More info.
 
   </description>

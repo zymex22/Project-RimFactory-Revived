@@ -6,9 +6,12 @@
     <techLevel>Industrial</techLevel>
     <baseCost>1500</baseCost>
     <label>Wooden stockpile crates</label>
-    <researchViewX>0</researchViewX>
+    <researchViewX>1</researchViewX>
     <researchViewY>0</researchViewY>
     <description>Allows colonists to build large crates for more compact storage.</description>
+    <prerequisites>
+      <li>PRFEulersIdentity</li>
+    </prerequisites>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -17,7 +20,7 @@
     <techLevel>Industrial</techLevel>
     <baseCost>3000</baseCost>
     <label>Steel stockpile crates</label>
-    <researchViewX>1</researchViewX>
+    <researchViewX>2</researchViewX>
     <researchViewY>0</researchViewY>
     <description>Allows colonists to build reinforced stockpile crates.</description>
     <prerequisites>
@@ -26,7 +29,7 @@
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
   </ResearchProjectDef>
-  
+
   <ResearchProjectDef>
     <defName>PRFStorageIO</defName>
     <tab>Automation</tab>

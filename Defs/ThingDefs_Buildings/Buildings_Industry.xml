@@ -357,8 +357,7 @@
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
       <li>Stonecutting</li>
-      <li>Machining</li>
-      <li>AutomationBasics</li>
+      <li>PRFEulersIdentity</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -420,7 +419,7 @@
     <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>UniversalAutocrafting</li>
+      <li>PRFMachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -475,7 +474,7 @@
         <minPowerForSpeed>3000</minPowerForSpeed>
         <minSpeedFactor>1</minSpeedFactor>
         <maxPowerForSpeed>10000</maxPowerForSpeed>
-        <maxSpeedFactor>3</maxSpeedFactor>
+        <maxSpeedFactor>3.5</maxSpeedFactor>
         <!-- range settings -->
         <rangeSetting>true</rangeSetting>
         <minPowerForRange>0</minPowerForRange>
@@ -655,7 +654,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>AutomationBasics</li>
+      <li>PRFEulersIdentity</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -718,7 +717,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>UniversalAutocrafting</li>
+      <li>PRFMachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 

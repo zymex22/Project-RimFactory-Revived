@@ -124,7 +124,7 @@
     </comps>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>AutomationBasics</li>
+      <li>PRFEulersIdentity</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>PlaceWorker_ShowFacilitiesConnections</li>
