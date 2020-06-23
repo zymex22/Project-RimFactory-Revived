@@ -508,7 +508,7 @@
   <!--==================== Furnace Base ====================-->
   <ThingDef Name="PRF_FurnaceBase" ParentName="PRF_IndustrialBase" Abstract="True">
     <tickerType>Normal</tickerType>
-    <passability>Impassable</passability>
+    <passability>PassThroughOnly</passability>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <inspectorTabs>
       <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>

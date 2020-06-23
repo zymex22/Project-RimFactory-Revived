@@ -45,5 +45,6 @@ See steampage for More info.
   </loadAfter>
   <incompatibleWith>
     <li>Spdskatr.ssBiggerBatteries</li>
+    <li>automatic.startupimpact</li>
   </incompatibleWith>
 </ModMetaData>
