@@ -204,7 +204,6 @@ Mod extennsion for assemblers
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
     </building>
-    <!-- <passability>Impassable</passability> -->    <!-- to be able to build them as walls -->
     <comps>
       <li Class="CompProperties_Breakdownable"/>
       <!-- enable breakdown of machines -->
@@ -266,7 +265,6 @@ Mod extennsion for assemblers
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
     </building>
-    <!-- <passability>Impassable</passability> -->    <!-- to be able to build them as walls -->
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>

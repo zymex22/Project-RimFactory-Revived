@@ -85,7 +85,7 @@ Mod extennsion for assemblers
       <!-- <shaderType></shaderType> -->      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
-    <passability>passthroughonly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, passthroughonly -->
+    <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, passthroughonly -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
@@ -163,7 +163,7 @@ Mod extennsion for assemblers
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
       <isMealSource>true</isMealSource>      <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
     </building>
-    <passability>passthroughonly</passability>
+    <passability>PassThroughOnly</passability>
     <researchPrerequisites>
       <li>SelfCooking</li>
     </researchPrerequisites>
