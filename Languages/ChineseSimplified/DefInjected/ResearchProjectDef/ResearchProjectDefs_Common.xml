@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
+  <PRFEulersIdentity.label>欧拉恒等式</PRFEulersIdentity.label>
+  <PRFEulersIdentity.description>“π是π，圆周长与其直径的比值。”学习自动化和机械的基本知识，这是通往工业群体的大门。第1层</PRFEulersIdentity.description>
+
   <!-- Tier 1 -->
 
   <AutomationBasics.label>PRF：基础自动化</AutomationBasics.label>
@@ -57,8 +60,8 @@
   <PRFPsychics.label>PRF：心灵学</PRFPsychics.label>
   <PRFPsychics.description>解锁制作心灵错乱枪等系列物品。</PRFPsychics.description>
 
-  <PRFTheoryOfEverything.label>PRF：万物论</PRFTheoryOfEverything.label>
-  <PRFTheoryOfEverything.description>通过骇客入侵来弄清这个模拟是如何运作的。</PRFTheoryOfEverything.description>
+  <EnhancedBatteries.label>增强型电池</EnhancedBatteries.label>
+  <EnhancedBatteries.description>建造大型电池以有效储存电力。解锁4k和10k电池。</EnhancedBatteries.description>
 
   <LargeBatteries.label>大型电池</LargeBatteries.label>
   <LargeBatteries.description>建造大型电池以有效储存电力。解锁4k和16k电池。</LargeBatteries.description>
