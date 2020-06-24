@@ -98,7 +98,7 @@
       <ComponentIndustrial>10</ComponentIndustrial>
     </costList>
     <passability>Impassable</passability>
-    <description>(Tier 2) A Puller That can pull stuff from growzones and place it into a storage or onto a belt.</description>
+    <description>(PRF) A Puller That can pull stuff from growzones and place it into a storage or onto a belt.</description>
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
@@ -133,7 +133,7 @@
       <ComponentIndustrial>10</ComponentIndustrial>
     </costList>
     <passability>Impassable</passability>
-    <description>(Tier 2) A Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
+    <description>(PRF) A Puller That Pull items from A to B more Flexible in in/output than IR Pusher/pullers, might be usefull in some cases</description>
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
@@ -164,7 +164,7 @@
     <defName>Building_AutoMachineTool_Puller_Side</defName>
     <label>Item Angle Puller</label>
     <passability>Impassable</passability>
-    <description>(Tier 2) A 90 degree angled Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases, can swap left/right after placed.</description>
+    <description>(PRF) A 90 degree angled Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases, can swap left/right after placed.</description>
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers Inherit="false">
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
@@ -218,7 +218,7 @@
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller_Wall</defName>
     <label>Wall Item Puller</label>
-    <description>(Tier 2) A Over wall item Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases</description>
+    <description>(PRF) A Over wall item Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases.\nThis one are placed over a wall so good for freezers or prisons where you dont want ppl through.</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <building>
       <isEdifice>false</isEdifice>

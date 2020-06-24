@@ -215,10 +215,6 @@ Mod extennsion for assemblers
         <glowRadius>6</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>5</heatPerSecond>
-      </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- speed settings -->
         <speedSetting>true</speedSetting>
