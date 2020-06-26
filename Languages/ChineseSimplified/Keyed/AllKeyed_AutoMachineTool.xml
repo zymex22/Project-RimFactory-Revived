@@ -27,7 +27,6 @@
   <!-- PowerTab -->
   <PRF.AutoMachineTool.SupplyPower.TabName>电力</PRF.AutoMachineTool.SupplyPower.TabName>
   <PRF.AutoMachineTool.SupplyPower.Description>设置电源使用情况。 更多电力 = 工作速度更快</PRF.AutoMachineTool.SupplyPower.Description>
-  <PRF.AutoMachineTool.SupplyPower.ValueLabel>提升电力</PRF.AutoMachineTool.SupplyPower.ValueLabel>
   <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>设定用电量. 更多电力 = 更大的范围</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
   <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>提升电力(速度)</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
   <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>提升电力(范围)</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
@@ -61,6 +60,8 @@
   <PRF.AutoMachineTool.Puller.SwitchActiveDesc>切换工作状态。</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
   <PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>开关输出,</PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>
   <PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>开关输出.</PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>
+  <PRF.Puller.TakeForbiddenItems>Pull forbidden</PRF.Puller.TakeForbiddenItems>
+  <PRF.Puller.TakeForbiddenItemsDesc>If set, this puller will also take forbidden items.  If they were forbidden, the puller will change them to "allowed."  This is a per-puller setting.</PRF.Puller.TakeForbiddenItemsDesc>
   <!-- FilterTab(puller) -->
   <PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>存储</PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>
   <PRF.AutoMachineTool.Puller.OutputItemFilter.Description>为要拉出的项目设置过滤器。</PRF.AutoMachineTool.Puller.OutputItemFilter.Description>

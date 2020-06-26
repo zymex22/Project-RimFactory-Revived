@@ -33,8 +33,8 @@
   <adv_Rollers.label>PRF: 先进传送带</adv_Rollers.label>
   <adv_Rollers.description>分离器，入墙式，地下传送带。</adv_Rollers.description>
 
-  <Push_Pull.label>PRF: 分拣器</Push_Pull.label>
-  <Push_Pull.description>分拣器.</Push_Pull.description>
+  <PRFMetalRefining.label>金属精炼</PRFMetalRefining.label>
+  <PRFMetalRefining.description>一家金属精炼厂，通过聚合物层压，将化学燃料与钢结合，使塑料灰化，从而生产稀有金属.</PRFMetalRefining.description>
 
 
 </LanguageData>

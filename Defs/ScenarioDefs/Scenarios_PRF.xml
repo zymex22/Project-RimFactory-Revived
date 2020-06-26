@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <ScenarioDef>
+        <defName>PRF_FactoryEntrepreneur</defName>
+        <label>Factory Entrepreneur</label>
+        <description>A small group of scientist were sent to aid a newly founded factory.
+with cargo full of new equipment and supplies to that factory.
+On its way their ship hit a meteor shower and crashed into a naked planet far from original destination and from home.
+Now they will have to build up a temporary factory here and gather resources to go back home.
+(BETA please post any error or suggestions)</description>
+        <scenario>
+            <summary>4 crashlanded scientists - Project RimFactory experiance</summary>
+            <playerFaction>
+                <def>PlayerFaction</def>
+                <factionDef>PlayerColony</factionDef>
+            </playerFaction>
+            <parts>
+                <li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+                    <def>ConfigPage_ConfigureStartingPawns</def>
+                    <pawnCount>4</pawnCount>
+                    <pawnChoiceCount>8</pawnChoiceCount>
+                </li>
+                <li Class="ScenPart_PlayerPawnsArriveMethod">
+                    <def>PlayerPawnsArriveMethod</def>
+                    <method>DropPods</method>
+                </li>
+                <li Class="ScenPart_ForcedHediff">
+                    <def>ForcedHediff</def>
+                    <chance>0.5</chance>
+                    <context>PlayerStarter</context>
+                    <hideOffMap>True</hideOffMap>
+                    <hediff>CryptosleepSickness</hediff>
+                    <severityRange>1~1</severityRange>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>Silver</thingDef>
+                    <count>550</count>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>MealNutrientPaste</thingDef>
+                    <count>50</count>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>MedicineIndustrial</thingDef>
+                    <count>30</count>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>ComponentIndustrial</thingDef>
+                    <count>30</count>
+                </li>
+                <li Class="ScenPart_ScatterThingsNearPlayerStart">
+                    <def>ScatterThingsNearPlayerStart</def>
+                    <thingDef>Steel</thingDef>
+                    <count>500</count>
+                </li>
+                <li Class="ScenPart_ScatterThingsNearPlayerStart">
+                    <def>ScatterThingsNearPlayerStart</def>
+                    <thingDef>Plasteel</thingDef>
+                    <count>20</count>
+                </li>
+                <li Class="ScenPart_ScatterThingsAnywhere">
+                    <def>ScatterThingsAnywhere</def>
+                    <thingDef>ShipChunk</thingDef>
+                    <count>5</count>
+                </li>
+                <li Class="ScenPart_ScatterThingsAnywhere">
+                    <def>ScatterThingsAnywhere</def>
+                    <thingDef>ChunkSlagSteel</thingDef>
+                    <count>100</count>
+                </li>
+                <li Class="ScenPart_GameStartDialog">
+                    <def>GameStartDialog</def>
+                    <text>A small group of scientist were sent to aid a newly founded factory.
+with cargo full of new equipment and supplies to that factory.
+On its way they hit a meteor shower and crashed into a naked planet.
+now they will have to build up a temporary factory here and gather resources to go back home.</text>
+                    <textKey>GameStartDialog</textKey>
+                    <closeSound>GameStartSting</closeSound>
+                </li>
+                <li Class="ScenPart_StartingResearch">
+                    <def>StartingResearch</def>
+                    <project>PRFCrates</project>
+                </li>
+                <li Class="ScenPart_StartingResearch">
+                    <def>StartingResearch</def>
+                    <project>PRFRollers</project>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>SelfCooker</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_FurnaceI</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_DeepQuarry_mkI</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>MeatGrinder</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>Telescope</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>Shearer</thingDef>
+                </li>
+                <li Class="ScenPart_StartingAnimal">
+                    <def>StartingAnimal</def>
+                    <animalKind>Sheep</animalKind>
+                    <count>2</count>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>Building_AutoMachineTool_Puller</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>Building_AutoMachineTool_GrowZonePuller</thingDef>
+                </li>
+            </parts>
+        </scenario>
+    </ScenarioDef>
+
+</Defs>

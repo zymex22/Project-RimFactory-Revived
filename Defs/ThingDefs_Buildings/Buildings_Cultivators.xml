@@ -13,6 +13,7 @@
       <Mass>70</Mass>      <!-- mass in kg -->
       <WorkToBuild>450</WorkToBuild>
     </statBases>
+    <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
       <shaderType>Transparent</shaderType>      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->

@@ -12,6 +12,7 @@
     <designatorDropdown>UgRollers_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <drawerType>MapMeshAndRealTime</drawerType>
+    <uiIconScale>0.7</uiIconScale>
     <costList>
       <Steel>20</Steel>
     </costList>
@@ -144,7 +145,7 @@ The belt conveyors are connected by vertically adjoining the orientation.</descr
   <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Underground</defName>
     <label>Underground belt</label>
-    <description>Underground BeltConveyor carries items in the basement.
+    <description>Underground Belt Conveyor carries items in the basement.
 Underground BeltConveyor can not move items on the ground as it is.
 Connect to the underground conveyor entrance and exit and use.</description>
     <altitudeLayer>FloorEmplacement</altitudeLayer>

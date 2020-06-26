@@ -3,48 +3,54 @@
   <!-- Tier 1 -->
   <ResearchProjectDef>
     <defName>SelfCooking</defName>
-	<tab>Automation</tab>
+    <tab>Automation</tab>
     <techLevel>Industrial</techLevel>
     <baseCost>2000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-	<prerequisites>
-	  <li>AutomationBasics</li>
-	</prerequisites>
-	<label>Self-cooking</label>
+    <prerequisites>
+      <li>PRFEulersIdentity</li>
+    </prerequisites>
+    <label>Self-cooking</label>
     <researchViewX>1</researchViewX>
     <researchViewY>2</researchViewY>
-	<description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
+    <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
   </ResearchProjectDef>
+
+
   <ResearchProjectDef>
     <defName>MagneticTape</defName>
-	<tab>Automation</tab>
+    <tab>Automation</tab>
     <techLevel>Industrial</techLevel>
     <baseCost>1000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-	<prerequisites>
-	  <li>SelfCooking</li>
-	</prerequisites>
-	<label>Magnetic tape</label>
+    <prerequisites>
+      <li>AutomationBasics</li>
+    </prerequisites>
+    <label>Magnetic tape</label>
     <researchViewX>2</researchViewX>
     <researchViewY>2</researchViewY>
-	<description>Learn how to make and use old-school magnetic tape to store instructions. Make data disks at the machining table.</description>
+    <description>Learn how to make and use old-school magnetic tape to store instructions. Make data disks at the machining table.</description>
   </ResearchProjectDef>
+
+
   <ResearchProjectDef>
     <defName>UniversalAutocrafting</defName>
-	<label>universal auto-crafting</label>
-	<description>Make buildings that can craft recipes given to them via a recipe database. Like your dedicated crafter, but won't have mental breaks for silly reasons.</description>
-	<tab>Automation</tab>
+    <label>universal auto-crafting</label>
+    <description>Make buildings that can craft recipes given to them via a recipe database. Like your dedicated crafter, but won't have mental breaks for silly reasons.</description>
+    <tab>Automation</tab>
     <techLevel>Industrial</techLevel>
     <baseCost>3000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-	<requiredResearchFacilities><li>MultiAnalyzer</li></requiredResearchFacilities>
-	<prerequisites>
-	  <li>MagneticTape</li>
-	</prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <prerequisites>
+      <li>MagneticTape</li>
+    </prerequisites>
     <researchViewX>3</researchViewX>
     <researchViewY>2</researchViewY>
   </ResearchProjectDef>
-  
+
   <!-- Tier 2 -->
   <ResearchProjectDef>
     <defName>SelfCorrectingAssemblers</defName>
@@ -54,10 +60,10 @@
     <baseCost>2250</baseCost>
     <tab>Automation</tab>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
-	<prerequisites>
-	  <li>PRFMachineLearning</li>
+    <prerequisites>
+      <li>PRFMachineLearning</li>
       <li>UniversalAutocrafting</li>
-	</prerequisites>
+    </prerequisites>
     <researchViewX>4</researchViewX>
     <researchViewY>2</researchViewY>
   </ResearchProjectDef>

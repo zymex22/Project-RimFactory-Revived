@@ -119,6 +119,66 @@ Mod extennsion for assemblers
     </comps>
   </ThingDef>
 
+  <!--==================== Recipe database ====================-->
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>RecipeDatabase</defName>
+    <label>recipe database</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
+    <designatorDropdown>assembler_gr</designatorDropdown>
+    <graphicData>
+      <texPath>SAL3/DISK_HARDWARE4</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <uiIconScale>0.7</uiIconScale>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>800</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Mass>25</Mass>
+    </statBases>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <description>The Portable Recipe Database can import recipes from nearby worktables. Afterwards, when reinstalled near assembler(s), it will upload its recipes to them.\n\nBlue cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
+    <costList>
+      <PRFMachineFrame>1</PRFMachineFrame>
+      <Steel>20</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <RimFactory_Data_Disk>1</RimFactory_Data_Disk>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <neverMultiSelect>true</neverMultiSelect>
+    <designationCategory>Industrial</designationCategory>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>2</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>MagneticTape</li>
+    </researchPrerequisites>
+  </ThingDef>
+
   <!--====================Universal assembler====================-->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>UniversalAssembler</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
@@ -135,7 +195,7 @@ Mod extennsion for assemblers
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
     </costList>
-    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
+    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
@@ -144,7 +204,6 @@ Mod extennsion for assemblers
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
     </building>
-    <!-- <passability>Impassable</passability> -->    <!-- to be able to build them as walls -->
     <comps>
       <li Class="CompProperties_Breakdownable"/>
       <!-- enable breakdown of machines -->
@@ -197,7 +256,7 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.</description>
+    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -206,7 +265,6 @@ Mod extennsion for assemblers
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
     </building>
-    <!-- <passability>Impassable</passability> -->    <!-- to be able to build them as walls -->
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -243,66 +301,6 @@ Mod extennsion for assemblers
       <li>SelfCorrectingAssemblers</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
-  </ThingDef>
-
-
-  <!--==================== Recipe database ====================-->
-  <ThingDef ParentName="PRFBuildingBase">
-    <defName>RecipeDatabase</defName>
-    <label>recipe database</label>
-    <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
-    <designatorDropdown>assembler_gr</designatorDropdown>
-    <graphicData>
-      <texPath>SAL3/DISK_HARDWARE4</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(1,1)</drawSize>
-    </graphicData>
-    <rotatable>true</rotatable>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <fillPercent>0.5</fillPercent>
-    <pathCost>70</pathCost>
-    <canOverlapZones>false</canOverlapZones>
-    <castEdgeShadows>true</castEdgeShadows>
-    <statBases>
-      <WorkToBuild>800</WorkToBuild>
-      <MaxHitPoints>150</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <Mass>25</Mass>
-    </statBases>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
-    <description>Imports recipes from adjacent work tables. Uploads recipes to adjacent assemblers.\n\nI wonder what all these other buttons do...</description>
-    <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
-      <Steel>20</Steel>
-      <ComponentIndustrial>1</ComponentIndustrial>
-      <RimFactory_Data_Disk>1</RimFactory_Data_Disk>
-    </costList>
-    <tickerType>Normal</tickerType>
-    <neverMultiSelect>true</neverMultiSelect>
-    <designationCategory>Industrial</designationCategory>
-    <staticSunShadowHeight>0.1</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>250</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_Glower">
-        <glowRadius>3</glowRadius>
-        <glowColor>(115,198,206,0)</glowColor>
-      </li>
-      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
-        <range>2</range>
-        <ghostColor>(0,1,1,1)</ghostColor>
-      </li>
-    </comps>
-    <researchPrerequisites>
-      <li>MagneticTape</li>
-    </researchPrerequisites>
   </ThingDef>
 
 </Defs>

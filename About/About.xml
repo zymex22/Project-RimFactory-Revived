@@ -7,44 +7,19 @@
   </supportedVersions>
   <packageId>spdskatr.projectrimfactory</packageId>
   <url>https://ludeon.com/forums/index.php?topic=30813.0</url>
-  <description>
-WIP - Unstable - Beta
-Please know by using this mod theres a risk of things being removed or break.
-Until a stable release are ready.
+  <description> &lt;size=24&gt;Incompatible mods:&lt;/size&gt;
+  - Mend and Recycle (only on assemblers)
+  - Technology Blueprints &amp; Reverse Engineering (t3 miner bill option)
+  - Startup impact (only if mod settings are used)
+  - Apothecary (wont work with cultivators)
+see more info here: https://github.com/zymex22/Project-RimFactory-Revived/wiki/Issues
 
-This mod adds:
-This mod is together with Industrial Rollers an Awesome way to automate and create factories and such in Rimworld.
-I always loved those 2 mods, and now i have the chance to update one of them
+[Link to GitHub]
+https://github.com/zymex22/Project-RimFactory-Revived
 
-Disclaimer
-This was my Favorite mod in B18 and B19 and there never really came a 1.0 or 1.1
-So i was looking into updating it, since Spdskatr properbly wont come back.
-i saw AbnerChen made asemblies update and created a PR but Spdskatr didnt update.
+[Link to Steampage] https://steamcommunity.com/sharedfiles/filedetails/?id=203397970
+See steampage for More info.
 
-I used this in combination with my own work and original to update to 1.1
-I hope this mod can be a Continuation of Spdskatr excellent mod.
-i dont want credit, i really just want my favorite mod back to rimworld 1.1 standard
-
-I sadly have no C# skills so can't build upon assemblies, so if some one wanna take over or colab feel free to contact me.
-
-
-
-Any bugs, suggestion or other are VERY welcome as i cant test i all myself.
-
-Credits:
-Wood crate texture: Chicken Plucker 2 years ago and updated 2020!
-Spdskatr - Rimfactory original! see: https://github.com/spdskatr/ProjectRimFactory
-
-Coders helped on this:
-Spdskatr, AbnerChen, Nobo, LWM
-
-Artist who have contributed to this mod:
-totobrother, Chicken Plucker, unnamed alien, Shotgunfrenzy, Xen, spdskatr, zymex, scythe
-
--Thanks to all that have worked on this mod
-
-Translaters: (might need update after release)
-Russian: Natsu_Zirok, Chinese Simplified: Dango998, Chinese Traditional: AbnerChen
   </description>
   <modDependencies>
     <li>
@@ -69,6 +44,7 @@ Russian: Natsu_Zirok, Chinese Simplified: Dango998, Chinese Traditional: AbnerCh
     <li>essecoisa.Floored</li>
   </loadAfter>
   <incompatibleWith>
-    <li>SS Bigger Batteries</li>
+    <li>Spdskatr.ssBiggerBatteries</li>
+    <li>automatic.startupimpact</li>
   </incompatibleWith>
 </ModMetaData>

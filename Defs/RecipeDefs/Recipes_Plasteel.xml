@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+ <!-- Plasteel refining 20pcs -->
+  <RecipeDef>
+    <defName>PRF_RefinePlasteel</defName>
+    <label>Refine plasteel</label>
+    <description>Refine plasteel from chemfuel and steel.</description>
+    <jobString>Refining plasteel</jobString>
+    <researchPrerequisite>PRFMetalRefining</researchPrerequisite>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workAmount>30000</workAmount>
+    <workSkillLearnFactor>0.75</workSkillLearnFactor>
+    <unfinishedThingDef>UnfinishedComponent</unfinishedThingDef>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Steel</li>
+          </thingDefs>
+        </filter>
+        <count>20</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Chemfuel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Steel</li>
+        <li>Chemfuel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Plasteel>20</Plasteel>
+    </products>
+    <skillRequirements>
+      <Crafting>10</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+  </RecipeDef>
+
+</Defs>

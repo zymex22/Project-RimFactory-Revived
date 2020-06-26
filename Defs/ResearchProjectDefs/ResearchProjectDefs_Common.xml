@@ -2,16 +2,14 @@
 <Defs>
   <!-- Tier 1 -->
   <ResearchProjectDef>
-    <defName>AutomationBasics</defName>
-    <label>Automation basics</label>
+    <defName>PRFEulersIdentity</defName>
+    <label>Euler's identity</label>
     <techLevel>Industrial</techLevel>
-    <baseCost>1000</baseCost>
-    <description>Learn the very basics of automation and mechanisms, the gateway to an industrial colony.</description>
+    <baseCost>750</baseCost>
+    <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the very basics of automation and mechanisms, the gateway to an industrial colony. tier 1</description>
     <prerequisites>
       <li>Machining</li>
-      <li>MicroelectronicsBasics</li>
     </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
     <researchViewX>0</researchViewX>
     <researchViewY>3</researchViewY>
@@ -24,7 +22,6 @@
     <baseCost>2000</baseCost>
     <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
     <prerequisites>
-      <li>FarmingSprinklers</li>
       <li>MagneticTape</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
@@ -36,13 +33,63 @@
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
+  <ResearchProjectDef>
+    <defName>PRFRollers</defName>
+    <label>Belts and Rollers</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>500</baseCost>
+    <description>Rollers and belts include both IR and PRF</description>
+    <prerequisites>
+      <li>PRFEulersIdentity</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>0</researchViewX>
+    <researchViewY>5</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>ADVrollers</defName>
+    <label>Pullers And Pushers</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>500</baseCost>
+    <description>pusher and pullers, include both IR and PRF</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>PRFRollers</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>0</researchViewX>
+    <researchViewY>6</researchViewY>
+  </ResearchProjectDef>
+
   <!-- Tier 2 -->
+  <ResearchProjectDef>
+    <defName>AutomationBasics</defName>
+    <label>Riemann zeta function</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>2000</baseCost>
+    <description>"The Riemann zeta function ζ(s), is a function of a complex variable s that analytically continues the sum of the Dirichlet series. which converges when the real part of s is greater than 1." Unlocks new set of second tier factory building options.</description>
+    <prerequisites>
+      <li>PRFEulersIdentity</li>
+      <li>MicroelectronicsBasics</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <tab>Automation</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>3</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- Tier 3 -->
   <ResearchProjectDef>
     <defName>PRFGoldbachConjecture</defName>
     <label>Goldbach's conjecture</label>
     <techLevel>Spacer</techLevel>
-    <baseCost>1500</baseCost>
-    <description>"Any even integer greater than or equal to 4 can be formed from the sum of 2 prime numbers."\nUnlocks a new array of research projects.</description>
+    <baseCost>2000</baseCost>
+    <description>"An even integer, greater than 2, can be formed from the sum of two prime numbers."\nUnlocks a new array of third tier research projects.</description>
     <prerequisites>
       <li>PRFMachineLearning</li>
     </prerequisites>
@@ -52,59 +99,42 @@
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
-  <ResearchProjectDef>
-    <defName>ADVrollers</defName>
-    <label>Advanced Rollers and Pusher</label>
-    <techLevel>Spacer</techLevel>
-    <baseCost>1500</baseCost>
-    <description>Advanced Rollers and pushers are a Tier 2 of IR Rollers</description>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <prerequisites>
-      <li>AutomationBasics</li>
-    </prerequisites>
-    <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
-    <researchViewY>4</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>PRFRollers</defName>
-    <label>Improved Rollers</label>
-    <techLevel>Industrial</techLevel>
-    <baseCost>1000</baseCost>
-    <description>Second Tiered improved Rollers, More options then Industrial Rollers</description>
-    <prerequisites>
-      <li>Machining</li>
-      <li>MicroelectronicsBasics</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
-    <researchViewY>6</researchViewY>
-  </ResearchProjectDef>
-
-
 
   <!-- Batteries Taken from SS bigger batteries-->
   <ResearchProjectDef>
-    <defName>LargeBatteries</defName>
-    <label>large batteries</label>
-    <description>Build large batteries for efficient storage of electricity. Unlocks the 4k and 16k battery cell.</description>
-    <baseCost>1000</baseCost>
+    <defName>EnhancedBatteries</defName>
+    <label>enhanced batteries</label>
+    <description>Build large batteries for efficient storage of electricity. Unlocks the 4k and 10k battery cell.</description>
+    <baseCost>750</baseCost>
     <techLevel>Industrial</techLevel>
     <prerequisites>
       <li>Batteries</li>
+      <li>PRFEulersIdentity</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>6</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>LargeBatteries</defName>
+    <label>large batteries</label>
+    <description>Build large batteries for efficient storage of electricity. Unlocks the 16k and 64k battery cell.</description>
+    <baseCost>1200</baseCost>
+    <techLevel>Industrial</techLevel>
+    <prerequisites>
+      <li>EnhancedBatteries</li>
       <li>AutomationBasics</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>5</researchViewX>
-    <researchViewY>4</researchViewY>
+    <researchViewX>3</researchViewX>
+    <researchViewY>6</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
     <defName>VeryLargeBatteries</defName>
     <label>very large batteries</label>
-    <description>Learn alternate methods of power storage, and create compact 64k and 256k battery cells for mass storage of power.</description>
+    <description>Learn alternate methods of power storage, and create compact 100k and 256k battery cells for mass storage of power.</description>
     <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
     <prerequisites>
@@ -112,8 +142,8 @@
       <li>PRFGoldbachConjecture</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>6</researchViewX>
-    <researchViewY>4</researchViewY>
+    <researchViewX>4</researchViewX>
+    <researchViewY>6</researchViewY>
   </ResearchProjectDef>
 
 </Defs>
