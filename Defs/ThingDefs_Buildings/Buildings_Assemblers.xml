@@ -148,7 +148,7 @@ Mod extennsion for assemblers
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
-    <description>Imports recipes from adjacent work tables. Uploads recipes to adjacent assemblers.\n\nI wonder what all these other buttons do...</description>
+    <description>The Portable Recipe Database can import recipes from nearby worktables. Afterwards, when reinstalled near assembler(s), it will upload its recipes to them.\n\nBlue cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <Steel>20</Steel>
@@ -195,7 +195,7 @@ Mod extennsion for assemblers
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
     </costList>
-    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
+    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
@@ -256,7 +256,7 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.</description>
+    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>

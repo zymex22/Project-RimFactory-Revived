@@ -137,7 +137,7 @@ Mod extennsion for assemblers
       <MarketValue>700</MarketValue>
       <Cleanliness>5</Cleanliness>
     </statBases>
-    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1x speed \n 5cleanliness \n cook level 10</description>
+    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1x speed \n 5cleanliness \n cook level 10\n\nWhite cell is input range \nBlue cell are db range.</description>
     <costStuffCount>100</costStuffCount>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>

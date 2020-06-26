@@ -282,7 +282,7 @@
           <Uranium Weight="0.9" Count="40" />
           <Gold Weight="0.4" Count="40" />
           <Jade Weight="0.4" Count="40" />
-          <Silver Weight="0.9" Count="40" />
+          <Silver Weight="0.7" Count="40" />
           <Plasteel Weight="0.01" Count="5" />
         </bonusYields>
       </li>
@@ -546,7 +546,7 @@
       <Cleanliness>-5</Cleanliness>
       <Beauty>-10</Beauty>
     </statBases>
-    <description>A early Furnace. made to burn unwanted things and smelt raw rescourses into usefull materials also capable of burning stones into usefull bricks</description>
+    <description>A early stage Furnace. made to burn unwanted things and smelt raw rescourses into usefull materials also capable of burning stones into usefull bricks.\n\nWhite cell is input range \nBlue cell are db range.</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -603,7 +603,7 @@
       <Cleanliness>-1</Cleanliness>
       <Beauty>-1</Beauty>
     </statBases>
-    <description>Advanced industrial Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
+    <description>This Second Furnace is a Advanced industrial Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -664,15 +664,13 @@
       <Cleanliness>1</Cleanliness>
       <Beauty>1</Beauty>
     </statBases>
-    <description>Advanced Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
+    <description>Advanced Furnace capable of burning, stuff and smelt raw resources into usefull materials, this one is the best and fastest of all 3.\nIt Will import any recipe from electric smelter and Crematorium.</description>
     <costList>
-      <Steel>200</Steel>
-      <ComponentIndustrial>5</ComponentIndustrial>
+      <Steel>350</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
     </costList>
     <recipes>
-      <li>CremateCorpse</li>
-      <li>BurnDrugs</li>
       <li>MakeSmallFrame</li>
       <li>MakeMediumFrame</li>
       <li>MakeLargeFrame</li>
@@ -695,11 +693,12 @@
         <workSpeedBaseFactor>2</workSpeedBaseFactor>
         <importRecipesFrom>
           <li>ElectricSmelter</li>
+          <li>ElectricCrematorium</li>
         </importRecipesFrom>
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
-        <skillLevel>15</skillLevel>
-        <artSkillLevel>5</artSkillLevel>
+        <skillLevel>20</skillLevel>
+        <artSkillLevel>10</artSkillLevel>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>Industry/smelter_t2</texPath>

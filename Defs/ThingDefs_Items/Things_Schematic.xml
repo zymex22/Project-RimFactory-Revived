@@ -6,7 +6,7 @@
     <defName>RimFactory_Data_Disk</defName>
     <label>recipe data disk</label>
     <thingClass>ThingWithComps</thingClass>
-    <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive...</description>
+    <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive... Its used to create Recipe DataBases(project rimfactory)</description>
     <graphicData>
       <texPath>SAL3/datadisk</texPath>
       <graphicClass>Graphic_Single</graphicClass>
