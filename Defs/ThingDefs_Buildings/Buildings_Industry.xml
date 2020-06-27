@@ -546,7 +546,7 @@
       <Cleanliness>-5</Cleanliness>
       <Beauty>-10</Beauty>
     </statBases>
-    <description>A early stage Furnace. made to burn unwanted things and smelt raw rescourses into usefull materials also capable of burning stones into usefull bricks.\n\nWhite cell is input range</description>
+    <description>A early stage Furnace. made to burn unwanted things and smelt raw rescourses into usefull materials, good for early automation. Just place your raw stuff onto input cells and wait for machine to make it, and move away from Output\n\nWhite cells is input range, here will items go in\nYellow cell is output cells(remember to remove quicly so it dont clog up)</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
