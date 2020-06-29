@@ -404,7 +404,22 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             base.DrawGUIOverlay();
             if (this.DrawStatus && Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
             {
-                GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), currentBillReport == null ? "AssemblerIdle".Translate().RawText : currentBillReport.bill.LabelCap, Color.white);
+                string label;
+                if (currentBillReport != null) // the assembler is actively working
+                { // set the status text to the bill's label:
+                    label = currentBillReport.bill.LabelCap;
+                }
+                else // the assmelber is NOT working
+                {
+                  // show why it is not working:
+                    if (this.BillStack.AnyShouldDoNow) { // it DOES have bills
+                        label = "SearchingForIngredients".Translate();
+                    } else { // it DOESN'T have bills:
+                        label = "AssemblerNoBills".Translate();    
+                    }
+                }
+                // draw the label on the screen:
+                GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
             }
         }
 
