@@ -40,11 +40,6 @@
     </comps>
   </ThingDef>
 
-  <!--===================================== Misc. Dropdown =====================================-->
-  <DesignatorDropdownGroupDef>
-    <defName>PRF_misc_gr</defName>    <!-- Create dropdown for animal station to group -->
-  </DesignatorDropdownGroupDef>
-
   <!--======================================= NR Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_WallLight</defName>
@@ -79,7 +74,6 @@
       <Flammability>0.1</Flammability>
     </statBases>
     <size>(1,1)</size>
-    <designatorDropdown>PRF_misc_gr</designatorDropdown>    <!-- assign dropdown group -->
     <surfaceType>Item</surfaceType>
     <comps>
       <li Class="CompProperties_Power">
@@ -165,7 +159,6 @@
     <researchPrerequisites>
       <li>Electricity</li>
     </researchPrerequisites>
-    <designatorDropdown>PRF_misc_gr</designatorDropdown>    <!-- assign dropdown group -->
     <specialDisplayRadius>18</specialDisplayRadius>
   </ThingDef>
 
@@ -220,7 +213,6 @@
     <researchPrerequisites>
       <li>Electricity</li>
     </researchPrerequisites>
-    <designatorDropdown>PRF_misc_gr</designatorDropdown>    <!-- assign dropdown group -->
   </ThingDef>
 
   
