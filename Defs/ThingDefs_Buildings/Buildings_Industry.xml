@@ -301,7 +301,7 @@
       <Cleanliness>-5</Cleanliness>
       <Beauty>-10</Beauty>
     </statBases>
-    <description>A early stage Furnace. made to burn unwanted things and smelt raw rescourses into usefull materials, good for early automation. Just place your raw stuff onto input cells and wait for machine to make it, and move away from Output\n\nWhite cells is input range, here will items go in\nYellow cell is output cells(remember to remove quicly so it dont clog up)</description>
+    <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -358,7 +358,7 @@
       <Cleanliness>-1</Cleanliness>
       <Beauty>-1</Beauty>
     </statBases>
-    <description>This Second Furnace is a Advanced industrial Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
+    <description>This Second Furnace is an advanced industrial Furnace capable of burning items and smelting raw resources into useful materials</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -419,7 +419,7 @@
       <Cleanliness>1</Cleanliness>
       <Beauty>1</Beauty>
     </statBases>
-    <description>Advanced Furnace capable of burning, stuff and smelt raw resources into usefull materials, this one is the best and fastest of all 3.\nIt Will import any recipe from electric smelter and Crematorium.</description>
+    <description>Advanced Furnace capable of burning stuff and smelting raw resources into useful materials, faster than previous iterations.\n\n(This furnace is the best and fastest in Project RimFactory.)\n\nImports any recipe from the Electric Smelter and the Crematorium.</description>
     <costList>
       <Steel>350</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
