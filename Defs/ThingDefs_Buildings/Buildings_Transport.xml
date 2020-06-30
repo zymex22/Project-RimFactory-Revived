@@ -289,7 +289,7 @@
       <ComponentIndustrial>10</ComponentIndustrial>
     </costList>
     <passability>Impassable</passability>
-    <description>(PRF) A Puller That Pull items from A to B more Flexible in in/output than IR Pusher/pullers, might be usefull in some cases</description>
+    <description>(PRF) A Puller That Pull items from A to B more Flexible in in/output than IR Pusher/pullers, might be usefull in some cases.\nPlace down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts...\nVery flexible in its connection\nREMEMBER to turn on after placed</description>
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>

@@ -15,6 +15,7 @@
   <SAL3Alert_SomeBillsRemoved>Some bills have been deleted as the smart assembler cannot make them anymore.</SAL3Alert_SomeBillsRemoved>
   <SAL3_BillsTabLabel>Bills</SAL3_BillsTabLabel>
   <AssemblerIdle>Idle</AssemblerIdle>
+  <AssemblerNoBills>Awaiting Instructions</AssemblerNoBills>
   <SALToggleForbidden>Allow using forbidden</SALToggleForbidden>
   <SALToggleForbidden_Desc>Allow/Disallow the auto-assembler to take forbidden items. Tick means allow.</SALToggleForbidden_Desc>
   <SALCurrentProductionSpeed>Production speed for current recipe ({0}): {1}</SALCurrentProductionSpeed>
