@@ -268,7 +268,7 @@ Mod extennsion for assemblers
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>700</basePowerConsumption>
+        <basePowerConsumption>750</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>6</glowRadius>

@@ -156,7 +156,7 @@
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
     </statBases>
-    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.</description>
+    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing./nIt has a size of 11x11</description>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <PRFRoboticArm>3</PRFRoboticArm>
@@ -204,7 +204,7 @@
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
     </statBases>
-    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
+    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing./nIt has a size of 11x11</description>
     <costList>
       <PRFMachineFrame>1</PRFMachineFrame>
       <PRFRoboticArm>3</PRFRoboticArm>
@@ -234,6 +234,50 @@
       <li>AutomaticFarming</li>      <!-- farming level 3 -->
     </researchPrerequisites>
   </ThingDef>
+
+    <!--=========================== Spacer Cultivator XL ==================================-->
+  <ThingDef ParentName="PRF_CultivatorBase">
+    <defName>CultivatorTools_b18CultivatorXL</defName>
+    <label>Mechanites XL Cultivator</label>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/CultivatorXL</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+    </statBases>
+    <description>This is a hightech XL Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing./nIt has a size of 23x23 and usses 4x more power and cost, but same speed as a normal size one.\nCapable of holding a roof</description>
+    <costList>
+      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFRoboticArm>3</PRFRoboticArm>
+      <Steel>400</Steel>
+      <Plasteel>120</Plasteel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
+    </costList>
+    <holdsRoof>true</holdsRoof>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>2400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>1</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <squareAreaRadius>11</squareAreaRadius>
+        <TickFrequencyDivisor>50</TickFrequencyDivisor>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>AutomaticFarming</li>      <!-- farming level 3 -->
+    </researchPrerequisites>
+  </ThingDef>
+
 
 
   <!--=========================== Sprinkler ==================================-->
