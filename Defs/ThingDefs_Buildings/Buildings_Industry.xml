@@ -315,7 +315,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>100</basePowerConsumption>
+        <basePowerConsumption>250</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>8</glowRadius>
@@ -378,7 +378,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>250</basePowerConsumption>
+        <basePowerConsumption>350</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>
@@ -435,7 +435,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>350</basePowerConsumption>
+        <basePowerConsumption>450</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>
