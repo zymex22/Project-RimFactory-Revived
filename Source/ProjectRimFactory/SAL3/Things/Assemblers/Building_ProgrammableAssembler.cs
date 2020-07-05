@@ -415,7 +415,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             if (this.DrawStatus && Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
             {
                 // only show overlay status text if has power:
-                if (this.GetComp<CompPowerTrader>()?.PowerOn ==true) {
+                if (this.Active) {
                     string label;
                     if (currentBillReport != null) // the assembler is actively working
                     { // set the status text to the bill's label:
