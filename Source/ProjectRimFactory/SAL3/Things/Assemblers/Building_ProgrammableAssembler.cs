@@ -38,10 +38,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
         }
 
-        public override Graphic Graphic => (this.GetComp<CompPowerTrader>()?.PowerOn ?? true) 
-            ? (this.currentBillReport == null 
-                ? base.Graphic 
-                : this.def.GetModExtension<AssemblerDefModExtension>()?.WorkingGrahic ?? base.Graphic) 
+        public override Graphic Graphic => (this.GetComp<CompPowerTrader>()?.PowerOn ?? true)
+            ? (this.currentBillReport == null
+                ? base.Graphic
+                : this.def.GetModExtension<AssemblerDefModExtension>()?.WorkingGrahic ?? base.Graphic)
             : this.def.GetModExtension<AssemblerDefModExtension>()?.PowerOffGrahic ?? base.Graphic;
 
         public bool DrawStatus => this.def.GetModExtension<AssemblerDefModExtension>()?.drawStatus ?? true;
@@ -49,7 +49,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         // Pawn
 
         public Pawn buildingPawn;
-        
+
         public virtual void DoPawn()
         {
             try
@@ -64,16 +64,16 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 }
                 //Assign Pawn's mapIndexOrState to building's mapIndexOrState
                 ReflectionUtility.mapIndexOrState.SetValue(p, ReflectionUtility.mapIndexOrState.GetValue(this));
-              
+
                 //Assign Pawn's position without nasty errors
                 p.SetPositionDirect(PositionHeld);
-              
+
                 //Clear pawn relations
                 p.relations.ClearAllRelations();
-              
+
                 //Set backstories
                 SetBackstoryAndSkills(p);
-             
+
                 //Pawn work-related stuffs
                 for (int i = 0; i < 24; i++)
                 {
@@ -81,7 +81,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 }
                 buildingPawn = p;
             }
-            catch (Exception ex) { 
+            catch (Exception ex) {
             Log.Error("ERROR=: "+ex.ToString());
             }
         }
@@ -98,7 +98,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
             if (BackstoryDatabase.TryGetWithIdentifier("ColonySettler53", out Backstory bstory))
             {
-          
+
                 p.story.adulthood = bstory;
             }
             else
@@ -107,18 +107,18 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 Log.Error("Tried to assign child backstory ColonySettler53, but not found");
             }
             //Clear traits
-          
+
             p.story.traits.allTraits = new List<Trait>();
             //Reset cache
-      
+
             //ReflectionUtility.cachedDisabledWorkTypes.SetValue(p.story, null);
             //Reset cache for each skill
-   
+
             for (int i = 0; i < p.skills.skills.Count; i++)
             {
                 ReflectionUtility.cachedTotallyDisabled.SetValue(p.skills.skills[i], BoolUnknown.Unknown);
             }
-     
+
         }
 
         // Misc
@@ -138,7 +138,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             Scribe_Deep.Look(ref buildingPawn, "buildingPawn");
             if (buildingPawn == null)
                 DoPawn();
-        }    
+        }
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (Gizmo g in base.GetGizmos())
@@ -225,8 +225,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             base.Tick();
             if (this.IsHashIntervalTick(10) && Active)
             {
-              
-                if (thingQueue.Count > 0 && OutputComp.CurrentCell.Walkable(Map) && 
+
+                if (thingQueue.Count > 0 && OutputComp.CurrentCell.Walkable(Map) &&
                     (OutputComp.CurrentCell.GetFirstItem(Map)?.TryAbsorbStack(thingQueue[0], true) ?? GenPlace.TryPlaceThing(thingQueue[0], OutputComp.CurrentCell, Map, ThingPlaceMode.Direct)))
                 {
                     thingQueue.RemoveAt(0);
@@ -310,7 +310,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 List<ThingCount> chosen = new List<ThingCount>();
                 if (TryFindBestBillIngredientsInSet(AllAccessibleThings.ToList(), b, chosen))
                 {
-                  
+
                     return new BillReport(b, (from ta in chosen select ta.Thing.SplitOff(ta.Count)).ToList());
                 }
             }
@@ -404,22 +404,25 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             base.DrawGUIOverlay();
             if (this.DrawStatus && Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
             {
-                string label;
-                if (currentBillReport != null) // the assembler is actively working
-                { // set the status text to the bill's label:
-                    label = currentBillReport.bill.LabelCap;
-                }
-                else // the assmelber is NOT working
-                {
-                  // show why it is not working:
-                    if (this.BillStack.AnyShouldDoNow) { // it DOES have bills
-                        label = "SearchingForIngredients".Translate();
-                    } else { // it DOESN'T have bills:
-                        label = "AssemblerNoBills".Translate();    
+                // only show overlay status text if has power:
+                if (this.GetComp<CompPowerTrader>()?.PowerOn ==true) {
+                    string label;
+                    if (currentBillReport != null) // the assembler is actively working
+                    { // set the status text to the bill's label:
+                        label = currentBillReport.bill.LabelCap;
                     }
+                    else // the assmelber is NOT working
+                    {
+                        // show why it is not working:
+                        if (this.BillStack.AnyShouldDoNow) { // it DOES have bills
+                            label = "SearchingForIngredients".Translate();
+                        } else { // it DOESN'T have bills:
+                            label = "AssemblerNoBills".Translate();
+                        }
+                    }
+                    // draw the label on the screen:
+                    GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
                 }
-                // draw the label on the screen:
-                GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
             }
         }
 
