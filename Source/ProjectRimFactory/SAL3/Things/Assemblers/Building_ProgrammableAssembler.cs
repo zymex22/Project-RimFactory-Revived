@@ -356,14 +356,24 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(base.GetInspectString());
-            if (currentBillReport == null)
-            {
-                stringBuilder.AppendLine("SearchingForIngredients".Translate());
+            if (this.Active) {
+                if (currentBillReport == null)
+                { // assembler is not working despite power:
+                    // show why it is not working:
+                    if (this.BillStack.AnyShouldDoNow) { // it DOES have bills
+                        stringBuilder.AppendLine("SearchingForIngredients".Translate());
+                    } else { // it DOESN'T have bills:
+                        stringBuilder.AppendLine("AssemblerNoBills".Translate());
+                    }
+                }
+                else
+                { // assembler is working
+                    stringBuilder.AppendLine("SAL3_BillReport".Translate(currentBillReport.bill.Label.ToString(), currentBillReport.workLeft.ToStringWorkAmount()));
+                }
             }
-            else
-            {
-                stringBuilder.AppendLine("SAL3_BillReport".Translate(currentBillReport.bill.Label.ToString(), currentBillReport.workLeft.ToStringWorkAmount()));
-            }
+            // even if it's not active, show any products ready to place:
+            //   (we always show this: even if 0 products, it lets new players
+            //    know it will hold products until it CAN place them)
             stringBuilder.AppendLine("SAL3_Products".Translate(thingQueue.Count));
             return stringBuilder.ToString().TrimEndNewlines();
         }
@@ -411,7 +421,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     { // set the status text to the bill's label:
                         label = currentBillReport.bill.LabelCap;
                     }
-                    else // the assmelber is NOT working
+                    else // the assembler is NOT working
                     {
                         // show why it is not working:
                         if (this.BillStack.AnyShouldDoNow) { // it DOES have bills
