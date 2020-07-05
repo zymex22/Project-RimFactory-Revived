@@ -101,6 +101,8 @@
     </modExtensions>
     <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <castEdgeShadows>false</castEdgeShadows>
     <researchPrerequisites>
       <li>Stonecutting</li>
       <li>PRFEulersIdentity</li>
@@ -163,6 +165,7 @@
       </li>
     </modExtensions>
     <tickerType>Normal</tickerType>
+    <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
       <li>PRFMachineLearning</li>
