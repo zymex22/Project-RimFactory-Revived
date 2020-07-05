@@ -29,11 +29,19 @@ namespace ProjectRimFactory.Industry
 
         public int ProducedChunksTotal = 0;
 
-        public override void TickLong()
+        public override void Tick()
         {
-            if (GetComp<CompPowerTrader>()?.PowerOn != false && Rand.MTBEventOccurs(GetProduceMtbHours, GenDate.TicksPerHour, GenTicks.TickLongInterval))
+            base.Tick();
+            var power = GetComp<CompPowerTrader>();
+            var fuel = GetComp<CompRefuelable>();
+            var flickable = GetComp<CompFlickable>();
+
+            if (Find.TickManager.TicksGame % GenTicks.TickLongInterval == 0)
             {
-                GenerateChunk();
+                if (power?.PowerOn != false && fuel?.HasFuel != false && flickable.SwitchIsOn != false && Rand.MTBEventOccurs(GetProduceMtbHours, GenDate.TicksPerHour, GenTicks.TickLongInterval))
+                {
+                    GenerateChunk();
+                }
             }
         }
         public override void ExposeData()
