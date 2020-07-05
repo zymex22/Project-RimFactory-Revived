@@ -38,10 +38,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
         }
 
-        public override Graphic Graphic => (this.GetComp<CompPowerTrader>()?.PowerOn ?? true)
+        public override Graphic Graphic => (this.Active)
             ? (this.currentBillReport == null
+               // powered on but idle:
                 ? base.Graphic
+               // powered on and working:
                 : this.def.GetModExtension<AssemblerDefModExtension>()?.WorkingGrahic ?? base.Graphic)
+            // not powered on:
             : this.def.GetModExtension<AssemblerDefModExtension>()?.PowerOffGrahic ?? base.Graphic;
 
         public bool DrawStatus => this.def.GetModExtension<AssemblerDefModExtension>()?.drawStatus ?? true;
@@ -199,19 +202,17 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 ReflectionUtility.cachedTotallyDisabled.SetValue(s, BoolUnknown.Unknown);
             });
 
+            this.compPowerTrader = GetComp<CompPowerTrader>();
+            this.compRefuelable  = GetComp<CompRefuelable>();
+
             //Assign Pawn's mapIndexOrState to building's mapIndexOrState
             ReflectionUtility.mapIndexOrState.SetValue(buildingPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
             //Assign Pawn's position without nasty errors
             buildingPawn.SetPositionDirect(Position);
         }
 
-        // Logic
-        protected BillReport currentBillReport;
-
-        // thingQueue is List to save properly
-        protected List<Thing> thingQueue = new List<Thing>();
-
-        protected virtual bool Active => GetComp<CompPowerTrader>()?.PowerOn ?? true;
+        protected virtual bool Active => compPowerTrader?.PowerOn != false
+                                       && compRefuelable?.HasFuel != false;
 
         protected IEnumerable<Thing> AllAccessibleThings => from c in IngredientStackCells
                                                             from t in Map.thingGrid.ThingsListAt(c)
@@ -298,11 +299,6 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
         }
 
-        [Unsaved]
-        private Effecter effecter = null;
-        [Unsaved]
-        private Sustainer sound = null;
-
         protected virtual BillReport CheckBills()
         {
             foreach (Bill b in AllBillsShouldDoNow)
@@ -379,12 +375,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         }
 
         // Settings
-        public bool allowForbidden;
+        protected bool allowForbidden; // internal variable
         public virtual bool AllowForbidden => allowForbidden;
         protected virtual float ProductionSpeedFactor => def.GetModExtension<AssemblerDefModExtension>()?.workSpeedBaseFactor ?? 1f;
-
         protected virtual int SkillLevel => def.GetModExtension<AssemblerDefModExtension>()?.skillLevel ?? 0;
-
         protected virtual int ArtSkillLevel => def.GetModExtension<AssemblerDefModExtension>()?.artSkillLevel ?? 10;
 
         protected virtual bool SatisfiesSkillRequirements(RecipeDef recipe)
@@ -448,5 +442,21 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         protected virtual void Notify_BillStarted()
         {
         }
+
+        // (Some) Internal variables:
+        // Logic
+        protected BillReport currentBillReport;
+
+        // thingQueue is List to save properly
+        //   List of produced things, waiting to be placed:
+        protected List<Thing> thingQueue = new List<Thing>();
+
+
+        [Unsaved]
+        private Effecter effecter = null;
+        [Unsaved]
+        private Sustainer sound = null;
+        protected CompPowerTrader compPowerTrader = null;
+        protected CompRefuelable  compRefuelable  = null;
     }
 }
