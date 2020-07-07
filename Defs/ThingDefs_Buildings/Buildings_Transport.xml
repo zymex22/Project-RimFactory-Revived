@@ -601,9 +601,15 @@ Connect to the underground conveyor entrance and exit and use.</description>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>UgRollers_gr</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
-
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
     <statBases>
-      <WorkToBuild>10</WorkToBuild>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>80</WorkToBuild>
+      <Flammability>0.4</Flammability>
+      <Mass>10</Mass>
     </statBases>
     <costList>
       <Steel>20</Steel>
@@ -621,7 +627,9 @@ Connect to the underground conveyor entrance and exit and use.</description>
     <pathCost>30</pathCost>
 
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Arrow</li>
+    </placeWorkers>
     <inspectorTabs>
     </inspectorTabs>
 
