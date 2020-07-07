@@ -525,7 +525,7 @@ The belt conveyors are connected by vertically adjoining the orientation.</descr
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>10</basePowerConsumption>
-        <transmitsPower>false</transmitsPower>
+        <transmitsPower>true</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
@@ -568,7 +568,7 @@ Connect to the underground conveyor entrance and exit and use.</description>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>10</basePowerConsumption>
-        <transmitsPower>false</transmitsPower>
+        <transmitsPower>true</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
