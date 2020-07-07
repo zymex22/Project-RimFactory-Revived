@@ -41,4 +41,11 @@
   <PRF.Settings.TurnOffMinerNerf.Label>Miners can mine all ore types(Unbalanced mode)</PRF.Settings.TurnOffMinerNerf.Label>
   <PRF.Settings.TurnOffMinerNerf.Desc>Miners can mine all ore types(Unbalanced mode)</PRF.Settings.TurnOffMinerNerf.Desc>
 
+  <PRF.Settings.TurnOffGrouping.Label>Turn off some of the menu grouping / dropdown</PRF.Settings.TurnOffGrouping.Label>
+  <PRF.Settings.TurnOffGrouping.Desc>Turn off some of the menu grouping / dropdown</PRF.Settings.TurnOffGrouping.Desc>
+
+  <PRF.Settings.TurnOffFurnacefuel.Label>Turn off fuel use on T1 Furnace</PRF.Settings.TurnOffFurnacefuel.Label>
+  <PRF.Settings.TurnOffFurnacefuel.Desc>Turn off fuel use on T1 Furnace</PRF.Settings.TurnOffFurnacefuel.Desc>
+
+
 </LanguageData>
