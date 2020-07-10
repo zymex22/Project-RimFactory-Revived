@@ -89,7 +89,7 @@
     <label>Goldbach's conjecture</label>
     <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
-    <description>"An even integer, greater than 2, can be formed from the sum of two prime numbers."\nUnlocks a new array of third tier research projects.</description>
+    <description>"Every even integer, greater than 2, can be formed from the sum of two prime numbers."\nUnlocks a new array of third tier research projects.</description>
     <prerequisites>
       <li>PRFMachineLearning</li>
     </prerequisites>
