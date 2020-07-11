@@ -7,8 +7,8 @@
     <mods>
       <li>Armored Floors</li>
     </mods>
-    <nomatch Class="PatchOperationReplace">
-      <xpath>/Defs/TerrainDef[defName = "Concrete"]</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/TerrainDef[defName="Concrete"]</xpath>
       <value>
         <designatorDropdown>PRF_ConcreteFloor</designatorDropdown>
       </value>
