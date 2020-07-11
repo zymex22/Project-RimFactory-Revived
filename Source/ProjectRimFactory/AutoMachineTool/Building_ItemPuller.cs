@@ -21,7 +21,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected ThingFilter filter = new ThingFilter();
         protected bool active = false;
-        protected bool takeForbiddenItems=true;
+        protected bool takeForbiddenItems = true;
         public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
 
         private string GetGraphicName()
@@ -141,7 +141,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override IntVec3 OutputCell()
         {
-            if(this.OutputSides)
+            if (this.OutputSides)
             {
                 RotationDirection dir = RotationDirection.Clockwise;
                 if (!this.right)
@@ -184,7 +184,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 isActive = () => this.takeForbiddenItems,
                 toggleAction = () => this.takeForbiddenItems = !this.takeForbiddenItems,
                 defaultLabel = "PRF.Puller.TakeForbiddenItems".Translate(),
-                defaultDesc  = "PRF.Puller.TakeForbiddenItemsDesc".Translate(),
+                defaultDesc = "PRF.Puller.TakeForbiddenItemsDesc".Translate(),
                 icon = TexCommand.ForbidOff
             };
             if (this.OutputSides)
@@ -241,9 +241,11 @@ namespace ProjectRimFactory.AutoMachineTool
             products = target;
             return true;
         }
-        protected override void Placing() {
+        protected override void Placing()
+        {
             // unforbid any items picked up before they are put down:
-            if (!products.NullOrEmpty()) {
+            if (!products.NullOrEmpty())
+            {
                 foreach (Thing t in products)
                     if (t.IsForbidden(Faction.OfPlayer))
                         t.SetForbidden(false);
