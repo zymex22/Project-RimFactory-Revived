@@ -15,9 +15,9 @@ namespace ProjectRimFactory.Common
             if (map == null) { return null; }
             foreach (var th in map.thingGrid.ThingsListAt(c))
             {
-                if (th is T t)
+                if (th is T)
                 {
-                    return t;
+                    return th as T;
                 }
             }
             return null;

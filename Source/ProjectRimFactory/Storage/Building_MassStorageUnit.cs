@@ -9,6 +9,7 @@ using UnityEngine;
 using ProjectRimFactory.Storage.UI;
 using System.Collections;
 using ProjectRimFactory.Common.HarmonyPatches;
+using SaveStorageSettingsUtil;
 
 namespace ProjectRimFactory.Storage
 {
@@ -48,6 +49,14 @@ namespace ProjectRimFactory.Storage
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
+        {
+            return SaveStorageSettingsUtil.SaveStorageSettingsGizmoUtil.AddSaveLoadGizmos(
+              getMassStorageUnitGizmos(), // The parent's returned gizmos
+              SaveTypeEnum.Zone_Stockpile,  // The location where saved settings will be located, specifically SaveStorageSettings/Custom_Mod in this case
+              this.settings.filter); // The ThingFilters to save
+        }
+
+        protected IEnumerable<Gizmo> getMassStorageUnitGizmos()
         {
             foreach (Gizmo g in base.GetGizmos())
                 yield return g;

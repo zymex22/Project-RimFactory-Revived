@@ -6,6 +6,7 @@ using System.Text;
 using Verse;
 using ProjectRimFactory.Storage.Editables;
 using UnityEngine;
+using SaveStorageSettingsUtil;
 
 namespace ProjectRimFactory.Storage
 {
@@ -75,7 +76,15 @@ namespace ProjectRimFactory.Storage
 
         public override IEnumerable<Gizmo> GetGizmos()
         {
-            foreach (Gizmo g in base.GetGizmos()) yield return g;
+            return SaveStorageSettingsUtil.SaveStorageSettingsGizmoUtil.AddSaveLoadGizmos(
+              getMassStorageUnitPoweredGizmos(), // The parent's returned gizmos
+              SaveTypeEnum.Zone_Stockpile,  // The location where saved settings will be located, specifically SaveStorageSettings/Custom_Mod in this case
+              this.settings.filter); // The ThingFilters to save
+        }
+
+        protected IEnumerable<Gizmo> getMassStorageUnitPoweredGizmos()
+        {
+            foreach (Gizmo g in base.getMassStorageUnitGizmos()) yield return g;
             if (Prefs.DevMode)
             {
                 yield return new Command_Action()
