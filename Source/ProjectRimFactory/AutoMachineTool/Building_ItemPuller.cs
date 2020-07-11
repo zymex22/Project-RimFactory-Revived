@@ -11,6 +11,7 @@ using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 using ProjectRimFactory.Common;
+using SaveStorageSettingsUtil;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -156,6 +157,14 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
+        {
+            return SaveStorageSettingsUtil.SaveStorageSettingsGizmoUtil.AddSaveLoadGizmos(
+              getItemPullerGizmos(), // The parent's returned gizmos
+              SaveTypeEnum.Zone_Stockpile,  // The location where saved settings will be located, specifically SaveStorageSettings/Custom_Mod in this case
+              this.filter); // The ThingFilters to save
+        }
+
+        protected IEnumerable<Gizmo> getItemPullerGizmos()
         {
             foreach (var g in base.GetGizmos())
             {
