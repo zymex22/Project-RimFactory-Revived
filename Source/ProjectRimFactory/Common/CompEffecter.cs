@@ -9,10 +9,14 @@ using Verse.Sound;
 
 namespace ProjectRimFactory.Common
 {
-    // This holds an effecter for the Thing
-    // The effector will Tick() every tick, independently of
-    // the Thing's Tick status.  So the Thing can TickLong,
-    // and the effecter will still Tick() every tick.
+    // This holds an effecter for the possessing ThingWithComps
+    //  (Vanilla effecters include pawn actions (e.g., vomiting
+    //   or playing poker), damage effects (bullet glanced off,
+    //   etc), or visual effects like firefoam being popped and
+    //   the ubiquitous progress bars)
+    // This effector will Tick() every tick, independently of
+    //   the Thing's Tick status.  So the Thing can TickLong,
+    //   and the effecter will still Tick() every tick.
     public class CompEffecter : ThingComp, ITicker
     {
         public CompProperties_Effecter Props => (CompProperties_Effecter)this.props;
