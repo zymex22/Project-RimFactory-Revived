@@ -9,6 +9,10 @@ using Verse.Sound;
 
 namespace ProjectRimFactory.Common
 {
+    // This holds an effecter for the Thing
+    // The effector will Tick() every tick, independently of
+    // the Thing's Tick status.  So the Thing can TickLong,
+    // and the effecter will still Tick() every tick.
     public class CompEffecter : ThingComp, ITicker
     {
         public CompProperties_Effecter Props => (CompProperties_Effecter)this.props;
@@ -132,13 +136,13 @@ namespace ProjectRimFactory.Common
         public override void ReceiveCompSignal(string signal)
         {
             base.ReceiveCompSignal(signal);
-            if (signal == CompPowerTrader.PowerTurnedOnSignal || 
-                signal == CompPowerTrader.PowerTurnedOffSignal || 
-                signal == CompFlickable.FlickedOnSignal || 
-                signal == CompFlickable.FlickedOffSignal || 
-                signal == CompRefuelable.RefueledSignal || 
+            if (signal == CompPowerTrader.PowerTurnedOnSignal ||
+                signal == CompPowerTrader.PowerTurnedOffSignal ||
+                signal == CompFlickable.FlickedOnSignal ||
+                signal == CompFlickable.FlickedOffSignal ||
+                signal == CompRefuelable.RefueledSignal ||
                 signal == CompRefuelable.RanOutOfFuelSignal ||
-                signal == CompSchedule.ScheduledOnSignal || 
+                signal == CompSchedule.ScheduledOnSignal ||
                 signal == CompSchedule.ScheduledOffSignal)
 //                signal == MechClusterUtility.DefeatedSignal)
             {
@@ -152,7 +156,7 @@ namespace ProjectRimFactory.Common
         public EffecterDef effect;
 
         public SoundDef sound;
-        
+
         public CompProperties_Effecter()
         {
             this.compClass = typeof(CompEffecter);
