@@ -13,6 +13,10 @@ namespace ProjectRimFactory.Industry
     /// 
     /// Note: Can be used as either Tick(), TickRare(), or TickLong()
     /// See below
+    /// Note: If you use TickRare AND you consume fuel while idle,
+    ///       this WILL throw an error. You can get around this w/
+    ///       a custom compProperties_Refuelable and then override
+    ///       ConfigErrors() to not log any errors.
     /// Note: If someone patches CompRefuelable's Notify_UsedThisTick()
     ///       it does NOT get called if set to Rare or Long.
     ///       (VERY unlikely to matter)
@@ -86,6 +90,12 @@ namespace ProjectRimFactory.Industry
         public override void TickRare()
         {
             base.TickRare();
+            // We have to handle fuel consumption by hand as the
+            //   vanilla CompRefuelable only Ticks.
+            // If we should consume fuel even if idle:
+            if (fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
+                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * 250);
+            // Actually do work:
             if (flick == null || flick.SwitchIsOn) {
                 if (power==null || power.PowerOn) {
                     if (fuel != null) {
@@ -116,6 +126,10 @@ namespace ProjectRimFactory.Industry
         {
             base.TickLong();
             // Again, like rare, we must manually consume fuel. See notes above.
+            // If we should consume fuel even if idle:
+            if (fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
+                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * 2000);
+            // Actually do work:
             if (flick == null || flick.SwitchIsOn) {
                 if (power == null || power.PowerOn) {
                     if (fuel != null) {
