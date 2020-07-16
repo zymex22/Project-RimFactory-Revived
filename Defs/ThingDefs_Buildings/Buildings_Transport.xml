@@ -36,7 +36,7 @@
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
-    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it.\n\nWorks with "Refualable comp" buildings only</description>
+    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it.(output is yellow cell)\n\nWorks with "Refualable comp" buildings only</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>1</PRFRoboticArm>
