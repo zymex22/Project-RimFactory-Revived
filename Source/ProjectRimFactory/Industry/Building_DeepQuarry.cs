@@ -6,13 +6,40 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
-
 namespace ProjectRimFactory.Industry
 {
+    /// <summary>
+    /// Deep Quarry
+    /// 
+    /// Note: Can be used as either Tick(), TickRare(), or TickLong()
+    /// See below
+    /// Note: If you use TickRare AND you consume fuel while idle,
+    ///       this WILL throw an error. You can get around this w/
+    ///       a custom compProperties_Refuelable and then override
+    ///       ConfigErrors() to not log any errors.
+    /// Note: If someone patches CompRefuelable's Notify_UsedThisTick()
+    ///       it does NOT get called if set to Rare or Long.
+    ///       (VERY unlikely to matter)
+    /// 
+    /// TODO: Set this up as an abstract parent "produce something
+    ///       every unit of time" thing?
+    /// </summary>
     public class Building_DeepQuarry : Building
     {
         public float GetProduceMtbHours { get { return def.GetModExtension<DeepQuarryDefModExtension>().TickCount; } }
         static IEnumerable<ThingDef> cachedPossibleRockDefCandidates;
+        protected int productionTime=0; // number of ticks this has been running since last production check
+        public CompFlickable flick;
+        public CompPowerTrader power;
+        public CompRefuelable fuel;
+        public int ProducedChunksTotal = 0;
+
+        public Building_DeepQuarry() : base() {
+            flick = GetComp<CompFlickable>();
+            power = GetComp<CompPowerTrader>();
+            fuel = GetComp<CompRefuelable>();
+        }
+
         protected static IEnumerable<ThingDef> PossibleRockDefCandidates
         {
             get
@@ -27,18 +54,110 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        public int ProducedChunksTotal = 0;
-
-        public override void TickLong()
-        {
-            if (GetComp<CompPowerTrader>()?.PowerOn != false && Rand.MTBEventOccurs(GetProduceMtbHours, GenDate.TicksPerHour, GenTicks.TickLongInterval))
-            {
-                GenerateChunk();
+        /// <summary>
+        /// Ticks, a Weighing of Benefits
+        /// 
+        /// When you create one of these, you must pick what Tick
+        ///  interval it follows. The vanilla CompRefuelable only
+        ///  runs at Tick but any of these Ticks will consume the
+        ///  correct amount of fuel. So choose the interval based
+        ///  on how you want the machine to behave
+        /// 
+        /// Shorter Tick duration gives you:
+        ///  Good view of how much fuel is left (since it goes
+        ///    down every tick)
+        ///  
+        /// Longer Tick duration gives you:
+        ///  Better performance
+        ///  Much better performance if you have a lot of these
+        /// 
+        /// </summary>
+        public override void Tick() {
+            base.Tick();
+            if (flick == null || flick.SwitchIsOn) {
+                if (power == null || power.PowerOn) {
+                    if (fuel != null) {
+                        fuel.Notify_UsedThisTick();
+                        if (fuel.HasFuel) {
+                            TryGenerateResource(1);
+                        }
+                    } else {  //fuel==null
+                        TryGenerateResource(1);
+                    }
+                }
             }
         }
+        public override void TickRare()
+        {
+            base.TickRare();
+            // We have to handle fuel consumption by hand as the
+            //   vanilla CompRefuelable only Ticks.
+            // If we should consume fuel even if idle:
+            if (fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
+                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * 250);
+            // Actually do work:
+            if (flick == null || flick.SwitchIsOn) {
+                if (power==null || power.PowerOn) {
+                    if (fuel != null) {
+                        // This option would not catch any harmony patches to
+                        //   Notify_UsedThisTick();
+
+                        // The fuel consuption per Tick is fuel.Props.fuelConsumptionRate/60000
+                        //   (per CompRefuelable - note that we will miss any Harmony patches
+                        //    that target fuelConsumptionRate. Grabbing the private result is
+                        //    a TODO for later)
+                        fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 60000 * 250);
+                        // Another (rather silly) option would be:
+                        // for (int i=0; i<250; i++) fuel.Notify_UsedThisTick();
+                        // As per Thornsworth:
+                        //    dear god. do the calculation yourself
+                        //    geeze
+                        if (fuel.HasFuel)
+                            TryGenerateResource(250);
+                    } else {// fuel == null
+                        TryGenerateResource(250);
+                    }
+                }
+            }
+            // possible TODO: allow consuming fuel during idle as an option?
+            // possible TODO: make a comp that only consumes when powered/etc.
+        }
+        public override void TickLong()
+        {
+            base.TickLong();
+            // Again, like rare, we must manually consume fuel. See notes above.
+            // If we should consume fuel even if idle:
+            if (fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
+                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * 2000);
+            // Actually do work:
+            if (flick == null || flick.SwitchIsOn) {
+                if (power == null || power.PowerOn) {
+                    if (fuel != null) {
+                        // 2000 ticks in a long
+                        fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 60000 * 2000);
+                        if (fuel.HasFuel)
+                            TryGenerateResource(2000);
+                    } else {// fuel == null
+                        TryGenerateResource(2000);
+                    }
+                }
+            }
+        }
+
+        public void TryGenerateResource(int ticksInInterval) {
+            productionTime += ticksInInterval;
+            if (productionTime >= 2000) {
+                productionTime = 0;
+                if (Rand.MTBEventOccurs(GetProduceMtbHours, GenDate.TicksPerHour, GenTicks.TickLongInterval)) {
+                    GenerateChunk();
+                }
+            }
+        }
+
         public override void ExposeData()
         {
             Scribe_Values.Look(ref ProducedChunksTotal, "producedTotal");
+            Scribe_Values.Look(ref productionTime, "PRF_productionTime");
             base.ExposeData();
         }
 
