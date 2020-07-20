@@ -36,7 +36,7 @@
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
-    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it.(output is yellow cell)\n\nWorks with "Refualable comp" buildings only</description>
+    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it (the yellow cell points to the "front").\n\n(Works with "Refualable comp" buildings)</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>1</PRFRoboticArm>
@@ -111,7 +111,7 @@
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
-    <description>A Vacuum Hopper that take in any items on stockpiles within 5 tile range, even different stockpiles, as long their cells are in range. It can be setup to specific type and amount, and hold onto it until pulled away.</description>
+    <description>A Vacuum Hopper that sucks in any items on stockpiles within a 5-tile range. As long as items are in range, they can be pulled in, even from different stockpiles. Can be set up with a specific amount and type of item, and holds onto the item until it is pulled away.</description>
     <costList>
       <Steel>30</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -254,7 +254,7 @@
       <ComponentIndustrial>10</ComponentIndustrial>
     </costList>
     <passability>Impassable</passability>
-    <description>(PRF) A Puller That can pull stuff from growzones and place it into a storage or onto a belt.</description>
+    <description>(PRF) A Puller that pulls foodstuffs from growzones and places them into storage or onto a belt.</description>
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
@@ -289,7 +289,7 @@
       <ComponentIndustrial>10</ComponentIndustrial>
     </costList>
     <passability>Impassable</passability>
-    <description>(PRF) A Puller That Pull items from A to B more Flexible in in/output than IR Pusher/pullers, might be usefull in some cases.\nPlace down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts...\nVery flexible in its connection\nREMEMBER to turn on after placed</description>
+    <description>(PRF) A Puller That Pull items from A to B. Place it down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description><!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
@@ -320,7 +320,7 @@
     <defName>Building_AutoMachineTool_Puller_Side</defName>
     <label>Item Angle Puller</label>
     <passability>Impassable</passability>
-    <description>(PRF) A 90 degree angled Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases, can swap left/right after placed.</description>
+    <description>(PRF) A 90 degree angled Puller that moves items from A to B. Similar to the basic puller, but allowing turns! You can swap the direction (left/right) after placing.\n\nREMEMBER to turn it on after placing!</description>
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers Inherit="false">
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
@@ -374,7 +374,7 @@
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller_Wall</defName>
     <label>Wall Item Puller</label>
-    <description>(PRF) A Over wall item Puller That push items from A to B more Flexible in in/output then IR Pusher/pullers, might be usefull in some cases.\nThis one are placed over a wall so good for freezers or prisons where you dont want ppl through.</description>
+    <description>(PRF) An in-wall item Puller that pushes items from A to B.\n\nThis one is placed through a wall, and is well insulated enough for use in freezers and secure enough for prisons where you dont want anyone crawling through.\n\nRemember you still need to turn it on!</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <building>
       <isEdifice>false</isEdifice>
@@ -475,9 +475,7 @@
   <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor</defName>
     <label>conveyor belt</label>
-    <description>Place it in the direction you want to carry.
-Place the item on top. (Item Puller and AutoMachineTool can be used.)
-The belt conveyors are connected by vertically adjoining the orientation.</description>
+    <description>A conveyor belt that can move items from A to B. Point the arrows in the direction you want to it carry things and then place items on top!\n\nConveyor belts can automatically handle turning and even branching if you want that, and will dump into Storage or stockpiles (or just leave stuff on the ground when the belts end).</description>
     <altitudeLayer>Building</altitudeLayer>
 
     <pathCost>30</pathCost>
@@ -513,9 +511,7 @@ The belt conveyors are connected by vertically adjoining the orientation.</descr
   <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Wall</defName>
     <label>Wall conveyor belt</label>
-    <description>Place it in the direction you want to carry.(In the wall)
-Place the item on top. (Item Puller and AutoMachineTool can be used.)
-The belt conveyors are connected by vertically adjoining the orientation.</description>
+    <description>Moves items - through walls! You can use these to traverse walls or move items along inside them. When items hit the end, they will move out onto the ground.</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
 
     <pathCost>0</pathCost>
@@ -555,10 +551,8 @@ The belt conveyors are connected by vertically adjoining the orientation.</descr
   <!--======================================= Conveyor underground ===============================================-->
   <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Underground</defName>
-    <label>Underground belt</label>
-    <description>Underground Belt Conveyor carries items in the basement.
-Underground BeltConveyor can not move items on the ground as it is.
-Connect to the underground conveyor entrance and exit and use.</description>
+    <label>underground belt</label>
+    <description>Underground Conveyor Belts carry items in tunnels under the ground. To move items into the subterrainian passages, you need to use the Underground Conveyor Entrance and Exit.</description>
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
     <fillPercent>0.0</fillPercent>
@@ -659,8 +653,7 @@ Connect to the underground conveyor entrance and exit and use.</description>
   <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_ToUnderground</defName>
     <label>Underground belt entrance</label>
-    <description>Connect the ground belt conveyor and underground conveyor.
-It is the entrance to the underground conveyor.</description>
+    <description>Connects ground conveyor belts to underground conveyors. This is the entrance to the subterrainian passages.</description>
 
     <graphicData>
       <texPath>AutoMachineTool/Buildings/undergroundIn</texPath>
@@ -679,8 +672,7 @@ It is the entrance to the underground conveyor.</description>
   <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_ToFloor</defName>
     <label>Underground belt exit</label>
-    <description>Connect the ground belt conveyor and underground conveyor.
-It is an exit to the underground conveyor.</description>
+    <description>Connects the underground conveyor belt to the above-ground conveyor. This is an exit back to the surface, and will drop items on the floor if there is no conveyor.</description>
 
     <graphicData>
       <texPath>AutoMachineTool/Buildings/undergroundOut</texPath>
