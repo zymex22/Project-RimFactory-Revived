@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!-- What the hack?! -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>What the hack?!</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<!-- Remove/Exclude ores from standard chances and Bills on miners -->
+				<li Class="PatchOperationAdd">					<!-- T1 miner Remove from standard chance -->
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkI"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<value>
+						<li>WTH_MechanoidParts</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">					<!-- T2 miner Remove from standard chance -->
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<value>
+						<li>WTH_MechanoidParts</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">					<!-- T3 miner Remove from Bill list -->
+					<xpath>/Defs/ThingDef[defName="Building_AutoMachineTool_Miner"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<value>
+						<li>WTH_MechanoidParts</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

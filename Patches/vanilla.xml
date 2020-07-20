@@ -2,13 +2,17 @@
 
 <Patch>
   <!--================================ Add concrete dropdown Menu ====================================== -->
-  <Operation Class="PatchOperationAdd">
-    <xpath>/Defs/TerrainDef[defName = "Concrete"]</xpath>
-    <value>
-      <designatorDropdown>PRF_ConcreteFloor</designatorDropdown>
-    </value>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Armored Floors</li>
+    </mods>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/TerrainDef[defName="Concrete"]</xpath>
+      <value>
+        <designatorDropdown>PRF_ConcreteFloor</designatorDropdown>
+      </value>
+    </nomatch>
   </Operation>
-
-
 
 </Patch>

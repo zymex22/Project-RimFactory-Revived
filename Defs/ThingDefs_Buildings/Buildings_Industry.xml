@@ -304,7 +304,7 @@
       <Cleanliness>-5</Cleanliness>
       <Beauty>-10</Beauty>
     </statBases>
-    <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)</description>
+    <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)\n Use wood to smelt</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -315,10 +315,16 @@
       <li>MakeSmallFrame</li>
     </recipes>
     <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>250</basePowerConsumption>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>80.0</fuelConsumptionRate>
+        <fuelCapacity>50.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>8</glowRadius>
@@ -361,7 +367,7 @@
       <Cleanliness>-1</Cleanliness>
       <Beauty>-1</Beauty>
     </statBases>
-    <description>This Second Furnace is an advanced industrial Furnace capable of burning items and smelting raw resources into useful materials</description>
+    <description>This Second Furnace is an advanced industrial Furnace capable of burning items and smelting raw resources into useful materials\nUses electricity to reduce wood amount for burning</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -378,10 +384,21 @@
       <li>MakeLargeFrame</li>
     </recipes>
     <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>20.0</fuelConsumptionRate>
+        <fuelCapacity>50.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>350</basePowerConsumption>
+        <basePowerConsumption>200</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>
@@ -438,7 +455,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>450</basePowerConsumption>
+        <basePowerConsumption>350</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>

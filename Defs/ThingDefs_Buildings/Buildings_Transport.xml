@@ -36,7 +36,7 @@
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
-    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it.\n\n(Works with "Refualable comp" buildings)</description>
+    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it (the yellow cell points to the "front").\n\n(Works with "Refualable comp" buildings)</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>1</PRFRoboticArm>
@@ -521,7 +521,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>10</basePowerConsumption>
-        <transmitsPower>false</transmitsPower>
+        <transmitsPower>true</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
@@ -562,7 +562,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>10</basePowerConsumption>
-        <transmitsPower>false</transmitsPower>
+        <transmitsPower>true</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
@@ -595,9 +595,15 @@
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>UgRollers_gr</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
-
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
     <statBases>
-      <WorkToBuild>10</WorkToBuild>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>80</WorkToBuild>
+      <Flammability>0.4</Flammability>
+      <Mass>10</Mass>
     </statBases>
     <costList>
       <Steel>20</Steel>
@@ -615,7 +621,9 @@
     <pathCost>30</pathCost>
 
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Arrow</li>
+    </placeWorkers>
     <inspectorTabs>
     </inspectorTabs>
 
