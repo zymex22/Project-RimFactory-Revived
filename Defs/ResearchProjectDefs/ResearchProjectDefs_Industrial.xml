@@ -9,7 +9,6 @@
     <baseCost>2000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
-      <li>DeepDrilling</li>
       <li>PRFEulersIdentity</li>
     </prerequisites>
     <researchViewX>1</researchViewX>
@@ -26,6 +25,7 @@
     <baseCost>3000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
+      <li>DeepDrilling</li>
       <li>AutomationBasics</li>
       <li>AutonomousMining</li>
     </prerequisites>

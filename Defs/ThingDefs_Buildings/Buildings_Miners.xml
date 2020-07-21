@@ -70,10 +70,20 @@
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>300</basePowerConsumption>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>20.0</fuelConsumptionRate>
+        <fuelCapacity>50.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_CreatesInfestations" />
@@ -82,7 +92,7 @@
       </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>10</heatPerSecond>
+        <heatPerSecond>6</heatPerSecond>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
         <effect>Drill</effect>
@@ -92,14 +102,12 @@
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
         <TickCount>8</TickCount>
       </li>
-      <!--
-        excludeOres : exclude ore list.
-        bonusYield  : Bonus yield ore list. for example, 10% bonus yield chance, Steel bonus : Plasteel bonus = 1 : 2
-          <bonusYields Chance="0.1">
-            <Steel Weight="1" Count="10" />
-            <Plasteel Weight="2" Count="15" />
-          </<bonusYields>
-      -->
+      <!-- excludeOres : exclude ore list.
+           bonusYield  : Bonus yield ore list. for example, 10% bonus yield chance, Steel bonus : Plasteel bonus = 1 : 2
+           <bonusYields Chance="0.1">
+           <Steel Weight="1" Count="10" />
+           <Plasteel Weight="2" Count="15" />
+           </<bonusYields> -->
       <li Class="ProjectRimFactory.Common.ModExtension_Miner">
         <excludeOres>
           <li>Gold</li>
@@ -118,7 +126,7 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Long</tickerType>
+    <tickerType>Rare</tickerType>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>AutonomousMining</li>
@@ -189,7 +197,7 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Long</tickerType>
+    <tickerType>Rare</tickerType>
     <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
