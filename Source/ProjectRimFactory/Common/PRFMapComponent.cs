@@ -36,6 +36,6 @@ namespace ProjectRimFactory.Common
 
     public interface ITicker
     {
-        public void Tick();
+        void Tick();
     }
 }
