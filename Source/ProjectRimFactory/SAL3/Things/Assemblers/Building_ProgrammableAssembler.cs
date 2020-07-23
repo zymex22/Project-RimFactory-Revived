@@ -308,11 +308,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             {
                 List<ThingCount> chosen = new List<ThingCount>();
 
-                List<Thing> AllAccessibleAllowedThings = AllAccessibleThings.Where(x=>b.IsFixedOrAllowedIngredient(x)).ToList();
+                List<Thing> allAccessibleAllowedThings = AllAccessibleThings.Where(x=>b.IsFixedOrAllowedIngredient(x)).ToList();
 
-                if (AllAccessibleAllowedThings.Count > 0)
+                if (allAccessibleAllowedThings.Count > 0)
                 {
-                    if (TryFindBestBillIngredientsInSet(AllAccessibleAllowedThings, b, chosen))
+                    if (TryFindBestBillIngredientsInSet(allAccessibleAllowedThings, b, chosen))
                     {
                         return new BillReport(b, (from ta in chosen select ta.Thing.SplitOff(ta.Count)).ToList());
                     }
