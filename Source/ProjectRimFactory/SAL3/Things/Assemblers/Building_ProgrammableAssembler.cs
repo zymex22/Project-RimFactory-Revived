@@ -308,8 +308,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             {
                 List<ThingCount> chosen = new List<ThingCount>();
 
-                List<Thing> AllAccessibleAllowedThings = AllAccessibleThings.ToList();
-                AllAccessibleAllowedThings.RemoveAll(X => !b.IsFixedOrAllowedIngredient(X));
+                List<Thing> AllAccessibleAllowedThings = AllAccessibleThings.Where(x=>b.IsFixedOrAllowedIngredient(x)).ToList();
 
                 if (AllAccessibleAllowedThings.Count > 0)
                 {
