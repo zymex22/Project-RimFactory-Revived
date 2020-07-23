@@ -25,7 +25,7 @@
     </Operation> -->
 
     <!-- Adding coal to all machines using fueled AND woodlog in them -->
-    <Operation Class="PatchOperationSequence">
+    <!-- <Operation Class="PatchOperationSequence">
         <success>Always</success>
         <operations>
             <li Class="PatchOperationAdd">
@@ -36,6 +36,20 @@
                 </value>
             </li>
         </operations>
+    </Operation> -->
+
+
+    <!-- Adding coal to all machines using fueled AND woodlog in them -->
+    <Operation Class="PatchOperationConditional">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="WDCoal"]</xpath>
+        <match Class="PatchOperationAdd">
+            <order>Append</order>
+            <xpath>/Defs/ThingDef/comps/li[@Class = "CompProperties_Refuelable" and fuelFilter/thingDefs/li[text() = "WoodLog"]]/fuelFilter/thingDefs</xpath>
+            <value>
+                <li>WDCoal</li>
+            </value>
+        </match>
     </Operation>
 
 

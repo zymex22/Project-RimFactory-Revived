@@ -331,21 +331,22 @@
   </Row>
 
   <!-- Turn off coal -->
-  <!-- <Row Class="ProjectRimFactory.Common.PatchItem">
+  <Row Class="ProjectRimFactory.Common.PatchItem">
     <key>turn.off.CoalGen</key>
     <label>PRF.Settings.TurnOffCoalGen.Label</label>
     <description>PRF.Settings.TurnOffCoalGen.Desc</description>
     <Patch>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="WDCoal"]</xpath>
-      </Operation>
-      <Operation Class="PatchOperationRemove">
-        <success>Always</success>
         <xpath>/Defs/ThingDef[defName="WDMineableCoal"]</xpath>
       </Operation>
+      <!-- <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="WDCoal"]</xpath>
+      </Operation> -->
+
     </Patch>
-  </Row> -->
+  </Row>
 
 
 </SettingRows>
