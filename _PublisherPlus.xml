@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Configuration>
-  <Excluded>
-    <exclude>E:\steam\steamapps\common\RimWorld\Mods\PRF\PRF.code-workspace</exclude>
-    <exclude>E:\steam\steamapps\common\RimWorld\Mods\PRF\Settings\examples.txt</exclude>
-    <exclude>E:\steam\steamapps\common\RimWorld\Mods\PRF\Source</exclude>
-  </Excluded>
-</Configuration>
