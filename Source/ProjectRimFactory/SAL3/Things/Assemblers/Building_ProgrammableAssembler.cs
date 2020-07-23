@@ -234,7 +234,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 }
                 if (currentBillReport != null)
                 {
+                    //Update the Required Work
                     currentBillReport.workLeft -= 10f * ProductionSpeedFactor * (this.TryGetComp<CompPowerWorkSetting>()?.GetSpeedFactor() ?? 1f);
+                    //If Work Finished
                     if (currentBillReport.workLeft <= 0)
                     {
                         try
@@ -255,6 +257,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 }
                 else if (this.IsHashIntervalTick(60))
                 {
+                    //Start Bill if Possible
                     if ((currentBillReport = CheckBills()) != null)
                     {
                         Notify_BillStarted();
@@ -304,11 +307,18 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             foreach (Bill b in AllBillsShouldDoNow)
             {
                 List<ThingCount> chosen = new List<ThingCount>();
-                if (TryFindBestBillIngredientsInSet(AllAccessibleThings.ToList(), b, chosen))
-                {
 
-                    return new BillReport(b, (from ta in chosen select ta.Thing.SplitOff(ta.Count)).ToList());
+                List<Thing> AllAccessibleAllowedThings = AllAccessibleThings.ToList();
+                AllAccessibleAllowedThings.RemoveAll(X => !b.IsFixedOrAllowedIngredient(X));
+
+                if (AllAccessibleAllowedThings.Count > 0)
+                {
+                    if (TryFindBestBillIngredientsInSet(AllAccessibleAllowedThings, b, chosen))
+                    {
+                        return new BillReport(b, (from ta in chosen select ta.Thing.SplitOff(ta.Count)).ToList());
+                    }
                 }
+                
             }
             return null;
         }
@@ -316,7 +326,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         bool TryFindBestBillIngredientsInSet(List<Thing> accessibleThings, Bill b, List<ThingCount> chosen)
         {
             ReflectionUtility.MakeIngredientsListInProcessingOrder.Invoke(null, new object[] { ReflectionUtility.ingredientsOrdered.GetValue(null), b });
-             return (bool)ReflectionUtility.TryFindBestBillIngredientsInSet.Invoke(null, new object[] { accessibleThings, b, chosen, new IntVec3(), false });
+            //TryFindBestBillIngredientsInSet Expects a List of Both Avilibale & Allowed Things as "accessibleThings"
+            return (bool)ReflectionUtility.TryFindBestBillIngredientsInSet.Invoke(null, new object[] { accessibleThings, b, chosen, new IntVec3(), false });
         }
 
         protected virtual void ProduceItems()
