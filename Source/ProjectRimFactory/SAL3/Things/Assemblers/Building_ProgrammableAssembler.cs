@@ -258,7 +258,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 else if (this.IsHashIntervalTick(60))
                 {
                     //Start Bill if Possible
-                    if ((currentBillReport = CheckBills()) != null)
+                    if ((currentBillReport = TryGetNextBill()) != null)
                     {
                         Notify_BillStarted();
                     }
@@ -301,8 +301,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 }
             }
         }
-
-        protected virtual BillReport CheckBills()
+        // TryGetNextBill returns a new BillReport to start if one is available
+        protected BillReport TryGetNextBill()
         {
             foreach (Bill b in AllBillsShouldDoNow)
             {
