@@ -310,7 +310,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
                 List<Thing> allAccessibleAllowedThings = AllAccessibleThings.Where(x=>b.IsFixedOrAllowedIngredient(x)).ToList();
 
-                if (allAccessibleAllowedThings.Count > 0)
+                if (allAccessibleAllowedThings.Count > 0 || b.ingredientFilter.AllowedThingDefs.Count() == 0)
                 {
                     if (TryFindBestBillIngredientsInSet(allAccessibleAllowedThings, b, chosen))
                     {
