@@ -87,7 +87,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look(ref this.state, "workingState", WorkingState.Ready);
             Scribe_Values.Look(ref this.totalWorkAmount, "totalWorkAmount", 0f);
             Scribe_Values.Look(ref this.workStartTick, "workStartTick", 0);
-            Scribe_Collections.Look<Thing>(ref this.products, "products", LookMode.Deep);
+            Scribe_Collections.Look<Thing>(ref this.products, "products", LookMode.Reference);
 
             if (WorkingIsDespawned())
                 Scribe_Deep.Look<T>(ref this.working, "working");
