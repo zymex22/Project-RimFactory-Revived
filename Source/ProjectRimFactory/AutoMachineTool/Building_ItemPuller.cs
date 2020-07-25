@@ -50,6 +50,8 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return settings;
         }
+        // See ExposeData for what this is:
+        private ThingFilter backCompatibilityFilter;
 
         public StorageSettings GetParentStoreSettings() => def.building.fixedStorageSettings;
 
@@ -79,21 +81,36 @@ namespace ProjectRimFactory.AutoMachineTool
 
             Scribe_Values.Look<bool>(ref this.active, "active", false);
             Scribe_Values.Look<bool>(ref this.right, "right", false);
-            Scribe_Deep.Look(ref settings, "settings", this);
+            Scribe_Deep.Look(ref settings, "settings", new object[] { this });
             Scribe_Values.Look<bool>(ref this.takeForbiddenItems, "takeForbidden", true);
+
+            if (Scribe.mode != LoadSaveMode.Saving) {
+                // The old filter settings were saved as a ThingFilter under the key 'filter'
+                //   We test for that filter on load and if they exist, we populate the settings 
+                //   with it so no one complains about "oh my puller filter went away!"
+                //   We can phase this out any time after 1 Feb 2021 - I won't feel bad about
+                //   losing someone's settings if they don't play for 6 months. Or, you know,
+                //    sometime after that.   --LWM
+                //   (also remove the field above when removing this)
+                Scribe_Deep.Look(ref this.backCompatibilityFilter, "filter");
+                if (backCompatibilityFilter!=null && Scribe.mode==LoadSaveMode.ResolvingCrossRefs) {
+                    // filter should be done loading by now.
+                    Log.Message("Project RimFactory: updating puller filter to new settings");
+                    if (settings==null) {
+                        settings = new StorageSettings(this);
+                    }
+                    settings.filter = backCompatibilityFilter;
+                }
+            }
+
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
 
-            settings = GetStoreSettings();
-
-            if (!respawningAfterLoad)
-            {
-                
-            }
-            this.forcePlace = this.ForcePlace;
+            this.settings = GetStoreSettings(); // force init
+            this.forcePlace = ForcePlace;
         }
 
         protected override void Reset()
