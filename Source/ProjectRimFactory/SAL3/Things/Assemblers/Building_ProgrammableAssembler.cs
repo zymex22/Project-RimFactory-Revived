@@ -10,6 +10,7 @@ using UnityEngine;
 using ProjectRimFactory.Common;
 using ProjectRimFactory.SAL3.Exposables;
 using Verse.Sound;
+using ProjectRimFactory.AutoMachineTool;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers
 {
@@ -190,9 +191,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             });
             yield break;
         }
+
+        private MapTickManager mapManager;
+        protected MapTickManager MapManager => this.mapManager;
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            this.mapManager = map.GetComponent<MapTickManager>();
             if (buildingPawn == null)
                 DoPawn();
 
@@ -209,6 +214,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             ReflectionUtility.mapIndexOrState.SetValue(buildingPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
             //Assign Pawn's position without nasty errors
             buildingPawn.SetPositionDirect(Position);
+
+            //Need this type of call to set the Powerconsumption on load
+            //A normal call will not work
+            this.MapManager.NextAction(this.RangePowerSupplyMachine.RefreshPowerStatus);
+            this.MapManager.AfterAction(5, this.RangePowerSupplyMachine.RefreshPowerStatus);
         }
 
         protected virtual bool Active => compPowerTrader?.PowerOn != false
