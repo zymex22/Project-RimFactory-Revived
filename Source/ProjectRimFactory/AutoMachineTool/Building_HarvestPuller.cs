@@ -24,14 +24,14 @@ namespace ProjectRimFactory.AutoMachineTool
             if (this.takeForbiddenItems)
                 return z.AllContainedThings
                     .Where(t => t.def.category == ThingCategory.Item)
-                    .Where(t => this.filter.Allows(t))
+                    .Where(t => this.settings.AllowedToAccept(t))
                     .Where(t => !this.IsLimit(t))
                     .FirstOption();
             else
                 return z.AllContainedThings
                     .Where(t => t.def.category == ThingCategory.Item)
                     .Where(t => !t.IsForbidden(Faction.OfPlayer))
-                    .Where(t => this.filter.Allows(t))
+                    .Where(t => this.settings.AllowedToAccept(t))
                     .Where(t => !this.IsLimit(t))
                     .FirstOption();
         }
