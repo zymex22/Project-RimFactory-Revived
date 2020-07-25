@@ -11,62 +11,63 @@ using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    class ITab_PullerFilter : ITab
-    {
-        private static readonly Vector2 WinSize = new Vector2(300f, 500f);
+    //class ITab_PullerFilter : ITab_Storage
+    //{
 
-        public ITab_PullerFilter()
-        {
-            this.size = WinSize;
-            this.labelKey = "PRF.AutoMachineTool.Puller.OutputItemFilter.TabName";
+    //    private static readonly Vector2 WinSize = new Vector2(300f, 500f);
 
-            this.description = "PRF.AutoMachineTool.Puller.OutputItemFilter.Description".Translate();
-        }
+    //    public ITab_PullerFilter()
+    //    {
+    //        this.size = WinSize;
+    //        this.labelKey = "PRF.AutoMachineTool.Puller.OutputItemFilter.TabName";
 
-        private string description;
+    //        this.description = "PRF.AutoMachineTool.Puller.OutputItemFilter.Description".Translate();
+    //    }
 
-        private Building_ItemPuller Puller
-        {
-            get => (Building_ItemPuller)this.SelThing;
-        }
+    //    private string description;
 
-        public override void OnOpen()
-        {
-            base.OnOpen();
+    //    private Building_ItemPuller Puller
+    //    {
+    //        get => (Building_ItemPuller)this.SelThing;
+    //    }
 
-            this.groups = this.Puller.Map.haulDestinationManager.AllGroups.ToList();
-        }
+    //    public override void OnOpen()
+    //    {
+    //        base.OnOpen();
 
-        private List<SlotGroup> groups;
+    //        this.groups = this.Puller.Map.haulDestinationManager.AllGroups.ToList();
+    //    }
 
-        public override bool IsVisible => Puller.Filter != null;
-        
-        private Vector2 scrollPosition;
+    //    private List<SlotGroup> groups;
 
-        protected override void FillTab()
-        {
-            Listing_Standard list = new Listing_Standard();
-            Rect inRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
+    //    public override bool IsVisible => Puller.Filter != null;
 
-            list.Begin(inRect);
-            list.Gap();
+    //    private Vector2 scrollPosition;
 
-            var rect = list.GetRect(40f);
-            Widgets.Label(rect, this.description);
-            list.Gap();
+    //    protected override void FillTab()
+    //    {
+    //        Listing_Standard list = new Listing_Standard();
+    //        Rect inRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
 
-            rect = list.GetRect(30f);
-            if (Widgets.ButtonText(rect, "PRF.AutoMachineTool.Puller.FilterCopyFrom".Translate()))
-            {
-                Find.WindowStack.Add(new FloatMenu(groups.Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => this.Puller.Filter.CopyAllowancesFrom(g.Settings.filter))).ToList()));
-            }
-            list.Gap();
+    //        list.Begin(inRect);
+    //        list.Gap();
 
-            list.End();
-            var height = list.CurHeight;
+    //        var rect = list.GetRect(40f);
+    //        Widgets.Label(rect, this.description);
+    //        list.Gap();
 
-            ThingFilterUI.DoThingFilterConfigWindow(inRect.BottomPartPixels(inRect.height - height), ref this.scrollPosition, this.Puller.Filter);
+    //        rect = list.GetRect(30f);
+    //        if (Widgets.ButtonText(rect, "PRF.AutoMachineTool.Puller.FilterCopyFrom".Translate()))
+    //        {
+    //            Find.WindowStack.Add(new FloatMenu(groups.Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => this.Puller.Filter.CopyAllowancesFrom(g.Settings.filter))).ToList()));
+    //        }
+    //        list.Gap();
 
-        }
-    }
+    //        list.End();
+    //        var height = list.CurHeight;
+
+    //        ThingFilterUI.DoThingFilterConfigWindow(inRect.BottomPartPixels(inRect.height - height), ref this.scrollPosition, this.Puller.Filter);
+
+    //    }
+    //}
 }
