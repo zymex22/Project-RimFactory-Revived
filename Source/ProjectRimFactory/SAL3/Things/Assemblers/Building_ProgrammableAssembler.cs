@@ -217,8 +217,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
             //Need this type of call to set the Powerconsumption on load
             //A normal call will not work
-            this.MapManager.NextAction(this.RangePowerSupplyMachine.RefreshPowerStatus);
-            this.MapManager.AfterAction(5, this.RangePowerSupplyMachine.RefreshPowerStatus);
+            var rangePowerSupplyMachine = this.RangePowerSupplyMachine;
+            if (rangePowerSupplyMachine != null) {
+                this.MapManager.NextAction(rangePowerSupplyMachine.RefreshPowerStatus);
+                this.MapManager.AfterAction(5, rangePowerSupplyMachine.RefreshPowerStatus);
+            }
         }
 
         protected virtual bool Active => compPowerTrader?.PowerOn != false
@@ -327,7 +330,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                         return new BillReport(b, (from ta in chosen select ta.Thing.SplitOff(ta.Count)).ToList());
                     }
                 }
-                
+
             }
             return null;
         }
