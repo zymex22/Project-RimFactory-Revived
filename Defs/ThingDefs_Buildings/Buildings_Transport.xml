@@ -229,7 +229,7 @@
       </li>
     </modExtensions>
     <inspectorTabs>
-      <li>ITab_Storage</li>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_PullerFilter</li>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
     </inspectorTabs>
