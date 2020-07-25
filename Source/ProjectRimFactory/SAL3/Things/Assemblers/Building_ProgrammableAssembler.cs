@@ -217,19 +217,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
             //Need this type of call to set the Powerconsumption on load
             //A normal call will not work
-            this.MapManager.NextAction(this.SetPower);
-            this.MapManager.AfterAction(5, this.SetPower);
-        }
-
-
-        protected virtual void SetPower()
-        {
-            if (this.compPowerTrader == null)
-            {
-                return;
-            }
-
-            this.compPowerTrader.PowerOutput = -1 * (this.RangePowerSupplyMachine.SupplyPowerForRange + this.RangePowerSupplyMachine.SupplyPowerForSpeed + this.PowerComp.Props.basePowerConsumption );
+            this.MapManager.NextAction(this.RangePowerSupplyMachine.RefreshPowerStatus);
+            this.MapManager.AfterAction(5, this.RangePowerSupplyMachine.RefreshPowerStatus);
         }
 
         protected virtual bool Active => compPowerTrader?.PowerOn != false
