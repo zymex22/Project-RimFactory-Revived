@@ -87,7 +87,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look(ref this.state, "workingState", WorkingState.Ready);
             Scribe_Values.Look(ref this.totalWorkAmount, "totalWorkAmount", 0f);
             Scribe_Values.Look(ref this.workStartTick, "workStartTick", 0);
-            Scribe_Collections.Look<Thing>(ref this.products, "products", LookMode.Reference);
+            Scribe_Collections.Look<Thing>(ref this.products, "products", LookMode.Deep);
 
             if (WorkingIsDespawned())
                 Scribe_Deep.Look<T>(ref this.working, "working");
@@ -162,7 +162,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.products.ForEach(t =>
                 {
-                    if (!t.Spawned)
+                    if (t != null && !t.Spawned)
                     {
                         GenPlace.TryPlaceThing(t, this.Position, this.Map, ThingPlaceMode.Near);
                     }
@@ -172,7 +172,7 @@ namespace ProjectRimFactory.AutoMachineTool
             this.State = WorkingState.Ready;
             this.totalWorkAmount = 0;
             this.workStartTick = 0;
-            Option(this.working).ForEach(h => workingSet.Remove(h));
+            workingSet.Remove(working);
             this.working = null;
             this.products.Clear();
         }
