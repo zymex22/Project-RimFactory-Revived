@@ -55,43 +55,6 @@ namespace ProjectRimFactory.Industry
         }
 
         /// <summary>
-        /// One function to handel a tick in order to remove duplicate Code and Logic
-        /// </summary>
-        /// <param name="GenRecorece">Recorce Ammount based on tick</param>
-        /// <param name="FuleConump">0 Means that Base Tick is Used . All other values are calculated</param>
-        private void HandelTick(int GenRecorece, int FuleConump)
-        {
-            if (FuleConump != 0 && fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
-                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuleConump);
-            if (flick == null || flick.SwitchIsOn)
-            {
-                if (power == null || power.PowerOn)
-                {
-                    if (fuel != null)
-                    {
-                        if (FuleConump != 0)
-                        {
-                            fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuleConump);
-                        }
-                        else
-                        {
-                            fuel.Notify_UsedThisTick();
-                        }
-                        if (fuel.HasFuel)
-                        {
-                            TryGenerateResource(GenRecorece);
-                        }
-                    }
-                    else if (power != null && power.PowerOn)
-                    {  //fuel==null
-                        TryGenerateResource(GenRecorece);
-                    }
-                }
-            }
-
-        }
-
-        /// <summary>
         /// Ticks, a Weighing of Benefits
         /// 
         /// When you create one of these, you must pick what Tick
@@ -109,20 +72,76 @@ namespace ProjectRimFactory.Industry
         ///  Much better performance if you have a lot of these
         /// 
         /// </summary>
-        public override void Tick()
-        {
+        public override void Tick() {
             base.Tick();
-            HandelTick(1, 0);
-       }
+            if (flick == null || flick.SwitchIsOn) {
+                if (power == null || power.PowerOn) {
+                    if (fuel != null) {
+                        fuel.Notify_UsedThisTick();
+                        if (fuel.HasFuel) {
+                            TryGenerateResource(1);
+                        }
+                    } else {  //fuel==null
+                        TryGenerateResource(1);
+                    }
+                }
+            }
+        }
         public override void TickRare()
         {
             base.TickRare();
-            HandelTick(250, 6000 * 250);
+            // We have to handle fuel consumption by hand as the
+            //   vanilla CompRefuelable only Ticks.
+            // If we should consume fuel even if idle:
+            if (fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
+                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * 250);
+            // Actually do work:
+            if (flick == null || flick.SwitchIsOn) {
+                if (power==null || power.PowerOn) {
+                    if (fuel != null) {
+                        // This option would not catch any harmony patches to
+                        //   Notify_UsedThisTick();
+
+                        // The fuel consuption per Tick is fuel.Props.fuelConsumptionRate/60000
+                        //   (per CompRefuelable - note that we will miss any Harmony patches
+                        //    that target fuelConsumptionRate. Grabbing the private result is
+                        //    a TODO for later)
+                        fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 60000 * 250);
+                        // Another (rather silly) option would be:
+                        // for (int i=0; i<250; i++) fuel.Notify_UsedThisTick();
+                        // As per Thornsworth:
+                        //    dear god. do the calculation yourself
+                        //    geeze
+                        if (fuel.HasFuel)
+                            TryGenerateResource(250);
+                    } else {// fuel == null
+                        TryGenerateResource(250);
+                    }
+                }
+            }
+            // possible TODO: allow consuming fuel during idle as an option?
+            // possible TODO: make a comp that only consumes when powered/etc.
         }
         public override void TickLong()
         {
             base.TickLong();
-            HandelTick(2000, 6000 * 2000);
+            // Again, like rare, we must manually consume fuel. See notes above.
+            // If we should consume fuel even if idle:
+            if (fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
+                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * 2000);
+            // Actually do work:
+            if (flick == null || flick.SwitchIsOn) {
+                if (power == null || power.PowerOn) {
+                    if (fuel != null) {
+                        // 2000 ticks in a long
+                        fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 60000 * 2000);
+                        if (fuel.HasFuel)
+                            TryGenerateResource(2000);
+                    } else {// fuel == null
+                        TryGenerateResource(2000);
+                    }
+                }
+            }
         }
 
         public void TryGenerateResource(int ticksInInterval) {
