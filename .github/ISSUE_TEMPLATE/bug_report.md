@@ -16,7 +16,7 @@ Steps to reproduce the behavior:
 1. ...
 2. ...
 3. ...
-4. ...
+
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
@@ -31,7 +31,6 @@ If applicable, add screenshots to help explain your problem.
 **Rimworld (please complete the following information):**
  - RimWorld Version:
  - PRF Version:
- - HarmonyLIb Version:
  - Link to gist bug report: 
  - Type:
  - Severity:
@@ -44,4 +43,3 @@ If applicable, add screenshots to help explain your problem.
  - Do you know what mod conflicts?:
 
 **Additional context**
-Add any other context about the problem here.
