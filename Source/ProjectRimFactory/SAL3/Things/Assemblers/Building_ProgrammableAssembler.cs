@@ -61,11 +61,16 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
                 Pawn p = PawnGenerator.GeneratePawn(PRFDefOf.PRFSlavePawn, Faction.OfPlayer);
                 p.Name = new NameTriple("...", "SAL_Name".Translate(), "...");
+
                 //Assign skills
                 foreach (var s in p.skills.skills)
                 {
                     s.Level = s.def == SkillDefOf.Artistic ? this.ArtSkillLevel : this.SkillLevel;
                 }
+
+                //This fixes the Disabled Skill issue
+                ReflectionUtility.cachedTotallyDisabledPer.SetValue(p, new List<WorkTypeDef>());
+
                 //Assign Pawn's mapIndexOrState to building's mapIndexOrState
                 ReflectionUtility.mapIndexOrState.SetValue(p, ReflectionUtility.mapIndexOrState.GetValue(this));
 
@@ -84,6 +89,16 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     p.timetable.SetAssignment(i, TimeAssignmentDefOf.Work);
                 }
                 buildingPawn = p;
+
+#if false
+                //Debug Code
+                foreach (var s in p.skills.skills)
+                {
+                    if (s.Level == 0) {
+                        Log.Error("PRF: Error Creating Assembler Pawn");
+                    }
+                }
+#endif
             }
             catch (Exception ex) {
             Log.Error("ERROR=: "+ex.ToString());
