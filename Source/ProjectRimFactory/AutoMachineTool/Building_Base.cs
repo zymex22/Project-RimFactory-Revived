@@ -172,7 +172,7 @@ namespace ProjectRimFactory.AutoMachineTool
             this.State = WorkingState.Ready;
             this.totalWorkAmount = 0;
             this.workStartTick = 0;
-            workingSet(Remove(h));
+            workingSet.Remove(working);
             this.working = null;
             this.products.Clear();
         }
