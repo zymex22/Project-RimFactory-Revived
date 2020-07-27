@@ -4,6 +4,10 @@
 # Vim backup files
 *.swp
 
+# Emacs backup files
+.#*
+\#*#
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
