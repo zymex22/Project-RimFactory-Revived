@@ -95,8 +95,12 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation)
         {
-            GraphicDatabase.Get<Graphic_Single>(thingDef.uiIconPath, ShaderTypeDefOf.EdgeDetect.Shader, thingDef.graphicData.drawSize, this.color, this.colorTwo)
-                .DrawWorker(loc, rot, thingDef, thing, extraRotation);
+            if (!(thing is MinifiedThing))
+            {
+                GraphicDatabase.Get<Graphic_Single>(thingDef.uiIconPath, ShaderTypeDefOf.EdgeDetect.Shader, thingDef.graphicData.drawSize, this.color, this.colorTwo)
+                    .DrawWorker(loc, rot, thingDef, thing, extraRotation);
+            }
+
         }
     }
 
