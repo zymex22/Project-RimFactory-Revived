@@ -135,13 +135,16 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Deep.Look(ref billStack, "bills", this);
-            Scribe_Deep.Look(ref currentBillReport, "currentBillReport");
-            Scribe_Collections.Look(ref thingQueue, "thingQueue", LookMode.Deep);
-            Scribe_Values.Look(ref allowForbidden, "allowForbidden");
-            Scribe_Deep.Look(ref buildingPawn, "buildingPawn");
-            if (buildingPawn == null)
-                DoPawn();
+
+            if (buildingPawn != null)
+            {
+                Scribe_Deep.Look(ref billStack, "bills", this);
+                Scribe_Deep.Look(ref currentBillReport, "currentBillReport");
+                Scribe_Collections.Look(ref thingQueue, "thingQueue", LookMode.Deep);
+                Scribe_Values.Look(ref allowForbidden, "allowForbidden");
+                Scribe_Deep.Look(ref buildingPawn, "buildingPawn");
+            }
+            
         }
         public override IEnumerable<Gizmo> GetGizmos()
         {
