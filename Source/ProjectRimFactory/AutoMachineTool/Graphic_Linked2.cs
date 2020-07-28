@@ -100,6 +100,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 GraphicDatabase.Get<Graphic_Single>(thingDef.uiIconPath, ShaderTypeDefOf.EdgeDetect.Shader, thingDef.graphicData.drawSize, this.color, this.colorTwo)
                     .DrawWorker(loc, rot, thingDef, thing, extraRotation);
             }
+            else {
+                base.DrawWorker(loc,rot,thingDef,thing,extraRotation);
+            }
 
         }
     }
