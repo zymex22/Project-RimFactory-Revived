@@ -68,7 +68,7 @@
     <costList>
       <Steel>400</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
     <recipes>
