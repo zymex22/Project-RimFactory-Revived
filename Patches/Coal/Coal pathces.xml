@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!-- Turn off if "any" mods from list is installed -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Coal Expanded</li>
+			<li>Materials+</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/ThingDef[defName="WDCoal"]</xpath>
+				</li>
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/ThingDef[defName="WDMineableCoal"]</xpath>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
