@@ -136,7 +136,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         {
             base.ExposeData();
 
-            if (buildingPawn != null)
+            if (buildingPawn != null || !(Scribe.mode == LoadSaveMode.Saving))
             {
                 Scribe_Deep.Look(ref billStack, "bills", this);
                 Scribe_Deep.Look(ref currentBillReport, "currentBillReport");
