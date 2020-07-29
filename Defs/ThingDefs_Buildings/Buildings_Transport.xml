@@ -465,7 +465,7 @@
         <maxPower>5</maxPower>
       </li>
     </modExtensions>
-    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
   </ThingDef>
 
   <!--======================================= Conveyor normal ===============================================-->

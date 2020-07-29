@@ -6,6 +6,7 @@
 		<mods>
 			<li>Coal Expanded</li>
 			<li>Materials+</li>
+			<li>Simple Mining Extension</li>
 		</mods>
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
