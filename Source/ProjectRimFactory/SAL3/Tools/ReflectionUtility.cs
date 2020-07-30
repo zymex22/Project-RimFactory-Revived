@@ -12,7 +12,7 @@ namespace ProjectRimFactory.SAL3
     {
         public static readonly FieldInfo mapIndexOrState = typeof(Thing).GetField("mapIndexOrState", BindingFlags.NonPublic | BindingFlags.Instance);
         //public static readonly FieldInfo cachedDisabledWorkTypes = typeof(Pawn_StoryTracker).GetField("cachedDisabledWorkTypes", BindingFlags.Instance | BindingFlags.NonPublic);
-        public static readonly FieldInfo cachedTotallyDisabledPer = typeof(Pawn).GetField("cachedDisabledWorkTypesPermanent", BindingFlags.NonPublic | BindingFlags.Instance);
+        public static readonly FieldInfo cachedDisabledWorkTypesPermanent = typeof(Pawn).GetField("cachedDisabledWorkTypesPermanent", BindingFlags.NonPublic | BindingFlags.Instance);
 
         public static readonly FieldInfo cachedTotallyDisabled = typeof(SkillRecord).GetField("cachedTotallyDisabled", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly FieldInfo ingredientsOrdered = typeof(WorkGiver_DoBill).GetField("ingredientsOrdered", BindingFlags.NonPublic | BindingFlags.Static);

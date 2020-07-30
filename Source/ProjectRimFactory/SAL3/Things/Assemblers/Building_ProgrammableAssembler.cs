@@ -68,8 +68,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     s.Level = s.def == SkillDefOf.Artistic ? this.ArtSkillLevel : this.SkillLevel;
                 }
 
-                //This fixes the Disabled Skill issue
-                ReflectionUtility.cachedTotallyDisabledPer.SetValue(p, new List<WorkTypeDef>());
+                // This ensures that if an assembler starts minified, it does not throw errors about a disabled pawn - see Issue#54
+                ReflectionUtility.cachedDisabledWorkTypesPermanent.SetValue(p, new List<WorkTypeDef>());
 
                 //Assign Pawn's mapIndexOrState to building's mapIndexOrState
                 ReflectionUtility.mapIndexOrState.SetValue(p, ReflectionUtility.mapIndexOrState.GetValue(this));
