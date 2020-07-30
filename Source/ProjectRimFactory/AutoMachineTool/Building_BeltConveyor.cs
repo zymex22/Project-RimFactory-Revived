@@ -63,7 +63,7 @@ namespace ProjectRimFactory.AutoMachineTool
             set
             {
                 supplyPower = value;
-                this.SetPower();
+                this.RefreshPowerStatus();
             }
         }
 

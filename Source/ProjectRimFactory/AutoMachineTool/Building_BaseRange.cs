@@ -67,7 +67,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     this.ChangeGlow();
                     this.allTargetCellsCache = null;
                 }
-                this.SetPower();
+                this.RefreshPowerStatus();
             }
         }
 
@@ -165,7 +165,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-        protected override void SetPower()
+        public override void RefreshPowerStatus()
         {
             if (-this.SupplyPowerForRange - this.SupplyPowerForSpeed - (this.Glowable && this.Glow ? 2000 : 0) != this.TryGetComp<CompPowerTrader>().PowerOutput)
             {

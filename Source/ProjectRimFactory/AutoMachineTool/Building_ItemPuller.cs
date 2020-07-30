@@ -14,11 +14,8 @@ using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public class Building_ItemPuller : Building_BaseLimitation<Thing>, IStorageSetting
+    public class Building_ItemPuller : Building_BaseLimitation<Thing>, IStorageSetting, IStoreSettingsParent
     {
-        public ThingFilter Filter { get => this.filter; }
-
-        protected ThingFilter filter = new ThingFilter();
         protected bool active = false;
         protected bool takeForbiddenItems=true;
         public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
@@ -36,6 +33,28 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return name;
         }
+
+        public bool StorageTabVisible => true;
+
+        public StorageSettings settings;
+
+        public StorageSettings GetStoreSettings()
+        {
+            if (settings == null)
+            {
+                settings = new StorageSettings();
+                //To "Prevent" a null Refrence as GetParentStoreSettings() seems to be null on first Placing the Building
+                if (GetParentStoreSettings() != null) { 
+                    settings.CopyFrom(GetParentStoreSettings());
+                }
+            }
+            return settings;
+        }
+        // See ExposeData for what this is:
+        private ThingFilter backCompatibilityFilter;
+
+        public StorageSettings GetParentStoreSettings() => def.building.fixedStorageSettings;
+
 
         [Unsaved]
         protected StorageSettings storageSettings;
@@ -60,27 +79,38 @@ namespace ProjectRimFactory.AutoMachineTool
 
             base.ExposeData();
 
-            Scribe_Deep.Look<ThingFilter>(ref this.filter, "filter");
             Scribe_Values.Look<bool>(ref this.active, "active", false);
             Scribe_Values.Look<bool>(ref this.right, "right", false);
+            Scribe_Deep.Look(ref settings, "settings", new object[] { this });
             Scribe_Values.Look<bool>(ref this.takeForbiddenItems, "takeForbidden", true);
 
-            if (this.filter == null) this.filter = new ThingFilter();
+            if (Scribe.mode != LoadSaveMode.Saving) {
+                // The old filter settings were saved as a ThingFilter under the key 'filter'
+                //   We test for that filter on load and if they exist, we populate the settings 
+                //   with it so no one complains about "oh my puller filter went away!"
+                //   We can phase this out any time after 1 Feb 2021 - I won't feel bad about
+                //   losing someone's settings if they don't play for 6 months. Or, you know,
+                //    sometime after that.   --LWM
+                //   (also remove the field above when removing this)
+                Scribe_Deep.Look(ref this.backCompatibilityFilter, "filter");
+                if (backCompatibilityFilter!=null && Scribe.mode==LoadSaveMode.ResolvingCrossRefs) {
+                    // filter should be done loading by now.
+                    Log.Message("Project RimFactory: updating puller filter to new settings");
+                    if (settings==null) {
+                        settings = new StorageSettings(this);
+                    }
+                    settings.filter = backCompatibilityFilter;
+                }
+            }
 
-            this.storageSettings = new StorageSettings { filter = this.filter };
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
 
-            if (!respawningAfterLoad)
-            {
-                this.filter = new ThingFilter();
-                this.filter.SetAllowAll(null);
-                this.storageSettings = new StorageSettings { filter = this.filter };
-            }
-            this.forcePlace = this.ForcePlace;
+            this.settings = GetStoreSettings(); // force init
+            this.forcePlace = ForcePlace;
         }
 
         protected override void Reset()
@@ -106,7 +136,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 return (this.Position + this.Rotation.Opposite.FacingCell).SlotGroupCells(this.Map)
                     .SelectMany(c => c.GetThingList(this.Map))
                     .Where(t => t.def.category == ThingCategory.Item)
-                    .Where(t => this.filter.Allows(t))
+                    .Where(t => this.settings.AllowedToAccept(t))
                     .Where(t => !this.IsLimit(t))
                     .FirstOption();
             else
@@ -114,7 +144,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     .SelectMany(c => c.GetThingList(this.Map))
                     .Where(t => t.def.category == ThingCategory.Item)
                     .Where(t => !t.IsForbidden(Faction.OfPlayer))
-                    .Where(t => this.filter.Allows(t))
+                    .Where(t => this.settings.AllowedToAccept(t))
                     .Where(t => !this.IsLimit(t))
                     .FirstOption();
         }
@@ -125,7 +155,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 return (this.Position + this.Rotation.Opposite.FacingCell).GetThingList(this.Map)
                     .OfType<Building_BeltConveyor>() // get any conveyors, also casts to conveyors
                     .Where(b => !b.IsUnderground && b.Carrying() != null)
-                    .Where(b => this.filter.Allows(b.Carrying()))
+                    .Where(b => this.settings.AllowedToAccept(b.Carrying()))
                     .Where(b => !this.IsLimit(b.Carrying()))
                     .FirstOption();
             else
@@ -133,7 +163,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     .OfType<Building_BeltConveyor>() // get any conveyors, also casts to conveyors
                     .Where(b => !b.IsUnderground && b.Carrying() != null)
                     .Where(b => !b.Carrying().IsForbidden(Faction.OfPlayer))
-                    .Where(b => this.filter.Allows(b.Carrying()))
+                    .Where(b => this.settings.AllowedToAccept(b.Carrying()))
                     .Where(b => !this.IsLimit(b.Carrying()))
                     .FirstOption();
         }
@@ -161,7 +191,8 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 yield return g;
             }
-
+            foreach (Gizmo g2 in StorageSettingsClipboard.CopyPasteGizmosFor(settings))
+                yield return g2;
             yield return new Command_Toggle()
             {
                 isActive = () => this.active,

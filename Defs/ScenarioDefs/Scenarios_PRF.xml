@@ -169,7 +169,7 @@ You should quickly prepare for the raid.</text>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
-                    <thingDef>WDCoal</thingDef>
+                    <thingDef>WoodLog</thingDef>
                     <count>100</count>
                 </li>
             </parts>

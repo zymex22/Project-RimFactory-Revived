@@ -32,6 +32,8 @@ namespace ProjectRimFactory.Common
         bool Glow { get; set; }
         bool SpeedSetting { get; }
         bool RangeSetting { get; }
+
+        void RefreshPowerStatus();
     }
 
     class ITab_PowerSupply : ITab
