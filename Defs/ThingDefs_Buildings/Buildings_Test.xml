@@ -89,8 +89,8 @@
       </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
-        <squareAreaRadius>5</squareAreaRadius> <!-- This dont work on Building_DroneStationRefuelable -->
+      <li Class="ProjectRimFactory.Drones.DroneDefModExtension">
+        <circularJobRadius>5</circularJobRadius>
       </li>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <maxNumDrones>2</maxNumDrones>        
