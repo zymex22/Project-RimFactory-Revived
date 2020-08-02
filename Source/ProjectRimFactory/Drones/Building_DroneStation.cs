@@ -47,19 +47,22 @@ namespace ProjectRimFactory.Drones
 
         public override Color Color => colorInt;
 
-        public override int ListPriority => throw new NotImplementedException();
+        public override int ListPriority => 3000;
 
         public override string GetUniqueLoadID()
         {
-            throw new NotImplementedException();
+            return "Area_" + ID + "_DroneArea";
         }
 
-    }
+        public override void ExposeData()
+        {
+            //IL_0025: Unknown result type (might be due to invalid IL or missing references)
+            //IL_002b: Unknown result type (might be due to invalid IL or missing references)
+            base.ExposeData();
+            Scribe_Values.Look(ref labelInt, "label");
+            Scribe_Values.Look(ref colorInt, "color");
+        }
 
-    public class DroneDefModExtension : DefModExtension
-    {
-        public int SquareJobRadius = 0; //0 Means infinite
-        public string Sleeptimes = ""; //Comma seperated List of sleep Times
     }
 
 
@@ -69,7 +72,7 @@ namespace ProjectRimFactory.Drones
 
         public string[] getSleepTimesList {
             get {
-                return def.GetModExtension<DroneDefModExtension>().Sleeptimes.Split(',');
+                return def.GetModExtension<DefModExtension_DroneStation>().Sleeptimes.Split(',');
             }
         }
 
@@ -79,7 +82,7 @@ namespace ProjectRimFactory.Drones
         {
             get
             {
-                return GenAdj.OccupiedRect(this).ExpandedBy(def.GetModExtension<DroneDefModExtension>().SquareJobRadius).Cells;
+                return GenAdj.OccupiedRect(this).ExpandedBy(def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius).Cells;
             }
         }
 
@@ -91,7 +94,9 @@ namespace ProjectRimFactory.Drones
             }
         }
 
-        public Area DroneAllowedArea
+        public Area DroneAllowedArea => GetDroneAllowedArea;
+
+        public Area GetDroneAllowedArea
         {
             get
             {
@@ -201,7 +206,7 @@ namespace ProjectRimFactory.Drones
         {
             base.DrawExtraSelectionOverlays();
             //Dont Draw if infinite
-            if (def.GetModExtension<DroneDefModExtension>().SquareJobRadius > 0) { 
+            if (def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius > 0) { 
                 GenDraw.DrawFieldEdges(GetCoverageCells);
             }
             

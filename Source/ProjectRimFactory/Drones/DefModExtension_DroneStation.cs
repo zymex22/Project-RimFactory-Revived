@@ -12,5 +12,7 @@ namespace ProjectRimFactory.Drones
         public int maxNumDrones;
         public bool displayDormantDrones;
         public List<WorkTypeDef> workTypes;
+        public int SquareJobRadius = 0; //0 Means infinite
+        public string Sleeptimes = ""; //Comma seperated List of sleep Times
     }
 }

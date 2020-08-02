@@ -19,9 +19,9 @@ namespace ProjectRimFactory.Drones
             //}
 
             //I want to replace that
-            if (def.GetModExtension<DroneDefModExtension>().SquareJobRadius > 0)
+            if (def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius > 0)
             {
-                int squareAreaRadius = def.GetModExtension<DroneDefModExtension>().SquareJobRadius;
+                int squareAreaRadius = def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius;
                 List<IntVec3> list = new List<IntVec3>((squareAreaRadius * 2 + 1) * (squareAreaRadius * 2 + 1));
                 for (int i = -squareAreaRadius; i <= squareAreaRadius; i++)
                 {

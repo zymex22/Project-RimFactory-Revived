@@ -50,7 +50,7 @@ namespace ProjectRimFactory.Drones
 
 
             //If range is set (bigger then 0) then do handel the range
-            if (this.station.def.GetModExtension< DroneDefModExtension>().SquareJobRadius > 0)
+            if (this.station.def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius > 0)
             {
                 playerSettings.AreaRestriction = this.station.DroneAllowedArea;
             }
@@ -92,6 +92,7 @@ namespace ProjectRimFactory.Drones
         {
             base.ExposeData();
             Scribe_References.Look(ref station, "station");
+          //  Scribe_References.Look(ref station.DroneAllowedArea, "Area");
         }
     }
 }

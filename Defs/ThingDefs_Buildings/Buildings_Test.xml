@@ -89,11 +89,9 @@
       </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.Drones.DroneDefModExtension">
-        <SquareJobRadius>5</SquareJobRadius>
-      </li>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">       
         <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
+        <SquareJobRadius>5</SquareJobRadius>
         <workTypes>
           <li>Firefighter</li>
           <li>BasicWorker</li>
