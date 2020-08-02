@@ -9,18 +9,16 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace ProjectRimFactory.CultivatorTools
+namespace ProjectRimFactory.Drones
 {
-    public class Building_DroneCultivator : Building_DroneStation
+    public class Building_DroneCultivator : Building_WorkGiverDroneStation
     {
         public Rot4 outputRotation = Rot4.North;
 
-        public IntVec3 OutputSlot => Position + outputRotation.FacingCell * (this.def.GetModExtension<CultivatorDefModExtension>().squareAreaRadius + 1);
+       // public IntVec3 OutputSlot => Position + outputRotation.FacingCell * (this.def.GetModExtension<CultivatorDefModExtension>().squareAreaRadius + 1);
 
         int dronesLeft;
         List<IntVec3> cachedCoverageCells;
-
-        public bool DroneHauling => this.def.GetModExtension<DefModExtension_DoneBehavior>()?.hauling ?? false;
 
         public override int DronesLeft { get => dronesLeft - spawnedDrones.Count; }
         public override void Notify_DroneLost()
@@ -32,101 +30,6 @@ namespace ProjectRimFactory.CultivatorTools
             dronesLeft++;
         }
 
-        public override Job TryGiveJob()
-        {
-            for (int i = 0; i < cachedCoverageCells.Count; i++)
-            {
-                if (!Map.reservationManager.IsReservedByAnyoneOf(cachedCoverageCells[i], Faction))
-                {
-                    Job job = JobOnCell(cachedCoverageCells[i]);
-                    if (job != null)
-                    {
-                        return job;
-                    }
-                }
-            }
-            return null;
-        }
-
-        Job JobOnCell(IntVec3 cell)
-        {
-            IPlantToGrowSettable plantToGrowSettable = cell.GetPlantToGrowSettable(Map);
-            if (plantToGrowSettable != null)
-            {
-                bool plantFound = false;
-                foreach (Thing t in cell.GetThingList(Map))
-                {
-                    if (t is Plant p)
-                    {
-                        plantFound = true;
-                        if (!Map.reservationManager.IsReservedByAnyoneOf(t, Faction))
-                        {
-                            Job job = JobAtPlant(p, plantToGrowSettable);
-                            if (job != null)
-                            {
-                                return job;
-                            }
-                        }
-                    }
-                    else if (this.DroneHauling && t.def == plantToGrowSettable.GetPlantDefToGrow().plant.harvestedThingDef)
-                    {
-                        if (!Map.reservationManager.IsReservedByAnyoneOf(t, this.Faction) && !Map.reservationManager.IsReservedByAnyoneOf(this.OutputSlot, this.Faction))
-                        {
-                            var job = JobMaker.MakeJob(JobDefOf.HaulToCell, t, this.OutputSlot);
-                            job.count = 99999;
-                            job.haulOpportunisticDuplicates = false;
-                            job.haulMode = HaulMode.ToCellNonStorage;
-                            job.ignoreDesignations = true;
-                            return job;
-                        }
-                    }
-                }
-                ThingDef plantDef = plantToGrowSettable.GetPlantDefToGrow();
-                if (!plantFound &&
-                    plantDef != null && 
-                    plantToGrowSettable.CanPlantRightNow() &&
-                    plantDef.CanEverPlantAt(cell, Map) &&
-                    PlantUtility.GrowthSeasonNow(cell, Map))
-                {
-                    Thing blocker = PlantUtility.AdjacentSowBlocker(plantDef, cell, Map);
-                    // Get rid of blockers
-                    if (blocker != null)
-                    {
-                        if (blocker is Plant && blocker.def != plantDef && !Map.reservationManager.IsReservedByAnyoneOf(blocker, Faction))
-                            return new Job(JobDefOf.CutPlant, blocker);
-                        // Wait for blocker to be cut/moved
-                    }
-                    else
-                    {
-                        // Sow
-                        return new Job(JobDefOf.Sow, cell)
-                        {
-                            plantDefToSow = plantToGrowSettable.GetPlantDefToGrow()
-                        };
-                    }
-                }
-            }
-            return null;
-        }
-
-        Job JobAtPlant(Plant p, IPlantToGrowSettable plantToGrowSettable)
-        {
-            if (p.def == plantToGrowSettable.GetPlantDefToGrow())
-            {
-                // Harvest if fully grown
-                if (p.Growth + 0.001f >= 1.00f)
-                {
-                    return new Job(JobDefOf.Harvest, p);
-                }
-            }
-            else
-            {
-                // Cut if foreign plant
-                return new Job(JobDefOf.CutPlant, p);
-            }
-            return null;
-        }
-
         public override void PostMake()
         {
             base.PostMake();
@@ -136,22 +39,9 @@ namespace ProjectRimFactory.CultivatorTools
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            cachedCoverageCells = GetCoverageCells();
+            cachedCoverageCells = GetCoverageCells;
         }
-
-        private List<IntVec3> GetCoverageCells()
-        {
-            int squareAreaRadius = def.GetModExtension<CultivatorDefModExtension>().squareAreaRadius;
-            List<IntVec3> list = new List<IntVec3>((squareAreaRadius * 2 + 1) * (squareAreaRadius * 2 + 1));
-            for (int i = -squareAreaRadius; i <= squareAreaRadius; i++)
-            {
-                for (int j = -squareAreaRadius; j <= squareAreaRadius; j++)
-                {
-                    list.Add(new IntVec3(i, 0, j) + Position);
-                }
-            }
-            return list;
-        }
+ 
 
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -167,17 +57,6 @@ namespace ProjectRimFactory.CultivatorTools
                 icon = ContentFinder<Texture2D>.Get("UI/Designators/ZoneCreate_Growing"),
                 defaultLabel = "CommandSunLampMakeGrowingZoneLabel".Translate()
             };
-            if (DroneHauling)
-            {
-                yield return new Command_Action
-                {
-                    icon = ContentFinder<Texture2D>.Get("UI/Misc/Compass"),
-                    defaultLabel = "CultivatorTools_AdjustDirection_Output".Translate(),
-                    defaultDesc = "CultivatorTools_AdjustDirection_Desc".Translate(outputRotation.AsCompassDirection()),
-                    activateSound = SoundDefOf.Click,
-                    action = () => outputRotation.Rotate(RotationDirection.Clockwise)
-                };
-            }
         }
 
         protected void MakeMatchingGrowZone()
@@ -188,17 +67,7 @@ namespace ProjectRimFactory.CultivatorTools
                                           select tempCell);
         }
 
-        public override void DrawExtraSelectionOverlays()
-        {
-            base.DrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(cachedCoverageCells);
-
-            if (this.DroneHauling)
-            {
-                GenDraw.DrawFieldEdges(new List<IntVec3> { OutputSlot }, Color.cyan);
-            }
-        }
-
+        //Save Drone Count
         public override void ExposeData()
         {
             base.ExposeData();
@@ -206,8 +75,5 @@ namespace ProjectRimFactory.CultivatorTools
         }
     }
 
-    public class DefModExtension_DoneBehavior : DefModExtension
-    {
-        public bool hauling = false;
-    }
+    
 }

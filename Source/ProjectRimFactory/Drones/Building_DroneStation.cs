@@ -10,9 +10,78 @@ using Verse.AI;
 
 namespace ProjectRimFactory.Drones
 {
+
+    public class DroneArea : Area
+    {
+        private string labelInt;
+        public DroneArea(AreaManager areaManager, string label = null) : base(areaManager)
+        {
+            base.areaManager = areaManager;
+            if (!label.NullOrEmpty())
+            {
+                labelInt = label;
+            }
+            else
+            {
+                int num = 1;
+                while (true)
+                {
+                    labelInt = "AreaDefaultLabel".Translate(num);
+                    if (areaManager.GetLabeled(labelInt) == null)
+                    {
+                        break;
+                    }
+                    num++;
+                }
+            }
+            colorInt = new Color(Rand.Value, Rand.Value, Rand.Value);
+            colorInt = Color.Lerp(colorInt, Color.gray, 0.5f);
+        }
+
+
+        private Color colorInt = Color.red;
+
+        private string LabelText = "DroneZone";
+
+        public override string Label => LabelText;
+
+        public override Color Color => colorInt;
+
+        public override int ListPriority => throw new NotImplementedException();
+
+        public override string GetUniqueLoadID()
+        {
+            throw new NotImplementedException();
+        }
+
+    }
+
+    public class DroneDefModExtension : DefModExtension
+    {
+        public int SquareJobRadius = 0; //0 Means infinite
+    }
+
+
     [StaticConstructorOnStartup]
     public abstract class Building_DroneStation : Building
     {
+
+        public IEnumerable<IntVec3> StationRangecells
+        {
+            get
+            {
+                return GenAdj.OccupiedRect(this).ExpandedBy(def.GetModExtension<DroneDefModExtension>().SquareJobRadius).Cells;
+            }
+        }
+
+        public List<IntVec3> GetCoverageCells
+        {
+            get
+            {
+                return StationRangecells.ToList();
+            }
+        }
+
         public static readonly Texture2D Cancel = ContentFinder<Texture2D>.Get("UI/Designators/Cancel", true);
         protected bool lockdown;
         protected DefModExtension_DroneStation extension;
@@ -96,6 +165,17 @@ namespace ProjectRimFactory.Drones
                 spawnedDrones.Remove(drone);
                 Notify_DroneLost();
             }
+        }
+
+        //Handel the Range UI
+        public override void DrawExtraSelectionOverlays()
+        {
+            base.DrawExtraSelectionOverlays();
+            //Dont Draw if infinite
+            if (def.GetModExtension<DroneDefModExtension>().SquareJobRadius > 0) { 
+                GenDraw.DrawFieldEdges(GetCoverageCells);
+            }
+            
         }
 
         public override string GetInspectString()

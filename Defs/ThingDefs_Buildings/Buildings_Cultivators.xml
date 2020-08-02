@@ -57,7 +57,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>CultivatorTools_DroneCultivator</defName>
     <label>Drone Cultivator</label>
-    <thingClass>ProjectRimFactory.CultivatorTools.Building_DroneCultivator</thingClass>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator</texPath>
     </graphicData>
@@ -78,15 +78,16 @@
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
-        <squareAreaRadius>5</squareAreaRadius>
+      <li Class="ProjectRimFactory.Drones.DroneDefModExtension">
+        <SquareJobRadius>5</SquareJobRadius>
       </li>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <maxNumDrones>2</maxNumDrones>        <!-- How many drones should be used? -->
         <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
-      </li>
-      <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
-        <hauling>false</hauling>        <!-- make false to no output again -->
+      <workTypes>
+          <li>Growing</li>
+          <li>Hauling</li>
+        </workTypes>
       </li>
     </modExtensions>
     <researchPrerequisites>
@@ -98,7 +99,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>CultivatorTools_CultivatorWithLamp</defName>
     <label>Drone Cultivator (sun lamp)</label>
-    <thingClass>ProjectRimFactory.CultivatorTools.Building_DroneCultivator</thingClass>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorWithSunLamp</texPath>
       <drawSize>(1.1,1.1)</drawSize>
@@ -129,15 +130,16 @@
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
-        <squareAreaRadius>5</squareAreaRadius>
+      <li Class="ProjectRimFactory.Drones.DroneDefModExtension">
+        <SquareJobRadius>5</SquareJobRadius>
       </li>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <maxNumDrones>2</maxNumDrones>
         <displayDormantDrones>true</displayDormantDrones>
-      </li>
-      <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
-        <hauling>false</hauling>        <!-- make false to no output again -->
+        <workTypes>
+          <li>Growing</li>
+          <li>Hauling</li>
+        </workTypes>
       </li>
     </modExtensions>
     <researchPrerequisites>

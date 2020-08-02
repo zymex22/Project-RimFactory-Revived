@@ -75,7 +75,7 @@
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Refuelable">
         <fuelConsumptionRate>0</fuelConsumptionRate>
-        <fuelCapacity>1</fuelCapacity>
+        <fuelCapacity>4</fuelCapacity>
         <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelFilter>
@@ -92,8 +92,7 @@
       <li Class="ProjectRimFactory.Drones.DroneDefModExtension">
         <SquareJobRadius>5</SquareJobRadius>
       </li>
-      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
-        <maxNumDrones>2</maxNumDrones>        
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">       
         <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
         <workTypes>
           <li>Firefighter</li>
@@ -105,6 +104,5 @@
     </modExtensions>
     <researchPrerequisites></researchPrerequisites>
   </ThingDef>
-
 
 </Defs>
