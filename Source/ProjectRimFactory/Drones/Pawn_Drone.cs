@@ -41,7 +41,9 @@ namespace ProjectRimFactory.Drones
 
         private Color colorInt = Color.red;
 
-        public override string Label => throw new NotImplementedException();
+        private string LabelText = "DroneZone";
+
+        public override string Label => LabelText;
 
         public override Color Color => colorInt;
 
@@ -56,7 +58,7 @@ namespace ProjectRimFactory.Drones
 
     public class DroneDefModExtension : DefModExtension
     {
-        public int circularJobRadius = 0; //0 Means infinite
+        public int SquareJobRadius = 0; //0 Means infinite
     }
 
     public class Pawn_Drone : Pawn
@@ -74,7 +76,7 @@ namespace ProjectRimFactory.Drones
         {
             get
             {
-                return GenAdj.OccupiedRect(this).ExpandedBy(this.station.def.GetModExtension<DroneDefModExtension>().circularJobRadius).Cells;
+                return GenAdj.OccupiedRect(this).ExpandedBy(this.station.def.GetModExtension<DroneDefModExtension>().SquareJobRadius).Cells;
             }
         }
 
@@ -107,21 +109,24 @@ namespace ProjectRimFactory.Drones
 
 
 
-            //Handel Allowed area (not to be confuced with Area_Allowed)
-            Area droneArea;
-            droneArea = new DroneArea(this.Map.areaManager);
-            //Need to set the Area to a size
+            //If range is set (bigger then 0) then do handel the range
+            if (this.station.def.GetModExtension<DroneDefModExtension>().SquareJobRadius > 0) { 
+                //Handel Allowed area (not to be confuced with Area_Allowed)
+                Area droneArea;
+                droneArea = new DroneArea(this.Map.areaManager);
+                //Need to set the Area to a size
 
-            foreach (IntVec3 cell in Rangecells)
-            {
-                droneArea[cell] = true;
+                foreach (IntVec3 cell in Rangecells)
+                {
+                    droneArea[cell] = true;
+                }
+                //Not shure if i need that but just to be shure
+                droneArea[Position] = true;
+
+                playerSettings.AreaRestriction = droneArea;
             }
+            
 
-            droneArea[Position] = true;
-
-            playerSettings.AreaRestriction = droneArea;
-
-            //station.def
 
         }
 

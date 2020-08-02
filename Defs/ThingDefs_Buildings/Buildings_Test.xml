@@ -90,7 +90,7 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Drones.DroneDefModExtension">
-        <circularJobRadius>5</circularJobRadius>
+        <SquareJobRadius>5</SquareJobRadius>
       </li>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <maxNumDrones>2</maxNumDrones>        
