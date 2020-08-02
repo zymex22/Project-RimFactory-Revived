@@ -59,12 +59,21 @@ namespace ProjectRimFactory.Drones
     public class DroneDefModExtension : DefModExtension
     {
         public int SquareJobRadius = 0; //0 Means infinite
+        public string Sleeptimes = ""; //Comma seperated List of sleep Times
     }
 
 
     [StaticConstructorOnStartup]
     public abstract class Building_DroneStation : Building
     {
+
+        public string[] getSleepTimesList {
+            get {
+                return def.GetModExtension<DroneDefModExtension>().Sleeptimes.Split(',');
+            }
+        }
+
+        public string[] stl => getSleepTimesList;
 
         public IEnumerable<IntVec3> StationRangecells
         {

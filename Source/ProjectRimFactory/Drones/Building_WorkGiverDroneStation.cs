@@ -22,23 +22,27 @@ namespace ProjectRimFactory.Drones
         public override Job TryGiveJob()
         {
             Job result = null;
-            Pawn pawn = MakeDrone();
-            GenSpawn.Spawn(pawn, Position, Map);
-            pawn.workSettings = new Pawn_WorkSettings(pawn);
-            pawn.workSettings.EnableAndInitialize();
-            pawn.workSettings.DisableAll();
+            GenLocalDate.HourOfDay(this);
+            if (!(stl.Contains(GenLocalDate.HourOfDay(this).ToString()))) { 
+                
+                Pawn pawn = MakeDrone();
+                GenSpawn.Spawn(pawn, Position, Map);
+                pawn.workSettings = new Pawn_WorkSettings(pawn);
+                pawn.workSettings.EnableAndInitialize();
+                pawn.workSettings.DisableAll();
             
-            foreach (WorkTypeDef def in WorkTypes)
-            {
-                pawn.workSettings.SetPriority(def, 3);
+                foreach (WorkTypeDef def in WorkTypes)
+                {
+                    pawn.workSettings.SetPriority(def, 3);
+                }
+                result = TryIssueJobPackageDrone(pawn, true).Job;
+                if (result == null)
+                {
+                    result = TryIssueJobPackageDrone(pawn, false).Job;
+                }
+                pawn.Destroy();
+                Notify_DroneGained();
             }
-            result = TryIssueJobPackageDrone(pawn, true).Job;
-            if (result == null)
-            {
-                result = TryIssueJobPackageDrone(pawn, false).Job;
-            }
-            pawn.Destroy();
-            Notify_DroneGained();
             return result;
         }
 
