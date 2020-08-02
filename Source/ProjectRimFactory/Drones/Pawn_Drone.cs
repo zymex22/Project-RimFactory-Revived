@@ -21,15 +21,6 @@ namespace ProjectRimFactory.Drones
         this.Destroy();
         }
 
-
-        public IEnumerable<IntVec3> Rangecells
-        {
-            get
-            {
-                return GenAdj.OccupiedRect(this).ExpandedBy(this.station.def.GetModExtension<DroneDefModExtension>().SquareJobRadius).Cells;
-            }
-        }
-
         // or destroyed
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
         if (this.Spawned) this.DeSpawn();
@@ -59,23 +50,10 @@ namespace ProjectRimFactory.Drones
 
 
             //If range is set (bigger then 0) then do handel the range
-                if (this.station.def.GetModExtension< DroneDefModExtension>().SquareJobRadius > 0)
-                {
-                    //Handel Allowed area (not to be confuced with Area_Allowed)
-                    Area droneArea;
-                    droneArea = new DroneArea(this.Map.areaManager);
-                    //Need to set the Area to a size
-
-
-                    foreach (IntVec3 cell in Rangecells)
-                    {
-                        droneArea[cell] = true;
-                    }
-                    //Not shure if i need that but just to be shure
-                    droneArea[Position] = true;
-
-                    playerSettings.AreaRestriction = droneArea;
-                }
+            if (this.station.def.GetModExtension< DroneDefModExtension>().SquareJobRadius > 0)
+            {
+                playerSettings.AreaRestriction = this.station.DroneAllowedArea;
+            }
             
 
         }

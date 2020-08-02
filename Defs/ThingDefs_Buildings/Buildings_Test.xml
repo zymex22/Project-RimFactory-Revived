@@ -40,7 +40,7 @@
     <staticSunShadowHeight>0.1</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <constructEffect>ConstructMetal</constructEffect>
     <placeWorkers>
-      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
+      <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
     </placeWorkers>
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />

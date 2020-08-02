@@ -5,7 +5,7 @@
     <defName>Cultivator_gr</defName>
   </DesignatorDropdownGroupDef>
   <!--=========================== Cultivator Base ==================================-->
-  <ThingDef Name="PRF_CultivatorBase" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_CultivatorBaseBase" ParentName="PRFBuildingBase" Abstract="True">
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
@@ -42,9 +42,7 @@
     <designatorDropdown>Cultivator_gr</designatorDropdown>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <constructEffect>ConstructMetal</constructEffect>
-    <placeWorkers>
-      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
-    </placeWorkers>
+    
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />
       <li>
@@ -52,9 +50,22 @@
       </li>
     </comps>
   </ThingDef>
+  
+  <ThingDef Name="PRF_CultivatorBaseDrone" ParentName="PRF_CultivatorBaseBase" Abstract="True">
+    <placeWorkers>
+        <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
+    </placeWorkers>
+  </ThingDef>
+  
+  <ThingDef Name="PRF_CultivatorBase" ParentName="PRF_CultivatorBaseBase" Abstract="True">
+    <placeWorkers>
+        <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
+    </placeWorkers>
+  </ThingDef>
+  
 
   <!--=========================== Basic Cultivator ==================================-->
-  <ThingDef ParentName="PRF_CultivatorBase">
+  <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>CultivatorTools_DroneCultivator</defName>
     <label>Drone Cultivator</label>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
@@ -96,7 +107,7 @@
   </ThingDef>
 
   <!--=========================== Sun Cultivator ==================================-->
-  <ThingDef ParentName="PRF_CultivatorBase">
+  <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>CultivatorTools_CultivatorWithLamp</defName>
     <label>Drone Cultivator (sun lamp)</label>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>

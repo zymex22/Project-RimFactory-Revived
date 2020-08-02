@@ -82,6 +82,26 @@ namespace ProjectRimFactory.Drones
             }
         }
 
+        public Area DroneAllowedArea
+        {
+            get
+            {
+                Area droneArea;
+                droneArea = new DroneArea(this.Map.areaManager);
+                //Need to set the Area to a size
+
+
+                foreach (IntVec3 cell in StationRangecells)
+                {
+                    droneArea[cell] = true;
+                }
+                //Not shure if i need that but just to be shure
+                droneArea[Position] = true;
+                return droneArea;
+
+            }
+        }
+
         public static readonly Texture2D Cancel = ContentFinder<Texture2D>.Get("UI/Designators/Cancel", true);
         protected bool lockdown;
         protected DefModExtension_DroneStation extension;
