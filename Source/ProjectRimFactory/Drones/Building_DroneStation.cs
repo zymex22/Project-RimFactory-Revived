@@ -14,6 +14,11 @@ namespace ProjectRimFactory.Drones
     public class DroneArea : Area
     {
         private string labelInt;
+
+        public DroneArea()
+        {
+        }
+
         public DroneArea(AreaManager areaManager, string label = null) : base(areaManager)
         {
             base.areaManager = areaManager;
@@ -94,7 +99,7 @@ namespace ProjectRimFactory.Drones
             }
         }
 
-        public Area DroneAllowedArea => GetDroneAllowedArea;
+        public Area DroneAllowedArea = new DroneArea();
 
         public Area GetDroneAllowedArea
         {
@@ -136,6 +141,9 @@ namespace ProjectRimFactory.Drones
         {
             base.SpawnSetup(map, respawningAfterLoad);
             extension = def.GetModExtension<DefModExtension_DroneStation>();
+            //Setup Allowd Area
+            DroneAllowedArea = GetDroneAllowedArea;
+
         }
         public override void Draw()
         {
@@ -235,6 +243,8 @@ namespace ProjectRimFactory.Drones
         public override void ExposeData()
         {
             base.ExposeData();
+
+           // Scribe_Deep.Look(ref DroneAllowedArea, "DroneAllowedArea", LookMode.Deep); //Not working as intended
             Scribe_Collections.Look(ref spawnedDrones, "spawnedDrones", LookMode.Reference);
             Scribe_Values.Look(ref lockdown, "lockdown");
         }
