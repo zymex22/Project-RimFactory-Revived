@@ -139,11 +139,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             Scribe_Deep.Look(ref currentBillReport, "currentBillReport");
             Scribe_Collections.Look(ref thingQueue, "thingQueue", LookMode.Deep);
             Scribe_Values.Look(ref allowForbidden, "allowForbidden");
-            if (buildingPawn != null)
-            {
-                Scribe_Deep.Look(ref buildingPawn, "buildingPawn");
-            }
-            
+            Scribe_Deep.Look(ref buildingPawn, "buildingPawn");
         }
         public override IEnumerable<Gizmo> GetGizmos()
         {
