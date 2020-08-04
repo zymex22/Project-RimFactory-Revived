@@ -12,13 +12,9 @@ namespace ProjectRimFactory.Industry
     /// Deep Quarry
     /// 
     /// Note: Can be used as either Tick(), TickRare(), or TickLong()
-    /// See below
-    /// Note: If you use TickRare AND you consume fuel while idle,
-    ///       this WILL throw an error. You can get around this w/
-    ///       a custom compProperties_Refuelable and then override
-    ///       ConfigErrors() to not log any errors.
-    /// Note: If someone patches CompRefuelable's Notify_UsedThisTick()
-    ///       it does NOT get called if set to Rare or Long.
+    /// Note: If someone (else - another mod, say) patches CompRefuelable's 
+    ///       Notify_UsedThisTick() it will NOT get called if this is set to 
+    ///       Rare or Long.
     ///       (VERY unlikely to matter)
     /// 
     /// TODO: Set this up as an abstract parent "produce something
@@ -34,7 +30,8 @@ namespace ProjectRimFactory.Industry
         public CompRefuelable fuel;
         public int ProducedChunksTotal = 0;
 
-        public Building_DeepQuarry() : base() {
+        public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+            base.SpawnSetup(map, respawningAfterLoad);
             flick = GetComp<CompFlickable>();
             power = GetComp<CompPowerTrader>();
             fuel = GetComp<CompRefuelable>();
@@ -55,40 +52,65 @@ namespace ProjectRimFactory.Industry
         }
 
         /// <summary>
-        /// One function to handel a tick in order to remove duplicate Code and Logic
+        ///   Tick() action for an arbitrary number of ticks
         /// </summary>
-        /// <param name="GenResource">Recorce Ammount based on tick</param>
-        /// <param name="FuelConsumptionRateFactor">0 Means that Base Tick is Used . All other values are calculated</param>
-        private void HandelTick(int GenResource, int FuelConsumptionRateFactor)
+        /// <param name="numTicks">Number of ticks that have passed</param>
+        /// <param name="consumeFuelWhileRunning">whether or not to manually consume fuel.
+        ///     This is important because the vanilla CompRefuelable only
+        ///     Tick()s and so only consumes fuel if the ThingWithComps is
+        ///     set to Tick (not Rare or Long).  This happens if the fuel is
+        ///     NOT consumeOnlyWhenUsed.</param>
+        private void HandelTick(int numTicks, bool consumeFuelWhileRunning)
         {
-            if (FuelConsumptionRateFactor != 0 && fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
-                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuelConsumptionRateFactor);
-            if (flick == null || flick.SwitchIsOn)
+            // Log.Message("" + this + ": has flick? " + (flick == null ? "null flick" : (flick.SwitchIsOn ? "flick on" : "flick off"))
+                 // + ". has power? " + (power == null ? "null power" : (power.PowerOn ? "power on" : "power off")) +
+                 // ". has fuel?" + (fuel == null ? "null fuel" : (fuel.HasFuel ? "fueled" : "out of fuel")));
+
+            // Consume fuel even if turned off or unpowered:
+            //   (this could be enabled by some setting in 
+            //    the ModExtension)
+            /*if (consumeFuelWhileRunning && fuel != null &&
+                !fuel.Props.consumeFuelOnlyWhenUsed) {
+                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
+            }*/
+
+            if (flick == null || flick.SwitchIsOn) // Either no switch or turned on
             {
-                if (power == null || power.PowerOn)
+                if (power == null || power.PowerOn) // Either does not use power or has power
                 {
-                    if (fuel != null)
+                    if (fuel != null) // uses fuel
                     {
-                        if (FuelConsumptionRateFactor != 0)
-                        {
-                            fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuelConsumptionRateFactor);
+                        // If we need to consume fuel ourselves:
+                        // The fuel consuption per Tick is fuel.Props.fuelConsumptionRate/60000
+                        //   (per CompRefuelable - note that we will miss any Harmony patches
+                        //    that target fuelConsumptionRate. Grabbing the private result is
+                        //    a TODO for later)
+                        if (consumeFuelWhileRunning &&
+                            !fuel.Props.consumeFuelOnlyWhenUsed) {
+                            fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
                         }
-                        else
-                        {
-                            fuel.Notify_UsedThisTick();
-                        }
+                        // Note: this doesn't catch any harmony patches to
+                        //   Notify_UsedThisTick()
+                        // One (rather silly) option would be:
+                        //   for (int i=0; i<numTicks; i++) fuel.Notify_UsedThisTick();
+                        // As per Thornsworth:
+                        //    dear god. do the calculation yourself
+                        //    geeze
+
+                        // Vanilla's CompRefuelable does this:
+                        fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
                         if (fuel.HasFuel)
                         {
-                            TryGenerateResource(GenResource);
+                            TryGenerateResource(numTicks);
                         }
                     }
-                    else if (power != null && power.PowerOn)
-                    {  //fuel==null
-                        TryGenerateResource(GenResource);
+                    else  //fuel==null, does not use fuel
+                    {
+                        // already know it's turned on and powered
+                        TryGenerateResource(numTicks);
                     }
                 }
             }
-
         }
 
         /// <summary>
@@ -112,20 +134,21 @@ namespace ProjectRimFactory.Industry
         public override void Tick()
         {
             base.Tick();
-            HandelTick(1, 0);
-       }
+            HandelTick(1, false); // CompRefuelable burns fuel on Tick() without extra work
+        }
         public override void TickRare()
         {
             base.TickRare();
-            HandelTick(250, 6000 * 250);
+            HandelTick(250, true);
         }
         public override void TickLong()
         {
             base.TickLong();
-            HandelTick(2000, 6000 * 2000);
+            HandelTick(2000, true);
         }
 
         public void TryGenerateResource(int ticksInInterval) {
+            // Log.Message("" + this + " trying to generate resource after this many ticks:" + ticksInInterval);
             productionTime += ticksInInterval;
             if (productionTime >= 2000) {
                 productionTime = 0;
