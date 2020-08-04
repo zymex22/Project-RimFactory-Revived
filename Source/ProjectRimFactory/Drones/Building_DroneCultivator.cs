@@ -15,10 +15,7 @@ namespace ProjectRimFactory.Drones
     {
         public Rot4 outputRotation = Rot4.North;
 
-       // public IntVec3 OutputSlot => Position + outputRotation.FacingCell * (this.def.GetModExtension<CultivatorDefModExtension>().squareAreaRadius + 1);
-
         int dronesLeft;
-        List<IntVec3> cachedCoverageCells;
 
         public override int DronesLeft { get => dronesLeft - spawnedDrones.Count; }
         public override void Notify_DroneLost()
@@ -39,7 +36,6 @@ namespace ProjectRimFactory.Drones
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            cachedCoverageCells = GetCoverageCells;
         }
  
 
@@ -62,7 +58,7 @@ namespace ProjectRimFactory.Drones
         protected void MakeMatchingGrowZone()
         {
             Designator_ZoneAdd_Growing designator = new Designator_ZoneAdd_Growing();
-            designator.DesignateMultiCell(from tempCell in cachedCoverageCells
+            designator.DesignateMultiCell(from tempCell in cashed_GetCoverageCells
                                           where designator.CanDesignateCell(tempCell).Accepted
                                           select tempCell);
         }

@@ -19,6 +19,7 @@ namespace ProjectRimFactory.Drones
             //}
 
             //I want to replace that
+            
             if (def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius > 0)
             {
                 int squareAreaRadius = def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius;

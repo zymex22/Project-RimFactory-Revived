@@ -23,7 +23,7 @@ namespace ProjectRimFactory.Drones
         {
             Job result = null;
             GenLocalDate.HourOfDay(this);
-            if (!(stl.Contains(GenLocalDate.HourOfDay(this).ToString()))) { 
+            if (!(cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(this).ToString()))) { 
                 
                 Pawn pawn = MakeDrone();
                 GenSpawn.Spawn(pawn, Position, Map);

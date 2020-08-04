@@ -22,7 +22,7 @@ namespace ProjectRimFactory.Drones.AI
                     if (drone.station is Building_WorkGiverDroneStation b)
                     {
                         
-                        if (!(drone.station.stl.Contains(GenLocalDate.HourOfDay(drone).ToString()))) { 
+                        if (!(drone.station.cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(drone).ToString()))) { 
                         pawn.workSettings = new Pawn_WorkSettings(pawn);
                         pawn.workSettings.EnableAndInitialize();
                         pawn.workSettings.DisableAll();

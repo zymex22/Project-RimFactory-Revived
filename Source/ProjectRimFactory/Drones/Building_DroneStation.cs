@@ -73,40 +73,52 @@ namespace ProjectRimFactory.Drones
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_DroneStation : Building
+    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder
     {
+        //Sleep Time List (Loaded on Spawn)
+        public string[] cachedSleepTimeList;
 
-        public string[] getSleepTimesList {
-            get {
-                return def.GetModExtension<DefModExtension_DroneStation>().Sleeptimes.Split(',');
+        //Return the Range depending on the Active Defenition
+        public int DroneRange
+        {
+            get
+            {
+                if (this.GetComp<CompPowerWorkSetting>() != null) {
+                    return (int)Math.Ceiling(this.GetComp<CompPowerWorkSetting>().GetRange());
+                }
+                else {
+                    return def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius;
+                }
             }
-        }
 
-        public string[] stl => getSleepTimesList;
+        }
 
         public IEnumerable<IntVec3> StationRangecells
         {
             get
             {
-                return GenAdj.OccupiedRect(this).ExpandedBy(def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius).Cells;
+                return GenAdj.OccupiedRect(this).ExpandedBy(DroneRange).Cells;
             }
         }
 
-        public List<IntVec3> GetCoverageCells
+        public List<IntVec3> cashed_GetCoverageCells = null;
+        //cashed_GetCoverageCells = StationRangecells.ToList();
+        /* public List<IntVec3> GetCoverageCells
+         {
+             get
+             {
+                 return StationRangecells.ToList();
+             }
+         }*/
+
+        //droneAllowedArea Loaded on Spawn | this is ithe zone where the DronePawns are allowed to move in
+        public DroneArea droneAllowedArea;
+
+        public DroneArea GetDroneAllowedArea
         {
             get
             {
-                return StationRangecells.ToList();
-            }
-        }
-
-        public Area droneAllowedArea;
-
-        public Area GetDroneAllowedArea
-        {
-            get
-            {
-                Area droneArea;
+                DroneArea droneArea;
                 droneArea = new DroneArea(this.Map.areaManager);
                 //Need to set the Area to a size
 
@@ -122,12 +134,32 @@ namespace ProjectRimFactory.Drones
             }
         }
 
+        //This function can be used to Update the Allowed area for all Drones (Active and future)
+        //Just need to auto call tha on Change from CompPowerWorkSetting
+        public void Update_droneAllowedArea_forDrones()
+        {
+            //Refresh the area
+            droneAllowedArea = GetDroneAllowedArea;
+            if (DroneRange > 0)
+            {
+                foreach (Pawn_Drone sdrone in spawnedDrones)
+                {
+                    sdrone.playerSettings.AreaRestriction = droneAllowedArea;    
+                }
+            }
+        }
+
         public static readonly Texture2D Cancel = ContentFinder<Texture2D>.Get("UI/Designators/Cancel", true);
         protected bool lockdown;
         protected DefModExtension_DroneStation extension;
         protected List<Pawn_Drone> spawnedDrones = new List<Pawn_Drone>();
 
         public abstract int DronesLeft { get; }
+
+        public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
+
+        private float LastPowerOutput = 0;
+
         // Used for destroyed pawns
         public abstract void Notify_DroneLost();
         // Used to negate imaginary pawns despawned in WorkGiverDroneStations and JobDriver_ReturnToStation
@@ -145,10 +177,12 @@ namespace ProjectRimFactory.Drones
             //Setup Allowd Area
             if (droneAllowedArea == null) {
                 Log.Message("droneAllowedArea was null");
-             droneAllowedArea = GetDroneAllowedArea;
+                Update_droneAllowedArea_forDrones();
             }
-           
-
+            //Load the SleepTimes from XML
+            cachedSleepTimeList = extension.Sleeptimes.Split(',');
+            LastPowerOutput = GetComp<CompPowerTrader>().powerOutputInt;
+            cashed_GetCoverageCells = StationRangecells.ToList();
         }
         public override void Draw()
         {
@@ -203,6 +237,17 @@ namespace ProjectRimFactory.Drones
                     drone.jobs.StartJob(job);
                 }
             }
+            //TODO Check if we should increase the IsHashIntervalTick to enhace performence (will reduce responsivness)
+            if (this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>().powerOutputInt != LastPowerOutput)
+            {
+                //Update the Range
+                Update_droneAllowedArea_forDrones();
+                //Update the last know Val
+                LastPowerOutput = GetComp<CompPowerTrader>().powerOutputInt;
+
+                //TODO add cell calc
+                cashed_GetCoverageCells = StationRangecells.ToList();
+            }
         }
 
         public void Notify_DroneMayBeLost(Pawn_Drone drone)
@@ -220,7 +265,7 @@ namespace ProjectRimFactory.Drones
             base.DrawExtraSelectionOverlays();
             //Dont Draw if infinite
             if (def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius > 0) { 
-                GenDraw.DrawFieldEdges(GetCoverageCells);
+                GenDraw.DrawFieldEdges(cashed_GetCoverageCells);
             }
             
         }

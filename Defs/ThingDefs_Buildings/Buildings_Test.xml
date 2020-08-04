@@ -66,6 +66,71 @@
       <Plasteel>20</Plasteel>
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>500</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0</fuelConsumptionRate>
+        <fuelCapacity>4</fuelCapacity>
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelFilter>
+          <thingDefs>
+            <li>PRFDroneModule</li>
+          </thingDefs>
+        </fuelFilter>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>1</initialConfigurableTargetFuelLevel>
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">        
+        <speedSetting>false</speedSetting>
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>4</minRange>
+        <maxPowerForRange>2000</maxPowerForRange>
+        <maxRange>10</maxRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">       
+        <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
+        <workTypes>
+          <li>Firefighter</li>
+          <li>BasicWorker</li>
+          <li>Hauling</li>
+          <li>Cleaning</li>
+        </workTypes>
+      </li>
+    </modExtensions>
+    <researchPrerequisites></researchPrerequisites>
+  </ThingDef>
+  <!--=========================== Mini drone station 2 ==================================-->
+  <ThingDef ParentName="PRF_MiniDroneStation">
+    <defName>PRF_minidronestationtwo</defName>
+    <label>Mini drone 2</label>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneStationRefuelable</thingClass>
+    <graphicData>
+      <texPath>Farm/Cultivator</texPath>
+    </graphicData>
+    <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.</description>
+    <costList>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFDroneModule>2</PRFDroneModule>
+      <Steel>30</Steel>
+      <Plasteel>20</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <inspectorTabs>
+    </inspectorTabs>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -102,5 +167,4 @@
     </modExtensions>
     <researchPrerequisites></researchPrerequisites>
   </ThingDef>
-
 </Defs>
