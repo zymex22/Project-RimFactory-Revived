@@ -58,20 +58,20 @@ namespace ProjectRimFactory.Industry
         /// One function to handel a tick in order to remove duplicate Code and Logic
         /// </summary>
         /// <param name="GenResource">Recorce Ammount based on tick</param>
-        /// <param name="FuleConsumptionRateFactor">0 Means that Base Tick is Used . All other values are calculated</param>
-        private void HandelTick(int GenResource, int FuleConsumptionRateFactor)
+        /// <param name="FuelConsumptionRateFactor">0 Means that Base Tick is Used . All other values are calculated</param>
+        private void HandelTick(int GenResource, int FuelConsumptionRateFactor)
         {
-            if (FuleConsumptionRateFactor != 0 && fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
-                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuleConsumptionRateFactor);
+            if (FuelConsumptionRateFactor != 0 && fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
+                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuelConsumptionRateFactor);
             if (flick == null || flick.SwitchIsOn)
             {
                 if (power == null || power.PowerOn)
                 {
                     if (fuel != null)
                     {
-                        if (FuleConsumptionRateFactor != 0)
+                        if (FuelConsumptionRateFactor != 0)
                         {
-                            fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuleConsumptionRateFactor);
+                            fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuelConsumptionRateFactor);
                         }
                         else
                         {
