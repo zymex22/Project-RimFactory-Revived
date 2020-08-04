@@ -11,6 +11,7 @@ using Verse.AI;
 namespace ProjectRimFactory.Drones
 {
 
+    //This is basicly a clone of Area_Allowed it was created since the former one is limited to 10 in vanilla RimWorld
     public class DroneArea : Area
     {
         private string labelInt;
@@ -99,7 +100,7 @@ namespace ProjectRimFactory.Drones
             }
         }
 
-        public Area DroneAllowedArea = new DroneArea();
+        public Area droneAllowedArea;
 
         public Area GetDroneAllowedArea
         {
@@ -142,7 +143,11 @@ namespace ProjectRimFactory.Drones
             base.SpawnSetup(map, respawningAfterLoad);
             extension = def.GetModExtension<DefModExtension_DroneStation>();
             //Setup Allowd Area
-            DroneAllowedArea = GetDroneAllowedArea;
+            if (droneAllowedArea == null) {
+                Log.Message("droneAllowedArea was null");
+             droneAllowedArea = GetDroneAllowedArea;
+            }
+           
 
         }
         public override void Draw()
@@ -244,7 +249,7 @@ namespace ProjectRimFactory.Drones
         {
             base.ExposeData();
 
-           // Scribe_Deep.Look(ref DroneAllowedArea, "DroneAllowedArea", LookMode.Deep); //Not working as intended
+            Scribe_Deep.Look(ref droneAllowedArea, "droneAllowedArea", LookMode.Deep, this.Map.areaManager); //Not working as intended
             Scribe_Collections.Look(ref spawnedDrones, "spawnedDrones", LookMode.Reference);
             Scribe_Values.Look(ref lockdown, "lockdown");
         }
