@@ -57,21 +57,21 @@ namespace ProjectRimFactory.Industry
         /// <summary>
         /// One function to handel a tick in order to remove duplicate Code and Logic
         /// </summary>
-        /// <param name="GenRecorece">Recorce Ammount based on tick</param>
-        /// <param name="FuleConump">0 Means that Base Tick is Used . All other values are calculated</param>
-        private void HandelTick(int GenRecorece, int FuleConump)
+        /// <param name="GenResource">Recorce Ammount based on tick</param>
+        /// <param name="FuleConsumptionRateFactor">0 Means that Base Tick is Used . All other values are calculated</param>
+        private void HandelTick(int GenResource, int FuleConsumptionRateFactor)
         {
-            if (FuleConump != 0 && fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
-                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuleConump);
+            if (FuleConsumptionRateFactor != 0 && fuel != null && !fuel.Props.consumeFuelOnlyWhenUsed)
+                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuleConsumptionRateFactor);
             if (flick == null || flick.SwitchIsOn)
             {
                 if (power == null || power.PowerOn)
                 {
                     if (fuel != null)
                     {
-                        if (FuleConump != 0)
+                        if (FuleConsumptionRateFactor != 0)
                         {
-                            fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuleConump);
+                            fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / FuleConsumptionRateFactor);
                         }
                         else
                         {
@@ -79,12 +79,12 @@ namespace ProjectRimFactory.Industry
                         }
                         if (fuel.HasFuel)
                         {
-                            TryGenerateResource(GenRecorece);
+                            TryGenerateResource(GenResource);
                         }
                     }
                     else if (power != null && power.PowerOn)
                     {  //fuel==null
-                        TryGenerateResource(GenRecorece);
+                        TryGenerateResource(GenResource);
                     }
                 }
             }
