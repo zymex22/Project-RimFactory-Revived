@@ -49,11 +49,8 @@ namespace ProjectRimFactory.Drones
             Name = new NameSingle("PRFDroneName".Translate());
 
 
-            //If range is set (bigger then 0) then do handel the range
-            if (this.station.DroneRange > 0)
-            {
-                playerSettings.AreaRestriction = this.station.droneAllowedArea;
-            }
+            //Set the AreaRestriction. null means Unrestricted
+            playerSettings.AreaRestriction = this.station.droneAllowedArea;
             
 
         }

@@ -72,6 +72,63 @@ namespace ProjectRimFactory.Drones
     }
 
 
+    //This Class is used for the Area Selection for Drones where the range is unlimeted (0)
+    public class DroneAreaSelector : Designator
+    {
+        //Content is mostly a copy of Designator_AreaAllowedExpand
+
+        private static Area selectedArea;
+
+        public Action<Area> selectAction;
+
+        public static Area SelectedArea => selectedArea;
+
+        
+        public override AcceptanceReport CanDesignateCell(IntVec3 loc)
+        {
+            return loc.InBounds(base.Map) && Designator_AreaAllowed.SelectedArea != null && !Designator_AreaAllowed.SelectedArea[loc];
+            //throw new NotImplementedException();
+        }
+        public override void SelectedUpdate()
+        {
+        //    Log.Message("SelectedUpdate");
+        }
+
+        public override void ProcessInput(Event ev)
+        {
+            if (CheckCanInteract())
+            {
+                if (selectedArea != null)
+                {
+                    base.ProcessInput(ev);
+                }
+                AreaUtility.MakeAllowedAreaListFloatMenu(delegate (Area a)
+                {
+                    selectedArea = a;
+                    base.ProcessInput(ev);
+
+                    /*
+                    selectedArea == null --> Unrestricted
+                    selectedArea != null --> User Area
+                     */
+                    selectAction(selectedArea);
+
+                }, addNullAreaOption: true, addManageOption: false, base.Map);
+            }
+        }
+        //public static void ClearSelectedArea()
+        //{
+        //    selectedArea = null;
+        //}
+        //protected override void FinalizeDesignationSucceeded()
+        //{
+        //    base.FinalizeDesignationSucceeded();
+        //    PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.AllowedAreas, KnowledgeAmount.SpecificInteraction);
+        //}
+    }
+
+
+
     [StaticConstructorOnStartup]
     public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder
     {
@@ -102,33 +159,31 @@ namespace ProjectRimFactory.Drones
         }
 
         public List<IntVec3> cashed_GetCoverageCells = null;
-        //cashed_GetCoverageCells = StationRangecells.ToList();
-        /* public List<IntVec3> GetCoverageCells
-         {
-             get
-             {
-                 return StationRangecells.ToList();
-             }
-         }*/
 
         //droneAllowedArea Loaded on Spawn | this is ithe zone where the DronePawns are allowed to move in
-        public DroneArea droneAllowedArea;
+        //This needs to be "Area" as one can cast "DroneArea" to "Area" but not the other way around
+        //That feature is needed to assign vanilla Allowed Areas
+        //Please note that for Area Null is a valid Value. it stands for unrestricted
+        public Area droneAllowedArea = null;
 
         public DroneArea GetDroneAllowedArea
         {
             get
             {
-                DroneArea droneArea;
-                droneArea = new DroneArea(this.Map.areaManager);
-                //Need to set the Area to a size
-
-
-                foreach (IntVec3 cell in StationRangecells)
+                DroneArea droneArea = null;
+                if (DroneRange > 0)
                 {
-                    droneArea[cell] = true;
+                    droneArea = new DroneArea(this.Map.areaManager);
+                    //Need to set the Area to a size
+
+
+                    foreach (IntVec3 cell in StationRangecells)
+                    {
+                        droneArea[cell] = true;
+                    }
+                    //Not shure if i need that but just to be shure
+                    droneArea[Position] = true;
                 }
-                //Not shure if i need that but just to be shure
-                droneArea[Position] = true;
                 return droneArea;
 
             }
@@ -136,21 +191,19 @@ namespace ProjectRimFactory.Drones
 
         //This function can be used to Update the Allowed area for all Drones (Active and future)
         //Just need to auto call tha on Change from CompPowerWorkSetting
-        public void Update_droneAllowedArea_forDrones()
+        public void Update_droneAllowedArea_forDrones(Area dr = null)
         {
             //Refresh the area
-            droneAllowedArea = GetDroneAllowedArea;
-            if (DroneRange > 0)
+            droneAllowedArea = dr ?? (Area)GetDroneAllowedArea;
+            foreach (Pawn_Drone sdrone in spawnedDrones)
             {
-                foreach (Pawn_Drone sdrone in spawnedDrones)
-                {
-                    sdrone.playerSettings.AreaRestriction = droneAllowedArea;    
-                }
+                sdrone.playerSettings.AreaRestriction = droneAllowedArea;    
             }
         }
 
         public static readonly Texture2D Cancel = ContentFinder<Texture2D>.Get("UI/Designators/Cancel", true);
         protected bool lockdown;
+        private string droneAreaSelectorLable = "Unrestricted\nSelect Area";
         protected DefModExtension_DroneStation extension;
         protected List<Pawn_Drone> spawnedDrones = new List<Pawn_Drone>();
 
@@ -299,6 +352,7 @@ namespace ProjectRimFactory.Drones
             Scribe_Values.Look(ref lockdown, "lockdown");
         }
 
+
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (Gizmo g in base.GetGizmos())
@@ -321,6 +375,33 @@ namespace ProjectRimFactory.Drones
                 isActive = () => lockdown,
                 icon = Cancel
             };
+            if (DroneRange == 0)
+            {
+                /*
+                "Verse.Designator"
+                Holds example of how i want this Gizmo Implemented
+                */
+                yield return new DroneAreaSelector()
+                {
+                    defaultLabel = droneAreaSelectorLable,
+                    selectAction = (a) =>
+                    {
+                        Update_droneAllowedArea_forDrones(a);
+                        if (a == null)
+                        {
+                            droneAreaSelectorLable = "Unrestricted\nSelect Area";
+                        }
+                        else
+                        {
+                            droneAreaSelectorLable =  a.Label + "\nSelect Area";
+                        }
+
+                    }
+                };
+
+
+            }
+            
         }
     }
 }
