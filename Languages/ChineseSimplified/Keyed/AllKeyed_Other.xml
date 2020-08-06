@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+  <!-- Some languages are RtoL, and might want "(default) {0}" -->
+  <PRF_Default_Tag>{0} (默认)</PRF_Default_Tag>
   <PRF_TotalStacksNum>总堆叠数： {0}</PRF_TotalStacksNum>
   <PRFItemsTab>物品</PRFItemsTab>
   <PRFStorageBuildingGainsName>这个存储建筑现在叫做 {0}。</PRFStorageBuildingGainsName>
@@ -68,4 +70,14 @@
   <PRFOutputItems>项目输出</PRFOutputItems>
   <PRFPawnAccessLabel>人物访问</PRFPawnAccessLabel>
   <PRFPawnAccessDesc>人物访问</PRFPawnAccessDesc>
+  <!--Lamp colors-->
+  <PRF_ChangeColorGizmo>颜色 ({0})</PRF_ChangeColorGizmo>
+  <PRF_Warm_White>暖白</PRF_Warm_White>
+  <PRF_Cool_White>冷白</PRF_Cool_White>  
+  <PRF_Red>红色</PRF_Red>
+  <PRF_Blue>蓝色</PRF_Blue>
+  <PRF_Green>绿色</PRF_Green>
+  <PRF_Cyan>青色</PRF_Cyan>
+  <PRF_Yellow>黄色</PRF_Yellow>
+  <PRF_Magenta>品红</PRF_Magenta>
 </LanguageData>

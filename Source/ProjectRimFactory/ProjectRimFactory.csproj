@@ -1,438 +1,48 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{49284A95-A0E6-45F6-B7C8-20A4372C90E5}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProjectRimFactory</RootNamespace>
-    <AssemblyName>ProjectRimFactory</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>net472</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>default</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\Assemblies\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DebugSymbols>true</DebugSymbols>
-    <LangVersion>default</LangVersion>
     <Prefer32Bit>false</Prefer32Bit>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Assemblies\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <DebugSymbols>true</DebugSymbols>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>packages\0Harmony.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="0NoMessySpawns">
-      <HintPath>packages\0NoMessySpawns.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>packages\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>packages\Unity.TextMeshPro.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>packages\UnityEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AccessibilityModule">
-      <HintPath>packages\UnityEngine.AccessibilityModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AIModule">
-      <HintPath>packages\UnityEngine.AIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AndroidJNIModule">
-      <HintPath>packages\UnityEngine.AndroidJNIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AnimationModule">
-      <HintPath>packages\UnityEngine.AnimationModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ARModule">
-      <HintPath>packages\UnityEngine.ARModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>packages\UnityEngine.AssetBundleModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.AudioModule">
-      <HintPath>packages\UnityEngine.AudioModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ClothModule">
-      <HintPath>packages\UnityEngine.ClothModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterInputModule">
-      <HintPath>packages\UnityEngine.ClusterInputModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ClusterRendererModule">
-      <HintPath>packages\UnityEngine.ClusterRendererModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>packages\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CrashReportingModule">
-      <HintPath>packages\UnityEngine.CrashReportingModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.DirectorModule">
-      <HintPath>packages\UnityEngine.DirectorModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.DSPGraphModule">
-      <HintPath>packages\UnityEngine.DSPGraphModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.FileSystemHttpModule">
-      <HintPath>packages\UnityEngine.FileSystemHttpModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.GameCenterModule">
-      <HintPath>packages\UnityEngine.GameCenterModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.GridModule">
-      <HintPath>packages\UnityEngine.GridModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.HotReloadModule">
-      <HintPath>packages\UnityEngine.HotReloadModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>packages\UnityEngine.ImageConversionModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>packages\UnityEngine.IMGUIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>packages\UnityEngine.InputLegacyModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.InputModule">
-      <HintPath>packages\UnityEngine.InputModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.JSONSerializeModule">
-      <HintPath>packages\UnityEngine.JSONSerializeModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.LocalizationModule">
-      <HintPath>packages\UnityEngine.LocalizationModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>packages\UnityEngine.ParticleSystemModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.PerformanceReportingModule">
-      <HintPath>packages\UnityEngine.PerformanceReportingModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>packages\UnityEngine.Physics2DModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>packages\UnityEngine.PhysicsModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ProfilerModule">
-      <HintPath>packages\UnityEngine.ProfilerModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.ScreenCaptureModule">
-      <HintPath>packages\UnityEngine.ScreenCaptureModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.SharedInternalsModule">
-      <HintPath>packages\UnityEngine.SharedInternalsModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.SpriteMaskModule">
-      <HintPath>packages\UnityEngine.SpriteMaskModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.SpriteShapeModule">
-      <HintPath>packages\UnityEngine.SpriteShapeModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.StreamingModule">
-      <HintPath>packages\UnityEngine.StreamingModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.SubstanceModule">
-      <HintPath>packages\UnityEngine.SubstanceModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TerrainModule">
-      <HintPath>packages\UnityEngine.TerrainModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TerrainPhysicsModule">
-      <HintPath>packages\UnityEngine.TerrainPhysicsModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TextCoreModule">
-      <HintPath>packages\UnityEngine.TextCoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>packages\UnityEngine.TextRenderingModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TilemapModule">
-      <HintPath>packages\UnityEngine.TilemapModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.TLSModule">
-      <HintPath>packages\UnityEngine.TLSModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>packages\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UIElementsModule">
-      <HintPath>packages\UnityEngine.UIElementsModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UIModule">
-      <HintPath>packages\UnityEngine.UIModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UmbraModule">
-      <HintPath>packages\UnityEngine.UmbraModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UNETModule">
-      <HintPath>packages\UnityEngine.UNETModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityAnalyticsModule">
-      <HintPath>packages\UnityEngine.UnityAnalyticsModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityConnectModule">
-      <HintPath>packages\UnityEngine.UnityConnectModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityTestProtocolModule">
-      <HintPath>packages\UnityEngine.UnityTestProtocolModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
-      <HintPath>packages\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
-      <HintPath>packages\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>packages\UnityEngine.UnityWebRequestModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestTextureModule">
-      <HintPath>packages\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UnityWebRequestWWWModule">
-      <HintPath>packages\UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.VehiclesModule">
-      <HintPath>packages\UnityEngine.VehiclesModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.VFXModule">
-      <HintPath>packages\UnityEngine.VFXModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.VideoModule">
-      <HintPath>packages\UnityEngine.VideoModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.VRModule">
-      <HintPath>packages\UnityEngine.VRModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.WindModule">
-      <HintPath>packages\UnityEngine.WindModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.XRModule">
-      <HintPath>packages\UnityEngine.XRModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+      <HintPath>..\packages\0NoMessySpawns.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- This package includes all Unity packages as well as Assembly-CSharp
+         Update this either in the GUI (nuget system) or from the command line:
+         nuget restore
+         -->
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.1.2654" />
+    <PackageReference Include="Lib.Harmony" Version="2.0.1" PrivateAssets="All"/>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AnimalStation\Building_CompHarvester.cs" />
-    <Compile Include="AnimalStation\Building_GenericBodyResourceGatherer.cs" />
-    <Compile Include="AnimalStation\Building_Milker.cs" />
-    <Compile Include="AnimalStation\Building_Shearer.cs" />
-    <Compile Include="AnimalStation\PlaceWorker_ShowAdjacent.cs" />
-    <Compile Include="Archo\ArchoCipher.cs" />
-    <Compile Include="Archo\PlaceWorker_PortalGenerator.cs" />
-    <Compile Include="Archo\PortalGeneratorUtility.cs" />
-    <Compile Include="Archo\Things\Building_HexCapacitor.cs" />
-    <Compile Include="Archo\CompProperties_Unstable.cs" />
-    <Compile Include="Archo\CompUnstable.cs" />
-    <Compile Include="Archo\ITab_ArchoCipher.cs" />
-    <Compile Include="Archo\ResearchMod_Notify.cs" />
-    <Compile Include="Archo\Things\Building_PaperclipSpawner.cs" />
-    <Compile Include="Archo\Things\Building_PortalGenerator.cs" />
-    <Compile Include="Archo\WorldComponent_NotificatonManager.cs" />
-    <Compile Include="AutoMachineTool\**\*.cs" />
-    <Compile Include="Common\Cache.cs" />
-    <Compile Include="Common\CompGlowerPulse.cs" />
-    <Compile Include="Common\CompEffecter.cs" />
-    <Compile Include="Common\CompCallTickRareFromTick.cs" />
-    <Compile Include="Common\CompOutputAdjustable.cs" />
-    <Compile Include="Common\CompPowerWorkSetting.cs" />
-    <Compile Include="Common\CompPRFHelp.cs" />
-    <Compile Include="Common\GridsUtilityExt.cs" />
-    <Compile Include="Common\HarmonyPatches\ModPatch.cs" />
-    <Compile Include="Common\HarmonyPatches\PatchStorage.cs" />
-    <Compile Include="Common\HarmonyPatches\PathGridPatch.cs" />
-    <Compile Include="Common\HarmonyPatches\RacePropertiesPatch.cs" />
-    <Compile Include="Common\ITab_PowerSupply.cs" />
-    <Compile Include="Common\HarmonyPatches\Patch_GenRecipe_MakeRecipeProducts.cs" />
-    <Compile Include="Common\ModExtension_Miner.cs" />
-    <Compile Include="Common\ModExtension_Settings.cs" />
-    <Compile Include="Common\ModExtension_Graphic.cs" />
-    <Compile Include="Common\PatchOperationRTFuseInsertionHook.cs" />
-    <Compile Include="Common\PRFDefOf.cs" />
-    <Compile Include="Common\PRFMapComponent.cs" />
-    <Compile Include="Common\ProjectRimFactory_ModComponent.cs" />
-    <Compile Include="Common\ProjectRimFactory_ModSettings.cs" />
-    <Compile Include="Common\HarmonyPatches\SaveCompressiblePatch.cs" />
-    <Compile Include="Common\HarmonyPatches\SetPositionPatch.cs" />
-    <Compile Include="Common\ThingCategoryDefUtility.cs" />
-    <Compile Include="Common\HarmonyPatches\VolumePerUnitPatch.cs" />
-    <Compile Include="Common\Util.cs" />
-    <Compile Include="CultivatorTools\Building_Cultivator.cs" />
-    <Compile Include="CultivatorTools\Building_DroneCultivator.cs" />
-    <Compile Include="CultivatorTools\Building_RadialCellIterator.cs" />
-    <Compile Include="CultivatorTools\Building_Sprinkler.cs" />
-    <Compile Include="CultivatorTools\Building_SquareCellIterator.cs" />
-    <Compile Include="CultivatorTools\PlaceWorker_HighlightPlaceableCells.cs" />
-    <Compile Include="CultivatorTools\SquareCellIterator.cs" />
-    <Compile Include="CultivatorTools\Utilities.cs" />
-    <Compile Include="Drones\AI\JobGiver_DroneFlee.cs" />
-    <Compile Include="Drones\Building_DroneStationSpecialGraphics.cs" />
-    <Compile Include="Drones\AI\JobDriver_ReturnToStation.cs" />
-    <Compile Include="Drones\AI\JobDriver_SelfTerminate.cs" />
-    <Compile Include="Drones\Building_DroneStationRefuelable.cs" />
-    <Compile Include="Drones\Building_WorkGiverDroneStation.cs" />
-    <Compile Include="Drones\DefModExtension_DroneStation.cs" />
-    <Compile Include="Drones\DroneBackstories.cs" />
-    <Compile Include="Drones\Pawn_Drone.cs" />
-    <Compile Include="Industry\Building_AtomicReconstructor.cs" />
-    <Compile Include="Industry\Building_CustomBattery.cs" />
-    <Compile Include="Industry\Building_DeepQuarry.cs" />
-    <Compile Include="Industry\Building_FuelingMachine.cs" />
-    <Compile Include="Industry\Building_PaperclipDuplicator.cs" />
-    <Compile Include="Industry\Building_RepairingMachine.cs" />
-    <Compile Include="Industry\CompPaperclipPowerPlant.cs" />
-    <Compile Include="Industry\DefModExtension_AtomicReconstructorDisallow.cs" />
-    <Compile Include="Industry\DefModExtension_AtomicReconstructorResearchPrerequisite.cs" />
-    <Compile Include="Industry\PaperclipsUtility.cs" />
-    <Compile Include="Industry\PlaceWorker_FuelingMachine.cs" />
-    <Compile Include="Industry\Utilities.cs" />
-    <Compile Include="Industry\UI\ITab_AtomicReconstruction.cs" />
-    <Compile Include="Industry\UI\ITab_PaperclipDuplicator.cs" />
-    <Compile Include="Industry\HarmonyPatches\Patch_CompCreatesInfestations_for_DeepQuarry.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Drones\AI\JobGiver_DroneMain.cs" />
-    <Compile Include="Drones\Building_DroneStation.cs" />
-    <Compile Include="SAL3\Exposables\AssemblerDefModExtension.cs" />
-    <Compile Include="SAL3\Things\Assemblers\Building_DynamicBillGiver.cs" />
-    <Compile Include="SAL3\Things\Assemblers\Building_SmartAssembler.cs" />
-    <Compile Include="SAL3\Things\Assemblers\Special\Building_Assembler_Learning.cs" />
-    <Compile Include="Industry\Building_PaperclipFactory.cs" />
-    <Compile Include="SAL3\Things\Assemblers\Special\WorkSpeedFactorManager.cs" />
-    <Compile Include="SAL3\Things\Building_RecipeHolder.cs" />
-    <Compile Include="SAL3\Things\Building_SmartHopper.cs" />
-    <Compile Include="SAL3\Things\CompRecipeImportRange.cs" />
-    <Compile Include="SAL3\Tools\BaseCountUtility.cs" />
-    <Compile Include="SAL3\Things\Assemblers\Building_SimpleAssembler.cs" />
-    <Compile Include="SAL3\Tools\CellUtility.cs" />
-    <Compile Include="SAL3\Tools\ColorGenerator_RangeHSV.cs" />
-    <Compile Include="SAL3\Tools\ProjectSAL_Utilities.cs" />
-    <Compile Include="SAL3\Things\Assemblers\Building_ProgrammableAssembler.cs" />
-    <Compile Include="SAL3\Tools\Textures.cs" />
-    <Compile Include="Storage\UI\Dialog_OutputMinMax.cs" />
-    <Compile Include="SAL3\UI\ITab_SAL3Bills.cs" />
-    <Compile Include="SAL3\Tools\ReflectionUtility.cs" />
-    <Compile Include="Storage\Building_Crate.cs" />
-    <Compile Include="Storage\Building_MassStorageUnit.cs" />
-    <Compile Include="Storage\Building_MassStorageUnitPowered.cs" />
-    <Compile Include="Storage\Building_StorageUnitIOPort.cs" />
-    <Compile Include="Storage\Editables\DefModExtension_CanUseStorageIOPorts.cs" />
-    <Compile Include="Storage\Editables\DefModExtension_Crate.cs" />
-    <Compile Include="Storage\OutputSettings.cs" />
-    <Compile Include="Storage\StorageIOMode.cs" />
-    <Compile Include="Storage\UI\Dialog_RenameMassStorageUnit.cs" />
-    <Compile Include="Storage\UI\ITab_IOPortStorage.cs" />
-    <Compile Include="Storage\UI\ITab_Items.cs" />
-    <Compile Include="Misc\CompGlower_ColorPick_Etc.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>"$(ProjectDir)Install.bat" $(ConfigurationName) "$(SolutionDir)" "$(ProjectName)" "About Assemblies Defs Patches Languages Textures" "0Harmony.dll $(ProjectName).dll 0NoMessySpawns.dll" "$(OutDir)" "$(ProjectDir)" "$(ProjectName).dll.mdb $(ProjectName).pdb" 
-</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
+
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
@@ -440,4 +50,5 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+
 </Project>

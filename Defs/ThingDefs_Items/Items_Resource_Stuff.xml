@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--=============== Coal ====================-->
+  <ThingDef ParentName="ResourceBase">
+    <defName>WDCoal</defName>
+    <label>coal</label>
+    <description>Coal is a fossil fuel and is the altered remains of prehistoric vegetation that originally accumulated in swamps and peat bogs.</description>
+    <graphicData>
+      <texPath>Things/Item/Resource/WDCoal</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <soundInteract>ChunkRock_Drop</soundInteract>
+    <soundDrop>ChunkRock_Drop</soundDrop>
+    <statBases>
+      <MarketValue>0.8</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>0.3</Mass>
+      <Flammability>1.0</Flammability>
+      <DeteriorationRate>0.5</DeteriorationRate>
+    </statBases>
+    <thingCategories>
+      <li>ResourcesRaw</li>
+    </thingCategories>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <deepCommonality>1.5</deepCommonality>
+    <deepCountPerPortion>35</deepCountPerPortion>
+    <deepLumpSizeRange>20~50</deepLumpSizeRange>
+  </ThingDef>
+
+
+
+
+</Defs>

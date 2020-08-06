@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+    <!-- Original WD patch method -->
+    <!--    <Operation Class="PatchOperationAdd">
+        <order>Append</order>
+        <xpath> Defs/ThingDef[defName = "FueledStove"]/comps/li[contains(@Class,'CompProperties_Refuelable')]/fuelFilter/thingDefs |
+                Defs/ThingDef[defName = "WoodFiredGenerator"]/comps/li[contains(@Class,'CompProperties_Refuelable')]/fuelFilter/thingDefs |
+		        Defs/ThingDef[defName = "FueledSmithy"]/comps/li[contains(@Class,'CompProperties_Refuelable')]/fuelFilter/thingDefs |
+		        Defs/ThingDef[defName = "TorchLamp"]/comps/li[contains(@Class,'CompProperties_Refuelable')]/fuelFilter/thingDefs |
+		        Defs/ThingDef[defName = "Campfire"]/comps/li[contains(@Class,'CompProperties_Refuelable')]/fuelFilter/thingDefs</xpath>
+        <value>
+            <li>WDCoal</li>
+        </value>
+    </Operation> -->
+
+    <!-- <Operation Class="PatchOperationConditional">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef/comps/li[@Class="CompProperties_Refuelable"]/fuelFilter/thingDefs/li[text()="WoodLog"]</xpath>
+        <match Class="PatchOperationAdd">
+            <value>
+                <li>WDCoal</li>
+            </value>
+        </match>
+    </Operation> -->
+
+    <!-- Adding coal to all machines using fueled AND woodlog in them -->
+    <!-- <Operation Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+            <li Class="PatchOperationAdd">
+                <order>Append</order>
+                <xpath>/Defs/ThingDef/comps/li[@Class = "CompProperties_Refuelable" and fuelFilter/thingDefs/li[text() = "WoodLog"]]/fuelFilter/thingDefs</xpath>
+                <value>
+                    <li>WDCoal</li>
+                </value>
+            </li>
+        </operations>
+    </Operation> -->
+
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Coal Expanded</li>
+            <li>Materials+</li>
+            <li>Simple Mining Extension</li>
+        </mods>
+        <nomatch Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAdd">
+                    <xpath>/Defs/ThingDef/comps/li[@Class = "CompProperties_Refuelable" and fuelFilter/thingDefs/li[text() = "WoodLog"]]/fuelFilter/thingDefs</xpath>
+                    <value>
+                        <li>WDCoal</li>
+                    </value>
+                </li>
+            </operations>
+        </nomatch>
+    </Operation>
+
+
+
+</Patch>

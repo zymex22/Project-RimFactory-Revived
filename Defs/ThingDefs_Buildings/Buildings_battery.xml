@@ -74,7 +74,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc4</designationHotKey>
     <researchPrerequisites>
-      <li>LargeBatteries</li>
+      <li>EnhancedBatteries</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -132,7 +132,7 @@
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>LargeBatteries</li>
+      <li>EnhancedBatteries</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -255,7 +255,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc4</designationHotKey>
     <researchPrerequisites>
-      <li>VeryLargeBatteries</li>
+      <li>LargeBatteries</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -265,9 +265,9 @@
     <designatorDropdown>prf_batteries_gr</designatorDropdown>
     <thingClass>Building_Battery</thingClass>
     <graphicData>
-      <texPath>Industry/Battery/Battery100k</texPath>
+      <texPath>Industry/Battery/Building_Battery_256k</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(2,3)</drawSize>
+      <drawSize>(5,5)</drawSize>
       <damageData>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
@@ -294,7 +294,7 @@
       <Beauty>-40</Beauty>
     </statBases>
     <description>A battery that can store 100000Wd of power. Has 100% efficiency.</description>
-    <size>(1,2)</size>
+    <size>(2,2)</size>
     <costList>
       <Steel>650</Steel>
       <Plasteel>130</Plasteel>
@@ -324,9 +324,9 @@
     <label>256k battery</label>
     <thingClass>Building_Battery</thingClass>
     <graphicData>
-      <texPath>Industry/Battery/Building_Battery_256k</texPath>
+      <texPath>Industry/Battery/batteryT3</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(6,6)</drawSize>
+      <drawSize>(3.3,2.9)</drawSize>
       <damageData>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
@@ -353,7 +353,7 @@
       <Beauty>50</Beauty>
     </statBases>
     <description>A very efficient waterproof AI-based battery capable of storing 256000 watt days of power. Cannot break down. Also very beautiful. Spdskatr Industries is not responsible for any damage caused by short circuits.</description>
-    <size>(2,2)</size>
+    <size>(3,2)</size>
     <building></building>
     <costList>
       <Steel>1000</Steel>

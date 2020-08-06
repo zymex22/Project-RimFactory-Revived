@@ -9,10 +9,16 @@ using Verse.AI;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
-namespace ProjectRimFactory.AutoMachineTool
+namespace ProjectRimFactory.Common
 {
-    class ITab_PullerFilter : ITab
-    {
+    // Have an ITab_Storage that says "Filter" instead of "Storage"
+    class ITab_Filter : ITab_Storage {
+        public ITab_Filter() : base() {
+            this.labelKey = "Filter";
+        }
+        // Everything else is vanilla, so any changes anyone makes to ITab_Storage
+        //   (such as RSA's search function!) *should* work just fine for us!
+#if false
         private static readonly Vector2 WinSize = new Vector2(300f, 500f);
 
         public ITab_PullerFilter()
@@ -40,7 +46,7 @@ namespace ProjectRimFactory.AutoMachineTool
         private List<SlotGroup> groups;
 
         public override bool IsVisible => Puller.Filter != null;
-        
+
         private Vector2 scrollPosition;
 
         protected override void FillTab()
@@ -68,5 +74,6 @@ namespace ProjectRimFactory.AutoMachineTool
             ThingFilterUI.DoThingFilterConfigWindow(inRect.BottomPartPixels(inRect.height - height), ref this.scrollPosition, this.Puller.Filter);
 
         }
+#endif
     }
 }

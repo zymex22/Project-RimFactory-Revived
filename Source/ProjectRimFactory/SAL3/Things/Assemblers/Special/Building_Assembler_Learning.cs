@@ -28,7 +28,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
         public override void Tick()
         {
             base.Tick();
-            if (currentBillReport != null && this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>()?.PowerOn != false)
+            if (currentBillReport != null && this.IsHashIntervalTick(60) && this.Active)
             {
                 manager.IncreaseWeight(currentBillReport.bill.recipe, 0.001f * currentBillReport.bill.recipe.workSkillLearnFactor);
             }

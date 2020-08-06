@@ -56,14 +56,17 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.RaceName>Race name</PRF.AutoMachineTool.RaceName>
   
   <!-- ItemPuller -->
-  <PRF.AutoMachineTool.Puller.SwitchActiveLabel>Switch operating status</PRF.AutoMachineTool.Puller.SwitchActiveLabel>
-  <PRF.AutoMachineTool.Puller.SwitchActiveDesc>Switch the operating status.</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
+  <PRF.AutoMachineTool.Puller.SwitchActiveLabel>Toggle Pulling</PRF.AutoMachineTool.Puller.SwitchActiveLabel>
+  <PRF.AutoMachineTool.Puller.SwitchActiveDesc>Switch the operating status On/Off.</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
   <PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>Switch output side,</PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>
   <PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>Switch output side.</PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>
+  <PRF.Puller.TakeForbiddenItems>Pull forbidden</PRF.Puller.TakeForbiddenItems>
+  <PRF.Puller.TakeForbiddenItemsDesc>If set, this puller will also take forbidden items.  If they were forbidden, the puller will change them to "allowed."  This is a per-puller setting.</PRF.Puller.TakeForbiddenItemsDesc>
   <!-- FilterTab(puller) -->
   <PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>Storage</PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>
   <PRF.AutoMachineTool.Puller.OutputItemFilter.Description>Set filter for what item to be pulled out.</PRF.AutoMachineTool.Puller.OutputItemFilter.Description>
   <PRF.AutoMachineTool.Puller.FilterCopyFrom>Select copy from</PRF.AutoMachineTool.Puller.FilterCopyFrom>
+  
   
   <!-- AutoMiner -->
   <PRF.AutoMachineTool.AutoMiner.MineOre>Mining {0}</PRF.AutoMachineTool.AutoMiner.MineOre>

@@ -38,7 +38,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (this.supplyPowerForSpeed != value)
                 {
                     this.supplyPowerForSpeed = value;
-                    this.SetPower();
+                    this.RefreshPowerStatus();
                 }
             }
         }
@@ -76,8 +76,8 @@ namespace ProjectRimFactory.AutoMachineTool
                     this.SupplyPowerForSpeed = this.MinPowerForSpeed;
             }
 
-            this.MapManager.NextAction(this.SetPower);
-            this.MapManager.AfterAction(5, this.SetPower);
+            this.MapManager.NextAction(this.RefreshPowerStatus);
+            this.MapManager.AfterAction(5, this.RefreshPowerStatus);
         }
 
         protected override bool IsActive()
@@ -94,7 +94,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.DeSpawn();
         }
 
-        protected virtual void SetPower()
+        public virtual void RefreshPowerStatus()
         {
             if(this.powerComp == null)
             {
@@ -133,7 +133,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             if (signal == CompPowerTrader.PowerTurnedOffSignal || signal == CompPowerTrader.PowerTurnedOnSignal)
             {
-                this.SetPower();
+                this.RefreshPowerStatus();
             }
         }
     }

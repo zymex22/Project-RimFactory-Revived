@@ -41,121 +41,44 @@
 
 
   <DesignatorDropdownGroupDef>
-    <defName>miners_gr</defName>
+    <defName>PRF_industry_gr</defName>
   </DesignatorDropdownGroupDef>
 
-  <!--==================== Quarry T1 ====================-->
+  <!--==================== Stoneworks ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
-    <defName>PRF_DeepQuarry_mkI</defName>
-    <label>Auger drill(T1)</label>
-    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
-    <designatorDropdown>miners_gr</designatorDropdown>
+    <defName>PRF_StoneWorks</defName>
+    <label>Industrial Stoneworks</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
     <graphicData>
-      <texPath>Industry/Drill</texPath>
-      <drawSize>(2,2)</drawSize>
+      <texPath>Industry/StoneCutter</texPath>
+      <drawSize>(2.1,2.1)</drawSize>
     </graphicData>
-    <castEdgeShadows>false</castEdgeShadows>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
+    <uiIconScale>0.8</uiIconScale>
+    <designatorDropdown>PRF_industry_gr</designatorDropdown>
     <size>(2,2)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
     <statBases>
-      <WorkToBuild>10000</WorkToBuild>
+      <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
-      <Flammability>0.5</Flammability>
-      <Beauty>-25</Beauty>
-      <Mass>35</Mass>
+      <Flammability>1.0</Flammability>
     </statBases>
-    <description>An early automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 8 hours.(can cause Infestation!)</description>
+    <description>A CNC router like automated machine that are capable of turning stone into bricks and even abit mid skilled art too. \nArt level: 10</description>
     <costList>
-      <Steel>250</Steel>
+      <Steel>400</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
+    <recipes>
+    </recipes>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>300</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_CreatesInfestations" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>10</heatPerSecond>
-      </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
-        <effect>Drill</effect>
-      </li>
-    </comps>
-    <modExtensions>
-      <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
-        <TickCount>8</TickCount>
-      </li>
-      <!--
-        excludeOres : exclude ore list.
-        bonusYield  : Bonus yield ore list. for example, 10% bonus yield chance, Steel bonus : Plasteel bonus = 1 : 2
-          <bonusYields Chance="0.1">
-            <Steel Weight="1" Count="10" />
-            <Plasteel Weight="2" Count="15" />
-          </<bonusYields>
-      -->
-      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
-        <excludeOres>
-          <li>Gold</li>
-          <li>Uranium</li>
-          <li>ComponentIndustrial</li>
-          <li>Steel</li>
-          <li>Plasteel</li>
-          <li>Jade</li>
-          <li>Silver</li>
-        </excludeOres>
-        <bonusYields Chance="0.18">
-          <ChunkSlagSteel Weight="1" Count="1" />
-          <Gold Weight="0.02" Count="10" />
-          <Jade Weight="0.02" Count="10" />
-          <Silver Weight="0.02" Count="30" />
-        </bonusYields>
-      </li>
-    </modExtensions>
-    <tickerType>Long</tickerType>
-    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
-    <researchPrerequisites>
-      <li>AutonomousMining</li>
-    </researchPrerequisites>
-  </ThingDef>
-
-  <!--==================== Quarry T2 ====================-->
-  <ThingDef ParentName="PRF_IndustrialBase">
-    <defName>PRF_DeepQuarry</defName>
-    <label>Pulse Drill(T2)</label>
-    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
-    <designatorDropdown>miners_gr</designatorDropdown>
-    <graphicData>
-      <texPath>Industry/DeepQuarry</texPath>
-      <drawSize>(2.5,2.5)</drawSize>
-    </graphicData>
-    <size>(2,2)</size>
-    <statBases>
-      <WorkToBuild>1000</WorkToBuild>
-      <MaxHitPoints>350</MaxHitPoints>
-      <Flammability>0.5</Flammability>
-    </statBases>
-    <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 3 hours.(can cause infestation)</description>
-    <costList>
-      <Steel>400</Steel>
-      <ComponentIndustrial>10</ComponentIndustrial>
-      <Plasteel>10</Plasteel>
-      <PRFMachineFrame>1</PRFMachineFrame>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>800</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_CreatesInfestations" />
       <li>
         <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
       </li>
@@ -163,135 +86,27 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
       </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
-        <effect>Drill</effect>
-      </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
-        <TickCount>3</TickCount>
-      </li>
-      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
-        <excludeOres>
-          <li>ComponentIndustrial</li>
-          <li>Plasteel</li>
-          <li>ChunkSandstone</li>
-          <li>ChunkGranite</li>
-          <li>ChunkLimestone</li>
-          <li>ChunkSlate</li>
-          <li>ChunkMarble</li>
-        </excludeOres>
-        <bonusYields Chance="0.1">
-          <ChunkSandstone Weight="1" Count="1" />
-          <ChunkGranite Weight="1" Count="1" />
-          <ChunkLimestone Weight="1" Count="1" />
-          <ChunkSlate Weight="1" Count="1" />
-          <ChunkMarble Weight="1" Count="1" />
-        </bonusYields>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>10</artSkillLevel>
+        <importRecipesFrom>
+          <li>TableSculpting</li>
+          <li>TableStonecutter</li>
+        </importRecipesFrom>
       </li>
     </modExtensions>
-    <tickerType>Long</tickerType>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
+    <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <castEdgeShadows>false</castEdgeShadows>
     <researchPrerequisites>
-      <li>AutonomousMining_II</li>
+      <li>Stonecutting</li>
+      <li>PRFEulersIdentity</li>
     </researchPrerequisites>
-  </ThingDef>
-
-  <!--==================== Quarry T3 ====================-->
-  <ThingDef ParentName="PRF_IndustrialBase">
-    <defName>Building_AutoMachineTool_Miner</defName>
-    <label>Plasma Drill(T3)</label>
-    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
-    <description>With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed. It will set primary ore type and get bonus in rare ores and junk</description>
-    <tickerType>Never</tickerType>
-    <designatorDropdown>miners_gr</designatorDropdown>
-    <graphicData>
-      <texPath>Industry/DrillT3</texPath>
-      <drawSize>(3.3,3.3)</drawSize>
-    </graphicData>
-    <costList>
-      <Steel>1000</Steel>
-      <ComponentIndustrial>50</ComponentIndustrial>
-      <Plasteel>100</Plasteel>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
-    </costList>
-    <statBases>
-      <WorkToBuild>10000</WorkToBuild>
-      <MaxHitPoints>800</MaxHitPoints>
-      <Flammability>0.2</Flammability>
-    </statBases>
-    <researchPrerequisites>
-      <li>AutonomousMining_III</li>
-    </researchPrerequisites>
-    <size>(3,3)</size>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
-        <shortCircuitInRain>false</shortCircuitInRain>
-      </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>20</heatPerSecond>
-      </li>
-      <li Class="CompProperties_Glower">
-        <glowRadius>6</glowRadius>
-        <glowColor>(115,198,206,0)</glowColor>
-      </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">
-        <pulse>false</pulse>
-        <minGlowRadius>1</minGlowRadius>
-        <maxGlowRadius>2</maxGlowRadius>
-        <minGlowColor>(115,198,206,10)</minGlowColor>
-        <maxGlowColor>(120,198,210,0,100)</maxGlowColor>
-        <intervalTicks>30</intervalTicks>
-        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>
-      </li>
-    </comps>
-    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-    </placeWorkers>
-    <inspectorTabs>
-      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
-      <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>      <!-- AutomachineTool ITab not PRF -->
-    </inspectorTabs>
-    <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>10</speedFactor>        <!-- Speed multiplier for mining -->
-        <minPower>3000</minPower>        <!-- minimum boost power -->
-        <maxPower>10000</maxPower>        <!-- maximum boost power -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
-      </li>
-      <!--  <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
-        <effectWorking>Drill</effectWorking>
-      </li>        -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
-      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
-        <excludeOres>
-          <li>Gold</li>
-          <li>Uranium</li>
-          <li>ComponentIndustrial</li>
-          <li>Plasteel</li>
-          <li>Jade</li>
-          <li>Silver</li>
-        </excludeOres>
-        <bonusYields Chance="0.05">
-          <!-- Junks -->
-          <InsectJelly Weight="0.2" Count="30" />
-          <Steel Weight="0.2" Count="40" />
-          <!-- Rares -->
-          <Uranium Weight="0.9" Count="40" />
-          <Gold Weight="0.4" Count="40" />
-          <Jade Weight="0.4" Count="40" />
-          <Silver Weight="0.9" Count="40" />
-          <Plasteel Weight="0.01" Count="5" />
-        </bonusYields>
-      </li>
-    </modExtensions>
   </ThingDef>
 
   <!--==================== Recycler ====================-->
@@ -303,6 +118,8 @@
       <texPath>Industry/smart_recycler</texPath>
       <drawSize>(2.1,2.1)</drawSize>
     </graphicData>
+    <uiIconScale>0.8</uiIconScale>
+    <designatorDropdown>PRF_industry_gr</designatorDropdown>
     <size>(2,2)</size>
     <inspectorTabs>
       <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
@@ -348,17 +165,99 @@
       </li>
     </modExtensions>
     <tickerType>Normal</tickerType>
+    <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>UniversalAutocrafting</li>
+      <li>PRFMachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 
+  <!--==================== Metal Refinery ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_MetalRefinery</defName>
+    <label>Metal Refinery</label>
+    <description>A metal refinery able to produce rare metals through polymer lamination</description>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
+    <graphicData>
+      <texPath>Industry/MetalRefinery</texPath>
+      <drawSize>(3.1,3.1)</drawSize>
+    </graphicData>
+    <designatorDropdown>PRF_industry_gr</designatorDropdown>
+    <size>(3,3)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>5000</WorkToBuild>
+      <MaxHitPoints>350</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <costList>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFWeakAIChip>2</PRFWeakAIChip>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Plasteel>25</Plasteel>
+      <Steel>250</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <recipes>
+      <li>PRF_RefinePlasteel</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- speed settings -->
+        <speedSetting>true</speedSetting>
+        <minPowerForSpeed>3000</minPowerForSpeed>
+        <minSpeedFactor>1</minSpeedFactor>
+        <maxPowerForSpeed>10000</maxPowerForSpeed>
+        <maxSpeedFactor>3.5</maxSpeedFactor>
+        <!-- range settings -->
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>1</minRange>
+        <maxPowerForRange>1500</maxPowerForRange>
+        <maxRange>4</maxRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+        <!-- range color settings
+        <blueprintMin>(1,1,1,1)</blueprintMin>
+        <blueprintMax>(0.5,0.5,0.5,0.6)</blueprintMax>
+        <instance>(1,1,1,1)</instance>
+        <otherInstance>(1,1,1,0.35)</otherInstance>
+        -->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>10</artSkillLevel>
+      </li>
+    </modExtensions>
+    <tickerType>Normal</tickerType>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRFMetalRefining</li>
+    </researchPrerequisites>
+  </ThingDef>
 
   <!--==================== Furnace Base ====================-->
   <ThingDef Name="PRF_FurnaceBase" ParentName="PRF_IndustrialBase" Abstract="True">
     <tickerType>Normal</tickerType>
-    <passability>Impassable</passability>
+    <passability>PassThroughOnly</passability>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <inspectorTabs>
       <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
@@ -405,7 +304,7 @@
       <Cleanliness>-5</Cleanliness>
       <Beauty>-10</Beauty>
     </statBases>
-    <description>A early Furnace. made to burn unwanted things and smelt raw rescourses into usefull materials also capable of burning stones into usefull bricks</description>
+    <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)\n Use wood to smelt</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -414,13 +313,18 @@
       <li>BurnApparel</li>
       <li>ExtractMetalFromSlag</li>
       <li>MakeSmallFrame</li>
-      <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>100</basePowerConsumption>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>80.0</fuelConsumptionRate>
+        <fuelCapacity>50.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>8</glowRadius>
@@ -463,7 +367,7 @@
       <Cleanliness>-1</Cleanliness>
       <Beauty>-1</Beauty>
     </statBases>
-    <description>Advanced industrial Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
+    <description>This Second Furnace is an advanced industrial Furnace capable of burning items and smelting raw resources into useful materials\nUses electricity to reduce wood amount for burning</description>
     <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -478,13 +382,23 @@
       <li>MakeSmallFrame</li>
       <li>MakeMediumFrame</li>
       <li>MakeLargeFrame</li>
-      <li>Make_StoneBlocksAny</li>
     </recipes>
     <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>20.0</fuelConsumptionRate>
+        <fuelCapacity>50.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>250</basePowerConsumption>
+        <basePowerConsumption>200</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>
@@ -506,7 +420,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>AutomationBasics</li>
+      <li>PRFEulersIdentity</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -525,15 +439,13 @@
       <Cleanliness>1</Cleanliness>
       <Beauty>1</Beauty>
     </statBases>
-    <description>Advanced Furnace capable of burning, stuff and smelt raw resources into usefull materials</description>
+    <description>Advanced Furnace capable of burning stuff and smelting raw resources into useful materials, faster than previous iterations.\n\n(This furnace is the best and fastest in Project RimFactory.)\n\nImports any recipe from the Electric Smelter and the Crematorium.</description>
     <costList>
-      <Steel>200</Steel>
-      <ComponentIndustrial>5</ComponentIndustrial>
+      <Steel>350</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
     </costList>
     <recipes>
-      <li>CremateCorpse</li>
-      <li>BurnDrugs</li>
       <li>MakeSmallFrame</li>
       <li>MakeMediumFrame</li>
       <li>MakeLargeFrame</li>
@@ -556,11 +468,12 @@
         <workSpeedBaseFactor>2</workSpeedBaseFactor>
         <importRecipesFrom>
           <li>ElectricSmelter</li>
+          <li>ElectricCrematorium</li>
         </importRecipesFrom>
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
-        <skillLevel>15</skillLevel>
-        <artSkillLevel>5</artSkillLevel>
+        <skillLevel>20</skillLevel>
+        <artSkillLevel>10</artSkillLevel>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>Industry/smelter_t2</texPath>
@@ -569,7 +482,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>UniversalAutocrafting</li>
+      <li>PRFMachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 

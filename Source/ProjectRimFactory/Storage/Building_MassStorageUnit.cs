@@ -173,7 +173,7 @@ namespace ProjectRimFactory.Storage
             base.DrawGUIOverlay();
             if (Current.CameraDriver.CurrentZoom <= CameraZoomRange.Close)
             {
-                GenMapUI.DrawThingLabel(this, GetUIThingLabel());
+                GenMapUI.DrawThingLabel(this, this.LabelCap + "\n\r" +  GetUIThingLabel()  );
             }
         }
 

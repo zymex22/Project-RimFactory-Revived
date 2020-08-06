@@ -1,76 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
-	<!--Reseach for Rollers -->
-	<Operation Class="PatchOperationFindMod">
-		<mods>
-			<li>Industrial Rollers</li>
-		</mods>
-		<match Class="PatchOperationSequence">
-			<success>Always</success>
-			<operations>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs</xpath>
-					<value>
-						<ResearchProjectDef>
-							<defName>IndustrialRollers</defName>
-							<label>Industrial Rollers</label>
-							<techLevel>Industrial</techLevel>
-							<baseCost>500</baseCost>
-							<description>Basic Rollers, Straight and Turns</description>
-							<prerequisites>
-								<li>Machining</li>
-								<li>MicroelectronicsBasics</li>
-							</prerequisites>
-							<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-							<tab>Automation</tab>
-							<researchViewX>1</researchViewX>
-							<researchViewY>6</researchViewY>
-						</ResearchProjectDef>
-					</value>
-				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs</xpath>
-					<value>
-						<ResearchProjectDef>
-							<defName>adv_Rollers</defName>
-							<label>Advanced Rollers</label>
-							<techLevel>Industrial</techLevel>
-							<baseCost>500</baseCost>
-							<description>Splitter, inwall, underground rollers</description>
-							<prerequisites>
-								<li>Machining</li>
-								<li>MicroelectronicsBasics</li>
-							</prerequisites>
-							<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-							<tab>Automation</tab>
-							<researchViewX>2</researchViewX>
-							<researchViewY>6</researchViewY>
-						</ResearchProjectDef>
-					</value>
-				</li>
-				<li Class="PatchOperationAdd">
-					<xpath>/Defs</xpath>
-					<value>
-						<ResearchProjectDef>
-							<defName>Push_Pull</defName>
-							<label>Push and Pull</label>
-							<techLevel>Industrial</techLevel>
-							<baseCost>500</baseCost>
-							<description>Pushers and Pullers</description>
-							<prerequisites>
-								<li>Machining</li>
-								<li>MicroelectronicsBasics</li>
-							</prerequisites>
-							<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-							<tab>Automation</tab>
-							<researchViewX>3</researchViewX>
-							<researchViewY>6</researchViewY>
-						</ResearchProjectDef>
-					</value>
-				</li>
-			</operations>
-		</match>
-	</Operation>
 
 <!--Set Rollers Research -->
 	<Operation Class="PatchOperationFindMod">
@@ -87,7 +16,7 @@
 						defName="MovingRailPuller"]
 					</xpath>
 					<value>
-					    <researchPrerequisites><li>Push_Pull</li></researchPrerequisites>
+					    <researchPrerequisites><li>ADVrollers</li></researchPrerequisites>
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">
@@ -97,7 +26,7 @@
 						defName="MovingRailLeft"]
 					</xpath>
 					<value>
-					<researchPrerequisites><li>IndustrialRollers</li></researchPrerequisites>
+					<researchPrerequisites><li>PRFRollers</li></researchPrerequisites>
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">
@@ -108,7 +37,7 @@
 						defName="MovingRailUndergroundOutput"]
 					</xpath>
 					<value>
-					<researchPrerequisites><li>adv_Rollers</li></researchPrerequisites>
+					<researchPrerequisites><li>PRFRollers</li></researchPrerequisites>
 					</value>
 				</li>									
 			</operations>

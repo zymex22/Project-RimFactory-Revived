@@ -3,12 +3,12 @@
   <!-- Tier 1 -->
   <ResearchProjectDef>
     <defName>AnimalStations</defName>
-    <label>animal stations tier 1</label>
+    <label>animal stations I</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1200</baseCost>
-    <description>Animal station technology allows animals with harvestable resources to be harvested automatically.</description>
+    <description>First tier animal station technology allows animals with harvestable resources to be harvested automatically.</description>
     <prerequisites>
-      <li>AutomationBasics</li>
+      <li>PRFEulersIdentity</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
@@ -16,15 +16,16 @@
     <researchViewY>5</researchViewY>
   </ResearchProjectDef>
 
-    <!-- Tier 2 -->
+  <!-- Tier 2 -->
   <ResearchProjectDef>
     <defName>AnimalStations_II</defName>
-    <label>animal stations tier2</label>
+    <label>animal stations II</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1500</baseCost>
-    <description>Animal station technology allows animals with harvestable resources to be harvested automatically.</description>
+    <description>Second tier animal station allows for more animal gathering and also auto animal slaugtering and breeding control.</description>
     <prerequisites>
       <li>AnimalStations</li>
+      <li>AutomationBasics</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>

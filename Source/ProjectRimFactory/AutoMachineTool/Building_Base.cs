@@ -162,7 +162,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.products.ForEach(t =>
                 {
-                    if (!t.Destroyed)
+                    if (t!=null && !t.Destroyed)
                     {
                         if (t.Spawned)
                         {
@@ -176,7 +176,7 @@ namespace ProjectRimFactory.AutoMachineTool
             this.State = WorkingState.Ready;
             this.totalWorkAmount = 0;
             this.workStartTick = 0;
-            Option(this.working).ForEach(h => workingSet.Remove(h));
+            workingSet.Remove(working);
             this.working = null;
             this.products.Clear();
         }

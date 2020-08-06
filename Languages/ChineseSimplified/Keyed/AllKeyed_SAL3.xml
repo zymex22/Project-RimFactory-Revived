@@ -28,6 +28,7 @@
   <SmartHopper_Maximum>当前物品最大限制： {0}</SmartHopper_Maximum>
   <SmartHopper_Minimum_UseTooltip>【使用最小值】被勾选时，如果智能进料口上堆叠的物品少于设定数量，它会禁用物品。</SmartHopper_Minimum_UseTooltip>
   <SmartHopper_Maximum_UseTooltip>【使用最大值】被勾选时，如果智能进料口上堆叠的物品已满或者超过设定数量，它会停止拿取物品。</SmartHopper_Maximum_UseTooltip>
+  <SmartHopper_PickupFromGround>地面传感器</SmartHopper_PickupFromGround>
 
   <!--Mod settings-->
   <ProjectRimFactoryModName>边缘工厂</ProjectRimFactoryModName>

@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
+  <PRF_MetalRefinery.label>金属精炼厂</PRF_MetalRefinery.label>
+  <PRF_MetalRefinery.description>通过聚合物层压生产稀有金属的金属精炼厂。</PRF_MetalRefinery.description>
+  <PRF_MetalRefinery_Blueprint.label>金属精炼厂（蓝图）</PRF_MetalRefinery_Blueprint.label>
+  <PRF_MetalRefinery_Frame.label>金属精炼厂（建造中）</PRF_MetalRefinery_Frame.label>
+  <PRF_MetalRefinery_Frame.description>通过聚合物层压生产稀有金属的金属精炼厂。</PRF_MetalRefinery_Frame.description>
+
   <PRF_DeepQuarry.label>深矿机（中）</PRF_DeepQuarry.label>
   <PRF_DeepQuarry.description>自动采矿机，不断从地下挖掘矿物，包括石块、原材料和零部件。每6小时生产一次随机资源。</PRF_DeepQuarry.description>
   <PRF_DeepQuarry_Blueprint.label>深矿机（中）（蓝图）</PRF_DeepQuarry_Blueprint.label>
@@ -96,11 +102,17 @@
   <PRFPaperclipDuplicator_Frame.label>回形针复制器（建造中）</PRFPaperclipDuplicator_Frame.label>
   <PRFPaperclipDuplicator_Frame.description>巴拿赫-塔斯基复制机能够复制回形针，存储在其中的回形针每天增加5%，任何篡改回形针复制器的企图都会破坏所有存储的回形针。</PRFPaperclipDuplicator_Frame.description>
 
+  <PRF_StoneWorks.label>工业石材厂</PRF_StoneWorks.label>
+  <PRF_StoneWorks.description>回收商可以将几乎所有服装和武器转换为可用的原始资源，并损失一些材料。</PRF_StoneWorks.description>
+  <PRF_StoneWorks_Blueprint.label>工业石材厂（蓝图）</PRF_StoneWorks_Blueprint.label>
+  <PRF_StoneWorks_Frame.label>工业石材厂（建造中）</PRF_StoneWorks_Frame.label>
+  <PRF_StoneWorks_Frame.description>回收商可以将几乎所有服装和武器转换为可用的原始资源，并损失一些材料。</PRF_StoneWorks_Frame.description>
+
   <PRF_Recycler.label>自动电熔炼器</PRF_Recycler.label>
-  <PRF_Recycler.description>回收商可以将几乎所有服装和武器转换为可用的原始资源，并损失一些材料。</PRF_Recycler.description>
+  <PRF_Recycler.description>一个像数控雕刻机一样的自动机器，能够把石头变成砖块，甚至是一些中等技能的艺术品。\n艺术水平：10</PRF_Recycler.description>
   <PRF_Recycler_Blueprint.label>自动电熔炼器（蓝图）</PRF_Recycler_Blueprint.label>
   <PRF_Recycler_Frame.label>自动电熔炼器（建造中）</PRF_Recycler_Frame.label>
-  <PRF_Recycler_Frame.description>回收商可以将几乎所有服装和武器转换为可用的原始资源，并损失一些材料。</PRF_Recycler_Frame.description>
+  <PRF_Recycler_Frame.description>一个像数控雕刻机一样的自动机器，能够把石头变成砖块，甚至是一些中等技能的艺术品。\n艺术水平：10</PRF_Recycler_Frame.description>
 
   <PRF_DeepQuarry_mkI.label>深矿机（小）</PRF_DeepQuarry_mkI.label>
   <PRF_DeepQuarry_mkI.description>一家早期的自动化采石场，不断从地面提取资源，包括岩石块，材料和组件。 大约每8小时产生一次随机资源。（可能会引起侵扰！）</PRF_DeepQuarry_mkI.description>

@@ -274,36 +274,6 @@
     </modExtensions>
   </ThingDef>
 
-  <!--==================== Old ====================-->
-  <!--==================== cant be seen ingame anymore ====================-->
-  <ThingDef ParentName="PRFBuildingBase">
-    <defName>IndustrialStorageUnit</defName>
-    <label>industrial storage unit (deprecated)</label>
-    <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
-    <graphicData>
-      <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Storage/industrial_storage_unit</texPath>
-      <drawSize>(3,3)</drawSize>
-    </graphicData>
-    <statBases>
-      <Mass>15</Mass>
-      <MaxHitPoints>300</MaxHitPoints>
-      <WorkToBuild>2500</WorkToBuild>
-      <Flammability>0.1</Flammability>
-    </statBases>
-    <description>This building will be deprecated in the release. Please use the cargo platform.</description>
-    <size>(3,3)</size>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
-      </li>
-    </comps>
-    <modExtensions>
-      <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
-    </modExtensions>
-  </ThingDef>
-
   <!--==================== Cargo Platform / Digital Storage Unit ====================-->
   <ThingDef ParentName="PRFMassStorageBase">
     <defName>PRFCargoPlatform</defName>
@@ -381,6 +351,97 @@
         <hideItems>true</hideItems>
         <forbidPawnAccess>false</forbidPawnAccess>
         <hideRightClickMenus>true</hideRightClickMenus>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!--============================== I/O HOPPER ==============================-->
+  <ThingDef ParentName="PRFBuildingBase">
+    <defName>PRFStorageUnitIOPort</defName>
+    <label>I/O Port</label>
+    <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+    <uiIconScale>0.7</uiIconScale>
+    <designatorDropdown>IO_gr</designatorDropdown>
+    <graphicData>
+      <texPath>Storage/IO_Port</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <building>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+          </categories>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Storage.UI.ITab_IOPortStorage</li>
+      <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
+    </inspectorTabs>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>600</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <Mass>30</Mass>
+    </statBases>
+    <description>(tier 3) \n A Connection port for your storage Cargo Platforms. It can be set to Input/output from any Platform remotely in any range within the map.</description>
+    <costList>
+      <Steel>80</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <rotatable>false</rotatable>
+    <designationCategory>Industrial</designationCategory>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <constructEffect>ConstructMetal</constructEffect>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <researchPrerequisites>
+      <li>PRFStorageIO</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">
+        <inColor>(144, 222, 255, 255)</inColor>
+        <outColor>(215, 169, 72, 255)</outColor>
       </li>
     </modExtensions>
   </ThingDef>

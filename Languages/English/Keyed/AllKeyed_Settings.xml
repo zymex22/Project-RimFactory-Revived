@@ -35,10 +35,19 @@
   <PRF.Settings.recipeDB.Label>Set range for Recipe DB</PRF.Settings.recipeDB.Label>
   <PRF.Settings.recipeDB.Desc>Set range for Recipe DB</PRF.Settings.recipeDB.Desc>
 
-  <PRF.Settings.TurnOffInfestation.Label>Turn off infestation for miners(kiddy mode)</PRF.Settings.TurnOffInfestation.Label>
-  <PRF.Settings.TurnOffInfestation.Desc>Turn off infestation for miners(kiddy mode)</PRF.Settings.TurnOffInfestation.Desc>
+  <PRF.Settings.TurnOffInfestation.Label>Turn off infestation for miners(Unbalanced mode)</PRF.Settings.TurnOffInfestation.Label>
+  <PRF.Settings.TurnOffInfestation.Desc>Turn off infestation for miners(Unbalanced mode)</PRF.Settings.TurnOffInfestation.Desc>
 
-  <PRF.Settings.TurnOffMinerNerf.Label>Turn off Miners nerf(kiddy mode)</PRF.Settings.TurnOffMinerNerf.Label>
-  <PRF.Settings.TurnOffMinerNerf.Desc>Turn off Miners nerf(kiddy mode)</PRF.Settings.TurnOffMinerNerf.Desc>
+  <PRF.Settings.TurnOffMinerNerf.Label>Miners can mine all ore types(Unbalanced mode)</PRF.Settings.TurnOffMinerNerf.Label>
+  <PRF.Settings.TurnOffMinerNerf.Desc>Miners can mine all ore types(Unbalanced mode)</PRF.Settings.TurnOffMinerNerf.Desc>
+
+  <PRF.Settings.TurnOffGrouping.Label>Turn off some of the menu grouping / dropdown</PRF.Settings.TurnOffGrouping.Label>
+  <PRF.Settings.TurnOffGrouping.Desc>Turn off some of the menu grouping / dropdown</PRF.Settings.TurnOffGrouping.Desc>
+
+  <PRF.Settings.TurnOffFurnacefuel.Label>Turn off fuel use on T1 Furnace</PRF.Settings.TurnOffFurnacefuel.Label>
+  <PRF.Settings.TurnOffFurnacefuel.Desc>Turn off fuel use on T1 Furnace</PRF.Settings.TurnOffFurnacefuel.Desc>
+
+  <PRF.Settings.TurnOffCoalGen.Label>Turn off Natural coal generation(and coal when i figure that out)</PRF.Settings.TurnOffCoalGen.Label>
+  <PRF.Settings.TurnOffCoalGen.Desc>Turn off Natural coal generation(and coal when i figure that out)</PRF.Settings.TurnOffCoalGen.Desc>
 
 </LanguageData>

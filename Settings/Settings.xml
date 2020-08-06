@@ -39,26 +39,6 @@
     <text>PRF.Settings.AssemblerMessage</text>
   </Row>
 
-  <!-- GlowerPulse animation -->
-  <Row Class="ProjectRimFactory.Common.PatchItem">
-    <key>turn.on.glower.pulse.effect</key>
-    <label>PRF.Settings.TurnOffPulseGlowerEffect.Label</label>
-    <description>PRF.Settings.TurnOffPulseGlowerEffect.Desc</description>
-    <Patch>
-      <Operation Class="PatchOperationRemove">
-        <success>Always</success>
-        <xpath>/Defs/ThingDef/comps/li[@Class="ProjectRimFactory.Common.CompProperties_GlowerPulse"]/pulse</xpath>
-      </Operation>
-      <Operation Class="PatchOperationAdd">
-        <success>Always</success>
-        <xpath>/Defs/ThingDef/comps/li[@Class="ProjectRimFactory.Common.CompProperties_GlowerPulse"]</xpath>
-        <value>
-          <pulse>true</pulse>
-        </value>
-      </Operation>
-    </Patch>
-  </Row>
-
   <!-- swap texture -->
   <Row Class="ProjectRimFactory.Common.PatchItem">
     <key>turn.off.swap.texture</key>
@@ -246,6 +226,76 @@
     </Patch>
   </Row>
 
+  <!-- Grouping -->
+  <Row Class="ProjectRimFactory.Common.PatchItem">
+    <key>turn.off.grouping</key>
+    <label>PRF.Settings.TurnOffGrouping.Label</label>
+    <description>PRF.Settings.TurnOffGrouping.Desc</description>
+    <Patch>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="PRF_StoneWorks"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="PRF_Recycler"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="PRF_MetalRefinery"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="CultivatorTools_Sprinkler"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="RecipeDatabase"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="SAL_SmartHopper"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="FuelingMachine"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="Building_AutoMachineTool_Slaughterhouse"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="PRFStorageUnitIOPort"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="MeatGrinder"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="PRFFermentingBarrel"]/designatorDropdown</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="SelfPrepper"]/designatorDropdown</xpath>
+      </Operation>
+    </Patch>
+  </Row>
+
+  <!-- T1 furnace fuel use -->
+  <Row Class="ProjectRimFactory.Common.PatchItem">
+    <key>turn.off.furnacefueluse</key>
+    <label>PRF.Settings.TurnOffFurnacefuel.Label</label>
+    <description>PRF.Settings.TurnOffFurnacefuel.Desc</description>
+    <Patch>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="PRF_FurnaceII"]/comps/li[@compClass="CompProperties_Refuelable"]</xpath>
+      </Operation>
+    </Patch>
+  </Row>
+
   <!-- Infestation -->
   <Row Class="ProjectRimFactory.Common.PatchItem">
     <key>turn.off.infestation</key>
@@ -280,4 +330,23 @@
     </Patch>
   </Row>
 
+  <!-- Turn off coal -->
+  <!-- <Row Class="ProjectRimFactory.Common.PatchItem">
+    <key>turn.off.CoalGen</key>
+    <label>PRF.Settings.TurnOffCoalGen.Label</label>
+    <description>PRF.Settings.TurnOffCoalGen.Desc</description>
+    <Patch>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="WDCoal"]</xpath>
+      </Operation>
+      <Operation Class="PatchOperationRemove">
+        <success>Always</success>
+        <xpath>/Defs/ThingDef[defName="WDMineableCoal"]</xpath>
+      </Operation>
+    </Patch>
+  </Row> -->
+
+
 </SettingRows>
+

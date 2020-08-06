@@ -1,6 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
+  <!--======================================= Growzone Puller ===============================================-->
+
+    <Building_AutoMachineTool_GrowZonePuller.label>延长捡货机</Building_AutoMachineTool_GrowZonePuller.label>
+    <Building_AutoMachineTool_GrowZonePuller.description>一种能把生长区的东西拉到仓库或皮带上的拉具。</Building_AutoMachineTool_GrowZonePuller.description>
+    <Building_AutoMachineTool_GrowZonePuller_Blueprint.label>延长捡货机（蓝图）</Building_AutoMachineTool_GrowZonePuller_Blueprint.label>
+    <Building_AutoMachineTool_GrowZonePuller_Blueprint_Install.label>延长捡货机（蓝图）</Building_AutoMachineTool_GrowZonePuller_Blueprint_Install.label>
+    <Building_AutoMachineTool_GrowZonePuller_Frame.label>延长捡货机（建造中）</Building_AutoMachineTool_GrowZonePuller_Frame.label>
+    <Building_AutoMachineTool_GrowZonePuller_Frame.description>一种能把生长区的东西拉到仓库或皮带上的拉具。</Building_AutoMachineTool_GrowZonePuller_Frame.description>
+
 
   <!--======================================= Item Pusher ===============================================-->
 

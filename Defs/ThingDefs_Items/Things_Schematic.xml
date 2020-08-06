@@ -6,7 +6,7 @@
     <defName>RimFactory_Data_Disk</defName>
     <label>recipe data disk</label>
     <thingClass>ThingWithComps</thingClass>
-    <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive...</description>
+    <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive... Its used to create Recipe DataBases(project rimfactory)</description>
     <graphicData>
       <texPath>SAL3/datadisk</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -82,6 +82,9 @@
         <!-- <li>TableRoboticMachining</li> -->
       </recipeUsers>
     </recipeMaker>
+    <researchPrerequisites>
+      <li>PRFEulersIdentity</li>
+    </researchPrerequisites>
     <tradeability>Sellable</tradeability>
     <stackLimit>5</stackLimit>
   </ThingDef>
@@ -122,6 +125,9 @@
         <!-- <li>TableRoboticMachining</li> -->
       </recipeUsers>
     </recipeMaker>
+    <researchPrerequisites>
+      <li>AutomationBasics</li>
+    </researchPrerequisites>
     <tradeability>Sellable</tradeability>
     <stackLimit>5</stackLimit>
   </ThingDef>
@@ -159,6 +165,9 @@
         <!-- <li>TableRoboticMachining</li> -->
       </recipeUsers>
     </recipeMaker>
+    <researchPrerequisites>
+      <li>AutomationBasics</li>
+    </researchPrerequisites>
     <thingCategories>
       <li>Items</li>
     </thingCategories>

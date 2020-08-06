@@ -28,7 +28,7 @@ namespace ProjectRimFactory.Common
             {
                 this.powerForSpeed = value;
                 this.AdjustPower();
-                this.SetPower();
+                this.RefreshPowerStatus();
             }
         }
 
@@ -39,7 +39,7 @@ namespace ProjectRimFactory.Common
             {
                 this.powerForRange = value;
                 this.AdjustPower();
-                this.SetPower();
+                this.RefreshPowerStatus();
             }
         }
 
@@ -63,7 +63,7 @@ namespace ProjectRimFactory.Common
             Scribe_Values.Look<float>(ref this.powerForSpeed, "powerForSpeed");
             Scribe_Values.Look<float>(ref this.powerForRange, "powerForRange");
             this.AdjustPower();
-            this.SetPower();
+            this.RefreshPowerStatus();
         }
 
         [Unsaved]
@@ -79,7 +79,7 @@ namespace ProjectRimFactory.Common
             }
             this.powerComp = this.parent.TryGetComp<CompPowerTrader>();
             this.AdjustPower();
-            this.SetPower();
+            this.RefreshPowerStatus();
         }
 
         protected virtual void AdjustPower()
@@ -102,7 +102,7 @@ namespace ProjectRimFactory.Common
             }
         }
 
-        protected virtual void SetPower()
+        public void RefreshPowerStatus()
         {
             if(this.powerComp != null)
             {
