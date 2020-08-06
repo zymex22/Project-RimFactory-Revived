@@ -383,6 +383,7 @@ namespace ProjectRimFactory.Drones
                 */
                 yield return new DroneAreaSelector()
                 {
+                    icon = ContentFinder<Texture2D>.Get("UI/Designators/AreaAllowedExpand"),
                     defaultLabel = droneAreaSelectorLable,
                     selectAction = (a) =>
                     {
