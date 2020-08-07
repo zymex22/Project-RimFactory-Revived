@@ -15,6 +15,9 @@ namespace ProjectRimFactory.Drones
     {
         public Building_DroneStation station;
 
+        private const int defaultSkillLevel = 20;
+
+
         // don't do anythin exciting when killed - just disappear:
         public override void Kill(DamageInfo? dinfo, Hediff exactCulprit = null) {
         // don't call base.Kill
@@ -31,12 +34,15 @@ namespace ProjectRimFactory.Drones
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            skillSettings = this.station.def.GetModExtension<ModExtension_Skills>();
             skills = new Pawn_SkillTracker(this);
-            foreach (SkillRecord record in skills.skills)
-            {
-                record.levelInt = 20;
-                record.passion = Passion.None;
-            }
+
+            UpdateSkills(skills);
+            //foreach (SkillRecord record in skills.skills)
+            //{
+            //    record.levelInt = 20;
+            //    record.passion = Passion.None;
+            //}
             story = new Pawn_StoryTracker(this)
             {
                 bodyType = BodyTypeDefOf.Thin,
@@ -54,21 +60,43 @@ namespace ProjectRimFactory.Drones
             
 
         }
+        private ModExtension_Skills skillSettings;
+
+        public void UpdateSkills(Pawn_SkillTracker skill)
+        {
+            foreach (SkillRecord record in skill.skills)
+            {
+                if (skillSettings != null)
+                {
+                    record.levelInt = skillSettings.skills.FirstOrDefault(x => x.def == record.def)?.levelInt ?? skillSettings.BaseSkill;
+                }
+                else {
+                    record.levelInt = defaultSkillLevel; //No Settings Found use the Default
+                }
+                record.passion = Passion.None;
+                if (record.xpSinceLastLevel > 1f)
+                {
+                    record.xpSinceMidnight = 100f;
+                    record.xpSinceLastLevel = 100f;
+                }
+            }
+        }
 
         public override void Tick()
         {
             base.Tick();
             if (this.IsHashIntervalTick(250))
             {
-                foreach (SkillRecord sr in skills.skills)
-                {
-                    sr.levelInt = 20;
-                    if (sr.xpSinceLastLevel > 1f)
-                    {
-                        sr.xpSinceMidnight = 100f;
-                        sr.xpSinceLastLevel = 100f;
-                    }
-                }
+                UpdateSkills(skills);
+                //foreach (SkillRecord sr in skills.skills)
+                //{
+                //    sr.levelInt = 20;
+                //    if (sr.xpSinceLastLevel > 1f)
+                //    {
+                //        sr.xpSinceMidnight = 100f;
+                //        sr.xpSinceLastLevel = 100f;
+                //    }
+                //}
             }
             if (Downed)
             {
