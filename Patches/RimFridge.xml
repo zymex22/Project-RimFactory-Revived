@@ -5,7 +5,7 @@
 	<Operation Class="PatchOperationFindMod">
 		<mods>
 			<li>[KV] RimFridge - 1.1</li>
-			<li>[KV] RimFridge - 1.2</li>
+			<li>[KV] RimFridge</li>
 		</mods>
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
