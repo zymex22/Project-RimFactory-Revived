@@ -5,7 +5,6 @@
   <downloadUri>https://github.com/zymex22/Project-RimFactory-Revived/releases</downloadUri>
   <dependencies>
     <li>brrainz.harmony</li>
-    <li>UnlimitedHugs.HugsLib</li>
   </dependencies>
   <incompatibleWith>
     <li>Spdskatr.ssBiggerBatteries</li>
