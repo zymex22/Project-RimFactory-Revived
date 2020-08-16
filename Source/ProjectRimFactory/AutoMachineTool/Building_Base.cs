@@ -24,7 +24,7 @@ namespace ProjectRimFactory.AutoMachineTool
         IntVec3 OutputCell();
     }
 
-    public abstract class Building_Base<T> : Building, IProductOutput where T : Thing
+    public abstract class Building_Base<T> : Building, Common.IPRF_Building, IProductOutput where T : Thing
     {
         private WorkingState state;
         private static HashSet<T> workingSet = new HashSet<T>();
@@ -44,6 +44,23 @@ namespace ProjectRimFactory.AutoMachineTool
         protected int startCheckIntervalTicks = 30;
 
         private MapTickManager mapManager;
+
+        // If something else wants to trade an item away, we don't
+        //   know what we could do with it.
+        public virtual bool AcceptsItem(Thing newItem) => false;
+        // If something else wants to take an item from us
+        public virtual Thing GetThingBy(ThingDef requiredDef,
+            Func<Thing, bool> optionalValidator = null) {
+            foreach (Thing p in products) {
+                if (p.def == requiredDef &&
+                    (optionalValidator == null 
+                     || optionalValidator(p))) {
+                    products.Remove(p);
+                    return p;
+                }
+            }
+            return null;
+        }
 
         protected WorkingState State
         {
@@ -301,6 +318,8 @@ namespace ProjectRimFactory.AutoMachineTool
             if (this.CurrentWorkAmount >= this.totalWorkAmount)
             {
                 // 作業中に電力が変更されて終わってしまった場合、次TickでFinish呼び出し.
+                // If the power is changed during work and it ends, 
+                //     call Finish with the next tick.
                 MapManager.NextAction(this.FinishWork);
             }
             else
@@ -392,6 +411,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (conveyor != null)
                 {
                     // コンベアがある場合、そっちに流す.
+                    // If there is a conveyor, flush it over.
                     if (conveyor.ReceiveThing(false, target))
                     {
                         return total;
@@ -400,6 +420,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 else
                 {
                     // ない場合は適当に流す.
+                    // If not, flush appropriately
                     if (target.Spawned) target.DeSpawn();
                     if (PlaceItem(target, OutputCell(), false, this.Map, this.placeFirstAbsorb))
                     {
