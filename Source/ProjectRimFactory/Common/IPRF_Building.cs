@@ -11,7 +11,9 @@ namespace ProjectRimFactory.Common {
         // Thanks to Thornsworth for names
 
         /// <summary>
-        /// Returns true if the IPRF_Building takes responsibility for the <paramref name="newItem"/>.
+        /// Returns true if the IPRF_Building takes responsibility for the <paramref name="newItem"/>
+        /// NOTE: If you accept newItem, you should ALWAYS(probably) start with:
+        /// if (newItem.Spawned) newItem.DeSpawn();
         /// </summary>
         /// <returns><c>true</c>, if item was accepted, <c>false</c> otherwise.</returns>
         /// <param name="newItem">New item.</param>
@@ -26,6 +28,11 @@ namespace ProjectRimFactory.Common {
         /// <param name="requiredDef">Required def.</param>
         /// <param name="optionalValidator">Optional validator.</param>
         Thing GetThingBy(ThingDef requiredDef, Func<Thing, bool> optionalValidator = null);
+        /// <summary>
+        /// Should the Building forbid output items?
+        /// </summary>
+        /// <returns><c>true</c>, if, on placing, thing should be forbidden, <c>false</c> otherwise.</returns>
+        bool ForbidOnPlacing();
         // List<Thing> AvailableThings(); // maybe?
     }
 }

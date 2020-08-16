@@ -62,6 +62,10 @@ namespace ProjectRimFactory.AutoMachineTool
             return null;
         }
 
+        public virtual bool ForbidOnPlacing() {
+            return false;
+        }
+
         protected WorkingState State
         {
             get { return this.state; }
@@ -404,6 +408,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected virtual bool PlaceProduct(ref List<Thing> products)
         {
+            // Use Aggregate() to attempt to place each item in products
+            //   Any unplaced products accumulate in the new List<Thing>,
+            //   and stay in products.
+            // Is there any reason this uses `ref List<Thing> products`
+            //   instead of `this.products`?
             products = products.Aggregate(new List<Thing>(), (total, target) => {
                 var conveyor = OutputCell().GetThingList(this.Map)
                     .OfType<IBeltConbeyorLinkable>() // return any IBeltConbeyorLinkable
