@@ -82,6 +82,7 @@ namespace ProjectRimFactory.Common
             if (!forcePlace) return false;
             ForcePlace:
             if (t.Spawned) t.DeSpawn();
+            // TODO: effet?
             GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Near);
             if (placer.ForbidOnPlacing())
                 t.SetForbidden(true, false);
@@ -98,6 +99,20 @@ namespace ProjectRimFactory.Common
             // TODO: should buildings be able to ignore this?
             //    (e.g., a conveyor belt that just dumps everything when it hits the end)
             if (!slotGroup.parent.Accepts(t)) return false;
+            // PRF Buildings are Magic, and can move stuff anywhere into a slotGroup
+            //   (or, you know, they pile stuff up until it falls, or use a machine
+            //    arm to move things, etc)
+            //TODO: make this use NoStorageBlockersIn() - faster AND lets
+            //   us set conveyor belts to dumping random stuff into stockpiles
+            //   if we want to be silly (or realistic)
+            if (StoreUtility.IsValidStorageFor(cell, map, t)) {
+                if (t.Spawned) t.DeSpawn();
+                GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct);
+                if (placer.ForbidOnPlacing()) t.SetForbidden(true, false);
+                //TODO: effect
+                //                effect(t);
+                return true;
+            }
             return true;
         }
 
