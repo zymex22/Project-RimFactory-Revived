@@ -26,7 +26,11 @@ namespace ProjectRimFactory.Drones
                     slot = BackstorySlot.Childhood,
                     baseDesc = "NoneBrackets".Translate()
                 };
-                BackstoryDatabase.AddBackstory(childhood);
+                //this check is required to avoid an issue with "BetterLoading" as it calls "LongEventHandler.ExecuteWhenFinished" twice 
+                if (!BackstoryDatabase.allBackstories.ContainsKey(childhood.identifier))
+                {
+                    BackstoryDatabase.AddBackstory(childhood);
+                }
                 adulthood = new Backstory()
                 {
                     title = "PRFDroneName".Translate(),
@@ -36,7 +40,11 @@ namespace ProjectRimFactory.Drones
                     slot = BackstorySlot.Adulthood,
                     baseDesc = "NoneBrackets".Translate()
                 };
-                BackstoryDatabase.AddBackstory(adulthood);
+                //this check is required to avoid an issue with "BetterLoading" as it calls "LongEventHandler.ExecuteWhenFinished" twice 
+                if (!BackstoryDatabase.allBackstories.ContainsKey(adulthood.identifier))
+                {
+                    BackstoryDatabase.AddBackstory(adulthood);
+                }
             });
         }
     }
