@@ -9,6 +9,7 @@ using Verse;
 using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
+using ProjectRimFactory.Common;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 using ProjectRimFactory.Common.HarmonyPatches;
 
@@ -208,27 +209,25 @@ namespace ProjectRimFactory.AutoMachineTool
             return base.CanStackWith(other) && this.State == WorkingState.Ready;
         }
 
-        public bool ReceiveThing(bool underground, Thing t)
-        {
-            return ReceiveThing(underground, t, Destination(t, true));
-        }
-
-        private bool ReceiveThing(bool underground, Thing t, Rot4 rot)
-        {
-            if (!this.ReceivableNow(underground, t))
+        public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
+            bool comesFromUnderGround = false;
+            if (giver is AutoMachineTool.IBeltConbeyorLinkable)
+                comesFromUnderGround = 
+                  (giver as AutoMachineTool.IBeltConbeyorLinkable).IsUnderground;
+            if (!this.ReceivableNow(comesFromUnderGround, newThing))
                 return false;
             if (this.State == WorkingState.Ready)
             {
-                if (t.Spawned && this.IsUnderground) t.DeSpawn();
-                t.Position = this.Position;
-                this.dest = rot;
-                this.ForceStartWork(t, 1f);
+                if (newThing.Spawned && this.IsUnderground) newThing.DeSpawn();
+                newThing.Position = this.Position;
+                this.dest = Destination(newThing, true);
+                this.ForceStartWork(newThing, 1f);
                 return true;
             }
             else
             {
                 var target = this.State == WorkingState.Working ? this.Working : this.products[0];
-                return target.TryAbsorbStack(t, true);
+                return target.TryAbsorbStack(newThing, true);
             }
         }
 
@@ -274,7 +273,9 @@ namespace ProjectRimFactory.AutoMachineTool
             var result = this.filters
                 .Where(f => f.Value.Allows(t.def))
                 .Select(f => f.Key)
-                .SelectMany(r => this.OutputBeltConveyor().Where(l => l.Position == this.Position + r.FacingCell).Select(b => new { Dir = r, Conveyor = b }))
+                .SelectMany(r => this.OutputBeltConveyor()
+                                 .Where(l => l.Position == this.Position + r.FacingCell)
+                                 .Select(b => new { Dir = r, Conveyor = b }))
                 .Where(b => b.Conveyor.ReceivableNow(this.IsUnderground, t))
                 .FirstOption();
             if (result.HasValue)
@@ -291,11 +292,12 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 return true;
             }
-            var next = this.LinkTargetConveyor().Where(o => o.Position == this.dest.FacingCell + this.Position).FirstOption();
-            if (next.HasValue)
+            var next = this.LinkTargetConveyor().Where(o => o.Position == this.dest.FacingCell + this.Position).First();
+            if (next != null)
             {
                 // コンベアある場合、そっちに流す.
-                if (next.Value.ReceiveThing(this.IsUnderground, thing))
+                // If there is a conveyor, flush it over.
+                if ((next as IPRF_Building).AcceptsThing(thing,this))
                 {
                     NotifyAroundSender();
                     this.stuck = false;
@@ -304,7 +306,8 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else
             {
-                if (!this.IsUnderground && PlaceItem(thing, this.dest.FacingCell + this.Position, false, this.Map))
+                if (!this.IsUnderground && this.PRFTryPlaceThing(thing, 
+                      this.dest.FacingCell + this.Position, this.Map))
                 {
                     NotifyAroundSender();
                     this.stuck = false;
@@ -315,11 +318,13 @@ namespace ProjectRimFactory.AutoMachineTool
             if (this.SendableConveyor(thing, out Rot4 dir))
             {
                 // 他に流す方向があれば、やり直し.
+                // If there is another direction, try again.
                 this.Reset();
                 this.ReceiveThing(this.IsUnderground, thing, dir);
                 return false;
             }
             // 配置失敗.
+            // Placement failure
             this.stuck = true;
             return false;
         }
@@ -386,6 +391,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 return false;
             }
+            // TODO: C#-ify this?
             Func<Thing, bool> check = (t) => t.CanStackWith(thing) && t.stackCount < t.def.stackLimit;
             switch (this.State) {
                 case WorkingState.Ready:
