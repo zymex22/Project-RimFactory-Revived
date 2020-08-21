@@ -185,7 +185,7 @@ namespace ProjectRimFactory.Storage
 
         public virtual void RefreshStorage()
         {
-            items = new List<Thing>();
+            items.Clear();
             if (!this.Spawned) return; // don't want to try getting lists of things when not on a map (see 155)
             foreach (IntVec3 cell in AllSlotCells())
             {
