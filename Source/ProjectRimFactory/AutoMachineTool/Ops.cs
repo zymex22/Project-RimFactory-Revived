@@ -190,7 +190,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public static void L(object obj) { Log.Message(obj == null ? "null" : obj.ToString()); }
 #endif
 
-        public static bool PlaceItem(Thing t, IntVec3 cell, bool forbid, Map map, bool firstAbsorbStack = false)
+        public static bool PlaceItemXXX(Thing t, IntVec3 cell, bool forbid, Map map, bool firstAbsorbStack = false)
         {
             Action<Thing> effect = (item) =>
             {
