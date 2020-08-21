@@ -189,8 +189,8 @@ namespace ProjectRimFactory.AutoMachineTool
 #if DEBUG
         public static void L(object obj) { Log.Message(obj == null ? "null" : obj.ToString()); }
 #endif
-
-        public static bool PlaceItemXXX(Thing t, IntVec3 cell, bool forbid, Map map, bool firstAbsorbStack = false)
+#if false
+        public static bool PlaceItem(Thing t, IntVec3 cell, bool forbid, Map map, bool firstAbsorbStack = false)
         {
             Action<Thing> effect = (item) =>
             {
@@ -239,6 +239,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return false;
         }
+#endif
 
         public static void Noop()
         {
@@ -370,7 +371,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return marketValue * 0.1f;
         }
-        #endregion
+#endregion
 
         public static Func<T, TValue> GenerateGetFieldDelegate<T, TValue>(FieldInfo field)
         {
