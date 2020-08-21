@@ -11,13 +11,13 @@ namespace ProjectRimFactory.Common {
         // Thanks to Thornsworth for names
 
         /// <summary>
-        /// Returns true if the IPRF_Building takes responsibility for the <paramref name="newItem"/>
+        /// Returns true if the IPRF_Building takes responsibility for the <paramref name="newThing"/>
         /// NOTE: If you accept newItem, you should ALWAYS(probably) start with:
         /// if (newItem.Spawned) newItem.DeSpawn();
         /// </summary>
         /// <returns><c>true</c>, if item was accepted, <c>false</c> otherwise.</returns>
-        /// <param name="newItem">New item.</param>
-        bool AcceptsItem(Thing newItem);
+        /// <param name="newThing">New item.</param>
+        bool AcceptsThing(Thing newThing, IPRF_Building giver = null);
         /// <summary>
         /// Ask the IPRF_Building for an item matching <paramref name="requiredDef"/> 
         ///   with optional Validator, in case the ThingDef is not sufficient to determin
@@ -34,5 +34,9 @@ namespace ProjectRimFactory.Common {
         /// <returns><c>true</c>, if, on placing, thing should be forbidden, <c>false</c> otherwise.</returns>
         bool ForbidOnPlacing();
         // List<Thing> AvailableThings(); // maybe?
+        bool ObeyStorageFilters();
+        void EffectOnPlaceThing(Thing t);
+        void EffectOnAcceptThing(Thing t);
+
     }
 }
