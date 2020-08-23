@@ -115,7 +115,7 @@ namespace ProjectRimFactory.AutoMachineTool
             if (!respawningAfterLoad)
             {
                 var conveyors = LinkTargetConveyor();
-                if (conveyors.Count == 0)
+                if (!conveyors.Any())
                 {
                     this.FilterSetting();
                 }
@@ -292,19 +292,21 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 return true;
             }
-            var next = this.LinkTargetConveyor().Where(o => o.Position == this.dest.FacingCell + this.Position).First();
-            if (next != null)
+            // Try to send to another conveyor first:
+            // コンベアある場合、そっちに流す.
+            var first = this.BeltLinkableAt(this.Position + dest.FacingCell);
+//            var first = (this.dest.FacingCell+this.Position).GetThingList(this.Map).Where(t=>t is )
+//            var next = this.LinkTargetConveyor().Where(o => o.Position == this.dest.FacingCell + this.Position).First();
+            if (first != null)
             {
-                // コンベアある場合、そっちに流す.
-                // If there is a conveyor, flush it over.
-                if ((next as IPRF_Building).AcceptsThing(thing,this))
+                if ((first as IPRF_Building).AcceptsThing(thing,this))
                 {
                     NotifyAroundSender();
                     this.stuck = false;
                     return true;
                 }
             }
-            else
+            else // if no conveyor, place if can
             {
                 if (!this.IsUnderground && this.PRFTryPlaceThing(thing, 
                       this.dest.FacingCell + this.Position, this.Map))
@@ -320,7 +322,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 // 他に流す方向があれば、やり直し.
                 // If there is another direction, try again.
                 this.Reset();
-                this.ReceiveThing(this.IsUnderground, thing, dir);
+                this.AcceptsThing(thing, this); // should always work
                 return false;
             }
             // 配置失敗.
@@ -360,24 +362,31 @@ namespace ProjectRimFactory.AutoMachineTool
             this.outputRot = this.filters.Select(x => x.Key).ToList();
         }
 
-        private List<IBeltConbeyorLinkable> LinkTargetConveyor()
+        protected IBeltConbeyorLinkable BeltLinkableAt(IntVec3 location)
         {
-            return Enumerable.Range(0, 4).Select(i => this.Position + new Rot4(i).FacingCell)
-                .SelectMany(t => t.GetThingList(this.Map))
-                .Where(t => t.def.category == ThingCategory.Building)
+            return location.GetThingList(this.Map)
+                .Where(t => t is IBeltConbeyorLinkable)
                 .Where(t => CanLink(this, t, this.def, t.def))
-                .SelectMany(t => Option(t as IBeltConbeyorLinkable))
-                .ToList();
+                .Select(t => t as IBeltConbeyorLinkable)
+                .First();
         }
 
-        private List<IBeltConbeyorLinkable> OutputBeltConveyor()
+        private IEnumerable<IBeltConbeyorLinkable> LinkTargetConveyor()
+        {
+            return Enumerable.Range(0, 3).Select(i => this.Position + new Rot4(i).FacingCell)
+                .SelectMany(c => c.GetThingList(this.Map))
+                .Where(t => t.def.category == ThingCategory.Building)
+                .Where(t => CanLink(this, t, this.def, t.def))
+                .Select(t => (t as IBeltConbeyorLinkable));
+        }
+
+        private IEnumerable<IBeltConbeyorLinkable> OutputBeltConveyor()
         {
             var links = this.LinkTargetConveyor();
             return links.Where(x =>
                     (x.Rotation.Opposite.FacingCell + x.Position == this.Position && x.Position != this.Position + this.Rotation.Opposite.FacingCell) ||
                     (x.Rotation.Opposite.FacingCell + x.Position == this.Position && links.Any(l => l.Position + l.Rotation.FacingCell == this.Position))
-                )
-                .ToList();
+                );
         }
 
         public bool Acceptable(Rot4 rot, bool underground)
