@@ -75,7 +75,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else
             {
-                var conveyor = thing as IBeltConbeyorLinkable;
+                var conveyor = thing as IBeltConveyorLinkable;
                 if (!Building_BeltConveyorUGConnector.IsConveyorUGConnecterDef(thing.def) && conveyor != null && conveyor.IsUnderground && !(layer is SectionLayer_UGConveyor))
                 {
                     return;

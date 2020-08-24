@@ -7,7 +7,7 @@ using Verse;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    interface IBeltConbeyorSender
+    interface IBeltConveyorSender
     {
         void NortifyReceivable();
     }

@@ -31,7 +31,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
     }
 
-    class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConbeyorLinkable, IHideItem, IHideRightClickMenu, IForbidPawnOutputItem
+    class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConveyorLinkable, IHideItem, IHideRightClickMenu, IForbidPawnOutputItem
     {
         public Building_BeltConveyor()
         {
@@ -212,9 +212,9 @@ namespace ProjectRimFactory.AutoMachineTool
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
             Log.Warning("" + this + " was asked if it can accept " + newThing);
             bool comesFromUnderGround = false;
-            if (giver is AutoMachineTool.IBeltConbeyorLinkable)
+            if (giver is AutoMachineTool.IBeltConveyorLinkable)
                 comesFromUnderGround = 
-                  (giver as AutoMachineTool.IBeltConbeyorLinkable).IsUnderground;
+                  (giver as AutoMachineTool.IBeltConveyorLinkable).IsUnderground;
             if (!this.ReceivableNow(comesFromUnderGround, newThing))
                 return false;
             if (this.State == WorkingState.Ready)
@@ -336,12 +336,12 @@ namespace ProjectRimFactory.AutoMachineTool
             return false;
         }
 
-        public void Link(IBeltConbeyorLinkable link)
+        public void Link(IBeltConveyorLinkable link)
         {
             this.FilterSetting();
         }
 
-        public void Unlink(IBeltConbeyorLinkable unlink)
+        public void Unlink(IBeltConveyorLinkable unlink)
         {
             this.FilterSetting();
             Option(this.Working).ForEach(t => this.dest = Destination(t, true));
@@ -367,25 +367,25 @@ namespace ProjectRimFactory.AutoMachineTool
             this.outputRot = this.filters.Select(x => x.Key).ToList();
         }
 
-        protected IBeltConbeyorLinkable BeltLinkableAt(IntVec3 location)
+        protected IBeltConveyorLinkable BeltLinkableAt(IntVec3 location)
         {
             return location.GetThingList(this.Map)
-                .Where(t => t is IBeltConbeyorLinkable)
+                .Where(t => t is IBeltConveyorLinkable)
                 .Where(t => CanLink(this, t, this.def, t.def))
-                .Select(t => t as IBeltConbeyorLinkable)
+                .Select(t => t as IBeltConveyorLinkable)
                 .First();
         }
 
-        private IEnumerable<IBeltConbeyorLinkable> LinkTargetConveyor()
+        private IEnumerable<IBeltConveyorLinkable> LinkTargetConveyor()
         {
             return Enumerable.Range(0, 3).Select(i => this.Position + new Rot4(i).FacingCell)
                 .SelectMany(c => c.GetThingList(this.Map))
                 .Where(t => t.def.category == ThingCategory.Building)
                 .Where(t => CanLink(this, t, this.def, t.def))
-                .Select(t => (t as IBeltConbeyorLinkable));
+                .Select(t => (t as IBeltConveyorLinkable));
         }
 
-        private IEnumerable<IBeltConbeyorLinkable> OutputBeltConveyor()
+        private IEnumerable<IBeltConveyorLinkable> OutputBeltConveyor()
         {
             var links = this.LinkTargetConveyor();
             return links.Where(x =>
@@ -425,7 +425,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 .Select(r => this.Position + r.FacingCell)
                 .SelectMany(p => p.GetThingList(this.Map).ToList())
                 .Where(t => t.def.category == ThingCategory.Building)
-                .SelectMany(t => Option(t as IBeltConbeyorSender))
+                .SelectMany(t => Option(t as IBeltConveyorSender))
                 .ForEach(s => s.NortifyReceivable());
         }
 

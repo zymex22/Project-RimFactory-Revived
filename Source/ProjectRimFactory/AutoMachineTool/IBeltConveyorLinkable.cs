@@ -7,10 +7,10 @@ using Verse;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    interface IBeltConbeyorLinkable : ProjectRimFactory.Common.IPRF_Building
+    interface IBeltConveyorLinkable : ProjectRimFactory.Common.IPRF_Building
     {
-        void Link(IBeltConbeyorLinkable linkable);
-        void Unlink(IBeltConbeyorLinkable linkable);
+        void Link(IBeltConveyorLinkable linkable);
+        void Unlink(IBeltConveyorLinkable linkable);
         Rot4 Rotation { get; }
         IntVec3 Position { get; }
         bool ReceivableNow(bool underground, Thing thing);

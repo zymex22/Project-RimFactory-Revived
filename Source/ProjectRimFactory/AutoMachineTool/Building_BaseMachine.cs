@@ -13,7 +13,7 @@ using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public abstract class Building_BaseMachine<T> : Building_Base<T>, IPowerSupplyMachineHolder, IPowerSupplyMachine, IBeltConbeyorSender where T : Thing
+    public abstract class Building_BaseMachine<T> : Building_Base<T>, IPowerSupplyMachineHolder, IPowerSupplyMachine, IBeltConveyorSender where T : Thing
     {
         protected virtual float SpeedFactor => WorkSpeedExtension.speedFactor;
         protected virtual int? SkillLevel { get => null; }

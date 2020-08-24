@@ -105,7 +105,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 .Where(p => p.def.defName == "Industrial")
                 .ForEach(p => OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame());
 
-            if (Find.Selector.FirstSelectedObject as IBeltConbeyorLinkable != null)
+            if (Find.Selector.FirstSelectedObject as IBeltConveyorLinkable != null)
             {
                 OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
             }
