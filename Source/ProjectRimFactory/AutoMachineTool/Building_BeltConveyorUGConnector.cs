@@ -10,6 +10,8 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -113,14 +115,35 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
+        public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null)
+        {
+            bool comesFromUnderGround = false;
+            if (giver is AutoMachineTool.IBeltConbeyorLinkable)
+                comesFromUnderGround =
+                  (giver as AutoMachineTool.IBeltConbeyorLinkable).IsUnderground;
+            if (!this.ReceivableNow(comesFromUnderGround, newThing))
+                return false;
+            if (this.State == WorkingState.Ready) {
+                if (newThing.Spawned && this.IsUnderground) newThing.DeSpawn();
+                newThing.Position = this.Position;
+                this.ForceStartWork(newThing, 1f);
+                return true;
+            } else {
+                var target = this.State == WorkingState.Working ? this.Working : this.products[0];
+                return target.TryAbsorbStack(newThing, true);
+            }
+        }
+
         protected override bool PlaceProduct(ref List<Thing> products)
         {
+            // These can only place things in one direction,
+            //   so the placing is different from base conveyors:
             var thing = products[0];
             var next = this.OutputConveyor();
-            if (next.HasValue)
+            if (next != null)
             {
                 // コンベアある場合、そっちに流す.
-                if (next.Value.ReceiveThing(this.ToUnderground, thing))
+                if (next.AcceptsThing(thing, this))
                 {
                     this.stuck = false;
                     return true;
@@ -128,7 +151,9 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else
             {
-                if (!this.ToUnderground && PlaceItem(thing, this.Rotation.FacingCell + this.Position, false, this.Map))
+                if (!this.ToUnderground && this.PRFTryPlaceThing(thing, 
+                    this.Position + this.Rotation.FacingCell,
+                    this.Map)) 
                 {
                     this.stuck = false;
                     return true;
@@ -158,22 +183,22 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-        private List<IBeltConbeyorLinkable> LinkTargetConveyor()
+        private IEnumerable<IBeltConbeyorLinkable> LinkTargetConveyor()
         {
             return new List<Rot4> { this.Rotation, this.Rotation.Opposite }
                 .Select(r => this.Position + r.FacingCell)
                 .SelectMany(t => t.GetThingList(this.Map))
                 .Where(t => t.def.category == ThingCategory.Building)
                 .Where(t => Building_BeltConveyor.CanLink(this, t, this.def, t.def))
-                .SelectMany(t => Option(t as IBeltConbeyorLinkable))
-                .ToList();
+                .Select(t => (t as IBeltConbeyorLinkable));
         }
 
-        private Option<IBeltConbeyorLinkable> OutputConveyor()
+        // TODO: Faster to directly access, or to cache
+        private IBeltConbeyorLinkable OutputConveyor()
         {
             return this.LinkTargetConveyor()
                 .Where(x => x.Position == this.Position + this.Rotation.FacingCell)
-                .FirstOption();
+                .First();
         }
 
         public bool ReceivableNow(bool underground, Thing thing)
@@ -216,7 +241,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         public bool IsUnderground { get => false; }
-
+        // 
         public bool ToUnderground { get => this.Extension.toUnderground; }
 
         protected override bool WorkingIsDespawned()

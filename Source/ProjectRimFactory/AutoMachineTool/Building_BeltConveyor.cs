@@ -210,6 +210,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
+            Log.Warning("" + this + " was asked if it can accept " + newThing);
             bool comesFromUnderGround = false;
             if (giver is AutoMachineTool.IBeltConbeyorLinkable)
                 comesFromUnderGround = 
@@ -288,6 +289,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool PlaceProduct(ref List<Thing> products)
         {
             var thing = products[0];
+            Log.Message("About to plce: " + thing);
             if (this.WorkInterruption(thing))
             {
                 return true;
@@ -303,16 +305,19 @@ namespace ProjectRimFactory.AutoMachineTool
                 {
                     NotifyAroundSender();
                     this.stuck = false;
+                    Log.Message("Passed it onto " + first);
                     return true;
                 }
             }
             else // if no conveyor, place if can
             {
+                Log.Warning("Tryin to place directly:");
                 if (!this.IsUnderground && this.PRFTryPlaceThing(thing, 
                       this.dest.FacingCell + this.Position, this.Map))
                 {
                     NotifyAroundSender();
                     this.stuck = false;
+                    Log.Message("Successfully placed!");
                     return true;
                 }
             }
