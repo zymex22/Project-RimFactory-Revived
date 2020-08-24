@@ -118,11 +118,13 @@ namespace ProjectRimFactory.AutoMachineTool
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null)
         {
             Log.Warning("" + this + " was asked if it can accept " + newThing);
-            bool comesFromUnderGround = false;
-            if (giver is AutoMachineTool.IBeltConveyorLinkable)
-                comesFromUnderGround =
-                  (giver as AutoMachineTool.IBeltConveyorLinkable).IsUnderground;
-            if (!this.ReceivableNow(comesFromUnderGround, newThing))
+            if (giver is AutoMachineTool.IBeltConveyorLinkable conveyor) {
+                if (this.ToUnderground) {
+                    if (!conveyor.CanSendToLevel(ConveyorLevel.Ground)) return false;
+                } else
+                    if (!conveyor.CanSendToLevel(ConveyorLevel.Underground)) return false;
+            }
+            if (!this.ReceivableNow(true /*TODO: XXX */, newThing))
                 return false;
             if (this.State == WorkingState.Ready) {
                 if (newThing.Spawned && this.IsUnderground) newThing.DeSpawn();
@@ -140,10 +142,12 @@ namespace ProjectRimFactory.AutoMachineTool
             // These can only place things in one direction,
             //   so the placing is different from base conveyors:
             var thing = products[0];
+            // TODO: check each if multilpe levels possible
             var next = this.OutputConveyor();
             if (next != null)
             {
                 // コンベアある場合、そっちに流す.
+                // If there is a conveyor, let it flow to it
                 if (next.AcceptsThing(thing, this))
                 {
                     this.stuck = false;
@@ -199,12 +203,12 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return this.LinkTargetConveyor()
                 .Where(x => x.Position == this.Position + this.Rotation.FacingCell)
-                .First();
+                .FirstOrDefault();
         }
 
         public bool ReceivableNow(bool underground, Thing thing)
         {
-            if (!this.IsActive() || this.ToUnderground == underground)
+            if (!this.IsActive())// TODO: XXX || this.ToUnderground == underground)
             {
                 return false;
             }
@@ -244,6 +248,23 @@ namespace ProjectRimFactory.AutoMachineTool
         public bool IsUnderground { get => false; }
         // 
         public bool ToUnderground { get => this.Extension.toUnderground; }
+
+        public bool CanSendToLevel(ConveyorLevel level)
+        {
+            if (this.ToUnderground) {
+                if (level == ConveyorLevel.Underground) return true;
+            } else // this is exit to surface:
+                if (level == ConveyorLevel.Ground) return true;
+            return false;
+        }
+        public bool CanReceiveFromLevel(ConveyorLevel level)
+        {
+            if (this.ToUnderground) {
+                if (level == ConveyorLevel.Ground) return true;
+            } else // this is exit to surface:
+                if (level == ConveyorLevel.Underground) return true;
+            return false;
+        }
 
         protected override bool WorkingIsDespawned()
         {

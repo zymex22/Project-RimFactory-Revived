@@ -14,8 +14,14 @@ namespace ProjectRimFactory.AutoMachineTool
         Rot4 Rotation { get; }
         IntVec3 Position { get; }
         bool ReceivableNow(bool underground, Thing thing);
+        bool CanSendToLevel(ConveyorLevel level);
+        bool CanReceiveFromLevel(ConveyorLevel level);
         bool IsUnderground { get; }
         IEnumerable<Rot4> OutputRots { get; }
         bool IsStuck { get; }
+    }
+    public enum ConveyorLevel {
+        Underground=-1,
+        Ground=0,
     }
 }

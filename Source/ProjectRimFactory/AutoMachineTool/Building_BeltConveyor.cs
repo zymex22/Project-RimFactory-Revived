@@ -74,7 +74,18 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public bool IsStuck => this.stuck;
 
+        // TODO: make this a local flag set in SpawnSetup
         public bool IsUnderground { get => Option(this.Extension).Fold(false)(x => x.underground); }
+
+        public bool CanSendToLevel(ConveyorLevel level)
+        {
+            if (this.IsUnderground) {
+                if (level == ConveyorLevel.Underground) return true;
+            } else // on surface
+                if (level == ConveyorLevel.Ground) return true;
+            return false;
+        }
+        public bool CanReceiveFromLevel(ConveyorLevel level) => CanSendToLevel(level);
 
         public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
 
@@ -211,11 +222,16 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
             Log.Warning("" + this + " was asked if it can accept " + newThing);
-            bool comesFromUnderGround = false;
-            if (giver is AutoMachineTool.IBeltConveyorLinkable)
-                comesFromUnderGround = 
-                  (giver as AutoMachineTool.IBeltConveyorLinkable).IsUnderground;
-            if (!this.ReceivableNow(comesFromUnderGround, newThing))
+            // verify proper levels:
+            if (giver is AutoMachineTool.IBeltConveyorLinkable) {
+                if (this.IsUnderground) {
+                    if (!((IBeltConveyorLinkable)giver).CanSendToLevel(ConveyorLevel.Underground))
+                        return false;
+                } else // not underground
+                    if (!((IBeltConveyorLinkable)giver).CanSendToLevel(ConveyorLevel.Ground))
+                        return false;
+            }
+            if (!this.ReceivableNow(true /*TODO: XXX*/, newThing))
                 return false;
             if (this.State == WorkingState.Ready)
             {
@@ -297,10 +313,12 @@ namespace ProjectRimFactory.AutoMachineTool
             // Try to send to another conveyor first:
             // コンベアある場合、そっちに流す.
             var first = this.BeltLinkableAt(this.Position + dest.FacingCell);
+            // TODO: redo this for multilpe levels in case both underground and surface?
 //            var first = (this.dest.FacingCell+this.Position).GetThingList(this.Map).Where(t=>t is )
 //            var next = this.LinkTargetConveyor().Where(o => o.Position == this.dest.FacingCell + this.Position).First();
             if (first != null)
             {
+                // TODO: do I care about checking levels here?
                 if ((first as IPRF_Building).AcceptsThing(thing,this))
                 {
                     NotifyAroundSender();
@@ -373,7 +391,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 .Where(t => t is IBeltConveyorLinkable)
                 .Where(t => CanLink(this, t, this.def, t.def))
                 .Select(t => t as IBeltConveyorLinkable)
-                .First();
+                .FirstOrDefault();
         }
 
         private IEnumerable<IBeltConveyorLinkable> LinkTargetConveyor()
@@ -401,7 +419,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public bool ReceivableNow(bool underground, Thing thing)
         {
-            if(!this.IsActive() || this.IsUnderground != underground)
+            if(!this.IsActive())//TODO: || this.IsUnderground != underground)
             {
                 return false;
             }

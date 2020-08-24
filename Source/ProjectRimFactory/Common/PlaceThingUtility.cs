@@ -25,6 +25,7 @@ namespace ProjectRimFactory {
             // Storage:
             SlotGroup slotGroup = cell.GetSlotGroup(map);
             if (slotGroup != null) {
+                Log.Warning("SlotGroup: " + slotGroup.parent);
                 if (slotGroup.parent is IPRF_Building) {
                     if (placer.PlaceThingNextBuilding((slotGroup.parent as IPRF_Building),
                         t, cell, map)) {
@@ -107,9 +108,13 @@ namespace ProjectRimFactory {
             //TODO: make this use NoStorageBlockersIn() - faster AND lets
             //   us set conveyor belts to dumping random stuff into stockpiles
             //   if we want to be silly (or realistic)
+            Log.Message("Checking IsValidStorageFor(" + cell + ", map, " + t + "): "
+                + StoreUtility.IsValidStorageFor(cell, map, t));
             if (StoreUtility.IsValidStorageFor(cell, map, t)) {
                 if (t.Spawned) t.DeSpawn();
-                GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct);
+                if (!GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct)) {
+                    Log.Error("Could not place thing??");
+                }
                 placer.EffectOnPlaceThing(t);
                 if (placer.ForbidOnPlacing()) t.SetForbidden(true, false);
                 return true;
