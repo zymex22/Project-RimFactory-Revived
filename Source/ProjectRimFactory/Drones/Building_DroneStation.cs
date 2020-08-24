@@ -184,6 +184,8 @@ namespace ProjectRimFactory.Drones
                     //Not shure if i need that but just to be shure
                     droneArea[Position] = true;
                 }
+                this.Map.areaManager.AllAreas.Add(droneArea);
+
                 return droneArea;
 
             }
@@ -346,10 +348,9 @@ namespace ProjectRimFactory.Drones
         public override void ExposeData()
         {
             base.ExposeData();
-
-            Scribe_Deep.Look(ref droneAllowedArea, "droneAllowedArea", LookMode.Deep, this.Map.areaManager); //Not working as intended
             Scribe_Collections.Look(ref spawnedDrones, "spawnedDrones", LookMode.Reference);
             Scribe_Values.Look(ref lockdown, "lockdown");
+            Scribe_References.Look(ref droneAllowedArea, "droneAllowedArea");
         }
 
 
