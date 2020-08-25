@@ -21,7 +21,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
             if (ext == null || ext.TargetCellResolver == null)
             {
-                Debug.LogWarning("targetCellResolver not found.");
+                UnityEngine.Debug.LogWarning("targetCellResolver not found.");
                 return;
             }
 
