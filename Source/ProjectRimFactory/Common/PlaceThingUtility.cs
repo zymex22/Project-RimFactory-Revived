@@ -112,9 +112,8 @@ namespace ProjectRimFactory {
             //TODO: make this use NoStorageBlockersIn() - faster AND lets
             //   us set conveyor belts to dumping random stuff into stockpiles
             //   if we want to be silly (or realistic)
-            Debug.Message(Debug.Flag.PlaceThing, "Checking IsValidStorageFor(" + cell + ", map, " + t + "): "
-                + StoreUtility.IsValidStorageFor(cell, map, t));
-            if (StoreUtility.IsValidStorageFor(cell, map, t)) {
+            if (CallNoStorageBlockersIn(cell, map, t)) {
+                Debug.Message(Debug.Flag.PlaceThing, "Found NoStorageBlockersIn(" + cell + ", map, " + t + ") - Placing");
                 if (t.Spawned) t.DeSpawn();
                 if (!GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct)) {
                     // should never happen??
@@ -124,10 +123,33 @@ namespace ProjectRimFactory {
                 if (placer.ForbidOnPlacing()) t.SetForbidden(true, false);
                 return true;
             }
+            Debug.Message(Debug.Flag.PlaceThing, "There were StorageBlockersIn(" + cell + ", map, " + t + ") - cannot place");
             return false;
         }
 
-
-
+        // static constructor to prep dynamic method
+        static PlaceThingUtility() {
+            // Set up CallNoStorageBlockersIn, to allow fast calling:
+            // #DeepMagic
+            var dm = new DynamicMethod("directly call RimWorld.StoreUtility's NoStorageBlockersIn",
+                typeof(bool), new Type[] { typeof(IntVec3), typeof(Map), typeof(Thing) },
+                true // skin JIT visibility checks - calling a private method is the entire point!
+                );
+            var il = dm.GetILGenerator();
+            // build our function from IL Because why not?
+            //   still faster than reflection!
+            il.Emit(OpCodes.Ldarg_0); // put IntVec3 cell on the stack
+            il.Emit(OpCodes.Ldarg_1); // Map
+            il.Emit(OpCodes.Ldarg_2); // Thing
+            il.Emit(OpCodes.Call, typeof(RimWorld.StoreUtility).GetMethod("NoStorageBlockersIn",
+                BindingFlags.Static | BindingFlags.NonPublic));
+            il.Emit(OpCodes.Ret);
+            // Now do the magic to make it an actually callable Func<>:
+            CallNoStorageBlockersIn = (Func<IntVec3, Map, Thing, bool>)dm.CreateDelegate(
+                typeof(Func<,,,>).MakeGenericType(typeof(IntVec3), typeof(Map), typeof(Thing), typeof(bool)));
+            // Mayb there's a way to make that faster? But this works ^.^
+        }
+        // Call via "    bool result=CallNoStorageBlockersIn(c, map, thing);"
+        public static Func<IntVec3, Map, Thing, bool> CallNoStorageBlockersIn;
     }
 }
