@@ -117,21 +117,29 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null)
         {
-            Log.Warning("" + this + " was asked if it can accept " + newThing);
+            Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked to accept " + newThing);
             if (giver is AutoMachineTool.IBeltConveyorLinkable conveyor) {
                 if (this.ToUnderground) {
-                    if (!conveyor.CanSendToLevel(ConveyorLevel.Ground)) return false;
-                } else
-                    if (!conveyor.CanSendToLevel(ConveyorLevel.Underground)) return false;
+                    if (!conveyor.CanSendToLevel(ConveyorLevel.Ground)) {
+                        Debug.Message(Debug.Flag.Conveyors, "  but this starts on the surface");
+                        return false;
+                    }
+                } else // this: underground -> surface
+                    if (!conveyor.CanSendToLevel(ConveyorLevel.Underground)) {
+                        Debug.Message(Debug.Flag.Conveyors, " but this starts underground");
+                        return false;
+                    }
             }
             if (!this.ReceivableNow(true /*TODO: XXX */, newThing))
                 return false;
             if (this.State == WorkingState.Ready) {
+                Debug.Message(Debug.Flag.Conveyors, "  taking it.");
                 if (newThing.Spawned && this.IsUnderground) newThing.DeSpawn();
                 newThing.Position = this.Position;
                 this.ForceStartWork(newThing, 1f);
                 return true;
             } else {
+                Debug.Message(Debug.Flag.Conveyors, "  but busy; trying to absorb.");
                 var target = this.State == WorkingState.Working ? this.Working : this.products[0];
                 return target.TryAbsorbStack(newThing, true);
             }

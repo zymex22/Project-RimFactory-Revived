@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using System.Reflection.Emit; // for dynamic method
 using ProjectRimFactory.Common;
 using Verse;
 using RimWorld;
@@ -25,10 +27,11 @@ namespace ProjectRimFactory {
             // Storage:
             SlotGroup slotGroup = cell.GetSlotGroup(map);
             if (slotGroup != null) {
-                Log.Warning("SlotGroup: " + slotGroup.parent);
+                Debug.Warning(Debug.Flag.PlaceThing, "Placing " + t + " in slotGroup: " + slotGroup.parent);
                 if (slotGroup.parent is IPRF_Building) {
                     if (placer.PlaceThingNextBuilding((slotGroup.parent as IPRF_Building),
                         t, cell, map)) {
+                        Debug.Message(Debug.Flag.PlaceThing, "  which is owned by PRF " + slotGroup.parent);
                         return true;
                     }
                     if (forcePlace) goto ForcePlace;
@@ -77,6 +80,7 @@ namespace ProjectRimFactory {
             }
             if (!forcePlace) return false;
             ForcePlace:
+            Debug.Warning(Debug.Flag.PlaceThing, "  Placement is forced!");
             if (t.Spawned) t.DeSpawn();
             GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Near);
             placer.EffectOnPlaceThing(t);
@@ -108,21 +112,20 @@ namespace ProjectRimFactory {
             //TODO: make this use NoStorageBlockersIn() - faster AND lets
             //   us set conveyor belts to dumping random stuff into stockpiles
             //   if we want to be silly (or realistic)
-            Log.Message("Checking IsValidStorageFor(" + cell + ", map, " + t + "): "
+            Debug.Message(Debug.Flag.PlaceThing, "Checking IsValidStorageFor(" + cell + ", map, " + t + "): "
                 + StoreUtility.IsValidStorageFor(cell, map, t));
             if (StoreUtility.IsValidStorageFor(cell, map, t)) {
                 if (t.Spawned) t.DeSpawn();
                 if (!GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct)) {
-                    Log.Error("Could not place thing??");
+                    // should never happen??
+                    Log.Error("Could not place thing "+t+" at "+cell);
                 }
                 placer.EffectOnPlaceThing(t);
                 if (placer.ForbidOnPlacing()) t.SetForbidden(true, false);
                 return true;
             }
-            return true;
+            return false;
         }
-
-
 
 
 

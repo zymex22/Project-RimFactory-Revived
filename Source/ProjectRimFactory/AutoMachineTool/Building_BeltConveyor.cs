@@ -221,7 +221,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
-            Log.Warning("" + this + " was asked if it can accept " + newThing);
+            Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked if it can accept " + newThing);
             // verify proper levels:
             if (giver is AutoMachineTool.IBeltConveyorLinkable) {
                 if (this.IsUnderground) {
@@ -305,7 +305,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool PlaceProduct(ref List<Thing> products)
         {
             var thing = products[0];
-            Log.Message("About to plce: " + thing);
+            Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this + " is about to try placingn " + thing);
             if (this.WorkInterruption(thing))
             {
                 return true;
@@ -323,19 +323,19 @@ namespace ProjectRimFactory.AutoMachineTool
                 {
                     NotifyAroundSender();
                     this.stuck = false;
-                    Log.Message("Passed it onto " + first);
+                    Debug.Message(Debug.Flag.Conveyors, " and successfully passed it to " + first);
                     return true;
                 }
             }
             else // if no conveyor, place if can
             {
-                Log.Warning("Tryin to place directly:");
+                Debug.Message(Debug.Flag.Conveyors, "  trying to place directly:");
                 if (!this.IsUnderground && this.PRFTryPlaceThing(thing, 
                       this.dest.FacingCell + this.Position, this.Map))
                 {
                     NotifyAroundSender();
                     this.stuck = false;
-                    Log.Message("Successfully placed!");
+                    Debug.Message(Debug.Flag.Conveyors, "Successfully placed!");
                     return true;
                 }
             }
