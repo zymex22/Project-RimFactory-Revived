@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using System.Reflection.Emit; // for dynamic method
+using System.Collections.Generic;
+using System.Linq;
 using ProjectRimFactory.Common;
 using Verse;
 using RimWorld;
@@ -100,18 +102,9 @@ namespace ProjectRimFactory {
         private static bool PlaceThingInSlotGroup(this IPRF_Building placer, Thing t,
             SlotGroup slotGroup, IntVec3 cell, Map map) {
             // Head off a lot of potential calculation:
-            // TODO: should buildings be able to ignore this?
-            //    (e.g., a conveyor belt that just dumps everything when it hits the end)
-            // TODO: Will need to use NoStorageBlockersIn() to be able to do that
             // TODO: Deal properly with underground conveyors (need options to allow
             //       player to decide how that works.
-            if (!slotGroup.parent.Accepts(t)) return false;
-            // PRF Buildings are Magic, and can move stuff anywhere into a slotGroup
-            //   (or, you know, they pile stuff up until it falls, or use a machine
-            //    arm to move things, etc)
-            //TODO: make this use NoStorageBlockersIn() - faster AND lets
-            //   us set conveyor belts to dumping random stuff into stockpiles
-            //   if we want to be silly (or realistic)
+            if (placer.ObeysStorageFilters && !slotGroup.parent.Accepts(t)) return false;
             if (CallNoStorageBlockersIn(cell, map, t)) {
                 Debug.Message(Debug.Flag.PlaceThing, "Found NoStorageBlockersIn(" + cell + ", map, " + t + ") - Placing");
                 if (t.Spawned) t.DeSpawn();
@@ -124,6 +117,41 @@ namespace ProjectRimFactory {
                 return true;
             }
             Debug.Message(Debug.Flag.PlaceThing, "There were StorageBlockersIn(" + cell + ", map, " + t + ") - cannot place");
+            return false;
+        }
+        /// <summary>
+        /// Some PRF Buildings are Magic, and can move stuff anywhere into a slotGroup
+        ///   (or, you know, they pile stuff up until it falls, or use a machine
+        ///    arm to move things, etc)
+        /// </summary>
+        /// <returns><c>true</c>, if thing was placed somewhere; <c>false</c> otherwise.</returns>
+        /// <param name="placer">IPRF Buidling placing.</param>
+        /// <param name="t">thing to place.</param>
+        /// <param name="slotGroup">SlotGroup.</param>
+        /// <param name="cell">optional first cell</param>
+        public static bool PlaceThingAnywhereInSlotGroup(this IPRF_Building placer, Thing t,
+            SlotGroup slotGroup, IntVec3? cell=null) {
+            // Should we even be putting anything here?
+            if (placer.ObeysStorageFilters && !slotGroup.parent.Accepts(t)) return false;
+            Map map = placer.Map;
+            // Go through slotGroup, starting with cell if given
+            // TODO: go thru slotgroup in order of increasing distance from cell?
+            foreach (var c in (cell != null ? ((new[] { (IntVec3)cell }).Concat(slotGroup.CellsList.Where(x => x != cell)))
+                                          : slotGroup.CellsList)) {
+                if (CallNoStorageBlockersIn(c, map, t)) {
+                    Debug.Message(Debug.Flag.PlaceThing, "Found NoStorageBlockersIn(" + cell + ", map, " + t + ") - Placing");
+                    if (t.Spawned) t.DeSpawn();
+                    if (!GenPlace.TryPlaceThing(t, c, map, ThingPlaceMode.Direct)) {
+                        // should never happen??
+                        Log.Error("Could not place thing " + t + " at " + cell);
+                    }
+                    placer.EffectOnPlaceThing(t);
+                    if (placer.ForbidOnPlacing()) t.SetForbidden(true, false);
+                    return true;
+                }
+            }
+            Debug.Message(Debug.Flag.PlaceThing, "There were StorageBlockersIn every cell of " 
+                       + slotGroup.parent + " - cannot place" + t);
             return false;
         }
 
