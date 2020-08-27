@@ -13,7 +13,7 @@ namespace ProjectRimFactory.Common
 
         public virtual bool ForbidOnPlacing() => false;
         // List<Thing> AvailableThings(); // maybe?
-        public virtual bool ObeyStorageFilters() => true;
+        public virtual bool ObeysStorageFilters { get => true; }
         public virtual void EffectOnPlaceThing(Thing t) { }
         public virtual void EffectOnAcceptThing(Thing t) { }
 

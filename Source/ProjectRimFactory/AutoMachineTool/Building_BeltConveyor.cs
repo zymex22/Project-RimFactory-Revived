@@ -68,7 +68,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.RefreshPowerStatus();
             }
         }
-
+        // Conveyors are dumb. They just dump their stuff onto the ground when they end!
+        //   TODO: mod setting?
+        public override bool ObeysStorageFilters => false;
         public Dictionary<Rot4, ThingFilter> Filters { get => this.filters; }
         public Dictionary<Rot4, DirectionPriority> Priorities { get => this.priorities; }
 
@@ -305,7 +307,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool PlaceProduct(ref List<Thing> products)
         {
             var thing = products[0];
-            Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this + " is about to try placingn " + thing);
+            Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this + " is about to try placing " + thing);
             if (this.WorkInterruption(thing))
             {
                 return true;
