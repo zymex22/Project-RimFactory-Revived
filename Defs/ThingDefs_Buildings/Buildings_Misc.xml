@@ -103,6 +103,7 @@
     <researchPrerequisites>
       <li>Electricity</li>
     </researchPrerequisites>
+    <specialDisplayRadius>13</specialDisplayRadius>
   </ThingDef>
 
 
@@ -213,6 +214,7 @@
     <researchPrerequisites>
       <li>Electricity</li>
     </researchPrerequisites>
+    <specialDisplayRadius>10</specialDisplayRadius>
   </ThingDef>
 
   
