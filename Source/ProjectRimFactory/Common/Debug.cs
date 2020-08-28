@@ -35,7 +35,7 @@ namespace ProjectRimFactory {
             // 0x20
             // 0x40, etc, as powers of two
         }
-        public static Flag activeFlags = 0; //Flag.PlaceThing | Flag.Conveyors...
+        public static Flag activeFlags = (Flag)0; //Flag.PlaceThing | Flag.Conveyors...
 
         [System.Diagnostics.Conditional("DEBUG")]
         public static void Message(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {

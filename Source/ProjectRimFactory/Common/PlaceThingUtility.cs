@@ -51,6 +51,7 @@ namespace ProjectRimFactory {
             bool cellIsImpassible = false;
             foreach (Thing otherThing in map.thingGrid.ThingsListAt(cell)) {
                 if (otherThing.TryAbsorbStack(t, true)) {
+                    Debug.Message(Debug.Flag.PlaceThing, "  absorbed by " + otherThing);
                     placer.EffectOnPlaceThing(otherThing); // I think?
                     return true;
                 }
@@ -59,23 +60,26 @@ namespace ProjectRimFactory {
                 if (otherThing is IPRF_Building) {
                     if (placer.PlaceThingNextBuilding((otherThing as IPRF_Building),
                         t, cell, map)) {
+                        Debug.Message(Debug.Flag.PlaceThing, "  taked by " + otherThing);
                         placer.EffectOnPlaceThing(t);
                         return true;
                     }
-                    if (forcePlace) goto ForcePlace;
-                    return false;
+                    // Continue loop - may be more than 1 PRF_Building here
                 }
             }
             // There is no IPRF Building to take this from us
             if (cellIsImpassible) {
+                Debug.Message(Debug.Flag.PlaceThing, "  cell is impassable.");
                 if (forcePlace) goto ForcePlace;
                 return false;
             }
             // The cell is not impassible! Try to place:
-            // IsValidStorageFor should also work for multi-storage mods
-            if (StoreUtility.IsValidStorageFor(cell, map, t)) {
+            if (CallNoStorageBlockersIn(cell, map, t)) {
+                Debug.Message(Debug.Flag.PlaceThing, "  placing directly.");
                 if (t.Spawned) t.DeSpawn();
-                GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct);
+                if (!GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct)) {
+                    Log.Error("Could not place thing " + t + " at " + cell);
+                }
                 placer.EffectOnPlaceThing(t);
                 if (placer.ForbidOnPlacing()) t.SetForbidden(true, false);
                 return true;
