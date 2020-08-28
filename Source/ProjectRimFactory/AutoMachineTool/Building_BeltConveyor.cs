@@ -316,8 +316,6 @@ namespace ProjectRimFactory.AutoMachineTool
             // コンベアある場合、そっちに流す.
             var first = this.BeltLinkableAt(this.Position + dest.FacingCell);
             // TODO: redo this for multilpe levels in case both underground and surface?
-//            var first = (this.dest.FacingCell+this.Position).GetThingList(this.Map).Where(t=>t is )
-//            var next = this.LinkTargetConveyor().Where(o => o.Position == this.dest.FacingCell + this.Position).First();
             if (first != null)
             {
                 // TODO: do I care about checking levels here?
@@ -393,6 +391,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 .Where(t => t is IBeltConveyorLinkable)
                 .Where(t => CanLink(this, t, this.def, t.def))
                 .Select(t => t as IBeltConveyorLinkable)
+                //TODO: CanLinkTo()
                 .FirstOrDefault();
         }
 
@@ -495,6 +494,45 @@ namespace ProjectRimFactory.AutoMachineTool
             return Option(def.GetModExtension<ModExtension_Conveyor>()).Fold(false)(x => x.underground);
         }
 
+        public bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
+            // First test: level (e.g., Ground vs Underground):
+            bool flag = false;
+            // Loop through enum:
+            //   (Seriously, C#, this is stupid syntax)
+            foreach (var level in (ConveyorLevel [])Enum.GetValues(typeof(ConveyorLevel))) {
+                if (this.CanSendToLevel(level) && otherBeltLinkable.CanReceiveFromLevel(level)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) return false;
+            if (!checkPosition) return true;
+            // Conveyor Belts can link forward, right, and left:
+            if (this.Position + this.Rotation.FacingCell == otherBeltLinkable.Position ||
+                this.Position + this.Rotation.RighthandCell == otherBeltLinkable.Position ||
+                // Why is there no LefthandCell? Annoying.
+                this.Position + this.Rotation.Opposite.RighthandCell == otherBeltLinkable.Position)
+                return true;
+            return false;
+        }
+        public bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition) {
+            // First test: level (e.g., Ground vs Underground):
+            bool flag = false;
+            // Loop through enum:
+            //   (Seriously, C#, this is stupid syntax)
+            foreach (var level in (ConveyorLevel[])Enum.GetValues(typeof(ConveyorLevel))) {
+                if (this.CanReceiveFromLevel(level) && otherBeltLinkable.CanSendToLevel(level)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) return false;
+            if (!checkPosition) return true;
+            // Conveyor belts can receive only from directly behind:
+            if (this.Position + this.Rotation.Opposite.FacingCell == otherBeltLinkable.Position)
+                return true;
+            return false;
+        }
 
         public static bool CanLink(Thing @this, Thing other, ThingDef thisDef, ThingDef otherDef)
         {

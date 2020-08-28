@@ -130,8 +130,8 @@ namespace ProjectRimFactory.AutoMachineTool
                         return false;
                     }
             }
-            if (!this.ReceivableNow(true /*TODO: XXX */, newThing))
-                return false;
+//            if (!this.ReceivableNow(true /*TODO: XXX */, newThing))
+//                return false;
             if (this.State == WorkingState.Ready) {
                 Debug.Message(Debug.Flag.Conveyors, "  taking it.");
                 if (newThing.Spawned && this.IsUnderground) newThing.DeSpawn();
@@ -272,6 +272,27 @@ namespace ProjectRimFactory.AutoMachineTool
             } else // this is exit to surface:
                 if (level == ConveyorLevel.Underground) return true;
             return false;
+        }
+
+        public bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
+            if (this.ToUnderground) {
+                if (!otherBeltLinkable.CanReceiveFromLevel(ConveyorLevel.Underground)) return false;
+            } else { // exit to surface:
+                if (!otherBeltLinkable.CanReceiveFromLevel(ConveyorLevel.Ground)) return false;
+            }
+            if (!checkPosition) return true;
+            // Connectors can only link to something directly in front of them:
+            return (this.Position + this.Rotation.FacingCell == otherBeltLinkable.Position);
+        }
+        public bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
+            if (this.ToUnderground) {
+                if (!otherBeltLinkable.CanSendToLevel(ConveyorLevel.Ground)) return false;
+            } else { // exit to surface:
+                if (!otherBeltLinkable.CanSendToLevel(ConveyorLevel.Underground)) return false;
+            }
+            if (!checkPosition) return true;
+            // Connectors can only link from something directly behind them:
+            return (this.Position + this.Rotation.Opposite.FacingCell == otherBeltLinkable.Position);
         }
 
         protected override bool WorkingIsDespawned()
