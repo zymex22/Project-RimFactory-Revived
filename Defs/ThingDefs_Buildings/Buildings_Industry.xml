@@ -323,7 +323,8 @@
             <li>WoodLog</li>
           </thingDefs>
         </fuelFilter>
-        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <consumeFuelOnlyWhenUsed>false</consumeFuelOnlyWhenUsed>
+        <!--<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>-->
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
@@ -333,7 +334,7 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <workSpeedBaseFactor>0.5</workSpeedBaseFactor>
+        <workSpeedBaseFactor>0.1</workSpeedBaseFactor>
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
         <skillLevel>10</skillLevel>

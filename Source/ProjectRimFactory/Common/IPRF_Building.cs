@@ -13,7 +13,7 @@ namespace ProjectRimFactory.Common {
         /// <summary>
         /// Returns true if the IPRF_Building takes responsibility for the <paramref name="newThing"/>
         /// NOTE: If you accept newItem, you should ALWAYS(probably) start with:
-        /// if (newItem.Spawned) newItem.DeSpawn();
+        /// <code>if (newItem.Spawned) newItem.DeSpawn();</code>
         /// </summary>
         /// <returns><c>true</c>, if item was accepted, <c>false</c> otherwise.</returns>
         /// <param name="newThing">New item.</param>
