@@ -55,6 +55,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 return false;
             }
+            // TODO: LWM:
             return Building_BeltConveyor.CanLink(parent, cellThing.Thing, def, cellThing.Def);
         }
 

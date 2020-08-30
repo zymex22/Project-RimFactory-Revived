@@ -130,8 +130,6 @@ namespace ProjectRimFactory.AutoMachineTool
                         return false;
                     }
             }
-//            if (!this.ReceivableNow(true /*TODO: XXX */, newThing))
-//                return false;
             if (this.State == WorkingState.Ready) {
                 Debug.Message(Debug.Flag.Conveyors, "  taking it.");
                 if (newThing.Spawned && this.IsUnderground) newThing.DeSpawn();

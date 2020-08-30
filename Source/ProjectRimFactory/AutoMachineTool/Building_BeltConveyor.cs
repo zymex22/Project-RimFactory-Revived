@@ -43,13 +43,23 @@ namespace ProjectRimFactory.AutoMachineTool
         private Dictionary<Rot4, DirectionPriority> priorities = new Rot4[] { Rot4.North, Rot4.East, Rot4.South, Rot4.West }.ToDictionary(d => d, _ => DirectionPriority.Normal);
         public static float supplyPower = 10f;
 
+        //TODO: Maybe save this?
         [Unsaved]
         private int round = 0;
+
+        private Rot4 previousDir=Rot4.Random; //TODO: save this?
+
         [Unsaved]
         private List<Rot4> outputRot = new List<Rot4>();
 
         [Unsaved]
         private bool stuck = false;
+
+        [Unsaved]
+        private List<IBeltConveyorLinkable> outgoingLinks = new List<IBeltConveyorLinkable>();
+        // TODO: Do we need this, even? YES. We need to let them know we're despawning?
+        [Unsaved]
+        private List<IBeltConveyorLinkable> incomingLinks = new List<IBeltConveyorLinkable>();
 
         public IEnumerable<Rot4> OutputRots => this.outputRot;
 
@@ -124,9 +134,12 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.showProgressBar = false;
+            outgoingLinks.Clear();
+            incomingLinks.Clear();
 
             if (!respawningAfterLoad)
             {
+                //TODO:
                 var conveyors = LinkTargetConveyor();
                 if (!conveyors.Any())
                 {
@@ -149,6 +162,8 @@ namespace ProjectRimFactory.AutoMachineTool
             base.DeSpawn();
 
             targets.ForEach(x => x.Unlink(this));
+            outgoingLinks.Clear();
+            incomingLinks.Clear();
         }
 
         protected override void Reset()
@@ -249,14 +264,41 @@ namespace ProjectRimFactory.AutoMachineTool
                 return target.TryAbsorbStack(newThing, true);
             }
         }
+        /// <summary>
+        /// Suggest the next direction to try placing an item
+        /// </summary>
+        /// <returns>The highest priority direction to try sending something.</returns>
+        /// <param name="t">T.</param>
+        /// <param name="doRotate">If set to <c>true</c> do rotate.</param>
+        private IEnumerable<Rot4> NextDirectionByPriority(Thing t, bool doRotate) {
+            // We need to try each direction in decreasing priority, and for each 
+            //   priority, we need to check each direction that matches it.
+            //   I'm sure there is a more elegant solution to this that doesn't
+            //   involve going through each direction, but this works, isn't too
+            //   slow, and I'm sure there are no mistakes here?
+            foreach (var priority in (DirectionPriority [])Enum.GetValues(typeof(DirectionPriority))) {
+                Log.Message("" + this + " Checking priority " + priority);
+                // I will rotate counterclockwise because that is the "positive" direction
+                Rot4 nextDir = doRotate ? this.previousDir.RotateAsNew(RotationDirection.Counterclockwise)
+                    : this.previousDir;
+                for (int i=0; i<4; i++, nextDir.Rotate(RotationDirection.Counterclockwise)) {
+                    if (nextDir != this.Rotation.Opposite && // don't look backwards
+                        this.priorities[nextDir] == priority &&
+                        this.filters[nextDir].Allows(t))
+                        {
+                            yield return nextDir;
+                        }
+                }
+            }
+        }
 
         private Rot4 Destination(Thing t, bool doRotate)
         {
-            var conveyors = this.OutputBeltConveyor();
-            var allowed = this.filters
+//            var conveyors = this.OutputBeltConveyor();
+            var allowedX = this.filters
                 .Where(f => f.Value.Allows(t.def)).Select(f => f.Key)
                 .ToList();
-            var placeable = allowed.Where(r => conveyors.Where(l => l.Position == this.Position + r.FacingCell).FirstOption().Select(b => b.ReceivableNow(this.IsUnderground, t) || !b.IsStuck).GetOrDefault(true))
+            var placeable = allowed.Where(r => this.outgoingLinks.Where(l => l.Position == this.Position + r.FacingCell).FirstOption().Select(b => b.ReceivableNow(this.IsUnderground, t) || !b.IsStuck).GetOrDefault(true))
                 .ToList();
 
             if (placeable.Count == 0)
