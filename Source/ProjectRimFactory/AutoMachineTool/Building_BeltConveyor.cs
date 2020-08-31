@@ -72,7 +72,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override bool ObeysStorageFilters => false;
         public bool IsStuck => this.stuck;
         public bool IsUnderground { get => this.Extension?.underground ?? false; }
-        public bool CanSendToLevel(ConveyorLevel level)
+        public virtual bool CanSendToLevel(ConveyorLevel level)
         {
             if (this.IsUnderground) {
                 if (level == ConveyorLevel.Underground) return true;
@@ -80,7 +80,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (level == ConveyorLevel.Ground) return true;
             return false;
         }
-        public bool CanReceiveFromLevel(ConveyorLevel level) => CanSendToLevel(level);
+        public virtual bool CanReceiveFromLevel(ConveyorLevel level) => CanSendToLevel(level);
 
         /********** Display *********/
         public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
@@ -156,7 +156,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-        private Vector3 CarryPosition() {
+        protected Vector3 CarryPosition() {
             var workLeft = this.stuck ? Mathf.Clamp(Mathf.Abs(this.WorkLeft), 0f, 0.5f) : Mathf.Clamp01(this.WorkLeft);
             return (this.OutputDirection.FacingCell.ToVector3() * (1f - workLeft)) + this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f);
         }
@@ -167,6 +167,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     this.products.Add(this.working);
                 }
             }
+            //TODO: Underground belts should not spawn items above ground on reset...
             base.Reset();
         }
 
@@ -209,6 +210,22 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
+        public bool CanAcceptNow(Thing thing) {
+            if (!this.IsActive()) return false;
+            switch (this.State) {
+                case WorkingState.Ready:
+                    return true;
+                case WorkingState.Working:
+                    return ThisCanAcceptThat(this.Working, thing);
+                case WorkingState.Placing:
+                    return ThisCanAcceptThat(this.products[0], thing);
+                default:
+                    return false;
+            }
+        }
+        protected bool ThisCanAcceptThat(Thing t1, Thing t2) =>
+                       t1.CanStackWith(t2) && t1.stackCount < t1.def.stackLimit;
+
         protected override bool PlaceProduct(ref List<Thing> products)
         {
             var thing = products[0];
@@ -249,11 +266,11 @@ namespace ProjectRimFactory.AutoMachineTool
             return false;
         }
 
-        public void Link(IBeltConveyorLinkable link)
+        public virtual void Link(IBeltConveyorLinkable link)
         {
         }
 
-        public void Unlink(IBeltConveyorLinkable unlink)
+        public virtual void Unlink(IBeltConveyorLinkable unlink)
         {
         }
 
@@ -278,24 +295,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 .Where(t => t is IBeltConveyorLinkable)
                 .Select(b => b as IBeltConveyorLinkable);
         }
-
-        // No longer useful?
-        public bool ReceivableNow(Thing thing)
-        {
-            if (!this.IsActive()) return false;
-            switch (this.State) {
-                case WorkingState.Ready:
-                    return true;
-                case WorkingState.Working:
-                    return ThisCanAcceptThat(this.Working, thing);
-                case WorkingState.Placing:
-                    return ThisCanAcceptThat(this.products[0], thing);
-                default:
-                    return false;
-            }
-        }
-        private bool ThisCanAcceptThat(Thing t1, Thing t2) => 
-                       t1.CanStackWith(t2) && t1.stackCount < t1.def.stackLimit;
 
         //TODO: fold this ability into IPRF_Building:
         //  NotifyOutputReady()
@@ -349,7 +348,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return true;
         }
 
-        public bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
+        public virtual bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             // First test: level (e.g., Ground vs Underground):
             bool flag = false;
             // Loop through enum:
@@ -365,7 +364,7 @@ namespace ProjectRimFactory.AutoMachineTool
             // Conveyor Belts can link forward:
             return (this.OutputCell() == otherBeltLinkable.Position);
         }
-        public bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition) {
+        public virtual bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             // First test: level (e.g., Ground vs Underground):
             bool flag = false;
             // Loop through enum:
