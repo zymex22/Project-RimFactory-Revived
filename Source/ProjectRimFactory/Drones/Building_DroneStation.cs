@@ -183,8 +183,9 @@ namespace ProjectRimFactory.Drones
                     }
                     //Not shure if i need that but just to be shure
                     droneArea[Position] = true;
+                    this.Map.areaManager.AllAreas.Add(droneArea);
                 }
-                this.Map.areaManager.AllAreas.Add(droneArea);
+                
 
                 return droneArea;
 
