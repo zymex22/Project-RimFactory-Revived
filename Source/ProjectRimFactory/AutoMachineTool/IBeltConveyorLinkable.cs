@@ -7,17 +7,24 @@ using Verse;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    interface IBeltConveyorLinkable : ProjectRimFactory.Common.IPRF_Building
+    public interface IBeltConveyorLinkable : ProjectRimFactory.Common.IPRF_Building, ILoadReferenceable
     {
         void Link(IBeltConveyorLinkable linkable);
         void Unlink(IBeltConveyorLinkable linkable);
         Rot4 Rotation { get; }
         IntVec3 Position { get; }
-        bool ReceivableNow(bool underground, Thing thing);
-
+        bool Spawned { get; }
+        // Because we are using a central Placing mechanism, it makes
+        //   more sense to try directions specifically? Maybe??
+        //        bool ReceivableNow(bool underground, Thing thing);
 
         bool CanSendToLevel(ConveyorLevel level);
         bool CanReceiveFromLevel(ConveyorLevel level);
+
+        /// <summary>
+        /// Whether the conveyor linkable can accpet thing *right this moment*
+        /// </summary>
+        bool CanAcceptNow(Thing t);
 
         // Can the BCL link TO another (irregardless of whether the other can
         //     link from this one)
@@ -28,7 +35,7 @@ namespace ProjectRimFactory.AutoMachineTool
         // If both A.CanLinkTo(B) and B.CanLinkFrom(A) then it's a link!
 
         bool IsUnderground { get; }
-        IEnumerable<Rot4> OutputRots { get; }
+//        IEnumerable<Rot4> OutputRots { get; }
         bool IsStuck { get; }
     }
     public enum ConveyorLevel {
