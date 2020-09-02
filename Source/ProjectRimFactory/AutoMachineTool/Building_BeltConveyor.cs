@@ -290,7 +290,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         protected IEnumerable<IBeltConveyorLinkable> AllNearbyLinkables() {
-            return Enumerable.Range(0, 3).Select(i => this.Position + new Rot4(i).FacingCell)
+            return Enumerable.Range(0, 4).Select(i => this.Position + new Rot4(i).FacingCell)
                 .SelectMany(c => c.GetThingList(this.Map))
                 .Where(t => t is IBeltConveyorLinkable)
                 .Select(b => b as IBeltConveyorLinkable);
