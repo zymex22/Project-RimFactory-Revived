@@ -38,7 +38,7 @@
         </operations>
     </Operation> -->
 
-
+    <!-- Adding coal to all machines using fueled AND woodlog in them -->
     <Operation Class="PatchOperationFindMod">
         <mods>
             <li>Coal Expanded</li>
@@ -49,6 +49,7 @@
             <success>Always</success>
             <operations>
                 <li Class="PatchOperationAdd">
+                    <order>Append</order>
                     <xpath>/Defs/ThingDef/comps/li[@Class = "CompProperties_Refuelable" and fuelFilter/thingDefs/li[text() = "WoodLog"]]/fuelFilter/thingDefs</xpath>
                     <value>
                         <li>WDCoal</li>
