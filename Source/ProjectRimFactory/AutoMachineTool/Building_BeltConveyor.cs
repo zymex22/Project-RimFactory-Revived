@@ -282,8 +282,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected IBeltConveyorLinkable OutputBeltAt(IntVec3 location)
         {
             return location.GetThingList(this.Map)
-                .Where(t => t is IBeltConveyorLinkable)
-                .Select(t => t as IBeltConveyorLinkable)
+                .OfType<IBeltConveyorLinkable>()
                 .Where(b=>this.CanLinkTo(b, false))
                 .Where(b=>b.CanLinkFrom(this))
                 .FirstOrDefault();
@@ -292,8 +291,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected IEnumerable<IBeltConveyorLinkable> AllNearbyLinkables() {
             return Enumerable.Range(0, 4).Select(i => this.Position + new Rot4(i).FacingCell)
                 .SelectMany(c => c.GetThingList(this.Map))
-                .Where(t => t is IBeltConveyorLinkable)
-                .Select(b => b as IBeltConveyorLinkable);
+                .OfType<IBeltConveyorLinkable>();
         }
 
         //TODO: fold this ability into IPRF_Building:
@@ -384,6 +382,11 @@ namespace ProjectRimFactory.AutoMachineTool
             if (this.OutputCell() == otherBeltLinkable.Position) return false;
             return this.Position.AdjacentToCardinal(otherBeltLinkable.Position);
         }
+        public virtual bool HasLinkWith(IBeltConveyorLinkable otherBelt) {
+            // TODO: should we cache these?
+            return (CanLinkTo(otherBelt) && otherBelt.CanLinkFrom(this))
+                || (otherBelt.CanLinkTo(this) && CanLinkFrom(otherBelt));
+        }
 
         public Thing Carrying()
         {
@@ -408,6 +411,34 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.ForceReady();
             }
             return pickup;
+        }
+        public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
+                             Rot4 queryRotation, ConveyorLevel queryLevel) {
+            // Not going to error check here: if there's a config error, there will be prominent
+            //   red error messages in the log.
+            if (queryLevel == ConveyorLevel.Underground) {
+                if (!def.GetModExtension<ModExtension_Conveyor>().underground)
+                    return false;
+            } else { // Ground
+                if (def.GetModExtension<ModExtension_Conveyor>().underground)
+                    return false;
+            }
+            return defRotation == queryRotation;
+        }
+        public static IEnumerable<Rot4> AllRot4DefCanSendToAtLevel(ThingDef def, Rot4 defRotation,
+            ConveyorLevel level) {
+            if (level == ConveyorLevel.Underground &&
+                 def.GetModExtension<ModExtension_Conveyor>().underground)
+                yield return new Rot4(defRotation.AsInt);
+        }
+        public static bool CanDefReceiveFromRot4AtLevel(ThingDef def, Rot4 defRotation, 
+                      Rot4 queryRotation, ConveyorLevel queryLevel) {
+            if ((queryLevel == ConveyorLevel.Ground &&
+                 !def.GetModExtension<ModExtension_Conveyor>().underground)
+                || (queryLevel == ConveyorLevel.Underground &&
+                    def.GetModExtension<ModExtension_Conveyor>().underground))
+                return (defRotation != queryRotation.Opposite);
+            return false;
         }
     }
 }

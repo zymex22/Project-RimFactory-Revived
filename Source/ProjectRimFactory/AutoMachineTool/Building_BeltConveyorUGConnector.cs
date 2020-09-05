@@ -237,5 +237,28 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return true;
         }
+        new public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
+                     Rot4 queryRotation, ConveyorLevel queryLevel) {
+            // Not going to error check here: if there's a config error, there will be prominent
+            //   red error messages in the log.
+            if (queryLevel == ConveyorLevel.Underground) {
+                if (!def.GetModExtension<ModExtension_Conveyor>().toUnderground)
+                    return false;
+            } else { // Ground
+                if (def.GetModExtension<ModExtension_Conveyor>().toUnderground)
+                    return false;
+            }
+            return defRotation == queryRotation;
+        }
+        new public static bool CanDefReceiveFromRot4AtLevel(ThingDef def, Rot4 defRotation,
+                      Rot4 queryRotation, ConveyorLevel queryLevel) {
+            if ((queryLevel == ConveyorLevel.Ground &&
+                 def.GetModExtension<ModExtension_Conveyor>().toUnderground)
+                || (queryLevel == ConveyorLevel.Underground &&
+                    !def.GetModExtension<ModExtension_Conveyor>().toUnderground))
+                return (defRotation != queryRotation.Opposite);
+            return false;
+        }
+
     }
 }

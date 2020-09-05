@@ -69,8 +69,9 @@ namespace ProjectRimFactory.AutoMachineTool
             int num2 = 1;
             for (int i = 0; i < 4; i++)
             {
-                IntVec3 c = cell + GenAdj.CardinalDirections[i];
-                if (this.ShouldLinkWith(c, parent))
+//                IntVec3 c = cell + GenAdj.CardinalDirections[i];
+//                if (this.ShouldLinkWith(c, parent)/TODO
+                if (this.ShouldLinkWith(new Rot4(i), parent))
                 {
                     num += num2;
                 }
@@ -85,7 +86,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.subMats[(int)linkSet];
         }
 
-        public abstract bool ShouldLinkWith(IntVec3 c, Thing parent);
+        public abstract bool ShouldLinkWith(Rot4 dir, Thing parent);
 
         public override void Print(SectionLayer layer, Thing thing)
         {

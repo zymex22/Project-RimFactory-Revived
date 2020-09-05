@@ -26,13 +26,28 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         bool CanAcceptNow(Thing t);
 
-        // Can the BCL link TO another (irregardless of whether the other can
-        //     link from this one)
+        /// <summary>
+        /// Can the BeltConveyorLinkable link TO another (regardless of whether
+        /// the other can link from this one)
+        /// </summary>
+        /// <param name="checkPosition">If set to <c>false</c>, assume position is valid, 
+        /// and only check other considerations - probably only used internally.</param>
         bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true);
         // can the BLC take a link FROM another (independent of whether the other
         //     can actually link to this one)
+        /// <summary>
+        /// Can the BeltConveyorLinkable link FROM another (independent of whether
+        ///   the other can actually link to this one)
+        /// </summary>
+        /// <param name="checkPosition">If set to <c>false</c>, assume position is valid, 
+        /// and only check other considerations - probably only used internally.</param>
         bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition = true);
         // If both A.CanLinkTo(B) and B.CanLinkFrom(A) then it's a link!
+        // if either A->B or B->A, then they have A link.
+        /// <summary>
+        /// Has a link with otherBelt, whether to or from
+        /// </summary>
+        bool HasLinkWith(IBeltConveyorLinkable otherBelt);
 
         bool IsUnderground { get; }
 //        IEnumerable<Rot4> OutputRots { get; }

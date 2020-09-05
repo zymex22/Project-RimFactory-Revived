@@ -15,103 +15,48 @@ using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public enum DirectionPriority
+    public class Building_BeltSplitter : Building_BeltConveyor
     {
-        VeryHigh = 4,
-        High = 3,
-        Normal = 2,
-        Low = 1
-    }
-
-    public static class DirectionPriorityExtension
-    {
-        public static string ToText(this DirectionPriority pri)
-        {
-            return ("PRF.AutoMachineTool.Conveyor.DirectionPriority." + pri.ToString()).Translate();
-        }
-    }
-
-    class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConveyorLinkable, IHideItem, IHideRightClickMenu, IForbidPawnOutputItem
-    {
-        public Building_BeltConveyor()
-        {
-            base.setInitialMinPower = false;
-        }
-
-        private Rot4 dest = default(Rot4);
-        private Dictionary<Rot4, ThingFilter> filters = new Dictionary<Rot4, ThingFilter>();
-        private Dictionary<Rot4, DirectionPriority> priorities = new Rot4[] { Rot4.North, Rot4.East, Rot4.South, Rot4.West }.ToDictionary(d => d, _ => DirectionPriority.Normal);
-        public static float supplyPower = 10f;
+        private Rot4 dest = Rot4.Random; // start in random direction if more than one available
+//        private Dictionary<Rot4, ThingFilter> filters = new Dictionary<Rot4, ThingFilter>();
+//        private Dictionary<Rot4, DirectionPriority> priorities = new Rot4[] { Rot4.North, Rot4.East, Rot4.South, Rot4.West }.ToDictionary(d => d, _ => DirectionPriority.Normal);
 
         //TODO: Maybe save this?
-        [Unsaved]
-        private int round = 0;
+//        [Unsaved]
+//        private int round = 0;
 
-        private Rot4 previousDir=Rot4.Random; //TODO: save this?
-
-        [Unsaved]
-        private List<Rot4> outputRot = new List<Rot4>();
+//        [Unsaved]
+//        private List<Rot4> outputRot = new List<Rot4>();
 
         [Unsaved]
-        private bool stuck = false;
+        private Dictionary<Rot4, OutputLink> outputLinks = new Dictionary<Rot4, OutputLink>();
+        public Dictionary<Rot4, OutputLink> OutputLinks => outputLinks;
 
         [Unsaved]
-        private List<IBeltConveyorLinkable> outgoingLinks = new List<IBeltConveyorLinkable>();
-        // TODO: Do we need this, even? YES. We need to let them know we're despawning?
-        [Unsaved]
-        private List<IBeltConveyorLinkable> incomingLinks = new List<IBeltConveyorLinkable>();
+        private HashSet<IBeltConveyorLinkable> incomingLinks = new HashSet<IBeltConveyorLinkable>();
 
-        public IEnumerable<Rot4> OutputRots => this.outputRot;
+        protected override Rot4 OutputDirection => dest;
 
-        private ModExtension_Conveyor Extension => this.def.GetModExtension<ModExtension_Conveyor>();
+        public IEnumerable<Rot4> AllOutputDirs => this.outputLinks.Keys;
 
-        public override float SupplyPowerForSpeed
-        {
-            get
-            {
-                return supplyPower;
-            }
-
-            set
-            {
-                supplyPower = value;
-                this.RefreshPowerStatus();
-            }
-        }
         // Conveyors are dumb. They just dump their stuff onto the ground when they end!
-        //   TODO: mod setting?
-        public override bool ObeysStorageFilters => false;
-        public Dictionary<Rot4, ThingFilter> Filters { get => this.filters; }
-        public Dictionary<Rot4, DirectionPriority> Priorities { get => this.priorities; }
+        //   But splitters are smart, they can figure stuff out:
+        public override bool ObeysStorageFilters => true;
+//        public Dictionary<Rot4, ThingFilter> Filters { get => this.filters; }
+//        public Dictionary<Rot4, DirectionPriority> Priorities { get => this.priorities; }
 
-        public bool IsStuck => this.stuck;
-
-        // TODO: make this a local flag set in SpawnSetup
-        public bool IsUnderground { get => Option(this.Extension).Fold(false)(x => x.underground); }
-
-        public bool CanSendToLevel(ConveyorLevel level)
-        {
-            if (this.IsUnderground) {
-                if (level == ConveyorLevel.Underground) return true;
-            } else // on surface
-                if (level == ConveyorLevel.Ground) return true;
-            return false;
-        }
-        public bool CanReceiveFromLevel(ConveyorLevel level) => CanSendToLevel(level);
-
-        public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
-
-        public bool HideRightClickMenus => !this.IsUnderground && this.State != WorkingState.Ready;
-
-        public bool ForbidPawnOutput => !this.IsUnderground && this.State != WorkingState.Ready;
+        // TODO: revisit:
+        //public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
+        //public bool HideRightClickMenus => !this.IsUnderground && this.State != WorkingState.Ready;
+        //public bool ForbidPawnOutput => !this.IsUnderground && this.State != WorkingState.Ready;
 
         public override void ExposeData()
         {
             base.ExposeData();
-
-            Scribe_Values.Look(ref supplyPower, "supplyPower", 10f);
             Scribe_Values.Look(ref this.dest, "dest");
-            Scribe_Collections.Look(ref this.filters, "filters", LookMode.Value, LookMode.Deep);
+//            Scribe_Values.Look(ref this.previousDir, "PRF_prevDest");
+            Scribe_Collections.Look(ref this.outputLinks, "outputLinks", LookMode.Value, LookMode.Deep);
+/*            Scribe_Collections.Look(ref this.filters, "filters", LookMode.Value, LookMode.Deep);
             if (this.filters == null)
             {
                 this.filters = new Dictionary<Rot4, ThingFilter>();
@@ -121,64 +66,59 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.priorities = new Rot4[] { Rot4.North, Rot4.East, Rot4.South, Rot4.West }.ToDictionary(d => d, _ => DirectionPriority.Normal);
             }
+            */
         }
 
         public override void PostMapInit()
         {
             base.PostMapInit();
             
-            this.FilterSetting();
+//            this.FilterSetting();
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.showProgressBar = false;
-            outgoingLinks.Clear();
+            outputLinks.Clear();
             incomingLinks.Clear();
 
-            if (!respawningAfterLoad)
-            {
-                //TODO:
-                var conveyors = LinkTargetConveyor();
-                if (!conveyors.Any())
-                {
-                    this.FilterSetting();
-                }
-                else
-                {
-                    conveyors.ForEach(x =>
-                    {
-                        x.Link(this);
-                        this.Link(x);
-                    });
-                }
+            var links = AllNearbyLinks().ToList();
+            foreach (var c in AllNearbyLinks()) {
+                c.Link(this);
+                this.Link(c);
             }
+/*            if (!respawningAfterLoad)
+            {
+                //TODO: ???
+                if (links.Count==0)
+                    this.FilterSetting();
+            }*/
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            var targets = LinkTargetConveyor();
-            base.DeSpawn();
+            foreach (var c in outputLinks.Values.Select(l=>l.link).Union(incomingLinks)) {
+                c.Unlink(this);
+            }
+            base.DeSpawn(mode);
 
-            targets.ForEach(x => x.Unlink(this));
-            outgoingLinks.Clear();
+            outputLinks.Clear();
             incomingLinks.Clear();
         }
 
         protected override void Reset()
         {
-            if (this.State != WorkingState.Ready)
+/*            if (this.State != WorkingState.Ready)
             {
+                // TODO:<)
                 this.FilterSetting();
-                if (this.working != null)
-                {
-                    this.products.Add(this.working);
-                }
             }
             base.Reset();
+            */          
         }
-        
+
+        //TODO:<)
         public override void DrawGUIOverlay()
         {
             base.DrawGUIOverlay();
@@ -198,6 +138,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
+        //TODO:<)
         public override void Draw()
         {
             if (this.IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
@@ -213,92 +154,84 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-        private Thing CarryingThing()
-        {
-            if (this.State == WorkingState.Working)
-            {
-                return this.Working;
-            }
-            else if (this.State == WorkingState.Placing)
-            {
-                return this.products[0];
-            }
-            return null;
-        }
-
-        private Vector3 CarryPosition()
-        {
-            var workLeft = this.stuck ? Mathf.Clamp(Mathf.Abs(this.WorkLeft), 0f, 0.5f) : Mathf.Clamp01(this.WorkLeft);
-            return (this.dest.FacingCell.ToVector3() * (1f - workLeft)) + this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f);
-        }
-        
         public override bool CanStackWith(Thing other)
         {
             return base.CanStackWith(other) && this.State == WorkingState.Ready;
         }
 
+        //TODO: test this:
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
-            Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked if it can accept " + newThing);
-            // verify proper levels:
-            if (giver is AutoMachineTool.IBeltConveyorLinkable) {
-                if (this.IsUnderground) {
-                    if (!((IBeltConveyorLinkable)giver).CanSendToLevel(ConveyorLevel.Underground))
-                        return false;
-                } else // not underground
-                    if (!((IBeltConveyorLinkable)giver).CanSendToLevel(ConveyorLevel.Ground))
-                        return false;
-            }
-            if (!this.ReceivableNow(true /*TODO: XXX*/, newThing))
-                return false;
-            if (this.State == WorkingState.Ready)
-            {
-                if (newThing.Spawned && this.IsUnderground) newThing.DeSpawn();
-                newThing.Position = this.Position;
-                this.dest = Destination(newThing, true);
-                this.ForceStartWork(newThing, 1f);
+            var origState = this.State;
+            if (base.AcceptsThing(newThing, giver) && origState == WorkingState.Ready) {
+                NextDirection(newThing, out dest);
+                Debug.Message(Debug.Flag.Conveyors, "  Spitter " + this 
+                              + " decided " + newThing + " should go " + dest);
                 return true;
             }
-            else
-            {
-                var target = this.State == WorkingState.Working ? this.Working : this.products[0];
-                return target.TryAbsorbStack(newThing, true);
-            }
+            return false;
         }
         /// <summary>
-        /// Suggest the next direction to try placing an item
+        /// Try to find a conveyor/location to pass on the next item to.
+        /// </summary>
+        private bool NextDirection(Thing t, out Rot4 newDir) {
+            foreach (var dir in NextDirectionByPriority(t)) {
+                var olink = outputLinks.TryGetValue(dir, null);
+                if (olink != null) {
+                    if (!olink.link.CanAcceptNow(t)) continue;
+                } else { // just a spot on the ground?
+                    if (!PlaceThingUtility.CallNoStorageBlockersIn(this.Position + dir.FacingCell,
+                                this.Map, t)) continue;
+                }
+                newDir = dir;
+                return true;
+            }
+            if (outputLinks.ContainsKey(this.dest)) {
+                newDir = dest;
+                return true;
+            }
+            newDir = dest;  // slightly better than Rot4.Random, I suppose :p
+            return false; // oh well. Fail.
+        }
+        /// <summary>
+        /// Suggest the next directions to try placing an item; direction will switch between
+        /// valid directions given filters
         /// </summary>
         /// <returns>The highest priority direction to try sending something.</returns>
-        /// <param name="t">T.</param>
-        /// <param name="doRotate">If set to <c>true</c> do rotate.</param>
-        private IEnumerable<Rot4> NextDirectionByPriority(Thing t, bool doRotate) {
+        private IEnumerable<Rot4> NextDirectionByPriority(Thing t) {
             // We need to try each direction in decreasing priority, and for each 
             //   priority, we need to check each direction that matches it.
             //   I'm sure there is a more elegant solution to this that doesn't
             //   involve going through each direction, but this works, isn't too
             //   slow, and I'm sure there are no mistakes here?
-            foreach (var priority in (DirectionPriority [])Enum.GetValues(typeof(DirectionPriority))) {
+            var previousDir = new Rot4(dest.AsInt);
+            var prevPriority = this.outputLinks.TryGetValue(previousDir, null)?.priority;
+            foreach (var priority in (DirectionPriority[])Enum.GetValues(typeof(DirectionPriority))) {
                 Log.Message("" + this + " Checking priority " + priority);
                 // I will rotate counterclockwise because that is the "positive" direction
-                Rot4 nextDir = doRotate ? this.previousDir.RotateAsNew(RotationDirection.Counterclockwise)
-                    : this.previousDir;
-                for (int i=0; i<4; i++, nextDir.Rotate(RotationDirection.Counterclockwise)) {
+                Rot4 nextDir = previousDir.RotateAsNew(RotationDirection.Counterclockwise);
+                for (int i = 0; i < 4; i++, nextDir.Rotate(RotationDirection.Counterclockwise)) {
                     if (nextDir != this.Rotation.Opposite && // don't look backwards
-                        this.priorities[nextDir] == priority &&
-                        this.filters[nextDir].Allows(t))
-                        {
-                            yield return nextDir;
-                        }
+                                nextDir != previousDir &&
+                                this.outputLinks.ContainsKey(nextDir) &&
+                                outputLinks[nextDir].priority == priority &&
+                                outputLinks[nextDir].Allows(t))
+                        //                                this.priorities[nextDir] == priority &&
+                        //                                this.filters[nextDir].Allows(t)) { 
+                        yield return nextDir;
                 }
+                // if prevPriority == null, it means we don't have a valid link there
+                //   and we won't return that direction.
+                if (priority == prevPriority) yield return previousDir;
             }
         }
 
-        private Rot4 Destination(Thing t, bool doRotate)
+/*        private Rot4 Destination(Thing t, bool doRotate)
         {
-//            var conveyors = this.OutputBeltConveyor();
-            var allowedX = this.filters
+            var conveyors = this.OutputBeltConveyor();
+            var allowed = this.filters
                 .Where(f => f.Value.Allows(t.def)).Select(f => f.Key)
                 .ToList();
-            var placeable = allowed.Where(r => this.outgoingLinks.Where(l => l.Position == this.Position + r.FacingCell).FirstOption().Select(b => b.ReceivableNow(this.IsUnderground, t) || !b.IsStuck).GetOrDefault(true))
+            List<IBeltConveyorLinkable> placeable = allowed.Where(r => this.outgoingLinks.Where(l => l.Position == this.Position + r.FacingCell).FirstOption().Select(b => b.ReceivableNow(this.IsUnderground, t) || !b.IsStuck).GetOrDefault(true))
                 .ToList();
 
             if (placeable.Count == 0)
@@ -309,7 +242,7 @@ namespace ProjectRimFactory.AutoMachineTool
                         conveyors
                             .Where(l => l.Position == this.Position + r.FacingCell)
                             .FirstOption()
-                            .Select(b => b.ReceivableNow(this.IsUnderground, t) || !b.IsStuck)
+//                            .Select(b => b.ReceivableNow(this.IsUnderground, t) || !b.IsStuck)
                             .GetOrDefault(true))
                         .ToList();
                 }
@@ -327,8 +260,8 @@ namespace ProjectRimFactory.AutoMachineTool
             if (doRotate) this.round++;
             return dests.ElementAt(index);
         }
-
-        private bool SendableConveyor(Thing t, out Rot4 dir)
+*/
+/*        private bool SendableConveyor(Thing t, out Rot4 dir)
         {
             dir = default(Rot4);
             var result = this.filters
@@ -345,7 +278,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return result.HasValue;
         }
-
+        */
         protected override bool PlaceProduct(ref List<Thing> products)
         {
             var thing = products[0];
@@ -356,11 +289,9 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             // Try to send to another conveyor first:
             // コンベアある場合、そっちに流す.
-            var first = this.BeltLinkableAt(this.Position + dest.FacingCell);
-            // TODO: redo this for multilpe levels in case both underground and surface?
+            var first = this.outputLinks.TryGetValue(dest, null)?.link;
             if (first != null)
             {
-                // TODO: do I care about checking levels here?
                 if ((first as IPRF_Building).AcceptsThing(thing,this))
                 {
                     NotifyAroundSender();
@@ -381,8 +312,8 @@ namespace ProjectRimFactory.AutoMachineTool
                     return true;
                 }
             }
-
-            if (this.SendableConveyor(thing, out Rot4 dir))
+            // If we have failed to place, look for another direction:
+            if (NextDirection(thing, out dest))
             {
                 // 他に流す方向があれば、やり直し.
                 // If there is another direction, try again.
@@ -396,18 +327,40 @@ namespace ProjectRimFactory.AutoMachineTool
             return false;
         }
 
-        public void Link(IBeltConveyorLinkable link)
+        public override void Link(IBeltConveyorLinkable link)
         {
-            this.FilterSetting();
+            if (this.CanLinkTo(link) && link.CanLinkFrom(this)) {
+                Rot4 r;
+                if (PositionToRot4(link, out r)) {
+                    this.outputLinks[r] = new OutputLink(link);
+                }
+            }
+            if (this.CanLinkFrom(link) && link.CanLinkTo(this)) {
+                incomingLinks.Add(link);
+            }
+        }
+        private bool PositionToRot4(IBeltConveyorLinkable link, out Rot4 r) {
+            foreach (var d in Enumerable.Range(0,4).Select(i=>new Rot4(i))) {
+                if (this.Position+d.FacingCell == link.Position) {
+                    r = d;
+                    return true;
+                }
+            }
+            r = Rot4.Random;
+            return false;
         }
 
-        public void Unlink(IBeltConveyorLinkable unlink)
+        public override void Unlink(IBeltConveyorLinkable unlink)
         {
-            this.FilterSetting();
-            Option(this.Working).ForEach(t => this.dest = Destination(t, true));
+            incomingLinks.Remove(unlink);
+            var tmpl = outputLinks.Where(kvp => kvp.Value.link == unlink)
+                .Select(kvp => kvp.Key).ToList();
+            foreach (var k in tmpl) {
+                outputLinks.Remove(k);
+            }
         }
 
-        private void FilterSetting()
+/*        private void FilterSetting()
         {
             Func<ThingFilter> createNew = () =>
             {
@@ -416,7 +369,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 return f;
             };
             var output = this.OutputBeltConveyor();
-            this.filters = Enumerable.Range(0, 4).Select(x => new Rot4(x))
+            this.filters = Enumerable.Range(0, 3).Select(x => new Rot4(x))
                 .Select(x => new { Rot = x, Pos = this.Position + x.FacingCell })
                 .Where(x => output.Any(l => l.Position == x.Pos) || this.Rotation == x.Rot)
                 .ToDictionary(r => r.Rot, r => this.filters.ContainsKey(r.Rot) ? this.filters[r.Rot] : createNew());
@@ -425,19 +378,25 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.filters.ForEach(x => x.Value.SetAllowAll(null));
             }
             this.outputRot = this.filters.Select(x => x.Key).ToList();
+        }*/
+
+        protected IEnumerable<IBeltConveyorLinkable> AllNearbyLinks() {
+            return AllNearbyLinkables()
+                .Where(b => (this.CanLinkTo(b) && b.CanLinkFrom(this))
+                         || (this.CanLinkFrom(b) && b.CanLinkTo(this)));
         }
 
         protected IBeltConveyorLinkable BeltLinkableAt(IntVec3 location)
         {
             return location.GetThingList(this.Map)
                 .Where(t => t is IBeltConveyorLinkable)
-                .Where(t => CanLink(this, t, this.def, t.def))
                 .Select(t => t as IBeltConveyorLinkable)
-                //TODO: CanLinkTo()
+                .Where(b=>this.CanLinkTo(b))
+                .Where(b=>b.CanLinkFrom(this))
                 .FirstOrDefault();
         }
 
-        private IEnumerable<IBeltConveyorLinkable> LinkTargetConveyor()
+/*        private IEnumerable<IBeltConveyorLinkable> LinkTargetConveyor()
         {
             return Enumerable.Range(0, 3).Select(i => this.Position + new Rot4(i).FacingCell)
                 .SelectMany(c => c.GetThingList(this.Map))
@@ -453,8 +412,9 @@ namespace ProjectRimFactory.AutoMachineTool
                     (x.Rotation.Opposite.FacingCell + x.Position == this.Position && x.Position != this.Position + this.Rotation.Opposite.FacingCell) ||
                     (x.Rotation.Opposite.FacingCell + x.Position == this.Position && links.Any(l => l.Position + l.Rotation.FacingCell == this.Position))
                 );
-        }
+        }*/
 
+            /*Superceded by Acceptable(Thing) and CanLinkTo/From
         public bool Acceptable(Rot4 rot, bool underground)
         {
             return rot != this.Rotation && this.IsUnderground == underground;
@@ -479,7 +439,9 @@ namespace ProjectRimFactory.AutoMachineTool
                     return false;
             }
         }
+        */
 
+        //TODO: <)?
         private void NotifyAroundSender()
         {
             new Rot4[] { this.Rotation.Opposite, this.Rotation.Opposite.RotateAsNew(RotationDirection.Clockwise), this.Rotation.Opposite.RotateAsNew(RotationDirection.Counterclockwise) }
@@ -495,9 +457,14 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.IsUnderground ? false : !working.Spawned || working.Position != this.Position;
         }
 
+        //TODO: I think this should just return false?
+        //  Because TryStartWorking is if something falls on top of it, right?
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
-            workAmount = 1f;
+            target = null;
+            workAmount = 0f;
+            return false;
+/*            workAmount = 1f;
             if (this.IsUnderground)
             {
                 target = null;
@@ -508,35 +475,26 @@ namespace ProjectRimFactory.AutoMachineTool
                 .FirstOption().GetOrDefault(null);
             if (target != null)
             {
-                this.dest = Destination(target, true);
+                NextDirection(target, out this.dest);
                 if (target.Spawned && this.IsUnderground) target.DeSpawn();
                 target.Position = this.Position;
             }
-            return target != null;
+            return target != null;*/
         }
 
-        protected override bool FinishWorking(Thing working, out List<Thing> products)
+        /*protected override bool FinishWorking(Thing working, out List<Thing> products)
         {
             products = new List<Thing>().Append(working);
             return true;
-        }
+        }*/
 
+        //???TODO: <)
         protected override bool WorkingIsDespawned()
         {
             return true;
         }
 
-        public static bool IsBeltConveyorDef(ThingDef def)
-        {
-            return typeof(Building_BeltConveyor).IsAssignableFrom(def.thingClass);
-        }
-
-        public static bool IsUndergroundDef(ThingDef def)
-        {
-            return Option(def.GetModExtension<ModExtension_Conveyor>()).Fold(false)(x => x.underground);
-        }
-
-        public bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
+        public override bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             // First test: level (e.g., Ground vs Underground):
             bool flag = false;
             // Loop through enum:
@@ -557,7 +515,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 return true;
             return false;
         }
-        public bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition) {
+        public override bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             // First test: level (e.g., Ground vs Underground):
             bool flag = false;
             // Loop through enum:
@@ -575,68 +533,74 @@ namespace ProjectRimFactory.AutoMachineTool
                 return true;
             return false;
         }
+        public override bool HasLinkWith(IBeltConveyorLinkable otherBelt) {
+            return incomingLinks.Contains(otherBelt) ||
+                outputLinks.Any(kvp => kvp.Value.link == otherBelt);
+        }
 
-        public static bool CanLink(Thing @this, Thing other, ThingDef thisDef, ThingDef otherDef)
-        {
-            var t = @this;
-            if (Building_BeltConveyor.IsBeltConveyorDef(thisDef))
-            {
-                var ug = Building_BeltConveyor.IsUndergroundDef(thisDef);
-                if (Building_BeltConveyor.IsBeltConveyorDef(otherDef))
-                {
-                    return ug == Building_BeltConveyor.IsUndergroundDef(otherDef) && (
-                        t.Position + t.Rotation.FacingCell == other.Position ||
-                        t.Position + t.Rotation.Opposite.FacingCell == other.Position ||
-                        other.Position + other.Rotation.FacingCell == t.Position ||
-                        other.Position + other.Rotation.Opposite.FacingCell == t.Position);
-                }
-                else if (Building_BeltConveyorUGConnector.IsConveyorUGConnecterDef(otherDef))
-                {
-                    return t.Position + t.Rotation.FacingCell == other.Position ||
-                        (other.Position + other.Rotation.FacingCell == t.Position && ug == Building_BeltConveyorUGConnector.ToUndergroundDef(otherDef)) ||
-                        (other.Position + other.Rotation.Opposite.FacingCell == t.Position && ug != Building_BeltConveyorUGConnector.ToUndergroundDef(otherDef));
-                }
+        new public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
+                     Rot4 queryRotation, ConveyorLevel queryLevel) {
+            // Not going to error check here: if there's a config error, there will be prominent
+            //   red error messages in the log.
+            if (queryLevel == ConveyorLevel.Underground) {
+                if (!def.GetModExtension<ModExtension_Conveyor>().underground)
+                    return false;
+            } else { // Ground
+                if (def.GetModExtension<ModExtension_Conveyor>().underground)
+                    return false;
             }
-            else if (Building_BeltConveyorUGConnector.IsConveyorUGConnecterDef(thisDef))
-            {
-                var toUg = Building_BeltConveyorUGConnector.ToUndergroundDef(thisDef);
-                if (Building_BeltConveyor.IsBeltConveyorDef(otherDef))
-                {
-                    return (t.Position + t.Rotation.FacingCell == other.Position && toUg == Building_BeltConveyor.IsUndergroundDef(otherDef)) ||
-                        (t.Position + t.Rotation.Opposite.FacingCell == other.Position && toUg != Building_BeltConveyor.IsUndergroundDef(otherDef));
-                }
-                else if (Building_BeltConveyorUGConnector.IsConveyorUGConnecterDef(otherDef))
-                {
-                    return (t.Position + t.Rotation.FacingCell == other.Position && toUg != Building_BeltConveyorUGConnector.ToUndergroundDef(otherDef)) ||
-                        (t.Position + t.Rotation.Opposite.FacingCell == other.Position && toUg != Building_BeltConveyorUGConnector.ToUndergroundDef(otherDef));
-                }
-            }
+            return defRotation == queryRotation;
+        }
+        new public static IEnumerable<Rot4> AllRot4DefCanSendToAtLevel(ThingDef def, Rot4 defRotation,
+            ConveyorLevel level) {
+            if (level == ConveyorLevel.Underground &&
+                 def.GetModExtension<ModExtension_Conveyor>().underground)
+                yield return new Rot4(defRotation.AsInt);
+        }
+        new public static bool CanDefReceiveFromRot4AtLevel(ThingDef def, Rot4 defRotation,
+                      Rot4 queryRotation, ConveyorLevel queryLevel) {
+            if ((queryLevel == ConveyorLevel.Ground &&
+                 !def.GetModExtension<ModExtension_Conveyor>().underground)
+                || (queryLevel == ConveyorLevel.Underground &&
+                    def.GetModExtension<ModExtension_Conveyor>().underground))
+                return (defRotation != queryRotation.Opposite);
             return false;
         }
 
-        public Thing Carrying()
-        {
-            if (this.State == WorkingState.Working)
-            {
-                return this.Working;
+        public class OutputLink : IExposable {
+            public OutputLink(IBeltConveyorLinkable l) {
+                link = l;
+                // TODO: any way to make filter null unless it's actually needed?
+                //   maybe not?
+                filter = new ThingFilter();
+                filter.SetAllowAll(null);
             }
-            else if (this.State == WorkingState.Placing)
-            {
-                return this.products.FirstOption().GetOrDefault(null);
+            public void ExposeData() {
+                // Skip saving any broken output links:
+                if (Scribe.mode == LoadSaveMode.Saving &&
+                    link != null && !link.Spawned) return;
+                Scribe_Values.Look(ref priority, "PRFB_priority", DirectionPriority.Normal);
+                //TODO: only write filter if it's actually interesting?
+                Scribe_Deep.Look(ref filter, "PRFB_filter", Array.Empty<object>());
+                Scribe_References.Look(ref link, "PRFB_link");
             }
-            return null;
-        }
-
-        public Thing Pickup()
-        {
-            var pickup = this.Carrying();
-            if (pickup != null)
-            {
-                this.products.Clear();
-                this.working = null;
-                this.ForceReady();
+            public bool Allows(Thing t) {
+                return (filter == null || filter.Allows(t));
             }
-            return pickup;
+            public void CopyAllowancesFrom(ThingFilter o) {
+                if (this.filter == null) filter = new ThingFilter();
+                filter.CopyAllowancesFrom(o);
+            }
+            public void DoThingFilterConfigWindow(Rect r, ref Vector2 sp) {
+                if (filter == null) {
+                    filter = new ThingFilter();
+                    filter.SetAllowAll(null);
+                }
+                ThingFilterUI.DoThingFilterConfigWindow(r, ref sp, this.filter);
+            }
+            public IBeltConveyorLinkable link;
+            public DirectionPriority priority=DirectionPriority.Normal;
+            private ThingFilter filter = null;
         }
     }
 }

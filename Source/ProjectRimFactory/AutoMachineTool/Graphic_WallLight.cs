@@ -17,8 +17,9 @@ namespace ProjectRimFactory.AutoMachineTool
         {
         }
 
-        public override bool ShouldLinkWith(IntVec3 c, Thing parent)
+        public override bool ShouldLinkWith(Rot4 dir, Thing parent)
         {
+            IntVec3 c = parent.Position + dir.FacingCell;
             if (!c.InBounds(parent.Map))
             {
                 return false;
