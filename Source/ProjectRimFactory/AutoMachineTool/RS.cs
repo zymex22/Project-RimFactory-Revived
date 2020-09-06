@@ -26,6 +26,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
 
             OutputDirectionIcon = ContentFinder<Texture2D>.Get("UI/OutputDirection", true);
+            ForbidIcon = ContentFinder<Texture2D>.Get("UI/Forbid", true);
             PlayIcon = ContentFinder<Texture2D>.Get("UI/Play", true);
 
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
@@ -44,6 +45,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public static readonly Texture2D AdultIcon;
 
         public static readonly Texture2D OutputDirectionIcon;
+        public static readonly Texture2D ForbidIcon;
         public static readonly Texture2D PlayIcon;
 
         public static readonly Texture2D DeleteX;
