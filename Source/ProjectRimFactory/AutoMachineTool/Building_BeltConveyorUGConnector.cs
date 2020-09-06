@@ -242,10 +242,10 @@ namespace ProjectRimFactory.AutoMachineTool
             // Not going to error check here: if there's a config error, there will be prominent
             //   red error messages in the log.
             if (queryLevel == ConveyorLevel.Underground) {
-                if (!def.GetModExtension<ModExtension_Conveyor>().toUnderground)
+                if (def.GetModExtension<ModExtension_Conveyor>()?.toUnderground!=true)
                     return false;
             } else { // Ground
-                if (def.GetModExtension<ModExtension_Conveyor>().toUnderground)
+                if (def.GetModExtension<ModExtension_Conveyor>()?.toUnderground == true)
                     return false;
             }
             return defRotation == queryRotation;
@@ -253,12 +253,11 @@ namespace ProjectRimFactory.AutoMachineTool
         new public static bool CanDefReceiveFromRot4AtLevel(ThingDef def, Rot4 defRotation,
                       Rot4 queryRotation, ConveyorLevel queryLevel) {
             if ((queryLevel == ConveyorLevel.Ground &&
-                 def.GetModExtension<ModExtension_Conveyor>().toUnderground)
+                 def.GetModExtension<ModExtension_Conveyor>()?.toUnderground == true)
                 || (queryLevel == ConveyorLevel.Underground &&
-                    !def.GetModExtension<ModExtension_Conveyor>().toUnderground))
+                    def.GetModExtension<ModExtension_Conveyor>()?.toUnderground != true))
                 return (defRotation != queryRotation.Opposite);
             return false;
         }
-
     }
 }
