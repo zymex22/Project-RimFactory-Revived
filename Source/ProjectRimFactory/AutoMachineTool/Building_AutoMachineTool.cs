@@ -448,7 +448,8 @@ namespace ProjectRimFactory.AutoMachineTool
                     .Where(b => b.recipe.AvailableNow)
                     .Where(b => Option(b.recipe.skillRequirements).Fold(true)(s => s.Where(x => x != null).All(r => r.minLevel <= this.GetSkillLevel(r.skill))))
                     .Select(b => Tuple(b, Ingredients(b, consumable)))
-                    .Where(t => t.Value1.recipe.ingredients.Count == 0 || t.Value2.Count > 0)
+                    // changed from Value1 and Value2 to Item1 and Item2 when ported over (zymex)
+                    .Where(t => t.Item1.recipe.ingredients.Count == 0 || t.Item2.Count > 0)
                     .FirstOption()
                 );
         }
