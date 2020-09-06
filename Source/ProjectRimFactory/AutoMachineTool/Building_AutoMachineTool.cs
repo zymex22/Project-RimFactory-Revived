@@ -651,11 +651,11 @@ namespace ProjectRimFactory.AutoMachineTool
     public class Building_AutoMachineToolCellResolver : BaseTargetCellResolver, IOutputCellResolver
     {
         // Should already be in building_basemachine.cs (zymex)
-        public override int MinPowerForRange => this.Setting.AutoMachineToolTier(this.Parent.tier).minSupplyPowerForRange;
-        public override int MaxPowerForRange => this.Setting.AutoMachineToolTier(this.Parent.tier).maxSupplyPowerForRange;
+        //public override int MinPowerForRange => this.Setting.AutoMachineToolTier(this.Parent.tier).minSupplyPowerForRange;
+        //public override int MaxPowerForRange => this.Setting.AutoMachineToolTier(this.Parent.tier).maxSupplyPowerForRange;
         public override bool NeedClearingCache => false;
 
-        public override IEnumerable<IntVec3> GetRangeCells(IntVec3 pos, Map map, Rot4 rot, int range)
+        public IEnumerable<IntVec3> GetRangeCells(IntVec3 pos, Map map, Rot4 rot, int range)
         {
             return GenAdj.CellsOccupiedBy(pos, rot, new IntVec2(1, 1) + new IntVec2(range * 2, range * 2));
         }
@@ -672,6 +672,14 @@ namespace ProjectRimFactory.AutoMachineTool
                 .FirstOption()
                 .Select(b => b.OutputCell());
         }
+        // should be this instead? LWM said
+        //public Option<IntVec3> OutputCell(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot)
+        //{
+        //    return center.GetThingList(map)
+        //        .SelectMany(b => Option(b as IProductOutput))
+        //        .FirstOption()
+        //        .Select(b => b.OutputCell());
+        //}
 
         private readonly static List<IntVec3> EmptyList = new List<IntVec3>();
 
