@@ -57,6 +57,17 @@ namespace ProjectRimFactory.Common
             Widgets.BeginScrollView(outRect, ref this.scrollPosition, viewRect);
             var list = new Listing_Standard();
             list.Begin(viewRect);
+            #if DEBUG
+            list.Label("Debug Symbols:");
+            foreach (var f in (Debug.Flag [])Enum.GetValues(typeof(Debug.Flag))) {
+                bool ischecked = (f & Debug.activeFlags) > 0;
+                list.CheckboxLabeled(f.ToString(), ref ischecked);
+                if (!ischecked == (f & Debug.activeFlags) > 0) {
+                    Debug.activeFlags ^= f; // toggle f
+                }
+            }
+            list.GapLine();
+            #endif
             root.Draw(list);
             list.End();
             Widgets.EndScrollView();
