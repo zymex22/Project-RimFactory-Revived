@@ -2,18 +2,18 @@
 <Defs>
   <!--==================== Dropdown Groups ====================-->
   <DesignatorDropdownGroupDef>
-    <defName>NRAutoMachineGroup</defName>
+    <defName>AutoMachineGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <!-- base -->
-  <ThingDef Name="Building_NR_AutoMachineTool_Base" Parent="BuildingBase" Abstract="True">
+  <ThingDef Name="PRF_AutoMachineTool_Base" Parent="BuildingBase" Abstract="True">
     <defName>Building_NR_AutoMachineTool_Base</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_AutoMachineTool</thingClass>
     <description>Place the AutoMachineTool facing the work table.
 Set the output destination of the finished product.
 The AutoMachineTool executes a requested craft that can be created with the material in the surrounding squares from the work table creation request.
 By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Skill Level 20.(Skill level can be changed by MOD setting)</description>
-    <designatorDropdown>NRAutoMachineGroup</designatorDropdown>
+    <designatorDropdown>AutoMachineGroup</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
@@ -36,13 +36,13 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
 
     <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <pathCost>0</pathCost>
-    <designationCategory>NR_AutoMachineTool_DesignationCategory</designationCategory>
+    <designationCategory>Industrial</designationCategory>
     <rotatable>true</rotatable>
 
     <placeWorkers>
-      <li>NR_AutoMachineTool.PlaceWorker_AutoMachineTool</li>
-      <li>NR_AutoMachineTool.PlaceWorker_TargetCellsHilight</li>
-      <li>NR_AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_AutoMachineTool</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_TargetCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
     </placeWorkers>
 
     <category>Building</category>
@@ -61,9 +61,9 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
 
 
   <!-- tier 1-->
-  <ThingDef ParentName="Building_NR_AutoMachineTool_Base">
+  <ThingDef ParentName="PRF_AutoMachineTool_Base">
     <defName>Building_NR_AutoMachineTool_TierOne</defName>
-    <label>AutoMachineTool Tier1</label>
+    <label>S.A.L T1</label>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <graphicData>
       <texPath>AutoMachineTool/Buildings/AutoMachineTool</texPath>
@@ -87,9 +87,9 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
   </ThingDef>
 
   <!-- tier 2-->
-  <ThingDef ParentName="Building_NR_AutoMachineTool_Base">
+  <ThingDef ParentName="PRF_AutoMachineTool_Base">
     <defName>Building_NR_AutoMachineTool_TierTwo</defName>
-    <label>AutoMachineTool Tier2</label>
+    <label>S.A.L T3</label>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
       <texPath>NAutoMachineTool/Buildings/AutoMachineTool</texPath>
@@ -114,9 +114,9 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
   </ThingDef>
 
   <!-- tier 3-->
-  <ThingDef ParentName="Building_NR_AutoMachineTool_Base">
+  <ThingDef ParentName="PRF_AutoMachineTool_Base">
     <defName>Building_NR_AutoMachineTool_TierThree</defName>
-    <label>AutoMachineTool Tier3</label>
+    <label>S.A.L T3</label>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
     <graphicData>
       <texPath>AutoMachineTool/Buildings/AutoMachineTool</texPath>
