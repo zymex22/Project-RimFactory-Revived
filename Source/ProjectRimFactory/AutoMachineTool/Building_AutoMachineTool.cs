@@ -182,11 +182,13 @@ namespace ProjectRimFactory.AutoMachineTool
             "NW"
         };
 
-        protected override int? SkillLevel { get { return this.Setting.AutoMachineToolTier(Extension.tier).skillLevel; } }
-        public override int MaxPowerForSpeed { get { return this.Setting.AutoMachineToolTier(Extension.tier).maxSupplyPowerForSpeed; } }
-        public override int MinPowerForSpeed { get { return this.Setting.AutoMachineToolTier(Extension.tier).minSupplyPowerForSpeed; } }
-        protected override float SpeedFactor { get { return this.Setting.AutoMachineToolTier(Extension.tier).speedFactor; } }
+        protected override int? SkillLevel { get { return this.def.GetModExtension<ModExtension_Tier>()?.skillLevel; } }
 
+        // seem to be included in Building_BaseMachine.cs already (zymex)
+        // public override int MaxPowerForSpeed { get { return this.Setting.AutoMachineToolTier(Extension.tier).maxSupplyPowerForSpeed; } }
+        // public override int MinPowerForSpeed { get { return this.Setting.AutoMachineToolTier(Extension.tier).minSupplyPowerForSpeed; } }
+        // protected override float SpeedFactor { get { return this.Setting.AutoMachineToolTier(Extension.tier).speedFactor; } }
+        
         public override bool Glowable => false;
 
         public override void ExposeData()
@@ -648,6 +650,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
     public class Building_AutoMachineToolCellResolver : BaseTargetCellResolver, IOutputCellResolver
     {
+        // Should already be in building_basemachine.cs (zymex)
         public override int MinPowerForRange => this.Setting.AutoMachineToolTier(this.Parent.tier).minSupplyPowerForRange;
         public override int MaxPowerForRange => this.Setting.AutoMachineToolTier(this.Parent.tier).maxSupplyPowerForRange;
         public override bool NeedClearingCache => false;
