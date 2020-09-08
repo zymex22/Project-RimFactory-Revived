@@ -311,6 +311,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     this.GetComp<CompGlowerPulse>().Glows = false;
                 }
             }
+            //Fuel
+            if (compRefuelable != null && Active && currentBillReport != null) {
+                compRefuelable.Notify_UsedThisTick();
+            }
+
         }
         // TryGetNextBill returns a new BillReport to start if one is available
         protected BillReport TryGetNextBill()
