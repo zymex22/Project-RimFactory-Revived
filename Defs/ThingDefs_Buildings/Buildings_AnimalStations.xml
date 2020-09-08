@@ -90,6 +90,14 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_SecondLayer">        <!-- This is used when multiple textures want to be stacked -->
+        <graphicData>
+          <texPath>Farm/Floor2</texPath>          <!-- Path to second layer texture -->
+          <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
+          <drawSize>(2.1)</drawSize>
+        </graphicData>
+        <altitudeLayer>Building</altitudeLayer>        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+      </li>
     </comps>
     <building>
       <preventDeteriorationInside>true</preventDeteriorationInside>
@@ -156,6 +164,14 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_SecondLayer">        <!-- This is used when multiple textures want to be stacked -->
+        <graphicData>
+          <texPath>Farm/Floor2</texPath>          <!-- Path to second layer texture -->
+          <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
+          <drawSize>(2.1)</drawSize>
+        </graphicData>
+        <altitudeLayer>Building</altitudeLayer>        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
       </li>
     </comps>
     <building>
