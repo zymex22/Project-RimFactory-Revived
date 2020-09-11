@@ -238,6 +238,10 @@
         <otherInstance>(1,1,1,0.35)</otherInstance>
         -->
       </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
