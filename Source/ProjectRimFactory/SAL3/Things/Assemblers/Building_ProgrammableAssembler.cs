@@ -436,9 +436,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             base.DrawGUIOverlay();
             if (this.DrawStatus && Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
             {
+                string label = "";
                 // only show overlay status text if has power:
                 if (this.Active) {
-                    string label;
+                    
                     if (currentBillReport != null) // the assembler is actively working
                     { // set the status text to the bill's label:
                         label = currentBillReport.bill.LabelCap;
@@ -453,8 +454,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                         }
                     }
                     // draw the label on the screen:
-                    GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
+                   
                 }
+                else if (compFlick?.SwitchIsOn == false)
+                {
+                    label = "SwitchedOff".Translate();
+                }
+                GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
             }
         }
 
