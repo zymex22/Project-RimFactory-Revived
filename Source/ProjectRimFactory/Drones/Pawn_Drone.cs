@@ -7,6 +7,7 @@ using RimWorld;
 using Verse.AI;
 using ProjectRimFactory.Common;
 using UnityEngine;
+using ProjectRimFactory.SAL3;
 
 namespace ProjectRimFactory.Drones
 {
@@ -22,12 +23,16 @@ namespace ProjectRimFactory.Drones
         public override void Kill(DamageInfo? dinfo, Hediff exactCulprit = null) {
         // don't call base.Kill
         this.Destroy();
+            //set mapIndexOrState to -2 to make "thing.Destroyed" true (needed for Work Tab Compatibility)
+            ReflectionUtility.mapIndexOrState.SetValue(this, (sbyte)-2);
         }
 
         // or destroyed
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
         if (this.Spawned) this.DeSpawn();
-        // don't call base.Destroy();
+            // don't call base.Destroy();
+            //set mapIndexOrState to -2 to make "thing.Destroyed" true (needed for Work Tab Compatibility)
+            ReflectionUtility.mapIndexOrState.SetValue(this, (sbyte)-2);
         }
         
 
