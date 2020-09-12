@@ -76,8 +76,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
                         {
                             Log.Error(string.Concat(recipeDef, " needs workSkill because it creates a product with a quality."));
                         }
-                        //QualityCategory q = QualityUtility.GenerateQualityCreatedByPawn(worker, recipeDef.workSkill);
-                        compQuality.SetQuality(0, ArtGenerationContext.Colony); //Set a placeholder Quality 
+                        QualityCategory q = QualityUtility.GenerateQualityCreatedByPawn(worker, recipeDef.workSkill);
+                        compQuality.SetQuality(q, ArtGenerationContext.Colony); 
                         //QualityUtility.SendCraftNotification(product, worker);
                     }
                     CompArt compArt = product.TryGetComp<CompArt>();
