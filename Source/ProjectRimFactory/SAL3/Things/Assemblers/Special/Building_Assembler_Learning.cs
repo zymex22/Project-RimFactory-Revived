@@ -61,7 +61,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             }
         }
 
-        [HarmonyPatch(typeof(Verse.GenRecipe), "PostProcessProduct")] /* there will be more here if finding MethodName by just its name is hard - I don't think this will be hard*/
+        //this patch prevents the execution of SendCraftNotification and all other calls the affect the quality. This is done caue the quality will be set with  ProjectRimFactory.SAL3.Things.Assemblers.Special.PostProcessRecipeProduct
+        [HarmonyPatch(typeof(Verse.GenRecipe), "PostProcessProduct")]
         class Patch_GenRecipe_PostProcessProduct
         {
             static bool Prefix(ref Thing __result, Thing product, RecipeDef recipeDef, Pawn worker)
@@ -75,25 +76,25 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
                         {
                             Log.Error(string.Concat(recipeDef, " needs workSkill because it creates a product with a quality."));
                         }
-                        QualityCategory q = QualityUtility.GenerateQualityCreatedByPawn(worker, recipeDef.workSkill);
-                        compQuality.SetQuality(q, ArtGenerationContext.Colony);
+                        //QualityCategory q = QualityUtility.GenerateQualityCreatedByPawn(worker, recipeDef.workSkill);
+                        compQuality.SetQuality(0, ArtGenerationContext.Colony); //Set a placeholder Quality 
                         //QualityUtility.SendCraftNotification(product, worker);
                     }
                     CompArt compArt = product.TryGetComp<CompArt>();
                     if (compArt != null)
                     {
                         compArt.JustCreatedBy(worker);
-                        if (compQuality != null && (int)compQuality.Quality >= 4)
-                        {
-                            TaleRecorder.RecordTale(TaleDefOf.CraftedArt, worker, product);
-                        }
+                        //if (compQuality != null && (int)compQuality.Quality >= 4)
+                        //{
+                        //    TaleRecorder.RecordTale(TaleDefOf.CraftedArt, worker, product);
+                        //}
                     }
                     if (product.def.Minifiable)
                     {
                         product = product.MakeMinified();
                     }
                     __result = product;
-                    return false; // do not make notifications for Assemblers
+                    return false; // do not run vanilla
                 }
                 return true; // run vanilla
             }
