@@ -16,6 +16,7 @@
   <SAL3_BillsTabLabel>Bills</SAL3_BillsTabLabel>
   <AssemblerIdle>Idle</AssemblerIdle>
   <AssemblerNoBills>Awaiting Instructions</AssemblerNoBills>
+  <SwitchedOff>Switched Off</SwitchedOff>
   <SALToggleForbidden>Allow using forbidden</SALToggleForbidden>
   <SALToggleForbidden_Desc>Allow/Disallow the auto-assembler to take forbidden items. Tick means allow.</SALToggleForbidden_Desc>
   <SALCurrentProductionSpeed>Production speed for current recipe ({0}): {1}</SALCurrentProductionSpeed>

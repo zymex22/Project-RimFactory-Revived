@@ -207,6 +207,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
             this.compPowerTrader = GetComp<CompPowerTrader>();
             this.compRefuelable  = GetComp<CompRefuelable>();
+            this.compFlick = GetComp<CompFlickable>();
 
             //Assign Pawn's mapIndexOrState to building's mapIndexOrState
             ReflectionUtility.mapIndexOrState.SetValue(buildingPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
@@ -223,7 +224,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         }
 
         protected virtual bool Active => compPowerTrader?.PowerOn != false
-                                       && compRefuelable?.HasFuel != false;
+                                       && compRefuelable?.HasFuel != false 
+                                       && compFlick?.SwitchIsOn != false;
 
         protected IEnumerable<Thing> AllAccessibleThings => from c in IngredientStackCells
                                                             from t in Map.thingGrid.ThingsListAt(c)
@@ -434,9 +436,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             base.DrawGUIOverlay();
             if (this.DrawStatus && Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
             {
+                string label = "";
                 // only show overlay status text if has power:
                 if (this.Active) {
-                    string label;
+                    
                     if (currentBillReport != null) // the assembler is actively working
                     { // set the status text to the bill's label:
                         label = currentBillReport.bill.LabelCap;
@@ -451,8 +454,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                         }
                     }
                     // draw the label on the screen:
-                    GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
+                   
                 }
+                else if (compFlick?.SwitchIsOn == false)
+                {
+                    label = "SwitchedOff".Translate();
+                }
+                GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
             }
         }
 
@@ -484,5 +492,6 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         private Sustainer sound = null;
         protected CompPowerTrader compPowerTrader = null;
         protected CompRefuelable  compRefuelable  = null;
+        protected CompFlickable   compFlick = null;
     }
 }
