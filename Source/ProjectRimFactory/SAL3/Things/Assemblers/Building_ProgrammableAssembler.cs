@@ -225,7 +225,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         protected virtual bool Active => compPowerTrader?.PowerOn != false
                                        && compRefuelable?.HasFuel != false 
-                                       && compFlick?.SwitchIsOn == true;
+                                       && compFlick?.SwitchIsOn != false;
 
         protected IEnumerable<Thing> AllAccessibleThings => from c in IngredientStackCells
                                                             from t in Map.thingGrid.ThingsListAt(c)
