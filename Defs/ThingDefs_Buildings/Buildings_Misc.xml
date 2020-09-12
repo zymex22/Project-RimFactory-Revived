@@ -2,7 +2,7 @@
 <Defs>
 
   <!--   This is just a lot of misc items not fit in other category of PRF and might be moved into a seprate mod later...  -->
-  
+
   <!--===================================== Base =====================================-->
   <ThingDef Name="PRF_MiscBase" ParentName="PRFBuildingBase" Abstract="True">
     <statBases>
@@ -87,13 +87,34 @@
         <glowColor>(252,199,139,0)</glowColor>
         <key>PRF_Warm_White</key>
         <moreColors>
-          <li><key>PRF_Cool_White</key><color>(140,200,250,0)</color></li>
-          <li><key>PRF_Red</key><color>(217,80,80,0)</color></li>
-          <li><key>PRF_Green</key><color>(80,217,80,0)</color></li>
-          <li><key>PRF_Blue</key><color>(80,80,217,0)</color></li>
-          <li><key>PRF_Cyan</key><color>(10,245,245,0)</color></li>
-          <li><key>PRF_Yellow</key><color>(240,240,20,0)</color></li>
-          <li><key>PRF_Magenta</key><color>(245,10,245,0)</color></li>
+          <li>
+            <key>PRF_Cool_White</key>
+            <color>(140,200,250,0)</color>
+          </li>
+          <li>
+            <key>PRF_Red</key>
+            <color>(217,80,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Green</key>
+            <color>(80,217,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Blue</key>
+            <color>(80,80,217,0)</color>
+          </li>
+          <li>
+            <key>PRF_Cyan</key>
+            <color>(10,245,245,0)</color>
+          </li>
+          <li>
+            <key>PRF_Yellow</key>
+            <color>(240,240,20,0)</color>
+          </li>
+          <li>
+            <key>PRF_Magenta</key>
+            <color>(245,10,245,0)</color>
+          </li>
         </moreColors>
         <prerequisites>
           <li>ColoredLights</li>
@@ -104,6 +125,79 @@
       <li>Electricity</li>
     </researchPrerequisites>
     <specialDisplayRadius>13</specialDisplayRadius>
+  </ThingDef>
+
+  <!--======================================= NR Sun Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->
+  <ThingDef ParentName="PRF_MiscBase">
+    <defName>PRF_SunWallLight</defName>
+    <label>Sun Wall Lamp</label>
+    <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
+    <description>An industrial wall lamp which lights an area brightly enough to grow crops, but consumes a huge amount of power. Automatically turns itself off at night.\n\nThis is added by Project RimFactory</description>
+    <uiIconPath>Misc/WallLightIcon</uiIconPath>
+    <graphicData>
+      <texPath>Misc/WallLight</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_WallLight</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <building>
+      <blueprintGraphicData>
+        <texPath>Misc/WallLight</texPath>
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_WallLight</graphicClass>
+        <drawSize>(1,1)</drawSize>
+      </blueprintGraphicData>
+      <isEdifice>false</isEdifice>
+    </building>
+    <clearBuildingArea>false</clearBuildingArea>
+    <costList>
+      <Steel>40</Steel>
+    </costList>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
+    </placeWorkers>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <fillPercent>0</fillPercent>
+    <statBases>
+      <Flammability>0.1</Flammability>
+      <WorkToBuild>330</WorkToBuild>
+      <Mass>4.5</Mass>
+    </statBases>
+    <size>(1,1)</size>
+    <surfaceType>Item</surfaceType>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>2900</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
+        <glowRadius>14</glowRadius>
+        <overlightRadius>7.0</overlightRadius>
+        <glowColor>(370,370,370,0)</glowColor>
+        <key>PRF_Warm_White</key>
+        <moreColors>
+          <li>
+            <key>PRF_Magenta</key>
+            <color>(245,10,245,0)</color>
+          </li>
+        </moreColors>
+      </li>
+      <li Class="CompProperties_Schedule">
+        <!-- Match plant growing times -->
+        <startTime>0.25</startTime>
+        <endTime>0.8</endTime>
+        <offMessage>Off for plant resting period</offMessage>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>3</heatPerSecond>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>Electricity</li>
+    </researchPrerequisites>
+    <specialDisplayRadius>5.8</specialDisplayRadius>
   </ThingDef>
 
 
@@ -144,13 +238,34 @@
         <glowColor>(252,199,139,0)</glowColor>
         <key>PRF_Warm_White</key>
         <moreColors>
-          <li><key>PRF_Cool_White</key><color>(140,200,250,0)</color></li>
-          <li><key>PRF_Red</key><color>(217,80,80,0)</color></li>
-          <li><key>PRF_Green</key><color>(80,217,80,0)</color></li>
-          <li><key>PRF_Blue</key><color>(80,80,217,0)</color></li>
-          <li><key>PRF_Cyan</key><color>(10,245,245,0)</color></li>
-          <li><key>PRF_Yellow</key><color>(240,240,20,0)</color></li>
-          <li><key>PRF_Magenta</key><color>(245,10,245,0)</color></li>
+          <li>
+            <key>PRF_Cool_White</key>
+            <color>(140,200,250,0)</color>
+          </li>
+          <li>
+            <key>PRF_Red</key>
+            <color>(217,80,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Green</key>
+            <color>(80,217,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Blue</key>
+            <color>(80,80,217,0)</color>
+          </li>
+          <li>
+            <key>PRF_Cyan</key>
+            <color>(10,245,245,0)</color>
+          </li>
+          <li>
+            <key>PRF_Yellow</key>
+            <color>(240,240,20,0)</color>
+          </li>
+          <li>
+            <key>PRF_Magenta</key>
+            <color>(245,10,245,0)</color>
+          </li>
         </moreColors>
         <prerequisites>
           <li>ColoredLights</li>
@@ -198,13 +313,34 @@
         <glowColor>(140,200,250,0)</glowColor>
         <key>PRF_Cool_White</key>
         <moreColors>
-          <li><key>PRF_Warm_White</key><color>(252,199,139,0)</color></li>
-          <li><key>PRF_Red</key><color>(217,80,80,0)</color></li>
-          <li><key>PRF_Green</key><color>(80,217,80,0)</color></li>
-          <li><key>PRF_Blue</key><color>(80,80,217,0)</color></li>
-          <li><key>PRF_Cyan</key><color>(10,245,245,0)</color></li>
-          <li><key>PRF_Yellow</key><color>(240,240,20,0)</color></li>
-          <li><key>PRF_Magenta</key><color>(245,10,245,0)</color></li>
+          <li>
+            <key>PRF_Warm_White</key>
+            <color>(252,199,139,0)</color>
+          </li>
+          <li>
+            <key>PRF_Red</key>
+            <color>(217,80,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Green</key>
+            <color>(80,217,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Blue</key>
+            <color>(80,80,217,0)</color>
+          </li>
+          <li>
+            <key>PRF_Cyan</key>
+            <color>(10,245,245,0)</color>
+          </li>
+          <li>
+            <key>PRF_Yellow</key>
+            <color>(240,240,20,0)</color>
+          </li>
+          <li>
+            <key>PRF_Magenta</key>
+            <color>(245,10,245,0)</color>
+          </li>
         </moreColors>
         <prerequisites>
           <li>ColoredLights</li>
@@ -217,5 +353,5 @@
     <specialDisplayRadius>10</specialDisplayRadius>
   </ThingDef>
 
-  
+
 </Defs>
