@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
+using HarmonyLib;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
@@ -58,6 +60,46 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
                 compQuality.SetQuality(GetRandomProductionQuality(), ArtGenerationContext.Colony);
             }
         }
+
+        [HarmonyPatch(typeof(Verse.GenRecipe), "PostProcessProduct")] /* there will be more here if finding MethodName by just its name is hard - I don't think this will be hard*/
+        class Patch_GenRecipe_PostProcessProduct
+        {
+            static bool Prefix(ref Thing __result, Thing product, RecipeDef recipeDef, Pawn worker)
+            {
+                if (worker.kindDef == PRFDefOf.PRFSlavePawn)
+                {
+                    CompQuality compQuality = product.TryGetComp<CompQuality>();
+                    if (compQuality != null)
+                    {
+                        if (recipeDef.workSkill == null)
+                        {
+                            Log.Error(string.Concat(recipeDef, " needs workSkill because it creates a product with a quality."));
+                        }
+                        QualityCategory q = QualityUtility.GenerateQualityCreatedByPawn(worker, recipeDef.workSkill);
+                        compQuality.SetQuality(q, ArtGenerationContext.Colony);
+                        //QualityUtility.SendCraftNotification(product, worker);
+                    }
+                    CompArt compArt = product.TryGetComp<CompArt>();
+                    if (compArt != null)
+                    {
+                        compArt.JustCreatedBy(worker);
+                        if (compQuality != null && (int)compQuality.Quality >= 4)
+                        {
+                            TaleRecorder.RecordTale(TaleDefOf.CraftedArt, worker, product);
+                        }
+                    }
+                    if (product.def.Minifiable)
+                    {
+                        product = product.MakeMinified();
+                    }
+                    __result = product;
+                    return false; // do not make notifications for Assemblers
+                }
+                return true; // run vanilla
+            }
+        }
+
+
         protected override IEnumerable<FloatMenuOption> GetDebugOptions()
         {
             foreach (FloatMenuOption option in base.GetDebugOptions())
