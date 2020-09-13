@@ -8,6 +8,7 @@ using Verse;
 using System.Reflection.Emit; // for OpCodes in Harmony Transpiler
 using ProjectRimFactory.SAL3.Things.Assemblers;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -131,6 +132,32 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             }
             return pawn.GetRoom(allowedRegionTypes);
         }
-
     }
+
+    [HarmonyPatch(typeof(QualityUtility))]
+    [HarmonyPatch("GenerateQualityCreatedByPawn")]
+    [HarmonyPatch(new Type[] { typeof(Pawn), typeof(SkillDef) })]
+    class Patch_GenRecipe_GenerateQualityCreatedByPawn
+    {
+        static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill )
+        {
+            Nullable<float> Speed = PatchStorageUtil.Get<ILearningAssemblerProgress>(pawn.Map, pawn.Position)?.ProductionSpeedFactor ?? null;
+            __result = 0;
+            if (Speed != null)
+            {
+                float centerX =  (float)Speed * 2f;
+                float num = Rand.Gaussian(centerX, 1.25f);
+                num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
+                __result = (QualityCategory)((int)num);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    interface ILearningAssemblerProgress
+    {
+        float ProductionSpeedFactor { get; }
+    }
+
 }

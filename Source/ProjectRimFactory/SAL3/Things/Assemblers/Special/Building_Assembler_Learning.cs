@@ -7,10 +7,11 @@ using UnityEngine;
 using Verse;
 using HarmonyLib;
 using ProjectRimFactory.Common;
+using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
-    public class Building_Assembler_Learning : Building_SmartAssembler
+    public class Building_Assembler_Learning : Building_SmartAssembler , ILearningAssemblerProgress
     {
         public float FactorOffset
         {
@@ -27,6 +28,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
                 return currentBillReport == null ? FactorOffset : manager.GetFactorFor(currentBillReport.bill.recipe) + FactorOffset;
             }
         }
+
+        //Used to Provide the ProductionSpeedFactor to the Harmony Patch for our increasing quality code
+        float ILearningAssemblerProgress.ProductionSpeedFactor => ProductionSpeedFactor;
+
         public override void Tick()
         {
             base.Tick();
@@ -45,61 +50,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             }
             return stringBuilder.ToString().TrimEndNewlines();
         }
-        public QualityCategory GetRandomProductionQuality()
-        {
-            float centerX = ProductionSpeedFactor * 2f;
-            float num = Rand.Gaussian(centerX, 1.25f);
-            num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
-            return (QualityCategory)((int)num);
-        }
+
         protected override void PostProcessRecipeProduct(Thing thing)
         {
-            CompQuality compQuality = thing.TryGetComp<CompQuality>();
-            if (compQuality != null)
-            {
-                compQuality.SetQuality(GetRandomProductionQuality(), ArtGenerationContext.Colony);
-            }
         }
-
-        //this patch prevents the execution of SendCraftNotification and all other calls the affect the quality. This is done caue the quality will be set with  ProjectRimFactory.SAL3.Things.Assemblers.Special.PostProcessRecipeProduct
-        [HarmonyPatch(typeof(Verse.GenRecipe), "PostProcessProduct")]
-        class Patch_GenRecipe_PostProcessProduct
-        {
-            static bool Prefix(ref Thing __result, Thing product, RecipeDef recipeDef, Pawn worker)
-            {
-                if (worker.kindDef == PRFDefOf.PRFSlavePawn)
-                {
-                    CompQuality compQuality = product.TryGetComp<CompQuality>();
-                    if (compQuality != null)
-                    {
-                        if (recipeDef.workSkill == null)
-                        {
-                            Log.Error(string.Concat(recipeDef, " needs workSkill because it creates a product with a quality."));
-                        }
-                        QualityCategory q = QualityUtility.GenerateQualityCreatedByPawn(worker, recipeDef.workSkill);
-                        compQuality.SetQuality(q, ArtGenerationContext.Colony); 
-                        //QualityUtility.SendCraftNotification(product, worker);
-                    }
-                    CompArt compArt = product.TryGetComp<CompArt>();
-                    if (compArt != null)
-                    {
-                        compArt.JustCreatedBy(worker);
-                        //if (compQuality != null && (int)compQuality.Quality >= 4)
-                        //{
-                        //    TaleRecorder.RecordTale(TaleDefOf.CraftedArt, worker, product);
-                        //}
-                    }
-                    if (product.def.Minifiable)
-                    {
-                        product = product.MakeMinified();
-                    }
-                    __result = product;
-                    return false; // do not run vanilla
-                }
-                return true; // run vanilla
-            }
-        }
-
 
         protected override IEnumerable<FloatMenuOption> GetDebugOptions()
         {

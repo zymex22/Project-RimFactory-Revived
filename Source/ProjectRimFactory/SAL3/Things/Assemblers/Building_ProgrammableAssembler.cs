@@ -356,11 +356,6 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             foreach (Thing thing in products)
             {
                 PostProcessRecipeProduct(thing);
-                CompQuality compQuality = thing.TryGetComp<CompQuality>();
-                if (compQuality != null)
-                {
-                    QualityUtility.SendCraftNotification(thing, buildingPawn);
-                }
                 thingQueue.Add(thing);
             }
             for (int i = 0; i < currentBillReport.selected.Count; i++)
