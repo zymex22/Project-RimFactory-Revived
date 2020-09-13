@@ -80,7 +80,7 @@ namespace ProjectRimFactory.Storage
             get
             {
 
-                //maybe we should cash currentItem
+                //maybe we should cache currentItem
                 Thing currentItem = Position.GetFirstItem(Map);
                 if (currentItem != null && IOMode == StorageIOMode.Output && outputSettings.useMax)
                 {
