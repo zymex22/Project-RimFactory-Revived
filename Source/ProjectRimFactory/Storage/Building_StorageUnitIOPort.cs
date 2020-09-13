@@ -1,4 +1,5 @@
 ﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.SAL3.UI;
 using ProjectRimFactory.Storage.Editables;
 using ProjectRimFactory.Storage.UI;
@@ -13,7 +14,7 @@ using Verse;
 namespace ProjectRimFactory.Storage
 {
     [StaticConstructorOnStartup]
-    public class Building_StorageUnitIOPort : Building_Storage
+    public class Building_StorageUnitIOPort : Building_Storage , IForbidPawnInputItem
     {
         public static readonly Texture2D CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
         public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("UI/IoIcon");
@@ -71,6 +72,21 @@ namespace ProjectRimFactory.Storage
             set
             {
                 outputSettings = value;
+            }
+        }
+
+        //
+        public bool ForbidPawnInput {
+            get
+            {
+
+                //maybe we should cash currentItem
+                Thing currentItem = Position.GetFirstItem(Map);
+                if (currentItem != null && IOMode == StorageIOMode.Output && outputSettings.useMax)
+                {
+                    return  OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit) <= 0;
+                }
+                return false;
             }
         }
 

@@ -126,7 +126,6 @@ namespace ProjectRimFactory.Storage
                 }
                 if (!newItem.Spawned)
                 {
-                    Log.Message("Item is not spawned");
                     newItem.SpawnSetup(this.Map, false);
                 }
 
