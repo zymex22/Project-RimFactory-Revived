@@ -142,7 +142,7 @@
     </graphicData>
     <building>
       <blueprintGraphicData>
-        <texPath>Misc/WallLight</texPath>
+        <texPath>Misc/SunWallLightIcon</texPath>
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_WallLight</graphicClass>
         <drawSize>(1,1)</drawSize>
       </blueprintGraphicData>

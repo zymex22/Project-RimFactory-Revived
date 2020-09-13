@@ -355,7 +355,7 @@
     </modExtensions>
   </ThingDef>
 
-  <!--============================== I/O HOPPER ==============================-->
+  <!--============================== I/O Port ==============================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>PRFStorageUnitIOPort</defName>
     <label>I/O Port</label>

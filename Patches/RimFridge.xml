@@ -20,6 +20,7 @@
 							<thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
 							<designatorDropdown>IO_gr</designatorDropdown>
 							<drawerType>RealtimeOnly</drawerType>
+							<uiIconScale>0.7</uiIconScale>
 							<graphicData>
 								<texPath>Storage/IO_Fridge</texPath>
 								<graphicClass>Graphic_Single</graphicClass>
