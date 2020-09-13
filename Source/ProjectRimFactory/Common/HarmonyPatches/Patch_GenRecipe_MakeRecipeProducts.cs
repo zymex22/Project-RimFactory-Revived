@@ -134,21 +134,13 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(QualityUtility))]
-    [HarmonyPatch("GenerateQualityCreatedByPawn")]
-    [HarmonyPatch(new Type[] { typeof(Pawn), typeof(SkillDef) })]
+    [HarmonyPatch(typeof(QualityUtility),"GenerateQualityCreatedByPawn",new Type[] { typeof(Pawn), typeof(SkillDef)})]
     class Patch_GenRecipe_GenerateQualityCreatedByPawn
     {
         static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill )
         {
-            Nullable<float> Speed = PatchStorageUtil.Get<ILearningAssemblerProgress>(pawn.Map, pawn.Position)?.ProductionSpeedFactor ?? null;
-            __result = 0;
-            if (Speed != null)
-            {
-                float centerX =  (float)Speed * 2f;
-                float num = Rand.Gaussian(centerX, 1.25f);
-                num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
-                __result = (QualityCategory)((int)num);
+            if ( PatchStorageUtil.Get<ILearningAssemblerProgress>(pawn.Map, pawn.Position) != null) {
+                __result = PatchStorageUtil.Get<ILearningAssemblerProgress>(pawn.Map, pawn.Position).GetQuality;
                 return false;
             }
             return true;
@@ -157,7 +149,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     interface ILearningAssemblerProgress
     {
-        float ProductionSpeedFactor { get; }
+        QualityCategory GetQuality { get; }
     }
 
 }

@@ -29,8 +29,18 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             }
         }
 
-        //Used to Provide the ProductionSpeedFactor to the Harmony Patch for our increasing quality code
-        float ILearningAssemblerProgress.ProductionSpeedFactor => ProductionSpeedFactor;
+        //Calculate the Item Quality based on the ProductionSpeedFactor (Used by the Harmony Patch)
+        QualityCategory ILearningAssemblerProgress.GetQuality
+        {
+            get
+            {
+                float centerX = ProductionSpeedFactor * 2f;
+                float num = Rand.Gaussian(centerX, 1.25f);
+                num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
+                return (QualityCategory)((int)num);
+
+            }
+        }
 
         public override void Tick()
         {
