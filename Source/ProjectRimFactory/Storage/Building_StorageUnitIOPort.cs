@@ -212,7 +212,7 @@ namespace ProjectRimFactory.Storage
                 .FirstOrDefault(g => OutputSettings.SatisfiesMin(g.Sum(t => t.stackCount))) ?? Enumerable.Empty<Thing>();
         }
 
-        protected void RefreshOutput()
+        protected void RefreshOutput() //
         {
             if (powerComp.PowerOn)
             {
@@ -254,10 +254,12 @@ namespace ProjectRimFactory.Storage
                             }
                         }
                     }
+                    //Transfre a item back if it is either too few or disallowed
                     if (currentItem != null && (!settings.AllowedToAccept(currentItem) || !OutputSettings.SatisfiesMin(currentItem.stackCount)) && boundStorageUnit.settings.AllowedToAccept(currentItem))
                     {
                         boundStorageUnit.RegisterNewItem(currentItem);
                     }
+                    //Transfer the diffrence back if it is too much
                     if (currentItem != null && (!OutputSettings.SatisfiesMax(currentItem.stackCount, currentItem.def.stackLimit) && boundStorageUnit.settings.AllowedToAccept(currentItem)))
                     {
                         int splitCount = -OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit);

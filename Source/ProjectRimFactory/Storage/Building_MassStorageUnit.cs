@@ -108,16 +108,28 @@ namespace ProjectRimFactory.Storage
                     break;
                 }
             }
+            //Add a new stack of a thing
             if (!newItem.Destroyed)
             {
+                
+
                 if (!items.Contains(newItem))
                     items.Add(newItem);
+
+                //What appens if its full?
                 if (CanStoreMoreItems)
                 {
                    
                     newItem.Position = Position;
-                    
+                   
+
                 }
+                if (!newItem.Spawned)
+                {
+                    Log.Message("Item is not spawned");
+                    newItem.SpawnSetup(this.Map, false);
+                }
+
             }
         }
 
