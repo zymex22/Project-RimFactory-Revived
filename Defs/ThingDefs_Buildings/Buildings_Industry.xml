@@ -272,13 +272,11 @@
       <MaxHitPoints>350</MaxHitPoints>
       <Flammability>0.5</Flammability>
     </statBases>
-    <costList>
+    <costList>      <!-- cost list for fixed prices, uses def names -->
       <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFWeakAIChip>2</PRFWeakAIChip>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <Plasteel>25</Plasteel>
-      <Steel>250</Steel>
-      <ComponentIndustrial>2</ComponentIndustrial>
+      <Steel>120</Steel>
+      <Plasteel>10</Plasteel>
     </costList>
     <recipes>
       <li>Make_ComponentIndustrial</li>
