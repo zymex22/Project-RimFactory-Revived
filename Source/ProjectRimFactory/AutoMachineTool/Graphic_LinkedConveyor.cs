@@ -25,7 +25,7 @@ namespace ProjectRimFactory.AutoMachineTool {
             if (!c.InBounds(parent.Map)) {
                 return false;
             }
-
+            //TODO: Straight conveyors need this:
             /*
             //TODO: is this true for splitters?
             if (parent.Position + parent.Rotation.FacingCell == c)

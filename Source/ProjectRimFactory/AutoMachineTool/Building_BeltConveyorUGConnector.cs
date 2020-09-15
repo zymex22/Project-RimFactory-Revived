@@ -104,12 +104,13 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             // These can only place things in one direction.
             var thing = products[0];
-            // TODO: check each if multilpe levels possible
             var next = this.OutputConveyor();
             if (next != null)
             {
                 // コンベアある場合、そっちに流す.
                 // If there is a conveyor, let it flow to it
+                // TODO: If coming from UG to G level, 
+                //    Will be unspawned
                 if (next.AcceptsThing(thing, this))
                 {
                     this.stuck = false;
