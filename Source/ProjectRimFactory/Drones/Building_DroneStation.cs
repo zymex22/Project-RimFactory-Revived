@@ -232,7 +232,7 @@ namespace ProjectRimFactory.Drones
             extension = def.GetModExtension<DefModExtension_DroneStation>();
             //Setup Allowd Area
             if (droneAllowedArea == null) {
-                Log.Message("droneAllowedArea was null");
+                //Log.Message("droneAllowedArea was null");
                 Update_droneAllowedArea_forDrones();
             }
             //Load the SleepTimes from XML

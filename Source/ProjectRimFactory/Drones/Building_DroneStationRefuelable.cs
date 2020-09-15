@@ -16,6 +16,7 @@ namespace ProjectRimFactory.Drones
         {
             base.PostMake();
             refuelableComp = GetComp<CompRefuelable>();
+            refuelableComp.Refuel(Mathf.Clamp(extension.GetDronesOnSpawn, 0, refuelableComp.Props.fuelCapacity));
         }
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {

@@ -93,6 +93,7 @@
         <maxNumDrones>2</maxNumDrones>        <!-- How many drones should be used? -->
         <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
         <SquareJobRadius>5</SquareJobRadius>
+        <spawnWithFullDrones>true</spawnWithFullDrones>
       <workTypes>
           <li>Growing</li>
           <li>Hauling</li>
@@ -143,6 +144,7 @@
         <maxNumDrones>2</maxNumDrones>
         <displayDormantDrones>true</displayDormantDrones>
         <SquareJobRadius>5</SquareJobRadius>
+        <spawnWithFullDrones>true</spawnWithFullDrones>
         <workTypes>
           <li>Growing</li>
           <li>Hauling</li>
