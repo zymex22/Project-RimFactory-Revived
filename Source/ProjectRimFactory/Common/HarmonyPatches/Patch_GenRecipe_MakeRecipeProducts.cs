@@ -139,7 +139,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill )
         {
-            if ( (var isqd=PatchStorageUtil.Get<ISetQualityDirectly>(pawn.Map, pawn.Position)) != null) {
+            ISetQualityDirectly isqd = PatchStorageUtil.Get<ISetQualityDirectly>(pawn.Map, pawn.Position);
+            if (isqd != null) {
                 __result = isqd.GetQuality(relevantSkill);
                 return false;
             }
