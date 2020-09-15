@@ -60,7 +60,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             {
 
                 Pawn p = PawnGenerator.GeneratePawn(PRFDefOf.PRFSlavePawn, Faction.OfPlayer);
-                p.Name = new NameTriple("...", "SAL_Name".Translate(), "...");
+                p.Name = new NameTriple("...", Label ?? "SAL_Name".Translate(), "...");
                 //Assign skills
                 foreach (var s in p.skills.skills)
                 {
