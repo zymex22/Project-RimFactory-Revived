@@ -31,7 +31,7 @@ namespace ProjectRimFactory.Drones
         {
             base.PostMake();
             //dronesLeft = extension.maxNumDrones;
-            dronesLeft = extension.GetDronesOnSpawn;
+            dronesLeft = extension.GetDronesOnSpawn();
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)

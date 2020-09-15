@@ -10,7 +10,7 @@ namespace ProjectRimFactory.Drones
 {
     public class DefModExtension_DroneStation : DefModExtension
     {
-        public int maxNumDrones = 2;
+        public int maxNumDrones;
         public bool displayDormantDrones;
         public List<WorkTypeDef> workTypes;
         public int SquareJobRadius = 0; //0 Means infinite
@@ -22,23 +22,14 @@ namespace ProjectRimFactory.Drones
         /// <summary>
         /// Returns the number of Drones that should be availibale on Spawn.
         /// </summary>
-        public int GetDronesOnSpawn
+        public int GetDronesOnSpawn(CompRefuelable fuelcomp = null)
         {
-            get
+
+            if (spawnWithFullDrones)
             {
-                if (spawnWithFullDrones)
-                {
-                    return maxNumDrones;
-                }
-                //Helper to find XML Errors
-                if (spawnWithDrones > maxNumDrones)
-                {
-                    Log.Error("PRF XML Config Error in DefModExtension_DroneStation --> spawnWithDrones (" + spawnWithDrones + ") > maxNumDrones (" + maxNumDrones + ")");
-                }
-                return Mathf.Clamp(spawnWithDrones, 0, maxNumDrones);
-
+                return (int)(fuelcomp?.Props.fuelCapacity ?? maxNumDrones);
             }
-
+            return Mathf.Clamp(spawnWithDrones, 0, (int)(fuelcomp?.Props.fuelCapacity ?? maxNumDrones));
         }
 
 
