@@ -139,17 +139,17 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill )
         {
-            if ( PatchStorageUtil.Get<ILearningAssemblerProgress>(pawn.Map, pawn.Position) != null) {
-                __result = PatchStorageUtil.Get<ILearningAssemblerProgress>(pawn.Map, pawn.Position).GetQuality;
+            if ( (var isqd=PatchStorageUtil.Get<ISetQualityDirectly>(pawn.Map, pawn.Position)) != null) {
+                __result = isqd.GetQuality(relevantSkill);
                 return false;
             }
             return true;
         }
     }
 
-    interface ILearningAssemblerProgress
+    interface ISetQualityDirectly
     {
-        QualityCategory GetQuality { get; }
+        QualityCategory GetQuality(SkillDef relevantSkill);
     }
 
 }
