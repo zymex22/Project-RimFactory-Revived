@@ -196,9 +196,15 @@ namespace ProjectRimFactory.AutoMachineTool
                     if (!((IBeltConveyorLinkable)giver).CanSendToLevel(ConveyorLevel.Ground))
                         return false;
             }
+            Debug.Message(Debug.Flag.Conveyors, "  It can accept items from " +
+                (giver == null ? "that direction." : giver.ToString()));
             if (this.State == WorkingState.Ready)
             {
-                if (newThing.Spawned && this.IsUnderground) newThing.DeSpawn();
+                // Note: I don't think there is any benefit to 
+                //   an item being spanwed?
+                if (newThing.Spawned) newThing.DeSpawn();
+                Debug.Message(Debug.Flag.Conveyors, "  And accepted " + newThing
+                    + (newThing.Spawned ? "" : " (not spanwed)"));
                 newThing.Position = this.Position;
                 this.ForceStartWork(newThing, 1f);
                 return true;
@@ -206,6 +212,8 @@ namespace ProjectRimFactory.AutoMachineTool
             else
             {
                 var target = this.State == WorkingState.Working ? this.Working : this.products[0];
+                Debug.Message(Debug.Flag.Conveyors, "  but busy with " + target +
+                                   ". Will try to absorb");
                 return target.TryAbsorbStack(newThing, true);
             }
         }
@@ -230,8 +238,10 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             var thing = products[0];
             Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this + " is about to try placing " + thing);
+            // Has something else taken the Thing away from us? (b/c they are spawned? or something else?)            
             if (this.WorkInterruption(thing))
             {
+                Debug.Message(Debug.Flag.Conveyors, "  but something has already moved the item.");
                 return true;
             }
             // Try to send to another conveyor first:
@@ -246,6 +256,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     Debug.Message(Debug.Flag.Conveyors, " and successfully passed it to " + outputBelt);
                     return true;
                 }
+                Debug.Message(Debug.Flag.Conveyors, " but next belt cannot take it now; stuck.");
                 return false; // Don't try anything else if other belt is busy
             }
             else // if no conveyor, place if can
@@ -262,6 +273,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             // 配置失敗.
             // Placement failure
+            Debug.Message(Debug.Flag.Conveyors, "  but could not place it. Stuck.");
             this.stuck = true;
             return false;
         }
@@ -314,7 +326,13 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Thing working)
         {
-            return this.IsUnderground ? false : !working.Spawned || working.Position != this.Position;
+            return false;
+            //TODO: this was originally designed, as far as I can tell, to 
+            //  trigger if something was picked up or moved (which can in 
+            //  theory happen if it's spawned...) but I cannot seem to make
+            //  it happen?
+            // So, do we want to keep any of that logic around?
+            // return this.IsUnderground ? false : !working.Spawned || working.Position != this.Position;
         }
 
         protected override bool TryStartWorking(out Thing target, out float workAmount)
@@ -329,7 +347,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 .FirstOrDefault();
             if (target != null)
             {
-                if (target.Spawned && this.IsUnderground) target.DeSpawn();
+                //TODO:
+                if (target.Spawned) target.DeSpawn();
+                //if (target.Spawned && this.IsUnderground) target.DeSpawn();
                 target.Position = this.Position;
             }
             return target != null;
