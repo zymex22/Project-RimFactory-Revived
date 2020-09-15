@@ -97,6 +97,7 @@
       <workTypes>
           <li>Growing</li>
           <li>Hauling</li>
+          <li>PlantCutting</li>
         </workTypes>
       </li>
     </modExtensions>
@@ -148,6 +149,7 @@
         <workTypes>
           <li>Growing</li>
           <li>Hauling</li>
+          <li>PlantCutting</li>
         </workTypes>
       </li>
     </modExtensions>
