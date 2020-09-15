@@ -42,6 +42,7 @@ namespace ProjectRimFactory.Common
         {
             base.ExposeData();
             root.ExposeData();
+            Scribe_Values.Look<Debug.Flag>(ref Debug.activeFlags, "debugFlags", 0);
         }
 
         public void DoWindowContents(Rect inRect)
