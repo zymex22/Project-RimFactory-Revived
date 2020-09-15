@@ -11,7 +11,7 @@ using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
-    public class Building_Assembler_Learning : Building_SmartAssembler , ILearningAssemblerProgress
+    public class Building_Assembler_Learning : Building_SmartAssembler , ISetQualityDirectly
     {
         public float FactorOffset
         {
@@ -29,17 +29,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             }
         }
 
-        //Calculate the Item Quality based on the ProductionSpeedFactor (Used by the Harmony Patch)
-        QualityCategory ILearningAssemblerProgress.GetQuality
+        //Calculate the Item Quality based on the ProductionSpeedFactor (Used by the Harmony Patch; see Patch_GenRecipe_MakeRecipeProducts.cs)
+        QualityCategory ISetQualityDirectly.GetQuality(SkillDef relevantSkill)
         {
-            get
-            {
-                float centerX = ProductionSpeedFactor * 2f;
-                float num = Rand.Gaussian(centerX, 1.25f);
-                num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
-                return (QualityCategory)((int)num);
-
-            }
+            float centerX = ProductionSpeedFactor * 2f;
+            float num = Rand.Gaussian(centerX, 1.25f);
+            num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
+            return (QualityCategory)((int)num);
         }
 
         public override void Tick()
