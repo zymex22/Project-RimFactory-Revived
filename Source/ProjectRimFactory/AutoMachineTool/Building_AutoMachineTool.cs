@@ -652,7 +652,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public override bool NeedClearingCache => false;
 
-        public IEnumerable<IntVec3> GetRangeCells(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot, int range)
+        public override IEnumerable<IntVec3> GetRangeCells(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot, int range)
         {
             return GenAdj.CellsOccupiedBy(center, rot, new IntVec2(1, 1) + new IntVec2(range * 2, range * 2));
         }
@@ -674,7 +674,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public IEnumerable<IntVec3> OutputZoneCells(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot)
         {
-            return this.OutputCell(center, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
+            return this.OutputCell(def, center, size, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
         }
     }
 }
