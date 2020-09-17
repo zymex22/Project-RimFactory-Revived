@@ -332,7 +332,7 @@
     <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRFMetalRefining</li>
+      <li>PRFGoldbachConjecture</li>
     </researchPrerequisites>
   </ThingDef>
 
