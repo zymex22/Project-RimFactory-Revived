@@ -55,7 +55,7 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <selectable>True</selectable>
 
     <inspectorTabs>
-      <li>NR_AutoMachineTool.ITab_RangePowerSupply</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
     </inspectorTabs>
   </ThingDef>
 
@@ -79,9 +79,8 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     </researchPrerequisites>
     <modExtensions>
       <li Class="NR_AutoMachineTool.ModExtension_AutoMachineTool">
-        <tier>1</tier>
-        <targetCellResolverType>NR_AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>NR_AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
     </modExtensions>
   </ThingDef>
@@ -106,9 +105,8 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     </researchPrerequisites>
     <modExtensions>
       <li Class="NR_AutoMachineTool.ModExtension_AutoMachineTool">
-        <tier>2</tier>
-        <targetCellResolverType>NR_AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>NR_AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
     </modExtensions>
   </ThingDef>
@@ -133,9 +131,8 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     </researchPrerequisites>
     <modExtensions>
       <li Class="NR_AutoMachineTool.ModExtension_AutoMachineTool">
-        <tier>3</tier>
-        <targetCellResolverType>NR_AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>NR_AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
     </modExtensions>
   </ThingDef>
