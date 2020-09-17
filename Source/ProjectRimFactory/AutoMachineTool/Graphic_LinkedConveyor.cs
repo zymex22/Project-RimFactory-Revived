@@ -11,14 +11,16 @@ using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool {
     public class Graphic_LinkedConveyor : Graphic_Link2<Graphic_LinkedConveyor> {
+
+        private static Material arrow00 => MaterialPool.MatFrom("Belts/SmallArrow00");
+        private static Material arrow01 => MaterialPool.MatFrom("Belts/SmallArrow01");
+
         public Graphic_LinkedConveyor() : base() {
         }
 
         public string arrow0path;
         public string arrow1path;
 
-        private Material arrow00 => MaterialPool.MatFrom(this.data.texPath + "_arrow00");
-        private Material arrow01 => MaterialPool.MatFrom(this.data.texPath + "_arrow01");
 
         public override bool ShouldLinkWith(Rot4 dir, Thing parent) {
             IntVec3 c = parent.Position + dir.FacingCell;
@@ -106,7 +108,7 @@ namespace ProjectRimFactory.AutoMachineTool {
         public override void Print(SectionLayer layer, Thing thing) {
             if (thing is Blueprint) {
                 base.Print(layer, thing);
-                Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0), this.drawSize, this.arrow00, thing.Rotation.AsAngle);
+                Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0), this.drawSize, arrow00, thing.Rotation.AsAngle);
             } else {
                 var conveyor = thing as IBeltConveyorLinkable;
 //TODO:                if (!Building_BeltConveyorUGConnector.IsConveyorUGConnecterDef(thing.def) && conveyor != null && conveyor.IsUnderground && !(layer is SectionLayer_UGConveyor)) {
@@ -129,7 +131,7 @@ namespace ProjectRimFactory.AutoMachineTool {
                 }
 
                 base.Print(layer, thing);
-                Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0), this.drawSize, this.arrow00, thing.Rotation.AsAngle);
+                Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0), this.drawSize, arrow00, thing.Rotation.AsAngle);
                 // TODO: this printed tiny brown arrows pointing in alternate directions:
                 //   We will perhaps use this for splitters?
                 if (conveyor != null) {
