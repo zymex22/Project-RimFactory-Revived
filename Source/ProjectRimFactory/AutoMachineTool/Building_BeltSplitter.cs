@@ -154,6 +154,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
+        // What does this even mean?
         public override bool CanStackWith(Thing other)
         {
             return base.CanStackWith(other) && this.State == WorkingState.Ready;
@@ -165,7 +166,7 @@ namespace ProjectRimFactory.AutoMachineTool
             if (base.AcceptsThing(newThing, giver) && origState == WorkingState.Ready) {
                 NextDirection(newThing, out dest);
                 Debug.Message(Debug.Flag.Conveyors, "  Spitter " + this 
-                              + " decided " + newThing + " should go " + dest);
+                              + " decided " + newThing + " should go " + dest.ToStringHuman());
                 return true;
             }
             return false;
@@ -185,10 +186,12 @@ namespace ProjectRimFactory.AutoMachineTool
                 newDir = dir;
                 return true;
             }
+            //??
             if (outputLinks.ContainsKey(this.dest)) {
                 newDir = dest;
                 return true;
             }
+//            newDir = this.Rotation;//TODO:
             newDir = dest;  // slightly better than Rot4.Random, I suppose :p
             return false; // oh well. Fail.
         }
@@ -282,39 +285,44 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool PlaceProduct(ref List<Thing> products)
         {
             var thing = products[0];
-            Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this + " is about to try placing " + thing);
+            Debug.Warning(Debug.Flag.Conveyors, "Splitter " + this + " is about to try placing " + thing);
             if (this.WorkInterruption(thing))
             {
+                Debug.Message(Debug.Flag.Conveyors, "   But interrupted; failing");
                 return true;
             }
-            // Try to send to another conveyor first:
-            // コンベアある場合、そっちに流す.
-            var first = this.outputLinks.TryGetValue(dest, null)?.link;
-            if (first != null)
-            {
-                if ((first as IPRF_Building).AcceptsThing(thing,this))
-                {
-                    NotifyAroundSender();
-                    this.stuck = false;
-                    Debug.Message(Debug.Flag.Conveyors, " and successfully passed it to " + first);
-                    return true;
-                }
-            }
-            else // if no conveyor, place if can
-            {
-                Debug.Message(Debug.Flag.Conveyors, "  trying to place directly:");
-                if (!this.IsUnderground && this.PRFTryPlaceThing(thing, 
-                      this.dest.FacingCell + this.Position, this.Map))
-                {
-                    NotifyAroundSender();
-                    this.stuck = false;
-                    Debug.Message(Debug.Flag.Conveyors, "Successfully placed!");
-                    return true;
+            var output = outputLinks.TryGetValue(dest, null);
+            if (output != null && output.Allows(thing)) {
+                // Try to send to another conveyor first:
+                // コンベアある場合、そっちに流す.
+                if (output.link != null) {
+                    Debug.Message(Debug.Flag.Conveyors, "" + this + ": found " + output.link +
+                                                        "; going to try passing it along");
+                    if ((output.link as IPRF_Building).AcceptsThing(thing, this)) {
+                        NotifyAroundSender();
+                        this.stuck = false;
+                        Debug.Message(Debug.Flag.Conveyors, "" + this +
+                                      ": and successfully passed it to " + output.link);
+                        return true;
+                    }
+                } else // if no conveyor, place if can
+                  {
+                    Debug.Message(Debug.Flag.Conveyors, "" + this + ": trying to place directly:");
+                    if (!this.IsUnderground && this.PRFTryPlaceThing(thing,
+                          this.dest.FacingCell + this.Position, this.Map)) {
+                        NotifyAroundSender();
+                        this.stuck = false;
+                        Debug.Message(Debug.Flag.Conveyors, "" + this + "Successfully\t placed!");
+                        return true;
+                    }
                 }
             }
             // If we have failed to place, look for another direction:
-            if (NextDirection(thing, out dest))
+            Debug.Message(Debug.Flag.Conveyors, "" + this + "Failed to place " + dest.ToStringHuman() +
+                                              "; looking for another direction");
+            if (NextDirection(thing, out Rot4 tmp))
             {
+                Debug.Message(Debug.Flag.Conveyors, "  going to try new direction " + dest.ToStringHuman());
                 // 他に流す方向があれば、やり直し.
                 // If there is another direction, try again.
                 this.Reset();
@@ -324,14 +332,14 @@ namespace ProjectRimFactory.AutoMachineTool
             // 配置失敗.
             // Placement failure
             this.stuck = true;
+            Debug.Message(Debug.Flag.Conveyors, "" + this + ": Is stuck.");
             return false;
         }
 
         public override void Link(IBeltConveyorLinkable link)
         {
             if (this.CanLinkTo(link) && link.CanLinkFrom(this)) {
-                Rot4 r;
-                if (PositionToRot4(link, out r)) {
+                if (PositionToRot4(link, out Rot4 r)) {
                     this.outputLinks[r] = new OutputLink(link);
                 }
             }
@@ -339,6 +347,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 incomingLinks.Add(link);
             }
         }
+        // Utility fn for linking to belt link
         private bool PositionToRot4(IBeltConveyorLinkable link, out Rot4 r) {
             foreach (var d in Enumerable.Range(0,4).Select(i=>new Rot4(i))) {
                 if (this.Position+d.FacingCell == link.Position) {
@@ -454,7 +463,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Thing working)
         {
-            return this.IsUnderground ? false : !working.Spawned || working.Position != this.Position;
+            return false; // TODO: this would assume the working thing is spawned?
+            //return this.IsUnderground ? false : !working.Spawned || working.Position != this.Position;
         }
 
         //TODO: I think this should just return false?

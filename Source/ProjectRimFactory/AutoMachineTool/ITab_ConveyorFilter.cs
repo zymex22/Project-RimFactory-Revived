@@ -44,7 +44,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.OnOpen();
 
             this.groups = this.Splitter.Map.haulDestinationManager.AllGroups.ToList();
-            selectedDir = this.Splitter.OutputLinks.Keys.FirstOrDefault(null);
+            selectedDir = this.Splitter.OutputLinks.Keys.FirstOrDefault();
 
         }
 
