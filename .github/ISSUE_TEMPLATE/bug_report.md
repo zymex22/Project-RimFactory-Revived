@@ -1,21 +1,21 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ''
-labels: ''
+title: ' (Bug report)'
+labels: 'Bug Report'
 assignees: ''
 
 ---
 
-**Describe the bug**
+# Describe the bug
 A clear and concise description of what the bug is.
 
 **To Reproduce**
 Reproducibility: ?
 Steps to reproduce the behavior:
-1. ...
-2. ...
-3. ...
+1. 
+2. 
+3. 
 
 
 **Expected behavior**
@@ -34,7 +34,6 @@ If applicable, add screenshots to help explain your problem.
  - Link to gist bug report: 
  - Type:
  - Severity:
- - Regression: 
  
 
 **Modlist (please complete the following information):**

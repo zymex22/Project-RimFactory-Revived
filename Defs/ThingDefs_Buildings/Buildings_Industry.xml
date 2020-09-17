@@ -209,7 +209,6 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>
       </li>
-      <li Class="CompProperties_Breakdownable"/>
       <li>
         <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
       </li>
@@ -228,15 +227,13 @@
         <rangeSetting>true</rangeSetting>
         <minPowerForRange>0</minPowerForRange>
         <minRange>1</minRange>
-        <maxPowerForRange>1500</maxPowerForRange>
+        <maxPowerForRange>500</maxPowerForRange>
         <maxRange>4</maxRange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
-        <!-- range color settings
-        <blueprintMin>(1,1,1,1)</blueprintMin>
-        <blueprintMax>(0.5,0.5,0.5,0.6)</blueprintMax>
-        <instance>(1,1,1,1)</instance>
-        <otherInstance>(1,1,1,0.35)</otherInstance>
-        -->
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
       </li>
     </comps>
     <modExtensions>
@@ -251,6 +248,91 @@
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
       <li>PRFMetalRefining</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Part Assembler ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_PartAssembler</defName>
+    <label>Part Assembler</label>
+    <description>This is a preset assembler that create parts for further production like components, prf parts and more.</description>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
+    <graphicData>
+      <texPath>Industry/part_assembler</texPath>
+      <drawSize>(3.1,3.1)</drawSize>
+    </graphicData>
+    <designatorDropdown>PRF_industry_gr</designatorDropdown>
+    <size>(3,3)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>5000</WorkToBuild>
+      <MaxHitPoints>350</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <costList>      <!-- cost list for fixed prices, uses def names -->
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <Steel>120</Steel>
+      <Plasteel>10</Plasteel>
+    </costList>
+    <recipes>
+      <li>Make_ComponentIndustrial</li>
+      <li>Make_ComponentSpacer</li>
+      <li>MakePRFRoboticArm</li>
+      <li>MakePRFWeakAIChip</li>
+      <li>MakePRFDroneModule</li>
+      <li>MakeDataDisk</li>
+      <li>MakeSmallFrame</li>
+      <li>MakeMediumFrame</li>
+      <li>MakeLargeFrame</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+      </li>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- speed settings -->
+        <speedSetting>true</speedSetting>
+        <minPowerForSpeed>750</minPowerForSpeed>
+        <minSpeedFactor>1</minSpeedFactor>
+        <maxPowerForSpeed>3000</maxPowerForSpeed>
+        <maxSpeedFactor>4</maxSpeedFactor>
+        <!-- range settings -->
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>1</minRange>
+        <maxPowerForRange>500</maxPowerForRange>
+        <maxRange>4</maxRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>10</artSkillLevel>
+      </li>
+    </modExtensions>
+    <tickerType>Normal</tickerType>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRFGoldbachConjecture</li>
     </researchPrerequisites>
   </ThingDef>
 
