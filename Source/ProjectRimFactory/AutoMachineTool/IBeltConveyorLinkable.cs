@@ -48,6 +48,11 @@ namespace ProjectRimFactory.AutoMachineTool
         /// Has a link with otherBelt, whether to or from
         /// </summary>
         bool HasLinkWith(IBeltConveyorLinkable otherBelt);
+        /// <summary>
+        /// Get a list of output directions the beltlinkable can actually send to
+        ///   at the moment.  Used for drawing output directional arrows!
+        /// </summary>
+        IEnumerable<Rot4> ActiveOutputDirections { get; }
 
         bool IsUnderground { get; }
 //        IEnumerable<Rot4> OutputRots { get; }

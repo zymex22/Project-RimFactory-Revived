@@ -36,8 +36,13 @@ namespace ProjectRimFactory.AutoMachineTool
         private HashSet<IBeltConveyorLinkable> incomingLinks = new HashSet<IBeltConveyorLinkable>();
 
         protected override Rot4 OutputDirection => dest;
-
-        public IEnumerable<Rot4> AllOutputDirs => this.outputLinks.Keys;
+        public override IEnumerable<Rot4> ActiveOutputDirections {
+            get {
+                foreach (var kvp in outputLinks) {
+                    yield return kvp.Key;
+                }
+            }
+        }
 
         // Conveyors are dumb. They just dump their stuff onto the ground when they end!
         //   But splitters are smart, they can figure stuff out:
@@ -178,7 +183,7 @@ namespace ProjectRimFactory.AutoMachineTool
             foreach (var dir in NextDirectionByPriority(t)) {
                 var olink = outputLinks.TryGetValue(dir, null);
                 if (olink != null) {
-                    if (!olink.link.CanAcceptNow(t)) continue;
+                    if (!olink.CanAcceptNow(t)) continue;
                 } else { // just a spot on the ground?
                     if (!PlaceThingUtility.CallNoStorageBlockersIn(this.Position + dir.FacingCell,
                                 this.Map, t)) continue;
@@ -187,12 +192,13 @@ namespace ProjectRimFactory.AutoMachineTool
                 return true;
             }
             //??
-            if (outputLinks.ContainsKey(this.dest)) {
+/*            if (outputLinks.ContainsKey(this.dest)) {
                 newDir = dest;
                 return true;
             }
+            */
 //            newDir = this.Rotation;//TODO:
-            newDir = dest;  // slightly better than Rot4.Random, I suppose :p
+            newDir = this.Rotation;  // slightly better than Rot4.Random, I suppose :p
             return false; // oh well. Fail.
         }
         /// <summary>
@@ -293,28 +299,10 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             var output = outputLinks.TryGetValue(dest, null);
             if (output != null && output.Allows(thing)) {
-                // Try to send to another conveyor first:
-                // コンベアある場合、そっちに流す.
-                if (output.link != null) {
-                    Debug.Message(Debug.Flag.Conveyors, "" + this + ": found " + output.link +
-                                                        "; going to try passing it along");
-                    if ((output.link as IPRF_Building).AcceptsThing(thing, this)) {
-                        NotifyAroundSender();
-                        this.stuck = false;
-                        Debug.Message(Debug.Flag.Conveyors, "" + this +
-                                      ": and successfully passed it to " + output.link);
-                        return true;
-                    }
-                } else // if no conveyor, place if can
-                  {
-                    Debug.Message(Debug.Flag.Conveyors, "" + this + ": trying to place directly:");
-                    if (!this.IsUnderground && this.PRFTryPlaceThing(thing,
-                          this.dest.FacingCell + this.Position, this.Map)) {
-                        NotifyAroundSender();
-                        this.stuck = false;
-                        Debug.Message(Debug.Flag.Conveyors, "" + this + "Successfully\t placed!");
-                        return true;
-                    }
+                if (output.TryPlace(thing)) {
+                    NotifyAroundSender();
+                    this.stuck = false;
+                    return true;
                 }
             }
             // If we have failed to place, look for another direction:
@@ -340,7 +328,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             if (this.CanLinkTo(link) && link.CanLinkFrom(this)) {
                 if (PositionToRot4(link, out Rot4 r)) {
-                    this.outputLinks[r] = new OutputLink(link);
+                    this.outputLinks[r] = new OutputLink(this, link);
                 }
             }
             if (this.CanLinkFrom(link) && link.CanLinkTo(this)) {
@@ -578,24 +566,60 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         public class OutputLink : IExposable {
-            public OutputLink(IBeltConveyorLinkable l) {
-                link = l;
+            public OutputLink(Building_BeltSplitter parent, IBeltConveyorLinkable link) 
+                  : this(parent,link.Position) { 
+                this.link = link;
+            }
+            public OutputLink(Building_BeltSplitter parent, IntVec3 pos) {
+                this.parent = parent;
+                link = null;
                 // TODO: any way to make filter null unless it's actually needed?
                 //   maybe not?
                 filter = new ThingFilter();
                 filter.SetAllowAll(null);
             }
             public void ExposeData() {
-                // Skip saving any broken output links:
-                if (Scribe.mode == LoadSaveMode.Saving &&
-                    link != null && !link.Spawned) return;
                 Scribe_Values.Look(ref priority, "PRFB_priority", DirectionPriority.Normal);
                 //TODO: only write filter if it's actually interesting?
-                Scribe_Deep.Look(ref filter, "PRFB_filter", Array.Empty<object>());
-                Scribe_References.Look(ref link, "PRFB_link");
+                Scribe_Deep.Look(ref filter, "PRFBSL_filter", Array.Empty<object>());
+                Scribe_References.Look(ref link, "PRFBSL_link");
+                Scribe_Values.Look(ref active, "PRFBSL_active");
+                Scribe_Values.Look(ref position, "PRFBSL_position");
+                Scribe_References.Look(ref parent, "PRFBSL_parent", false);
+            }
+            public bool Active {
+                get => active;
+                set => active = value;
             }
             public bool Allows(Thing t) {
                 return (filter == null || filter.Allows(t));
+            }
+            public bool CanAcceptNow(Thing t) {
+                if (!Allows(t)) return false;
+                if (link != null) return link.CanAcceptNow(t);
+                return PlaceThingUtility.CallNoStorageBlockersIn(position, 
+                                            parent.Map, t);
+            }
+            public bool TryPlace(Thing thing) {
+                // Try to send to another conveyor first:
+                // コンベアある場合、そっちに流す.
+                if (link != null) {
+                    Debug.Message(Debug.Flag.Conveyors, "" + this + ": found " + link +
+                                                        "; going to try passing it along");
+                    if ((link as IPRF_Building).AcceptsThing(thing, parent)) {
+                        Debug.Message(Debug.Flag.Conveyors, "" + this +
+                                      ": and successfully passed it to " + link);
+                        return true;
+                    }
+                } else {// if no conveyor, place if can
+                    Debug.Message(Debug.Flag.Conveyors, "" + this + ": trying to place directly:");
+                    if (!parent.IsUnderground && parent.PRFTryPlaceThing(thing,
+                        position, parent.Map)) {
+                        Debug.Message(Debug.Flag.Conveyors, "" + this + "Successfully\t placed!");
+                        return true;
+                    }
+                }
+                return false;
             }
             public void CopyAllowancesFrom(ThingFilter o) {
                 if (this.filter == null) filter = new ThingFilter();
@@ -611,6 +635,9 @@ namespace ProjectRimFactory.AutoMachineTool
             public IBeltConveyorLinkable link;
             public DirectionPriority priority=DirectionPriority.Normal;
             private ThingFilter filter = null;
+            private bool active = true;
+            private IntVec3 position;
+            private Building_BeltSplitter parent;
         }
     }
 }

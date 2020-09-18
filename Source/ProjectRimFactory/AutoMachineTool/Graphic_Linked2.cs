@@ -69,8 +69,6 @@ namespace ProjectRimFactory.AutoMachineTool
             int num2 = 1;
             for (int i = 0; i < 4; i++)
             {
-//                IntVec3 c = cell + GenAdj.CardinalDirections[i];
-//                if (this.ShouldLinkWith(c, parent)/TODO
                 if (this.ShouldLinkWith(new Rot4(i), parent))
                 {
                     num += num2;

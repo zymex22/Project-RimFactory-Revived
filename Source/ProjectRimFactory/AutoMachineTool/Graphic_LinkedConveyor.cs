@@ -18,23 +18,18 @@ namespace ProjectRimFactory.AutoMachineTool {
         public Graphic_LinkedConveyor() : base() {
         }
 
-        public string arrow0path;
-        public string arrow1path;
-
 
         public override bool ShouldLinkWith(Rot4 dir, Thing parent) {
             IntVec3 c = parent.Position + dir.FacingCell;
             if (!c.InBounds(parent.Map)) {
                 return false;
             }
-            //TODO: Straight conveyors need this:
-            /*
-            //TODO: is this true for splitters?
-            if (parent.Position + parent.Rotation.FacingCell == c)
-            {
+            // hardcoded for conveyors; no other conveyor buildings 
+            //   will get this special logic.
+            if (parent.GetType() == typeof(Building_BeltConveyor) &&
+                parent.Rotation == dir) {
                 return true;
             }
-            */
 
             var blueprint = parent as Blueprint;
             if (blueprint == null) {
@@ -43,7 +38,6 @@ namespace ProjectRimFactory.AutoMachineTool {
                     .OfType<IBeltConveyorLinkable>()
                     .Any(belt.HasLinkWith);
             }
-            //            var def = blueprint ? (ThingDef)parent.def.entityDefToBuild : parent.def;
             var def = (ThingDef)parent.def.entityDefToBuild;
             // Don't bother error checking. If an error shows up, we'll KNOW
             foreach (var l in (ConveyorLevel[])Enum
@@ -111,7 +105,6 @@ namespace ProjectRimFactory.AutoMachineTool {
                 Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0), this.drawSize, arrow00, thing.Rotation.AsAngle);
             } else {
                 var conveyor = thing as IBeltConveyorLinkable;
-//TODO:                if (!Building_BeltConveyorUGConnector.IsConveyorUGConnecterDef(thing.def) && conveyor != null && conveyor.IsUnderground && !(layer is SectionLayer_UGConveyor)) {
                 if (!(thing is Building_BeltConveyorUGConnector)
                     && conveyor != null && conveyor.IsUnderground 
                     && !(layer is SectionLayer_UGConveyor)) {
@@ -127,16 +120,18 @@ namespace ProjectRimFactory.AutoMachineTool {
                     // or it's above ground
                     // or it's UG's SectionLayer
                     // then print this
+                    // So....don't print underground belts?
                     return;
                 }
 
                 base.Print(layer, thing);
                 Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0), this.drawSize, arrow00, thing.Rotation.AsAngle);
-                // TODO: this printed tiny brown arrows pointing in alternate directions:
-                //   We will perhaps use this for splitters?
+                // this prints tiny brown arrows pointing in output directions:
+                //   Helpful for splitters:
                 if (conveyor != null) {
-                    //                    conveyor.OutputRots.Where(x => x != thing.Rotation)
-                    //                        .ForEach(r => Printer_Plane.PrintPlane(layer, thing.TrueCenter(), this.drawSize, this.arrow01, r.AsAngle));
+                    conveyor.ActiveOutputDirections.Where(d => d != thing.Rotation)
+                        .ForEach(d => Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
+                                 this.drawSize, arrow01, d.AsAngle));
                 }
             }
         }
@@ -148,9 +143,9 @@ namespace ProjectRimFactory.AutoMachineTool {
             canSendTos[typeof(Building_BeltSplitter)] = Building_BeltSplitter.CanDefSendToRot4AtLevel;
             canGetFroms[typeof(Building_BeltSplitter)] = Building_BeltSplitter.CanDefReceiveFromRot4AtLevel;
         }
-        static Dictionary<Type, Func<ThingDef, Rot4, Rot4, ConveyorLevel, bool>>
+        protected static Dictionary<Type, Func<ThingDef, Rot4, Rot4, ConveyorLevel, bool>>
                canSendTos = new Dictionary<Type, Func<ThingDef, Rot4, Rot4, ConveyorLevel, bool>>();
-        static Dictionary<Type, Func<ThingDef, Rot4, Rot4, ConveyorLevel, bool>>
+        protected static Dictionary<Type, Func<ThingDef, Rot4, Rot4, ConveyorLevel, bool>>
                canGetFroms = new Dictionary<Type, Func<ThingDef, Rot4, Rot4, ConveyorLevel, bool>>();
 
     }

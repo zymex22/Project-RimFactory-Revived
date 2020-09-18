@@ -84,6 +84,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
         /********** Display *********/
         public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
+        public virtual IEnumerable<Rot4> ActiveOutputDirections {
+            get { yield return this.Rotation; }
+        }
 
         /********** Interactions ********/
         public bool HideRightClickMenus => !this.IsUnderground && this.State != WorkingState.Ready;
@@ -158,6 +161,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected Vector3 CarryPosition() {
             var workLeft = this.stuck ? Mathf.Clamp(Mathf.Abs(this.WorkLeft), 0f, 0.5f) : Mathf.Clamp01(this.WorkLeft);
+            Debug.Message(Debug.Flag.Graphics, "" + this + " carrying with this much work left: " + workLeft);//TODO
             return (this.OutputDirection.FacingCell.ToVector3() * (1f - workLeft)) + this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f);
         }
         /******** AutoMachineTool logic *********/

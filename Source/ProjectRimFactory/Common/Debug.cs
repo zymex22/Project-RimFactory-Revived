@@ -29,6 +29,7 @@ namespace ProjectRimFactory {
         public enum Flag {
             PlaceThing=0x1,
             Conveyors=0x2,
+            Graphics=0x4,
             // NextFlag=0x4,
             // 0x8
             // 0x10
