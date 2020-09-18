@@ -78,7 +78,14 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <researchPrerequisites>
     </researchPrerequisites>
     <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
+        <speedFactor>1</speedFactor>        <!-- Base speed -->
+        <minPower>700</minPower>        <!-- power usage lowest range -->
+        <maxPower>2000</maxPower>        <!-- Power for max range -->
+      </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>        <!-- power usage lowest range -->
+        <maxPower>2000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
@@ -104,7 +111,14 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <researchPrerequisites>
     </researchPrerequisites>
     <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
+        <speedFactor>1</speedFactor>        <!-- Base speed -->
+        <minPower>700</minPower>        <!-- power usage lowest range -->
+        <maxPower>2000</maxPower>        <!-- Power for max range -->
+      </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>        <!-- power usage lowest range -->
+        <maxPower>2000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
@@ -130,7 +144,14 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <researchPrerequisites>
     </researchPrerequisites>
     <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
+        <speedFactor>1</speedFactor>        <!-- Base speed -->
+        <minPower>700</minPower>        <!-- power usage lowest range -->
+        <maxPower>2000</maxPower>        <!-- Power for max range -->
+      </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>        <!-- power usage lowest range -->
+        <maxPower>2000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
