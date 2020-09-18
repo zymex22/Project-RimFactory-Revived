@@ -66,7 +66,7 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <label>S.A.L T1</label>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/AutoMachineTool</texPath>
+      <texPath>SAL3/ASWP1</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1,1)</drawSize>
     </graphicData>
@@ -78,7 +78,7 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <researchPrerequisites>
     </researchPrerequisites>
     <modExtensions>
-      <li Class="NR_AutoMachineTool.ModExtension_AutoMachineTool">
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
@@ -91,7 +91,7 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <label>S.A.L T3</label>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
-      <texPath>NAutoMachineTool/Buildings/AutoMachineTool</texPath>
+      <texPath>SAL3/ASWP1</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1,1)</drawSize>
     </graphicData>
@@ -104,7 +104,7 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <researchPrerequisites>
     </researchPrerequisites>
     <modExtensions>
-      <li Class="NR_AutoMachineTool.ModExtension_AutoMachineTool">
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
@@ -117,7 +117,7 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <label>S.A.L T3</label>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/AutoMachineTool</texPath>
+      <texPath>SAL3/ASWP1</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(1,1)</drawSize>
     </graphicData>
@@ -130,7 +130,7 @@ By default, Tier 1 is Skill Level 5, Tier 2 is Skill Level 10, and Tier 3 is Ski
     <researchPrerequisites>
     </researchPrerequisites>
     <modExtensions>
-      <li Class="NR_AutoMachineTool.ModExtension_AutoMachineTool">
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
