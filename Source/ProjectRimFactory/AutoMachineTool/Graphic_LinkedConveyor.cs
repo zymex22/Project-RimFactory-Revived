@@ -125,13 +125,23 @@ namespace ProjectRimFactory.AutoMachineTool {
                 }
 
                 base.Print(layer, thing);
-                Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0), this.drawSize, arrow00, thing.Rotation.AsAngle);
+                Printer_Plane.PrintPlane(layer, thing.TrueCenter() 
+                    + new Vector3(0, 0.1f, 0), this.drawSize, arrow00, 
+                    thing.Rotation.AsAngle);
                 // this prints tiny brown arrows pointing in output directions:
                 //   Helpful for splitters:
                 if (conveyor != null) {
+                    foreach (var d in conveyor.ActiveOutputDirections
+                             .Where(d=>d!=thing.Rotation)) {
+                        Log.Message("Printing arrow for " + thing + " in direction " + d);
+                        Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
+                                 this.drawSize, arrow01, d.AsAngle);
+                    }
+                    /*
                     conveyor.ActiveOutputDirections.Where(d => d != thing.Rotation)
                         .ForEach(d => Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
                                  this.drawSize, arrow01, d.AsAngle));
+                                 */
                 }
             }
         }

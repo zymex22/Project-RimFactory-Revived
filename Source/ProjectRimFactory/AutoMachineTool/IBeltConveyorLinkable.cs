@@ -9,11 +9,19 @@ namespace ProjectRimFactory.AutoMachineTool
 {
     public interface IBeltConveyorLinkable : ProjectRimFactory.Common.IPRF_Building, ILoadReferenceable
     {
+        /// <summary>
+        /// Notify the IBeltConveyorLinkable that <paramref name="linkable"/>
+        ///   is a candidate for a link.
+        /// </summary>
+        /// <param name="linkable">Other linkable.</param>
         void Link(IBeltConveyorLinkable linkable);
+        /// <summary>
+        /// Notify the IBeltConveyorLinkable that <paramref name="linkable"/>
+        ///   will no longer be a valid link (usually despawning)
+        /// </summary>
+        /// <param name="linkable">Other linkable.</param>
         void Unlink(IBeltConveyorLinkable linkable);
-        Rot4 Rotation { get; }
-        IntVec3 Position { get; }
-        bool Spawned { get; }
+
         // Because we are using a central Placing mechanism, it makes
         //   more sense to try directions specifically? Maybe??
         //        bool ReceivableNow(bool underground, Thing thing);
@@ -22,7 +30,7 @@ namespace ProjectRimFactory.AutoMachineTool
         bool CanReceiveFromLevel(ConveyorLevel level);
 
         /// <summary>
-        /// Whether the conveyor linkable can accpet thing *right this moment*
+        /// Whether the conveyor linkable can accept thing *right this moment*
         /// </summary>
         bool CanAcceptNow(Thing t);
 
@@ -33,8 +41,6 @@ namespace ProjectRimFactory.AutoMachineTool
         /// <param name="checkPosition">If set to <c>false</c>, assume position is valid, 
         /// and only check other considerations - probably only used internally.</param>
         bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true);
-        // can the BLC take a link FROM another (independent of whether the other
-        //     can actually link to this one)
         /// <summary>
         /// Can the BeltConveyorLinkable link FROM another (independent of whether
         ///   the other can actually link to this one)
@@ -43,9 +49,9 @@ namespace ProjectRimFactory.AutoMachineTool
         /// and only check other considerations - probably only used internally.</param>
         bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition = true);
         // If both A.CanLinkTo(B) and B.CanLinkFrom(A) then it's a link!
-        // if either A->B or B->A, then they have A link.
         /// <summary>
         /// Has a link with otherBelt, whether to or from
+        ///   (either A->B or B->A)
         /// </summary>
         bool HasLinkWith(IBeltConveyorLinkable otherBelt);
         /// <summary>
@@ -53,10 +59,20 @@ namespace ProjectRimFactory.AutoMachineTool
         ///   at the moment.  Used for drawing output directional arrows!
         /// </summary>
         IEnumerable<Rot4> ActiveOutputDirections { get; }
-
+        /// <summary>
+        /// Is the IBCL "underground" - mostly for drawing purposes
+        /// </summary>
         bool IsUnderground { get; }
-//        IEnumerable<Rot4> OutputRots { get; }
+        /// <summary>
+        /// Is the conveyor "stuck" - with an item it cannot place
+        /// </summary>
+        /// <value><c>true</c> if it cannot place the item it has;
+        ///   <c>false</c> if it has free space for an item.</value>
         bool IsStuck { get; }
+        // // // // RimWorld stuff // // // //
+        Rot4 Rotation { get; }
+        IntVec3 Position { get; }
+        bool Spawned { get; }
     }
     public enum ConveyorLevel {
         Underground=-1,

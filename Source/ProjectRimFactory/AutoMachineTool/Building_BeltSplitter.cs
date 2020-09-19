@@ -38,7 +38,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override Rot4 OutputDirection => dest;
         public override IEnumerable<Rot4> ActiveOutputDirections {
             get {
-                foreach (var kvp in outputLinks) {
+                foreach (var kvp in outputLinks.Where(kvp=>kvp.Value.Active)) {
                     yield return kvp.Key;
                 }
             }
@@ -85,7 +85,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.showProgressBar = false;
-            outputLinks.Clear();
+            //outputLinks.Clear();
             incomingLinks.Clear();
 
             var links = AllNearbyLinks().ToList();
@@ -103,24 +103,13 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            foreach (var c in outputLinks.Values.Select(l=>l.link).Union(incomingLinks)) {
+            foreach (var c in this.AllNearbyLinkables()) {
                 c.Unlink(this);
             }
             base.DeSpawn(mode);
 
             outputLinks.Clear();
             incomingLinks.Clear();
-        }
-
-        protected override void Reset()
-        {
-/*            if (this.State != WorkingState.Ready)
-            {
-                // TODO:<)
-                this.FilterSetting();
-            }
-            base.Reset();
-            */          
         }
 
         //TODO:<)
@@ -328,7 +317,11 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             if (this.CanLinkTo(link) && link.CanLinkFrom(this)) {
                 if (PositionToRot4(link, out Rot4 r)) {
-                    this.outputLinks[r] = new OutputLink(this, link);
+                    if (outputLinks.ContainsKey(r)) {
+                        outputLinks[r].link = link;
+                    } else {
+                        this.outputLinks[r] = new OutputLink(this, link);
+                    }
                 }
             }
             if (this.CanLinkFrom(link) && link.CanLinkTo(this)) {
@@ -486,11 +479,6 @@ namespace ProjectRimFactory.AutoMachineTool
             return true;
         }*/
 
-        //???TODO: <)
-        protected override bool WorkingIsDespawned()
-        {
-            return true;
-        }
 
         public override bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             // First test: level (e.g., Ground vs Underground):
@@ -577,6 +565,10 @@ namespace ProjectRimFactory.AutoMachineTool
                 //   maybe not?
                 filter = new ThingFilter();
                 filter.SetAllowAll(null);
+            }
+            public OutputLink() {
+                // This is used purely so ExposeData can create these things
+                //   when loading a saved game.
             }
             public void ExposeData() {
                 Scribe_Values.Look(ref priority, "PRFB_priority", DirectionPriority.Normal);

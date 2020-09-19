@@ -234,10 +234,6 @@ namespace ProjectRimFactory.AutoMachineTool
             return (this.Position + this.Rotation.Opposite.FacingCell == otherBeltLinkable.Position);
         }
 
-        protected override bool WorkingIsDespawned()
-        {
-            return true;
-        }
         new public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
                      Rot4 queryRotation, ConveyorLevel queryLevel) {
             // Not going to error check here: if there's a config error, there will be prominent
