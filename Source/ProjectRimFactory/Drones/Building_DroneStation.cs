@@ -384,7 +384,6 @@ namespace ProjectRimFactory.Drones
                 action = () =>
                 {
                     List<Building_DroneStation> buildings = Map.listerThings.AllThings.OfType<Building_DroneStation>().ToList();
-                    Log.Message("Count" + buildings.Count);
                     for (int i = 0; i< buildings.Count;i++)
                     {
                         buildings[i].lockdown = true;
@@ -392,6 +391,21 @@ namespace ProjectRimFactory.Drones
                         {
                             drone.jobs.StartJob(new Job(PRFDefOf.PRFDrone_ReturnToStation, buildings[i]), JobCondition.InterruptForced);
                         }
+                    }
+
+                },
+                icon = Cancel
+            };
+            yield return new Command_Action()
+            {
+                defaultLabel = "PRFDroneStationLiftLockdownAll".Translate(),
+                defaultDesc = "PRFDroneStationLiftLockdownAllDesc".Translate(),
+                action = () =>
+                {
+                    List<Building_DroneStation> buildings = Map.listerThings.AllThings.OfType<Building_DroneStation>().ToList();
+                    for (int i = 0; i < buildings.Count; i++)
+                    {
+                        buildings[i].lockdown = false;
                     }
 
                 },

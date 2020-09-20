@@ -68,6 +68,8 @@
   <PRFDroneStationLockdownDesc>Recall all active drones and disable drone station.</PRFDroneStationLockdownDesc>
   <PRFDroneStationLockdownAll>Lockdown All</PRFDroneStationLockdown>
   <PRFDroneStationLockdownAllDesc>Activate the Lockdown for all drone stations on the map.</PRFDroneStationLockdownDesc>
+  <PRFDroneStationLiftLockdownAll>Lifts all Lockdown(s)</PRFDroneStationLockdown>
+  <PRFDroneStationLfttLockdownAllDesc>Lift the Lockdown for all drone stations on the map.</PRFDroneStationLockdownDesc>
   
   <PRFOutputItems>output item</PRFOutputItems>
   <PRFPawnAccessLabel>pawn access</PRFPawnAccessLabel>
