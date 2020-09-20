@@ -15,6 +15,8 @@ namespace ProjectRimFactory.Drones
     {
         public Rot4 outputRotation = Rot4.North;
 
+        private int totalDroneCount => spawnedDrones.Count + dronesLeft;
+
         int dronesLeft;
 
         public override int DronesLeft { get => dronesLeft - spawnedDrones.Count; }
@@ -30,13 +32,16 @@ namespace ProjectRimFactory.Drones
         public override void PostMake()
         {
             base.PostMake();
-            //dronesLeft = extension.maxNumDrones;
             dronesLeft = extension.GetDronesOnSpawn();
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            if (totalDroneCount < extension.GetDronesOnSpawn())
+            {
+                dronesLeft = extension.GetDronesOnSpawn();
+            }
         }
  
 
