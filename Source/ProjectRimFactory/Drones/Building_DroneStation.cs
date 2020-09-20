@@ -377,6 +377,26 @@ namespace ProjectRimFactory.Drones
                 isActive = () => lockdown,
                 icon = Cancel
             };
+            yield return new Command_Action()
+            {
+                defaultLabel = "PRFDroneStationLockdownAll".Translate(),
+                defaultDesc = "PRFDroneStationLockdownAllDesc".Translate(),
+                action = () =>
+                {
+                    List<Building_DroneStation> buildings = Map.listerThings.AllThings.OfType<Building_DroneStation>().ToList();
+                    Log.Message("Count" + buildings.Count);
+                    for (int i = 0; i< buildings.Count;i++)
+                    {
+                        buildings[i].lockdown = true;
+                        foreach (Pawn_Drone drone in buildings[i].spawnedDrones.ToList())
+                        {
+                            drone.jobs.StartJob(new Job(PRFDefOf.PRFDrone_ReturnToStation, buildings[i]), JobCondition.InterruptForced);
+                        }
+                    }
+
+                },
+                icon = Cancel
+            };
             if (DroneRange == 0)
             {
                 /*
