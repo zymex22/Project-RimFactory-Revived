@@ -394,7 +394,7 @@ namespace ProjectRimFactory.Drones
                     }
 
                 },
-                icon = Cancel
+                icon = ContentFinder<Texture2D>.Get("UI/deactivate", true)
             };
             yield return new Command_Action()
             {
@@ -409,7 +409,7 @@ namespace ProjectRimFactory.Drones
                     }
 
                 },
-                icon = Cancel
+                icon = ContentFinder<Texture2D>.Get("UI/activate", true)
             };
             if (DroneRange == 0)
             {
