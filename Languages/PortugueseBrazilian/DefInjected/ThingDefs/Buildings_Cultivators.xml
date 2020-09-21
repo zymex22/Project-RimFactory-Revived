@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CultivatorTools_DroneCultivator.label>Produtor</CultivatorTools_DroneCultivator.label>
+  <CultivatorTools_DroneCultivator.description>Um edifício que pode plantar e colher de forma independente em 11 quadrados ao redor. Nenhum modificador será afetado.</CultivatorTools_DroneCultivator.description>
+
+  <CultivatorTools_CultivatorWithLamp.label>Cultivador (com lâmpada solar)</CultivatorTools_CultivatorWithLamp.label>
+  <CultivatorTools_CultivatorWithLamp.description>Um edifício que pode plantar e colher de forma independente em 11 quadrados ao redor. Tem uma lâmpada solar. Nenhum modificador será afetado.</CultivatorTools_CultivatorWithLamp.description>
+
+  <CultivatorTools_Sprinkler.label>Sprinkler</CultivatorTools_Sprinkler.label>
+  <CultivatorTools_Sprinkler.description>Um edifício que rega plantas em um raio de expansão, aumentando seu crescimento em uma hora por rodada. Os efeitos são empilháveis ​​e funcionam mesmo quando as plantas estão em repouso.</CultivatorTools_Sprinkler.description>
+
+</LanguageData>
