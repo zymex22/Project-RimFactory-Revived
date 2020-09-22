@@ -207,7 +207,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
             this.compPowerTrader = GetComp<CompPowerTrader>();
             this.compRefuelable  = GetComp<CompRefuelable>();
-            this.compFlick = GetComp<CompFlickable>();
+            this.compFlick       = GetComp<CompFlickable>();
 
             //Assign Pawn's mapIndexOrState to building's mapIndexOrState
             ReflectionUtility.mapIndexOrState.SetValue(buildingPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
@@ -234,14 +234,25 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         protected IEnumerable<Bill> AllBillsShouldDoNow => from b in billStack.Bills
                                                            where b.ShouldDoNow()
                                                            select b;
+        public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null) {
+            foreach (var t in thingQueue) {
+                if (optionalValidator == null ||
+                    optionalValidator(t)) {
+                    thingQueue.Remove(t);
+                    return t;
+                }
+            }
+            return null;
+        }
+
         public override void Tick()
         {
             base.Tick();
             if (this.IsHashIntervalTick(10) && Active)
             {
-
-                if (thingQueue.Count > 0 && OutputComp.CurrentCell.Walkable(Map) &&
-                    (OutputComp.CurrentCell.GetFirstItem(Map)?.TryAbsorbStack(thingQueue[0], true) ?? GenPlace.TryPlaceThing(thingQueue[0], OutputComp.CurrentCell, Map, ThingPlaceMode.Direct)))
+                if (thingQueue.Count > 0 &&
+                    PlaceThingUtility.PRFTryPlaceThing(this, thingQueue[0],
+                        OutputComp.CurrentCell, Map))
                 {
                     thingQueue.RemoveAt(0);
                 }
