@@ -7,8 +7,7 @@ namespace ProjectRimFactory.Common
         //   know what we could do with it.
         public virtual bool AcceptsThing(Thing newThing, IPRF_Building giver) => false;
         // If something else wants to take an item from us
-        public abstract Thing GetThingBy(ThingDef requiredDef,
-            Func<Thing, bool> optionalValidator = null);
+        public abstract Thing GetThingBy(Func<Thing, bool> optionalValidator = null);
 
 
         public virtual bool ForbidOnPlacing() => false;

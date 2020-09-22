@@ -44,12 +44,10 @@ namespace ProjectRimFactory.AutoMachineTool
         protected int startCheckIntervalTicks = 30;
 
         private MapTickManager mapManager;
-        public override Thing GetThingBy(ThingDef requiredDef,
-            Func<Thing, bool> optionalValidator = null) {
+        public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null) {
             foreach (Thing p in products) {
-                if (p.def == requiredDef &&
-                    (optionalValidator == null
-                     || optionalValidator(p))) {
+                if (optionalValidator == null
+                     || optionalValidator(p)) {
                     products.Remove(p);
                     return p;
                 }
