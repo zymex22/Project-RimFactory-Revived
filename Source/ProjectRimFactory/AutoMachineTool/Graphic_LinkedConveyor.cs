@@ -15,25 +15,11 @@ namespace ProjectRimFactory.AutoMachineTool {
         public static Material arrow00 => MaterialPool.MatFrom("Belts/SmallArrow00");
         public static Material arrow01 => MaterialPool.MatFrom("Belts/SmallArrow01");
 
-        public Material rotatedNoLinks;
-
         public Graphic_LinkedConveyor() : base() {
         }
 
         public override void Init(GraphicRequest req) {
             base.Init(req);
-            rotatedNoLinks = new Material(subMats[(int)LinkDirections.None]);
-            rotatedNoLinks.name = subMats[(int)LinkDirections.None].name + "r";
-/*            rotatedNoLinks.
-
-                         float x = (float)(i % 4) * 0.25f;
-            float y = (float)(i / 4) * 0.25f;
-            Vector2 mainTextureOffset = new Vector2(x, y);
-            Material material = new Material(this.subGraphic.MatSingle);
-            material.name = this.subGraphic.MatSingle.name + "_ASM" + i;
-            material.mainTextureScale = mainTextureScale;
-            material.mainTextureOffset = mainTextureOffset;
-            */           
         }
 
 
