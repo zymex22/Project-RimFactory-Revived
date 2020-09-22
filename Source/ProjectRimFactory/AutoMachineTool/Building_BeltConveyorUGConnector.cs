@@ -187,8 +187,10 @@ namespace ProjectRimFactory.AutoMachineTool
             return false;
         }
 
+        //TODO: Decide if we allow this.
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
+            if (this.ToUnderground) return base.TryStartWorking(out target, out workAmount);
             target = null;
             workAmount = 1f;
             return false;
