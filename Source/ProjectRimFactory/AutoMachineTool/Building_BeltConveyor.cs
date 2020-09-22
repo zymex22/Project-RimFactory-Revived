@@ -30,7 +30,20 @@ namespace ProjectRimFactory.AutoMachineTool
             return ("PRF.AutoMachineTool.Conveyor.DirectionPriority." + pri.ToString()).Translate();
         }
     }
-
+/// <summary>
+/// Conveyor Belts
+/// </summary>
+/// <designNotes>
+/// Conveyor belts move an unspawned item from their position to
+///   an adjacent one.  When their work is finished, the item is
+///   placed.
+/// Important note: If the item is ever spawned, it needs to be
+///   either placed immediately, or despanwed before Placing()
+///   happens - the products[] (from whence items are placed)
+///   is saved Deep, not Reference, and if the item is spawned,
+///   it will already be saved by the map.  This creates a small
+///   window in which a problem can occur.
+/// </designNotes>
     public class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConveyorLinkable, IHideItem, IHideRightClickMenu, IForbidPawnOutputItem
     {
         public Building_BeltConveyor()
@@ -104,6 +117,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.SpawnSetup(map, respawningAfterLoad);
             this.showProgressBar = false;
 
+            // 
             //TODO: was originally only !respawningAfterLoad - okay?
             foreach (var c in AllNearbyLinkables()) {
                 c.Link(this);

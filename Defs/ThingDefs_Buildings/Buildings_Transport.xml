@@ -486,18 +486,18 @@
     </comps>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorIcon</uiIconPath>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/BeltConveyor</texPath>
+      <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1, 1)</drawSize>
     </graphicData>
     <building>
       <blueprintGraphicData>
-        <texPath>AutoMachineTool/Buildings/BeltConveyor</texPath>
+      <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
         <drawRotated>true</drawRotated>
         <drawSize>(1, 1)</drawSize>
-      </blueprintGraphicData>
+       </blueprintGraphicData>
     </building>
   </ThingDef>
 
@@ -706,7 +706,7 @@
     </comps>
     <uiIconPath>Belts/Splitter_door_closed</uiIconPath>
     <graphicData>
-      <texPath>Belts/Splitters-Atlas_Rollers_256x256_v1.06</texPath><!--TODO - correct path?-->
+      <texPath>Belts/Splitters-Atlas_Rollers_256x256_v1.06</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1, 1)</drawSize>
@@ -741,7 +741,7 @@
       </li>
     </modExtensions>
     <graphicData>
-      <texPath>Belts/Splitters-Atlas_Rollers_256x256_v1.06</texPath><!--TODO - correct path?-->
+      <texPath>Belts/Splitters-Atlas_Rollers_256x256_v1.06</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
       <drawRotated>true</drawRotated>
     </graphicData>

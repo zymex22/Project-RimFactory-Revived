@@ -12,11 +12,30 @@ using static ProjectRimFactory.AutoMachineTool.Ops;
 namespace ProjectRimFactory.AutoMachineTool {
     public class Graphic_LinkedConveyor : Graphic_Link2<Graphic_LinkedConveyor> {
 
-        private static Material arrow00 => MaterialPool.MatFrom("Belts/SmallArrow00");
-        private static Material arrow01 => MaterialPool.MatFrom("Belts/SmallArrow01");
+        public static Material arrow00 => MaterialPool.MatFrom("Belts/SmallArrow00");
+        public static Material arrow01 => MaterialPool.MatFrom("Belts/SmallArrow01");
+
+        public Material rotatedNoLinks;
 
         public Graphic_LinkedConveyor() : base() {
         }
+
+        public override void Init(GraphicRequest req) {
+            base.Init(req);
+            rotatedNoLinks = new Material(subMats[(int)LinkDirections.None]);
+            rotatedNoLinks.name = subMats[(int)LinkDirections.None].name + "r";
+/*            rotatedNoLinks.
+
+                         float x = (float)(i % 4) * 0.25f;
+            float y = (float)(i / 4) * 0.25f;
+            Vector2 mainTextureOffset = new Vector2(x, y);
+            Material material = new Material(this.subGraphic.MatSingle);
+            material.name = this.subGraphic.MatSingle.name + "_ASM" + i;
+            material.mainTextureScale = mainTextureScale;
+            material.mainTextureOffset = mainTextureOffset;
+            */           
+        }
+
 
 
         public override bool ShouldLinkWith(Rot4 dir, Thing parent) {
@@ -24,12 +43,14 @@ namespace ProjectRimFactory.AutoMachineTool {
             if (!c.InBounds(parent.Map)) {
                 return false;
             }
+            /*
             // hardcoded for conveyors; no other conveyor buildings 
             //   will get this special logic.
             if (parent.GetType() == typeof(Building_BeltConveyor) &&
                 parent.Rotation == dir) {
                 return true;
             }
+            */
 
             var blueprint = parent as Blueprint;
             if (blueprint == null) {
@@ -100,50 +121,69 @@ namespace ProjectRimFactory.AutoMachineTool {
         }
 
         public override void Print(SectionLayer layer, Thing thing) {
-            if (thing is Blueprint) {
-                base.Print(layer, thing);
-                Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0), this.drawSize, arrow00, thing.Rotation.AsAngle);
-            } else {
-                var conveyor = thing as IBeltConveyorLinkable;
-                if (!(thing is Building_BeltConveyorUGConnector)
-                    && conveyor != null && conveyor.IsUnderground 
-                    && !(layer is SectionLayer_UGConveyor)) {
-                    // Original Logic (notation by LWM)
-                    // if it IS NOT an underground connector
-                    // and it IS an IBeltLinkable
-                    // and it IS underground
-                    // and the layer IS NOT Sectionlayer for UGConveyor
-                    // then return
-                    // so.....
-                    // if it IS a connector
-                    // or it's NOT an IBletLinkable
-                    // or it's above ground
-                    // or it's UG's SectionLayer
-                    // then print this
-                    // So....don't print underground belts?
-                    return;
-                }
+            var conveyor = thing as IBeltConveyorLinkable;
+            if (!(thing is Building_BeltConveyorUGConnector)
+                && conveyor != null && conveyor.IsUnderground
+                && !(layer is SectionLayer_UGConveyor)) {
+                // Original Logic (notation by LWM)
+                // if it IS NOT an underground connector
+                // and it IS an IBeltLinkable
+                // and it IS underground
+                // and the layer IS NOT Sectionlayer for UGConveyor
+                // then return
+                // so.....
+                // if it IS a connector
+                // or it's NOT an IBletLinkable
+                // or it's above ground
+                // or it's UG's SectionLayer
+                // then print this
+                // So....don't print underground belts?
+                return;
+            }
+            Material mat = this.LinkedDrawMatFrom(thing, thing.Position);
+            float extraRotation = 0f;
+            if (mat == subMats[(int)LinkDirections.None]) {
+                // The graphic for no links is up/down.  But
+                //   if the conveyor is oriented East/West, 
+                //   we should draw the singleton conveyor
+                //   rotated to match
+                extraRotation = thing.Rotation.AsAngle;
+            }
 
-                base.Print(layer, thing);
-                Printer_Plane.PrintPlane(layer, thing.TrueCenter() 
-                    + new Vector3(0, 0.1f, 0), this.drawSize, arrow00, 
-                    thing.Rotation.AsAngle);
-                // this prints tiny brown arrows pointing in output directions:
-                //   Helpful for splitters:
-                if (conveyor != null) {
-                    foreach (var d in conveyor.ActiveOutputDirections
-                             .Where(d=>d!=thing.Rotation)) {
-                        Log.Message("Printing arrow for " + thing + " in direction " + d);
-                        Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
-                                 this.drawSize, arrow01, d.AsAngle);
-                    }
-                    /*
-                    conveyor.ActiveOutputDirections.Where(d => d != thing.Rotation)
-                        .ForEach(d => Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
-                                 this.drawSize, arrow01, d.AsAngle));
-                                 */
+            /*            if (thing is Blueprint) {
+                            Log.Message("Printing blueprint with rotation " + thing.Rotation.ToStringHuman()
+                            + " -> " + thing.Rotation.AsAngle);
+                            base.Print(layer, thing);
+                    Printer_Plane.PrintPlane(layer,
+                        thing.TrueCenter() + new Vector3(0, 0.1f, 0), 
+                                this.drawSize, arrow00, thing.Rotation.AsAngle);
+
+            */
+            if (thing is Blueprint) {
+                mat = FadedMaterialPool.FadedVersionOf(mat, 0.5f);
+            }
+            // Print the conveyor material:
+            Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
+                this.drawSize, mat, extraRotation);
+            // Print the tiny yellow arrow showing direction:
+            Printer_Plane.PrintPlane(layer, thing.TrueCenter()
+                + new Vector3(0, 0.1f, 0), this.drawSize, arrow00,
+                thing.Rotation.AsAngle);
+            // print tiny brown arrows pointing in output directions:
+            //   Helpful for splitters:
+            if (conveyor != null) {
+                foreach (var d in conveyor.ActiveOutputDirections
+                         .Where(d => d != thing.Rotation)) {
+                    Log.Message("Printing arrow for " + thing + " in direction " + d);
+                    Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
+                             this.drawSize, arrow01, d.AsAngle);
                 }
             }
+                /*
+                conveyor.ActiveOutputDirections.Where(d => d != thing.Rotation)
+                    .ForEach(d => Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
+                             this.drawSize, arrow01, d.AsAngle));
+                             */
         }
         static Graphic_LinkedConveyor() {
             canSendTos[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefSendToRot4AtLevel;
