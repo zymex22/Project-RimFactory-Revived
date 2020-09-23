@@ -95,15 +95,56 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public virtual bool CanReceiveFromLevel(ConveyorLevel level) => CanSendToLevel(level);
 
-        /********** Display *********/
-        public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
-        public virtual IEnumerable<Rot4> ActiveOutputDirections {
-            get { yield return this.Rotation; }
-        }
-
         /********** Interactions ********/
         public bool HideRightClickMenus => !this.IsUnderground && this.State != WorkingState.Ready;
         public bool ForbidPawnOutput => !this.IsUnderground && this.State != WorkingState.Ready;
+        public override IEnumerable<Gizmo> GetGizmos() {
+            foreach (Gizmo gizmo in base.GetGizmos()) {
+                yield return gizmo;
+            }
+            if (this.working != null || !this.products.NullOrEmpty()) {
+                Thing dropThing;
+                if (working != null) dropThing = working;
+                else dropThing = products[0];
+                yield return new Command_Action
+                {
+                    defaultLabel = "PRF_DropThing".Translate(dropThing.Label),
+                    defaultDesc = "PRF_DropFromConveyorDesc".Translate(),
+                    icon = (Texture2D)dropThing.Graphic.MatSingleFor(dropThing).mainTexture,
+                    action=delegate() { DropThing(dropThing); },
+                };
+            }
+        }
+        public void DropThing(Thing t) {
+            if (working != t && (products == null || !products.Contains(t))) {
+                Messages.Message("Error: Conveyor " + this + " does not have " + t.Label,
+                    this, MessageTypeDefOf.RejectInput);
+                return; // should never happen?
+            }
+            Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this + " attempting to drop " + t);
+            if (GenPlace.TryPlaceThing(t, Position, Map, ThingPlaceMode.Near, null,
+                      // no above-ground conveyors, impassable cells:
+                      delegate (IntVec3 c) {
+                          if (c.Impassable(this.Map)) return false;
+                          Debug.Message(Debug.Flag.Conveyors, "  validating " + c);
+                          foreach (var jl in c.GetThingList(Map).OfType<IBeltConveyorLinkable>()) {
+                              Debug.Message(Debug.Flag.Conveyors, "  but found " + jl);
+                              if (!jl.IsUnderground) {
+                                  Debug.Message(Debug.Flag.Conveyors, "  which is above ground, failed");
+                                  return false;
+                              }
+                          }
+                          return true;
+                      })) {
+                // successfully placed
+                if (working == t) working = null;
+                else products.Remove(t);
+                this.ForceReady();
+            } else { // failed to place
+                Messages.Message("PRF_CouldNotPlaceThing".Translate(t.Label), 
+                      this, MessageTypeDefOf.NegativeEvent);
+            }
+        }
 
         /********** RimWorld *********/
         public override void ExposeData()
@@ -138,6 +179,11 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         /********* Display **********/
+        public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
+        public virtual IEnumerable<Rot4> ActiveOutputDirections {
+            get { yield return this.Rotation; }
+        }
+
         public override void DrawGUIOverlay()
         {
             base.DrawGUIOverlay();
