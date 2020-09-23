@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+  <PRF_DropThing>Drop {0}</PRF_DropThing>
+  <PRF_CouldNotPlaceThing>No valid place found to place {0}.</PRF_CouldNotPlaceThing>
   <!-- Some languages are RtoL, and might want "(default) {0}" -->
   <PRF_Default_Tag>{0} (default)</PRF_Default_Tag>
   <PRF_TotalStacksNum>Total number of stacks: {0}</PRF_TotalStacksNum>

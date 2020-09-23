@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
   <!-- common -->
@@ -72,6 +72,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.AutoMiner.MineOre>Mining {0}</PRF.AutoMachineTool.AutoMiner.MineOre>
   
   <!-- BeltConveyor -->
+  <PRF_DropFromConveyorDesc>Drop the item on the conveyor onto the ground - somewhere off a conveyor. Obviously, this doesn't make sense for underground conveyors, but it's a lot easier to let you do this than it is to script pawns getting weird things unstuck from tunnels.</PRF_DropFromConveyorDesc>
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>very high</PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.High>high</PRF.AutoMachineTool.Conveyor.DirectionPriority.High>
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.Normal>normal</PRF.AutoMachineTool.Conveyor.DirectionPriority.Normal>
