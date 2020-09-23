@@ -214,7 +214,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (level == ConveyorLevel.Underground) return true;
             return false;
         }
-
         public override bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             if (this.ToUnderground) {
                 if (!otherBeltLinkable.CanReceiveFromLevel(ConveyorLevel.Underground)) return false;
@@ -224,16 +223,6 @@ namespace ProjectRimFactory.AutoMachineTool
             if (!checkPosition) return true;
             // Connectors can only link to something directly in front of them:
             return (this.Position + this.Rotation.FacingCell == otherBeltLinkable.Position);
-        }
-        public override bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
-            if (this.ToUnderground) {
-                if (!otherBeltLinkable.CanSendToLevel(ConveyorLevel.Ground)) return false;
-            } else { // exit to surface:
-                if (!otherBeltLinkable.CanSendToLevel(ConveyorLevel.Underground)) return false;
-            }
-            if (!checkPosition) return true;
-            // Connectors can only link from something directly behind them:
-            return (this.Position + this.Rotation.Opposite.FacingCell == otherBeltLinkable.Position);
         }
 
         new public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
