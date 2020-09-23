@@ -13,19 +13,14 @@ using static ProjectRimFactory.AutoMachineTool.Ops;
 using ProjectRimFactory;
 using ProjectRimFactory.Common;
 
-namespace ProjectRimFactory.AutoMachineTool
-{
-    class Building_BeltConveyorUGConnector : Building_BeltConveyor, IBeltConveyorLinkable
-    {
-        public override void DrawGUIOverlay()
-        {
+namespace ProjectRimFactory.AutoMachineTool {
+    class Building_BeltConveyorUGConnector : Building_BeltConveyor, IBeltConveyorLinkable {
+        public override void DrawGUIOverlay() {
             base.DrawGUIOverlay();
 
-            if (this.State != WorkingState.Ready && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
-            {
+            if (this.State != WorkingState.Ready && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest) {
                 var p = CarryPosition();
-                if (!this.ToUnderground || this.WorkLeft > 0.7f)
-                {
+                if (!this.ToUnderground || this.WorkLeft > 0.7f) {
                     Vector2 result = Find.Camera.WorldToScreenPoint(p + new Vector3(0, 0, -0.4f)) / Prefs.UIScale;
                     result.y = (float)UI.screenHeight - result.y;
                     GenMapUI.DrawThingLabel(result, this.CarryingThing().stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
@@ -33,45 +28,18 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-        public override void Draw()
-        {
+        public override void Draw() {
             base.Draw();
-
-            if (this.State != WorkingState.Ready)
-            {
+            //TODO: is 0.7 correct?
+            if (this.State != WorkingState.Ready) {
                 var p = CarryPosition();
-                if (!this.ToUnderground || this.WorkLeft > 0.7f)
-                {
+                if (!this.ToUnderground || this.WorkLeft > 0.7f) {
                     this.CarryingThing().DrawAt(p);
                 }
             }
         }
 
-        /*private Vector3 CarryPosition()
-        {
-            var workLeft = this.stuck ? Mathf.Clamp(Mathf.Abs(this.WorkLeft), 0f, 0.8f) : Mathf.Clamp01(this.WorkLeft);
-            return (this.Rotation.FacingCell.ToVector3() * (1f - workLeft)) + this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f);
-        }*/
-
-        /*public bool XXXReceiveThing(bool underground, Thing t)
-        {
-            if (!this.ReceivableNow(underground, t))
-                return false;
-            if (this.State == WorkingState.Ready)
-            {
-                if (t.Spawned) t.DeSpawn();
-                this.ForceStartWork(t, 1f);
-                return true;
-            }
-            else
-            {
-                var target = this.State == WorkingState.Working ? this.Working : this.products[0];
-                return target.TryAbsorbStack(t, true);
-            }
-        }*/
-
-        public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null)
-        {
+        public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
             Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked to accept " + newThing);
             if (giver is AutoMachineTool.IBeltConveyorLinkable conveyor) {
                 if (this.ToUnderground) {
@@ -81,9 +49,9 @@ namespace ProjectRimFactory.AutoMachineTool
                     }
                 } else // this: underground -> surface
                     if (!conveyor.CanSendToLevel(ConveyorLevel.Underground)) {
-                        Debug.Message(Debug.Flag.Conveyors, " but this starts underground");
+                        Debug.Message(Debug.Flag.Conveyors, " but this starts un\tderground");
                         return false;
-                    }
+                }
             }
             if (this.State == WorkingState.Ready) {
                 Debug.Message(Debug.Flag.Conveyors, "  taking it.");
@@ -98,31 +66,21 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-
-
-        protected override bool PlaceProduct(ref List<Thing> products)
-        {
+        protected override bool PlaceProduct(ref List<Thing> products) {
             // These can only place things in one direction.
             var thing = products[0];
             var next = this.OutputConveyor();
-            if (next != null)
-            {
+            if (next != null) {
                 // コンベアある場合、そっちに流す.
                 // If there is a conveyor, let it flow to it
-                // TODO: If coming from UG to G level, 
-                //    Will be unspawned
-                if (next.AcceptsThing(thing, this))
-                {
+                if (next.AcceptsThing(thing, this)) {
                     this.stuck = false;
                     return true;
                 }
-            }
-            else
-            {
-                if (!this.ToUnderground && this.PRFTryPlaceThing(thing, 
+            } else {
+                if (!this.ToUnderground && this.PRFTryPlaceThing(thing,
                     this.Position + this.Rotation.FacingCell,
-                    this.Map)) 
-                {
+                    this.Map)) {
                     this.stuck = false;
                     return true;
                 }
@@ -132,64 +90,20 @@ namespace ProjectRimFactory.AutoMachineTool
             return false;
         }
 
-/*        public IEnumerable<Rot4> OutputRots
-        {
-            get
-            {
-                yield return this.Rotation;
-            }
-        }*/
-
-/*        private IEnumerable<IBeltConveyorLinkable> LinkTargetConveyor()
-        {
-            return new List<Rot4> { this.Rotation, this.Rotation.Opposite }
-                .Select(r => this.Position + r.FacingCell)
-                .SelectMany(t => t.GetThingList(this.Map))
-                .Where(t => t.def.category == ThingCategory.Building)
-                .Where(t => Building_BeltConveyor.CanLink(this, t, this.def, t.def))
-                .Select(t => (t as IBeltConveyorLinkable));
-        }*/
-
         // TODO: Faster to directly access, or to cache
-        private IBeltConveyorLinkable OutputConveyor()
-        {
+        private IBeltConveyorLinkable OutputConveyor() {
             return (this.Position + Rotation.FacingCell).GetThingList(this.Map)
-                .Where(t => t is IBeltConveyorLinkable)
-                .Select(t => t as IBeltConveyorLinkable)
+                .OfType<IBeltConveyorLinkable>()
                 .Where(b => this.CanLinkTo(b))
-                .Where(b => b.CanLinkFrom(this))
-                .FirstOrDefault();
+                .FirstOrDefault(b => b.CanLinkFrom(this));
         }
 
-/*        public bool ReceivableNow(bool underground, Thing thing)
-        {
-            if (!this.IsActive())// TODO: XXX || this.ToUnderground == underground)
-            {
-                return false;
-            }
-            Func<Thing, bool> check = (t) => t.CanStackWith(thing) && t.stackCount < t.def.stackLimit;
-            switch (this.State)
-            {
-                case WorkingState.Ready:
-                    return true;
-                case WorkingState.Working:
-                    // return check(this.working);
-                    return false;
-                case WorkingState.Placing:
-                    return check(this.products[0]);
-                default:
-                    return false;
-            }
-        }*/
-
-        protected override bool WorkInterruption(Thing working)
-        {
+        protected override bool WorkInterruption(Thing working) {
             return false;
         }
 
         //TODO: Decide if we allow this.
-        protected override bool TryStartWorking(out Thing target, out float workAmount)
-        {
+        protected override bool TryStartWorking(out Thing target, out float workAmount) {
             if (this.ToUnderground) return base.TryStartWorking(out target, out workAmount);
             target = null;
             workAmount = 1f;
@@ -198,23 +112,21 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public bool ToUnderground { get => this.Extension.toUnderground; }
 
-        public override bool CanSendToLevel(ConveyorLevel level)
-        {
+        public override bool CanSendToLevel(ConveyorLevel level) {
             if (this.ToUnderground) {
                 if (level == ConveyorLevel.Underground) return true;
             } else // this is exit to surface:
                 if (level == ConveyorLevel.Ground) return true;
             return false;
         }
-        public override bool CanReceiveFromLevel(ConveyorLevel level)
-        {
+        public override bool CanReceiveFromLevel(ConveyorLevel level) {
             if (this.ToUnderground) {
                 if (level == ConveyorLevel.Ground) return true;
             } else // this is exit to surface:
                 if (level == ConveyorLevel.Underground) return true;
             return false;
         }
-        public override bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
+        public override bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition = true) {
             if (this.ToUnderground) {
                 if (!otherBeltLinkable.CanReceiveFromLevel(ConveyorLevel.Underground)) return false;
             } else { // exit to surface:
@@ -230,7 +142,7 @@ namespace ProjectRimFactory.AutoMachineTool
             // Not going to error check here: if there's a config error, there will be prominent
             //   red error messages in the log.
             if (queryLevel == ConveyorLevel.Underground) {
-                if (def.GetModExtension<ModExtension_Conveyor>()?.toUnderground!=true)
+                if (def.GetModExtension<ModExtension_Conveyor>()?.toUnderground != true)
                     return false;
             } else { // Ground
                 if (def.GetModExtension<ModExtension_Conveyor>()?.toUnderground == true)
