@@ -55,6 +55,7 @@
     <placeWorkers>
         <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
     </placeWorkers>
+    <drawGUIOverlay>true</drawGUIOverlay>
   </ThingDef>
   
   <ThingDef Name="PRF_CultivatorBase" ParentName="PRF_CultivatorBaseBase" Abstract="True">
