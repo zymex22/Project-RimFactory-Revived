@@ -438,7 +438,25 @@ namespace ProjectRimFactory.Drones
 
 
             }
-            
+            if (Prefs.DevMode)
+            {
+                yield return new Command_Action()
+                {
+                    defaultLabel = "DEV: Respawn drones",
+                    defaultDesc = "Respawns all Drones",
+                    action = () =>
+                    {
+                       for (int i = spawnedDrones.Count - 1; i >= 0; i--)
+                        {
+                            spawnedDrones[i].Destroy();
+                            Notify_DroneGained();
+                        }
+
+                    },
+                };
+            }
+
+
         }
     }
 }
