@@ -293,6 +293,14 @@ namespace ProjectRimFactory.Drones
                     drone.jobs.StartJob(job);
                 }
             }
+            //To enhance performence we could add "this.IsHashIntervalTick(60)"
+            if (spawnedDrones.Count > 0 && GetComp<CompPowerTrader>()?.PowerOn == false)
+            {
+                for (int i = spawnedDrones.Count - 1; i >= 0; i--)
+                {
+                    spawnedDrones[i].jobs.StartJob(new Job(PRFDefOf.PRFDrone_ReturnToStation, this), JobCondition.InterruptForced);
+                }
+            }
             //TODO Check if we should increase the IsHashIntervalTick to enhace performence (will reduce responsivness)
             if (this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>().powerOutputInt != LastPowerOutput)
             {
