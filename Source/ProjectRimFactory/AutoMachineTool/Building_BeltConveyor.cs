@@ -55,6 +55,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         [Unsaved]
         protected bool stuck = false;
+        // how far towards the next belt to stop:
+        protected readonly float stuckDrawPercent = 0.3f;
 
 
 
@@ -202,7 +204,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 GenMapUI.DrawThingLabel(result, this.CarryingThing().stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
             }
         }
-
         public override void Draw()
         {
             //TODO: what does this do?
@@ -220,9 +221,20 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         protected Vector3 CarryPosition() {
+            if (stuck) {
+                return (this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f) +
+                  this.OutputDirection.FacingCell.ToVector3()
+                    * (stuckDrawPercent+Mathf.Clamp01(WorkLeft)));
+            } else {
+                return (this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f) +
+                  this.OutputDirection.FacingCell.ToVector3()
+                    * (1f - Mathf.Clamp01(WorkLeft)));
+            }
+/*            //            var workLeft = this.stuck ? Mathf.Clamp(Mathf.Abs(this.WorkLeft), 0f, 0.5f) : Mathf.Clamp01(this.WorkLeft);
             var workLeft = this.stuck ? Mathf.Clamp(Mathf.Abs(this.WorkLeft), 0f, 0.5f) : Mathf.Clamp01(this.WorkLeft);
-            Debug.Message(Debug.Flag.Graphics, "" + this + " carrying with this much work left: " + workLeft);//TODO
+            Debug.Message(Debug.Flag.Graphics, "" + this + " carrying with this much work left: " + workLeft+" Stuck? "+stuck);//TODO
             return (this.OutputDirection.FacingCell.ToVector3() * (1f - workLeft)) + this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f);
+            */
         }
         /******** AutoMachineTool logic *********/
         protected override void Reset() {
@@ -249,7 +261,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
-            Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked if it can accept " + newThing);
+            Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked if it will accept " + newThing);
             if (!this.IsActive()) return false;
             // verify proper levels:
             if (giver is AutoMachineTool.IBeltConveyorLinkable) {
@@ -270,6 +282,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 Debug.Message(Debug.Flag.Conveyors, "  And accepted " + newThing
                     + (newThing.Spawned ? "" : " (not spanwed)"));
                 newThing.Position = this.Position;
+                stuck = false;
                 this.ForceStartWork(newThing, 1f);
                 return true;
             }
@@ -283,9 +296,11 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         public bool CanAcceptNow(Thing thing) {
+            Debug.Message(Debug.Flag.Conveyors, "  " + this + " was asked if it can accept " + thing);
             if (!this.IsActive()) return false;
             switch (this.State) {
                 case WorkingState.Ready:
+                    Debug.Message(Debug.Flag.Conveyors, "    Ready state: yes");
                     return true;
                 case WorkingState.Working:
                     return ThisCanAcceptThat(this.Working, thing);
@@ -301,12 +316,21 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool PlaceProduct(ref List<Thing> products)
         {
             var thing = products[0];
-            Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this + " is about to try placing " + thing);
+            Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this + 
+                (stuck?" is stuck with ":" is about to try placing ") + thing);
             // Has something else taken the Thing away from us? (b/c they are spawned? or something else?)            
             if (this.WorkInterruption(thing))
             {
                 Debug.Message(Debug.Flag.Conveyors, "  but something has already moved the item.");
                 return true;
+            }
+            if (stuck) {
+                if (this.CanOutput(thing)) {
+                    ChangeStuckStatus(thing);
+                    return false; // still not ready for new action
+                }
+//                Debug.Message(Debug.Flag.Conveyors, "  and is still stuck.");
+                return false;
             }
             // Try to send to another conveyor first:
             // コンベアある場合、そっちに流す.
@@ -321,7 +345,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     return true;
                 }
                 Debug.Message(Debug.Flag.Conveyors, " but next belt cannot take it now; stuck.");
-                return false; // Don't try anything else if other belt is busy
+                // Don't try anything else if other belt is busy
             }
             else // if no conveyor, place if can
             {
@@ -337,9 +361,9 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             // 配置失敗.
             // Placement failure
-            Debug.Message(Debug.Flag.Conveyors, "  but could not place it. Stuck.");
-            this.stuck = true;
-            return false;
+            Debug.Message(Debug.Flag.Conveyors, "    Could not place it. Stuck.");
+            ChangeStuckStatus(thing);
+            return false; // not ready for next work
         }
 
         public virtual void Link(IBeltConveyorLinkable link)
@@ -423,6 +447,49 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             products = new List<Thing>().Append(working);
             return true;
+        }
+
+        protected override void CheckWork() {
+            if (stuck) {
+                if (CanOutput(working)) {
+                    // start going forward again:
+                    ChangeStuckStatus(working);
+                }
+            } else {
+                // if work done is below stuckDrawPercent, let it continue forward
+                if (WorkLeft < 1-this.stuckDrawPercent) {
+                    if (!CanOutput(working)) {
+                        ChangeStuckStatus(working);
+                        return;
+                    }
+                }
+            }
+            base.CheckWork();
+        }
+        protected virtual bool CanOutput(Thing t) {
+            foreach (var item in OutputCell().GetThingList(Map)) {
+                if (item is IBeltConveyorLinkable belt) {
+                    if (belt.CanAcceptNow(t)) return true;
+                }
+            }
+            return !this.IsUnderground && PlaceThingUtility.CallNoStorageBlockersIn(OutputCell(), Map, t);
+        }
+
+        protected void ChangeStuckStatus(Thing t) {
+            bool willBeStuck = !stuck;
+            while (products.Remove(t)) { }
+            working = null;
+            if (willBeStuck) {
+                Debug.Message(Debug.Flag.Conveyors, this + " is now stuck with " + t);
+                this.ForceStartWork(t, 1 - stuckDrawPercent
+                        - Mathf.Clamp01(WorkLeft));
+                stuck = true;
+            } else {
+                Debug.Message(Debug.Flag.Conveyors, this + " is no longer stuck with " + t);
+                this.ForceStartWork(t, 1 - stuckDrawPercent
+                          - Mathf.Clamp(WorkLeft, 0, 1 - stuckDrawPercent));
+                stuck = false;
+            }
         }
 
         protected override bool WorkingIsDespawned()
