@@ -100,12 +100,12 @@ namespace ProjectRimFactory.Drones
             {
                 if (selectedArea != null)
                 {
-                    base.ProcessInput(ev);
+                    //base.ProcessInput(ev);
                 }
                 AreaUtility.MakeAllowedAreaListFloatMenu(delegate (Area a)
                 {
                     selectedArea = a;
-                    base.ProcessInput(ev);
+                   // base.ProcessInput(ev);
 
                     /*
                     selectedArea == null --> Unrestricted
