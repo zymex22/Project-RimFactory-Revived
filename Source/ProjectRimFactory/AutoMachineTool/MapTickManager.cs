@@ -16,7 +16,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public MapTickManager(Map map) : base(map)
         {
-            this.thingsList = new ThingLister(map);
+//            this.thingsList = new ThingLister(map);
         }
 
         public override void MapComponentTick()
@@ -98,14 +98,11 @@ namespace ProjectRimFactory.AutoMachineTool
             base.MapComponentUpdate();
 
             // ここでいいのか・・・？
-            Option(Find.MainTabsRoot.OpenTab)
-                .Select(r => r.TabWindow)
-                .SelectMany(w => Option(w as MainTabWindow_Architect))
-                .SelectMany(a => Option(a.selectedDesPanel))
-                .Where(p => p.def.defName == "Industrial")
-                .ForEach(p => OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame());
-
-            if (Find.Selector.FirstSelectedObject as IBeltConveyorLinkable != null)
+            if ((Find.MainTabsRoot.OpenTab?.TabWindow as MainTabWindow_Architect)
+                ?.selectedDesPanel?.def.defName == "Industrial") {
+                OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
+            }
+            if (Find.Selector.FirstSelectedObject is IBeltConveyorLinkable)
             {
                 OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
             }
@@ -155,9 +152,9 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.tickActionsDict.GetOption(Find.TickManager.TicksGame).Select(l => l.Contains(act)).GetOrDefault(false);
         }
 
-        private ThingLister thingsList;
+  //      private ThingLister thingsList;
 
-        public ThingLister ThingsList => thingsList;
+//        public ThingLister ThingsList => thingsList;
 
 #if DEBUG
         public override void MapComponentOnGUI()
