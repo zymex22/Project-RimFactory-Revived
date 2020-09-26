@@ -71,6 +71,9 @@
   <PRFDroneStationLiftLockdownAll>Lifts all Lockdowns</PRFDroneStationLiftLockdownAll>
   <PRFDroneStationLfttLockdownAllDesc>Lift the Lockdown for all drone stations on the map.</PRFDroneStationLfttLockdownAllDesc>
   
+  <ITab_DroneStation_labelKey>Tab</ITab_DroneStation_labelKey>
+  <ITab_DroneStation_InfoLabel>Disable/Enable Jobs for this Drone Station</ITab_DroneStation_InfoLabel>
+  
   <PRFOutputItems>output item</PRFOutputItems>
   <PRFPawnAccessLabel>pawn access</PRFPawnAccessLabel>
   <PRFPawnAccessDesc>pawn access</PRFPawnAccessDesc>

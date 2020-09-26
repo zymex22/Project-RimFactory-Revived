@@ -38,9 +38,7 @@ namespace ProjectRimFactory.Drones
         public ITab_DroneStation()
         {
             this.size = WinSize;
-            this.labelKey = "My Name";
-           // local_WorkSelectionList = droneInterface.WorkSelectionList; 
-
+            this.labelKey = "ITab_DroneStation_labelKey".Translate(); //Some issues with that....
         }
 
 
@@ -49,7 +47,7 @@ namespace ProjectRimFactory.Drones
             base.TabUpdate();
 
             float additionalHeight = checkboxhight * droneInterface.WorkBaseList.Count;
-            this.size = new Vector2(WinSize.x,  additionalHeight);
+            this.size = new Vector2(WinSize.x, Mathf.Max(  additionalHeight,140f));
             this.UpdateSize();
         }
 
@@ -82,6 +80,9 @@ namespace ProjectRimFactory.Drones
                     droneInterface.WorkBaseListEnable.Add(true);
                 }
             }
+            rect = list.GetRect(30f);
+
+            Widgets.Label(rect, "ITab_DroneStation_InfoLabel".Translate()); ;
 
             foreach (WorkTypeDef def in droneInterface.WorkBaseList)
             {
