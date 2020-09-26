@@ -25,6 +25,7 @@
     <rotatable>false</rotatable>
     <pathCost>70</pathCost>
     <fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones> 
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
