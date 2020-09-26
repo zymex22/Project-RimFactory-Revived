@@ -281,11 +281,15 @@ namespace ProjectRimFactory.Drones
             LastPowerOutput = GetComp<CompPowerTrader>().powerOutputInt;
             cashed_GetCoverageCells = StationRangecells.ToList();
 
-
-            foreach (WorkTypeDef def in extension.workTypes)
+            if (extension.workTypes.Count != LocalWorkBaseListEnable.Count)
             {
-                LocalWorkBaseListEnable.Add(true);
+                LocalWorkBaseListEnable.Clear();
+                for (int i = 0;i < extension.workTypes.Count;i++)
+                {
+                    LocalWorkBaseListEnable.Add(true);
+                }
             }
+            
 
         }
         public override void Draw()
@@ -408,6 +412,13 @@ namespace ProjectRimFactory.Drones
             Scribe_Collections.Look(ref spawnedDrones, "spawnedDrones", LookMode.Reference);
             Scribe_Values.Look(ref lockdown, "lockdown");
             Scribe_References.Look(ref droneAllowedArea, "droneAllowedArea");
+            Scribe_Collections.Look(ref LocalWorkBaseListEnable, "LocalWorkBaseListEnable");
+            if (LocalWorkBaseListEnable == null) //Need for Compatibility with older saves
+            {
+                LocalWorkBaseListEnable = new List<bool>();
+            }
+
+
         }
 
 

@@ -21,33 +21,44 @@ namespace ProjectRimFactory.Drones
 
     }
 
+    
+
 
     class ITab_DroneStation : ITab
     {
+        //This will need a lot of fine tuning...
+        private static readonly float checkboxhight = 60;
 
         //We need a check for each item of that list
         private IDroneSeetingsITab droneInterface => (this.SelThing as IDroneSeetingsITab);
 
 
-        private static readonly Vector2 WinSize = new Vector2(600f, 130f);
+        private static readonly Vector2 WinSize = new Vector2(400f, 130f);
 
         public ITab_DroneStation()
         {
             this.size = WinSize;
             this.labelKey = "My Name";
-           // local_WorkSelectionList = droneInterface.WorkSelectionList;
-           
-            
-            
+           // local_WorkSelectionList = droneInterface.WorkSelectionList; 
 
+        }
+
+
+        public override void TabUpdate()
+        {
+            base.TabUpdate();
+
+            float additionalHeight = checkboxhight * droneInterface.WorkBaseList.Count;
+            this.size = new Vector2(WinSize.x,  additionalHeight);
+            this.UpdateSize();
         }
 
 
         //  private bool status = false;
 
-      //  private Dictionary<WorkTypeDef, bool> local_WorkSelectionList;
+        //  private Dictionary<WorkTypeDef, bool> local_WorkSelectionList;
 
-     // private bool test = false;
+        // private bool test = false;
 
         protected override void FillTab()
         {
