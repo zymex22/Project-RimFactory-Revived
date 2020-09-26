@@ -18,6 +18,13 @@ namespace ProjectRimFactory.Drones
                 return extension.workTypes;
             }
         }
+        public virtual List<WorkTypeDef> WorkTypes_list
+        {
+            get
+            {
+                return extension.workTypes;
+            }
+        }
 
         public override Job TryGiveJob()
         {
@@ -35,6 +42,20 @@ namespace ProjectRimFactory.Drones
                 {
                     pawn.workSettings.SetPriority(def, 3);
                 }
+
+                for (int i = 0; i < extension.workTypes.Count; i++)
+                {
+                    if (LocalWorkBaseListEnable[i])
+                    {
+                        pawn.workSettings.SetPriority(extension.workTypes[i], 3);
+                    }
+                    else
+                    {
+                        pawn.workSettings.SetPriority(extension.workTypes[i], 0);
+                    }
+
+                }
+
                 result = TryIssueJobPackageDrone(pawn, true).Job;
                 if (result == null)
                 {

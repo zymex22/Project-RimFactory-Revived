@@ -130,7 +130,7 @@ namespace ProjectRimFactory.Drones
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder
+    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab
     {
         //Sleep Time List (Loaded on Spawn)
         public string[] cachedSleepTimeList;
@@ -214,6 +214,47 @@ namespace ProjectRimFactory.Drones
 
         public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
 
+        public List<WorkTypeDef> WorkBaseList => extension.workTypes;
+
+        public List<bool> LocalWorkBaseListEnable = new List<bool>();
+
+        public List<bool> WorkBaseListEnable {
+            get
+            {
+
+                return LocalWorkBaseListEnable;
+            }
+            set
+            {
+                LocalWorkBaseListEnable = value;
+            }
+        }
+
+        public void UpdateDronePrioritys() 
+        {
+
+            if (spawnedDrones.Count > 0)
+            {
+                foreach (Pawn pawn in spawnedDrones)
+                {
+
+                    for (int i = 0;i< extension.workTypes.Count; i++)
+                    {
+                        if (LocalWorkBaseListEnable[i])
+                        {
+                            pawn.workSettings.SetPriority(extension.workTypes[i], 3);
+                        }
+                        else
+                        {
+                            pawn.workSettings.SetPriority(extension.workTypes[i], 0);
+                        }
+
+                    }
+                }
+
+            }
+        }
+
         private float LastPowerOutput = 0;
 
         // Used for destroyed pawns
@@ -239,6 +280,13 @@ namespace ProjectRimFactory.Drones
             cachedSleepTimeList = extension.Sleeptimes.Split(',');
             LastPowerOutput = GetComp<CompPowerTrader>().powerOutputInt;
             cashed_GetCoverageCells = StationRangecells.ToList();
+
+
+            foreach (WorkTypeDef def in extension.workTypes)
+            {
+                LocalWorkBaseListEnable.Add(true);
+            }
+
         }
         public override void Draw()
         {

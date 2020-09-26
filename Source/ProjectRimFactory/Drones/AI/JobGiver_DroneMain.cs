@@ -30,8 +30,22 @@ namespace ProjectRimFactory.Drones.AI
                         {
                             pawn.workSettings.SetPriority(def, 3);
                         }
-                        // So the station finds the best job for the pawn
-                        result = b.TryIssueJobPackageDrone(drone, true).Job;
+                        for (int i = 0; i < b.WorkTypes_list.Count; i++)
+                            {
+                                if (b.LocalWorkBaseListEnable[i])
+                                {
+                                    pawn.workSettings.SetPriority(b.WorkTypes_list[i], 3);
+                                }
+                                else
+                                {
+                                    pawn.workSettings.SetPriority(b.WorkTypes_list[i], 0);
+                                }
+
+                            }
+
+
+                            // So the station finds the best job for the pawn
+                            result = b.TryIssueJobPackageDrone(drone, true).Job;
                         if (result == null)
                         {
                             result = b.TryIssueJobPackageDrone(drone, false).Job;
