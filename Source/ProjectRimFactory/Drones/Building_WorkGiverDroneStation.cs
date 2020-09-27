@@ -18,11 +18,11 @@ namespace ProjectRimFactory.Drones
                 return extension.workTypes;
             }
         }
-        public virtual List<WorkTypeDef> WorkTypes_list
+        public virtual Dictionary<WorkTypeDef,bool> LocalWorkSettings_dict
         {
             get
             {
-                return extension.workTypes;
+                return LocalWorkSettings;
             }
         }
 
@@ -43,17 +43,17 @@ namespace ProjectRimFactory.Drones
                     pawn.workSettings.SetPriority(def, 3);
                 }
 
-                for (int i = 0; i < extension.workTypes.Count; i++)
+
+                foreach (WorkTypeDef def in LocalWorkSettings.Keys)
                 {
-                    if (LocalWorkBaseListEnable[i])
+                    if (LocalWorkSettings[def])
                     {
-                        pawn.workSettings.SetPriority(extension.workTypes[i], 3);
+                        pawn.workSettings.SetPriority(def, 3);
                     }
                     else
                     {
-                        pawn.workSettings.SetPriority(extension.workTypes[i], 0);
+                        pawn.workSettings.SetPriority(def, 0);
                     }
-
                 }
 
                 result = TryIssueJobPackageDrone(pawn, true).Job;

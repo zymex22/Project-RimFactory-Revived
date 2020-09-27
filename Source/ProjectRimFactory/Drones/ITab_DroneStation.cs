@@ -14,10 +14,7 @@ namespace ProjectRimFactory.Drones
 
     interface IDroneSeetingsITab
     {
-        //This List contains are Work Types for That station
-        List<WorkTypeDef> WorkBaseList { get;}
-        //Contains the respective allowed setting for WorkBaseList
-        List<bool> WorkBaseListEnable { get; set; }
+        Dictionary<WorkTypeDef, bool> WorkSettings { get; set; }
 
     }
 
@@ -41,7 +38,7 @@ namespace ProjectRimFactory.Drones
         {
             base.TabUpdate();
             //Calculate New hight based on Content
-            float additionalHeight = (checkboxheight * droneInterface.WorkBaseList.Count) + labelheight;
+            float additionalHeight = (checkboxheight * droneInterface.WorkSettings.Count) + labelheight;
             this.size = new Vector2(WinSize.x,  additionalHeight);
             this.UpdateSize();
         }
@@ -56,23 +53,14 @@ namespace ProjectRimFactory.Drones
             list.Gap();
             var rect = new Rect();
 
-            //TODO Check if i can remove that
-            if (droneInterface.WorkBaseListEnable.Count == 0)
-            {
-                for (int i = 0; i< droneInterface.WorkBaseList.Count; i++)
-                {
-                    droneInterface.WorkBaseListEnable.Add(true);
-                }
-            }
+
             rect = list.GetRect(30f);
             //Add Lable Explayning the pannel
             Widgets.Label(rect, "ITab_DroneStation_InfoLabel".Translate());
 
-            //add a Checkbox for each WorkTypeDef of the Station
-            foreach (WorkTypeDef def in droneInterface.WorkBaseList)
+            foreach (WorkTypeDef def in droneInterface.WorkSettings.Keys.ToList())
             {
-                int defindex = droneInterface.WorkBaseList.IndexOf(def);
-                droneInterface.WorkBaseListEnable[defindex] = CheckboxHelper(rect, list, droneInterface.WorkBaseListEnable[defindex], def.labelShort);
+                droneInterface.WorkSettings[def] = CheckboxHelper(rect, list, droneInterface.WorkSettings[def], def.labelShort);
             }
             list.End();
         }

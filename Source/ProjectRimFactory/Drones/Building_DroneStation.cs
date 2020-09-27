@@ -214,19 +214,16 @@ namespace ProjectRimFactory.Drones
 
         public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
 
-        public List<WorkTypeDef> WorkBaseList => extension.workTypes;
+        public Dictionary<WorkTypeDef, bool> LocalWorkSettings = new Dictionary<WorkTypeDef, bool>();
 
-        public List<bool> LocalWorkBaseListEnable = new List<bool>();
-
-        public List<bool> WorkBaseListEnable {
+        public Dictionary<WorkTypeDef, bool> WorkSettings {
             get
             {
-
-                return LocalWorkBaseListEnable;
+                return LocalWorkSettings;
             }
             set
             {
-                LocalWorkBaseListEnable = value;
+                LocalWorkSettings = value;
             }
         }
 
@@ -237,18 +234,16 @@ namespace ProjectRimFactory.Drones
             {
                 foreach (Pawn pawn in spawnedDrones)
                 {
-
-                    for (int i = 0;i< extension.workTypes.Count; i++)
+                    foreach (WorkTypeDef def in LocalWorkSettings.Keys)
                     {
-                        if (LocalWorkBaseListEnable[i])
+                        if (LocalWorkSettings[def])
                         {
-                            pawn.workSettings.SetPriority(extension.workTypes[i], 3);
+                            pawn.workSettings.SetPriority(def, 3);
                         }
                         else
                         {
-                            pawn.workSettings.SetPriority(extension.workTypes[i], 0);
+                            pawn.workSettings.SetPriority(def, 0);
                         }
-
                     }
                 }
 
@@ -281,15 +276,18 @@ namespace ProjectRimFactory.Drones
             LastPowerOutput = GetComp<CompPowerTrader>().powerOutputInt;
             cashed_GetCoverageCells = StationRangecells.ToList();
 
-            if (extension.workTypes.Count != LocalWorkBaseListEnable.Count)
+            //Check for missing WorkTypeDef
+            foreach (WorkTypeDef def in extension.workTypes.Except(LocalWorkSettings.Keys).ToList())
             {
-                LocalWorkBaseListEnable.Clear();
-                for (int i = 0;i < extension.workTypes.Count;i++)
-                {
-                    LocalWorkBaseListEnable.Add(true);
-                }
+                LocalWorkSettings.Add(def, true);
             }
-            
+            //Remove stuff thats nolonger valid (can only happen after updates)
+            foreach (WorkTypeDef def in LocalWorkSettings.Keys.Except(extension.workTypes).ToList())
+            {
+                LocalWorkSettings.Remove(def);
+            }
+
+
 
         }
         public override void Draw()
@@ -412,10 +410,11 @@ namespace ProjectRimFactory.Drones
             Scribe_Collections.Look(ref spawnedDrones, "spawnedDrones", LookMode.Reference);
             Scribe_Values.Look(ref lockdown, "lockdown");
             Scribe_References.Look(ref droneAllowedArea, "droneAllowedArea");
-            Scribe_Collections.Look(ref LocalWorkBaseListEnable, "LocalWorkBaseListEnable");
-            if (LocalWorkBaseListEnable == null) //Need for Compatibility with older saves
+            //LocalWorkSettings
+            Scribe_Collections.Look(ref LocalWorkSettings, "LocalWorkSettings");
+            if (LocalWorkSettings == null) //Need for Compatibility with older saves
             {
-                LocalWorkBaseListEnable = new List<bool>();
+                LocalWorkSettings = new Dictionary<WorkTypeDef, bool>();
             }
 
 
