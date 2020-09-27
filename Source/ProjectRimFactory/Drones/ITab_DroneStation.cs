@@ -36,7 +36,7 @@ namespace ProjectRimFactory.Drones
         public ITab_DroneStation()
         {
             this.size = WinSize;
-            this.labelKey = "ITab_DroneStation_labelKey".Translate(); //Some issues with that....
+            this.labelKey = "ITab_DroneStation_labelKey"; //Some issues with that....
         }
 
         public override void TabUpdate()
@@ -61,7 +61,7 @@ namespace ProjectRimFactory.Drones
 
             rect = list.GetRect(30f);
             //Add Lable Explayning the pannel
-            Widgets.Label(rect, "ITab_DroneStation_InfoLabel".Translate());
+            Widgets.Label(rect, "ITab_DroneStation_InfoLabel".Translate()) ;
             rect = list.GetRect(30f);
             Widgets.DrawLineHorizontal(rect.x, rect.y, itabwidth);
 
@@ -84,8 +84,11 @@ namespace ProjectRimFactory.Drones
                     }
                 }
                 rect2.y += 5;
+                
                 medSkill = medSkill / def.relevantSkills.Count;
-                Widgets.Label(rect2, "AverageSkillLevel = " + medSkill);
+                string labeltext = "ITab_DroneStation_averageskill".Translate();
+                rect2.x = itabwidth - (10 * labeltext.Length);
+                Widgets.Label(rect2, labeltext + medSkill);
             }
             
             
@@ -99,7 +102,7 @@ namespace ProjectRimFactory.Drones
             bool lstatus = variable;
             Widgets.CheckboxLabeled(rect, def.labelShort, ref lstatus);
             Rect rect2 = rect;
-            rect2.x = itabwidth - 200;
+            
             AddskillLabel(def, rect2);
             return lstatus;
         }
