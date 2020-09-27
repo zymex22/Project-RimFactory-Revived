@@ -14,26 +14,22 @@ namespace ProjectRimFactory.Drones
 
     interface IDroneSeetingsITab
     {
-        
+        //This List contains are Work Types for That station
         List<WorkTypeDef> WorkBaseList { get;}
-
+        //Contains the respective allowed setting for WorkBaseList
         List<bool> WorkBaseListEnable { get; set; }
 
     }
 
-    
-
-
     class ITab_DroneStation : ITab
     {
         //This will need a lot of fine tuning...
-        private static readonly float checkboxhight = 60;
+        private static readonly float checkboxhight = 30; //30 seems great
+        private static readonly float labelhight = 70; //70 seems good maybe a bit smaller would be perfect
 
-        //We need a check for each item of that list
         private IDroneSeetingsITab droneInterface => (this.SelThing as IDroneSeetingsITab);
 
-
-        private static readonly Vector2 WinSize = new Vector2(400f, 130f);
+        private static readonly Vector2 WinSize = new Vector2(400f, checkboxhight + labelhight);
 
         public ITab_DroneStation()
         {
@@ -41,22 +37,14 @@ namespace ProjectRimFactory.Drones
             this.labelKey = "ITab_DroneStation_labelKey".Translate(); //Some issues with that....
         }
 
-
         public override void TabUpdate()
         {
             base.TabUpdate();
-
-            float additionalHeight = checkboxhight * droneInterface.WorkBaseList.Count;
-            this.size = new Vector2(WinSize.x, Mathf.Max(  additionalHeight,140f));
+            //Calculate New hight based on Content
+            float additionalHeight = (checkboxhight * droneInterface.WorkBaseList.Count) + labelhight;
+            this.size = new Vector2(WinSize.x,  additionalHeight);
             this.UpdateSize();
         }
-
-
-        //  private bool status = false;
-
-        //  private Dictionary<WorkTypeDef, bool> local_WorkSelectionList;
-
-        // private bool test = false;
 
         protected override void FillTab()
         {
@@ -68,11 +56,7 @@ namespace ProjectRimFactory.Drones
             list.Gap();
             var rect = new Rect();
 
-            //--------------------------------------
-
-
-            //--------------
-
+            //TODO Check if i can remove that
             if (droneInterface.WorkBaseListEnable.Count == 0)
             {
                 for (int i = 0; i< droneInterface.WorkBaseList.Count; i++)
@@ -81,9 +65,10 @@ namespace ProjectRimFactory.Drones
                 }
             }
             rect = list.GetRect(30f);
+            //Add Lable Explayning the pannel
+            Widgets.Label(rect, "ITab_DroneStation_InfoLabel".Translate());
 
-            Widgets.Label(rect, "ITab_DroneStation_InfoLabel".Translate()); ;
-
+            //add a Checkbox for each WorkTypeDef of the Station
             foreach (WorkTypeDef def in droneInterface.WorkBaseList)
             {
                 int defindex = droneInterface.WorkBaseList.IndexOf(def);
@@ -92,11 +77,12 @@ namespace ProjectRimFactory.Drones
             list.End();
         }
 
+        //Small helper function to create each Checkbox as i cant pass variable directly
         private bool CheckboxHelper(Rect rect, Listing_Standard list, bool variable,string text)
         {
-            rect = list.GetRect(30f); //That seems to affect the text possition
+           rect = list.GetRect(30f); //That seems to affect the text possition
            bool lstatus = variable;
-            Widgets.CheckboxLabeled(rect, text, ref lstatus);
+           Widgets.CheckboxLabeled(rect, text, ref lstatus);
            return lstatus;
         }
 
