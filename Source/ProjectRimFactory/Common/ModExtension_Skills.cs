@@ -66,5 +66,10 @@ namespace ProjectRimFactory.Common
 		</skills>
         */
 
+		public int GetSkillLevel(SkillRecord record)
+        {
+			return skills.FirstOrDefault(x => x.def == record.def)?.levelInt ?? BaseSkill;
+		}
+
 	}
 }

@@ -20,8 +20,9 @@ namespace ProjectRimFactory.Drones
         }
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
+            refuelableComp = GetComp<CompRefuelable>(); //this needs to be called before base.SpawnSetup for the init implementation of droneSkillsRecord in Building_DroneStation
             base.SpawnSetup(map, respawningAfterLoad);
-            refuelableComp = GetComp<CompRefuelable>();
+            
         }
         public override int DronesLeft
         {

@@ -135,6 +135,33 @@ namespace ProjectRimFactory.Drones
         //Sleep Time List (Loaded on Spawn)
         public string[] cachedSleepTimeList;
 
+        private const int defaultSkillLevel = 20;
+
+        public int GetdefaultSkillLevel
+        {
+            get
+            {
+                return defaultSkillLevel;
+            }
+        }
+
+        
+
+        private List<SkillRecord> droneSkillsRecord = new List<SkillRecord>();
+
+        public List<SkillRecord> getdroneSkillsRecord
+        {
+            get
+            {
+                return droneSkillsRecord;
+            }
+            set
+            {
+                droneSkillsRecord = value;
+            }
+        }
+
+
         //Return the Range depending on the Active Defenition
         public int DroneRange
         {
@@ -227,6 +254,8 @@ namespace ProjectRimFactory.Drones
             }
         }
 
+        public List<SkillRecord> DroneSeetings_skillDefs => droneSkillsRecord;
+
         public void UpdateDronePrioritys() 
         {
 
@@ -286,6 +315,14 @@ namespace ProjectRimFactory.Drones
             {
                 LocalWorkSettings.Remove(def);
             }
+            //need to take action to init droneSkillsRecord
+            if (droneSkillsRecord.Count == 0 && DronesLeft == 0)
+            {
+                Pawn_Drone drone = MakeDrone();
+                GenSpawn.Spawn(drone, Position, Map);
+                drone.Destroy();
+            }
+
 
 
 
