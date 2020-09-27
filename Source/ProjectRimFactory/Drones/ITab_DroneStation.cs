@@ -24,12 +24,12 @@ namespace ProjectRimFactory.Drones
     class ITab_DroneStation : ITab
     {
         //This will need a lot of fine tuning...
-        private static readonly float checkboxhight = 30; //30 seems great
-        private static readonly float labelhight = 70; //70 seems good maybe a bit smaller would be perfect
+        private static readonly float checkboxheight = 30; //30 seems great
+        private static readonly float labelheight = 70; //70 seems good maybe a bit smaller would be perfect
 
         private IDroneSeetingsITab droneInterface => (this.SelThing as IDroneSeetingsITab);
 
-        private static readonly Vector2 WinSize = new Vector2(400f, checkboxhight + labelhight);
+        private static readonly Vector2 WinSize = new Vector2(400f, checkboxheight + labelheight);
 
         public ITab_DroneStation()
         {
@@ -41,7 +41,7 @@ namespace ProjectRimFactory.Drones
         {
             base.TabUpdate();
             //Calculate New hight based on Content
-            float additionalHeight = (checkboxhight * droneInterface.WorkBaseList.Count) + labelhight;
+            float additionalHeight = (checkboxheight * droneInterface.WorkBaseList.Count) + labelheight;
             this.size = new Vector2(WinSize.x,  additionalHeight);
             this.UpdateSize();
         }
