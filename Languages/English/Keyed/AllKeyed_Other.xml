@@ -73,7 +73,8 @@
   
   <ITab_DroneStation_labelKey>Setting</ITab_DroneStation_labelKey>
   <ITab_DroneStation_InfoLabel>Disable/Enable Jobs for this Drone Station</ITab_DroneStation_InfoLabel>
-  <ITab_DroneStation_averageskill>AverageSkillLevel = </ITab_DroneStation_averageskill>
+  <ITab_DroneStation_HeaderLabel>Drone Settings</ITab_DroneStation_HeaderLabel>
+  <ITab_DroneStation_averageskill>Avg. relevant skills: </ITab_DroneStation_averageskill>
   
   <PRFOutputItems>output item</PRFOutputItems>
   <PRFPawnAccessLabel>pawn access</PRFPawnAccessLabel>

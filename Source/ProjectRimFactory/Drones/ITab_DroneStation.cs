@@ -57,9 +57,14 @@ namespace ProjectRimFactory.Drones
 
             list.Gap();
             var rect = new Rect();
-
+            
 
             rect = list.GetRect(30f);
+
+            Rect rect3 = rect;
+            rect3.y -= 17;
+            Widgets.Label(rect3, "ITab_DroneStation_HeaderLabel".Translate());
+
             //Add Lable Explayning the pannel
             Widgets.Label(rect, "ITab_DroneStation_InfoLabel".Translate()) ;
             rect = list.GetRect(30f);
@@ -74,6 +79,8 @@ namespace ProjectRimFactory.Drones
 
         private void AddskillLabel(WorkTypeDef def , Rect rect2)
         {
+            string labeltext = "ITab_DroneStation_averageskill".Translate();
+            rect2.x = itabwidth - (10 * labeltext.Length);
             if (def.relevantSkills.Count > 0)
             {
                 int medSkill = 0;
@@ -86,12 +93,13 @@ namespace ProjectRimFactory.Drones
                 rect2.y += 5;
                 
                 medSkill = medSkill / def.relevantSkills.Count;
-                string labeltext = "ITab_DroneStation_averageskill".Translate();
-                rect2.x = itabwidth - (10 * labeltext.Length);
+                
                 Widgets.Label(rect2, labeltext + medSkill);
+                return;
             }
-            
-            
+            Widgets.Label(rect2, "-");
+
+
         }
 
 
