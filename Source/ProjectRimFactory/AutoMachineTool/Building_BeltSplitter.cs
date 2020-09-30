@@ -59,33 +59,20 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.ExposeData();
             Scribe_Values.Look(ref this.dest, "dest");
-//            Scribe_Values.Look(ref this.previousDir, "PRF_prevDest");
             Scribe_Collections.Look(ref this.outputLinks, "outputLinks", LookMode.Value, LookMode.Deep);
-/*            Scribe_Collections.Look(ref this.filters, "filters", LookMode.Value, LookMode.Deep);
-            if (this.filters == null)
-            {
-                this.filters = new Dictionary<Rot4, ThingFilter>();
-            }
-            Scribe_Collections.Look(ref this.priorities, "priorities", LookMode.Value, LookMode.Value);
-            if (this.priorities == null)
-            {
-                this.priorities = new Rot4[] { Rot4.North, Rot4.East, Rot4.South, Rot4.West }.ToDictionary(d => d, _ => DirectionPriority.Normal);
-            }
-            */
         }
 
-        public override void PostMapInit()
+        /*public override void PostMapInit()
         {
+            // maybe this should do the Link() stuff SpawnSetup does?
             base.PostMapInit();
-            
-//            this.FilterSetting();
-        }
+        }*/
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.showProgressBar = false;
-            //outputLinks.Clear();
+            //outputLinks.Clear(); // TODO <) ??
             incomingLinks.Clear();
 
             var links = AllNearbyLinks().ToList();
@@ -93,12 +80,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 c.Link(this);
                 this.Link(c);
             }
-/*            if (!respawningAfterLoad)
-            {
-                //TODO: ???
-                if (links.Count==0)
-                    this.FilterSetting();
-            }*/
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
@@ -112,40 +93,14 @@ namespace ProjectRimFactory.AutoMachineTool
             incomingLinks.Clear();
         }
 
-        //TODO:<)
-        public override void DrawGUIOverlay()
-        {
-            base.DrawGUIOverlay();
-
-            if (this.IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
-            {
-                // 地下コンベアの場合には表示しない.
-                return;
-            }
-
-            if (this.State != WorkingState.Ready && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
-            {
-                var p = CarryPosition();
-                Vector2 result = Find.Camera.WorldToScreenPoint(p + new Vector3(0, 0, -0.4f)) / Prefs.UIScale;
-                result.y = (float)UI.screenHeight - result.y;
-                GenMapUI.DrawThingLabel(result, this.CarryingThing().stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
-            }
-        }
-
-        //TODO:<)
-        public override void Draw()
-        {
-            if (this.IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
-            {
-                // 地下コンベアの場合には表示しない.
-                return;
-            }
-            base.Draw();
-            if (this.State != WorkingState.Ready)
-            {
-                var p = CarryPosition();
-                this.CarryingThing().DrawAt(p);
-            }
+        /// <summary>
+        /// If the graphic changes - for example, the number of arrows for output
+        ///    we probably need to refresh the graphic.  So, call this from Link,
+        ///    Unlink, and anything that changes whether links are active.
+        /// </summary>
+        protected void UpdateGraphic() {
+            if (Spawned) this.Map.mapDrawer.MapMeshDirty(this.Position,
+                MapMeshFlag.Buildings | MapMeshFlag.Things);
         }
 
         // What does this even mean?
@@ -154,7 +109,6 @@ namespace ProjectRimFactory.AutoMachineTool
             return base.CanStackWith(other) && this.State == WorkingState.Ready;
         }
 
-        //TODO: test this:
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
             var origState = this.State;
             if (base.AcceptsThing(newThing, giver) && origState == WorkingState.Ready) {
@@ -180,13 +134,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 newDir = dir;
                 return true;
             }
-            //??
-/*            if (outputLinks.ContainsKey(this.dest)) {
-                newDir = dest;
-                return true;
-            }
-            */
-//            newDir = this.Rotation;//TODO:
             newDir = this.Rotation;  // slightly better than Rot4.Random, I suppose :p
             return false; // oh well. Fail.
         }
@@ -222,61 +169,16 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (priority == prevPriority) yield return previousDir;
             }
         }
-
-/*        private Rot4 Destination(Thing t, bool doRotate)
-        {
-            var conveyors = this.OutputBeltConveyor();
-            var allowed = this.filters
-                .Where(f => f.Value.Allows(t.def)).Select(f => f.Key)
-                .ToList();
-            List<IBeltConveyorLinkable> placeable = allowed.Where(r => this.outgoingLinks.Where(l => l.Position == this.Position + r.FacingCell).FirstOption().Select(b => b.ReceivableNow(this.IsUnderground, t) || !b.IsStuck).GetOrDefault(true))
-                .ToList();
-
-            if (placeable.Count == 0)
-            {
-                if(allowed.Count == 0)
-                {
-                    placeable = this.OutputRots.Where(r =>
-                        conveyors
-                            .Where(l => l.Position == this.Position + r.FacingCell)
-                            .FirstOption()
-//                            .Select(b => b.ReceivableNow(this.IsUnderground, t) || !b.IsStuck)
-                            .GetOrDefault(true))
-                        .ToList();
-                }
-                else
-                {
-                    placeable = allowed;
+        protected override IBeltConveyorLinkable OutputBeltAt(IntVec3 location) {
+            foreach (var kvp in this.outputLinks) {
+                if (kvp.Key.FacingCell + this.Position == location) {
+                    if (!kvp.Value.Active) return null;
+                    return kvp.Value.link;
                 }
             }
-
-            var maxPri = placeable.Select(r => this.priorities[r]).Max();
-            var dests = placeable.Where(r => this.priorities[r] == maxPri).ToList();
-
-            if (dests.Count <= this.round) this.round = 0;
-            var index = this.round;
-            if (doRotate) this.round++;
-            return dests.ElementAt(index);
+            return null;
         }
-*/
-/*        private bool SendableConveyor(Thing t, out Rot4 dir)
-        {
-            dir = default(Rot4);
-            var result = this.filters
-                .Where(f => f.Value.Allows(t.def))
-                .Select(f => f.Key)
-                .SelectMany(r => this.OutputBeltConveyor()
-                                 .Where(l => l.Position == this.Position + r.FacingCell)
-                                 .Select(b => new { Dir = r, Conveyor = b }))
-                .Where(b => b.Conveyor.ReceivableNow(this.IsUnderground, t))
-                .FirstOption();
-            if (result.HasValue)
-            {
-                dir = result.Value.Dir;
-            }
-            return result.HasValue;
-        }
-        */
+
         protected override bool PlaceProduct(ref List<Thing> products)
         {
             var thing = products[0];
@@ -317,6 +219,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             if (this.CanLinkTo(link) && link.CanLinkFrom(this)) {
                 if (PositionToRot4(link, out Rot4 r)) {
+                    UpdateGraphic();
                     if (outputLinks.ContainsKey(r)) {
                         outputLinks[r].link = link;
                     } else {
@@ -350,26 +253,6 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-/*        private void FilterSetting()
-        {
-            Func<ThingFilter> createNew = () =>
-            {
-                var f = new ThingFilter();
-                f.SetAllowAll(null);
-                return f;
-            };
-            var output = this.OutputBeltConveyor();
-            this.filters = Enumerable.Range(0, 3).Select(x => new Rot4(x))
-                .Select(x => new { Rot = x, Pos = this.Position + x.FacingCell })
-                .Where(x => output.Any(l => l.Position == x.Pos) || this.Rotation == x.Rot)
-                .ToDictionary(r => r.Rot, r => this.filters.ContainsKey(r.Rot) ? this.filters[r.Rot] : createNew());
-            if(this.filters.Count <= 1)
-            {
-                this.filters.ForEach(x => x.Value.SetAllowAll(null));
-            }
-            this.outputRot = this.filters.Select(x => x.Key).ToList();
-        }*/
-
         protected IEnumerable<IBeltConveyorLinkable> AllNearbyLinks() {
             return AllNearbyLinkables()
                 .Where(b => (this.CanLinkTo(b) && b.CanLinkFrom(this))
@@ -379,57 +262,10 @@ namespace ProjectRimFactory.AutoMachineTool
         protected IBeltConveyorLinkable BeltLinkableAt(IntVec3 location)
         {
             return location.GetThingList(this.Map)
-                .Where(t => t is IBeltConveyorLinkable)
-                .Select(t => t as IBeltConveyorLinkable)
-                .Where(b=>this.CanLinkTo(b))
-                .Where(b=>b.CanLinkFrom(this))
-                .FirstOrDefault();
+                .OfType<IBeltConveyorLinkable>()
+                .Where(b => this.CanLinkTo(b))
+                .FirstOrDefault(b => b.CanLinkFrom(this));
         }
-
-/*        private IEnumerable<IBeltConveyorLinkable> LinkTargetConveyor()
-        {
-            return Enumerable.Range(0, 3).Select(i => this.Position + new Rot4(i).FacingCell)
-                .SelectMany(c => c.GetThingList(this.Map))
-                .Where(t => t.def.category == ThingCategory.Building)
-                .Where(t => CanLink(this, t, this.def, t.def))
-                .Select(t => (t as IBeltConveyorLinkable));
-        }
-
-        private IEnumerable<IBeltConveyorLinkable> OutputBeltConveyor()
-        {
-            var links = this.LinkTargetConveyor();
-            return links.Where(x =>
-                    (x.Rotation.Opposite.FacingCell + x.Position == this.Position && x.Position != this.Position + this.Rotation.Opposite.FacingCell) ||
-                    (x.Rotation.Opposite.FacingCell + x.Position == this.Position && links.Any(l => l.Position + l.Rotation.FacingCell == this.Position))
-                );
-        }*/
-
-            /*Superceded by Acceptable(Thing) and CanLinkTo/From
-        public bool Acceptable(Rot4 rot, bool underground)
-        {
-            return rot != this.Rotation && this.IsUnderground == underground;
-        }
-
-        public bool ReceivableNow(bool underground, Thing thing)
-        {
-            if(!this.IsActive())//TODO: || this.IsUnderground != underground)
-            {
-                return false;
-            }
-            // TODO: C#-ify this?
-            Func<Thing, bool> check = (t) => t.CanStackWith(thing) && t.stackCount < t.def.stackLimit;
-            switch (this.State) {
-                case WorkingState.Ready:
-                    return true;
-                case WorkingState.Working:
-                    return check(this.Working);
-                case WorkingState.Placing:
-                    return check(this.products[0]);
-                default:
-                    return false;
-            }
-        }
-        */
 
         //TODO: <)?
         private void NotifyAroundSender()
@@ -445,6 +281,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool WorkInterruption(Thing working)
         {
             return false; // TODO: this would assume the working thing is spawned?
+            // todo: should this happen if something takes the belt's item?
             //return this.IsUnderground ? false : !working.Spawned || working.Position != this.Position;
         }
 
@@ -455,7 +292,8 @@ namespace ProjectRimFactory.AutoMachineTool
             target = null;
             workAmount = 0f;
             return false;
-/*            workAmount = 1f;
+            #if false
+            workAmount = 1f;
             if (this.IsUnderground)
             {
                 target = null;
@@ -470,15 +308,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (target.Spawned && this.IsUnderground) target.DeSpawn();
                 target.Position = this.Position;
             }
-            return target != null;*/
+            return target != null;
+            #endif
         }
-
-        /*protected override bool FinishWorking(Thing working, out List<Thing> products)
-        {
-            products = new List<Thing>().Append(working);
-            return true;
-        }*/
-
 
         public override bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             // First test: level (e.g., Ground vs Underground):
@@ -529,7 +361,7 @@ namespace ProjectRimFactory.AutoMachineTool
             // Not going to error check here: if there's a config error, there will be prominent
             //   red error messages in the log.
             if (queryLevel == ConveyorLevel.Underground) {
-                if (def.GetModExtension<ModExtension_Conveyor>().underground != true)
+                if (def.GetModExtension<ModExtension_Conveyor>()?.underground != true)
                     return false;
             } else { // Ground
                 if (def.GetModExtension<ModExtension_Conveyor>()?.underground == true)
@@ -552,7 +384,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 return (defRotation != queryRotation.Opposite);
             return false;
         }
-
+        /// <summary> /////////////////////////////////////////////////////////////////
+        /// A class to handle each output link, with filters, knowing belts, etc.
+        /// </summary>
         public class OutputLink : IExposable {
             public OutputLink(Building_BeltSplitter parent, IBeltConveyorLinkable link) 
                   : this(parent,link.Position) { 
