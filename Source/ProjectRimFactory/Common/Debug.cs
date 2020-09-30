@@ -30,6 +30,7 @@ namespace ProjectRimFactory {
             PlaceThing=0x1,
             Conveyors=0x2,
             Graphics=0x4,
+            Benchmark=0x8, // performance measurement
             // NextFlag=0x4,
             // 0x8
             // 0x10
