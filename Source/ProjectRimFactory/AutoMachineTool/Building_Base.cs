@@ -84,7 +84,12 @@ namespace ProjectRimFactory.AutoMachineTool
             this.MapManager.RemoveAfterAction(this.StartWork);
             this.MapManager.RemoveAfterAction(this.FinishWork);
         }
-
+        /// <summary>
+        /// Whether all items in "working" are spawned - 
+        ///   this affects saving, as unspawned items must be saved
+        ///   differently.  Note that this cannot apply to single
+        ///   items; it's all or nothing.
+        /// </summary>
         protected virtual bool WorkingIsDespawned()
         {
             return false;
@@ -126,7 +131,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.SpawnSetup(map, respawningAfterLoad);
             this.mapManager = map.GetComponent<MapTickManager>();
 
-            if (readyOnStart)
+            if (readyOnStart) // No check for respawning after load?
             {
                 this.State = WorkingState.Ready;
                 this.Reset();
