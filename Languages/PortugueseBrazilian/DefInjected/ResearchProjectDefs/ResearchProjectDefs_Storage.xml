@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <PRFCrates.label>Caixas de armazenamento</PRFCrates.label>
+  <PRFCrates.description>Permite que os colonos construam grandes caixas para armazenamento mais compacto.</PRFCrates.description>
+  
+  <PRFStorage.label>Caixas de armazém II</PRFStorage.label>
+  <PRFStorage.description>Permite que os colonos construam caixas de armazenamento fortificadas.</PRFStorage.description>
+
+  <PRFStorageIO.label>Transferência sem fio de itens</PRFStorageIO.label>
+  <PRFStorageIO.description>Permite que os colonos construam plataformas de carga e portas de E/S. As portas de E/S podem transferir objetos remotamente de e para plataformas de carga.</PRFStorageIO.description>
+  
+</LanguageData>
