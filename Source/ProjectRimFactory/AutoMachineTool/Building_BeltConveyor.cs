@@ -57,9 +57,11 @@ namespace ProjectRimFactory.AutoMachineTool
         protected bool stuck = false;
         // how far towards the next belt to stop:
         protected readonly float stuckDrawPercent = 0.3f;
-
-
-
+        // A few display constants:
+        // scale to draw items while on belts:
+        protected const float carriedItemScale = 0.75f;
+        // additional height over the belt's True Center to draw:
+        protected const float carriedItemDrawHeight = 0.15f;
 
         // Generally useful methods:
         protected ModExtension_Conveyor Extension => this.def.GetModExtension<ModExtension_Conveyor>();
@@ -218,47 +220,36 @@ namespace ProjectRimFactory.AutoMachineTool
                 DrawCarried();
             }
         }
+        /// <summary>
+        /// Draw the carried item (there should be one). This allows
+        ///   derived classes to decide when/how to draw their items.
+        /// </summary>
         public virtual void DrawCarried() {
             Thing t = CarryingThing();
+            // Took this line from MinifiedThing; don't know if it's needed:
             var g = t.Graphic.ExtractInnerGraphicFor(t);
+            // Graphic's GetCopy() fails on any Graphic_RandomRotated
+            //   There is no easy way to get around this, but this seems
+            //   to work the best so far:
             if (g is Graphic_RandomRotated grr) {
                 var d = t.def.graphicData;
-                g = GraphicDatabase.Get(d.graphicClass, d.texPath, g.Shader, new Vector2(0.5f, 0.5f), g.color, g.colorTwo);
+                g = GraphicDatabase.Get(d.graphicClass, d.texPath, g.Shader,
+                          new Vector2(carriedItemScale, carriedItemScale), g.color, g.colorTwo);
             } else {
-                g = g.GetCopy(new Vector2(.5f, .5f));
+                g = g.GetCopy(new Vector2(carriedItemScale, carriedItemScale));
             }
-            /*            if (Rotation == Rot4.South)
-                            g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
-                        else
-                        */
-            //g.GetCopy(new Vector2(.5f, .5f))
             g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
-
-
-            //            this.CarryingThing().Graphic.GetCopy(new Vector2(2f, 2f)).Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
-            //            this.CarryingThing().DrawAt(this.CarryPosition());
         }
-        private static float carryHeightGain = Altitudes.AltitudeFor(AltitudeLayer.Building) + 0.2f;//3 * Altitudes.AltInc+0.1f;
         protected Vector3 CarryPosition() {
             if (stuck) {
-                return (this.TrueCenter() + new Vector3(0, 0.15f, 0) +
-                //this.Position.ToVector3() + new Vector3(0.5f, carryHeightGain, 0.5f) +
+                return (this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0) +
                   this.OutputDirection.FacingCell.ToVector3()
                     * (stuckDrawPercent + Mathf.Clamp01(WorkLeft)));
             } else {
-//                for (int i = 0; i < 10389; i++)
-//                    Log.Message("" + this + " position: " + Position.ToVector3() + "; TrueCenter: " + this.TrueCenter() +
-//                        "; carry altitude: " + (Position.ToVector3().y + carryHeightGain));
-                return (this.TrueCenter() + new Vector3(0, 0.15f, 0) +
-                  //this.Position.ToVector3() + new Vector3(0.5f, carryHeightGain, 0.5f) +
+                return (this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0) +
                   this.OutputDirection.FacingCell.ToVector3()
                     * (1f - Mathf.Clamp01(WorkLeft)));
             }
-/*            //            var workLeft = this.stuck ? Mathf.Clamp(Mathf.Abs(this.WorkLeft), 0f, 0.5f) : Mathf.Clamp01(this.WorkLeft);
-            var workLeft = this.stuck ? Mathf.Clamp(Mathf.Abs(this.WorkLeft), 0f, 0.5f) : Mathf.Clamp01(this.WorkLeft);
-            Debug.Message(Debug.Flag.Graphics, "" + this + " carrying with this much work left: " + workLeft+" Stuck? "+stuck);//TODO
-            return (this.OutputDirection.FacingCell.ToVector3() * (1f - workLeft)) + this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f);
-            */
         }
         /******** AutoMachineTool logic *********/
         protected override void Reset() {

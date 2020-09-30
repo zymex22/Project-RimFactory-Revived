@@ -29,6 +29,12 @@ namespace ProjectRimFactory.AutoMachineTool {
             if (!c.InBounds(parent.Map)) {
                 return false;
             }
+            //TODO: Still need a good set of logic for this
+            //  For example, if pointing down, and linked
+            //    from the left, should curve.  But does not.
+            // but at the same time, it would be nice to have 
+            //   end conveyors actually end?
+
             /*
             // hardcoded for conveyors; no other conveyor buildings 
             //   will get this special logic.
@@ -135,16 +141,6 @@ namespace ProjectRimFactory.AutoMachineTool {
                 //   rotated to match
                 extraRotation = thing.Rotation.AsAngle;
             }
-
-            /*            if (thing is Blueprint) {
-                            Log.Message("Printing blueprint with rotation " + thing.Rotation.ToStringHuman()
-                            + " -> " + thing.Rotation.AsAngle);
-                            base.Print(layer, thing);
-                    Printer_Plane.PrintPlane(layer,
-                        thing.TrueCenter() + new Vector3(0, 0.1f, 0), 
-                                this.drawSize, arrow00, thing.Rotation.AsAngle);
-
-            */
             if (thing is Blueprint) {
                 mat = FadedMaterialPool.FadedVersionOf(mat, 0.5f);
             }
@@ -155,21 +151,6 @@ namespace ProjectRimFactory.AutoMachineTool {
             Printer_Plane.PrintPlane(layer, thing.TrueCenter()
                 + new Vector3(0, 0.1f, 0), this.drawSize, arrow00,
                 thing.Rotation.AsAngle);
-            // print tiny brown arrows pointing in output directions:
-            //   Helpful for splitters:
-            if (conveyor != null) {
-                foreach (var d in conveyor.ActiveOutputDirections
-                         .Where(d => d != thing.Rotation)) {
-                    Log.Message("Printing arrow for " + thing + " in direction " + d);
-                    Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
-                             this.drawSize, arrow01, d.AsAngle);
-                }
-            }
-                /*
-                conveyor.ActiveOutputDirections.Where(d => d != thing.Rotation)
-                    .ForEach(d => Printer_Plane.PrintPlane(layer, thing.TrueCenter(),
-                             this.drawSize, arrow01, d.AsAngle));
-                             */
         }
         static Graphic_LinkedConveyor() {
             canSendTos[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefSendToRot4AtLevel;
