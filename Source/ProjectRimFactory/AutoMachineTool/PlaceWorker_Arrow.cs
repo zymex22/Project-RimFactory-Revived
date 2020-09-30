@@ -17,7 +17,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.DrawGhost(def, center, rot, ghostCol, thing);
             var pos = center.ToVector3Shifted();
-            pos.y = AltitudeLayer.BuildingOnTop.AltitudeFor();
+            pos.y = AltitudeLayer.LightingOverlay.AltitudeFor();
             Graphics.DrawMesh(MeshPool.plane10, pos, rot.AsQuat, MaterialPool.MatFrom(RS.Arrow), 0);
         }
     }
