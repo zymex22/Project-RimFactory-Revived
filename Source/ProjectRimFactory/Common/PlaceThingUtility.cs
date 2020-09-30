@@ -60,7 +60,8 @@ namespace ProjectRimFactory {
                 if (otherThing is IPRF_Building) {
                     if (placer.PlaceThingNextBuilding((otherThing as IPRF_Building),
                         t, cell, map)) {
-                        Debug.Message(Debug.Flag.PlaceThing, "  taked by " + otherThing);
+                        Debug.Message(Debug.Flag.PlaceThing, placer +
+                          " gave " + t + " to " + otherThing);
                         placer.EffectOnPlaceThing(t);
                         return true;
                     }
