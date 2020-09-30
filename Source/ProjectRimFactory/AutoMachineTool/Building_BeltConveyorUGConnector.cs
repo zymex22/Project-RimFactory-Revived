@@ -27,20 +27,17 @@ namespace ProjectRimFactory.AutoMachineTool {
                 }
             }
         }
-
-        public override void Draw() {
-            base.Draw();
-            //TODO: is 0.7 correct?
-            if (this.State != WorkingState.Ready) {
-                var p = CarryPosition();
-                if (!this.ToUnderground || this.WorkLeft > 0.7f) {
-                    this.CarryingThing().DrawAt(p);
-                }
-            }
+        public override void DrawCarried() {
+            if (!ToUnderground ||
+                (IsStuck && WorkLeft < 0.05f) ||
+                (!IsStuck && WorkLeft > 0.85f)) {
+                this.CarryingThing().DrawAt(CarryPosition());
+            }            
         }
 
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
             Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked to accept " + newThing);
+            if (!IsActive()) return false;
             if (giver is AutoMachineTool.IBeltConveyorLinkable conveyor) {
                 if (this.ToUnderground) {
                     if (!conveyor.CanSendToLevel(ConveyorLevel.Ground)) {

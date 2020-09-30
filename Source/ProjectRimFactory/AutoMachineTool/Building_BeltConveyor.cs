@@ -97,7 +97,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public virtual bool CanReceiveFromLevel(ConveyorLevel level) => CanSendToLevel(level);
 
-        /********** Interactions ********/
+        /********** Pawn Interactions ********/
         public bool HideRightClickMenus => !this.IsUnderground && this.State != WorkingState.Ready;
         public bool ForbidPawnOutput => !this.IsUnderground && this.State != WorkingState.Ready;
         public override IEnumerable<Gizmo> GetGizmos() {
@@ -206,7 +206,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public override void Draw()
         {
-            //TODO: what does this do?
+            // Don't draw underground things by default:
             if (this.IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
             {
                 // 地下コンベアの場合には表示しない.
@@ -215,18 +215,42 @@ namespace ProjectRimFactory.AutoMachineTool
             base.Draw();
             if (this.State != WorkingState.Ready)
             {
-                var p = CarryPosition();
-                this.CarryingThing().DrawAt(p);
+                DrawCarried();
             }
         }
+        public virtual void DrawCarried() {
+            Thing t = CarryingThing();
+            var g = t.Graphic.ExtractInnerGraphicFor(t);
+            if (g is Graphic_RandomRotated grr) {
+                var d = t.def.graphicData;
+                g = GraphicDatabase.Get(d.graphicClass, d.texPath, g.Shader, new Vector2(0.5f, 0.5f), g.color, g.colorTwo);
+            } else {
+                g = g.GetCopy(new Vector2(.5f, .5f));
+            }
+            /*            if (Rotation == Rot4.South)
+                            g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
+                        else
+                        */
+            //g.GetCopy(new Vector2(.5f, .5f))
+            g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
 
+
+            //            this.CarryingThing().Graphic.GetCopy(new Vector2(2f, 2f)).Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
+            //            this.CarryingThing().DrawAt(this.CarryPosition());
+        }
+        private static float carryHeightGain = Altitudes.AltitudeFor(AltitudeLayer.Building) + 0.2f;//3 * Altitudes.AltInc+0.1f;
         protected Vector3 CarryPosition() {
             if (stuck) {
-                return (this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f) +
+                return (this.TrueCenter() + new Vector3(0, 0.15f, 0) +
+                //this.Position.ToVector3() + new Vector3(0.5f, carryHeightGain, 0.5f) +
                   this.OutputDirection.FacingCell.ToVector3()
-                    * (stuckDrawPercent+Mathf.Clamp01(WorkLeft)));
+                    * (stuckDrawPercent + Mathf.Clamp01(WorkLeft)));
             } else {
-                return (this.Position.ToVector3() + new Vector3(0.5f, 10f, 0.5f) +
+//                for (int i = 0; i < 10389; i++)
+//                    Log.Message("" + this + " position: " + Position.ToVector3() + "; TrueCenter: " + this.TrueCenter() +
+//                        "; carry altitude: " + (Position.ToVector3().y + carryHeightGain));
+                return (this.TrueCenter() + new Vector3(0, 0.15f, 0) +
+                  //this.Position.ToVector3() + new Vector3(0.5f, carryHeightGain, 0.5f) +
                   this.OutputDirection.FacingCell.ToVector3()
                     * (1f - Mathf.Clamp01(WorkLeft)));
             }
@@ -297,7 +321,10 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public bool CanAcceptNow(Thing thing) {
             Debug.Message(Debug.Flag.Conveyors, "  " + this + " was asked if it can accept " + thing);
-            if (!this.IsActive()) return false;
+            if (!this.IsActive()) {
+                Debug.Message(Debug.Flag.Conveyors, "      but it's not active and can't");
+                return false;
+            }
             switch (this.State) {
                 case WorkingState.Ready:
                     Debug.Message(Debug.Flag.Conveyors, "    Ready state: yes");
@@ -329,7 +356,6 @@ namespace ProjectRimFactory.AutoMachineTool
                     ChangeStuckStatus(thing);
                     return false; // still not ready for new action
                 }
-//                Debug.Message(Debug.Flag.Conveyors, "  and is still stuck.");
                 return false;
             }
             // Try to send to another conveyor first:
@@ -379,7 +405,7 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         /// <returns>The belt, or null if none found</returns>
         /// <param name="location">Valid IntVec3 this conveyor can send to</param>
-        protected IBeltConveyorLinkable OutputBeltAt(IntVec3 location)
+        protected virtual IBeltConveyorLinkable OutputBeltAt(IntVec3 location)
         {
             return location.GetThingList(this.Map)
                 .OfType<IBeltConveyorLinkable>()
@@ -467,11 +493,13 @@ namespace ProjectRimFactory.AutoMachineTool
             base.CheckWork();
         }
         protected virtual bool CanOutput(Thing t) {
-            foreach (var item in OutputCell().GetThingList(Map)) {
-                if (item is IBeltConveyorLinkable belt) {
-                    if (belt.CanAcceptNow(t)) return true;
-                }
+            var belt = this.OutputBeltAt(this.OutputCell());
+            if (belt != null) {
+                Debug.Message(Debug.Flag.Conveyors,
+                    "  CanOutput: Testing can " + " accept " + t);
+                return belt.CanAcceptNow(t);
             }
+            Debug.Message(Debug.Flag.Conveyors, "    No belts can take " + t);
             return !this.IsUnderground && PlaceThingUtility.CallNoStorageBlockersIn(OutputCell(), Map, t);
         }
 
