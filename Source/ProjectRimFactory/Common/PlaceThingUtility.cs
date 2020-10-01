@@ -29,7 +29,7 @@ namespace ProjectRimFactory {
             // Storage:
             SlotGroup slotGroup = cell.GetSlotGroup(map);
             if (slotGroup != null) {
-                Debug.Warning(Debug.Flag.PlaceThing, "Placing " + t + " in slotGroup: " + slotGroup.parent);
+                Debug.Warning(Debug.Flag.PlaceThing, "Placing " + t + " in slotGroup: " + slotGroup.parent + " at " + cell);
                 if (slotGroup.parent is IPRF_Building) {
                     if (placer.PlaceThingNextBuilding((slotGroup.parent as IPRF_Building),
                         t, cell, map)) {
@@ -45,6 +45,7 @@ namespace ProjectRimFactory {
                 if (forcePlace) goto ForcePlace;
                 return false;
             }
+            Debug.Warning(Debug.Flag.PlaceThing, "Place request: " + placer == null ? "NoPlacer" : placer.ToString() + " is trying to place " + t + " at " + cell);
             // Search through all items in cell: see if any will absorb
             //   our thing.  If we find a PRF_Building, stop looking and
             //   try to pass it on.
