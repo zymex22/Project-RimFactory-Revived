@@ -83,10 +83,36 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.RefreshPowerStatus();
             }
         }
-        /************* Conveyors IBeltConveyor ***********/
+        /**************** IPRF_Building ***************/
+        public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null) {
+            // TODO: underground?  Mod Setting?
+            if (IsUnderground || this.State == WorkingState.Ready) return null;
+            if (working != null && (optionalValidator==null || optionalValidator(working))) {
+                Thing t = working;
+                working = null;
+                this.ForceReady();
+                return t;
+            }
+            // Nobo would have written this in an entirely different - and probably
+            //   more elegant - way, but this works.
+            if (!products.NullOrEmpty()) {
+                // should only be one, but who knows.
+                for (int i = products.Count - 1; i >= 0; i--) {
+                    if (optionalValidator == null || optionalValidator(products[i])) {
+                        Thing t = products[i];
+                        products.Remove(t);
+                        if (working == null)  // We were placing
+                            ForceReady();
+                        return t;
+                    }
+                }
+            }
+            return null;
+        }
         // Conveyors are dumb. They just dump their stuff onto the ground when they end!
         //   TODO: mod setting?
         public override bool ObeysStorageFilters => false;
+        /************* Conveyors IBeltConveyor ***********/
         public bool IsStuck => this.stuck;
         public bool IsUnderground { get => this.Extension?.underground ?? false; }
         public virtual bool CanSendToLevel(ConveyorLevel level)
