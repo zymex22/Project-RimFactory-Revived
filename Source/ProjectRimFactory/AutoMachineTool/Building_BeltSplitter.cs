@@ -18,17 +18,7 @@ namespace ProjectRimFactory.AutoMachineTool
     public class Building_BeltSplitter : Building_BeltConveyor
     {
         private Rot4 dest = Rot4.Random; // start in random direction if more than one available
-//        private Dictionary<Rot4, ThingFilter> filters = new Dictionary<Rot4, ThingFilter>();
-//        private Dictionary<Rot4, DirectionPriority> priorities = new Rot4[] { Rot4.North, Rot4.East, Rot4.South, Rot4.West }.ToDictionary(d => d, _ => DirectionPriority.Normal);
 
-        //TODO: Maybe save this?
-//        [Unsaved]
-//        private int round = 0;
-
-//        [Unsaved]
-//        private List<Rot4> outputRot = new List<Rot4>();
-
-        [Unsaved]
         private Dictionary<Rot4, OutputLink> outputLinks = new Dictionary<Rot4, OutputLink>();
         public Dictionary<Rot4, OutputLink> OutputLinks => outputLinks;
 
@@ -47,8 +37,6 @@ namespace ProjectRimFactory.AutoMachineTool
         // Conveyors are dumb. They just dump their stuff onto the ground when they end!
         //   But splitters are smart, they can figure stuff out:
         public override bool ObeysStorageFilters => true;
-//        public Dictionary<Rot4, ThingFilter> Filters { get => this.filters; }
-//        public Dictionary<Rot4, DirectionPriority> Priorities { get => this.priorities; }
 
         // TODO: revisit:
         //public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
@@ -126,13 +114,14 @@ namespace ProjectRimFactory.AutoMachineTool
             foreach (var dir in NextDirectionByPriority(t)) {
                 var olink = outputLinks.TryGetValue(dir, null);
                 if (olink != null) {
-                    if (!olink.CanAcceptNow(t)) continue;
-                } else { // just a spot on the ground?
+                    if (olink.IsValidOutputLinkFor(t)) {
+                        newDir = dir;
+                        return true;
+                    }
+                }/* else { // just a spot on the ground?
                     if (!PlaceThingUtility.CallNoStorageBlockersIn(this.Position + dir.FacingCell,
                                 this.Map, t)) continue;
-                }
-                newDir = dir;
-                return true;
+                }*/
             }
             newDir = this.Rotation;  // slightly better than Rot4.Random, I suppose :p
             return false; // oh well. Fail.
@@ -178,6 +167,10 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return null;
         }
+        protected override bool CanOutput(Thing t) {
+            if (!outputLinks.ContainsKey(dest)) return false;
+            return outputLinks[dest].IsValidOutputLinkFor(t);
+        }
 
         protected override bool PlaceProduct(ref List<Thing> products)
         {
@@ -215,6 +208,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return false;
         }
 
+        /***************** Outgoing Links ********************/
         public override void Link(IBeltConveyorLinkable link)
         {
             if (this.CanLinkTo(link) && link.CanLinkFrom(this)) {
@@ -242,7 +236,6 @@ namespace ProjectRimFactory.AutoMachineTool
             r = Rot4.Random;
             return false;
         }
-
         public override void Unlink(IBeltConveyorLinkable unlink)
         {
             incomingLinks.Remove(unlink);
@@ -251,7 +244,19 @@ namespace ProjectRimFactory.AutoMachineTool
             foreach (var k in tmpl) {
                 outputLinks.Remove(k);
             }
+            UpdateGraphic();
         }
+        public void AddOutgoingLink(Rot4 dir) {
+            // Assume that if it had a linked belt, the link would have formed via
+            //   the Link() method. So this is activating a link to a direction. I hope.
+            if (outputLinks.ContainsKey(dir)) {
+                outputLinks[dir].Active = true;
+                return;
+            }
+            outputLinks[dir] = new OutputLink(this, Position + dir.FacingCell);
+            UpdateGraphic();
+        }
+
 
         protected IEnumerable<IBeltConveyorLinkable> AllNearbyLinks() {
             return AllNearbyLinkables()
@@ -389,12 +394,13 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         public class OutputLink : IExposable {
             public OutputLink(Building_BeltSplitter parent, IBeltConveyorLinkable link) 
-                  : this(parent,link.Position) { 
+                  : this(parent,link.Position) {
                 this.link = link;
             }
             public OutputLink(Building_BeltSplitter parent, IntVec3 pos) {
                 this.parent = parent;
                 link = null;
+                this.position = pos;
                 // TODO: any way to make filter null unless it's actually needed?
                 //   maybe not?
                 filter = new ThingFilter();
@@ -403,6 +409,7 @@ namespace ProjectRimFactory.AutoMachineTool
             public OutputLink() {
                 // This is used purely so ExposeData can create these things
                 //   when loading a saved game.
+                // Do not actually use this constructor.
             }
             public void ExposeData() {
                 Scribe_Values.Look(ref priority, "PRFB_priority", DirectionPriority.Normal);
@@ -415,12 +422,16 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             public bool Active {
                 get => active;
-                set => active = value;
+                set {
+                    if (active == value) return;
+                    active = value;
+                    parent.UpdateGraphic();
+                }
             }
             public bool Allows(Thing t) {
-                return (filter == null || filter.Allows(t));
+                return Active && (filter == null || filter.Allows(t));
             }
-            public bool CanAcceptNow(Thing t) {
+            public bool IsValidOutputLinkFor(Thing t) {
                 if (!Allows(t)) return false;
                 if (link != null) return link.CanAcceptNow(t);
                 return PlaceThingUtility.CallNoStorageBlockersIn(position, 
@@ -441,7 +452,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     Debug.Message(Debug.Flag.Conveyors, "" + this + ": trying to place directly:");
                     if (!parent.IsUnderground && parent.PRFTryPlaceThing(thing,
                         position, parent.Map)) {
-                        Debug.Message(Debug.Flag.Conveyors, "" + this + "Successfully\t placed!");
+                        Debug.Message(Debug.Flag.Conveyors, "" + this + "Successfully placed!");
                         return true;
                     }
                 }
@@ -462,7 +473,7 @@ namespace ProjectRimFactory.AutoMachineTool
             public DirectionPriority priority=DirectionPriority.Normal;
             private ThingFilter filter = null;
             private bool active = true;
-            private IntVec3 position;
+            private IntVec3 position = IntVec3.Invalid;
             private Building_BeltSplitter parent;
         }
     }
