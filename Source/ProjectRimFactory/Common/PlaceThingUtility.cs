@@ -173,6 +173,9 @@ namespace ProjectRimFactory {
             //   still faster than reflection!
             il.Emit(OpCodes.Ldarg_0); // put IntVec3 cell on the stack
             il.Emit(OpCodes.Ldarg_1); // Map
+            //il.Emit(OpCodes.Ldarg_0); // put IntVec3 cell on the stack//uncomment for debug
+            //il.Emit(OpCodes.Ldarg_1); // Map
+            //il.Emit(OpCodes.Call, typeof(PlaceThingUtility).GetMethod("ForDebug", BindingFlags.Static | BindingFlags.Public));
             il.Emit(OpCodes.Ldarg_2); // Thing
             il.Emit(OpCodes.Call, typeof(RimWorld.StoreUtility).GetMethod("NoStorageBlockersIn",
                 BindingFlags.Static | BindingFlags.NonPublic));
@@ -182,6 +185,8 @@ namespace ProjectRimFactory {
                 typeof(Func<,,,>).MakeGenericType(typeof(IntVec3), typeof(Map), typeof(Thing), typeof(bool)));
             // Mayb there's a way to make that faster? But this works ^.^
         }
+        /*public static void ForDebug(IntVec3 c, Map map) {
+        }*/
         // Call via "    bool result=CallNoStorageBlockersIn(c, map, thing);"
         public static Func<IntVec3, Map, Thing, bool> CallNoStorageBlockersIn;
     }
