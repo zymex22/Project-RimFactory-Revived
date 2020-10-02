@@ -130,7 +130,7 @@ namespace ProjectRimFactory.AutoMachineTool
             if (conveyor.HasValue)
             {
                 this.pickupConveyor = true;
-                return Option(conveyor.Value.Carrying());
+                return Option(conveyor.Value.GetThingBy(null)); // already verified it's what we want
             }
             if (this.takeForbiddenItems)
                 return (this.Position + this.Rotation.Opposite.FacingCell).SlotGroupCells(this.Map)
