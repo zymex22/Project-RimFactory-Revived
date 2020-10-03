@@ -49,6 +49,5 @@ namespace ProjectRimFactory.Common
         public static ThingDef PRFDrone;
         public static ThingDef PRFDroneModule;
 
-        public static FleshTypeDef PRFDroneFlesh;
     }
 }
