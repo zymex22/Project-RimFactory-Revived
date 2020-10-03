@@ -212,7 +212,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected virtual void CreateWorkingEffect()
         {
             this.CleanupWorkingEffect();
-            if (this.working.Spawned && this.showProgressBar)
+            if (this.showProgressBar)
             {
                 Option(ProgressBarTarget()).ForEach(t =>
                 {
@@ -225,7 +225,10 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected virtual TargetInfo ProgressBarTarget()
         {
-            return this.working;
+            if (this.working.Spawned) {
+                return this.working;
+            }
+            return this;
         }
 
         protected virtual void Ready()

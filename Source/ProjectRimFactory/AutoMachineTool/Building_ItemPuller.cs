@@ -70,7 +70,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkingIsDespawned()
         {
-            return false;
+            return true;
         }
 
         public override void ExposeData()
@@ -228,39 +228,27 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Thing working)
         {
-            return this.pickupConveyor ? !this.GetPickableConveyor().HasValue : !working.Spawned || working.Destroyed;
+            return false;
+            //return this.pickupConveyor ? !this.GetPickableConveyor().HasValue : !working.Spawned || working.Destroyed;
         }
 
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
             workAmount = 120;
             target = TargetThing().GetOrDefault(null);
+            if (target?.Spawned == true) target.DeSpawn();
             return target != null;
         }
 
         protected override bool FinishWorking(Thing working, out List<Thing> products)
         {
-            var target = new List<Thing>();
-            if (this.pickupConveyor)
-            {
-                var pickup = GetPickableConveyor().Select(c => c.Pickup());
-                // Not needed (I think, as conveyors should only have forbidden items if allowed:
-                //if (pickup.HasValue && (this.takeForbiddenItems || !pickup.Value.IsForbidden(Faction.OfPlayer)))
-                if (pickup.HasValue)
-                {
-                    target.Append(pickup.Value);
-                }
-                else
-                {
-                    this.ForceReady();
-                }
-            }
-            else
-            {
-                if (this.takeForbiddenItems || !working.IsForbidden(Faction.OfPlayer))
-                    target.Append(working);
-            }
-            products = target;
+            // why do we need to create a *new* list???  Why not just append
+            //   directly to this.products()??  It IS the C# object-oriented
+            //   way (altho, if Nobo comes from a background where variables
+            //   are immutable that might explain the choice?) Nevertheless,
+            //   I will use and return the current instantiation of products
+            this.products.Append(working);
+            products = this.products;
             return true;
         }
         protected override void Placing() {
