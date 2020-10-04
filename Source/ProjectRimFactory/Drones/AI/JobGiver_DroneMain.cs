@@ -30,9 +30,9 @@ namespace ProjectRimFactory.Drones.AI
                         {
                             pawn.workSettings.SetPriority(def, 3);
                         }
-                            foreach (WorkTypeDef def in b.LocalWorkSettings_dict.Keys)
+                            foreach (WorkTypeDef def in b.WorkSettings_dict.Keys)
                             {
-                                if (b.LocalWorkSettings_dict[def])
+                                if (b.WorkSettings_dict[def])
                                 {
                                     pawn.workSettings.SetPriority(def, 3);
                                 }

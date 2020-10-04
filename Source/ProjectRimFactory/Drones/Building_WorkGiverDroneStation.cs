@@ -18,35 +18,31 @@ namespace ProjectRimFactory.Drones
                 return extension.workTypes;
             }
         }
-        public virtual Dictionary<WorkTypeDef,bool> LocalWorkSettings_dict
+        public virtual Dictionary<WorkTypeDef,bool> WorkSettings_dict
         {
             get
             {
-                return LocalWorkSettings;
+                return WorkSettings;
             }
         }
 
+        //TODO Finding a good way to Cache pawn.workSettings may increase performence
         public override Job TryGiveJob()
         {
             Job result = null;
-            GenLocalDate.HourOfDay(this);
-            if (!(cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(this).ToString()))) { 
-                
+            if (!(cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(this).ToString()))) 
+            { 
                 Pawn pawn = MakeDrone();
                 GenSpawn.Spawn(pawn, Position, Map);
+
                 pawn.workSettings = new Pawn_WorkSettings(pawn);
                 pawn.workSettings.EnableAndInitialize();
                 pawn.workSettings.DisableAll();
-            
-                foreach (WorkTypeDef def in WorkTypes)
-                {
-                    pawn.workSettings.SetPriority(def, 3);
-                }
 
-
-                foreach (WorkTypeDef def in LocalWorkSettings.Keys)
+                //Set the workSettings based upon the settings
+                foreach (WorkTypeDef def in WorkSettings.Keys)
                 {
-                    if (LocalWorkSettings[def])
+                    if (WorkSettings[def])
                     {
                         pawn.workSettings.SetPriority(def, 3);
                     }

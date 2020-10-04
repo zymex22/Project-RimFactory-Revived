@@ -12,14 +12,7 @@ namespace ProjectRimFactory.Drones
         public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
         {
             base.DrawGhost(def, center, rot, ghostCol);
-            ////Dont Draw if infinite
-            //if (def.GetModExtension<DroneDefModExtension>().SquareJobRadius > 0)
-            //{
-            //    GenDraw.DrawFieldEdges(GenAdj.OccupiedRect(thing).ExpandedBy(def.GetModExtension<DroneDefModExtension>().SquareJobRadius).Cells.ToList());
-            //}
 
-            //I want to replace that
-            
             if (def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius > 0)
             {
                 int squareAreaRadius = def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius;

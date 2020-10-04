@@ -149,7 +149,7 @@ namespace ProjectRimFactory.Drones
 
         private List<SkillRecord> droneSkillsRecord = new List<SkillRecord>();
 
-        public List<SkillRecord> getdroneSkillsRecord
+        public List<SkillRecord> GetDroneSkillsRecord
         {
             get
             {
@@ -241,16 +241,17 @@ namespace ProjectRimFactory.Drones
 
         public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
 
-        public Dictionary<WorkTypeDef, bool> LocalWorkSettings = new Dictionary<WorkTypeDef, bool>();
+        public Dictionary<WorkTypeDef, bool> WorkSettings = new Dictionary<WorkTypeDef, bool>();
 
-        public Dictionary<WorkTypeDef, bool> WorkSettings {
+        public Dictionary<WorkTypeDef, bool> GetWorkSettings
+        {
             get
             {
-                return LocalWorkSettings;
+                return WorkSettings;
             }
             set
             {
-                LocalWorkSettings = value;
+                WorkSettings = value;
             }
         }
 
@@ -263,9 +264,9 @@ namespace ProjectRimFactory.Drones
             {
                 foreach (Pawn pawn in spawnedDrones)
                 {
-                    foreach (WorkTypeDef def in LocalWorkSettings.Keys)
+                    foreach (WorkTypeDef def in WorkSettings.Keys)
                     {
-                        if (LocalWorkSettings[def])
+                        if (WorkSettings[def])
                         {
                             pawn.workSettings.SetPriority(def, 3);
                         }
@@ -306,14 +307,14 @@ namespace ProjectRimFactory.Drones
             cashed_GetCoverageCells = StationRangecells.ToList();
 
             //Check for missing WorkTypeDef
-            foreach (WorkTypeDef def in extension.workTypes.Except(LocalWorkSettings.Keys).ToList())
+            foreach (WorkTypeDef def in extension.workTypes.Except(WorkSettings.Keys).ToList())
             {
-                LocalWorkSettings.Add(def, true);
+                WorkSettings.Add(def, true);
             }
             //Remove stuff thats nolonger valid (can only happen after updates)
-            foreach (WorkTypeDef def in LocalWorkSettings.Keys.Except(extension.workTypes).ToList())
+            foreach (WorkTypeDef def in WorkSettings.Keys.Except(extension.workTypes).ToList())
             {
-                LocalWorkSettings.Remove(def);
+                WorkSettings.Remove(def);
             }
             //need to take action to init droneSkillsRecord
             if (droneSkillsRecord.Count == 0 && DronesLeft == 0)
@@ -447,11 +448,11 @@ namespace ProjectRimFactory.Drones
             Scribe_Collections.Look(ref spawnedDrones, "spawnedDrones", LookMode.Reference);
             Scribe_Values.Look(ref lockdown, "lockdown");
             Scribe_References.Look(ref droneAllowedArea, "droneAllowedArea");
-            //LocalWorkSettings
-            Scribe_Collections.Look(ref LocalWorkSettings, "LocalWorkSettings");
-            if (LocalWorkSettings == null) //Need for Compatibility with older saves
+            //WorkSettings
+            Scribe_Collections.Look(ref WorkSettings, "WorkSettings");
+            if (WorkSettings == null) //Need for Compatibility with older saves
             {
-                LocalWorkSettings = new Dictionary<WorkTypeDef, bool>();
+                WorkSettings = new Dictionary<WorkTypeDef, bool>();
             }
 
 

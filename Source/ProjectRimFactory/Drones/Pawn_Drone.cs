@@ -40,11 +40,7 @@ namespace ProjectRimFactory.Drones
             skills = new Pawn_SkillTracker(this);
             skillSettings = def.GetModExtension<ModExtension_Skills>();
             UpdateSkills(skills);
-            //foreach (SkillRecord record in skills.skills)
-            //{
-            //    record.levelInt = 20;
-            //    record.passion = Passion.None;
-            //}
+
             story = new Pawn_StoryTracker(this)
             {
                 bodyType = BodyTypeDefOf.Thin,
@@ -56,16 +52,13 @@ namespace ProjectRimFactory.Drones
             relations = new Pawn_RelationsTracker(this);
             Name = new NameSingle("PRFDroneName".Translate());
 
-
             //Set the AreaRestriction. null means Unrestricted
             playerSettings.AreaRestriction = this.station.droneAllowedArea;
-            
-
         }
 
         public void UpdateSkills(Pawn_SkillTracker skill)
         {
-            if (station.getdroneSkillsRecord.Count == 0)
+            if (station.GetDroneSkillsRecord.Count == 0)
             {
                 
                 foreach (SkillRecord record in skill.skills)
@@ -86,11 +79,11 @@ namespace ProjectRimFactory.Drones
                     }
                 }
 
-                station.getdroneSkillsRecord = skill.skills;
+                station.GetDroneSkillsRecord = skill.skills;
             }
             else
             {
-                skill.skills = station.getdroneSkillsRecord;
+                skill.skills = station.GetDroneSkillsRecord;
             }
 
             
@@ -122,7 +115,6 @@ namespace ProjectRimFactory.Drones
         {
             base.ExposeData();
             Scribe_References.Look(ref station, "station");
-          //  Scribe_References.Look(ref station.DroneAllowedArea, "Area");
         }
     }
 }

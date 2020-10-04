@@ -14,7 +14,7 @@ namespace ProjectRimFactory.Drones
 
     interface IDroneSeetingsITab
     {
-        Dictionary<WorkTypeDef, bool> WorkSettings { get; set; }
+        Dictionary<WorkTypeDef, bool> GetWorkSettings { get; set; }
 
         List<SkillRecord> DroneSeetings_skillDefs { get; }
 
@@ -36,18 +36,20 @@ namespace ProjectRimFactory.Drones
         public ITab_DroneStation()
         {
             this.size = WinSize;
-            this.labelKey = "ITab_DroneStation_labelKey"; //Some issues with that....
+            //Do NOT add .Translate() to this.labelKey as this is already done automaticly.
+            this.labelKey = "ITab_DroneStation_labelKey";
         }
 
         public override void TabUpdate()
         {
             base.TabUpdate();
             //Calculate New hight based on Content
-            float additionalHeight = (checkboxheight * droneInterface.WorkSettings.Count) + labelheight + headerheight;
+            float additionalHeight = (checkboxheight * droneInterface.GetWorkSettings.Count) + labelheight + headerheight;
             this.size = new Vector2(WinSize.x,  additionalHeight);
             this.UpdateSize();
         }
 
+        //TODO may need to add code that enabels a scroll bar should we ever need a station with that many WorkTypeDef(s). may also depend on resulution / UI Scale.
         protected override void FillTab()
         {
             Listing_Standard list = new Listing_Standard();
@@ -58,7 +60,6 @@ namespace ProjectRimFactory.Drones
             list.Gap();
             var rect = new Rect();
             
-
             rect = list.GetRect(30f);
 
             Rect rect3 = rect;
@@ -70,9 +71,9 @@ namespace ProjectRimFactory.Drones
             rect = list.GetRect(30f);
             Widgets.DrawLineHorizontal(rect.x, rect.y, itabwidth);
 
-            foreach (WorkTypeDef def in droneInterface.WorkSettings.Keys.ToList())
+            foreach (WorkTypeDef def in droneInterface.GetWorkSettings.Keys.ToList())
             {
-                droneInterface.WorkSettings[def] = CheckboxHelper(rect, list, droneInterface.WorkSettings[def], def);   
+                droneInterface.GetWorkSettings[def] = CheckboxHelper(rect, list, droneInterface.GetWorkSettings[def], def);   
             }
             list.End();
         }
@@ -98,8 +99,6 @@ namespace ProjectRimFactory.Drones
                 return;
             }
             Widgets.Label(rect2, "-");
-
-
         }
 
 

@@ -13,11 +13,9 @@ namespace ProjectRimFactory.Drones
 {
     public class Building_DroneCultivator : Building_WorkGiverDroneStation
     {
-        public Rot4 outputRotation = Rot4.North;
-
         private int totalDroneCount => spawnedDrones.Count + dronesLeft;
 
-        int dronesLeft;
+        private int dronesLeft;
 
         public override int DronesLeft { get => dronesLeft - spawnedDrones.Count; }
         public override void Notify_DroneLost()
