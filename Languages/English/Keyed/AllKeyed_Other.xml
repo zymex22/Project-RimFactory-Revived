@@ -68,12 +68,12 @@
   <PRFDroneStationLockdownDesc>Recall all active drones and disable drone station.</PRFDroneStationLockdownDesc>
   <PRFDroneStationLockdownAll>Lockdown All</PRFDroneStationLockdownAll>
   <PRFDroneStationLockdownAllDesc>Activate the Lockdown for all drone stations on the map.</PRFDroneStationLockdownAllDesc>
-  <PRFDroneStationLiftLockdownAll>Lifts all Lockdowns</PRFDroneStationLiftLockdownAll>
+  <PRFDroneStationLiftLockdownAll>Reactivate all</PRFDroneStationLiftLockdownAll>
   <PRFDroneStationLfttLockdownAllDesc>Lift the Lockdown for all drone stations on the map.</PRFDroneStationLfttLockdownAllDesc>
   
-  <ITab_DroneStation_labelKey>Setting</ITab_DroneStation_labelKey>
-  <ITab_DroneStation_InfoLabel>Disable/Enable Jobs for this Drone Station</ITab_DroneStation_InfoLabel>
-  <ITab_DroneStation_HeaderLabel>Drone Settings</ITab_DroneStation_HeaderLabel>
+  <ITab_DroneStation_labelKey>Settings</ITab_DroneStation_labelKey>
+  <ITab_DroneStation_InfoLabel>Toggle Jobs for this Drone Station</ITab_DroneStation_InfoLabel>
+  <ITab_DroneStation_HeaderLabel>Drone Station Settings</ITab_DroneStation_HeaderLabel>
   <ITab_DroneStation_averageskill>Avg. relevant skills: </ITab_DroneStation_averageskill>
   
   <PRFOutputItems>output item</PRFOutputItems>
@@ -89,4 +89,5 @@
   <PRF_Cyan>cyan</PRF_Cyan>
   <PRF_Yellow>yellow</PRF_Yellow>
   <PRF_Magenta>magenta</PRF_Magenta>
+  <PRF_None>None</PRF_None>
 </LanguageData>

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- Base palced in core -->
+  <!-- Base palced in prf - core -->
 
   <!--============================= Caretaker drone station ==================================-->
   <ThingDef ParentName="PRF_DroneStationBase">
     <defName>PRF_CaretakerDroneStation</defName>
     <label>caretaker drone station</label>
-    <description>A station that holds up to 30 drones, capable of hauling and cleaning, flicking and fighting fires. Consumes considerable power. Typically your colony only needs 1 of these.</description>
+    <description>A station that holds up to 20 drones, capable of hauling and cleaning, flicking and fighting fires. Consumes considerable power. Typically your colony only needs 1 of these.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneStationSpecialGraphics</thingClass>
     <graphicData>
       <texPath>Drones/DroneStationCaretaker</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
-      <drawSize>(3, 3)</drawSize>
+      <drawSize>(2,2)</drawSize>
     </graphicData>
-    <size>(3, 3)</size>
+    <size>(2,2)</size>
     <costList>
       <Steel>100</Steel>
       <ComponentSpacer>5</ComponentSpacer>
@@ -47,15 +47,15 @@
   <ThingDef ParentName="PRF_DroneStationBase">
     <defName>PRF_ConstructionDroneStation</defName>
     <label>construction drone station</label>
-    <description>A station that holds up to 30 drones, capable of mining and construction. Consumes considerable power. Typically your colony only needs 1 of these.</description>
+    <description>A station that holds up to 20 drones, capable of mining and construction. Consumes considerable power. Typically your colony only needs 1 of these.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneStationSpecialGraphics</thingClass>
     <graphicData>
       <texPath>Drones/DroneStationConstruction</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
-      <drawSize>(3, 3)</drawSize>
+      <drawSize>(2,2)</drawSize>
     </graphicData>
-    <size>(3, 3)</size>
+    <size>(2,2)</size>
     <costList>
       <Steel>100</Steel>
       <ComponentSpacer>5</ComponentSpacer>
@@ -68,6 +68,12 @@
         <workTypes>
           <li>Construction</li>
           <li>Mining</li>
+          <li>Firefighter</li>
+          <li>BasicWorker</li>
+          <li>Hauling</li>
+          <li>Cleaning</li>
+          <li>PlantCutting</li>
+          <li>Growing</li>
         </workTypes>
       </li>
     </modExtensions>
@@ -82,19 +88,19 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!--============================= Growing drone station ==================================-->
+  <!--============================= Plant gather drone station ==================================-->
   <ThingDef ParentName="PRF_DroneStationBase">
     <defName>PRF_GrowingDroneStation</defName>
     <label>Wild plant collector</label>
-    <description>A station that holds up to 30 drones, capable of cutting trees and plants. Consumes considerable power. Typically your colony only needs 1 of these.</description>
+    <description>A station that holds up to 20 drones, capable of cutting trees and plants. Consumes considerable power. Typically your colony only needs 1 of these.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneStationSpecialGraphics</thingClass>
     <graphicData>
       <texPath>Drones/DroneStationGrower</texPath>
       <graphicClass>Graphic_Single</graphicClass>
       <shaderType>CutoutComplex</shaderType>
-      <drawSize>(3, 3)</drawSize>
+      <drawSize>(2,2)</drawSize>
     </graphicData>
-    <size>(3, 3)</size>
+    <size>(2,2)</size>
     <costList>
       <Steel>100</Steel>
       <ComponentSpacer>5</ComponentSpacer>
