@@ -85,14 +85,17 @@ namespace ProjectRimFactory.AutoMachineTool
             this.MapManager.RemoveAfterAction(this.FinishWork);
         }
         /// <summary>
-        /// Whether all items in "working" are spawned - 
-        ///   this affects saving, as unspawned items must be saved
-        ///   differently.  Note that this cannot apply to single
-        ///   items; it's all or nothing.
+        /// The mode to use for saving/loading `working` for this class.
+        ///   Use LookMode.Deep if no one else saves the object (e.g. if
+        ///   the object is not spawned). Use LookMode.Reference if some
+        ///   other source also saves the item - a spawned item is saved
+        ///   by the map.
         /// </summary>
-        protected virtual bool WorkingIsDespawned()
-        {
-            return false;
+        protected virtual LookMode WorkingLookMode {
+            get => LookMode.Reference;
+        }
+        protected virtual LookMode ProductsLookMode {
+            get => LookMode.Deep;
         }
 
         public override void ExposeData()
@@ -102,12 +105,12 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look(ref this.state, "workingState", WorkingState.Ready);
             Scribe_Values.Look(ref this.totalWorkAmount, "totalWorkAmount", 0f);
             Scribe_Values.Look(ref this.workStartTick, "workStartTick", 0);
-            Scribe_Collections.Look<Thing>(ref this.products, "products", LookMode.Deep);
-
-            if (WorkingIsDespawned())
+            Scribe_Collections.Look<Thing>(ref this.products, "products", ProductsLookMode);
+            if (WorkingLookMode == LookMode.Deep) {
                 Scribe_Deep.Look<T>(ref this.working, "working");
-            else
+            } else if (WorkingLookMode == LookMode.Reference) {
                 Scribe_References.Look<T>(ref this.working, "working");
+            }
         }
 
         public override void PostMapInit()

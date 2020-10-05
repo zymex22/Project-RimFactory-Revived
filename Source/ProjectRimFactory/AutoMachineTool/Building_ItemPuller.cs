@@ -68,11 +68,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private bool pickupConveyor = false;
 
-        protected override bool WorkingIsDespawned()
-        {
-            return true;
-        }
-
+        protected override LookMode WorkingLookMode { get => LookMode.Deep; } // despawned
         public override void ExposeData()
         {
             Scribe_Values.Look<bool>(ref this.pickupConveyor, "pickupConveyor", false);
