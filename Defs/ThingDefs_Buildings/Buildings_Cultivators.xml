@@ -25,6 +25,7 @@
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <canOverlapZones>false</canOverlapZones>
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
@@ -42,7 +43,7 @@
     <designatorDropdown>Cultivator_gr</designatorDropdown>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <constructEffect>ConstructMetal</constructEffect>
-    
+
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />
       <li>
@@ -50,20 +51,25 @@
       </li>
     </comps>
   </ThingDef>
-  
+
+  <!--=========================== Sub base for drones ==================================-->
   <ThingDef Name="PRF_CultivatorBaseDrone" ParentName="PRF_CultivatorBaseBase" Abstract="True">
     <placeWorkers>
-        <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
+      <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
     </placeWorkers>
     <drawGUIOverlay>true</drawGUIOverlay>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Drones.ITab_DroneStation</li>
+    </inspectorTabs>
   </ThingDef>
-  
+
+  <!--=========================== sub base for oldschool type ==================================-->
   <ThingDef Name="PRF_CultivatorBase" ParentName="PRF_CultivatorBaseBase" Abstract="True">
     <placeWorkers>
-        <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
+      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
     </placeWorkers>
   </ThingDef>
-  
+
 
   <!--=========================== Basic Cultivator ==================================-->
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
@@ -95,7 +101,7 @@
         <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
         <SquareJobRadius>5</SquareJobRadius>
         <spawnWithFullDrones>true</spawnWithFullDrones>
-      <workTypes>
+        <workTypes>
           <li>Growing</li>
           <li>Hauling</li>
           <li>PlantCutting</li>
@@ -249,7 +255,7 @@
     </researchPrerequisites>
   </ThingDef>
 
-    <!--=========================== Spacer Cultivator XL ==================================-->
+  <!--=========================== Spacer Cultivator XL ==================================-->
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>CultivatorTools_b18CultivatorXL</defName>
     <label>Mechanites XL Cultivator</label>
