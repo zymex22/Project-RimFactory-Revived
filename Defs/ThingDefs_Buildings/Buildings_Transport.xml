@@ -237,7 +237,7 @@
       <li>ADVrollers</li>
     </researchPrerequisites>
     <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Arrow</li>
+      <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
   </ThingDef>
 
@@ -448,7 +448,7 @@
     <placingDraggableDimensions>1</placingDraggableDimensions>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Arrow</li>
+      <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
     <comps>
       <li>
@@ -618,7 +618,7 @@
     <pathCost>30</pathCost>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Arrow</li>
+      <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
     <inspectorTabs>
     </inspectorTabs>

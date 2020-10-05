@@ -8,7 +8,7 @@ using Verse;
 using Verse.AI;
 using UnityEngine;
 
-namespace ProjectRimFactory.AutoMachineTool
+namespace ProjectRimFactory
 {
     [StaticConstructorOnStartup]
     public static class RS

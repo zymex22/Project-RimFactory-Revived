@@ -7,9 +7,9 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 using UnityEngine;
-using static ProjectRimFactory.AutoMachineTool.Ops;
+using static ProjectRimFactory.RS;
 
-namespace ProjectRimFactory.AutoMachineTool
+namespace ProjectRimFactory
 {
     [StaticConstructorOnStartup]
     public class PlaceWorker_Arrow : PlaceWorker
