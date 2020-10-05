@@ -161,7 +161,6 @@ namespace ProjectRimFactory.Drones
             }
         }
 
-
         //Return the Range depending on the Active Defenition
         public int DroneRange
         {
@@ -317,7 +316,7 @@ namespace ProjectRimFactory.Drones
                 WorkSettings.Remove(def);
             }
             //need to take action to init droneSkillsRecord
-            if (droneSkillsRecord.Count == 0 && DronesLeft == 0)
+            if (droneSkillsRecord.Count == 0)
             {
                 Pawn_Drone drone = MakeDrone();
                 GenSpawn.Spawn(drone, Position, Map);
