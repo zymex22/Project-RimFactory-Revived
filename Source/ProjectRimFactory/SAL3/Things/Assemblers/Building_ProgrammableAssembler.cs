@@ -1,19 +1,17 @@
-﻿using RimWorld;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using Verse;
-using ProjectRimFactory.SAL3.Tools;
-using UnityEngine;
+using ProjectRimFactory.AutoMachineTool;
 using ProjectRimFactory.Common;
 using ProjectRimFactory.SAL3.Exposables;
+using ProjectRimFactory.SAL3.Tools;
+using RimWorld;
+using UnityEngine;
+using Verse;
 using Verse.Sound;
-using ProjectRimFactory.AutoMachineTool;
 
-namespace ProjectRimFactory.SAL3.Things.Assemblers
-{
+namespace ProjectRimFactory.SAL3.Things.Assemblers {
     public abstract class Building_ProgrammableAssembler : Building_DynamicBillGiver, IPowerSupplyMachineHolder
     {
         protected class BillReport : IExposable
@@ -227,10 +225,32 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                                        && compRefuelable?.HasFuel != false 
                                        && compFlick?.SwitchIsOn != false;
 
-        protected IEnumerable<Thing> AllAccessibleThings => from c in IngredientStackCells
-                                                            from t in Map.thingGrid.ThingsListAt(c)
-                                                            where (AllowForbidden || !t.IsForbidden(Faction)) && t.def.category == ThingCategory.Item
+        protected IEnumerable<Thing> AllAccessibleThings => from t in AllThingsInArea
+                                                            where (AllowForbidden || !t.IsForbidden(Faction))
                                                             select t;
+
+        protected IEnumerable<Thing> AllThingsInArea {
+            get {
+                foreach (var c in IngredientStackCells) {
+                    foreach (var t in Map.thingGrid.ThingsListAt(c)) {
+                        if (t is Building && t is IThingHolder holder) {
+                            if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner) {
+                                foreach (var moreT in owner.InnerListForReading) yield return moreT;
+                            }
+                        } else if (t.def.category == ThingCategory.Item) {
+                            yield return t;
+                        }
+                    }
+                }
+                yield break;
+            }
+        }
+
+
+        /*=> from c in IngredientStackCells
+                                                        from t in Map.thingGrid.ThingsListAt(c)
+                                                        where (AllowForbidden || !t.IsForbidden(Faction)) && t.def.category == ThingCategory.Item
+                                                        select t;*/
         protected IEnumerable<Bill> AllBillsShouldDoNow => from b in billStack.Bills
                                                            where b.ShouldDoNow()
                                                            select b;
