@@ -10,10 +10,11 @@ using RimWorld;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool {
+    [StaticConstructorOnStartup]
     public class Graphic_LinkedConveyor : Graphic_Link2<Graphic_LinkedConveyor> {
 
-        public static Material arrow00 => MaterialPool.MatFrom("Belts/SmallArrow00");
-        public static Material arrow01 => MaterialPool.MatFrom("Belts/SmallArrow01");
+        public static Material arrow00; // initialized in the static constructor
+        public static Material arrow01;
 
         public Graphic_LinkedConveyor() : base() {
         }
@@ -153,6 +154,8 @@ namespace ProjectRimFactory.AutoMachineTool {
                 thing.Rotation.AsAngle);
         }
         static Graphic_LinkedConveyor() {
+            arrow00 = MaterialPool.MatFrom("Belts/SmallArrow00");
+            arrow01 = MaterialPool.MatFrom("Belts/SmallArrow01");
             canSendTos[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefSendToRot4AtLevel;
             canGetFroms[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefReceiveFromRot4AtLevel;
             canSendTos[typeof(Building_BeltConveyorUGConnector)] = Building_BeltConveyorUGConnector.CanDefSendToRot4AtLevel;
