@@ -256,6 +256,10 @@ namespace ProjectRimFactory.Drones
 
         public List<SkillRecord> DroneSeetings_skillDefs => droneSkillsRecord;
 
+        public string[] GetSleepTimeList => cachedSleepTimeList;
+
+        public CompRefuelable compRefuelable => GetComp<CompRefuelable>();
+
         public void UpdateDronePrioritys() 
         {
 
@@ -302,6 +306,8 @@ namespace ProjectRimFactory.Drones
             }
             //Load the SleepTimes from XML
             cachedSleepTimeList = extension.Sleeptimes.Split(',');
+           
+
             LastPowerOutput = GetComp<CompPowerTrader>().powerOutputInt;
             cashed_GetCoverageCells = StationRangecells.ToList();
 
