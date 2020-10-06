@@ -291,7 +291,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-        protected void ForceStartWork(T working, float workAmount)
+        protected virtual void ForceStartWork(T working, float workAmount)
         {
             this.Reset();
             this.ClearActions();

@@ -329,6 +329,10 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
         /******** AutoMachineTool logic *********/
+        protected override void ForceStartWork(Thing working, float workAmount) {
+            base.ForceStartWork(working, workAmount);
+            thingOwnerInt.TryAdd(working);
+        }
         protected override void Reset() {
             /*            if (this.State != WorkingState.Ready) {
                             if (this.working != null) {
@@ -361,27 +365,21 @@ namespace ProjectRimFactory.AutoMachineTool
             Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked if it will accept " + newThing);
             if (!this.IsActive()) return false;
             // verify proper levels:
-            if (giver is AutoMachineTool.IBeltConveyorLinkable) {
-                if (this.IsUnderground) {
-                    if (!((IBeltConveyorLinkable)giver).CanSendToLevel(ConveyorLevel.Underground))
-                        return false;
-                } else // not underground
-                    if (!((IBeltConveyorLinkable)giver).CanSendToLevel(ConveyorLevel.Ground))
-                        return false;
+            if (giver is AutoMachineTool.IBeltConveyorLinkable linkableGiver) {
+                if (!this.CanLinkFrom(linkableGiver, false)) return false;
             }
             Debug.Message(Debug.Flag.Conveyors, "  It can accept items from " +
                 (giver == null ? "that direction." : giver.ToString()));
             if (this.State == WorkingState.Ready)
             {
                 // Note: I don't think there is any benefit to 
-                //   an item being spanwed?
+                //   an item being spanwed?  But what do I know?
                 if (newThing.Spawned) newThing.DeSpawn();
                 Debug.Message(Debug.Flag.Conveyors, "  And accepted " + newThing
                     + (newThing.Spawned ? "" : " (not spanwed)"));
                 newThing.Position = this.Position;
                 stuck = false;
                 this.ForceStartWork(newThing, 1f);
-                thingOwnerInt.TryAdd(newThing);
                 return true;
             }
             else
@@ -456,7 +454,7 @@ namespace ProjectRimFactory.AutoMachineTool
             else // if no conveyor, place if can
             {
                 Debug.Message(Debug.Flag.Conveyors, "  trying to place at end of conveyor:");
-                if (!this.IsUnderground && this.PRFTryPlaceThing(thing, 
+                if (!this.CanSendToLevel(ConveyorLevel.Ground) && this.PRFTryPlaceThing(thing, 
                       this.OutputCell(), this.Map))
                 {
                     NotifyAroundSender();
@@ -602,13 +600,11 @@ namespace ProjectRimFactory.AutoMachineTool
                 Debug.Message(Debug.Flag.Conveyors, this + " is now stuck with " + t);
                 this.ForceStartWork(t, 1 - stuckDrawPercent
                         - Mathf.Clamp01(WorkLeft));
-                thingOwnerInt.TryAdd(t); // todo: make ForceStartWork virtual?
                 stuck = true;
             } else {
                 Debug.Message(Debug.Flag.Conveyors, this + " is no longer stuck with " + t);
                 this.ForceStartWork(t, 1 - stuckDrawPercent
                           - Mathf.Clamp(WorkLeft, 0, 1 - stuckDrawPercent));
-                thingOwnerInt.TryAdd(t);
                 stuck = false;
             }
         }

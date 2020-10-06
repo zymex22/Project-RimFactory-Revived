@@ -174,7 +174,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool PlaceProduct(ref List<Thing> products)
         {
-            var thing = products[0];
+            var thing = thingOwnerInt.Take(products[0]);
             Debug.Warning(Debug.Flag.Conveyors, "Splitter " + this + " is about to try placing " + thing);
             if (this.WorkInterruption(thing))
             {
@@ -204,6 +204,7 @@ namespace ProjectRimFactory.AutoMachineTool
             // 配置失敗.
             // Placement failure
             this.stuck = true;
+            thingOwnerInt.TryAdd(thing);//put it back
             Debug.Message(Debug.Flag.Conveyors, "" + this + ": Is stuck.");
             return false;
         }

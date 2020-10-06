@@ -31,11 +31,12 @@ namespace ProjectRimFactory.AutoMachineTool {
             if (!ToUnderground ||
                 (IsStuck && WorkLeft < 0.05f) ||
                 (!IsStuck && WorkLeft > 0.85f)) {
-                this.CarryingThing().DrawAt(CarryPosition());
+                base.DrawCarried();
+                //this.CarryingThing().DrawAt(CarryPosition());
             }            
         }
 
-        public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
+/*        public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
             Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked to accept " + newThing);
             if (!IsActive()) return false;
             if (giver is AutoMachineTool.IBeltConveyorLinkable conveyor) {
@@ -62,8 +63,9 @@ namespace ProjectRimFactory.AutoMachineTool {
                 return target.TryAbsorbStack(newThing, true);
             }
         }
+        */
 
-        protected override bool PlaceProduct(ref List<Thing> products) {
+/*        protected override bool PlaceProduct(ref List<Thing> products) {
             // These can only place things in one direction.
             var thing = products[0];
             var next = this.OutputConveyor();
@@ -86,8 +88,8 @@ namespace ProjectRimFactory.AutoMachineTool {
             this.stuck = true;
             return false;
         }
-
-        // TODO: Faster to directly access, or to cache
+        */
+/*        // TODO: Faster to directly access, or to cache
         private IBeltConveyorLinkable OutputConveyor() {
             return (this.Position + Rotation.FacingCell).GetThingList(this.Map)
                 .OfType<IBeltConveyorLinkable>()
@@ -98,7 +100,7 @@ namespace ProjectRimFactory.AutoMachineTool {
         protected override bool WorkInterruption(Thing working) {
             return false;
         }
-
+*/
         //TODO: Decide if we allow this.
         protected override bool TryStartWorking(out Thing target, out float workAmount) {
             if (this.ToUnderground) return base.TryStartWorking(out target, out workAmount);
