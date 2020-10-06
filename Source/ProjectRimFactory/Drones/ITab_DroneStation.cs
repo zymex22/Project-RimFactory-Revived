@@ -109,7 +109,7 @@ namespace ProjectRimFactory.Drones
                 rect = list.GetRect(30f);
                 Widgets.DrawLineHorizontal(rect.x, rect.y, itabwidth);
                
-                CommonGUIFunctions.Label(rect, "DroneStation Sleep Times (marked in red)", richTextStyle);
+                CommonGUIFunctions.Label(rect, "ITab_DroneStation_Sleeptimes".Translate(), richTextStyle);
                 AddSleepDisplay(rect, list);
             }
             
@@ -120,12 +120,10 @@ namespace ProjectRimFactory.Drones
                 rect = list.GetRect(30f);
                 Widgets.DrawLineHorizontal(rect.x, rect.y, itabwidth);
                 
-                CommonGUIFunctions.Label(rect, "DroneStation FuleLevel", richTextStyle);
+                CommonGUIFunctions.Label(rect, "ITab_DroneStation_SetTargetFuel".Translate(), richTextStyle);
                 rect = list.GetRect(30f);
                 list.Gap();
-                droneInterface.compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider(rect, droneInterface.compRefuelable.TargetFuelLevel, 0, droneInterface.compRefuelable.Props.fuelCapacity, true, "Set target fuel Level:" + droneInterface.compRefuelable.TargetFuelLevel, null, null, 1);
-
-
+                droneInterface.compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider(rect, droneInterface.compRefuelable.TargetFuelLevel, 0, droneInterface.compRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(droneInterface.compRefuelable.TargetFuelLevel), "0", droneInterface.compRefuelable.Props.fuelCapacity.ToString(), 1);
             }
 
 
@@ -137,9 +135,9 @@ namespace ProjectRimFactory.Drones
             rect = list.GetRect(30f);
             // droneInterface.GetSleepTimeList
             string txt = "";
-           for (int i = 0;i<= 24; i++)
-           {
-            if (droneInterface.GetSleepTimeList.Contains(i.ToString()))
+            for (int i = 0;i< 24; i++)
+            {
+                if (droneInterface.GetSleepTimeList.Contains(i.ToString()))
                 {
                     txt += "<color=red><b>" + i.ToString() + "</b></color> ";
                 }
@@ -147,7 +145,7 @@ namespace ProjectRimFactory.Drones
                 {
                     txt += i.ToString() + " ";
                 }
-           }
+            }
             CommonGUIFunctions.Label(rect, txt, richTextStyle);
         }
 

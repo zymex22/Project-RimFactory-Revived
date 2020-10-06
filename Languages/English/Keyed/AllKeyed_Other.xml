@@ -76,6 +76,9 @@
   <ITab_DroneStation_HeaderLabel>Drone Station Settings</ITab_DroneStation_HeaderLabel>
   <ITab_DroneStation_averageskill>Avg. relevant skills: </ITab_DroneStation_averageskill>
   
+  <ITab_DroneStation_Sleeptimes>DroneStation Sleep Times (marked in red)</ITab_DroneStation_Sleeptimes>
+  <ITab_DroneStation_SetTargetFuel>DroneStation Fuel Level</ITab_DroneStation_SetTargetFuel>
+  
   <PRFOutputItems>output item</PRFOutputItems>
   <PRFPawnAccessLabel>pawn access</PRFPawnAccessLabel>
   <PRFPawnAccessDesc>pawn access</PRFPawnAccessDesc>
