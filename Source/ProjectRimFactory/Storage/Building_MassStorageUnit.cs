@@ -108,16 +108,27 @@ namespace ProjectRimFactory.Storage
                     break;
                 }
             }
+            //Add a new stack of a thing
             if (!newItem.Destroyed)
             {
+                
+
                 if (!items.Contains(newItem))
                     items.Add(newItem);
+
+                //What appens if its full?
                 if (CanStoreMoreItems)
                 {
                    
                     newItem.Position = Position;
-                    
+                   
+
                 }
+                if (!newItem.Spawned)
+                {
+                    newItem.SpawnSetup(this.Map, false);
+                }
+
             }
         }
 
@@ -185,7 +196,8 @@ namespace ProjectRimFactory.Storage
 
         public virtual void RefreshStorage()
         {
-            items = new List<Thing>();
+            items.Clear();
+            if (!this.Spawned) return; // don't want to try getting lists of things when not on a map (see 155)
             foreach (IntVec3 cell in AllSlotCells())
             {
                 List<Thing> things = new List<Thing>(cell.GetThingList(Map));

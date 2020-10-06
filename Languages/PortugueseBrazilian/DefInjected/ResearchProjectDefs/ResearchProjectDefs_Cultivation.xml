@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <FarmingSprinklers.label>Sprinkler</FarmingSprinklers.label>
+  <FarmingSprinklers.description>Aprenda a criar sprinklers para aumentar ligeiramente o crescimento das plantas.</FarmingSprinklers.description>
+
+  <AutomaticFarming.label>Agricultura automática</AutomaticFarming.label>
+  <AutomaticFarming.description>Aprenda a criar cultivadores que podem cuidar automaticamente de terrenos de tamanho médio.</AutomaticFarming.description>
+
+</LanguageData>

@@ -6,7 +6,7 @@
     <label>Auger drill I</label>
     <tab>Automation</tab>
     <techLevel>Industrial</techLevel>
-    <baseCost>2000</baseCost>
+    <baseCost>1000</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRFEulersIdentity</li>

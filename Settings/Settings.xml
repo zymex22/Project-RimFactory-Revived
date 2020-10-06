@@ -30,6 +30,11 @@
     <!-- rich text https://docs.unity3d.com/560/Documentation/Manual/StyledText.html -->
     <text>PRF.Settings.TopMessage</text>
   </Row>
+  <Row Class="ProjectRimFactory.Common.TextRow">
+    <font>Small</font>
+    <anchor>MiddleCenter</anchor>
+    <text>PRF.Settings.restartMessage</text>
+  </Row> 
 
   <Row Class="ProjectRimFactory.Common.GapRow" />
 

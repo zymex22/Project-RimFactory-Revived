@@ -8,7 +8,7 @@ using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AnimalStation
 {
-    public abstract class Building_CompHarvester : Building_Storage
+    public abstract class Building_CompHarvester : Building_Storage , IPowerSupplyMachineHolder
     {
         public static readonly PropertyInfo ResourceAmount = typeof(CompHasGatherableBodyResource).GetProperty("ResourceAmount", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly PropertyInfo ResourceDef = typeof(CompHasGatherableBodyResource).GetProperty("ResourceDef", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -18,9 +18,11 @@ namespace ProjectRimFactory.AnimalStation
         {
             get
             {
-                return GenAdj.OccupiedRect(this).ExpandedBy(1).Cells;
+                return this.GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenAdj.OccupiedRect(this).ExpandedBy(1).Cells;
             }
         }
+
+        public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
 
         public abstract bool CompValidator(CompHasGatherableBodyResource comp);
 

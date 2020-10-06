@@ -162,6 +162,7 @@
     </modExtensions>
     <researchPrerequisites>
       <li>AutomaticFarming1</li>      <!-- farming level 2 -->
+      <li>PRFGoldbachConjecture</li>
     </researchPrerequisites>
   </ThingDef>
 

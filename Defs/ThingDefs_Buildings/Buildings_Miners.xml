@@ -25,6 +25,7 @@
     <rotatable>false</rotatable>
     <pathCost>70</pathCost>
     <fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
@@ -202,6 +203,83 @@
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
       <li>AutonomousMining_II</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Quarry T3.2  ====================-->
+  <ThingDef ParentName="PRF_MinersBase">
+    <defName>PRF_DeepQuarry_mkIII</defName>
+    <label>Random Pulse Drill(T3)</label>
+    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <designatorDropdown>miners_gr</designatorDropdown>
+    <graphicData>
+      <texPath>Industry/DrillT32</texPath>
+      <drawSize>(3.3,3.3)</drawSize>
+    </graphicData>
+    <size>(3,3)</size>
+    <statBases>
+      <WorkToBuild>10000</WorkToBuild>
+      <MaxHitPoints>800</MaxHitPoints>
+      <Flammability>0.2</Flammability>
+    </statBases>
+    <description>This is last tier random ore mining quarry, this one will not create infestation and will only mine rare ores no stones.</description>
+    <costList>
+      <Steel>1000</Steel>
+      <ComponentIndustrial>25</ComponentIndustrial>
+      <Plasteel>50</Plasteel>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>5000</basePowerConsumption>
+      </li>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>20</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
+        <TickCount>2</TickCount>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>ComponentIndustrial</li>
+          <li>Plasteel</li>
+          <li>ChunkSandstone</li>
+          <li>ChunkGranite</li>
+          <li>ChunkLimestone</li>
+          <li>ChunkSlate</li>
+          <li>ChunkMarble</li>
+        </excludeOres>
+        <bonusYields Chance="0.1">
+          <!-- Junks -->
+          <InsectJelly Weight="0.2" Count="30" />
+          <Steel Weight="0.2" Count="40" />
+          <ComponentIndustrial Weight="0.02" Count="5" />
+          <!-- Rares -->
+          <Uranium Weight="0.9" Count="40" />
+          <Gold Weight="0.4" Count="40" />
+          <Jade Weight="0.4" Count="40" />
+          <Silver Weight="0.6" Count="40" />
+          <Plasteel Weight="0.03" Count="5" />
+        </bonusYields>
+      </li>
+    </modExtensions>
+    <tickerType>Rare</tickerType>
+    <filthLeaving>Filth_RubbleRock</filthLeaving>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>AutonomousMining_III</li>
     </researchPrerequisites>
   </ThingDef>
 

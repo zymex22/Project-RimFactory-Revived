@@ -17,18 +17,18 @@ namespace ProjectRimFactory.Drones
         public Building_DroneStation station;
 
         // don't do anythin exciting when killed - just disappear:
+        //   (this keeps weird side effects from happening, such as
+        //    forever increasing the list of dead drones)
         public override void Kill(DamageInfo? dinfo, Hediff exactCulprit = null) {
-        // don't call base.Kill
-        this.Destroy();
-            //set mapIndexOrState to -2 to make "thing.Destroyed" true (needed for Work Tab Compatibility)
-            ReflectionUtility.mapIndexOrState.SetValue(this, (sbyte)-2);
+          // don't call base.Kill
+          this.Destroy();
         }
 
         // or destroyed
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
         if (this.Spawned) this.DeSpawn();
             // don't call base.Destroy();
-            //set mapIndexOrState to -2 to make "thing.Destroyed" true (needed for Work Tab Compatibility)
+            // DO set mapIndexOrState to -2 to make "thing.Destroyed" true (needed for Work Tab Compatibility)
             ReflectionUtility.mapIndexOrState.SetValue(this, (sbyte)-2);
         }
 

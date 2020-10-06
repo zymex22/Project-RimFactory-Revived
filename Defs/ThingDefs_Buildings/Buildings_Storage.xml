@@ -355,7 +355,7 @@
     </modExtensions>
   </ThingDef>
 
-  <!--============================== I/O HOPPER ==============================-->
+  <!--============================== I/O Port ==============================-->
   <ThingDef ParentName="PRFBuildingBase">
     <defName>PRFStorageUnitIOPort</defName>
     <label>I/O Port</label>
@@ -411,7 +411,6 @@
       <ComponentIndustrial>4</ComponentIndustrial>
     </costList>
     <comps>
-      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>300</basePowerConsumption>

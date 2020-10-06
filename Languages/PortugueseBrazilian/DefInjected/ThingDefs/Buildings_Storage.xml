@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <StockpileCrate.label>Caixa de armazenamento</StockpileCrate.label>
+  <StockpileCrate.description>Uma caixa gigante que pode conter 25 pilhas. Os itens armazenados na gaveta não se deterioram.</StockpileCrate.description>
+
+  <StockpileCrateReinforced.label>Caixa de armazenamento selada</StockpileCrateReinforced.label>
+  <StockpileCrateReinforced.description>Uma caixa gigante que pode conter 100 pilhas. Os itens armazenados na gaveta não se deterioram.</StockpileCrateReinforced.description>
+  
+  <IndustrialStorageUnit.label>Armazenamento industrial (legado)</IndustrialStorageUnit.label>
+  <IndustrialStorageUnit.description>Este edifício ficará obsoleto no lançamento. Use uma plataforma de carregamento.</IndustrialStorageUnit.description>
+  
+  <PRFCargoPlatform.label>Plataforma de carga</PRFCargoPlatform.label>
+  <PRFCargoPlatform.description>Armazena um número infinito de itens. Consome 10 watts de potência para cada pilha que contém. Quando sua colônia perder energia, os itens serão mantidos dentro, mas a construção irá parar de puxar os itens para o slot central.</PRFCargoPlatform.description>
+
+</LanguageData>

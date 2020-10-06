@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <ArchoMakePsychicInsanityLance.label>faça a lança da loucura</ArchoMakePsychicInsanityLance.label>
+  <ArchoMakePsychicInsanityLance.description>Faça uma lança da loucura.</ArchoMakePsychicInsanityLance.description>
+  <ArchoMakePsychicInsanityLance.jobString>Construindo a Lança da Loucura</ArchoMakePsychicInsanityLance.jobString>
+  
+  <ArchoMakePsychicShockLance.label>faça a lança do choque</ArchoMakePsychicShockLance.label>
+  <ArchoMakePsychicShockLance.description>Faça uma lança de choque.</ArchoMakePsychicShockLance.description>
+  <ArchoMakePsychicShockLance.jobString>Crie a lança do choque</ArchoMakePsychicShockLance.jobString>
+  
+  <ArchoMakePsychicAnimalPulser.label>fazer um gerador de psi-pulso (animais)</ArchoMakePsychicAnimalPulser.label>
+  <ArchoMakePsychicAnimalPulser.description>Faça um gerador de pulso psi (animais).</ArchoMakePsychicAnimalPulser.description>
+  <ArchoMakePsychicAnimalPulser.jobString>Criação de um gerador de pulso psi (animais)</ArchoMakePsychicAnimalPulser.jobString>
+  
+  <ArchoMakePsychicSoothePulser.label>faça um gerador de pulso psi calmante</ArchoMakePsychicSoothePulser.label>
+  <ArchoMakePsychicSoothePulser.description>Faça um gerador de pulso psi calmante.</ArchoMakePsychicSoothePulser.description>
+  <ArchoMakePsychicSoothePulser.jobString>Criando um gerador de pulso psi calmante</ArchoMakePsychicSoothePulser.jobString>
+  
+  <ArchoMakePsychicEmanator.label>fazer um emissor psi</ArchoMakePsychicEmanator.label>
+  <ArchoMakePsychicEmanator.description>Faça um emissor psi.</ArchoMakePsychicEmanator.description>
+  <ArchoMakePsychicEmanator.jobString>Crie um emissor psi</ArchoMakePsychicEmanator.jobString>
+  
+  <ArchoMakeMechSerumHealer.label>faça um soro de cura</ArchoMakeMechSerumHealer.label>
+  <ArchoMakeMechSerumHealer.description>Faça um soro curativo.</ArchoMakeMechSerumHealer.description>
+  <ArchoMakeMechSerumHealer.jobString>Crie um soro curativo</ArchoMakeMechSerumHealer.jobString>
+  
+  <ArchoMakeMechSerumResurrector.label>fazer soro de ressurreição</ArchoMakeMechSerumResurrector.label>
+  <ArchoMakeMechSerumResurrector.description>Faça um soro de ressurreição.</ArchoMakeMechSerumResurrector.description>
+  <ArchoMakeMechSerumResurrector.jobString>Criar soro de ressurreição</ArchoMakeMechSerumResurrector.jobString>
+  
+  <ArchoMakeVanometricPowerCell.label>fazer um gerador vanométrico</ArchoMakeVanometricPowerCell.label>
+  <ArchoMakeVanometricPowerCell.description>Faça um gerador vanométrico.</ArchoMakeVanometricPowerCell.description>
+  <ArchoMakeVanometricPowerCell.jobString>Meat of a vanometric generator</ArchoMakeVanometricPowerCell.jobString>
+  
+  <ArchoMakeInfiniteChemreactor.label>para fazer um eterno sintetizador de combustível químico</ArchoMakeInfiniteChemreactor.label>
+  <ArchoMakeInfiniteChemreactor.description>Faça um sintetizador de combustível químico permanente.</ArchoMakeInfiniteChemreactor.description>
+  <ArchoMakeInfiniteChemreactor.jobString>Criação de um sintetizador de combustível químico duradouro</ArchoMakeInfiniteChemreactor.jobString>
+
+  <PRFFuseXAndYCOmposite.label>fusível X- e Y-Composite</PRFFuseXAndYCOmposite.label>
+  <PRFFuseXAndYCOmposite.description>Faça 40 Composto Z fundindo 10 Composto X e 10 Composto Y junto com o volatito.</PRFFuseXAndYCOmposite.description>
+  <PRFFuseXAndYCOmposite.jobString>Criando um Z-Composite</PRFFuseXAndYCOmposite.jobString>
+  
+</LanguageData>
