@@ -50,6 +50,9 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.setInitialMinPower = false;
             this.thingOwnerInt = new ThingOwner<Thing>(this);
+            // this is a horrible bastardization of AutoMachineTool and 
+            //  RW's ThingOwner mechanism, made viable by C#'s list-by-
+            //  reference mechanism.  It works great!
             products = thingOwnerInt.InnerListForReading;
         }
 
@@ -68,8 +71,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
         // Generally useful methods:
         protected ModExtension_Conveyor Extension => this.def.GetModExtension<ModExtension_Conveyor>();
-        protected virtual Rot4 OutputDirection => this.Rotation;
 
+        // Generally important methods:
+        protected virtual Rot4 OutputDirection => this.Rotation;
         // AutoMachineTool: Building_Base
         public override IntVec3 OutputCell() => this.Position + this.OutputDirection.FacingCell;
 
@@ -97,35 +101,19 @@ namespace ProjectRimFactory.AutoMachineTool
                 return t;
             }
             return null;
-            /*
-            if (working != null && (optionalValidator==null || optionalValidator(working))) {
-                Thing t = working;
-                working = null;
-                this.ForceReady();
-                return t;
-            }
-            // Nobo would have written this in an entirely different - and probably
-            //   more elegant - way, but this works.
-            if (!products.NullOrEmpty()) {
-                // should only be one, but who knows.
-                for (int i = products.Count - 1; i >= 0; i--) {
-                    if (optionalValidator == null || optionalValidator(products[i])) {
-                        Thing t = products[i];
-                        products.Remove(t);
-                        if (working == null)  // We were placing
-                            ForceReady();
-                        return t;
-                    }
-                }
-            }
-            return null;*/
         }
         // Conveyors are dumb. They just dump their stuff onto the ground when they end!
         //   TODO: mod setting?
         public override bool ObeysStorageFilters => false;
+
         /************* Conveyors IBeltConveyor ***********/
         public bool IsStuck => this.stuck;
         public bool IsUnderground { get => this.Extension?.underground ?? false; }
+        // Note: it might be worth making link and unlink do something with a cached
+        //   conveyor link; it will certainly be faster in some specific scenarios
+        //   (underground belts going through a storehouse with DeepStorage or DSUs?)
+        public virtual void Link(IBeltConveyorLinkable link) { }
+        public virtual void Unlink(IBeltConveyorLinkable unlink) { }
         public virtual bool CanSendToLevel(ConveyorLevel level)
         {
             if (this.IsUnderground) {
@@ -134,9 +122,10 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (level == ConveyorLevel.Ground) return true;
             return false;
         }
+        // Same for Conveyors:
         public virtual bool CanReceiveFromLevel(ConveyorLevel level) => CanSendToLevel(level);
 
-        /********** IThinHolder ***********/
+        /********** IThingHolder ***********/
         public void GetChildHolders(List<IThingHolder> outChildren) => Enumerable.Empty<IThingHolder>();
         public ThingOwner GetDirectlyHeldThings() => thingOwnerInt;
 
@@ -261,6 +250,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
         /********* Display **********/
         public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
+        /// <summary>
+        /// Output directions used by the Linked Graphic for drawing little arrows
+        /// </summary>
         public virtual IEnumerable<Rot4> ActiveOutputDirections {
             get { yield return this.Rotation; }
         }
@@ -328,39 +320,8 @@ namespace ProjectRimFactory.AutoMachineTool
                     * (1f - Mathf.Clamp01(WorkLeft)));
             }
         }
-        /******** AutoMachineTool logic *********/
-        protected override void ForceStartWork(Thing working, float workAmount) {
-            base.ForceStartWork(working, workAmount);
-            thingOwnerInt.TryAdd(working);
-        }
-        protected override void Reset() {
-            /*            if (this.State != WorkingState.Ready) {
-                            if (this.working != null) {
-                                this.products.Add(this.working);
-                            }
-                        }*/
-            //TODO: Underground belts should not spawn items above ground on reset...
-            if (thingOwnerInt.Any) {// remove them from care of thingOwner:
-                this.products = new List<Thing>(thingOwnerInt.InnerListForReading);
-                thingOwnerInt.Clear();
-            }
-            base.Reset();
-            this.products = thingOwnerInt.InnerListForReading;
-        }
 
-        protected Thing CarryingThing()
-        {
-            if (this.State == WorkingState.Working)
-            {
-                return this.Working;
-            }
-            else if (this.State == WorkingState.Placing)
-            {
-                return this.products[0];
-            }
-            return null;
-        }
-
+        /******** IPRF logic *********/
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
             Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked if it will accept " + newThing);
             if (!this.IsActive()) return false;
@@ -370,8 +331,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             Debug.Message(Debug.Flag.Conveyors, "  It can accept items from " +
                 (giver == null ? "that direction." : giver.ToString()));
-            if (this.State == WorkingState.Ready)
-            {
+            if (this.State == WorkingState.Ready) {
                 // Note: I don't think there is any benefit to 
                 //   an item being spanwed?  But what do I know?
                 if (newThing.Spawned) newThing.DeSpawn();
@@ -381,9 +341,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 stuck = false;
                 this.ForceStartWork(newThing, 1f);
                 return true;
-            }
-            else
-            {
+            } else {
                 var target = this.State == WorkingState.Working ? this.Working : this.products[0];
                 Debug.Message(Debug.Flag.Conveyors, "  but busy with " + target +
                                    ". Will try to absorb");
@@ -412,8 +370,38 @@ namespace ProjectRimFactory.AutoMachineTool
         protected bool ThisCanAcceptThat(Thing t1, Thing t2) =>
                        t1.CanStackWith(t2) && t1.stackCount < t1.def.stackLimit;
 
-        protected override bool PlaceProduct(ref List<Thing> products)
-        {
+
+        /******** AutoMachineTool logic *********/
+        protected override bool TryStartWorking(out Thing target, out float workAmount) {
+            workAmount = 1f;
+            if (this.IsUnderground) {
+                target = null;
+                return false;
+            }
+            target = this.Position.GetThingList(this.Map).FirstOrDefault(t => t.def.EverHaulable);
+            if (target != null) {
+                if (target.Spawned) target.DeSpawn();
+                target.Position = this.Position;
+            }
+            if (target != null) thingOwnerInt.TryAdd(target);
+            return target != null;
+        }
+        protected override void ForceStartWork(Thing working, float workAmount) {
+            base.ForceStartWork(working, workAmount);
+            thingOwnerInt.TryAdd(working);
+        }
+
+        protected override void Reset() {
+            //TODO: Underground belts should not spawn items above ground on reset...
+            if (thingOwnerInt.Any) {// remove them from care of thingOwner:
+                this.products = new List<Thing>(thingOwnerInt.InnerListForReading);
+                thingOwnerInt.Clear();
+            }
+            base.Reset();
+            this.products = thingOwnerInt.InnerListForReading;
+        }
+
+        protected override bool PlaceProduct(ref List<Thing> products) {
             //            var thing = products[0];
             //todo: test for work interruption first....
             if (thingOwnerInt.Count == 0) {
@@ -426,8 +414,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 return true;
             }
             Thing thing = thingOwnerInt.Take(thingOwnerInt[0]);
-            Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this + 
-                (stuck?" is stuck with ":" is about to try placing ") + thing);
+            Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this +
+                (stuck ? " is stuck with " : " is about to try placing ") + thing);
             if (stuck) {
                 thingOwnerInt.TryAdd(thing);
                 if (this.CanOutput(thing)) {
@@ -439,10 +427,8 @@ namespace ProjectRimFactory.AutoMachineTool
             // Try to send to another conveyor first:
             // コンベアある場合、そっちに流す.
             var outputBelt = this.OutputBeltAt(this.OutputCell());
-            if (outputBelt != null)
-            {
-                if ((outputBelt as IPRF_Building).AcceptsThing(thing,this))
-                {
+            if (outputBelt != null) {
+                if ((outputBelt as IPRF_Building).AcceptsThing(thing, this)) {
                     NotifyAroundSender();
                     this.stuck = false;
                     Debug.Message(Debug.Flag.Conveyors, " and successfully passed it to " + outputBelt);
@@ -450,13 +436,11 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
                 Debug.Message(Debug.Flag.Conveyors, " but next belt cannot take it now; stuck.");
                 // Don't try anything else if other belt is busy
-            }
-            else // if no conveyor, place if can
-            {
+            } else // if no conveyor, place if can
+              {
                 Debug.Message(Debug.Flag.Conveyors, "  trying to place at end of conveyor:");
-                if (this.CanSendToLevel(ConveyorLevel.Ground) && this.PRFTryPlaceThing(thing, 
-                      this.OutputCell(), this.Map))
-                {
+                if (this.CanSendToLevel(ConveyorLevel.Ground) && this.PRFTryPlaceThing(thing,
+                      this.OutputCell(), this.Map)) {
                     NotifyAroundSender();
                     this.stuck = false;
                     Debug.Message(Debug.Flag.Conveyors, "Successfully placed!");
@@ -471,12 +455,17 @@ namespace ProjectRimFactory.AutoMachineTool
             return false; // not ready for next work
         }
 
-        public virtual void Link(IBeltConveyorLinkable link)
+        protected Thing CarryingThing()
         {
-        }
-
-        public virtual void Unlink(IBeltConveyorLinkable unlink)
-        {
+            if (this.State == WorkingState.Working)
+            {
+                return this.Working;
+            }
+            else if (this.State == WorkingState.Placing)
+            {
+                return this.products[0];
+            }
+            return null;
         }
 
         /// <summary>
@@ -519,42 +508,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Thing working)
         {
-/*            var o = working.holdingOwner;
-            if (o != null) {
-                string o1 = "null";
-                string o2 = "null";
-                if (o.Owner != null) o1 = o.Owner.ToString();
-                if (thingOwnerInt.Owner != null) o2 = thingOwnerInt.Owner.ToString();
-                Log.Error("Working holding owner: " + o1 + " vs this: " + o2 + " -> " + (working.holdingOwner.Owner == thingOwnerInt.Owner)
-                   + " ... actual test: " + (working.holdingOwner == thingOwnerInt));
-            } else Log.Error("working is " + working + " and has no own....fuck, of course no=t.");*/
             return working.holdingOwner != thingOwnerInt;
-//            return false;
-            //TODO: this was originally designed, as far as I can tell, to 
-            //  trigger if something was picked up or moved (which can in 
-            //  theory happen if it's spawned...) but I cannot seem to make
-            //  it happen?
-            // So, do we want to keep any of that logic around?
-            // return this.IsUnderground ? false : !working.Spawned || working.Position != this.Position;
-        }
-
-        protected override bool TryStartWorking(out Thing target, out float workAmount)
-        {
-            workAmount = 1f;
-            if (this.IsUnderground)
-            {
-                target = null;
-                return false;
-            }
-            target = this.Position.GetThingList(this.Map).Where(t => t.def.EverHaulable)
-                .FirstOrDefault();
-            if (target != null)
-            {
-                if (target.Spawned) target.DeSpawn();
-                target.Position = this.Position;
-            }
-            if (target != null) thingOwnerInt.TryAdd(target);
-            return target != null;
         }
 
         protected override bool FinishWorking(Thing working, out List<Thing> products)
