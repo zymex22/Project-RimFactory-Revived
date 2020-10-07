@@ -36,6 +36,13 @@ namespace ProjectRimFactory.Drones
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
+            //Kill all invalid spawns
+            if (this.station == null)
+            {
+                this.Kill(null);
+                return;
+            }
+
             base.SpawnSetup(map, respawningAfterLoad);
             skills = new Pawn_SkillTracker(this);
             skillSettings = def.GetModExtension<ModExtension_Skills>();
