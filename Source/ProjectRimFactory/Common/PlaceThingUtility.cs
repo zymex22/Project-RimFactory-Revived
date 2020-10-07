@@ -174,19 +174,22 @@ namespace ProjectRimFactory {
             //   still faster than reflection!
             il.Emit(OpCodes.Ldarg_0); // put IntVec3 cell on the stack
             il.Emit(OpCodes.Ldarg_1); // Map
-            //il.Emit(OpCodes.Ldarg_0); // put IntVec3 cell on the stack//uncomment for debug
-            //il.Emit(OpCodes.Ldarg_1); // Map
-            //il.Emit(OpCodes.Call, typeof(PlaceThingUtility).GetMethod("ForDebug", BindingFlags.Static | BindingFlags.Public));
             il.Emit(OpCodes.Ldarg_2); // Thing
+            //il.Emit(OpCodes.Ldarg_0); // put IntVec3 cell on the stack//uncomment for debug
+            //il.Emit(OpCodes.Ldarg_1); // Map for debug
+            //il.Emit(OpCodes.Ldarg_2); // Thing for debug
             il.Emit(OpCodes.Call, typeof(RimWorld.StoreUtility).GetMethod("NoStorageBlockersIn",
                 BindingFlags.Static | BindingFlags.NonPublic));
+            //il.Emit(OpCodes.Call, typeof(PlaceThingUtility).GetMethod("PostCallDebug", BindingFlags.Static | BindingFlags.Public));
             il.Emit(OpCodes.Ret);
             // Now do the magic to make it an actually callable Func<>:
             CallNoStorageBlockersIn = (Func<IntVec3, Map, Thing, bool>)dm.CreateDelegate(
                 typeof(Func<,,,>).MakeGenericType(typeof(IntVec3), typeof(Map), typeof(Thing), typeof(bool)));
             // Mayb there's a way to make that faster? But this works ^.^
         }
-        /*public static void ForDebug(IntVec3 c, Map map) {
+        /*public static bool PostCallDebug(IntVec3 c, Map map, Thing t, bool res) {
+            Log.Message("NSBI: " + t + " at " + c + "; result: " + res);
+            return res;
         }*/
         // Call via "    bool result=CallNoStorageBlockersIn(c, map, thing);"
         public static Func<IntVec3, Map, Thing, bool> CallNoStorageBlockersIn;
