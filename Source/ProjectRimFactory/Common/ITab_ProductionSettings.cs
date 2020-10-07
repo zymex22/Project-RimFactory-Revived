@@ -7,34 +7,37 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 using UnityEngine;
-using ProjectRimFactory.Common;
+using ProjectRimFactory.AutoMachineTool;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
-namespace ProjectRimFactory.AutoMachineTool
+namespace ProjectRimFactory.Common
 {
-    interface IProductLimitation
+    /// <summary>
+    /// An ITab that contains multilpe settings, all in one place:
+    ///  * whether can output produced things to entire stockpile, or only one cell
+    ///  * whether to obey IProductLimitation limits on production/storing
+    /// </summary>
+    class ITab_ProductionSettings : ITab
     {
-        int ProductLimitCount { get; set; }
-        bool ProductLimitation { get; set; }
-        bool CountStacks { get; set; }
-        Option<SlotGroup> TargetSlotGroup { get; set; }
-    }
-
-    class ITab_ProductLimitation : ITab
-    {
-//        private static readonly Vector2 WinSize = new Vector2(400f, 270f);
         private Vector2 winSize = new Vector2(400f, 0f);
+        private List<SlotGroup> groups;
 
-        public ITab_ProductLimitation()
+        public ITab_ProductionSettings()
         {
-            this.labelKey = "PRF.AutoMachineTool.ProductLimitation.TabName";
-        }
-        
-        public IProductLimitation Machine
-        {
-            get => this.SelThing as IProductLimitation;
+            this.labelKey = "PRFSettingsTab";
         }
 
+        public override bool IsVisible {
+            get {
+                if (Machine != null) return true;
+                if (PRFB == null) return false;
+                if (PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground))
+                    return false;
+                return true;
+            }
+        }
+
+        private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
         private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
 
         protected override void UpdateSize() {
@@ -54,8 +57,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.Machine.TargetSlotGroup = this.Machine.TargetSlotGroup.Where(s => this.groups.Contains(s));
             }
         }
-
-        private List<SlotGroup> groups;
 
         protected override void FillTab()
         {
@@ -113,11 +114,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
                 this.Machine.ProductLimitCount = limit;
             }
-
             list.Gap();
-
             list.End();
-
         }
     }
 }

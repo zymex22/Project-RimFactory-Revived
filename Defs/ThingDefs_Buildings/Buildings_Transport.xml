@@ -231,7 +231,7 @@
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_Filter</li>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <researchPrerequisites>
       <li>ADVrollers</li>
@@ -455,9 +455,6 @@
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>
-    <inspectorTabs>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
-    </inspectorTabs>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
         <speedFactor>2.8</speedFactor>
@@ -487,6 +484,9 @@
       </li>
       <li Class="CompProperties_Flickable"/>
     </comps>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorIcon</uiIconPath>
     <graphicData>
       <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
@@ -527,6 +527,9 @@
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
     </placeWorkers>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
       <texPath>AutoMachineTool/Buildings/BeltConveyorTest</texPath>
@@ -623,9 +626,6 @@
     <placeWorkers>
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
-    <inspectorTabs>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
-    </inspectorTabs>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -678,6 +678,9 @@
       <drawSize>(1,1.1)</drawSize>
       <drawRotated>true</drawRotated>
     </graphicData>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
         <toUnderground>false</toUnderground>
@@ -722,7 +725,7 @@
       </blueprintGraphicData>
     </building>
     <inspectorTabs>
-      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <statBases>
       <WorkToBuild Inherit="false">450</WorkToBuild>
@@ -747,7 +750,6 @@
     </modExtensions>
     <graphicData>
       <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
-<!--      <texPath>Belts/Splitters-Atlas_Rollers_256x256_v1.06</texPath>TODO - correct path?-->
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedSplitter</graphicClass>
       <drawRotated>true</drawRotated>
     </graphicData>
