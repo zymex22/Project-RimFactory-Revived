@@ -260,13 +260,11 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void DrawGUIOverlay()
         {
             base.DrawGUIOverlay();
-
             if (this.IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
             {
                 // 地下コンベアの場合には表示しない.
                 return;
             }
-
             if (this.State != WorkingState.Ready && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
             {
                 var p = CarryPosition();
@@ -619,17 +617,6 @@ namespace ProjectRimFactory.AutoMachineTool
             return null;
         }
 
-        public Thing Pickup()//<) TODO
-        {
-            var pickup = this.Carrying();
-            if (pickup != null)
-            {
-                this.products.Clear();
-                this.working = null;
-                this.ForceReady();
-            }
-            return pickup;
-        }
         public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
                              Rot4 queryRotation, ConveyorLevel queryLevel) {
             // Not going to error check here: if there's a config error, there will be prominent
