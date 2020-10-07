@@ -224,7 +224,6 @@
     </statBases>
     <stuffCategories>
       <li>Metallic</li>
-      <li>Woody</li>
       <li>Stony</li>
     </stuffCategories>
     <costStuffCount>20</costStuffCount>
@@ -299,6 +298,9 @@
         </workTypes>
       </li>
     </modExtensions>
+    <researchPrerequisites>
+      <li>PRFGoldbachConjecture</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <!--=========================== Fire Drone Station ==================================-->
@@ -349,8 +351,6 @@
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
     </comps>
-    <researchPrerequisites>
-    </researchPrerequisites>
   </ThingDef> -->
 
 </Defs>
