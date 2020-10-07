@@ -454,7 +454,7 @@ namespace ProjectRimFactory.AutoMachineTool
             else // if no conveyor, place if can
             {
                 Debug.Message(Debug.Flag.Conveyors, "  trying to place at end of conveyor:");
-                if (!this.CanSendToLevel(ConveyorLevel.Ground) && this.PRFTryPlaceThing(thing, 
+                if (this.CanSendToLevel(ConveyorLevel.Ground) && this.PRFTryPlaceThing(thing, 
                       this.OutputCell(), this.Map))
                 {
                     NotifyAroundSender();
@@ -589,7 +589,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 return belt.CanAcceptNow(t);
             }
             Debug.Message(Debug.Flag.Conveyors, "    No belts can take " + t);
-            return !this.IsUnderground && PlaceThingUtility.CallNoStorageBlockersIn(OutputCell(), Map, t);
+            return this.CanSendToLevel(ConveyorLevel.Ground) 
+                    && PlaceThingUtility.CallNoStorageBlockersIn(OutputCell(), Map, t);
         }
 
         protected void ChangeStuckStatus(Thing t) {
