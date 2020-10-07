@@ -1,5 +1,6 @@
 ﻿using System;
 using Verse;
+using System.Collections.Generic;
 
 namespace ProjectRimFactory.Common {
     // ProjectRimFactory is all about producing things, moving things, 
@@ -28,13 +29,14 @@ namespace ProjectRimFactory.Common {
         /// the IPRF_Building, or null if no such Things are available.</returns>
         /// <param name="optionalValidator">Optional validator.</param>
         Thing GetThingBy(Func<Thing, bool> optionalValidator = null);
+        IEnumerable<Thing> AvailableThings { get; }
         /// <summary>
         /// Should the Building forbid output items?
         /// </summary>
         /// <returns><c>true</c>, if, on placing, thing should be forbidden, <c>false</c> otherwise.</returns>
-        bool ForbidOnPlacing();
-        // List<Thing> AvailableThings(); // maybe?
+        bool ForbidOnPlacing(Thing t);
         bool ObeysStorageFilters { get; }
+        bool OutputToEntireStockpile { get; }
         void EffectOnPlaceThing(Thing t);
         void EffectOnAcceptThing(Thing t);
 

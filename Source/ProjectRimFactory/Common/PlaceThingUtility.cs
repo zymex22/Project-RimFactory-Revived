@@ -83,7 +83,7 @@ namespace ProjectRimFactory {
                     Log.Error("Could not place thing " + t + " at " + cell);
                 }
                 placer.EffectOnPlaceThing(t);
-                if (placer.ForbidOnPlacing()) t.SetForbidden(true, false);
+                if (placer.ForbidOnPlacing(t)) t.SetForbidden(true, false);
                 return true;
             }
             if (!forcePlace) return false;
@@ -92,7 +92,7 @@ namespace ProjectRimFactory {
             if (t.Spawned) t.DeSpawn();
             GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Near);
             placer.EffectOnPlaceThing(t);
-            if (placer.ForbidOnPlacing())
+            if (placer.ForbidOnPlacing(t))
                 t.SetForbidden(true, false);
             return true;
         }
@@ -107,6 +107,7 @@ namespace ProjectRimFactory {
         }
         private static bool PlaceThingInSlotGroup(this IPRF_Building placer, Thing t,
             SlotGroup slotGroup, IntVec3 cell, Map map) {
+            if (placer?.OutputToEntireStockpile == true) return PlaceThingAnywhereInSlotGroup(placer, t, slotGroup, cell);
             // Head off a lot of potential calculation:
             // TODO: Deal properly with underground conveyors (need options to allow
             //       player to decide how that works.
@@ -119,7 +120,7 @@ namespace ProjectRimFactory {
                     Log.Error("Could not place thing "+t+" at "+cell);
                 }
                 placer.EffectOnPlaceThing(t);
-                if (placer.ForbidOnPlacing()) t.SetForbidden(true, false);
+                if (placer.ForbidOnPlacing(t)) t.SetForbidden(true, false);
                 return true;
             }
             Debug.Message(Debug.Flag.PlaceThing, "There were StorageBlockersIn(" + cell + ", map, " + t + ") - cannot place");
@@ -152,7 +153,7 @@ namespace ProjectRimFactory {
                         Log.Error("Could not place thing " + t + " at " + cell);
                     }
                     placer.EffectOnPlaceThing(t);
-                    if (placer.ForbidOnPlacing()) t.SetForbidden(true, false);
+                    if (placer.ForbidOnPlacing(t)) t.SetForbidden(true, false);
                     return true;
                 }
             }

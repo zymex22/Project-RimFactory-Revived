@@ -59,6 +59,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public StorageSettings StorageSettings => this.storageSettings;
 
         private bool ForcePlace => this.def.GetModExtension<ModExtension_Testing>()?.forcePlacing ?? false;
+        public override bool OutputToEntireStockpile { get => true; }
 
         private bool right = false;
 
