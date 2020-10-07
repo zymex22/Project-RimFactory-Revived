@@ -455,6 +455,9 @@
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
+    </inspectorTabs>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
         <speedFactor>2.8</speedFactor>
@@ -621,6 +624,7 @@
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
     <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
     </inspectorTabs>
     <comps>
       <li Class="CompProperties_Power">
@@ -717,6 +721,9 @@
         <drawSize>(1, 1)</drawSize>
       </blueprintGraphicData>
     </building>
+    <inspectorTabs>
+      <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
+    </inspectorTabs>
     <statBases>
       <WorkToBuild Inherit="false">450</WorkToBuild>
     </statBases>

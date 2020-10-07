@@ -16,6 +16,9 @@ namespace ProjectRimFactory.AutoMachineTool
 {
     public class Building_ItemPuller : Building_BaseLimitation<Thing>, IStorageSetting, IStoreSettingsParent
     {
+        public Building_ItemPuller() {
+            this.outputToEntireStockpile = true;
+        }
         protected bool active = false;
         protected bool takeForbiddenItems=true;
         public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
@@ -59,7 +62,6 @@ namespace ProjectRimFactory.AutoMachineTool
         public StorageSettings StorageSettings => this.storageSettings;
 
         private bool ForcePlace => this.def.GetModExtension<ModExtension_Testing>()?.forcePlacing ?? false;
-        public override bool OutputToEntireStockpile { get => true; }
 
         private bool right = false;
 

@@ -162,6 +162,18 @@ namespace ProjectRimFactory {
             return false;
         }
 
+        public static bool CanPlaceThingInSlotGroup(Thing t, SlotGroup slotGroup, Map map) {
+            foreach (var c in slotGroup.CellsList) {
+                if (CallNoStorageBlockersIn(c, map, t)) {
+                    return true;
+                }
+            }
+            Debug.Message(Debug.Flag.PlaceThing, "There were StorageBlockersIn every cell of "
+                       + slotGroup.parent + " - can not place" + t);
+            return false;
+        }
+
+
         // static constructor to prep dynamic method
         static PlaceThingUtility() {
             // Set up CallNoStorageBlockersIn, to allow fast calling:

@@ -16,10 +16,18 @@ namespace ProjectRimFactory.Common
 
         public virtual bool ForbidOnPlacing(Thing t) => false;
         public virtual bool ObeysStorageFilters { get => true; }
-        public virtual bool OutputToEntireStockpile { get => outputToEntireStockpile; }
+        public virtual bool OutputToEntireStockpile {
+            get => outputToEntireStockpile;
+            set => outputToEntireStockpile = value;
+        }
         public virtual void EffectOnPlaceThing(Thing t) { }
         public virtual void EffectOnAcceptThing(Thing t) { }
 
         protected bool outputToEntireStockpile=false;
+
+        public override void ExposeData() {
+            base.ExposeData();
+            Scribe_Values.Look(ref outputToEntireStockpile, "PRFOutputToEntireStockpile", false);
+        }
     }
 }

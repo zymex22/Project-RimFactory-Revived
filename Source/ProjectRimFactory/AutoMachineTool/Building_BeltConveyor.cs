@@ -541,8 +541,14 @@ namespace ProjectRimFactory.AutoMachineTool
                 return belt.CanAcceptNow(t);
             }
             Debug.Message(Debug.Flag.Conveyors, "    No belts can take " + t);
-            return this.CanSendToLevel(ConveyorLevel.Ground) 
-                    && PlaceThingUtility.CallNoStorageBlockersIn(OutputCell(), Map, t);
+            if (!CanSendToLevel(ConveyorLevel.Ground)) return false;
+            if (OutputToEntireStockpile) {
+                SlotGroup slotGroup = OutputCell().GetSlotGroup(Map);
+                if (slotGroup!=null) {
+                    return PlaceThingUtility.CanPlaceThingInSlotGroup(t, slotGroup, Map);
+                }
+            }
+            return PlaceThingUtility.CallNoStorageBlockersIn(OutputCell(), Map, t);
         }
 
         protected void ChangeStuckStatus(Thing t) {
