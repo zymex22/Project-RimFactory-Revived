@@ -62,7 +62,7 @@ namespace ProjectRimFactory.Common
             list.Label("Debug Symbols:");
             foreach (var f in (Debug.Flag [])Enum.GetValues(typeof(Debug.Flag))) {
                 bool ischecked = (f & Debug.activeFlags) > 0;
-                list.CheckboxLabeled(f.ToString(), ref ischecked);
+                list.CheckboxLabeled(f.ToString(), ref ischecked, f.ToString());// use Desc to force list to highlight
                 if (!ischecked == (f & Debug.activeFlags) > 0) {
                     Debug.activeFlags ^= f; // toggle f
                 }
