@@ -55,8 +55,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public StorageSettings GetParentStoreSettings() => def.building.fixedStorageSettings;
 
-
-        [Unsaved]
         protected StorageSettings storageSettings;
         public StorageSettings StorageSettings => this.storageSettings;
 
@@ -107,6 +105,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
             this.settings = GetStoreSettings(); // force init
             this.forcePlace = ForcePlace;
+
+            if (!respawningAfterLoad) Messages.Message("PRF.NeedToTurnOnPuller".Translate(), 
+                     this, MessageTypeDefOf.CautionInput);
         }
 
         protected override void Reset()

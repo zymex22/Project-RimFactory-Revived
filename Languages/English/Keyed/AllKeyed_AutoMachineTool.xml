@@ -57,6 +57,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   
   <!-- ItemPuller -->
   <PRF.AutoMachineTool.Puller.SwitchActiveLabel>Toggle Pulling</PRF.AutoMachineTool.Puller.SwitchActiveLabel>
+  <PRF.NeedToTurnOnPuller>Puller is inactive until toggled on.</PRF.NeedToTurnOnPuller>
   <PRF.AutoMachineTool.Puller.SwitchActiveDesc>Switch the operating status On/Off.</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
   <PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>Switch output side,</PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>
   <PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>Switch output side.</PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>
