@@ -54,9 +54,11 @@ namespace ProjectRimFactory.AutoMachineTool
             //  RW's ThingOwner mechanism, made viable by C#'s list-by-
             //  reference mechanism.  It works great!
             products = thingOwnerInt.InnerListForReading;
-        }
+            // Conveyors are dumb. They just dump their stuff onto the ground when they end!
+            this.obeysStorageFilters = false;
+    }
 
-        protected ThingOwner<Thing> thingOwnerInt;
+    protected ThingOwner<Thing> thingOwnerInt;
 
         public static float supplyPower = 10f;
         protected bool stuck = false;
@@ -102,9 +104,6 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return null;
         }
-        // Conveyors are dumb. They just dump their stuff onto the ground when they end!
-        //   TODO: mod setting?
-        public override bool ObeysStorageFilters => false;
 
         /************* Conveyors IBeltConveyor ***********/
         public bool IsStuck => this.stuck;
@@ -367,7 +366,11 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         protected bool ThisCanAcceptThat(Thing t1, Thing t2) =>
                        t1.CanStackWith(t2) && t1.stackCount < t1.def.stackLimit;
-
+        // We (LWM) are mean and don't allow conveyors to change the "Obey Storage Filters"
+        //   setting.  Maybe if zymex is really nice we can change this....
+        public override PRFBSetting SettingsOptions {
+            get => base.SettingsOptions & ~PRFBSetting.optionObeysStorageFilters;
+        }
 
         /******** AutoMachineTool logic *********/
         protected override bool TryStartWorking(out Thing target, out float workAmount) {

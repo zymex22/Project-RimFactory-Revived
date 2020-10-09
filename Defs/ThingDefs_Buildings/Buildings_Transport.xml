@@ -698,7 +698,18 @@
     <clearBuildingArea>true</clearBuildingArea>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ConveyorFilter</li>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
+    <costList>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <Steel>60</Steel>
+    </costList>
+    <!--<stuffCategories>Guess what we cannot do with current menu options?  Have a stuffed thing. Dmmit.
+      <li>Stony</li>
+      <li>Metallic</li>
+      <li>Woody</li>
+    </stuffCategories>
+    <costStuffCount>40</costStuffCount>-->
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -724,9 +735,6 @@
         <drawSize>(1, 1)</drawSize>
       </blueprintGraphicData>
     </building>
-    <inspectorTabs>
-      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
-    </inspectorTabs>
     <statBases>
       <WorkToBuild Inherit="false">450</WorkToBuild>
     </statBases>

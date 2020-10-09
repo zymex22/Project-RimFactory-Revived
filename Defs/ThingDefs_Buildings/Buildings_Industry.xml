@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_industry_gr</defName>
+  </DesignatorDropdownGroupDef>
 
   <!--==================== Industrial Base ====================-->
   <ThingDef Name="PRF_IndustrialBase" ParentName="PRFBuildingBase" Abstract="True">
@@ -37,13 +40,11 @@
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>
+        <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
   </ThingDef>
-
-
-  <DesignatorDropdownGroupDef>
-    <defName>PRF_industry_gr</defName>
-  </DesignatorDropdownGroupDef>
-
+  
   <!--==================== Stoneworks ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_StoneWorks</defName>

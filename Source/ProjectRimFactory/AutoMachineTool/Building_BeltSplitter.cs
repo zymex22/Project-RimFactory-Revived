@@ -25,6 +25,15 @@ namespace ProjectRimFactory.AutoMachineTool
         [Unsaved]
         private HashSet<IBeltConveyorLinkable> incomingLinks = new HashSet<IBeltConveyorLinkable>();
 
+        public Building_BeltSplitter() : base() {
+            // Conveyors are dumb. They just dump their stuff onto the ground when they end!
+            //   But splitters are smart, they can figure stuff out:
+            this.obeysStorageFilters = true;
+        }
+        public override PRFBSetting SettingsOptions { // allow player to change this at playtime:
+            get => base.SettingsOptions | PRFBSetting.optionObeysStorageFilters;
+        }
+
         protected override Rot4 OutputDirection => dest;
         public override IEnumerable<Rot4> ActiveOutputDirections {
             get {
@@ -33,10 +42,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
             }
         }
-
-        // Conveyors are dumb. They just dump their stuff onto the ground when they end!
-        //   But splitters are smart, they can figure stuff out:
-        public override bool ObeysStorageFilters => true;
 
         // TODO: revisit:
         //public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
@@ -60,7 +65,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.showProgressBar = false;
-            //outputLinks.Clear(); // TODO <) ??
+            //outputLinks.Clear(); // TOD\O <) ??
             incomingLinks.Clear();
 
             var links = AllNearbyLinks().ToList();
@@ -80,7 +85,6 @@ namespace ProjectRimFactory.AutoMachineTool
             outputLinks.Clear();
             incomingLinks.Clear();
         }
-
         /// <summary>
         /// If the graphic changes - for example, the number of arrows for output
         ///    we probably need to refresh the graphic.  So, call this from Link,
