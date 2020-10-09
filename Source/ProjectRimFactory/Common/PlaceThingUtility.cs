@@ -149,8 +149,9 @@ namespace ProjectRimFactory {
                     Debug.Message(Debug.Flag.PlaceThing, "Found NoStorageBlockersIn(" + cell + ", map, " + t + ") - Placing");
                     if (t.Spawned) t.DeSpawn();
                     if (!GenPlace.TryPlaceThing(t, c, map, ThingPlaceMode.Direct)) {
-                        // should never happen??
+                        // should never happen??//TODO: This happens if some was absorbed!! Handle this gracefully!!
                         Log.Error("Could not place thing " + t + " at " + cell);
+                        return false;
                     }
                     placer.EffectOnPlaceThing(t);
                     if (placer.ForbidOnPlacing(t)) t.SetForbidden(true, false);
