@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using ProjectRimFactory.Common;
+using HarmonyLib; //TESTING
 
 namespace ProjectRimFactory.Industry
 {
@@ -20,6 +22,21 @@ namespace ProjectRimFactory.Industry
             base.TickRare();
             Refuel();
         }
+
+        //This function will be Harmony Patched if SOS2 is instaled
+        //This is nessesary to support play without SOS2
+        private Thing checkIfThingIsSoS2Weapon(Thing thing)
+        {
+            return null;
+        }
+        //This function will be Harmony Patched if SOS2 is instaled
+        //This is nessesary to support play without SOS2
+        private void refuelSoSWeapon(Thing thing)
+        {
+            return;
+        }
+
+
         public void Refuel()
         {
             if (GetComp<CompPowerTrader>().PowerOn)
@@ -30,13 +47,24 @@ namespace ProjectRimFactory.Industry
                 //    instead of all the "return;"s below)
                 CompRefuelable refuelableComp=null;
                 CompChangeableProjectile changeableProjectileComp = null;
-                
+                //Only set to non null if tmpThing is a SOS2 Weapon
+                Thing SOS2Weapon = null;
+
                 foreach (Thing tmpThing in Map.thingGrid.ThingsListAt(FuelableCell)) {
                     if (tmpThing is Building)
                     {
                         refuelableComp = (tmpThing as Building).GetComp<CompRefuelable>();
                         //This if for Mortar like buildings
                         changeableProjectileComp = (tmpThing as Building_TurretGun)?.gun?.TryGetComp<CompChangeableProjectile>();
+                        
+                        //Save our Ship 2 Patch
+                        if (LoadedMods.Metha_sos2 != null)
+                        {
+                            SOS2Weapon = checkIfThingIsSoS2Weapon(tmpThing);
+                        }
+                       
+
+
                     }
                     if (refuelableComp != null || changeableProjectileComp != null) break;
                 }
@@ -99,15 +127,28 @@ namespace ProjectRimFactory.Industry
                                 {
                                     //Load Item
                                     changeableProjectileComp.LoadShell(item.def, 1);
+                                    if (item.stackCount > 1)
+                                    {
+                                        item.SplitOff(1).Destroy();
+                                    }
+                                    else
+                                    {
+                                        item.Destroy();
+                                    }
                                     if (changeableProjectileComp.Loaded) return;
                                 }
                             }
                         }
                     }
                 }
+                if (SOS2Weapon != null)
+                {
+                    refuelSoSWeapon(SOS2Weapon);
+                }
             
             }
         }
+
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
