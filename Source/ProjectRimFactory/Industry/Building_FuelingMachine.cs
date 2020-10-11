@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using ProjectRimFactory.Common;
-using HarmonyLib; //TESTING
 
 namespace ProjectRimFactory.Industry
 {
