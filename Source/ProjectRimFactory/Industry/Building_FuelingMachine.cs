@@ -50,26 +50,34 @@ namespace ProjectRimFactory.Industry
                             //     Feature.  Not a bug.
                             // But if it ever causes a problem, uncomment this check:
                             // if (item.def.category != ThingCategory.Item) continue;
-                            if (refuelableComp.Props.fuelFilter.Allows(item))
-                            {
-                                // round down to not waste fuel:
-                                int num = Mathf.Min(item.stackCount, Mathf.FloorToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
-                                if (num > 0) {
-                                    refuelableComp.Refuel(num);
-                                    item.SplitOff(num).Destroy();
-                                } else { // It's not quite 1 below TargetFuelLevel
-                                    // but we KNOW we are at least .9999f below TargetFuelLevel (see test above)
-                                    // So we call it close enough to 1:
-                                    refuelableComp.Refuel(1);
-                                    item.SplitOff(1).Destroy();
-                                }
-                                // check fuel as float (as above)
-                                if (refuelableComp.Fuel + 0.9999f >= refuelableComp.TargetFuelLevel) return; // fully fueled
+                            if (RefuelWith(refuelableComp, item)) return;
+                            if (item is Building && item is IThingHolder holder) {
+                                if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner)
+                                    foreach (var t in owner.InnerListForReading)
+                                        if (RefuelWith(refuelableComp, t)) return;
                             }
                         }
                     }
                 }
             }
+        }
+        private bool RefuelWith(CompRefuelable refuelableComp, Thing item) {
+            if (refuelableComp.Props.fuelFilter.Allows(item)) {
+                // round down to not waste fuel:
+                int num = Mathf.Min(item.stackCount, Mathf.FloorToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
+                if (num > 0) {
+                    refuelableComp.Refuel(num);
+                    item.SplitOff(num).Destroy();
+                } else { // It's not quite 1 below TargetFuelLevel
+                         // but we KNOW we are at least .9999f below TargetFuelLevel (see test above)
+                         // So we call it close enough to 1:
+                    refuelableComp.Refuel(1);
+                    item.SplitOff(1).Destroy();
+                }
+                // check fuel as float (as above)
+                return (refuelableComp.Fuel + 0.9999f >= refuelableComp.TargetFuelLevel); // fully fueled
+            }
+            return false;
         }
         public override void DrawExtraSelectionOverlays()
         {
