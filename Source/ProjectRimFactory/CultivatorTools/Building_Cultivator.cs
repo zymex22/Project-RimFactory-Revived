@@ -193,4 +193,10 @@ namespace ProjectRimFactory.CultivatorTools
             GenDraw.DrawFieldEdges(new List<IntVec3> { OutputSlot }, Color.yellow);
         }
     }
+
+    public class DefModExtension_DoneBehavior : DefModExtension
+    {
+        public bool hauling = false;
+    }
+
 }

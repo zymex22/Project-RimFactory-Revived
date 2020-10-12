@@ -9,17 +9,6 @@ using ProjectRimFactory.Drones;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    [HarmonyPatch(typeof(RaceProperties), "get_IsFlesh")]
-    public static class RacePropertiesPatch
-    {
-        public static void Postfix(ref bool __result, RaceProperties __instance)
-        {
-            if (__instance.FleshType == PRFDefOf.PRFDroneFlesh)
-            {
-                __result = false;
-            }
-        }
-    }
 
     // A patch to the problem of forbidding what drones have mined.
     // When mineable yields, if pawn is Drone, Drone will be Colonist.

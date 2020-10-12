@@ -18,27 +18,48 @@ namespace ProjectRimFactory.Drones
                 return extension.workTypes;
             }
         }
+        public virtual Dictionary<WorkTypeDef,bool> WorkSettings_dict
+        {
+            get
+            {
+                return WorkSettings;
+            }
+        }
 
+        //TODO Finding a good way to Cache pawn.workSettings may increase performence
         public override Job TryGiveJob()
         {
             Job result = null;
-            Pawn pawn = MakeDrone();
-            GenSpawn.Spawn(pawn, Position, Map);
-            pawn.workSettings = new Pawn_WorkSettings(pawn);
-            pawn.workSettings.EnableAndInitialize();
-            pawn.workSettings.DisableAll();
-            
-            foreach (WorkTypeDef def in WorkTypes)
-            {
-                pawn.workSettings.SetPriority(def, 3);
+            if (!(cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(this).ToString()))) 
+            { 
+                Pawn pawn = MakeDrone();
+                GenSpawn.Spawn(pawn, Position, Map);
+
+                pawn.workSettings = new Pawn_WorkSettings(pawn);
+                pawn.workSettings.EnableAndInitialize();
+                pawn.workSettings.DisableAll();
+
+                //Set the workSettings based upon the settings
+                foreach (WorkTypeDef def in WorkSettings.Keys)
+                {
+                    if (WorkSettings[def])
+                    {
+                        pawn.workSettings.SetPriority(def, 3);
+                    }
+                    else
+                    {
+                        pawn.workSettings.SetPriority(def, 0);
+                    }
+                }
+
+                result = TryIssueJobPackageDrone(pawn, true).Job;
+                if (result == null)
+                {
+                    result = TryIssueJobPackageDrone(pawn, false).Job;
+                }
+                pawn.Destroy();
+                Notify_DroneGained();
             }
-            result = TryIssueJobPackageDrone(pawn, true).Job;
-            if (result == null)
-            {
-                result = TryIssueJobPackageDrone(pawn, false).Job;
-            }
-            pawn.Destroy();
-            Notify_DroneGained();
             return result;
         }
 
