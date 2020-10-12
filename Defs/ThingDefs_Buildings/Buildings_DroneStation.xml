@@ -26,6 +26,7 @@
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <displayDormantDrones>true</displayDormantDrones>
         <workTypes>
+          <li>Firefighter</li>
           <li>BasicWorker</li>
           <li>Hauling</li>
           <li>Cleaning</li>
@@ -68,12 +69,6 @@
         <workTypes>
           <li>Construction</li>
           <li>Mining</li>
-          <li>Firefighter</li>
-          <li>BasicWorker</li>
-          <li>Hauling</li>
-          <li>Cleaning</li>
-          <li>PlantCutting</li>
-          <li>Growing</li>
         </workTypes>
       </li>
     </modExtensions>
@@ -111,6 +106,7 @@
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <displayDormantDrones>true</displayDormantDrones>
         <workTypes>
+          <li>Growing</li>
           <li>PlantCutting</li>
         </workTypes>
       </li>

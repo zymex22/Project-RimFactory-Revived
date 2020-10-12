@@ -79,7 +79,7 @@
     <graphicData>
       <texPath>Farm/Cultivator</texPath>
     </graphicData>
-    <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.</description>
+    <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.\n\nWill haul to a storage or stockpile if withing range.</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFDroneModule>2</PRFDroneModule>
@@ -121,7 +121,7 @@
       <texPath>Farm/CultivatorWithSunLamp</texPath>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
-    <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Has a sun lamp. Will not be affected by any stat modifiers.</description>
+    <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Has a sun lamp. Will not be affected by any stat modifiers.\n\nWill haul to a storage or stockpile if withing range.</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFDroneModule>2</PRFDroneModule>
@@ -133,7 +133,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>3100</basePowerConsumption>
+        <basePowerConsumption>3000</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">        <!-- CompGlower: Color of light it will emit. RGBA: (r, g, b, 0) -->
         <overlightRadius>9</overlightRadius>
