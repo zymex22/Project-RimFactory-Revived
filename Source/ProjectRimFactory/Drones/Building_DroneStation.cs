@@ -338,11 +338,11 @@ namespace ProjectRimFactory.Drones
         {
             if (a == null)
             {
-                droneAreaSelectorLable = "Unrestricted\nSelect Area";
+                droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate("Unrestricted".Translate());
             }
             else
             {
-                droneAreaSelectorLable = a.Label + "\nSelect Area";
+                droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate(a.Label);
             }
         }
 
