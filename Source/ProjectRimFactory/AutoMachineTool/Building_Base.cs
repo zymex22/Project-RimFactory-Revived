@@ -58,7 +58,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected WorkingState State
         {
             get { return this.state; }
-            private set
+            set
             {
                 if (this.state != value)
                 {

@@ -49,7 +49,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public Building_BeltConveyor()
         {
             base.setInitialMinPower = false;
-            this.thingOwnerInt = new ThingOwner<Thing>(this);
+            this.thingOwnerInt = new ThingOwner_Conveyor(this);
             // this is a horrible bastardization of AutoMachineTool and 
             //  RW's ThingOwner mechanism, made viable by C#'s list-by-
             //  reference mechanism.  It works great!
@@ -58,7 +58,7 @@ namespace ProjectRimFactory.AutoMachineTool
             this.obeysStorageFilters = false;
     }
 
-    protected ThingOwner<Thing> thingOwnerInt;
+        protected ThingOwner_Conveyor thingOwnerInt;
 
         public static float supplyPower = 10f;
         protected bool stuck = false;
@@ -97,6 +97,7 @@ namespace ProjectRimFactory.AutoMachineTool
             // TODO: underground?  Mod Setting?
             if (IsUnderground || this.State == WorkingState.Ready) return null;
             if (optionalValidator == null || optionalValidator(products[0])) {
+                this.State = WorkingState.Placing;
                 Thing t = thingOwnerInt.Take(products[0]);
                 working = null;
                 this.ForceReady();
@@ -179,7 +180,15 @@ namespace ProjectRimFactory.AutoMachineTool
                 thingOwnerInt.TryAdd(t);
             }
         }
-
+        public void Notify_LostItem(Thing item) {
+            Debug.Warning(Debug.Flag.Conveyors, this + " was notified it has lost " + item);
+            if ((item.holdingOwner != this.thingOwnerInt) && !thingOwnerInt.Any
+                 && this.State != WorkingState.Ready // nothing happening
+                 && this.State != WorkingState.Placing) // already placing; should know it's gone
+            {
+                Reset(); // something took it!
+            }
+        }
         /********** RimWorld *********/
         /**********************
          * Saving and Loading
@@ -214,7 +223,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Deep.Look(ref thingOwnerInt, "thingOwner", new object[] { this });
             if (Scribe.mode == LoadSaveMode.PostLoadInit) {
                 if (thingOwnerInt == null) {
-                    thingOwnerInt = new ThingOwner<Thing>(this);
+                    thingOwnerInt = new ThingOwner_Conveyor(this);
                 }
                 if (version < 2) {
                     if (working != null) thingOwnerInt.TryAdd(working);
