@@ -32,75 +32,9 @@ namespace ProjectRimFactory.AutoMachineTool {
                 (IsStuck && WorkLeft < 0.05f) ||
                 (!IsStuck && WorkLeft > 0.85f)) {
                 base.DrawCarried();
-                //this.CarryingThing().DrawAt(CarryPosition());
             }            
         }
 
-/*        public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
-            Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked to accept " + newThing);
-            if (!IsActive()) return false;
-            if (giver is AutoMachineTool.IBeltConveyorLinkable conveyor) {
-                if (this.ToUnderground) {
-                    if (!conveyor.CanSendToLevel(ConveyorLevel.Ground)) {
-                        Debug.Message(Debug.Flag.Conveyors, "  but this starts on the surface");
-                        return false;
-                    }
-                } else // this: underground -> surface
-                    if (!conveyor.CanSendToLevel(ConveyorLevel.Underground)) {
-                        Debug.Message(Debug.Flag.Conveyors, " but this starts un\tderground");
-                        return false;
-                }
-            }
-            if (this.State == WorkingState.Ready) {
-                Debug.Message(Debug.Flag.Conveyors, "  taking it.");
-                if (newThing.Spawned && this.IsUnderground) newThing.DeSpawn();
-                newThing.Position = this.Position;
-                this.ForceStartWork(newThing, 1f);
-                return true;
-            } else {
-                Debug.Message(Debug.Flag.Conveyors, "  but busy; trying to absorb.");
-                var target = this.State == WorkingState.Working ? this.Working : this.products[0];
-                return target.TryAbsorbStack(newThing, true);
-            }
-        }
-        */
-
-/*        protected override bool PlaceProduct(ref List<Thing> products) {
-            // These can only place things in one direction.
-            var thing = products[0];
-            var next = this.OutputConveyor();
-            if (next != null) {
-                // コンベアある場合、そっちに流す.
-                // If there is a conveyor, let it flow to it
-                if (next.AcceptsThing(thing, this)) {
-                    this.stuck = false;
-                    return true;
-                }
-            } else {
-                if (!this.ToUnderground && this.PRFTryPlaceThing(thing,
-                    this.Position + this.Rotation.FacingCell,
-                    this.Map)) {
-                    this.stuck = false;
-                    return true;
-                }
-            }
-            // 配置失敗.
-            this.stuck = true;
-            return false;
-        }
-        */
-/*        // TODO: Faster to directly access, or to cache
-        private IBeltConveyorLinkable OutputConveyor() {
-            return (this.Position + Rotation.FacingCell).GetThingList(this.Map)
-                .OfType<IBeltConveyorLinkable>()
-                .Where(b => this.CanLinkTo(b))
-                .FirstOrDefault(b => b.CanLinkFrom(this));
-        }
-
-        protected override bool WorkInterruption(Thing working) {
-            return false;
-        }
-*/
         //TODO: Decide if we allow this.
         protected override bool TryStartWorking(out Thing target, out float workAmount) {
             if (this.ToUnderground) return base.TryStartWorking(out target, out workAmount);
