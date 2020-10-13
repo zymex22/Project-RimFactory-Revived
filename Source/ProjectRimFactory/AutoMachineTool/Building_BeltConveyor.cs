@@ -63,11 +63,12 @@ namespace ProjectRimFactory.AutoMachineTool
         public static float supplyPower = 10f;
         protected bool stuck = false;
 
-        // how far towards the next belt to stop:
-        protected readonly float stuckDrawPercent = 0.3f;
         // A few display constants:
+        // how far towards the next belt to stop:
+        protected readonly float stuckDrawPercent = 0.3f; // also slightly affects game logic
         // scale to draw items while on belts:
         protected const float carriedItemScale = 0.75f;
+        protected const float undergroundItemScale = 0.60f;
         // additional height over the belt's True Center to draw:
         protected const float carriedItemDrawHeight = 0.15f;
 
@@ -301,6 +302,7 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         public virtual void DrawCarried() {
             Thing t = CarryingThing();
+            float scale = IsUnderground ? undergroundItemScale : carriedItemScale;
             // Took this line from MinifiedThing; don't know if it's needed:
             var g = t.Graphic.ExtractInnerGraphicFor(t);
             // Graphic's GetCopy() fails on any Graphic_RandomRotated
@@ -309,9 +311,9 @@ namespace ProjectRimFactory.AutoMachineTool
             if (g is Graphic_RandomRotated grr) {
                 var d = t.def.graphicData;
                 g = GraphicDatabase.Get(d.graphicClass, d.texPath, g.Shader,
-                          new Vector2(carriedItemScale, carriedItemScale), g.color, g.colorTwo);
+                          new Vector2(scale, carriedItemScale), g.color, g.colorTwo);
             } else {
-                g = g.GetCopy(new Vector2(carriedItemScale, carriedItemScale));
+                g = g.GetCopy(new Vector2(scale, carriedItemScale));
             }
             g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
         }
