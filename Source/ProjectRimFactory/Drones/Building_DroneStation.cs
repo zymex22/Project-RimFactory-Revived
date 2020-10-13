@@ -226,9 +226,9 @@ namespace ProjectRimFactory.Drones
         {
             //Refresh the area
             droneAllowedArea = dr ?? (Area)GetDroneAllowedArea;
-            foreach (Pawn_Drone sdrone in spawnedDrones)
+            for (int i = 0; i < spawnedDrones.Count; i++)
             {
-                sdrone.playerSettings.AreaRestriction = droneAllowedArea;    
+                spawnedDrones[i].playerSettings.AreaRestriction = droneAllowedArea;
             }
         }
 
