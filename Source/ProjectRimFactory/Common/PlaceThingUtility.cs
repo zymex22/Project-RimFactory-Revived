@@ -78,9 +78,16 @@ namespace ProjectRimFactory {
             // The cell is not impassible! Try to place:
             if (CallNoStorageBlockersIn(cell, map, t)) {
                 Debug.Message(Debug.Flag.PlaceThing, "  placing directly.");
-                if (t.Spawned) t.DeSpawn();
+                bool wasSpawned = t.Spawned;
+                if (wasSpawned) t.DeSpawn();
                 if (!GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct)) {
-                    Log.Error("Could not place thing " + t + " at " + cell);
+                    // some of the stack
+                    Debug.Message(Debug.Flag.PlaceThing, "  some absorbed, still have " + t.stackCount + " left");
+                    // I think this is safe, as it shoudl still have its position?
+                    if (wasSpawned) GenPlace.TryPlaceThing(t, t.Position, map, ThingPlaceMode.Near);
+                    placer.EffectOnPlaceThing(t);
+                    if (forcePlace) goto ForcePlace;
+                    return false;
                 }
                 placer.EffectOnPlaceThing(t);
                 if (placer.ForbidOnPlacing(t)) t.SetForbidden(true, false);
@@ -114,10 +121,15 @@ namespace ProjectRimFactory {
             if (placer.ObeysStorageFilters && !slotGroup.parent.Accepts(t)) return false;
             if (CallNoStorageBlockersIn(cell, map, t)) {
                 Debug.Message(Debug.Flag.PlaceThing, "Found NoStorageBlockersIn(" + cell + ", map, " + t + ") - Placing");
-                if (t.Spawned) t.DeSpawn();
+                bool wasSpawned = t.Spawned;
+                if (wasSpawned) t.DeSpawn();
                 if (!GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct)) {
-                    // should never happen??
-                    Log.Error("Could not place thing "+t+" at "+cell);
+                    // This happens if some was absorbed, but not the whole stack
+                    Debug.Message(Debug.Flag.PlaceThing, "  some was absorbed, but still have " + t.stackCount);
+                    // as above, should be safe
+                    if (wasSpawned) GenPlace.TryPlaceThing(t, t.Position, map, ThingPlaceMode.Near);
+                    placer.EffectOnPlaceThing(t);
+                    return false;
                 }
                 placer.EffectOnPlaceThing(t);
                 if (placer.ForbidOnPlacing(t)) t.SetForbidden(true, false);
@@ -149,9 +161,10 @@ namespace ProjectRimFactory {
                     Debug.Message(Debug.Flag.PlaceThing, "Found NoStorageBlockersIn(" + cell + ", map, " + t + ") - Placing");
                     if (t.Spawned) t.DeSpawn();
                     if (!GenPlace.TryPlaceThing(t, c, map, ThingPlaceMode.Direct)) {
-                        // should never happen??//TODO: This happens if some was absorbed!! Handle this gracefully!!
-                        Log.Error("Could not place thing " + t + " at " + cell);
-                        return false;
+                        // This happens if some was absorbed, but not the whole stack
+                        //  We should continue on, to see if we can place everything
+                        Debug.Message(Debug.Flag.PlaceThing, "  some was absorbed, still have " + t.stackCount);
+                        continue;
                     }
                     placer.EffectOnPlaceThing(t);
                     if (placer.ForbidOnPlacing(t)) t.SetForbidden(true, false);
