@@ -214,7 +214,7 @@
       <shaderType>CutoutComplex</shaderType>
     </graphicData>
     <!-- <designationCategory>Structure</designationCategory> -->
-    <uiIconScale>0.85</uiIconScale>
+    <uiIconScale>0.70</uiIconScale>
     <fillPercent>0.75</fillPercent>
     <pathCost>0</pathCost>
     <!-- <specialDisplayRadius>6.9</specialDisplayRadius> --> <!-- Show radius for hold roof -->
