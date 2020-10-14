@@ -150,7 +150,8 @@ namespace ProjectRimFactory.AutoMachineTool
         public override Option<IntVec3> OutputCell(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot)
         {
             return center.GetThingList(map)
-                .SelectMany(b => Option(b as IProductOutput))
+                .Where(t => t.def == def)
+                .OfType<IProductOutput>()
                 .FirstOption()
                 .Select(b => b.OutputCell());
         }
