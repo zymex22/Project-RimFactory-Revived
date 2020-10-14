@@ -70,6 +70,7 @@
   <PRFDroneStationLockdownAllDesc>Activate the Lockdown for all drone stations on the map.</PRFDroneStationLockdownAllDesc>
   <PRFDroneStationLiftLockdownAll>Reactivate all</PRFDroneStationLiftLockdownAll>
   <PRFDroneStationLfttLockdownAllDesc>Lift the Lockdown for all drone stations on the map.</PRFDroneStationLfttLockdownAllDesc>
+  <PRFDroneStationSelectArea>{0}\nSelect Area</PRFDroneStationSelectArea>
   
   <ITab_DroneStation_labelKey>Settings</ITab_DroneStation_labelKey>
   <ITab_DroneStation_InfoLabel>Toggle Jobs for this Drone Station</ITab_DroneStation_InfoLabel>

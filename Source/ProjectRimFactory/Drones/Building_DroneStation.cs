@@ -83,7 +83,9 @@ namespace ProjectRimFactory.Drones
 
         public static Area SelectedArea => selectedArea;
 
-        
+
+
+
         public override AcceptanceReport CanDesignateCell(IntVec3 loc)
         {
             return loc.InBounds(base.Map) && Designator_AreaAllowed.SelectedArea != null && !Designator_AreaAllowed.SelectedArea[loc];
@@ -224,9 +226,9 @@ namespace ProjectRimFactory.Drones
         {
             //Refresh the area
             droneAllowedArea = dr ?? (Area)GetDroneAllowedArea;
-            foreach (Pawn_Drone sdrone in spawnedDrones)
+            for (int i = 0; i < spawnedDrones.Count; i++)
             {
-                sdrone.playerSettings.AreaRestriction = droneAllowedArea;    
+                spawnedDrones[i].playerSettings.AreaRestriction = droneAllowedArea;
             }
         }
 
@@ -328,11 +330,22 @@ namespace ProjectRimFactory.Drones
                 GenSpawn.Spawn(drone, Position, Map);
                 drone.Destroy();
             }
-
-
-
-
+            //Init the Designator default Label
+            update_droneAreaSelectorLable(droneAllowedArea);
         }
+
+        private void update_droneAreaSelectorLable(Area a)
+        {
+            if (a == null)
+            {
+                droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate("Unrestricted".Translate());
+            }
+            else
+            {
+                droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate(a.Label);
+            }
+        }
+
         public override void Draw()
         {
             base.Draw();
@@ -533,14 +546,7 @@ namespace ProjectRimFactory.Drones
                     selectAction = (a) =>
                     {
                         Update_droneAllowedArea_forDrones(a);
-                        if (a == null)
-                        {
-                            droneAreaSelectorLable = "Unrestricted\nSelect Area";
-                        }
-                        else
-                        {
-                            droneAreaSelectorLable =  a.Label + "\nSelect Area";
-                        }
+                        update_droneAreaSelectorLable(a);
 
                     }
                 };
