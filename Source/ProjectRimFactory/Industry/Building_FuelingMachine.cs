@@ -93,7 +93,7 @@ namespace ProjectRimFactory.Industry
                                 if (count > 0) { // it wants some of this for fuel/ammo!
                                     Thing fuel = t.SplitOff(count);
                                     rr.refuelAction(o, fuel);
-                                    goto Fueled;
+                                    goto Fueled; // jump back to beginning to make sure it's fully fueled.
                                 }
                             }
                         }
