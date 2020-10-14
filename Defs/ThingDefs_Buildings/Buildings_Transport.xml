@@ -422,7 +422,7 @@
     <drawerType>MapMeshAndRealTime</drawerType>
     <uiIconScale>0.7</uiIconScale>
     <costList>
-      <Steel>20</Steel>
+      <Steel>10</Steel>
     </costList>
     <statBases>
       <MaxHitPoints>80</MaxHitPoints>

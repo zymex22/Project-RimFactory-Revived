@@ -72,8 +72,8 @@
     </costList>
     <comps>
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>20.0</fuelConsumptionRate>
-        <fuelCapacity>50.0</fuelCapacity>
+        <fuelConsumptionRate>15.0</fuelConsumptionRate>
+        <fuelCapacity>100.0</fuelCapacity>
         <fuelFilter>
           <thingDefs>
             <li>WoodLog</li>
@@ -264,7 +264,7 @@
         <bonusYields Chance="0.1">
           <!-- Junks -->
           <InsectJelly Weight="0.2" Count="30" />
-          <Steel Weight="0.2" Count="40" />
+          <Steel Weight="0.18" Count="40" />
           <ComponentIndustrial Weight="0.02" Count="5" />
           <!-- Rares -->
           <Uranium Weight="0.9" Count="40" />
