@@ -17,6 +17,7 @@
     </graphicData>
     <passability>Standable</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <fillPercent>0.9</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
+    <canOverlapZones>false</canOverlapZones> 
     <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
     <castEdgeShadows>true</castEdgeShadows>
     <size>(2,2)</size>    <!-- Ingame cell/ground size (x,y) -->
@@ -90,6 +91,14 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_SecondLayer">        <!-- This is used when multiple textures want to be stacked -->
+        <graphicData>
+          <texPath>Farm/Floor2</texPath>          <!-- Path to second layer texture -->
+          <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
+          <drawSize>(2.1)</drawSize>
+        </graphicData>
+        <altitudeLayer>Building</altitudeLayer>        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+      </li>
     </comps>
     <building>
       <preventDeteriorationInside>true</preventDeteriorationInside>
@@ -156,6 +165,14 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_SecondLayer">        <!-- This is used when multiple textures want to be stacked -->
+        <graphicData>
+          <texPath>Farm/Floor2</texPath>          <!-- Path to second layer texture -->
+          <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
+          <drawSize>(2.1)</drawSize>
+        </graphicData>
+        <altitudeLayer>Building</altitudeLayer>        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
       </li>
     </comps>
     <building>
@@ -251,6 +268,90 @@
     </placeWorkers>
     <inspectorTabs>
       <li>ITab_Storage</li>
+    </inspectorTabs>
+    <researchPrerequisites>
+      <li>AnimalStations_II</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+  </ThingDef>
+
+  <!--===================================== Glitter Harvester T3 =====================================-->
+  <ThingDef ParentName="prf_AnimalBase">
+    <defName>PRF_GlitterHarvester</defName>
+    <label>spacer animal harvester</label>
+    <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
+    <graphicData>
+      <texPath>Farm/HarvesterT3</texPath>
+      <drawSize>(2.1)</drawSize>
+    </graphicData>
+    <passability>Standable</passability>
+    <altitudeLayer>Gas</altitudeLayer>
+    <statBases>
+      <Mass>50</Mass>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>500</WorkToBuild>
+    </statBases>
+    <tickerType>Rare</tickerType>
+    <description>This is a advanced animal harvester that can harvest a wide range of products from animals, it has a frontfacing pull zone that can be made larger with powerbooster. and if RimFridge is installed its cooled to keep food from spoiling over time.</description>
+    <size>(2,2)</size>
+    <costList>
+      <PRFMachineFrame>1</PRFMachineFrame>
+      <Hay>50</Hay>
+      <Steel>100</Steel>
+      <PRFRoboticArm>4</PRFRoboticArm>
+      <PRFWeakAIChip>2</PRFWeakAIChip>
+    </costList>
+    <comps>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>        <!-- set output if thingclass allows it -->
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>850</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- speed settings -->
+        <speedSetting>false</speedSetting>
+        <minPowerForSpeed>0</minPowerForSpeed>
+        <minSpeedFactor>1</minSpeedFactor>
+        <maxPowerForSpeed>3000</maxPowerForSpeed>
+        <maxSpeedFactor>3</maxSpeedFactor>
+        <!-- range settings -->
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>1</minRange>
+        <maxPowerForRange>1500</maxPowerForRange>
+        <maxRange>4</maxRange>
+        <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>
+      </li>
+    </comps>
+    <building>
+      <preventDeteriorationInside>true</preventDeteriorationInside>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ai_chillDestination>true</ai_chillDestination>
+      <fixedStorageSettings>
+        <filter>
+          <categories>
+            <li>Foods</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter>
+          <thingDefs>
+            <li>Hay</li>
+          </thingDefs>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
     <researchPrerequisites>
       <li>AnimalStations_II</li>

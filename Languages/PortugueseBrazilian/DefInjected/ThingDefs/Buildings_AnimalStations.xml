@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <Shearer.label>Cortador</Shearer.label>
+  <Shearer.description>Uma caixa de alimentação 2x2 para seus animais domesticados, mas sob a caixa está um conjunto de braços robóticos e tesouras para coletar os pelos com o mínimo de invasão. A lã cai onde o animal está. Funciona em qualquer animal domesticado.</Shearer.description>
+
+  <Milker.label>Ordenhadeira</Milker.label>
+  <Milker.description>Uma caixa de alimentação 2x2 para seus animais domesticados, mas sob a caixa está um conjunto de braços robóticos e coletores para coletar o leite com o mínimo de invasão. A lã cai onde o animal está. Funciona em qualquer animal domesticado.</Milker.description>
+
+  <GenericAnimalHarvester.label>Colheitadeira animal universal</GenericAnimalHarvester.label>
+  <GenericAnimalHarvester.description>Uma versão mais avançada do moedor/cortador que pode coletar qualquer produto do animal.</GenericAnimalHarvester.description>
+
+</LanguageData>

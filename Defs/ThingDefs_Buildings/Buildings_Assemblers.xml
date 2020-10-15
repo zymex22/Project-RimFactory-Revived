@@ -275,7 +275,7 @@ Mod extennsion for assemblers
         <glowColor>(115,198,206,0)</glowColor>
       </li>
       <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
-        <range>4</range>
+        <range>5</range>
         <ghostColor>(0,1,1,1)</ghostColor>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
@@ -284,7 +284,7 @@ Mod extennsion for assemblers
         <rangeSetting>true</rangeSetting>
         <minPowerForRange>0</minPowerForRange>
         <minRange>1</minRange>
-        <maxPowerForRange>2000</maxPowerForRange>
+        <maxPowerForRange>1500</maxPowerForRange>
         <maxRange>5</maxRange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>

@@ -28,10 +28,6 @@
       <workSkill>Crafting</workSkill>
       <effectWorking>Cook</effectWorking>
       <soundWorking>Recipe_Machining</soundWorking>
-      <recipeUsers>
-        <li>TableRoboticMachining</li>
-        <li>TableMachining</li>
-      </recipeUsers>
     </recipeMaker>
     <researchPrerequisites>
       <li>PRFEulersIdentity</li>
@@ -69,9 +65,6 @@
       <workSkill>Crafting</workSkill>
       <effectWorking>Cook</effectWorking>
       <soundWorking>Recipe_Machining</soundWorking>
-      <recipeUsers>
-        <li>TableRoboticMachining</li>
-      </recipeUsers>
       <researchPrerequisite>PRFMachineLearning</researchPrerequisite>
     </recipeMaker>
     <thingCategories>
@@ -107,9 +100,6 @@
       <workSkill>Crafting</workSkill>
       <effectWorking>Cook</effectWorking>
       <soundWorking>Recipe_Machining</soundWorking>
-      <recipeUsers>
-        <li>TableRoboticMachining</li>
-      </recipeUsers>
     </recipeMaker>
     <thingCategories>
       <li>Items</li>

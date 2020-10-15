@@ -20,6 +20,7 @@
 							<thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
 							<designatorDropdown>IO_gr</designatorDropdown>
 							<drawerType>RealtimeOnly</drawerType>
+							<uiIconScale>0.7</uiIconScale>
 							<graphicData>
 								<texPath>Storage/IO_Fridge</texPath>
 								<graphicClass>Graphic_Single</graphicClass>
@@ -90,7 +91,6 @@
 									<basePowerConsumption>375</basePowerConsumption>
 								</li>
 								<li Class="CompProperties_Flickable"/>
-								<li Class="CompProperties_Breakdownable"/>
 								<li Class="CompProperties_Glower">
 									<glowRadius>2.5</glowRadius>
 									<glowColor>(89,188,255,0)</glowColor>
@@ -243,6 +243,21 @@
 				<!-- ============== Adding fridge comp to Generic Animal Harvester =============== -->
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs/ThingDef[defName="GenericAnimalHarvester"]/comps</xpath>
+					<value>
+						<li Class="RimFridge.CompProperties_Refrigerator">
+							<drinksBestCold>
+								<li>Beer</li>
+								<li>RC2_Ale</li>
+								<li>RC2_Cider</li>
+								<li>RC2_Grog</li>
+								<li>RC2_Stout</li>
+							</drinksBestCold>
+							<findAllRottableForFilters>false</findAllRottableForFilters>
+						</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_GlitterHarvester"]/comps</xpath>
 					<value>
 						<li Class="RimFridge.CompProperties_Refrigerator">
 							<drinksBestCold>

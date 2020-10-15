@@ -5,10 +5,13 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Verse;
+using HarmonyLib;
+using ProjectRimFactory.Common;
+using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
-    public class Building_Assembler_Learning : Building_SmartAssembler
+    public class Building_Assembler_Learning : Building_SmartAssembler , ISetQualityDirectly
     {
         public float FactorOffset
         {
@@ -25,6 +28,16 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
                 return currentBillReport == null ? FactorOffset : manager.GetFactorFor(currentBillReport.bill.recipe) + FactorOffset;
             }
         }
+
+        //Calculate the Item Quality based on the ProductionSpeedFactor (Used by the Harmony Patch; see Patch_GenRecipe_MakeRecipeProducts.cs)
+        QualityCategory ISetQualityDirectly.GetQuality(SkillDef relevantSkill)
+        {
+            float centerX = ProductionSpeedFactor * 2f;
+            float num = Rand.Gaussian(centerX, 1.25f);
+            num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
+            return (QualityCategory)((int)num);
+        }
+
         public override void Tick()
         {
             base.Tick();
@@ -43,21 +56,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             }
             return stringBuilder.ToString().TrimEndNewlines();
         }
-        public QualityCategory GetRandomProductionQuality()
-        {
-            float centerX = ProductionSpeedFactor * 2f;
-            float num = Rand.Gaussian(centerX, 1.25f);
-            num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
-            return (QualityCategory)((int)num);
-        }
+
         protected override void PostProcessRecipeProduct(Thing thing)
         {
-            CompQuality compQuality = thing.TryGetComp<CompQuality>();
-            if (compQuality != null)
-            {
-                compQuality.SetQuality(GetRandomProductionQuality(), ArtGenerationContext.Colony);
-            }
         }
+
         protected override IEnumerable<FloatMenuOption> GetDebugOptions()
         {
             foreach (FloatMenuOption option in base.GetDebugOptions())

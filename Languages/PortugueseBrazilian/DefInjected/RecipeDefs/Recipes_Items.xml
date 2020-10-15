@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MakeDataDisk.label>faça um disco de dados</MakeDataDisk.label>
+  <MakeDataDisk.description>Faça um rolo de fita de dados.</MakeDataDisk.description>
+  <MakeDataDisk.jobString>Criação de um disco de dados</MakeDataDisk.jobString>
+  
+  <MakePaperclips.label>faça clipes de papel (pegue 1 item)</MakePaperclips.label>
+  <MakePaperclips.description>Faça clipes de papel processando 1 item (10 para volume pequeno) de uma vez.</MakePaperclips.description>
+  <MakePaperclips.jobString>Fazendo clipes de papel</MakePaperclips.jobString>
+  
+  <MakePaperclipsTake10Items.label>faça clipes de papel (pegue 10 itens)</MakePaperclipsTake10Items.label>
+  <MakePaperclipsTake10Items.description>Faça clipes de papel processando 10 itens (100 para baixo volume) de uma vez.</MakePaperclipsTake10Items.description>
+  <MakePaperclipsTake10Items.jobString>Fazendo clipes de papel</MakePaperclipsTake10Items.jobString>
+  
+  <MakePaperclipsTake75Items.label>faça clipes de papel (pegue 75 itens)</MakePaperclipsTake75Items.label>
+  <MakePaperclipsTake75Items.description>Faça clipes de papel cortando 75 itens (750 para baixo volume) de uma vez.</MakePaperclipsTake75Items.description>
+  <MakePaperclipsTake75Items.jobString>Fazendo clipes de papel</MakePaperclipsTake75Items.jobString>
+  
+  <MakeAIPersonaCoreFromWeakAIChips.label>fazer um núcleo de IA de chips de IA fracos</MakeAIPersonaCoreFromWeakAIChips.label>
+  <MakeAIPersonaCoreFromWeakAIChips.description>Construa um núcleo de IA combinando 10 chips de IA fracos.</MakeAIPersonaCoreFromWeakAIChips.description>
+  <MakeAIPersonaCoreFromWeakAIChips.jobString>Construindo um núcleo de IA</MakeAIPersonaCoreFromWeakAIChips.jobString>
+
+</LanguageData>
