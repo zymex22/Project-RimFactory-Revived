@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+<!--Set Rollers Research -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Industrial Rollers</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[
+						defName="MovingRailPusher" or 
+						defName="MovingRailGreenPuller" or 						
+						defName="MovingRailPuller"]
+					</xpath>
+					<value>
+					    <researchPrerequisites><li>ADVrollers</li></researchPrerequisites>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[
+						defName="MovingRailStraight" or 
+						defName="MovingRailRight" or 						
+						defName="MovingRailLeft"]
+					</xpath>
+					<value>
+					<researchPrerequisites><li>PRFRollers</li></researchPrerequisites>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[
+						defName="MovingRailUndergroundInput" or 
+						defName="MovingRailWall" or 
+						defName="MovingRailSplitter" or 
+						defName="MovingRailUndergroundOutput"]
+					</xpath>
+					<value>
+					<researchPrerequisites><li>PRFRollers</li></researchPrerequisites>
+					</value>
+				</li>									
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
