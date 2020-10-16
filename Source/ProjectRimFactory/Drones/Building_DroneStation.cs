@@ -7,6 +7,7 @@ using System.Text;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using ProjectRimFactory.AutoMachineTool;
 
 namespace ProjectRimFactory.Drones
 {
@@ -297,9 +298,13 @@ namespace ProjectRimFactory.Drones
             base.PostMake();
             extension = def.GetModExtension<DefModExtension_DroneStation>();
         }
+
+        private MapTickManager mapManager;
+        protected MapTickManager MapManager => this.mapManager;
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            this.mapManager = map.GetComponent<MapTickManager>();
             extension = def.GetModExtension<DefModExtension_DroneStation>();
             //Setup Allowd Area
             if (droneAllowedArea == null) {
@@ -332,6 +337,15 @@ namespace ProjectRimFactory.Drones
             }
             //Init the Designator default Label
             update_droneAreaSelectorLable(droneAllowedArea);
+
+            //Need this type of call to set the Powerconsumption on load
+            //A normal call will not work
+            var rangePowerSupplyMachine = this.RangePowerSupplyMachine;
+            if (rangePowerSupplyMachine != null)
+            {
+                this.MapManager.NextAction(rangePowerSupplyMachine.RefreshPowerStatus);
+                this.MapManager.AfterAction(5, rangePowerSupplyMachine.RefreshPowerStatus);
+            }
         }
 
         private void update_droneAreaSelectorLable(Area a)
