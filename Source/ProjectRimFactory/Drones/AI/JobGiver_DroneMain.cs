@@ -18,11 +18,11 @@ namespace ProjectRimFactory.Drones.AI
             {
                 if (drone.station.Spawned && drone.station.Map == pawn.Map)
                 {
-                    Job result;
+                    Job result = null;
                     if (drone.station is Building_WorkGiverDroneStation b)
                     {
-
-
+                        
+                        if (!(drone.station.cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(drone).ToString()))) { 
                         pawn.workSettings = new Pawn_WorkSettings(pawn);
                         pawn.workSettings.EnableAndInitialize();
                         pawn.workSettings.DisableAll();
@@ -30,12 +30,28 @@ namespace ProjectRimFactory.Drones.AI
                         {
                             pawn.workSettings.SetPriority(def, 3);
                         }
-                        // So the station finds the best job for the pawn
-                        result = b.TryIssueJobPackageDrone(drone, true).Job;
+                            foreach (WorkTypeDef def in b.WorkSettings_dict.Keys)
+                            {
+                                if (b.WorkSettings_dict[def])
+                                {
+                                    pawn.workSettings.SetPriority(def, 3);
+                                }
+                                else
+                                {
+                                    pawn.workSettings.SetPriority(def, 0);
+                                }
+                            }
+
+
+                            // So the station finds the best job for the pawn
+                            result = b.TryIssueJobPackageDrone(drone, true).Job;
                         if (result == null)
                         {
                             result = b.TryIssueJobPackageDrone(drone, false).Job;
                         }
+                        
+                        }
+                        
                     }
                     else
                     {

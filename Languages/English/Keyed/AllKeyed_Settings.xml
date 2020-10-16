@@ -4,6 +4,7 @@
   <PRF.Settings.RequireReboot>Changes require reboot to apply the setting.</PRF.Settings.RequireReboot>
   <PRF.Settings.Select>Select</PRF.Settings.Select>
   <PRF.Settings.TopMessage><![CDATA[<size=20>All setting changes <b><i><color=red>require a restart</color></i></b></size>]]></PRF.Settings.TopMessage>
+  <PRF.Settings.restartMessage>All change will perform a rw restart when press close. \nAlso please note that atm. Startup Impact mod will crash game if ANY mod setting here is changed.</PRF.Settings.restartMessage>
   <PRF.Settings.AssemblerMessage>Assembler Settings</PRF.Settings.AssemblerMessage>
   <PRF.Settings.OtherMessage>Other Settings</PRF.Settings.OtherMessage>
   <PRF.Settings.StorageMessage>Storage Settings</PRF.Settings.StorageMessage>
@@ -35,8 +36,8 @@
   <PRF.Settings.recipeDB.Label>Set range for Recipe DB</PRF.Settings.recipeDB.Label>
   <PRF.Settings.recipeDB.Desc>Set range for Recipe DB</PRF.Settings.recipeDB.Desc>
 
-  <PRF.Settings.TurnOffInfestation.Label>Turn off infestation for miners(Unbalanced mode)</PRF.Settings.TurnOffInfestation.Label>
-  <PRF.Settings.TurnOffInfestation.Desc>Turn off infestation for miners(Unbalanced mode)</PRF.Settings.TurnOffInfestation.Desc>
+  <PRF.Settings.TurnOffInfestation.Label>Turn off infestation for t1/t2 miners(Unbalanced mode)</PRF.Settings.TurnOffInfestation.Label>
+  <PRF.Settings.TurnOffInfestation.Desc>Turn off infestation for t1/t2 miners(Unbalanced mode)</PRF.Settings.TurnOffInfestation.Desc>
 
   <PRF.Settings.TurnOffMinerNerf.Label>Miners can mine all ore types(Unbalanced mode)</PRF.Settings.TurnOffMinerNerf.Label>
   <PRF.Settings.TurnOffMinerNerf.Desc>Miners can mine all ore types(Unbalanced mode)</PRF.Settings.TurnOffMinerNerf.Desc>

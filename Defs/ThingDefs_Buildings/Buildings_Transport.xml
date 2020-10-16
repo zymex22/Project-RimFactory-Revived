@@ -36,7 +36,7 @@
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
-    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it (the yellow cell points to the "front").\n\n(Works with "Refualable comp" buildings)</description>
+    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it (the yellow cell points to the "front").\n\n(Works with "Refualable comp" buildings)\nAnd also mortars</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>1</PRFRoboticArm>
@@ -422,7 +422,7 @@
     <drawerType>MapMeshAndRealTime</drawerType>
     <uiIconScale>0.7</uiIconScale>
     <costList>
-      <Steel>20</Steel>
+      <Steel>10</Steel>
     </costList>
     <statBases>
       <MaxHitPoints>80</MaxHitPoints>

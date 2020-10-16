@@ -1,0 +1,27 @@
+<LanguageData>
+
+  <PRFRoboticArm.label>braço robótico</PRFRoboticArm.label>
+  <PRFRoboticArm.description>O braço do robô é movido por um motor elétrico. Utilizado na construção de alguns edifícios de automação.</PRFRoboticArm.description>
+
+  <PRFWeakAIChip.label>chip AI fraco</PRFWeakAIChip.label>
+  <PRFWeakAIChip.description>Unidade de processamento de tensores contendo a IA mais rudimentar.</PRFWeakAIChip.description>
+
+  <PRFMachineFrame.label>máquina de moldura</PRFMachineFrame.label>
+  <PRFMachineFrame.description>Uma concha vazia de tamanho médio.</PRFMachineFrame.description>
+
+  <PRFMachineFrameSmall.label>máquina de moldura pequena</PRFMachineFrameSmall.label>
+  <PRFMachineFrameSmall.description>Pequena concha vazia.</PRFMachineFrameSmall.description>
+
+  <PRFMachineFrameLarge.label>máquina de moldura grande</PRFMachineFrameLarge.label>
+  <PRFMachineFrameLarge.description>Grande concha vazia.</PRFMachineFrameLarge.description>
+
+  <PRFDroneModule.label>módulo drone</PRFDroneModule.label>
+  <PRFDroneModule.description>Quadro quadroscópico dormindo capaz de voar em baixa altitude.</PRFDroneModule.description>
+
+  <Paperclip.label>Grampo</Paperclip.label>
+  <Paperclip.description>Pequeno objeto de metal pesando exatamente 1 grama. Os clipes de papel são ideais como um recurso intermediário para recombinação atômica e molecular.</Paperclip.description>
+
+  <PRFComputronium.label>Computronium</PRFComputronium.label>
+  <PRFComputronium.description>Um cluster de eletrônicos capaz de realizar várias operações paralelas de ponto flutuante por segundo. Não contendo IA por si só, provavelmente é feito para abrigar superinteligência artificial.</PRFComputronium.description>
+
+</LanguageData>

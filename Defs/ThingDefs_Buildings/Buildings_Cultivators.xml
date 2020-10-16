@@ -5,7 +5,7 @@
     <defName>Cultivator_gr</defName>
   </DesignatorDropdownGroupDef>
   <!--=========================== Cultivator Base ==================================-->
-  <ThingDef Name="PRF_CultivatorBase" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_CultivatorBaseBase" ParentName="PRFBuildingBase" Abstract="True">
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
@@ -25,6 +25,7 @@
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <canOverlapZones>false</canOverlapZones>
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
@@ -42,9 +43,7 @@
     <designatorDropdown>Cultivator_gr</designatorDropdown>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <constructEffect>ConstructMetal</constructEffect>
-    <placeWorkers>
-      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
-    </placeWorkers>
+
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />
       <li>
@@ -53,15 +52,34 @@
     </comps>
   </ThingDef>
 
+  <!--=========================== Sub base for drones ==================================-->
+  <ThingDef Name="PRF_CultivatorBaseDrone" ParentName="PRF_CultivatorBaseBase" Abstract="True">
+    <placeWorkers>
+      <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
+    </placeWorkers>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Drones.ITab_DroneStation</li>
+    </inspectorTabs>
+  </ThingDef>
+
+  <!--=========================== sub base for oldschool type ==================================-->
+  <ThingDef Name="PRF_CultivatorBase" ParentName="PRF_CultivatorBaseBase" Abstract="True">
+    <placeWorkers>
+      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
+    </placeWorkers>
+  </ThingDef>
+
+
   <!--=========================== Basic Cultivator ==================================-->
-  <ThingDef ParentName="PRF_CultivatorBase">
+  <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>CultivatorTools_DroneCultivator</defName>
     <label>Drone Cultivator</label>
-    <thingClass>ProjectRimFactory.CultivatorTools.Building_DroneCultivator</thingClass>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator</texPath>
     </graphicData>
-    <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.</description>
+    <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.\n\nWill haul to a storage or stockpile if withing range.</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFDroneModule>2</PRFDroneModule>
@@ -78,15 +96,15 @@
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
-        <squareAreaRadius>5</squareAreaRadius>
-      </li>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <maxNumDrones>2</maxNumDrones>        <!-- How many drones should be used? -->
         <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
-      </li>
-      <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
-        <hauling>false</hauling>        <!-- make false to no output again -->
+        <SquareJobRadius>5</SquareJobRadius>
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <workTypes>
+          <li>Growing</li>
+          <li>Hauling</li>
+        </workTypes>
       </li>
     </modExtensions>
     <researchPrerequisites>
@@ -95,15 +113,15 @@
   </ThingDef>
 
   <!--=========================== Sun Cultivator ==================================-->
-  <ThingDef ParentName="PRF_CultivatorBase">
+  <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>CultivatorTools_CultivatorWithLamp</defName>
     <label>Drone Cultivator (sun lamp)</label>
-    <thingClass>ProjectRimFactory.CultivatorTools.Building_DroneCultivator</thingClass>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorWithSunLamp</texPath>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
-    <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Has a sun lamp. Will not be affected by any stat modifiers.</description>
+    <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Has a sun lamp. Will not be affected by any stat modifiers.\n\nWill haul to a storage or stockpile if withing range.</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFDroneModule>2</PRFDroneModule>
@@ -115,7 +133,7 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>3100</basePowerConsumption>
+        <basePowerConsumption>3000</basePowerConsumption>
       </li>
       <li Class="CompProperties_Glower">        <!-- CompGlower: Color of light it will emit. RGBA: (r, g, b, 0) -->
         <overlightRadius>9</overlightRadius>
@@ -129,15 +147,15 @@
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
-        <squareAreaRadius>5</squareAreaRadius>
-      </li>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <maxNumDrones>2</maxNumDrones>
         <displayDormantDrones>true</displayDormantDrones>
-      </li>
-      <li Class="ProjectRimFactory.CultivatorTools.DefModExtension_DoneBehavior">
-        <hauling>false</hauling>        <!-- make false to no output again -->
+        <SquareJobRadius>5</SquareJobRadius>
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <workTypes>
+          <li>Growing</li>
+          <li>Hauling</li>
+        </workTypes>
       </li>
     </modExtensions>
     <researchPrerequisites>
@@ -236,7 +254,7 @@
     </researchPrerequisites>
   </ThingDef>
 
-    <!--=========================== Spacer Cultivator XL ==================================-->
+  <!--=========================== Spacer Cultivator XL ==================================-->
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>CultivatorTools_b18CultivatorXL</defName>
     <label>Mechanites XL Cultivator</label>

@@ -17,6 +17,7 @@
     </graphicData>
     <passability>Standable</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <fillPercent>0.9</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
+    <canOverlapZones>false</canOverlapZones> 
     <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
     <castEdgeShadows>true</castEdgeShadows>
     <size>(2,2)</size>    <!-- Ingame cell/ground size (x,y) -->

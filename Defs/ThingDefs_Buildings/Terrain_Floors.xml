@@ -95,9 +95,26 @@
 
 
   <!-- ================= From Floored - Credit to EsseCoisa and Curundir ================= -->
-  <TerrainDef ParentName="FloorBase_prf">
-    <defName>StripedTile</defName> <!-- OLD NOT USED ANYMORE SEE BELOW -->
+  <TerrainDef>
+    <defName>StripedTile</defName>    <!-- OLD NOT USED ANYMORE SEE BELOW -->
     <label>striped tile Right</label>
+    <layerable>true</layerable>    <!-- Optional. If true, the player can build the terrain (floor) on top of an existing floor -->
+    <affordances>      <!-- Defines affordance types for the terrain  Vanilla affordances:	Diggable,	GrowSoil,	Heavy, Light,	SmoothHard -->
+      <li>Light</li>
+      <li>Medium</li>
+      <li>Heavy</li>
+    </affordances>
+    <fertility>0</fertility>    <!-- Defines the terrain's vertility multiplier. Can set to 0 to disable growing crops on the terrain -->
+    <filthAcceptanceMask>
+      <li>Terrain</li>
+      <li>Natural</li>
+      <li>Unnatural</li>
+    </filthAcceptanceMask>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Optional. Defaults to Light. Defines which terrain affordance level is needed when placing a floor tile -->
+    <researchPrerequisites>      <!-- Optional. The player will not be able to build the floor or terrain until completing one or more research projects -->
+      <li>Machining</li>
+    </researchPrerequisites>
+    <edgeType>Hard</edgeType>    <!-- Defines the rendering method for terrain edges. Vanilla types:		Hard,	Fade,	FadeRough -->
     <renderPrecedence>240</renderPrecedence>
     <description>A metal tile, painted with yellow stripes to indicate critical areas.\n\nThis is added by Project RimFactory</description>
     <texturePath>Misc/CautionTile</texturePath>

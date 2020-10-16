@@ -20,6 +20,7 @@
       <Flammability>0.8</Flammability>
       <Mass>80</Mass>
     </statBases>
+    <canOverlapZones>false</canOverlapZones> 
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <rotatable>false</rotatable>
     <pathCost>70</pathCost>
