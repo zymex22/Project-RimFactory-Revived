@@ -66,6 +66,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 {
                     s.Level = s.def == SkillDefOf.Artistic ? this.ArtSkillLevel : this.SkillLevel;
                 }
+
+                // This ensures that pawns do not end up with disabled work types - see Issue#54
+                ReflectionUtility.cachedDisabledWorkTypesPermanent.SetValue(p, new List<WorkTypeDef>());
+
+
                 //Assign Pawn's mapIndexOrState to building's mapIndexOrState
                 ReflectionUtility.mapIndexOrState.SetValue(p, ReflectionUtility.mapIndexOrState.GetValue(this));
 
