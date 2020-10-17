@@ -489,17 +489,21 @@
     </inspectorTabs>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorIcon</uiIconPath>
     <graphicData>
-      <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
-      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+      <!--     <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
+           <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>-->
+      <texPath>Belts/v3/PRF Belts Atlas 256x256 GroundLevel</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1, 1)</drawSize>
     </graphicData>
     <building>
       <blueprintGraphicData>
-      <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
-        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
-        <drawRotated>true</drawRotated>
-        <drawSize>(1, 1)</drawSize>
+      <texPath>Belts/v3/PRF Belts Atlas 256x256 GroundLevel Blueprint</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
+      <!--<texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
+           <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>-->
+      <drawRotated>true</drawRotated>
+      <drawSize>(1, 1)</drawSize>
        </blueprintGraphicData>
     </building>
   </ThingDef>
