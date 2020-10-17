@@ -63,6 +63,20 @@ namespace ProjectRimFactory.Drones
             return result;
         }
 
+
+        private bool canAcceptJob(Pawn_Drone pawn, Job job)
+        {
+            if (isStationPos(job.targetA.Cell ,pawn) || isStationPos(job.targetB.Cell, pawn))
+            {
+                return false;
+            }
+            return true;
+        }
+        private bool isStationPos(IntVec3 pos1,Pawn_Drone pawn)
+        {
+            return pos1 == pawn.station.Position;
+        }
+
         // Method from RimWorld.JobGiver_Work.TryIssueJobPackage(Pawn pawn, JobIssueParams jobParams)
         // I modified the line if (!workGiver.ShouldSkip(pawn))
 #pragma warning disable
@@ -86,6 +100,9 @@ namespace ProjectRimFactory.Drones
                         Job job2 = workGiver.NonScanJob(pawn);
                         if (job2 != null)
                         {
+                            //Returning now Job here should be fine
+                            //From my understanding this will only happen during Emergency Situations
+                            if (canAcceptJob((Pawn_Drone)pawn, job2) == false) return ThinkResult.NoJob;
                             return new ThinkResult(job2, null, new JobTag?(list[j].def.tagToGive), false);
                         }
                         WorkGiver_Scanner scanner = workGiver as WorkGiver_Scanner;
@@ -94,6 +111,7 @@ namespace ProjectRimFactory.Drones
                             if (scanner.def.scanThings)
                             {
                                 Predicate<Thing> predicate = (Thing t) => !t.IsForbidden(pawn) && scanner.HasJobOnThing(pawn, t, false);
+                                //Try to remove Station cell things from enumerable
                                 IEnumerable<Thing> enumerable = scanner.PotentialWorkThingsGlobal(pawn);
                                 Thing thing;
                                 if (scanner.Prioritized)
@@ -146,8 +164,13 @@ namespace ProjectRimFactory.Drones
                                 }
                                 if (thing != null)
                                 {
-                                    targetInfo = thing;
-                                    workGiver_Scanner = scanner;
+                                    //Ensure that targetInfo is invalid if it refers to the own Drone Station
+                                    if (!isStationPos(thing.Position, (Pawn_Drone)pawn))
+                                    {
+                                        targetInfo = thing;
+                                        workGiver_Scanner = scanner;
+                                    }
+                                    
                                 }
                             }
                             if (scanner.def.scanCells)
@@ -158,8 +181,11 @@ namespace ProjectRimFactory.Drones
                                 bool prioritized = scanner.Prioritized;
                                 bool allowUnreachable = scanner.AllowUnreachable;
                                 Danger maxDanger = scanner.MaxPathDanger(pawn);
+                                //May need a Check here fo all the cells So that they are not of the Drone Station
                                 foreach (IntVec3 intVec in scanner.PotentialWorkCellsGlobal(pawn))
                                 {
+                                    //Skipp if cell is the Drone Station
+                                    if (isStationPos(intVec, (Pawn_Drone)pawn)) continue;
                                     bool flag = false;
                                     float num4 = (float)(intVec - position2).LengthHorizontalSquared;
                                     float num5 = 0f;
@@ -224,6 +250,11 @@ namespace ProjectRimFactory.Drones
                         }
                         if (job3 != null)
                         {
+                            if (canAcceptJob((Pawn_Drone)pawn, job3) == false) {
+                                Log.Warning("PRF - Prevented a Job with the Intend to move the Drone Station - This may leed to a less functional Station Till the issue is resolved. Check the follwing Cells: " + job3.targetA.Cell + " / " + job3.targetB.Cell);
+                            return ThinkResult.NoJob;
+                            }
+                            
                             return new ThinkResult(job3, null, new JobTag?(list[j].def.tagToGive), false);
                         }
                         Log.ErrorOnce(string.Concat(new object[]
