@@ -143,6 +143,22 @@ namespace ProjectRimFactory.Drones
                                     Predicate<Thing> validator = predicate;
                                     bool forceGlobalSearch = enumerable != null;
                                     thing = GenClosest.ClosestThingReachable(position, map, potentialWorkThingRequest, pathEndMode, traverseParams, 9999f, validator, enumerable, 0, scanner.MaxRegionsToScanBeforeGlobalSearch, forceGlobalSearch, RegionType.Set_Passable, false);
+                                    if (scanner is WorkGiver_ConstructDeliverResourcesToBlueprints)
+                                    {
+                                        //Preforme further checks too see if this is a reinstall attempt of its own station
+                                        if (thing is Blueprint_Install) {
+                                            Blueprint_Install bpthing = (Blueprint_Install)thing;
+                                            Pawn_Drone pd = (Pawn_Drone)pawn;
+                                            if (bpthing.MiniToInstallOrBuildingToReinstall == pd.station)
+                                            {
+                                                //This is a reinstall attempt - Prevent by setting thing to null
+                                                thing = null;
+                                            }
+                                        }
+                                    }
+
+
+
                                 }
                                 if (thing != null)
                                 {

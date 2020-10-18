@@ -43,4 +43,22 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     }
 
 
+    //This Patch Prevents Drones from Uninstalling or Deconstructing their own Station
+    [HarmonyPatch(typeof(WorkGiver_RemoveBuilding), "PotentialWorkThingsGlobal")]
+    class Patch_PotentialWorkThingsGlobal_DronesRenoveOwnBase
+    {
+
+        static void Postfix(Pawn pawn , ref IEnumerable<Thing> __result)
+        {
+            if (pawn.kindDef == PRFDefOf.PRFDroneKind)
+            {
+                Pawn_Drone drone = (Pawn_Drone)pawn;
+                IntVec3 DroneStationPos = drone.station.Position;
+
+                //Remove work on the station itself
+                __result = __result.Where(u => u.Position != DroneStationPos).ToList();
+            }
+        }
+    }
+
 }
