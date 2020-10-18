@@ -414,7 +414,7 @@
   <!--======================================= ============= ===============================================-->
   <!--======================================= Conveyor base ===============================================-->
   <!--======================================= ============= ===============================================-->
-  <ThingDef Name="Building_AutoMachineTool_BeltConveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
+  <ThingDef Name="PRF_Conveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
     <category>Building</category>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>UgRollers_gr</designatorDropdown>
@@ -431,6 +431,7 @@
       <Beauty>-0.5</Beauty><!--Let's Game It Out playing SatisFactory shows how beautiful conveyors truly are!-->
       <Mass>10</Mass>
     </statBases>
+    <altitudeLayer>Building</altitudeLayer>
     <minifiedDef>MinifiedThing</minifiedDef>
     <thingCategories>
       <li>BuildingsAutomation</li>
@@ -466,7 +467,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor normal ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+  <ThingDef ParentName="PRF_Conveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor</defName>
     <label>conveyor belt</label>
     <description>A conveyor belt that can move items from A to B. Point the arrows in the direction you want to it carry things and then place items on top!\n\nConveyor belts can automatically handle turning and with Splitters can branch if you want that, and will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.  But because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.</description>
@@ -509,7 +510,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor wall ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+  <ThingDef ParentName="PRF_Conveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Wall</defName>
     <label>Wall conveyor belt</label>
     <description>Moves items - through walls! You can use these to traverse walls or move items along inside them. When items hit the end, they will move out onto the ground, as long as there is room.</description>
@@ -553,7 +554,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor underground ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+  <ThingDef ParentName="PRF_Conveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Underground</defName>
     <label>underground belt</label>
     <description>Underground Conveyor Belts carry items in tunnels under the ground. To move items into the subterrainian passages, you need to use the Underground Conveyor Entrance and Exit.</description>
@@ -595,7 +596,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor underground connector base ===============================================-->
-  <ThingDef Name="Building_AutoMachineTool_BeltConveyorUGConnector_Base" Parent="PRFBuildingBase" Abstract="true">
+  <ThingDef Name="PRF_UGConnector_Base" Parent="PRFBuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <category>Building</category>
     <uiIconScale>0.7</uiIconScale>
@@ -652,7 +653,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor floor connector to underground ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
+  <ThingDef ParentName="PRF_UGConnector_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_ToUnderground</defName>
     <label>Underground belt entrance</label>
     <description>Connects ground conveyor belts to underground conveyors. This is the entrance to the subterrainian passages.</description>
@@ -671,7 +672,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor underground connector to floor ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyorUGConnector_Base">
+  <ThingDef ParentName="PRF_UGConnector_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_ToFloor</defName>
     <label>Underground belt exit</label>
     <description>Connects the underground conveyor belt to the above-ground conveyor. This is an exit back to the surface, and will drop items on the floor if there is no conveyor.</description>
@@ -692,13 +693,13 @@
     </modExtensions>
   </ThingDef>
   <!--======================================= Conveyor Splitters ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base" Name="PRF_Belt_Splitter">
+  <ThingDef ParentName="PRF_Conveyor_Base" Name="PRF_Belt_Splitter">
     <defName>Building_AutoMachineTool_BeltSplitter</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltSplitter</thingClass>
     <label>conveyor splitter</label>
     <description>An automated unit that directs items on a conveyor belt in different directions depending on filters, handled by a very basic AI. If no filters are set, it will simply split where items passing through go.</description>
-    <altitudeLayer>Building</altitudeLayer>
-    <pathCost>80</pathCost>
+    <pathCost>120</pathCost>
+    <passability>PassThroughOnly</passability>
     <clearBuildingArea>true</clearBuildingArea>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ConveyorFilter</li>
@@ -750,6 +751,7 @@
     <description>A conveyor splitter unit built into the ground.  This one will hand off items to other underground conveyor belts.</description>
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
+    <passability>Standable</passability>
     <fillPercent>0.0</fillPercent>
     <clearBuildingArea>false</clearBuildingArea>
     <statBases>
