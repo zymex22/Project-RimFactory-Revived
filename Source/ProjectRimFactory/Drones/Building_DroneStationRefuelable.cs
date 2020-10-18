@@ -13,12 +13,13 @@ namespace ProjectRimFactory.Drones
     {
         protected CompRefuelable refuelableComp;
 
-        protected bool postmakeflag = false;
 
         public override void PostMake()
         {
             base.PostMake();
-            postmakeflag = true;
+
+            refuelableComp = GetComp<CompRefuelable>();
+            refuelableComp.Refuel(extension.GetDronesOnSpawn(refuelableComp));
         }
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -26,15 +27,6 @@ namespace ProjectRimFactory.Drones
             refuelableComp = GetComp<CompRefuelable>(); 
 
             base.SpawnSetup(map, respawningAfterLoad);
-            //Due to the implementation of droneSkillsRecord in Building_DroneStation this code needs to run after base.SpawnSetup
-            //Flag is used to ensure it only runs after a post make.
-            if (postmakeflag) 
-            {
-                refuelableComp = GetComp<CompRefuelable>();
-                refuelableComp.Refuel(extension.GetDronesOnSpawn(refuelableComp));
-                postmakeflag = false;
-            }
-            
         }
         public override int DronesLeft
         {
