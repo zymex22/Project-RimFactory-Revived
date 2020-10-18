@@ -334,6 +334,9 @@ namespace ProjectRimFactory.Drones
                 Pawn_Drone drone = MakeDrone();
                 GenSpawn.Spawn(drone, Position, Map);
                 drone.Destroy();
+
+                GetComp<CompRefuelable>()?.Refuel(1);
+
             }
             //Init the Designator default Label
             update_droneAreaSelectorLable(droneAllowedArea);
