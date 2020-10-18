@@ -319,7 +319,7 @@
     <passability>Impassable</passability>
     <description>(PRF) A 90 degree angled Puller that moves items from A to B. Similar to the basic puller, but allowing turns! You can swap the direction (left/right) after placing.\n\nREMEMBER to turn it on after placing!</description>
     <altitudeLayer>Building</altitudeLayer>
-    <placeWorkers Inherit="false">
+    <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
@@ -414,8 +414,9 @@
   <!--======================================= ============= ===============================================-->
   <!--======================================= Conveyor base ===============================================-->
   <!--======================================= ============= ===============================================-->
-  <ThingDef Name="Building_AutoMachineTool_BeltConveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
+  <ThingDef Name="PRF_Conveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
     <category>Building</category>
+    <altitudeLayer>Building</altitudeLayer>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>UgRollers_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
@@ -438,6 +439,7 @@
     <researchPrerequisites>
       <li>PRFRollers</li>
     </researchPrerequisites>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <size>(1,1)</size>
     <pathCost>70</pathCost>
     <passability>Standable</passability>
@@ -445,12 +447,18 @@
     <rotatable>true</rotatable>
     <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <drawGUIOverlay>true</drawGUIOverlay>
-    <placingDraggableDimensions>1</placingDraggableDimensions>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
     <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
@@ -462,31 +470,22 @@
         <maxPower>5</maxPower>
       </li>
     </modExtensions>
-    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
-  </ThingDef>
-
-  <!--======================================= Conveyor normal ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
-    <defName>Building_AutoMachineTool_BeltConveyor</defName>
-    <label>conveyor belt</label>
-    <description>A conveyor belt that can move items from A to B. Point the arrows in the direction you want to it carry things and then place items on top!\n\nConveyor belts can automatically handle turning and with Splitters can branch if you want that, and will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.  But because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.</description>
-    <altitudeLayer>Building</altitudeLayer>
-
-    <pathCost>30</pathCost>
-    <clearBuildingArea>false</clearBuildingArea>
-
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>10</basePowerConsumption>
-        <transmitsPower>true</transmitsPower>
-        <shortCircuitInRain>false</shortCircuitInRain>
-      </li>
-      <li Class="CompProperties_Flickable"/>
-    </comps>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
+  </ThingDef>
+  <!--======================================= Conveyor belt base   ===============================================-->
+  <ThingDef Name="PRF_DraggableConveyorBelt_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
+    <placingDraggableDimensions>1</placingDraggableDimensions>
+  </ThingDef>
+ 
+  <!--======================================= Conveyor belt normal ===============================================-->
+  <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
+    <defName>Building_AutoMachineTool_BeltConveyor</defName>
+    <label>conveyor belt</label>
+    <description>A conveyor belt that can move items from A to B. Point the arrows in the direction you want to it carry things and then place items on top!\n\nConveyor belts can automatically handle turning and with Splitters can branch if you want that, and will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.  But because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.</description>
+    <pathCost>30</pathCost>
+    <clearBuildingArea>false</clearBuildingArea>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorIcon</uiIconPath>
     <graphicData>
       <!--     <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
@@ -509,31 +508,17 @@
   </ThingDef>
 
   <!--======================================= Conveyor wall ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+  <ThingDef ParentName="PRF_Conveyor_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Wall</defName>
     <label>Wall conveyor belt</label>
     <description>Moves items - through walls! You can use these to traverse walls or move items along inside them. When items hit the end, they will move out onto the ground, as long as there is room.</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
-
     <pathCost>0</pathCost>
     <fillPercent>0.0</fillPercent>
-
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>10</basePowerConsumption>
-        <transmitsPower>true</transmitsPower>
-        <shortCircuitInRain>false</shortCircuitInRain>
-      </li>
-      <li Class="CompProperties_Flickable"/>
-    </comps>
     <clearBuildingArea>false</clearBuildingArea>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
     </placeWorkers>
-    <inspectorTabs>
-      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
-    </inspectorTabs>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
       <texPath>AutoMachineTool/Buildings/BeltConveyorTest</texPath>
@@ -553,7 +538,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor underground ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base">
+  <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Underground</defName>
     <label>underground belt</label>
     <description>Underground Conveyor Belts carry items in tunnels under the ground. To move items into the subterrainian passages, you need to use the Underground Conveyor Entrance and Exit.</description>
@@ -564,15 +549,6 @@
     <statBases>
       <WorkToBuild Inherit="false">900</WorkToBuild><!--harder to dig tunnel-->
     </statBases>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>10</basePowerConsumption>
-        <transmitsPower>true</transmitsPower>
-        <shortCircuitInRain>false</shortCircuitInRain>
-      </li>
-      <li Class="CompProperties_Flickable"/>
-    </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
         <underground>true</underground>
@@ -692,7 +668,7 @@
     </modExtensions>
   </ThingDef>
   <!--======================================= Conveyor Splitters ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_BeltConveyor_Base" Name="PRF_Belt_Splitter">
+  <ThingDef ParentName="PRF_Conveyor_Base" Name="PRF_Belt_Splitter">
     <defName>Building_AutoMachineTool_BeltSplitter</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltSplitter</thingClass>
     <label>conveyor splitter</label>
@@ -714,14 +690,17 @@
       <li>Woody</li>
     </stuffCategories>
     <costStuffCount>40</costStuffCount>-->
-    <comps>
+    <comps Inherit="false"><!--It appears one must replace all of them-->
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>40</basePowerConsumption>
         <transmitsPower>true</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
-      <li Class="CompProperties_Flickable" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+      <li Class="CompProperties_Flickable"/>
     </comps>
     <uiIconPath>Belts/Splitter_door_closed</uiIconPath>
     <graphicData>
