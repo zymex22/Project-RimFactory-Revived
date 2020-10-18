@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!-- ############################################# AI research bench ##################################################### -->
-  <ThingDef ParentName="PRFBenchBase">
+  <ThingDef ParentName="ResearchBenchVanilla">
     <defName>AIResearchBench</defName>
     <label>AI research bench</label>
     <description>A high-tech bench with an AI module installed. Required for tier 2 automation research and is not a replacement for the hi-tech research bench. Requires power.</description>
     <thingClass>Building_ResearchBench</thingClass>
+    <category>Building</category>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <selectable>true</selectable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <repairEffect>Repair</repairEffect>    <!-- Effect when the building is being repaired. Any, Light, Heavy, GrowSoil, Diggable, SmoothHard, SmoothableStone -->
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>    <!-- 	Whether it leaves part of its resource cost when killed. -->
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
+    <canOverlapZones>false</canOverlapZones>
     <size>(3,1)</size>
     <stuffCategories>
       <li>Metallic</li>
@@ -36,18 +46,11 @@
       <WorkToBuild>5000</WorkToBuild>
       <Flammability>1.0</Flammability>
       <ResearchSpeedFactor>1.0</ResearchSpeedFactor>
+      <SellPriceFactor>0.70</SellPriceFactor>
     </statBases>
     <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>250</basePowerConsumption>
-
-      </li>
-      <li Class="CompProperties_Flickable"/>
-      <li Class="CompProperties_AffectedByFacilities">
-        <linkableFacilities>
-          <li>MultiAnalyzer</li>
-        </linkableFacilities>
+      <li>
+        <compClass>CompReportWorkSpeed</compClass>
       </li>
     </comps>
     <fillPercent>0.5</fillPercent>
@@ -56,7 +59,9 @@
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <designationCategory>Production</designationCategory>
     <surfaceType>Item</surfaceType>
-    <placeWorkers>
+    <designationHotKey />
+    <constructionSkillPrerequisite />
+    <placeWorkers Inherit="false">
       <li>PlaceWorker_ShowFacilitiesConnections</li>
     </placeWorkers>
     <researchPrerequisites>
@@ -69,7 +74,7 @@
     <defName>TableRoboticMachining</defName>
     <label>robotic machining table</label>
     <thingClass>Building_WorkTable</thingClass>
-    <description>A work station for creating parts for automation buildings.</description>
+    <description>A work station for creating parts, frames and more for automation buildings.</description>
     <graphicData>
       <texPath>Common/TableRobotics</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
