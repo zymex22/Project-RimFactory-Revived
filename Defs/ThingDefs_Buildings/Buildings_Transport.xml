@@ -440,7 +440,7 @@
       <li>PRFRollers</li>
     </researchPrerequisites>
     <size>(1,1)</size>
-    <pathCost>30</pathCost>
+    <pathCost>70</pathCost>
     <passability>Standable</passability>
     <selectable>True</selectable>
     <rotatable>true</rotatable>
@@ -596,19 +596,60 @@
   </ThingDef>
 
   <!--======================================= Conveyor underground connector base ===============================================-->
-  <ThingDef Name="PRF_UGConnector_Base" Parent="PRF_Conveyor_Base" Abstract="true">
+  <ThingDef Name="PRF_UGConnector_Base" Parent="PRFBuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
+    <category>Building</category>
     <uiIconScale>0.7</uiIconScale>
-<!--    <statBases>
+    <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>UgRollers_gr</designatorDropdown>
+    <altitudeLayer>Building</altitudeLayer>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <statBases>
       <MaxHitPoints>80</MaxHitPoints>
       <WorkToBuild>80</WorkToBuild>
       <Flammability>0.4</Flammability>
       <Mass>10</Mass>
-    </statBases>-->
-    <costList Inherit="false">
+    </statBases>
+    <costList>
       <Steel>20</Steel>
     </costList>
-    <pathCost>90</pathCost>
+    <researchPrerequisites>
+      <li>PRFRollers</li>
+    </researchPrerequisites>
+
+    <size>(1,1)</size>
+    <passability>Standable</passability>
+    <selectable>True</selectable>
+    <rotatable>true</rotatable>
+    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <pathCost>30</pathCost>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <placeWorkers>
+      <li>ProjectRimFactory.PlaceWorker_Arrow</li>
+    </placeWorkers>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>2.8</speedFactor>
+        <minPower>5</minPower>
+        <maxPower>5</maxPower>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <!--======================================= Conveyor floor connector to underground ===============================================-->
