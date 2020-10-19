@@ -415,11 +415,11 @@
   <!--======================================= Conveyor base ===============================================-->
   <!--======================================= ============= ===============================================-->
   <ThingDef Name="PRF_Conveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <category>Building</category>
     <altitudeLayer>Building</altitudeLayer>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>UgRollers_gr</designatorDropdown>
-    <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <drawerType>MapMeshAndRealTime</drawerType>
     <uiIconScale>0.7</uiIconScale>
     <costList>
@@ -432,7 +432,7 @@
       <Beauty>-0.5</Beauty><!--Let's Game It Out playing SatisFactory shows how beautiful conveyors truly are!-->
       <Mass>10</Mass>
     </statBases>
-    <altitudeLayer>Building</altitudeLayer>
+    <clearBuildingArea>false</clearBuildingArea><!-- Might want to change this for anything with a building -->
     <minifiedDef>MinifiedThing</minifiedDef>
     <thingCategories>
       <li>BuildingsAutomation</li>
@@ -442,7 +442,7 @@
     </researchPrerequisites>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <size>(1,1)</size>
-    <pathCost>70</pathCost>
+    <pathCost>45</pathCost>
     <passability>Standable</passability>
     <selectable>True</selectable>
     <rotatable>true</rotatable>
@@ -485,7 +485,6 @@
     <defName>Building_AutoMachineTool_BeltConveyor</defName>
     <label>conveyor belt</label>
     <description>A conveyor belt that can move items from A to B. Point the arrows in the direction you want to it carry things and then place items on top!\n\nConveyor belts can automatically handle turning and with Splitters can branch if you want that, and will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.  But because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.</description>
-    <pathCost>30</pathCost>
     <clearBuildingArea>false</clearBuildingArea>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorIcon</uiIconPath>
     <graphicData>
@@ -574,58 +573,12 @@
   <!--======================================= Conveyor underground connector base ===============================================-->
   <ThingDef Name="PRF_UGConnector_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
-    <category>Building</category>
-    <uiIconScale>0.7</uiIconScale>
-    <designationCategory>Industrial</designationCategory>
-    <designatorDropdown>UgRollers_gr</designatorDropdown>
-    <altitudeLayer>Building</altitudeLayer>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
-    <statBases>
-      <MaxHitPoints>80</MaxHitPoints>
-      <WorkToBuild>80</WorkToBuild>
-      <Flammability>0.4</Flammability>
-      <Mass>10</Mass>
-    </statBases>
+    <clearBuildingArea>true</clearBuildingArea>
     <costList>
       <Steel>20</Steel>
     </costList>
-    <researchPrerequisites>
-      <li>PRFRollers</li>
-    </researchPrerequisites>
-
-    <size>(1,1)</size>
-    <passability>Standable</passability>
-    <selectable>True</selectable>
-    <rotatable>true</rotatable>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
-    <drawGUIOverlay>true</drawGUIOverlay>
-    <pathCost>30</pathCost>
-    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>ProjectRimFactory.PlaceWorker_Arrow</li>
-    </placeWorkers>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>10</basePowerConsumption>
-        <transmitsPower>true</transmitsPower>
-        <shortCircuitInRain>false</shortCircuitInRain>
-      </li>
-      <li Class="CompProperties_Flickable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
-    </comps>
-    <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>2.8</speedFactor>
-        <minPower>5</minPower>
-        <maxPower>5</maxPower>
-      </li>
-    </modExtensions>
+    <pathCost>70</pathCost>
+    <fillPercent>0.4</fillPercent><!-- Cover from shell -->
   </ThingDef>
 
   <!--======================================= Conveyor floor connector to underground ===============================================-->
@@ -633,7 +586,6 @@
     <defName>Building_AutoMachineTool_BeltConveyor_ToUnderground</defName>
     <label>Underground belt entrance</label>
     <description>Connects ground conveyor belts to underground conveyors. This is the entrance to the subterrainian passages.</description>
-
     <graphicData>
       <texPath>AutoMachineTool/Buildings/undergroundIn</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -652,7 +604,6 @@
     <defName>Building_AutoMachineTool_BeltConveyor_ToFloor</defName>
     <label>Underground belt exit</label>
     <description>Connects the underground conveyor belt to the above-ground conveyor. This is an exit back to the surface, and will drop items on the floor if there is no conveyor.</description>
-
     <graphicData>
       <texPath>AutoMachineTool/Buildings/undergroundOut</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -679,7 +630,6 @@
     <clearBuildingArea>true</clearBuildingArea>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ConveyorFilter</li>
-      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -698,10 +648,10 @@
         <transmitsPower>true</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
+      <li Class="CompProperties_Flickable"/>
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
-      <li Class="CompProperties_Flickable"/>
     </comps>
     <uiIconPath>Belts/Splitter_door_closed</uiIconPath>
     <graphicData>
