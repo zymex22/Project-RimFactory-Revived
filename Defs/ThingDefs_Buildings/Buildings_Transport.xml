@@ -456,13 +456,14 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>10</basePowerConsumption>
-        <transmitsPower>true</transmitsPower>
+        <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
+      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
@@ -641,13 +642,14 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>40</basePowerConsumption>
-        <transmitsPower>true</transmitsPower>
+        <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
+      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
     </comps>
     <uiIconPath>Belts/Splitter_door_closed</uiIconPath>
     <graphicData>
