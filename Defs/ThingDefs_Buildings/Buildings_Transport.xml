@@ -20,7 +20,7 @@
     <defName>FuelingMachine</defName>
     <label>fueling machine</label>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
-    <designatorDropdown>PRF_Fuel_gr</designatorDropdown>
+    <!-- <designatorDropdown>PRF_Fuel_gr</designatorDropdown> -->
     <graphicData>
       <texPath>Industry/FuelingMachine</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -68,7 +68,7 @@
     <defName>SAL_SmartHopper</defName>
     <label>Vacuum Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
-    <designatorDropdown>PRF_Fuel_gr</designatorDropdown>
+    <!-- <designatorDropdown>PRF_Fuel_gr</designatorDropdown> -->
     <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <texPath>Storage/vacuum</texPath>

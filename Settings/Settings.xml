@@ -34,7 +34,7 @@
     <font>Small</font>
     <anchor>MiddleCenter</anchor>
     <text>PRF.Settings.restartMessage</text>
-  </Row> 
+  </Row>
 
   <Row Class="ProjectRimFactory.Common.GapRow" />
 
@@ -256,14 +256,6 @@
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
         <xpath>/Defs/ThingDef[defName="RecipeDatabase"]/designatorDropdown</xpath>
-      </Operation>
-      <Operation Class="PatchOperationRemove">
-        <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="SAL_SmartHopper"]/designatorDropdown</xpath>
-      </Operation>
-      <Operation Class="PatchOperationRemove">
-        <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="FuelingMachine"]/designatorDropdown</xpath>
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
