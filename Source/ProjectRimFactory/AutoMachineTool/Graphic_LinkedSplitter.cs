@@ -21,9 +21,17 @@ namespace ProjectRimFactory.AutoMachineTool {
     /// Yeah, maybe I should have done that, but this was easier.
     /// --LWM
     /// </summary>
-    public class Graphic_LinkedSplitter : Graphic_LinkedConveyor {
+    [StaticConstructorOnStartup]
+    public class Graphic_LinkedSplitter : Graphic_LinkedConveyorV2 {
         // to show the input direction for the splitter:
-        public static Material arrow00b => MaterialPool.MatFrom("Belts/SmallArrow00b");
+        public static Material arrow00b;
+        // to show all output directions for the splitter:
+        public static Material arrow01;
+
+        static Graphic_LinkedSplitter() {
+            arrow01 = MaterialPool.MatFrom("Belts/SmallArrow01");
+            arrow00b = MaterialPool.MatFrom("Belts/SmallArrow00b");
+        }
 
         private static GraphicData splitterBuildingDoorOpen = new GraphicData
         {

@@ -13,9 +13,13 @@ namespace ProjectRimFactory.AutoMachineTool
 {
     /// <summary>
     /// This is the original Nobo version of Linked Graphics for our use
-    /// It uses an unpadded atlas, which causes problems with conveyor
-    /// belts, but this should be fine with some other applications
-    /// (e.g., lights)
+    ///   It uses an unpadded atlas, which causes problems when the 
+    ///   atlas has enough detail: the Link2 class doesn't have any
+    ///   buffer between bits of the atlas, and the edges can bleed
+    ///   into each other. It can lead to thin-line artifacts along
+    ///   edges.  Prefer to use Graphic_LinkedConveyorV2 if there's
+    ///   any edge contact.  This may be fine for some applicatios,
+    ///   such as lights.
     /// </summary>
     public abstract class Graphic_Linked2 : Graphic
     {

@@ -10,6 +10,14 @@ using RimWorld;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool {
+#if false
+    /// <summary>
+    /// Note: This works okay for some graphics, but fails when the
+    ///   atlas has enough detail: the Link2 class doesn't have any
+    ///   buffer between bits of the atlas, and the edges can bleed
+    ///   into each other. It can lead to thin-line artifacts along
+    ///   edges.  Prefer to use Graphic_LinkedConveyorV2.
+    /// </summary>
     [StaticConstructorOnStartup]
     public class Graphic_LinkedConveyor : Graphic_Link2<Graphic_LinkedConveyor> {
 
@@ -169,4 +177,5 @@ namespace ProjectRimFactory.AutoMachineTool {
                canGetFroms = new Dictionary<Type, Func<ThingDef, Rot4, Rot4, ConveyorLevel, bool>>();
 
     }
+#endif
 }

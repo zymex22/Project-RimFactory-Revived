@@ -8,23 +8,30 @@ using Verse;
 using RimWorld;
 
 namespace ProjectRimFactory.AutoMachineTool {
+    /// <summary>
+    /// A Graphic that handles custom Link logic - this can be adapted
+    ///   to all sorts of other linked classes if needed.
+    /// Requires a padded atlas (similar to Vanilla) (which avoids any
+    ///   weird edge artifacts)
+    /// </summary>
     [StaticConstructorOnStartup]
     public class Graphic_LinkedConveyorV2 : Verse.Graphic_Linked {
         public static Material arrow00; // initialized in the static constructor
-        public static Material arrow01;
 
         public Graphic_LinkedConveyorV2() : base() {
         }
         public Graphic_LinkedConveyorV2(Graphic subGraphic) : base(subGraphic) {
         }
 
-/*        public override void Init(GraphicRequest req) {
+        public override void Init(GraphicRequest req) {
             this.data = req.graphicData;
             this.path = req.path;
             this.color = req.color;
             this.colorTwo = req.colorTwo;
             this.drawSize = req.drawSize;
-        }*/
+            this.subGraphic = new Graphic_Single();
+            this.subGraphic.Init(req);
+        }
 
         public override void Print(SectionLayer layer, Thing thing) {
             var conveyor = thing as IBeltConveyorLinkable;
@@ -46,7 +53,6 @@ namespace ProjectRimFactory.AutoMachineTool {
                 // So....don't print underground belts?
                 return;
             }
-            Log.Message("Actualy printing for " + thing);
             base.Print(layer, thing);
             // Print the tiny yellow arrow showing direction:
             Printer_Plane.PrintPlane(layer, thing.TrueCenter()
@@ -58,7 +64,6 @@ namespace ProjectRimFactory.AutoMachineTool {
             if (!c.InBounds(parent.Map)) {
                 return false;
             }
-            Log.Message("Drawing " + parent + "; does it link with " + c);
             //TODO: Still need a good set of logic for this
             //  For example, if pointing down, and linked
             //    from the left, should curve.  But does not.
@@ -125,7 +130,6 @@ namespace ProjectRimFactory.AutoMachineTool {
 
         static Graphic_LinkedConveyorV2() {
             arrow00 = MaterialPool.MatFrom("Belts/SmallArrow00");
-            arrow01 = MaterialPool.MatFrom("Belts/SmallArrow01");
             canSendTos[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefSendToRot4AtLevel;
             canGetFroms[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefReceiveFromRot4AtLevel;
             canSendTos[typeof(Building_BeltConveyorUGConnector)] = Building_BeltConveyorUGConnector.CanDefSendToRot4AtLevel;

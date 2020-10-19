@@ -488,22 +488,18 @@
     <clearBuildingArea>false</clearBuildingArea>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorIcon</uiIconPath>
     <graphicData>
-      <!--     <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
-           <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>-->
-      <texPath>Belts/v3/PRF Belts Atlas 256x256 GroundLevel</texPath>
+      <texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1, 1)</drawSize>
     </graphicData>
     <building>
       <blueprintGraphicData>
-      <texPath>Belts/v3/PRF Belts Atlas 256x256 GroundLevel Blueprint</texPath>
-      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
-      <!--<texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
-           <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>-->
-      <drawRotated>true</drawRotated>
-      <drawSize>(1, 1)</drawSize>
-       </blueprintGraphicData>
+        <texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint_North</texPath><!--TODO-->
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorV2</graphicClass>
+        <drawRotated>true</drawRotated>
+        <drawSize>(1, 1)</drawSize>
+      </blueprintGraphicData>
     </building>
   </ThingDef>
 
@@ -521,8 +517,8 @@
     </placeWorkers>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/BeltConveyorTest</texPath>
-<!--TODO-->      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+      <texPath>Belts/v3/Atlas_PRF_Rollers_512x512_Walls</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1,1)</drawSize>
     </graphicData>
@@ -530,7 +526,7 @@
       <isEdifice>false</isEdifice>
       <blueprintGraphicData>
         <texPath>AutoMachineTool/Buildings/BeltConveyorTest</texPath>
-        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorV2</graphicClass>
         <drawRotated>true</drawRotated>
         <drawSize>(0.8,0.8)</drawSize>
       </blueprintGraphicData>
@@ -557,14 +553,14 @@
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorUGIcon</uiIconPath>
     <graphicData>
       <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
-      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorV2</graphicClass>
       <drawRotated>true</drawRotated>
     </graphicData>
     <building>
       <isEdifice>false</isEdifice>
       <blueprintGraphicData>
         <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
-        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyor</graphicClass>
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorV2</graphicClass>
         <drawRotated>true</drawRotated>
       </blueprintGraphicData>
     </building>
@@ -655,14 +651,14 @@
     </comps>
     <uiIconPath>Belts/Splitter_door_closed</uiIconPath>
     <graphicData>
-      <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
+      <texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded_North</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedSplitter</graphicClass>
       <drawRotated>false</drawRotated>
       <drawSize>(1, 1)</drawSize>
     </graphicData>
     <building>
       <blueprintGraphicData>
-        <texPath>Belts/Atlas2_Rollers_256x256_no_buildings</texPath>
+        <texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint_North</texPath>
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedSplitter</graphicClass>
         <shaderType>EdgeDetect</shaderType>
         <drawRotated>false</drawRotated>
