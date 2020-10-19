@@ -11,6 +11,12 @@ using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
+    /// <summary>
+    /// This is the original Nobo version of Linked Graphics for our use
+    /// It uses an unpadded atlas, which causes problems with conveyor
+    /// belts, but this should be fine with some other applications
+    /// (e.g., lights)
+    /// </summary>
     public abstract class Graphic_Linked2 : Graphic
     {
         public Graphic_Linked2() : base()
