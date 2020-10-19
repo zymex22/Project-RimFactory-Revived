@@ -596,7 +596,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor underground connector base ===============================================-->
-  <ThingDef Name="PRF_UGConnector_Base" Parent="PRFBuildingBase" Abstract="true">
+  <ThingDef Name="PRF_UGConnector_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <category>Building</category>
     <uiIconScale>0.7</uiIconScale>
