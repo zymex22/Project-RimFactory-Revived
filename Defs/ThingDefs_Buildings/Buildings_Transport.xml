@@ -451,6 +451,7 @@
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Conveyor</li>
     </placeWorkers>
     <comps>
       <li Class="CompProperties_Power">
@@ -518,7 +519,7 @@
     </placeWorkers>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
-      <texPath>Belts/v3/Atlas_PRF_Rollers_512x512_Walls</texPath>
+      <texPath>Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v2</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1,1)</drawSize>
