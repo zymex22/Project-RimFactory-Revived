@@ -144,7 +144,12 @@ namespace ProjectRimFactory.AutoMachineTool
                     defaultLabel = "PRF_DropThing".Translate(dropThing.Label),
                     defaultDesc = "PRF_DropFromConveyorDesc".Translate(),
                     icon = (Texture2D)dropThing.Graphic.MatSingleFor(dropThing).mainTexture,
-                    action=delegate() { DropThing(dropThing); },
+                    action=delegate()
+                    {
+                        DropThing(dropThing);
+                        Find.Selector.ClearSelection();
+                        Find.Selector.Select(dropThing);
+                    },
                 };
             }
         }
