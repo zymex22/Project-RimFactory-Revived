@@ -559,14 +559,14 @@
     </modExtensions>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorUGIcon</uiIconPath>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
+      <texPath>Belts/v3/BeltConveyorUG</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorV2</graphicClass>
       <drawRotated>true</drawRotated>
     </graphicData>
     <building>
       <isEdifice>false</isEdifice>
       <blueprintGraphicData>
-        <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
+        <texPath>Belts/v3/BeltConveyorUG</texPath>
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorV2</graphicClass>
         <drawRotated>true</drawRotated>
       </blueprintGraphicData>
