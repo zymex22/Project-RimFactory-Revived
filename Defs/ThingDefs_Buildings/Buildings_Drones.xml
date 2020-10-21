@@ -196,7 +196,7 @@
       </li> -->
     </modExtensions>
     <researchPrerequisites>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_ImprovedDrones</li>
     </researchPrerequisites>
     <designatorDropdown>MiniDrone_gr</designatorDropdown>
   </ThingDef>
@@ -302,7 +302,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_ImprovedDrones</li>
     </researchPrerequisites>
   </ThingDef>
 
