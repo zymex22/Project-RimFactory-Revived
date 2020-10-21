@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+  <!-- Tier 1 -->
   <ResearchProjectDef>
     <defName>FarmingSprinklers</defName>
-    <label>Automatic farming I</label>
+    <label>Automated Farming Technique</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1750</baseCost>
-    <description>Basic Cultivation tools with use of drone</description>
+    <description>An agricultural drone is an unmanned aerial vehicle used to help optimize agriculture operations, increase crop production, and monitor crop growth. Sensors and digital imaging capabilities can give farmers a richer picture of their fields.</description>
     <prerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_BasicDrones</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
@@ -15,31 +16,34 @@
     <researchViewY>4</researchViewY>
   </ResearchProjectDef>
 
+  <!-- Tier 2 -->
   <ResearchProjectDef>
     <defName>AutomaticFarming1</defName>
-    <label>Automatic farming II</label>
+    <label>Improved Farming Techniques</label>
     <techLevel>Industrial</techLevel>
     <baseCost>2250</baseCost>
-    <description>Learn how to improve farming skills further by adding sunlamps and sprinklers to your cultivation.</description>
+    <description>Further Improvements to agricultural drones have made them more efficient and they can now haul harvest to storage or belts. This also unlocks sprinklers which boost crop speed.</description>
     <prerequisites>
       <li>FarmingSprinklers</li>
+      <li>PRF_ImprovedDrones</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
     <researchViewX>2</researchViewX>
     <researchViewY>4</researchViewY>
   </ResearchProjectDef>
-  
+
+  <!-- Tier 3 -->
   <ResearchProjectDef>
     <defName>AutomaticFarming</defName>
-    <label>Automatic farming III</label>
+    <label>Advanced Farming Techniques</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3000</baseCost>
-    <description>Learn how to farm in spacer style with use of Mechanites to farm plots for you</description>
+    <description>With advanced use of Mechanites and improved Ai control, Cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
     <prerequisites>
       <li>AutomaticFarming1</li>
     </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>

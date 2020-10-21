@@ -275,7 +275,7 @@
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
   </ThingDef>
 
-  <!--===================================== Glitter Harvester T3 =====================================-->
+  <!--===================================== Spacer Harvester T3 =====================================-->
   <ThingDef ParentName="prf_AnimalBase">
     <defName>PRF_GlitterHarvester</defName>
     <label>spacer animal harvester</label>
@@ -355,6 +355,7 @@
     </inspectorTabs>
     <researchPrerequisites>
       <li>AnimalStations_II</li>
+      <li>AutomaticFarming</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
   </ThingDef>

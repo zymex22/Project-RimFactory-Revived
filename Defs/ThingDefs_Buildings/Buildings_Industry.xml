@@ -284,6 +284,7 @@
       <li>Make_ComponentSpacer</li>
       <li>MakePRFRoboticArm</li>
       <li>MakePRFWeakAIChip</li>
+      <li>MakePRFPRFAdvancedAIChip</li>
       <li>MakePRFDroneModule</li>
       <li>MakeDataDisk</li>
       <li>MakeSmallFrame</li>
