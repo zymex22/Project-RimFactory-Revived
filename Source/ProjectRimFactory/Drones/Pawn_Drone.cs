@@ -45,7 +45,7 @@ namespace ProjectRimFactory.Drones
 
             base.SpawnSetup(map, respawningAfterLoad);
             skills = new Pawn_SkillTracker(this);
-            skillSettings = def.GetModExtension<ModExtension_Skills>();
+            skillSettings =  station.def.GetModExtension<ModExtension_Skills>();
             UpdateSkills(skills);
 
             story = new Pawn_StoryTracker(this)
@@ -67,7 +67,7 @@ namespace ProjectRimFactory.Drones
         {
             if (station.GetDroneSkillsRecord.Count == 0)
             {
-                
+
                 foreach (SkillRecord record in skill.skills)
                 {
                     if (skillSettings != null)
