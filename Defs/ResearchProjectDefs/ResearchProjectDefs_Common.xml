@@ -11,7 +11,7 @@
       <li>Machining</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>0</researchViewX>
+    <researchViewX>2</researchViewX>
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
@@ -20,34 +20,16 @@
     <defName>PRF_BasicDrones</defName>
     <label>Basic Drone knowledge</label>
     <techLevel>Industrial</techLevel>
-    <baseCost>750</baseCost>
+    <baseCost>600</baseCost>
     <description>The first pilotless vehicles were built during the First World War. These early models were launched by catapult or flown using radio control. Much have changed since then and drones are now used for more common tasks.\nThis sets drones basestats lv. 10</description>
     <prerequisites>
       <li>PRFEulersIdentity</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>0</researchViewX>
+    <researchViewX>3</researchViewX>
     <researchViewY>0</researchViewY>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 10 unless manually overwritten -->
-
-  <ResearchProjectDef>
-    <defName>PRFMachineLearning</defName>
-    <label>Machine learning</label>
-    <techLevel>Industrial</techLevel>
-    <baseCost>2000</baseCost>
-    <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
-    <prerequisites>
-      <li>MagneticTape</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <requiredResearchFacilities>
-      <li>MultiAnalyzer</li>
-    </requiredResearchFacilities>
-    <tab>Automation</tab>
-    <researchViewX>3</researchViewX>
-    <researchViewY>3</researchViewY>
-  </ResearchProjectDef>
 
   <ResearchProjectDef>
     <defName>PRFRollers</defName>
@@ -56,12 +38,12 @@
     <baseCost>500</baseCost>
     <description>Rollers and belts include both IR and PRF</description>
     <prerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>Machining</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
     <researchViewX>0</researchViewX>
-    <researchViewY>5</researchViewY>
+    <researchViewY>6</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -75,7 +57,7 @@
       <li>PRFRollers</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>0</researchViewX>
+    <researchViewX>1</researchViewX>
     <researchViewY>6</researchViewY>
   </ResearchProjectDef>
 
@@ -95,9 +77,28 @@
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
     <tab>Automation</tab>
-    <researchViewX>2</researchViewX>
+    <researchViewX>5</researchViewX>
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>PRFMachineLearning</defName>
+    <label>Machine learning</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>2000</baseCost>
+    <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
+    <prerequisites>
+      <li>AutomationBasics</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <tab>Automation</tab>
+    <researchViewX>6</researchViewX>
+    <researchViewY>2.9</researchViewY>
+  </ResearchProjectDef>
+
 
   <!-- Improved drone technology -->
   <ResearchProjectDef>
@@ -108,9 +109,10 @@
     <description>Further improvements for drones have now enabled use of more drones and with a greater control over task it can perform.\nThis sets drones basestats lv. 15</description>
     <prerequisites>
       <li>AutomationBasics</li>
+      <li>PRF_BasicDrones</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>3</researchViewX>
+    <researchViewX>6</researchViewX>
     <researchViewY>0</researchViewY>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 15 unless manually overwritten -->
@@ -124,11 +126,11 @@
     <baseCost>2000</baseCost>
     <description>"Every even integer, greater than 2, can be formed from the sum of two prime numbers."\nUnlocks a new array of third tier research projects.</description>
     <prerequisites>
-      <li>PRFMachineLearning</li>
+      <li>AutomationBasics</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
+    <researchViewX>8</researchViewX>
     <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
@@ -141,10 +143,11 @@
     <description>Perfectly aerodynamics higher power engines and Ai have created a perfectly balanced super drone that will perform tasks better than most pawns ever will.\nThis sets drones basestats lv. 20</description>
     <prerequisites>
       <li>PRFGoldbachConjecture</li>
+      <li>PRF_ImprovedDrones</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
+    <researchViewX>10</researchViewX>
     <researchViewY>0</researchViewY>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 20 unless manually overwritten -->
@@ -162,8 +165,8 @@
       <li>PRFEulersIdentity</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>2</researchViewX>
-    <researchViewY>6</researchViewY>
+    <researchViewX>3</researchViewX>
+    <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -177,8 +180,8 @@
       <li>AutomationBasics</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>3</researchViewX>
-    <researchViewY>6</researchViewY>
+    <researchViewX>6</researchViewX>
+    <researchViewY>3.5</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -192,8 +195,8 @@
       <li>PRFGoldbachConjecture</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
-    <researchViewY>6</researchViewY>
+    <researchViewX>9</researchViewX>
+    <researchViewY>3.5</researchViewY>
   </ResearchProjectDef>
 
 </Defs>

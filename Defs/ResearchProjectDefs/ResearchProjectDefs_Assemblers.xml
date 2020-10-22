@@ -11,8 +11,8 @@
       <li>PRFEulersIdentity</li>
     </prerequisites>
     <label>Self-cooking</label>
-    <researchViewX>1</researchViewX>
-    <researchViewY>2</researchViewY>
+    <researchViewX>3</researchViewX>
+    <researchViewY>1.2</researchViewY>
     <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
   </ResearchProjectDef>
 
@@ -27,8 +27,8 @@
       <li>AutomationBasics</li>
     </prerequisites>
     <label>Magnetic tape</label>
-    <researchViewX>2</researchViewX>
-    <researchViewY>2</researchViewY>
+    <researchViewX>6</researchViewX>
+    <researchViewY>1.2</researchViewY>
     <description>Learn how to make and use old-school magnetic tape to store instructions. Make data disks at the machining table.</description>
   </ResearchProjectDef>
 
@@ -47,8 +47,8 @@
     <prerequisites>
       <li>MagneticTape</li>
     </prerequisites>
-    <researchViewX>3</researchViewX>
-    <researchViewY>2</researchViewY>
+    <researchViewX>7</researchViewX>
+    <researchViewY>1.2</researchViewY>
   </ResearchProjectDef>
 
   <!-- Tier 2 -->
@@ -61,10 +61,10 @@
     <tab>Automation</tab>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <prerequisites>
-      <li>PRFMachineLearning</li>
+      <li>PRFGoldbachConjecture</li>
       <li>UniversalAutocrafting</li>
     </prerequisites>
-    <researchViewX>4</researchViewX>
-    <researchViewY>2</researchViewY>
+    <researchViewX>9</researchViewX>
+    <researchViewY>1.2</researchViewY>
   </ResearchProjectDef>
 </Defs>

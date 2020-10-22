@@ -11,8 +11,8 @@
     <prerequisites>
       <li>PRFEulersIdentity</li>
     </prerequisites>
-    <researchViewX>1</researchViewX>
-    <researchViewY>1</researchViewY>
+    <researchViewX>3</researchViewX>
+    <researchViewY>0.7</researchViewY>
     <description>Make buildings that can extract random minerals and rocks from deep underground.(can cause infestation)</description>
   </ResearchProjectDef>
 
@@ -32,8 +32,8 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>2</researchViewX>
-    <researchViewY>1</researchViewY>
+    <researchViewX>6</researchViewX>
+    <researchViewY>0.7</researchViewY>
     <description>Make buildings that can extract random minerals and rocks from deep underground.(can cause infestation)</description>
   </ResearchProjectDef>
 
@@ -53,8 +53,8 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>3</researchViewX>
-    <researchViewY>1</researchViewY>
+    <researchViewX>9</researchViewX>
+    <researchViewY>0.7</researchViewY>
     <description>A advanced miner that can select a main ore to mine for and get secondaries as rare/junk bonus chance(no infestation)</description>
   </ResearchProjectDef>
 
@@ -70,8 +70,8 @@
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
-    <researchViewY>4</researchViewY>
+    <researchViewX>9</researchViewX>
+    <researchViewY>2.4</researchViewY>
   </ResearchProjectDef>
 
 </Defs>

@@ -5,15 +5,15 @@
     <defName>FarmingSprinklers</defName>
     <label>Automated Farming Technique</label>
     <techLevel>Industrial</techLevel>
-    <baseCost>1750</baseCost>
+    <baseCost>1500</baseCost>
     <description>An agricultural drone is an unmanned aerial vehicle used to help optimize agriculture operations, increase crop production, and monitor crop growth. Sensors and digital imaging capabilities can give farmers a richer picture of their fields.</description>
     <prerequisites>
       <li>PRF_BasicDrones</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>1</researchViewX>
-    <researchViewY>4</researchViewY>
+    <researchViewX>4</researchViewX>
+    <researchViewY>0</researchViewY>
   </ResearchProjectDef>
 
   <!-- Tier 2 -->
@@ -25,12 +25,12 @@
     <description>Further Improvements to agricultural drones have made them more efficient and they can now haul harvest to storage or belts. This also unlocks sprinklers which boost crop speed.</description>
     <prerequisites>
       <li>FarmingSprinklers</li>
-      <li>PRF_ImprovedDrones</li>
+      <li>AutomationBasics</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>2</researchViewX>
-    <researchViewY>4</researchViewY>
+    <researchViewX>7</researchViewX>
+    <researchViewY>0</researchViewY>
   </ResearchProjectDef>
 
   <!-- Tier 3 -->
@@ -42,13 +42,14 @@
     <description>With advanced use of Mechanites and improved Ai control, Cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
     <prerequisites>
       <li>AutomaticFarming1</li>
+      <li>PRFGoldbachConjecture</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
     <tab>Automation</tab>
-    <researchViewX>3</researchViewX>
-    <researchViewY>4</researchViewY>
+    <researchViewX>9</researchViewX>
+    <researchViewY>0</researchViewY>
   </ResearchProjectDef>
 </Defs>

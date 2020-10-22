@@ -12,8 +12,8 @@
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>1</researchViewX>
-    <researchViewY>5</researchViewY>
+    <researchViewX>3</researchViewX>
+    <researchViewY>2.4</researchViewY>
   </ResearchProjectDef>
 
   <!-- Tier 2 -->
@@ -29,8 +29,8 @@
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>2</researchViewX>
-    <researchViewY>5</researchViewY>
+    <researchViewX>6</researchViewX>
+    <researchViewY>2.4</researchViewY>
   </ResearchProjectDef>
 
 </Defs>
