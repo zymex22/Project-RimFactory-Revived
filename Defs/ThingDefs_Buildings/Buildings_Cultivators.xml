@@ -158,6 +158,8 @@
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <BaseSkill>15</BaseSkill>
+        <skills>
+        </skills>
       </li>
     </modExtensions>
     <researchPrerequisites>
@@ -268,6 +270,8 @@
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <BaseSkill>20</BaseSkill>
+        <skills>
+        </skills>
       </li>
     </modExtensions>
     <inspectorTabs>
