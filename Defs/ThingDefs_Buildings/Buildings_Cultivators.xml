@@ -109,10 +109,10 @@
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <BaseSkill>10</BaseSkill>
         <skills>
-          <li>
+          <!--<li>
             <def>Plants</def>
             <levelInt>11</levelInt>
-          </li>
+          </li>-->
         </skills>
       </li>
     </modExtensions>
