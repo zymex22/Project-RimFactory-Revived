@@ -411,6 +411,10 @@
   <DesignatorDropdownGroupDef>
     <defName>UgRollers_gr</defName>
   </DesignatorDropdownGroupDef>
+
+    <DesignatorDropdownGroupDef>
+    <defName>Rollers_gr</defName>
+  </DesignatorDropdownGroupDef>
   <!--======================================= ============= ===============================================-->
   <!--======================================= Conveyor base ===============================================-->
   <!--======================================= ============= ===============================================-->
@@ -419,7 +423,7 @@
     <category>Building</category>
     <altitudeLayer>Building</altitudeLayer>
     <designationCategory>Industrial</designationCategory>
-    <designatorDropdown>UgRollers_gr</designatorDropdown>
+    <designatorDropdown>Rollers_gr</designatorDropdown>
     <drawerType>MapMeshAndRealTime</drawerType>
     <uiIconScale>0.7</uiIconScale>
     <costList>
@@ -488,7 +492,7 @@
     <label>conveyor belt</label>
     <description>A conveyor belt that can move items from A to B. Point the arrows in the direction you want to it carry things and then place items on top!\n\nConveyor belts can automatically handle turning and with Splitters can branch if you want that, and will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.  But because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.</description>
     <clearBuildingArea>false</clearBuildingArea>
-    <uiIconPath>AutoMachineTool/Buildings/BeltConveyorIcon</uiIconPath>
+    <uiIconPath>Belts/v3/BeltConveyorIcon</uiIconPath>
     <graphicData>
       <texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
@@ -506,7 +510,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor wall ===============================================-->
-  <ThingDef ParentName="PRF_Conveyor_Base">
+  <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Wall</defName>
     <label>Wall conveyor belt</label>
     <description>Moves items - through walls! You can use these to traverse walls or move items along inside them. When items hit the end, they will move out onto the ground, as long as there is room.</description>
@@ -517,9 +521,9 @@
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
     </placeWorkers>
-    <uiIconPath>AutoMachineTool/Buildings/BeltConveyorWallIcon</uiIconPath>
+    <uiIconPath>Belts/v3/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
-      <texPath>Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v2</texPath>
+      <texPath>Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v3</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1,1)</drawSize>
@@ -539,6 +543,7 @@
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Underground</defName>
     <label>underground belt</label>
+    <designatorDropdown>UgRollers_gr</designatorDropdown>
     <description>Underground Conveyor Belts carry items in tunnels under the ground. To move items into the subterrainian passages, you need to use the Underground Conveyor Entrance and Exit.</description>
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
@@ -554,14 +559,14 @@
     </modExtensions>
     <uiIconPath>AutoMachineTool/Buildings/BeltConveyorUGIcon</uiIconPath>
     <graphicData>
-      <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
+      <texPath>Belts/v3/BeltConveyorUG</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorV2</graphicClass>
       <drawRotated>true</drawRotated>
     </graphicData>
     <building>
       <isEdifice>false</isEdifice>
       <blueprintGraphicData>
-        <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
+        <texPath>Belts/v3/BeltConveyorUG</texPath>
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorV2</graphicClass>
         <drawRotated>true</drawRotated>
       </blueprintGraphicData>
@@ -572,6 +577,7 @@
   <ThingDef Name="PRF_UGConnector_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <clearBuildingArea>true</clearBuildingArea>
+    <designatorDropdown>UgRollers_gr</designatorDropdown>
     <costList>
       <Steel>20</Steel>
     </costList>
@@ -676,6 +682,7 @@
   <ThingDef ParentName="PRF_Belt_Splitter">
     <defName>Building_AutoMachineTool_BeltSplitter_UG</defName>
     <label>underground splitter</label>
+    <designatorDropdown>UgRollers_gr</designatorDropdown>
     <description>A conveyor splitter unit built into the ground.  This one will hand off items to other underground conveyor belts.</description>
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
