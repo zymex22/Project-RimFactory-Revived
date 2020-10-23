@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!-- Tier 1 -->
+  <!-- ==================== Main Tier 1 ============================= -->
   <ResearchProjectDef>
     <defName>PRFEulersIdentity</defName>
     <label>Euler's identity</label>
@@ -13,6 +14,8 @@
     <tab>Automation</tab>
     <researchViewX>2</researchViewX>
     <researchViewY>3</researchViewY>
+    <discoveredLetterTitle>About: Getting Factory started</discoveredLetterTitle>
+    <discoveredLetterText>You now have the technology to start automatic fabrication.</discoveredLetterText>
   </ResearchProjectDef>
 
   <!-- Basic drone technology -->
@@ -28,6 +31,8 @@
     <tab>Automation</tab>
     <researchViewX>3</researchViewX>
     <researchViewY>0</researchViewY>
+    <discoveredLetterTitle>About: Drone Knowledge</discoveredLetterTitle>
+    <discoveredLetterText>You now have basic knowledge about drones and can now start utilize them for different tasks. This also unlocks DroneCultivator research which let you Automate your agriculture needs. /n This will set any drones base level to 10. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 10 unless manually overwritten -->
 
@@ -77,6 +82,7 @@
   </ResearchProjectDef>
 
   <!-- Tier 2 -->
+  <!-- ==================== Main Tier 2 ============================= -->
   <ResearchProjectDef>
     <defName>AutomationBasics</defName>
     <label>Riemann zeta function</label>
@@ -129,11 +135,14 @@
     <tab>Automation</tab>
     <researchViewX>6</researchViewX>
     <researchViewY>0</researchViewY>
+    <discoveredLetterTitle>About: Drone Engine Upgrade</discoveredLetterTitle>
+    <discoveredLetterText>You have upgraded your drones with better engines and batteries and as such they now do jobs even more efficient. /n This will set any drones base level to 15. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 15 unless manually overwritten -->
 
 
   <!-- Tier 3 -->
+  <!-- ==================== Main Tier 3 ============================= -->
   <ResearchProjectDef>
     <defName>PRFGoldbachConjecture</defName>
     <label>Goldbach's conjecture</label>
@@ -154,7 +163,7 @@
     <defName>PRF_AdvancedDrones</defName>
     <label>Advanced Drone Ai</label>
     <techLevel>Spacer</techLevel>
-    <baseCost>5000</baseCost>
+    <baseCost>6000</baseCost>
     <description>Perfectly aerodynamics higher power engines and Ai have created a perfectly balanced super drone that will perform tasks better than most pawns ever will.\nThis sets drones basestats lv. 20</description>
     <prerequisites>
       <li>PRFGoldbachConjecture</li>
@@ -164,6 +173,8 @@
     <tab>Automation</tab>
     <researchViewX>10</researchViewX>
     <researchViewY>0</researchViewY>
+    <discoveredLetterTitle>About: Drone Ai upgrade</discoveredLetterTitle>
+    <discoveredLetterText>You have upgraded your drones with advanced Ai cores, this will let them do their task better than most humans will do. /n This will set any drones base level to 20. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 20 unless manually overwritten -->
 
