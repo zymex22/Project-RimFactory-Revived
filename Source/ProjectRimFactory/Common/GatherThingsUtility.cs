@@ -24,7 +24,7 @@ namespace ProjectRimFactory {
         /// <param name="map">Map</param>
         public static IEnumerable<Thing> AllThingsInCellForUse(this IntVec3 c, Map map) {
             List<Thing> thingList = map.thingGrid.ThingsListAt(c);
-            for (int i=thingList.Count-1; i>=9; i--) {
+            for (int i=thingList.Count-1; i>=0; i--) {
                 Thing t = thingList[i];
                 if (t is Building && t is IThingHolder holder) {
                     if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner) {
