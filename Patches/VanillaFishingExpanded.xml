@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!--RimFridge -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Fishing Expanded</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<!-- ============== Adding Mini fishing drone station =============== -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<ThingDef ParentName="PRF_MiniDroneStation">
+							<defName>PRF_MiniHelperFishing</defName>
+							<label>Mini Fishing station</label>
+							<graphicData>
+								<texPath>Drones/MiniDroneStation</texPath>
+							</graphicData>
+							<constructEffect>ConstructMetal</constructEffect>
+							<description>A mini Fishing Station capable of helping you with catching fish. it will take breaks to prevent curcuits getting too wet.</description>
+							<costList>
+								<PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+								<PRFDroneModule>1</PRFDroneModule>
+								<Steel>30</Steel>
+								<Plasteel>20</Plasteel>
+								<ComponentIndustrial>3</ComponentIndustrial>
+							</costList>
+							<inspectorTabs>
+								<li>ProjectRimFactory.Common.ITab_PowerSupply</li>								<!-- Power boost -->
+							</inspectorTabs>
+							<comps>
+								<li Class="CompProperties_Breakdownable"/>
+								<li Class="CompProperties_Refuelable">
+									<fuelConsumptionRate>0</fuelConsumptionRate>
+									<fuelCapacity>1</fuelCapacity>
+									<fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+									<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+									<fuelFilter>
+										<thingDefs>
+											<li>PRFDroneModule</li>
+										</thingDefs>
+									</fuelFilter>
+									<targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+									<initialConfigurableTargetFuelLevel>1</initialConfigurableTargetFuelLevel>
+									<drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+								</li>
+								<li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+									<speedSetting>false</speedSetting>
+									<rangeSetting>true</rangeSetting>
+									<minPowerForRange>300</minPowerForRange>
+									<minRange>3</minRange>
+									<maxPowerForRange>800</maxPowerForRange>
+									<maxRange>6</maxRange>
+									<rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+								</li>
+							</comps>
+							<modExtensions>
+								<li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+									<displayDormantDrones>false</displayDormantDrones>									<!-- Drones will sit on top while not working -->
+									<Sleeptimes>1,4,7,10,13,16,19,22</Sleeptimes>
+									<spawnWithFullDrones>true</spawnWithFullDrones>
+									<workTypes>
+										<li>VCEF_Fishing</li>
+										<li>Hauling</li>
+									</workTypes>
+								</li>
+							</modExtensions>
+							<researchPrerequisites>
+								<li>PRF_ImprovedDrones</li>
+							</researchPrerequisites>
+							<designatorDropdown>MiniDrone_gr</designatorDropdown>
+						</ThingDef>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
