@@ -510,7 +510,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor wall ===============================================-->
-  <ThingDef ParentName="PRF_Conveyor_Base">
+  <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>Building_AutoMachineTool_BeltConveyor_Wall</defName>
     <label>Wall conveyor belt</label>
     <description>Moves items - through walls! You can use these to traverse walls or move items along inside them. When items hit the end, they will move out onto the ground, as long as there is room.</description>

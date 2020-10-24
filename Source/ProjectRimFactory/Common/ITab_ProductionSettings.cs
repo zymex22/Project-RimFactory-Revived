@@ -17,13 +17,11 @@ namespace ProjectRimFactory.Common
     ///  * whether can output produced things to entire stockpile, or only one cell
     ///  * whether to obey IProductLimitation limits on production/storing
     /// </summary>
-    class ITab_ProductionSettings : ITab
-    {
+    class ITab_ProductionSettings : ITab {
         private Vector2 winSize = new Vector2(400f, 0f);
         private List<SlotGroup> groups;
 
-        public ITab_ProductionSettings()
-        {
+        public ITab_ProductionSettings() {
             this.labelKey = "PRFSettingsTab";
         }
 
@@ -33,11 +31,13 @@ namespace ProjectRimFactory.Common
             }
         }
         bool ShowProductLimt => Machine != null;
-        bool ShowOutputToEntireStockpile => (((PRFB.SettingsOptions & PRFBSetting.optionOutputToEntireStockpie) > 0) &&
-                    // Only output to stockpile option if belt is above ground!
-                    !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground)));
-        bool ShowObeysStorageFilter => ((PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
-            !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
+        bool ShowOutputToEntireStockpile => ( PRFB != null && 
+                ((PRFB.SettingsOptions & PRFBSetting.optionOutputToEntireStockpie) > 0) &&
+                // Only output to stockpile option if belt is above ground!
+                !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground)));
+        bool ShowObeysStorageFilter => (PRFB != null &&
+                (PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
+                !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
 
         private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
         private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
