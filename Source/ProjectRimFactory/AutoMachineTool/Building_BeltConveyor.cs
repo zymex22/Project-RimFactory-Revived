@@ -416,6 +416,11 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             base.Reset();
             this.products = thingOwnerInt.InnerListForReading;
+            // Any of thse could come up in weird scenarios: remove them all?
+            MapManager.RemoveAfterAction(CheckWork);
+            MapManager.RemoveAfterAction(Placing);
+            MapManager.RemoveAfterAction(StartWork);
+            MapManager.RemoveAfterAction(FinishWork);
         }
 
         protected override bool PlaceProduct(ref List<Thing> products) {
@@ -535,6 +540,9 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         protected override void CheckWork() {
+            if (working==null || this.thingOwnerInt.Count==0) {
+                return;
+            }
             //TODO: Add test here :p
             if (stuck) {
                 if (CanOutput(working)) {
@@ -553,6 +561,9 @@ namespace ProjectRimFactory.AutoMachineTool
             base.CheckWork();
         }
         protected virtual bool CanOutput(Thing t) {
+            if (t == null) {
+                return true; // Sure? Nothing to place, so can place it trivially.
+            }
             var belt = this.OutputBeltAt(this.OutputCell());
             if (belt != null) {
                 Debug.Message(Debug.Flag.Conveyors,
