@@ -78,10 +78,10 @@
     </researchPrerequisites>
   </ThingDef>
 
+  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
   <ThingDef ParentName="BBBuildingBase">
     <defName>Battery10k</defName>
     <label>10k battery</label>
-    <designatorDropdown>prf_batteries_gr</designatorDropdown>
     <thingClass>Building_Battery</thingClass>
     <graphicData>
       <texPath>Industry/Battery/Battery10k</texPath>
@@ -128,11 +128,9 @@
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <designationCategory>Power</designationCategory>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>EnhancedBatteries</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -259,10 +257,10 @@
     </researchPrerequisites>
   </ThingDef>
 
+  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
   <ThingDef ParentName="BBBuildingBase">
     <defName>Battery100k</defName>
     <label>100k battery</label>
-    <designatorDropdown>prf_batteries_gr</designatorDropdown>
     <thingClass>Building_Battery</thingClass>
     <graphicData>
       <texPath>Industry/Battery/Building_Battery_256k</texPath>
@@ -305,18 +303,13 @@
       <li Class="CompProperties_Battery">
         <storedEnergyMax>100000</storedEnergyMax>
         <efficiency>1</efficiency>
-
         <transmitsPower>true</transmitsPower>
       </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <designationCategory>Power</designationCategory>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
-    <researchPrerequisites>
-      <li>VeryLargeBatteries</li>
-    </researchPrerequisites>
   </ThingDef>
 
   <ThingDef ParentName="BBBuildingBase">
