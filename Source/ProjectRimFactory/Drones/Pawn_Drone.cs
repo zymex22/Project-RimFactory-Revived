@@ -63,22 +63,27 @@ namespace ProjectRimFactory.Drones
             playerSettings.AreaRestriction = this.station.droneAllowedArea;
         }
 
-
-
-
- 
-
         public override void Tick()
         {
             base.Tick();
-            if (this.IsHashIntervalTick(250))
-            {
-                DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings);
-            }
             if (Downed)
             {
                 Kill(null);
             }
+        }
+
+        //Disabeling this for now as i think we dont need the refresh on Rare Tick.
+        //I think on spawn && Long Tick is Enoth
+        //public override void TickRare()
+        //{
+        //    base.TickRare();
+        //    DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings);
+        //}
+
+        public override void TickLong()
+        {
+            base.TickLong();
+            DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings, true);
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
