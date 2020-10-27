@@ -6,7 +6,7 @@
   <ResearchProjectDef>
     <defName>PRF_Clockwork</defName>
     <label>Clockwork Principle</label>
-    <techLevel>Industrial</techLevel>
+    <techLevel>Medieval</techLevel>
     <baseCost>500</baseCost>
     <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the very basics of automation and mechanisms, the gateway to an industrial colony. tier 1</description>
     <prerequisites>
@@ -15,8 +15,11 @@
     <tab>Automation</tab>
     <researchViewX>1</researchViewX>
     <researchViewY>3</researchViewY>
-    <discoveredLetterTitle>About: Getting Factory started</discoveredLetterTitle>
-    <discoveredLetterText>You now have the technology to start automatic fabrication.</discoveredLetterText>
+    <discoveredLetterTitle>About: Clockwork Principle</discoveredLetterTitle>
+    <discoveredLetterText>The earliest known example of a clockwork mechanism is the Antikythera mechanism, a first-century BC geared analogue computer, somewhat astrolabe-like, for calculating astronomical positions and eclipses, recovered from a Greek shipwreck. There are many other accounts of clockwork devices in ancient Greece, even in its mythology, and the mechanism itself is sophisticated enough to indicate a significant history of lesser devices leading up to its creation.\n\n
+At some point, this level of sophistication in clockwork technology was lost or forgotten in Europe, and only returned when brought from the Islamic world after the Crusades, along with other knowledge leading to the Renaissance. Clockwork finally recovered the equivalent of pre-Roman technological levels in the 14th century.\n\n
+As in Greek mythology, there are ambitious automation claims in the legends of other cultures. For example, in Jewish legend, Solomon used his wisdom to design a throne with mechanical animals which hailed him as king when he ascended it; upon sitting down an eagle would place a crown upon his head, and a dove would bring him a Torah scroll. It's also said that when King Solomon stepped upon the throne, a mechanism was set in motion. As soon as he stepped upon the first step, a golden ox and a golden lion each stretched out one foot to support him and help him rise to the next step. On each side, the animals helped the King up until he was comfortably seated upon his throne.
+    </discoveredLetterText>
   </ResearchProjectDef>
 
   <!-- Tier 1 -->
@@ -50,7 +53,7 @@
     <tab>Automation</tab>
     <researchViewX>3</researchViewX>
     <researchViewY>0</researchViewY>
-    <discoveredLetterTitle>About: Drone Knowledge</discoveredLetterTitle>
+    <discoveredLetterTitle>About: Drone are now lv 10</discoveredLetterTitle>
     <discoveredLetterText>You now have basic knowledge about drones and can now start utilize them for different tasks. This also unlocks DroneCultivator research which let you Automate your agriculture needs. /n This will set any drones base level to 10. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 10 unless manually overwritten -->
@@ -119,6 +122,8 @@
     <tab>Automation</tab>
     <researchViewX>5</researchViewX>
     <researchViewY>3</researchViewY>
+    <discoveredLetterTitle>About: Tier 2 Factory Unlocked</discoveredLetterTitle>
+    <discoveredLetterText>You have now Researched Riemann zeta function with this you have unlocked Tier 2 Reseaches.\n You also unlocked ability to create Ai Research bench which you will need to progress to tier 3</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -154,7 +159,7 @@
     <tab>Automation</tab>
     <researchViewX>6</researchViewX>
     <researchViewY>0</researchViewY>
-    <discoveredLetterTitle>About: Drone Engine Upgrade</discoveredLetterTitle>
+    <discoveredLetterTitle>About: Drone are now lv 15</discoveredLetterTitle>
     <discoveredLetterText>You have upgraded your drones with better engines and batteries and as such they now do jobs even more efficient. /n This will set any drones base level to 15. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 15 unless manually overwritten -->
@@ -176,6 +181,8 @@
     <tab>Automation</tab>
     <researchViewX>8</researchViewX>
     <researchViewY>3</researchViewY>
+    <discoveredLetterTitle>About: Tier 3 Factory Unlocked</discoveredLetterTitle>
+    <discoveredLetterText>You have now Researched Goldbach's conjecture with this you have unlocked Tier 3 Reseaches.</discoveredLetterText>
   </ResearchProjectDef>
 
   <!-- Advanced drone technology -->
@@ -193,7 +200,7 @@
     <tab>Automation</tab>
     <researchViewX>10</researchViewX>
     <researchViewY>0</researchViewY>
-    <discoveredLetterTitle>About: Drone Ai upgrade</discoveredLetterTitle>
+    <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
     <discoveredLetterText>You have upgraded your drones with advanced Ai cores, this will let them do their task better than most humans will do. /n This will set any drones base level to 20. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 20 unless manually overwritten -->
