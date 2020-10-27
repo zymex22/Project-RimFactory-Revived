@@ -14,7 +14,7 @@
   <!--=========================== =========================== ===================================-->
   <!--=========================== Mini drone station Base 1x1 ===================================-->
   <ThingDef Name="PRF_MiniDroneStation" ParentName="PRFBuildingBase" Abstract="True">
-  <thingClass>ProjectRimFactory.Drones.Building_DroneStationRefuelable</thingClass>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneStationRefuelable</thingClass>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
@@ -66,7 +66,7 @@
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>0</basePowerConsumption>
-      </li>     
+      </li>
     </comps>
     <inspectorTabs>
       <li>ProjectRimFactory.Drones.ITab_DroneStation</li>
@@ -176,8 +176,8 @@
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <displayDormantDrones>false</displayDormantDrones>        <!-- Drones will sit on top while not working -->
         <spawnWithFullDrones>true</spawnWithFullDrones>
-        <!-- <Sleeptimes></Sleeptimes> --> <!-- Setting off times use 22,23,24,0,1,2 -->
-        <!-- <SquareJobRadius>5</SquareJobRadius> --> <!-- This is used if it has a Fixed Range -->
+        <!-- <Sleeptimes></Sleeptimes> -->        <!-- Setting off times use 22,23,24,0,1,2 -->
+        <!-- <SquareJobRadius>5</SquareJobRadius> -->        <!-- This is used if it has a Fixed Range -->
         <workTypes>
           <li>BasicWorker</li>
           <li>Hauling</li>
@@ -185,15 +185,16 @@
           <li>Firefighter</li>
         </workTypes>
       </li>
-      <!-- <li Class="ProjectRimFactory.Common.ModExtension_Skills">
-        <BaseSkill>19</BaseSkill>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ReserchOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
         <skills>
-          <li>
+          <!--<li>
             <def>Intellectual</def>
             <levelInt>11</levelInt>
-          </li>
+          </li>-->
         </skills>
-      </li> -->
+      </li>
     </modExtensions>
     <researchPrerequisites>
       <li>PRF_ImprovedDrones</li>
@@ -217,7 +218,7 @@
     <uiIconScale>0.70</uiIconScale>
     <fillPercent>0.75</fillPercent>
     <pathCost>0</pathCost>
-    <!-- <specialDisplayRadius>6.9</specialDisplayRadius> --> <!-- Show radius for hold roof -->
+    <!-- <specialDisplayRadius>6.9</specialDisplayRadius> -->    <!-- Show radius for hold roof -->
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
@@ -275,30 +276,64 @@
         <glowColor>(252,199,139,0)</glowColor>
         <key>PRF_Warm_White</key>
         <moreColors>
-          <li><key>PRF_Cool_White</key><color>(140,200,250,0)</color></li>
-          <li><key>PRF_Red</key><color>(217,80,80,0)</color></li>
-          <li><key>PRF_Green</key><color>(80,217,80,0)</color></li>
-          <li><key>PRF_Blue</key><color>(80,80,217,0)</color></li>
-          <li><key>PRF_Cyan</key><color>(10,245,245,0)</color></li>
-          <li><key>PRF_Yellow</key><color>(240,240,20,0)</color></li>
-          <li><key>PRF_Magenta</key><color>(245,10,245,0)</color></li>
-          <li><key>PRF_None</key><color>(0,0,0,0)</color></li>
+          <li>
+            <key>PRF_Cool_White</key>
+            <color>(140,200,250,0)</color>
+          </li>
+          <li>
+            <key>PRF_Red</key>
+            <color>(217,80,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Green</key>
+            <color>(80,217,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Blue</key>
+            <color>(80,80,217,0)</color>
+          </li>
+          <li>
+            <key>PRF_Cyan</key>
+            <color>(10,245,245,0)</color>
+          </li>
+          <li>
+            <key>PRF_Yellow</key>
+            <color>(240,240,20,0)</color>
+          </li>
+          <li>
+            <key>PRF_Magenta</key>
+            <color>(245,10,245,0)</color>
+          </li>
+          <li>
+            <key>PRF_None</key>
+            <color>(0,0,0,0)</color>
+          </li>
         </moreColors>
         <!-- <prerequisites>
           <li>ColoredLights</li>
         </prerequisites> -->
-      </li>      
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
         <displayDormantDrones>false</displayDormantDrones>        <!-- Drones will sit on top while not working -->
         <spawnWithFullDrones>true</spawnWithFullDrones>
-        <!-- <Sleeptimes>22,23,24,0,1,2</Sleeptimes> --> <!-- SLEEEEEEP -->
+        <!-- <Sleeptimes>22,23,24,0,1,2</Sleeptimes> -->        <!-- SLEEEEEEP -->
         <workTypes>
           <li>Hauling</li>
           <li>Cleaning</li>
           <li>Firefighter</li>
         </workTypes>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ReserchOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
+        <skills>
+          <!--<li>
+            <def>Intellectual</def>
+            <levelInt>11</levelInt>
+          </li>-->
+        </skills>
       </li>
     </modExtensions>
     <researchPrerequisites>

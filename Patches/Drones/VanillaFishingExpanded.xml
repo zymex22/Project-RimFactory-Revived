@@ -4,26 +4,26 @@
 	<!--RimFridge -->
 	<Operation Class="PatchOperationFindMod">
 		<mods>
-			<li>Rimatomics</li>
+			<li>Vanilla Fishing Expanded</li>
 		</mods>
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
 			<operations>
-				<!-- ============== Adding Mini atomic drone station =============== -->
+				<!-- ============== Adding Mini fishing drone station =============== -->
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs</xpath>
 					<value>
 						<ThingDef ParentName="PRF_MiniDroneStation">
-							<defName>PRF_MiniHelperAtomic</defName>
-							<label>Mini RimAtomic station</label>
+							<defName>PRF_MiniHelperFishing</defName>
+							<label>Mini Fishing station</label>
 							<graphicData>
-								<texPath>Drones/MiniDroneStationAtomic</texPath>
+								<texPath>Drones/MiniDroneStation</texPath>
 							</graphicData>
 							<constructEffect>ConstructMetal</constructEffect>
-							<description>A mini Atomic Workshop helper for RimAtomics to do maintain and fuel your reactors it can flick, haul, atomic, firefight</description>
+							<description>A mini Fishing Station capable of helping you with catching fish. it will take breaks to prevent curcuits getting too wet.</description>
 							<costList>
 								<PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-								<PRFDroneModule>2</PRFDroneModule>
+								<PRFDroneModule>1</PRFDroneModule>
 								<Steel>30</Steel>
 								<Plasteel>20</Plasteel>
 								<ComponentIndustrial>3</ComponentIndustrial>
@@ -35,7 +35,7 @@
 								<li Class="CompProperties_Breakdownable"/>
 								<li Class="CompProperties_Refuelable">
 									<fuelConsumptionRate>0</fuelConsumptionRate>
-									<fuelCapacity>2</fuelCapacity>
+									<fuelCapacity>1</fuelCapacity>
 									<fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
 									<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
 									<fuelFilter>
@@ -52,21 +52,30 @@
 									<rangeSetting>true</rangeSetting>
 									<minPowerForRange>300</minPowerForRange>
 									<minRange>3</minRange>
-									<maxPowerForRange>1000</maxPowerForRange>
-									<maxRange>10</maxRange>
+									<maxPowerForRange>800</maxPowerForRange>
+									<maxRange>6</maxRange>
 									<rangeType>ProjectRimFactory.Common.RectRange</rangeType>
 								</li>
 							</comps>
 							<modExtensions>
 								<li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
 									<displayDormantDrones>false</displayDormantDrones>									<!-- Drones will sit on top while not working -->
+									<Sleeptimes>1,4,7,10,13,16,19,22</Sleeptimes>
 									<spawnWithFullDrones>true</spawnWithFullDrones>
 									<workTypes>
-										<li>BasicWorker</li>
+										<li>VCEF_Fishing</li>
 										<li>Hauling</li>
-										<li>NuclearWork</li>
-										<li>Firefighter</li>
 									</workTypes>
+								</li>
+								<li Class="ProjectRimFactory.Common.ModExtension_Skills">
+									<SkillUsage>ReserchOverrides</SkillUsage>
+									<BaseSkill>10</BaseSkill>
+									<skills>
+									<!--<li>
+            						<def>Intellectual</def>
+            						<levelInt>11</levelInt>
+          							</li>-->
+									</skills>
 								</li>
 							</modExtensions>
 							<researchPrerequisites>

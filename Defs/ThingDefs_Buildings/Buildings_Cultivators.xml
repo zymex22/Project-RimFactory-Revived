@@ -107,6 +107,7 @@
         </workTypes>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>10</BaseSkill>
         <skills>
           <!--<li>
@@ -157,6 +158,7 @@
         </workTypes>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>15</BaseSkill>
         <skills>
         </skills>
@@ -219,6 +221,12 @@
           <li>Hauling</li>
         </workTypes>
       </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ReserchOverrides</SkillUsage>
+        <BaseSkill>15</BaseSkill>
+        <skills>
+        </skills>
+      </li>
     </modExtensions>
     <researchPrerequisites>
       <li>AutomaticFarming1</li>      <!-- farming level 2 -->
@@ -269,6 +277,7 @@
         </workTypes>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>20</BaseSkill>
         <skills>
         </skills>
