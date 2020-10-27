@@ -49,5 +49,11 @@ namespace ProjectRimFactory.Common
         public static ThingDef PRFDrone;
         public static ThingDef PRFDroneModule;
 
+        //Reserch Projeckts
+        public static ResearchProjectDef PRF_BasicDrones;
+        public static ResearchProjectDef PRF_ImprovedDrones; //For Level 15
+        public static ResearchProjectDef PRF_AdvancedDrones; //For Level 20
+
+
     }
 }

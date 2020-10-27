@@ -46,7 +46,7 @@ namespace ProjectRimFactory.Drones
             base.SpawnSetup(map, respawningAfterLoad);
             skills = new Pawn_SkillTracker(this);
             skillSettings =  station.def.GetModExtension<ModExtension_Skills>();
-            UpdateSkills(skills);
+            DroneSkills.UpdateSkills(skills,station.GetDroneSkillsRecord,skillSettings,true);
 
             story = new Pawn_StoryTracker(this)
             {
@@ -63,50 +63,27 @@ namespace ProjectRimFactory.Drones
             playerSettings.AreaRestriction = this.station.droneAllowedArea;
         }
 
-        public void UpdateSkills(Pawn_SkillTracker skill)
-        {
-            if (station.GetDroneSkillsRecord.Count == 0)
-            {
-
-                foreach (SkillRecord record in skill.skills)
-                {
-                    if (skillSettings != null)
-                    {
-                        record.levelInt = skillSettings.GetSkillLevel(record);
-                    }
-                    else
-                    {
-                        record.levelInt = station.GetdefaultSkillLevel; //No Settings Found use the Default
-                    }
-                    record.passion = Passion.None;
-                    if (record.xpSinceLastLevel > 1f)
-                    {
-                        record.xpSinceMidnight = 100f;
-                        record.xpSinceLastLevel = 100f;
-                    }
-                }
-
-                station.GetDroneSkillsRecord = skill.skills;
-            }
-            else
-            {
-                skill.skills = station.GetDroneSkillsRecord;
-            }
-
-            
-        }
-
         public override void Tick()
         {
             base.Tick();
-            if (this.IsHashIntervalTick(250))
-            {
-                UpdateSkills(skills);
-            }
             if (Downed)
             {
                 Kill(null);
             }
+        }
+
+        //Disabeling this for now as i think we dont need the refresh on Rare Tick.
+        //I think on spawn && Long Tick is Enoth
+        //public override void TickRare()
+        //{
+        //    base.TickRare();
+        //    DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings);
+        //}
+
+        public override void TickLong()
+        {
+            base.TickLong();
+            DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings, true);
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
