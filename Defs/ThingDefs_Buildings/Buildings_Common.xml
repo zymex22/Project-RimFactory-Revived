@@ -65,7 +65,7 @@
       <li>PlaceWorker_ShowFacilitiesConnections</li>
     </placeWorkers>
     <researchPrerequisites>
-      <li>PRFMachineLearning</li>
+      <li>AutomationBasics</li>
     </researchPrerequisites>
   </ThingDef>
 
