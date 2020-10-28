@@ -46,7 +46,7 @@ namespace ProjectRimFactory.Drones
             base.SpawnSetup(map, respawningAfterLoad);
             skills = new Pawn_SkillTracker(this);
             skillSettings =  station.def.GetModExtension<ModExtension_Skills>();
-            DroneSkills.UpdateSkills(skills,station.GetDroneSkillsRecord,skillSettings,true);
+            station.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills,station.GetDroneSkillsRecord,skillSettings,true);
 
             story = new Pawn_StoryTracker(this)
             {
@@ -83,7 +83,7 @@ namespace ProjectRimFactory.Drones
         public override void TickLong()
         {
             base.TickLong();
-            DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings, true);
+            station.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings, true);
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)

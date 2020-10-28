@@ -47,7 +47,8 @@ namespace ProjectRimFactory.Drones
         /// <param name="skillRecords">Skill Record Cache</param>
         /// <param name="modExtension_Skills">Optional ModExtension_Skills</param>
         /// <param name="forceUpdate">Enforce a reload of the Skills</param>
-        public static void UpdateSkills(Pawn_SkillTracker skill , List<SkillRecord> skillRecords, ModExtension_Skills modExtension_Skills = null , bool forceUpdate = false)
+        /// <returns>Cache Output</returns>
+        public static List<SkillRecord> UpdateSkills(Pawn_SkillTracker skill , List<SkillRecord> skillRecords, ModExtension_Skills modExtension_Skills = null , bool forceUpdate = false)
         {
             if (skillRecords.Count == 0 || forceUpdate)
             {
@@ -101,15 +102,13 @@ namespace ProjectRimFactory.Drones
                         record.xpSinceLastLevel = 100f;
                     }
                 }
-
-                skillRecords = skill.skills;
             }
             else
             {
-                skill.skills = skillRecords;
+                skill.skills = skillRecords;   
             }
 
-
+            return skill.skills;
         }
 
     }
