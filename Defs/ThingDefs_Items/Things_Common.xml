@@ -110,6 +110,43 @@
     <tradeability>Sellable</tradeability>
   </ThingDef>
 
+  <!-- ================================== Qubit processor ================================= -->
+  <ThingDef ParentName="PRFResourceBase">
+    <defName>PRFQubitProcessor</defName>
+    <label>Qubit processor</label>
+    <description>In quantum computing, a qubit or quantum bit is the basic unit of quantum information—the quantum version of the classical binary bit physically realized with a two-state device. A qubit is a two-state quantum-mechanical system, one of the simplest quantum systems displaying the peculiarity of quantum mechanics.</description>
+    <graphicData>
+      <texPath>Common/UltraAiCore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>1500</MarketValue>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToMake>10000</WorkToMake>
+      <Mass>1</Mass>
+    </statBases>
+    <costList>
+      <Plasteel>100</Plasteel>
+      <Gold>10</Gold>
+      <PRFAdvancedAIChip>5</PRFAdvancedAIChip>
+      <ComponentSpacer>10</ComponentSpacer>
+    </costList>
+    <recipeMaker>
+      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+      <workSkill>Crafting</workSkill>
+      <effectWorking>Cook</effectWorking>
+      <soundWorking>Recipe_Machining</soundWorking>
+      <researchPrerequisite>PRF_PatternPecognition</researchPrerequisite>
+    </recipeMaker>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <tradeability>Sellable</tradeability>
+  </ThingDef>
+
   <!-- ================================== Drone module ================================= -->
   <ThingDef ParentName="PRFResourceBase">
     <defName>PRFDroneModule</defName>

@@ -17,7 +17,7 @@
       <Flammability>0.8</Flammability>
       <Mass>80</Mass>
     </statBases>
-    <canOverlapZones>false</canOverlapZones> 
+    <canOverlapZones>false</canOverlapZones>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <rotatable>false</rotatable>
     <pathCost>70</pathCost>
@@ -284,7 +284,8 @@
       <li>Make_ComponentSpacer</li>
       <li>MakePRFRoboticArm</li>
       <li>MakePRFWeakAIChip</li>
-      <li>MakePRFPRFAdvancedAIChip</li>
+      <li>MakePRFAdvancedAIChip</li>
+      <li>MakePRFQubitProcessor</li>
       <li>MakePRFDroneModule</li>
       <li>MakeDataDisk</li>
       <li>MakeSmallFrame</li>

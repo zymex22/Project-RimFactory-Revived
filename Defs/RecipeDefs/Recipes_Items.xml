@@ -136,7 +136,7 @@
 
   <!--==================================== Advanced AI Core ==============================-->
   <RecipeDef>
-    <defName>MakePRFPRFAdvancedAIChip</defName>
+    <defName>MakePRFAdvancedAIChip</defName>
     <label>make Adv. AI core</label>
     <description>Make Adv. AI core</description>
     <jobString>Making Adv. AI core</jobString>
@@ -197,6 +197,71 @@
       <li>TableRoboticMachining</li>
     </recipeUsers>
     <researchPrerequisite>PRFGoldbachConjecture</researchPrerequisite>
+  </RecipeDef>
+
+  <!--==================================== qubit processor ==============================-->
+  <RecipeDef>
+    <defName>MakePRFQubitProcessor</defName>
+    <label>make qubit processor</label>
+    <description>Make qubit processor</description>
+    <jobString>Making qubit processor</jobString>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Cook</effectWorking>
+    <soundWorking>Recipe_Machining</soundWorking>
+    <workAmount>10000</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentSpacer</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Gold</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>PRFAdvancedAIChip</li>
+          </thingDefs>
+        </filter>
+        <count>5</count>
+      </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Plasteel</li>
+          </thingDefs>
+        </filter>
+        <count>100</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ComponentSpacer</li>
+        <li>Gold</li>
+        <li>PRFAdvancedAIChip</li>
+        <li>Plasteel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <PRFQubitProcessor>1</PRFQubitProcessor>
+    </products>
+    <skillRequirements>
+      <Crafting>18</Crafting>
+    </skillRequirements>
+    <workSkill>Crafting</workSkill>
+    <recipeUsers>
+      <li>TableRoboticMachining</li>
+    </recipeUsers>
+    <researchPrerequisite>PRF_PatternPecognition</researchPrerequisite>
   </RecipeDef>
 
   <!--==================================== Drone module ==============================-->
