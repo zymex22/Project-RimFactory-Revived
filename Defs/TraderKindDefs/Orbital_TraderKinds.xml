@@ -12,11 +12,11 @@
 
       <li Class="StockGenerator_SingleDef">
         <thingDef>Silver</thingDef>
-        <countRange>3500~5000</countRange>
+        <countRange>3500~10000</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Chemfuel</thingDef>
-        <countRange>50~150</countRange>
+        <countRange>50~250</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>ComponentIndustrial</thingDef>
@@ -27,6 +27,16 @@
         <thingDef>ComponentSpacer</thingDef>
         <price>Cheap</price>
         <countRange>25~75</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Plasteel</thingDef>
+        <price>Cheap</price>
+        <countRange>10~150</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Steel</thingDef>
+        <price>Cheap</price>
+        <countRange>10~500</countRange>
       </li>
       <!-- ====================== Prf Items ==================== -->
       <li Class="StockGenerator_SingleDef">
@@ -74,6 +84,11 @@
         <price>Expensive</price>
         <countRange>0~1</countRange>
       </li>
+      <li Class="StockGenerator_Category">
+        <categoryDef>BuildingsAutomation</categoryDef>
+        <thingDefCountRange>10~20</thingDefCountRange>
+        <countRange>0~5</countRange>
+      </li>
       <!-- ======================  ==================== -->
       <li Class="StockGenerator_Category">
         <categoryDef>Manufactured</categoryDef>
@@ -84,8 +99,8 @@
         <excludedCategories>
           <li>MortarShells</li>
         </excludedCategories>
-        <thingDefCountRange>10~16</thingDefCountRange>
-        <countRange>400~550</countRange>
+        <thingDefCountRange>2~12</thingDefCountRange>
+        <countRange>10~100</countRange>
       </li>
       <li Class="StockGenerator_Category">
         <categoryDef>StoneBlocks</categoryDef>
@@ -96,7 +111,7 @@
       <li Class="StockGenerator_Category">
         <categoryDef>BuildingsFurniture</categoryDef>
         <price>Cheap</price>
-        <thingDefCountRange>5~10</thingDefCountRange>
+        <thingDefCountRange>0~5</thingDefCountRange>
         <countRange>1~2</countRange>
       </li>
       <li Class="StockGenerator_Category">
