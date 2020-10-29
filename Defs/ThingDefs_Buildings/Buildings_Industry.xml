@@ -396,6 +396,7 @@
     </costList>
     <recipes>
       <li>BurnApparel</li>
+      <li>CremateCorpse</li>
       <li>ExtractMetalFromSlag</li>
       <li>MakeSmallFrame</li>
     </recipes>
