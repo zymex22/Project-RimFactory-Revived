@@ -434,7 +434,6 @@
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>Smithing</li>
-      <li>Stonecutting</li>
     </researchPrerequisites>
   </ThingDef>
 
