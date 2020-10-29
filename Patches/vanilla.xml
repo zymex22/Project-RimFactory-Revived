@@ -24,4 +24,14 @@
     </nomatch>
   </Operation>
 
+  <!--================================ Make stone blocks sellable ========================================-->
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[@Name = "StoneBlocksBase"]/tradeability</xpath>
+    <value>
+      <tradeability>All</tradeability>
+    </value>
+  </Operation>
+
+
 </Patch>
