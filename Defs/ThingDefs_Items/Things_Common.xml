@@ -19,23 +19,13 @@
       <WorkToMake>1000</WorkToMake>
       <Mass>2</Mass>
     </statBases>
-    <costList>
-      <Steel>20</Steel>
-      <ComponentIndustrial>2</ComponentIndustrial>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-    </recipeMaker>
     <researchPrerequisites>
       <li>PRFEulersIdentity</li>
     </researchPrerequisites>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <tradeability>Sellable</tradeability>
+    <techLevel>Industrial</techLevel>
   </ThingDef>
 
   <!-- ================================== Weak AI Chip ================================= -->
@@ -56,21 +46,10 @@
       <WorkToMake>2000</WorkToMake>
       <Mass>1</Mass>
     </statBases>
-    <costList>
-      <Steel>10</Steel>
-      <ComponentIndustrial>4</ComponentIndustrial>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-      <researchPrerequisite>AutomationBasics</researchPrerequisite>
-    </recipeMaker>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <tradeability>Sellable</tradeability>
+    <techLevel>Industrial</techLevel>
   </ThingDef>
 
   <!-- ================================== Advanced AI Core ================================= -->
@@ -91,23 +70,9 @@
       <WorkToMake>4000</WorkToMake>
       <Mass>1</Mass>
     </statBases>
-    <costList>
-      <Plasteel>5</Plasteel>
-      <Steel>10</Steel>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
-      <ComponentSpacer>4</ComponentSpacer>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-      <researchPrerequisite>PRFGoldbachConjecture</researchPrerequisite>
-    </recipeMaker>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <tradeability>Sellable</tradeability>
   </ThingDef>
 
   <!-- ================================== Qubit processor ================================= -->
@@ -128,23 +93,10 @@
       <WorkToMake>10000</WorkToMake>
       <Mass>1</Mass>
     </statBases>
-    <costList>
-      <Plasteel>100</Plasteel>
-      <Gold>10</Gold>
-      <PRFAdvancedAIChip>5</PRFAdvancedAIChip>
-      <ComponentSpacer>10</ComponentSpacer>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-      <researchPrerequisite>PRF_PatternPecognition</researchPrerequisite>
-    </recipeMaker>
+    <techLevel>Ultra</techLevel>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <tradeability>Sellable</tradeability>
   </ThingDef>
 
   <!-- ================================== Drone module ================================= -->
@@ -165,21 +117,11 @@
       <Mass>2</Mass>
       <WorkToMake>2000</WorkToMake>
     </statBases>
-    <costList>
-      <Plasteel>10</Plasteel>
-      <Steel>30</Steel>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-    </recipeMaker>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <tradeability>Sellable</tradeability>
     <stackLimit>75</stackLimit>
+    <techLevel>Industrial</techLevel>
   </ThingDef>
 
 </Defs>
