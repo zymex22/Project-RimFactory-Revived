@@ -24,7 +24,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     .SelectMany(t => Option(t as Building_WorkTable))
                     .Where(b => b.InteractionCell == loc).Count() == 0)
                 {
-                    return new AcceptanceReport("NR_AutoMachineTool.PlaceNotAllowed".Translate());
+                    return new AcceptanceReport("PRF.AutoMachineTool.PlaceNotAllowed".Translate());
                 }
                 return r;
             }
