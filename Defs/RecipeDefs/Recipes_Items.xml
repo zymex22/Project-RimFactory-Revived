@@ -261,7 +261,7 @@
     <recipeUsers>
       <li>TableRoboticMachining</li>
     </recipeUsers>
-    <researchPrerequisite>PRF_PatternPecognition</researchPrerequisite>
+    <researchPrerequisite>PRF_QubitTech</researchPrerequisite>
   </RecipeDef>
 
   <!--==================================== Drone module ==============================-->
