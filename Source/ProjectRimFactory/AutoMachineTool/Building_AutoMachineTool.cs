@@ -595,16 +595,16 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
             };
             direction.activateSound = SoundDefOf.Checkbox_TurnedOn;
-            direction.defaultLabel = "NR_AutoMachineTool.SelectOutputDirectionLabel".Translate();
-            direction.defaultDesc = "NR_AutoMachineTool.SelectOutputDirectionDesc".Translate();
+            direction.defaultLabel = "PRF.AutoMachineTool.SelectOutputDirectionLabel".Translate();
+            direction.defaultDesc = "PRF.AutoMachineTool.SelectOutputDirectionDesc".Translate();
             direction.icon = RS.OutputDirectionIcon;
             yield return direction;
 
             var forb = new Command_Toggle();
             forb.isActive = () => this.forbidItem;
             forb.toggleAction = () => this.forbidItem = !this.forbidItem;
-            forb.defaultLabel = "NR_AutoMachineTool.ForbidOutputItemLabel".Translate();
-            forb.defaultDesc = "NR_AutoMachineTool.ForbidOutputItemDesc".Translate();
+            forb.defaultLabel = "PRF.AutoMachineTool.ForbidOutputItemLabel".Translate();
+            forb.defaultDesc = "PRF.AutoMachineTool.ForbidOutputItemDesc".Translate();
             forb.icon = RS.ForbidIcon;
             yield return forb;
         }
@@ -613,7 +613,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             String msg = base.GetInspectString();
             msg += "\n";
-            msg += "NR_AutoMachineTool.OutputDirection".Translate(("NR_AutoMachineTool.OutputDirection" + this.adjacentName[this.outputIndex]).Translate());
+            msg += "PRF.AutoMachineTool.OutputDirection".Translate(("PRF.AutoMachineTool.OutputDirection" + this.adjacentName[this.outputIndex]).Translate());
             return msg;
         }
 
