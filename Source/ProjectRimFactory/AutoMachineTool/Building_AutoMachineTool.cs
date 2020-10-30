@@ -9,6 +9,7 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -154,9 +155,12 @@ namespace ProjectRimFactory.AutoMachineTool
         [Unsaved]
         private Option<Building_WorkTable> workTable;
 
+
+        ModExtension_Skills extension_Skills;
+
         public int GetSkillLevel(SkillDef def)
         {
-            return this.SkillLevel ?? 0;
+            return extension_Skills?.GetSkillLevel(null) ?? this.SkillLevel ?? 0;
         }
 
         private IntVec3[] adjacent =
@@ -208,6 +212,8 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.workTable = Nothing<Building_WorkTable>();
+            extension_Skills = def.GetModExtension<ModExtension_Skills>();
+
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
