@@ -142,6 +142,7 @@
       <li>PRF_Recycle_Apparel</li>
       <!-- <li>PRF_Destroy_Art</li> -->
       <li>PRF_Destroy_Chunks</li>
+      <li>PRF_Destroy_Anything</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Power">
