@@ -8,7 +8,7 @@
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
     <baseCost>500</baseCost>
-    <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the very basics of automation and mechanisms, the gateway to an industrial colony. tier 1</description>
+    <description>Clockwork Principle will unlock some Early age automation aimed at Tribal/medieval age. You can skip this and go directly to Tier1 if you will fast forward to high tier.\n its aimed to aid in medieval playthrough</description>
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>
@@ -208,11 +208,11 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <!-- Tier 4 -->
   <!-- ==================== Main Tier 4 ============================= -->
   <ResearchProjectDef>
-    <defName>PRF_PatternPecognition</defName>
-    <label>NEW TIER 4 Research</label>
+    <defName>PRF_QubitTech</defName>
+    <label>quantum bit technology</label>
     <techLevel>Ultra</techLevel>
     <baseCost>3500</baseCost>
-    <description>"Every even integer, greater than 2, can be formed from the sum of two prime numbers."\nUnlocks a new array of third tier research projects.</description>
+    <description>A qubit (or quantum bit) is the quantum mechanical analogue of a classical bit. In classical computing the information is encoded in bits, where each bit can have the value zero or one. In quantum computing the information is encoded in qubits. A qubit is a two-level quantum system where the two basis qubit states are usually written as \left\lvert 0 \right\rangle∣0⟩ and \left\lvert 1 \right\rangle∣1⟩. A qubit can be in state \left\lvert 0 \right\rangle∣0⟩, \left\lvert 1 \right\rangle∣1⟩ or (unlike a classical bit) in a linear combination of both states. The name of this phenomenon is superposition.</description>
     <prerequisites>
       <li>PRFGoldbachConjecture</li>
       <li>ShipBasics</li>
@@ -221,6 +221,8 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
     <tab>Automation</tab>
     <researchViewX>11</researchViewX>
     <researchViewY>3</researchViewY>
+    <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
+    <discoveredLetterText>Qubit technology opens up Tier 4 stuff for your factory.\n\nMORE USES WILL COME LATER...</discoveredLetterText>
   </ResearchProjectDef>
 
 
