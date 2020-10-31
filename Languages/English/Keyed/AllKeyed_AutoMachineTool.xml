@@ -10,7 +10,6 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.ForbidOutputItemLabel>Forbid output items</PRF.AutoMachineTool.ForbidOutputItemLabel>
   <PRF.AutoMachineTool.ForbidOutputItemDesc>Machine tools forbid items that are output as finished goods, so that colonists are not involved.</PRF.AutoMachineTool.ForbidOutputItemDesc>
 
-  <PRF.AutoMachineTool.OutputDirection>Output destination. [{0}]</PRF.AutoMachineTool.OutputDirection>
   <PRF.AutoMachineTool.OutputDirectionN>North</PRF.AutoMachineTool.OutputDirectionN>
   <PRF.AutoMachineTool.OutputDirectionNE>Northeast</PRF.AutoMachineTool.OutputDirectionNE>
   <PRF.AutoMachineTool.OutputDirectionE>East</PRF.AutoMachineTool.OutputDirectionE>
