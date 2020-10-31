@@ -62,17 +62,17 @@ namespace ProjectRimFactory.Drones
                         {
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ThisOverrides:
                                 {
-                                    record.levelInt = modExtension_Skills.GetSkillLevel(record);
+                                    record.levelInt = modExtension_Skills.GetSkillLevel(record.def);
                                     break;
                                 }
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchIsCapping:
                                 {
-                                    record.levelInt = Mathf.Clamp(modExtension_Skills.GetSkillLevel(record), 0, GetResechSkillLevel());
+                                    record.levelInt = Mathf.Clamp(modExtension_Skills.GetSkillLevel(record.def), 0, GetResechSkillLevel());
                                     break;
                                 }
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ThisIsCapping:
                                 {
-                                    record.levelInt = Mathf.Clamp(GetResechSkillLevel(), 0, modExtension_Skills.GetSkillLevel(record));
+                                    record.levelInt = Mathf.Clamp(GetResechSkillLevel(), 0, modExtension_Skills.GetSkillLevel(record.def));
                                     break;
                                 }
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchOverrides:
@@ -82,7 +82,7 @@ namespace ProjectRimFactory.Drones
                                 }
                             default:
                                 {
-                                    record.levelInt = modExtension_Skills.GetSkillLevel(record);
+                                    record.levelInt = modExtension_Skills.GetSkillLevel(record.def);
                                     break;
                                 }
                         }

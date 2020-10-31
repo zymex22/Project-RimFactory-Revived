@@ -76,10 +76,9 @@ namespace ProjectRimFactory.Common
 		</skills>
         */
 
-		public int GetSkillLevel(SkillRecord record)
+		public int GetSkillLevel(SkillDef skillDef)
         {
-			DroneSkills.GetResechSkillLevel();
-			return skills.FirstOrDefault(x => x.def == record.def)?.levelInt ?? BaseSkill;
+			return skills.FirstOrDefault(x => x.def == skillDef)?.levelInt ?? BaseSkill;
 		}
 
 	}

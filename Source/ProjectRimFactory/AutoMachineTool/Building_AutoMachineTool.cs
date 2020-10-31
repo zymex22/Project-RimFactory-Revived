@@ -160,7 +160,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public int GetSkillLevel(SkillDef def)
         {
-            return extension_Skills?.GetSkillLevel(null) ?? this.SkillLevel ?? 0;
+            return extension_Skills?.GetSkillLevel(def) ?? this.SkillLevel ?? 0;
         }
 
         private IntVec3[] adjacent =
