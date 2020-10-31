@@ -6,11 +6,16 @@
   </DesignatorDropdownGroupDef>
 
   <!-- base -->
-  <ThingDef Name="PRF_AutoMachineTool_Base" Parent="BuildingBase" Abstract="True">
+  <ThingDef Name="PRF_SAL_Base" Parent="PRFBuildingBase" Abstract="True">
     <defName>Building_NR_AutoMachineTool_Base</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_AutoMachineTool</thingClass>
     <designatorDropdown>SALGroup</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
+    <graphicData>
+      <texPath>SAL3/ASWP1</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>200</WorkToBuild>
@@ -36,6 +41,9 @@
     <pathCost>0</pathCost>
     <designationCategory>Industrial</designationCategory>
     <rotatable>true</rotatable>
+    <blockWind>false</blockWind>
+    <castEdgeShadows>false</castEdgeShadows>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
@@ -56,25 +64,24 @@
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
     </inspectorTabs>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+    </building>
   </ThingDef>
 
 
-  <!-- tier 1-->
-  <ThingDef ParentName="PRF_AutoMachineTool_Base">
-    <defName>Building_NR_AutoMachineTool_TierOne</defName>
+  <!-- auto-assembler Mk-1 -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_AutoCrafterSimple</defName>
     <label>auto-assembler Mk-1</label>
     <description>The first version of the auto-assembler, able to craft with the skill and speed of a level 5 crafter. Place this on a workbench's interaction spot with the arrow facing the workbench. The auto-crafter can also do art, but its database of art is very limited and will not be able to produce masterpieces.</description>
-    <graphicData>
-      <texPath>SAL3/ASWP1</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1,1)</drawSize>
-    </graphicData>
     <costList>
       <Steel>75</Steel>
       <Plasteel>45</Plasteel>
       <ComponentIndustrial>8</ComponentIndustrial>
     </costList>
     <researchPrerequisites>
+    <li>PRF_AutonomousCraftingI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -109,23 +116,19 @@
     </modExtensions>
   </ThingDef>
 
-  <!-- tier 2-->
-  <ThingDef ParentName="PRF_AutoMachineTool_Base">
-    <defName>Building_NR_AutoMachineTool_TierTwo</defName>
+  <!-- auto-assembler Mk-2 -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_AutoCrafter</defName>
     <label>auto-assembler Mk-2</label>
     <description>The auto-assembler is the backbone of Project S.A.L., a small but powerful building capable of autonomously crafting recipes. It is equivalent to a level 12 crafter.</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
-    <graphicData>
-      <texPath>SAL3/ASWP1</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1,1)</drawSize>
-    </graphicData>
     <costList>
       <Steel>100</Steel>
       <Plasteel>75</Plasteel>
       <ComponentIndustrial>10</ComponentIndustrial>
     </costList>
     <researchPrerequisites>
+    <li>PRF_AutonomousCraftingII</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -160,17 +163,100 @@
     </modExtensions>
   </ThingDef>
 
-  <!-- tier 3-->
-  <ThingDef ParentName="PRF_AutoMachineTool_Base">
-    <defName>Building_NR_AutoMachineTool_TierThree</defName>
+    <!-- The Art Machine -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_TheArtMachine</defName>
+    <label>The Art Machine</label>
+    <description>Pumps out art like a hose pumps out water. Level 8 art.</description>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <costList>
+      <Steel>150</Steel>
+      <Plasteel>100</Plasteel>
+      <Silver>300</Silver>
+      <ComponentIndustrial>20</ComponentIndustrial>
+    </costList>
+    <researchPrerequisites>
+    <li>PRF_ArtCraftingI</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
+        <speedFactor>1</speedFactor>        <!-- Base speed -->
+        <minPower>750</minPower>        <!-- power usage lowest range -->
+        <maxPower>750</maxPower>        <!-- Power for max range -->
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>        <!-- power usage lowest range -->
+        <maxPower>1000</maxPower>        <!-- Power for max range -->
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>3</BaseSkill>
+        <skills>
+          <li>
+            <def>Crafting</def>
+            <levelInt>7</levelInt>
+          </li>
+          <li>
+            <def>Artistic</def>
+            <levelInt>8</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+      <!-- The Art Master -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_TheArtMaster</defName>
+    <label>The Art Master</label>
+    <description>Pumps out art like a violent volcanic eruption pumps out lava. Level 18 art.</description>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <costList>
+      <Steel>150</Steel>
+      <Plasteel>200</Plasteel>
+      <Silver>800</Silver>
+      <ComponentIndustrial>30</ComponentIndustrial>
+    </costList>
+    <researchPrerequisites>
+    <li>PRF_ArtCraftingII</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
+        <speedFactor>1</speedFactor>        <!-- Base speed -->
+        <minPower>750</minPower>        <!-- power usage lowest range -->
+        <maxPower>750</maxPower>        <!-- Power for max range -->
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>        <!-- power usage lowest range -->
+        <maxPower>1000</maxPower>        <!-- Power for max range -->
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>3</BaseSkill>
+        <skills>
+          <li>
+            <def>Crafting</def>
+            <levelInt>9</levelInt>
+          </li>
+          <li>
+            <def>Artistic</def>
+            <levelInt>18</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- overclocked auto-assembler -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_OverclockedAutoAssembler</defName>
     <label>overclocked auto-assembler</label>
     <description>Produces work at the standard of a level 1 dunce, but works extremely quickly.</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
-    <graphicData>
-      <texPath>SAL3/ASWP1</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1,1)</drawSize>
-    </graphicData>
     <costList>
       <Steel>500</Steel>
       <Plasteel>300</Plasteel>
@@ -178,6 +264,7 @@
       <ComponentIndustrial>40</ComponentIndustrial>
     </costList>
     <researchPrerequisites>
+    <li>PRF_AutonomousOverclockingI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
