@@ -67,10 +67,12 @@ namespace ProjectRimFactory.AutoMachineTool
         // how far towards the next belt to stop:
         protected readonly float stuckDrawPercent = 0.3f; // also slightly affects game logic
         // scale to draw items while on belts:
-        protected const float carriedItemScale = 0.75f;
-        protected const float undergroundItemScale = 0.60f;
+        //   Note: this is used if nothing is read from the ModExtension_Conveyors
+        protected const float defaultCarriedItemScale = 0.75f;
         // additional height over the belt's True Center to draw:
-        protected const float carriedItemDrawHeight = 0.15f;
+        protected const float defaultCarriedItemDrawHeight = 0.15f;
+        // and display variables
+        protected float carriedItemDrawHeight = defaultCarriedItemDrawHeight;
 
         // Generally useful methods:
         protected ModExtension_Conveyor Extension => this.def.GetModExtension<ModExtension_Conveyor>();
@@ -307,7 +309,8 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         public virtual void DrawCarried() {
             Thing t = CarryingThing();
-            float scale = IsUnderground ? undergroundItemScale : carriedItemScale;
+            float scale = this.def.GetModExtension<ModExtension_Conveyor>()?.
+                          carriedItemScale ?? defaultCarriedItemScale;
             // Took this line from MinifiedThing; don't know if it's needed:
             var g = t.Graphic.ExtractInnerGraphicFor(t);
             // Graphic's GetCopy() fails on any Graphic_RandomRotated
@@ -316,9 +319,9 @@ namespace ProjectRimFactory.AutoMachineTool
             if (g is Graphic_RandomRotated grr) {
                 var d = t.def.graphicData;
                 g = GraphicDatabase.Get(d.graphicClass, d.texPath, g.Shader,
-                          new Vector2(scale, carriedItemScale), g.color, g.colorTwo);
+                          new Vector2(scale, scale), g.color, g.colorTwo);
             } else {
-                g = g.GetCopy(new Vector2(scale, carriedItemScale));
+                g = g.GetCopy(new Vector2(scale, scale));
             }
             g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
         }
@@ -331,6 +334,27 @@ namespace ProjectRimFactory.AutoMachineTool
                 return (this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0) +
                   this.OutputDirection.FacingCell.ToVector3()
                     * (1f - Mathf.Clamp01(WorkLeft)));
+            }
+        }
+        protected void CalculateCarriedItemDrawHeight() {
+            var nextBelt = this.OutputBeltAt(this.OutputCell());
+            if (nextBelt != null) {
+                var theirs = nextBelt.CarriedItemDrawHeight;
+                var ours = this.CarriedItemDrawHeight;
+                if (ours < theirs) {  //comparing whose is higher - what, are
+                    //                    conveyor belts schoolboys?
+                    carriedItemDrawHeight = theirs - this.TrueCenter().y;
+                    return;
+                }
+            }
+            carriedItemDrawHeight = defaultCarriedItemDrawHeight;
+        }
+        /// <summary>
+        /// External use only - default draw height for carried items
+        /// </summary>
+        public float CarriedItemDrawHeight {
+            get {
+                return this.TrueCenter().y + defaultCarriedItemDrawHeight;
             }
         }
 
@@ -390,6 +414,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         /******** AutoMachineTool logic *********/
         protected override bool TryStartWorking(out Thing target, out float workAmount) {
+            CalculateCarriedItemDrawHeight();
             workAmount = 1f;
             if (this.IsUnderground) {
                 target = null;
@@ -404,6 +429,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return target != null;
         }
         protected override void ForceStartWork(Thing working, float workAmount) {
+            CalculateCarriedItemDrawHeight();
             base.ForceStartWork(working, workAmount);
             thingOwnerInt.TryAdd(working);
         }
@@ -550,6 +576,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     ChangeStuckStatus(working);
                 }
             } else {
+                this.CalculateCarriedItemDrawHeight();
                 // if work done is below stuckDrawPercent, let it continue forward
                 if (WorkLeft < 1-this.stuckDrawPercent) {
                     if (!CanOutput(working)) {

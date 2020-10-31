@@ -22,15 +22,12 @@ namespace ProjectRimFactory.AutoMachineTool
         /// <param name="linkable">Other linkable.</param>
         void Unlink(IBeltConveyorLinkable linkable);
 
-        // Because we are using a central Placing mechanism, it makes
-        //   more sense to try directions specifically? Maybe??
-        //        bool ReceivableNow(bool underground, Thing thing);
-
         bool CanSendToLevel(ConveyorLevel level);
         bool CanReceiveFromLevel(ConveyorLevel level);
 
         /// <summary>
         /// Whether the conveyor linkable can accept thing *right this moment*
+        ///   - no promises about the future (no reservations)
         /// </summary>
         bool CanAcceptNow(Thing t);
 
@@ -55,6 +52,13 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         bool HasLinkWith(IBeltConveyorLinkable otherBelt);
         /// <summary>
+        /// Is the conveyor "stuck" - with an item it cannot place
+        /// </summary>
+        /// <value><c>true</c> if it cannot place the item it has;
+        ///   <c>false</c> if it has free space for an item.</value>
+        bool IsStuck { get; }
+        // // // // Graphics related // // // //
+        /// <summary>
         /// Get a list of output directions the beltlinkable can actually send to
         ///   at the moment.  Used for drawing output directional arrows!
         /// </summary>
@@ -64,11 +68,11 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         bool IsUnderground { get; }
         /// <summary>
-        /// Is the conveyor "stuck" - with an item it cannot place
+        /// The height (y coord) the IBCL carries its items at - important for drawing
+        ///   items on their way to the IBCL.  Return 0 if no carried items are drawn.
         /// </summary>
-        /// <value><c>true</c> if it cannot place the item it has;
-        ///   <c>false</c> if it has free space for an item.</value>
-        bool IsStuck { get; }
+        float CarriedItemDrawHeight { get; }
+
         // // // // RimWorld stuff // // // //
         Rot4 Rotation { get; }
         IntVec3 Position { get; }
