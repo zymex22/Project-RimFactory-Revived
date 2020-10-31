@@ -599,14 +599,6 @@ namespace ProjectRimFactory.AutoMachineTool
             direction.defaultDesc = "PRF.AutoMachineTool.SelectOutputDirectionDesc".Translate();
             direction.icon = RS.OutputDirectionIcon;
             yield return direction;
-
-            var forb = new Command_Toggle();
-            forb.isActive = () => this.forbidItem;
-            forb.toggleAction = () => this.forbidItem = !this.forbidItem;
-            forb.defaultLabel = "PRF.AutoMachineTool.ForbidOutputItemLabel".Translate();
-            forb.defaultDesc = "PRF.AutoMachineTool.ForbidOutputItemDesc".Translate();
-            forb.icon = RS.ForbidIcon;
-            yield return forb;
         }
 
         public override string GetInspectString()
