@@ -17,7 +17,7 @@
       <Flammability>0.8</Flammability>
       <Mass>80</Mass>
     </statBases>
-    <canOverlapZones>false</canOverlapZones> 
+    <canOverlapZones>false</canOverlapZones>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <rotatable>false</rotatable>
     <pathCost>70</pathCost>
@@ -142,6 +142,7 @@
       <li>PRF_Recycle_Apparel</li>
       <!-- <li>PRF_Destroy_Art</li> -->
       <li>PRF_Destroy_Chunks</li>
+      <li>PRF_Destroy_Anything</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Power">
@@ -284,6 +285,8 @@
       <li>Make_ComponentSpacer</li>
       <li>MakePRFRoboticArm</li>
       <li>MakePRFWeakAIChip</li>
+      <li>MakePRFAdvancedAIChip</li>
+      <li>MakePRFQubitProcessor</li>
       <li>MakePRFDroneModule</li>
       <li>MakeDataDisk</li>
       <li>MakeSmallFrame</li>
@@ -394,6 +397,7 @@
     </costList>
     <recipes>
       <li>BurnApparel</li>
+      <li>CremateCorpse</li>
       <li>ExtractMetalFromSlag</li>
       <li>MakeSmallFrame</li>
     </recipes>
@@ -431,7 +435,6 @@
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>Smithing</li>
-      <li>Stonecutting</li>
     </researchPrerequisites>
   </ThingDef>
 

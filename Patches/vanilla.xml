@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
 <Patch>
+  <!--================================ Patches for vanilla ====================================== -->
+
+  <!--================================ Add name for vanilla Research bench so we can use it as parent ====================================== -->
+  <Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/ThingDef[defName="HiTechResearchBench"]</xpath>
+    <attribute>Name</attribute>
+    <value>ResearchBenchVanilla</value>
+  </Operation>
+
   <!--================================ Add concrete dropdown Menu ====================================== -->
 
   <Operation Class="PatchOperationFindMod">
@@ -14,5 +23,15 @@
       </value>
     </nomatch>
   </Operation>
+
+  <!--================================ Make stone blocks sellable ========================================-->
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[@Name = "StoneBlocksBase"]/tradeability</xpath>
+    <value>
+      <tradeability>All</tradeability>
+    </value>
+  </Operation>
+
 
 </Patch>

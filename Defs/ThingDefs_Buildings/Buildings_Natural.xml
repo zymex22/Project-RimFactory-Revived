@@ -21,8 +21,8 @@
       <isResourceRock>true</isResourceRock>
       <mineableThing>WDCoal</mineableThing>
       <mineableYield>40</mineableYield>
-      <mineableScatterCommonality>0.3</mineableScatterCommonality>
-      <mineableScatterLumpSizeRange>20~40</mineableScatterLumpSizeRange>
+      <mineableScatterCommonality>0.2</mineableScatterCommonality>
+      <mineableScatterLumpSizeRange>15~30</mineableScatterLumpSizeRange>
     </building>
   </ThingDef>
 

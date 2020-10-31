@@ -19,30 +19,20 @@
       <WorkToMake>1000</WorkToMake>
       <Mass>2</Mass>
     </statBases>
-    <costList>
-      <Steel>20</Steel>
-      <ComponentIndustrial>2</ComponentIndustrial>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-    </recipeMaker>
     <researchPrerequisites>
       <li>PRFEulersIdentity</li>
     </researchPrerequisites>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <tradeability>Sellable</tradeability>
+    <techLevel>Industrial</techLevel>
   </ThingDef>
 
-  <!-- ================================== Weak Chip ================================= -->
+  <!-- ================================== Weak AI Chip ================================= -->
   <ThingDef ParentName="PRFResourceBase">
     <defName>PRFWeakAIChip</defName>
     <label>weak AI chip</label>
-    <description>A tensor processing unit containing the most rudimentary AI.</description>
+    <description>A tensor processing unit containing the most rudimentary AI. Used for Early machines and robots.</description>
     <graphicData>
       <texPath>Common/WeakAICore</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -56,21 +46,57 @@
       <WorkToMake>2000</WorkToMake>
       <Mass>1</Mass>
     </statBases>
-    <costList>
-      <Steel>10</Steel>
-      <ComponentIndustrial>4</ComponentIndustrial>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-      <researchPrerequisite>PRFMachineLearning</researchPrerequisite>
-    </recipeMaker>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <tradeability>Sellable</tradeability>
+    <techLevel>Industrial</techLevel>
+  </ThingDef>
+
+  <!-- ================================== Advanced AI Core ================================= -->
+  <ThingDef ParentName="PRFResourceBase">
+    <defName>PRFAdvancedAIChip</defName>
+    <label>Advanced AI core</label>
+    <description>A advanced processing unit containing hi-tech AI, which is used for advanced machines and robots.</description>
+    <graphicData>
+      <texPath>Common/AdvancedAICore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>300</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>4000</WorkToMake>
+      <Mass>1</Mass>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+  </ThingDef>
+
+  <!-- ================================== Qubit processor ================================= -->
+  <ThingDef ParentName="PRFResourceBase">
+    <defName>PRFQubitProcessor</defName>
+    <label>Qubit processor</label>
+    <description>In quantum computing, a qubit or quantum bit is the basic unit of quantum information—the quantum version of the classical binary bit physically realized with a two-state device. A qubit is a two-state quantum-mechanical system, one of the simplest quantum systems displaying the peculiarity of quantum mechanics.</description>
+    <graphicData>
+      <texPath>Common/UltraAiCore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>1500</MarketValue>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToMake>10000</WorkToMake>
+      <Mass>1</Mass>
+    </statBases>
+    <techLevel>Ultra</techLevel>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
   </ThingDef>
 
   <!-- ================================== Drone module ================================= -->
@@ -91,21 +117,11 @@
       <Mass>2</Mass>
       <WorkToMake>2000</WorkToMake>
     </statBases>
-    <costList>
-      <Plasteel>10</Plasteel>
-      <Steel>30</Steel>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-    </recipeMaker>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <tradeability>Sellable</tradeability>
     <stackLimit>75</stackLimit>
+    <techLevel>Industrial</techLevel>
   </ThingDef>
 
 </Defs>

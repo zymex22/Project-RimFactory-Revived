@@ -20,7 +20,7 @@
     <defName>FuelingMachine</defName>
     <label>fueling machine</label>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
-    <designatorDropdown>PRF_Fuel_gr</designatorDropdown>
+    <!-- <designatorDropdown>PRF_Fuel_gr</designatorDropdown> -->
     <graphicData>
       <texPath>Industry/FuelingMachine</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -68,7 +68,7 @@
     <defName>SAL_SmartHopper</defName>
     <label>Vacuum Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
-    <designatorDropdown>PRF_Fuel_gr</designatorDropdown>
+    <!-- <designatorDropdown>PRF_Fuel_gr</designatorDropdown> -->
     <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <texPath>Storage/vacuum</texPath>
@@ -234,7 +234,7 @@
       <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
     </inspectorTabs>
     <researchPrerequisites>
-      <li>ADVrollers</li>
+      <li>ADVrollersII</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Arrow</li>
@@ -277,16 +277,59 @@
     </modExtensions>
   </ThingDef>
 
-  <!--======================================= Item Puller ===============================================-->
+  <!--======================================= Item Puller mkI ===============================================-->
+  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
+    <defName>Building_AutoMachineTool_PullerI</defName>
+    <label>Item Puller mkI</label>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <passability>Impassable</passability>
+    <description>A Puller That Pull items from A to B. Place it down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
+    <altitudeLayer>Building</altitudeLayer>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
+    </placeWorkers>
+    <graphicData>
+      <texPath>Belts/PullerI</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1.1,1.1)</drawSize>
+    </graphicData>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
+        <graphicDataList>
+          <Working>
+            <graphicData>
+              <texPath>Belts/PullerWorkingI</texPath>
+              <graphicClass>Graphic_Multi</graphicClass>
+              <drawSize>(1.1,1.1)</drawSize>
+            </graphicData>
+          </Working>
+        </graphicDataList>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>15</speedFactor>
+        <minPower>50</minPower>
+        <maxPower>200</maxPower>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>ADVrollers</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--======================================= Item Puller mkII ===============================================-->
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller</defName>
-    <label>Item Puller</label>
+    <label>Item Puller mkII</label>
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
     </costList>
     <passability>Impassable</passability>
-    <description>(PRF) A Puller That Pull items from A to B. Place it down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description><!--todo: maybe make a message on spawn if not turned on-->
+    <description>A upgraded puller which run at a higher speed than mkI puller. pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-
+  <!-- ==================================== Battery base ===================================== -->
   <!-- Batteries Taken from SS bigger batteries-->
   <ThingDef Name="BBBuildingBase" Abstract="True">
     <category>Building</category>
@@ -19,14 +19,16 @@
     <defName>prf_batteries_gr</defName>
   </DesignatorDropdownGroupDef>
 
+
+  <!-- ==================================== 4k Battery ===================================== -->
   <ThingDef ParentName="BBBuildingBase">
     <defName>Battery4k</defName>
     <label>4k battery</label>
-    <thingClass>Building_Battery</thingClass>
+    <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
-      <texPath>Industry/Battery/Building_Battery_4k</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(2,3)</drawSize>
+      <texPath>Industry/Battery/4k</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
       <damageData>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
@@ -34,6 +36,7 @@
         <cornerBR>Damage/Corner</cornerBR>
       </damageData>
     </graphicData>
+    <drawGUIOverlay>true</drawGUIOverlay>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
     <pathCost>70</pathCost>
@@ -52,8 +55,8 @@
       <Flammability>1.0</Flammability>
       <Beauty>-40</Beauty>
     </statBases>
-    <description>A battery capable of storing 4000 watt days of power.</description>
-    <size>(1,2)</size>
+    <description>A battery capable of storing 4000 watt days of power. it has a efficiency of 50% which mean it will take 8k WD to charge it.</description>
+    <size>(1,1)</size>
     <building></building>
     <costList>
       <Steel>150</Steel>
@@ -78,64 +81,8 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <ThingDef ParentName="BBBuildingBase">
-    <defName>Battery10k</defName>
-    <label>10k battery</label>
-    <designatorDropdown>prf_batteries_gr</designatorDropdown>
-    <thingClass>Building_Battery</thingClass>
-    <graphicData>
-      <texPath>Industry/Battery/Battery10k</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(2,3)</drawSize>
-      <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
-    </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <pathCost>70</pathCost>
-    <blockWind>true</blockWind>
-    <castEdgeShadows>true</castEdgeShadows>
-    <fillPercent>0.40</fillPercent>
-    <tickerType>Normal</tickerType>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsPower</li>
-    </thingCategories>
-    <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
-      <WorkToBuild>800</WorkToBuild>
-      <Mass>40</Mass>
-      <Flammability>1.0</Flammability>
-      <Beauty>-40</Beauty>
-    </statBases>
-    <description>A battery that can store 10000Wd of power.</description>
-    <size>(1,2)</size>
-    <costList>
-      <Steel>200</Steel>
-      <Plasteel>20</Plasteel>
-      <ComponentIndustrial>6</ComponentIndustrial>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Battery">
-        <storedEnergyMax>10000</storedEnergyMax>
-        <efficiency>0.5</efficiency>
-        <transmitsPower>true</transmitsPower>
-      </li>
-      <li Class="CompProperties_Breakdownable"/>
-    </comps>
-    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <designationCategory>Power</designationCategory>
-    <staticSunShadowHeight>0.5</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
-    <researchPrerequisites>
-      <li>EnhancedBatteries</li>
-    </researchPrerequisites>
-  </ThingDef>
 
+  <!-- ==================================== 16k Battery ===================================== -->
   <ThingDef ParentName="BBBuildingBase">
     <defName>Battery16k</defName>
     <label>16k battery</label>
@@ -186,7 +133,7 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
-    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
     <designationCategory>Power</designationCategory>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
@@ -196,16 +143,15 @@
     </researchPrerequisites>
   </ThingDef>
 
-  <!-- Spacer Batteries -->
-
+  <!-- ==================================== 64k Battery ===================================== -->
   <ThingDef ParentName="BBBuildingBase">
     <defName>Battery64k</defName>
     <label>64k battery</label>
-    <thingClass>Building_Battery</thingClass>
+    <thingClass>ProjectRimFactory.Industry.Building_CustomBattery</thingClass>
     <graphicData>
       <texPath>Industry/Battery/Building_Battery_64k</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(2,3)</drawSize>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
       <damageData>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
@@ -232,7 +178,7 @@
       <Beauty>0</Beauty>
     </statBases>
     <description>An efficient waterproof superposed-cell battery capable of storing 64000 watt days of power. Spdskatr Industries is not responsible for any damage caused by short circuits.</description>
-    <size>(1,2)</size>
+    <size>(2,2)</size>
     <building></building>
     <costList>
       <Steel>500</Steel>
@@ -249,20 +195,98 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
-    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <designationCategory>Power</designationCategory>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc4</designationHotKey>
     <researchPrerequisites>
-      <li>LargeBatteries</li>
+      <li>VeryLargeBatteries</li>
     </researchPrerequisites>
   </ThingDef>
 
+
+  <!-- ==================================== 256k Battery ===================================== -->
+  <ThingDef ParentName="BBBuildingBase">
+    <defName>Battery256k</defName>
+    <label>256k battery</label>
+    <thingClass>Building_Battery</thingClass>
+    <graphicData>
+      <texPath>Industry/Battery/batteryT3</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(4.3,2.9)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <blockWind>true</blockWind>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.40</fillPercent>
+    <tickerType>Normal</tickerType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsPower</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Mass>80</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>50</Beauty>
+    </statBases>
+    <description>A very efficient waterproof AI-based battery capable of storing 256000 watt days of power. Cannot break down. Also very beautiful. Spdskatr Industries is not responsible for any damage caused by short circuits.</description>
+    <size>(4,2)</size>
+    <building></building>
+    <costList>
+      <Steel>1000</Steel>
+      <Plasteel>200</Plasteel>
+      <Gold>200</Gold>
+      <ComponentIndustrial>30</ComponentIndustrial>
+      <AIPersonaCore>1</AIPersonaCore>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>256000</storedEnergyMax>
+        <efficiency>1</efficiency>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_SecondLayer">        <!-- This is used when multiple textures want to be stacked -->
+        <graphicData>
+          <texPath>Industry/Battery/batteryT3_4</texPath>          <!-- Path to second layer texture -->
+          <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
+          <drawSize>(4.3,2.9)</drawSize>
+        </graphicData>
+        <altitudeLayer>Projectile</altitudeLayer>        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+      </li>
+    </comps>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Power</designationCategory>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <constructEffect>ConstructMetal</constructEffect>
+    <designationHotKey>Misc4</designationHotKey>
+    <researchPrerequisites>
+      <li>VeryLargeBatteries</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
+  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
+  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
   <ThingDef ParentName="BBBuildingBase">
     <defName>Battery100k</defName>
     <label>100k battery</label>
-    <designatorDropdown>prf_batteries_gr</designatorDropdown>
     <thingClass>Building_Battery</thingClass>
     <graphicData>
       <texPath>Industry/Battery/Building_Battery_256k</texPath>
@@ -305,28 +329,24 @@
       <li Class="CompProperties_Battery">
         <storedEnergyMax>100000</storedEnergyMax>
         <efficiency>1</efficiency>
-
         <transmitsPower>true</transmitsPower>
       </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <designationCategory>Power</designationCategory>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
-    <researchPrerequisites>
-      <li>VeryLargeBatteries</li>
-    </researchPrerequisites>
   </ThingDef>
 
+  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
   <ThingDef ParentName="BBBuildingBase">
-    <defName>Battery256k</defName>
-    <label>256k battery</label>
+    <defName>Battery10k</defName>
+    <label>10k battery</label>
     <thingClass>Building_Battery</thingClass>
     <graphicData>
-      <texPath>Industry/Battery/batteryT3</texPath>
+      <texPath>Industry/Battery/Battery10k</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(3.3,2.9)</drawSize>
+      <drawSize>(2,3)</drawSize>
       <damageData>
         <cornerTL>Damage/Corner</cornerTL>
         <cornerTR>Damage/Corner</cornerTR>
@@ -348,36 +368,31 @@
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>800</WorkToBuild>
-      <Mass>80</Mass>
+      <Mass>40</Mass>
       <Flammability>1.0</Flammability>
-      <Beauty>50</Beauty>
+      <Beauty>-40</Beauty>
     </statBases>
-    <description>A very efficient waterproof AI-based battery capable of storing 256000 watt days of power. Cannot break down. Also very beautiful. Spdskatr Industries is not responsible for any damage caused by short circuits.</description>
-    <size>(3,2)</size>
-    <building></building>
+    <description>A battery that can store 10000Wd of power.</description>
+    <size>(1,2)</size>
     <costList>
-      <Steel>1000</Steel>
-      <Plasteel>200</Plasteel>
-      <Gold>200</Gold>
-      <ComponentIndustrial>30</ComponentIndustrial>
-      <AIPersonaCore>1</AIPersonaCore>
+      <Steel>200</Steel>
+      <Plasteel>20</Plasteel>
+      <ComponentIndustrial>6</ComponentIndustrial>
     </costList>
     <comps>
       <li Class="CompProperties_Battery">
-        <storedEnergyMax>256000</storedEnergyMax>
-        <efficiency>1</efficiency>
-        <shortCircuitInRain>false</shortCircuitInRain>
+        <storedEnergyMax>10000</storedEnergyMax>
+        <efficiency>0.5</efficiency>
         <transmitsPower>true</transmitsPower>
       </li>
+      <li Class="CompProperties_Breakdownable"/>
     </comps>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <designationCategory>Power</designationCategory>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
-    <designationHotKey>Misc4</designationHotKey>
     <researchPrerequisites>
-      <li>VeryLargeBatteries</li>
     </researchPrerequisites>
   </ThingDef>
+
 
 </Defs>

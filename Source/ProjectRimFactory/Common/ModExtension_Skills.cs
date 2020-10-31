@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
+using ProjectRimFactory.Drones;
 
 namespace ProjectRimFactory.Common
 {
     class ModExtension_Skills : DefModExtension
     {
+        public enum enum_ModExtension_SkillsskillUsage
+		{
+			ThisOverrides = 0,
+			ReserchIsCapping = 1,
+			ThisIsCapping = 2,
+			ReserchOverrides = 3
+        }
+
+		public enum_ModExtension_SkillsskillUsage SkillUsage = enum_ModExtension_SkillsskillUsage.ReserchOverrides;
         public int BaseSkill = 0; //The Base levelInt to uses in case another one is not specified
         public List<SkillRecord> skills = null; //List of specific Skill levelInts
 		/* Usage Sample -----------------------------------------------------------------------
@@ -68,6 +78,7 @@ namespace ProjectRimFactory.Common
 
 		public int GetSkillLevel(SkillRecord record)
         {
+			DroneSkills.GetResechSkillLevel();
 			return skills.FirstOrDefault(x => x.def == record.def)?.levelInt ?? BaseSkill;
 		}
 

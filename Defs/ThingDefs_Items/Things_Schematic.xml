@@ -24,7 +24,7 @@
       <Mass>2</Mass>
     </statBases>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
     <drawGUIOverlay>false</drawGUIOverlay>
     <colorGenerator Class="ProjectRimFactory.SAL3.Tools.ColorGenerator_RangeHSV">
@@ -45,6 +45,7 @@
     <alwaysHaulable>true</alwaysHaulable>
     <rotatable>false</rotatable>
     <pathCost>15</pathCost>
+    <techLevel>Industrial</techLevel>
   </ThingDef>
 
   <!--==================================== Small frame ===============================-->
@@ -66,27 +67,13 @@
       <Mass>10</Mass>
     </statBases>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <costList>
-      <Steel>30</Steel>
-      <Plasteel>5</Plasteel>
-      <ComponentIndustrial>2</ComponentIndustrial>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-      <recipeUsers>
-        <!-- <li>TableRoboticMachining</li> -->
-      </recipeUsers>
-    </recipeMaker>
     <researchPrerequisites>
       <li>PRFEulersIdentity</li>
     </researchPrerequisites>
-    <tradeability>Sellable</tradeability>
     <stackLimit>5</stackLimit>
+    <techLevel>Industrial</techLevel>
   </ThingDef>
 
 
@@ -109,27 +96,13 @@
       <Mass>20</Mass>
     </statBases>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <costList>
-      <Steel>40</Steel>
-      <Plasteel>10</Plasteel>
-      <ComponentIndustrial>3</ComponentIndustrial>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-      <recipeUsers>
-        <!-- <li>TableRoboticMachining</li> -->
-      </recipeUsers>
-    </recipeMaker>
     <researchPrerequisites>
       <li>AutomationBasics</li>
     </researchPrerequisites>
-    <tradeability>Sellable</tradeability>
     <stackLimit>5</stackLimit>
+    <techLevel>Industrial</techLevel>
   </ThingDef>
 
 
@@ -151,27 +124,12 @@
       <WorkToMake>4800</WorkToMake>
       <Mass>40</Mass>
     </statBases>
-    <costList>
-      <Steel>80</Steel>
-      <Plasteel>20</Plasteel>
-      <ComponentIndustrial>4</ComponentIndustrial>
-    </costList>
-    <recipeMaker>
-      <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
-      <workSkill>Crafting</workSkill>
-      <effectWorking>Cook</effectWorking>
-      <soundWorking>Recipe_Machining</soundWorking>
-      <recipeUsers>
-        <!-- <li>TableRoboticMachining</li> -->
-      </recipeUsers>
-    </recipeMaker>
     <researchPrerequisites>
       <li>AutomationBasics</li>
     </researchPrerequisites>
     <thingCategories>
-      <li>Items</li>
+      <li>Manufactured</li>
     </thingCategories>
-    <tradeability>Sellable</tradeability>
     <stackLimit>5</stackLimit>
   </ThingDef>
 

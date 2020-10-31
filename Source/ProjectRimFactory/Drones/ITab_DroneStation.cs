@@ -53,7 +53,7 @@ namespace ProjectRimFactory.Drones
             float additionalHeight = (checkboxheight * droneInterface.GetWorkSettings.Count) + labelheight + headerheight;
             if (droneInterface.GetSleepTimeList[0] != "")
             {
-                additionalHeight += 50;
+                additionalHeight += 60;
             }
             if (droneInterface.compRefuelable != null)
             {

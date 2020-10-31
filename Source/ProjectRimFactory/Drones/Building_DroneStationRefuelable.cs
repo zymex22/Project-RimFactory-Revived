@@ -12,9 +12,12 @@ namespace ProjectRimFactory.Drones
     public class Building_DroneStationRefuelable : Building_WorkGiverDroneStation
     {
         protected CompRefuelable refuelableComp;
+
+
         public override void PostMake()
         {
             base.PostMake();
+
             refuelableComp = GetComp<CompRefuelable>();
             refuelableComp.Refuel(extension.GetDronesOnSpawn(refuelableComp));
         }
@@ -24,7 +27,6 @@ namespace ProjectRimFactory.Drones
             refuelableComp = GetComp<CompRefuelable>(); 
 
             base.SpawnSetup(map, respawningAfterLoad);
-            
         }
         public override int DronesLeft
         {

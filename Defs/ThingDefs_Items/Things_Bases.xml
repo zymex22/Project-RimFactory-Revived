@@ -8,6 +8,7 @@
     <selectable>true</selectable>
     <altitudeLayer>Item</altitudeLayer>
     <stackLimit>75</stackLimit>
+    <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
       <Beauty>-4</Beauty>
     </statBases>
@@ -17,6 +18,9 @@
     <alwaysHaulable>true</alwaysHaulable>
     <drawGUIOverlay>true</drawGUIOverlay>
     <rotatable>false</rotatable>
-    <pathCost>15</pathCost>
+    <pathCost>14</pathCost>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
   </ThingDef>
 </Defs>

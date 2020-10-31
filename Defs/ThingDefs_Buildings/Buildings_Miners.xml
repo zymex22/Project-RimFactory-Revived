@@ -72,7 +72,7 @@
     </costList>
     <comps>
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>15.0</fuelConsumptionRate>
+        <fuelConsumptionRate>10.0</fuelConsumptionRate>
         <fuelCapacity>100.0</fuelCapacity>
         <fuelFilter>
           <thingDefs>

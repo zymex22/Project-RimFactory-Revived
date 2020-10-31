@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+
+  <!-- Tier 0 -->
+  <!-- ==================== Main Tier 0 ============================= -->
+  <ResearchProjectDef>
+    <defName>PRF_Clockwork</defName>
+    <label>Clockwork Principle</label>
+    <techLevel>Medieval</techLevel>
+    <baseCost>500</baseCost>
+    <description>Clockwork Principle will unlock some Early age automation aimed at Tribal/medieval age. You can skip this and go directly to Tier1 if you will fast forward to high tier.\n its aimed to aid in medieval playthrough</description>
+    <prerequisites>
+      <li>Smithing</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>1</researchViewX>
+    <researchViewY>3</researchViewY>
+    <discoveredLetterTitle>About: Clockwork Principle</discoveredLetterTitle>
+    <discoveredLetterText>The earliest known example of a clockwork mechanism is the Antikythera mechanism, a first-century BC geared analogue computer, somewhat astrolabe-like, for calculating astronomical positions and eclipses, recovered from a Greek shipwreck. There are many other accounts of clockwork devices in ancient Greece, even in its mythology, and the mechanism itself is sophisticated enough to indicate a significant history of lesser devices leading up to its creation.\n\n
+At some point, this level of sophistication in clockwork technology was lost or forgotten in Europe, and only returned when brought from the Islamic world after the Crusades, along with other knowledge leading to the Renaissance. Clockwork finally recovered the equivalent of pre-Roman technological levels in the 14th century.\n\n
+As in Greek mythology, there are ambitious automation claims in the legends of other cultures. For example, in Jewish legend, Solomon used his wisdom to design a throne with mechanical animals which hailed him as king when he ascended it; upon sitting down an eagle would place a crown upon his head, and a dove would bring him a Torah scroll. It's also said that when King Solomon stepped upon the throne, a mechanism was set in motion. As soon as he stepped upon the first step, a golden ox and a golden lion each stretched out one foot to support him and help him rise to the next step. On each side, the animals helped the King up until he was comfortably seated upon his throne.
+    </discoveredLetterText>
+  </ResearchProjectDef>
+
   <!-- Tier 1 -->
+  <!-- ==================== Main Tier 1 ============================= -->
   <ResearchProjectDef>
     <defName>PRFEulersIdentity</defName>
     <label>Euler's identity</label>
@@ -11,65 +34,91 @@
       <li>Machining</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>0</researchViewX>
+    <researchViewX>2</researchViewX>
     <researchViewY>3</researchViewY>
+    <discoveredLetterTitle>About: Getting Factory started</discoveredLetterTitle>
+    <discoveredLetterText>With Euler's identity you now have started your factory adventure.
+    This will unlock Tier 1 buildings you can further research to unlock individual types, or rush to next tier.
+    \nHere are some pointers that will help you along:
+  - Many items are grouped together in categories to save space rightclick to see them all.
+  - All items have a dedicated Help Button which will have a how to use description.
+  - White cells are input, Yellow are output, blue are DB.
+  - We have added theese popups on some of the researches to give a introduction to each type machine
+  \n\nPlease Note mod is still WIP and stuff might change, we do a big effort not break any save by updates though!\n feel free to post suggesions and bugs on steampage
+    </discoveredLetterText>
   </ResearchProjectDef>
 
+  <!-- Basic drone technology -->
   <ResearchProjectDef>
-    <defName>PRFMachineLearning</defName>
-    <label>Machine learning</label>
+    <defName>PRF_BasicDrones</defName>
+    <label>Basic Drone knowledge</label>
     <techLevel>Industrial</techLevel>
-    <baseCost>2000</baseCost>
-    <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
-    <prerequisites>
-      <li>MagneticTape</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <requiredResearchFacilities>
-      <li>MultiAnalyzer</li>
-    </requiredResearchFacilities>
-    <tab>Automation</tab>
-    <researchViewX>3</researchViewX>
-    <researchViewY>3</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>PRFRollers</defName>
-    <label>Belts and Rollers</label>
-    <techLevel>Industrial</techLevel>
-    <baseCost>500</baseCost>
-    <description>Rollers and belts include both IR and PRF</description>
+    <baseCost>600</baseCost>
+    <description>The first pilotless vehicles were built during the First World War. These early models were launched by catapult or flown using radio control. Much have changed since then and drones are now used for more common tasks.\nThis sets drones basestats lv. 10</description>
     <prerequisites>
       <li>PRFEulersIdentity</li>
     </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>0</researchViewX>
+    <researchViewX>3</researchViewX>
+    <researchViewY>0</researchViewY>
+    <discoveredLetterTitle>About: Drone are now lv 10</discoveredLetterTitle>
+    <discoveredLetterText>You now have basic knowledge about drones and can now start utilize them for different tasks. This also unlocks DroneCultivator research which let you Automate your agriculture needs. /n This will set any drones base level to 10. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
+  </ResearchProjectDef>
+  <!-- this should set all drone base stats to 10 unless manually overwritten -->
+
+  <ResearchProjectDef>
+    <defName>PRFRollers</defName>
+    <label>Conveyor belts</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>500</baseCost>
+    <description>First set of conveyor belts, to make early automations</description>
+    <prerequisites>
+      <li>Electricity</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>2</researchViewX>
     <researchViewY>5</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
     <defName>ADVrollers</defName>
-    <label>Pullers And Pushers</label>
+    <label>Splitters and basic pullers</label>
     <techLevel>Spacer</techLevel>
     <baseCost>500</baseCost>
-    <description>pusher and pullers, include both IR and PRF</description>
+    <description>Basic Pullers and splitters to further improve your automation</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRFRollers</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>0</researchViewX>
-    <researchViewY>6</researchViewY>
+    <researchViewX>3</researchViewX>
+    <researchViewY>5</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>ADVrollersII</defName>
+    <label>Advanced belts and pullers</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>500</baseCost>
+    <description>Advanced set of conveyor belts and pullers</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>ADVrollers</li>
+      <li>AutomationBasics</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>6</researchViewX>
+    <researchViewY>5</researchViewY>
   </ResearchProjectDef>
 
   <!-- Tier 2 -->
+  <!-- ==================== Main Tier 2 ============================= -->
   <ResearchProjectDef>
     <defName>AutomationBasics</defName>
-    <label>Riemann zeta function</label>
+    <label>Koller-Li Framework</label>
     <techLevel>Industrial</techLevel>
     <baseCost>2000</baseCost>
-    <description>"The Riemann zeta function ζ(s), is a function of a complex variable s that analytically continues the sum of the Dirichlet series. which converges when the real part of s is greater than 1." Unlocks new set of second tier factory building options.</description>
+    <description>AI Learning and Patern Recognition allow automation to reach a new level. Even on the Rim, some basic AI frameworks are recognized as being both useful and easy to apply. Using these frameworks is good, because these are hard problems</description>
     <prerequisites>
       <li>PRFEulersIdentity</li>
       <li>MicroelectronicsBasics</li>
@@ -79,11 +128,53 @@
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
     <tab>Automation</tab>
-    <researchViewX>2</researchViewX>
+    <researchViewX>5</researchViewX>
     <researchViewY>3</researchViewY>
+    <discoveredLetterTitle>About: Tier 2 Factory Unlocked</discoveredLetterTitle>
+    <discoveredLetterText>You have now Researched Koller-Li Framework and unlocked Tier 2 Reseaches.\n You also unlocked ability to create Ai Research bench which you will need to progress to tier 3\n\nAI Learning and Patern Recognition allow automation to reach a new level. Even on the Rim, some basic AI frameworks are recognized as being both useful and easy to apply. Using these frameworks is good, because these are hard problems.</discoveredLetterText>
   </ResearchProjectDef>
 
+  <ResearchProjectDef>
+    <defName>PRFMachineLearning</defName>
+    <label>Machine learning</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>2000</baseCost>
+    <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
+    <prerequisites>
+      <li>AutomationBasics</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <tab>Automation</tab>
+    <researchViewX>6</researchViewX>
+    <researchViewY>2.9</researchViewY>
+  </ResearchProjectDef>
+
+
+  <!-- Improved drone technology -->
+  <ResearchProjectDef>
+    <defName>PRF_ImprovedDrones</defName>
+    <label>Improved Drone engines</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>2000</baseCost>
+    <description>Further improvements for drones have now enabled use of more drones and with a greater control over task it can perform.\nThis sets drones basestats lv. 15</description>
+    <prerequisites>
+      <li>AutomationBasics</li>
+      <li>PRF_BasicDrones</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>6</researchViewX>
+    <researchViewY>0</researchViewY>
+    <discoveredLetterTitle>About: Drone are now lv 15</discoveredLetterTitle>
+    <discoveredLetterText>You have upgraded your drones with better engines and batteries and as such they now do jobs even more efficient. /n This will set any drones base level to 15. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
+  </ResearchProjectDef>
+  <!-- this should set all drone base stats to 15 unless manually overwritten -->
+
+
   <!-- Tier 3 -->
+  <!-- ==================== Main Tier 3 ============================= -->
   <ResearchProjectDef>
     <defName>PRFGoldbachConjecture</defName>
     <label>Goldbach's conjecture</label>
@@ -91,12 +182,55 @@
     <baseCost>2000</baseCost>
     <description>"Every even integer, greater than 2, can be formed from the sum of two prime numbers."\nUnlocks a new array of third tier research projects.</description>
     <prerequisites>
-      <li>PRFMachineLearning</li>
+      <li>AutomationBasics</li>
+      <li>Fabrication</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
+    <researchViewX>8</researchViewX>
     <researchViewY>3</researchViewY>
+    <discoveredLetterTitle>About: Tier 3 Factory Unlocked</discoveredLetterTitle>
+    <discoveredLetterText>You have now Researched Goldbach's conjecture with this you have unlocked Tier 3 Reseaches.</discoveredLetterText>
+  </ResearchProjectDef>
+
+  <!-- Advanced drone technology -->
+  <ResearchProjectDef>
+    <defName>PRF_AdvancedDrones</defName>
+    <label>Advanced Drone Ai</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>6000</baseCost>
+    <description>Perfectly aerodynamics higher power engines and Ai have created a perfectly balanced super drone that will perform tasks better than most pawns ever will.\nThis sets drones basestats lv. 20</description>
+    <prerequisites>
+      <li>PRFGoldbachConjecture</li>
+      <li>PRF_ImprovedDrones</li>
+    </prerequisites>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>10</researchViewX>
+    <researchViewY>0</researchViewY>
+    <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
+    <discoveredLetterText>You have upgraded your drones with advanced Ai cores, this will let them do their task better than most humans will do. /n This will set any drones base level to 20. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
+  </ResearchProjectDef>
+  <!-- this should set all drone base stats to 20 unless manually overwritten -->
+
+  <!-- Tier 4 -->
+  <!-- ==================== Main Tier 4 ============================= -->
+  <ResearchProjectDef>
+    <defName>PRF_QubitTech</defName>
+    <label>quantum bit technology</label>
+    <techLevel>Ultra</techLevel>
+    <baseCost>3500</baseCost>
+    <description>A qubit (or quantum bit) is the quantum mechanical analogue of a classical bit. In classical computing the information is encoded in bits, where each bit can have the value zero or one. In quantum computing the information is encoded in qubits. A qubit is a two-level quantum system where the two basis qubit states are usually written as \left\lvert 0 \right\rangle∣0⟩ and \left\lvert 1 \right\rangle∣1⟩. A qubit can be in state \left\lvert 0 \right\rangle∣0⟩, \left\lvert 1 \right\rangle∣1⟩ or (unlike a classical bit) in a linear combination of both states. The name of this phenomenon is superposition.</description>
+    <prerequisites>
+      <li>PRFGoldbachConjecture</li>
+      <li>ShipBasics</li>
+    </prerequisites>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>11</researchViewX>
+    <researchViewY>3</researchViewY>
+    <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
+    <discoveredLetterText>Qubit technology opens up Tier 4 stuff for your factory.\n\nMORE USES WILL COME LATER...</discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -112,8 +246,8 @@
       <li>PRFEulersIdentity</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>2</researchViewX>
-    <researchViewY>6</researchViewY>
+    <researchViewX>3</researchViewX>
+    <researchViewY>3</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -127,8 +261,8 @@
       <li>AutomationBasics</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>3</researchViewX>
-    <researchViewY>6</researchViewY>
+    <researchViewX>6</researchViewX>
+    <researchViewY>3.5</researchViewY>
   </ResearchProjectDef>
 
   <ResearchProjectDef>
@@ -142,8 +276,8 @@
       <li>PRFGoldbachConjecture</li>
     </prerequisites>
     <tab>Automation</tab>
-    <researchViewX>4</researchViewX>
-    <researchViewY>6</researchViewY>
+    <researchViewX>9</researchViewX>
+    <researchViewY>3.5</researchViewY>
   </ResearchProjectDef>
 
 </Defs>
