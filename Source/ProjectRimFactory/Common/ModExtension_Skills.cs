@@ -7,6 +7,7 @@ using RimWorld;
 using RimWorld.Planet;
 using Verse;
 using ProjectRimFactory.Drones;
+using UnityEngine;
 
 namespace ProjectRimFactory.Common
 {
@@ -81,5 +82,49 @@ namespace ProjectRimFactory.Common
 			return skills.FirstOrDefault(x => x.def == skillDef)?.levelInt ?? BaseSkill;
 		}
 
+		public int GetExtendedSkillLevel(SkillDef skillDef, Type type)
+		{
+			int returnval = 0;
+			switch (SkillUsage)
+			{
+				case enum_ModExtension_SkillsskillUsage.ThisOverrides:
+					{
+						returnval = GetSkillLevel(skillDef);
+						break;
+					}
+				case enum_ModExtension_SkillsskillUsage.ReserchIsCapping:
+					{
+						returnval = Mathf.Clamp(GetSkillLevel(skillDef), 0, ReserchSkillModifier.GetResechSkillLevel(type));
+						break;
+					}
+				case enum_ModExtension_SkillsskillUsage.ThisIsCapping:
+					{
+						returnval = Mathf.Clamp(ReserchSkillModifier.GetResechSkillLevel(type), 0, GetSkillLevel(skillDef));
+						break;
+					}
+				case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchOverrides:
+					{
+						returnval = ReserchSkillModifier.GetResechSkillLevel(type);
+						break;
+					}
+				default:
+					{
+						returnval = GetSkillLevel(skillDef);
+						break;
+					}
+			}
+			return returnval;
+		}
+
+
+
+
+
+
+
+
+
 	}
+
+
 }

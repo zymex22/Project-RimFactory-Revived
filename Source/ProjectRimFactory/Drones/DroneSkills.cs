@@ -12,34 +12,6 @@ namespace ProjectRimFactory.Drones
 {
     class DroneSkills
     {
-
-        private static int reserchSkillLevelDefault = 10; //Set if no other Reserch takes Effect
-
-        /// <summary>
-        /// Check The Resech for the apropriate Level to return
-        /// </summary>
-        /// <param name="record">Optional for future Updates</param>
-        /// <returns></returns>
-        public static int GetResechSkillLevel(SkillRecord record = null)
-        {
-            //Order Matters
-            if (PRFDefOf.PRF_AdvancedDrones.IsFinished)
-            {
-                return 20;//Advanced Version
-            }
-            else if (PRFDefOf.PRF_ImprovedDrones.IsFinished)
-            {
-                return 15; //Improved Version
-            }
-            else if (PRFDefOf.PRF_BasicDrones.IsFinished)
-            {
-                return 10; //Basic
-            }
-            
-            return reserchSkillLevelDefault;
-        }
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -67,17 +39,17 @@ namespace ProjectRimFactory.Drones
                                 }
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchIsCapping:
                                 {
-                                    record.levelInt = Mathf.Clamp(modExtension_Skills.GetSkillLevel(record.def), 0, GetResechSkillLevel());
+                                    record.levelInt = Mathf.Clamp(modExtension_Skills.GetSkillLevel(record.def), 0, ReserchSkillModifier.GetResechSkillLevel());
                                     break;
                                 }
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ThisIsCapping:
                                 {
-                                    record.levelInt = Mathf.Clamp(GetResechSkillLevel(), 0, modExtension_Skills.GetSkillLevel(record.def));
+                                    record.levelInt = Mathf.Clamp(ReserchSkillModifier.GetResechSkillLevel(), 0, modExtension_Skills.GetSkillLevel(record.def));
                                     break;
                                 }
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchOverrides:
                                 {
-                                    record.levelInt = DroneSkills.GetResechSkillLevel();
+                                    record.levelInt = ReserchSkillModifier.GetResechSkillLevel();
                                     break;
                                 }
                             default:
@@ -91,7 +63,7 @@ namespace ProjectRimFactory.Drones
                     }
                     else
                     {
-                        record.levelInt = DroneSkills.GetResechSkillLevel(); //No Settings Found use the Reserch Directly
+                        record.levelInt = ReserchSkillModifier.GetResechSkillLevel(); //No Settings Found use the Reserch Directly
                     }
 
 
