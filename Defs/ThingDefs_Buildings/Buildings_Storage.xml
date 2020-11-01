@@ -100,7 +100,7 @@
     </costList>
     <constructEffect>ConstructWood</constructEffect>
     <researchPrerequisites>
-      <li>PRFCrates</li>
+      <li>PRF_Crates</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <modExtensions>
@@ -154,7 +154,7 @@
     </costList>
     <constructEffect>ConstructWood</constructEffect>
     <researchPrerequisites>
-      <li>PRFCrates</li>
+      <li>PRF_Crates</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <modExtensions>
@@ -210,7 +210,7 @@
     <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>PRFStorage</li>
+      <li>PRF_SteelCrates</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
@@ -264,7 +264,7 @@
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>PRFStorage</li>
+      <li>PRF_SteelCrates</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
@@ -327,7 +327,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <tickerType>Normal</tickerType>
     <researchPrerequisites>
-      <li>PRFStorageIO</li>
+      <li>PRF_StorageIO</li>
     </researchPrerequisites>
     <comps>
       <li Class="CompProperties_Glower">
@@ -435,7 +435,7 @@
       <li>BuildingsAutomation</li>
     </thingCategories>
     <researchPrerequisites>
-      <li>PRFStorageIO</li>
+      <li>PRF_StorageIO</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">

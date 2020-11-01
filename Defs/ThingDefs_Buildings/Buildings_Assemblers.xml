@@ -175,7 +175,7 @@ Mod extennsion for assemblers
       </li>
     </comps>
     <researchPrerequisites>
-      <li>MagneticTape</li>
+      <li>PRF_MagneticTape</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -221,7 +221,7 @@ Mod extennsion for assemblers
       </li>
     </comps>
     <researchPrerequisites>      <!-- Needed Research to see in menus -->
-      <li>UniversalAutocrafting</li>
+      <li>PEF_UniversalAutocrafting</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
     <modExtensions>
@@ -298,7 +298,7 @@ Mod extennsion for assemblers
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>SelfCorrectingAssemblers</li>
+      <li>PRF_SelfCorrectingAssemblers</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
   </ThingDef>

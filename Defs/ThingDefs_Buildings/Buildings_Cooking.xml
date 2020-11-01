@@ -165,7 +165,7 @@ Mod extennsion for assemblers
     </building>
     <passability>PassThroughOnly</passability>
     <researchPrerequisites>
-      <li>SelfCooking</li>
+      <li>PRF_SelfCooking</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>    <!-- for being able to swap between textures each rotation -->
     <modExtensions>
@@ -250,7 +250,7 @@ Mod extennsion for assemblers
     </building>
     <passability>PassThroughOnly</passability>
     <researchPrerequisites>
-      <li>SelfCorrectingAssemblers</li>
+      <li>PRF_SelfCorrectingAssemblers</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
     <modExtensions>
@@ -322,7 +322,7 @@ Mod extennsion for assemblers
     </comps>
     <!--<recipes></recipes>-->
     <researchPrerequisites>
-      <li>SelfCooking</li>
+      <li>PRF_SelfCooking</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
     <modExtensions>
@@ -391,7 +391,7 @@ Mod extennsion for assemblers
     <designationCategory>Industrial</designationCategory>
     <researchPrerequisites>
       <li>Brewing</li>
-      <li>SelfCooking</li>
+      <li>PRF_SelfCooking</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
@@ -439,7 +439,7 @@ Mod extennsion for assemblers
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
     </building>
     <researchPrerequisites>
-      <li>SelfCooking</li>
+      <li>PRF_SelfCooking</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
     <modExtensions>

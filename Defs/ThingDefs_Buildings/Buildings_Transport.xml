@@ -234,7 +234,7 @@
       <li>ProjectRimFactory.AutoMachineTool.ITab_ProductLimitation</li>
     </inspectorTabs>
     <researchPrerequisites>
-      <li>ADVrollersII</li>
+      <li>PRF_BeltsIII</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_Arrow</li>
@@ -316,7 +316,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>ADVrollers</li>
+      <li>PRF_BeltsI</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -479,7 +479,7 @@
       <li>BuildingsAutomation</li>
     </thingCategories>
     <researchPrerequisites>
-      <li>PRFRollers</li>
+      <li>PRF_BeltsI</li>
     </researchPrerequisites>
     <size>(1,1)</size>
     <pathCost>70</pathCost>
@@ -586,6 +586,9 @@
         <drawSize>(0.8,0.8)</drawSize>
       </blueprintGraphicData>
     </building>
+    <researchPrerequisites>
+      <li>PRF_BeltsII</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <!--======================================= Conveyor underground ===============================================-->
@@ -626,6 +629,9 @@
         <drawRotated>true</drawRotated>
       </blueprintGraphicData>
     </building>
+    <researchPrerequisites>
+      <li>PRF_BeltsII</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <!--======================================= Conveyor underground connector base ===============================================-->
@@ -650,7 +656,7 @@
       <Steel>20</Steel>
     </costList>
     <researchPrerequisites>
-      <li>PRFRollers</li>
+      <li>PRF_BeltsII</li>
     </researchPrerequisites>
 
     <size>(1,1)</size>
