@@ -16,6 +16,9 @@ namespace ProjectRimFactory.AutoMachineTool
 {
     public class Building_ItemPuller : Building_BaseLimitation<Thing>, IStorageSetting, IStoreSettingsParent
     {
+        public Building_ItemPuller() {
+            this.outputToEntireStockpile = true;
+        }
         protected bool active = false;
         protected bool takeForbiddenItems=true;
         public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
@@ -55,8 +58,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public StorageSettings GetParentStoreSettings() => def.building.fixedStorageSettings;
 
-
-        [Unsaved]
         protected StorageSettings storageSettings;
         public StorageSettings StorageSettings => this.storageSettings;
 
@@ -68,11 +69,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private bool pickupConveyor = false;
 
-        protected override bool WorkingIsDespawned()
-        {
-            return false;
-        }
-
+        protected override LookMode WorkingLookMode { get => LookMode.Deep; } // despawned
         public override void ExposeData()
         {
             Scribe_Values.Look<bool>(ref this.pickupConveyor, "pickupConveyor", false);
@@ -111,6 +108,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
             this.settings = GetStoreSettings(); // force init
             this.forcePlace = ForcePlace;
+
+            if (!respawningAfterLoad) Messages.Message("PRF.NeedToTurnOnPuller".Translate(), 
+                     this, MessageTypeDefOf.CautionInput);
         }
 
         protected override void Reset()
@@ -130,7 +130,7 @@ namespace ProjectRimFactory.AutoMachineTool
             if (conveyor.HasValue)
             {
                 this.pickupConveyor = true;
-                return Option(conveyor.Value.Carrying());
+                return Option(conveyor.Value.GetThingBy(null)); // already verified it's what we want
             }
             if (this.takeForbiddenItems)
                 return (this.Position + this.Rotation.Opposite.FacingCell).SlotGroupCells(this.Map)
@@ -228,39 +228,27 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Thing working)
         {
-            return this.pickupConveyor ? !this.GetPickableConveyor().HasValue : !working.Spawned || working.Destroyed;
+            return false;
+            //return this.pickupConveyor ? !this.GetPickableConveyor().HasValue : !working.Spawned || working.Destroyed;
         }
 
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
             workAmount = 120;
             target = TargetThing().GetOrDefault(null);
+            if (target?.Spawned == true) target.DeSpawn();
             return target != null;
         }
 
         protected override bool FinishWorking(Thing working, out List<Thing> products)
         {
-            var target = new List<Thing>();
-            if (this.pickupConveyor)
-            {
-                var pickup = GetPickableConveyor().Select(c => c.Pickup());
-                // Not needed (I think, as conveyors should only have forbidden items if allowed:
-                //if (pickup.HasValue && (this.takeForbiddenItems || !pickup.Value.IsForbidden(Faction.OfPlayer)))
-                if (pickup.HasValue)
-                {
-                    target.Append(pickup.Value);
-                }
-                else
-                {
-                    this.ForceReady();
-                }
-            }
-            else
-            {
-                if (this.takeForbiddenItems || !working.IsForbidden(Faction.OfPlayer))
-                    target.Append(working);
-            }
-            products = target;
+            // why do we need to create a *new* list???  Why not just append
+            //   directly to this.products()??  It IS the C# object-oriented
+            //   way (altho, if Nobo comes from a background where variables
+            //   are immutable that might explain the choice?) Nevertheless,
+            //   I will use and return the current instantiation of products
+            this.products.Append(working);
+            products = this.products;
             return true;
         }
         protected override void Placing() {

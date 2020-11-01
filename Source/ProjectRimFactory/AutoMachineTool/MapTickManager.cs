@@ -16,7 +16,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public MapTickManager(Map map) : base(map)
         {
-            this.thingsList = new ThingLister(map);
+//            this.thingsList = new ThingLister(map);
         }
 
         public override void MapComponentTick()
@@ -27,46 +27,45 @@ namespace ProjectRimFactory.AutoMachineTool
             removeSet.ForEach(r => this.eachTickActions.Remove(r));
 
 #if DEBUG
-            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-            sw.Start();
+            if ((Debug.activeFlags & Debug.Flag.Benchmark) > 0) {
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
 
-            var beforeCount = GC.CollectionCount(0);
+                var beforeCount = GC.CollectionCount(0);
 
-            StringBuilder b = new StringBuilder();
-            var tickers = this.tickActionsDict.GetOption(Find.TickManager.TicksGame);
-            if (tickers.HasValue)
-            {
-                foreach(var a in tickers.Value.ToList())
-                {
-                    System.Diagnostics.Stopwatch sw2 = new System.Diagnostics.Stopwatch();
-                    sw2.Start();
-                    Exec(a);
-                    sw2.Stop();
-                    var micros = (double)sw2.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency * 1000d * 1000d;
-                    b.Append(a.Target.GetType().ToString() + "." + a.Method.Name + " / elapse : " + micros + "micros \n");
+                StringBuilder b = new StringBuilder();
+                var tickers = this.tickActionsDict.GetOption(Find.TickManager.TicksGame);
+                if (tickers.HasValue) {
+                    foreach (var a in tickers.Value.ToList()) {
+                        System.Diagnostics.Stopwatch sw2 = new System.Diagnostics.Stopwatch();
+                        sw2.Start();
+                        Exec(a);
+                        sw2.Stop();
+                        var micros = (double)sw2.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency * 1000d * 1000d;
+                        b.Append(a.Target.GetType().ToString() + "." + a.Method.Name + " / elapse : " + micros + "micros \n");
+                    }
                 }
-            }
 
-            var gcCount = GC.CollectionCount(0) - beforeCount;
+                var gcCount = GC.CollectionCount(0) - beforeCount;
 
-            sw.Stop();
-            var millis = (double)sw.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency * 1000d;
-            if (millis > 2d)
-            {
-                if(gcCount >= 1)
-                {
-                    L("GC called");
+                sw.Stop();
+                var millis = (double)sw.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency * 1000d;
+                if (millis > 2d) {
+                    if (gcCount >= 1) {
+                        L("GC called");
+                    } else {
+                        L("millis : " + millis + " / methods : " + b.ToString());
+                    }
                 }
-                else
-                {
-                    L("millis : " + millis + " / methods : " + b.ToString());
-                }
+            } else { // debug flag off:
+                this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
             }
 #else
+            // Need ToList() b/c the list of tickActions can change
             this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
 #endif
             this.tickActionsDict.Remove(Find.TickManager.TicksGame);
-        }
+            }
 
         private static void Exec(Action act)
         {
@@ -98,14 +97,18 @@ namespace ProjectRimFactory.AutoMachineTool
             base.MapComponentUpdate();
 
             // ここでいいのか・・・？
-            Option(Find.MainTabsRoot.OpenTab)
+            if ((Find.MainTabsRoot.OpenTab?.TabWindow as MainTabWindow_Architect)
+                ?.selectedDesPanel?.def.defName == "Industrial") {
+                OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
+            }
+/*            Option(Find.MainTabsRoot.OpenTab)
                 .Select(r => r.TabWindow)
                 .SelectMany(w => Option(w as MainTabWindow_Architect))
                 .SelectMany(a => Option(a.selectedDesPanel))
                 .Where(p => p.def.defName == "Industrial")
                 .ForEach(p => OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame());
-
-            if (Find.Selector.FirstSelectedObject as IBeltConbeyorLinkable != null)
+*/
+            if (Find.Selector.FirstSelectedObject is IBeltConveyorLinkable)
             {
                 OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
             }
@@ -155,9 +158,9 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.tickActionsDict.GetOption(Find.TickManager.TicksGame).Select(l => l.Contains(act)).GetOrDefault(false);
         }
 
-        private ThingLister thingsList;
+  //      private ThingLister thingsList;
 
-        public ThingLister ThingsList => thingsList;
+//        public ThingLister ThingsList => thingsList;
 
 #if DEBUG
         public override void MapComponentOnGUI()

@@ -20,7 +20,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var ext = def.GetModExtension<ModExtension_WorkIORange>();
             if (ext == null || ext.OutputCellResolver == null)
             {
-                Debug.LogWarning("outputCellResolver not found.");
+                UnityEngine.Debug.LogWarning("outputCellResolver not found.");
                 return;
             }
 

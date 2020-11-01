@@ -11,6 +11,16 @@ using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
+    /// <summary>
+    /// This is the original Nobo version of Linked Graphics for our use
+    ///   It uses an unpadded atlas, which causes problems when the 
+    ///   atlas has enough detail: the Link2 class doesn't have any
+    ///   buffer between bits of the atlas, and the edges can bleed
+    ///   into each other. It can lead to thin-line artifacts along
+    ///   edges.  Prefer to use Graphic_LinkedConveyorV2 if there's
+    ///   any edge contact.  This may be fine for some applicatios,
+    ///   such as lights.
+    /// </summary>
     public abstract class Graphic_Linked2 : Graphic
     {
         public Graphic_Linked2() : base()
@@ -69,8 +79,7 @@ namespace ProjectRimFactory.AutoMachineTool
             int num2 = 1;
             for (int i = 0; i < 4; i++)
             {
-                IntVec3 c = cell + GenAdj.CardinalDirections[i];
-                if (this.ShouldLinkWith(c, parent))
+                if (this.ShouldLinkWith(new Rot4(i), parent))
                 {
                     num += num2;
                 }
@@ -85,7 +94,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.subMats[(int)linkSet];
         }
 
-        public abstract bool ShouldLinkWith(IntVec3 c, Thing parent);
+        public abstract bool ShouldLinkWith(Rot4 dir, Thing parent);
 
         public override void Print(SectionLayer layer, Thing thing)
         {

@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
+  <PRF_DropThing>Drop {0}</PRF_DropThing>
+  <PRF_CouldNotPlaceThing>No valid place found to place {0}.</PRF_CouldNotPlaceThing>
+  <PRFBlockedBy>Blocked by {0}</PRFBlockedBy><!-- Cannot be placed b/c of, etc -->
   <!-- Some languages are RtoL, and might want "(default) {0}" -->
   <PRF_Default_Tag>{0} (default)</PRF_Default_Tag>
   <PRF_TotalStacksNum>Total number of stacks: {0}</PRF_TotalStacksNum>
   <PRFItemsTab>Items</PRFItemsTab>
+  <PRFSettingsTab>Settings</PRFSettingsTab>
+  <PRF.Common.OutputToStockpile>Can output to Entire stockpile</PRF.Common.OutputToStockpile>
+  <PRF.Common.OutputToStockpileDesc>Select whether this PRF machine can put its output anywhere in the stockpile instead of the single cell right in front of it. This makes sense for some machines with long robotic arms, for pullers filling a giant skip with slag for processing, for conveyors creating a mountain of coal. Use your common sense (or not), and decide how you want it to work!  (note: for giant stockpiles this may slow things down slightly when placing items?)</PRF.Common.OutputToStockpileDesc>
+  <PRF.Common.ObeysStorageFilters>Obeys Storage Filters</PRF.Common.ObeysStorageFilters>
+  <PRF.Common.ObeysStorageFiltersDesc>Select behavior when this PRF machine outputs into a stockpile: set  whether the machine pays attention to the stockpile's filter. If not selected, the machine will happily add any products to the stockpile, even if the stockpile is not set to accept them. If it is checked, the machine will hold products until it has a clear place to put them down.</PRF.Common.ObeysStorageFiltersDesc>
   <PRFStorageBuildingGainsName>This storage building is now called {0}.</PRFStorageBuildingGainsName>
   <PRFItemsTabLabel>All items ({0} stacks total, showing {1} result(s))</PRFItemsTabLabel>
   <PRFItemsTabLabel_Crate>All items ({0}/{1} stacks total, showing {2} result(s))</PRFItemsTabLabel_Crate>
@@ -11,8 +19,7 @@
   <PRFRenameMassStorageUnitDesc>Rename this building.</PRFRenameMassStorageUnitDesc>
   <PRFMassStorageUIThingLabel>{0} stacks</PRFMassStorageUIThingLabel>
   <PRFCrateUIThingLabel>{0}/{1} stacks</PRFCrateUIThingLabel>
-  <PRFMassStorageRightClickSelectPawn>Select colonist...</PRFMassStorageRightClickSelectPawn>
-  
+  <PRFMassStorageRightClickSelectPawn>Select colonist...</PRFMassStorageRightClickSelectPawn>  
   <PRFReorganize>Reorganize</PRFReorganize>
   <PRFIOOutputSettings>Output settings...</PRFIOOutputSettings>
   <PRFReorganize_Desc>Re-register I/O ports, reorganize and re-stack items.</PRFReorganize_Desc>
