@@ -130,7 +130,7 @@
     <tickerType>Rare</tickerType>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <researchPrerequisites>
-      <li>AutonomousMining</li>
+      <li>PRF_AutonomousMining</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -202,7 +202,7 @@
     <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>AutonomousMining_II</li>
+      <li>PRF_AutonomousMiningII</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -279,7 +279,7 @@
     <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>AutonomousMining_III</li>
+      <li>PRF_AutonomousMiningIII</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -308,7 +308,7 @@
       <Flammability>0.2</Flammability>
     </statBases>
     <researchPrerequisites>
-      <li>AutonomousMining_III</li>
+      <li>PRF_AutonomousMiningIII</li>
     </researchPrerequisites>
     <size>(3,3)</size>
     <comps>

@@ -249,7 +249,7 @@
     <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRFMetalRefining</li>
+      <li>PRF_MetalRefining</li>
     </researchPrerequisites>
   </ThingDef>
 

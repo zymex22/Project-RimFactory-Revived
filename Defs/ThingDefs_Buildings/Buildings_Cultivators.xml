@@ -118,7 +118,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>FarmingSprinklers</li>      <!-- farming level 1 -->
+      <li>PRF_AutomaticFarmingI</li>      <!-- farming level 1 -->
     </researchPrerequisites>
   </ThingDef>
 
@@ -165,7 +165,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>AutomaticFarming1</li>      <!-- farming level 2 -->
+      <li>PRF_AutomaticFarmingII</li>      <!-- farming level 2 -->
     </researchPrerequisites>
   </ThingDef>
 
@@ -229,7 +229,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>AutomaticFarming1</li>      <!-- farming level 2 -->
+      <li>PRF_AutomaticFarmingII</li>      <!-- farming level 2 -->
     </researchPrerequisites>
   </ThingDef>
 
@@ -287,7 +287,7 @@
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
     <researchPrerequisites>
-      <li>AutomaticFarming</li>      <!-- farming level 3 -->
+      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
     </researchPrerequisites>
   </ThingDef>
 
@@ -342,7 +342,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>AutomaticFarming</li>      <!-- farming level 3 -->
+      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
     </researchPrerequisites>
   </ThingDef>
 
@@ -384,7 +384,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>AutomaticFarming</li>      <!-- farming level 3 -->
+      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
     </researchPrerequisites>
   </ThingDef>
 
@@ -427,7 +427,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>AutomaticFarming</li>      <!-- farming level 3 -->
+      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
     </researchPrerequisites>
   </ThingDef>
 
@@ -490,7 +490,7 @@
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>AutomaticFarming1</li>      <!-- farming level 2 -->
+      <li>PRF_AutomaticFarmingII</li>      <!-- farming level 2 -->
     </researchPrerequisites>
   </ThingDef>
 
@@ -550,7 +550,7 @@
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>AutomaticFarming</li>      <!-- farming level 3 -->
+      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
     </researchPrerequisites>
   </ThingDef>
 

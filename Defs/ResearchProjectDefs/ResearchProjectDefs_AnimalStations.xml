@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- Tier 1 -->
-  <ResearchProjectDef>
-    <defName>AnimalStations</defName>
-    <label>animal stations I</label>
+  <!--============================================== AnimalStation Research base ============================================-->
+  <ResearchProjectDef Name="PRF_AnimalStationResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>2.4</researchViewY>
     <techLevel>Industrial</techLevel>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+  </ResearchProjectDef>
+
+  <!-- Tier 1 -->
+  <ResearchProjectDef ParentName="PRF_AnimalStationResearch">
+    <defName>PRF_AnimalStations</defName>
+    <label>animal stations I</label>
     <baseCost>1200</baseCost>
     <description>First tier animal station technology allows animals with harvestable resources to be harvested automatically.</description>
     <prerequisites>
       <li>PRFEulersIdentity</li>
     </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <tab>Automation</tab>
     <researchViewX>3</researchViewX>
-    <researchViewY>2.4</researchViewY>
   </ResearchProjectDef>
 
   <!-- Tier 2 -->
   <ResearchProjectDef>
-    <defName>AnimalStations_II</defName>
+    <defName>PRF_AnimalStationsII</defName>
     <label>animal stations II</label>
-    <techLevel>Industrial</techLevel>
     <baseCost>1500</baseCost>
     <description>Second tier animal station allows for more animal gathering and also auto animal slaugtering and breeding control.</description>
     <prerequisites>
-      <li>AnimalStations</li>
+      <li>PRF_AnimalStations</li>
       <li>AutomationBasics</li>
     </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <tab>Automation</tab>
     <researchViewX>6</researchViewX>
-    <researchViewY>2.4</researchViewY>
+  </ResearchProjectDef>
+
+    <!-- Tier 3 -->
+  <ResearchProjectDef>
+    <defName>PRF_AnimalStationsIII</defName>
+    <label>animal stations III</label>
+    <baseCost>2000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <description>third tier animal station allows for more animal gathering and also auto animal slaugtering and breeding control.</description>
+    <prerequisites>
+      <li>PRF_AnimalStationsII</li>
+    </prerequisites>
+    <researchViewX>8</researchViewX>
   </ResearchProjectDef>
 
 </Defs>

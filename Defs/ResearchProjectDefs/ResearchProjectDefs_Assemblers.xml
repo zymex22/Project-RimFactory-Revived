@@ -16,6 +16,23 @@
     <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
   </ResearchProjectDef>
 
+  <ResearchProjectDef>
+    <defName>PRFMachineLearning</defName>
+    <label>Machine learning</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>2000</baseCost>
+    <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
+    <prerequisites>
+      <li>AutomationBasics</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <tab>Automation</tab>
+    <researchViewX>6</researchViewX>
+    <researchViewY>2.9</researchViewY>
+  </ResearchProjectDef>
 
   <ResearchProjectDef>
     <defName>MagneticTape</defName>
@@ -70,5 +87,21 @@
     </prerequisites>
     <researchViewX>9</researchViewX>
     <researchViewY>1.2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_MiningResearch">
+    <defName>PRF_MetalRefining</defName>
+    <label>Metal Refining</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>4000</baseCost>
+    <description>A metal refinery able to produce rare metals through polymer lamination, by combining Chemfuel with steel to greate Plasteel</description>
+    <prerequisites>
+      <li>PRFGoldbachConjecture</li>
+      <li>AdvancedFabrication</li>
+    </prerequisites>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>9</researchViewX>
+    <researchViewY>2.4</researchViewY>
   </ResearchProjectDef>
 </Defs>

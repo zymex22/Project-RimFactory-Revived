@@ -7,7 +7,7 @@
     <label>Refine plasteel</label>
     <description>Refine plasteel from chemfuel and steel.</description>
     <jobString>Refining plasteel</jobString>
-    <researchPrerequisite>PRFMetalRefining</researchPrerequisite>
+    <researchPrerequisite>PRF_MetalRefining</researchPrerequisite>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Smelt</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>

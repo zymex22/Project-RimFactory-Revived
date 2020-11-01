@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>PRFRollers</defName>
+    <label>Conveyor belts</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>500</baseCost>
+    <description>First set of conveyor belts, to make early automations</description>
+    <prerequisites>
+      <li>Electricity</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>5</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>ADVrollers</defName>
+    <label>Splitters and basic pullers</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>500</baseCost>
+    <description>Basic Pullers and splitters to further improve your automation</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>PRFRollers</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>3</researchViewX>
+    <researchViewY>5</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>ADVrollersII</defName>
+    <label>Advanced belts and pullers</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>500</baseCost>
+    <description>Advanced set of conveyor belts and pullers</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>ADVrollers</li>
+      <li>AutomationBasics</li>
+    </prerequisites>
+    <tab>Automation</tab>
+    <researchViewX>6</researchViewX>
+    <researchViewY>5</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

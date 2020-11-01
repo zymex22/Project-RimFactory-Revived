@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!--============================================== Common Research base ============================================-->
+  <ResearchProjectDef Name="PRF_CommonResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>3</researchViewY>
+    <techLevel>Industrial</techLevel>
+  </ResearchProjectDef>
+
   <!-- Tier 0 -->
   <!-- ==================== Main Tier 0 ============================= -->
-  <ResearchProjectDef>
+  <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_Clockwork</defName>
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
@@ -12,9 +19,7 @@
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>
-    <tab>Automation</tab>
     <researchViewX>1</researchViewX>
-    <researchViewY>3</researchViewY>
     <discoveredLetterTitle>About: Clockwork Principle</discoveredLetterTitle>
     <discoveredLetterText>The earliest known example of a clockwork mechanism is the Antikythera mechanism, a first-century BC geared analogue computer, somewhat astrolabe-like, for calculating astronomical positions and eclipses, recovered from a Greek shipwreck. There are many other accounts of clockwork devices in ancient Greece, even in its mythology, and the mechanism itself is sophisticated enough to indicate a significant history of lesser devices leading up to its creation.\n\n
 At some point, this level of sophistication in clockwork technology was lost or forgotten in Europe, and only returned when brought from the Islamic world after the Crusades, along with other knowledge leading to the Renaissance. Clockwork finally recovered the equivalent of pre-Roman technological levels in the 14th century.\n\n
@@ -24,18 +29,15 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
 
   <!-- Tier 1 -->
   <!-- ==================== Main Tier 1 ============================= -->
-  <ResearchProjectDef>
+  <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRFEulersIdentity</defName>
     <label>Euler's identity</label>
-    <techLevel>Industrial</techLevel>
     <baseCost>750</baseCost>
     <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the very basics of automation and mechanisms, the gateway to an industrial colony. tier 1</description>
     <prerequisites>
       <li>Machining</li>
     </prerequisites>
-    <tab>Automation</tab>
     <researchViewX>2</researchViewX>
-    <researchViewY>3</researchViewY>
     <discoveredLetterTitle>About: Getting Factory started</discoveredLetterTitle>
     <discoveredLetterText>With Euler's identity you now have started your factory adventure.
     This will unlock Tier 1 buildings you can further research to unlock individual types, or rush to next tier.
@@ -48,75 +50,12 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
     </discoveredLetterText>
   </ResearchProjectDef>
 
-  <!-- Basic drone technology -->
-  <ResearchProjectDef>
-    <defName>PRF_BasicDrones</defName>
-    <label>Basic Drone knowledge</label>
-    <techLevel>Industrial</techLevel>
-    <baseCost>600</baseCost>
-    <description>The first pilotless vehicles were built during the First World War. These early models were launched by catapult or flown using radio control. Much have changed since then and drones are now used for more common tasks.\nThis sets drones basestats lv. 10</description>
-    <prerequisites>
-      <li>PRFEulersIdentity</li>
-    </prerequisites>
-    <tab>Automation</tab>
-    <researchViewX>3</researchViewX>
-    <researchViewY>0</researchViewY>
-    <discoveredLetterTitle>About: Drone are now lv 10</discoveredLetterTitle>
-    <discoveredLetterText>You now have basic knowledge about drones and can now start utilize them for different tasks. This also unlocks DroneCultivator research which let you Automate your agriculture needs. /n This will set any drones base level to 10. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
-  </ResearchProjectDef>
-  <!-- this should set all drone base stats to 10 unless manually overwritten -->
-
-  <ResearchProjectDef>
-    <defName>PRFRollers</defName>
-    <label>Conveyor belts</label>
-    <techLevel>Industrial</techLevel>
-    <baseCost>500</baseCost>
-    <description>First set of conveyor belts, to make early automations</description>
-    <prerequisites>
-      <li>Electricity</li>
-    </prerequisites>
-    <tab>Automation</tab>
-    <researchViewX>2</researchViewX>
-    <researchViewY>5</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>ADVrollers</defName>
-    <label>Splitters and basic pullers</label>
-    <techLevel>Spacer</techLevel>
-    <baseCost>500</baseCost>
-    <description>Basic Pullers and splitters to further improve your automation</description>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <prerequisites>
-      <li>PRFRollers</li>
-    </prerequisites>
-    <tab>Automation</tab>
-    <researchViewX>3</researchViewX>
-    <researchViewY>5</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>ADVrollersII</defName>
-    <label>Advanced belts and pullers</label>
-    <techLevel>Spacer</techLevel>
-    <baseCost>500</baseCost>
-    <description>Advanced set of conveyor belts and pullers</description>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <prerequisites>
-      <li>ADVrollers</li>
-      <li>AutomationBasics</li>
-    </prerequisites>
-    <tab>Automation</tab>
-    <researchViewX>6</researchViewX>
-    <researchViewY>5</researchViewY>
-  </ResearchProjectDef>
 
   <!-- Tier 2 -->
   <!-- ==================== Main Tier 2 ============================= -->
-  <ResearchProjectDef>
+  <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>AutomationBasics</defName>
     <label>Koller-Li Framework</label>
-    <techLevel>Industrial</techLevel>
     <baseCost>2000</baseCost>
     <description>AI Learning and Patern Recognition allow automation to reach a new level. Even on the Rim, some basic AI frameworks are recognized as being both useful and easy to apply. Using these frameworks is good, because these are hard problems</description>
     <prerequisites>
@@ -127,55 +66,15 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <tab>Automation</tab>
     <researchViewX>5</researchViewX>
-    <researchViewY>3</researchViewY>
     <discoveredLetterTitle>About: Tier 2 Factory Unlocked</discoveredLetterTitle>
     <discoveredLetterText>You have now Researched Koller-Li Framework and unlocked Tier 2 Reseaches.\n You also unlocked ability to create Ai Research bench which you will need to progress to tier 3\n\nAI Learning and Patern Recognition allow automation to reach a new level. Even on the Rim, some basic AI frameworks are recognized as being both useful and easy to apply. Using these frameworks is good, because these are hard problems.</discoveredLetterText>
   </ResearchProjectDef>
 
-  <ResearchProjectDef>
-    <defName>PRFMachineLearning</defName>
-    <label>Machine learning</label>
-    <techLevel>Industrial</techLevel>
-    <baseCost>2000</baseCost>
-    <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
-    <prerequisites>
-      <li>AutomationBasics</li>
-    </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <requiredResearchFacilities>
-      <li>MultiAnalyzer</li>
-    </requiredResearchFacilities>
-    <tab>Automation</tab>
-    <researchViewX>6</researchViewX>
-    <researchViewY>2.9</researchViewY>
-  </ResearchProjectDef>
-
-
-  <!-- Improved drone technology -->
-  <ResearchProjectDef>
-    <defName>PRF_ImprovedDrones</defName>
-    <label>Improved Drone engines</label>
-    <techLevel>Industrial</techLevel>
-    <baseCost>2000</baseCost>
-    <description>Further improvements for drones have now enabled use of more drones and with a greater control over task it can perform.\nThis sets drones basestats lv. 15</description>
-    <prerequisites>
-      <li>AutomationBasics</li>
-      <li>PRF_BasicDrones</li>
-    </prerequisites>
-    <tab>Automation</tab>
-    <researchViewX>6</researchViewX>
-    <researchViewY>0</researchViewY>
-    <discoveredLetterTitle>About: Drone are now lv 15</discoveredLetterTitle>
-    <discoveredLetterText>You have upgraded your drones with better engines and batteries and as such they now do jobs even more efficient. /n This will set any drones base level to 15. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
-  </ResearchProjectDef>
-  <!-- this should set all drone base stats to 15 unless manually overwritten -->
-
 
   <!-- Tier 3 -->
   <!-- ==================== Main Tier 3 ============================= -->
-  <ResearchProjectDef>
+  <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRFGoldbachConjecture</defName>
     <label>Goldbach's conjecture</label>
     <techLevel>Spacer</techLevel>
@@ -186,36 +85,15 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
       <li>Fabrication</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
-    <tab>Automation</tab>
     <researchViewX>8</researchViewX>
-    <researchViewY>3</researchViewY>
     <discoveredLetterTitle>About: Tier 3 Factory Unlocked</discoveredLetterTitle>
     <discoveredLetterText>You have now Researched Goldbach's conjecture with this you have unlocked Tier 3 Reseaches.</discoveredLetterText>
   </ResearchProjectDef>
 
-  <!-- Advanced drone technology -->
-  <ResearchProjectDef>
-    <defName>PRF_AdvancedDrones</defName>
-    <label>Advanced Drone Ai</label>
-    <techLevel>Spacer</techLevel>
-    <baseCost>6000</baseCost>
-    <description>Perfectly aerodynamics higher power engines and Ai have created a perfectly balanced super drone that will perform tasks better than most pawns ever will.\nThis sets drones basestats lv. 20</description>
-    <prerequisites>
-      <li>PRFGoldbachConjecture</li>
-      <li>PRF_ImprovedDrones</li>
-    </prerequisites>
-    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
-    <tab>Automation</tab>
-    <researchViewX>10</researchViewX>
-    <researchViewY>0</researchViewY>
-    <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
-    <discoveredLetterText>You have upgraded your drones with advanced Ai cores, this will let them do their task better than most humans will do. /n This will set any drones base level to 20. /n Unless other settings for specific dronestation is specified.</discoveredLetterText>
-  </ResearchProjectDef>
-  <!-- this should set all drone base stats to 20 unless manually overwritten -->
 
   <!-- Tier 4 -->
   <!-- ==================== Main Tier 4 ============================= -->
-  <ResearchProjectDef>
+  <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_QubitTech</defName>
     <label>quantum bit technology</label>
     <techLevel>Ultra</techLevel>
@@ -226,58 +104,9 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
       <li>ShipBasics</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
-    <tab>Automation</tab>
     <researchViewX>11</researchViewX>
-    <researchViewY>3</researchViewY>
     <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
     <discoveredLetterText>Qubit technology opens up Tier 4 stuff for your factory.\n\nMORE USES WILL COME LATER...</discoveredLetterText>
-  </ResearchProjectDef>
-
-
-  <!-- Batteries Taken from SS bigger batteries-->
-  <ResearchProjectDef>
-    <defName>EnhancedBatteries</defName>
-    <label>enhanced batteries</label>
-    <description>Build large batteries for efficient storage of electricity. Unlocks the 4k and 10k battery cell.</description>
-    <baseCost>750</baseCost>
-    <techLevel>Industrial</techLevel>
-    <prerequisites>
-      <li>Batteries</li>
-      <li>PRFEulersIdentity</li>
-    </prerequisites>
-    <tab>Automation</tab>
-    <researchViewX>3</researchViewX>
-    <researchViewY>3</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>LargeBatteries</defName>
-    <label>large batteries</label>
-    <description>Build large batteries for efficient storage of electricity. Unlocks the 16k and 64k battery cell.</description>
-    <baseCost>1200</baseCost>
-    <techLevel>Industrial</techLevel>
-    <prerequisites>
-      <li>EnhancedBatteries</li>
-      <li>AutomationBasics</li>
-    </prerequisites>
-    <tab>Automation</tab>
-    <researchViewX>6</researchViewX>
-    <researchViewY>3.5</researchViewY>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef>
-    <defName>VeryLargeBatteries</defName>
-    <label>very large batteries</label>
-    <description>Learn alternate methods of power storage, and create compact 100k and 256k battery cells for mass storage of power.</description>
-    <baseCost>2000</baseCost>
-    <techLevel>Spacer</techLevel>
-    <prerequisites>
-      <li>LargeBatteries</li>
-      <li>PRFGoldbachConjecture</li>
-    </prerequisites>
-    <tab>Automation</tab>
-    <researchViewX>9</researchViewX>
-    <researchViewY>3.5</researchViewY>
   </ResearchProjectDef>
 
 </Defs>

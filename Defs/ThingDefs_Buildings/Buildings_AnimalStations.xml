@@ -17,7 +17,7 @@
     </graphicData>
     <passability>Standable</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <fillPercent>0.9</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
-    <canOverlapZones>false</canOverlapZones> 
+    <canOverlapZones>false</canOverlapZones>
     <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
     <castEdgeShadows>true</castEdgeShadows>
     <size>(2,2)</size>    <!-- Ingame cell/ground size (x,y) -->
@@ -127,7 +127,7 @@
       <li>ITab_Storage</li>
     </inspectorTabs>
     <researchPrerequisites>
-      <li>AnimalStations</li>
+      <li>PRF_AnimalStations</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -202,7 +202,7 @@
       <li>ITab_Storage</li>
     </inspectorTabs>
     <researchPrerequisites>
-      <li>AnimalStations</li>
+      <li>PRF_AnimalStations</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -270,7 +270,7 @@
       <li>ITab_Storage</li>
     </inspectorTabs>
     <researchPrerequisites>
-      <li>AnimalStations_II</li>
+      <li>PRF_AnimalStationsII</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
   </ThingDef>
@@ -354,7 +354,7 @@
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
     <researchPrerequisites>
-      <li>AnimalStations_II</li>
+      <li>PRF_AnimalStationsII</li>
       <li>AutomaticFarming</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
@@ -389,7 +389,7 @@
     </costList>
     <rotatable>true</rotatable>
     <researchPrerequisites>
-      <li>AnimalStations_II</li>
+      <li>PRF_AnimalStationsIII</li>
     </researchPrerequisites>
     <fillPercent>1</fillPercent>
     <constructEffect>ConstructMetal</constructEffect>

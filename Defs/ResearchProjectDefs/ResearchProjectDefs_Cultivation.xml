@@ -1,55 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- Tier 1 -->
-  <ResearchProjectDef>
-    <defName>FarmingSprinklers</defName>
-    <label>Automated Farming Technique</label>
+  <!--============================================== Cultivator Research base ============================================-->
+  <ResearchProjectDef Name="PRF_CultivatorResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>0</researchViewY>
     <techLevel>Industrial</techLevel>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+  </ResearchProjectDef>
+
+  <!-- Tier 1 -->
+  <ResearchProjectDef ParentName="PRF_CultivatorResearch">
+    <defName>PRF_AutomaticFarmingI</defName>
+    <label>Automated Farming Technique</label>
     <baseCost>1500</baseCost>
     <description>An agricultural drone is an unmanned aerial vehicle used to help optimize agriculture operations, increase crop production, and monitor crop growth. Sensors and digital imaging capabilities can give farmers a richer picture of their fields.</description>
     <prerequisites>
       <li>PRF_BasicDrones</li>
     </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <tab>Automation</tab>
     <researchViewX>4</researchViewX>
-    <researchViewY>0</researchViewY>
   </ResearchProjectDef>
 
   <!-- Tier 2 -->
-  <ResearchProjectDef>
-    <defName>AutomaticFarming1</defName>
+  <ResearchProjectDef ParentName="PRF_CultivatorResearch">
+    <defName>PRF_AutomaticFarmingII</defName>
     <label>Improved Farming Techniques</label>
-    <techLevel>Industrial</techLevel>
     <baseCost>2250</baseCost>
     <description>Further Improvements to agricultural drones have made them more efficient and they can now haul harvest to storage or belts. This also unlocks sprinklers which boost crop speed.</description>
     <prerequisites>
-      <li>FarmingSprinklers</li>
+      <li>PRF_AutomaticFarmingI</li>
       <li>AutomationBasics</li>
     </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
-    <tab>Automation</tab>
     <researchViewX>7</researchViewX>
-    <researchViewY>0</researchViewY>
   </ResearchProjectDef>
 
   <!-- Tier 3 -->
-  <ResearchProjectDef>
-    <defName>AutomaticFarming</defName>
+  <ResearchProjectDef ParentName="PRF_CultivatorResearch">
+    <defName>PRF_AutomaticFarmingIII</defName>
     <label>Advanced Farming Techniques</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3000</baseCost>
     <description>With advanced use of Mechanites and improved Ai control, Cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
     <prerequisites>
-      <li>AutomaticFarming1</li>
+      <li>PRF_AutomaticFarmingII</li>
       <li>PRFGoldbachConjecture</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <tab>Automation</tab>
     <researchViewX>9</researchViewX>
-    <researchViewY>0</researchViewY>
   </ResearchProjectDef>
 </Defs>
