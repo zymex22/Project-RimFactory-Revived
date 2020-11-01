@@ -55,8 +55,7 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 foreach (var c in CellsToSelect)
                 {
-                    foreach (var t in Map.thingGrid.ThingsListAt(c))
-                    {
+                    foreach (Thing t in GatherThingsUtility.AllThingsInCellForUse(c, Map)) {
                         yield return t;
                     }
                 }
@@ -114,7 +113,7 @@ namespace ProjectRimFactory.SAL3.Things
         public override void Tick()
         {
             base.Tick();
-            if (GetComp<CompPowerTrader>().PowerOn && Find.TickManager.TicksGame % 35 == 0)
+            if (Find.TickManager.TicksGame % 35 == 0 && GetComp<CompPowerTrader>().PowerOn)
             {
                 foreach (var element in ThingsToSelect)
                 {
@@ -172,13 +171,9 @@ namespace ProjectRimFactory.SAL3.Things
                 var num = element.stackCount;
 
                 if (OutputSettings.useMax) num = Mathf.Min(element.stackCount, OutputSettings.max);
-
-                if (num == element.stackCount)
-                {
-                    element.Position = Position;
-                }
                 else if (num > 0)
                 {
+                    // if this is the entire stack, we just get the stack. Important for belts to do it this way:
                     var t = element.SplitOff(num);
                     GenPlace.TryPlaceThing(t, Position, Map, ThingPlaceMode.Direct);
                 }

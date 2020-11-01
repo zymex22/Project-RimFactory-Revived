@@ -189,7 +189,7 @@ namespace ProjectRimFactory.AutoMachineTool
 #if DEBUG
         public static void L(object obj) { Log.Message(obj == null ? "null" : obj.ToString()); }
 #endif
-
+#if false
         public static bool PlaceItem(Thing t, IntVec3 cell, bool forbid, Map map, bool firstAbsorbStack = false)
         {
             Action<Thing> effect = (item) =>
@@ -211,6 +211,7 @@ namespace ProjectRimFactory.AutoMachineTool
             // fast check:
             if (!firstAbsorbStack && cell.GetThingList(map).Where(ti => ti.def.category == ThingCategory.Item).Count() == 0)
             {
+                if (t.Spawned) t.DeSpawn();
                 GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct);
                 if (forbid) t.SetForbidden(forbid);
                 effect(t);
@@ -230,6 +231,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 .FirstOption();
             if (o.HasValue)
             {
+                if (t.Spawned) t.DeSpawn();
                 GenPlace.TryPlaceThing(t, o.Value, map, ThingPlaceMode.Near);
                 if (forbid) t.SetForbidden(forbid);
                 effect(t);
@@ -237,6 +239,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return false;
         }
+#endif
 
         public static void Noop()
         {
@@ -368,7 +371,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return marketValue * 0.1f;
         }
-        #endregion
+#endregion
 
         public static Func<T, TValue> GenerateGetFieldDelegate<T, TValue>(FieldInfo field)
         {

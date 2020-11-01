@@ -9,7 +9,7 @@ using ProjectRimFactory.Common;
 namespace ProjectRimFactory.SAL3.Things.Assemblers
 {
     [StaticConstructorOnStartup]
-    public abstract class Building_DynamicBillGiver : Building, IBillGiver
+    public abstract class Building_DynamicBillGiver : PRF_Building, IBillGiver
     {
         public abstract BillStack BillStack { get; }
 

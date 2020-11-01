@@ -24,7 +24,7 @@ namespace ProjectRimFactory.AutoMachineTool
         IntVec3 OutputCell();
     }
 
-    public abstract class Building_Base<T> : Building, IProductOutput where T : Thing
+    public abstract class Building_Base<T> : ProjectRimFactory.Common.PRF_Building, IProductOutput where T : Thing
     {
         private WorkingState state;
         private static HashSet<T> workingSet = new HashSet<T>();
@@ -44,11 +44,21 @@ namespace ProjectRimFactory.AutoMachineTool
         protected int startCheckIntervalTicks = 30;
 
         private MapTickManager mapManager;
+        public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null) {
+            foreach (Thing p in products) {
+                if (optionalValidator == null
+                     || optionalValidator(p)) {
+                    products.Remove(p);
+                    return p;
+                }
+            }
+            return null;
+        }
 
         protected WorkingState State
         {
             get { return this.state; }
-            private set
+            set
             {
                 if (this.state != value)
                 {
@@ -74,10 +84,18 @@ namespace ProjectRimFactory.AutoMachineTool
             this.MapManager.RemoveAfterAction(this.StartWork);
             this.MapManager.RemoveAfterAction(this.FinishWork);
         }
-
-        protected virtual bool WorkingIsDespawned()
-        {
-            return false;
+        /// <summary>
+        /// The mode to use for saving/loading `working` for this class.
+        ///   Use LookMode.Deep if no one else saves the object (e.g. if
+        ///   the object is not spawned). Use LookMode.Reference if some
+        ///   other source also saves the item - a spawned item is saved
+        ///   by the map.
+        /// </summary>
+        protected virtual LookMode WorkingLookMode {
+            get => LookMode.Reference;
+        }
+        protected virtual LookMode ProductsLookMode {
+            get => LookMode.Deep;
         }
 
         public override void ExposeData()
@@ -87,12 +105,12 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look(ref this.state, "workingState", WorkingState.Ready);
             Scribe_Values.Look(ref this.totalWorkAmount, "totalWorkAmount", 0f);
             Scribe_Values.Look(ref this.workStartTick, "workStartTick", 0);
-            Scribe_Collections.Look<Thing>(ref this.products, "products", LookMode.Deep);
-
-            if (WorkingIsDespawned())
+            Scribe_Collections.Look<Thing>(ref this.products, "products", ProductsLookMode);
+            if (WorkingLookMode == LookMode.Deep) {
                 Scribe_Deep.Look<T>(ref this.working, "working");
-            else
+            } else if (WorkingLookMode == LookMode.Reference) {
                 Scribe_References.Look<T>(ref this.working, "working");
+            }
         }
 
         public override void PostMapInit()
@@ -116,7 +134,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.SpawnSetup(map, respawningAfterLoad);
             this.mapManager = map.GetComponent<MapTickManager>();
 
-            if (readyOnStart)
+            if (readyOnStart) // No check for respawning after load?
             {
                 this.State = WorkingState.Ready;
                 this.Reset();
@@ -162,8 +180,12 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.products.ForEach(t =>
                 {
-                    if (t != null && !t.Spawned)
+                    if (t!=null && !t.Destroyed)
                     {
+                        if (t.Spawned)
+                        {
+                            t.DeSpawn();
+                        }
                         GenPlace.TryPlaceThing(t, this.Position, this.Map, ThingPlaceMode.Near);
                     }
                 });
@@ -193,7 +215,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected virtual void CreateWorkingEffect()
         {
             this.CleanupWorkingEffect();
-            if (this.working.Spawned && this.showProgressBar)
+            if (this.showProgressBar)
             {
                 Option(ProgressBarTarget()).ForEach(t =>
                 {
@@ -206,7 +228,10 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected virtual TargetInfo ProgressBarTarget()
         {
-            return this.working;
+            if (this.working.Spawned) {
+                return this.working;
+            }
+            return this;
         }
 
         protected virtual void Ready()
@@ -266,7 +291,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-        protected void ForceStartWork(T working, float workAmount)
+        protected virtual void ForceStartWork(T working, float workAmount)
         {
             this.Reset();
             this.ClearActions();
@@ -297,6 +322,8 @@ namespace ProjectRimFactory.AutoMachineTool
             if (this.CurrentWorkAmount >= this.totalWorkAmount)
             {
                 // 作業中に電力が変更されて終わってしまった場合、次TickでFinish呼び出し.
+                // If the power is changed during work and it ends, 
+                //     call Finish with the next tick.
                 MapManager.NextAction(this.FinishWork);
             }
             else
@@ -381,35 +408,21 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected virtual bool PlaceProduct(ref List<Thing> products)
         {
+            // Use Aggregate() to attempt to place each item in products
+            //   Any unplaced products accumulate in the new List<Thing>,
+            //   and stay in products.
+            // Is there any reason this uses `ref List<Thing> products`
+            //   instead of `this.products`?
             products = products.Aggregate(new List<Thing>(), (total, target) => {
-                var conveyor = OutputCell().GetThingList(this.Map)
-                    .OfType<IBeltConbeyorLinkable>() // return any IBeltConbeyorLinkable
-                    .FirstOrDefault(b => !b.IsUnderground);
-                if (conveyor != null)
+                if (target.Spawned) target.DeSpawn();
+                if (this.PRFTryPlaceThing(target, OutputCell(), this.Map, this.forcePlace))
                 {
-                    // コンベアがある場合、そっちに流す.
-                    if (conveyor.ReceiveThing(false, target))
-                    {
-                        return total;
-                    }
-                }
-                else
-                {
-                    // ない場合は適当に流す.
-                    if (target.Spawned) target.DeSpawn();
-                    if (PlaceItem(target, OutputCell(), false, this.Map, this.placeFirstAbsorb))
-                    {
-                        return total;
-                    }
-                    if (this.forcePlace)
-                    {
-                        GenPlace.TryPlaceThing(target, OutputCell(), this.Map, ThingPlaceMode.Near);
-                        return total;
-                    }
+                    return total;
                 }
                 return total.Append(target);
             });
-            return this.products.Count() == 0;
+            // if there are any left in products, we didn't place them all:
+            return !this.products.Any();
         }
 
         public virtual IntVec3 OutputCell()

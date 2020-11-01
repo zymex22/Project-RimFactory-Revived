@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_industry_gr</defName>
+  </DesignatorDropdownGroupDef>
 
   <!--==================== Industrial Base ====================-->
   <ThingDef Name="PRF_IndustrialBase" ParentName="PRFBuildingBase" Abstract="True">
@@ -38,13 +41,11 @@
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>
+        <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
   </ThingDef>
-
-
-  <DesignatorDropdownGroupDef>
-    <defName>PRF_industry_gr</defName>
-  </DesignatorDropdownGroupDef>
-
+  
   <!--==================== Stoneworks ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_StoneWorks</defName>
@@ -410,7 +411,8 @@
             <li>WoodLog</li>
           </thingDefs>
         </fuelFilter>
-        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <consumeFuelOnlyWhenUsed>false</consumeFuelOnlyWhenUsed>
+        <!--<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>-->
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
@@ -420,7 +422,7 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
-        <workSpeedBaseFactor>0.5</workSpeedBaseFactor>
+        <workSpeedBaseFactor>0.1</workSpeedBaseFactor>
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
         <skillLevel>10</skillLevel>

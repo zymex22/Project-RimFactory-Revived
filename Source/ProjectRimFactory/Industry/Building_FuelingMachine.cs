@@ -22,20 +22,6 @@ namespace ProjectRimFactory.Industry
             Refuel();
         }
 
-        //This function will be Harmony Patched if SOS2 is instaled
-        //This is nessesary to support play without SOS2
-        private Thing checkIfThingIsSoS2Weapon(Thing thing)
-        {
-            return null;
-        }
-        //This function will be Harmony Patched if SOS2 is instaled
-        //This is nessesary to support play without SOS2
-        private void refuelSoSWeapon(Thing thing)
-        {
-            return;
-        }
-
-
         public void Refuel() {
             if (!GetComp<CompPowerTrader>().PowerOn) return;
             // Get what we are supposed to refuel:
@@ -51,32 +37,21 @@ namespace ProjectRimFactory.Industry
                     //  (because Fuel is a float, we check the current fuel + .99, so it
                     //   only refuels when Fuel drops at least one full unit below taret level)
                     if (refuelableComp != null && refuelableComp.Fuel + 0.9999f < refuelableComp.TargetFuelLevel) {
-                        foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this)) {
-                            List<Thing> l = Map.thingGrid.ThingsListAt(cell);
-                            for (int i = l.Count - 1; i >= 0; i--) { // count down because items may be destroyed
-                                Thing item = l[i];
-                                // Without this check, if there is something that is fueled by
-                                //     minified Power Conduits (weird, but ...possible?), then
-                                //     our FuelingMachine will happily rip conduits out of the
-                                //     ground to fuel it.  I'm okay with this behavior.
-                                //     Feature.  Not a bug.
-                                // But if it ever causes a problem, uncomment this check:
-                                // if (item.def.category != ThingCategory.Item) continue;
-                                if (refuelableComp.Props.fuelFilter.Allows(item)) {
-                                    // round down to not waste fuel:
-                                    int num = Mathf.Min(item.stackCount, Mathf.FloorToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
-                                    if (num > 0) {
-                                        refuelableComp.Refuel(num);
-                                        item.SplitOff(num).Destroy();
-                                    } else { // It's not quite 1 below TargetFuelLevel
-                                             // but we KNOW we are at least .9999f below TargetFuelLevel (see test above)
-                                             // So we call it close enough to 1:
-                                        refuelableComp.Refuel(1);
-                                        item.SplitOff(1).Destroy();
-                                    }
-                                    // check fuel as float (as above)
-                                    if (refuelableComp.Fuel + 0.9999f >= refuelableComp.TargetFuelLevel) goto Fueled; // fully fueled
+                        foreach (Thing item in this.AllThingsForFueling) {
+                            if (refuelableComp.Props.fuelFilter.Allows(item)) {
+                                // round down to not waste fuel:
+                                int num = Mathf.Min(item.stackCount, Mathf.FloorToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
+                                if (num > 0) {
+                                    refuelableComp.Refuel(num);
+                                    item.SplitOff(num).Destroy();
+                                } else { // It's not quite 1 below TargetFuelLevel
+                                         // but we KNOW we are at least .9999f below TargetFuelLevel (see test above)
+                                         // So we call it close enough to 1:
+                                    refuelableComp.Refuel(1);
+                                    item.SplitOff(1).Destroy();
                                 }
+                                // check fuel as float (as above)
+                                if (refuelableComp.Fuel + 0.9999f >= refuelableComp.TargetFuelLevel) goto Fueled; // fully fueled
                             }
                         }
                     }
@@ -105,9 +80,8 @@ namespace ProjectRimFactory.Industry
         protected IEnumerable<Thing> AllThingsForFueling {
             get {
                 foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this)) {
-                    List<Thing> l = Map.thingGrid.ThingsListAt(cell);
-                    for (int i = l.Count - 1; i >= 0; i--) { // count down because items may be destroyed
-                        yield return l[i];
+                    foreach (Thing item in GatherThingsUtility.AllThingsInCellForUse(cell, Map)) {
+                        yield return item;
                     }
                 }
             }

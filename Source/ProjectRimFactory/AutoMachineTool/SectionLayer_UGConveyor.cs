@@ -34,7 +34,8 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 return;
             }
-            if(Building_BeltConveyor.IsBeltConveyorDef(t.def) && Building_BeltConveyor.IsUndergroundDef(t.def))
+            if (t is Building_BeltConveyor b && b.IsUnderground)
+//TODO:            if(Building_BeltConveyor.IsBeltConveyorDef(t.def) && Building_BeltConveyor.IsUndergroundDef(t.def))
             {
                 t.Graphic.Print(this, t);
             }

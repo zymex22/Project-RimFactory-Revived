@@ -42,6 +42,7 @@ namespace ProjectRimFactory.Common
         {
             base.ExposeData();
             root.ExposeData();
+            Scribe_Values.Look<Debug.Flag>(ref Debug.activeFlags, "debugFlags", 0);
         }
 
         public void DoWindowContents(Rect inRect)
@@ -57,6 +58,17 @@ namespace ProjectRimFactory.Common
             Widgets.BeginScrollView(outRect, ref this.scrollPosition, viewRect);
             var list = new Listing_Standard();
             list.Begin(viewRect);
+            #if DEBUG
+            list.Label("Debug Symbols:");
+            foreach (var f in (Debug.Flag [])Enum.GetValues(typeof(Debug.Flag))) {
+                bool ischecked = (f & Debug.activeFlags) > 0;
+                list.CheckboxLabeled(f.ToString(), ref ischecked, f.ToString());// use Desc to force list to highlight
+                if (!ischecked == (f & Debug.activeFlags) > 0) {
+                    Debug.activeFlags ^= f; // toggle f
+                }
+            }
+            list.GapLine();
+            #endif
             root.Draw(list);
             list.End();
             Widgets.EndScrollView();
