@@ -355,7 +355,7 @@
     </inspectorTabs>
     <researchPrerequisites>
       <li>PRF_AnimalStationsII</li>
-      <li>AutomaticFarming</li>
+      <li>PRF_AutomaticFarmingIII</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
   </ThingDef>

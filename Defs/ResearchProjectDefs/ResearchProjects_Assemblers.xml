@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- Tier 1 -->
+  <ResearchProjectDef>
+    <defName>SelfCooking</defName>
+    <tab>Automation</tab>
+    <techLevel>Industrial</techLevel>
+    <baseCost>2000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>PRFEulersIdentity</li>
+    </prerequisites>
+    <label>Self-cooking</label>
+    <researchViewX>3</researchViewX>
+    <researchViewY>1.2</researchViewY>
+    <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>PRFMachineLearning</defName>
+    <label>Machine learning</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>2000</baseCost>
+    <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
+    <prerequisites>
+      <li>AutomationBasics</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <tab>Automation</tab>
+    <researchViewX>6</researchViewX>
+    <researchViewY>2.9</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MagneticTape</defName>
+    <tab>Automation</tab>
+    <techLevel>Industrial</techLevel>
+    <baseCost>1000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>AutomationBasics</li>
+    </prerequisites>
+    <label>Magnetic tape</label>
+    <researchViewX>6</researchViewX>
+    <researchViewY>1.2</researchViewY>
+    <description>Learn how to make and use old-school magnetic tape to store instructions. Make data disks at the machining table.</description>
+    <discoveredLetterTitle>About: Intro to recipe db.</discoveredLetterTitle>
+    <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\n This is used to import recipes from any workbench into your recipe db.\n Your doing so by place it near a workbench and click import on those recipe you want it to store, afterwards you can move it to another workbench and copy more. Or you can move it to that Assembler you want to link to it.\n Recipes will be stored forever in your db. and you can safely move it around, please do know if you move it from your assemblers, they will loose their setup bills.</discoveredLetterText>
+  </ResearchProjectDef>
+
+
+  <ResearchProjectDef>
+    <defName>UniversalAutocrafting</defName>
+    <label>universal auto-crafting</label>
+    <description>Make buildings that can craft recipes given to them via a recipe database. Like your dedicated crafter, but won't have mental breaks for silly reasons.</description>
+    <tab>Automation</tab>
+    <techLevel>Industrial</techLevel>
+    <baseCost>3000</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <prerequisites>
+      <li>MagneticTape</li>
+    </prerequisites>
+    <researchViewX>7</researchViewX>
+    <researchViewY>1.2</researchViewY>
+    <discoveredLetterTitle>About: Intro to assemblers</discoveredLetterTitle>
+    <discoveredLetterText>You have unlocked your first real type assembler, this is basicly a universal machine, that can produce anything your workbenches can do, you just copy bills with a recipe DB, and place it near your assembler to show recipes.\n Please note that it CAN'T return same item again so mods like Mend and Recycle will not work on assemblers, as it destroy products it takes in.\n\n This assembler have stats set to 10 this mean it can ONLY see recipes with lv 10 or less in DB., if you upgrade to next tier it will be smarter and have higher skill level.\n This Assembler have a fixed speed set and will not get better over time like next tier will.</discoveredLetterText>
+  </ResearchProjectDef>
+
+  <!-- Tier 2 -->
+  <ResearchProjectDef>
+    <defName>SelfCorrectingAssemblers</defName>
+    <label>self-correcting assemblers</label>
+    <description>Learn how to make a new type of assembler that slowly improves its crafting speed.</description>
+    <techLevel>Spacer</techLevel>
+    <baseCost>2250</baseCost>
+    <tab>Automation</tab>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>PRFGoldbachConjecture</li>
+      <li>UniversalAutocrafting</li>
+    </prerequisites>
+    <researchViewX>9</researchViewX>
+    <researchViewY>1.2</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_MiningResearch">
+    <defName>PRF_MetalRefining</defName>
+    <label>Metal Refining</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>4000</baseCost>
+    <description>A metal refinery able to produce rare metals through polymer lamination, by combining Chemfuel with steel to greate Plasteel</description>
+    <prerequisites>
+      <li>PRFGoldbachConjecture</li>
+      <li>AdvancedFabrication</li>
+    </prerequisites>
+    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewX>9</researchViewX>
+    <researchViewY>2.4</researchViewY>
+  </ResearchProjectDef>
+</Defs>

@@ -77,7 +77,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc4</designationHotKey>
     <researchPrerequisites>
-      <li>EnhancedBatteries</li>
+      <li>PRF_EnhancedBatteries</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -139,7 +139,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc4</designationHotKey>
     <researchPrerequisites>
-      <li>LargeBatteries</li>
+      <li>PRF_LargeBatteries</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -201,7 +201,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc4</designationHotKey>
     <researchPrerequisites>
-      <li>VeryLargeBatteries</li>
+      <li>PRF_VeryLargeBatteries</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -276,7 +276,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc4</designationHotKey>
     <researchPrerequisites>
-      <li>VeryLargeBatteries</li>
+      <li>PRF_VeryLargeBatteries</li>
     </researchPrerequisites>
   </ThingDef>
 

@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
+  <!--============================================== Drone Research base ============================================-->
+  <ResearchProjectDef Name="PRF_DroneResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>0</researchViewY>
+    <techLevel>Industrial</techLevel>
+  </ResearchProjectDef>
+
   <!-- Basic drone technology -->
-  <ResearchProjectDef>
+  <ResearchProjectDef ParentName="PRF_DroneResearch">
     <defName>PRF_BasicDrones</defName>
     <label>Basic Drone knowledge</label>
-    <techLevel>Industrial</techLevel>
     <baseCost>600</baseCost>
     <description>The first pilotless vehicles were built during the First World War. These early models were launched by catapult or flown using radio control. Much have changed since then and drones are now used for more common tasks.\nThis sets drones basestats lv. 10</description>
     <prerequisites>
       <li>PRFEulersIdentity</li>
     </prerequisites>
-    <tab>Automation</tab>
     <researchViewX>3</researchViewX>
-    <researchViewY>0</researchViewY>
     <discoveredLetterTitle>About: Drone are now lv 10</discoveredLetterTitle>
     <discoveredLetterText>You now have basic knowledge about drones and can now start utilize them for different tasks. This also unlocks DroneCultivator research which let you Automate your agriculture needs. \n This will set any drones base level to 10. \n Unless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 10 unless manually overwritten -->
 
   <!-- Improved drone technology -->
-  <ResearchProjectDef>
+  <ResearchProjectDef ParentName="PRF_DroneResearch">
     <defName>PRF_ImprovedDrones</defName>
     <label>Improved Drone engines</label>
-    <techLevel>Industrial</techLevel>
     <baseCost>2000</baseCost>
     <description>Further improvements for drones have now enabled use of more drones and with a greater control over task it can perform.\nThis sets drones basestats lv. 15</description>
     <prerequisites>
       <li>AutomationBasics</li>
       <li>PRF_BasicDrones</li>
     </prerequisites>
-    <tab>Automation</tab>
     <researchViewX>6</researchViewX>
-    <researchViewY>0</researchViewY>
     <discoveredLetterTitle>About: Drone are now lv 15</discoveredLetterTitle>
     <discoveredLetterText>You have upgraded your drones with better engines and batteries and as such they now do jobs even more efficient. \n This will set any drones base level to 15. \n Unless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
@@ -39,7 +40,7 @@
 
 
   <!-- Advanced drone technology -->
-  <ResearchProjectDef>
+  <ResearchProjectDef ParentName="PRF_DroneResearch">
     <defName>PRF_AdvancedDrones</defName>
     <label>Advanced Drone Ai</label>
     <techLevel>Spacer</techLevel>
@@ -50,9 +51,7 @@
       <li>PRF_ImprovedDrones</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
-    <tab>Automation</tab>
     <researchViewX>10</researchViewX>
-    <researchViewY>0</researchViewY>
     <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
     <discoveredLetterText>You have upgraded your drones with advanced Ai cores, this will let them do their task better than most humans will do. \n This will set any drones base level to 20. \n Unless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
