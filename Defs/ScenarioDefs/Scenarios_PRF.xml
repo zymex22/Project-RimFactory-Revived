@@ -114,6 +114,10 @@ You should quickly prepare for the raid.</text>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
+                    <thingDef>Battery4k</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
                     <thingDef>Telescope</thingDef>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
