@@ -221,7 +221,7 @@ Mod extennsion for assemblers
       </li>
     </comps>
     <researchPrerequisites>      <!-- Needed Research to see in menus -->
-      <li>PEF_UniversalAutocrafting</li>
+      <li>PRF_UniversalAutocrafting</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
     <modExtensions>

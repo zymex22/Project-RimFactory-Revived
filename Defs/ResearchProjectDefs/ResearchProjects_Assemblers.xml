@@ -51,7 +51,7 @@
 
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
-    <defName>PEF_UniversalAutocrafting</defName>
+    <defName>PRF_UniversalAutocrafting</defName>
     <label>universal auto-crafting</label>
     <description>Make buildings that can craft recipes given to them via a recipe database. Like your dedicated crafter, but won't have mental breaks for silly reasons.</description>
     <baseCost>3000</baseCost>
@@ -75,7 +75,7 @@
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRFGoldbachConjecture</li>
-      <li>PEF_UniversalAutocrafting</li>
+      <li>PRF_UniversalAutocrafting</li>
     </prerequisites>
     <researchViewX>9</researchViewX>
   </ResearchProjectDef>
