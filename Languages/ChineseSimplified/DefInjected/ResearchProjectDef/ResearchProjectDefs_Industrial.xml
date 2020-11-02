@@ -3,14 +3,14 @@
 
   <!-- Tier 1 -->
 
-  <AutonomousMining.label>PRF: 自动采矿</AutonomousMining.label>
-  <AutonomousMining.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</AutonomousMining.description>
+  <PRF_AutonomousMining.label>PRF: 自动采矿</PRF_AutonomousMining.label>
+  <PRF_AutonomousMining.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</PRF_AutonomousMining.description>
 
-  <AutonomousMining_II.label>PRF: 自动采矿II型</AutonomousMining_II.label>
-  <AutonomousMining_II.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</AutonomousMining_II.description>
+  <PRF_AutonomousMining_II.label>PRF: 自动采矿II型</PRF_AutonomousMining_II.label>
+  <PRF_AutonomousMining_II.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</PRF_AutonomousMining_II.description>
 
-  <AutonomousMining_III.label>PRF: 自动采矿III型</AutonomousMining_III.label>
-  <AutonomousMining_III.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</AutonomousMining_III.description>
+  <PRF_AutonomousMining_III.label>PRF: 自动采矿III型</PRF_AutonomousMining_III.label>
+  <PRF_AutonomousMining_III.description>可以建造从地底深处挖掘随机矿物和岩石的建筑。</PRF_AutonomousMining_III.description>
 
 
   <!-- Tier 2 -->
@@ -27,14 +27,14 @@
   <PaperclipGeneratorQuantumFoamManipulation.label>PRF: 回形针发电机：量子泡沫控制</PaperclipGeneratorQuantumFoamManipulation.label>
   <PaperclipGeneratorQuantumFoamManipulation.description>回形针发电机的最大效率提高至2500%.</PaperclipGeneratorQuantumFoamManipulation.description>
 
-  <IndustrialRollers.label>PRF: 工业传送带</IndustrialRollers.label>
-  <IndustrialRollers.description>基本工业传送带，直线和转弯。</IndustrialRollers.description>
+  <PRF_BeltsI.label>PRF: 工业传送带</PRF_BeltsI.label>
+  <PRF_BeltsI.description>基本工业传送带，直线和转弯。</PRF_BeltsI.description>
 
-  <adv_Rollers.label>PRF: 先进传送带</adv_Rollers.label>
-  <adv_Rollers.description>分离器，入墙式，地下传送带。</adv_Rollers.description>
+  <PRF_BeltsII.label>PRF: 先进传送带</PRF_BeltsII.label>
+  <PRF_BeltsII.description>分离器，入墙式，地下传送带。</PRF_BeltsII.description>
 
-  <PRFMetalRefining.label>金属精炼</PRFMetalRefining.label>
-  <PRFMetalRefining.description>一家金属精炼厂，通过聚合物层压，将化学燃料与钢结合，使塑料灰化，从而生产稀有金属.</PRFMetalRefining.description>
+  <PRF_MetalRefining.label>金属精炼</PRF_MetalRefining.label>
+  <PRF_MetalRefining.description>一家金属精炼厂，通过聚合物层压，将化学燃料与钢结合，使塑料灰化，从而生产稀有金属.</PRF_MetalRefining.description>
 
 
 </LanguageData>

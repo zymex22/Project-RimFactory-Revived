@@ -65,7 +65,7 @@
       <li>PlaceWorker_ShowFacilitiesConnections</li>
     </placeWorkers>
     <researchPrerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -129,7 +129,7 @@
     </comps>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>PlaceWorker_ShowFacilitiesConnections</li>

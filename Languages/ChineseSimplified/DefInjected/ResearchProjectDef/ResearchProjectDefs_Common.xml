@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <PRFEulersIdentity.label>欧拉恒等式</PRFEulersIdentity.label>
-  <PRFEulersIdentity.description>“π是π，圆周长与其直径的比值。”学习自动化和机械的基本知识，这是通往工业群体的大门。第1层</PRFEulersIdentity.description>
+  <PRF_CoreTierI.label>欧拉恒等式</PRF_CoreTierI.label>
+  <PRF_CoreTierI.description>“π是π，圆周长与其直径的比值。”学习自动化和机械的基本知识，这是通往工业群体的大门。第1层</PRF_CoreTierI.description>
 
   <!-- Tier 1 -->
 
-  <AutomationBasics.label>PRF：基础自动化</AutomationBasics.label>
-  <AutomationBasics.description>学习自动化机械的基础知识，迈向通往工业化殖民地的大门。</AutomationBasics.description>
+  <PRF_CoreTierII.label>PRF：基础自动化</PRF_CoreTierII.label>
+  <PRF_CoreTierII.description>学习自动化机械的基础知识，迈向通往工业化殖民地的大门。</PRF_CoreTierII.description>
 
-  <PRFMachineLearning.label>PRF：机械学习</PRFMachineLearning.label>
-  <PRFMachineLearning.description>让机械学会如何提高自身能力。解锁建造AI研究台。可以在机器人加工台上制作无人机模块。</PRFMachineLearning.description>
+  <PRF_MachineLearning.label>PRF：机械学习</PRF_MachineLearning.label>
+  <PRF_MachineLearning.description>让机械学会如何提高自身能力。解锁建造AI研究台。可以在机器人加工台上制作无人机模块。</PRF_MachineLearning.description>
 
 
   <!-- Tier 2 -->
 
-  <PRFGoldbachConjecture.label>PRF：哥德巴赫猜想</PRFGoldbachConjecture.label>
-  <PRFGoldbachConjecture.description>“任何大于或等于4的偶数都可以由2个质数之和构成。”\n解锁一系列新的研究项目。</PRFGoldbachConjecture.description>
+  <PRF_CoreTierIII.label>PRF：哥德巴赫猜想</PRF_CoreTierIII.label>
+  <PRF_CoreTierIII.description>“任何大于或等于4的偶数都可以由2个质数之和构成。”\n解锁一系列新的研究项目。</PRF_CoreTierIII.description>
 
   <PRFQuantumComputing.label>PRF：量子计算</PRFQuantumComputing.label>
   <PRFQuantumComputing.description>学习如何建造量子计算机来帮助研究项目。</PRFQuantumComputing.description>

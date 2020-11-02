@@ -14,7 +14,7 @@
     <baseCost>600</baseCost>
     <description>The first pilotless vehicles were built during the First World War. These early models were launched by catapult or flown using radio control. Much have changed since then and drones are now used for more common tasks.\nThis sets drones basestats lv. 10</description>
     <prerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
     <discoveredLetterTitle>About: Drone are now lv 10</discoveredLetterTitle>
@@ -29,7 +29,7 @@
     <baseCost>2000</baseCost>
     <description>Further improvements for drones have now enabled use of more drones and with a greater control over task it can perform.\nThis sets drones basestats lv. 15</description>
     <prerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
       <li>PRF_BasicDrones</li>
     </prerequisites>
     <researchViewX>6</researchViewX>
@@ -47,7 +47,7 @@
     <baseCost>6000</baseCost>
     <description>Perfectly aerodynamics higher power engines and Ai have created a perfectly balanced super drone that will perform tasks better than most pawns ever will.\nThis sets drones basestats lv. 20</description>
     <prerequisites>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_CoreTierIII</li>
       <li>PRF_ImprovedDrones</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>

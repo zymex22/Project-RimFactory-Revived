@@ -16,7 +16,7 @@
     <baseCost>750</baseCost>
     <prerequisites>
       <li>Batteries</li>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
     <researchViewY>3</researchViewY>
@@ -33,7 +33,7 @@
     </requiredResearchFacilities>
     <prerequisites>
       <li>PRF_EnhancedBatteries</li>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
     </prerequisites>
     <researchViewX>6</researchViewX>
   </ResearchProjectDef>
@@ -47,7 +47,7 @@
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_LargeBatteries</li>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_CoreTierIII</li>
     </prerequisites>
     <researchViewX>9</researchViewX>
   </ResearchProjectDef>

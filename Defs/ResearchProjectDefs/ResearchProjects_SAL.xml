@@ -17,7 +17,7 @@
     <baseCost>1000</baseCost>
     <description>Start to learn how to program machines to be able to perform skilled labor.</description>
     <prerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>

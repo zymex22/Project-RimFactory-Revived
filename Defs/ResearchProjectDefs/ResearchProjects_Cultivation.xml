@@ -28,7 +28,7 @@
     <description>Further Improvements to agricultural drones have made them more efficient and they can now haul harvest to storage or belts. This also unlocks sprinklers which boost crop speed.</description>
     <prerequisites>
       <li>PRF_AutomaticFarmingI</li>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
     </prerequisites>
     <researchViewX>7</researchViewX>
   </ResearchProjectDef>
@@ -42,7 +42,7 @@
     <description>With advanced use of Mechanites and improved Ai control, Cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
     <prerequisites>
       <li>PRF_AutomaticFarmingII</li>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_CoreTierIII</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <requiredResearchFacilities>

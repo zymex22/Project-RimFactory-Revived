@@ -15,19 +15,19 @@
     <label>Self-cooking</label>
     <baseCost>2000</baseCost>
     <prerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
     <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
-    <defName>PRFMachineLearning</defName>
+    <defName>PRF_MachineLearning</defName>
     <label>Machine learning</label>
     <baseCost>2000</baseCost>
     <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
     <prerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
@@ -41,7 +41,7 @@
     <label>Magnetic tape</label>
     <baseCost>1000</baseCost>
     <prerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
     </prerequisites>
     <researchViewX>6</researchViewX>
     <description>Learn how to make and use old-school magnetic tape to store instructions. Make data disks at the machining table.</description>
@@ -74,7 +74,7 @@
     <baseCost>2250</baseCost>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <prerequisites>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_CoreTierIII</li>
       <li>PRF_UniversalAutocrafting</li>
     </prerequisites>
     <researchViewX>9</researchViewX>
@@ -87,7 +87,7 @@
     <baseCost>4000</baseCost>
     <description>A metal refinery able to produce rare metals through polymer lamination, by combining Chemfuel with steel to greate Plasteel</description>
     <prerequisites>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_CoreTierIII</li>
       <li>AdvancedFabrication</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>

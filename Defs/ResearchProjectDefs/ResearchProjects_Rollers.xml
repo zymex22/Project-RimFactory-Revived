@@ -40,7 +40,7 @@
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_BeltsII</li>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
     </prerequisites>
     <researchViewX>6</researchViewX>
   </ResearchProjectDef>

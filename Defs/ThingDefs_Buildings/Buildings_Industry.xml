@@ -107,7 +107,7 @@
     <castEdgeShadows>false</castEdgeShadows>
     <researchPrerequisites>
       <li>Stonecutting</li>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -171,7 +171,7 @@
     <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRFMachineLearning</li>
+      <li>PRF_MachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -337,7 +337,7 @@
     <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_CoreTierIII</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -508,7 +508,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -570,7 +570,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRFMachineLearning</li>
+      <li>PRF_MachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 

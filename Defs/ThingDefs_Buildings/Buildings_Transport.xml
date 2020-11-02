@@ -55,7 +55,7 @@
     <rotatable>true</rotatable>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>ProjectRimFactory.Industry.PlaceWorker_FuelingMachine</li>
@@ -150,7 +150,7 @@
     </thingCategories>
     <!-- <specialDisplayRadius>5</specialDisplayRadius> -->    <!--A.K.A. Search radius-->
     <researchPrerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Settings">
