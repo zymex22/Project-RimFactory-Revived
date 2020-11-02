@@ -12,8 +12,8 @@
     <designatorDropdown>SALGroup</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
     <graphicData>
-      <texPath>SAL3/ASWP1</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>SAL3/SAL</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1,1)</drawSize>
     </graphicData>
     <statBases>
@@ -81,7 +81,7 @@
       <ComponentIndustrial>8</ComponentIndustrial>
     </costList>
     <researchPrerequisites>
-    <li>PRF_AutonomousCraftingI</li>
+      <li>PRF_AutonomousCraftingI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -128,7 +128,7 @@
       <ComponentIndustrial>10</ComponentIndustrial>
     </costList>
     <researchPrerequisites>
-    <li>PRF_AutonomousCraftingII</li>
+      <li>PRF_AutonomousCraftingII</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -163,7 +163,7 @@
     </modExtensions>
   </ThingDef>
 
-    <!-- The Art Machine -->
+  <!-- The Art Machine -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMachine</defName>
     <label>The Art Machine</label>
@@ -176,7 +176,7 @@
       <ComponentIndustrial>20</ComponentIndustrial>
     </costList>
     <researchPrerequisites>
-    <li>PRF_ArtCraftingI</li>
+      <li>PRF_ArtCraftingI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -207,7 +207,7 @@
     </modExtensions>
   </ThingDef>
 
-      <!-- The Art Master -->
+  <!-- The Art Master -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMaster</defName>
     <label>The Art Master</label>
@@ -220,7 +220,7 @@
       <ComponentIndustrial>30</ComponentIndustrial>
     </costList>
     <researchPrerequisites>
-    <li>PRF_ArtCraftingII</li>
+      <li>PRF_ArtCraftingII</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -264,7 +264,7 @@
       <ComponentIndustrial>40</ComponentIndustrial>
     </costList>
     <researchPrerequisites>
-    <li>PRF_AutonomousOverclockingI</li>
+      <li>PRF_AutonomousOverclockingI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
