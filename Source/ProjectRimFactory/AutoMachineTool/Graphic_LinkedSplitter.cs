@@ -22,29 +22,46 @@ namespace ProjectRimFactory.AutoMachineTool {
     /// --LWM
     /// </summary>
     [StaticConstructorOnStartup]
-    public class Graphic_LinkedSplitter : Graphic_LinkedConveyorV2 {
+    public class Graphic_LinkedSplitter : Graphic_LinkedConveyorV2, IHaveGraphicExtraData {
         // to show the input direction for the splitter:
         public static Material arrow00b;
         // to show all output directions for the splitter:
         public static Material arrow01;
+
+        private GraphicData splitterBuildingDoorOpen;
+        private GraphicData splitterBuildingDoorClosed;
 
         static Graphic_LinkedSplitter() {
             arrow01 = MaterialPool.MatFrom("Belts/SmallArrow01");
             arrow00b = MaterialPool.MatFrom("Belts/SmallArrow00b");
         }
 
-        private static GraphicData splitterBuildingDoorOpen = new GraphicData
-        {
-            graphicClass = typeof(Graphic_Single),
-            texPath = "Belts/Splitter_door_open",
-            drawSize = Vector2.one
-        };
-        private static GraphicData splitterBuildingDoorClosed = new GraphicData
-        {
-            graphicClass = typeof(Graphic_Single),
-            texPath = "Belts/Splitter_door_closed",
-            drawSize = Vector2.one
-        };
+        public override void Init(GraphicRequest req) {
+            var extraData = GraphicExtraData.Extract(req, out GraphicRequest newReq);
+            ExtraInit(newReq, extraData);
+        }
+
+        public override void ExtraInit(GraphicRequest req, GraphicExtraData extraData) {
+            base.ExtraInit(req, extraData);
+            if (extraData == null) {
+                Log.Error("PRF: invalid XML for conveyor Splitter's graphic:\n" +
+                  "   it must have <texPath>[extraData]...[texPath2]path/to/building[/texPath2]</texPath>");
+                return;
+            }
+            string doorBasePath = extraData.texPath2;
+            splitterBuildingDoorOpen = new GraphicData
+            {
+                graphicClass = typeof(Graphic_Single),
+                texPath = doorBasePath + "_Open",
+                drawSize = Vector2.one
+            };
+            splitterBuildingDoorClosed = new GraphicData
+            {
+                graphicClass = typeof(Graphic_Single),
+                texPath = doorBasePath + "_Closed",
+                drawSize = Vector2.one
+            };
+        }
 
         public override void Print(SectionLayer layer, Thing thing) {
             base.Print(layer, thing);
@@ -72,7 +89,8 @@ namespace ProjectRimFactory.AutoMachineTool {
                     thing.Rotation.AsAngle);
                 // print tiny brown arrows pointing in output directions:
                 foreach (var d in splitter.ActiveOutputDirections) {
-                    Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 1f, 0),
+                    Printer_Plane.PrintPlane(layer, thing.TrueCenter() + 
+                             this.arrowOffsetsByRot4[d.AsInt],
                              this.drawSize, arrow01, d.AsAngle);
                 }
             } else { // blueprint?

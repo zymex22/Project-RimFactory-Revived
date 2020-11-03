@@ -15,8 +15,16 @@ namespace ProjectRimFactory.AutoMachineTool {
     ///   weird edge artifacts)
     /// </summary>
     [StaticConstructorOnStartup]
-    public class Graphic_LinkedConveyorV2 : Verse.Graphic_Linked {
+    public class Graphic_LinkedConveyorV2 : Verse.Graphic_Linked, IHaveGraphicExtraData {
+        // Little yellow arrow that points the direction of conveyor travel:
         public static Material arrow00; // initialized in the static constructor
+        // Offsets used for placing those arrows:
+        public Vector3[] arrowOffsetsByRot4 = {
+                    new Vector3(0f, 0.1f, 0f),
+                    new Vector3(0f, 0.1f, 0f),
+                    new Vector3(0f, 0.1f, 0f),
+                    new Vector3(0f, 0.1f, 0f)
+            };
 
         public Graphic_LinkedConveyorV2() : base() {
         }
@@ -24,13 +32,33 @@ namespace ProjectRimFactory.AutoMachineTool {
         }
 
         public override void Init(GraphicRequest req) {
+            // I'm sure "req ... out req" is perfectly safe?
+            var extraData = GraphicExtraData.Extract(req, out req);
+            ExtraInit(req, extraData);
+        }
+        public virtual void ExtraInit(GraphicRequest req, GraphicExtraData extraData) {
             this.data = req.graphicData;
-            this.path = req.path;
             this.color = req.color;
             this.colorTwo = req.colorTwo;
             this.drawSize = req.drawSize;
             this.subGraphic = new Graphic_Single();
             this.subGraphic.Init(req);
+            this.path = req.path;
+            if (extraData == null) return;
+            if (extraData.arrowDrawOffset != null) {
+                var v = extraData.arrowDrawOffset.Value;
+                for (int i = 0; i < 4; i++) {
+                    arrowOffsetsByRot4[i] = new Vector3(v.x, v.y, v.z);
+                }
+            }
+            if (extraData.arrowEastDrawOffset != null)
+                arrowOffsetsByRot4[1] = extraData.arrowEastDrawOffset.Value;
+            if (extraData.arrowWestDrawOffset != null)
+                arrowOffsetsByRot4[3] = extraData.arrowWestDrawOffset.Value;
+            if (extraData.arrowNorthDrawOffset != null)
+                arrowOffsetsByRot4[0] = extraData.arrowNorthDrawOffset.Value;
+            if (extraData.arrowSouthDrawOffset != null)
+                arrowOffsetsByRot4[2] = extraData.arrowSouthDrawOffset.Value;
         }
 
         public override void Print(SectionLayer layer, Thing thing) {
@@ -56,11 +84,12 @@ namespace ProjectRimFactory.AutoMachineTool {
             base.Print(layer, thing);
             // Print the tiny yellow arrow showing direction:
             Printer_Plane.PrintPlane(layer, thing.TrueCenter()
-                + new Vector3(0, 0.1f, 0), this.drawSize, arrow00,
+                + arrowOffsetsByRot4[thing.Rotation.AsInt], this.drawSize, arrow00,
                 thing.Rotation.AsAngle);
         }
 
         public override bool ShouldLinkWith(IntVec3 c, Thing parent) {
+            //TODO: should probably cache this in the conveyor, for speed
             if (!c.InBounds(parent.Map)) {
                 return false;
             }
@@ -128,7 +157,7 @@ namespace ProjectRimFactory.AutoMachineTool {
             return false;
         }
 
-        static Graphic_LinkedConveyorV2() {
+        static Graphic_LinkedConveyorV2() { // this runs after graphics are loaded
             arrow00 = MaterialPool.MatFrom("Belts/SmallArrow00");
             canSendTos[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefSendToRot4AtLevel;
             canGetFroms[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefReceiveFromRot4AtLevel;
