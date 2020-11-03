@@ -48,11 +48,6 @@
       <li>ITab_Storage</li>
       <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
     </inspectorTabs>
-    <comps>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
-    </comps>
   </ThingDef>
 
   <!--==================== small Wood Crate ====================-->
@@ -416,9 +411,6 @@
         <basePowerConsumption>300</basePowerConsumption>
       </li>
       <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
       <li Class="CompProperties_Glower">
         <glowRadius>2</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>

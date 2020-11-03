@@ -33,11 +33,6 @@
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
     <neverMultiSelect>false</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
     <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
-    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
-      </li>
-    </comps>
   </ThingDef>
 
   <!--======================================= NR Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->

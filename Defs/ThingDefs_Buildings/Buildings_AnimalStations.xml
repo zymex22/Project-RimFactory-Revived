@@ -43,9 +43,6 @@
       <!-- Machines will need maintanance -->
       <li Class="CompProperties_Flickable" />
       <!-- Be able to power on/off -->
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
-      </li>
     </comps>
   </ThingDef>
 
@@ -409,9 +406,6 @@
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>10</heatPerSecond>
-      </li>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
       </li>
     </comps>
     <placeWorkers>

@@ -113,9 +113,6 @@ Mod extennsion for assemblers
       </li>
       <li Class="CompProperties_Flickable" />
       <!-- option to power off -->
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
-      </li>
     </comps>
   </ThingDef>
 

@@ -37,9 +37,6 @@
     <minifiedDef>MinifiedThing</minifiedDef>
     <comps>
       <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
     </comps>
         <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>

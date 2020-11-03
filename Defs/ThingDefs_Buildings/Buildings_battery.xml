@@ -2,7 +2,7 @@
 <Defs>
   <!-- ==================================== Battery base ===================================== -->
   <!-- Batteries Taken from SS bigger batteries-->
-  <ThingDef Name="BBBuildingBase" Abstract="True">
+  <ThingDef Name="BBBuildingBase" ParentName="PRFBuildingBase" Abstract="True">
     <category>Building</category>
     <thingClass>Building</thingClass>
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
