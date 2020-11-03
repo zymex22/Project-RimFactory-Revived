@@ -188,7 +188,7 @@
     <Patch>
       <Operation Class="PatchOperationReplace">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="PRFCargoPlatform"]/modExtensions/li[@Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate"]/limit</xpath>
+        <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate"]/limit</xpath>
         <value>
           <!-- ${value} is replaced with the entered value. -->
           <limit>${value}</limit>
