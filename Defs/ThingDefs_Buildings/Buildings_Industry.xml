@@ -337,7 +337,7 @@
     <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRF_CoreTierIII</li>
+      <li>PRF_MachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 

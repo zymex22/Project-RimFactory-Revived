@@ -125,7 +125,7 @@
       <Mass>40</Mass>
     </statBases>
     <researchPrerequisites>
-      <li>PRF_CoreTierII</li>
+      <li>PRF_CoreTierIII</li>
     </researchPrerequisites>
     <thingCategories>
       <li>Manufactured</li>

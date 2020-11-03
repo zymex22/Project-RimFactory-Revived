@@ -12,24 +12,24 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_AutonomousCraftingI</defName>
-    <label>autonomous crafting I</label>
+    <label>S.A.L Autonomous crafting I</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1000</baseCost>
     <description>Start to learn how to program machines to be able to perform skilled labor.</description>
     <prerequisites>
-      <li>PRF_CoreTierI</li>
+      <li>PRF_CoreTierII</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>3</researchViewX>
+    <researchViewX>6</researchViewX>
     <discoveredLetterTitle>About: S.A.L automation robots</discoveredLetterTitle>
     <discoveredLetterText>With this Research you have unlocked S.A.L automation robots.\nTheese are a placeable robots you place on a workbench workercell, then they will start doing work on that bench.\n\nThis is added as a Tribute to S.A.L mod which where what Project RimFactory started as before it became assemblers as we know them today in PRF.\nSettings and most things are taken directly from S.A.L mod but might be changed/tweaked later. Also it does not include cooker/miner, be feel free to ask if you think we miss them.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_AutonomousCraftingII</defName>
-    <label>autonomous crafting II</label>
+    <label>S.A.L autonomous crafting II</label>
     <techLevel>Industrial</techLevel>
     <baseCost>3000</baseCost>
     <description>Start to learn how to program more advanced machines to be able to craft faster, better, and more accurately.</description>
@@ -39,12 +39,12 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>4</researchViewX>
+    <researchViewX>7</researchViewX>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALSpecialisation</defName>
-    <label>S.A.L. specialisation</label>
+    <label>S.A.L. Specialisation</label>
     <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
     <description>Start to learn how to specialise and create different auto-assemblers with different roles.</description>
@@ -54,14 +54,14 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>5</researchViewX>
+    <researchViewX>8</researchViewX>
   </ResearchProjectDef>
 
 
   <!--==============================================Specialised============================================-->
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_ArtCraftingI</defName>
-    <label>art I</label>
+    <label>S.A.L Art I</label>
     <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
     <description>Learn the ways of hypercomputing and neural networks, allowing machines to create proper semi-decent art.</description>
@@ -71,12 +71,12 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>6</researchViewX>
+    <researchViewX>9</researchViewX>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_ArtCraftingII</defName>
-    <label>art II</label>
+    <label>S.A.L Art II</label>
     <techLevel>Ultra</techLevel>
     <baseCost>3000</baseCost>
     <description>Combined with overclocking, make your neural networks react much faster, improving quality of art.</description>
@@ -87,7 +87,7 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>7</researchViewX>
+    <researchViewX>10</researchViewX>
     <researchViewY>3.7</researchViewY>
   </ResearchProjectDef>
 
@@ -109,7 +109,7 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_AutonomousOverclockingI</defName>
-    <label>autonomous overclocking I</label>
+    <label>S.A.L Autonomous overclocking I</label>
     <techLevel>Spacer</techLevel>
     <baseCost>5000</baseCost>
     <description>S.A.L. machines often work too slowly for repetitive tasks where quality doesn't matter. Learn how to speed them up at the cost of quality.</description>
@@ -120,7 +120,7 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>7</researchViewX>
+    <researchViewX>10</researchViewX>
     <researchViewY>4.3</researchViewY>
   </ResearchProjectDef>
 

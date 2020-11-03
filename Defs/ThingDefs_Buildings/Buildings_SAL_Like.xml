@@ -79,6 +79,7 @@
       <Steel>75</Steel>
       <Plasteel>45</Plasteel>
       <ComponentIndustrial>8</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <researchPrerequisites>
       <li>PRF_AutonomousCraftingI</li>
@@ -126,6 +127,7 @@
       <Steel>100</Steel>
       <Plasteel>75</Plasteel>
       <ComponentIndustrial>10</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <researchPrerequisites>
       <li>PRF_AutonomousCraftingII</li>
@@ -174,6 +176,7 @@
       <Plasteel>100</Plasteel>
       <Silver>300</Silver>
       <ComponentIndustrial>20</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <researchPrerequisites>
       <li>PRF_ArtCraftingI</li>
@@ -218,6 +221,7 @@
       <Plasteel>200</Plasteel>
       <Silver>800</Silver>
       <ComponentIndustrial>30</ComponentIndustrial>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <researchPrerequisites>
       <li>PRF_ArtCraftingII</li>
@@ -262,6 +266,7 @@
       <Plasteel>300</Plasteel>
       <Silver>1000</Silver>
       <ComponentIndustrial>40</ComponentIndustrial>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <researchPrerequisites>
       <li>PRF_AutonomousOverclockingI</li>
