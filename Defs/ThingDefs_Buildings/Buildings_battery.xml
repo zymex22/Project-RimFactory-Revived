@@ -3,15 +3,6 @@
   <!-- ==================================== Battery base ===================================== -->
   <!-- Batteries Taken from SS bigger batteries-->
   <ThingDef Name="BBBuildingBase" ParentName="PRFBuildingBase" Abstract="True">
-    <category>Building</category>
-    <thingClass>Building</thingClass>
-    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
-    <selectable>true</selectable>
-    <drawerType>MapMeshAndRealTime</drawerType>
-    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <repairEffect>Repair</repairEffect>
-    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
-    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
     <designatorDropdown>prf_batteries_gr</designatorDropdown>
   </ThingDef>
 
@@ -284,7 +275,7 @@
   <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
   <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
   <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
-  <ThingDef ParentName="BBBuildingBase">
+  <ThingDef ParentName="PRFBuildingBase">
     <defName>Battery100k</defName>
     <label>100k battery</label>
     <thingClass>Building_Battery</thingClass>
@@ -339,7 +330,7 @@
   </ThingDef>
 
   <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
-  <ThingDef ParentName="BBBuildingBase">
+  <ThingDef ParentName="PRFBuildingBase">
     <defName>Battery10k</defName>
     <label>10k battery</label>
     <thingClass>Building_Battery</thingClass>

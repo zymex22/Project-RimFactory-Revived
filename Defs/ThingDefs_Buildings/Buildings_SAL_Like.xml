@@ -6,7 +6,7 @@
   </DesignatorDropdownGroupDef>
 
   <!-- base -->
-  <ThingDef Name="PRF_SAL_Base" Parent="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_SAL_Base" ParentName="PRFBuildingBase" Abstract="True">
     <defName>Building_NR_AutoMachineTool_Base</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_AutoMachineTool</thingClass>
     <designatorDropdown>SALGroup</designatorDropdown>
@@ -22,7 +22,6 @@
       <Flammability>1.0</Flammability>
       <Mass>70</Mass>
     </statBases>
-    <drawerType>MapMeshAndRealTime</drawerType>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <fillPercent>1</fillPercent>
     <comps>
@@ -34,7 +33,6 @@
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
     </comps>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <pathCost>0</pathCost>
     <designationCategory>Industrial</designationCategory>
     <rotatable>true</rotatable>
@@ -50,14 +48,11 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_TargetCellsHilight</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
     </placeWorkers>
-    <category>Building</category>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-    <repairEffect>Repair</repairEffect>
     <constructEffect>ConstructMetal</constructEffect>
     <size>(1,1)</size>
     <passability>Standable</passability>
-    <selectable>True</selectable>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
     </inspectorTabs>

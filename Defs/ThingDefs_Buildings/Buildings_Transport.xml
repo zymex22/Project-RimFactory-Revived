@@ -163,9 +163,7 @@
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <tickerType>Never</tickerType>
-    <category>Building</category>
     <uiIconScale>0.7</uiIconScale>
-    <selectable>true</selectable>
     <designatorDropdown>Pullers_gr</designatorDropdown>
     <costList>
       <Steel>150</Steel>
@@ -188,7 +186,6 @@
     <constructEffect>ConstructMetal</constructEffect>
     <passability>Standable</passability>
     <rotatable>true</rotatable>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
     <comps>
@@ -457,11 +454,9 @@
   <!--======================================= ============= ===============================================-->
   <ThingDef Name="PRF_Conveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
-    <category>Building</category>
     <altitudeLayer>Building</altitudeLayer>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>Rollers_gr</designatorDropdown>
-    <drawerType>MapMeshAndRealTime</drawerType>
     <uiIconScale>0.7</uiIconScale>
     <costList>
       <Steel>10</Steel>
@@ -485,9 +480,7 @@
     <size>(1,1)</size>
     <pathCost>45</pathCost>
     <passability>Standable</passability>
-    <selectable>True</selectable>
     <rotatable>true</rotatable>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <drawGUIOverlay>true</drawGUIOverlay>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>

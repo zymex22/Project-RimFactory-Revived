@@ -7,8 +7,6 @@
 
   <!-- ================= Base ================= -->
   <ThingDef Name="PRF_FloorSign" ParentName="PRFBuildingBase" Abstract="True">
-    <thingClass>Building</thingClass>
-    <category>Building</category>
     <description>Weak florescent sig, can be placed on floor or on top of machines or other buildings to show guidance.</description>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>floor_lights</designatorDropdown>
@@ -16,7 +14,6 @@
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <clearBuildingArea>false</clearBuildingArea>
     <passability>Standable</passability>
-    <selectable>true</selectable>
     <costList>
       <Steel>2</Steel>
     </costList>
@@ -35,7 +32,6 @@
     <building>
       <isEdifice>false</isEdifice>
     </building>
-    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <placingDraggableDimensions>1</placingDraggableDimensions>
     <size>(1,1)</size>

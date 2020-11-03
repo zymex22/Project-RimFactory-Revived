@@ -36,6 +36,7 @@
       <uninstallWork>1800</uninstallWork>
     </building>
     <minifiedDef>MinifiedThing</minifiedDef>
+    <tickerType>Rare</tickerType>
     <comps>
       <li Class="CompProperties_Flickable" />
     </comps>
@@ -52,7 +53,6 @@
       <drawSize>(2,2)</drawSize>
     </graphicData>
     <castEdgeShadows>false</castEdgeShadows>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
     <size>(2,2)</size>
     <statBases>
       <WorkToBuild>10000</WorkToBuild>
@@ -124,7 +124,6 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Rare</tickerType>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>PRF_AutonomousMining</li>
@@ -195,8 +194,6 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Rare</tickerType>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
       <li>PRF_AutonomousMiningII</li>
@@ -272,8 +269,7 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Rare</tickerType>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
+    
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
       <li>PRF_AutonomousMiningIII</li>
