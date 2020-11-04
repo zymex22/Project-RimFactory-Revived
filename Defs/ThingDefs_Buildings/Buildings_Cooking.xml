@@ -199,8 +199,9 @@ Mod extennsion for assemblers
     <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 2x speed \n 20cleanliness \n cook level 20</description>
     <costStuffCount>100</costStuffCount>
     <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFRoboticArm>1</PRFRoboticArm>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
       <Steel>10</Steel>
     </costList>
     <comps>

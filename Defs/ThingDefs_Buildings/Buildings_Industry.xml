@@ -193,7 +193,7 @@
     </statBases>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFWeakAIChip>2</PRFWeakAIChip>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <Plasteel>25</Plasteel>
       <Steel>250</Steel>

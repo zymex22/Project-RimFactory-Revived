@@ -138,6 +138,7 @@
       <Plasteel>100</Plasteel>
       <Gold>50</Gold>
       <ComponentIndustrial>15</ComponentIndustrial>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <comps>
       <li Class="CompProperties_Battery">

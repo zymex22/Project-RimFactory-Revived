@@ -318,6 +318,7 @@
       <Gold>50</Gold>
       <Uranium>20</Uranium>
       <ComponentIndustrial>10</ComponentIndustrial>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <constructEffect>ConstructMetal</constructEffect>
     <tickerType>Normal</tickerType>

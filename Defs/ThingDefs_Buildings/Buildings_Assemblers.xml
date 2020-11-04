@@ -191,6 +191,7 @@ Mod extennsion for assemblers
       <PRFMachineFrame>1</PRFMachineFrame>
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <statBases>
@@ -244,7 +245,7 @@ Mod extennsion for assemblers
     </graphicData>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <Plasteel>10</Plasteel>
       <Steel>150</Steel>
