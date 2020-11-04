@@ -15,6 +15,8 @@
       <texPath>SAL3/SAL</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1,1)</drawSize>
+      <!-- <shaderType>CutoutComplex</shaderType> -->      <!-- for mask to change color when stuffed -->
+      <!-- <color>(133,97,67,256)</color> -->      <!--change color on maske manually -->
     </graphicData>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
@@ -73,6 +75,10 @@
       <ComponentIndustrial>8</ComponentIndustrial>
       <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(102,102,105,256)</color>      <!--change color on maske manually -->
+    </graphicData>
     <researchPrerequisites>
       <li>PRF_AutonomousCraftingI</li>
     </researchPrerequisites>
@@ -163,6 +169,10 @@
     <label>The Art Machine</label>
     <description>Pumps out art like a hose pumps out water. Level 8 art.</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(133,97,67,256)</color>      <!--change color on maske manually -->
+    </graphicData>
     <costList>
       <Steel>150</Steel>
       <Plasteel>100</Plasteel>
@@ -208,6 +218,10 @@
     <label>The Art Master</label>
     <description>Pumps out art like a violent volcanic eruption pumps out lava. Level 18 art.</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(180,60,60,256)</color>      <!--change color on maske manually -->
+    </graphicData>
     <costList>
       <Steel>150</Steel>
       <Plasteel>200</Plasteel>
