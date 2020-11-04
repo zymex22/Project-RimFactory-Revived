@@ -9,6 +9,7 @@ using Verse.AI;
 using UnityEngine;
 using ProjectRimFactory.AutoMachineTool;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory.Drones;
 
 namespace ProjectRimFactory.Common
 {
@@ -27,7 +28,7 @@ namespace ProjectRimFactory.Common
 
         public override bool IsVisible {
             get {
-                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter;
+                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowDroneSettings || ShowSlaughterhouseSettings;
             }
         }
         bool ShowProductLimt => Machine != null;
@@ -39,7 +40,17 @@ namespace ProjectRimFactory.Common
                 (PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
                 !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
 
+        bool ShowDroneSettings => DroneStation != null;
+
+        bool ShowSlaughterhouseSettings => Slaughterhouse != null;
+
+
         private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
+
+        private IDroneSeetingsITab DroneStation { get => this.SelThing as IDroneSeetingsITab; }
+
+        private ISlaughterhouse Slaughterhouse { get => this.SelThing as ISlaughterhouse; }
+
         private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
 
         protected override void UpdateSize() {

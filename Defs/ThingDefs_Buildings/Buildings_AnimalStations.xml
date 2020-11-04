@@ -414,7 +414,7 @@
     </placeWorkers>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power option tab -->
-      <li>ProjectRimFactory.AutoMachineTool.ITab_Slaughterhouse</li>      <!-- Slaugter setting tab -->
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
