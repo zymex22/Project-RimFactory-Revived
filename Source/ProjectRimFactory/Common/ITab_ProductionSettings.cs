@@ -11,8 +11,25 @@ using ProjectRimFactory.AutoMachineTool;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 using ProjectRimFactory.Drones;
 
+
 namespace ProjectRimFactory.Common
 {
+
+    interface PRF_SettingsContent
+    {
+        abstract public float ITab_Settings_Minimum_x { get; }
+        abstract public float ITab_Settings_Additional_y { get; }
+
+        abstract public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list);
+
+
+
+    }
+
+
+
+
+
     /// <summary>
     /// An ITab that contains multilpe settings, all in one place:
     ///  * whether can output produced things to entire stockpile, or only one cell
@@ -28,7 +45,7 @@ namespace ProjectRimFactory.Common
 
         public override bool IsVisible {
             get {
-                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowDroneSettings || ShowSlaughterhouseSettings;
+                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowDroneSettings || ShowSlaughterhouseSettings || ShowAdditionalSettings;
             }
         }
         bool ShowProductLimt => Machine != null;
@@ -44,12 +61,18 @@ namespace ProjectRimFactory.Common
 
         bool ShowSlaughterhouseSettings => Slaughterhouse != null;
 
+        bool ShowAdditionalSettings => pRF_SettingsContent != null;
+
+
 
         private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
 
         private IDroneSeetingsITab DroneStation { get => this.SelThing as IDroneSeetingsITab; }
 
         private ISlaughterhouse Slaughterhouse { get => this.SelThing as ISlaughterhouse; }
+
+        private PRF_SettingsContent pRF_SettingsContent { get => this.SelThing as PRF_SettingsContent; }
+
 
         private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
 
@@ -58,6 +81,14 @@ namespace ProjectRimFactory.Common
             if (ShowProductLimt) winSize.y += 270f;
             if (ShowOutputToEntireStockpile) winSize.y += 100f;
             if (ShowObeysStorageFilter) winSize.y += 100f;
+            if (pRF_SettingsContent != null) { 
+                winSize.y += pRF_SettingsContent.ITab_Settings_Additional_y;
+                winSize.x = Mathf.Min(winSize.x, pRF_SettingsContent.ITab_Settings_Minimum_x);
+            }
+           
+
+
+
             this.size = winSize;
             base.UpdateSize();
         }
@@ -143,6 +174,15 @@ namespace ProjectRimFactory.Common
                 }
                 this.Machine.ProductLimitCount = limit;
             }
+            
+            if (pRF_SettingsContent != null)
+            {
+
+                list = pRF_SettingsContent.ITab_Settings_AppendContent(list);
+
+            }
+            
+            
             list.Gap();
             list.End();
         }

@@ -133,7 +133,7 @@ namespace ProjectRimFactory.Drones
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab
+    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , PRF_SettingsContent
     {
         //Sleep Time List (Loaded on Spawn)
         public string[] cachedSleepTimeList;
@@ -301,6 +301,28 @@ namespace ProjectRimFactory.Drones
 
         private MapTickManager mapManager;
         protected MapTickManager MapManager => this.mapManager;
+        public float ITab_Settings_Minimum_x => 400;
+
+        public float ITab_Settings_Additional_y
+        {
+            get
+            {
+                float additionalHeight = (30 * GetWorkSettings.Count) + 70 + 30;
+                if (GetSleepTimeList[0] != "")
+                {
+                    additionalHeight += 70;
+                }
+                if (compRefuelable != null)
+                {
+                    additionalHeight += 70;
+                }
+                return additionalHeight;
+
+            }
+
+        }
+
+
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
@@ -589,6 +611,127 @@ namespace ProjectRimFactory.Drones
             }
 
 
+        }
+
+
+        private static GUIStyle richTextStyle
+        {
+            get
+            {
+                GUIStyle gtter_richTextStyle = new GUIStyle();
+                gtter_richTextStyle.richText = true;
+                gtter_richTextStyle.normal.textColor = Color.white;
+                return gtter_richTextStyle;
+            }
+        }
+
+        private void AddSleepDisplay(Rect rect, Listing_Standard list)
+        {
+            rect = list.GetRect(30f);
+            // droneInterface.GetSleepTimeList
+            string txt = "";
+            for (int i = 0; i < 24; i++)
+            {
+                if (GetSleepTimeList.Contains(i.ToString()))
+                {
+                    txt += "<color=red><b>" + i.ToString() + "</b></color> ";
+                }
+                else
+                {
+                    txt += i.ToString() + " ";
+                }
+            }
+            CommonGUIFunctions.Label(rect, txt, richTextStyle);
+        }
+
+
+        private void AddskillLabel(WorkTypeDef def, Rect rect2)
+        {
+            string labeltext = "ITab_DroneStation_averageskill".Translate();
+            rect2.x = 400 - (10 * labeltext.Length);
+            if (def.relevantSkills.Count > 0)
+            {
+                int medSkill = 0;
+                foreach (SkillRecord skill in DroneSeetings_skillDefs)
+                {
+                    if (def.relevantSkills.Contains(skill.def))
+                    {
+                        medSkill += skill.levelInt;
+                    }
+                }
+                rect2.y += 5;
+
+                medSkill = medSkill / def.relevantSkills.Count;
+
+                Widgets.Label(rect2, labeltext + medSkill);
+                return;
+            }
+            Widgets.Label(rect2, "-");
+        }
+
+
+        //Small helper function to create each Checkbox as i cant pass variable directly
+        private bool CheckboxHelper(Rect rect, Listing_Standard list, bool variable, WorkTypeDef def)
+        {
+            rect = list.GetRect(30f); //That seems to affect the text possition
+            bool lstatus = variable;
+            Widgets.CheckboxLabeled(rect, def.labelShort, ref lstatus);
+            Rect rect2 = rect;
+
+            AddskillLabel(def, rect2);
+            return lstatus;
+        }
+
+
+
+        public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list)
+        {
+
+            var rect = new Rect();
+
+            rect = list.GetRect(30f);
+
+            Rect rect3 = rect;
+            rect3.y -= 17;
+            Widgets.Label(rect3, "ITab_DroneStation_HeaderLabel".Translate());
+
+            //Add Lable Explayning the pannel
+            Widgets.Label(rect, "ITab_DroneStation_InfoLabel".Translate());
+            rect = list.GetRect(30f);
+            Widgets.DrawLineHorizontal(rect.x, rect.y, 400);
+
+            foreach (WorkTypeDef def in GetWorkSettings.Keys.ToList())
+            {
+                GetWorkSettings[def] = CheckboxHelper(rect, list, GetWorkSettings[def], def);
+            }
+
+
+            //Add The Sleep Times Overview
+            //If There are Sleep Times configured
+            if (GetSleepTimeList[0] != "")
+            {
+                rect = list.GetRect(30f);
+                Widgets.DrawLineHorizontal(rect.x, rect.y, 400);
+
+                CommonGUIFunctions.Label(rect, "ITab_DroneStation_Sleeptimes".Translate(), richTextStyle);
+                AddSleepDisplay(rect, list);
+            }
+
+
+            //Add the fule display if existing
+            if (compRefuelable != null)
+            {
+                rect = list.GetRect(30f);
+                Widgets.DrawLineHorizontal(rect.x, rect.y, 400);
+
+                CommonGUIFunctions.Label(rect, "ITab_DroneStation_SetTargetFuel".Translate(), richTextStyle);
+                rect = list.GetRect(30f);
+                list.Gap();
+                compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider(rect, compRefuelable.TargetFuelLevel, 0, compRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(compRefuelable.TargetFuelLevel), "0", compRefuelable.Props.fuelCapacity.ToString(), 1);
+            }
+
+
+            return list;
         }
     }
 }

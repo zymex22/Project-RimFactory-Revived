@@ -23,6 +23,8 @@ namespace ProjectRimFactory.Drones
 
         CompRefuelable compRefuelable { get; }
 
+        PRF_SettingsContent Tabcontent { get; }
+
     }
 
     class ITab_DroneStation : ITab
@@ -188,4 +190,8 @@ namespace ProjectRimFactory.Drones
         }
 
     }
+
+
+
+
 }
