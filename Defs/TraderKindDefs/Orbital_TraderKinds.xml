@@ -98,6 +98,11 @@
         </excludedThingDefs>
         <excludedCategories>
           <li>MortarShells</li>
+          <li>Textiles</li>
+          <li>Leathers</li>
+          <li>Medicine</li>
+          <li>Drugs</li>
+          <li>MortarShells</li>
         </excludedCategories>
         <thingDefCountRange>2~12</thingDefCountRange>
         <countRange>10~100</countRange>
@@ -119,11 +124,6 @@
         <price>Cheap</price>
         <thingDefCountRange>1~3</thingDefCountRange>
         <countRange>1~1</countRange>
-      </li>
-      <li Class="StockGenerator_Tag">
-        <tradeTag>Television</tradeTag>
-        <thingDefCountRange>1~2</thingDefCountRange>
-        <countRange>1~2</countRange>
       </li>
       <li Class="StockGenerator_BuyTradeTag">
         <tag>Art</tag>
