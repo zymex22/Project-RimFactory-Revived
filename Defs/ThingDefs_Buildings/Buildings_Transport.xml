@@ -641,7 +641,7 @@
       <drawSize>(1,1.1)</drawSize>
       <drawRotated>true</drawRotated>
     </graphicData>
-    <inspectorTabs>
+    <inspectorTabs Inherit="false">
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <modExtensions>
