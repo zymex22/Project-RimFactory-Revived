@@ -306,7 +306,7 @@
         <maxPower>200</maxPower>
       </li>
     </modExtensions>
-    <researchPrerequisites>
+    <researchPrerequisites Inherit="false">
       <li>PRF_BeltsI</li>
     </researchPrerequisites>
   </ThingDef>
