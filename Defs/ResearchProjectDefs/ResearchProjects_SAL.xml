@@ -81,7 +81,6 @@
     <baseCost>3000</baseCost>
     <description>Combined with overclocking, make your neural networks react much faster, improving quality of art.</description>
     <prerequisites>
-      <li>PRF_ArtCraftingI</li>
       <li>PRF_AutonomousOverclockingI</li>
     </prerequisites>
     <requiredResearchFacilities>
