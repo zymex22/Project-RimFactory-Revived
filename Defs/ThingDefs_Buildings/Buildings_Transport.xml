@@ -499,12 +499,13 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>2.8</speedFactor>
+        <speedFactor>6</speedFactor>
         <minPower>5</minPower>
         <maxPower>5</maxPower>
       </li>
     </modExtensions>
     <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
   </ThingDef>
