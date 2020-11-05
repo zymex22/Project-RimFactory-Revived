@@ -90,7 +90,7 @@
         <countRange>0~5</countRange>
       </li>
       <!-- ======================  ==================== -->
-      <li Class="StockGenerator_Category">
+      <!-- <li Class="StockGenerator_Category">
         <categoryDef>Manufactured</categoryDef>
         <excludedThingDefs>
           <li>Leather_Human</li>
@@ -106,7 +106,7 @@
         </excludedCategories>
         <thingDefCountRange>2~12</thingDefCountRange>
         <countRange>10~100</countRange>
-      </li>
+      </li> -->
       <li Class="StockGenerator_Category">
         <categoryDef>StoneBlocks</categoryDef>
         <price>Expensive</price>
