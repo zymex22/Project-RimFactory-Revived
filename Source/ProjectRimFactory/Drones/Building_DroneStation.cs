@@ -133,7 +133,7 @@ namespace ProjectRimFactory.Drones
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab, PRF_SettingsContentLink
+    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab, IPRF_SettingsContentLink
     {
         //Sleep Time List (Loaded on Spawn)
         public string[] cachedSleepTimeList;
@@ -302,7 +302,7 @@ namespace ProjectRimFactory.Drones
         private MapTickManager mapManager;
         protected MapTickManager MapManager => this.mapManager;
 
-        PRF_SettingsContent PRF_SettingsContentLink.PRF_SettingsContentOb => new ITab_DroneStation_Def(this);
+        IPRF_SettingsContent IPRF_SettingsContentLink.PRF_SettingsContentOb => new ITab_DroneStation_Def(this);
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {

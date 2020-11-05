@@ -13,9 +13,9 @@ using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public class Building_Slaughterhouse : Building_BaseRange<Pawn>, PRF_SettingsContentLink, ISlaughterhouse
+    public class Building_Slaughterhouse : Building_BaseRange<Pawn>, IPRF_SettingsContentLink, ISlaughterhouse
     {
-        PRF_SettingsContent PRF_SettingsContentLink.PRF_SettingsContentOb => new ITab_Slaughterhouse_Def(this);
+        IPRF_SettingsContent IPRF_SettingsContentLink.PRF_SettingsContentOb => new ITab_Slaughterhouse_Def(this);
 
         public Dictionary<ThingDef, SlaughterSettings> Settings { get => this.slaughterSettings; }
 

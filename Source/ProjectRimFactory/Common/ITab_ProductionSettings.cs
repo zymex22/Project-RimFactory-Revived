@@ -15,7 +15,7 @@ using ProjectRimFactory.Drones;
 namespace ProjectRimFactory.Common
 {
 
-    interface PRF_SettingsContent
+    interface IPRF_SettingsContent
     {
         abstract public float ITab_Settings_Minimum_x { get; }
         abstract public float ITab_Settings_Additional_y { get; }
@@ -27,9 +27,9 @@ namespace ProjectRimFactory.Common
 
     }
 
-    interface PRF_SettingsContentLink
+    interface IPRF_SettingsContentLink
     {
-        public PRF_SettingsContent PRF_SettingsContentOb { get; }
+        public IPRF_SettingsContent PRF_SettingsContentOb { get; }
     }
 
 
@@ -52,7 +52,7 @@ namespace ProjectRimFactory.Common
 
         public override bool IsVisible {
             get {
-                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings;
+                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton;
             }
         }
         bool ShowProductLimt => Machine != null;
@@ -67,15 +67,24 @@ namespace ProjectRimFactory.Common
 
         bool ShowAdditionalSettings => pRF_SettingsContent != null;
 
-
+        bool ShowAreaSelectButton => supplyMachineHolder != null;
 
         private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
 
 
-        private PRF_SettingsContentLink pRF_SettingsContent { get => this.SelThing as PRF_SettingsContentLink; }
+        private IPowerSupplyMachineHolder supplyMachineHolder { get => this.SelThing as IPowerSupplyMachineHolder; }
+
+        // private CompProperties_PowerWorkSetting compProperties_PowerWorkSetting { get => this.SelThing.GetComp<CompProperties_PowerWorkSetting>(); }
+
+
+        private IPRF_SettingsContentLink pRF_SettingsContent { get => this.SelThing as IPRF_SettingsContentLink; }
 
 
         private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
+
+        private ThingWithComps selThingWithComps => this.SelThing as ThingWithComps;
+
+        private CompProperties_PowerWorkSetting compPropertiesPowerWork => selThingWithComps?.GetComp<CompPowerWorkSetting>()?.Props;
 
         protected override void UpdateSize() {
             winSize.y = 0;
@@ -185,6 +194,17 @@ namespace ProjectRimFactory.Common
                 list = pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list);
 
             }
+            if (ShowAreaSelectButton && compPropertiesPowerWork != null)
+            {
+                //Add Selector button
+
+                //I Guss im missing somthing here
+                //compPropertiesPowerWork.rangeType =(Type) new CircleRange();
+
+
+
+            }
+
             
             
             list.Gap();

@@ -13,7 +13,7 @@ using ProjectRimFactory.Common;
 namespace ProjectRimFactory.AutoMachineTool
 {
 
-    public class ITab_Slaughterhouse_Def : PRF_SettingsContent
+    public class ITab_Slaughterhouse_Def : IPRF_SettingsContent
     {
         object caller = null;
 
@@ -43,7 +43,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public float ITab_Settings_Minimum_x => 800f;
 
-        public float ITab_Settings_Additional_y => 600f;
+        public float ITab_Settings_Additional_y => 600f;//Thats more then needed
 
 
         private static TipSignal slaughterTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip".Translate());

@@ -66,7 +66,7 @@
       </li>
     </comps>
     <inspectorTabs>
-      <li>ProjectRimFactory.Drones.ITab_DroneStation</li>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
   </ThingDef>
 
@@ -94,7 +94,7 @@
     </statBases>
     <drawGUIOverlay>true</drawGUIOverlay>
     <inspectorTabs>
-      <li>ProjectRimFactory.Drones.ITab_DroneStation</li>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <comps>
       <li Class="CompProperties_Refuelable">

@@ -25,7 +25,7 @@ namespace ProjectRimFactory.Drones
 
     }
 
-    public class ITab_DroneStation_Def : PRF_SettingsContent
+    public class ITab_DroneStation_Def : IPRF_SettingsContent
     {
 
         private static GUIStyle richTextStyle
