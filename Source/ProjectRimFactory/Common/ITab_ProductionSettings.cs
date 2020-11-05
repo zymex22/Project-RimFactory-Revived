@@ -20,6 +20,7 @@ namespace ProjectRimFactory.Common
         abstract public float ITab_Settings_Minimum_x { get; }
         abstract public float ITab_Settings_Additional_y { get; }
 
+        //may need to pass some pos context
         abstract public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list);
 
 
@@ -36,6 +37,7 @@ namespace ProjectRimFactory.Common
     ///  * whether to obey IProductLimitation limits on production/storing
     /// </summary>
     class ITab_ProductionSettings : ITab {
+
         private Vector2 winSize = new Vector2(400f, 0f);
         private List<SlotGroup> groups;
 
@@ -45,7 +47,7 @@ namespace ProjectRimFactory.Common
 
         public override bool IsVisible {
             get {
-                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowDroneSettings || ShowSlaughterhouseSettings || ShowAdditionalSettings;
+                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings;
             }
         }
         bool ShowProductLimt => Machine != null;
@@ -57,9 +59,6 @@ namespace ProjectRimFactory.Common
                 (PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
                 !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
 
-        bool ShowDroneSettings => DroneStation != null;
-
-        bool ShowSlaughterhouseSettings => Slaughterhouse != null;
 
         bool ShowAdditionalSettings => pRF_SettingsContent != null;
 
@@ -67,9 +66,6 @@ namespace ProjectRimFactory.Common
 
         private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
 
-        private IDroneSeetingsITab DroneStation { get => this.SelThing as IDroneSeetingsITab; }
-
-        private ISlaughterhouse Slaughterhouse { get => this.SelThing as ISlaughterhouse; }
 
         private PRF_SettingsContent pRF_SettingsContent { get => this.SelThing as PRF_SettingsContent; }
 
@@ -78,14 +74,16 @@ namespace ProjectRimFactory.Common
 
         protected override void UpdateSize() {
             winSize.y = 0;
+            winSize.x = 400f;
             if (ShowProductLimt) winSize.y += 270f;
             if (ShowOutputToEntireStockpile) winSize.y += 100f;
             if (ShowObeysStorageFilter) winSize.y += 100f;
             if (pRF_SettingsContent != null) { 
                 winSize.y += pRF_SettingsContent.ITab_Settings_Additional_y;
-                winSize.x = Mathf.Min(winSize.x, pRF_SettingsContent.ITab_Settings_Minimum_x);
+                winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.ITab_Settings_Minimum_x);
             }
-           
+
+            winSize.y = Mathf.Clamp(winSize.y, 0, Prefs.ScreenHeight - 268); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
 
 
 

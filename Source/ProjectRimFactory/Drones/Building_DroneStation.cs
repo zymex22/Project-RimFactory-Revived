@@ -614,39 +614,16 @@ namespace ProjectRimFactory.Drones
         }
 
 
-        private static GUIStyle richTextStyle
-        {
-            get
-            {
-                GUIStyle gtter_richTextStyle = new GUIStyle();
-                gtter_richTextStyle.richText = true;
-                gtter_richTextStyle.normal.textColor = Color.white;
-                return gtter_richTextStyle;
-            }
-        }
+      
 
-        private void AddSleepDisplay(Rect rect, Listing_Standard list)
+        //Small helper function to create each Checkbox as i cant pass variable directly
+        private bool CheckboxHelper(Rect rect, Listing_Standard list, bool variable, WorkTypeDef def)
         {
-            rect = list.GetRect(30f);
-            // droneInterface.GetSleepTimeList
-            string txt = "";
-            for (int i = 0; i < 24; i++)
-            {
-                if (GetSleepTimeList.Contains(i.ToString()))
-                {
-                    txt += "<color=red><b>" + i.ToString() + "</b></color> ";
-                }
-                else
-                {
-                    txt += i.ToString() + " ";
-                }
-            }
-            CommonGUIFunctions.Label(rect, txt, richTextStyle);
-        }
+            rect = list.GetRect(30f); //That seems to affect the text possition
+            bool lstatus = variable;
+            Widgets.CheckboxLabeled(rect, def.labelShort, ref lstatus);
+            Rect rect2 = rect;
 
-
-        private void AddskillLabel(WorkTypeDef def, Rect rect2)
-        {
             string labeltext = "ITab_DroneStation_averageskill".Translate();
             rect2.x = 400 - (10 * labeltext.Length);
             if (def.relevantSkills.Count > 0)
@@ -664,21 +641,12 @@ namespace ProjectRimFactory.Drones
                 medSkill = medSkill / def.relevantSkills.Count;
 
                 Widgets.Label(rect2, labeltext + medSkill);
-                return;
             }
-            Widgets.Label(rect2, "-");
-        }
+            else
+            {
+                Widgets.Label(rect2, "-");
+            }
 
-
-        //Small helper function to create each Checkbox as i cant pass variable directly
-        private bool CheckboxHelper(Rect rect, Listing_Standard list, bool variable, WorkTypeDef def)
-        {
-            rect = list.GetRect(30f); //That seems to affect the text possition
-            bool lstatus = variable;
-            Widgets.CheckboxLabeled(rect, def.labelShort, ref lstatus);
-            Rect rect2 = rect;
-
-            AddskillLabel(def, rect2);
             return lstatus;
         }
 
@@ -713,8 +681,24 @@ namespace ProjectRimFactory.Drones
                 rect = list.GetRect(30f);
                 Widgets.DrawLineHorizontal(rect.x, rect.y, 400);
 
-                CommonGUIFunctions.Label(rect, "ITab_DroneStation_Sleeptimes".Translate(), richTextStyle);
-                AddSleepDisplay(rect, list);
+                CommonGUIFunctions.Label(rect, "ITab_DroneStation_Sleeptimes".Translate(), ITab_Common.richTextStyle);
+                rect = list.GetRect(30f);
+                // droneInterface.GetSleepTimeList
+                string txt = "";
+                for (int i = 0; i < 24; i++)
+                {
+                    if (GetSleepTimeList.Contains(i.ToString()))
+                    {
+                        txt += "<color=red><b>" + i.ToString() + "</b></color> ";
+                    }
+                    else
+                    {
+                        txt += i.ToString() + " ";
+                    }
+                }
+                CommonGUIFunctions.Label(rect, txt, ITab_Common.richTextStyle);
+
+
             }
 
 
@@ -724,7 +708,7 @@ namespace ProjectRimFactory.Drones
                 rect = list.GetRect(30f);
                 Widgets.DrawLineHorizontal(rect.x, rect.y, 400);
 
-                CommonGUIFunctions.Label(rect, "ITab_DroneStation_SetTargetFuel".Translate(), richTextStyle);
+                CommonGUIFunctions.Label(rect, "ITab_DroneStation_SetTargetFuel".Translate(), ITab_Common.richTextStyle);
                 rect = list.GetRect(30f);
                 list.Gap();
                 compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider(rect, compRefuelable.TargetFuelLevel, 0, compRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(compRefuelable.TargetFuelLevel), "0", compRefuelable.Props.fuelCapacity.ToString(), 1);
