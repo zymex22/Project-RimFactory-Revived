@@ -27,6 +27,11 @@ namespace ProjectRimFactory.Common
 
     }
 
+    interface PRF_SettingsContentLink
+    {
+        public PRF_SettingsContent PRF_SettingsContentOb { get; }
+    }
+
 
 
 
@@ -67,7 +72,7 @@ namespace ProjectRimFactory.Common
         private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
 
 
-        private PRF_SettingsContent pRF_SettingsContent { get => this.SelThing as PRF_SettingsContent; }
+        private PRF_SettingsContentLink pRF_SettingsContent { get => this.SelThing as PRF_SettingsContentLink; }
 
 
         private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
@@ -78,9 +83,10 @@ namespace ProjectRimFactory.Common
             if (ShowProductLimt) winSize.y += 270f;
             if (ShowOutputToEntireStockpile) winSize.y += 100f;
             if (ShowObeysStorageFilter) winSize.y += 100f;
-            if (pRF_SettingsContent != null) { 
-                winSize.y += pRF_SettingsContent.ITab_Settings_Additional_y;
-                winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.ITab_Settings_Minimum_x);
+            if (pRF_SettingsContent != null) {
+                
+                winSize.y += pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Additional_y;
+                winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Minimum_x);
             }
 
             winSize.y = Mathf.Clamp(winSize.y, 0, Prefs.ScreenHeight - 268); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
@@ -176,7 +182,7 @@ namespace ProjectRimFactory.Common
             if (pRF_SettingsContent != null)
             {
 
-                list = pRF_SettingsContent.ITab_Settings_AppendContent(list);
+                list = pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list);
 
             }
             
