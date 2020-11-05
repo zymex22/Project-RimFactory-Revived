@@ -194,14 +194,6 @@
         <glowRadius>6</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
-      <li Class="ProjectRimFactory.Common.CompProperties_SecondLayer">        <!-- This is used when multiple textures want to be stacked -->
-        <graphicData>
-          <texPath>Industry/Battery/batteryT3_4</texPath>          <!-- Path to second layer texture -->
-          <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
-          <drawSize>(4.3,2.9)</drawSize>
-        </graphicData>
-        <altitudeLayer>Projectile</altitudeLayer>        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
-      </li>
     </comps>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <researchPrerequisites>
