@@ -141,6 +141,8 @@
       <!-- <li>PRF_Destroy_Art</li> -->
       <li>PRF_Destroy_Chunks</li>
       <li>PRF_Destroy_Anything</li>
+      <li>ButcherCorpseMechanoid</li>
+      <li>SmashCorpseMechanoid</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Power">
