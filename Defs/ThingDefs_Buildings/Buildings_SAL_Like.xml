@@ -267,6 +267,10 @@
     <label>overclocked auto-assembler</label>
     <description>Produces work at the standard of a level 1 dunce, but works extremely quickly.</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(15,100,130,256)</color>      <!--change color on maske manually -->
+    </graphicData>
     <costList>
       <Steel>500</Steel>
       <Plasteel>300</Plasteel>
