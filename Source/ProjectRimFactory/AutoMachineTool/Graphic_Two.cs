@@ -26,31 +26,26 @@ namespace ProjectRimFactory.AutoMachineTool {
             this.color = req.color;
             this.colorTwo = req.colorTwo;
             this.drawSize = req.drawSize;
-            this.path = req.path;
+            this.path = extraData?.texPath ?? req.path;
             // What we want is two duplicate graphics with slightly different paths
-            // EW
+            EW = MakeSubgraphic(req, extraData, "_East");
+            NS = MakeSubgraphic(req, extraData, "_North");
+        }
+        protected Graphic MakeSubgraphic(GraphicRequest req, GraphicExtraData extraData, string texSuffix) {
             var childReq = GraphicExtraData.CopyGraphicRequest(req);
-            childReq.path += "_East";
-            childReq.graphicData.texPath += "_East";
             childReq.graphicClass = typeof(T);
-            var tmpLC = new T();
-            if (tmpLC is IHaveGraphicExtraData ihged)
+            var tmpG = new T();
+            if (tmpG is IHaveGraphicExtraData ihged && extraData != null) {
+                var tmpPath = extraData.texPath;
+                extraData.texPath += texSuffix;
                 ihged.ExtraInit(childReq, extraData);
-            else
-                tmpLC.Init(req);
-            EW = tmpLC;
-
-            // And NS:
-            childReq = GraphicExtraData.CopyGraphicRequest(req);
-            childReq.path += "_North";
-            childReq.graphicData.texPath += "_North";
-            childReq.graphicClass = typeof(T);
-            tmpLC = new T();
-            if (tmpLC is IHaveGraphicExtraData ihged2)
-                ihged2.ExtraInit(childReq, extraData);
-            else
-                tmpLC.Init(req);
-            NS = tmpLC;
+                extraData.texPath = tmpPath;
+            } else {
+                childReq.path += texSuffix;
+                childReq.graphicData.texPath += texSuffix;
+                tmpG.Init(childReq);
+            }
+            return tmpG;
         }
         public override Material MatSingle {
             get {

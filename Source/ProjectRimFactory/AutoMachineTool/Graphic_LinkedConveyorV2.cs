@@ -42,9 +42,14 @@ namespace ProjectRimFactory.AutoMachineTool {
             this.colorTwo = req.colorTwo;
             this.drawSize = req.drawSize;
             this.subGraphic = new Graphic_Single();
-            this.subGraphic.Init(req);
-            this.path = req.path;
-            if (extraData == null) return;
+            if (extraData == null) {
+                this.subGraphic.Init(req);
+                this.path = req.path;
+                return;
+            }
+            var req2 = GraphicExtraData.CopyGraphicRequest(req, extraData.texPath);
+            this.path = extraData.texPath;
+            this.subGraphic.Init(req2);
             if (extraData.arrowDrawOffset != null) {
                 var v = extraData.arrowDrawOffset.Value;
                 for (int i = 0; i < 4; i++) {
@@ -81,6 +86,7 @@ namespace ProjectRimFactory.AutoMachineTool {
                 // So....don't print underground belts?
                 return;
             }
+            //TODO: print ourself if it's underground, so it's higher than walls and visible
             base.Print(layer, thing);
             // Print the tiny yellow arrow showing direction:
             Printer_Plane.PrintPlane(layer, thing.TrueCenter()

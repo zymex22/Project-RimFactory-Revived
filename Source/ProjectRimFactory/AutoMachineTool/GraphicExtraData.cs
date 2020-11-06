@@ -19,7 +19,7 @@ namespace ProjectRimFactory {
      *  '[' in a filename gets what's coming to them?)
      * USAGE NOTE:
      *   public override void Init(GraphicRequest req) {
-     *     var extraData = GraphicExtraData.Extract(req, out this.path, out req2);
+     *     var extraData = GraphicExtraData.Extract(req, out this.path, out req2, TODO);
      *     // req2 is new GraphicRequest
      *     // req2.path and req2.graphicData.texPath are correct
      *     // use req2 for init, do all init in ExtraInit:
@@ -40,33 +40,49 @@ namespace ProjectRimFactory {
         public Vector3? arrowWestDrawOffset; // and only update if
         public Vector3? arrowNorthDrawOffset;  // actually changed
         public Vector3? arrowSouthDrawOffset;  // in def's XML.
-        private string texPath = null; // actual texPath
+        public string texPath = null; // actual texPath
         public string texPath2 = null;  // splitter building, wall edges, whatever?
         public List<ThingDef> specialLinkDefs;
+        public string inputString = null;
 
         public static GraphicExtraData Extract(GraphicRequest req, 
-                                           out GraphicRequest outReq) {
+                                           out GraphicRequest outReq,
+                                           bool removeExtraFromReq=false) {
             outReq = CopyGraphicRequest(req);
-            Log.Error("Checking request " + req.path);
             if (req.path[0] == '[') {
-                var helperDoc = new System.Xml.XmlDocument();
-                helperDoc.LoadXml(req.path.Replace('[', '<').Replace(']', '>'));
-                var extraData = DirectXmlToObject.ObjectFromXml<GraphicExtraData>(
-                                               helperDoc.DocumentElement, false);
-                outReq.graphicData.texPath = extraData.texPath;
-                outReq.path = extraData.texPath;
+                GraphicExtraData extraData = null;
+                try {
+                    var helperDoc = new System.Xml.XmlDocument();
+                    helperDoc.LoadXml(req.path.Replace('[', '<').Replace(']', '>'));
+                    extraData = DirectXmlToObject.ObjectFromXml<GraphicExtraData>(
+                                                   helperDoc.DocumentElement, false);
+                } catch (Exception e) {
+                    Log.Error("GraphicExtraData was unable to extract XML from \"" + req.path + 
+                    "\"; Exception: "+e);
+                    return null;
+                }
+                extraData.inputString = req.path;
+                if (removeExtraFromReq) {
+                    outReq.graphicData.texPath = extraData.texPath;
+                    outReq.path = extraData.texPath;
+                }
                 return extraData;
             }
             return null;
         }
         //no idea if this is necessary, but *it works* 
         //  - "it works" is a general theme here
-        public static GraphicRequest CopyGraphicRequest(GraphicRequest req) {
+        public static GraphicRequest CopyGraphicRequest(GraphicRequest req, string newTexPath = null) {
             GraphicData gData = new GraphicData();
             gData.CopyFrom(req.graphicData);
-            return new GraphicRequest(gData.graphicClass, gData.texPath, req.shader,
+            var gr = new GraphicRequest(gData.graphicClass, gData.texPath, req.shader,
                   req.drawSize, req.color, req.colorTwo, gData, req.renderQueue,
                   req.shaderParameters);
+            if (newTexPath != null) {
+                gr.path = newTexPath;
+                gr.graphicData.texPath = newTexPath;
+            }
+            return gr;
         }
     }
     public interface IHaveGraphicExtraData {

@@ -30,6 +30,7 @@ namespace ProjectRimFactory.AutoMachineTool {
 
         private GraphicData splitterBuildingDoorOpen;
         private GraphicData splitterBuildingDoorClosed;
+        private GraphicData splitterBuildingBlueprint;
 
         static Graphic_LinkedSplitter() {
             arrow01 = MaterialPool.MatFrom("Belts/SmallArrow01");
@@ -45,7 +46,8 @@ namespace ProjectRimFactory.AutoMachineTool {
             base.ExtraInit(req, extraData);
             if (extraData == null) {
                 Log.Error("PRF: invalid XML for conveyor Splitter's graphic:\n" +
-                  "   it must have <texPath>[extraData]...[texPath2]path/to/building[/texPath2]</texPath>");
+                  "   it must have <texPath>[extraData]...[texPath2]path/to/building[/texPath2]</texPath>\n"+
+                  "   but has string: "+req.path);
                 return;
             }
             string doorBasePath = extraData.texPath2;
@@ -59,6 +61,12 @@ namespace ProjectRimFactory.AutoMachineTool {
             {
                 graphicClass = typeof(Graphic_Single),
                 texPath = doorBasePath + "_Closed",
+                drawSize = Vector2.one
+            };
+            splitterBuildingBlueprint = new GraphicData
+            {
+                graphicClass = typeof(Graphic_Single),
+                texPath = doorBasePath + "_Blueprint",
                 drawSize = Vector2.one
             };
         }
@@ -94,9 +102,9 @@ namespace ProjectRimFactory.AutoMachineTool {
                              this.drawSize, arrow01, d.AsAngle);
                 }
             } else { // blueprint?
-                var mat = FadedMaterialPool.FadedVersionOf(splitterBuildingDoorClosed.Graphic.MatSingleFor(thing), 0.5f);
+                //var mat = FadedMaterialPool.FadedVersionOf(splitterBuildingDoorClosed.Graphic.MatSingleFor(thing), 0.5f);
                 Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.3f, 0),
-                    Vector2.one, mat);
+                    Vector2.one, splitterBuildingBlueprint.Graphic.MatSingleFor(thing));
             }
         }
 
