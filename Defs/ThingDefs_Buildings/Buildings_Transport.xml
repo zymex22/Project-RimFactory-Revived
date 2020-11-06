@@ -288,7 +288,7 @@
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
-    <modExtensions>
+    <modExtensions Inherit="false">
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
@@ -302,8 +302,15 @@
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
         <speedFactor>15</speedFactor>
-        <minPower>50</minPower>
-        <maxPower>200</maxPower>
+        <minPower>100</minPower>
+        <maxPower>500</maxPower>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerOutputCellResolver</outputCellResolverType>
+        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerInputCellResolver</inputCellResolverType>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
+        <forcePlacing>false</forcePlacing>
       </li>
     </modExtensions>
     <researchPrerequisites Inherit="false">
@@ -499,9 +506,9 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>6</speedFactor>
-        <minPower>5</minPower>
-        <maxPower>5</maxPower>
+        <speedFactor>0.35</speedFactor>
+        <minPower>100</minPower>
+        <maxPower>1000</maxPower>
       </li>
     </modExtensions>
     <inspectorTabs>
