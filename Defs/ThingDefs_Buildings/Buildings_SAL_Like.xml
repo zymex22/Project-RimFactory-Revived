@@ -11,6 +11,7 @@
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_AutoMachineTool</thingClass>
     <designatorDropdown>SALGroup</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
+    <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <texPath>SAL3/SAL</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
