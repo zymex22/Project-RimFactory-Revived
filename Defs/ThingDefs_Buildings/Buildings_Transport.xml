@@ -55,7 +55,7 @@
     <rotatable>true</rotatable>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRF_CoreTierI</li>
+      <li>PRF_BeltsI</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>ProjectRimFactory.Industry.PlaceWorker_FuelingMachine</li>
@@ -147,7 +147,7 @@
     </thingCategories>
     <!-- <specialDisplayRadius>5</specialDisplayRadius> -->    <!--A.K.A. Search radius-->
     <researchPrerequisites>
-      <li>PRF_CoreTierII</li>
+      <li>PRF_BeltsIII</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Settings">
@@ -225,7 +225,7 @@
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <researchPrerequisites>
-      <li>PRF_BeltsII</li>
+      <li>PRF_BeltsIII</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
@@ -266,6 +266,9 @@
         </graphicDataList>
       </li>
     </modExtensions>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsII</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <!--======================================= Item Puller mkI ===============================================-->
@@ -314,7 +317,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites Inherit="false">
-      <li>PRF_BeltsI</li>
+      <li>PRF_BeltsII</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -360,10 +363,14 @@
     <passability>Impassable</passability>
     <description>(PRF) A 90 degree angled Puller that moves items from A to B. Similar to the basic puller, but allowing turns! You can swap the direction (left/right) after placing.\n\nREMEMBER to turn it on after placing!</description>
     <altitudeLayer>Building</altitudeLayer>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
+
     <graphicData>
       <texPath>Belts/PullerL</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -556,6 +563,9 @@
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
     </placeWorkers>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <uiIconPath>Belts/v3/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
       <texPath>Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v3</texPath>
@@ -583,6 +593,9 @@
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
     <fillPercent>0.0</fillPercent>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <clearBuildingArea>false</clearBuildingArea>
     <statBases>
       <WorkToBuild Inherit="false">900</WorkToBuild>      <!--harder to dig tunnel-->
@@ -613,6 +626,9 @@
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <clearBuildingArea>true</clearBuildingArea>
     <designatorDropdown>UgRollers_gr</designatorDropdown>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <costList>
       <Steel>20</Steel>
     </costList>
@@ -667,6 +683,9 @@
     <pathCost>120</pathCost>
     <passability>PassThroughOnly</passability>
     <clearBuildingArea>true</clearBuildingArea>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsII</li>
+    </researchPrerequisites>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ConveyorFilter</li>
     </inspectorTabs>
@@ -737,6 +756,9 @@
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedSplitter</graphicClass>
       <drawRotated>true</drawRotated>
     </graphicData>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <building>
       <isEdifice>false</isEdifice>
       <blueprintGraphicData>
