@@ -34,7 +34,7 @@
   <ResearchProjectDef ParentName="PRF_BeltsResearch">
     <defName>PRF_BeltsIII</defName>
     <label>Advanced belts and pullers</label>
-    <techLevel>Spacer</techLevel>
+    <techLevel>Industrial</techLevel>
     <baseCost>500</baseCost>
     <description>Advanced set of conveyor belts and pullers</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
