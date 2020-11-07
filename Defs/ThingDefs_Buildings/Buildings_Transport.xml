@@ -253,6 +253,28 @@
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
+    <building>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Manufactured</li>
+            <li>ResourcesRaw</li>
+            <li>AnimalProductRaw</li>
+            <li>Drugs</li>
+            <li>EggsFertilized</li>
+            <li>EggsUnfertilized</li>
+            <li>Foods</li>
+            <li>Medicine</li>
+            <li>PlantMatter</li>
+            <li>PlantFoodRaw</li>
+          </categories>
+          <specialFiltersToDisallow>
+            <li>AllowRotten</li>            <!-- Disallow rotten by default -->
+          </specialFiltersToDisallow>
+        </filter>
+      </fixedStorageSettings>
+    </building>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
