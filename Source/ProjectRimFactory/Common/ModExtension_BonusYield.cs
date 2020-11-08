@@ -60,7 +60,7 @@ namespace ProjectRimFactory.Common
                     .RandomElementByWeightWithFallback(y => y.Weight, null);
                 if (yield != null)
                 {
-                    var t = ThingMaker.MakeThing(yield.def, GenStuff.DefaultStuffFor(yield.def));
+                    var t = ThingMaker.MakeThing(yield.def, yield.MaterialDef);
                     t.stackCount = yield.Count;
                     if (t.TryGetQuality(out _))
                     {
@@ -70,7 +70,6 @@ namespace ProjectRimFactory.Common
                     {
                         t.SetFaction(Faction.OfPlayer);
                     }
-                   // t = t.TryMakeMinified();
 
                     return t.TryMakeMinified();
                 }
@@ -85,12 +84,28 @@ namespace ProjectRimFactory.Common
         public float weight;
         public int count;
         public int quality;
+        public string materialdef = null;
 
         public int Count => Mathf.Min(this.count, this.def.stackLimit);
 
         public float Weight => this.weight;
 
         public int Quality => this.quality;
+
+        public ThingDef MaterialDef 
+        {
+            get 
+            {
+                if (materialdef != null)
+                {
+                    return ThingDef.Named(materialdef);
+                }
+                else
+                {
+                    return GenStuff.DefaultStuffFor(def);
+                }
+            }
+        }
 
         public void LoadDataFromXmlCustom(XmlNode xmlRoot)
         {
@@ -106,6 +121,10 @@ namespace ProjectRimFactory.Common
             if (xmlRoot.Attributes["Quality"] != null)
             {
                 int.TryParse(xmlRoot.Attributes["Quality"].Value, out this.quality);
+            }
+            if (xmlRoot.Attributes["MaterialDef"] != null)
+            {
+                this.materialdef = xmlRoot.Attributes["MaterialDef"].Value;
             }
         }
     }
