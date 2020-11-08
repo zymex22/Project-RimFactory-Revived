@@ -37,10 +37,10 @@
     <defName>PRF_StorageIO</defName>
     <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
-    <label>Wireless item Storage</label>
+    <label>Thornsworth Holography</label>
     <researchViewX>9</researchViewX>
     <researchViewY>1.9</researchViewY>
-    <description>Allows colonists to build cargo platforms and I/O ports. I/O ports can transfer items remotely to and from cargo platforms.</description>
+    <description>The holographam artist Thornsworth, despite growing blindness, continued producing masterpieces for many years, and when holographic data storage was finally perfected, he was instrumental in developing Holographic Item Storage.\nAllows Items to be stored wirelessly in a Digital Storage Unit. Can be send to any I/O port on map, and recieve items from I/O ports too.\n\nYou will be missed, Thornsworth.</description>
     <prerequisites>
       <li>PRF_SteelCrates</li>
       <li>PRF_CoreTierIII</li>
