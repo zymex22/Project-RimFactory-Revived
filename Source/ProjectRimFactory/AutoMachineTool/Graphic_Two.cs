@@ -7,6 +7,7 @@ using RimWorld;
 namespace ProjectRimFactory.AutoMachineTool {
     public class Graphic_LinkedConveyorTwo : Graphic_Two<Graphic_LinkedConveyorV2> { }
     public class Graphic_LinkedSplitterTwo : Graphic_Two<Graphic_LinkedSplitter> { }
+    public class Graphic_LinkedConveyorWallTwo : Graphic_Two<Graphic_LinkedConveyorWall> { }
 
     public class Graphic_Two<T> : Graphic, IHaveGraphicExtraData 
                                      where T : Graphic, new() {
@@ -41,8 +42,8 @@ namespace ProjectRimFactory.AutoMachineTool {
                 ihged.ExtraInit(childReq, extraData);
                 extraData.texPath = tmpPath;
             } else {
-                childReq.path += texSuffix;
                 childReq.graphicData.texPath += texSuffix;
+                childReq.path = childReq.graphicData.texPath;
                 tmpG.Init(childReq);
             }
             return tmpG;

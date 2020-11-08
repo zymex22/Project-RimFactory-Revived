@@ -49,19 +49,19 @@ namespace ProjectRimFactory {
                                            out GraphicRequest outReq,
                                            bool removeExtraFromReq=false) {
             outReq = CopyGraphicRequest(req);
-            if (req.path[0] == '[') {
+            if (req.graphicData.texPath[0] == '[') {
                 GraphicExtraData extraData = null;
                 try {
                     var helperDoc = new System.Xml.XmlDocument();
-                    helperDoc.LoadXml(req.path.Replace('[', '<').Replace(']', '>'));
+                    helperDoc.LoadXml(req.graphicData.texPath.Replace('[', '<').Replace(']', '>'));
                     extraData = DirectXmlToObject.ObjectFromXml<GraphicExtraData>(
                                                    helperDoc.DocumentElement, false);
                 } catch (Exception e) {
-                    Log.Error("GraphicExtraData was unable to extract XML from \"" + req.path + 
+                    Log.Error("GraphicExtraData was unable to extract XML from \"" + req.graphicData.texPath + 
                     "\"; Exception: "+e);
                     return null;
                 }
-                extraData.inputString = req.path;
+                extraData.inputString = req.graphicData.texPath;
                 if (removeExtraFromReq) {
                     outReq.graphicData.texPath = extraData.texPath;
                     outReq.path = extraData.texPath;
