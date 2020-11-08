@@ -36,11 +36,9 @@
       <uninstallWork>1800</uninstallWork>
     </building>
     <minifiedDef>MinifiedThing</minifiedDef>
+    <tickerType>Rare</tickerType>
     <comps>
       <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
     </comps>
   </ThingDef>
 
@@ -55,7 +53,6 @@
       <drawSize>(2,2)</drawSize>
     </graphicData>
     <castEdgeShadows>false</castEdgeShadows>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
     <size>(2,2)</size>
     <statBases>
       <WorkToBuild>10000</WorkToBuild>
@@ -127,7 +124,6 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Rare</tickerType>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>PRF_AutonomousMining</li>
@@ -198,8 +194,6 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Rare</tickerType>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
       <li>PRF_AutonomousMiningII</li>
@@ -228,7 +222,7 @@
       <ComponentIndustrial>25</ComponentIndustrial>
       <Plasteel>50</Plasteel>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
@@ -275,8 +269,7 @@
         </bonusYields>
       </li>
     </modExtensions>
-    <tickerType>Rare</tickerType>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
+    
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
       <li>PRF_AutonomousMiningIII</li>
@@ -300,7 +293,7 @@
       <ComponentIndustrial>25</ComponentIndustrial>
       <Plasteel>50</Plasteel>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <statBases>
       <WorkToBuild>10000</WorkToBuild>

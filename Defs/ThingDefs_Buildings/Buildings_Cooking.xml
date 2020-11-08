@@ -113,9 +113,6 @@ Mod extennsion for assemblers
       </li>
       <li Class="CompProperties_Flickable" />
       <!-- option to power off -->
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
-      </li>
     </comps>
   </ThingDef>
 
@@ -165,7 +162,7 @@ Mod extennsion for assemblers
     </building>
     <passability>PassThroughOnly</passability>
     <researchPrerequisites>
-      <li>SelfCooking</li>
+      <li>PRF_SelfCooking</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>    <!-- for being able to swap between textures each rotation -->
     <modExtensions>
@@ -202,8 +199,9 @@ Mod extennsion for assemblers
     <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 2x speed \n 20cleanliness \n cook level 20</description>
     <costStuffCount>100</costStuffCount>
     <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFRoboticArm>1</PRFRoboticArm>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
       <Steel>10</Steel>
     </costList>
     <comps>
@@ -250,7 +248,7 @@ Mod extennsion for assemblers
     </building>
     <passability>PassThroughOnly</passability>
     <researchPrerequisites>
-      <li>SelfCorrectingAssemblers</li>
+      <li>PRF_SelfCorrectingAssemblers</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
     <modExtensions>
@@ -322,7 +320,7 @@ Mod extennsion for assemblers
     </comps>
     <!--<recipes></recipes>-->
     <researchPrerequisites>
-      <li>SelfCooking</li>
+      <li>PRF_SelfCooking</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
     <modExtensions>
@@ -391,7 +389,7 @@ Mod extennsion for assemblers
     <designationCategory>Industrial</designationCategory>
     <researchPrerequisites>
       <li>Brewing</li>
-      <li>SelfCooking</li>
+      <li>PRF_SelfCooking</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
@@ -439,7 +437,7 @@ Mod extennsion for assemblers
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
     </building>
     <researchPrerequisites>
-      <li>SelfCooking</li>
+      <li>PRF_SelfCooking</li>
     </researchPrerequisites>
     <rotatable>false</rotatable>
     <modExtensions>

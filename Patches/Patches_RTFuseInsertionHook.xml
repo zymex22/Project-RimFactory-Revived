@@ -57,7 +57,7 @@
 		<label>circuit breaker (30k)</label>
 		<description>A set of automatic circuit breakers. Handles up to 30000 Wd discharge, will flick off if tripped.</description>
 		<researchPrerequisites>
-			<li>AutomationBasics</li>
+			<li>PRF_CoreTierII</li>
 		</researchPrerequisites>
 		<statBases>
 			<WorkToMake>1500</WorkToMake>
@@ -81,7 +81,7 @@
 		<label>circuit breaker (300k)</label>
 		<description>A set of automatic circuit breakers. Handles up to 300000 Wd discharge, will flick off if tripped.</description>
 		<researchPrerequisites>
-			<li>PRFGoldbachConjecture</li>
+			<li>PRF_CoreTierIII</li>
 		</researchPrerequisites>
 		<statBases>
 			<WorkToMake>3000</WorkToMake>

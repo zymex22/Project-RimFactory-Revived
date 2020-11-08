@@ -59,9 +59,6 @@
     </placeWorkers>
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
-      </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
@@ -100,9 +97,6 @@
       <li>ProjectRimFactory.Drones.ITab_DroneStation</li>
     </inspectorTabs>
     <comps>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
       <li Class="CompProperties_Refuelable">
         <fuelConsumptionRate>0</fuelConsumptionRate>
         <fuelCapacity>20</fuelCapacity>        <!-- Max Drone Amounts -->

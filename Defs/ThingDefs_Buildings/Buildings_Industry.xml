@@ -35,17 +35,15 @@
       <uninstallWork>1800</uninstallWork>
     </building>
     <minifiedDef>MinifiedThing</minifiedDef>
+    <tickerType>Normal</tickerType>
     <comps>
       <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
     </comps>
-        <inspectorTabs>
+    <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
   </ThingDef>
-  
+
   <!--==================== Stoneworks ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_StoneWorks</defName>
@@ -101,13 +99,12 @@
         </importRecipesFrom>
       </li>
     </modExtensions>
-    <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <castEdgeShadows>false</castEdgeShadows>
     <researchPrerequisites>
       <li>Stonecutting</li>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -144,6 +141,7 @@
       <!-- <li>PRF_Destroy_Art</li> -->
       <li>PRF_Destroy_Chunks</li>
       <li>PRF_Destroy_Anything</li>
+      <li>ButcherCorpseMechanoid</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Power">
@@ -167,11 +165,9 @@
         <artSkillLevel>10</artSkillLevel>
       </li>
     </modExtensions>
-    <tickerType>Normal</tickerType>
-    <filthLeaving>Filth_RubbleRock</filthLeaving>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRFMachineLearning</li>
+      <li>PRF_MachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -198,7 +194,7 @@
     </statBases>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFWeakAIChip>2</PRFWeakAIChip>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <Plasteel>25</Plasteel>
       <Steel>250</Steel>
@@ -247,7 +243,6 @@
         <artSkillLevel>10</artSkillLevel>
       </li>
     </modExtensions>
-    <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
       <li>PRF_MetalRefining</li>
@@ -334,17 +329,14 @@
         <artSkillLevel>10</artSkillLevel>
       </li>
     </modExtensions>
-    <tickerType>Normal</tickerType>
     <staticSunShadowHeight>1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_MachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 
   <!--==================== Furnace Base ====================-->
   <ThingDef Name="PRF_FurnaceBase" ParentName="PRF_IndustrialBase" Abstract="True">
-    <tickerType>Normal</tickerType>
-    <passability>PassThroughOnly</passability>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <inspectorTabs>
       <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
@@ -508,7 +500,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -570,7 +562,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRFMachineLearning</li>
+      <li>PRF_MachineLearning</li>
     </researchPrerequisites>
   </ThingDef>
 

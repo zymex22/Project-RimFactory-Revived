@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <AutomationBasics.label>Automação Básica</AutomationBasics.label>
-  <AutomationBasics.description>Aprenda o básico sobre automação e mecanismos, a porta de entrada para uma colônia industrial.</AutomationBasics.description>
+  <PRF_CoreTierII.label>Automação Básica</PRF_CoreTierII.label>
+  <PRF_CoreTierII.description>Aprenda o básico sobre automação e mecanismos, a porta de entrada para uma colônia industrial.</PRF_CoreTierII.description>
 
-  <PRFMachineLearning.label>Aprendizado de máquina</PRFMachineLearning.label>
-  <PRFMachineLearning.description>Ensine as máquinas a melhorar suas habilidades por conta própria. Desbloqueia o pesquisador de IA. Também permite criar módulos de drones em uma planilha robótica.</PRFMachineLearning.description>
+  <PRF_MachineLearning.label>Aprendizado de máquina</PRF_MachineLearning.label>
+  <PRF_MachineLearning.description>Ensine as máquinas a melhorar suas habilidades por conta própria. Desbloqueia o pesquisador de IA. Também permite criar módulos de drones em uma planilha robótica.</PRF_MachineLearning.description>
 
-  <PRFGoldbachConjecture.label>Hipótese de Goldbach</PRFGoldbachConjecture.label>
-  <PRFGoldbachConjecture.description>"Qualquer número inteiro par maior ou igual a 4 pode ser formado a partir da soma de dois números primos. "\nUnlocks uma nova matriz de projetos de pesquisa.</PRFGoldbachConjecture.description>
+  <PRF_CoreTierIII.label>Hipótese de Goldbach</PRF_CoreTierIII.label>
+  <PRF_CoreTierIII.description>"Qualquer número inteiro par maior ou igual a 4 pode ser formado a partir da soma de dois números primos. "\nUnlocks uma nova matriz de projetos de pesquisa.</PRF_CoreTierIII.description>
 
   <PRFQuantumComputing.label>Computação quântica</PRFQuantumComputing.label>
   <PRFQuantumComputing.description>Aprenda como construir computadores quânticos para auxiliar seus projetos de pesquisa.</PRFQuantumComputing.description>

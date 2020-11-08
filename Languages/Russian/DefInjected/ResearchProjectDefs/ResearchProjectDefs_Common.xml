@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <AutomationBasics.label>Базовая автоматизация</AutomationBasics.label>
-  <AutomationBasics.description>Изучите самые основы автоматизации и механизмов, ворота в индустриальную колонию.</AutomationBasics.description>
+  <PRF_CoreTierII.label>Базовая автоматизация</PRF_CoreTierII.label>
+  <PRF_CoreTierII.description>Изучите самые основы автоматизации и механизмов, ворота в индустриальную колонию.</PRF_CoreTierII.description>
 
-  <PRFMachineLearning.label>Машинное обучение</PRFMachineLearning.label>
-  <PRFMachineLearning.description>Научите машины, как улучшить свои способности самостоятельно. Разблокирует ИИ-иследователя. Также позволяет создавать модули дронов на роботизированной рабочей таблице.</PRFMachineLearning.description>
+  <PRF_MachineLearning.label>Машинное обучение</PRF_MachineLearning.label>
+  <PRF_MachineLearning.description>Научите машины, как улучшить свои способности самостоятельно. Разблокирует ИИ-иследователя. Также позволяет создавать модули дронов на роботизированной рабочей таблице.</PRF_MachineLearning.description>
 
-  <PRFGoldbachConjecture.label>Гипотеза Гольдбаха</PRFGoldbachConjecture.label>
-  <PRFGoldbachConjecture.description>"Любое четное целое число, большее или равное 4, может быть образовано из суммы двух простых чисел."\nРазблокирует новый массив исследовательских проектов.</PRFGoldbachConjecture.description>
+  <PRF_CoreTierIII.label>Гипотеза Гольдбаха</PRF_CoreTierIII.label>
+  <PRF_CoreTierIII.description>"Любое четное целое число, большее или равное 4, может быть образовано из суммы двух простых чисел."\nРазблокирует новый массив исследовательских проектов.</PRF_CoreTierIII.description>
 
   <PRFQuantumComputing.label>Квантовые вычисления</PRFQuantumComputing.label>
   <PRFQuantumComputing.description>Узнайте, как создавать квантовые компьютеры, чтобы помочь в исследовательских проектах.</PRFQuantumComputing.description>

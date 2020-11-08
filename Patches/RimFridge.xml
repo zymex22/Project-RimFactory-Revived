@@ -123,7 +123,7 @@
 								<li>BuildingsFurniture</li>
 							</thingCategories>
 							<researchPrerequisites>
-								<li>PRFStorageIO</li>
+								<li>PRF_StorageIO</li>
 								<li>AirConditioning</li>
 							</researchPrerequisites>
 							<modExtensions>
@@ -198,7 +198,7 @@
 							<constructEffect>ConstructMetal</constructEffect>
 							<tickerType>Normal</tickerType>
 							<researchPrerequisites>
-								<li>PRFStorageIO</li>
+								<li>PRF_StorageIO</li>
 							</researchPrerequisites>
 							<comps>
 								<li Class="CompProperties_Glower">

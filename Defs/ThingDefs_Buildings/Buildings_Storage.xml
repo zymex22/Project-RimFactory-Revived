@@ -48,11 +48,6 @@
       <li>ITab_Storage</li>
       <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
     </inspectorTabs>
-    <comps>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
-    </comps>
   </ThingDef>
 
   <!--==================== small Wood Crate ====================-->
@@ -100,7 +95,7 @@
     </costList>
     <constructEffect>ConstructWood</constructEffect>
     <researchPrerequisites>
-      <li>PRFCrates</li>
+      <li>PRF_Crates</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <modExtensions>
@@ -154,7 +149,7 @@
     </costList>
     <constructEffect>ConstructWood</constructEffect>
     <researchPrerequisites>
-      <li>PRFCrates</li>
+      <li>PRF_Crates</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <modExtensions>
@@ -210,7 +205,7 @@
     <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>PRFStorage</li>
+      <li>PRF_SteelCrates</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
@@ -264,7 +259,7 @@
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>PRFStorage</li>
+      <li>PRF_SteelCrates</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
@@ -323,11 +318,12 @@
       <Gold>50</Gold>
       <Uranium>20</Uranium>
       <ComponentIndustrial>10</ComponentIndustrial>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <constructEffect>ConstructMetal</constructEffect>
     <tickerType>Normal</tickerType>
     <researchPrerequisites>
-      <li>PRFStorageIO</li>
+      <li>PRF_StorageIO</li>
     </researchPrerequisites>
     <comps>
       <li Class="CompProperties_Glower">
@@ -416,9 +412,6 @@
         <basePowerConsumption>300</basePowerConsumption>
       </li>
       <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
       <li Class="CompProperties_Glower">
         <glowRadius>2</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
@@ -435,7 +428,7 @@
       <li>BuildingsAutomation</li>
     </thingCategories>
     <researchPrerequisites>
-      <li>PRFStorageIO</li>
+      <li>PRF_StorageIO</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">

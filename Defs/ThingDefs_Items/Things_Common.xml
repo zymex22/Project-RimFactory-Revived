@@ -20,7 +20,7 @@
       <Mass>2</Mass>
     </statBases>
     <researchPrerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </researchPrerequisites>
     <thingCategories>
       <li>Manufactured</li>

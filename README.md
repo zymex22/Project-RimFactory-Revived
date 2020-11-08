@@ -1,11 +1,13 @@
 # Project-RimFactory-Revived
-Still in Work-In-Progress
-but beggining to near its stable phase soon i hope
 
 ## This mod adds
-This mod is together with Industrial Rollers an Awesome way to automate and create factories and such in Rimworld.
-I always loved those 2 mods, and now i have the chance to update one of them
+This mod add a lot of automation and is heavily inspired by games like Factorio and Satisfactory and modded minecraft MFFR.
 
+It adds machines that can replace pawns for working, so your pawns can do other stuff like chilling, raiding and defending your colony.
+Its focused around crafting and resource gathering and have no stuff for raid/defence/medical.
+
+
+(outdated, will get updated soon)
 Kitchen
 - 2 Auto cooker
 - 1 Meat grinder (New)
@@ -40,29 +42,27 @@ i saw AbnerChen made asemblies update and created a PR but Spdskatr didnt update
 
 I used this in combination with my own work and original to update to 1.1
 I hope this mod can be a Continuation of Spdskatr excellent mod.
-i dont want credit, i really just want my favorite mod back to rimworld 1.1 standard
-
-I sadly have no C# skills so can't build upon assemblies, so if some one wanna take over or colab feel free to contact me.
+i dont want credit, i really just want my favorite mod back to rimworld 1.1/1.2 standard
 
 
-# New in this version:
-Most of the mod are updated by now either in balance or apperence also alot of new stuff have been added
-
-Any bugs, suggestion or other are VERY welcome as i cant test i all myself.
-Feel free to help me update/build upon this version and lets make PRF return to rimworld!
-Im not capble to do any c# work, so if you are? feel free to help me!
+# Mod suggestion to use with PRF
+- RimFridge
+- Ogrestack / StackXl
 
 
 # Credits:
-Huge thanks to Nobo for making alot of C# work on this mod to give it some new life.
-Also thanks to all those give feedback on steam and in my discord, it makes it all possible
+This mod is created, maintained and updated by so many great ppl.
+It have grown huge collection of talented ppl that have contributed to make this mod great.
 
-- Data disk and tape player textures by totobrother
-- Wood/steel crate texture: Chicken Plucker 2 years ago and updated 2020!
-- X/Y/Z-Composite + drone station texture: Scythe
-- Nobo: Alot of C# work
-- LWM: Fixing DS and help me solve small C# bugs
-- Spdskatr - Rimfactory original! see: https://github.com/spdskatr/ProjectRimFactory
-Old helpers: Xen, Shotgunfrenzy, Scythe
-Translaters: (might need update after release)
-Russian: Natsu_Zirok, Chinese Simplified: Dango998, Chinese Traditional: AbnerChen
+Zymex - updater of this revived version
+Spdskatr - Rimfactory original! see: https://github.com/spdskatr/ProjectRimFactory
+Nobo / Nullre - For porting thing from NR_AutoMachineTools to prf and genral C#
+
+Coders: Spdskatr, Nobo, abnerchen, LWM, Sn1p3rr3c0n
+Artists: Shotgunfrenzy, Chicken Plucker, Xen, Scythe, totobrother, "unknown alien", Argon
+
+Translaters:
+Russian: Natsu_Zirok, Chinese Simplified: 十里小飞 , Chinese Traditional: AbnerChen
+
+Resources: Freepik, Flaticon
+Other worth mentioning: Malkav, Thornsworth,

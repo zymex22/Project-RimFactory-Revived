@@ -15,7 +15,7 @@
     <baseCost>1200</baseCost>
     <description>First tier animal station technology allows animals with harvestable resources to be harvested automatically.</description>
     <prerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
   </ResearchProjectDef>
@@ -28,7 +28,7 @@
     <description>Second tier animal station allows for more animal gathering and also auto animal slaugtering and breeding control.</description>
     <prerequisites>
       <li>PRF_AnimalStations</li>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
     </prerequisites>
     <researchViewX>6</researchViewX>
   </ResearchProjectDef>

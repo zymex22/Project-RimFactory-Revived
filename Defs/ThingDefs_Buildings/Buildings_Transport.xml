@@ -55,7 +55,7 @@
     <rotatable>true</rotatable>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <researchPrerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_BeltsI</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>ProjectRimFactory.Industry.PlaceWorker_FuelingMachine</li>
@@ -123,9 +123,6 @@
         <basePowerConsumption>200</basePowerConsumption>
       </li>
       <li Class="CompProperties_Flickable" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
       <!-- Either specialDisplayRadius or CompProperties_PowerWorkSetting -->
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <speedSetting>false</speedSetting>
@@ -150,7 +147,7 @@
     </thingCategories>
     <!-- <specialDisplayRadius>5</specialDisplayRadius> -->    <!--A.K.A. Search radius-->
     <researchPrerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_BeltsIII</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Settings">
@@ -166,9 +163,7 @@
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <tickerType>Never</tickerType>
-    <category>Building</category>
     <uiIconScale>0.7</uiIconScale>
-    <selectable>true</selectable>
     <designatorDropdown>Pullers_gr</designatorDropdown>
     <costList>
       <Steel>150</Steel>
@@ -191,7 +186,6 @@
     <constructEffect>ConstructMetal</constructEffect>
     <passability>Standable</passability>
     <rotatable>true</rotatable>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
     <comps>
@@ -202,9 +196,6 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
@@ -234,7 +225,7 @@
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <researchPrerequisites>
-      <li>ADVrollersII</li>
+      <li>PRF_BeltsIII</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
@@ -262,6 +253,28 @@
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
+    <building>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Manufactured</li>
+            <li>ResourcesRaw</li>
+            <li>AnimalProductRaw</li>
+            <li>Drugs</li>
+            <li>EggsFertilized</li>
+            <li>EggsUnfertilized</li>
+            <li>Foods</li>
+            <li>Medicine</li>
+            <li>PlantMatter</li>
+            <li>PlantFoodRaw</li>
+          </categories>
+          <specialFiltersToDisallow>
+            <li>AllowRotten</li>            <!-- Disallow rotten by default -->
+          </specialFiltersToDisallow>
+        </filter>
+      </fixedStorageSettings>
+    </building>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
@@ -275,6 +288,9 @@
         </graphicDataList>
       </li>
     </modExtensions>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsII</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <!--======================================= Item Puller mkI ===============================================-->
@@ -297,7 +313,7 @@
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
-    <modExtensions>
+    <modExtensions Inherit="false">
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
@@ -311,12 +327,19 @@
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
         <speedFactor>15</speedFactor>
-        <minPower>50</minPower>
-        <maxPower>200</maxPower>
+        <minPower>100</minPower>
+        <maxPower>500</maxPower>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerOutputCellResolver</outputCellResolverType>
+        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerInputCellResolver</inputCellResolverType>
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
+        <forcePlacing>false</forcePlacing>
       </li>
     </modExtensions>
-    <researchPrerequisites>
-      <li>ADVrollers</li>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsII</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -362,10 +385,14 @@
     <passability>Impassable</passability>
     <description>(PRF) A 90 degree angled Puller that moves items from A to B. Similar to the basic puller, but allowing turns! You can swap the direction (left/right) after placing.\n\nREMEMBER to turn it on after placing!</description>
     <altitudeLayer>Building</altitudeLayer>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
+
     <graphicData>
       <texPath>Belts/PullerL</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -455,7 +482,7 @@
     <defName>UgRollers_gr</defName>
   </DesignatorDropdownGroupDef>
 
-    <DesignatorDropdownGroupDef>
+  <DesignatorDropdownGroupDef>
     <defName>Rollers_gr</defName>
   </DesignatorDropdownGroupDef>
   <!--======================================= ============= ===============================================-->
@@ -463,11 +490,9 @@
   <!--======================================= ============= ===============================================-->
   <ThingDef Name="PRF_Conveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
-    <category>Building</category>
     <altitudeLayer>Building</altitudeLayer>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>Rollers_gr</designatorDropdown>
-    <drawerType>MapMeshAndRealTime</drawerType>
     <uiIconScale>0.7</uiIconScale>
     <costList>
       <Steel>10</Steel>
@@ -476,24 +501,22 @@
       <MaxHitPoints>80</MaxHitPoints>
       <WorkToBuild>80</WorkToBuild>
       <Flammability>0.4</Flammability>
-      <Beauty>-0.5</Beauty><!--Let's Game It Out playing SatisFactory shows how beautiful conveyors truly are!-->
+      <Beauty>-0.5</Beauty>      <!--Let's Game It Out playing SatisFactory shows how beautiful conveyors truly are!-->
       <Mass>10</Mass>
     </statBases>
-    <clearBuildingArea>false</clearBuildingArea><!-- Might want to change this for anything with a building -->
+    <clearBuildingArea>false</clearBuildingArea>    <!-- Might want to change this for anything with a building -->
     <minifiedDef>MinifiedThing</minifiedDef>
     <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
     <researchPrerequisites>
-      <li>PRFRollers</li>
+      <li>PRF_BeltsI</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <size>(1,1)</size>
     <pathCost>45</pathCost>
     <passability>Standable</passability>
-    <selectable>True</selectable>
     <rotatable>true</rotatable>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <drawGUIOverlay>true</drawGUIOverlay>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
@@ -508,19 +531,17 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>2.8</speedFactor>
-        <minPower>5</minPower>
-        <maxPower>5</maxPower>
+        <speedFactor>0.35</speedFactor>
+        <minPower>100</minPower>
+        <maxPower>1000</maxPower>
       </li>
     </modExtensions>
     <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
   </ThingDef>
@@ -528,7 +549,7 @@
   <ThingDef Name="PRF_DraggableConveyorBelt_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
     <placingDraggableDimensions>1</placingDraggableDimensions>
   </ThingDef>
- 
+
   <!--======================================= Conveyor belt normal ===============================================-->
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>Building_AutoMachineTool_BeltConveyor</defName>
@@ -564,6 +585,9 @@
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
     </placeWorkers>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <uiIconPath>Belts/v3/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
       <texPath>[RIPThorny][texPath]Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v3[/texPath][texPath2]Belts/v3/Belts_Wall_Transition[/texPath2][specialLinkDefs][li]Building_AutoMachineTool_BeltConveyor_Wall[/li][/specialLinkDefs][/RIPThorny]</texPath>
@@ -591,9 +615,12 @@
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
     <fillPercent>0.0</fillPercent>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <clearBuildingArea>false</clearBuildingArea>
     <statBases>
-      <WorkToBuild Inherit="false">900</WorkToBuild><!--harder to dig tunnel-->
+      <WorkToBuild Inherit="false">900</WorkToBuild>      <!--harder to dig tunnel-->
     </statBases>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
@@ -621,11 +648,14 @@
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <clearBuildingArea>true</clearBuildingArea>
     <designatorDropdown>UgRollers_gr</designatorDropdown>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <costList>
       <Steel>20</Steel>
     </costList>
     <pathCost>70</pathCost>
-    <fillPercent>0.4</fillPercent><!-- Cover from shell -->
+    <fillPercent>0.4</fillPercent>    <!-- Cover from shell -->
   </ThingDef>
 
   <!--======================================= Conveyor floor connector to underground ===============================================-->
@@ -657,7 +687,7 @@
       <drawSize>(1,1.1)</drawSize>
       <drawRotated>true</drawRotated>
     </graphicData>
-    <inspectorTabs>
+    <inspectorTabs Inherit="false">
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <modExtensions>
@@ -675,6 +705,9 @@
     <pathCost>120</pathCost>
     <passability>PassThroughOnly</passability>
     <clearBuildingArea>true</clearBuildingArea>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsII</li>
+    </researchPrerequisites>
     <inspectorTabs>
       <li>ProjectRimFactory.AutoMachineTool.ITab_ConveyorFilter</li>
     </inspectorTabs>
@@ -688,7 +721,7 @@
       <li>Woody</li>
     </stuffCategories>
     <costStuffCount>40</costStuffCount>-->
-    <comps Inherit="false"><!--It appears one must replace all of them-->
+    <comps Inherit="false">      <!--It appears one must replace all of them-->
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>40</basePowerConsumption>
@@ -696,10 +729,10 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li>
+        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
+      </li>
     </comps>
     <uiIconPath>Belts/Splitter_door_closed</uiIconPath>
     <graphicData>
@@ -733,7 +766,7 @@
     <fillPercent>0.0</fillPercent>
     <clearBuildingArea>false</clearBuildingArea>
     <statBases>
-      <WorkToBuild Inherit="false">1300</WorkToBuild><!--have to dig space for unit-->
+      <WorkToBuild Inherit="false">1300</WorkToBuild>      <!--have to dig space for unit-->
     </statBases>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
@@ -745,6 +778,9 @@
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedSplitter</graphicClass>
       <drawRotated>true</drawRotated>
     </graphicData>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
     <building>
       <isEdifice>false</isEdifice>
 <!--      <blueprintGraphicData>
@@ -754,5 +790,5 @@
       </blueprintGraphicData>-->
     </building>
   </ThingDef>
-  
+
 </Defs>

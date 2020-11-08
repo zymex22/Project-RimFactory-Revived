@@ -90,11 +90,11 @@ You should quickly prepare for the raid.</text>
                 </li>
                 <li Class="ScenPart_StartingResearch">
                     <def>StartingResearch</def>
-                    <project>PRFCrates</project>
+                    <project>PRF_Crates</project>
                 </li>
                 <li Class="ScenPart_StartingResearch">
                     <def>StartingResearch</def>
-                    <project>PRFRollers</project>
+                    <project>PRF_BeltsI</project>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
@@ -111,6 +111,10 @@ You should quickly prepare for the raid.</text>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
                     <thingDef>MeatGrinder</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>Battery4k</thingDef>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <AutomationBasics.label>PRF：基礎自動化</AutomationBasics.label>
-  <AutomationBasics.description>學習自動化機械的基礎知識，邁向通往工業化殖民地的大門。</AutomationBasics.description>
+  <PRF_CoreTierII.label>PRF：基礎自動化</PRF_CoreTierII.label>
+  <PRF_CoreTierII.description>學習自動化機械的基礎知識，邁向通往工業化殖民地的大門。</PRF_CoreTierII.description>
 
-  <PRFMachineLearning.label>PRF：機械學習</PRFMachineLearning.label>
-  <PRFMachineLearning.description>讓工作站通過機械學習提高工作效率。</PRFMachineLearning.description>
+  <PRF_MachineLearning.label>PRF：機械學習</PRF_MachineLearning.label>
+  <PRF_MachineLearning.description>讓工作站通過機械學習提高工作效率。</PRF_MachineLearning.description>
   
-  <PRFGoldbachConjecture.label>哥德巴赫假說</PRFGoldbachConjecture.label>
-  <PRFGoldbachConjecture.description>"可以從兩個素數之和形成任何等於或大於4的整數。"\n\解鎖一系列新的研究項目.</PRFGoldbachConjecture.description>
+  <PRF_CoreTierIII.label>哥德巴赫假說</PRF_CoreTierIII.label>
+  <PRF_CoreTierIII.description>"可以從兩個素數之和形成任何等於或大於4的整數。"\n\解鎖一系列新的研究項目.</PRF_CoreTierIII.description>
 
   <PRFQuantumComputing.label>量子計算</PRFQuantumComputing.label>
   <PRFQuantumComputing.description>解如何創建量子計算機來幫助研究項目.</PRFQuantumComputing.description>

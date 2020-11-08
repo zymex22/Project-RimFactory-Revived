@@ -6,15 +6,18 @@
   </DesignatorDropdownGroupDef>
 
   <!-- base -->
-  <ThingDef Name="PRF_SAL_Base" Parent="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_SAL_Base" ParentName="PRFBuildingBase" Abstract="True">
     <defName>Building_NR_AutoMachineTool_Base</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_AutoMachineTool</thingClass>
     <designatorDropdown>SALGroup</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
+    <uiIconScale>0.7</uiIconScale>
     <graphicData>
-      <texPath>SAL3/ASWP1</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>SAL3/SAL</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1,1)</drawSize>
+      <!-- <shaderType>CutoutComplex</shaderType> -->      <!-- for mask to change color when stuffed -->
+      <!-- <color>(133,97,67,256)</color> -->      <!--change color on maske manually -->
     </graphicData>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
@@ -22,7 +25,6 @@
       <Flammability>1.0</Flammability>
       <Mass>70</Mass>
     </statBases>
-    <drawerType>MapMeshAndRealTime</drawerType>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <fillPercent>1</fillPercent>
     <comps>
@@ -33,11 +35,7 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
     </comps>
-    <leaveResourcesWhenKilled>True</leaveResourcesWhenKilled>
     <pathCost>0</pathCost>
     <designationCategory>Industrial</designationCategory>
     <rotatable>true</rotatable>
@@ -53,14 +51,11 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_TargetCellsHilight</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
     </placeWorkers>
-    <category>Building</category>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-    <repairEffect>Repair</repairEffect>
     <constructEffect>ConstructMetal</constructEffect>
     <size>(1,1)</size>
     <passability>Standable</passability>
-    <selectable>True</selectable>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
     </inspectorTabs>
@@ -79,9 +74,14 @@
       <Steel>75</Steel>
       <Plasteel>45</Plasteel>
       <ComponentIndustrial>8</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(102,102,105,256)</color>      <!--change color on maske manually -->
+    </graphicData>
     <researchPrerequisites>
-    <li>PRF_AutonomousCraftingI</li>
+      <li>PRF_AutonomousCraftingI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -126,9 +126,10 @@
       <Steel>100</Steel>
       <Plasteel>75</Plasteel>
       <ComponentIndustrial>10</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <researchPrerequisites>
-    <li>PRF_AutonomousCraftingII</li>
+      <li>PRF_AutonomousCraftingII</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -163,20 +164,25 @@
     </modExtensions>
   </ThingDef>
 
-    <!-- The Art Machine -->
+  <!-- The Art Machine -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMachine</defName>
     <label>The Art Machine</label>
     <description>Pumps out art like a hose pumps out water. Level 8 art.</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(133,97,67,256)</color>      <!--change color on maske manually -->
+    </graphicData>
     <costList>
       <Steel>150</Steel>
       <Plasteel>100</Plasteel>
       <Silver>300</Silver>
       <ComponentIndustrial>20</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <researchPrerequisites>
-    <li>PRF_ArtCraftingI</li>
+      <li>PRF_ArtCraftingI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -207,20 +213,25 @@
     </modExtensions>
   </ThingDef>
 
-      <!-- The Art Master -->
+  <!-- The Art Master -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMaster</defName>
     <label>The Art Master</label>
     <description>Pumps out art like a violent volcanic eruption pumps out lava. Level 18 art.</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(180,60,60,256)</color>      <!--change color on maske manually -->
+    </graphicData>
     <costList>
       <Steel>150</Steel>
       <Plasteel>200</Plasteel>
       <Silver>800</Silver>
       <ComponentIndustrial>30</ComponentIndustrial>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <researchPrerequisites>
-    <li>PRF_ArtCraftingII</li>
+      <li>PRF_ArtCraftingII</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -257,14 +268,19 @@
     <label>overclocked auto-assembler</label>
     <description>Produces work at the standard of a level 1 dunce, but works extremely quickly.</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(15,100,130,256)</color>      <!--change color on maske manually -->
+    </graphicData>
     <costList>
       <Steel>500</Steel>
       <Plasteel>300</Plasteel>
       <Silver>1000</Silver>
       <ComponentIndustrial>40</ComponentIndustrial>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <researchPrerequisites>
-    <li>PRF_AutonomousOverclockingI</li>
+      <li>PRF_AutonomousOverclockingI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->

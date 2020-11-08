@@ -36,7 +36,7 @@
       <li>TableMachining</li>
       <li>TableRoboticMachining</li>
     </recipeUsers>
-    <researchPrerequisite>MagneticTape</researchPrerequisite>
+    <researchPrerequisite>PRF_MagneticTape</researchPrerequisite>
   </RecipeDef>
 
   <!--==================================== Robotarm ==============================-->
@@ -84,7 +84,7 @@
       <li>TableMachining</li>
       <li>TableRoboticMachining</li>
     </recipeUsers>
-    <researchPrerequisite>PRFEulersIdentity</researchPrerequisite>
+    <researchPrerequisite>PRF_CoreTierI</researchPrerequisite>
   </RecipeDef>
 
   <!--==================================== Weak Chip ==============================-->
@@ -131,7 +131,7 @@
     <recipeUsers>
       <li>TableRoboticMachining</li>
     </recipeUsers>
-    <researchPrerequisite>AutomationBasics</researchPrerequisite>
+    <researchPrerequisite>PRF_CoreTierII</researchPrerequisite>
   </RecipeDef>
 
   <!--==================================== Advanced AI Core ==============================-->
@@ -196,7 +196,7 @@
     <recipeUsers>
       <li>TableRoboticMachining</li>
     </recipeUsers>
-    <researchPrerequisite>PRFGoldbachConjecture</researchPrerequisite>
+    <researchPrerequisite>PRF_CoreTierIII</researchPrerequisite>
   </RecipeDef>
 
   <!--==================================== qubit processor ==============================-->
@@ -261,7 +261,7 @@
     <recipeUsers>
       <li>TableRoboticMachining</li>
     </recipeUsers>
-    <researchPrerequisite>PRF_QubitTech</researchPrerequisite>
+    <researchPrerequisite>PRF_CoreTierIV</researchPrerequisite>
   </RecipeDef>
 
   <!--==================================== Drone module ==============================-->

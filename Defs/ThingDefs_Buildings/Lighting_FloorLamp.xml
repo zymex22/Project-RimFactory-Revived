@@ -6,9 +6,7 @@
   </DesignatorDropdownGroupDef>
 
   <!-- ================= Base ================= -->
-  <ThingDef Name="PRF_FloorSign" Abstract="True">
-    <thingClass>Building</thingClass>
-    <category>Building</category>
+  <ThingDef Name="PRF_FloorSign" ParentName="PRFBuildingBase" Abstract="True">
     <description>Weak florescent sig, can be placed on floor or on top of machines or other buildings to show guidance.</description>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>floor_lights</designatorDropdown>
@@ -16,7 +14,6 @@
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <clearBuildingArea>false</clearBuildingArea>
     <passability>Standable</passability>
-    <selectable>true</selectable>
     <costList>
       <Steel>2</Steel>
     </costList>
@@ -31,14 +28,10 @@
         <glowRadius>3</glowRadius>
         <glowColor>(113,141,117,0)</glowColor>
       </li>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
-      </li>
     </comps>
     <building>
       <isEdifice>false</isEdifice>
     </building>
-    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <placingDraggableDimensions>1</placingDraggableDimensions>
     <size>(1,1)</size>

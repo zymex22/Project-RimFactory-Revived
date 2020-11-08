@@ -70,7 +70,7 @@
       <li>Manufactured</li>
     </thingCategories>
     <researchPrerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </researchPrerequisites>
     <stackLimit>5</stackLimit>
     <techLevel>Industrial</techLevel>
@@ -99,7 +99,7 @@
       <li>Manufactured</li>
     </thingCategories>
     <researchPrerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
     </researchPrerequisites>
     <stackLimit>5</stackLimit>
     <techLevel>Industrial</techLevel>
@@ -125,7 +125,7 @@
       <Mass>40</Mass>
     </statBases>
     <researchPrerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierIII</li>
     </researchPrerequisites>
     <thingCategories>
       <li>Manufactured</li>

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <AutonomousMining.label>PRF: 自動採礦</AutonomousMining.label>
-  <AutonomousMining.description>可以建造從地底深處挖掘隨機礦物和岩石的建築。</AutonomousMining.description>
+  <PRF_AutonomousMining.label>PRF: 自動採礦</PRF_AutonomousMining.label>
+  <PRF_AutonomousMining.description>可以建造從地底深處挖掘隨機礦物和岩石的建築。</PRF_AutonomousMining.description>
 
   <PaperclipProduction.label>迴紋針生產</PaperclipProduction.label>
   <PaperclipProduction.description>允許殖民者建立一個工廠，該工廠可以用任何材料創建迴紋針，並可以使用一台機器從迴紋針中產生能量.</PaperclipProduction.description>

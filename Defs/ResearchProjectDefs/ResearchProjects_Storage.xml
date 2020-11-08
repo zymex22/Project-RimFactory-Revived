@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <ResearchProjectDef>
-    <defName>PRFCrates</defName>
+  <!--============================================== Storage Research base ============================================-->
+  <ResearchProjectDef Name="PRF_StorageResearch" Abstract="True">
     <tab>Automation</tab>
+    <researchViewY>1.7</researchViewY>
+  </ResearchProjectDef>
+
+
+  <ResearchProjectDef ParentName="PRF_StorageResearch">
+    <defName>PRF_Crates</defName>
     <techLevel>Industrial</techLevel>
     <baseCost>1500</baseCost>
     <label>Wooden stockpile crates</label>
     <researchViewX>3</researchViewX>
-    <researchViewY>1.7</researchViewY>
     <description>Allows colonists to build large crates for more compact storage.</description>
     <prerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </prerequisites>
   </ResearchProjectDef>
 
-  <ResearchProjectDef>
-    <defName>PRFStorage</defName>
-    <tab>Automation</tab>
+  <ResearchProjectDef ParentName="PRF_StorageResearch">
+    <defName>PRF_SteelCrates</defName>
     <techLevel>Industrial</techLevel>
-    <baseCost>3000</baseCost>
+    <baseCost>2000</baseCost>
     <label>Steel stockpile crates</label>
     <researchViewX>6</researchViewX>
-    <researchViewY>1.7</researchViewY>
     <description>Allows colonists to build reinforced stockpile crates.</description>
     <prerequisites>
-      <li>AutomationBasics</li>
-      <li>PRFCrates</li>
+      <li>PRF_CoreTierII</li>
+      <li>PRF_Crates</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
   </ResearchProjectDef>
 
-  <ResearchProjectDef>
-    <defName>PRFStorageIO</defName>
-    <tab>Automation</tab>
+  <ResearchProjectDef ParentName="PRF_StorageResearch">
+    <defName>PRF_StorageIO</defName>
     <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
-    <label>Wireless item Storage</label>
+    <label>Thornsworth Holography</label>
     <researchViewX>9</researchViewX>
     <researchViewY>1.9</researchViewY>
-    <description>Allows colonists to build cargo platforms and I/O ports. I/O ports can transfer items remotely to and from cargo platforms.</description>
+    <description>The holographam artist Thornsworth, despite growing blindness, continued producing masterpieces for many years, and when holographic data storage was finally perfected, he was instrumental in developing Holographic Item Storage.\nAllows Items to be stored wirelessly in a Digital Storage Unit. Can be send to any I/O port on map, and recieve items from I/O ports too.\n\nYou will be missed, Thornsworth.</description>
     <prerequisites>
-      <li>PRFStorage</li>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_SteelCrates</li>
+      <li>PRF_CoreTierIII</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
   </ResearchProjectDef>

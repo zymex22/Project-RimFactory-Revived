@@ -11,7 +11,7 @@
   <!-- Tier 0 -->
   <!-- ==================== Main Tier 0 ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
-    <defName>PRF_Clockwork</defName>
+    <defName>PRF_CoreTierO</defName>
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
     <baseCost>500</baseCost>
@@ -30,7 +30,7 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <!-- Tier 1 -->
   <!-- ==================== Main Tier 1 ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
-    <defName>PRFEulersIdentity</defName>
+    <defName>PRF_CoreTierI</defName>
     <label>Euler's identity</label>
     <baseCost>750</baseCost>
     <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the very basics of automation and mechanisms, the gateway to an industrial colony. tier 1</description>
@@ -54,12 +54,12 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <!-- Tier 2 -->
   <!-- ==================== Main Tier 2 ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
-    <defName>AutomationBasics</defName>
+    <defName>PRF_CoreTierII</defName>
     <label>Koller-Li Framework</label>
     <baseCost>2000</baseCost>
     <description>AI Learning and Patern Recognition allow automation to reach a new level. Even on the Rim, some basic AI frameworks are recognized as being both useful and easy to apply. Using these frameworks is good, because these are hard problems</description>
     <prerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
       <li>MicroelectronicsBasics</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
@@ -75,13 +75,13 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <!-- Tier 3 -->
   <!-- ==================== Main Tier 3 ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
-    <defName>PRFGoldbachConjecture</defName>
+    <defName>PRF_CoreTierIII</defName>
     <label>Goldbach's conjecture</label>
     <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
     <description>"Every even integer, greater than 2, can be formed from the sum of two prime numbers."\nUnlocks a new array of third tier research projects.</description>
     <prerequisites>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
       <li>Fabrication</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
@@ -94,13 +94,13 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <!-- Tier 4 -->
   <!-- ==================== Main Tier 4 ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
-    <defName>PRF_QubitTech</defName>
+    <defName>PRF_CoreTierIV</defName>
     <label>quantum bit technology</label>
     <techLevel>Ultra</techLevel>
     <baseCost>3500</baseCost>
     <description>A qubit (or quantum bit) is the quantum mechanical analogue of a classical bit. In classical computing the information is encoded in bits, where each bit can have the value zero or one. In quantum computing the information is encoded in qubits. A qubit is a two-level quantum system where the two basis qubit states are usually written as \left\lvert 0 \right\rangle∣0⟩ and \left\lvert 1 \right\rangle∣1⟩. A qubit can be in state \left\lvert 0 \right\rangle∣0⟩, \left\lvert 1 \right\rangle∣1⟩ or (unlike a classical bit) in a linear combination of both states. The name of this phenomenon is superposition.</description>
     <prerequisites>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_CoreTierIII</li>
       <li>ShipBasics</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>

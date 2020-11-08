@@ -13,7 +13,7 @@
     <label>Auger drill I</label>
     <baseCost>1000</baseCost>
     <prerequisites>
-      <li>PRFEulersIdentity</li>
+      <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
     <description>Make buildings that can extract random minerals and rocks from deep underground.(can cause infestation)</description>
@@ -29,7 +29,7 @@
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>DeepDrilling</li>
-      <li>AutomationBasics</li>
+      <li>PRF_CoreTierII</li>
       <li>PRF_AutonomousMining</li>
     </prerequisites>
     <requiredResearchFacilities>
@@ -49,7 +49,7 @@
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_AutonomousMiningII</li>
-      <li>PRFGoldbachConjecture</li>
+      <li>PRF_CoreTierIII</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
