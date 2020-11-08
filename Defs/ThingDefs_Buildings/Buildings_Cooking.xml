@@ -106,6 +106,7 @@ Mod extennsion for assemblers
     <drawGUIOverlay>true</drawGUIOverlay>    <!-- Whether GUI will show up when you select this thing. -->
     <inspectorTabs>      <!-- A list of ITabs that will show up in the inspector when you select this item. These ITabs are for example the "Bills" buttons (ITab_Bills) and the art description (ITab_Art). -->
       <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>      <!-- Setup bills for assemblers -->
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li>
