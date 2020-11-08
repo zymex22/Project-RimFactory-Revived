@@ -158,6 +158,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         ModExtension_Skills extension_Skills;
 
+        public ModExtension_BonusYield modExtension_BonusYield => this.def.GetModExtension<ModExtension_BonusYield>();
+
         public int GetSkillLevel(SkillDef def)
         {
             return extension_Skills?.GetExtendedSkillLevel(def,typeof(Building_AutoMachineTool)) ?? this.SkillLevel ?? 0;
@@ -426,6 +428,12 @@ namespace ProjectRimFactory.AutoMachineTool
             this.dominant = null;
             this.unfinished = null;
             this.ingredients = null;
+            Thing bonus = modExtension_BonusYield?.GetBonusYield(QualityCategory.Normal) ?? null;
+            if (bonus != null)
+            {
+                products.Add(bonus);
+            }
+
             return true;
         }
 
