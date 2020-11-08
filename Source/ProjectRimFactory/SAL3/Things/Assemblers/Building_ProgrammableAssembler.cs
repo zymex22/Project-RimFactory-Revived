@@ -48,6 +48,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         public bool DrawStatus => this.def.GetModExtension<AssemblerDefModExtension>()?.drawStatus ?? true;
 
+
+        public ModExtension_BonusYield modExtension_BonusYield => this.def.GetModExtension<ModExtension_BonusYield>();
         // Pawn
 
         public Pawn buildingPawn;
@@ -409,6 +411,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 }
                 currentBillReport.bill.recipe.Worker.ConsumeIngredient(currentBillReport.selected[i], currentBillReport.bill.recipe, Map);
             }
+            //Bonus
+            Thing bonus = modExtension_BonusYield?.GetBonusYield(QualityCategory.Normal) ?? null;
+            if (bonus != null)
+            {
+                thingQueue.Add(bonus);
+            }
+
             thingQueue.AddRange(from Thing t in currentBillReport.selected where t.Spawned select t);
         }
 
