@@ -511,7 +511,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else if (this.State == WorkingState.Placing)
             {
-                return this.products[0];
+                return this.products?[0];
             }
             return null;
         }
