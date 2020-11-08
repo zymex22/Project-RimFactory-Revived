@@ -94,7 +94,6 @@
         <skillLevel>10</skillLevel>
         <artSkillLevel>10</artSkillLevel>
         <importRecipesFrom>
-          <li>TableSculpting</li>
           <li>TableStonecutter</li>
         </importRecipesFrom>
       </li>
@@ -163,6 +162,68 @@
         <doEffect>false</doEffect>
         <skillLevel>10</skillLevel>
         <artSkillLevel>10</artSkillLevel>
+      </li>
+    </modExtensions>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRF_MachineLearning</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Tribute To Tornsworth ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_MrTsArtMachine</defName>
+    <label>Mr T's Art Machine</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
+    <graphicData>
+      <texPath>Industry/ArtPrinter</texPath>
+      <drawSize>(2.3,2.3)</drawSize>
+    </graphicData>
+    <uiIconScale>0.8</uiIconScale>
+    <designatorDropdown>PRF_industry_gr</designatorDropdown>
+    <size>(2,2)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>Tribute to Tornsworth here</description>
+    <costList>
+      <Steel>250</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+    </costList>
+    <recipes>
+      <!-- <li>PRF_Destroy_Art</li> -->
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+        <skillLevel>10</skillLevel>
+        <artSkillLevel>18</artSkillLevel>
+        <importRecipesFrom>
+          <li>TableSculpting</li>
+        </importRecipesFrom>
       </li>
     </modExtensions>
     <staticSunShadowHeight>1</staticSunShadowHeight>
