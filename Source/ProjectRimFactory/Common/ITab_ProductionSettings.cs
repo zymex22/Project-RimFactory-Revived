@@ -84,19 +84,20 @@ namespace ProjectRimFactory.Common
 
         private ThingWithComps selThingWithComps => this.SelThing as ThingWithComps;
 
-        private CompProperties_PowerWorkSetting compPropertiesPowerWork => selThingWithComps?.GetComp<CompPowerWorkSetting>()?.Props;
+        private CompPowerWorkSetting compPropertiesPowerWork => selThingWithComps?.GetComp<CompPowerWorkSetting>();
 
         protected override void UpdateSize() {
             winSize.y = 0;
             winSize.x = 400f;
             if (ShowProductLimt) winSize.y += 270f;
             if (ShowOutputToEntireStockpile) winSize.y += 100f;
-            if (ShowObeysStorageFilter) winSize.y += 100f;
+            if (ShowObeysStorageFilter) winSize.y += 70f;
             if (pRF_SettingsContent != null) {
                 
                 winSize.y += pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Additional_y;
                 winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Minimum_x);
             }
+            winSize.y += 100f;
 
             winSize.y = Mathf.Clamp(winSize.y, 0, Prefs.ScreenHeight - 268); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
 
@@ -196,12 +197,17 @@ namespace ProjectRimFactory.Common
             }
             if (ShowAreaSelectButton && compPropertiesPowerWork != null)
             {
-                //Add Selector button
+                inRect = list.GetRect(30f);
+                Widgets.Label(inRect.LeftHalf(), "Select Zone Shape");
+                if (Widgets.ButtonText(inRect.RightHalf(), compPropertiesPowerWork.rangeCells.ToText() ))
+                {
+                    Find.WindowStack.Add(new FloatMenu(compPropertiesPowerWork.rangeTypes
+                      .Select(d => new FloatMenuOption(d.ToText(),
+                      () => compPropertiesPowerWork.rangeCells = d
+                      )).ToList()));
 
-                //I Guss im missing somthing here
-                //compPropertiesPowerWork.rangeType =(Type) new CircleRange();
-
-
+                }
+                list.Gap();
 
             }
 

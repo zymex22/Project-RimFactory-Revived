@@ -21,6 +21,8 @@ namespace ProjectRimFactory.Common
 
         public int MaxPowerForRange => this.Props.maxPowerForRange;
 
+        public IRangeCells rangeCells = null;
+
         public float SupplyPowerForSpeed
         {
             get => this.powerForSpeed;
@@ -62,6 +64,12 @@ namespace ProjectRimFactory.Common
             base.PostExposeData();
             Scribe_Values.Look<float>(ref this.powerForSpeed, "powerForSpeed");
             Scribe_Values.Look<float>(ref this.powerForRange, "powerForRange");
+            Scribe_Values.Look<IRangeCells>(ref rangeCells, "rangeType");
+            if (rangeCells == null)
+            {
+                rangeCells = (IRangeCells)Activator.CreateInstance(Props.rangeType);
+            }
+            
             this.AdjustPower();
             this.RefreshPowerStatus();
         }
@@ -130,7 +138,7 @@ namespace ProjectRimFactory.Common
         {
             if (this.RangeSetting)
             {
-                return this.Props.RangeCells(this.parent.Position, this.parent.Rotation, this.parent.def, this.GetRange());
+                return this.RangeCells(this.parent.Position, this.parent.Rotation, this.parent.def, this.GetRange());
             }
             return null;
         }
@@ -149,6 +157,31 @@ namespace ProjectRimFactory.Common
             var range = GetRange();
             GenDraw.DrawFieldEdges(this.GetRangeCells().ToList(), color);
         }
+
+
+        
+
+        public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
+        {
+            if (this.rangeCells == null)
+            {
+                this.rangeCells = (IRangeCells)Activator.CreateInstance(Props.rangeType);
+            }
+            return this.rangeCells.RangeCells(center, rot, thingDef, range);
+        }
+
+
+
+
+        public IRangeCells[] rangeTypes = new IRangeCells[] { new  CircleRange() , new FacingRectRange() , new RectRange() }; 
+
+
+
+
+
+
+
+
     }
 
     public class CompProperties_PowerWorkSetting : CompProperties
@@ -186,35 +219,29 @@ namespace ProjectRimFactory.Common
             {
                 base.DrawGhost(center, rot, thingDef, ghostCol, drawAltitude, thing);
 
-                var min = this.RangeCells(center, rot, thingDef, this.minRange);
-                var max = this.RangeCells(center, rot, thingDef, this.maxRange);
-                min.Select(c => new { Cell = c, Color = this.blueprintMin })
-                    .Concat(max.Select(c => new { Cell = c, Color = this.blueprintMax }))
-                    .GroupBy(a => a.Color)
-                    .ToList()
-                    .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
+            //    var min = this.RangeCells(center, rot, thingDef, this.minRange);
+            //    var max = this.RangeCells(center, rot, thingDef, this.maxRange);
+            //    min.Select(c => new { Cell = c, Color = this.blueprintMin })
+            //        .Concat(max.Select(c => new { Cell = c, Color = this.blueprintMax }))
+            //        .GroupBy(a => a.Color)
+            //        .ToList()
+            //        .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
 
-                Map map = Find.CurrentMap;
-                map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null)
-                    .ToList().ForEach(c => c.DrawRangeCells(this.otherInstance));
+            //    Map map = Find.CurrentMap;
+            //    map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null)
+            //        .ToList().ForEach(c => c.DrawRangeCells(this.otherInstance));
             }
         }
 
-        private IRangeCells rangeCells;
-
-        public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
-        {
-            if(this.rangeCells == null)
-            {
-                this.rangeCells = (IRangeCells)Activator.CreateInstance(rangeType);
-            }
-            return this.rangeCells.RangeCells(center, rot, thingDef, range);
-        }
+        
     }
 
     public interface IRangeCells
     {
         IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range);
+
+        string ToText();
+
     }
 
     public class CircleRange : IRangeCells
@@ -223,6 +250,11 @@ namespace ProjectRimFactory.Common
         {
             return GenRadial.RadialCellsAround(center, range, true);
         }
+
+        public string ToText()
+        {
+            return "CircleRange";
+        }
     }
 
     public class FacingRectRange : IRangeCells
@@ -230,6 +262,11 @@ namespace ProjectRimFactory.Common
         public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
         {
             return Util.FacingRect(center, thingDef.size, rot, Mathf.RoundToInt(range));
+        }
+
+        public string ToText()
+        {
+            return "FacingRectRange";
         }
     }
 
@@ -240,6 +277,10 @@ namespace ProjectRimFactory.Common
             var under = GenAdj.CellsOccupiedBy(center, rot, thingDef.size).ToHashSet();
             return GenAdj.CellsOccupiedBy(center, rot, thingDef.size + new IntVec2(Mathf.RoundToInt(range) * 2, Mathf.RoundToInt(range) * 2))
                 .Where(c => !under.Contains(c));
+        }
+        public string ToText()
+        {
+            return "RectRange";
         }
     }
 }

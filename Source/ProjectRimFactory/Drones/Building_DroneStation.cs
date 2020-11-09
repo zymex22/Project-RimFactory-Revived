@@ -169,8 +169,8 @@ namespace ProjectRimFactory.Drones
         {
             get
             {
-                if (this.GetComp<CompPowerWorkSetting>() != null) {
-                    return (int)Math.Ceiling(this.GetComp<CompPowerWorkSetting>().GetRange());
+                if (compPowerWorkSetting != null) {
+                    return (int)Math.Ceiling(compPowerWorkSetting.GetRange());
                 }
                 else {
                     return def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius;
@@ -179,11 +179,20 @@ namespace ProjectRimFactory.Drones
 
         }
 
+        private CompPowerWorkSetting compPowerWorkSetting => this.GetComp<CompPowerWorkSetting>();
+
         public IEnumerable<IntVec3> StationRangecells
         {
             get
             {
-                return GenAdj.OccupiedRect(this).ExpandedBy(DroneRange).Cells;
+                if (compPowerWorkSetting != null && compPowerWorkSetting.RangeSetting)
+                {
+                    return compPowerWorkSetting.GetRangeCells();
+                }
+                else
+                {
+                    return GenAdj.OccupiedRect(this).ExpandedBy(DroneRange).Cells;
+                }
             }
         }
 
@@ -310,6 +319,7 @@ namespace ProjectRimFactory.Drones
             this.mapManager = map.GetComponent<MapTickManager>();
             extension = def.GetModExtension<DefModExtension_DroneStation>();
             //Setup Allowd Area
+            //Enssuring that Update_droneAllowedArea_forDrones() is run resolves #224 (May need to add a diffrent check)
             if (droneAllowedArea == null) {
                 //Log.Message("droneAllowedArea was null");
                 Update_droneAllowedArea_forDrones();
@@ -383,6 +393,8 @@ namespace ProjectRimFactory.Drones
             {
                 drones[i].Destroy();
             }
+            droneAllowedArea = null;
+
         }
 
         public virtual void DrawDormantDrones()
@@ -407,6 +419,7 @@ namespace ProjectRimFactory.Drones
         public override void Tick()
         {
             base.Tick();
+            if (!this.Spawned) return;
             if (DronesLeft > 0 && !lockdown && this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>()?.PowerOn != false)
             {
                 Job job = TryGiveJob();
