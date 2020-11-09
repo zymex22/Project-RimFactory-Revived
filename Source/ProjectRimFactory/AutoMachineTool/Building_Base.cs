@@ -453,7 +453,10 @@ namespace ProjectRimFactory.AutoMachineTool
                     msg += "PRF.AutoMachineTool.StatReady".Translate();
                     break;
                 case WorkingState.Placing:
-                    msg += "PRF.AutoMachineTool.StatPlacing".Translate(this.products.Count);
+                    if (this.products.Count != 1)
+                        msg += "PRF.AutoMachineTool.StatPlacing".Translate(this.products.Count);
+                    else
+                        msg += "PRF.AutoMachineTool.PlacingSingle".Translate(this.products[0].Label);
                     break;
                 default:
                     msg += this.State.ToString();

@@ -25,6 +25,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.StatWorkingNotParam>Working.</PRF.AutoMachineTool.StatWorkingNotParam>
   <PRF.AutoMachineTool.StatReady>Ready.</PRF.AutoMachineTool.StatReady>
   <PRF.AutoMachineTool.StatPlacing>Placing. [pending placement {0}]</PRF.AutoMachineTool.StatPlacing>
+  <PRF.AutoMachineTool.PlacingSingle>Placing {0}.</PRF.AutoMachineTool.PlacingSingle>
   
   <PRF.AutoMachineTool.Priority>priority</PRF.AutoMachineTool.Priority>
   
