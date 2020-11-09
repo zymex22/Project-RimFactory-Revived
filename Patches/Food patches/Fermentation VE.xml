@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName = "BrewBeer_sixpack"]/workAmount</xpath>
+    <value>
+      <workAmount>180000</workAmount>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName = "BrewBeer_case"]/workAmount</xpath>
+    <value>
+      <workAmount>180000</workAmount>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/RecipeDef[defName = "BrewBeer_keg"]/workAmount</xpath>
+    <value>
+      <workAmount>180000</workAmount>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Brewing Expanded</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName = "PRFFermentingBarrel"]/recipes</xpath>
+          <value>
+            <li>Brew_VBE_AmbrandyNormal</li>
+            <li>Brew_VBE_Gin</li>
+            <li>Brew_VBE_Tequila</li>
+            <li>Brew_VBE_Vodka</li>
+            <li>Brew_VBE_Whiskey</li>
+            <li>VBE_MakeTea</li>
+            <li>VBE_MakeCoffee</li>
+            <li>VBE_MakeEnergyDrink</li>
+            <li>VBE_MakeSodaSyrup</li>
+            <li>Brew_VBE_Soda</li>
+            <li>VBE_MixJuice</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Factions Expanded - Medieval</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName = "PRFFermentingBarrel"]/recipes</xpath>
+          <value>
+            <li>Brew_VFEM_Wine</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Factions Expanded - Vikings</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName = "PRFFermentingBarrel"]/recipes</xpath>
+          <value>
+            <li>Brew_VFEV_Mead</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Brewing Expanded</li>
+    </mods>
+    <match Class="PatchOperationFindMod">
+      <mods>
+        <li>Vanilla Plants Expanded</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+          <li Class="PatchOperationAdd">
+            <xpath>/Defs/ThingDef[defName = "PRFFermentingBarrel"]/recipes</xpath>
+            <value>
+              <li>Brew_VBE_Cider</li>
+            </value>
+          </li>
+        </operations>
+      </match>
+    </match>
+  </Operation>
+
+</Patch>
