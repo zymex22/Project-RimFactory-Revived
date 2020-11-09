@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Cooking Expanded - Sushi</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName = "SelfCooker"]/recipes</xpath>
+			<value>
+				<li>VCE_CookChirashizushiSimple</li>
+				<li>VCE_CookChirashizushiSimpleBulk</li>
+				<li>VCE_CookNorimakiSimple</li>
+				<li>VCE_CookNorimakiSimpleBulk</li>
+				<li>VCE_CookUramakiFine</li>
+				<li>VCE_CookUramakiFineBulk</li>
+				<li>VCE_CookNigiriFine</li>
+				<li>VCE_CookNigiriFineBulk</li>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName = "PRF_SpacerCooker"]/recipes</xpath>
+			<value>
+				<li>VCE_CookChirashizushiSimple</li>
+				<li>VCE_CookChirashizushiSimpleBulk</li>
+				<li>VCE_CookNorimakiSimple</li>
+				<li>VCE_CookNorimakiSimpleBulk</li>
+				<li>VCE_CookUramakiFine</li>
+				<li>VCE_CookUramakiFineBulk</li>
+				<li>VCE_CookNigiriFine</li>
+				<li>VCE_CookNigiriFineBulk</li>
+				<li>VCE_CookTemakiLavish</li>
+				<li>VCE_CookTemakiLavishBulk</li>
+				<li>VCE_CookFutomakiLavish</li>
+				<li>VCE_CookFutomakiLavishBulk</li>
+				<li>VCE_CookOshizushiiGourmet</li>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName = "SelfPrepper"]/recipes</xpath>
+			<value>
+				<li>VCE_MakeHumanSurimi</li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>
