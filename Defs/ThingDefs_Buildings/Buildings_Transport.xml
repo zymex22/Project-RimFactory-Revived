@@ -558,7 +558,7 @@
     <clearBuildingArea>false</clearBuildingArea>
     <uiIconPath>Belts/v3/BeltConveyorIcon</uiIconPath>
     <graphicData>
-      <texPath>[extraData][texPath]Belts/v3/Belts Atlas 640x640 GroundLevel Padded[/texPath][arrowEastDrawOffset](2,0.1,2)[/arrowEastDrawOffset][/extraData]</texPath>
+      <texPath>[extraData][texPath]Belts/v3/Belts Atlas 640x640 GroundLevel Padded[/texPath][arrowEastDrawOffset](0,0.0,0)[/arrowEastDrawOffset][/extraData]</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1, 1)</drawSize>
