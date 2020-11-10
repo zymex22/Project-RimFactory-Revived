@@ -199,7 +199,7 @@ namespace ProjectRimFactory.Common
             {
                 inRect = list.GetRect(30f);
                 Widgets.Label(inRect.LeftHalf(), "Select Zone Shape");
-                if (Widgets.ButtonText(inRect.RightHalf(), compPropertiesPowerWork.rangeCells.ToText() ))
+                if (Widgets.ButtonText(inRect.RightHalf(), ( compPropertiesPowerWork.rangeCells as IRangeCells).ToText() ))
                 {
                     Find.WindowStack.Add(new FloatMenu(compPropertiesPowerWork.rangeTypes
                       .Select(d => new FloatMenuOption(d.ToText(),

@@ -57,19 +57,59 @@ namespace ProjectRimFactory.Common
 
         private float powerForSpeed = 0;
 
+        
         private float powerForRange = 0;
+
+        private enum rangeTypeClassEnum{
+            CircleRange,
+            FacingRectRange,
+            RectRange
+        }
+
+        private int rangeTypeSelection
+        {
+            get
+            {
+                if (rangeCells == null) rangeCells = (IRangeCells)Activator.CreateInstance(Props.rangeType);
+                if (rangeCells.ToText() == new CircleRange().ToText()) return (int)rangeTypeClassEnum.CircleRange;
+                if (rangeCells.ToText() == new FacingRectRange().ToText()) return (int)rangeTypeClassEnum.FacingRectRange;
+                if (rangeCells.ToText() == new RectRange().ToText()) return (int)rangeTypeClassEnum.RectRange;
+                return (int)rangeTypeClassEnum.RectRange;
+            }
+
+            set
+            {
+                if (value == (int)rangeTypeClassEnum.CircleRange) rangeCells = new CircleRange();
+                if (value == (int)rangeTypeClassEnum.FacingRectRange) rangeCells = new FacingRectRange();
+                if (value == (int)rangeTypeClassEnum.RectRange) rangeCells = new RectRange();
+            }
+
+        }
+
+        //Used for Saving the rangeCells . This is done as directly saving rangeCells leads to unknown Type Errors on Load
+        private int rangeTypeSeletion = 0;
+
 
         public override void PostExposeData()
         {
             base.PostExposeData();
+
+            //Load the Current rangeCells Value
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                rangeTypeSeletion = rangeTypeSelection;
+            }
+
             Scribe_Values.Look<float>(ref this.powerForSpeed, "powerForSpeed");
             Scribe_Values.Look<float>(ref this.powerForRange, "powerForRange");
-            Scribe_Values.Look<IRangeCells>(ref rangeCells, "rangeType");
-            if (rangeCells == null)
+            Scribe_Values.Look(ref rangeTypeSeletion, "rangeType");
+
+            //Set the Loaded rangeCells Value
+            if (Scribe.mode != LoadSaveMode.Saving)
             {
-                rangeCells = (IRangeCells)Activator.CreateInstance(Props.rangeType);
+                rangeTypeSelection = rangeTypeSeletion;
             }
-            
+
             this.AdjustPower();
             this.RefreshPowerStatus();
         }
@@ -167,7 +207,7 @@ namespace ProjectRimFactory.Common
             {
                 this.rangeCells = (IRangeCells)Activator.CreateInstance(Props.rangeType);
             }
-            return this.rangeCells.RangeCells(center, rot, thingDef, range);
+            return (this.rangeCells as IRangeCells).RangeCells(center, rot, thingDef, range);
         }
 
 
