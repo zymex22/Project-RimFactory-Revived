@@ -308,6 +308,7 @@
     <recipeUsers>
       <li>TableRoboticMachining</li>
     </recipeUsers>
+    <researchPrerequisite>PRF_BasicDrones</researchPrerequisite>
   </RecipeDef>
 
   <!--==================================== Simple frame ==============================-->

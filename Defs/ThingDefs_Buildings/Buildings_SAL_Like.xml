@@ -81,7 +81,7 @@
       <color>(102,102,105,256)</color>      <!--change color on maske manually -->
     </graphicData>
     <researchPrerequisites>
-      <li>PRF_AutonomousCraftingI</li>
+      <li>PRF_SALResearchI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -129,7 +129,7 @@
       <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <researchPrerequisites>
-      <li>PRF_AutonomousCraftingII</li>
+      <li>PRF_SALResearchII</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -182,7 +182,7 @@
       <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <researchPrerequisites>
-      <li>PRF_ArtCraftingI</li>
+      <li>PRF_SALResearchIV</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -231,7 +231,7 @@
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <researchPrerequisites>
-      <li>PRF_ArtCraftingII</li>
+      <li>PRF_SALResearchV</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
@@ -280,7 +280,7 @@
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <researchPrerequisites>
-      <li>PRF_AutonomousOverclockingI</li>
+      <li>PRF_SALResearchVI</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->

@@ -11,7 +11,7 @@
   <!--==============================================General============================================-->
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
-    <defName>PRF_AutonomousCraftingI</defName>
+    <defName>PRF_SALResearchI</defName>
     <label>S.A.L Autonomous crafting I</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1000</baseCost>
@@ -28,13 +28,13 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
-    <defName>PRF_AutonomousCraftingII</defName>
+    <defName>PRF_SALResearchII</defName>
     <label>S.A.L autonomous crafting II</label>
     <techLevel>Industrial</techLevel>
     <baseCost>3000</baseCost>
     <description>Start to learn how to program more advanced machines to be able to craft faster, better, and more accurately.</description>
     <prerequisites>
-      <li>PRF_AutonomousCraftingI</li>
+      <li>PRF_SALResearchI</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
@@ -43,13 +43,13 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
-    <defName>PRF_SALSpecialisation</defName>
+    <defName>PRF_SALResearchIII</defName>
     <label>S.A.L. Specialisation</label>
     <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
     <description>Start to learn how to specialise and create different auto-assemblers with different roles.</description>
     <prerequisites>
-      <li>PRF_AutonomousCraftingII</li>
+      <li>PRF_SALResearchII</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
@@ -60,13 +60,13 @@
 
   <!--==============================================Specialised============================================-->
   <ResearchProjectDef ParentName="PRF_SALResearch">
-    <defName>PRF_ArtCraftingI</defName>
+    <defName>PRF_SALResearchIV</defName>
     <label>S.A.L Art I</label>
     <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
     <description>Learn the ways of hypercomputing and neural networks, allowing machines to create proper semi-decent art.</description>
     <prerequisites>
-      <li>PRF_SALSpecialisation</li>
+      <li>PRF_SALResearchIII</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
@@ -75,13 +75,13 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
-    <defName>PRF_ArtCraftingII</defName>
+    <defName>PRF_SALResearchV</defName>
     <label>S.A.L Art II</label>
     <techLevel>Ultra</techLevel>
     <baseCost>3000</baseCost>
     <description>Combined with overclocking, make your neural networks react much faster, improving quality of art.</description>
     <prerequisites>
-      <li>PRF_AutonomousOverclockingI</li>
+      <li>PRF_SALResearchVI</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
@@ -107,13 +107,13 @@
   </ResearchProjectDef> -->
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
-    <defName>PRF_AutonomousOverclockingI</defName>
+    <defName>PRF_SALResearchVI</defName>
     <label>S.A.L Autonomous overclocking I</label>
     <techLevel>Spacer</techLevel>
     <baseCost>5000</baseCost>
     <description>S.A.L. machines often work too slowly for repetitive tasks where quality doesn't matter. Learn how to speed them up at the cost of quality.</description>
     <prerequisites>
-      <li>PRF_ArtCraftingI</li>
+      <li>PRF_SALResearchIV</li>
       <!-- <li>PRF_AutonomousCookingI</li> -->
     </prerequisites>
     <requiredResearchFacilities>
