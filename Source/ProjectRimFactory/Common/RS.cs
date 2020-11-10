@@ -32,6 +32,10 @@ namespace ProjectRimFactory
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
 
             Arrow = ContentFinder<Texture2D>.Get("UI/Overlays/Arrow", true);
+            // Initialize graphics for SpecialSculptures:
+            foreach (var s in ProjectRimFactory.Common.
+                     ProjectRimFactory_ModComponent.availableSpecialSculptures)
+                s.Init();
         }
 
         public static readonly Texture2D PregnantIcon;

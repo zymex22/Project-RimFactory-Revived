@@ -23,6 +23,7 @@ namespace ProjectRimFactory.Common
                 this.HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
                 Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");
                 NoMessySpawns.Instance.Add(ShouldSuppressDisplace, (Building_MassStorageUnit b, Map map) => true);
+                availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
             }
             catch (Exception ex)
             {
@@ -58,5 +59,8 @@ namespace ProjectRimFactory.Common
         {
             return !respawningAfterLoad || map?.thingGrid.ThingsListAtFast(cell).OfType<Building_MassStorageUnit>().Any() != true;
         }
+        // I am happy enough to make this static; it's not like there will be more than once
+        //   instance of the mod loaded or anything.
+        public static List<SpecialSculpture> availableSpecialSculptures; // loaded on startup in SpecialScupture; see above
     }
 }

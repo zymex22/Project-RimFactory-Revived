@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Sculptures>
+  <li>
+    <id>ThornsworthMemorial</id>
+    <titleKey>PRF.ThornyMemorialTitle</titleKey>
+    <descKey>PRF.ThornyMemorialDesc</descKey>
+    <authorKey>PRF.ThornyAuthor</authorKey>
+    <graphicData>
+      <texPath>InMemoryOf/Thornsworth</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.5,1.5)</drawSize>
+    </graphicData>
+  </li>
+</Sculptures>
