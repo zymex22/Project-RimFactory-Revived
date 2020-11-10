@@ -241,6 +241,8 @@ namespace ProjectRimFactory.Common
         public bool speedSetting = true;
         public bool rangeSetting = false;
 
+        public bool allowManualRangeTypeChange = false;
+
         public Color blueprintMin = Color.white;
         public Color blueprintMax = Color.gray.A(0.6f);
         public Color instance = Color.white;

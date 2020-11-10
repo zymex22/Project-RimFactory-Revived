@@ -64,6 +64,7 @@ namespace ProjectRimFactory.Common
                 (PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
                 !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
 
+        bool ShowRangeTypeSelectorButton => ShowAreaSelectButton && compPropertiesPowerWork != null && compPropertiesPowerWork.Props.allowManualRangeTypeChange;
 
         bool ShowAdditionalSettings => pRF_SettingsContent != null;
 
@@ -97,7 +98,7 @@ namespace ProjectRimFactory.Common
                 winSize.y += pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Additional_y;
                 winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Minimum_x);
             }
-            winSize.y += 100f;
+            if(ShowRangeTypeSelectorButton) winSize.y += 100f;
 
             winSize.y = Mathf.Clamp(winSize.y, 0, Prefs.ScreenHeight - 268); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
 
@@ -195,7 +196,7 @@ namespace ProjectRimFactory.Common
                 list = pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list);
 
             }
-            if (ShowAreaSelectButton && compPropertiesPowerWork != null)
+            if (ShowRangeTypeSelectorButton)
             {
                 inRect = list.GetRect(30f);
                 Widgets.Label(inRect.LeftHalf(), "Select Zone Shape");
