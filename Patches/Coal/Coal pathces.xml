@@ -18,6 +18,9 @@
 				<li Class="PatchOperationRemove">
 					<xpath>/Defs/ThingDef[defName="WDMineableCoal"]</xpath>
 				</li>
+				<li Class="PatchOperationRemove">
+					<xpath>/Defs/RecipeDef[defName="PRF_ChemfuelFromCoal"]</xpath>
+				</li>
 			</operations>
 		</match>
 	</Operation>
