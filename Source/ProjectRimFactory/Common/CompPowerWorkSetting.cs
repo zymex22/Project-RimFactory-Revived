@@ -250,6 +250,8 @@ namespace ProjectRimFactory.Common
 
         public Type rangeType;
 
+        private IRangeCells propsRangeType => (IRangeCells)Activator.CreateInstance(rangeType);
+
         public CompProperties_PowerWorkSetting()
         {
             this.compClass = typeof(CompPowerWorkSetting);
@@ -260,18 +262,17 @@ namespace ProjectRimFactory.Common
             if (this.rangeSetting)
             {
                 base.DrawGhost(center, rot, thingDef, ghostCol, drawAltitude, thing);
+                var min = propsRangeType.RangeCells(center, rot, thingDef, this.minRange);
+                var max = propsRangeType.RangeCells(center, rot, thingDef, this.maxRange);
+                min.Select(c => new { Cell = c, Color = this.blueprintMin })
+                    .Concat(max.Select(c => new { Cell = c, Color = this.blueprintMax }))
+                    .GroupBy(a => a.Color)
+                    .ToList()
+                    .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
 
-            //    var min = this.RangeCells(center, rot, thingDef, this.minRange);
-            //    var max = this.RangeCells(center, rot, thingDef, this.maxRange);
-            //    min.Select(c => new { Cell = c, Color = this.blueprintMin })
-            //        .Concat(max.Select(c => new { Cell = c, Color = this.blueprintMax }))
-            //        .GroupBy(a => a.Color)
-            //        .ToList()
-            //        .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
-
-            //    Map map = Find.CurrentMap;
-            //    map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null)
-            //        .ToList().ForEach(c => c.DrawRangeCells(this.otherInstance));
+                Map map = Find.CurrentMap;
+                map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null)
+                    .ToList().ForEach(c => c.DrawRangeCells(this.otherInstance));
             }
         }
 
