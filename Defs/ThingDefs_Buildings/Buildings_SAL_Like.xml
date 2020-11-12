@@ -308,6 +308,48 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- overclocked auto-assembler mkII (Tier 3) -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_OverclockedAutoAssemblerII</defName>
+    <label>overclocked auto-assembler mkII</label>
+    <description>Produces terrible quality items, though it does this so quickly it might not matter</description>
+    <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(15,100,130,256)</color>      <!--change color on maske manually -->
+    </graphicData>
+    <costList>
+      <Steel>1000</Steel>
+      <Plasteel>600</Plasteel>
+      <Silver>2000</Silver>
+      <ComponentIndustrial>50</ComponentIndustrial>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRFRoboticArm>1</PRFRoboticArm>
+    </costList>
+    <researchPrerequisites>
+      <li>PRF_SALResearchVIII</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
+        <speedFactor>12</speedFactor>        <!-- Base speed -->
+        <minPower>1500</minPower>        <!-- power usage lowest range -->
+        <maxPower>2500</maxPower>        <!-- Power for max range -->
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>        <!-- power usage lowest range -->
+        <maxPower>1000</maxPower>        <!-- Power for max range -->
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>1</BaseSkill>
+        <skills>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
   <!-- AutoCooker S.A.L -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_SALAutoCooker</defName>
@@ -403,6 +445,65 @@
           <li>
             <def>Mining</def>
             <levelInt>12</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+
+  <!-- Tier 4: Godlike -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_GodlyCrafter</defName>
+    <label>Godly S.A.L Crafter</label>
+    <description>Works so quickly, it defies all expectation. Perfect for mass-producing high quality items. May or may not incinerate the universe\nThis might be first step into insanity?!#..</description>
+    <constructionSkillPrerequisite>18</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <!-- <color>(15,100,130,256)</color> -->      <!--change color on maske manually -->
+    </graphicData>
+    <costList>
+      <Steel>10000</Steel>
+      <Plasteel>7500</Plasteel>
+      <Silver>100000</Silver>
+      <ComponentIndustrial>450</ComponentIndustrial>
+      <PRFQubitProcessor>5</PRFQubitProcessor>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <AIPersonaCore>5</AIPersonaCore>
+    </costList>
+    <researchPrerequisites>
+      <li>PRF_SALGodlyCrafting</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(50,0,100,0)</glowColor>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>15</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
+        <speedFactor>666</speedFactor>        <!-- Base speed -->
+        <minPower>20000</minPower>        <!-- power usage lowest range -->
+        <maxPower>50000</maxPower>        <!-- Power for max range -->
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>        <!-- power usage lowest range -->
+        <maxPower>1000</maxPower>        <!-- Power for max range -->
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>18</levelInt>
           </li>
         </skills>
       </li>

@@ -123,4 +123,38 @@
     <researchViewY>4.3</researchViewY>
   </ResearchProjectDef>
 
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchVIII</defName>
+    <label>S.A.L Autonomous overclocking II</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>10000</baseCost>
+    <description>Increases to servo speed and internal visualisation computers allow this S.A.L crafter to work even faster than before</description>
+    <prerequisites>
+      <li>PRF_SALResearchVI</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>11</researchViewX>
+    <researchViewY>4.3</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- Tier 4 -->
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALGodlyCrafting</defName>
+    <label>S.A.L Godly Crafting</label>
+    <techLevel>Ultra</techLevel>
+    <baseCost>20000</baseCost>
+    <description>A godlike crafter made with insane amounts of materials, you may run out of resources before you can turn this crafter off, this might be on edge to insanity, is this even safe?!</description>
+    <prerequisites>
+      <li>PRF_SALResearchVIII</li>
+      <li>PRF_CoreTierIV</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>12</researchViewX>
+    <researchViewY>4.3</researchViewY>
+  </ResearchProjectDef>
+
 </Defs>
