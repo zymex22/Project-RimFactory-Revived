@@ -8,7 +8,7 @@ namespace ProjectRimFactory {
     public class PRFGameComponent : GameComponent {
         public List<SpecialSculpture> specialScupltures;
         public PRFGameComponent(Game game) {
-            Log.Message("Loaded PRF Game Component");
+            SpecialSculpture.PreStartGame();
         }
         public override void ExposeData() {
             base.ExposeData();
@@ -25,24 +25,39 @@ namespace ProjectRimFactory {
             if (specialSculpture == null) { // find an acceptable special sculpture
                 foreach (var ss in ProjectRimFactory_ModComponent.availableSpecialSculptures
                                 .InRandomOrder()) {
-                    if (this.specialScupltures == null ||
-                        // not currently in special Sculptures list
-                        (specialScupltures.FirstOrDefault(s => s.id == ss.id) == null)) {
-                        //TODO: Maybe check defs, too, to make sure we aren't replacing
-                        //  a grand sculptur with the image for a large one?
+                    if (this.specialScupltures == null) { specialSculpture = ss; break; }
+                    var inGameWithSameId = specialScupltures.FirstOrDefault(s => s.id == ss.id);
+                    if (inGameWithSameId == null) { specialSculpture = ss;  break; }
+                    if (inGameWithSameId.currentInstances == null ||
+                        inGameWithSameId.currentInstances.Count(a => a!=item) 
+                           < inGameWithSameId.maxNumberCopies) {
                         specialSculpture = ss;
                         break;
                     }
+                    //TODO: Maybe check defs, too, to make sure we aren't replacing
+                    //  a grand sculptur with the image for a large one?
                 }
-                if (specialSculpture == null) return false; // could not find empty sculpture
+                if (specialSculpture == null) return false; // could not find empty sculpture slot
             }
-            specialSculpture.currentInstance = item;
             specialSculpture.MakeItemSpecial(item);
+            // bookkeeping:
             if (this.specialScupltures == null) specialScupltures = new List<SpecialSculpture>();
-            this.specialScupltures.Add(specialSculpture);
+            var alreadyRecordedSpecialSculpture = this.specialScupltures
+                             .FirstOrDefault(s => s.id == specialSculpture.id);
+            if (alreadyRecordedSpecialSculpture == null) {
+                this.specialScupltures.Add(specialSculpture);
+                alreadyRecordedSpecialSculpture = specialSculpture;
+            } // alreadyRSS has been added to list one way or another now
+            if (alreadyRecordedSpecialSculpture.currentInstances == null)
+                alreadyRecordedSpecialSculpture.currentInstances = new List<Thing>();
+            if (!alreadyRecordedSpecialSculpture.currentInstances.Contains(item)) {
+                alreadyRecordedSpecialSculpture.currentInstances.Add(item);
+            }
+            // Note: autocompletion was essential for all that.
             return true;
         }
         /*
+        // A quick way to test all the scupltures available, if need be.       
         public override void LoadedGame() {
             base.LoadedGame();
             foreach (var t in Current.Game.CurrentMap.spawnedThings.Where(x => x is Building_Art)) {

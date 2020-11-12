@@ -15,7 +15,8 @@ namespace ProjectRimFactory {
             Thing t = __instance.parent;
             var ss = Current.Game.GetComponent<PRFGameComponent>().specialScupltures;
             if (ss == null) return true;
-            var s = ss.FirstOrDefault(x => x.currentInstance == t);
+            var s = ss.FirstOrDefault(x => x.currentInstances != null &&
+                                           x.currentInstances.Contains(t));
             if (s == null) return true;
             __result = new TaggedString(s.descKey.Translate());
             return false; // skip vanilla
