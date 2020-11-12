@@ -495,7 +495,7 @@
     </modExtensions>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
     <researchPrerequisites>
-      <li>Smithing</li>
+      <li>PRF_CoreTierO</li>
     </researchPrerequisites>
   </ThingDef>
 

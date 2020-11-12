@@ -14,7 +14,7 @@
     <defName>PRF_CoreTierO</defName>
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
-    <baseCost>500</baseCost>
+    <baseCost>400</baseCost>
     <description>Clockwork Principle will unlock some Early age automation aimed at Tribal/medieval age. You can skip this and go directly to Tier1 if you will fast forward to high tier.\n its aimed to aid in medieval playthrough</description>
     <prerequisites>
       <li>Smithing</li>
@@ -32,9 +32,10 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierI</defName>
     <label>Euler's identity</label>
-    <baseCost>750</baseCost>
+    <baseCost>700</baseCost>
     <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the very basics of automation and mechanisms, the gateway to an industrial colony. tier 1</description>
     <prerequisites>
+      <li>PRF_CoreTierO</li>
       <li>Machining</li>
     </prerequisites>
     <researchViewX>2</researchViewX>
