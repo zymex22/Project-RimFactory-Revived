@@ -565,7 +565,7 @@
     </graphicData>
     <building>
       <blueprintGraphicData>
-        <texPath>[notActualTexPath>[texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint[/texPath>[arrowDrawOffset](0,0.2,0)[/arrowDrawOffset][/notActualTexPath></texPath><!--TODO-->
+        <texPath>[notActualTexPath>[texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint[/texPath>[arrowDrawOffset](0,0.2,0)[/arrowDrawOffset][/notActualTexPath></texPath>        <!--TODO-->
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
         <drawRotated>true</drawRotated>
         <drawSize>(1, 1)</drawSize>
@@ -741,7 +741,7 @@
       <drawRotated>false</drawRotated>
       <drawSize>(1, 1)</drawSize>
     </graphicData>
-<!--    <building>
+    <!--    <building>
       <blueprintGraphicData>
         <texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint_North</texPath>
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedSplitter</graphicClass>
@@ -783,7 +783,42 @@
     </researchPrerequisites>
     <building>
       <isEdifice>false</isEdifice>
-<!--      <blueprintGraphicData>
+      <!--      <blueprintGraphicData>
+        <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedSplitter</graphicClass>
+        <drawRotated>false</drawRotated>
+      </blueprintGraphicData>-->
+    </building>
+  </ThingDef>
+
+  <!--======================================= Conveyor Splitter Wall ===============================================-->
+  <ThingDef ParentName="PRF_Belt_Splitter">
+    <defName>Building_AutoMachineTool_BeltSplitter_Wall</defName>
+    <label>wall splitter</label>
+    <designatorDropdown>UgRollers_gr</designatorDropdown>
+    <description>A conveyor splitter unit built into the walls.  This one will hand off items to wall belts and Overground ones.</description>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <pathCost>0</pathCost>
+    <passability>Standable</passability>
+    <fillPercent>0.0</fillPercent>
+    <clearBuildingArea>false</clearBuildingArea>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
+    </placeWorkers>
+    <statBases>
+      <WorkToBuild Inherit="false">1300</WorkToBuild>      <!--have to dig space for unit-->
+    </statBases>
+    <graphicData>
+      <texPath>[extraData][texPath]AutoMachineTool/Buildings/BeltConveyorUG[/texPath][texPath2]Belts/v3/Splitter_House[/texPath2][/extraData]</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedSplitter</graphicClass>
+      <drawRotated>true</drawRotated>
+    </graphicData>
+    <researchPrerequisites Inherit="false">
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
+    <building>
+      <isEdifice>false</isEdifice>
+      <!--      <blueprintGraphicData>
         <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedSplitter</graphicClass>
         <drawRotated>false</drawRotated>
