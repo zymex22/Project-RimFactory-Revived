@@ -489,7 +489,7 @@
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>666</speedFactor>        <!-- Base speed -->
         <minPower>20000</minPower>        <!-- power usage lowest range -->
-        <maxPower>50000</maxPower>        <!-- Power for max range -->
+        <maxPower>20000</maxPower>        <!-- Power for max range -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <minPower>0</minPower>        <!-- power usage lowest range -->
