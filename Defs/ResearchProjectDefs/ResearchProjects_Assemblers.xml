@@ -26,6 +26,7 @@
     <label>Self-cooking</label>
     <baseCost>2000</baseCost>
     <prerequisites>
+      <li>PRF_SelfCooking</li>
       <li>PRF_CoreTierII</li>
     </prerequisites>
     <researchViewX>7</researchViewX>

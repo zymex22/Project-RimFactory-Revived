@@ -102,7 +102,7 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>10</researchViewX>
+    <researchViewX>9</researchViewX>
     <researchViewY>5</researchViewY>
   </ResearchProjectDef>
 
