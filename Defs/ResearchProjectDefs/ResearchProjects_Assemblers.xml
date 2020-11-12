@@ -13,11 +13,22 @@
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCooking</defName>
     <label>Self-cooking</label>
-    <baseCost>2000</baseCost>
+    <baseCost>1500</baseCost>
     <prerequisites>
       <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
+    <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
+  </ResearchProjectDef>
+
+    <ResearchProjectDef ParentName="PRF_AssemblersResearch">
+    <defName>PRF_SelfCookingII</defName>
+    <label>Self-cooking</label>
+    <baseCost>2000</baseCost>
+    <prerequisites>
+      <li>PRF_CoreTierII</li>
+    </prerequisites>
+    <researchViewX>7</researchViewX>
     <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
   </ResearchProjectDef>
 

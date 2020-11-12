@@ -117,7 +117,7 @@ Mod extennsion for assemblers
     </comps>
   </ThingDef>
 
-  <!--==================== T1 Cooker ====================-->
+  <!--==================== T1 Industrial Cooker ====================-->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>SelfCooker</defName>
     <label>industrial cooker</label>
@@ -129,6 +129,7 @@ Mod extennsion for assemblers
       <graphicClass>Graphic_Single</graphicClass>      <!-- for being able to swap between textures each rotation -->
       <texPath>SAL3/cooker1</texPath>
     </graphicData>
+    <size>(2,2)</size>
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
@@ -172,7 +173,70 @@ Mod extennsion for assemblers
           <li>ElectricStove</li>
         </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
         <workSpeedBaseFactor>1</workSpeedBaseFactor>
-        <skillLevel>10</skillLevel>
+        <skillLevel>6</skillLevel>
+        <drawStatus>true</drawStatus>
+        <doEffect>true</doEffect>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!--==================== T2 modern AutoCooker ====================-->
+  <ThingDef ParentName="PRF_CookingBase">
+    <defName>PRF_SelfCookerII</defName>
+    <label>modern autocooker</label>
+    <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>assembler_food_gr</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- for being able to swap between textures each rotation -->
+      <texPath>SAL3/cooker2</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>2500</WorkToBuild>
+      <MarketValue>700</MarketValue>
+      <Cleanliness>5</Cleanliness>
+    </statBases>
+    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1x speed \n 5cleanliness \n cook level 10\n\nWhite cell is input range \nBlue cell are db range.</description>
+    <costStuffCount>100</costStuffCount>
+    <costList>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFMachineFrame>1</PRFMachineFrame>
+      <Steel>10</Steel>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+    </comps>
+    <recipes>      <!-- Defines recipe to make it in ThingDef directly.	 (extra from importrecipesfrom) -->
+      <li>MakeNutrientPaste</li>
+      <li>MakeNutrientPasteBulk</li>
+    </recipes>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
+      <isMealSource>true</isMealSource>      <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
+    </building>
+    <passability>PassThroughOnly</passability>
+    <researchPrerequisites>
+      <li>PRF_SelfCookingII</li>
+    </researchPrerequisites>
+    <rotatable>false</rotatable>    <!-- for being able to swap between textures each rotation -->
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <importRecipesFrom>
+          <li>ElectricStove</li>
+        </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
+        <workSpeedBaseFactor>1.5</workSpeedBaseFactor>
+        <skillLevel>12</skillLevel>
         <drawStatus>true</drawStatus>
         <doEffect>true</doEffect>
       </li>
@@ -257,7 +321,7 @@ Mod extennsion for assemblers
         <importRecipesFrom>          <!-- import same bills as vanilla electric stove have -->
           <li>ElectricStove</li>
         </importRecipesFrom>
-        <workSpeedBaseFactor>1</workSpeedBaseFactor>
+        <workSpeedBaseFactor>2</workSpeedBaseFactor>
         <skillLevel>20</skillLevel>
         <artSkillLevel>10</artSkillLevel>
         <workingGraphicData>
