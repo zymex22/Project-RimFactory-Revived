@@ -45,6 +45,12 @@
             <li>VBE_MixJuice</li>
           </value>
         </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName = "PRFStorageUnitIOPortFridge"]/building/fixedStorageSettings/filter/categories</xpath>
+          <value>
+            <li>VBE_Musts</li>
+          </value>
+        </li>
       </operations>
     </match>
   </Operation>
@@ -98,6 +104,29 @@
             <xpath>/Defs/ThingDef[defName = "PRFFermentingBarrel"]/recipes</xpath>
             <value>
               <li>Brew_VBE_Cider</li>
+            </value>
+          </li>
+        </operations>
+      </match>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Brewing Expanded</li>
+    </mods>
+    <match Class="PatchOperationFindMod">
+      <mods>
+        <li>[KV] RimFridge - 1.1</li>
+        <li>[KV] RimFridge</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+          <li Class="PatchOperationAdd">
+            <xpath>/Defs/ThingDef[defName = "PRFStorageUnitIOPortFridge"]/building/fixedStorageSettings/filter/thingDefs</xpath>
+            <value>
+              <li>VFEM_Must</li>
             </value>
           </li>
         </operations>
