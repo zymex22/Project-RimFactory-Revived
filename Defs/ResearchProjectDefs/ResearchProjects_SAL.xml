@@ -90,8 +90,8 @@
     <researchViewY>3.7</researchViewY>
   </ResearchProjectDef>
 
-  <!-- <ResearchProjectDef ParentName="PRF_SALResearch">
-    <defName>PRF_AutonomousCookingI</defName>
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchVII</defName>
     <label>autonomous cooking</label>
     <techLevel>Industrial</techLevel>
     <baseCost>2000</baseCost>
@@ -102,9 +102,9 @@
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
-    <researchViewX>4</researchViewX>
-    <researchViewY>2</researchViewY>
-  </ResearchProjectDef> -->
+    <researchViewX>10</researchViewX>
+    <researchViewY>5</researchViewY>
+  </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchVI</defName>
@@ -114,7 +114,7 @@
     <description>S.A.L. machines often work too slowly for repetitive tasks where quality doesn't matter. Learn how to speed them up at the cost of quality.</description>
     <prerequisites>
       <li>PRF_SALResearchIV</li>
-      <!-- <li>PRF_AutonomousCookingI</li> -->
+      <li>PRF_SALResearchVII</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>

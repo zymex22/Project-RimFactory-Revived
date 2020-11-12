@@ -303,4 +303,58 @@
     </modExtensions>
   </ThingDef>
 
+  <!-- AutoCooker S.A.L -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_SALAutoCooker</defName>
+    <label>AutoCooker S.A.L</label>
+    <description>Although the auto-assembler performs cooking to a decent level, the auto-cooker is both faster and more accurate in its food production, capable of reaching a level 12 standard.</description>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <!-- <color>(15,100,130,256)</color> -->      <!--change color on maske manually -->
+    </graphicData>
+    <costList>
+      <Steel>50</Steel>
+      <Plasteel>175</Plasteel>
+      <Silver>100</Silver>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
+    </costList>
+    <researchPrerequisites>
+      <li>PRF_SALResearchVI</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
+        <speedFactor>1</speedFactor>        <!-- Base speed -->
+        <minPower>750</minPower>        <!-- power usage lowest range -->
+        <maxPower>750</maxPower>        <!-- Power for max range -->
+      </li>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
+        <minPower>0</minPower>        <!-- power usage lowest range -->
+        <maxPower>400</maxPower>        <!-- Power for max range -->
+        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
+        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>5</BaseSkill>
+        <skills>
+          <li>
+            <def>Cooking</def>
+            <levelInt>12</levelInt>
+          </li>
+          <li>
+            <def>Crafting</def>
+            <levelInt>8</levelInt>
+          </li>
+          <li>
+            <def>Artistic</def>
+            <levelInt>0</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
 </Defs>
