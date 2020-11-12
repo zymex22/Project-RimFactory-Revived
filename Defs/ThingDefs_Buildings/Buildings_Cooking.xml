@@ -125,9 +125,11 @@ Mod extennsion for assemblers
     <designatorDropdown>assembler_food_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <drawerType>RealtimeOnly</drawerType>
+    <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>      <!-- for being able to swap between textures each rotation -->
       <texPath>SAL3/cooker1</texPath>
+      <drawSize>(2,2)</drawSize>
     </graphicData>
     <size>(2,2)</size>
     <statBases>

@@ -795,7 +795,6 @@
   <ThingDef ParentName="PRF_Belt_Splitter">
     <defName>Building_AutoMachineTool_BeltSplitter_Wall</defName>
     <label>wall splitter</label>
-    <designatorDropdown>UgRollers_gr</designatorDropdown>
     <description>A conveyor splitter unit built into the walls.  This one will hand off items to wall belts and Overground ones.</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <pathCost>0</pathCost>
@@ -816,6 +815,7 @@
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
+    <designatorDropdown>Rollers_gr</designatorDropdown>
     <building>
       <isEdifice>false</isEdifice>
       <!--      <blueprintGraphicData>

@@ -97,7 +97,7 @@
     <baseCost>2000</baseCost>
     <description>Learn how to give auto-assemblers enough dexterity and precision for them to become cooks.</description>
     <prerequisites>
-      <li>PRF_SALSpecialisation</li>
+      <li>PRF_SALResearchIII</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>

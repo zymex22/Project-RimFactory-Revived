@@ -87,8 +87,8 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>2</speedFactor>        <!-- Base speed -->
-        <minPower>350</minPower>        <!-- power usage lowest range -->
-        <maxPower>350</maxPower>        <!-- Power for max range -->
+        <minPower>400</minPower>        <!-- power usage lowest range -->
+        <maxPower>400</maxPower>        <!-- Power for max range -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <minPower>0</minPower>        <!-- power usage lowest range -->
@@ -136,8 +136,8 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>750</minPower>        <!-- power usage lowest range -->
-        <maxPower>750</maxPower>        <!-- Power for max range -->
+        <minPower>800</minPower>        <!-- power usage lowest range -->
+        <maxPower>800</maxPower>        <!-- Power for max range -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <minPower>0</minPower>        <!-- power usage lowest range -->
@@ -190,8 +190,8 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>750</minPower>        <!-- power usage lowest range -->
-        <maxPower>750</maxPower>        <!-- Power for max range -->
+        <minPower>800</minPower>        <!-- power usage lowest range -->
+        <maxPower>800</maxPower>        <!-- Power for max range -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <minPower>0</minPower>        <!-- power usage lowest range -->
@@ -240,8 +240,8 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>750</minPower>        <!-- power usage lowest range -->
-        <maxPower>750</maxPower>        <!-- Power for max range -->
+        <minPower>800</minPower>        <!-- power usage lowest range -->
+        <maxPower>800</maxPower>        <!-- Power for max range -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <minPower>0</minPower>        <!-- power usage lowest range -->
@@ -290,8 +290,8 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>5</speedFactor>        <!-- Base speed -->
-        <minPower>1250</minPower>        <!-- power usage lowest range -->
-        <maxPower>1250</maxPower>        <!-- Power for max range -->
+        <minPower>1300</minPower>        <!-- power usage lowest range -->
+        <maxPower>1300</maxPower>        <!-- Power for max range -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <minPower>0</minPower>        <!-- power usage lowest range -->
@@ -374,8 +374,8 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>750</minPower>        <!-- power usage lowest range -->
-        <maxPower>750</maxPower>        <!-- Power for max range -->
+        <minPower>800</minPower>        <!-- power usage lowest range -->
+        <maxPower>800</maxPower>        <!-- Power for max range -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <minPower>0</minPower>        <!-- power usage lowest range -->
@@ -429,8 +429,8 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>750</minPower>        <!-- power usage lowest range -->
-        <maxPower>750</maxPower>        <!-- Power for max range -->
+        <minPower>800</minPower>        <!-- power usage lowest range -->
+        <maxPower>800</maxPower>        <!-- Power for max range -->
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <minPower>0</minPower>        <!-- power usage lowest range -->
