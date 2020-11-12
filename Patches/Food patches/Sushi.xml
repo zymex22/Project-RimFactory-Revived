@@ -9,7 +9,7 @@
       <success>Always</success>
       <operations>
         <li Class="PatchOperationAdd">
-          <xpath>/Defs/ThingDef[defName = "SelfCooker"]/recipes</xpath>
+          <xpath>/Defs/ThingDef[defName = "PRF_SelfCookerII"]/recipes</xpath>
 			<value>
 				<li>VCE_CookChirashizushiSimple</li>
 				<li>VCE_CookChirashizushiSimpleBulk</li>

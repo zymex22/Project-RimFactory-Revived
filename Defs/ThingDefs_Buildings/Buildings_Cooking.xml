@@ -134,7 +134,7 @@ Mod extennsion for assemblers
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
       <MarketValue>700</MarketValue>
-      <Cleanliness>5</Cleanliness>
+      <Cleanliness>0</Cleanliness>
     </statBases>
     <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1x speed \n 5cleanliness \n cook level 10\n\nWhite cell is input range \nBlue cell are db range.</description>
     <costStuffCount>100</costStuffCount>
@@ -157,6 +157,10 @@ Mod extennsion for assemblers
     <recipes>      <!-- Defines recipe to make it in ThingDef directly.	 (extra from importrecipesfrom) -->
       <li>MakeNutrientPaste</li>
       <li>MakeNutrientPasteBulk</li>
+      <li>CookMealSimple</li>
+      <li>CookMealSimpleBulk</li>
+      <li>Make_Pemmican</li>
+      <li>Make_PemmicanBulk</li>
     </recipes>
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
@@ -170,7 +174,7 @@ Mod extennsion for assemblers
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <importRecipesFrom>
-          <li>ElectricStove</li>
+          <!-- <li>ElectricStove</li> -->
         </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
         <workSpeedBaseFactor>1</workSpeedBaseFactor>
         <skillLevel>6</skillLevel>
@@ -195,7 +199,7 @@ Mod extennsion for assemblers
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
-      <MarketValue>700</MarketValue>
+      <MarketValue>1500</MarketValue>
       <Cleanliness>5</Cleanliness>
     </statBases>
     <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1x speed \n 5cleanliness \n cook level 10\n\nWhite cell is input range \nBlue cell are db range.</description>
