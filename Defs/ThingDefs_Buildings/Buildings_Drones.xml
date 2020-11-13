@@ -159,6 +159,7 @@
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <speedSetting>false</speedSetting>
         <rangeSetting>true</rangeSetting>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <minPowerForRange>300</minPowerForRange>
         <minRange>3</minRange>
         <maxPowerForRange>1000</maxPowerForRange>
@@ -259,6 +260,7 @@
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <speedSetting>false</speedSetting>
         <rangeSetting>true</rangeSetting>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <minPowerForRange>200</minPowerForRange>
         <minRange>2</minRange>
         <maxPowerForRange>500</maxPowerForRange>

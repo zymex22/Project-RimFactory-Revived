@@ -323,6 +323,7 @@
         <minRange>1</minRange>
         <maxPowerForRange>1500</maxPowerForRange>
         <maxRange>4</maxRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>
       </li>
     </comps>
@@ -349,6 +350,7 @@
     <inspectorTabs>
       <li>ITab_Storage</li>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <researchPrerequisites>
       <li>PRF_AnimalStationsII</li>
