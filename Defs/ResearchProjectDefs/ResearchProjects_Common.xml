@@ -14,16 +14,23 @@
     <defName>PRF_CoreTierO</defName>
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
-    <baseCost>400</baseCost>
-    <description>Clockwork Principle will unlock some Early age automation aimed at Tribal/medieval age. You can skip this and go directly to Tier1 if you will fast forward to high tier.\n its aimed to aid in medieval playthrough</description>
+    <baseCost>500</baseCost>
+    <description>Automation begins here, trash or scrap metal goes in one side and the product comes out the other.\nCogs and chutes powered by wood and coal.</description>
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>
     <researchViewX>1</researchViewX>
-    <discoveredLetterTitle>About: Clockwork Principle</discoveredLetterTitle>
-    <discoveredLetterText>The earliest known example of a clockwork mechanism is the Antikythera mechanism, a first-century BC geared analogue computer, somewhat astrolabe-like, for calculating astronomical positions and eclipses, recovered from a Greek shipwreck. There are many other accounts of clockwork devices in ancient Greece, even in its mythology, and the mechanism itself is sophisticated enough to indicate a significant history of lesser devices leading up to its creation.\n\n
-At some point, this level of sophistication in clockwork technology was lost or forgotten in Europe, and only returned when brought from the Islamic world after the Crusades, along with other knowledge leading to the Renaissance. Clockwork finally recovered the equivalent of pre-Roman technological levels in the 14th century.\n\n
-As in Greek mythology, there are ambitious automation claims in the legends of other cultures. For example, in Jewish legend, Solomon used his wisdom to design a throne with mechanical animals which hailed him as king when he ascended it; upon sitting down an eagle would place a crown upon his head, and a dove would bring him a Torah scroll. It's also said that when King Solomon stepped upon the throne, a mechanism was set in motion. As soon as he stepped upon the first step, a golden ox and a golden lion each stretched out one foot to support him and help him rise to the next step. On each side, the animals helped the King up until he was comfortably seated upon his throne.
+    <discoveredLetterTitle>About: Factory building</discoveredLetterTitle>
+    <discoveredLetterText>Welcome to Project RimFactory Beta!
+      /n/nWe invite you on a trip through the ages of automation from the root of fueled smelters through to self-improving assemblers.
+      /nStore materials in the white designation for the machine to consume. After a bit of work, the machine will place the finished product on it's Output tile.
+      /n/nThe oldest known clockwork machine is the Antikythera mechanism, found in 1901 in a shipwreck dated at 50BC and Greek in origin. A series of 30 gears used to predict eclipses and other astronomical phenomenon as well as the passage of years.
+      /n/nCode by:spdskatr, Nobo, Abnerchen, LWN, Madara Uchiha, Sn1p3rr3c0n.
+      /nArt by: ShotgunFrenzy, Chicken Plucker, Xen, Scythe, totoBrother, "Unknown Alien", Argon, spdskatr.
+      /nTested by Malkav, Extrien, Daemon976, AerosAtar, and all of you.
+      /nTranslated by: Natsu_Zirok, 十里小飞, AbnerChen, Lucas559-noob
+      /nSpecial thanks the father of Project Rim Factory: Thornsworth.
+      /nRest In Productivity.
     </discoveredLetterText>
   </ResearchProjectDef>
 
@@ -32,22 +39,19 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierI</defName>
     <label>Euler's identity</label>
-    <baseCost>700</baseCost>
-    <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the very basics of automation and mechanisms, the gateway to an industrial colony. tier 1</description>
+    <baseCost>750</baseCost>
+    <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the basics of automation and mechanisms, the gateway to an industrialized colony.
+    /nDevelop the mathematical models necessary to further automate simple processes with electricity such as stonecutting and cooking.</description>
+    
     <prerequisites>
-      <li>PRF_CoreTierO</li>
       <li>Machining</li>
+      <li>PRF_CoreTierO</li>
     </prerequisites>
     <researchViewX>2</researchViewX>
-    <discoveredLetterTitle>About: Getting Factory started</discoveredLetterTitle>
-    <discoveredLetterText>With Euler's identity you now have started your factory adventure.
-    This will unlock Tier 1 buildings you can further research to unlock individual types, or rush to next tier.
-    \nHere are some pointers that will help you along:
-  - Many items are grouped together in categories to save space rightclick to see them all.
-  - All items have a dedicated Help Button which will have a how to use description.
-  - White cells are input, Yellow are output, blue are DB.
-  - We have added theese popups on some of the researches to give a introduction to each type machine
-  \n\nPlease Note mod is still WIP and stuff might change, we do a big effort not break any save by updates though!\n feel free to post suggesions and bugs on steampage
+    <discoveredLetterTitle>True Automation begins</discoveredLetterTitle>
+    <discoveredLetterText>Leonard Euler developed mathematical systems for interactions between physics, geometry and algebra.
+      \nWith these formulas, automated production of basic materials such as stone bricks and simple art is possible.
+    \nPlace items within the white designation for the bills to consume, they will be output to the adjustable green tile
     </discoveredLetterText>
   </ResearchProjectDef>
 
@@ -56,9 +60,10 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <!-- ==================== Main Tier 2 ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierII</defName>
-    <label>Koller-Li Framework</label>
+    <label>Moritz Machinery</label>
     <baseCost>2000</baseCost>
-    <description>AI Learning and Patern Recognition allow automation to reach a new level. Even on the Rim, some basic AI frameworks are recognized as being both useful and easy to apply. Using these frameworks is good, because these are hard problems</description>
+    <description>A machine that can predict outcomes will solve many of the design flaws we have been facing. Imagine a machine that could improve itself...
+    /nWe will need an AI research bench to go further.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
       <li>MicroelectronicsBasics</li>
@@ -69,7 +74,11 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
     </requiredResearchFacilities>
     <researchViewX>5</researchViewX>
     <discoveredLetterTitle>About: Tier 2 Factory Unlocked</discoveredLetterTitle>
-    <discoveredLetterText>You have now Researched Koller-Li Framework and unlocked Tier 2 Reseaches.\n You also unlocked ability to create Ai Research bench which you will need to progress to tier 3\n\nAI Learning and Patern Recognition allow automation to reach a new level. Even on the Rim, some basic AI frameworks are recognized as being both useful and easy to apply. Using these frameworks is good, because these are hard problems.</discoveredLetterText>
+    <discoveredLetterText>The mathematical models developed in the 1700s began an industrial revolution all of the world, series of gears and pressurization allowed the mass processing of basic materials with coal and electricity. 
+      /nMoritz von Jacobi managed to propel a boat with an electric motor in 1845, but it wasn't until 1837 when Thomas and Emily Dacenport patented the first motor in the US that the promise of electro-mechanical machinery was seen as the next big leap forward
+      /nRudimentary programming allows storing a bill on a Recipe Database and importing it into an assembler.
+      /n-The blue region around assemblers and recipe databases indicate the data transfer area
+    </discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -77,10 +86,10 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <!-- ==================== Main Tier 3 ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierIII</defName>
-    <label>Goldbach's conjecture</label>
+    <label>Turing implementation</label>
     <techLevel>Spacer</techLevel>
-    <baseCost>2000</baseCost>
-    <description>"Every even integer, greater than 2, can be formed from the sum of two prime numbers."\nUnlocks a new array of third tier research projects.</description>
+    <baseCost>3500</baseCost>
+    <description>Anything can be described as a series of 1s and 0s as long as there enough 1s and 0s</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
       <li>Fabrication</li>
@@ -88,7 +97,8 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <researchViewX>8</researchViewX>
     <discoveredLetterTitle>About: Tier 3 Factory Unlocked</discoveredLetterTitle>
-    <discoveredLetterText>You have now Researched Goldbach's conjecture with this you have unlocked Tier 3 Reseaches.</discoveredLetterText>
+    <discoveredLetterText>Refinements to machinery allow sophisticated machines, such as those that self-correct (get faster the more time they complete a job), drills with object recognition to only mine what you want and the first mechanite swarm technologies.
+    /n-mechanite machines interact with a couple random tiles in thh area every second.</discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -96,18 +106,20 @@ As in Greek mythology, there are ambitious automation claims in the legends of o
   <!-- ==================== Main Tier 4 ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierIV</defName>
-    <label>quantum bit technology</label>
+    <label>Quantum Bit technology</label>
     <techLevel>Ultra</techLevel>
-    <baseCost>3500</baseCost>
-    <description>A qubit (or quantum bit) is the quantum mechanical analogue of a classical bit. In classical computing the information is encoded in bits, where each bit can have the value zero or one. In quantum computing the information is encoded in qubits. A qubit is a two-level quantum system where the two basis qubit states are usually written as \left\lvert 0 \right\rangle∣0⟩ and \left\lvert 1 \right\rangle∣1⟩. A qubit can be in state \left\lvert 0 \right\rangle∣0⟩, \left\lvert 1 \right\rangle∣1⟩ or (unlike a classical bit) in a linear combination of both states. The name of this phenomenon is superposition.</description>
+    <baseCost>5000</baseCost>
+    <description>Leveraging the quantum nature of reality itself to solve exponentially more demanding computational problems.</description>
     <prerequisites>
       <li>PRF_CoreTierIII</li>
       <li>ShipBasics</li>
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <researchViewX>11</researchViewX>
-    <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
-    <discoveredLetterText>Qubit technology opens up Tier 4 stuff for your factory.\n\nMORE USES WILL COME LATER...</discoveredLetterText>
+    <discoveredLetterTitle>Quantum Computing:Drone are now lv 20</discoveredLetterTitle>
+    <discoveredLetterText>Qubit technology has not yet been implemented. For now, enjoy level 20 drones.
+      /nDrop us suggestions on our Workshop page. 
+      \n\nThanks for playing!<discoveredLetterText>
   </ResearchProjectDef>
 
 </Defs>
