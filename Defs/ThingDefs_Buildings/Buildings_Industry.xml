@@ -295,6 +295,7 @@
         <minRange>1</minRange>
         <maxPowerForRange>500</maxPowerForRange>
         <maxRange>4</maxRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
       <li Class="CompProperties_Glower">
@@ -381,6 +382,7 @@
         <minRange>1</minRange>
         <maxPowerForRange>500</maxPowerForRange>
         <maxRange>4</maxRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
       <li Class="CompProperties_Glower">

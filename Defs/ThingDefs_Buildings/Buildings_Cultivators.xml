@@ -56,7 +56,8 @@
     </placeWorkers>
     <drawGUIOverlay>true</drawGUIOverlay>
     <inspectorTabs>
-      <li>ProjectRimFactory.Drones.ITab_DroneStation</li>
+      <!-- <li>ProjectRimFactory.Drones.ITab_DroneStation</li> -->
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
   </ThingDef>
 
@@ -255,6 +256,7 @@
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <speedSetting>false</speedSetting>
         <rangeSetting>true</rangeSetting>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <minPowerForRange>750</minPowerForRange>
         <minRange>5</minRange>
         <maxPowerForRange>1500</maxPowerForRange>

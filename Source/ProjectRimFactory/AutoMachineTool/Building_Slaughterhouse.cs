@@ -9,12 +9,17 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public class Building_Slaughterhouse : Building_BaseRange<Pawn>, ISlaughterhouse
+    public class Building_Slaughterhouse : Building_BaseRange<Pawn>, IPRF_SettingsContentLink, ISlaughterhouse
     {
+        IPRF_SettingsContent IPRF_SettingsContentLink.PRF_SettingsContentOb => new ITab_Slaughterhouse_Def(this);
+
         public Dictionary<ThingDef, SlaughterSettings> Settings { get => this.slaughterSettings; }
+
+    
 
         private Dictionary<ThingDef, SlaughterSettings> slaughterSettings = new Dictionary<ThingDef, SlaughterSettings>();
 
@@ -156,6 +161,9 @@ namespace ProjectRimFactory.AutoMachineTool
             working.Corpse.SetForbidden(false);
             return true;
         }
+
+
+      
     }
 
     public class Building_SlaughterhouseTargetCellResolver : BaseTargetCellResolver

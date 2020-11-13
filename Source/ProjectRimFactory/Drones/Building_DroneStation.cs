@@ -133,7 +133,7 @@ namespace ProjectRimFactory.Drones
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab
+    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab, IPRF_SettingsContentLink
     {
         //Sleep Time List (Loaded on Spawn)
         public string[] cachedSleepTimeList;
@@ -169,8 +169,8 @@ namespace ProjectRimFactory.Drones
         {
             get
             {
-                if (this.GetComp<CompPowerWorkSetting>() != null) {
-                    return (int)Math.Ceiling(this.GetComp<CompPowerWorkSetting>().GetRange());
+                if (compPowerWorkSetting != null) {
+                    return (int)Math.Ceiling(compPowerWorkSetting.GetRange());
                 }
                 else {
                     return def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius;
@@ -179,11 +179,20 @@ namespace ProjectRimFactory.Drones
 
         }
 
+        private CompPowerWorkSetting compPowerWorkSetting => this.GetComp<CompPowerWorkSetting>();
+
         public IEnumerable<IntVec3> StationRangecells
         {
             get
             {
-                return GenAdj.OccupiedRect(this).ExpandedBy(DroneRange).Cells;
+                if (compPowerWorkSetting != null && compPowerWorkSetting.RangeSetting)
+                {
+                    return compPowerWorkSetting.GetRangeCells();
+                }
+                else
+                {
+                    return GenAdj.OccupiedRect(this).ExpandedBy(DroneRange).Cells;
+                }
             }
         }
 
@@ -301,12 +310,16 @@ namespace ProjectRimFactory.Drones
 
         private MapTickManager mapManager;
         protected MapTickManager MapManager => this.mapManager;
+
+        IPRF_SettingsContent IPRF_SettingsContentLink.PRF_SettingsContentOb => new ITab_DroneStation_Def(this);
+
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.mapManager = map.GetComponent<MapTickManager>();
             extension = def.GetModExtension<DefModExtension_DroneStation>();
             //Setup Allowd Area
+            //Enssuring that Update_droneAllowedArea_forDrones() is run resolves #224 (May need to add a diffrent check)
             if (droneAllowedArea == null) {
                 //Log.Message("droneAllowedArea was null");
                 Update_droneAllowedArea_forDrones();
@@ -380,6 +393,8 @@ namespace ProjectRimFactory.Drones
             {
                 drones[i].Destroy();
             }
+            droneAllowedArea = null;
+
         }
 
         public virtual void DrawDormantDrones()
@@ -404,6 +419,7 @@ namespace ProjectRimFactory.Drones
         public override void Tick()
         {
             base.Tick();
+            if (!this.Spawned) return;
             if (DronesLeft > 0 && !lockdown && this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>()?.PowerOn != false)
             {
                 Job job = TryGiveJob();
@@ -590,5 +606,12 @@ namespace ProjectRimFactory.Drones
 
 
         }
+
+
+      
+
+
+
+
     }
 }

@@ -9,15 +9,40 @@ using Verse.AI;
 using UnityEngine;
 using ProjectRimFactory.AutoMachineTool;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory.Drones;
+
 
 namespace ProjectRimFactory.Common
 {
+
+    interface IPRF_SettingsContent
+    {
+        abstract public float ITab_Settings_Minimum_x { get; }
+        abstract public float ITab_Settings_Additional_y { get; }
+
+        //may need to pass some pos context
+        abstract public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect);
+
+
+
+    }
+
+    interface IPRF_SettingsContentLink
+    {
+        public IPRF_SettingsContent PRF_SettingsContentOb { get; }
+    }
+
+
+
+
+
     /// <summary>
     /// An ITab that contains multilpe settings, all in one place:
     ///  * whether can output produced things to entire stockpile, or only one cell
     ///  * whether to obey IProductLimitation limits on production/storing
     /// </summary>
     class ITab_ProductionSettings : ITab {
+
         private Vector2 winSize = new Vector2(400f, 0f);
         private List<SlotGroup> groups;
 
@@ -27,7 +52,7 @@ namespace ProjectRimFactory.Common
 
         public override bool IsVisible {
             get {
-                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter;
+                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton;
             }
         }
         bool ShowProductLimt => Machine != null;
@@ -39,14 +64,46 @@ namespace ProjectRimFactory.Common
                 (PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
                 !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
 
+        bool ShowRangeTypeSelectorButton => ShowAreaSelectButton && compPropertiesPowerWork != null && compPropertiesPowerWork.Props.allowManualRangeTypeChange;
+
+        bool ShowAdditionalSettings => pRF_SettingsContent != null;
+
+        bool ShowAreaSelectButton => supplyMachineHolder != null;
+
         private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
+
+
+        private IPowerSupplyMachineHolder supplyMachineHolder { get => this.SelThing as IPowerSupplyMachineHolder; }
+
+        // private CompProperties_PowerWorkSetting compProperties_PowerWorkSetting { get => this.SelThing.GetComp<CompProperties_PowerWorkSetting>(); }
+
+
+        private IPRF_SettingsContentLink pRF_SettingsContent { get => this.SelThing as IPRF_SettingsContentLink; }
+
+
         private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
+
+        private ThingWithComps selThingWithComps => this.SelThing as ThingWithComps;
+
+        private CompPowerWorkSetting compPropertiesPowerWork => selThingWithComps?.GetComp<CompPowerWorkSetting>();
 
         protected override void UpdateSize() {
             winSize.y = 0;
+            winSize.x = 400f;
             if (ShowProductLimt) winSize.y += 270f;
             if (ShowOutputToEntireStockpile) winSize.y += 100f;
-            if (ShowObeysStorageFilter) winSize.y += 100f;
+            if (ShowObeysStorageFilter) winSize.y += 70f;
+            if (pRF_SettingsContent != null) {
+                
+                winSize.y += pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Additional_y;
+                winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Minimum_x);
+            }
+            if(ShowRangeTypeSelectorButton) winSize.y += 100f;
+
+            winSize.y = Mathf.Clamp(winSize.y, 0, Prefs.ScreenHeight - 268); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
+
+
+
             this.size = winSize;
             base.UpdateSize();
         }
@@ -132,6 +189,31 @@ namespace ProjectRimFactory.Common
                 }
                 this.Machine.ProductLimitCount = limit;
             }
+            
+            if (pRF_SettingsContent != null)
+            {
+
+                list = pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list, inRect);
+
+            }
+            if (ShowRangeTypeSelectorButton)
+            {
+                inRect = list.GetRect(30f);
+                Widgets.Label(inRect.LeftHalf(), "PRF_SettingsTab_RangeType_Label".Translate());
+                if (Widgets.ButtonText(inRect.RightHalf(), ( compPropertiesPowerWork.rangeCells as IRangeCells).ToText() ))
+                {
+                    Find.WindowStack.Add(new FloatMenu(compPropertiesPowerWork.rangeTypes
+                      .Select(d => new FloatMenuOption(d.ToText(),
+                      () => compPropertiesPowerWork.rangeCells = d
+                      )).ToList()));
+
+                }
+                list.Gap();
+
+            }
+
+            
+            
             list.Gap();
             list.End();
         }
