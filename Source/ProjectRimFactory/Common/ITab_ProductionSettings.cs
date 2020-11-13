@@ -199,7 +199,7 @@ namespace ProjectRimFactory.Common
             if (ShowRangeTypeSelectorButton)
             {
                 inRect = list.GetRect(30f);
-                Widgets.Label(inRect.LeftHalf(), "Select Zone Shape");
+                Widgets.Label(inRect.LeftHalf(), "PRF_SettingsTab_RangeType_Label".Translate());
                 if (Widgets.ButtonText(inRect.RightHalf(), ( compPropertiesPowerWork.rangeCells as IRangeCells).ToText() ))
                 {
                     Find.WindowStack.Add(new FloatMenu(compPropertiesPowerWork.rangeTypes

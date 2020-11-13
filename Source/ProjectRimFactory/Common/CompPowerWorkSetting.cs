@@ -296,7 +296,7 @@ namespace ProjectRimFactory.Common
 
         public string ToText()
         {
-            return "CircleRange";
+            return "PRF_SettingsTab_RangeType_CircleRange".Translate();
         }
     }
 
@@ -309,7 +309,7 @@ namespace ProjectRimFactory.Common
 
         public string ToText()
         {
-            return "FacingRectRange";
+            return "PRF_SettingsTab_RangeType_FacingRectRange".Translate();
         }
     }
 
@@ -323,7 +323,7 @@ namespace ProjectRimFactory.Common
         }
         public string ToText()
         {
-            return "RectRange";
+            return "PRF_SettingsTab_RangeType_RectRange".Translate();
         }
     }
 }
