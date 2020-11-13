@@ -20,18 +20,11 @@
       <li>Smithing</li>
     </prerequisites>
     <researchViewX>1</researchViewX>
-    <discoveredLetterTitle>About: Factory building</discoveredLetterTitle>
-    <discoveredLetterText>Welcome to Project RimFactory Beta!
-      /n/nWe invite you on a trip through the ages of automation from the root of fueled smelters through to self-improving assemblers.
-      /nStore materials in the white designation for the machine to consume. After a bit of work, the machine will place the finished product on it's Output tile.
-      /n/nThe oldest known clockwork machine is the Antikythera mechanism, found in 1901 in a shipwreck dated at 50BC and Greek in origin. A series of 30 gears used to predict eclipses and other astronomical phenomenon as well as the passage of years.
-      /n/nCode by:spdskatr, Nobo, Abnerchen, LWN, Madara Uchiha, Sn1p3rr3c0n.
-      /nArt by: ShotgunFrenzy, Chicken Plucker, Xen, Scythe, totoBrother, "Unknown Alien", Argon, spdskatr.
-      /nTested by Malkav, Extrien, Daemon976, AerosAtar, and all of you.
-      /nTranslated by: Natsu_Zirok, 十里小飞, AbnerChen, Lucas559-noob
-      /nSpecial thanks the father of Project Rim Factory: Thornsworth.
-      /nRest In Productivity.
-    </discoveredLetterText>
+    <researchMods>
+      <li Class="ProjectRimFactory.Archo.ResearchMod_Notify">
+        <text>Welcome to Project RimFactory Beta!\n\nWe invite you on a trip through the ages of automation from the root of fueled smelters through to self-improving assemblers.\nStore materials in the white designation for the machine to consume. After a bit of work, the machine will place the finished product on it's Output tile.\n\nThe oldest known clockwork machine is the Antikythera mechanism, found in 1901 in a shipwreck dated at 50BC and Greek in origin. A series of 30 gears used to predict eclipses and other astronomical phenomenon as well as the passage of years.\n\nCode by:spdskatr, Nobo, Abnerchen, LWN, Madara Uchiha, Sn1p3rr3c0n.\nArt by: ShotgunFrenzy, Chicken Plucker, Xen, Scythe, totoBrother, "Unknown Alien", Argon, spdskatr.\nTested by Malkav, Extrien, Daemon976, AerosAtar, and all of you.\nTranslated by: Natsu_Zirok, 十里小飞, AbnerChen, Lucas559-noob\nSpecial thanks the father of Project Rim Factory: Thornsworth.\nRest In Productivity.</text>
+      </li>
+    </researchMods>
   </ResearchProjectDef>
 
   <!-- Tier 1 -->
@@ -41,18 +34,15 @@
     <label>Euler's identity</label>
     <baseCost>750</baseCost>
     <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the basics of automation and mechanisms, the gateway to an industrialized colony.
-    /nDevelop the mathematical models necessary to further automate simple processes with electricity such as stonecutting and cooking.</description>
-    
+    \nDevelop the mathematical models necessary to further automate simple processes with electricity such as stonecutting and cooking.</description>
+
     <prerequisites>
       <li>Machining</li>
       <li>PRF_CoreTierO</li>
     </prerequisites>
     <researchViewX>2</researchViewX>
     <discoveredLetterTitle>True Automation begins</discoveredLetterTitle>
-    <discoveredLetterText>Leonard Euler developed mathematical systems for interactions between physics, geometry and algebra.
-      \nWith these formulas, automated production of basic materials such as stone bricks and simple art is possible.
-    \nPlace items within the white designation for the bills to consume, they will be output to the adjustable green tile
-    </discoveredLetterText>
+    <discoveredLetterText>Leonard Euler developed mathematical systems for interactions between physics, geometry and algebra.\nWith these formulas, automated production of basic materials such as stone bricks and simple art is possible.\nPlace items within the white designation for the bills to consume, they will be output to the adjustable green tile</discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -63,7 +53,7 @@
     <label>Moritz Machinery</label>
     <baseCost>2000</baseCost>
     <description>A machine that can predict outcomes will solve many of the design flaws we have been facing. Imagine a machine that could improve itself...
-    /nWe will need an AI research bench to go further.</description>
+    \nWe will need an AI research bench to go further.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
       <li>MicroelectronicsBasics</li>
@@ -75,9 +65,9 @@
     <researchViewX>5</researchViewX>
     <discoveredLetterTitle>About: Tier 2 Factory Unlocked</discoveredLetterTitle>
     <discoveredLetterText>The mathematical models developed in the 1700s began an industrial revolution all of the world, series of gears and pressurization allowed the mass processing of basic materials with coal and electricity. 
-      /nMoritz von Jacobi managed to propel a boat with an electric motor in 1845, but it wasn't until 1837 when Thomas and Emily Dacenport patented the first motor in the US that the promise of electro-mechanical machinery was seen as the next big leap forward
-      /nRudimentary programming allows storing a bill on a Recipe Database and importing it into an assembler.
-      /n-The blue region around assemblers and recipe databases indicate the data transfer area
+      \nMoritz von Jacobi managed to propel a boat with an electric motor in 1845, but it wasn't until 1837 when Thomas and Emily Dacenport patented the first motor in the US that the promise of electro-mechanical machinery was seen as the next big leap forward
+      \nRudimentary programming allows storing a bill on a Recipe Database and importing it into an assembler.
+      \n-The blue region around assemblers and recipe databases indicate the data transfer area
     </discoveredLetterText>
   </ResearchProjectDef>
 
@@ -98,7 +88,7 @@
     <researchViewX>8</researchViewX>
     <discoveredLetterTitle>About: Tier 3 Factory Unlocked</discoveredLetterTitle>
     <discoveredLetterText>Refinements to machinery allow sophisticated machines, such as those that self-correct (get faster the more time they complete a job), drills with object recognition to only mine what you want and the first mechanite swarm technologies.
-    /n-mechanite machines interact with a couple random tiles in thh area every second.</discoveredLetterText>
+    \n-mechanite machines interact with a couple random tiles in the area every second.</discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -116,10 +106,10 @@
     </prerequisites>
     <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <researchViewX>11</researchViewX>
-    <discoveredLetterTitle>Quantum Computing:Drone are now lv 20</discoveredLetterTitle>
-    <discoveredLetterText>Qubit technology has not yet been implemented. For now, enjoy level 20 drones.
-      /nDrop us suggestions on our Workshop page. 
-      \n\nThanks for playing!<discoveredLetterText>
+    <discoveredLetterTitle>Quantum Computing: Tier 4 Factory Unlocked</discoveredLetterTitle>
+    <discoveredLetterText>Qubit technology is all about advanced computing, highend machines and technolegy, this might even be on the brinck of insanity? whats next?!¤%.
+      \nDrop us suggestions on our Workshop page. 
+      \n\nThanks for playing!</discoveredLetterText>
   </ResearchProjectDef>
 
 </Defs>
