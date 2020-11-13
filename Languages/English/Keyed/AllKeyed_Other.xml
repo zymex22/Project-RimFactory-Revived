@@ -52,10 +52,10 @@
   
   <PRF_ArchoCipher_BankOverflow>The AI chip from your paperclip duplicator has sent you a message:\n\Congratulations! You have achieved the maximum balance of paperclips in your duplicator. The real question is: What are you going to do with all these paperclips?</PRF_ArchoCipher_BankOverflow>
   
-  <PRF_SettingsTab_RangeType_Label>Select Zone Shape</PRF_SettingsTab_RangeType_Label>
-  <PRF_SettingsTab_RangeType_CircleRange>CircleRange</PRF_SettingsTab_RangeType_CircleRange>
-  <PRF_SettingsTab_RangeType_FacingRectRange>FacingRectRange</PRF_SettingsTab_RangeType_FacingRectRange>
-  <PRF_SettingsTab_RangeType_RectRange>RectRange</PRF_SettingsTab_RangeType_RectRange>
+  <PRF_SettingsTab_RangeType_Label>Change Zone Type</PRF_SettingsTab_RangeType_Label>
+  <PRF_SettingsTab_RangeType_CircleRange>Circle Type</PRF_SettingsTab_RangeType_CircleRange>
+  <PRF_SettingsTab_RangeType_FacingRectRange>Facing Rectangle</PRF_SettingsTab_RangeType_FacingRectRange>
+  <PRF_SettingsTab_RangeType_RectRange>Center Square</PRF_SettingsTab_RangeType_RectRange>
   
   
   <PRF_TimeLeftToDisintegrate>Time left until disintegrate: {0}</PRF_TimeLeftToDisintegrate>
