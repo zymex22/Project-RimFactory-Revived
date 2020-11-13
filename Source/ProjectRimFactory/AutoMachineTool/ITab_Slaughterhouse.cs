@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -12,6 +11,70 @@ using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
+    public class SlaughterSettings : IExposable
+    {
+        public SlaughterSettings()
+        {
+            this.doSlaughter = false;
+            this.hasBonds = false;
+            this.pregnancy = false;
+            this.trained = false;
+
+            this.keepMaleAdultCount = 10;
+            this.keepMaleYoungCount = 10;
+            this.keepFemaleAdultCount = 10;
+            this.keepFemaleYoungCount = 10;
+        }
+
+        public ThingDef def;
+        public bool doSlaughter;
+        public bool hasBonds;
+        public bool pregnancy;
+        public bool trained;
+
+        public int keepMaleAdultCount;
+        public int keepMaleYoungCount;
+        public int keepFemaleAdultCount;
+        public int keepFemaleYoungCount;
+
+        public void ExposeData()
+        {
+            Scribe_Values.Look<bool>(ref this.doSlaughter, "doSlaughter", false);
+            Scribe_Values.Look<bool>(ref this.hasBonds, "hasBonds", false);
+            Scribe_Values.Look<bool>(ref this.pregnancy, "pregnancy", false);
+            Scribe_Values.Look<bool>(ref this.trained, "trained", false);
+
+            Scribe_Values.Look<int>(ref this.keepMaleAdultCount, "keepMaleAdultCount", 10);
+            Scribe_Values.Look<int>(ref this.keepMaleYoungCount, "keepMaleYoungCount", 10);
+            Scribe_Values.Look<int>(ref this.keepFemaleAdultCount, "keepFemaleAdultCount", 10);
+            Scribe_Values.Look<int>(ref this.keepFemaleYoungCount, "keepFemaleYoungCount", 10);
+
+            Scribe_Defs.Look<ThingDef>(ref this.def, "def");
+        }
+
+        public int KeepCount(Gender gender, bool adult)
+        {
+            if (gender == Gender.Male)
+            {
+                if (adult)
+                    return keepMaleAdultCount;
+                else
+                    return keepMaleYoungCount;
+            }
+            else
+            {
+                if (adult)
+                    return keepFemaleAdultCount;
+                else
+                    return keepFemaleYoungCount;
+            }
+        }
+    }
+
+    interface ISlaughterhouse
+    {
+        Dictionary<ThingDef, SlaughterSettings> Settings { get; }
+    }
 
     public class ITab_Slaughterhouse_Def : IPRF_SettingsContent
     {
@@ -65,7 +128,7 @@ namespace ProjectRimFactory.AutoMachineTool
             defs = Find.CurrentMap.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).Where(p => p.RaceProps.Animal && p.RaceProps.IsFlesh && p.SpawnedOrAnyParentSpawned).Select(p => p.def).Distinct().ToList();
 
             var rect = list.GetRect(40f);
-            Rect outRect = new Rect(0f, 0f, ITab_Settings_Minimum_x, ITab_Settings_Additional_y).ContractedBy(10f);
+            Rect outRect = new Rect(0f, 0, ITab_Settings_Minimum_x, ITab_Settings_Additional_y ).ContractedBy(10f);
             Widgets.Label(rect, this.description);
 
             var headerRect = list.GetRect(24f);
@@ -184,71 +247,5 @@ namespace ProjectRimFactory.AutoMachineTool
 
         }
 
-    }
-
-
-    public class SlaughterSettings : IExposable
-    {
-        public SlaughterSettings()
-        {
-            this.doSlaughter = false;
-            this.hasBonds = false;
-            this.pregnancy = false;
-            this.trained = false;
-
-            this.keepMaleAdultCount = 10;
-            this.keepMaleYoungCount = 10;
-            this.keepFemaleAdultCount = 10;
-            this.keepFemaleYoungCount = 10;
-        }
-
-        public ThingDef def;
-        public bool doSlaughter;
-        public bool hasBonds;
-        public bool pregnancy;
-        public bool trained;
-
-        public int keepMaleAdultCount;
-        public int keepMaleYoungCount;
-        public int keepFemaleAdultCount;
-        public int keepFemaleYoungCount;
-
-        public void ExposeData()
-        {
-            Scribe_Values.Look<bool>(ref this.doSlaughter, "doSlaughter", false);
-            Scribe_Values.Look<bool>(ref this.hasBonds, "hasBonds", false);
-            Scribe_Values.Look<bool>(ref this.pregnancy, "pregnancy", false);
-            Scribe_Values.Look<bool>(ref this.trained, "trained", false);
-
-            Scribe_Values.Look<int>(ref this.keepMaleAdultCount, "keepMaleAdultCount", 10);
-            Scribe_Values.Look<int>(ref this.keepMaleYoungCount, "keepMaleYoungCount", 10);
-            Scribe_Values.Look<int>(ref this.keepFemaleAdultCount, "keepFemaleAdultCount", 10);
-            Scribe_Values.Look<int>(ref this.keepFemaleYoungCount, "keepFemaleYoungCount", 10);
-
-            Scribe_Defs.Look<ThingDef>(ref this.def, "def");
-        }
-
-        public int KeepCount(Gender gender, bool adult)
-        {
-            if(gender == Gender.Male)
-            {
-                if (adult)
-                    return keepMaleAdultCount;
-                else
-                    return keepMaleYoungCount;
-            }
-            else
-            {
-                if (adult)
-                    return keepFemaleAdultCount;
-                else
-                    return keepFemaleYoungCount;
-            }
-        }
-    }
-
-    interface ISlaughterhouse
-    {
-        Dictionary<ThingDef, SlaughterSettings> Settings { get; }
     }
 }
