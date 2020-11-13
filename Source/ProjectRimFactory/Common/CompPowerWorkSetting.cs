@@ -87,7 +87,7 @@ namespace ProjectRimFactory.Common
         }
 
         //Used for Saving the rangeCells . This is done as directly saving rangeCells leads to unknown Type Errors on Load
-        private int rangeTypeSeletion = 0;
+        private int rangeTypeSeletion = -1;
 
 
         public override void PostExposeData()
@@ -102,11 +102,16 @@ namespace ProjectRimFactory.Common
 
             Scribe_Values.Look<float>(ref this.powerForSpeed, "powerForSpeed");
             Scribe_Values.Look<float>(ref this.powerForRange, "powerForRange");
-            Scribe_Values.Look(ref rangeTypeSeletion, "rangeType");
+            Scribe_Values.Look(ref rangeTypeSeletion, "rangeType",-1);
 
             //Set the Loaded rangeCells Value
             if (Scribe.mode != LoadSaveMode.Saving)
             {
+                if (rangeTypeSeletion == -1) {
+                    rangeCells = null;
+                    rangeTypeSeletion = rangeTypeSelection;
+                } 
+
                 rangeTypeSelection = rangeTypeSeletion;
             }
 

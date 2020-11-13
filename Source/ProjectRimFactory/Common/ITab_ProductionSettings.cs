@@ -98,7 +98,7 @@ namespace ProjectRimFactory.Common
                 winSize.y += pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Additional_y;
                 winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Minimum_x);
             }
-            if(ShowRangeTypeSelectorButton) winSize.y += 50f;
+            if(ShowRangeTypeSelectorButton) winSize.y += 100f;
 
             winSize.y = Mathf.Clamp(winSize.y, 0, Prefs.ScreenHeight - 268); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
 
