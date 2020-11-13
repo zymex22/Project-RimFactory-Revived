@@ -21,7 +21,7 @@ namespace ProjectRimFactory.Common
         abstract public float ITab_Settings_Additional_y { get; }
 
         //may need to pass some pos context
-        abstract public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list);
+        abstract public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect);
 
 
 
@@ -193,7 +193,7 @@ namespace ProjectRimFactory.Common
             if (pRF_SettingsContent != null)
             {
 
-                list = pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list);
+                list = pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list, inRect);
 
             }
             if (ShowRangeTypeSelectorButton)

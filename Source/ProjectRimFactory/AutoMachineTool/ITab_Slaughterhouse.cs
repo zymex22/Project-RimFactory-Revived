@@ -106,7 +106,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public float ITab_Settings_Minimum_x => 800f;
 
-        public float ITab_Settings_Additional_y => 600f;//Thats more then needed
+        //This has some unexpected impact
+        public float ITab_Settings_Additional_y => 400f;//Thats more then needed
 
 
         private static TipSignal slaughterTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip".Translate());
@@ -120,16 +121,23 @@ namespace ProjectRimFactory.AutoMachineTool
         private static TipSignal keepFemaleAdultCountTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip".Translate("PRF.AutoMachineTool.Female".Translate(), "PRF.AutoMachineTool.Adult".Translate()));
 
         private Vector2 scrollPosition;
+        private static Vector2 sscrollPosition;
         private string description = "PRF.AutoMachineTool.Slaughterhouse.Setting.Description".Translate();
 
         private List<ThingDef> defs;
-        public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list)
+        public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect)
         {
+            //Get the Variable from the Static - This is needed as you cant pass a static by ref (& by ref is requere in this case)
+            scrollPosition = sscrollPosition;
             defs = Find.CurrentMap.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).Where(p => p.RaceProps.Animal && p.RaceProps.IsFlesh && p.SpawnedOrAnyParentSpawned).Select(p => p.def).Distinct().ToList();
 
+            //Add header Discription for this settings Section
             var rect = list.GetRect(40f);
-            Rect outRect = new Rect(0f, 0, ITab_Settings_Minimum_x, ITab_Settings_Additional_y ).ContractedBy(10f);
             Widgets.Label(rect, this.description);
+
+            //Need to fix that as step one
+            Rect outRect = new Rect(0f, list.CurHeight, ITab_Settings_Minimum_x, ITab_Settings_Additional_y + list.CurHeight).ContractedBy(10f);
+            //Log.Message("ITab_Settings_Additional_y + (int)list.CurHeight: " + (ITab_Settings_Additional_y + (int)list.CurHeight) + " - parrent_rect.height: " + parrent_rect.height + " - list.CurHeight" + list.CurHeight);
 
             var headerRect = list.GetRect(24f);
             headerRect.width -= 30f;
@@ -177,12 +185,14 @@ namespace ProjectRimFactory.AutoMachineTool
             TooltipHandler.TipRegion(col, keepFemaleAdultCountTip);
 
             var scrollOutRect = list.GetRect(outRect.height - list.CurHeight);
-            var scrollViewRect = new Rect(scrollOutRect.x, scrollOutRect.y, scrollOutRect.width - 30f, this.defs.Count() * 36f);
+
+            var scrollViewRect = new Rect(scrollOutRect.x, 0, scrollOutRect.width - 30f, this.defs.Count() * 36f);
 
 
-
-            Widgets.BeginScrollView(scrollOutRect, ref this.scrollPosition, scrollViewRect);
+            //Thats somhow not working
+            //Widgets.BeginScrollView(scrollOutRect, ref this.scrollPosition, scrollViewRect);
             var innerlist = new Listing_Standard();
+            innerlist.BeginScrollView(scrollOutRect, ref scrollPosition, ref scrollViewRect);
             innerlist.Begin(scrollViewRect);
             this.defs.ForEach(d =>
             {
@@ -239,9 +249,10 @@ namespace ProjectRimFactory.AutoMachineTool
                 string buf4 = s.keepFemaleAdultCount.ToString();
                 Widgets.TextFieldNumeric<int>(col, ref s.keepFemaleAdultCount, ref buf4, 0, 1000);
             });
-
+            innerlist.EndScrollView(ref scrollViewRect);
             innerlist.End();
-            Widgets.EndScrollView();
+            //Update the static variable to keep the data
+            sscrollPosition = scrollPosition;
             return list;
 
 

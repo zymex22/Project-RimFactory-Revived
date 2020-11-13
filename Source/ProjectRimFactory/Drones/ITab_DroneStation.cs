@@ -106,7 +106,7 @@ namespace ProjectRimFactory.Drones
             return lstatus;
         }
 
-        public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list)
+        public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect)
         {
 
             var rect = new Rect();
