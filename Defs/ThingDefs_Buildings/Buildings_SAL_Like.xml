@@ -28,11 +28,6 @@
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <fillPercent>1</fillPercent>
     <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
-        <shortCircuitInRain>false</shortCircuitInRain>
-      </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
     </comps>
@@ -64,7 +59,6 @@
     </building>
   </ThingDef>
 
-
   <!-- auto-assembler Mk-1 -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_AutoCrafterSimple</defName>
@@ -81,6 +75,13 @@
       <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
       <color>(102,102,105,256)</color>      <!--change color on maske manually -->
     </graphicData>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+    </comps>
     <researchPrerequisites>
       <li>PRF_SALResearchI</li>
     </researchPrerequisites>
@@ -133,6 +134,13 @@
     <researchPrerequisites>
       <li>PRF_SALResearchII</li>
     </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+    </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>1</speedFactor>        <!-- Base speed -->
@@ -187,6 +195,13 @@
     <researchPrerequisites>
       <li>PRF_SALResearchIV</li>
     </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+    </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>1</speedFactor>        <!-- Base speed -->
@@ -237,6 +252,13 @@
     <researchPrerequisites>
       <li>PRF_SALResearchV</li>
     </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+    </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>1</speedFactor>        <!-- Base speed -->
@@ -287,6 +309,13 @@
     <researchPrerequisites>
       <li>PRF_SALResearchVI</li>
     </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+    </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>5</speedFactor>        <!-- Base speed -->
@@ -329,6 +358,13 @@
     <researchPrerequisites>
       <li>PRF_SALResearchVIII</li>
     </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+    </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>12</speedFactor>        <!-- Base speed -->
@@ -354,6 +390,7 @@
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_SALAutoCooker</defName>
     <label>AutoCooker S.A.L</label>
+    <designatorDropdown>assembler_food_gr</designatorDropdown>
     <description>Although the auto-assembler performs cooking to a decent level, the auto-cooker is both faster and more accurate in its food production, capable of reaching a level 12 standard.</description>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
     <graphicData>
@@ -371,6 +408,13 @@
     <researchPrerequisites>
       <li>PRF_SALResearchVI</li>
     </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+    </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
         <speedFactor>1</speedFactor>        <!-- Base speed -->
@@ -404,15 +448,14 @@
     </modExtensions>
   </ThingDef>
 
-  <!-- AutoCooker S.A.L -->
-  <ThingDef ParentName="PRF_SAL_Base">
+  <!-- auto-miner S.A.L -->
+  <!-- <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_SALAutoMinerI</defName>
     <label>auto-miner S.A.L</label>
     <description>Modified crafter which is capable of performing high level mining, most useful in front of a deep core miner</description>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
     <graphicData>
-      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
-      <!-- <color>(15,100,130,256)</color> -->      <!--change color on maske manually -->
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
     <costList>
       <Steel>50</Steel>
@@ -427,14 +470,14 @@
       <li>PRF_AutonomousMining</li>
     </researchPrerequisites>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>800</minPower>        <!-- power usage lowest range -->
-        <maxPower>800</maxPower>        <!-- Power for max range -->
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
+        <speedFactor>1</speedFactor>    
+        <minPower>800</minPower>       
+        <maxPower>800</maxPower>       
       </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>400</maxPower>        <!-- Power for max range -->
+        <minPower>0</minPower>        
+        <maxPower>400</maxPower>     
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
@@ -449,7 +492,7 @@
         </skills>
       </li>
     </modExtensions>
-  </ThingDef>
+  </ThingDef> -->
 
 
 
@@ -483,6 +526,11 @@
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>15</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
       </li>
     </comps>
     <modExtensions>
