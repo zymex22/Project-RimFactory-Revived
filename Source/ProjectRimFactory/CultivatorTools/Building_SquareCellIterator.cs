@@ -9,27 +9,12 @@ using Verse;
 
 namespace ProjectRimFactory.CultivatorTools
 {
-    public abstract class Building_SquareCellIterator : Building
+    public abstract class Building_SquareCellIterator : Building_CellIterator
     {
         public SquareCellIterator iter;
-        protected int currentPosition;
 
-        public IntVec3 Current => iter.cellPattern[currentPosition] + Position;
-        public bool Fueled => GetComp<CompRefuelable>()?.HasFuel ?? true;
-        public bool Powered => GetComp<CompPowerTrader>()?.PowerOn ?? true;
-        public virtual int TickRate => 250;
-
-        public virtual bool CellValidator(IntVec3 c)
-        {
-            return c.InBounds(Map);
-        }
-        public abstract bool DoIterationWork(IntVec3 c);
-        public override void Tick()
-        {
-            base.Tick();
-            if (Find.TickManager.TicksGame % TickRate == 0 && Powered && Fueled)
-                DoTickerWork();
-        }
+        public override IntVec3 Current => iter.cellPattern[currentPosition] + Position;
+        
         Cache<List<IntVec3>> selectedCellsCache;
         List<IntVec3> UpdateCellsCache()
         {
@@ -54,46 +39,18 @@ namespace ProjectRimFactory.CultivatorTools
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(new List<IntVec3> { Current }, Color.yellow);
             GenDraw.DrawFieldEdges(CellsInRange);
         }
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref currentPosition, "currentNumber", 1);
-        }
-        public void DoTickerWork()
-        {
-            base.TickRare();
-            var cell = Current;
-            var zone = cell.GetZone(Map);
-            if (CellValidator(cell))
-            {
-                if (!DoIterationWork(cell)) return;
-            }
-            MoveNextInternal();
-        }
+        
+       
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
             iter = new SquareCellIterator(def.GetModExtension<CultivatorDefModExtension>().squareAreaRadius);
             selectedCellsCache = new Cache<List<IntVec3>>(UpdateCellsCache);
         }
-        protected virtual void MoveNextInternal()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                currentPosition++;
-                var num = iter.cellPattern.Length;
-                if (currentPosition >= num)
-                    currentPosition = 0;
-                var cell = Current;
-                var zone = cell.GetZone(Map);
-                if (CellValidator(cell))
-                {
-                    break;
-                }
-            }
-        }
+
+        protected override int cellCount => iter.cellPattern.Length;
+        
     }
 }
