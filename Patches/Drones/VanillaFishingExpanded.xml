@@ -52,7 +52,7 @@
 									<rangeSetting>true</rangeSetting>
 									<minPowerForRange>300</minPowerForRange>
 									<minRange>3</minRange>
-									<maxPowerForRange>800</maxPowerForRange>
+									<maxPowerForRange>900</maxPowerForRange>
 									<maxRange>6</maxRange>
 									<rangeType>ProjectRimFactory.Common.RectRange</rangeType>
 								</li>

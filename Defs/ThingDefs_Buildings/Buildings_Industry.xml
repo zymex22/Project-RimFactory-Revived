@@ -294,7 +294,7 @@
         <minPowerForRange>0</minPowerForRange>
         <minRange>1</minRange>
         <maxPowerForRange>500</maxPowerForRange>
-        <maxRange>4</maxRange>
+        <maxRange>5</maxRange>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
@@ -381,7 +381,7 @@
         <minPowerForRange>0</minPowerForRange>
         <minRange>1</minRange>
         <maxPowerForRange>500</maxPowerForRange>
-        <maxRange>4</maxRange>
+        <maxRange>5</maxRange>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
