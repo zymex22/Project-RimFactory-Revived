@@ -66,7 +66,6 @@ namespace ProjectRimFactory.CultivatorTools
         {
             base.TickRare();
             var cell = Current;
-            var zone = cell.GetZone(Map);
             if (CellValidator(cell))
             {
                 if (!DoIterationWork(cell)) return;
@@ -88,7 +87,6 @@ namespace ProjectRimFactory.CultivatorTools
                 if (currentPosition >= num)
                     currentPosition = 0;
                 var cell = Current;
-                var zone = cell.GetZone(Map);
                 if (CellValidator(cell))
                 {
                     break;
