@@ -296,7 +296,7 @@ namespace ProjectRimFactory.Common
     {
         public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
         {
-            return GenRadial.RadialCellsAround(center, range, true);
+            return GenRadial.RadialCellsAround(center, range + Mathf.Max(thingDef.size.x, thingDef.size.z) - 1, true);
         }
 
         public string ToText()
