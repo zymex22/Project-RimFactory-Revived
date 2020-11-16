@@ -37,6 +37,7 @@ See steampage for More info.
     <li>UnlimitedHugs.HugsLib</li>
     <li>historic.IndustrialRollers</li>
     <li>essecoisa.Floored</li>
+    <li>vanillaexpanded.achievements</li>
   </loadAfter>
   <incompatibleWith>
     <li>Spdskatr.ssBiggerBatteries</li>
