@@ -221,14 +221,23 @@
         <doEffect>false</doEffect>
         <skillLevel>10</skillLevel>
         <artSkillLevel>14</artSkillLevel>
+        <workSpeedBaseFactor>1.5</workSpeedBaseFactor>
         <importRecipesFrom>
           <li>TableSculpting</li>
         </importRecipesFrom>
       </li>
       <!-- For thorny special sculp when done? -->
       <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+        <!-- <billBonusYields>
+          <li>
+            <key>Make_SculptureSmall</key>
+            <value Chance="1">
+              <SculptureLarge Weight="0.5" Count="1" Quality="6" MaterialDef="Gold" />
+            </value>
+          </li>
+        </billBonusYields> -->
         <bonusYields Chance="0.25">
-          <SculptureLarge Weight="0.5" Count="1" Quality="6" MaterialDef="Gold" />
+          <SculptureLarge Weight="0.5" Count="1" Quality="6" MaterialDef="Jade" />
         </bonusYields>
       </li>
     </modExtensions>
