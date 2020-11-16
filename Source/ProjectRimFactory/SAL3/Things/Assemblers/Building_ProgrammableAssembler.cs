@@ -412,7 +412,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 currentBillReport.bill.recipe.Worker.ConsumeIngredient(currentBillReport.selected[i], currentBillReport.bill.recipe, Map);
             }
             //Bonus
-            Thing bonus = modExtension_BonusYield?.GetBonusYield(QualityCategory.Normal) ?? null;
+            Thing bonus = modExtension_BonusYield?.GetBonusYield(currentBillReport.bill.recipe,QualityCategory.Normal) ?? null;
             if (bonus != null)
             {
                 thingQueue.Add(bonus);
