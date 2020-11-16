@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--===================== Achievement Tab =====================-->
+  <AchievementsExpanded.AchievementTabDef>
+    <defName>PRF_Achievement</defName>
+    <label>Project RimFactory</label>
+  </AchievementsExpanded.AchievementTabDef>
+
+  <!--===================== example =====================-->
+  <!-- <AchievementsExpanded.AchievementDef>
+    <defName></defName>
+    <tab>PRF_Achievement</tab>
+    <label></label>
+    <description></description>
+
+    <tracker Class=""></tracker>
+
+    <texPath></texPath>
+    <points></points>
+  </AchievementsExpanded.AchievementDef> -->
+
+<!-- Find more tracker examples here:
+https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trackers-for-XML
+-->
+  <!--======================== Getting started ========================-->
+  <AchievementsExpanded.AchievementDef>
+    <defName>PRF_GettingStarted</defName>
+    <tab>PRF_Achievement</tab>
+    <label>Getting Started</label>
+    <description>Get your Factory Research going</description>
+
+    <tracker Class="AchievementsExpanded.ResearchTracker">
+      <def>PRF_CoreTierO</def>
+    </tracker>
+
+    <texPath>Achievements/OutOfTheDarkAge</texPath>
+    <points>5</points>
+  </AchievementsExpanded.AchievementDef>
+
+</Defs>
