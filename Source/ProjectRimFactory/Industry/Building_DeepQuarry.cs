@@ -177,7 +177,7 @@ namespace ProjectRimFactory.Industry
                 .Where(d => !this.def.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.building.mineableThing) ?? true)
                 .RandomElementByWeight(d => d.building.isResourceRock ? d.building.mineableScatterCommonality * d.building.mineableScatterLumpSizeRange.Average * d.building.mineableDropChance : 3f);
 
-            var bonus = this.def.GetModExtension<ModExtension_Miner>()?.GetBonusYield(rock.building.mineableThing);
+            var bonus = this.def.GetModExtension<ModExtension_BonusYield>()?.GetBonusYield();
             if (bonus != null)
             {
                 return bonus;

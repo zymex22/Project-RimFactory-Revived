@@ -85,7 +85,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool FinishWorking(Building_Miner working, out List<Thing> products)
         {
-            var bonus = this.def.GetModExtension<ModExtension_Miner>()?.GetBonusYield(this.workingBill.recipe.ProducedThingDef);
+            var bonus = this.def.GetModExtension<ModExtension_BonusYield>()?.GetBonusYield(this.workingBill.recipe);
             if (bonus == null)
             {
                 products = GenRecipe2.MakeRecipeProducts(this.workingBill.recipe, this, new List<Thing>(), null, this).ToList();
