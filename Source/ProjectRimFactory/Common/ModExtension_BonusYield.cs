@@ -13,25 +13,41 @@ namespace ProjectRimFactory.Common
 {
     public class ModExtension_BonusYield : DefModExtension
     {
+        //Generic bill independent reward
         public BonusYieldList bonusYields;
+        //needs to be string instead of RecipeDef as most RecipeDef(s) are created in C# and that occurs after the XML causing a cant refrence error
+        public Dictionary<string , BonusYieldList> billBonusYields;
 
-        public Thing GetBonusYield(QualityCategory min_quality = QualityCategory.Awful , QualityCategory max_quality = QualityCategory.Legendary)
+        
+        public Thing GetBonusYield(RecipeDef recipe = null, QualityCategory min_quality = QualityCategory.Awful , QualityCategory max_quality = QualityCategory.Legendary)
         {
-            Thing thing = this.bonusYields?.GetBonusYield();
+            Thing genericThing = this.bonusYields?.GetBonusYield();
+            Thing billThing = null;
+            Thing thingYield = null;
+
+            if (billBonusYields != null && recipe != null && billBonusYields.ContainsKey(recipe.defName))
+            {
+                
+                billThing = this.billBonusYields[recipe.defName]?.GetBonusYield();
+            }
+            thingYield = billThing ?? genericThing;
+
             QualityCategory thingQuality = QualityCategory.Normal;
-            if (thing.TryGetQuality(out thingQuality))
+            if (thingYield.TryGetQuality(out thingQuality))
             {
                 //Try Update Quality
                 thingQuality = (QualityCategory)Mathf.Clamp((float)thingQuality, (float)min_quality, (float)max_quality);
-                thing.TryGetComp<CompQuality>()?.SetQuality(thingQuality, ArtGenerationContext.Colony);
+                thingYield.TryGetComp<CompQuality>()?.SetQuality(thingQuality, ArtGenerationContext.Colony);
 
             }
 
-            return thing;
+            return thingYield;
         }
 
 
     }
+
+    
 
     public class BonusYieldList
     {

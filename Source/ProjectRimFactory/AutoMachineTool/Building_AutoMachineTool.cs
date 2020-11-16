@@ -428,7 +428,7 @@ namespace ProjectRimFactory.AutoMachineTool
             this.dominant = null;
             this.unfinished = null;
             this.ingredients = null;
-            Thing bonus = modExtension_BonusYield?.GetBonusYield(QualityCategory.Normal) ?? null;
+            Thing bonus = modExtension_BonusYield?.GetBonusYield(this.bill.recipe,QualityCategory.Normal) ?? null;
             if (bonus != null)
             {
                 products.Add(bonus);

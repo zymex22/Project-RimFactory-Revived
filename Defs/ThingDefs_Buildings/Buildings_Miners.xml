@@ -116,6 +116,8 @@
           <li>Jade</li>
           <li>Silver</li>
         </excludeOres>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
         <bonusYields Chance="0.18">
           <ChunkSlagSteel Weight="1" Count="1" />
           <Gold Weight="0.02" Count="10" />
@@ -185,6 +187,8 @@
           <li>ChunkSlate</li>
           <li>ChunkMarble</li>
         </excludeOres>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
         <bonusYields Chance="0.1">
           <ChunkSandstone Weight="1" Count="1" />
           <ChunkGranite Weight="1" Count="1" />
@@ -255,6 +259,8 @@
           <li>ChunkSlate</li>
           <li>ChunkMarble</li>
         </excludeOres>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
         <bonusYields Chance="0.1">
           <!-- Junks -->
           <InsectJelly Weight="0.2" Count="30" />
@@ -348,6 +354,8 @@
           <li>Jade</li>
           <li>Silver</li>
         </excludeOres>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
         <bonusYields Chance="0.05">
           <!-- Junks -->
           <InsectJelly Weight="0.2" Count="30" />
@@ -359,7 +367,7 @@
           <Silver Weight="0.7" Count="40" />
           <Plasteel Weight="0.01" Count="5" />
         </bonusYields>
-      </li>
+        </li>
     </modExtensions>
   </ThingDef>
 
