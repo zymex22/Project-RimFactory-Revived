@@ -316,7 +316,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 }
             }
             // Effect.
-            if (currentBillReport != null)
+            if (currentBillReport != null && Active)
             {
                 var ext = this.def.GetModExtension<AssemblerDefModExtension>();
                 if (this.effecter == null)
