@@ -29,7 +29,7 @@ namespace ProjectRimFactory {
         public enum Flag {
             PlaceThing=0x1,
             Conveyors=0x2,
-            Graphics=0x4,
+            ConveyorGraphics=0x4,
             Benchmark=0x8, // performance measurement
             // NextFlag=0x4,
             // 0x8
@@ -53,5 +53,11 @@ namespace ProjectRimFactory {
         public static void Error(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
             if ((activeFlags & flag) > 0) Log.Error(text, ignoreStopLoggingLimit);
         }
+        // NOTE: Additional options are possible:
+        // https://github.com/zymex22/Project-RimFactory-Revived/issues/95
+        // For example, allowing a debug trace call to specify the calling method, which
+        //   might be useful for tracing callbacks (or maybe not, who knows).
+        // If you think it might be useful, feel free to add another parameter `string methodName=null`
+        // as described in Issue 95
     }
 }

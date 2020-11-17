@@ -57,8 +57,8 @@ namespace ProjectRimFactory {
                     extraData = DirectXmlToObject.ObjectFromXml<GraphicExtraData>(
                                                    helperDoc.DocumentElement, false);
                 } catch (Exception e) {
-                    Log.Error("GraphicExtraData was unable to extract XML from \"" + req.graphicData.texPath + 
-                    "\"; Exception: "+e);
+                    Log.Error("GraphicExtraData was unable to extract XML from \"" + req.graphicData.texPath +
+                    "\"; Exception: " + e);
                     return null;
                 }
                 extraData.inputString = req.graphicData.texPath;
@@ -66,8 +66,14 @@ namespace ProjectRimFactory {
                     outReq.graphicData.texPath = extraData.texPath;
                     outReq.path = extraData.texPath;
                 }
+                Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data extracted: " + extraData);
                 return extraData;
             }
+            #if DEBUG
+            else {
+                Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data empty: " + req.graphicData.texPath);
+            }
+            #endif
             return null;
         }
         //no idea if this is necessary, but *it works* 
@@ -84,6 +90,32 @@ namespace ProjectRimFactory {
             }
             return gr;
         }
+        #if DEBUG
+        // This is only used in graphics debugging:
+        public override string ToString() {
+            StringBuilder s = new StringBuilder("[ExtraGraphicRequest for \"" + this.inputString + "\": ");
+            var pieces = new List<string>();
+            foreach (var f in HarmonyLib.AccessTools.GetDeclaredFields(typeof(GraphicExtraData))) {
+                if (f.FieldType == typeof(Vector3?)) {
+                    var x = f.GetValue(this);
+                    if (x != null)
+                        pieces.Add(f.Name + ": " + x.ToString());
+                    else { } //pieces.Add(" " + f.Name + ": null");
+                } else if (f.FieldType == typeof(string) && f.Name!="inputString") {
+                    var x = f.GetValue(this);
+                    if (x != null)
+                        pieces.Add(f.Name + ": \"" + x.ToString() + "\"");
+                }
+            }
+            if (specialLinkDefs != null) {
+                pieces.Add(" specialLinkDefs: [" + String.Join(", ",
+                             specialLinkDefs.Select(d => d.defName)) + "]");
+            }
+            if (pieces.Count > 0) s.Append(" ").Append(String.Join(", ", pieces));
+            s.Append("]");
+            return s.ToString();
+        }
+        #endif
     }
     public interface IHaveGraphicExtraData {
         void ExtraInit(GraphicRequest req, GraphicExtraData extraData);

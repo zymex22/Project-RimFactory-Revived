@@ -19,11 +19,13 @@ namespace ProjectRimFactory.AutoMachineTool {
         bool showW;
         bool showS;
         bool showE;
+        //TODO: I'm an idiot: this should be a Graphic_Multi!  Then zymex can play with normal RW graphics settings
         GraphicData transitionWest;
         GraphicData transitionSouth;
         GraphicData transitionEast;
         List<ThingDef> sameLinkDefs;
         public override void ExtraInit(GraphicRequest req, GraphicExtraData extraData) {
+            Debug.Warning(Debug.Flag.ConveyorGraphics, "Graphics ExtraInit for Graphic_LinkedConveyorWall: (" + req.graphicData.texPath + ")");
             base.ExtraInit(req, extraData);
             if (extraData == null) Log.Error("PRF's Wall Conveyor graphic requires GraphicExtraData");
             else {
@@ -46,12 +48,15 @@ namespace ProjectRimFactory.AutoMachineTool {
                     drawSize = Vector2.one
                 };
                 sameLinkDefs = extraData.specialLinkDefs;
+                Debug.Message(Debug.Flag.ConveyorGraphics, "  added sameLinkDefs: " + 
+                    (sameLinkDefs == null ? "null" : String.Join(", ", sameLinkDefs.Select(d => d.defName))));
             }
         }
         public override void Print(SectionLayer layer, Thing thing) {
             showW = false; showS = false; showE = false;
             // This may set some of those flags:
             base.Print(layer, thing);
+            Debug.Message(Debug.Flag.ConveyorGraphics, "Printing transitions for " + thing + " S:" + showS + " W:" + showW + "E:" + showE);
             Material mat;
             if (showW) {
                 mat = transitionWest.Graphic.MatSingleFor(thing);
@@ -75,12 +80,14 @@ namespace ProjectRimFactory.AutoMachineTool {
             var x = (c - parent.Position);
             if (x == IntVec3.North) return base.ShouldLinkWith(c, parent);
             if (!c.InBounds(parent.Map)) return false;
-            var belt = parent as IBeltConveyorLinkable;
+            var belt = parent as IBeltConveyorLinkable; // don't use this with non-belts
             var otherBelt = c.GetThingList(parent.Map)
                     .OfType<IBeltConveyorLinkable>()
                     .FirstOrDefault(belt.HasLinkWith);
             if (otherBelt == null) return false;
+            Debug.Message(Debug.Flag.ConveyorGraphics, "WallBelt graphic testing links vs sameLinkDefs for " + parent + ": " + (sameLinkDefs == null ? "null" : String.Join(", ", sameLinkDefs.Select(d => d.defName))));
             if (!sameLinkDefs.Contains((otherBelt as Thing).def)) {
+                Debug.Message(Debug.Flag.ConveyorGraphics, " found link with " + otherBelt + " (" + (otherBelt as Thing).def.defName + ")");
                 if (x == IntVec3.East) showE = true;
                 else if (x == IntVec3.South) showS = true;
                 else // has to be W, or something is v v weird
