@@ -64,7 +64,7 @@
       <MaxHitPoints>250</MaxHitPoints>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>A CNC router like automated machine that are capable of turning stone into bricks and even abit mid skilled art too. \nArt level: 10</description>
+    <description>A CNC router like automated machine that are capable of turning stone into bricks.</description>
     <costList>
       <Steel>400</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
