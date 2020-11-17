@@ -15,14 +15,14 @@
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
     <baseCost>500</baseCost>
-    <description>Automation begins here, trash, raw material, or scrap metal goes in one side and useful products come out the other.\nCogs and chutes powered by wood and coal.</description>
+    <description>Automation begins here. Trash, raw material, or scrap metal goes in one side and useful products come out the other.\nCogs and chutes powered by wood and coal.</description>
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>
     <researchViewX>1</researchViewX>
     <researchMods>
       <li Class="ProjectRimFactory.Archo.ResearchMod_Notify">
-        <text>Welcome to Project RimFactory Beta!\n\nWelcome to Project RimFactory Beta!\n\nWe invite you on a trip through automation, starting with steam-driven fueled smelters and advancing through AI-controlled self-improving assemblers.\n\nGenearl Usage: Store materials in the white designation Input area for the machine to consume. After a bit of work, the machine will place the finished product on it's yellow Output tile.\n\nThe oldest known clockwork machine is the Antikythera mechanism, found in 1901 in a shipwreck dated at 50BC and Greek in origin. A series of 30 gears was used to predict eclipses and other astronomical phenomenon as well as the passage of years. Advanced clockwork mechanisms reached new heights in Europe during the 1800s, and even today automation without computers is used in industry.\n\nCode by:spdskatr, Nobo, Abnerchen, Little White Mouse, Madara Uchiha, Sn1p3rr3c0n.\nArt by: ShotgunFrenzy, Chicken Plucker, Xen, Scythe, totoBrother, "Unknown Alien", Argon, spdskatr, Thornsworth.\nTested by Malkav, Extrien, Daemon976, AerosAtar, and the mandatory Steam volunteers.\nTranslated by: Natsu_Zirok, 十里小飞, AbnerChen, Lucas559-noob\nSpecial thanks Thornsworth and Nobo, who are no longer with us.\nRest In Productivity.</text>
+        <text>Welcome to Project RimFactory Beta!\n\nWelcome to Project RimFactory Beta!\n\nWe invite you on a trip through automation, starting with wood and coal fueled smelters and advancing through AI-controlled self-improving assemblers.\n\nGeneral Usage: Store materials in the white designation Input area for the machine to consume. After a bit of work, the machine will place the finished product on it's yellow Output tile.\n\nThe oldest known clockwork machine is the Antikythera mechanism, found in 1901 in a shipwreck dated at 50BC and Greek in origin. A series of 30 gears was used to predict eclipses and other astronomical phenomenon as well as the passage of years. Advanced clockwork mechanisms reached new heights in Europe during the 1800s, and even today automation without computers is used in industry.\n\nCode by:spdskatr, Nobo, Abnerchen, Little White Mouse, Madara Uchiha, Sn1p3rr3c0n.\nArt by: ShotgunFrenzy, Chicken Plucker, Xen, Scythe, totoBrother, "Unknown Alien", Argon, spdskatr, Thornsworth.\nTested by Malkav, Extrien, Daemon976, AerosAtar, and the mandatory Steam volunteers.\nTranslated by: Natsu_Zirok, 十里小飞, AbnerChen, Lucas559-noob\nSpecial thanks Thornsworth and Nobo, who are no longer with us.\nRest In Productivity.</text>
       </li>
     </researchMods>
   </ResearchProjectDef>
