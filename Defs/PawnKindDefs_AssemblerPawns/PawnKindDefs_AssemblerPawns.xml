@@ -49,6 +49,5 @@
     <techHediffsChance>0.01</techHediffsChance>
     <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
     <invNutrition>0.05</invNutrition>
-    <invFoodDef>Pemmican</invFoodDef>
   </PawnKindDef>
 </Defs>
