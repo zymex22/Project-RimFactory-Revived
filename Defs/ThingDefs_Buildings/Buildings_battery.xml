@@ -58,7 +58,6 @@
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>4</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
     </costList>
     <comps>
       <li Class="CompProperties_Battery">
@@ -91,7 +90,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>800</WorkToBuild>
       <Mass>60</Mass>
-      <MarketValue>1330</MarketValue>
+      <MarketValue>1130</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>-80</Beauty>
     </statBases>
@@ -101,7 +100,6 @@
       <Steel>300</Steel>
       <Plasteel>25</Plasteel>
       <ComponentIndustrial>8</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
     </costList>
     <comps>
       <li Class="CompProperties_Battery">
@@ -131,7 +129,7 @@
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>800</WorkToBuild>
-      <MarketValue>5550</MarketValue>
+      <MarketValue>5320</MarketValue>
       <Mass>80</Mass>
       <Flammability>1.0</Flammability>
       <Beauty>0</Beauty>
@@ -177,7 +175,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>800</WorkToBuild>
       <Mass>80</Mass>
-      <MarketValue>16360</MarketValue>
+      <MarketValue>14750</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>50</Beauty>
     </statBases>
@@ -302,7 +300,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>800</WorkToBuild>
       <Mass>40</Mass>
-      <MarketValue>1030</MarketValue>
+      <MarketValue>830</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>-40</Beauty>
     </statBases>
@@ -312,7 +310,6 @@
       <Steel>200</Steel>
       <Plasteel>20</Plasteel>
       <ComponentIndustrial>6</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
     </costList>
     <comps>
       <li Class="CompProperties_Battery">

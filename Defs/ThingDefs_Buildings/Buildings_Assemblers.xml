@@ -139,7 +139,7 @@ Mod extennsion for assemblers
     <statBases>
       <WorkToBuild>800</WorkToBuild>
       <MaxHitPoints>150</MaxHitPoints>
-      <MarketValue>1950</MarketValue>
+      <MarketValue>1140</MarketValue>
       <Flammability>1.0</Flammability>
       <Mass>25</Mass>
     </statBases>
@@ -200,7 +200,7 @@ Mod extennsion for assemblers
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
-      <MarketValue>3760</MarketValue>      <!-- 	The "market value" of this thing. Please note that sellPriceFactor halves this value when selling the thing, and that the Social skill influences the actual value. -->
+      <MarketValue>4725</MarketValue>      <!-- 	The "market value" of this thing. Please note that sellPriceFactor halves this value when selling the thing, and that the Social skill influences the actual value. -->
     </statBases>
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
@@ -263,7 +263,7 @@ Mod extennsion for assemblers
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
-      <MarketValue>6230</MarketValue>
+      <MarketValue>7205</MarketValue>
     </statBases>
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->

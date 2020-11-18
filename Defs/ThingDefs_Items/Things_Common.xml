@@ -14,7 +14,7 @@
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
     <statBases>
-      <MarketValue>150</MarketValue>
+      <MarketValue>200</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
       <WorkToMake>1000</WorkToMake>
       <Mass>2</Mass>
@@ -41,7 +41,7 @@
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
     <statBases>
-      <MarketValue>150</MarketValue>
+      <MarketValue>350</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
       <WorkToMake>2000</WorkToMake>
       <Mass>1</Mass>
@@ -65,7 +65,7 @@
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
     <statBases>
-      <MarketValue>300</MarketValue>
+      <MarketValue>1615</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
       <WorkToMake>4000</WorkToMake>
       <Mass>1</Mass>
@@ -88,7 +88,7 @@
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
     <statBases>
-      <MarketValue>1500</MarketValue>
+      <MarketValue>12055</MarketValue>
       <MaxHitPoints>75</MaxHitPoints>
       <WorkToMake>10000</WorkToMake>
       <Mass>1</Mass>
@@ -112,7 +112,7 @@
     <soundInteract>Metal_Drop</soundInteract>
     <soundDrop>Metal_Drop</soundDrop>
     <statBases>
-      <MarketValue>400</MarketValue>
+      <MarketValue>475</MarketValue>
       <MaxHitPoints>50</MaxHitPoints>
       <Mass>2</Mass>
       <WorkToMake>2000</WorkToMake>

@@ -264,7 +264,7 @@ Mod extennsion for assemblers
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
-      <MarketValue>2610</MarketValue>
+      <MarketValue>3580</MarketValue>
       <Cleanliness>20</Cleanliness>
     </statBases>
     <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 2x speed \n 20cleanliness \n cook level 20</description>
@@ -439,7 +439,7 @@ Mod extennsion for assemblers
       <Mass>17</Mass>
       <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
-      <MarketValue>1660</MarketValue>
+      <MarketValue>820</MarketValue>
     </statBases>
     <costList>
       <PRFRoboticArm>1</PRFRoboticArm>

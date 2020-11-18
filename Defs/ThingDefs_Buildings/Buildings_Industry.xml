@@ -126,14 +126,13 @@
     <statBases>
       <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
-      <MarketValue>2446</MarketValue>
+      <MarketValue>2246</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
     <description>A recycler that turns almost any apparel and weapons into usable resources, at the cost of some lost materials.</description>
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
       <PRFWeakAIChip>1</PRFWeakAIChip>
       <PRFMachineFrame>1</PRFMachineFrame>
       <PRFRoboticArm>2</PRFRoboticArm>
@@ -272,7 +271,7 @@
     <statBases>
       <WorkToBuild>5000</WorkToBuild>
       <MaxHitPoints>350</MaxHitPoints>
-      <MarketValue>4675</MarketValue>
+      <MarketValue>5050</MarketValue>
       <Flammability>0.5</Flammability>
     </statBases>
     <costList>
@@ -282,7 +281,6 @@
       <Plasteel>25</Plasteel>
       <Steel>250</Steel>
       <ComponentIndustrial>12</ComponentIndustrial>
-      <ComponentSpacer>3</ComponentSpacer>
     </costList>
     <recipes>
       <li>PRF_RefinePlasteel</li>
@@ -353,14 +351,13 @@
     <statBases>
       <WorkToBuild>5000</WorkToBuild>
       <MaxHitPoints>350</MaxHitPoints>
-      <MarketValue>2686</MarketValue>
+      <MarketValue>3060</MarketValue>
       <Flammability>0.5</Flammability>
     </statBases>
     <costList>      <!-- cost list for fixed prices, uses def names -->
       <PRFRoboticArm>2</PRFRoboticArm>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <ComponentIndustrial>12</ComponentIndustrial>
-      <ComponentSpacer>3</ComponentSpacer>
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
     </costList>
@@ -536,14 +533,13 @@
       <MaxHitPoints>250</MaxHitPoints>
       <Cleanliness>-1</Cleanliness>
       <Beauty>-1</Beauty>
-      <MarketValue>3168</MarketValue>
+      <MarketValue>2716</MarketValue>
     </statBases>
     <description>This Second Furnace is an advanced industrial Furnace capable of burning items and smelting raw resources into useful materials\nUses electricity to reduce wood amount for burning</description>
     <costList>
       <Steel>500</Steel>
       <ComponentIndustrial>8</ComponentIndustrial>
-      <ComponentSpacer>2</ComponentSpacer>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFMachineFrame>1</PRFMachineFrame>
     </costList>
     <recipes>
       <li>CremateCorpse</li>
@@ -610,7 +606,7 @@
       <MaxHitPoints>350</MaxHitPoints>
       <Cleanliness>1</Cleanliness>
       <Beauty>1</Beauty>
-      <MarketValue>4362</MarketValue>
+      <MarketValue>4934</MarketValue>
     </statBases>
     <description>Advanced Furnace capable of burning stuff and smelting raw resources into useful materials, faster than previous iterations.\n\n(This furnace is the best and fastest in Project RimFactory.)\n\nImports any recipe from the Electric Smelter and the Crematorium.</description>
     <costList>
@@ -618,7 +614,6 @@
       <Plasteel>200</Plasteel>
       <PRFWeakAIChip>1</PRFWeakAIChip>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
     </costList>
     <recipes>

@@ -83,11 +83,10 @@
       <PRFDroneModule>1</PRFDroneModule>
       <Steel>30</Steel>
       <Plasteel>10</Plasteel>
-      <ComponentSpacer>1</ComponentSpacer>
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
     <statBases>
-      <MarketValue>2394</MarketValue>
+      <MarketValue>1475</MarketValue>
     </statBases>
     <comps>
       <li Class="CompProperties_Power">
@@ -193,11 +192,10 @@
       <Plasteel>20</Plasteel>
       <Silver>30</Silver>
       <PRFWeakAIChip>1</PRFWeakAIChip>
-      <ComponentSpacer>2</ComponentSpacer>
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
     <statBases>
-      <MarketValue>3128</MarketValue>
+      <MarketValue>2137</MarketValue>
     </statBases>
     <comps>
       <li Class="CompProperties_Power">
@@ -549,7 +547,7 @@
     <costList>
       <Steel>50</Steel>
       <Plasteel>10</Plasteel>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <ComponentIndustrial>8</ComponentIndustrial>
     </costList>
     <comps>
       <li Class="CompProperties_Power">

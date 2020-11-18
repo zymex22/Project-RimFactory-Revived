@@ -247,12 +247,11 @@
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
       <PRFRoboticArm>1</PRFRoboticArm>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
-	  <MarketValue>2250</MarketValue>
+	  <MarketValue>1200</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>(PRF) A Puller that pulls foodstuffs from growzones and places them into storage or onto a belt.</description>
@@ -313,12 +312,11 @@
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
       <PRFRoboticArm>1</PRFRoboticArm>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
-	  <MarketValue>1730</MarketValue>
+	  <MarketValue>882</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>A Puller That Pull items from A to B. Place it down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
@@ -410,12 +408,11 @@
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
       <PRFRoboticArm>2</PRFRoboticArm>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
-	  <MarketValue>2650</MarketValue>
+	  <MarketValue>1404</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>(PRF) A 90 degree angled Puller that moves items from A to B. Similar to the basic puller, but allowing turns! You can swap the direction (left/right) after placing.\n\nREMEMBER to turn it on after placing!</description>
@@ -479,12 +476,11 @@
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
       <PRFRoboticArm>1</PRFRoboticArm>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
-	  <MarketValue>2250</MarketValue>
+	  <MarketValue>1200</MarketValue>
     </statBases>
     <description>(PRF) An in-wall item Puller that pushes items from A to B.\n\nThis one is placed through a wall, and is well insulated enough for use in freezers and secure enough for prisons where you dont want anyone crawling through.\n\nRemember you still need to turn it on!</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
@@ -540,14 +536,13 @@
     <designatorDropdown>Rollers_gr</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
     <costList>
-      <Steel>10</Steel>
-      <ComponentIndustrial>2</ComponentIndustrial>
+      <Steel>20</Steel>
     </costList>
     <statBases>
       <MaxHitPoints>80</MaxHitPoints>
-      <WorkToBuild>80</WorkToBuild>
+      <WorkToBuild>100</WorkToBuild>
       <Flammability>0.4</Flammability>
-	  <MarketValue>90</MarketValue>
+	  <MarketValue>59</MarketValue>
       <Beauty>-0.5</Beauty>      <!--Let's Game It Out playing SatisFactory shows how beautiful conveyors truly are!-->
       <Mass>10</Mass>
     </statBases>
@@ -667,7 +662,7 @@
     </researchPrerequisites>
     <clearBuildingArea>false</clearBuildingArea>
     <statBases>
-      <WorkToBuild Inherit="false">900</WorkToBuild>      <!--harder to dig tunnel-->
+      <WorkToBuild Inherit="false">400</WorkToBuild>      <!--harder to dig tunnel-->
     </statBases>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
@@ -700,12 +695,11 @@
     </researchPrerequisites>
     <costList>
       <Steel>20</Steel>
-      <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
 	<statBases>
-	  <MarketValue>90</MarketValue>
+	  <MarketValue>78</MarketValue>
     </statBases>
-    <pathCost>70</pathCost>
+    <pathCost>0</pathCost>
     <fillPercent>0.4</fillPercent>    <!-- Cover from shell -->
   </ThingDef>
 
@@ -720,6 +714,7 @@
       <drawSize>(1,1.1)</drawSize>
       <drawRotated>true</drawRotated>
     </graphicData>
+    <pathCost>70</pathCost>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
         <toUnderground>true</toUnderground>
@@ -738,6 +733,7 @@
       <drawSize>(1,1.1)</drawSize>
       <drawRotated>true</drawRotated>
     </graphicData>
+    <pathCost>70</pathCost>
     <inspectorTabs Inherit="false">
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
@@ -765,12 +761,9 @@
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
       <Steel>60</Steel>
-      <ComponentSpacer>2</ComponentSpacer>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
 	<statBases>
-	  <MarketValue>110</MarketValue>
+	  <MarketValue>319</MarketValue>
       <WorkToBuild Inherit="false">450</WorkToBuild>
     </statBases>
     <!--<stuffCategories>Guess what we cannot do with current menu options?  Have a stuffed thing. Dmmit.
@@ -822,7 +815,7 @@
     <clearBuildingArea>false</clearBuildingArea>
     <statBases>
       <WorkToBuild Inherit="false">1300</WorkToBuild>      <!--have to dig space for unit-->
-	  <MarketValue>920</MarketValue>
+	  <MarketValue>404</MarketValue>
     </statBases>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
