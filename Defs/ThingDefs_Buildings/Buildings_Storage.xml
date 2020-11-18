@@ -66,6 +66,7 @@
       <WorkToBuild>1000</WorkToBuild>
       <Flammability>1.0</Flammability>
       <Beauty>-0.5</Beauty>
+      <MarketValue>170</MarketValue>
     </statBases>
     <building>
       <defaultStorageSettings>
@@ -120,6 +121,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>1000</WorkToBuild>
       <Flammability>1.0</Flammability>
+      <MarketValue>230</MarketValue>
       <Beauty>-0.5</Beauty>
     </statBases>
     <building>
@@ -174,6 +176,7 @@
       <Mass>10</Mass>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
+      <MarketValue>360</MarketValue>
       <Flammability>0.1</Flammability>
       <Beauty>-0.1</Beauty>
     </statBases>
@@ -230,6 +233,7 @@
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
       <Flammability>0.1</Flammability>
+      <MarketValue>480</MarketValue>
       <Beauty>-0.2</Beauty>
     </statBases>
     <building>
@@ -288,6 +292,7 @@
       <Mass>15</Mass>
       <MaxHitPoints>450</MaxHitPoints>
       <WorkToBuild>5000</WorkToBuild>
+      <MarketValue>10880</MarketValue>
       <Flammability>0.05</Flammability>
       <Beauty>0.5</Beauty>
     </statBases>
@@ -317,7 +322,10 @@
       <Steel>300</Steel>
       <Gold>50</Gold>
       <Uranium>20</Uranium>
-      <ComponentIndustrial>10</ComponentIndustrial>
+      <Plasteel>100</Plasteel>
+      <ComponentIndustrial>100</ComponentIndustrial>
+      <ComponentSpacer>15</ComponentSpacer>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <constructEffect>ConstructMetal</constructEffect>
@@ -398,12 +406,15 @@
     <statBases>
       <WorkToBuild>600</WorkToBuild>
       <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>370</MarketValue>
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
     <description>(tier 3) \n A Connection port for your storage Cargo Platforms. It can be set to Input/output from any Platform remotely in any range within the map.</description>
     <costList>
-      <Steel>80</Steel>
+      <Steel>50</Steel>
+      <Plasteel>10</Plasteel>
+      <ComponentSpacer>1</ComponentSpacer>
       <ComponentIndustrial>4</ComponentIndustrial>
     </costList>
     <comps>

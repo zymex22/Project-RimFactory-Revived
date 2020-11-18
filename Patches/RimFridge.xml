@@ -77,12 +77,16 @@
 							<statBases>
 								<WorkToBuild>600</WorkToBuild>
 								<MaxHitPoints>100</MaxHitPoints>
+								<MarketValue>375</MarketValue>
 								<Flammability>1.0</Flammability>
 								<Mass>30</Mass>
 							</statBases>
 							<description>(tier 3) \n A Connection port for your DeepStorageUnit. It can be set to Input/output from any DSU remotely in any range within the map. This one also have same option as Rimfidge Coolers.</description>
 							<costList>
-								<Steel>80</Steel>
+								<Steel>50</Steel>
+								<Plasteel>10</Plasteel>
+								<Silver>2</Silver>
+								<ComponentSpacer>1</ComponentSpacer>
 								<ComponentIndustrial>4</ComponentIndustrial>
 							</costList>
 							<comps>
@@ -157,6 +161,7 @@
 								<Mass>15</Mass>
 								<MaxHitPoints>450</MaxHitPoints>
 								<WorkToBuild>5000</WorkToBuild>
+								<MarketValue>10900</MarketValue>
 								<Flammability>0.05</Flammability>
 								<Beauty>0.5</Beauty>
 							</statBases>
@@ -189,11 +194,15 @@
 							<size>(3,3)</size>
 							<pathCost>150</pathCost>
 							<costList>
-								<Steel>350</Steel>
-								<PRFWeakAIChip>1</PRFWeakAIChip>
+								<Steel>300</Steel>
 								<Gold>50</Gold>
 								<Uranium>20</Uranium>
-								<ComponentIndustrial>12</ComponentIndustrial>
+								<Silver>20</Silver>
+								<Plasteel>100</Plasteel>
+								<ComponentIndustrial>100</ComponentIndustrial>
+								<ComponentSpacer>15</ComponentSpacer>
+								<PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+								<PRFAdvancedAIChip>1</PRFAdvancedAIChip>
 							</costList>
 							<constructEffect>ConstructMetal</constructEffect>
 							<tickerType>Normal</tickerType>

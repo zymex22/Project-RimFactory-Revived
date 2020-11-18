@@ -135,8 +135,13 @@
       <PRFDroneModule>2</PRFDroneModule>
       <Steel>30</Steel>
       <Plasteel>20</Plasteel>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
       <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
     </costList>
+    <statBases>
+      <MarketValue>2936</MarketValue>
+    </statBases>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
@@ -218,6 +223,7 @@
       <MaxHitPoints>150</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
       <Mass>25</Mass>
+      <MarketValue>2763</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>10</Beauty>
     </statBases>
@@ -231,7 +237,9 @@
       <PRFDroneModule>2</PRFDroneModule>
       <Steel>10</Steel>
       <Plasteel>5</Plasteel>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
       <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
     </costList>
     <holdsRoof>true</holdsRoof>
     <fertility>0</fertility>

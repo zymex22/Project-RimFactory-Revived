@@ -58,6 +58,7 @@
     </building>
     <clearBuildingArea>false</clearBuildingArea>
     <costList>
+      <Silver>1</Silver>
       <Steel>20</Steel>
     </costList>
     <placeWorkers>
@@ -67,6 +68,7 @@
     <fillPercent>0</fillPercent>
     <statBases>
       <Flammability>0.1</Flammability>
+      <MarketValue>50</MarketValue>
     </statBases>
     <size>(1,1)</size>
     <surfaceType>Item</surfaceType>
@@ -145,6 +147,7 @@
     </building>
     <clearBuildingArea>false</clearBuildingArea>
     <costList>
+      <Silver>2</Silver>
       <Steel>40</Steel>
     </costList>
     <placeWorkers>
@@ -155,6 +158,7 @@
     <statBases>
       <Flammability>0.1</Flammability>
       <WorkToBuild>330</WorkToBuild>
+      <MarketValue>85</MarketValue>
       <Mass>4.5</Mass>
     </statBases>
     <size>(1,1)</size>
@@ -209,12 +213,14 @@
     </graphicData>
     <tickerType>Rare</tickerType>
     <costList>
+      <Silver>2</Silver>
       <Steel>40</Steel>
       <ComponentIndustrial>1</ComponentIndustrial>
     </costList>
     <statBases>
       <WorkToBuild>500</WorkToBuild>
       <Flammability>0</Flammability>
+      <MarketValue>160</MarketValue>
       <Mass>25</Mass>
     </statBases>
     <size>(1,1)</size>
@@ -289,11 +295,13 @@
     </graphicData>
     <tickerType>Rare</tickerType>
     <costList>
+      <Silver>2</Silver>
       <Steel>20</Steel>
     </costList>
     <statBases>
       <WorkToBuild>250</WorkToBuild>
       <Flammability>0</Flammability>
+      <MarketValue>65</MarketValue>
       <Mass>10</Mass>
     </statBases>
     <size>(1,1)</size>

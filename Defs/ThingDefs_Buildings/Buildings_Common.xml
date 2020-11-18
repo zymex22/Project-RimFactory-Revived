@@ -23,7 +23,8 @@
     <costStuffCount>150</costStuffCount>
     <costList>
       <Steel>100</Steel>
-      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>8</ComponentSpacer>
       <PRFWeakAIChip>3</PRFWeakAIChip>
     </costList>
     <graphicData>
@@ -45,6 +46,7 @@
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>5000</WorkToBuild>
       <Flammability>1.0</Flammability>
+      <MarketValue>3970</MarketValue>
       <ResearchSpeedFactor>1.0</ResearchSpeedFactor>
       <SellPriceFactor>0.70</SellPriceFactor>
     </statBases>
@@ -90,6 +92,7 @@
       <PRFRoboticArm>1</PRFRoboticArm>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
     </costList>
     <altitudeLayer>Building</altitudeLayer>
     <fillPercent>0.5</fillPercent>
@@ -97,6 +100,7 @@
     <statBases>
       <WorkToBuild>3500</WorkToBuild>
       <MaxHitPoints>200</MaxHitPoints>
+      <MarketValue>1500</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
     <size>(3,1)</size>

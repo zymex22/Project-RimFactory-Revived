@@ -33,11 +33,13 @@
     <statBases>
       <WorkToBuild>450</WorkToBuild>
       <MaxHitPoints>150</MaxHitPoints>
+	  <MarketValue>1560</MarketValue>
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
     <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it (the yellow cell points to the "front").\n\n(Works with "Refualable comp" buildings)\nAnd also mortars</description>
     <costList>
+      <Steel>20</Steel>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>1</PRFRoboticArm>
       <ComponentIndustrial>2</ComponentIndustrial>
@@ -108,6 +110,7 @@
     <statBases>
       <WorkToBuild>450</WorkToBuild>
       <MaxHitPoints>100</MaxHitPoints>
+	  <MarketValue>1475</MarketValue>
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
@@ -115,6 +118,7 @@
     <costList>
       <Steel>30</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <comps>
       <li Class="CompProperties_Breakdownable"/>
@@ -168,6 +172,9 @@
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
@@ -240,7 +247,13 @@
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
+    <statBases>
+	  <MarketValue>2250</MarketValue>
+    </statBases>
     <passability>Impassable</passability>
     <description>(PRF) A Puller that pulls foodstuffs from growzones and places them into storage or onto a belt.</description>
     <altitudeLayer>Building</altitudeLayer>
@@ -298,9 +311,15 @@
     <defName>Building_AutoMachineTool_PullerI</defName>
     <label>Item Puller mkI</label>
     <costList>
-      <Steel>100</Steel>
-      <ComponentIndustrial>5</ComponentIndustrial>
+      <Steel>150</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
+    <statBases>
+	  <MarketValue>1730</MarketValue>
+    </statBases>
     <passability>Impassable</passability>
     <description>A Puller That Pull items from A to B. Place it down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
@@ -350,7 +369,13 @@
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
+    <statBases>
+	  <MarketValue>2450</MarketValue>
+    </statBases>
     <passability>Impassable</passability>
     <description>A upgraded puller which run at a higher speed than mkI puller. pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
@@ -382,6 +407,16 @@
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller_Side</defName>
     <label>Item Angle Puller</label>
+    <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+    </costList>
+    <statBases>
+	  <MarketValue>2650</MarketValue>
+    </statBases>
     <passability>Impassable</passability>
     <description>(PRF) A 90 degree angled Puller that moves items from A to B. Similar to the basic puller, but allowing turns! You can swap the direction (left/right) after placing.\n\nREMEMBER to turn it on after placing!</description>
     <altitudeLayer>Building</altitudeLayer>
@@ -441,6 +476,16 @@
   <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
     <defName>Building_AutoMachineTool_Puller_Wall</defName>
     <label>Wall Item Puller</label>
+    <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+    </costList>
+    <statBases>
+	  <MarketValue>2250</MarketValue>
+    </statBases>
     <description>(PRF) An in-wall item Puller that pushes items from A to B.\n\nThis one is placed through a wall, and is well insulated enough for use in freezers and secure enough for prisons where you dont want anyone crawling through.\n\nRemember you still need to turn it on!</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <building>
@@ -496,11 +541,13 @@
     <uiIconScale>0.7</uiIconScale>
     <costList>
       <Steel>10</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
     <statBases>
       <MaxHitPoints>80</MaxHitPoints>
       <WorkToBuild>80</WorkToBuild>
       <Flammability>0.4</Flammability>
+	  <MarketValue>90</MarketValue>
       <Beauty>-0.5</Beauty>      <!--Let's Game It Out playing SatisFactory shows how beautiful conveyors truly are!-->
       <Mass>10</Mass>
     </statBases>
@@ -653,7 +700,11 @@
     </researchPrerequisites>
     <costList>
       <Steel>20</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
+	<statBases>
+	  <MarketValue>90</MarketValue>
+    </statBases>
     <pathCost>70</pathCost>
     <fillPercent>0.4</fillPercent>    <!-- Cover from shell -->
   </ThingDef>
@@ -714,7 +765,14 @@
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
       <Steel>60</Steel>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
+	<statBases>
+	  <MarketValue>110</MarketValue>
+      <WorkToBuild Inherit="false">450</WorkToBuild>
+    </statBases>
     <!--<stuffCategories>Guess what we cannot do with current menu options?  Have a stuffed thing. Dmmit.
       <li>Stony</li>
       <li>Metallic</li>
@@ -750,9 +808,6 @@
         <drawSize>(1, 1)</drawSize>
       </blueprintGraphicData>
     </building>-->
-    <statBases>
-      <WorkToBuild Inherit="false">450</WorkToBuild>
-    </statBases>
   </ThingDef>
   <!--======================================= Conveyor Splitter UG ===============================================-->
   <ThingDef ParentName="PRF_Belt_Splitter">
@@ -767,6 +822,7 @@
     <clearBuildingArea>false</clearBuildingArea>
     <statBases>
       <WorkToBuild Inherit="false">1300</WorkToBuild>      <!--have to dig space for unit-->
+	  <MarketValue>920</MarketValue>
     </statBases>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
