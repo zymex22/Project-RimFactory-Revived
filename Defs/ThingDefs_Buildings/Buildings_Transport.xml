@@ -760,10 +760,13 @@
     </inspectorTabs>
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <Steel>60</Steel>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <Steel>40</Steel>
     </costList>
 	<statBases>
-	  <MarketValue>319</MarketValue>
+	  <MarketValue>1195</MarketValue>
       <WorkToBuild Inherit="false">450</WorkToBuild>
     </statBases>
     <!--<stuffCategories>Guess what we cannot do with current menu options?  Have a stuffed thing. Dmmit.
@@ -815,7 +818,7 @@
     <clearBuildingArea>false</clearBuildingArea>
     <statBases>
       <WorkToBuild Inherit="false">1300</WorkToBuild>      <!--have to dig space for unit-->
-	  <MarketValue>404</MarketValue>
+	  <MarketValue>1280</MarketValue>
     </statBases>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
@@ -854,6 +857,7 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
     </placeWorkers>
     <statBases>
+	  <MarketValue>1195</MarketValue>
       <WorkToBuild Inherit="false">1300</WorkToBuild>      <!--have to dig space for unit-->
     </statBases>
     <graphicData>
