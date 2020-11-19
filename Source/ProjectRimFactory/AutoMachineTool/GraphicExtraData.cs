@@ -42,7 +42,7 @@ namespace ProjectRimFactory {
         public Vector3? arrowSouthDrawOffset;  // in def's XML.
         public string texPath = null; // actual texPath
         public string texPath2 = null;  // splitter building, wall edges, whatever?
-        public List<ThingDef> specialLinkDefs;
+        public List<string> specialLinkDefs;
         public string inputString = null;
 
         public static GraphicExtraData Extract(GraphicRequest req, 
@@ -109,7 +109,7 @@ namespace ProjectRimFactory {
             }
             if (specialLinkDefs != null) {
                 pieces.Add(" specialLinkDefs: [" + String.Join(", ",
-                             specialLinkDefs.Select(d => d.defName)) + "]");
+                             specialLinkDefs) + "]");
             }
             if (pieces.Count > 0) s.Append(" ").Append(String.Join(", ", pieces));
             s.Append("]");

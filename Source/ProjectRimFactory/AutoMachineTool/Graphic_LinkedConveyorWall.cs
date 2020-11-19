@@ -47,9 +47,13 @@ namespace ProjectRimFactory.AutoMachineTool {
                     texPath = extraData.texPath2 + "_East",
                     drawSize = Vector2.one
                 };
-                sameLinkDefs = extraData.specialLinkDefs;
-                Debug.Message(Debug.Flag.ConveyorGraphics, "  added sameLinkDefs: " + 
-                    (sameLinkDefs == null ? "null" : String.Join(", ", sameLinkDefs.Select(d => d.defName))));
+                // If this throws errors, that's okay - it's a config error that needs to be fixed:
+                // NOTE: this can be changed later if the graphics needs to allow multilpe defs,
+                //   not all of which may be actually listed...
+                sameLinkDefs = new List<ThingDef>(extraData.specialLinkDefs.Select(
+                    s=>DefDatabase<ThingDef>.GetNamed(s)));
+                Debug.Message(Debug.Flag.ConveyorGraphics, "  added sameLinkDefs: " +
+                    (sameLinkDefs == null ? "null" : String.Join(", ", sameLinkDefs)));
             }
         }
         public override void Print(SectionLayer layer, Thing thing) {
@@ -85,7 +89,7 @@ namespace ProjectRimFactory.AutoMachineTool {
                     .OfType<IBeltConveyorLinkable>()
                     .FirstOrDefault(belt.HasLinkWith);
             if (otherBelt == null) return false;
-            Debug.Message(Debug.Flag.ConveyorGraphics, "WallBelt graphic testing links vs sameLinkDefs for " + parent + ": " + (sameLinkDefs == null ? "null" : String.Join(", ", sameLinkDefs.Select(d => d.defName))));
+            Debug.Message(Debug.Flag.ConveyorGraphics, "WallBelt graphic testing links vs sameLinkDefs for " + parent + ": " + (sameLinkDefs == null ? "null" : String.Join(", ", sameLinkDefs)));
             if (!sameLinkDefs.Contains((otherBelt as Thing).def)) {
                 Debug.Message(Debug.Flag.ConveyorGraphics, " found link with " + otherBelt + " (" + (otherBelt as Thing).def.defName + ")");
                 if (x == IntVec3.East) showE = true;
