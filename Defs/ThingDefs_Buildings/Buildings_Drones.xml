@@ -140,7 +140,7 @@
       <ComponentSpacer>1</ComponentSpacer>
     </costList>
     <statBases>
-      <MarketValue>2936</MarketValue>
+      <MarketValue>2345</MarketValue>
     </statBases>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
@@ -223,7 +223,7 @@
       <MaxHitPoints>150</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
       <Mass>25</Mass>
-      <MarketValue>2763</MarketValue>
+      <MarketValue>2172</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>10</Beauty>
     </statBases>
