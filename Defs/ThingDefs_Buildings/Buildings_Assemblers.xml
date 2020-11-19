@@ -139,6 +139,7 @@ Mod extennsion for assemblers
     <statBases>
       <WorkToBuild>800</WorkToBuild>
       <MaxHitPoints>150</MaxHitPoints>
+      <MarketValue>1140</MarketValue>
       <Flammability>1.0</Flammability>
       <Mass>25</Mass>
     </statBases>
@@ -148,7 +149,7 @@ Mod extennsion for assemblers
     </thingCategories>
     <description>The Portable Recipe Database can import recipes from nearby worktables. Afterwards, when reinstalled near assembler(s), it will upload its recipes to them.\n\nBlue cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <Steel>20</Steel>
       <ComponentIndustrial>1</ComponentIndustrial>
       <RimFactory_Data_Disk>1</RimFactory_Data_Disk>
@@ -189,16 +190,17 @@ Mod extennsion for assemblers
     </graphicData>
     <costList>      <!-- cost list for fixed prices, uses def names -->
       <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRFWeakAIChip>2</PRFWeakAIChip>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
-      <MarketValue>1000</MarketValue>      <!-- 	The "market value" of this thing. Please note that sellPriceFactor halves this value when selling the thing, and that the Social skill influences the actual value. -->
+      <MarketValue>4725</MarketValue>      <!-- 	The "market value" of this thing. Please note that sellPriceFactor halves this value when selling the thing, and that the Social skill influences the actual value. -->
     </statBases>
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
@@ -246,7 +248,8 @@ Mod extennsion for assemblers
     </graphicData>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRFWeakAIChip>4</PRFWeakAIChip>
+      <PRFAdvancedAIChip>2</PRFAdvancedAIChip>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <Plasteel>10</Plasteel>
       <Steel>150</Steel>
@@ -254,12 +257,13 @@ Mod extennsion for assemblers
     </costList>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
-      <MarketValue>1250</MarketValue>
+      <MarketValue>7205</MarketValue>
     </statBases>
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->

@@ -23,8 +23,9 @@
     <costStuffCount>150</costStuffCount>
     <costList>
       <Steel>100</Steel>
-      <ComponentIndustrial>10</ComponentIndustrial>
-      <PRFWeakAIChip>3</PRFWeakAIChip>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <graphicData>
       <texPath>Common/ResearchBenchAI</texPath>
@@ -45,6 +46,7 @@
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>5000</WorkToBuild>
       <Flammability>1.0</Flammability>
+      <MarketValue>2080</MarketValue>
       <ResearchSpeedFactor>1.0</ResearchSpeedFactor>
       <SellPriceFactor>0.70</SellPriceFactor>
     </statBases>
@@ -97,6 +99,7 @@
     <statBases>
       <WorkToBuild>3500</WorkToBuild>
       <MaxHitPoints>200</MaxHitPoints>
+      <MarketValue>1090</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
     <size>(3,1)</size>

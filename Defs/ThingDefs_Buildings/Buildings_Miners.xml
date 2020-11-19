@@ -55,17 +55,18 @@
     <castEdgeShadows>false</castEdgeShadows>
     <size>(2,2)</size>
     <statBases>
-      <WorkToBuild>10000</WorkToBuild>
+      <WorkToBuild>4000</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
       <Flammability>0.5</Flammability>
+      <MarketValue>2175</MarketValue>
       <Beauty>-25</Beauty>
       <Mass>35</Mass>
     </statBases>
     <description>An early automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 8 hours.(can cause Infestation!)</description>
     <costList>
-      <Steel>250</Steel>
+      <Steel>450</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFMachineFrame>1</PRFMachineFrame>
     </costList>
     <comps>
       <li Class="CompProperties_Refuelable">
@@ -144,15 +145,16 @@
     </graphicData>
     <size>(2,2)</size>
     <statBases>
-      <WorkToBuild>1000</WorkToBuild>
+      <WorkToBuild>6500</WorkToBuild>
       <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>2940</MarketValue>
       <Flammability>0.5</Flammability>
     </statBases>
     <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 3 hours.(can cause infestation)</description>
     <costList>
       <Steel>400</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <Plasteel>10</Plasteel>
+      <Plasteel>50</Plasteel>
       <PRFMachineFrame>1</PRFMachineFrame>
     </costList>
     <comps>
@@ -216,14 +218,16 @@
     </graphicData>
     <size>(3,3)</size>
     <statBases>
-      <WorkToBuild>10000</WorkToBuild>
+      <WorkToBuild>6800</WorkToBuild>
       <MaxHitPoints>800</MaxHitPoints>
+      <MarketValue>6893</MarketValue>
       <Flammability>0.2</Flammability>
     </statBases>
     <description>This is last tier random ore mining quarry, this one will not create infestation and will only mine rare ores no stones.</description>
     <costList>
       <Steel>1000</Steel>
       <ComponentIndustrial>25</ComponentIndustrial>
+      <ComponentSpacer>5</ComponentSpacer>
       <Plasteel>50</Plasteel>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
@@ -297,13 +301,15 @@
     <costList>
       <Steel>1000</Steel>
       <ComponentIndustrial>25</ComponentIndustrial>
-      <Plasteel>50</Plasteel>
+      <ComponentSpacer>10</ComponentSpacer>
+      <Plasteel>100</Plasteel>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <statBases>
-      <WorkToBuild>10000</WorkToBuild>
+      <WorkToBuild>7600</WorkToBuild>
       <MaxHitPoints>800</MaxHitPoints>
+      <MarketValue>8663</MarketValue>
       <Flammability>0.2</Flammability>
     </statBases>
     <researchPrerequisites>

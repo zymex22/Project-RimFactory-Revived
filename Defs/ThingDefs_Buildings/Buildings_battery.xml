@@ -51,6 +51,7 @@
       <Mass>40</Mass>
       <Flammability>1.0</Flammability>
       <Beauty>-40</Beauty>
+      <MarketValue>490</MarketValue>
     </statBases>
     <description>A battery capable of storing 4000 watt days of power. it has a efficiency of 50% which mean it will take 8k WD to charge it.</description>
     <size>(1,1)</size>
@@ -89,6 +90,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>800</WorkToBuild>
       <Mass>60</Mass>
+      <MarketValue>1130</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>-80</Beauty>
     </statBases>
@@ -127,6 +129,7 @@
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>800</WorkToBuild>
+      <MarketValue>5320</MarketValue>
       <Mass>80</Mass>
       <Flammability>1.0</Flammability>
       <Beauty>0</Beauty>
@@ -138,6 +141,7 @@
       <Plasteel>100</Plasteel>
       <Gold>50</Gold>
       <ComponentIndustrial>15</ComponentIndustrial>
+      <ComponentSpacer>4</ComponentSpacer>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <comps>
@@ -171,6 +175,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>800</WorkToBuild>
       <Mass>80</Mass>
+      <MarketValue>14750</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>50</Beauty>
     </statBases>
@@ -180,6 +185,8 @@
       <Steel>1000</Steel>
       <Plasteel>200</Plasteel>
       <Gold>200</Gold>
+      <ComponentSpacer>12</ComponentSpacer>
+      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
       <ComponentIndustrial>30</ComponentIndustrial>
       <AIPersonaCore>1</AIPersonaCore>
     </costList>
@@ -235,6 +242,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>1000</WorkToBuild>
       <Mass>40</Mass>
+      <MarketValue>8410</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>-40</Beauty>
     </statBases>
@@ -245,6 +253,8 @@
       <Plasteel>130</Plasteel>
       <Gold>100</Gold>
       <ComponentIndustrial>15</ComponentIndustrial>
+      <ComponentSpacer>6</ComponentSpacer>
+      <PRFAdvancedAIChip>2</PRFAdvancedAIChip>
     </costList>
     <comps>
       <li Class="CompProperties_Battery">
@@ -290,6 +300,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>800</WorkToBuild>
       <Mass>40</Mass>
+      <MarketValue>830</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>-40</Beauty>
     </statBases>

@@ -26,8 +26,13 @@
 								<PRFDroneModule>1</PRFDroneModule>
 								<Steel>30</Steel>
 								<Plasteel>20</Plasteel>
+								<PRFWeakAIChip>1</PRFWeakAIChip>
 								<ComponentIndustrial>3</ComponentIndustrial>
+								<ComponentSpacer>1</ComponentSpacer>
 							</costList>
+							<statBases>
+								<MarketValue>1870</MarketValue>
+							</statBases>
 							<inspectorTabs>
 								<li>ProjectRimFactory.Common.ITab_PowerSupply</li>								<!-- Power boost -->
 							</inspectorTabs>

@@ -23,6 +23,7 @@
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>200</WorkToBuild>
       <Flammability>1.0</Flammability>
+      <MarketValue>2780</MarketValue>
       <Mass>70</Mass>
     </statBases>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
@@ -68,9 +69,14 @@
       <Steel>75</Steel>
       <Plasteel>45</Plasteel>
       <ComponentIndustrial>8</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFWeakAIChip>1</PRFWeakAIChip>
       <PRFRoboticArm>1</PRFRoboticArm>
     </costList>
+    <statBases>
+      <MarketValue>2780</MarketValue>
+    </statBases>
     <graphicData>
       <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
       <color>(102,102,105,256)</color>      <!--change color on maske manually -->
@@ -128,9 +134,14 @@
       <Steel>100</Steel>
       <Plasteel>75</Plasteel>
       <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFWeakAIChip>1</PRFWeakAIChip>
       <PRFRoboticArm>1</PRFRoboticArm>
     </costList>
+    <statBases>
+      <MarketValue>3366</MarketValue>
+    </statBases>
     <researchPrerequisites>
       <li>PRF_SALResearchII</li>
     </researchPrerequisites>
@@ -189,9 +200,14 @@
       <Plasteel>100</Plasteel>
       <Silver>300</Silver>
       <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>4</ComponentSpacer>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFWeakAIChip>1</PRFWeakAIChip>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
+    <statBases>
+      <MarketValue>5108</MarketValue>
+    </statBases>
     <researchPrerequisites>
       <li>PRF_SALResearchIV</li>
     </researchPrerequisites>
@@ -246,9 +262,14 @@
       <Plasteel>200</Plasteel>
       <Silver>800</Silver>
       <ComponentIndustrial>30</ComponentIndustrial>
+      <ComponentSpacer>5</ComponentSpacer>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFRoboticArm>4</PRFRoboticArm>
     </costList>
+    <statBases>
+      <MarketValue>8500</MarketValue>
+    </statBases>
     <researchPrerequisites>
       <li>PRF_SALResearchV</li>
     </researchPrerequisites>
@@ -303,9 +324,14 @@
       <Plasteel>300</Plasteel>
       <Silver>1000</Silver>
       <ComponentIndustrial>40</ComponentIndustrial>
+      <ComponentSpacer>8</ComponentSpacer>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
       <PRFRoboticArm>1</PRFRoboticArm>
     </costList>
+    <statBases>
+      <MarketValue>10575</MarketValue>
+    </statBases>
     <researchPrerequisites>
       <li>PRF_SALResearchVI</li>
     </researchPrerequisites>
@@ -352,9 +378,14 @@
       <Plasteel>600</Plasteel>
       <Silver>2000</Silver>
       <ComponentIndustrial>50</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
+    <statBases>
+      <MarketValue>16147</MarketValue>
+    </statBases>
     <researchPrerequisites>
       <li>PRF_SALResearchVIII</li>
     </researchPrerequisites>
@@ -402,9 +433,14 @@
       <Plasteel>175</Plasteel>
       <Silver>100</Silver>
       <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFWeakAIChip>1</PRFWeakAIChip>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
+    <statBases>
+      <MarketValue>5110</MarketValue>
+    </statBases>
     <researchPrerequisites>
       <li>PRF_SALResearchVI</li>
     </researchPrerequisites>
@@ -511,10 +547,15 @@
       <Plasteel>7500</Plasteel>
       <Silver>100000</Silver>
       <ComponentIndustrial>450</ComponentIndustrial>
+      <ComponentSpacer>50</ComponentSpacer>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFQubitProcessor>5</PRFQubitProcessor>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRFRoboticArm>4</PRFRoboticArm>
       <AIPersonaCore>5</AIPersonaCore>
     </costList>
+    <statBases>
+      <MarketValue>293000</MarketValue>
+    </statBases>
     <researchPrerequisites>
       <li>PRF_SALGodlyCrafting</li>
     </researchPrerequisites>

@@ -62,13 +62,14 @@
     <statBases>
       <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
+      <MarketValue>2184</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>A CNC router like automated machine that are capable of turning stone into bricks.</description>
+    <description>A CNC router like automated machine that are capable of turning stone into bricks and even abit mid skilled art too. \nArt level: 10</description>
     <costList>
       <Steel>400</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFMachineFrame>1</PRFMachineFrame>
       <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
     <recipes>
@@ -125,12 +126,14 @@
     <statBases>
       <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
+      <MarketValue>2246</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
     <description>A recycler that turns almost any apparel and weapons into usable resources, at the cost of some lost materials.</description>
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
       <PRFMachineFrame>1</PRFMachineFrame>
       <PRFRoboticArm>2</PRFRoboticArm>
     </costList>
@@ -188,12 +191,14 @@
     <statBases>
       <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
+      <MarketValue>5000</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
     <description>Thornsworth's Art machine, capable of producing art with a art level of 14.\nThorny had a big passion for 3D printers and Producing art with hes large army of assemblers, he made this machine before he passed away, and now its finally added to produce a army of sculptures in future.\nRIP Thornsworth 2020</description>
     <costList>
       <Steel>250</Steel>
-      <ComponentIndustrial>5</ComponentIndustrial>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
       <PRFMachineFrame>1</PRFMachineFrame>
       <PRFRoboticArm>1</PRFRoboticArm>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
@@ -266,6 +271,7 @@
     <statBases>
       <WorkToBuild>5000</WorkToBuild>
       <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>5050</MarketValue>
       <Flammability>0.5</Flammability>
     </statBases>
     <costList>
@@ -274,7 +280,7 @@
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <Plasteel>25</Plasteel>
       <Steel>250</Steel>
-      <ComponentIndustrial>2</ComponentIndustrial>
+      <ComponentIndustrial>12</ComponentIndustrial>
     </costList>
     <recipes>
       <li>PRF_RefinePlasteel</li>
@@ -345,11 +351,13 @@
     <statBases>
       <WorkToBuild>5000</WorkToBuild>
       <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>3060</MarketValue>
       <Flammability>0.5</Flammability>
     </statBases>
     <costList>      <!-- cost list for fixed prices, uses def names -->
       <PRFRoboticArm>2</PRFRoboticArm>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <ComponentIndustrial>12</ComponentIndustrial>
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
     </costList>
@@ -460,10 +468,11 @@
     <statBases>
       <Cleanliness>-5</Cleanliness>
       <Beauty>-10</Beauty>
+      <MarketValue>4310</MarketValue>
     </statBases>
     <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)\n Use wood to smelt</description>
     <costList>
-      <Steel>200</Steel>
+      <Steel>2000</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
     <recipes>
@@ -524,12 +533,13 @@
       <MaxHitPoints>250</MaxHitPoints>
       <Cleanliness>-1</Cleanliness>
       <Beauty>-1</Beauty>
+      <MarketValue>2716</MarketValue>
     </statBases>
     <description>This Second Furnace is an advanced industrial Furnace capable of burning items and smelting raw resources into useful materials\nUses electricity to reduce wood amount for burning</description>
     <costList>
-      <Steel>200</Steel>
-      <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <Steel>500</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <PRFMachineFrame>1</PRFMachineFrame>
     </costList>
     <recipes>
       <li>CremateCorpse</li>
@@ -596,10 +606,13 @@
       <MaxHitPoints>350</MaxHitPoints>
       <Cleanliness>1</Cleanliness>
       <Beauty>1</Beauty>
+      <MarketValue>4934</MarketValue>
     </statBases>
     <description>Advanced Furnace capable of burning stuff and smelting raw resources into useful materials, faster than previous iterations.\n\n(This furnace is the best and fastest in Project RimFactory.)\n\nImports any recipe from the Electric Smelter and the Crematorium.</description>
     <costList>
       <Steel>350</Steel>
+      <Plasteel>200</Plasteel>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
       <ComponentIndustrial>10</ComponentIndustrial>
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
     </costList>

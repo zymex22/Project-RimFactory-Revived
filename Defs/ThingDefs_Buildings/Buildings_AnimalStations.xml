@@ -68,6 +68,7 @@
     <altitudeLayer>Gas</altitudeLayer>    <!-- will hide stuff under texture if "Gas" used -->
     <statBases>
       <Mass>50</Mass>      <!-- weight when minified -->
+      <MarketValue>1650</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>200</WorkToBuild>      <!-- time to build -->
     </statBases>
@@ -75,10 +76,11 @@
     <description>A station with motion detecting industrial-size shearing clippers. Swiftly and automatically extracts wool from your colony's animals.\n\nKeep it stocked with food to lure the animals in for processing. Drops the produce where the sheared creature is standing.</description>    <!-- use \n for next line -->
     <size>(2,2)</size>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFMachineFrame>1</PRFMachineFrame>
       <Hay>50</Hay>
       <Steel>50</Steel>
       <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <comps>
       <li>
@@ -143,6 +145,7 @@
     <altitudeLayer>Gas</altitudeLayer>
     <statBases>
       <Mass>50</Mass>
+      <MarketValue>1650</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>200</WorkToBuild>
     </statBases>
@@ -150,10 +153,11 @@
     <description>A station equipped with servo-motorized tubes, which seek out mammary glands to milk your farm animals.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the milked creature is standing.</description>
     <size>(2,2)</size>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFMachineFrame>1</PRFMachineFrame>
       <Hay>50</Hay>
       <Steel>50</Steel>
       <PRFRoboticArm>2</PRFRoboticArm>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <comps>
       <li>
@@ -218,6 +222,7 @@
     <altitudeLayer>Gas</altitudeLayer>
     <statBases>
       <Mass>50</Mass>
+      <MarketValue>2110</MarketValue>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>200</WorkToBuild>
     </statBases>
@@ -285,6 +290,7 @@
     <altitudeLayer>Gas</altitudeLayer>
     <statBases>
       <Mass>50</Mass>
+      <MarketValue>2530</MarketValue>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>500</WorkToBuild>
     </statBases>
@@ -371,6 +377,7 @@
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <statBases>
       <Mass>70</Mass>
+      <MarketValue>2200</MarketValue>
       <MaxHitPoints>200</MaxHitPoints>
       <WorkToBuild>200</WorkToBuild>
     </statBases>

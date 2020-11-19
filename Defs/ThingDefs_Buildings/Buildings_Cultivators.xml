@@ -85,6 +85,9 @@
       <Plasteel>10</Plasteel>
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
+    <statBases>
+      <MarketValue>1475</MarketValue>
+    </statBases>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -134,8 +137,13 @@
       <PRFDroneModule>2</PRFDroneModule>
       <Steel>30</Steel>
       <Plasteel>20</Plasteel>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <ComponentSpacer>2</ComponentSpacer>
       <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
+    <statBases>
+      <MarketValue>3095</MarketValue>
+    </statBases>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -182,8 +190,13 @@
       <PRFDroneModule>2</PRFDroneModule>
       <Steel>65</Steel>
       <Plasteel>20</Plasteel>
+      <Silver>30</Silver>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
+    <statBases>
+      <MarketValue>2137</MarketValue>
+    </statBases>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -245,8 +258,13 @@
       <PRFDroneModule>5</PRFDroneModule>
       <Steel>50</Steel>
       <Plasteel>50</Plasteel>
+      <ComponentSpacer>4</ComponentSpacer>
+      <ComponentIndustrial>15</ComponentIndustrial>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
+    <statBases>
+      <MarketValue>6428</MarketValue>
+    </statBases>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -300,14 +318,17 @@
     </graphicData>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>3631</MarketValue>
     </statBases>
     <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing./nIt has a size of 11x11</description>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>3</PRFRoboticArm>
       <Steel>100</Steel>
       <Plasteel>30</Plasteel>
+      <Silver>30</Silver>
       <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
       <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <comps>
@@ -355,14 +376,16 @@
     </graphicData>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>2995</MarketValue>
     </statBases>
     <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing./nIt has a size of 11x11</description>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFRoboticArm>3</PRFRoboticArm>
       <Steel>100</Steel>
       <Plasteel>30</Plasteel>
       <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
       <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <comps>
@@ -397,14 +420,16 @@
     </graphicData>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
+      <MarketValue>10646</MarketValue>
     </statBases>
     <description>This is a hightech XL Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing./nIt has a size of 23x23 and usses 4x more power and cost, but same speed as a normal size one.\nCapable of holding a roof</description>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
-      <PRFRoboticArm>3</PRFRoboticArm>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRFRoboticArm>9</PRFRoboticArm>
       <Steel>800</Steel>
       <Plasteel>200</Plasteel>
       <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
     <holdsRoof>true</holdsRoof>
@@ -457,6 +482,7 @@
       <WorkToBuild>450</WorkToBuild>
       <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
+      <MarketValue>360</MarketValue>
     </statBases>
     <description>A building that waters plants in an expanding radius, increasing their growth by one hour per round. Effects are stackable</description>
     <costList>
@@ -515,12 +541,13 @@
       <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>200</MaxHitPoints>
       <Flammability>1.0</Flammability>
+      <MarketValue>1896</MarketValue>
     </statBases>
     <description>A Upgraded sprinkler using advanced AI to stimulate plants fertilizer needs in each sprinkle, this leads to a improved growrate. Increasing their growth by 2 hour per round. Effects are stackable</description>
     <costList>
       <Steel>50</Steel>
       <Plasteel>10</Plasteel>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <ComponentIndustrial>8</ComponentIndustrial>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
