@@ -309,20 +309,24 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         public virtual void DrawCarried() {
             Thing t = CarryingThing();
+            if (t == null) return;
             float scale = this.def.GetModExtension<ModExtension_Conveyor>()?.
                           carriedItemScale ?? defaultCarriedItemScale;
             // Took this line from MinifiedThing; don't know if it's needed:
+            //   However, it's insuffient to use Graphic's GetCopy() :(
             var g = t.Graphic.ExtractInnerGraphicFor(t);
             // Graphic's GetCopy() fails on any Graphic_RandomRotated
+            //   And on minified things.  And who knows what else?
             //   There is no easy way to get around this, but this seems
             //   to work the best so far:
-            if (g is Graphic_RandomRotated grr) {
-                var d = t.def.graphicData;
-                g = GraphicDatabase.Get(d.graphicClass, d.texPath, g.Shader,
-                          new Vector2(scale, scale), g.color, g.colorTwo);
-            } else {
-                g = g.GetCopy(new Vector2(scale, scale));
+            GraphicData gd = t.def.graphicData;
+            if (gd == null) gd = g.data;
+            if (gd == null) {
+                t.DrawAt(CarryPosition());
+                return;
             }
+            g = GraphicDatabase.Get(gd.graphicClass, gd.texPath, g.Shader,
+                      new Vector2(scale, scale), g.color, g.colorTwo);
             g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
         }
         protected Vector3 CarryPosition() {
