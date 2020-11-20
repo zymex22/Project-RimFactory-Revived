@@ -168,6 +168,50 @@
         <thingDefCountRange>2~12</thingDefCountRange>
         <countRange>10~100</countRange>
       </li> -->
+      <!-- POWER items vanilla -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>PowerSwitch</thingDef>
+        <price>Cheap</price>
+        <countRange>5~40</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>WoodFiredGenerator</thingDef>
+        <price>Cheap</price>
+        <countRange>1~10</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>ChemfuelPoweredGenerator</thingDef>
+        <countRange>0~3</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>WindTurbine</thingDef>
+        <countRange>0~10</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>WatermillGenerator</thingDef>
+        <countRange>0~4</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>Battery</thingDef>
+        <price>Cheap</price>
+        <countRange>1~10</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>SolarGenerator</thingDef>
+        <price>Expensive</price>
+        <countRange>0~4</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>GeothermalGenerator</thingDef>
+        <price>Expensive</price>
+        <countRange>0~1</countRange>
+      </li>
+      <!--  -->
+      <li Class="StockGenerator_Category">
+        <categoryDef>BuildingsAutomation</categoryDef>
+        <thingDefCountRange>10~40</thingDefCountRange>
+        <countRange>0~5</countRange>
+      </li>
       <li Class="StockGenerator_Category">
         <categoryDef>StoneBlocks</categoryDef>
         <price>Expensive</price>
