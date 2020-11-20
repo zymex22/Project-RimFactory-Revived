@@ -16,17 +16,17 @@
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Chemfuel</thingDef>
-        <countRange>50~250</countRange>
+        <countRange>50~300</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>ComponentIndustrial</thingDef>
         <price>Cheap</price>
-        <countRange>75~200</countRange>
+        <countRange>50~250</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>ComponentSpacer</thingDef>
         <price>Cheap</price>
-        <countRange>25~75</countRange>
+        <countRange>10~75</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Plasteel</thingDef>
@@ -34,9 +34,14 @@
         <countRange>10~150</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
+        <thingDef>Gold</thingDef>
+        <price>Expensive</price>
+        <countRange>0~50</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
         <thingDef>Steel</thingDef>
         <price>Cheap</price>
-        <countRange>10~500</countRange>
+        <countRange>100~1000</countRange>
       </li>
       <!-- ====================== Prf Items ==================== -->
       <li Class="StockGenerator_SingleDef">
