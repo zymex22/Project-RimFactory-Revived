@@ -66,7 +66,7 @@
     <costList>
       <Steel>450</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <comps>
       <li Class="CompProperties_Refuelable">
@@ -171,6 +171,10 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
       </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
+      </li>
       <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
         <effect>Drill</effect>
       </li>
@@ -228,6 +232,7 @@
     <statBases>
       <MarketValue>1050</MarketValue>
       <WorkToBuild>750</WorkToBuild>
+      <MaxHitPoints>50</MaxHitPoints>
       <Mass>20</Mass>
     </statBases>
     <inspectorTabs>
@@ -309,7 +314,8 @@
     </costList>
     <statBases>
       <MarketValue>4080</MarketValue>
-      <WorkToBuild>120</WorkToBuild>
+      <WorkToBuild>1200</WorkToBuild>
+      <MaxHitPoints>125</MaxHitPoints>
       <Mass>35</Mass>
     </statBases>
     <inspectorTabs>
