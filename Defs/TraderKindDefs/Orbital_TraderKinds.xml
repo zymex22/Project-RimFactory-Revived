@@ -135,6 +135,11 @@
         <price>Cheap</price>
         <countRange>5~40</countRange>
       </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>PRF_WallLight</thingDef>
+        <price>Cheap</price>
+        <countRange>5~40</countRange>
+      </li>
       <!-- Basics -->
       <li Class="StockGenerator_SingleDef">
         <thingDef>AIResearchBench</thingDef>
@@ -145,11 +150,6 @@
         <countRange>0~3</countRange>
       </li>
       <!--  -->
-      <li Class="StockGenerator_SingleDef">
-        <thingDef>PRF_WallLight</thingDef>
-        <price>Cheap</price>
-        <countRange>5~40</countRange>
-      </li>
       <li Class="StockGenerator_Category">
         <categoryDef>BuildingsAutomation</categoryDef>
         <thingDefCountRange>10~40</thingDefCountRange>
@@ -211,12 +211,32 @@
         <price>Expensive</price>
         <countRange>0~1</countRange>
       </li>
-      <!--  -->
-      <li Class="StockGenerator_Category">
-        <categoryDef>BuildingsAutomation</categoryDef>
-        <thingDefCountRange>10~40</thingDefCountRange>
+      <!-- Other Vanilla stuff -->
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>BiofuelRefinery</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>HiTechResearchBench</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>LongRangeMineralScanner</thingDef>
+        <countRange>0~1</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>OrbitalTradeBeacon</thingDef>
         <countRange>0~5</countRange>
       </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>FirefoamPopper</thingDef>
+        <countRange>0~10</countRange>
+      </li>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>GroundPenetratingScanner</thingDef>
+        <countRange>0~2</countRange>
+      </li>
+      <!-- Selling stuff -->
       <li Class="StockGenerator_Category">
         <categoryDef>StoneBlocks</categoryDef>
         <price>Expensive</price>
