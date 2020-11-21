@@ -179,9 +179,18 @@ Mod extennsion for assemblers
           <!-- <li>ElectricStove</li> -->
         </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
         <workSpeedBaseFactor>1</workSpeedBaseFactor>
-        <skillLevel>6</skillLevel>
         <drawStatus>true</drawStatus>
         <doEffect>true</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>6</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
       </li>
     </modExtensions>
   </ThingDef>
@@ -242,9 +251,18 @@ Mod extennsion for assemblers
           <li>ElectricStove</li>
         </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
         <workSpeedBaseFactor>1.5</workSpeedBaseFactor>
-        <skillLevel>12</skillLevel>
         <drawStatus>true</drawStatus>
         <doEffect>true</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>12</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
       </li>
     </modExtensions>
   </ThingDef>
@@ -330,8 +348,6 @@ Mod extennsion for assemblers
           <li>ElectricStove</li>
         </importRecipesFrom>
         <workSpeedBaseFactor>2</workSpeedBaseFactor>
-        <skillLevel>20</skillLevel>
-        <artSkillLevel>10</artSkillLevel>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>SAL3/SpacerCookerWorking</texPath>
@@ -344,6 +360,16 @@ Mod extennsion for assemblers
           <texPath>SAL3/AutoCookerPowerOff</texPath>
           <drawSize>(3,3)</drawSize>
         </powerOffGraphicData>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
       </li>
     </modExtensions>
   </ThingDef>
@@ -403,13 +429,21 @@ Mod extennsion for assemblers
         </importRecipesFrom>
         <drawStatus>true</drawStatus>
         <doEffect>true</doEffect>
-        <skillLevel>10</skillLevel>
-        <artSkillLevel>0</artSkillLevel>
         <workingGraphicData>
           <graphicClass>Graphic_Single</graphicClass>
           <texPath>SAL3/smart_butcher_working</texPath>
           <drawSize>(2.1,2.1)</drawSize>
         </workingGraphicData>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>0</levelInt>
+          </li>
+        </skills>
       </li>
     </modExtensions>
     <placeWorkers>      <!-- Restrictor when placing the building. -->
@@ -468,8 +502,16 @@ Mod extennsion for assemblers
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
-        <skillLevel>10</skillLevel>
-        <artSkillLevel>0</artSkillLevel>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>0</levelInt>
+          </li>
+        </skills>
       </li>
     </modExtensions>
   </ThingDef>
@@ -520,8 +562,16 @@ Mod extennsion for assemblers
         </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
         <doEffect>false</doEffect>
         <drawStatus>true</drawStatus>
-        <skillLevel>10</skillLevel>
-        <artSkillLevel>0</artSkillLevel>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>0</levelInt>
+          </li>
+        </skills>
       </li>
     </modExtensions>
   </ThingDef>
