@@ -229,8 +229,16 @@ Mod extennsion for assemblers
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <drawStatus>true</drawStatus>
         <doEffect>false</doEffect>
-        <skillLevel>10</skillLevel>
-        <artSkillLevel>9</artSkillLevel>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>9</levelInt>
+          </li>
+        </skills>
       </li>
     </modExtensions>
   </ThingDef>
@@ -297,8 +305,16 @@ Mod extennsion for assemblers
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <drawStatus>true</drawStatus>
         <doEffect>false</doEffect>
-        <skillLevel>20</skillLevel>
-        <artSkillLevel>12</artSkillLevel>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>12</levelInt>
+          </li>
+        </skills>
       </li>
     </modExtensions>
     <researchPrerequisites>

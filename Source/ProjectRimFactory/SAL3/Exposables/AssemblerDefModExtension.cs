@@ -11,8 +11,6 @@ namespace ProjectRimFactory.SAL3.Exposables
     {
         public float workSpeedBaseFactor = 1f;
         public List<ThingDef> importRecipesFrom;
-        public int skillLevel = 0;
-        public int artSkillLevel = 10;
         public bool drawStatus = false;
         public bool doEffect = false;
         public List<RecipeEffecter> overrideRecipeEffecter = new List<RecipeEffecter>();

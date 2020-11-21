@@ -64,7 +64,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 //Assign skills
                 foreach (var s in p.skills.skills)
                 {
-                    s.Level = s.def == SkillDefOf.Artistic ? this.ArtSkillLevel : this.SkillLevel;
+                    s.Level = extension_Skills.GetExtendedSkillLevel(s.def, typeof(Building_ProgrammableAssembler));
                 }
 
                 // This ensures that pawns do not end up with disabled work types - see Issue#54
@@ -206,7 +206,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
             this.buildingPawn?.skills.skills.ForEach(s =>
             {
-                s.Level = s.def == SkillDefOf.Artistic ? this.ArtSkillLevel : this.SkillLevel;
+                s.Level = extension_Skills.GetExtendedSkillLevel(s.def, typeof(Building_ProgrammableAssembler));
                 ReflectionUtility.cachedTotallyDisabled.SetValue(s, BoolUnknown.Unknown);
             });
 
@@ -378,6 +378,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             return null;
         }
 
+        private ModExtension_Skills extension_Skills  => this.def.GetModExtension<ModExtension_Skills>();
+
         bool TryFindBestBillIngredientsInSet(List<Thing> accessibleThings, Bill b, List<ThingCount> chosen)
         {
             ReflectionUtility.MakeIngredientsListInProcessingOrder.Invoke(null, new object[] { ReflectionUtility.ingredientsOrdered.GetValue(null), b });
@@ -451,8 +453,6 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         protected bool allowForbidden; // internal variable
         public virtual bool AllowForbidden => allowForbidden;
         protected virtual float ProductionSpeedFactor => def.GetModExtension<AssemblerDefModExtension>()?.workSpeedBaseFactor ?? 1f;
-        protected virtual int SkillLevel => def.GetModExtension<AssemblerDefModExtension>()?.skillLevel ?? 0;
-        protected virtual int ArtSkillLevel => def.GetModExtension<AssemblerDefModExtension>()?.artSkillLevel ?? 10;
 
         protected virtual bool SatisfiesSkillRequirements(RecipeDef recipe)
         {
@@ -462,7 +462,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             }
             else
             {
-                return recipe.skillRequirements?.All(s => s.minLevel <= (s.skill == SkillDefOf.Artistic ? this.ArtSkillLevel : this.SkillLevel)) ?? true;
+                return recipe.skillRequirements?.All(s => s.minLevel <= extension_Skills.GetExtendedSkillLevel(s.skill, typeof(Building_ProgrammableAssembler))) ?? true;
             }
         }
 
