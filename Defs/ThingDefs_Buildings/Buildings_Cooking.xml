@@ -138,7 +138,7 @@ Mod extennsion for assemblers
       <MarketValue>1380</MarketValue>
       <Cleanliness>0</Cleanliness>
     </statBases>
-    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1x speed \n 5cleanliness \n cook level 10\n\nWhite cell is input range \nBlue cell are db range.</description>
+    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\nOnly cooks simple foods but with a cooking level of 10 at 1x speed \n\nWhite cell is input range.</description>
     <costStuffCount>100</costStuffCount>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
@@ -166,28 +166,28 @@ Mod extennsion for assemblers
     </recipes>
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
-      <isMealSource>true</isMealSource>      <!-- So it's whether or not to show that warning on the right of the screen" You need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
+      <isMealSource>true</isMealSource>      <!-- So it's whether or not to show that warning on the right of the screen "need a meal source" "Either build a NPD or a Stove or a Firepit or whatever the description says" -->
     </building>
     <passability>PassThroughOnly</passability>
     <researchPrerequisites>
       <li>PRF_SelfCooking</li>
     </researchPrerequisites>
-    <rotatable>false</rotatable>    <!-- for being able to swap between textures each rotation -->
+    <rotatable>false</rotatable>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <importRecipesFrom>
           <!-- <li>ElectricStove</li> -->
-        </importRecipesFrom>        <!-- import same bills as vanilla electric stove have -->
+        </importRecipesFrom>
         <workSpeedBaseFactor>1</workSpeedBaseFactor>
         <drawStatus>true</drawStatus>
         <doEffect>true</doEffect>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
-        <BaseSkill>6</BaseSkill>
+        <BaseSkill>5</BaseSkill>
         <skills>
           <li>
-            <def>Artistic</def>
+            <def>Cooking</def>
             <levelInt>10</levelInt>
           </li>
         </skills>
