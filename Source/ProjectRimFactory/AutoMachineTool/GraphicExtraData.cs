@@ -35,6 +35,7 @@ namespace ProjectRimFactory {
      * am doing, so ...good luck, god speed, etc?
      ***************************************************************/
     public class GraphicExtraData {
+        // If you add something here, consider adding ToString() for it below
         public Vector3? arrowDrawOffset;     // Vector3? so we can
         public Vector3? arrowEastDrawOffset; // test against `null`
         public Vector3? arrowWestDrawOffset; // and only update if
@@ -42,6 +43,7 @@ namespace ProjectRimFactory {
         public Vector3? arrowSouthDrawOffset;  // in def's XML.
         public string texPath = null; // actual texPath
         public string texPath2 = null;  // splitter building, wall edges, whatever?
+        public GraphicData graphicData1 = null; // wall transitions?
         public List<string> specialLinkDefs;
         public string inputString = null;
 
@@ -105,6 +107,10 @@ namespace ProjectRimFactory {
                     var x = f.GetValue(this);
                     if (x != null)
                         pieces.Add(f.Name + ": \"" + x.ToString() + "\"");
+                } else if (f.FieldType == typeof(GraphicData)) {
+                    var x = f.GetValue(this);
+                    if (x != null)
+                        pieces.Add(f.Name + ": [" + x.ToString() + "]");
                 }
             }
             if (specialLinkDefs != null) {

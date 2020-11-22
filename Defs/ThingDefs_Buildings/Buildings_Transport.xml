@@ -632,7 +632,7 @@
     </researchPrerequisites>
     <uiIconPath>Belts/v3/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
-      <texPath>[RIPThorny][texPath]Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v3[/texPath][texPath2]Belts/v3/Belts_Wall_Transition[/texPath2][specialLinkDefs][li]Building_AutoMachineTool_BeltConveyor_Wall[/li][/specialLinkDefs][/RIPThorny]</texPath>
+      <texPath>[RIPThorny][texPath]Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v3[/texPath][graphicData1][texPath]Belts/v3/Belts_Wall_Transition[/texPath][graphicClass]Graphic_Multi[/graphicClass][/graphicData1][specialLinkDefs][li]Building_AutoMachineTool_BeltConveyor_Wall[/li][/specialLinkDefs][/RIPThorny]</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorWallTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1,1)</drawSize>
