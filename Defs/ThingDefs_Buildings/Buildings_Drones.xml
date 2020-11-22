@@ -22,6 +22,7 @@
       <Mass>70</Mass>      <!-- mass in kg -->
       <WorkToBuild>1500</WorkToBuild>
     </statBases>
+    <constructEffect>ConstructMetal</constructEffect>
     <uiIconScale>0.7</uiIconScale>
     <drawGUIOverlay>true</drawGUIOverlay>
     <canOverlapZones>false</canOverlapZones>
@@ -128,7 +129,6 @@
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
     </graphicData>
-    <constructEffect>ConstructMetal</constructEffect>
     <description>A mini workshop helper capable of haul, flick, firefight and clean your workshop within a range(can be expanded with powerslider)</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>

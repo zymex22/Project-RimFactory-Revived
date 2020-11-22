@@ -11,6 +11,7 @@
     <blockLight>false</blockLight>
     <blockWind>true</blockWind>
     <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>miners_gr</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
     <constructEffect>ConstructMetal</constructEffect>
     <graphicData>
@@ -47,7 +48,6 @@
     <defName>PRF_DeepQuarry_mkI</defName>
     <label>Auger drill(T1)</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
-    <designatorDropdown>miners_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/Drill</texPath>
       <drawSize>(2,2)</drawSize>
@@ -138,7 +138,6 @@
     <defName>PRF_DeepQuarry</defName>
     <label>Pulse Drill(T2)</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
-    <designatorDropdown>miners_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/DeepQuarry</texPath>
       <drawSize>(2.5,2.5)</drawSize>
@@ -220,7 +219,6 @@
       <drawRotated>false</drawRotated>
     </graphicData>
     <rotatable>true</rotatable>
-    <constructEffect>ConstructMetal</constructEffect>
     <description>This is a Portable Drone miner mkI. It works in much same way as a Cultivator, and can be picked carried when your traveling around the rim for your remote mining operations. It is also excellent for excavating for your new base.\n It has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat, and only work 1 hour shifts.</description>
     <costList>
       <PRFDroneModule>2</PRFDroneModule>
@@ -303,7 +301,6 @@
     </graphicData>
     <size>(2,2)</size>
     <rotatable>true</rotatable>
-    <constructEffect>ConstructMetal</constructEffect>
     <description>This is a Portable Drone miner mkI. It works in much same way as a Cultivator, and can be picked carried when your traveling around the rim for your remote mining operations. It is also excellent for excavating for your new base.\n It has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat, and only work 1 hour shifts.</description>
     <costList>
       <PRFDroneModule>4</PRFDroneModule>
@@ -385,7 +382,6 @@
     <defName>PRF_DeepQuarry_mkIII</defName>
     <label>Random Pulse Drill(T3)</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
-    <designatorDropdown>miners_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/DrillT32</texPath>
       <drawSize>(3.3,3.3)</drawSize>
@@ -467,7 +463,6 @@
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
     <description>With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed. It will set primary ore type and get bonus in rare ores and junk</description>
     <tickerType>Never</tickerType>
-    <designatorDropdown>miners_gr</designatorDropdown>
     <graphicData>
       <texPath>Industry/DrillT3</texPath>
       <drawSize>(3.3,3.3)</drawSize>
