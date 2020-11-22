@@ -214,6 +214,7 @@
       <graphicClass>Graphic_Single</graphicClass>      <!-- <graphicClass>Graphic_Random</graphicClass> -->
       <shaderType>CutoutComplex</shaderType>
     </graphicData>
+    <constructEffect></constructEffect>
     <!-- <designationCategory>Structure</designationCategory> -->
     <uiIconScale>0.70</uiIconScale>
     <fillPercent>0.75</fillPercent>
