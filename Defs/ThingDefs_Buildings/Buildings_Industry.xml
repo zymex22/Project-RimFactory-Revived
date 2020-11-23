@@ -346,6 +346,8 @@
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <drawStatus>true</drawStatus>
         <doEffect>false</doEffect>
+        <importRecipesFrom>
+        </importRecipesFrom>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
