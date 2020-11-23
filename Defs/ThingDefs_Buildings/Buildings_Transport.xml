@@ -578,8 +578,8 @@
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
         <speedFactor>0.35</speedFactor>
-        <minPower>100</minPower>
-        <maxPower>1000</maxPower>
+        <minPower>7</minPower>
+        <maxPower>15</maxPower>
       </li>
     </modExtensions>
     <inspectorTabs>
