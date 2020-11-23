@@ -100,7 +100,7 @@ namespace ProjectRimFactory.Common
                 list.Gap();
 
                 rect = list.GetRect(50f);
-                var speed = (int)Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForSpeed, (float)minPowerSpeed, (float)maxPowerSpeed, true, valueLabelForSpeed, minPowerSpeed.ToString(), maxPowerSpeed.ToString(), 100);
+                var speed = (int)Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForSpeed, (float)minPowerSpeed, (float)maxPowerSpeed, true, valueLabelForSpeed, minPowerSpeed.ToString(), maxPowerSpeed.ToString(), 50);
                 this.Machine.SupplyPowerForSpeed = speed;
                 list.Gap();
 
@@ -126,7 +126,7 @@ namespace ProjectRimFactory.Common
                 list.Gap();
 
                 rect = list.GetRect(50f);
-                var range = (int)Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForRange, (float)minPowerRange, (float)maxPowerRange, true, valueLabelForRange, minPowerRange.ToString(), maxPowerRange.ToString(), this.Machine.RangeInterval);
+                var range = Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForRange, (float)minPowerRange, (float)maxPowerRange, true, valueLabelForRange, minPowerRange.ToString(), maxPowerRange.ToString(), this.Machine.RangeInterval);
                 this.Machine.SupplyPowerForRange = range;
                 list.Gap();
             }

@@ -22,6 +22,7 @@
       <Mass>70</Mass>      <!-- mass in kg -->
       <WorkToBuild>1500</WorkToBuild>
     </statBases>
+    <constructEffect>ConstructMetal</constructEffect>
     <uiIconScale>0.7</uiIconScale>
     <drawGUIOverlay>true</drawGUIOverlay>
     <canOverlapZones>false</canOverlapZones>
@@ -128,15 +129,19 @@
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
     </graphicData>
-    <constructEffect>ConstructMetal</constructEffect>
     <description>A mini workshop helper capable of haul, flick, firefight and clean your workshop within a range(can be expanded with powerslider)</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
       <PRFDroneModule>2</PRFDroneModule>
       <Steel>30</Steel>
       <Plasteel>20</Plasteel>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
       <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
     </costList>
+    <statBases>
+      <MarketValue>2345</MarketValue>
+    </statBases>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
@@ -209,6 +214,7 @@
       <graphicClass>Graphic_Single</graphicClass>      <!-- <graphicClass>Graphic_Random</graphicClass> -->
       <shaderType>CutoutComplex</shaderType>
     </graphicData>
+    <constructEffect></constructEffect>
     <!-- <designationCategory>Structure</designationCategory> -->
     <uiIconScale>0.70</uiIconScale>
     <fillPercent>0.75</fillPercent>
@@ -218,6 +224,7 @@
       <MaxHitPoints>150</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
       <Mass>25</Mass>
+      <MarketValue>2172</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>10</Beauty>
     </statBases>
@@ -231,7 +238,9 @@
       <PRFDroneModule>2</PRFDroneModule>
       <Steel>10</Steel>
       <Plasteel>5</Plasteel>
+      <PRFWeakAIChip>1</PRFWeakAIChip>
       <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
     </costList>
     <holdsRoof>true</holdsRoof>
     <fertility>0</fertility>

@@ -13,24 +13,24 @@
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCooking</defName>
     <label>Self-cooking</label>
-    <baseCost>1500</baseCost>
+    <baseCost>1250</baseCost>
     <prerequisites>
       <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
-    <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
+    <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.\nThis one will unlock simple food stuff and dedicated machines, good entry into automation.</description>
   </ResearchProjectDef>
 
     <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCookingII</defName>
-    <label>Self-cooking</label>
-    <baseCost>2000</baseCost>
+    <label>Improved Self-cooking</label>
+    <baseCost>1500</baseCost>
     <prerequisites>
       <li>PRF_SelfCooking</li>
       <li>PRF_CoreTierII</li>
     </prerequisites>
     <researchViewX>7</researchViewX>
-    <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.</description>
+    <description>Our researchers have discovered a way to produce even better quality foods from our cookers.</description>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">

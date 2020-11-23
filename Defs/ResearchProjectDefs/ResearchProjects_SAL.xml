@@ -24,7 +24,7 @@
     </requiredResearchFacilities>
     <researchViewX>6</researchViewX>
     <discoveredLetterTitle>About: S.A.L automation robots</discoveredLetterTitle>
-    <discoveredLetterText>With this Research you have unlocked S.A.L automation robots.\nTheese are a placeable robots you place on a workbench workercell, then they will start doing work on that bench.\n\nThis is added as a Tribute to S.A.L mod which where what Project RimFactory started as before it became assemblers as we know them today in PRF.\nSettings and most things are taken directly from S.A.L mod but might be changed/tweaked later. Also it does not include cooker/miner, be feel free to ask if you think we miss them.</discoveredLetterText>
+    <discoveredLetterText>With this Research you have unlocked S.A.L automation robots.\nTheese are a placeable robots you place on a workbench workercell, then they will start doing work on that bench.\n\nThis is added as a Tribute to S.A.L mod which where what Project RimFactory started as before it became assemblers as we know them today in PRF.\nSettings and most things are taken directly from S.A.L mod but might be changed/tweaked later. Also it does not include miner, be feel free to ask if you think we miss them.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">

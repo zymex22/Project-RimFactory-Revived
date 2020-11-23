@@ -19,10 +19,19 @@
         </filter>
         <count>50</count>
       </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
         <li>Steel</li>
+        <li>ComponentIndustrial</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
@@ -291,11 +300,20 @@
         </filter>
         <count>30</count>
       </li>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ComponentIndustrial</li>
+          </thingDefs>
+        </filter>
+        <count>4</count>
+      </li>
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
         <li>Plasteel</li>
         <li>Steel</li>
+        <li>ComponentIndustrial</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
@@ -426,10 +444,10 @@
       <li>
         <filter>
           <thingDefs>
-            <li>ComponentSpacer</li>
+            <li>ComponentIndustrial</li>
           </thingDefs>
         </filter>
-        <count>2</count>
+        <count>20</count>
       </li>
       <li>
         <filter>
@@ -450,7 +468,7 @@
     </ingredients>
     <fixedIngredientFilter>
       <thingDefs>
-        <li>ComponentSpacer</li>
+        <li>ComponentIndustrial</li>
         <li>Steel</li>
         <li>Plasteel</li>
       </thingDefs>

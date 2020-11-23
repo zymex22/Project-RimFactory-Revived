@@ -16,10 +16,12 @@
     <passability>Standable</passability>
     <costList>
       <Steel>2</Steel>
+      <Silver>1</Silver>
     </costList>
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>110</WorkToBuild>
+	  <MarketValue>15</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>2</Beauty>
     </statBases>

@@ -137,22 +137,9 @@ namespace ProjectRimFactory.Common
 
         protected virtual void AdjustPower()
         {
-            if (this.powerForSpeed < this.MinPowerForSpeed)
-            {
-                this.powerForSpeed = this.MinPowerForSpeed;
-            }
-            if (this.powerForSpeed > this.MaxPowerForSpeed)
-            {
-                this.powerForSpeed = this.MaxPowerForSpeed;
-            }
-            if (this.powerForRange < this.MinPowerForRange)
-            {
-                this.powerForRange = this.MinPowerForRange;
-            }
-            if (this.powerForRange > this.MaxPowerForRange)
-            {
-                this.powerForRange = this.MaxPowerForRange;
-            }
+            this.powerForSpeed = Mathf.Clamp(this.powerForSpeed, this.MinPowerForSpeed, this.MaxPowerForSpeed);
+
+            this.powerForRange = Mathf.Clamp(this.powerForRange, this.MinPowerForRange, this.MaxPowerForRange);
         }
 
         public void RefreshPowerStatus()

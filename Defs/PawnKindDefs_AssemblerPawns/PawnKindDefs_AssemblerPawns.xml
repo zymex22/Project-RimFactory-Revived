@@ -17,19 +17,26 @@
     </backstoryFiltersOverride>
     <defaultFactionType>OutlanderCivil</defaultFactionType>
     <itemQuality>Shoddy</itemQuality>
-    <backstoryCryptosleepCommonality>0.2</backstoryCryptosleepCommonality>
+    <backstoryCryptosleepCommonality>0.02</backstoryCryptosleepCommonality>
     <isFighter>false</isFighter>
     <chemicalAddictionChance>0.05</chemicalAddictionChance>
     <gearHealthRange>
       <min>0.2</min>
       <max>0.8</max>
     </gearHealthRange>
+    <weaponMoney>
+      <min>0</min>
+      <max>0</max>
+    </weaponMoney>
+    <weaponTags>
+      <li>Gun</li>
+    </weaponTags>
     <apparelTags>
       <li>Outlander</li>
     </apparelTags>
     <apparelMoney>
-      <min>150</min>
-      <max>300</max>
+      <min>0</min>
+      <max>0</max>
     </apparelMoney>
     <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
     <techHediffsMoney>
@@ -41,7 +48,6 @@
     </techHediffsTags>
     <techHediffsChance>0.01</techHediffsChance>
     <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
-    <invNutrition>1</invNutrition>
-    <invFoodDef>Pemmican</invFoodDef>
+    <invNutrition>0.05</invNutrition>
   </PawnKindDef>
 </Defs>
