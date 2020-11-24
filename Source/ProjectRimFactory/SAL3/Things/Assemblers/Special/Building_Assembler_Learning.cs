@@ -17,7 +17,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
         {
             get
             {
-                return 0.5f;
+                return modExtension_LearningAssembler?.MinSpeed ?? 0.5f;
             }
         }
         WorkSpeedFactorManager manager = new WorkSpeedFactorManager();
@@ -29,12 +29,21 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             }
         }
 
+        private ModExtension_LearningAssembler modExtension_LearningAssembler => this.def.GetModExtension<ModExtension_LearningAssembler>();
+
         //Calculate the Item Quality based on the ProductionSpeedFactor (Used by the Harmony Patch; see Patch_GenRecipe_MakeRecipeProducts.cs)
         QualityCategory ISetQualityDirectly.GetQuality(SkillDef relevantSkill)
         {
             float centerX = ProductionSpeedFactor * 2f;
             float num = Rand.Gaussian(centerX, 1.25f);
             num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
+            
+            //TODO maybe modify the gaussian to be within the range
+            if (modExtension_LearningAssembler != null)
+            {
+                num = Mathf.Clamp(num, (int)modExtension_LearningAssembler.MinQuality, (int)modExtension_LearningAssembler.MaxQuality);
+            }
+            
             return (QualityCategory)((int)num);
         }
 
@@ -43,7 +52,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             base.Tick();
             if (currentBillReport != null && this.IsHashIntervalTick(60) && this.Active)
             {
-                manager.IncreaseWeight(currentBillReport.bill.recipe, 0.001f * currentBillReport.bill.recipe.workSkillLearnFactor);
+                if (modExtension_LearningAssembler != null && modExtension_LearningAssembler?.MaxSpeed <= manager.GetFactorFor(currentBillReport.bill.recipe))
+                {
+                    return;
+                }
+
+
+                    manager.IncreaseWeight(currentBillReport.bill.recipe, 0.001f * currentBillReport.bill.recipe.workSkillLearnFactor);
             }
         }
         public override string GetInspectString()
