@@ -154,6 +154,16 @@
         <categoryDef>BuildingsAutomation</categoryDef>
         <thingDefCountRange>10~40</thingDefCountRange>
         <countRange>0~5</countRange>
+        <excludedThingDefs>
+          <li>Building_AutoMachineTool_BeltConveyor</li>
+          <li>Building_AutoMachineTool_BeltConveyor_Wall</li>
+          <li>Building_AutoMachineTool_BeltConveyor_Underground</li>
+          <li>Building_AutoMachineTool_BeltConveyor_ToUnderground</li>
+          <li>Building_AutoMachineTool_BeltConveyor_ToFloor</li>
+          <li>Building_AutoMachineTool_BeltSplitter</li>
+          <li>Building_AutoMachineTool_BeltSplitter_UG</li>
+          <li>Building_AutoMachineTool_BeltSplitter_Wall</li>
+        </excludedThingDefs>
       </li>
       <!-- ======================  ==================== -->
       <!-- <li Class="StockGenerator_Category">
