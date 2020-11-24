@@ -32,6 +32,11 @@ namespace ProjectRimFactory.Drones
         {
             get
             {
+                //needed as SpawnSetup is not called if the building is Minified
+                if (refuelableComp == null)
+                {
+                    refuelableComp = GetComp<CompRefuelable>();
+                }
                 return Mathf.RoundToInt(refuelableComp.Fuel) - spawnedDrones.Count;
             }
         }
