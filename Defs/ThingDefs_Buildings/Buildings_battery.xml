@@ -83,7 +83,7 @@
     <graphicData>
       <texPath>Industry/Battery/Building_Battery_16k</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(2,3)</drawSize>
+      <drawSize>(1,2)</drawSize>
     </graphicData>
     <tickerType>Normal</tickerType>
     <statBases>

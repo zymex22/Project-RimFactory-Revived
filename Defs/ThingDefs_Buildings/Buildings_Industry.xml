@@ -510,12 +510,12 @@
     <statBases>
       <Cleanliness>-5</Cleanliness>
       <Beauty>-10</Beauty>
-      <MarketValue>4310</MarketValue>
+      <MarketValue>1340</MarketValue>
     </statBases>
     <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)\n Use wood to smelt</description>
     <costList>
-      <Steel>2000</Steel>
-      <ComponentIndustrial>5</ComponentIndustrial>
+      <Steel>200</Steel>
+      <BlocksGranite>500</BlocksGranite>
     </costList>
     <recipes>
       <li>BurnApparel</li>
