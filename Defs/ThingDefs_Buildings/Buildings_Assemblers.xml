@@ -305,9 +305,15 @@ Mod extennsion for assemblers
         <drawStatus>true</drawStatus>
         <doEffect>false</doEffect>
       </li>
+      <li Class="ProjectRimFactory.SAL3.Things.Assemblers.Special.ModExtension_LearningAssembler">        <!-- setting for adaptive assembler only? -->
+        <MinSpeed>1</MinSpeed>        <!-- 1 = 100%, if not set min= 50% (default: 100%) -->
+        <MaxSpeed>5</MaxSpeed>        <!-- 5 = 500%, if not set max= infinite (default: 500%) -->
+        <MinQuality>Awful</MinQuality>        <!-- start out at... (default: Awful)(Awful, Poor, Normal, Good, Excellent, Masterwork, Legendary) -->
+        <MaxQuality>Legendary</MaxQuality>        <!-- max out at... (default: Masterwork)-->
+      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
-        <BaseSkill>20</BaseSkill>
+        <BaseSkill>20</BaseSkill> <!-- Base level skills if nothing is defined below -->
         <skills>
           <li>
             <def>Artistic</def>
