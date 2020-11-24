@@ -44,7 +44,7 @@
   </ThingDef>
 
   <!--==================== MineShaft T0 ====================-->
-    <ThingDef ParentName="BenchBase">
+  <ThingDef ParentName="BenchBase">
     <defName>PRF_MineShaft</defName>
     <label>MiningShaft</label>
     <description>A early random ore mineshaft capable of finding stones, steel slag, and other low end resources, also a slim chance to find rares</description>
@@ -68,6 +68,13 @@
     <costList>
       <Steel>100</Steel>
     </costList>
+    <recipes>
+    <li>PRF_Excavate_Granite</li>
+    <li>PRF_Excavate_Sandstone</li>
+    <li>PRF_Excavate_Limestone</li>
+    <li>PRF_Excavate_Slate</li>
+    <li>PRF_Excavate_Marble</li>
+    </recipes>
     <altitudeLayer>Building</altitudeLayer>
     <fillPercent>0.5</fillPercent>
     <useHitPoints>True</useHitPoints>
