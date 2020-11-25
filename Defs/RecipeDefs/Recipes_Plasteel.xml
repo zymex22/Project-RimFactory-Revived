@@ -48,7 +48,7 @@
   </RecipeDef>
 
   <!-- Coal into Chem -->
-  <RecipeDef>
+  <!-- <RecipeDef>
     <defName>PRF_ChemfuelFromCoal</defName>
     <label>make chemfuel from coal</label>
     <description>Make a batch of chemfuel by extracting and condensing coal gas from coal.</description>
@@ -78,6 +78,6 @@
     <recipeUsers>
       <li>BiofuelRefinery</li>
     </recipeUsers>
-  </RecipeDef>
+  </RecipeDef> -->
 
 </Defs>
