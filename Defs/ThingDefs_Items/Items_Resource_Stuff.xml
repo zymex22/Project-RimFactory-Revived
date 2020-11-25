@@ -2,7 +2,7 @@
 <Defs>
 
   <!--=============== Coal ====================-->
-  <ThingDef ParentName="ResourceBase">
+  <!-- <ThingDef ParentName="ResourceBase">
     <defName>WDCoal</defName>
     <label>coal</label>
     <description>Coal is a fossil fuel and is the altered remains of prehistoric vegetation that originally accumulated in swamps and peat bogs.</description>
@@ -27,7 +27,7 @@
     <deepCommonality>1.5</deepCommonality>
     <deepCountPerPortion>35</deepCountPerPortion>
     <deepLumpSizeRange>20~50</deepLumpSizeRange>
-  </ThingDef>
+  </ThingDef> -->
 
 
 

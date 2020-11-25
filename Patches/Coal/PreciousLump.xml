@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
 
-	<!-- <Operation Class="PatchOperationAdd">
-		<xpath>Defs/GenStepDef[defName = "PreciousLump"]/genStep/mineables</xpath>
-		<value>
-			<li>WDMineableCoal</li>
-		</value>
-	</Operation> -->
-
-	<Operation Class="PatchOperationFindMod">
+	<!-- <Operation Class="PatchOperationFindMod">
 		<mods>
 			<li>Coal Expanded</li>
 			<li>Materials+</li>
@@ -26,7 +19,7 @@
 				</li>
 			</operations>
 		</nomatch>
-	</Operation>
+	</Operation> -->
 
 </Patch>
 

@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
 
-	<!-- <Operation Class="PatchOperationAdd">
-		<xpath>Defs/TraderKindDef[defName="Base_Neolithic_Standard"]/stockGenerators</xpath>
-		<value>
-			<li Class="StockGenerator_SingleDef">
-				<thingDef>WDCoal</thingDef>
-				<countRange>200~300</countRange>
-			</li>
-		</value>
-	</Operation> -->
-
-    <Operation Class="PatchOperationFindMod">
+	<!-- <Operation Class="PatchOperationFindMod">
         <mods>
             <li>Coal Expanded</li>
             <li>Materials+</li>
@@ -32,7 +22,7 @@
 				</li>
 			</operations>
 		</nomatch>
-	</Operation>
+	</Operation> -->
 
 
 </Patch> 

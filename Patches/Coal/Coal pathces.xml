@@ -2,7 +2,7 @@
 <Patch>
 
 	<!-- Turn off if "any" mods from list is installed -->
-	<Operation Class="PatchOperationFindMod">
+	<!-- <Operation Class="PatchOperationFindMod">
 		<mods>
 			<li>Coal Expanded</li>
 			<li>Materials+</li>
@@ -23,6 +23,6 @@
 				</li>
 			</operations>
 		</match>
-	</Operation>
+	</Operation> -->
 
 </Patch>

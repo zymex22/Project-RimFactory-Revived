@@ -3,7 +3,7 @@
 
   <!--============================ Resource rocks ===============================-->
 
-  <ThingDef ParentName="RockBase">
+  <!-- <ThingDef ParentName="RockBase">
     <defName>WDMineableCoal</defName>
     <label>coal</label>
     <description>Coal is a combustible black or brownish-black sedimentary rock, formed as rock strata called coal seams.</description>
@@ -24,7 +24,7 @@
       <mineableScatterCommonality>0.2</mineableScatterCommonality>
       <mineableScatterLumpSizeRange>15~30</mineableScatterLumpSizeRange>
     </building>
-  </ThingDef>
+  </ThingDef> -->
 
 
 </Defs>

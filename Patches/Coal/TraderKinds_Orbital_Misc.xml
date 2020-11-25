@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
 
-	<!-- <Operation Class="PatchOperationAdd">
-		<xpath>Defs/TraderKindDef[defName="Orbital_BulkGoods"]/stockGenerators</xpath>
-		<value>
-			<li Class="StockGenerator_SingleDef">
-				<thingDef>WDCoal</thingDef>
-				<countRange>200~600</countRange>
-			</li>
-		</value>
-	</Operation> -->
 
-	<Operation Class="PatchOperationFindMod">
+
+	<!-- <Operation Class="PatchOperationFindMod">
 		<mods>
 			<li>Coal Expanded</li>
 			<li>Materials+</li>
@@ -32,7 +24,7 @@
 				</li>
 			</operations>
 		</nomatch>
-	</Operation>
+	</Operation> -->
 
 
 </Patch>
