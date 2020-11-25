@@ -43,6 +43,7 @@
       <texPath>Industry/Battery/4k</texPath>
       <drawSize>(1,1)</drawSize>
     </graphicData>
+    <rotatable>false</rotatable>  
     <drawGUIOverlay>true</drawGUIOverlay>
     <tickerType>Normal</tickerType>
     <statBases>
@@ -66,6 +67,10 @@
         <shortCircuitInRain>true</shortCircuitInRain>
         <transmitsPower>true</transmitsPower>
       </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
@@ -79,12 +84,14 @@
   <ThingDef ParentName="BBBuildingBase">
     <defName>Battery16k</defName>
     <label>16k battery</label>
-    <thingClass>Building_Battery</thingClass>
+    <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
       <texPath>Industry/Battery/Building_Battery_16k</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(1,2)</drawSize>
+      <drawSize>(2,1)</drawSize>
     </graphicData>
+    <rotatable>true</rotatable>  
+    <drawGUIOverlay>true</drawGUIOverlay>
     <tickerType>Normal</tickerType>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
@@ -95,7 +102,7 @@
       <Beauty>-80</Beauty>
     </statBases>
     <description>A battery capable of storing 16000 watt days of power.</description>
-    <size>(1,2)</size>
+    <size>(2,1)</size>
     <costList>
       <Steel>300</Steel>
       <Plasteel>25</Plasteel>
@@ -107,6 +114,10 @@
         <efficiency>0.5</efficiency>
         <shortCircuitInRain>true</shortCircuitInRain>
         <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
       </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
@@ -120,11 +131,13 @@
   <ThingDef ParentName="BBBuildingBase">
     <defName>Battery64k</defName>
     <label>64k battery</label>
-    <thingClass>ProjectRimFactory.Industry.Building_CustomBattery</thingClass>
+    <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
       <texPath>Industry/Battery/Building_Battery_64k</texPath>
       <drawSize>(2,2)</drawSize>
     </graphicData>
+    <rotatable>false</rotatable>  
+    <drawGUIOverlay>true</drawGUIOverlay>
     <tickerType>Normal</tickerType>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
@@ -151,6 +164,10 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <transmitsPower>true</transmitsPower>
       </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>4</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
@@ -164,12 +181,14 @@
   <ThingDef ParentName="BBBuildingBase">
     <defName>Battery256k</defName>
     <label>256k battery</label>
-    <thingClass>Building_Battery</thingClass>
+    <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
       <texPath>Industry/Battery/batteryT3</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(4.3,2.9)</drawSize>
+      <drawSize>(4,2)</drawSize>
     </graphicData>
+    <rotatable>true</rotatable>  
+    <drawGUIOverlay>true</drawGUIOverlay>
     <tickerType>Normal</tickerType>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
