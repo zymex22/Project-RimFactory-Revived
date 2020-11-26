@@ -9,7 +9,6 @@
   <incompatibleWith>
     <li>Spdskatr.ssBiggerBatteries</li>
     <li>automatic.startupimpact</li>
-    <li>Wemd.SimpleCoal</li>
   </incompatibleWith>
   <loadAfter>
     <li>brrainz.harmony</li>
