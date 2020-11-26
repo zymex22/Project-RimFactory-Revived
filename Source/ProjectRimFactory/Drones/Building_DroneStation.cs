@@ -148,7 +148,7 @@ namespace ProjectRimFactory.Drones
             }
         }
 
-        
+        protected CompRefuelable refuelableComp;
 
         private List<SkillRecord> droneSkillsRecord = new List<SkillRecord>();
 
@@ -306,6 +306,7 @@ namespace ProjectRimFactory.Drones
         {
             base.PostMake();
             extension = def.GetModExtension<DefModExtension_DroneStation>();
+            refuelableComp = GetComp<CompRefuelable>();
         }
 
         private MapTickManager mapManager;
@@ -317,6 +318,7 @@ namespace ProjectRimFactory.Drones
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.mapManager = map.GetComponent<MapTickManager>();
+            refuelableComp = GetComp<CompRefuelable>();
             extension = def.GetModExtension<DefModExtension_DroneStation>();
             //Setup Allowd Area
             //Enssuring that Update_droneAllowedArea_forDrones() is run resolves #224 (May need to add a diffrent check)
@@ -504,6 +506,11 @@ namespace ProjectRimFactory.Drones
             if (WorkSettings == null) //Need for Compatibility with older saves
             {
                 WorkSettings = new Dictionary<WorkTypeDef, bool>();
+            }
+            //init refuelableComp after a Load
+            if (refuelableComp == null)
+            {
+                refuelableComp = this.GetComp<CompRefuelable>();
             }
 
 
