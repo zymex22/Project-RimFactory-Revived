@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ProjectRimFactory.AutoMachineTool;
 using ProjectRimFactory.Common;
+using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.SAL3.Exposables;
 using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
@@ -12,7 +13,7 @@ using Verse;
 using Verse.Sound;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers {
-    public abstract class Building_ProgrammableAssembler : Building_DynamicBillGiver, IPowerSupplyMachineHolder
+    public abstract class Building_ProgrammableAssembler : Building_DynamicBillGiver, IPowerSupplyMachineHolder , IAssemblerQueue
     {
         protected class BillReport : IExposable
         {
@@ -226,6 +227,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 this.MapManager.NextAction(rangePowerSupplyMachine.RefreshPowerStatus);
                 this.MapManager.AfterAction(5, rangePowerSupplyMachine.RefreshPowerStatus);
             }
+            AssemblerQueueManager.RegisterAssemblerQueue(this);
+
+
+
         }
 
         protected virtual bool Active => compPowerTrader?.PowerOn != false
@@ -520,6 +525,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         protected virtual void Notify_BillStarted()
         {
+        }
+
+        public List<Thing> GetThingQueue()
+        {
+            return thingQueue;
         }
 
         // (Some) Internal variables:
