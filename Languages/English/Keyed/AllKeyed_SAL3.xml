@@ -3,7 +3,8 @@
   <SALMessage_NoDataDiskFound>Please place a data disk nearby first.</SALMessage_NoDataDiskFound>
   <SearchingForIngredients>Searching for ingredients...</SearchingForIngredients>
   <SAL3_BillReport>Current bill: {0} ({1} work left)</SAL3_BillReport>
-  <SAL3_Products>Products waiting to be placed: {0}</SAL3_Products>
+  <SAL3_Products>Products waiting to be placed: {0}/{1}</SAL3_Products>
+  <PRF_OutputBufferWarning>Output buffer full</PRF_OutputBufferWarning>
   <SALMessage_NoRecipes>No recipes found.</SALMessage_NoRecipes>
   <SALDataStartEncoding>Import recipe...</SALDataStartEncoding>
   <SALDataStartEncoding_Desc>Import a new recipe from nearby work tables.</SALDataStartEncoding_Desc>

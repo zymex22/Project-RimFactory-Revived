@@ -311,7 +311,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                         }
                     }
                 }
-                else if (this.IsHashIntervalTick(60))
+                else if (this.IsHashIntervalTick(60) && allowProduction_thingQueue)
                 {
                     //Start Bill if Possible
                     if ((currentBillReport = TryGetNextBill()) != null)
@@ -450,7 +450,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             // even if it's not active, show any products ready to place:
             //   (we always show this: even if 0 products, it lets new players
             //    know it will hold products until it CAN place them)
-            stringBuilder.AppendLine("SAL3_Products".Translate(thingQueue.Count));
+            stringBuilder.AppendLine("SAL3_Products".Translate(thingQueue.Count,max_thingQueue_Count));
             return stringBuilder.ToString().TrimEndNewlines();
         }
 
@@ -510,6 +510,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 {
                     label = "SwitchedOff".Translate();
                 }
+                if (!allowProduction_thingQueue)
+                {
+                    label += "\n" + "PRF_OutputBufferWarning".Translate(); ;
+                }
                 GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
             }
         }
@@ -539,6 +543,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         // thingQueue is List to save properly
         //   List of produced things, waiting to be placed:
         protected List<Thing> thingQueue = new List<Thing>();
+        //max number of items that can be stored in thingQueue before production is halted
+        protected const int max_thingQueue_Count = 100;
+
+        protected bool allowProduction_thingQueue => thingQueue.Count < max_thingQueue_Count;
 
 
         [Unsaved]
