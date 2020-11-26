@@ -243,7 +243,21 @@ namespace ProjectRimFactory.AutoMachineTool
                         //.Where(d => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.thingDef) ?? true)
                 );
 
-                var recipeDefs = mineables.Select(m => CreateMiningRecipe(m, effecter)).ToList();                
+                var recipeDefs_all = mineables.Select(m => CreateMiningRecipe(m, effecter)).ToList();
+
+                //Check for duplicates
+                List<RecipeDef> recipeDefs = new List<RecipeDef>();
+                List<String> recipeDefsnames = new List<string>();
+                for (int i = 0; i< recipeDefs_all.Count; i++)
+                {
+                    if (!recipeDefsnames.Contains(recipeDefs_all[i].defName))
+                    {
+                        recipeDefs.Add(recipeDefs_all[i]);
+                        recipeDefsnames.Add(recipeDefs_all[i].defName);
+                    } 
+                }
+
+
                 DefDatabase<RecipeDef>.Add(recipeDefs);
                 // These 3 lines remove exluded recipes from available bills:
                 var acceptableRecipeDefs=recipeDefs
