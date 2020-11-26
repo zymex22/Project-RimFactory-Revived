@@ -487,6 +487,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             if (this.DrawStatus && Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
             {
                 string label = "";
+                string label2 = "";
                 // only show overlay status text if has power:
                 if (this.Active) {
                     
@@ -510,11 +511,22 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 {
                     label = "SwitchedOff".Translate();
                 }
+
                 if (!allowProduction_thingQueue)
                 {
-                    label += "\n" + "PRF_OutputBufferWarning".Translate(); ;
+                    label2 = "PRF_OutputBufferWarning".Translate(); 
                 }
-                GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
+                else if(thingQueue.Count > 1) 
+                {
+                    label2 = "SAL3_Products".Translate(thingQueue.Count, max_thingQueue_Count);
+                }
+                Vector2 vectorpos = GenMapUI.LabelDrawPosFor(this, 0f);
+                GenMapUI.DrawThingLabel(vectorpos, label, Color.white);
+                vectorpos.y += Verse.Text.CalcSize(label).y;
+
+
+                GenMapUI.DrawThingLabel(vectorpos, label2, Color.yellow);
+
             }
         }
 
