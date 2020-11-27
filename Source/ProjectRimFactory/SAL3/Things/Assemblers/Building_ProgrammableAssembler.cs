@@ -227,7 +227,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 this.MapManager.NextAction(rangePowerSupplyMachine.RefreshPowerStatus);
                 this.MapManager.AfterAction(5, rangePowerSupplyMachine.RefreshPowerStatus);
             }
-            AssemblerQueueManager.RegisterAssemblerQueue(this);
+            PRFGameComponent.RegisterAssemblerQueue(this);
 
 
 
@@ -311,7 +311,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                         }
                     }
                 }
-                else if (this.IsHashIntervalTick(60) && allowProduction_thingQueue)
+                else if (this.IsHashIntervalTick(60) && AllowProduction_thingQueue)
                 {
                     //Start Bill if Possible
                     if ((currentBillReport = TryGetNextBill()) != null)
@@ -512,7 +512,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                     label = "SwitchedOff".Translate();
                 }
 
-                if (!allowProduction_thingQueue)
+                if (!AllowProduction_thingQueue)
                 {
                     label2 = "PRF_OutputBufferWarning".Translate(); 
                 }
@@ -558,7 +558,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         //max number of items that can be stored in thingQueue before production is halted
         protected const int max_thingQueue_Count = 100;
 
-        protected bool allowProduction_thingQueue => thingQueue.Count < max_thingQueue_Count;
+        protected bool AllowProduction_thingQueue => thingQueue.Count < max_thingQueue_Count;
 
 
         [Unsaved]

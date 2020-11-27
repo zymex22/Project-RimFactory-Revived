@@ -10,18 +10,6 @@ using System.Threading.Tasks;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-
-
-    [StaticConstructorOnStartup]
-    public static class AssemblerQueueManager
-    {
-        public static List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
-
-        public static void RegisterAssemblerQueue(IAssemblerQueue queue)
-        {
-            AssemblerQueue.Add(queue);
-        }
-    }
     
     public interface IAssemblerQueue
     {
@@ -36,9 +24,9 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static void Postfix(ResourceCounter __instance, Dictionary<ThingDef, int> ___countedAmounts)
         {
             int i = 0;
-            for (i = 0; i < AssemblerQueueManager.AssemblerQueue.Count; i++)
+            for (i = 0; i < PRFGameComponent.AssemblerQueue.Count; i++)
             {
-                foreach (Thing heldThing in AssemblerQueueManager.AssemblerQueue[i].GetThingQueue())
+                foreach (Thing heldThing in PRFGameComponent.AssemblerQueue[i].GetThingQueue())
                 {
                     Thing innerIfMinified = heldThing.GetInnerIfMinified();
                     ___countedAmounts[innerIfMinified.def] += innerIfMinified.stackCount;
