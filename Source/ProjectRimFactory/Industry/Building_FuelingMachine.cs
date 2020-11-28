@@ -32,7 +32,12 @@ namespace ProjectRimFactory.Industry
             //    instead of all the "return;"s below)
             CompRefuelable refuelableComp = null;
 
-            foreach (Thing tmpThing in Map.thingGrid.ThingsListAt(FuelableCell))
+            var thingsOnRefuelCell = Map.thingGrid.ThingsListAt(FuelableCell);
+
+            // Refuel action might cause thing to to be added to that cell, this ensures no list modification while iterating.
+            var clonedThingsOnRefuelCell = new List<Thing>(thingsOnRefuelCell);
+
+            foreach (Thing tmpThing in clonedThingsOnRefuelCell)
             {
                 if (tmpThing is Building)
                 {
