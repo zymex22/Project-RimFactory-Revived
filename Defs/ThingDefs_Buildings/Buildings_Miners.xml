@@ -50,9 +50,9 @@
     <description>A early random ore mineshaft capable of finding stones, steel slag, and other low end resources, also a slim chance to find rares</description>
     <thingClass>Building_WorkTable</thingClass>
     <graphicData>
-      <texPath>Things/Building/Production/TableStonecutter</texPath>
+      <texPath>Industry/MiningShaft</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(3.5,1.5)</drawSize>
+      <drawSize>(4.5,2.5)</drawSize>
       <shaderType>CutoutComplex</shaderType>
       <shadowData>
         <volume>(2.85, 0.3, 0.62)</volume>
@@ -69,11 +69,11 @@
       <Steel>100</Steel>
     </costList>
     <recipes>
-    <li>PRF_Excavate_Granite</li>
-    <li>PRF_Excavate_Sandstone</li>
-    <li>PRF_Excavate_Limestone</li>
-    <li>PRF_Excavate_Slate</li>
-    <li>PRF_Excavate_Marble</li>
+      <li>PRF_Excavate_Granite</li>
+      <li>PRF_Excavate_Sandstone</li>
+      <li>PRF_Excavate_Limestone</li>
+      <li>PRF_Excavate_Slate</li>
+      <li>PRF_Excavate_Marble</li>
     </recipes>
     <altitudeLayer>Building</altitudeLayer>
     <fillPercent>0.5</fillPercent>
@@ -85,7 +85,8 @@
       <Cleanliness>-5</Cleanliness>
     </statBases>
     <size>(3,1)</size>
-    <designationCategory>Production</designationCategory>
+    <designationCategory>Industrial</designationCategory>
+    <designatorDropdown>miners_gr</designatorDropdown>
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
     <hasInteractionCell>True</hasInteractionCell>

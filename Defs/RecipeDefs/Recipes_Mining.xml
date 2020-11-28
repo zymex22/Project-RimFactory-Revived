@@ -13,7 +13,7 @@
 	<!--============ stones ===============-->
 	<RecipeDef ParentName="MiningWork">
 		<defName>PRF_Excavate_Granite</defName>
-		<label>mining granite</label>
+		<label>mine granite</label>
 		<description>mining granite.</description>
 		<jobString>Mining granite</jobString>
 		<workAmount>655</workAmount>
@@ -24,7 +24,7 @@
 
 	<RecipeDef ParentName="MiningWork">
 		<defName>PRF_Excavate_Sandstone</defName>
-		<label>mining sandstone</label>
+		<label>mine sandstone</label>
 		<description>mining sandstone.</description>
 		<jobString>Mining sandstone</jobString>
 		<workAmount>655</workAmount>
@@ -35,7 +35,7 @@
 
 	<RecipeDef ParentName="MiningWork">
 		<defName>PRF_Excavate_Limestone</defName>
-		<label>mining limestone</label>
+		<label>mine limestone</label>
 		<description>mining limestone.</description>
 		<jobString>Mining limestone</jobString>
 		<workAmount>655</workAmount>
@@ -46,7 +46,7 @@
 
 	<RecipeDef ParentName="MiningWork">
 		<defName>PRF_Excavate_Slate</defName>
-		<label>mining slate</label>
+		<label>mine slate</label>
 		<description>mining slate.</description>
 		<jobString>Mining slate</jobString>
 		<workAmount>655</workAmount>
@@ -57,7 +57,7 @@
 
 	<RecipeDef ParentName="MiningWork">
 		<defName>PRF_Excavate_Marble</defName>
-		<label>mining marble</label>
+		<label>mine marble</label>
 		<description>mining marble.</description>
 		<jobString>Mining marble</jobString>
 		<workAmount>655</workAmount>
