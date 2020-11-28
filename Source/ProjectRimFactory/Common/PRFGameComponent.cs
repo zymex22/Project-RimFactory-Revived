@@ -4,9 +4,18 @@ using System.Linq;
 using RimWorld;
 using Verse;
 using ProjectRimFactory.Common;
+using ProjectRimFactory.Common.HarmonyPatches;
 namespace ProjectRimFactory {
     public class PRFGameComponent : GameComponent {
         public List<SpecialSculpture> specialScupltures;
+
+        public static List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
+
+        public static void RegisterAssemblerQueue(IAssemblerQueue queue)
+        {
+            AssemblerQueue.Add(queue);
+        }
+
         public PRFGameComponent(Game game) {
             SpecialSculpture.PreStartGame();
         }

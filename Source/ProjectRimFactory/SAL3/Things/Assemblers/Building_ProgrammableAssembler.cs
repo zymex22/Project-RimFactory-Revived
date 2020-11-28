@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using ProjectRimFactory.AutoMachineTool;
 using ProjectRimFactory.Common;
+using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.SAL3.Exposables;
 using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
@@ -12,7 +13,7 @@ using Verse;
 using Verse.Sound;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers {
-    public abstract class Building_ProgrammableAssembler : Building_DynamicBillGiver, IPowerSupplyMachineHolder
+    public abstract class Building_ProgrammableAssembler : Building_DynamicBillGiver, IPowerSupplyMachineHolder , IAssemblerQueue
     {
         protected class BillReport : IExposable
         {
@@ -226,6 +227,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 this.MapManager.NextAction(rangePowerSupplyMachine.RefreshPowerStatus);
                 this.MapManager.AfterAction(5, rangePowerSupplyMachine.RefreshPowerStatus);
             }
+            PRFGameComponent.RegisterAssemblerQueue(this);
+
+
+
         }
 
         protected virtual bool Active => compPowerTrader?.PowerOn != false
@@ -306,7 +311,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                         }
                     }
                 }
-                else if (this.IsHashIntervalTick(60))
+                else if (this.IsHashIntervalTick(60) && AllowProduction_thingQueue)
                 {
                     //Start Bill if Possible
                     if ((currentBillReport = TryGetNextBill()) != null)
@@ -445,7 +450,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             // even if it's not active, show any products ready to place:
             //   (we always show this: even if 0 products, it lets new players
             //    know it will hold products until it CAN place them)
-            stringBuilder.AppendLine("SAL3_Products".Translate(thingQueue.Count));
+            stringBuilder.AppendLine("SAL3_Products".Translate(thingQueue.Count,max_thingQueue_Count));
             return stringBuilder.ToString().TrimEndNewlines();
         }
 
@@ -482,6 +487,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             if (this.DrawStatus && Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
             {
                 string label = "";
+                string label2 = "";
                 // only show overlay status text if has power:
                 if (this.Active) {
                     
@@ -505,7 +511,22 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 {
                     label = "SwitchedOff".Translate();
                 }
-                GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), label, Color.white);
+
+                if (!AllowProduction_thingQueue)
+                {
+                    label2 = "PRF_OutputBufferWarning".Translate(); 
+                }
+                else if(thingQueue.Count > 1) 
+                {
+                    label2 = "SAL3_Products".Translate(thingQueue.Count, max_thingQueue_Count);
+                }
+                Vector2 vectorpos = GenMapUI.LabelDrawPosFor(this, 0f);
+                GenMapUI.DrawThingLabel(vectorpos, label, Color.white);
+                vectorpos.y += Verse.Text.CalcSize(label).y;
+
+
+                GenMapUI.DrawThingLabel(vectorpos, label2, Color.yellow);
+
             }
         }
 
@@ -522,6 +543,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         {
         }
 
+        public List<Thing> GetThingQueue()
+        {
+            return thingQueue;
+        }
+
         // (Some) Internal variables:
         // Logic
         protected BillReport currentBillReport;
@@ -529,6 +555,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         // thingQueue is List to save properly
         //   List of produced things, waiting to be placed:
         protected List<Thing> thingQueue = new List<Thing>();
+        //max number of items that can be stored in thingQueue before production is halted
+        protected const int max_thingQueue_Count = 100;
+
+        protected bool AllowProduction_thingQueue => thingQueue.Count < max_thingQueue_Count;
 
 
         [Unsaved]
