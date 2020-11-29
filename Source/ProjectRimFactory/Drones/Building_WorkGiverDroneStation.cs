@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using Verse;
 using Verse.AI;
+using System.Diagnostics;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.Drones
 {
@@ -26,19 +28,41 @@ namespace ProjectRimFactory.Drones
             }
         }
 
+
+        Pawn_WorkSettings workSettings = null;
+
         //TODO Finding a good way to Cache pawn.workSettings may increase performence
         public override Job TryGiveJob()
         {
             Job result = null;
             if (!(cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(this).ToString()))) 
-            { 
+            {
+                //watch2 3ed Highest Avarage time of 1.08ms
+                //var watch2 = System.Diagnostics.Stopwatch.StartNew();
                 Pawn pawn = MakeDrone();
+                //watch2.Stop();
+                //Log.Message("watch2 :" + watch2.ElapsedMilliseconds);
+
+                //Spawn is cheap
                 GenSpawn.Spawn(pawn, Position, Map);
 
-                pawn.workSettings = new Pawn_WorkSettings(pawn);
-                pawn.workSettings.EnableAndInitialize();
-                pawn.workSettings.DisableAll();
+                var watch3 = System.Diagnostics.Stopwatch.StartNew();
+                if (workSettings == null)
+                {
+                    //This case takes an Average of 3.31ms
+                    pawn.workSettings = new Pawn_WorkSettings(pawn);
+                    pawn.workSettings.EnableAndInitialize();
+                    pawn.workSettings.DisableAll();
+                    workSettings = pawn.workSettings;
+                }
+                else
+                {
+                    pawn.workSettings = workSettings;
+                }
+                watch3.Stop();
+                Log.Message("watch3 :" + watch3.ElapsedMilliseconds);
 
+                //This loop is cheap
                 //Set the workSettings based upon the settings
                 foreach (WorkTypeDef def in WorkSettings.Keys)
                 {
@@ -52,11 +76,16 @@ namespace ProjectRimFactory.Drones
                     }
                 }
 
+                //watch5 Seccond Highest Average Time of 2.03ms
+                //var watch5 = System.Diagnostics.Stopwatch.StartNew();
                 result = TryIssueJobPackageDrone(pawn, true).Job;
                 if (result == null)
                 {
                     result = TryIssueJobPackageDrone(pawn, false).Job;
                 }
+                //watch5.Stop();
+                //Log.Message("watch5 :" + watch5.ElapsedMilliseconds);
+
                 pawn.Destroy();
                 Notify_DroneGained();
             }
