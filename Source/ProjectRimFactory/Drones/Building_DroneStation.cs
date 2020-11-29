@@ -423,6 +423,9 @@ namespace ProjectRimFactory.Drones
 
         protected CompPowerTrader compPowerTrader;
 
+        protected int additionJobSearchTickDelay = 0;
+
+
         public override void Tick()
         {
             //Base Tick
@@ -462,28 +465,40 @@ namespace ProjectRimFactory.Drones
                     cashed_GetCoverageCells = StationRangecells.ToList();
                 }
 
-                //Search for Job
-                if (DronesLeft > 0 && !lockdown)
+                
+
+            }
+            //Search for Job
+            if (this.IsHashIntervalTick(60 + additionJobSearchTickDelay) && DronesLeft > 0 && !lockdown)
+            {
+                //The issue appears to be 100% with TryGiveJob
+                Job job = TryGiveJob();
+
+                if (job != null)
                 {
-                    //The issue appears to be 100% with TryGiveJob
-                    Job job = TryGiveJob();
-                    
-                    if (job != null)
+                    additionJobSearchTickDelay = 0; //Reset to 0 - found a job -> may find more
+                    job.playerForced = true;
+                    job.expiryInterval = -1;
+                    //MakeDrone takes about 1ms
+                    Pawn_Drone drone = MakeDrone();
+                    GenSpawn.Spawn(drone, Position, Map);
+                    drone.jobs.StartJob(job);
+                }
+                else
+                {
+                    //Experimental Delay
+                    //Add delay (limit to 300) i am well aware that this can be higher that 300 with the current code
+                    if (additionJobSearchTickDelay < 300)
                     {
-                        Log.Message("Job is not null");
-                        job.playerForced = true;
-                        job.expiryInterval = -1;
-                        Pawn_Drone drone = MakeDrone();
-                        GenSpawn.Spawn(drone, Position, Map);
-                        drone.jobs.StartJob(job);
+                        //Exponential delay
+                        additionJobSearchTickDelay = (additionJobSearchTickDelay + 1) * 2;
                     }
                 }
-
             }
 
 
- 
-           
+
+
         }
         //It appers as if TickLong & TickRare are not getting called here
 
