@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <EffecterDef>
+    <defName>LaserDrill</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_Sustainer</subEffecterClass>
+        <soundDef>Recipe_Smelt</soundDef>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <moteDef>Mote_SparkFlash</moteDef>
+        <spawnLocType>BetweenTouchingCells</spawnLocType>
+        <positionLerpFactor>0.49</positionLerpFactor>
+        <chancePerTick>0.2</chancePerTick>
+        <scale>
+          <min>2.5</min>
+          <max>3.5</max>
+        </scale>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <moteDef>Mote_SparkThrown</moteDef>
+        <spawnLocType>BetweenTouchingCells</spawnLocType>
+        <positionLerpFactor>0.49</positionLerpFactor>
+        <chancePerTick>0.2</chancePerTick>
+        <scale>
+          <min>0.24</min>
+          <max>0.34</max>
+        </scale>
+        <airTime>
+          <min>0.08</min>
+          <max>0.16</max>
+        </airTime>
+        <rotationRate>
+          <min>-240</min>
+          <max>240</max>
+        </rotationRate>
+        <speed>
+          <min>7.2</min>
+          <max>24</max>
+        </speed>
+        <angle>
+          <min>-45</min>
+          <max>45</max>
+        </angle>
+        <positionRadius>0.02</positionRadius>
+      </li>
+    </children>
+  </EffecterDef>
+
+  <ThingDef ParentName="MoteBase">
+    <defName>Mote_SparkThrown</defName>
+    <graphicData>
+      <texPath>Things/Mote/SparkThrown</texPath>
+    </graphicData>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <mote>
+      <fadeInTime>0.08</fadeInTime>
+      <solidTime>0.33</solidTime>
+      <fadeOutTime>0.85</fadeOutTime>
+      <collide>true</collide>
+    </mote>
+  </ThingDef>
+
+</Defs>

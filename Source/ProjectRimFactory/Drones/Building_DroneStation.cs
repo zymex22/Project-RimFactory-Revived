@@ -556,7 +556,7 @@ namespace ProjectRimFactory.Drones
                     }
 
                 },
-                icon = ContentFinder<Texture2D>.Get("UI/deactivate", true)
+                icon = ContentFinder<Texture2D>.Get("PRFUi/deactivate", true)
             };
             yield return new Command_Action()
             {
@@ -571,7 +571,7 @@ namespace ProjectRimFactory.Drones
                     }
 
                 },
-                icon = ContentFinder<Texture2D>.Get("UI/activate", true)
+                icon = ContentFinder<Texture2D>.Get("PRFUi/activate", true)
             };
             if (DroneRange == 0)
             {

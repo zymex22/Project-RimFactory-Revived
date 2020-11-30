@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>ResearchForceField</defName>
+    <label>force field</label>
+    <description>Design force field generator. This advanced defensive building is able to absorb or repel incoming projectiles until it is completely discharged.</description>
+    <techLevel>Industrial</techLevel>
+    <baseCost>3000</baseCost>
+    <prerequisites>
+      <li>MultiAnalyzer</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <tab>MiningCo</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>2</researchViewY>
+  </ResearchProjectDef>
+  
+</Defs>

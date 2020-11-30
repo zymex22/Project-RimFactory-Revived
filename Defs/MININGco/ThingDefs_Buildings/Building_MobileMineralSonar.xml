@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Defs>
+
+  <ThingDef ParentName="BuildingBase" Class="MobileMineralSonar.ThingDef_MobileMineralSonar">
+    <defName>MobileMineralSonar</defName>
+    <label>mobile mineral sonar</label>
+    <description>Slowly scans the surrounding area to detect mineral ores. Works much more faster when powered.</description>
+    <thingClass>MobileMineralSonar.Building_MobileMineralSonar</thingClass>
+    <tickerType>Normal</tickerType>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Things/Building/MobileMineralSonar</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <uiIconPath>Things/Building/MenuIcon_MobileMineralSonar</uiIconPath>
+    <uiIconScale>2.5</uiIconScale>
+    <designationCategory>Misc</designationCategory>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <altitudeLayer>Building</altitudeLayer>
+    <costList>
+      <Steel>50</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <useHitPoints>True</useHitPoints>
+    <size>(1,1)</size>
+    <statBases>
+      <WorkToBuild>200</WorkToBuild>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>0.1</Flammability>
+      <Mass>20</Mass>
+    </statBases>
+    <passability>PassThroughOnly</passability>
+    <pathCost>30</pathCost>
+    <researchPrerequisites>
+      <li>ResearchMobileMineralSonar</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>3000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    <placeWorkers>
+      <li>MobileMineralSonar.PlaceWorker_MobileMineralSonar</li>
+    </placeWorkers>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <tradeTags>
+      <li>ExoticMisc</li>
+    </tradeTags>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+
+    <scannedThingDefs>
+      <li>MineableSteel</li>
+      <li>MineableSilver</li>
+      <li>MineableGold</li>
+      <li>MineableUranium</li>
+      <li>MineablePlasteel</li>
+      <li>MineableComponentsIndustrial</li>
+      <li>AncientCryptosleepCasket</li>
+    </scannedThingDefs>
+  </ThingDef>
+
+</Defs>
