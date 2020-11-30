@@ -33,7 +33,7 @@
     <statBases>
       <WorkToBuild>450</WorkToBuild>
       <MaxHitPoints>150</MaxHitPoints>
-	  <MarketValue>1560</MarketValue>
+      <MarketValue>1560</MarketValue>
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
@@ -110,7 +110,7 @@
     <statBases>
       <WorkToBuild>450</WorkToBuild>
       <MaxHitPoints>100</MaxHitPoints>
-	  <MarketValue>1475</MarketValue>
+      <MarketValue>1475</MarketValue>
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
@@ -251,7 +251,7 @@
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
-	  <MarketValue>1200</MarketValue>
+      <MarketValue>1200</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>(PRF) A Puller that pulls foodstuffs from growzones and places them into storage or onto a belt.</description>
@@ -310,13 +310,12 @@
     <defName>Building_AutoMachineTool_PullerI</defName>
     <label>Item Puller mkI</label>
     <costList>
-      <Steel>150</Steel>
-      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentIndustrial>2</ComponentIndustrial>
       <PRFRoboticArm>1</PRFRoboticArm>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
-	  <MarketValue>882</MarketValue>
+      <MarketValue>597</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>A Puller That Pull items from A to B. Place it down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
@@ -372,7 +371,7 @@
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
-	  <MarketValue>2450</MarketValue>
+      <MarketValue>2450</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>A upgraded puller which run at a higher speed than mkI puller. pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
@@ -412,7 +411,7 @@
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
-	  <MarketValue>1404</MarketValue>
+      <MarketValue>1404</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>(PRF) A 90 degree angled Puller that moves items from A to B. Similar to the basic puller, but allowing turns! You can swap the direction (left/right) after placing.\n\nREMEMBER to turn it on after placing!</description>
@@ -480,7 +479,7 @@
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
     </costList>
     <statBases>
-	  <MarketValue>1200</MarketValue>
+      <MarketValue>1200</MarketValue>
     </statBases>
     <description>(PRF) An in-wall item Puller that pushes items from A to B.\n\nThis one is placed through a wall, and is well insulated enough for use in freezers and secure enough for prisons where you dont want anyone crawling through.\n\nRemember you still need to turn it on!</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
@@ -536,13 +535,12 @@
     <designatorDropdown>Rollers_gr</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
     <costList>
-      <Steel>20</Steel>
+      <Steel>2</Steel>
     </costList>
     <statBases>
       <MaxHitPoints>80</MaxHitPoints>
       <WorkToBuild>100</WorkToBuild>
       <Flammability>0.4</Flammability>
-	  <MarketValue>59</MarketValue>
       <Beauty>-0.5</Beauty>      <!--Let's Game It Out playing SatisFactory shows how beautiful conveyors truly are!-->
       <Mass>10</Mass>
     </statBases>
@@ -568,7 +566,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>10</basePowerConsumption>
+        <basePowerConsumption>0</basePowerConsumption>
         <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
@@ -577,9 +575,9 @@
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>0.35</speedFactor>
-        <minPower>7</minPower>
-        <maxPower>15</maxPower>
+        <speedFactor>5</speedFactor>
+        <minPower>10</minPower>
+        <maxPower>10</maxPower>
       </li>
     </modExtensions>
     <inspectorTabs>
@@ -696,8 +694,8 @@
     <costList>
       <Steel>20</Steel>
     </costList>
-	<statBases>
-	  <MarketValue>78</MarketValue>
+    <statBases>
+      <MarketValue>78</MarketValue>
     </statBases>
     <pathCost>0</pathCost>
     <fillPercent>0.4</fillPercent>    <!-- Cover from shell -->
@@ -765,8 +763,8 @@
       <PRFWeakAIChip>1</PRFWeakAIChip>
       <Steel>40</Steel>
     </costList>
-	<statBases>
-	  <MarketValue>1195</MarketValue>
+    <statBases>
+      <MarketValue>1195</MarketValue>
       <WorkToBuild Inherit="false">450</WorkToBuild>
     </statBases>
     <!--<stuffCategories>Guess what we cannot do with current menu options?  Have a stuffed thing. Dmmit.
@@ -818,7 +816,7 @@
     <clearBuildingArea>false</clearBuildingArea>
     <statBases>
       <WorkToBuild Inherit="false">1300</WorkToBuild>      <!--have to dig space for unit-->
-	  <MarketValue>1280</MarketValue>
+      <MarketValue>1280</MarketValue>
     </statBases>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
@@ -857,7 +855,7 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
     </placeWorkers>
     <statBases>
-	  <MarketValue>1195</MarketValue>
+      <MarketValue>1195</MarketValue>
       <WorkToBuild Inherit="false">1300</WorkToBuild>      <!--have to dig space for unit-->
     </statBases>
     <graphicData>

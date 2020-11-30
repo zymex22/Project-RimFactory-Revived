@@ -89,7 +89,6 @@
       </damageData>
     </graphicData>
     <costList>
-      <PRFRoboticArm>1</PRFRoboticArm>
       <Steel>200</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
@@ -132,7 +131,8 @@
     </comps>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>PRF_CoreTierI</li>
+      <li>PRF_CoreTierO</li>
+      <li>Electricity</li>
     </researchPrerequisites>
     <placeWorkers>
       <li>PlaceWorker_ShowFacilitiesConnections</li>

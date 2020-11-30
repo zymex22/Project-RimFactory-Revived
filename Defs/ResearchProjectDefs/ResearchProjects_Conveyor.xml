@@ -11,7 +11,7 @@
   <ResearchProjectDef ParentName="PRF_BeltsResearch">
     <defName>PRF_BeltsI</defName>
     <label>Conveyor belts</label>
-    <baseCost>500</baseCost>
+    <baseCost>300</baseCost>
     <description>First set of conveyor belts, to make early automations</description>
     <prerequisites>
       <li>Electricity</li>
