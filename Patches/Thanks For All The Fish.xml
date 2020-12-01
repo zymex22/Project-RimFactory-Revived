@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Thanks For All The Fish</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName = "PRF_T1_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_BonusYield"]/bonusYields</xpath>
+					<value>
+						<DeadFish Weight="0.2" Count="2" />
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName = "PRF_T2_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_BonusYield"]/bonusYields</xpath>
+					<value>
+						<DeadFish Weight="0.2" Count="2" />
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
