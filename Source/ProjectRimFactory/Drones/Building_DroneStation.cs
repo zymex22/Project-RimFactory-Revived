@@ -447,27 +447,19 @@ namespace ProjectRimFactory.Drones
             }
 
 
-            //The issue seems to be with one of them
-            if (this.IsHashIntervalTick(60))
+            //Update the Allowed Area Range on Power Change
+            //TODO Check if we should increase the IsHashIntervalTick to enhace performence (will reduce responsivness)
+            if (this.IsHashIntervalTick(60) && compPowerTrader.powerOutputInt != LastPowerOutput)
             {
-                
+                //Update the Range
+                Update_droneAllowedArea_forDrones();
+                //Update the last know Val
+                LastPowerOutput = compPowerTrader.powerOutputInt;
 
-                //Update the Allowed Area Range on Power Change
-                //TODO Check if we should increase the IsHashIntervalTick to enhace performence (will reduce responsivness)
-                if (compPowerTrader.powerOutputInt != LastPowerOutput)
-                {
-                    //Update the Range
-                    Update_droneAllowedArea_forDrones();
-                    //Update the last know Val
-                    LastPowerOutput = compPowerTrader.powerOutputInt;
-
-                    //TODO add cell calc
-                    cashed_GetCoverageCells = StationRangecells.ToList();
-                }
-
-                
-
+                //TODO add cell calc
+                cashed_GetCoverageCells = StationRangecells.ToList();
             }
+
             //Search for Job
             if (this.IsHashIntervalTick(60 + additionJobSearchTickDelay) && DronesLeft > 0 && !lockdown)
             {
