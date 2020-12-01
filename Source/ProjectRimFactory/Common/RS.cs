@@ -25,9 +25,9 @@ namespace ProjectRimFactory
             AdultIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Adult", true);
 
 
-            OutputDirectionIcon = ContentFinder<Texture2D>.Get("UI/OutputDirection", true);
-            ForbidIcon = ContentFinder<Texture2D>.Get("UI/Forbid", true);
-            PlayIcon = ContentFinder<Texture2D>.Get("UI/Play", true);
+            OutputDirectionIcon = ContentFinder<Texture2D>.Get("PRFUi/OutputDirection", true);
+            ForbidIcon = ContentFinder<Texture2D>.Get("PRFUi/Forbid", true);
+            PlayIcon = ContentFinder<Texture2D>.Get("PRFUi/Play", true);
 
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
 

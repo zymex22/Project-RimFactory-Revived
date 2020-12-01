@@ -20,6 +20,7 @@
       <drawSize>(3,3)</drawSize>      <!-- Scale texture up/down to fit -->
       <!-- <shaderType></shaderType> -->      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
     </graphicData>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, passthroughonly -->
@@ -29,7 +30,7 @@
     <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
     <canOverlapZones>false</canOverlapZones>    <!-- zones as in storage zones, growing zones, etc -->
     <castEdgeShadows>true</castEdgeShadows>
-    <size>(3,3)</size>    <!-- Ingame cell/ground size (x,y) -->
+    <size>(2,2)</size>    <!-- Ingame cell/ground size (x,y) -->
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
     <thingCategories>
       <li>BuildingsAutomation</li>
@@ -59,13 +60,11 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>SelfCooker</defName>
     <label>industrial cooker</label>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
-    <uiIconScale>0.7</uiIconScale>
+        <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <texPath>SAL3/cooker1</texPath>
       <drawSize>(2,2)</drawSize>
     </graphicData>
-    <size>(2,2)</size>
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
@@ -130,11 +129,11 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerII</defName>
     <label>modern autocooker</label>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>SAL3/cooker2</texPath>
       <drawSize>(3.3,3.3)</drawSize>
     </graphicData>
+    <size>3,3</size>
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
@@ -196,10 +195,10 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SpacerCooker</defName>
     <label>spacer cooker</label>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>SAL3/SpacerCooker</texPath>
     </graphicData>
+    <size>3,3</size>
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -296,7 +295,6 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>MeatGrinder</defName>
     <label>meat grinder</label>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>SAL3/smart_butcher</texPath>
       <drawSize>(2.1,2.1)</drawSize>
@@ -314,9 +312,7 @@
       <Beauty>-25</Beauty>      <!-- this is pretty gross -->
       <Cleanliness>0</Cleanliness>      <!-- INFO -->
     </statBases>
-    <size>(2,2)</size>
     <description>Precise grinder which processes corpses into piles of usable materials: meat, leather, etc.</description>
-    <surfaceType>Item</surfaceType>
     <costList>
       <PRFRoboticArm>2</PRFRoboticArm>
       <PRFMachineFrame>1</PRFMachineFrame>
@@ -371,7 +367,6 @@
     <defName>PRFFermentingBarrel</defName>
     <label>fermenting tank</label>
     <description>Fully automated fermenting. Self-regulates temperature to maintain the best quality.</description>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>SAL3/brewer</texPath>
       <drawSize>(1.8,1.8)</drawSize>
@@ -431,8 +426,6 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>SelfPrepper</defName>
     <label>industrial food processor</label>
-    <size>(2,2)</size>
-    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>SAL3/smart_prepper</texPath>
       <drawSize>(2,2)</drawSize>
