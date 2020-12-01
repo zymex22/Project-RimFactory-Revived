@@ -307,6 +307,7 @@ namespace ProjectRimFactory.Drones
             base.PostMake();
             extension = def.GetModExtension<DefModExtension_DroneStation>();
             refuelableComp = GetComp<CompRefuelable>();
+            compPowerTrader = GetComp<CompPowerTrader>();
         }
 
         private MapTickManager mapManager;
@@ -319,6 +320,7 @@ namespace ProjectRimFactory.Drones
             base.SpawnSetup(map, respawningAfterLoad);
             this.mapManager = map.GetComponent<MapTickManager>();
             refuelableComp = GetComp<CompRefuelable>();
+            compPowerTrader = GetComp<CompPowerTrader>();
             extension = def.GetModExtension<DefModExtension_DroneStation>();
             //Setup Allowd Area
             //Enssuring that Update_droneAllowedArea_forDrones() is run resolves #224 (May need to add a diffrent check)
@@ -328,9 +330,9 @@ namespace ProjectRimFactory.Drones
             }
             //Load the SleepTimes from XML
             cachedSleepTimeList = extension.Sleeptimes.Split(',');
-           
 
-            LastPowerOutput = GetComp<CompPowerTrader>().powerOutputInt;
+            
+            LastPowerOutput = compPowerTrader.powerOutputInt;
             cashed_GetCoverageCells = StationRangecells.ToList();
 
             //Check for missing WorkTypeDef
@@ -418,42 +420,79 @@ namespace ProjectRimFactory.Drones
 
         public abstract Job TryGiveJob();
 
+
+        protected CompPowerTrader compPowerTrader;
+
+        protected int additionJobSearchTickDelay = 0;
+
+
         public override void Tick()
         {
+            //Base Tick
             base.Tick();
+            //Return if not Spawnd
             if (!this.Spawned) return;
-            if (DronesLeft > 0 && !lockdown && this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>()?.PowerOn != false)
-            {
-                Job job = TryGiveJob();
-                if (job != null)
-                {
-                    job.playerForced = true;
-                    job.expiryInterval = -1;
-                    Pawn_Drone drone = MakeDrone();
-                    GenSpawn.Spawn(drone, Position, Map);
-                    drone.jobs.StartJob(job);
-                }
-            }
+
+
+            //Should not draw much performence...
             //To enhance performence we could add "this.IsHashIntervalTick(60)"
-            if (spawnedDrones.Count > 0 && GetComp<CompPowerTrader>()?.PowerOn == false)
+            if (spawnedDrones.Count > 0 && compPowerTrader?.PowerOn == false)
             {
                 for (int i = spawnedDrones.Count - 1; i >= 0; i--)
                 {
                     spawnedDrones[i].jobs.StartJob(new Job(PRFDefOf.PRFDrone_ReturnToStation, this), JobCondition.InterruptForced);
                 }
+                //return as there is nothing to do if its off....
+                return;
             }
+
+
+            //Update the Allowed Area Range on Power Change
             //TODO Check if we should increase the IsHashIntervalTick to enhace performence (will reduce responsivness)
-            if (this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>().powerOutputInt != LastPowerOutput)
+            if (this.IsHashIntervalTick(60) && compPowerTrader.powerOutputInt != LastPowerOutput)
             {
                 //Update the Range
                 Update_droneAllowedArea_forDrones();
                 //Update the last know Val
-                LastPowerOutput = GetComp<CompPowerTrader>().powerOutputInt;
+                LastPowerOutput = compPowerTrader.powerOutputInt;
 
                 //TODO add cell calc
                 cashed_GetCoverageCells = StationRangecells.ToList();
             }
+
+            //Search for Job
+            if (this.IsHashIntervalTick(60 + additionJobSearchTickDelay) && DronesLeft > 0 && !lockdown)
+            {
+                //The issue appears to be 100% with TryGiveJob
+                Job job = TryGiveJob();
+
+                if (job != null)
+                {
+                    additionJobSearchTickDelay = 0; //Reset to 0 - found a job -> may find more
+                    job.playerForced = true;
+                    job.expiryInterval = -1;
+                    //MakeDrone takes about 1ms
+                    Pawn_Drone drone = MakeDrone();
+                    GenSpawn.Spawn(drone, Position, Map);
+                    drone.jobs.StartJob(job);
+                }
+                else
+                {
+                    //Experimental Delay
+                    //Add delay (limit to 300) i am well aware that this can be higher that 300 with the current code
+                    if (additionJobSearchTickDelay < 300)
+                    {
+                        //Exponential delay
+                        additionJobSearchTickDelay = (additionJobSearchTickDelay + 1) * 2;
+                    }
+                }
+            }
+
+
+
+
         }
+        //It appers as if TickLong & TickRare are not getting called here
 
         public void Notify_DroneMayBeLost(Pawn_Drone drone)
         {

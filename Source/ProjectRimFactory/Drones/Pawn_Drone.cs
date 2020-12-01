@@ -12,6 +12,7 @@ using ProjectRimFactory.SAL3;
 namespace ProjectRimFactory.Drones
 {
 
+
     public class Pawn_Drone : Pawn
     {
         public Building_DroneStation station;
@@ -65,6 +66,11 @@ namespace ProjectRimFactory.Drones
 
         public override void Tick()
         {
+            //This is an issue
+            //from what i understand base.base is not a option
+            //This means that i am limited in what i can remove
+
+            //JobTrackerTick is the biggest / only issue. its insanly high for some reason
             base.Tick();
             if (Downed)
             {
