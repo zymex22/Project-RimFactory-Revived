@@ -12,10 +12,12 @@ namespace ProjectRimFactory.Common {
     static class Patch_GenRecipe_MakeRecipeProducts_BonusYield {
         static IEnumerable<Thing> Postfix(IEnumerable<Thing> __result, RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
             Thing dominantIngredient, IBillGiver billGiver) {
+            Log.Warning("Harmony P called");
             List<Thing> products = new List<Thing>(__result); // List->IEnumerable->List, etc. As one does.
             if (billGiver is Thing t && // `is` implies non-null
-                t.def.GetModExtension<ModExtension_BonusYield>() is ModExtension_BonusYield yieldExt) {
-                yieldExt.GiveAnyBonusProducts(products, recipeDef, worker, ingredients, dominantIngredient, billGiver);
+                t.def.GetModExtension<ModExtension_BonusYield>() is ModExtension_BonusYield yieldExt
+                && yieldExt.autoBonus) {
+                yieldExt.GiveAnyBonusProducts(products, , billGiver, null, recipeDef, worker, ingredients, dominantIngredient);
             }
             foreach (var r in products) {
                 yield return r;
@@ -25,6 +27,8 @@ namespace ProjectRimFactory.Common {
 
     public class ModExtension_BonusYield : DefModExtension
     {
+        public bool autoBonus = true; // Whether Vanilla's Product generation will automatically add bonuses
+                                      // (turn off if calling update internally.)
         //needs to be string instead of RecipeDef as most RecipeDef(s) are created in C# and that occurs after the XML causing a cant refrence error
         public Dictionary<string , BonusYieldList> billBonusYields;
         // Internal system for yield changers: C# methods that can determine yields with a lot of flexibility
@@ -42,8 +46,9 @@ namespace ProjectRimFactory.Common {
         public QualityCategory minQuality = QualityCategory.Normal;
         public QualityCategory maxQuality = QualityCategory.Legendary;
 
-        public void GiveAnyBonusProducts(List<Thing> products, RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
-            Thing dominantIngredient, IBillGiver billGiver) {
+        public void GiveAnyBonusProducts(List<Thing> products, IBillGiver billGiver = null, Thing productMaker = null, RecipeDef recipeDef=null, Pawn worker=null, 
+            List<Thing> ingredients=null, Thing dominantIngredient=null) {
+            Log.Message("GABP called for " + (billGiver==null?"nll":billGiver.ToString()));
             if (this.yieldChangers == null || yieldChangers.changers.NullOrEmpty()) {
                 this.yieldChangers = new YieldChangerList();
                 yieldChangers.changers.Add(TryGetDefaultBonusYield);
@@ -56,18 +61,20 @@ namespace ProjectRimFactory.Common {
         }
 
         public static bool TryGetDefaultBonusYield(List<Thing> products, ModExtension_BonusYield bonusYieldExt,
+                                          IBillGiver billGiver, Thing productMaker,
                                           RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
-                                          Thing dominantIngredient, IBillGiver billGiver
+                                          Thing dominantIngredient
                                      ) {
-            return TryGetRecipeBonusYield(products, bonusYieldExt, recipeDef, worker, ingredients,
-                dominantIngredient, billGiver) ||
-                TryGetSimpleBonusYield(products, bonusYieldExt, recipeDef, worker, ingredients,
-                dominantIngredient, billGiver);
+            return TryGetRecipeBonusYield(products, bonusYieldExt, billGiver, productMaker, recipeDef, worker, ingredients,
+                dominantIngredient) ||
+                TryGetSimpleBonusYield(products, bonusYieldExt, billGiver, productMaker, , worker, ingredients,
+                dominantIngredient);
         }
 
         public static bool TryGetSimpleBonusYield(List<Thing> products, ModExtension_BonusYield bonusYieldExt,
+                                          IBillGiver billGiver, Thing productMaker,
                                           RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
-                                          Thing dominantIngredient, IBillGiver billGiver
+                                          Thing dominantIngredient
                                      ) {
             // Normal bonus products:
             // Check to see if we get a random bonus item from general list:
@@ -79,8 +86,9 @@ namespace ProjectRimFactory.Common {
             return false;
         }
         public static bool TryGetRecipeBonusYield(List<Thing> products, ModExtension_BonusYield bonusYieldExt,
+                                          IBillGiver billGiver, Thing productMaker,
                                           RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
-                                          Thing dominantIngredient, IBillGiver billGiver
+                                          Thing dominantIngredient
                                      ) {
             if (bonusYieldExt.billBonusYields != null && bonusYieldExt.billBonusYields.ContainsKey(recipeDef.defName)) {
                 var billThing = bonusYieldExt.billBonusYields[recipeDef.defName]?.GetBonusYield();
@@ -127,8 +135,16 @@ namespace ProjectRimFactory.Common {
 
             return thingYield;
         }
-
-
+        #if DEBUG
+        public bool TestChanger(List<Thing> products, ModExtension_BonusYield bonusYieldExt,
+                                          RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
+                                          Thing dominantIngredient, IBillGiver billGiver
+                                     ) {
+            Log.Message("Test Product Yield changer called for " + (billGiver == null ? "nll" : billGiver.ToString()));
+            products.Add(ThingMaker.MakeThing(ThingDefOf.MealNutrientPaste));
+            return true;
+        }
+        #endif
     }
 
     public class YieldChangerList {
@@ -144,8 +160,9 @@ namespace ProjectRimFactory.Common {
         //   vanilla's XML->C# engine completely.
         //   There is NO WAY RW will handle that XML->C# translation for us ;p
         public delegate bool YieldChanger(List<Thing> products, ModExtension_BonusYield bonusYield,
-                                          RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
-                                          Thing dominantIngredient, IBillGiver billGiver);
+                                          IBillGiver billGiver = null, Thing productMaker = null,
+                                          RecipeDef recipeDef = null, Pawn worker = null,
+                                          List<Thing> ingredients = null, Thing dominantIngredient = null);
         public List<YieldChanger> changers = new List<YieldChanger>();
         // Override RW XML->C#
         public void LoadDataFromXmlCustom(XmlNode xmlRoot) {
