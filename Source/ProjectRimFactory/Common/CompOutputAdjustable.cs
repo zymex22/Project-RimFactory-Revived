@@ -10,6 +10,9 @@ namespace ProjectRimFactory.Common
     public class CompOutputAdjustable : ThingComp
     {
         int index;
+
+        public CompProperties_CompOutputAdjustable Props => (CompProperties_CompOutputAdjustable)this.props;
+
         List<IntVec3> possibleOutputs = new List<IntVec3>();
         public IntVec3 CurrentCell
         {
@@ -21,7 +24,15 @@ namespace ProjectRimFactory.Common
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
-            possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacentCardinal(parent));
+            if (Props.SupportDiagonal)
+            {
+                possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacent8Way(parent));
+            }
+            else
+            {
+                possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacentCardinal(parent));
+            }
+            
         }
         public override void PostDrawExtraSelectionOverlays()
         {
@@ -44,5 +55,17 @@ namespace ProjectRimFactory.Common
             base.PostExposeData();
             Scribe_Values.Look(ref index, "outputSlotIndex");
         }
+    }
+
+    public class CompProperties_CompOutputAdjustable : CompProperties
+    {
+
+        public bool SupportDiagonal = false;
+
+        public CompProperties_CompOutputAdjustable()
+        {
+            this.compClass = typeof(CompOutputAdjustable);
+        }
+
     }
 }

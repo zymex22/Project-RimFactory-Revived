@@ -78,9 +78,7 @@
       <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <comps>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>        <!-- set output if thingclass allows it -->
-      </li>
+        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
@@ -155,9 +153,7 @@
       <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <comps>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>        <!-- set output if thingclass allows it -->
-      </li>
+        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
@@ -232,9 +228,7 @@
       <PRFWeakAIChip>1</PRFWeakAIChip>
     </costList>
     <comps>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>        <!-- set output if thingclass allows it -->
-      </li>
+        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
@@ -300,9 +294,7 @@
       <PRFWeakAIChip>2</PRFWeakAIChip>
     </costList>
     <comps>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>        <!-- set output if thingclass allows it -->
-      </li>
+        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>850</basePowerConsumption>
@@ -401,9 +393,7 @@
       <canPlaceOverWall>true</canPlaceOverWall>
     </building>
     <comps>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>
