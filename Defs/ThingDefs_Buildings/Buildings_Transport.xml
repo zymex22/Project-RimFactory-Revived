@@ -16,7 +16,7 @@
   </DesignatorDropdownGroupDef>
 
   <!--==================== Fueling Machine ====================-->
-  <ThingDef ParentName="PRF_IndustrialBase">
+  <ThingDef ParentName="PRF_BuildingBase">
     <defName>FuelingMachine</defName>
     <label>fueling machine</label>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
@@ -37,7 +37,7 @@
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
-    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it (the yellow cell points to the "front").\n\n(Works with "Refualable comp" buildings)\nAnd also mortars</description>
+    <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it (the yellow cell points to the "front").\n\n(Works with "Refualable comp" buildings)\nAlso capable of Fueling mortars with shells</description>
     <costList>
       <Steel>20</Steel>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
@@ -66,7 +66,7 @@
   </ThingDef>
 
   <!--============================== Smart Puller / vacuum Hopper ==============================-->
-  <ThingDef ParentName="PRFBuildingBase">
+  <ThingDef ParentName="PRF_BuildingBase">
     <defName>SAL_SmartHopper</defName>
     <label>Vacuum Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
@@ -146,9 +146,6 @@
     <surfaceType>Item</surfaceType>
     <constructEffect>ConstructMetal</constructEffect>
     <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <!-- <specialDisplayRadius>5</specialDisplayRadius> -->    <!--A.K.A. Search radius-->
     <researchPrerequisites>
       <li>PRF_BeltsIII</li>
@@ -163,7 +160,7 @@
   </ThingDef>
 
   <!--======================================= Item Puller base ===============================================-->
-  <ThingDef Name="Building_AutoMachineTool_Puller_Base" ParentName="PRFBuildingBase" Abstract="true">
+  <ThingDef Name="Building_AutoMachineTool_Puller_Base" ParentName="PRF_BuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <tickerType>Never</tickerType>
@@ -184,9 +181,6 @@
       <Beauty>-2</Beauty>
     </statBases>
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <designationCategory>Industrial</designationCategory>
     <size>(1,1)</size>
     <fillPercent>0.5</fillPercent>
@@ -528,7 +522,7 @@
   <!--======================================= ============= ===============================================-->
   <!--======================================= Conveyor base ===============================================-->
   <!--======================================= ============= ===============================================-->
-  <ThingDef Name="PRF_Conveyor_Base" ParentName="PRFBuildingBase" Abstract="true">
+  <ThingDef Name="PRF_Conveyor_Base" ParentName="PRF_BuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <altitudeLayer>Building</altitudeLayer>
     <designationCategory>Industrial</designationCategory>
@@ -546,9 +540,6 @@
     </statBases>
     <clearBuildingArea>false</clearBuildingArea>    <!-- Might want to change this for anything with a building -->
     <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <researchPrerequisites>
       <li>PRF_BeltsI</li>
     </researchPrerequisites>

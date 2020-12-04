@@ -5,7 +5,7 @@
     <defName>Cultivator_gr</defName>
   </DesignatorDropdownGroupDef>
   <!--=========================== Cultivator Base ==================================-->
-  <ThingDef Name="PRF_CultivatorBaseBase" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_CultivatorBaseBase" ParentName="PRF_BuildingBase" Abstract="True">
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
@@ -33,9 +33,6 @@
     <castEdgeShadows>true</castEdgeShadows>
     <size>(1,1)</size>    <!-- Ingame cell/ground size (x,y) -->
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
@@ -458,11 +455,12 @@
 
 
   <!--=========================== Sprinkler ==================================-->
-  <ThingDef ParentName="PRFBuildingBase">
+  <ThingDef ParentName="PRF_BuildingBase">
     <defName>CultivatorTools_Sprinkler</defName>
     <label>Sprinkler</label>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
     <designatorDropdown>Cultivator_gr</designatorDropdown>
+    <minifiedDef>MinifiedThing</minifiedDef>
     <graphicData>
       <texPath>Farm/CultivatorTools_Sprinkler</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -483,6 +481,7 @@
       <MaxHitPoints>150</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <MarketValue>360</MarketValue>
+      <Mass>5</Mass>
     </statBases>
     <description>A building that waters plants in an expanding radius, increasing their growth by one hour per round. Effects are stackable</description>
     <costList>
@@ -508,6 +507,7 @@
     </modExtensions>
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
+
     <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
@@ -517,11 +517,12 @@
   </ThingDef>
 
   <!--=========================== Spacer Sprinkler ==================================-->
-  <ThingDef ParentName="PRFBuildingBase">
+  <ThingDef ParentName="PRF_BuildingBase">
     <defName>CultivatorTools_SpacerSprinkler</defName>
     <label>Sprinkler mkII</label>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
     <designatorDropdown>Cultivator_gr</designatorDropdown>
+    <minifiedDef>MinifiedThing</minifiedDef>
     <graphicData>
       <texPath>Farm/CultivatorTools_SprinklerSpacer</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -542,6 +543,7 @@
       <MaxHitPoints>200</MaxHitPoints>
       <Flammability>1.0</Flammability>
       <MarketValue>1896</MarketValue>
+      <Mass>5</Mass>
     </statBases>
     <description>A Upgraded sprinkler using advanced AI to stimulate plants fertilizer needs in each sprinkle, this leads to a improved growrate. Increasing their growth by 2 hour per round. Effects are stackable</description>
     <costList>

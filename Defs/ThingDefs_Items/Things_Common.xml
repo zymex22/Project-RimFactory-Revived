@@ -2,7 +2,7 @@
 <Defs>
 
   <!-- ================================== Robot arm ================================= -->
-  <ThingDef ParentName="PRFResourceBase">
+  <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRFRoboticArm</defName>
     <label>robotic arm</label>
     <description>A robotic arm powered by an electric motor. Used in the construction of some automation buildings.</description>
@@ -29,7 +29,7 @@
   </ThingDef>
 
   <!-- ================================== Weak AI Chip ================================= -->
-  <ThingDef ParentName="PRFResourceBase">
+  <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRFWeakAIChip</defName>
     <label>weak AI chip</label>
     <description>A tensor processing unit containing the most rudimentary AI. Used for Early machines and robots.</description>
@@ -53,7 +53,7 @@
   </ThingDef>
 
   <!-- ================================== Advanced AI Core ================================= -->
-  <ThingDef ParentName="PRFResourceBase">
+  <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRFAdvancedAIChip</defName>
     <label>Advanced AI core</label>
     <description>A advanced processing unit containing hi-tech AI, which is used for advanced machines and robots.</description>
@@ -76,7 +76,7 @@
   </ThingDef>
 
   <!-- ================================== Qubit processor ================================= -->
-  <ThingDef ParentName="PRFResourceBase">
+  <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRFQubitProcessor</defName>
     <label>Qubit processor</label>
     <description>In quantum computing, a qubit or quantum bit is the basic unit of quantum information—the quantum version of the classical binary bit physically realized with a two-state device. A qubit is a two-state quantum-mechanical system, one of the simplest quantum systems displaying the peculiarity of quantum mechanics.</description>
@@ -100,7 +100,7 @@
   </ThingDef>
 
   <!-- ================================== Drone module ================================= -->
-  <ThingDef ParentName="PRFResourceBase">
+  <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRFDroneModule</defName>
     <label>drone module</label>
     <description>A dormant quadcopter frame capable of low-altitude flight.</description>

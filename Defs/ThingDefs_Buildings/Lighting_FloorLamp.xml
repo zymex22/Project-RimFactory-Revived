@@ -6,7 +6,7 @@
   </DesignatorDropdownGroupDef>
 
   <!-- ================= Base ================= -->
-  <ThingDef Name="PRF_FloorSign" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_FloorSign" ParentName="PRF_BuildingBase" Abstract="True">
     <description>Weak florescent sig, can be placed on floor or on top of machines or other buildings to show guidance.</description>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>floor_lights</designatorDropdown>
@@ -21,7 +21,7 @@
     <statBases>
       <MaxHitPoints>50</MaxHitPoints>
       <WorkToBuild>110</WorkToBuild>
-	  <MarketValue>15</MarketValue>
+      <MarketValue>15</MarketValue>
       <Flammability>1.0</Flammability>
       <Beauty>2</Beauty>
     </statBases>
@@ -40,6 +40,8 @@
     <researchPrerequisites>      <!-- Optional. The player will not be able to build the floor or terrain until completing one or more research projects -->
       <li>Machining</li>
     </researchPrerequisites>
+    <thingCategories Inherit="false">
+    </thingCategories>
   </ThingDef>
 
 

@@ -4,7 +4,7 @@
   <!--   This is just a lot of misc items not fit in other category of PRF and might be moved into a seprate mod later...  -->
 
   <!--===================================== Base =====================================-->
-  <ThingDef Name="PRF_MiscBase" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_MiscBase" ParentName="PRF_BuildingBase" Abstract="True">
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>      <!-- structure HP -->
       <Flammability>0.9</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
@@ -25,9 +25,6 @@
     <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
     <size>(1,1)</size>    <!-- Ingame cell/ground size (x,y) -->
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <constructEffect>ConstructMetal</constructEffect>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->

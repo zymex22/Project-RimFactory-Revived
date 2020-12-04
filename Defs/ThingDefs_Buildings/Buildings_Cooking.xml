@@ -7,7 +7,7 @@
   </DesignatorDropdownGroupDef>
 
   <!--==================== Cooker Base ====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
-  <ThingDef Name="PRF_CookingBase" ParentName="PRFBuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRFBuildingBase -->
+  <ThingDef Name="PRF_CookingBase" ParentName="PRF_BuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRF_BuildingBase -->
     <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
@@ -32,9 +32,6 @@
     <castEdgeShadows>true</castEdgeShadows>
     <size>(2,2)</size>    <!-- Ingame cell/ground size (x,y) -->
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->

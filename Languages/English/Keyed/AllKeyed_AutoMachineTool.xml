@@ -40,11 +40,11 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.OutputDirection.NW>Northwest</PRF.AutoMachineTool.OutputDirection.NW>
   
   <!-- PowerTab -->
-  <PRF.AutoMachineTool.SupplyPower.TabName>Power</PRF.AutoMachineTool.SupplyPower.TabName>
-  <PRF.AutoMachineTool.SupplyPower.Description>Set the power usage. More power = Faster workspeed</PRF.AutoMachineTool.SupplyPower.Description>
-  <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Set the power usage. More power = Greater Range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
-  <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Boost Power(speed)</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
-  <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Boost Power(range)</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
+  <PRF.AutoMachineTool.SupplyPower.TabName>Overclock</PRF.AutoMachineTool.SupplyPower.TabName>
+  <PRF.AutoMachineTool.SupplyPower.Description>Overclock power usage to increace WorkSpeed</PRF.AutoMachineTool.SupplyPower.Description>
+  <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Overclock power usage to increace Work Range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Overclock Power For Speed</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Overclock Power For Range</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
   <PRF.AutoMachineTool.SupplyPower.SunLampText>Sun Lamp(power:2000)</PRF.AutoMachineTool.SupplyPower.SunLampText>
   
   <!-- LimitationTab -->

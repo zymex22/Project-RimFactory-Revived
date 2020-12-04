@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!-- Base for all other bases/structures in PRF -->
-  <ThingDef Name="PRFBuildingBase" ParentName="BuildingBase" Abstract="True">
+  <ThingDef Name="PRF_BuildingBase" ParentName="BuildingBase" Abstract="True">
     <category>Building</category>    <!-- Designates a category to be used internally. -->
     <thingClass>Building</thingClass>    <!-- 	Provides an attachment to an internal class in the code. -->
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
@@ -19,9 +19,16 @@
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
       </li>
     </comps>
+    <thingCategories> <!-- Assign there in filters this should go when minified -->
+      <li>BuildingsAutomation</li>
+    </thingCategories>
   </ThingDef>
 
-  <ThingDef Name="PRFBenchBase" ParentName="PRFBuildingBase" Abstract="True">
+  <!-- Just to make sure if any other mod still use old base -->
+  <ThingDef Name="PRFBuildingBase" ParentName="PRF_BuildingBase" Abstract="True">
+  </ThingDef>
+
+  <ThingDef Name="PRF_BenchBase" ParentName="PRF_BuildingBase" Abstract="True">
     <castEdgeShadows>true</castEdgeShadows>
     <staticSunShadowHeight>0.20</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <canOverlapZones>false</canOverlapZones>    <!-- zones as in storage zones, growing zones, etc -->

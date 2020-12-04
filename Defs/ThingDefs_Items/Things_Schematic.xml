@@ -49,7 +49,7 @@
   </ThingDef>
 
   <!--==================================== Small frame ===============================-->
-  <ThingDef ParentName="PRFResourceBase">
+  <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRFMachineFrameSmall</defName>
     <label>simple machine frame</label>
     <description>The empty shell of a small automation building.</description>
@@ -78,7 +78,7 @@
 
 
   <!--==================================== Medium frame ==============================-->
-  <ThingDef ParentName="PRFResourceBase">
+  <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRFMachineFrame</defName>
     <label>machine frame</label>
     <description>The empty shell of a medium-sized automation building.</description>
@@ -107,7 +107,7 @@
 
 
   <!--==================================== Large frame ===============================-->
-  <ThingDef ParentName="PRFResourceBase">
+  <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRFMachineFrameLarge</defName>
     <label>adv. machine frame</label>
     <description>The empty shell of a advanced automation building.</description>

@@ -5,7 +5,7 @@
     <defName>prfstorage_gr</defName>
   </DesignatorDropdownGroupDef>
   <!--==================== Base ====================-->
-  <ThingDef ParentName="PRFBuildingBase" Name="PRFMassStorageBase" Abstract="True">
+  <ThingDef Name="PRF_MassStorageBase" ParentName="PRF_BuildingBase" Abstract="True">
     <thingClass>ProjectRimFactory.Storage.Building_Crate</thingClass>
     <designationCategory>Industrial</designationCategory>
     <designatorDropdown>prfstorage_gr</designatorDropdown>
@@ -37,9 +37,6 @@
         </filter>
       </fixedStorageSettings>
     </building>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <minifiedDef>MinifiedThing</minifiedDef>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
@@ -50,8 +47,12 @@
     </inspectorTabs>
   </ThingDef>
 
+  <!-- Just to make sure if any other mod still use old base -->
+  <ThingDef Name="PRFMassStorageBase" ParentName="PRF_MassStorageBase" Abstract="True">
+  </ThingDef>
+
   <!--==================== small Wood Crate ====================-->
-  <ThingDef ParentName="PRFMassStorageBase">
+  <ThingDef ParentName="PRF_MassStorageBase">
     <defName>StockpileCrateSmall</defName>
     <label>small wooden crate</label>
     <graphicData>
@@ -108,7 +109,7 @@
   </ThingDef>
 
   <!--==================== Wood Crate ====================-->
-  <ThingDef ParentName="PRFMassStorageBase">
+  <ThingDef ParentName="PRF_MassStorageBase">
     <defName>StockpileCrate</defName>
     <label>wooden crate</label>
     <graphicData>
@@ -163,7 +164,7 @@
   </ThingDef>
 
   <!--==================== small Steel Crate ====================-->
-  <ThingDef ParentName="PRFMassStorageBase">
+  <ThingDef ParentName="PRF_MassStorageBase">
     <defName>StockpileCrateReinforcedTiny</defName>
     <label>small steel crate</label>
     <graphicData>
@@ -220,7 +221,7 @@
 
 
   <!--==================== Steel Crate ====================-->
-  <ThingDef ParentName="PRFMassStorageBase">
+  <ThingDef ParentName="PRF_MassStorageBase">
     <defName>StockpileCrateReinforced</defName>
     <label>steel crate</label>
     <graphicData>
@@ -274,7 +275,7 @@
   </ThingDef>
 
   <!--==================== Cargo Platform / Digital Storage Unit ====================-->
-  <ThingDef ParentName="PRFMassStorageBase">
+  <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRFCargoPlatform</defName>
     <label>digital storage unit</label>
     <designatorDropdown>IO_gr</designatorDropdown>
@@ -360,7 +361,7 @@
   </ThingDef>
 
   <!--============================== I/O Port ==============================-->
-  <ThingDef ParentName="PRFBuildingBase">
+  <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRFStorageUnitIOPort</defName>
     <label>I/O Port</label>
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
@@ -435,9 +436,6 @@
     <surfaceType>Item</surfaceType>
     <constructEffect>ConstructMetal</constructEffect>
     <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <researchPrerequisites>
       <li>PRF_StorageIO</li>
     </researchPrerequisites>

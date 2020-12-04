@@ -6,7 +6,7 @@
   </DesignatorDropdownGroupDef>
 
   <!--==================== Miners Base ====================-->
-  <ThingDef Name="PRF_MinersBase" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_MinersBase" ParentName="PRF_BuildingBase" Abstract="True">
     <passability>PassThroughOnly</passability>
     <blockLight>false</blockLight>
     <blockWind>true</blockWind>
@@ -27,9 +27,6 @@
     <pathCost>70</pathCost>
     <fillPercent>0.5</fillPercent>
     <canOverlapZones>false</canOverlapZones>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Ground type to build on -->
     <castEdgeShadows>true</castEdgeShadows>
     <drawGUIOverlay>true</drawGUIOverlay>

@@ -2,7 +2,7 @@
 <Defs>
 
   <!--====================Animal Base====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
-  <ThingDef Name="prf_AnimalBase" ParentName="PRFBuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRFBuildingBase -->
+  <ThingDef Name="prf_AnimalBase" ParentName="PRF_BuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRF_BuildingBase -->
     <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
     <category>Building</category>    <!-- Designates a category to be used internally -->
     <statBases>
@@ -25,9 +25,6 @@
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>    <!-- Show input/output cells when selected -->
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Ground type to build on -->
     <surfaceType>Item</surfaceType>    <!-- What kind of object can be placed on building? -->
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->

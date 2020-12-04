@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <ThingDef Name="PRFResourceBase" Abstract="True">
+  <ThingDef Name="PRF_ResourceBase" Abstract="True">
     <thingClass>ThingWithComps</thingClass>
     <category>Item</category>
     <resourceReadoutPriority>Middle</resourceReadoutPriority>
@@ -10,7 +10,7 @@
     <stackLimit>75</stackLimit>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
-      <Beauty>-4</Beauty>
+      <Beauty>0</Beauty>
     </statBases>
     <comps>
       <li Class="CompProperties_Forbiddable"/>
@@ -23,4 +23,9 @@
       <li>ExoticMisc</li>
     </tradeTags>
   </ThingDef>
+
+  <!-- Just to make sure if any other mod still use old base -->
+  <ThingDef Name="PRFResourceBase" ParentName="PRF_ResourceBase" Abstract="True">
+  </ThingDef>
+
 </Defs>

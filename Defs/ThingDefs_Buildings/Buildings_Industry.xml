@@ -5,7 +5,7 @@
   </DesignatorDropdownGroupDef>
 
   <!--==================== Industrial Base ====================-->
-  <ThingDef Name="PRF_IndustrialBase" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_IndustrialBase" ParentName="PRF_BuildingBase" Abstract="True">
     <passability>PassThroughOnly</passability>
     <blockLight>false</blockLight>
     <blockWind>true</blockWind>
@@ -25,9 +25,6 @@
     <rotatable>false</rotatable>
     <pathCost>70</pathCost>
     <fillPercent>0.5</fillPercent>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Ground type to build on -->
     <castEdgeShadows>true</castEdgeShadows>
     <drawGUIOverlay>true</drawGUIOverlay>

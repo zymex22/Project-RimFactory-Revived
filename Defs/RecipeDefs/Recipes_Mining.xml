@@ -2,7 +2,7 @@
 
 <Defs>
 
-	<RecipeDef Name="MiningWork" Abstract="True">
+	<RecipeDef Name="PRF_MiningWork" Abstract="True">
 		<workSkill>Mining</workSkill>
 		<workAmount>500</workAmount>
 		<effectWorking>Smith</effectWorking>
@@ -11,7 +11,7 @@
 	</RecipeDef>
 
 	<!--============ stones ===============-->
-	<RecipeDef ParentName="MiningWork">
+	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Granite</defName>
 		<label>mine granite</label>
 		<description>mining granite.</description>
@@ -22,7 +22,7 @@
 		</products>
 	</RecipeDef>
 
-	<RecipeDef ParentName="MiningWork">
+	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Sandstone</defName>
 		<label>mine sandstone</label>
 		<description>mining sandstone.</description>
@@ -33,7 +33,7 @@
 		</products>
 	</RecipeDef>
 
-	<RecipeDef ParentName="MiningWork">
+	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Limestone</defName>
 		<label>mine limestone</label>
 		<description>mining limestone.</description>
@@ -44,7 +44,7 @@
 		</products>
 	</RecipeDef>
 
-	<RecipeDef ParentName="MiningWork">
+	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Slate</defName>
 		<label>mine slate</label>
 		<description>mining slate.</description>
@@ -55,7 +55,7 @@
 		</products>
 	</RecipeDef>
 
-	<RecipeDef ParentName="MiningWork">
+	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Marble</defName>
 		<label>mine marble</label>
 		<description>mining marble.</description>

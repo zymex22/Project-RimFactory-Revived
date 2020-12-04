@@ -6,7 +6,7 @@
   </DesignatorDropdownGroupDef>
 
   <!-- base -->
-  <ThingDef Name="PRF_SAL_Base" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="PRF_SAL_Base" ParentName="PRF_BuildingBase" Abstract="True">
     <defName>Building_NR_AutoMachineTool_Base</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_AutoMachineTool</thingClass>
     <designatorDropdown>SALGroup</designatorDropdown>
@@ -38,9 +38,6 @@
     <blockWind>false</blockWind>
     <castEdgeShadows>false</castEdgeShadows>
     <scatterableOnMapGen>false</scatterableOnMapGen>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <minifiedDef>MinifiedThing</minifiedDef>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_AutoMachineTool</li>

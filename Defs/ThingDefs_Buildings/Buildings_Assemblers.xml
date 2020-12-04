@@ -71,7 +71,7 @@ Mod extennsion for assemblers
   </DesignatorDropdownGroupDef>
 
   <!--====================AssemblerBase====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
-  <ThingDef Name="PRF_AssemblerBase" ParentName="PRFBuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRFBuildingBase -->
+  <ThingDef Name="PRF_AssemblerBase" ParentName="PRF_BuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRF_BuildingBase -->
     <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
@@ -94,9 +94,6 @@ Mod extennsion for assemblers
     <castEdgeShadows>true</castEdgeShadows>
     <size>(3,3)</size>    <!-- Ingame cell/ground size (x,y) -->
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
@@ -118,7 +115,7 @@ Mod extennsion for assemblers
   </ThingDef>
 
   <!--==================== Recipe database ====================-->
-  <ThingDef ParentName="PRFBuildingBase">
+  <ThingDef ParentName="PRF_BuildingBase">
     <defName>RecipeDatabase</defName>
     <label>recipe database</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
@@ -144,9 +141,6 @@ Mod extennsion for assemblers
       <Mass>25</Mass>
     </statBases>
     <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsAutomation</li>
-    </thingCategories>
     <description>The Portable Recipe Database can import recipes from nearby worktables. Afterwards, when reinstalled near assembler(s), it will upload its recipes to them.\n\nBlue cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
     <costList>
       <PRFMachineFrameSmall>1</PRFMachineFrameSmall>

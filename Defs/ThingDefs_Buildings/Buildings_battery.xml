@@ -2,7 +2,7 @@
 <Defs>
   <!-- ==================================== Battery base ===================================== -->
   <!-- Batteries Taken from SS bigger batteries-->
-  <ThingDef Name="BBBuildingBase" ParentName="PRFBuildingBase" Abstract="True">
+  <ThingDef Name="BiggerBatteries_BuildingBase" ParentName="PRF_BuildingBase" Abstract="True">
     <designatorDropdown>prf_batteries_gr</designatorDropdown>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
@@ -35,7 +35,7 @@
 
 
   <!-- ==================================== 4k Battery ===================================== -->
-  <ThingDef ParentName="BBBuildingBase">
+  <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>Battery4k</defName>
     <label>4k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
@@ -43,7 +43,7 @@
       <texPath>Industry/Battery/4k</texPath>
       <drawSize>(1,1)</drawSize>
     </graphicData>
-    <rotatable>false</rotatable>  
+    <rotatable>false</rotatable>
     <drawGUIOverlay>true</drawGUIOverlay>
     <tickerType>Normal</tickerType>
     <statBases>
@@ -81,7 +81,7 @@
 
 
   <!-- ==================================== 16k Battery ===================================== -->
-  <ThingDef ParentName="BBBuildingBase">
+  <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>Battery16k</defName>
     <label>16k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
@@ -90,7 +90,7 @@
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(2,1)</drawSize>
     </graphicData>
-    <rotatable>true</rotatable>  
+    <rotatable>true</rotatable>
     <drawGUIOverlay>true</drawGUIOverlay>
     <tickerType>Normal</tickerType>
     <statBases>
@@ -128,7 +128,7 @@
   </ThingDef>
 
   <!-- ==================================== 64k Battery ===================================== -->
-  <ThingDef ParentName="BBBuildingBase">
+  <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>Battery64k</defName>
     <label>64k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
@@ -136,7 +136,7 @@
       <texPath>Industry/Battery/Building_Battery_64k</texPath>
       <drawSize>(2,2)</drawSize>
     </graphicData>
-    <rotatable>false</rotatable>  
+    <rotatable>false</rotatable>
     <drawGUIOverlay>true</drawGUIOverlay>
     <tickerType>Normal</tickerType>
     <statBases>
@@ -178,7 +178,7 @@
 
 
   <!-- ==================================== 256k Battery ===================================== -->
-  <ThingDef ParentName="BBBuildingBase">
+  <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>Battery256k</defName>
     <label>256k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
@@ -187,7 +187,7 @@
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(4,2)</drawSize>
     </graphicData>
-    <rotatable>true</rotatable>  
+    <rotatable>true</rotatable>
     <drawGUIOverlay>true</drawGUIOverlay>
     <tickerType>Normal</tickerType>
     <statBases>
@@ -227,123 +227,6 @@
     </researchPrerequisites>
   </ThingDef>
 
-
-  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
-  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
-  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
-  <ThingDef ParentName="PRFBuildingBase">
-    <defName>Battery100k</defName>
-    <label>100k battery</label>
-    <thingClass>Building_Battery</thingClass>
-    <graphicData>
-      <texPath>Industry/Battery/Building_Battery_256k</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(5,5)</drawSize>
-      <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
-    </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <pathCost>70</pathCost>
-    <blockWind>true</blockWind>
-    <castEdgeShadows>true</castEdgeShadows>
-    <fillPercent>0.40</fillPercent>
-    <tickerType>Normal</tickerType>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsPower</li>
-    </thingCategories>
-    <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
-      <WorkToBuild>1000</WorkToBuild>
-      <Mass>40</Mass>
-      <MarketValue>8410</MarketValue>
-      <Flammability>1.0</Flammability>
-      <Beauty>-40</Beauty>
-    </statBases>
-    <description>A battery that can store 100000Wd of power. Has 100% efficiency.</description>
-    <size>(2,2)</size>
-    <costList>
-      <Steel>650</Steel>
-      <Plasteel>130</Plasteel>
-      <Gold>100</Gold>
-      <ComponentIndustrial>15</ComponentIndustrial>
-      <ComponentSpacer>6</ComponentSpacer>
-      <PRFAdvancedAIChip>2</PRFAdvancedAIChip>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Battery">
-        <storedEnergyMax>100000</storedEnergyMax>
-        <efficiency>1</efficiency>
-        <transmitsPower>true</transmitsPower>
-      </li>
-      <li Class="CompProperties_Breakdownable"/>
-    </comps>
-    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <staticSunShadowHeight>0.5</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
-  </ThingDef>
-
-  <!-- ==================================== Not visable used ingame (hidden) ===================================== -->
-  <ThingDef ParentName="PRFBuildingBase">
-    <defName>Battery10k</defName>
-    <label>10k battery</label>
-    <thingClass>Building_Battery</thingClass>
-    <graphicData>
-      <texPath>Industry/Battery/Battery10k</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(2,3)</drawSize>
-      <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
-        <cornerBL>Damage/Corner</cornerBL>
-        <cornerBR>Damage/Corner</cornerBR>
-      </damageData>
-    </graphicData>
-    <altitudeLayer>Building</altitudeLayer>
-    <passability>PassThroughOnly</passability>
-    <pathCost>70</pathCost>
-    <blockWind>true</blockWind>
-    <castEdgeShadows>true</castEdgeShadows>
-    <fillPercent>0.40</fillPercent>
-    <tickerType>Normal</tickerType>
-    <minifiedDef>MinifiedThing</minifiedDef>
-    <thingCategories>
-      <li>BuildingsPower</li>
-    </thingCategories>
-    <statBases>
-      <MaxHitPoints>100</MaxHitPoints>
-      <WorkToBuild>800</WorkToBuild>
-      <Mass>40</Mass>
-      <MarketValue>830</MarketValue>
-      <Flammability>1.0</Flammability>
-      <Beauty>-40</Beauty>
-    </statBases>
-    <description>A battery that can store 10000Wd of power.</description>
-    <size>(1,2)</size>
-    <costList>
-      <Steel>200</Steel>
-      <Plasteel>20</Plasteel>
-      <ComponentIndustrial>6</ComponentIndustrial>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Battery">
-        <storedEnergyMax>10000</storedEnergyMax>
-        <efficiency>0.5</efficiency>
-        <transmitsPower>true</transmitsPower>
-      </li>
-      <li Class="CompProperties_Breakdownable"/>
-    </comps>
-    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
-    <staticSunShadowHeight>0.5</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
-    <researchPrerequisites>
-    </researchPrerequisites>
-  </ThingDef>
 
 
 </Defs>

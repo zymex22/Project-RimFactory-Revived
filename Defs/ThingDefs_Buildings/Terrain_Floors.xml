@@ -11,7 +11,7 @@
 
   <!-- ================= Colored Concrete floor ================= -->
 
-  <TerrainDef ParentName="FloorBase" Name="PRF_ConcreteFloorBase" Abstract="True">
+  <TerrainDef Name="PRF_ConcreteFloorBase" ParentName="FloorBase" Abstract="True">
     <layerable>true</layerable>
     <affordances>
       <li>Light</li>
@@ -71,7 +71,7 @@
 
 
   <!-- ================= From Floored - Credit to EsseCoisa and Curundir ================= -->
-  <TerrainDef Name="FloorBase_prf" ParentName="FloorBase" Abstract="True">
+  <TerrainDef Name="PRF_FloorBase" ParentName="FloorBase" Abstract="True">
     <layerable>true</layerable>    <!-- Optional. If true, the player can build the terrain (floor) on top of an existing floor -->
     <affordances>      <!-- Defines affordance types for the terrain  Vanilla affordances:	Diggable,	GrowSoil,	Heavy, Light,	SmoothHard -->
       <li>Light</li>
@@ -95,43 +95,7 @@
 
 
   <!-- ================= From Floored - Credit to EsseCoisa and Curundir ================= -->
-  <TerrainDef>
-    <defName>StripedTile</defName>    <!-- OLD NOT USED ANYMORE SEE BELOW -->
-    <label>striped tile Right</label>
-    <layerable>true</layerable>    <!-- Optional. If true, the player can build the terrain (floor) on top of an existing floor -->
-    <affordances>      <!-- Defines affordance types for the terrain  Vanilla affordances:	Diggable,	GrowSoil,	Heavy, Light,	SmoothHard -->
-      <li>Light</li>
-      <li>Medium</li>
-      <li>Heavy</li>
-    </affordances>
-    <fertility>0</fertility>    <!-- Defines the terrain's vertility multiplier. Can set to 0 to disable growing crops on the terrain -->
-    <filthAcceptanceMask>
-      <li>Terrain</li>
-      <li>Natural</li>
-      <li>Unnatural</li>
-    </filthAcceptanceMask>
-    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Optional. Defaults to Light. Defines which terrain affordance level is needed when placing a floor tile -->
-    <researchPrerequisites>      <!-- Optional. The player will not be able to build the floor or terrain until completing one or more research projects -->
-      <li>Machining</li>
-    </researchPrerequisites>
-    <edgeType>Hard</edgeType>    <!-- Defines the rendering method for terrain edges. Vanilla types:		Hard,	Fade,	FadeRough -->
-    <renderPrecedence>240</renderPrecedence>
-    <description>A metal tile, painted with yellow stripes to indicate critical areas.\n\nThis is added by Project RimFactory</description>
-    <texturePath>Misc/CautionTile</texturePath>
-    <color>(255, 255, 255)</color>    <!-- Optional. Defines a custom colour that is applied to the terrain texture. Usually uses RGB with this structure -->
-    <statBases>
-      <Beauty>1</Beauty>
-      <Cleanliness>0.2</Cleanliness>      <!-- affact postive or negatively on cleanliness -->
-      <WorkToBuild>800</WorkToBuild>
-    </statBases>
-    <costList>
-      <Steel>7</Steel>
-    </costList>
-    <constructEffect>ConstructMetal</constructEffect>
-    <designationHotKey>Misc9</designationHotKey>    <!-- Optional. Defines a HotKey to use in the designation category menu when selecting the terrain -->
-  </TerrainDef>
-
-  <TerrainDef ParentName="FloorBase_prf">
+  <TerrainDef ParentName="PRF_FloorBase">
     <defName>StripedTileRight</defName>
     <label>striped tile Right</label>
     <renderPrecedence>240</renderPrecedence>
@@ -153,7 +117,7 @@
   </TerrainDef>
 
 
-  <TerrainDef ParentName="FloorBase_prf">
+  <TerrainDef ParentName="PRF_FloorBase">
     <defName>StripedTileLeft</defName>
     <label>striped tile Left</label>
     <renderPrecedence>240</renderPrecedence>

@@ -14,7 +14,7 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs</xpath>
 					<value>
-						<ThingDef ParentName="PRFBuildingBase">
+						<ThingDef ParentName="PRF_BuildingBase">
 							<defName>PRFStorageUnitIOPortFridge</defName>
 							<label>I/O Fridge Port</label>
 							<thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>

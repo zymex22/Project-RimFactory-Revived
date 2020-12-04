@@ -21,6 +21,7 @@
       <li>Metallic</li>
     </stuffCategories>
     <costStuffCount>150</costStuffCount>
+    <minifiedDef>MinifiedThing</minifiedDef>
     <costList>
       <Steel>100</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
@@ -49,12 +50,16 @@
       <MarketValue>2080</MarketValue>
       <ResearchSpeedFactor>1.0</ResearchSpeedFactor>
       <SellPriceFactor>0.70</SellPriceFactor>
+      <Mass>50</Mass>
     </statBases>
     <comps>
       <li>
         <compClass>CompReportWorkSpeed</compClass>
       </li>
     </comps>
+    <thingCategories>      <!-- Assign there in filters this should go when minified -->
+      <li>BuildingsAutomation</li>
+    </thingCategories>
     <fillPercent>0.5</fillPercent>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <hasInteractionCell>true</hasInteractionCell>
@@ -72,7 +77,7 @@
   </ThingDef>
 
   <!-- ############################################# robotic machining table ##################################################### -->
-  <ThingDef ParentName="BenchBase">
+  <ThingDef ParentName="PRF_BenchBase">
     <defName>TableRoboticMachining</defName>
     <label>robotic machining table</label>
     <thingClass>Building_WorkTable</thingClass>
@@ -100,9 +105,11 @@
       <MaxHitPoints>200</MaxHitPoints>
       <MarketValue>1090</MarketValue>
       <Flammability>1.0</Flammability>
+      <Mass>50</Mass>
     </statBases>
     <size>(3,1)</size>
     <designationCategory>Production</designationCategory>
+    <minifiedDef>MinifiedThing</minifiedDef>
     <passability>PassThroughOnly</passability>
     <pathCost>70</pathCost>
     <hasInteractionCell>True</hasInteractionCell>
@@ -114,7 +121,6 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-
         <basePowerConsumption>400</basePowerConsumption>
       </li>
       <li Class="CompProperties_Flickable"/>
