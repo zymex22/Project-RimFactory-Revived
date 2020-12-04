@@ -145,7 +145,7 @@ namespace ProjectRimFactory.AutoMachineTool
         private List<Thing> ingredients;
         private Thing dominant;
         private UnfinishedThing unfinished;
-        private int outputIndex = 0;
+        
         private bool forbidItem = false;
 
         [Unsaved]
@@ -165,29 +165,6 @@ namespace ProjectRimFactory.AutoMachineTool
             return extension_Skills?.GetExtendedSkillLevel(def,typeof(Building_AutoMachineTool)) ?? this.SkillLevel ?? 0;
         }
 
-        private IntVec3[] adjacent =
-        {
-            new IntVec3(0, 0, 1),
-            new IntVec3(1, 0, 1),
-            new IntVec3(1, 0, 0),
-            new IntVec3(1, 0, -1),
-            new IntVec3(0, 0, -1),
-            new IntVec3(-1, 0, -1),
-            new IntVec3(-1, 0, 0),
-            new IntVec3(-1, 0, 1)
-        };
-        private string[] adjacentName =
-        {
-            "N",
-            "NE",
-            "E",
-            "SE",
-            "S",
-            "SW",
-            "W",
-            "NW"
-        };
-
         protected override int? SkillLevel { get { return this.def.GetModExtension<ModExtension_Tier>()?.skillLevel; } }
 
         // seem to be included in Building_BaseMachine.cs already (zymex)
@@ -200,7 +177,6 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<int>(ref this.outputIndex, "outputIndex");
             Scribe_Values.Look<bool>(ref this.forbidItem, "forbidItem");
 
             Scribe_Deep.Look<UnfinishedThing>(ref this.unfinished, "unfinished");
@@ -441,10 +417,10 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return this.OutputCell().SlotGroupCells(M);
         }
-
+        
         public override IntVec3 OutputCell()
         {
-            return this.Position + this.adjacent[this.outputIndex];
+            return compOutputAdjustable.CurrentCell;
         }
 
         private List<Thing> Consumable()
@@ -589,31 +565,11 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 yield return g;
             }
-
-            var direction = new Command_Action();
-            direction.action = () =>
-            {
-                if (this.outputIndex + 1 >= this.adjacent.Count())
-                {
-                    this.outputIndex = 0;
-                }
-                else
-                {
-                    this.outputIndex++;
-                }
-            };
-            direction.activateSound = SoundDefOf.Checkbox_TurnedOn;
-            direction.defaultLabel = "PRF.AutoMachineTool.SelectOutputDirectionLabel".Translate();
-            direction.defaultDesc = "PRF.AutoMachineTool.SelectOutputDirectionDesc".Translate();
-            direction.icon = RS.OutputDirectionIcon;
-            yield return direction;
         }
 
         public override string GetInspectString()
         {
             String msg = base.GetInspectString();
-            msg += "\n";
-            msg += "PRF.AutoMachineTool.OutputDirection".Translate(("PRF.AutoMachineTool.OutputDirection" + this.adjacentName[this.outputIndex]).Translate());
             return msg;
         }
 

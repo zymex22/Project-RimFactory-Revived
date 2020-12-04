@@ -401,6 +401,9 @@
       <canPlaceOverWall>true</canPlaceOverWall>
     </building>
     <comps>
+      <li>
+        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+      </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>

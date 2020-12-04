@@ -52,8 +52,6 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void ExposeData()
         {
             base.ExposeData();
-
-            Scribe_Values.Look<int>(ref this.outputIndex, "outputIndex");
             Scribe_Deep.Look(ref this.billStack, "billStack", new object[] { this });
             Scribe_References.Look(ref this.workingBill, "workingBill");
             if (Scribe.mode == LoadSaveMode.PostLoadInit && this.workingBill == null)
@@ -162,8 +160,6 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
 
-            this.adjacent = GenAdj.CellsAdjacent8Way(this).ToArray();
-
             if (this.GetComp<CompGlowerPulse>() != null)
             {
                 this.GetComp<CompGlowerPulse>().Glows = false;
@@ -176,33 +172,13 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 yield return g;
             }
-
-            var direction = new Command_Action();
-            direction.action = () =>
-            {
-                if (this.outputIndex + 1 >= this.adjacent.Count())
-                {
-                    this.outputIndex = 0;
-                }
-                else
-                {
-                    this.outputIndex++;
-                }
-            };
-            direction.activateSound = SoundDefOf.Checkbox_TurnedOn;
-            direction.defaultLabel = "PRF.AutoMachineTool.SelectOutputDirectionLabel".Translate();
-            direction.defaultDesc = "PRF.AutoMachineTool.SelectOutputDirectionDesc".Translate();
-            direction.icon = RS.OutputDirectionIcon;
-            yield return direction;
         }
 
-        private int outputIndex = 0;
 
-        private IntVec3[] adjacent;
 
         public override IntVec3 OutputCell()
         {
-            return this.adjacent[this.outputIndex];
+            return compOutputAdjustable.CurrentCell;
         }
 
         public Bill MakeNewBill(RecipeDef recipe)

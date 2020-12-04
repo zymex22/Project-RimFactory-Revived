@@ -3,7 +3,6 @@
 
   <!-- common -->
   <PRF.AutoMachineTool.MustInWall>Must be installed in a wall.</PRF.AutoMachineTool.MustInWall>
-  <PRF.AutoMachineTool.SelectOutputDirectionLabel>Adjust Output Direction</PRF.AutoMachineTool.SelectOutputDirectionLabel>
   <PRF.AutoMachineTool.SelectOutputDirectionDesc>Specify the output destination of the finished product. If the output destination is part of the stockpiling zone and the finished product can be stored, it is output in it.
 Even if the output destination is in the stockpiling zone, the finished product can not be placed, but it is placed in the cell specified as the output destination.</PRF.AutoMachineTool.SelectOutputDirectionDesc>
   
