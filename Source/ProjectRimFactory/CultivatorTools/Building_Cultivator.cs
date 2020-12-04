@@ -6,15 +6,22 @@ using System.Reflection;
 using Verse;
 using UnityEngine;
 using RimWorld;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.CultivatorTools
 {
     // Deprecated class.
     public class Building_Cultivator : Building_SquareCellIterator
     {
-        public Rot4 outputRotation = Rot4.North;
 
-        public IntVec3 OutputSlot => Position + GenAdj.CardinalDirections[outputRotation.AsInt];
+        public CompOutputAdjustable compOutputAdjustable;
+
+
+        public override void PostMake()
+        {
+            base.PostMake();
+            compOutputAdjustable = GetComp<CompOutputAdjustable>();
+        }
 
         #region Abstract stuff
         public override int TickRate => def.GetModExtension<CultivatorDefModExtension>()?.TickFrequencyDivisor ?? 200;
@@ -66,12 +73,6 @@ namespace ProjectRimFactory.CultivatorTools
             }
             if (plantDef.CanEverPlantAt(c, Map) && PlantUtility.AdjacentSowBlocker(plantDef, c, Map) == null)
                 GenPlace.TryPlaceThing(ThingMaker.MakeThing(plantDef), c, Map, ThingPlaceMode.Direct);
-        }
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref outputRotation, "outputRotation");
         }
 
         #region SeedsPlease activated stuff
@@ -127,7 +128,7 @@ namespace ProjectRimFactory.CultivatorTools
                 }
                 var thing = ThingMaker.MakeThing(seed);
                 thing.stackCount = count;
-                GenSpawn.Spawn(thing, OutputSlot, Map);
+                GenSpawn.Spawn(thing, compOutputAdjustable.CurrentCell, Map);
             }
         }
         #endregion
@@ -145,15 +146,6 @@ namespace ProjectRimFactory.CultivatorTools
                 defaultDesc = "CommandSunLampMakeGrowingZoneDesc".Translate(),
                 icon = ContentFinder<Texture2D>.Get("UI/Designators/ZoneCreate_Growing"),
                 defaultLabel = "CommandSunLampMakeGrowingZoneLabel".Translate()
-            };
-            yield return new Command_Action
-            {
-                icon = TexUI.RotRightTex,
-                defaultIconColor = Color.green,
-                defaultLabel = "CultivatorTools_AdjustDirection_Output".Translate(),
-                defaultDesc = "CultivatorTools_AdjustDirection_Desc".Translate(outputRotation.AsCompassDirection()),
-                activateSound = SoundDefOf.Click,
-                action = () => outputRotation.Rotate(RotationDirection.Clockwise)
             };
         }
 
@@ -173,7 +165,7 @@ namespace ProjectRimFactory.CultivatorTools
             {
                 Thing thing = ThingMaker.MakeThing(p.def.plant.harvestedThingDef, null);
                 thing.stackCount = num2;
-                GenPlace.TryPlaceThing(thing, OutputSlot, Map, ThingPlaceMode.Near, null);
+                GenPlace.TryPlaceThing(thing, compOutputAdjustable.CurrentCell, Map, ThingPlaceMode.Near, null);
             }
             if (Utilities.SeedsPleaseActive && p.def.blueprintDef != null)
                 CreatePlantProductsSeedsPleaseActive(p);
@@ -186,12 +178,6 @@ namespace ProjectRimFactory.CultivatorTools
 
         public override string DescriptionFlavor => base.DescriptionFlavor + " " +
             ((Utilities.SeedsPleaseActive) ? "CultivatorTools_SeedsPleaseActiveDesc".Translate() : "CultivatorTools_SeedsPleaseInactiveDesc".Translate());
-
-        public override void DrawExtraSelectionOverlays()
-        {
-            base.DrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(new List<IntVec3> { OutputSlot }, Color.yellow);
-        }
     }
 
     public class DefModExtension_DoneBehavior : DefModExtension
