@@ -11,7 +11,7 @@
     <workSkill>Cooking</workSkill>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
-    <workAmount>600000</workAmount>
+    <workAmount>180000</workAmount>
     <ingredients>
       <li>
         <filter>
@@ -42,7 +42,7 @@
     <workSkill>Cooking</workSkill>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
-    <workAmount>600000</workAmount>
+    <workAmount>180000</workAmount>
     <ingredients>
       <li>
         <filter>
@@ -74,7 +74,7 @@
     <workSkill>Cooking</workSkill>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
-    <workAmount>600000</workAmount>
+    <workAmount>180000</workAmount>
     <ingredients>
       <li>
         <filter>

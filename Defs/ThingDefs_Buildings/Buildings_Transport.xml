@@ -141,10 +141,10 @@
     <tickerType>Normal</tickerType>
     <rotatable>true</rotatable>
     <neverMultiSelect>true</neverMultiSelect>
-    <designationCategory>Industrial</designationCategory>
+    
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <minifiedDef>MinifiedThing</minifiedDef>
     <!-- <specialDisplayRadius>5</specialDisplayRadius> -->    <!--A.K.A. Search radius-->
     <researchPrerequisites>
@@ -181,10 +181,10 @@
       <Beauty>-2</Beauty>
     </statBases>
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
-    <designationCategory>Industrial</designationCategory>
+    
     <size>(1,1)</size>
     <fillPercent>0.5</fillPercent>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <passability>Standable</passability>
     <rotatable>true</rotatable>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
@@ -525,7 +525,7 @@
   <ThingDef Name="PRF_Conveyor_Base" ParentName="PRF_BuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <altitudeLayer>Building</altitudeLayer>
-    <designationCategory>Industrial</designationCategory>
+    
     <designatorDropdown>Rollers_gr</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
     <costList>

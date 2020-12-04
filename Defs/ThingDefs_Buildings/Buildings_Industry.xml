@@ -9,9 +9,9 @@
     <passability>PassThroughOnly</passability>
     <blockLight>false</blockLight>
     <blockWind>true</blockWind>
-    <designationCategory>Industrial</designationCategory>
+    
     <altitudeLayer>Building</altitudeLayer>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>

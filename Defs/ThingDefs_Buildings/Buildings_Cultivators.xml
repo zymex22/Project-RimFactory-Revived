@@ -9,7 +9,6 @@
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
-      <Beauty>0</Beauty>      <!-- +is good -is bad ;) -->
       <Mass>70</Mass>      <!-- mass in kg -->
       <WorkToBuild>450</WorkToBuild>
     </statBases>
@@ -23,7 +22,7 @@
         <cornerTR>Damage/Corner</cornerTR>
       </damageData>
     </graphicData>
-    <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+       <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <canOverlapZones>false</canOverlapZones>
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
@@ -36,10 +35,10 @@
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
-    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
+        <!--architect menu location-->
     <designatorDropdown>Cultivator_gr</designatorDropdown>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
-    <constructEffect>ConstructMetal</constructEffect>
+    
 
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />
@@ -508,9 +507,9 @@
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
 
-    <designationCategory>Industrial</designationCategory>
+    
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <researchPrerequisites>
       <li>PRF_AutomaticFarmingII</li>      <!-- farming level 2 -->
     </researchPrerequisites>
@@ -568,9 +567,9 @@
     </modExtensions>
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
-    <designationCategory>Industrial</designationCategory>
+    
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <researchPrerequisites>
       <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
     </researchPrerequisites>

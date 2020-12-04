@@ -112,7 +112,7 @@
     </costList>
     <designatorDropdown>PRF_floors</designatorDropdown>    <!-- assign to dropdown menu -->
     <designationCategory>Floors</designationCategory>    <!-- Defines which category in the Architect tab contains the terrain or floor building order -->
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <designationHotKey>Misc9</designationHotKey>    <!-- Optional. Defines a HotKey to use in the designation category menu when selecting the terrain -->
   </TerrainDef>
 
@@ -134,7 +134,7 @@
     </costList>
     <designatorDropdown>PRF_floors</designatorDropdown>    <!-- assign to dropdown menu -->
     <designationCategory>Floors</designationCategory>    <!-- Defines which category in the Architect tab contains the terrain or floor building order -->
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <designationHotKey>Misc9</designationHotKey>
   </TerrainDef>
 

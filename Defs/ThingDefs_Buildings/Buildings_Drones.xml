@@ -18,11 +18,9 @@
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
-      <Beauty>0</Beauty>      <!-- +is good -is bad ;) -->
       <Mass>70</Mass>      <!-- mass in kg -->
       <WorkToBuild>1500</WorkToBuild>
     </statBases>
-    <constructEffect>ConstructMetal</constructEffect>
     <uiIconScale>0.7</uiIconScale>
     <drawGUIOverlay>true</drawGUIOverlay>
     <canOverlapZones>false</canOverlapZones>
@@ -39,7 +37,7 @@
         <offset>(0,0,-0.23)</offset>
       </shadowData>
     </graphicData>
-    <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+       <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
@@ -51,7 +49,7 @@
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
-    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
+        <!--architect menu location-->
     <placeWorkers>
       <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
     </placeWorkers>
@@ -111,7 +109,7 @@
       </li>
     </comps>
     <rotatable>false</rotatable>
-    <designationCategory>Industrial</designationCategory>
+    
     <placeWorkers>
       <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
     </placeWorkers>

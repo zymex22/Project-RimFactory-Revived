@@ -19,7 +19,7 @@
 							<graphicData>
 								<texPath>Drones/MiniDroneStationAtomic</texPath>
 							</graphicData>
-							<constructEffect>ConstructMetal</constructEffect>
+							
 							<description>A mini Atomic Workshop helper for RimAtomics to do maintain and fuel your reactors it can flick, haul, atomic, firefight</description>
 							<costList>
 								<PRFMachineFrameSmall>1</PRFMachineFrameSmall>

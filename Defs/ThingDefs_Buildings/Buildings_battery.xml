@@ -25,9 +25,9 @@
     </thingCategories>
     <designationCategory>Power</designationCategory>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
     <designationHotKey>Misc4</designationHotKey>
   </ThingDef>
+
 
   <DesignatorDropdownGroupDef>
     <defName>prf_batteries_gr</defName>
@@ -145,7 +145,6 @@
       <MarketValue>5320</MarketValue>
       <Mass>80</Mass>
       <Flammability>1.0</Flammability>
-      <Beauty>0</Beauty>
     </statBases>
     <description>An efficient waterproof superposed-cell battery capable of storing 64000 watt days of power. Spdskatr Industries is not responsible for any damage caused by short circuits.</description>
     <size>(2,2)</size>

@@ -8,7 +8,7 @@
   <!-- ================= Base ================= -->
   <ThingDef Name="PRF_FloorSign" ParentName="PRF_BuildingBase" Abstract="True">
     <description>Weak florescent sig, can be placed on floor or on top of machines or other buildings to show guidance.</description>
-    <designationCategory>Industrial</designationCategory>
+    
     <designatorDropdown>floor_lights</designatorDropdown>
     <rotatable>true</rotatable>
     <altitudeLayer>BuildingOnTop</altitudeLayer>

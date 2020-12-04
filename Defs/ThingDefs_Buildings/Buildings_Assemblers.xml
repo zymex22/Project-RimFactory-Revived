@@ -76,7 +76,6 @@ Mod extennsion for assemblers
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
-      <Beauty>-1</Beauty>      <!-- +is good -is bad ;) -->
       <Mass>70</Mass>      <!-- mass in kg -->
     </statBases>
     <graphicData>
@@ -84,7 +83,7 @@ Mod extennsion for assemblers
       <drawSize>(3,3)</drawSize>      <!-- Scale texture up/down to fit -->
       <!-- <shaderType></shaderType> -->      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
     </graphicData>
-    <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+       <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
@@ -98,7 +97,6 @@ Mod extennsion for assemblers
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
     <neverMultiSelect>true</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
-    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
     <staticSunShadowHeight>0.3</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <drawGUIOverlay>true</drawGUIOverlay>    <!-- Whether GUI will show up when you select this thing. -->
     <inspectorTabs>      <!-- A list of ITabs that will show up in the inspector when you select this item. These ITabs are for example the "Bills" buttons (ITab_Bills) and the art description (ITab_Art). -->
@@ -150,9 +148,7 @@ Mod extennsion for assemblers
     </costList>
     <tickerType>Normal</tickerType>
     <neverMultiSelect>true</neverMultiSelect>
-    <designationCategory>Industrial</designationCategory>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
-    <constructEffect>ConstructMetal</constructEffect>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -307,7 +303,7 @@ Mod extennsion for assemblers
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
-        <BaseSkill>20</BaseSkill> <!-- Base level skills if nothing is defined below -->
+        <BaseSkill>20</BaseSkill>        <!-- Base level skills if nothing is defined below -->
         <skills>
           <li>
             <def>Artistic</def>

@@ -10,10 +10,10 @@
     <passability>PassThroughOnly</passability>
     <blockLight>false</blockLight>
     <blockWind>true</blockWind>
-    <designationCategory>Industrial</designationCategory>
+    
     <designatorDropdown>miners_gr</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
@@ -82,7 +82,7 @@
       <Cleanliness>-5</Cleanliness>
     </statBases>
     <size>(3,1)</size>
-    <designationCategory>Industrial</designationCategory>
+    
     <designatorDropdown>miners_gr</designatorDropdown>
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>

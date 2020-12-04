@@ -22,7 +22,7 @@
     </graphicData>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <drawerType>RealtimeOnly</drawerType>
-    <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+       <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, passthroughonly -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
@@ -36,7 +36,6 @@
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
     <neverMultiSelect>true</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
-    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
     <designatorDropdown>assembler_food_gr</designatorDropdown>    <!-- Assign Dropdown menu -->
     <staticSunShadowHeight>0.3</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <drawGUIOverlay>true</drawGUIOverlay>    <!-- Whether GUI will show up when you select this thing. -->
@@ -57,7 +56,7 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>SelfCooker</defName>
     <label>industrial cooker</label>
-        <uiIconScale>0.7</uiIconScale>
+    <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <texPath>SAL3/cooker1</texPath>
       <drawSize>(2,2)</drawSize>

@@ -16,20 +16,18 @@
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
       <drawSize>(1,1)</drawSize>      <!-- Scale texture up/down to fit -->
-      <!-- <shaderType></shaderType> -->      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
     </graphicData>
-    <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+       <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
     <size>(1,1)</size>    <!-- Ingame cell/ground size (x,y) -->
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
-    <constructEffect>ConstructMetal</constructEffect>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
     <neverMultiSelect>false</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
-    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
+        <!--architect menu location-->
   </ThingDef>
 
   <!--======================================= NR Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->

@@ -5,7 +5,6 @@
     <value>
 	<ThingDef Name="PRFLargeFuseBase" Abstract="True">
 		<designationCategory>Power</designationCategory>
-		<category>Building</category>
 		<thingClass>Building</thingClass>
 		<minifiedDef>MinifiedThing</minifiedDef>
         <thingCategories><li>BuildingsPower</li></thingCategories>
@@ -19,7 +18,7 @@
 		</graphicData>
 		<drawerType>MapMeshAndRealTime</drawerType>
 		<repairEffect>Repair</repairEffect>
-		<constructEffect>ConstructMetal</constructEffect>
+		
 		<soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
 		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
 		<staticSunShadowHeight>0.5</staticSunShadowHeight>

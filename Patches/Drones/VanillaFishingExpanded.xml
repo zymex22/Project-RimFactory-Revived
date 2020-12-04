@@ -19,7 +19,6 @@
 							<graphicData>
 								<texPath>Drones/MiniDroneStation</texPath>
 							</graphicData>
-							<constructEffect>ConstructMetal</constructEffect>
 							<description>A mini Fishing Station capable of helping you with catching fish. it will take breaks to prevent curcuits getting too wet.</description>
 							<costList>
 								<PRFMachineFrameSmall>1</PRFMachineFrameSmall>

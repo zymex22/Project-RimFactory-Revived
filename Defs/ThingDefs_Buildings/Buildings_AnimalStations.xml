@@ -4,7 +4,6 @@
   <!--====================Animal Base====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
   <ThingDef Name="prf_AnimalBase" ParentName="PRF_BuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRF_BuildingBase -->
     <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
-    <category>Building</category>    <!-- Designates a category to be used internally -->
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
       <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
@@ -31,7 +30,6 @@
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
     <neverMultiSelect>true</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
-    <designationCategory>Industrial</designationCategory>    <!-- architect menu location-->
     <designatorDropdown>AnimalStations_gr</designatorDropdown>    <!-- assign dropdown group -->
     <staticSunShadowHeight>0.3</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <drawGUIOverlay>true</drawGUIOverlay>    <!-- Whether GUI will show up when you select this thing. -->
@@ -93,7 +91,7 @@
           <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
           <drawSize>(2.1)</drawSize>
         </graphicData>
-        <altitudeLayer>Building</altitudeLayer>        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+               <!-- Set to what layer wanted, Projectile for top, building for bottom -->
       </li>
     </comps>
     <building>
@@ -170,7 +168,7 @@
           <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
           <drawSize>(2.1)</drawSize>
         </graphicData>
-        <altitudeLayer>Building</altitudeLayer>        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+               <!-- Set to what layer wanted, Projectile for top, building for bottom -->
       </li>
     </comps>
     <building>
@@ -395,7 +393,6 @@
       <li>PRF_AnimalStationsIII</li>
     </researchPrerequisites>
     <fillPercent>1</fillPercent>
-    <constructEffect>ConstructMetal</constructEffect>
     <passability>Impassable</passability>
     <size>(3,3)</size>
     <coversFloor>true</coversFloor>

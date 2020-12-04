@@ -117,11 +117,10 @@
 								</li>
 							</comps>
 							<rotatable>false</rotatable>
-							<designationCategory>Industrial</designationCategory>
-							<category>Building</category>
+							
 							<staticSunShadowHeight>0.3</staticSunShadowHeight>
 							<surfaceType>Item</surfaceType>
-							<constructEffect>ConstructMetal</constructEffect>
+							
 							<minifiedDef>MinifiedThing</minifiedDef>
 							<thingCategories>
 								<li>BuildingsFurniture</li>
@@ -204,7 +203,7 @@
 								<PRFMachineFrameLarge>1</PRFMachineFrameLarge>
 								<PRFAdvancedAIChip>1</PRFAdvancedAIChip>
 							</costList>
-							<constructEffect>ConstructMetal</constructEffect>
+							
 							<tickerType>Normal</tickerType>
 							<researchPrerequisites>
 								<li>PRF_StorageIO</li>

@@ -7,7 +7,7 @@
   <!--==================== Base ====================-->
   <ThingDef Name="PRF_MassStorageBase" ParentName="PRF_BuildingBase" Abstract="True">
     <thingClass>ProjectRimFactory.Storage.Building_Crate</thingClass>
-    <designationCategory>Industrial</designationCategory>
+    
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
     <tradeTags>
@@ -207,7 +207,7 @@
       <Steel>60</Steel>
     </costList>
     <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <researchPrerequisites>
       <li>PRF_SteelCrates</li>
     </researchPrerequisites>
@@ -262,7 +262,7 @@
       <Steel>120</Steel>
     </costList>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <researchPrerequisites>
       <li>PRF_SteelCrates</li>
     </researchPrerequisites>
@@ -329,7 +329,7 @@
       <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
       <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
     </costList>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <tickerType>Normal</tickerType>
     <researchPrerequisites>
       <li>PRF_StorageIO</li>
@@ -431,10 +431,10 @@
     </comps>
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
-    <designationCategory>Industrial</designationCategory>
+    
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <minifiedDef>MinifiedThing</minifiedDef>
     <researchPrerequisites>
       <li>PRF_StorageIO</li>

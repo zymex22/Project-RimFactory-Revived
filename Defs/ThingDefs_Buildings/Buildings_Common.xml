@@ -135,7 +135,7 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <researchPrerequisites>
       <li>PRF_CoreTierO</li>
       <li>Electricity</li>

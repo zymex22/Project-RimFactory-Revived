@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
 
-  <Operation Class="PatchOperationReplace">
-    <xpath>/Defs/RecipeDef[defName = "BrewBeer_sixpack"]/workAmount</xpath>
-    <value>
-      <workAmount>180000</workAmount>
-    </value>
-  </Operation>
-
-  <Operation Class="PatchOperationReplace">
-    <xpath>/Defs/RecipeDef[defName = "BrewBeer_case"]/workAmount</xpath>
-    <value>
-      <workAmount>180000</workAmount>
-    </value>
-  </Operation>
-
-  <Operation Class="PatchOperationReplace">
-    <xpath>/Defs/RecipeDef[defName = "BrewBeer_keg"]/workAmount</xpath>
-    <value>
-      <workAmount>180000</workAmount>
-    </value>
-  </Operation>
-
   <Operation Class="PatchOperationFindMod">
     <mods>
       <li>Vanilla Brewing Expanded</li>

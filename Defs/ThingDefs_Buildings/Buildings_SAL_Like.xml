@@ -33,7 +33,7 @@
       <li Class="CompProperties_Flickable"/>
     </comps>
     <pathCost>0</pathCost>
-    <designationCategory>Industrial</designationCategory>
+    
     <rotatable>true</rotatable>
     <blockWind>false</blockWind>
     <castEdgeShadows>false</castEdgeShadows>
@@ -46,7 +46,7 @@
     </placeWorkers>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-    <constructEffect>ConstructMetal</constructEffect>
+    
     <size>(1,1)</size>
     <passability>Standable</passability>
     <inspectorTabs>
