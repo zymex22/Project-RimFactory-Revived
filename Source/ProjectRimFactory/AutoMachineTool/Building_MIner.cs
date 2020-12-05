@@ -216,7 +216,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         static RecipeRegister()
         {
-            var minerDef = DefDatabase<ThingDef>.GetNamedSilentFail("Building_AutoMachineTool_Miner");
+            var minerDef = DefDatabase<ThingDef>.GetNamedSilentFail("PRF_BillTypeMiner_I");
             if (minerDef != null)
             {
                 var effecter = minerDef.GetModExtension<ModExtension_EffectWorking>()?.effectWorking;

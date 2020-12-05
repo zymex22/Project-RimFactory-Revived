@@ -17,13 +17,13 @@
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">					<!-- T2 miner Remove from standard chance -->
-					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
 					<value>
 						<li>WTH_MechanoidParts</li>
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">					<!-- T3 miner Remove from Bill list -->
-					<xpath>/Defs/ThingDef[defName="Building_AutoMachineTool_Miner"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_BillTypeMiner_I"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
 					<value>
 						<li>WTH_MechanoidParts</li>
 					</value>

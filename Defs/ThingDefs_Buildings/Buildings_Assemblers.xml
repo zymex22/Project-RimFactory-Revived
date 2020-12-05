@@ -83,7 +83,7 @@ Mod extennsion for assemblers
       <drawSize>(3,3)</drawSize>      <!-- Scale texture up/down to fit -->
       <!-- <shaderType></shaderType> -->      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
     </graphicData>
-       <!-- The layer this thing is rendered on. Usually the same value as category. -->
+    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
@@ -113,8 +113,9 @@ Mod extennsion for assemblers
   </ThingDef>
 
   <!--==================== Recipe database ====================-->
-  <ThingDef ParentName="PRF_BuildingBase">
-    <defName>RecipeDatabase</defName>
+  <!-- This machine can import recipes from any bench and afterwards being moved near a assembler for use. -->
+    <ThingDef ParentName="PRF_BuildingBase">
+    <defName>PRF_RecipeDatabase</defName>
     <label>recipe database</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
     <designatorDropdown>assembler_gr</designatorDropdown>
@@ -141,10 +142,10 @@ Mod extennsion for assemblers
     <minifiedDef>MinifiedThing</minifiedDef>
     <description>The Portable Recipe Database can import recipes from nearby worktables. Afterwards, when reinstalled near assembler(s), it will upload its recipes to them.\n\nBlue cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <Steel>20</Steel>
       <ComponentIndustrial>1</ComponentIndustrial>
-      <RimFactory_Data_Disk>1</RimFactory_Data_Disk>
+      <PRF_DataDisk>1</PRF_DataDisk>
     </costList>
     <tickerType>Normal</tickerType>
     <neverMultiSelect>true</neverMultiSelect>
@@ -168,9 +169,18 @@ Mod extennsion for assemblers
     </researchPrerequisites>
   </ThingDef>
 
-  <!--====================Universal assembler====================-->
+
+  <!--============================================================-->
+  <!-- *^*^*^*^* Simple Assembler *^*^*^*^* -->
+  <!-- Simple assembler is cooking, industrial and all other types they work like Universal assembler, but with preset recipy, look at selfcooker for example. -->
+  <!-- Theese can also import/copy recipes from a whole bench which for mod support can be very usefull. -->
+  <!--============================================================-->
+
+
+  <!--==================== Universal Assembler ====================-->
+  <!-- This is a fixed type of assembler that always will work at same speed and can import recipes from DB. -->
   <ThingDef ParentName="PRF_AssemblerBase">
-    <defName>UniversalAssembler</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
+    <defName>PRF_TypeOneAssembler_I</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
     <label>assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
     <designatorDropdown>assembler_gr</designatorDropdown>    <!-- Use Dropdown Group -->
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>    <!-- What C# class to call when doing anything with this thing. Unless you know what you're doing, it's suggested to use the same thingClass similar things use. -->
@@ -179,12 +189,12 @@ Mod extennsion for assemblers
       <texPath>SAL3/smart_assembler</texPath>      <!-- The path relative to ../Textures/ in which this thing's texture is stored. -->
     </graphicData>
     <costList>      <!-- cost list for fixed prices, uses def names -->
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
-      <PRFWeakAIChip>2</PRFWeakAIChip>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_ElectronicChip_I>2</PRF_ElectronicChip_I>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
     <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <statBases>
@@ -234,9 +244,10 @@ Mod extennsion for assemblers
   </ThingDef>
 
 
-  <!--==================== adaptive assembler ====================-->
+  <!--==================== Adaptive Assembler ====================-->
+  <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
   <ThingDef ParentName="PRF_AssemblerBase">
-    <defName>MachineLearningAssembler</defName>
+    <defName>PRF_TypeTwoAssembler_I</defName>
     <label>adaptive assembler</label>
     <designatorDropdown>assembler_gr</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
@@ -245,10 +256,10 @@ Mod extennsion for assemblers
       <texPath>SAL3/correcting_assembler</texPath>
     </graphicData>
     <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFWeakAIChip>4</PRFWeakAIChip>
-      <PRFAdvancedAIChip>2</PRFAdvancedAIChip>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>4</PRF_ElectronicChip_I>
+      <PRF_ElectronicChip_II>2</PRF_ElectronicChip_II>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
       <Plasteel>10</Plasteel>
       <Steel>150</Steel>
       <ComponentIndustrial>2</ComponentIndustrial>

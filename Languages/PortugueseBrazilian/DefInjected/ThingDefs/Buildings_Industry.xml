@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <PRF_DeepQuarry.label>Pedreira profunda</PRF_DeepQuarry.label>
-  <PRF_DeepQuarry.description>Uma pedreira automatizada que extrai recursos continuamente do solo, incluindo pedaços de rocha, materiais e componentes. Produz um recurso aleatório aproximadamente a cada 6 horas.</PRF_DeepQuarry.description>
+  <PRF_DeepQuarry_mkII.label>Pedreira profunda</PRF_DeepQuarry_mkII.label>
+  <PRF_DeepQuarry_mkII.description>Uma pedreira automatizada que extrai recursos continuamente do solo, incluindo pedaços de rocha, materiais e componentes. Produz um recurso aleatório aproximadamente a cada 6 horas.</PRF_DeepQuarry_mkII.description>
 
   <PaperclipFactory.label>Fábrica de clipes de papel</PaperclipFactory.label>
   <PaperclipFactory.description>Uma máquina que transforma clipes de papel de qualquer matéria-prima nela inserida - metal, planta ou cadáver.</PaperclipFactory.description>
 
-  <FuelingMachine.label>Máquina de enchimento</FuelingMachine.label>
-  <FuelingMachine.description>O braço robótico é construído em uma pequena estrutura de máquina que pode alimentar automaticamente o prédio à sua frente.</FuelingMachine.description>
+  <PRF_FuelingMachine.label>Máquina de enchimento</PRF_FuelingMachine.label>
+  <PRF_FuelingMachine.description>O braço robótico é construído em uma pequena estrutura de máquina que pode alimentar automaticamente o prédio à sua frente.</PRF_FuelingMachine.description>
 
   <PRFPaperclipPowerGenerator.label>Gerador em clipes de papel</PRFPaperclipPowerGenerator.label>
   <PRFPaperclipPowerGenerator.description>Produz energia consumindo clipes de papel. Deve ser alimentado manualmente.</PRFPaperclipPowerGenerator.description>

@@ -100,7 +100,7 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelFilter>
           <thingDefs>
-            <li>PRFDroneModule</li>
+            <li>PRF_DroneModule</li>
           </thingDefs>
         </fuelFilter>
         <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
@@ -126,11 +126,11 @@
     </graphicData>
     <description>A mini workshop helper capable of haul, flick, firefight and clean your workshop within a range(can be expanded with powerslider)</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFDroneModule>2</PRFDroneModule>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>2</PRF_DroneModule>
       <Steel>30</Steel>
       <Plasteel>20</Plasteel>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
       <ComponentIndustrial>3</ComponentIndustrial>
       <ComponentSpacer>1</ComponentSpacer>
     </costList>
@@ -149,7 +149,7 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelFilter>
           <thingDefs>
-            <li>PRFDroneModule</li>
+            <li>PRF_DroneModule</li>
           </thingDefs>
         </fuelFilter>
         <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
@@ -229,11 +229,11 @@
     </stuffCategories>
     <costStuffCount>20</costStuffCount>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFDroneModule>2</PRFDroneModule>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>2</PRF_DroneModule>
       <Steel>10</Steel>
       <Plasteel>5</Plasteel>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
       <ComponentIndustrial>3</ComponentIndustrial>
       <ComponentSpacer>1</ComponentSpacer>
     </costList>
@@ -254,7 +254,7 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelFilter>
           <thingDefs>
-            <li>PRFDroneModule</li>
+            <li>PRF_DroneModule</li>
           </thingDefs>
         </fuelFilter>
         <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
@@ -358,7 +358,7 @@
       <Steel>100</Steel>
       <ComponentSpacer>5</ComponentSpacer>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFWeakAIChip>12</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>12</PRF_ElectronicChip_I>
     </costList>
     <modExtensions>
       <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
@@ -381,7 +381,7 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelFilter>
           <thingDefs>
-            <li>PRFDroneModule</li>
+            <li>PRF_DroneModule</li>
           </thingDefs>
         </fuelFilter>
         <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>

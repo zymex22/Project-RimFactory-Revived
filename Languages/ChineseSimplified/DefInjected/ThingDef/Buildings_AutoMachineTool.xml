@@ -3,96 +3,96 @@
 
   <!--======================================= Growzone Puller ===============================================-->
 
-    <Building_AutoMachineTool_GrowZonePuller.label>延长捡货机</Building_AutoMachineTool_GrowZonePuller.label>
-    <Building_AutoMachineTool_GrowZonePuller.description>一种能把生长区的东西拉到仓库或皮带上的拉具。</Building_AutoMachineTool_GrowZonePuller.description>
-    <Building_AutoMachineTool_GrowZonePuller_Blueprint.label>延长捡货机（蓝图）</Building_AutoMachineTool_GrowZonePuller_Blueprint.label>
-    <Building_AutoMachineTool_GrowZonePuller_Blueprint_Install.label>延长捡货机（蓝图）</Building_AutoMachineTool_GrowZonePuller_Blueprint_Install.label>
-    <Building_AutoMachineTool_GrowZonePuller_Frame.label>延长捡货机（建造中）</Building_AutoMachineTool_GrowZonePuller_Frame.label>
-    <Building_AutoMachineTool_GrowZonePuller_Frame.description>一种能把生长区的东西拉到仓库或皮带上的拉具。</Building_AutoMachineTool_GrowZonePuller_Frame.description>
+    <PRF_GrowzonePuller_I.label>延长捡货机</PRF_GrowzonePuller_I.label>
+    <PRF_GrowzonePuller_I.description>一种能把生长区的东西拉到仓库或皮带上的拉具。</PRF_GrowzonePuller_I.description>
+    <PRF_GrowzonePuller_I_Blueprint.label>延长捡货机（蓝图）</PRF_GrowzonePuller_I_Blueprint.label>
+    <PRF_GrowzonePuller_I_Blueprint_Install.label>延长捡货机（蓝图）</PRF_GrowzonePuller_I_Blueprint_Install.label>
+    <PRF_GrowzonePuller_I_Frame.label>延长捡货机（建造中）</PRF_GrowzonePuller_I_Frame.label>
+    <PRF_GrowzonePuller_I_Frame.description>一种能把生长区的东西拉到仓库或皮带上的拉具。</PRF_GrowzonePuller_I_Frame.description>
 
 
   <!--======================================= Item Pusher ===============================================-->
 
-    <Building_AutoMachineTool_Puller.label>自动捡货机</Building_AutoMachineTool_Puller.label>
-    <Building_AutoMachineTool_Puller.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</Building_AutoMachineTool_Puller.description>
-    <Building_AutoMachineTool_Puller_Blueprint.label>自动捡货机（蓝图）</Building_AutoMachineTool_Puller_Blueprint.label>
-    <Building_AutoMachineTool_Puller_Blueprint_Install.label>自动捡货机（蓝图）</Building_AutoMachineTool_Puller_Blueprint_Install.label>
-    <Building_AutoMachineTool_Puller_Frame.label>自动捡货机（建造中）</Building_AutoMachineTool_Puller_Frame.label>
-    <Building_AutoMachineTool_Puller_Frame.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</Building_AutoMachineTool_Puller_Frame.description>
+    <PRF_SimplePuller_II.label>自动捡货机</PRF_SimplePuller_II.label>
+    <PRF_SimplePuller_II.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</PRF_SimplePuller_II.description>
+    <PRF_SimplePuller_II_Blueprint.label>自动捡货机（蓝图）</PRF_SimplePuller_II_Blueprint.label>
+    <PRF_SimplePuller_II_Blueprint_Install.label>自动捡货机（蓝图）</PRF_SimplePuller_II_Blueprint_Install.label>
+    <PRF_SimplePuller_II_Frame.label>自动捡货机（建造中）</PRF_SimplePuller_II_Frame.label>
+    <PRF_SimplePuller_II_Frame.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</PRF_SimplePuller_II_Frame.description>
 
   <!--======================================= Wall Item Pusher ===============================================-->
-    <Building_AutoMachineTool_Puller_Wall.label>过墙自动捡货机</Building_AutoMachineTool_Puller_Wall.label>
-    <Building_AutoMachineTool_Puller_Wall.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</Building_AutoMachineTool_Puller_Wall.description>
-    <Building_AutoMachineTool_Puller_Wall_Blueprint.label>过墙自动捡货机（蓝图）</Building_AutoMachineTool_Puller_Wall_Blueprint.label>
-    <Building_AutoMachineTool_Puller_Wall_Blueprint_Install.label>过墙自动捡货机（蓝图）</Building_AutoMachineTool_Puller_Wall_Blueprint_Install.label>
-    <Building_AutoMachineTool_Puller_Wall_Frame.label>过墙自动捡货机（建造中）</Building_AutoMachineTool_Puller_Wall_Frame.label>
-    <Building_AutoMachineTool_Puller_Wall_Frame.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</Building_AutoMachineTool_Puller_Wall_Frame.description>
+    <PRF_SimplePuller_II_Wall.label>过墙自动捡货机</PRF_SimplePuller_II_Wall.label>
+    <PRF_SimplePuller_II_Wall.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</PRF_SimplePuller_II_Wall.description>
+    <PRF_SimplePuller_II_Wall_Blueprint.label>过墙自动捡货机（蓝图）</PRF_SimplePuller_II_Wall_Blueprint.label>
+    <PRF_SimplePuller_II_Wall_Blueprint_Install.label>过墙自动捡货机（蓝图）</PRF_SimplePuller_II_Wall_Blueprint_Install.label>
+    <PRF_SimplePuller_II_Wall_Frame.label>过墙自动捡货机（建造中）</PRF_SimplePuller_II_Wall_Frame.label>
+    <PRF_SimplePuller_II_Wall_Frame.description>在某些情况下，可以使用从A到B的推料器，该推料器在输入/输出方面比IR推料器/拉料器更灵活</PRF_SimplePuller_II_Wall_Frame.description>
 
   <!--======================================= Conveyor normal ===============================================-->
-    <Building_AutoMachineTool_BeltConveyor.label>传送带</Building_AutoMachineTool_BeltConveyor.label>
-    <Building_AutoMachineTool_BeltConveyor.description>把它放在你想拿的方向。
+    <PRF_Conveyor_Simple_I.label>传送带</PRF_Conveyor_Simple_I.label>
+    <PRF_Conveyor_Simple_I.description>把它放在你想拿的方向。
 将物品放在最上面. (可以使用划分物品和自动机床。)
-带式输送机通过垂直方向相邻连接.</Building_AutoMachineTool_BeltConveyor.description>
-    <Building_AutoMachineTool_BeltConveyor_Blueprint.label>传送带（蓝图）</Building_AutoMachineTool_BeltConveyor_Blueprint.label>
-    <Building_AutoMachineTool_BeltConveyor_Blueprint_Install.label>传送带（蓝图）</Building_AutoMachineTool_BeltConveyor_Blueprint_Install.label>
-    <Building_AutoMachineTool_BeltConveyor_Frame.label>传送带（建造中）</Building_AutoMachineTool_BeltConveyor_Frame.label>
-    <Building_AutoMachineTool_BeltConveyor_Frame.description>把它放在你想拿的方向。
+带式输送机通过垂直方向相邻连接.</PRF_Conveyor_Simple_I.description>
+    <PRF_Conveyor_Simple_I_Blueprint.label>传送带（蓝图）</PRF_Conveyor_Simple_I_Blueprint.label>
+    <PRF_Conveyor_Simple_I_Blueprint_Install.label>传送带（蓝图）</PRF_Conveyor_Simple_I_Blueprint_Install.label>
+    <PRF_Conveyor_Simple_I_Frame.label>传送带（建造中）</PRF_Conveyor_Simple_I_Frame.label>
+    <PRF_Conveyor_Simple_I_Frame.description>把它放在你想拿的方向。
 将物品放在最上面. (可以使用划分物品和自动机床。)
-带式输送机通过垂直方向相邻连接.</Building_AutoMachineTool_BeltConveyor_Frame.description>
+带式输送机通过垂直方向相邻连接.</PRF_Conveyor_Simple_I_Frame.description>
 
   <!--======================================= Conveyor wall ===============================================-->
-    <Building_AutoMachineTool_BeltConveyor_Wall.label>壁式输送带</Building_AutoMachineTool_BeltConveyor_Wall.label>
-    <Building_AutoMachineTool_BeltConveyor_Wall.description>把它放在你想拿的方向。(放在墙上)
+    <PRF_Conveyor_Wall_I.label>壁式输送带</PRF_Conveyor_Wall_I.label>
+    <PRF_Conveyor_Wall_I.description>把它放在你想拿的方向。(放在墙上)
 将物品放在最上面. (可以使用划分物品和自动机床。)
-带式输送机通过垂直方向相邻连接.</Building_AutoMachineTool_BeltConveyor_Wall.description>
-    <Building_AutoMachineTool_BeltConveyor_Wall_Blueprint.label>壁式输送带（蓝图）</Building_AutoMachineTool_BeltConveyor_Wall_Blueprint.label>
-    <Building_AutoMachineTool_BeltConveyor_Wall_Blueprint_Install.label>壁式输送带（蓝图）</Building_AutoMachineTool_BeltConveyor_Wall_Blueprint_Install.label>
-    <Building_AutoMachineTool_BeltConveyor_Wall_Frame.label>壁式输送带（建造中）</Building_AutoMachineTool_BeltConveyor_Wall_Frame.label>
-    <Building_AutoMachineTool_BeltConveyor_Wall_Frame.description>把它放在你想拿的方向。(放在墙上)
+带式输送机通过垂直方向相邻连接.</PRF_Conveyor_Wall_I.description>
+    <PRF_Conveyor_Wall_I_Blueprint.label>壁式输送带（蓝图）</PRF_Conveyor_Wall_I_Blueprint.label>
+    <PRF_Conveyor_Wall_I_Blueprint_Install.label>壁式输送带（蓝图）</PRF_Conveyor_Wall_I_Blueprint_Install.label>
+    <PRF_Conveyor_Wall_I_Frame.label>壁式输送带（建造中）</PRF_Conveyor_Wall_I_Frame.label>
+    <PRF_Conveyor_Wall_I_Frame.description>把它放在你想拿的方向。(放在墙上)
 将物品放在最上面. (可以使用划分物品和自动机床。)
-带式输送机通过垂直方向相邻连接.</Building_AutoMachineTool_BeltConveyor_Wall_Frame.description>
+带式输送机通过垂直方向相邻连接.</PRF_Conveyor_Wall_I_Frame.description>
 
   <!--======================================= Conveyor underground ===============================================-->
-    <Building_AutoMachineTool_BeltConveyor_Underground.label>地下传送带</Building_AutoMachineTool_BeltConveyor_Underground.label>
-    <Building_AutoMachineTool_BeltConveyor_Underground.description>地下带式输送机在地下室搬运物品.
+    <PRF_Conveyor_UG_I.label>地下传送带</PRF_Conveyor_UG_I.label>
+    <PRF_Conveyor_UG_I.description>地下带式输送机在地下室搬运物品.
 下皮带输送机不能按原样在地面上移动物品.
-连接到地下输送机的入口和出口并使用.</Building_AutoMachineTool_BeltConveyor_Underground.description>
-    <Building_AutoMachineTool_BeltConveyor_Underground_Blueprint.label>地下传送带（蓝图）</Building_AutoMachineTool_BeltConveyor_Underground_Blueprint.label>
-    <Building_AutoMachineTool_BeltConveyor_Underground_Blueprint_Install.label>地下传送带（蓝图）</Building_AutoMachineTool_BeltConveyor_Underground_Blueprint_Install.label>
-    <Building_AutoMachineTool_BeltConveyor_Underground_Frame.label>地下传送带（建造中）</Building_AutoMachineTool_BeltConveyor_Underground_Frame.label>
-    <Building_AutoMachineTool_BeltConveyor_Underground_Frame.description>地下带式输送机在地下室搬运物品.
+连接到地下输送机的入口和出口并使用.</PRF_Conveyor_UG_I.description>
+    <PRF_Conveyor_UG_I_Blueprint.label>地下传送带（蓝图）</PRF_Conveyor_UG_I_Blueprint.label>
+    <PRF_Conveyor_UG_I_Blueprint_Install.label>地下传送带（蓝图）</PRF_Conveyor_UG_I_Blueprint_Install.label>
+    <PRF_Conveyor_UG_I_Frame.label>地下传送带（建造中）</PRF_Conveyor_UG_I_Frame.label>
+    <PRF_Conveyor_UG_I_Frame.description>地下带式输送机在地下室搬运物品.
 下皮带输送机不能按原样在地面上移动物品.
-连接到地下输送机的入口和出口并使用.</Building_AutoMachineTool_BeltConveyor_Underground_Frame.description>
+连接到地下输送机的入口和出口并使用.</PRF_Conveyor_UG_I_Frame.description>
 
 
   <!--======================================= Conveyor floor connector to underground ===============================================-->
-    <Building_AutoMachineTool_BeltConveyor_ToUnderground.label>地下传送带入口</Building_AutoMachineTool_BeltConveyor_ToUnderground.label>
-    <Building_AutoMachineTool_BeltConveyor_ToUnderground.description>连接地面皮带输送机和地下输送机.
-它是地下输送机的入口.</Building_AutoMachineTool_BeltConveyor_ToUnderground.description>
-    <Building_AutoMachineTool_BeltConveyor_ToUnderground_Blueprint.label>地下传送带入口（蓝图）</Building_AutoMachineTool_BeltConveyor_ToUnderground_Blueprint.label>
-    <Building_AutoMachineTool_BeltConveyor_ToUnderground_Blueprint_Install.label>地下传送带入口（蓝图）</Building_AutoMachineTool_BeltConveyor_ToUnderground_Blueprint_Install.label>
-    <Building_AutoMachineTool_BeltConveyor_ToUnderground_Frame.label>地下传送带入口（建造中）</Building_AutoMachineTool_BeltConveyor_ToUnderground_Frame.label>
-    <Building_AutoMachineTool_BeltConveyor_ToUnderground_Frame.description>连接地面皮带输送机和地下输送机.
-它是地下输送机的入口.</Building_AutoMachineTool_BeltConveyor_ToUnderground_Frame.description>
+    <PRF_Conveyor_Connector_To_UG.label>地下传送带入口</PRF_Conveyor_Connector_To_UG.label>
+    <PRF_Conveyor_Connector_To_UG.description>连接地面皮带输送机和地下输送机.
+它是地下输送机的入口.</PRF_Conveyor_Connector_To_UG.description>
+    <PRF_Conveyor_Connector_To_UG_Blueprint.label>地下传送带入口（蓝图）</PRF_Conveyor_Connector_To_UG_Blueprint.label>
+    <PRF_Conveyor_Connector_To_UG_Blueprint_Install.label>地下传送带入口（蓝图）</PRF_Conveyor_Connector_To_UG_Blueprint_Install.label>
+    <PRF_Conveyor_Connector_To_UG_Frame.label>地下传送带入口（建造中）</PRF_Conveyor_Connector_To_UG_Frame.label>
+    <PRF_Conveyor_Connector_To_UG_Frame.description>连接地面皮带输送机和地下输送机.
+它是地下输送机的入口.</PRF_Conveyor_Connector_To_UG_Frame.description>
 
   <!--======================================= Conveyor underground connector to floor ===============================================-->
-    <Building_AutoMachineTool_BeltConveyor_ToFloor.label>地下传送带出口</Building_AutoMachineTool_BeltConveyor_ToFloor.label>
-    <Building_AutoMachineTool_BeltConveyor_ToFloor.description>连接地面皮带输送机和地下输送机.
-它是地下输送机的出口.</Building_AutoMachineTool_BeltConveyor_ToFloor.description>
-    <Building_AutoMachineTool_BeltConveyor_ToFloor_Blueprint.label>地下传送带出口（蓝图）</Building_AutoMachineTool_BeltConveyor_ToFloor_Blueprint.label>
-    <Building_AutoMachineTool_BeltConveyor_ToFloor_Blueprint_Install.label>地下传送带出口（蓝图）</Building_AutoMachineTool_BeltConveyor_ToFloor_Blueprint_Install.label>
-    <Building_AutoMachineTool_BeltConveyor_ToFloor_Frame.label>地下传送带出口（建造中）</Building_AutoMachineTool_BeltConveyor_ToFloor_Frame.label>
-    <Building_AutoMachineTool_BeltConveyor_ToFloor_Frame.description>连接地面皮带输送机和地下输送机.
-它是地下输送机的出口.</Building_AutoMachineTool_BeltConveyor_ToFloor_Frame.description>
+    <PRF_Conveyor_Connector_To_Floor.label>地下传送带出口</PRF_Conveyor_Connector_To_Floor.label>
+    <PRF_Conveyor_Connector_To_Floor.description>连接地面皮带输送机和地下输送机.
+它是地下输送机的出口.</PRF_Conveyor_Connector_To_Floor.description>
+    <PRF_Conveyor_Connector_To_Floor_Blueprint.label>地下传送带出口（蓝图）</PRF_Conveyor_Connector_To_Floor_Blueprint.label>
+    <PRF_Conveyor_Connector_To_Floor_Blueprint_Install.label>地下传送带出口（蓝图）</PRF_Conveyor_Connector_To_Floor_Blueprint_Install.label>
+    <PRF_Conveyor_Connector_To_Floor_Frame.label>地下传送带出口（建造中）</PRF_Conveyor_Connector_To_Floor_Frame.label>
+    <PRF_Conveyor_Connector_To_Floor_Frame.description>连接地面皮带输送机和地下输送机.
+它是地下输送机的出口.</PRF_Conveyor_Connector_To_Floor_Frame.description>
 
   <!--======================================= Item Angle Puller===============================================-->
-    <Building_AutoMachineTool_Puller_Side.label>自动捡货机(直角)</Building_AutoMachineTool_Puller_Side.label>
-    <Building_AutoMachineTool_Puller_Side.description>连接地面皮带输送机和地下输送机.
-它是地下输送机的出口.</Building_AutoMachineTool_Puller_Side.description>
-    <Building_AutoMachineTool_Puller_Side_Blueprint.label>动捡货机(直角)（蓝图）</Building_AutoMachineTool_Puller_Side_Blueprint.label>
-    <Building_AutoMachineTool_Puller_Side_Blueprint_Install.label>动捡货机(直角)（蓝图）</Building_AutoMachineTool_Puller_Side_Blueprint_Install.label>
-    <Building_AutoMachineTool_Puller_Side_Frame.label>动捡货机(直角)（建造中）</Building_AutoMachineTool_Puller_Side_Frame.label>
-    <Building_AutoMachineTool_Puller_Side_Frame.description>连接地面皮带输送机和地下输送机.
-它是地下输送机的出口.</Building_AutoMachineTool_Puller_Side_Frame.description>
+    <PRF_SimplePuller_II_Side.label>自动捡货机(直角)</PRF_SimplePuller_II_Side.label>
+    <PRF_SimplePuller_II_Side.description>连接地面皮带输送机和地下输送机.
+它是地下输送机的出口.</PRF_SimplePuller_II_Side.description>
+    <PRF_SimplePuller_II_Side_Blueprint.label>动捡货机(直角)（蓝图）</PRF_SimplePuller_II_Side_Blueprint.label>
+    <PRF_SimplePuller_II_Side_Blueprint_Install.label>动捡货机(直角)（蓝图）</PRF_SimplePuller_II_Side_Blueprint_Install.label>
+    <PRF_SimplePuller_II_Side_Frame.label>动捡货机(直角)（建造中）</PRF_SimplePuller_II_Side_Frame.label>
+    <PRF_SimplePuller_II_Side_Frame.description>连接地面皮带输送机和地下输送机.
+它是地下输送机的出口.</PRF_SimplePuller_II_Side_Frame.description>
 
 </LanguageData>

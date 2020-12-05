@@ -108,6 +108,7 @@
   </ThingDef>
 
   <!--==================== Quarry T1 Auger drill ====================-->
+  <!-- This is old type miner from original prf, it will mine random ores from any minable resource when powered -->
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_DeepQuarry_mkI</defName>
     <label>Auger drill(T1)</label>
@@ -130,7 +131,7 @@
     <costList>
       <Steel>450</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <comps>
       <li Class="CompProperties_Refuelable">
@@ -199,7 +200,7 @@
 
   <!--==================== Quarry T2 ====================-->
   <ThingDef ParentName="PRF_MinersBase">
-    <defName>PRF_DeepQuarry</defName>
+    <defName>PRF_DeepQuarry_mkII</defName>
     <label>Pulse Drill(T2)</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <graphicData>
@@ -218,7 +219,7 @@
       <Steel>400</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
       <Plasteel>50</Plasteel>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
@@ -274,6 +275,7 @@
   </ThingDef>
 
   <!--=========================== Portable Miner MkI ==================================-->
+  <!-- This is a drone/cultivator type miner that can mine in a selected area. -->
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_PortableMinerMkI</defName>
     <label>Portable Miner MkI</label>
@@ -285,10 +287,10 @@
     <rotatable>true</rotatable>
     <description>This is a Portable Drone miner mkI. It works in much same way as a Cultivator, and can be picked carried when your traveling around the rim for your remote mining operations. It is also excellent for excavating for your new base.\n It has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat, and only work 1 hour shifts.</description>
     <costList>
-      <PRFDroneModule>2</PRFDroneModule>
+      <PRF_DroneModule>2</PRF_DroneModule>
       <Steel>30</Steel>
       <Plasteel>20</Plasteel>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
     <statBases>
@@ -309,7 +311,7 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelFilter>
           <thingDefs>
-            <li>PRFDroneModule</li>
+            <li>PRF_DroneModule</li>
           </thingDefs>
         </fuelFilter>
         <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
@@ -367,10 +369,10 @@
     <rotatable>true</rotatable>
     <description>This is a Portable Drone miner mkI. It works in much same way as a Cultivator, and can be picked carried when your traveling around the rim for your remote mining operations. It is also excellent for excavating for your new base.\n It has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat, and only work 1 hour shifts.</description>
     <costList>
-      <PRFDroneModule>4</PRFDroneModule>
+      <PRF_DroneModule>4</PRF_DroneModule>
       <Steel>10</Steel>
       <Plasteel>30</Plasteel>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
       <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
     <statBases>
@@ -396,7 +398,7 @@
         <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <fuelFilter>
           <thingDefs>
-            <li>PRFDroneModule</li>
+            <li>PRF_DroneModule</li>
           </thingDefs>
         </fuelFilter>
         <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
@@ -463,8 +465,8 @@
       <ComponentIndustrial>25</ComponentIndustrial>
       <ComponentSpacer>5</ComponentSpacer>
       <Plasteel>50</Plasteel>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
@@ -521,8 +523,10 @@
   </ThingDef>
 
   <!--==================== Quarry T3 Plasma Drill ====================-->
+  <!-- This is a Bill type miner where it will auto add any minable ores as a bill option, This is originally from Nobo's NR AutoMachineTool mod -->
+  <!-- it behave more ore less like omnicore drill(mod), and such just this one is automatic (no pawn needed) -->
   <ThingDef ParentName="PRF_MinersBase">
-    <defName>Building_AutoMachineTool_Miner</defName>
+    <defName>PRF_BillTypeMiner_I</defName>
     <label>Plasma Drill(T3)</label>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
     <description>With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed. It will set primary ore type and get bonus in rare ores and junk</description>
@@ -536,8 +540,8 @@
       <ComponentIndustrial>25</ComponentIndustrial>
       <ComponentSpacer>10</ComponentSpacer>
       <Plasteel>100</Plasteel>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
     <statBases>
       <WorkToBuild>7600</WorkToBuild>

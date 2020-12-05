@@ -47,7 +47,7 @@
 
   <!-- ================= Yellow Arrow ================= -->
   <ThingDef ParentName="PRF_FloorSign">
-    <defName>Lighting_FloorLampArrow</defName>
+    <defName>PRF_FloorLampArrow</defName>
     <label>Yellow Floor Sign Arrow</label>
     <graphicData>
       <texPath>Misc/FloorLamp</texPath>
@@ -57,7 +57,7 @@
 
   <!-- ================= Red Arrow =================== -->
   <ThingDef ParentName="PRF_FloorSign">
-    <defName>Lighting_RedFloorLampArrow</defName>
+    <defName>PRF_RedFloorLampArrow</defName>
     <label>Red Floor Sign Arrow</label>
     <graphicData>
       <texPath>Misc/FloorLampR</texPath>
@@ -67,7 +67,7 @@
 
   <!-- ================= Green Arrow ================= -->
   <ThingDef ParentName="PRF_FloorSign">
-    <defName>Lighting_GreenFloorLampArrow</defName>
+    <defName>PRF_GreenFloorLampArrow</defName>
     <label>Green Floor Sign Arrow</label>
     <graphicData>
       <texPath>Misc/FloorLampGR</texPath>
@@ -77,7 +77,7 @@
 
   <!-- ================= Red X ======================= -->
   <ThingDef ParentName="PRF_FloorSign">
-    <defName>Lighting_FloorLampX</defName>
+    <defName>PRF_FloorLampX</defName>
     <label>Red Floor Sign X</label>
     <graphicData>
       <texPath>Misc/FloorLampX</texPath>
@@ -87,7 +87,7 @@
 
   <!-- ================= Input ======================= -->
   <ThingDef ParentName="PRF_FloorSign">
-    <defName>Lighting_FloorInput</defName>
+    <defName>PRF_FloorInput</defName>
     <label>Input Sign</label>
     <graphicData>
       <texPath>Misc/Input</texPath>
@@ -97,7 +97,7 @@
 
   <!-- ================= Output ======================= -->
   <ThingDef ParentName="PRF_FloorSign">
-    <defName>Lighting_FloorOutput</defName>
+    <defName>PRF_FloorOutput</defName>
     <label>Output Sign</label>
     <graphicData>
       <texPath>Misc/Output</texPath>

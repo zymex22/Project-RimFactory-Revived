@@ -7,7 +7,6 @@
   <!--==================== Base ====================-->
   <ThingDef Name="PRF_MassStorageBase" ParentName="PRF_BuildingBase" Abstract="True">
     <thingClass>ProjectRimFactory.Storage.Building_Crate</thingClass>
-    
     <designatorDropdown>prfstorage_gr</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
     <tradeTags>
@@ -53,7 +52,7 @@
 
   <!--==================== small Wood Crate ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
-    <defName>StockpileCrateSmall</defName>
+    <defName>PRF_WoodCrate_I</defName>
     <label>small wooden crate</label>
     <graphicData>
       <texPath>Storage/Wood_Crate6</texPath>
@@ -110,7 +109,7 @@
 
   <!--==================== Wood Crate ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
-    <defName>StockpileCrate</defName>
+    <defName>PRF_WoodCrate_II</defName>
     <label>wooden crate</label>
     <graphicData>
       <texPath>Storage/Wood_Crate6</texPath>
@@ -165,7 +164,7 @@
 
   <!--==================== small Steel Crate ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
-    <defName>StockpileCrateReinforcedTiny</defName>
+    <defName>PRF_SteelCrate_I</defName>
     <label>small steel crate</label>
     <graphicData>
       <texPath>Storage/Steel_Crate</texPath>
@@ -207,7 +206,6 @@
       <Steel>60</Steel>
     </costList>
     <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
-    
     <researchPrerequisites>
       <li>PRF_SteelCrates</li>
     </researchPrerequisites>
@@ -222,7 +220,7 @@
 
   <!--==================== Steel Crate ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
-    <defName>StockpileCrateReinforced</defName>
+    <defName>PRF_SteelCrate_II</defName>
     <label>steel crate</label>
     <graphicData>
       <texPath>Storage/Steel_Crate</texPath>
@@ -262,7 +260,6 @@
       <Steel>120</Steel>
     </costList>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
-    
     <researchPrerequisites>
       <li>PRF_SteelCrates</li>
     </researchPrerequisites>
@@ -276,7 +273,7 @@
 
   <!--==================== Cargo Platform / Digital Storage Unit ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
-    <defName>PRFCargoPlatform</defName>
+    <defName>PRF_DigitalStorageUnit_I</defName>
     <label>digital storage unit</label>
     <designatorDropdown>IO_gr</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
@@ -326,10 +323,9 @@
       <Plasteel>100</Plasteel>
       <ComponentIndustrial>100</ComponentIndustrial>
       <ComponentSpacer>15</ComponentSpacer>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
-    
     <tickerType>Normal</tickerType>
     <researchPrerequisites>
       <li>PRF_StorageIO</li>
@@ -362,7 +358,7 @@
 
   <!--============================== I/O Port ==============================-->
   <ThingDef ParentName="PRF_BuildingBase">
-    <defName>PRFStorageUnitIOPort</defName>
+    <defName>PRF_IOPort_I</defName>
     <label>I/O Port</label>
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
@@ -431,10 +427,8 @@
     </comps>
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
-    
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
-    
     <minifiedDef>MinifiedThing</minifiedDef>
     <researchPrerequisites>
       <li>PRF_StorageIO</li>

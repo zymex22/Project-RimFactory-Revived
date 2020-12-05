@@ -96,7 +96,7 @@
 
   <!-- ================= From Floored - Credit to EsseCoisa and Curundir ================= -->
   <TerrainDef ParentName="PRF_FloorBase">
-    <defName>StripedTileRight</defName>
+    <defName>PRF_StripedTileRight</defName>
     <label>striped tile Right</label>
     <renderPrecedence>240</renderPrecedence>
     <description>A metal tile, painted with yellow stripes to indicate critical areas.\n\nThis is added by Project RimFactory</description>
@@ -118,7 +118,7 @@
 
 
   <TerrainDef ParentName="PRF_FloorBase">
-    <defName>StripedTileLeft</defName>
+    <defName>PRF_StripedTileLeft</defName>
     <label>striped tile Left</label>
     <renderPrecedence>240</renderPrecedence>
     <description>A metal tile, painted with yellow stripes to indicate critical areas.\n\nThis is added by Project RimFactory</description>

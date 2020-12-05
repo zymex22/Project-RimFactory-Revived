@@ -2,7 +2,7 @@
 <Defs>
 
   <!--====================Animal Base====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
-  <ThingDef Name="prf_AnimalBase" ParentName="PRF_BuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRF_BuildingBase -->
+  <ThingDef Name="PRF_AnimalBase" ParentName="PRF_BuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRF_BuildingBase -->
     <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
@@ -49,8 +49,8 @@
   </DesignatorDropdownGroupDef>
 
   <!--===================================== Shearer T1 =====================================-->
-  <ThingDef ParentName="prf_AnimalBase">
-    <defName>Shearer</defName>
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_Shearer</defName>
     <label>shearer</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Shearer</thingClass>
     <graphicData>
@@ -71,11 +71,11 @@
     <description>A station with motion detecting industrial-size shearing clippers. Swiftly and automatically extracts wool from your colony's animals.\n\nKeep it stocked with food to lure the animals in for processing. Drops the produce where the sheared creature is standing.</description>    <!-- use \n for next line -->
     <size>(2,2)</size>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
       <Hay>50</Hay>
       <Steel>50</Steel>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
       <li>
@@ -126,8 +126,8 @@
   </ThingDef>
 
   <!--===================================== Milker T1 =====================================-->
-  <ThingDef ParentName="prf_AnimalBase">
-    <defName>Milker</defName>
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_Milker</defName>
     <label>milker</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Milker</thingClass>
     <graphicData>
@@ -148,11 +148,11 @@
     <description>A station equipped with servo-motorized tubes, which seek out mammary glands to milk your farm animals.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the milked creature is standing.</description>
     <size>(2,2)</size>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
       <Hay>50</Hay>
       <Steel>50</Steel>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
       <li>
@@ -203,8 +203,8 @@
   </ThingDef>
 
   <!--===================================== Generic Harvester T2 =====================================-->
-  <ThingDef ParentName="prf_AnimalBase">
-    <defName>GenericAnimalHarvester</defName>
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_GenericAnimalHarvester</defName>
     <label>generic animal harvester</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
@@ -225,11 +225,11 @@
     <description>A sophisticated facility boasting a variety of tools to gently extract any kind of animal products, even from the more exotic species.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the animal is standing.</description>
     <size>(2,2)</size>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
       <Hay>50</Hay>
       <Steel>75</Steel>
-      <PRFRoboticArm>4</PRFRoboticArm>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_RoboticArm>4</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
       <li>
@@ -273,8 +273,8 @@
   </ThingDef>
 
   <!--===================================== Spacer Harvester T3 =====================================-->
-  <ThingDef ParentName="prf_AnimalBase">
-    <defName>PRF_GlitterHarvester</defName>
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_GenericAnimalHarvester_II</defName>
     <label>spacer animal harvester</label>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
@@ -293,11 +293,11 @@
     <description>This is a advanced animal harvester that can harvest a wide range of products from animals, it has a frontfacing pull zone that can be made larger with powerbooster. and if RimFridge is installed its cooled to keep food from spoiling over time.</description>
     <size>(2,2)</size>
     <costList>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
       <Hay>50</Hay>
       <Steel>100</Steel>
-      <PRFRoboticArm>4</PRFRoboticArm>
-      <PRFWeakAIChip>2</PRFWeakAIChip>
+      <PRF_RoboticArm>4</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>2</PRF_ElectronicChip_I>
     </costList>
     <comps>
       <li>
@@ -361,10 +361,10 @@
   </ThingDef>
 
   <!--===================================== Animal Manager / Slaugter House T2 =====================================-->
-  <ThingDef ParentName="prf_AnimalBase">
-    <defName>Building_AutoMachineTool_Slaughterhouse</defName>
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
-    <label>animal manager</label>
+    <label>Slaughter House</label>
     <designatorDropdown>AnimalStations_gr</designatorDropdown>
     <description>An automatic slaughterhouse. Uses cameras and a rudimentary computer to keep track of your animal population, and to keep it within your defined limits.</description>
     <altitudeLayer>Building</altitudeLayer>
@@ -382,11 +382,11 @@
       <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
     <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <rotatable>true</rotatable>
     <researchPrerequisites>

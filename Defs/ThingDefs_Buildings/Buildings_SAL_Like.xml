@@ -67,9 +67,9 @@
       <Plasteel>45</Plasteel>
       <ComponentIndustrial>8</ComponentIndustrial>
       <ComponentSpacer>1</ComponentSpacer>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
     </costList>
     <statBases>
       <MarketValue>2780</MarketValue>
@@ -132,9 +132,9 @@
       <Plasteel>75</Plasteel>
       <ComponentIndustrial>10</ComponentIndustrial>
       <ComponentSpacer>2</ComponentSpacer>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
     </costList>
     <statBases>
       <MarketValue>3366</MarketValue>
@@ -198,9 +198,9 @@
       <Silver>300</Silver>
       <ComponentIndustrial>20</ComponentIndustrial>
       <ComponentSpacer>4</ComponentSpacer>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
-      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
     </costList>
     <statBases>
       <MarketValue>5108</MarketValue>
@@ -260,9 +260,9 @@
       <Silver>800</Silver>
       <ComponentIndustrial>30</ComponentIndustrial>
       <ComponentSpacer>5</ComponentSpacer>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
-      <PRFRoboticArm>4</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <PRF_RoboticArm>4</PRF_RoboticArm>
     </costList>
     <statBases>
       <MarketValue>8500</MarketValue>
@@ -322,9 +322,9 @@
       <Silver>1000</Silver>
       <ComponentIndustrial>40</ComponentIndustrial>
       <ComponentSpacer>8</ComponentSpacer>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
     </costList>
     <statBases>
       <MarketValue>10575</MarketValue>
@@ -376,9 +376,9 @@
       <Silver>2000</Silver>
       <ComponentIndustrial>50</ComponentIndustrial>
       <ComponentSpacer>10</ComponentSpacer>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
-      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
     </costList>
     <statBases>
       <MarketValue>16147</MarketValue>
@@ -431,9 +431,9 @@
       <Silver>100</Silver>
       <ComponentIndustrial>10</ComponentIndustrial>
       <ComponentSpacer>2</ComponentSpacer>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
-      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
     </costList>
     <statBases>
       <MarketValue>5110</MarketValue>
@@ -495,8 +495,8 @@
       <Plasteel>75</Plasteel>
       <Silver>100</Silver>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
     </costList>
     <researchPrerequisites>
       <li>PRF_SALResearchIII</li>
@@ -545,9 +545,9 @@
       <Silver>100000</Silver>
       <ComponentIndustrial>450</ComponentIndustrial>
       <ComponentSpacer>50</ComponentSpacer>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFQubitProcessor>5</PRFQubitProcessor>
-      <PRFRoboticArm>4</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_III>5</PRF_ElectronicChip_III>
+      <PRF_RoboticArm>4</PRF_RoboticArm>
       <AIPersonaCore>5</AIPersonaCore>
     </costList>
     <statBases>

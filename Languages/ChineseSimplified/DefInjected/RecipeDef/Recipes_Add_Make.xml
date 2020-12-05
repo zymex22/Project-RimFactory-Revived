@@ -6,20 +6,20 @@
 
   <!-- Recipe Users: TableRoboticMachining, TableMachining -->
 
-  <Make_PRFRoboticArm.label>制作机械臂</Make_PRFRoboticArm.label>
-  <Make_PRFRoboticArm.description>制作机械臂。</Make_PRFRoboticArm.description>
-  <Make_PRFRoboticArm.jobString>正在制作机械臂。</Make_PRFRoboticArm.jobString>
+  <Make_PRF_RoboticArm.label>制作机械臂</Make_PRF_RoboticArm.label>
+  <Make_PRF_RoboticArm.description>制作机械臂。</Make_PRF_RoboticArm.description>
+  <Make_PRF_RoboticArm.jobString>正在制作机械臂。</Make_PRF_RoboticArm.jobString>
 
 
   <!-- Recipe Users: TableRoboticMachining -->
 
-  <Make_PRFWeakAIChip.label>制作弱AI芯片</Make_PRFWeakAIChip.label>
-  <Make_PRFWeakAIChip.description>制作弱AI芯片。</Make_PRFWeakAIChip.description>
-  <Make_PRFWeakAIChip.jobString>正在制作弱AI芯片。</Make_PRFWeakAIChip.jobString>
+  <Make_PRF_ElectronicChip_I.label>制作弱AI芯片</Make_PRF_ElectronicChip_I.label>
+  <Make_PRF_ElectronicChip_I.description>制作弱AI芯片。</Make_PRF_ElectronicChip_I.description>
+  <Make_PRF_ElectronicChip_I.jobString>正在制作弱AI芯片。</Make_PRF_ElectronicChip_I.jobString>
 
-  <Make_PRFDroneModule.label>制作无人机模块</Make_PRFDroneModule.label>
-  <Make_PRFDroneModule.description>制作无人机模块。</Make_PRFDroneModule.description>
-  <Make_PRFDroneModule.jobString>正在制作无人机模块。</Make_PRFDroneModule.jobString>
+  <Make_PRF_DroneModule.label>制作无人机模块</Make_PRF_DroneModule.label>
+  <Make_PRF_DroneModule.description>制作无人机模块。</Make_PRF_DroneModule.description>
+  <Make_PRF_DroneModule.jobString>正在制作无人机模块。</Make_PRF_DroneModule.jobString>
 
   <Make_PRFComputronium.label>制作计算质</Make_PRFComputronium.label>
   <Make_PRFComputronium.description>制作计算质。</Make_PRFComputronium.description>

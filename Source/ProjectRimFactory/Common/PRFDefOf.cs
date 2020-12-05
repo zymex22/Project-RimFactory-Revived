@@ -47,7 +47,7 @@ namespace ProjectRimFactory.Common
         public static ThingDef PRFZComposite;
         public static ThingDef PRFVolatiteChunk;
         public static ThingDef PRFDrone;
-        public static ThingDef PRFDroneModule;
+        public static ThingDef PRF_DroneModule;
 
         //Reserch Projeckts
         public static ResearchProjectDef PRF_BasicDrones;

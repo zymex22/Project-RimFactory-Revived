@@ -7,8 +7,8 @@
   <PRF_MetalRefinery_Frame.label>金属精炼厂（建造中）</PRF_MetalRefinery_Frame.label>
   <PRF_MetalRefinery_Frame.description>通过聚合物层压生产稀有金属的金属精炼厂。</PRF_MetalRefinery_Frame.description>
 
-  <PRF_DeepQuarry.label>深矿机（中）</PRF_DeepQuarry.label>
-  <PRF_DeepQuarry.description>自动采矿机，不断从地下挖掘矿物，包括石块、原材料和零部件。每6小时生产一次随机资源。</PRF_DeepQuarry.description>
+  <PRF_DeepQuarry_mkII.label>深矿机（中）</PRF_DeepQuarry_mkII.label>
+  <PRF_DeepQuarry_mkII.description>自动采矿机，不断从地下挖掘矿物，包括石块、原材料和零部件。每6小时生产一次随机资源。</PRF_DeepQuarry_mkII.description>
   <PRF_DeepQuarry_Blueprint.label>深矿机（中）（蓝图）</PRF_DeepQuarry_Blueprint.label>
   <PRF_DeepQuarry_Frame.label>深矿机（中）（建造中）</PRF_DeepQuarry_Frame.label>
   <PRF_DeepQuarry_Frame.description>自动采矿机，不断从地下挖掘矿物，包括石块、原材料和零部件。每6小时生产一次随机资源。</PRF_DeepQuarry_Frame.description>
@@ -20,12 +20,12 @@
   <PaperclipFactory_Frame.label>回形针工厂（建造中）</PaperclipFactory_Frame.label>
   <PaperclipFactory_Frame.description>能够将金属、植物、尸体等任何原材料转换为回形针的机器。</PaperclipFactory_Frame.description>
 
-  <FuelingMachine.label>自动装填机</FuelingMachine.label>
-  <FuelingMachine.description>小型机械框架上附带一个机械臂，可以自动为它正前方的建筑添加消耗品。</FuelingMachine.description>
-  <FuelingMachine_Blueprint.label>自动装填机（蓝图）</FuelingMachine_Blueprint.label>
-  <FuelingMachine_Blueprint_Install.label>自动装填机（蓝图）</FuelingMachine_Blueprint_Install.label>
-  <FuelingMachine_Frame.label>自动装填机（建造中）</FuelingMachine_Frame.label>
-  <FuelingMachine_Frame.description>小型机械框架上附带一个机械臂，可以自动为它正前方的建筑添加消耗品。</FuelingMachine_Frame.description>
+  <PRF_FuelingMachine.label>自动装填机</PRF_FuelingMachine.label>
+  <PRF_FuelingMachine.description>小型机械框架上附带一个机械臂，可以自动为它正前方的建筑添加消耗品。</PRF_FuelingMachine.description>
+  <PRF_FuelingMachine_Blueprint.label>自动装填机（蓝图）</PRF_FuelingMachine_Blueprint.label>
+  <PRF_FuelingMachine_Blueprint_Install.label>自动装填机（蓝图）</PRF_FuelingMachine_Blueprint_Install.label>
+  <PRF_FuelingMachine_Frame.label>自动装填机（建造中）</PRF_FuelingMachine_Frame.label>
+  <PRF_FuelingMachine_Frame.description>小型机械框架上附带一个机械臂，可以自动为它正前方的建筑添加消耗品。</PRF_FuelingMachine_Frame.description>
 
   <PRFPaperclipPowerGenerator.label>回形针发电机</PRFPaperclipPowerGenerator.label>
   <PRFPaperclipPowerGenerator.description>通过回形针产生电力，需要手动添加燃料。</PRFPaperclipPowerGenerator.description>
@@ -40,12 +40,12 @@
   <AtomicReconstructor_Frame.label>原子重建机（建造中）</AtomicReconstructor_Frame.label>
   <AtomicReconstructor_Frame.description>将回形针转换为更有用的东西。</AtomicReconstructor_Frame.description>
 
-  <Battery4k.label>4k电池</Battery4k.label>
-  <Battery4k.description>可以存储4000Wd的电池。</Battery4k.description>
-  <Battery4k_Blueprint.label>4k电池（蓝图）</Battery4k_Blueprint.label>
-  <Battery4k_Blueprint_Install.label>4k电池（蓝图）</Battery4k_Blueprint_Install.label>
-  <Battery4k_Frame.label>4k电池（建造中）</Battery4k_Frame.label>
-  <Battery4k_Frame.description>可以存储10000Wd的电池。</Battery4k_Frame.description>
+  <PRF_4k_Battery.label>4k电池</PRF_4k_Battery.label>
+  <PRF_4k_Battery.description>可以存储4000Wd的电池。</PRF_4k_Battery.description>
+  <PRF_4k_Battery_Blueprint.label>4k电池（蓝图）</PRF_4k_Battery_Blueprint.label>
+  <PRF_4k_Battery_Blueprint_Install.label>4k电池（蓝图）</PRF_4k_Battery_Blueprint_Install.label>
+  <PRF_4k_Battery_Frame.label>4k电池（建造中）</PRF_4k_Battery_Frame.label>
+  <PRF_4k_Battery_Frame.description>可以存储10000Wd的电池。</PRF_4k_Battery_Frame.description>
 
   <Battery10k.label>10k电池</Battery10k.label>
   <Battery10k.description>可以存储10000Wd的电池。</Battery10k.description>
@@ -54,19 +54,19 @@
   <Battery10k_Frame.label>10k电池（建造中）</Battery10k_Frame.label>
   <Battery10k_Frame.description>可以存储10000Wd的电池。</Battery10k_Frame.description>
 
-  <Battery16k.label>16k电池</Battery16k.label>
-  <Battery16k.description>可以存储16000Wd的电池。</Battery16k.description>
-  <Battery16k_Blueprint.label>16k电池（蓝图）</Battery16k_Blueprint.label>
-  <Battery16k_Blueprint_Install.label>10k电池（蓝图）</Battery16k_Blueprint_Install.label>
-  <Battery16k_Frame.label>16k电池（建造中）</Battery16k_Frame.label>
-  <Battery16k_Frame.description>可以存储16000Wd的电池。</Battery16k_Frame.description>
+  <PRF_16k_Battery.label>16k电池</PRF_16k_Battery.label>
+  <PRF_16k_Battery.description>可以存储16000Wd的电池。</PRF_16k_Battery.description>
+  <PRF_16k_Battery_Blueprint.label>16k电池（蓝图）</PRF_16k_Battery_Blueprint.label>
+  <PRF_16k_Battery_Blueprint_Install.label>10k电池（蓝图）</PRF_16k_Battery_Blueprint_Install.label>
+  <PRF_16k_Battery_Frame.label>16k电池（建造中）</PRF_16k_Battery_Frame.label>
+  <PRF_16k_Battery_Frame.description>可以存储16000Wd的电池。</PRF_16k_Battery_Frame.description>
 
-  <Battery64k.label>64k电池</Battery64k.label>
-  <Battery64k.description>可以存储64000Wd的电池。</Battery64k.description>
-  <Battery64k_Blueprint.label>64k电池（蓝图）</Battery64k_Blueprint.label>
-  <Battery64k_Blueprint_Install.label>100k电池（蓝图）</Battery64k_Blueprint_Install.label>
-  <Battery64k_Frame.label>64k电池（建造中）</Battery64k_Frame.label>
-  <Battery64k_Frame.description>可以存储64000Wd的电池。100%</Battery64k_Frame.description>
+  <PRF_64k_Battery.label>64k电池</PRF_64k_Battery.label>
+  <PRF_64k_Battery.description>可以存储64000Wd的电池。</PRF_64k_Battery.description>
+  <PRF_64k_Battery_Blueprint.label>64k电池（蓝图）</PRF_64k_Battery_Blueprint.label>
+  <PRF_64k_Battery_Blueprint_Install.label>100k电池（蓝图）</PRF_64k_Battery_Blueprint_Install.label>
+  <PRF_64k_Battery_Frame.label>64k电池（建造中）</PRF_64k_Battery_Frame.label>
+  <PRF_64k_Battery_Frame.description>可以存储64000Wd的电池。100%</PRF_64k_Battery_Frame.description>
 
   <Battery100k.label>100k电池</Battery100k.label>
   <Battery100k.description>可以存储1000000Wd的电池。100%蓄电效率。</Battery100k.description>
@@ -75,12 +75,12 @@
   <Battery100k_Frame.label>100k电池（建造中）</Battery100k_Frame.label>
   <Battery100k_Frame.description>可以存储1000000Wd的电池。100%蓄电效率。</Battery100k_Frame.description>
 
-  <Battery256k.label>256k电池</Battery256k.label>
-  <Battery256k.description>可以存储2560000Wd的电池。100%蓄电效率。</Battery256k.description>
-  <Battery256k_Blueprint.label>256k电池（蓝图）</Battery256k_Blueprint.label>
-  <Battery256k_Blueprint_Install.label>100k电池（蓝图）</Battery256k_Blueprint_Install.label>
-  <Battery256k_Frame.label>256k电池（建造中）</Battery256k_Frame.label>
-  <Battery256k_Frame.description>可以存储2560000Wd的电池。100%蓄电效率。</Battery256k_Frame.description>
+  <PRF_256k_Battery.label>256k电池</PRF_256k_Battery.label>
+  <PRF_256k_Battery.description>可以存储2560000Wd的电池。100%蓄电效率。</PRF_256k_Battery.description>
+  <PRF_256k_Battery_Blueprint.label>256k电池（蓝图）</PRF_256k_Battery_Blueprint.label>
+  <PRF_256k_Battery_Blueprint_Install.label>100k电池（蓝图）</PRF_256k_Battery_Blueprint_Install.label>
+  <PRF_256k_Battery_Frame.label>256k电池（建造中）</PRF_256k_Battery_Frame.label>
+  <PRF_256k_Battery_Frame.description>可以存储2560000Wd的电池。100%蓄电效率。</PRF_256k_Battery_Frame.description>
 
   <Building_RTCircuitBreaker_30k.label>超级电容器（30K）</Building_RTCircuitBreaker_30k.label>
   <Building_RTCircuitBreaker_30k.description>可以存储30000Wd的电池。100%蓄电效率，并且防水。</Building_RTCircuitBreaker_30k.description>
@@ -120,11 +120,11 @@
   <PRF_DeepQuarry_mkI_Frame.label>深矿机（小）（建造中）</PRF_DeepQuarry_mkI_Frame.label>
   <PRF_DeepQuarry_mkI_Frame.description>一家早期的自动化采石场，不断从地面提取资源，包括岩石块，材料和组件。 大约每8小时产生一次随机资源。（可能会引起侵扰！）</PRF_DeepQuarry_mkI_Frame.description>
 
-  <Building_AutoMachineTool_Miner.label>深矿机（大）</Building_AutoMachineTool_Miner.label>
-  <Building_AutoMachineTool_Miner.description>利用最新的间隔技术，自动采矿比以往任何时候都更精确，现在可以调整要开采的矿石，甚至可以平衡速度的功率</Building_AutoMachineTool_Miner.description>
-  <Building_AutoMachineTool_Miner_Blueprint.label>深矿机（大）（蓝图）</Building_AutoMachineTool_Miner_Blueprint.label>
-  <Building_AutoMachineTool_Miner_Frame.label>深矿机（大）（建造中）</Building_AutoMachineTool_Miner_Frame.label>
-  <Building_AutoMachineTool_Miner_Frame.description>利用最新的间隔技术，自动采矿比以往任何时候都更精确，现在可以调整要开采的矿石，甚至可以平衡速度的功率</Building_AutoMachineTool_Miner_Frame.description>
+  <PRF_BillTypeMiner_I.label>深矿机（大）</PRF_BillTypeMiner_I.label>
+  <PRF_BillTypeMiner_I.description>利用最新的间隔技术，自动采矿比以往任何时候都更精确，现在可以调整要开采的矿石，甚至可以平衡速度的功率</PRF_BillTypeMiner_I.description>
+  <PRF_BillTypeMiner_I_Blueprint.label>深矿机（大）（蓝图）</PRF_BillTypeMiner_I_Blueprint.label>
+  <PRF_BillTypeMiner_I_Frame.label>深矿机（大）（建造中）</PRF_BillTypeMiner_I_Frame.label>
+  <PRF_BillTypeMiner_I_Frame.description>利用最新的间隔技术，自动采矿比以往任何时候都更精确，现在可以调整要开采的矿石，甚至可以平衡速度的功率</PRF_BillTypeMiner_I_Frame.description>
 
   <PRF_FurnaceI.label>高炉</PRF_FurnaceI.label>
   <PRF_FurnaceI.description>早期的熔炉。 用于燃烧不需要的东西并将原始资源冶炼成有用的材料，也可以将石头燃烧成有用的砖头</PRF_FurnaceI.description>

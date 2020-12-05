@@ -150,11 +150,11 @@
     <Patch>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="StockpileCrateSmall"  or defName="StockpileCrate"  or defName="StockpileCrateReinforcedTiny"  or defName="StockpileCrateReinforced"  or defName="PRFCargoPlatform"]/building/fixedStorageSettings</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_WoodCrate_I"  or defName="PRF_WoodCrate_II"  or defName="PRF_SteelCrate_I"  or defName="PRF_SteelCrate_II"  or defName="PRF_DigitalStorageUnit_I"]/building/fixedStorageSettings</xpath>
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="StockpileCrateSmall"  or defName="StockpileCrate"  or defName="StockpileCrateReinforcedTiny"  or defName="StockpileCrateReinforced"  or defName="PRFCargoPlatform"]/building/defaultStorageSettings</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_WoodCrate_I"  or defName="PRF_WoodCrate_II"  or defName="PRF_SteelCrate_I"  or defName="PRF_SteelCrate_II"  or defName="PRF_DigitalStorageUnit_I"]/building/defaultStorageSettings</xpath>
       </Operation>
     </Patch>
   </Row>
@@ -251,31 +251,31 @@
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="CultivatorTools_Sprinkler"]/designatorDropdown</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_Sprinkler_I"]/designatorDropdown</xpath>
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="RecipeDatabase"]/designatorDropdown</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_RecipeDatabase"]/designatorDropdown</xpath>
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="Building_AutoMachineTool_Slaughterhouse"]/designatorDropdown</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_Slaughterhouse"]/designatorDropdown</xpath>
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="PRFStorageUnitIOPort"]/designatorDropdown</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_IOPort_I"]/designatorDropdown</xpath>
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="MeatGrinder"]/designatorDropdown</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_MeatGrinder"]/designatorDropdown</xpath>
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="PRFFermentingBarrel"]/designatorDropdown</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_FermentingBarrel"]/designatorDropdown</xpath>
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="SelfPrepper"]/designatorDropdown</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_SelfPrepper"]/designatorDropdown</xpath>
       </Operation>
     </Patch>
   </Row>
@@ -305,7 +305,7 @@
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry"]/comps/li[@compClass="CompProperties_CreatesInfestations"]</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkII"]/comps/li[@compClass="CompProperties_CreatesInfestations"]</xpath>
       </Operation>
     </Patch>
   </Row>

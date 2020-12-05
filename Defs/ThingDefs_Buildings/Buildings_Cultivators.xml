@@ -22,7 +22,6 @@
         <cornerTR>Damage/Corner</cornerTR>
       </damageData>
     </graphicData>
-       <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <canOverlapZones>false</canOverlapZones>
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
@@ -35,10 +34,9 @@
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
-        <!--architect menu location-->
     <designatorDropdown>Cultivator_gr</designatorDropdown>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
-    
+
 
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />
@@ -67,7 +65,7 @@
 
   <!--=========================== Basic Cultivator MKI ==================================-->
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
-    <defName>CultivatorTools_DroneCultivator</defName>
+    <defName>PRF_DroneCultivator_I</defName>
     <label>Drone Cultivator</label>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
@@ -75,8 +73,8 @@
     </graphicData>
     <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.\n\nWill haul to a storage or stockpile if withing range.</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFDroneModule>1</PRFDroneModule>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>1</PRF_DroneModule>
       <Steel>30</Steel>
       <Plasteel>10</Plasteel>
       <ComponentIndustrial>3</ComponentIndustrial>
@@ -115,13 +113,13 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRF_AutomaticFarmingI</li>      <!-- farming level 1 -->
+      <li>PRF_AutomaticFarmingI</li>
     </researchPrerequisites>
   </ThingDef>
 
   <!--=========================== Cultivator MKII ==================================-->
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
-    <defName>CultivatorTools_DroneCultivatorII</defName>
+    <defName>PRF_DroneCultivator_II</defName>
     <label>Drone Cultivator mkII</label>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
@@ -129,11 +127,11 @@
     </graphicData>
     <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.\n\nWill haul to a storage or stockpile if withing range.</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFDroneModule>2</PRFDroneModule>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>2</PRF_DroneModule>
       <Steel>30</Steel>
       <Plasteel>20</Plasteel>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
       <ComponentSpacer>2</ComponentSpacer>
       <ComponentIndustrial>5</ComponentIndustrial>
     </costList>
@@ -167,13 +165,13 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRF_AutomaticFarmingII</li>      <!-- farming level 2 -->
+      <li>PRF_AutomaticFarmingII</li>
     </researchPrerequisites>
   </ThingDef>
 
   <!--=========================== Sun Cultivator MKII ==================================-->
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
-    <defName>CultivatorTools_CultivatorWithLamp</defName>
+    <defName>PRF_DroneCultivator_II_sun</defName>
     <label>Drone Cultivator mkII(sun lamp)</label>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
@@ -182,12 +180,12 @@
     </graphicData>
     <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Has a sun lamp. Will not be affected by any stat modifiers.\n\nWill haul to a storage or stockpile if withing range.</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFDroneModule>2</PRFDroneModule>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>2</PRF_DroneModule>
       <Steel>65</Steel>
       <Plasteel>20</Plasteel>
       <Silver>30</Silver>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
     <statBases>
@@ -236,13 +234,13 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRF_AutomaticFarmingII</li>      <!-- farming level 2 -->
+      <li>PRF_AutomaticFarmingII</li>
     </researchPrerequisites>
   </ThingDef>
 
   <!--=========================== Cultivator MKIII ==================================-->
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
-    <defName>CultivatorTools_DroneCultivatorIII</defName>
+    <defName>PRF_DroneCultivator_III</defName>
     <label>Drone Cultivator mkIII</label>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
@@ -250,13 +248,13 @@
     </graphicData>
     <description>A building that now using Drones. Can autonomously plant and harvest crops in a 11 cell square around it. Will not be affected by any stat modifiers.\n\nWill haul to a storage or stockpile if withing range.</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFDroneModule>5</PRFDroneModule>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>5</PRF_DroneModule>
       <Steel>50</Steel>
       <Plasteel>50</Plasteel>
       <ComponentSpacer>4</ComponentSpacer>
       <ComponentIndustrial>15</ComponentIndustrial>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
     <statBases>
       <MarketValue>6428</MarketValue>
@@ -300,13 +298,60 @@
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
     <researchPrerequisites>
-      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
+      <li>PRF_AutomaticFarmingIII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!--=========================== Spacer Cultivator ==================================-->
+  <!-- This is actually old style cultivator from b18 and before drone one was implemented. -->
+  <!-- This works with a invisable worker, that is shown when hover over it, it has a output cell -->
+  <ThingDef ParentName="PRF_CultivatorBase">
+    <defName>PRF_OldTypeCultivator_I</defName>
+    <label>Mechanites Cultivator</label>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/Cultivator2</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>2995</MarketValue>
+    </statBases>
+    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing./nIt has a size of 11x11</description>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_RoboticArm>3</PRF_RoboticArm>
+      <Steel>100</Steel>
+      <Plasteel>30</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>600</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>1</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <squareAreaRadius>5</squareAreaRadius>
+        <TickFrequencyDivisor>50</TickFrequencyDivisor>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingIII</li>
     </researchPrerequisites>
   </ThingDef>
 
   <!--=========================== Spacer Cultivator Sun ==================================-->
   <ThingDef ParentName="PRF_CultivatorBase">
-    <defName>CultivatorTools_b18CultivatorSun</defName>
+    <defName>PRF_OldTypeCultivator_Sun</defName>
     <label>Mechanites Cultivator (sun lamp)</label>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
@@ -318,14 +363,14 @@
     </statBases>
     <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing./nIt has a size of 11x11</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFRoboticArm>3</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_RoboticArm>3</PRF_RoboticArm>
       <Steel>100</Steel>
       <Plasteel>30</Plasteel>
       <Silver>30</Silver>
       <ComponentIndustrial>3</ComponentIndustrial>
       <ComponentSpacer>2</ComponentSpacer>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
@@ -358,57 +403,13 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
-    </researchPrerequisites>
-  </ThingDef>
-
-  <!--=========================== Spacer Cultivator ==================================-->
-  <ThingDef ParentName="PRF_CultivatorBase">
-    <defName>CultivatorTools_b18Cultivator</defName>
-    <label>Mechanites Cultivator</label>
-    <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
-    <graphicData>
-      <texPath>Farm/Cultivator2</texPath>
-    </graphicData>
-    <statBases>
-      <MaxHitPoints>350</MaxHitPoints>
-      <MarketValue>2995</MarketValue>
-    </statBases>
-    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing./nIt has a size of 11x11</description>
-    <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFRoboticArm>3</PRFRoboticArm>
-      <Steel>100</Steel>
-      <Plasteel>30</Plasteel>
-      <ComponentIndustrial>3</ComponentIndustrial>
-      <ComponentSpacer>2</ComponentSpacer>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
-    </costList>
-    <comps>
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>600</basePowerConsumption>
-      </li>
-      <li Class="CompProperties_HeatPusher">
-        <compClass>CompHeatPusherPowered</compClass>
-        <heatPerSecond>1</heatPerSecond>
-      </li>
-    </comps>
-    <modExtensions>
-      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
-        <squareAreaRadius>5</squareAreaRadius>
-        <TickFrequencyDivisor>50</TickFrequencyDivisor>
-      </li>
-    </modExtensions>
-    <researchPrerequisites>
-      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
+      <li>PRF_AutomaticFarmingIII</li>
     </researchPrerequisites>
   </ThingDef>
 
   <!--=========================== Spacer Cultivator XL ==================================-->
   <ThingDef ParentName="PRF_CultivatorBase">
-    <defName>CultivatorTools_b18CultivatorXL</defName>
+    <defName>PRF_OldTypeCultivator_Xl</defName>
     <label>Mechanites XL Cultivator</label>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
@@ -420,13 +421,13 @@
     </statBases>
     <description>This is a hightech XL Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing./nIt has a size of 23x23 and usses 4x more power and cost, but same speed as a normal size one.\nCapable of holding a roof</description>
     <costList>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFRoboticArm>9</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_RoboticArm>9</PRF_RoboticArm>
       <Steel>800</Steel>
       <Plasteel>200</Plasteel>
       <ComponentIndustrial>20</ComponentIndustrial>
       <ComponentSpacer>10</ComponentSpacer>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
     <holdsRoof>true</holdsRoof>
     <comps>
@@ -447,7 +448,7 @@
       </li>
     </modExtensions>
     <researchPrerequisites>
-      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
+      <li>PRF_AutomaticFarmingIII</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -455,7 +456,7 @@
 
   <!--=========================== Sprinkler ==================================-->
   <ThingDef ParentName="PRF_BuildingBase">
-    <defName>CultivatorTools_Sprinkler</defName>
+    <defName>PRF_Sprinkler_I</defName>
     <label>Sprinkler</label>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
     <designatorDropdown>Cultivator_gr</designatorDropdown>
@@ -506,18 +507,15 @@
     </modExtensions>
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
-
-    
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
-    
     <researchPrerequisites>
-      <li>PRF_AutomaticFarmingII</li>      <!-- farming level 2 -->
+      <li>PRF_AutomaticFarmingII</li>
     </researchPrerequisites>
   </ThingDef>
 
   <!--=========================== Spacer Sprinkler ==================================-->
   <ThingDef ParentName="PRF_BuildingBase">
-    <defName>CultivatorTools_SpacerSprinkler</defName>
+    <defName>PRF_Sprinkler_II</defName>
     <label>Sprinkler mkII</label>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
     <designatorDropdown>Cultivator_gr</designatorDropdown>
@@ -567,11 +565,9 @@
     </modExtensions>
     <tickerType>Normal</tickerType>
     <rotatable>false</rotatable>
-    
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
-    
     <researchPrerequisites>
-      <li>PRF_AutomaticFarmingIII</li>      <!-- farming level 3 -->
+      <li>PRF_AutomaticFarmingIII</li>
     </researchPrerequisites>
   </ThingDef>
 

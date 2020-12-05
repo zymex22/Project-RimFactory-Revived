@@ -17,7 +17,7 @@
 
   <!--==================== Fueling Machine ====================-->
   <ThingDef ParentName="PRF_BuildingBase">
-    <defName>FuelingMachine</defName>
+    <defName>PRF_FuelingMachine</defName>
     <label>fueling machine</label>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
     <!-- <designatorDropdown>PRF_Fuel_gr</designatorDropdown> -->
@@ -40,8 +40,8 @@
     <description>A robotic arm built on a simple machine frame that can automatically fuel the building in front of it (the yellow cell points to the "front").\n\n(Works with "Refualable comp" buildings)\nAlso capable of Fueling mortars with shells</description>
     <costList>
       <Steel>20</Steel>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
       <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
     <minifiedDef>MinifiedThing</minifiedDef>
@@ -67,7 +67,7 @@
 
   <!--============================== Smart Puller / vacuum Hopper ==============================-->
   <ThingDef ParentName="PRF_BuildingBase">
-    <defName>SAL_SmartHopper</defName>
+    <defName>PRF_SmartHopper</defName>
     <label>Vacuum Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
     <!-- <designatorDropdown>PRF_Fuel_gr</designatorDropdown> -->
@@ -118,7 +118,7 @@
     <costList>
       <Steel>30</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <comps>
       <li Class="CompProperties_Breakdownable"/>
@@ -141,10 +141,8 @@
     <tickerType>Normal</tickerType>
     <rotatable>true</rotatable>
     <neverMultiSelect>true</neverMultiSelect>
-    
     <staticSunShadowHeight>0.3</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
-    
     <minifiedDef>MinifiedThing</minifiedDef>
     <!-- <specialDisplayRadius>5</specialDisplayRadius> -->    <!--A.K.A. Search radius-->
     <researchPrerequisites>
@@ -160,7 +158,7 @@
   </ThingDef>
 
   <!--======================================= Item Puller base ===============================================-->
-  <ThingDef Name="Building_AutoMachineTool_Puller_Base" ParentName="PRF_BuildingBase" Abstract="true">
+  <ThingDef Name="PRF_Puller_Base" ParentName="PRF_BuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <tickerType>Never</tickerType>
@@ -170,8 +168,8 @@
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
       <ComponentSpacer>1</ComponentSpacer>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
@@ -181,10 +179,8 @@
       <Beauty>-2</Beauty>
     </statBases>
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
-    
     <size>(1,1)</size>
     <fillPercent>0.5</fillPercent>
-    
     <passability>Standable</passability>
     <rotatable>true</rotatable>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
@@ -234,15 +230,15 @@
   </ThingDef>
 
   <!--======================================= Growzone Puller ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
+  <ThingDef ParentName="PRF_Puller_Base">
+    <defName>PRF_GrowzonePuller_I</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_HarvestPuller</thingClass>
-    <defName>Building_AutoMachineTool_GrowZonePuller</defName>
     <label>growzone Puller</label>
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <statBases>
       <MarketValue>1200</MarketValue>
@@ -300,13 +296,13 @@
   </ThingDef>
 
   <!--======================================= Item Puller mkI ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
-    <defName>Building_AutoMachineTool_PullerI</defName>
+  <ThingDef ParentName="PRF_Puller_Base">
+    <defName>PRF_SimplePuller_I</defName>
     <label>Item Puller mkI</label>
     <costList>
       <ComponentIndustrial>2</ComponentIndustrial>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <statBases>
       <MarketValue>597</MarketValue>
@@ -354,15 +350,15 @@
   </ThingDef>
 
   <!--======================================= Item Puller mkII ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
-    <defName>Building_AutoMachineTool_Puller</defName>
+  <ThingDef ParentName="PRF_Puller_Base">
+    <defName>PRF_SimplePuller_II</defName>
     <label>Item Puller mkII</label>
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
       <ComponentSpacer>1</ComponentSpacer>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <statBases>
       <MarketValue>2450</MarketValue>
@@ -395,14 +391,14 @@
   </ThingDef>
 
   <!--======================================= Item Angle Puller===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
-    <defName>Building_AutoMachineTool_Puller_Side</defName>
+  <ThingDef ParentName="PRF_Puller_Base">
+    <defName>PRF_SimplePuller_II_Side</defName>
     <label>Item Angle Puller</label>
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <statBases>
       <MarketValue>1404</MarketValue>
@@ -463,14 +459,14 @@
   </ThingDef>
 
   <!--======================================= Wall Item Puller ===============================================-->
-  <ThingDef ParentName="Building_AutoMachineTool_Puller_Base">
-    <defName>Building_AutoMachineTool_Puller_Wall</defName>
+  <ThingDef ParentName="PRF_Puller_Base">
+    <defName>PRF_SimplePuller_II_Wall</defName>
     <label>Wall Item Puller</label>
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <statBases>
       <MarketValue>1200</MarketValue>
@@ -525,7 +521,6 @@
   <ThingDef Name="PRF_Conveyor_Base" ParentName="PRF_BuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <altitudeLayer>Building</altitudeLayer>
-    
     <designatorDropdown>Rollers_gr</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
     <costList>
@@ -583,7 +578,7 @@
 
   <!--======================================= Conveyor belt normal ===============================================-->
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
-    <defName>Building_AutoMachineTool_BeltConveyor</defName>
+    <defName>PRF_Conveyor_Simple_I</defName>
     <label>conveyor belt</label>
     <description>A conveyor belt that can move items from A to B. Point the arrows in the direction you want to it carry things and then place items on top!\n\nConveyor belts can automatically handle turning and with Splitters can branch if you want that, and will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.  But because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.</description>
     <clearBuildingArea>false</clearBuildingArea>
@@ -606,7 +601,7 @@
 
   <!--======================================= Conveyor wall ===============================================-->
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
-    <defName>Building_AutoMachineTool_BeltConveyor_Wall</defName>
+    <defName>PRF_Conveyor_Wall_I</defName>
     <label>Wall conveyor belt</label>
     <description>Moves items - through walls! You can use these to traverse walls or move items along inside them. When items hit the end, they will move out onto the ground, as long as there is room.</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
@@ -621,7 +616,7 @@
     </researchPrerequisites>
     <uiIconPath>Belts/v3/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
-      <texPath>[RIPThorny][texPath]Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v3[/texPath][graphicData1][texPath]Belts/v3/Belts_Wall_Transition[/texPath][graphicClass]Graphic_Multi[/graphicClass][/graphicData1][specialLinkDefs][li]Building_AutoMachineTool_BeltConveyor_Wall[/li][/specialLinkDefs][/RIPThorny]</texPath>
+      <texPath>[RIPThorny][texPath]Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v3[/texPath][graphicData1][texPath]Belts/v3/Belts_Wall_Transition[/texPath][graphicClass]Graphic_Multi[/graphicClass][/graphicData1][specialLinkDefs][li]PRF_Conveyor_Wall_I[/li][/specialLinkDefs][/RIPThorny]</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorWallTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1,1)</drawSize>
@@ -639,7 +634,7 @@
 
   <!--======================================= Conveyor underground ===============================================-->
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
-    <defName>Building_AutoMachineTool_BeltConveyor_Underground</defName>
+    <defName>PRF_Conveyor_UG_I</defName>
     <label>underground belt</label>
     <designatorDropdown>UgRollers_gr</designatorDropdown>
     <description>Underground Conveyor Belts carry items in tunnels under the ground. To move items into the subterrainian passages, you need to use the Underground Conveyor Entrance and Exit.</description>
@@ -675,6 +670,7 @@
   </ThingDef>
 
   <!--======================================= Conveyor underground connector base ===============================================-->
+  <!-- ==== BASE ZYMEX STOP LOOKING for a name HERE ==== -->
   <ThingDef Name="PRF_UGConnector_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <clearBuildingArea>true</clearBuildingArea>
@@ -694,7 +690,7 @@
 
   <!--======================================= Conveyor floor connector to underground ===============================================-->
   <ThingDef ParentName="PRF_UGConnector_Base">
-    <defName>Building_AutoMachineTool_BeltConveyor_ToUnderground</defName>
+    <defName>PRF_Conveyor_Connector_To_UG</defName>
     <label>Underground belt entrance</label>
     <description>Connects ground conveyor belts to underground conveyors. This is the entrance to the subterrainian passages.</description>
     <graphicData>
@@ -713,7 +709,7 @@
 
   <!--======================================= Conveyor underground connector to floor ===============================================-->
   <ThingDef ParentName="PRF_UGConnector_Base">
-    <defName>Building_AutoMachineTool_BeltConveyor_ToFloor</defName>
+    <defName>PRF_Conveyor_Connector_To_Floor</defName>
     <label>Underground belt exit</label>
     <description>Connects the underground conveyor belt to the above-ground conveyor. This is an exit back to the surface, and will drop items on the floor if there is no conveyor.</description>
     <graphicData>
@@ -734,7 +730,7 @@
   </ThingDef>
   <!--======================================= Conveyor Splitters ===============================================-->
   <ThingDef ParentName="PRF_Conveyor_Base" Name="PRF_Belt_Splitter">
-    <defName>Building_AutoMachineTool_BeltSplitter</defName>
+    <defName>PRF_Conveyor_Splitter_I</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltSplitter</thingClass>
     <label>conveyor splitter</label>
     <description>An automated unit that directs items on a conveyor belt in different directions depending on filters, handled by a very basic AI. If no filters are set, it will simply split where items passing through go.</description>
@@ -749,9 +745,9 @@
     </inspectorTabs>
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
       <Steel>40</Steel>
     </costList>
     <statBases>
@@ -796,7 +792,7 @@
   </ThingDef>
   <!--======================================= Conveyor Splitter UG ===============================================-->
   <ThingDef ParentName="PRF_Belt_Splitter">
-    <defName>Building_AutoMachineTool_BeltSplitter_UG</defName>
+    <defName>PRF_Conveyor_Splitter_UG</defName>
     <label>underground splitter</label>
     <designatorDropdown>UgRollers_gr</designatorDropdown>
     <description>A conveyor splitter unit built into the ground.  This one will hand off items to other underground conveyor belts.</description>
@@ -834,7 +830,7 @@
 
   <!--======================================= Conveyor Splitter Wall ===============================================-->
   <ThingDef ParentName="PRF_Belt_Splitter">
-    <defName>Building_AutoMachineTool_BeltSplitter_Wall</defName>
+    <defName>PRF_Conveyor_Splitter_Wall</defName>
     <label>wall splitter</label>
     <description>A conveyor splitter unit built into the walls.  This one will hand off items to wall belts and Overground ones.</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>

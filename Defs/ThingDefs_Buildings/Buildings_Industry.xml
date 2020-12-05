@@ -66,8 +66,8 @@
     <costList>
       <Steel>400</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFMachineFrame>1</PRFMachineFrame>
-      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
     </costList>
     <recipes>
     </recipes>
@@ -138,9 +138,9 @@
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
-      <PRFMachineFrame>1</PRFMachineFrame>
-      <PRFRoboticArm>2</PRFRoboticArm>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
     </costList>
     <recipes>
       <li>PRF_Recycle_Weapon</li>
@@ -212,9 +212,9 @@
       <Steel>250</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
       <ComponentSpacer>2</ComponentSpacer>
-      <PRFMachineFrame>1</PRFMachineFrame>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
     <recipes>
       <!-- <li>PRF_Destroy_Art</li> -->
@@ -296,9 +296,9 @@
       <Flammability>0.5</Flammability>
     </statBases>
     <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
       <Plasteel>25</Plasteel>
       <Steel>250</Steel>
       <ComponentIndustrial>12</ComponentIndustrial>
@@ -386,8 +386,8 @@
       <Flammability>0.5</Flammability>
     </statBases>
     <costList>      <!-- cost list for fixed prices, uses def names -->
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
       <ComponentIndustrial>12</ComponentIndustrial>
       <Steel>120</Steel>
       <Plasteel>10</Plasteel>
@@ -395,11 +395,11 @@
     <recipes>
       <li>Make_ComponentIndustrial</li>
       <li>Make_ComponentSpacer</li>
-      <li>MakePRFRoboticArm</li>
-      <li>MakePRFWeakAIChip</li>
-      <li>MakePRFAdvancedAIChip</li>
-      <li>MakePRFQubitProcessor</li>
-      <li>MakePRFDroneModule</li>
+      <li>MakePRF_RoboticArm</li>
+      <li>MakePRF_ElectronicChip_I</li>
+      <li>MakePRF_ElectronicChip_II</li>
+      <li>MakePRF_ElectronicChip_III</li>
+      <li>MakePRF_DroneModule</li>
       <li>MakeDataDisk</li>
       <li>MakeSmallFrame</li>
       <li>MakeMediumFrame</li>
@@ -586,7 +586,7 @@
     <costList>
       <Steel>500</Steel>
       <ComponentIndustrial>8</ComponentIndustrial>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
     </costList>
     <recipes>
       <li>CremateCorpse</li>
@@ -667,9 +667,9 @@
     <costList>
       <Steel>350</Steel>
       <Plasteel>200</Plasteel>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
     </costList>
     <recipes>
       <li>MakeSmallFrame</li>

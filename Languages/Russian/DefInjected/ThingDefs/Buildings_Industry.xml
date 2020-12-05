@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <PRF_DeepQuarry.label>Глубокий карьер</PRF_DeepQuarry.label>
-  <PRF_DeepQuarry.description>Автоматизированный карьер, который непрерывно извлекает ресурсы из земли, включая куски горных пород, материалы и компоненты. Производит случайный ресурс примерно раз в 6 часов.</PRF_DeepQuarry.description>
+  <PRF_DeepQuarry_mkII.label>Глубокий карьер</PRF_DeepQuarry_mkII.label>
+  <PRF_DeepQuarry_mkII.description>Автоматизированный карьер, который непрерывно извлекает ресурсы из земли, включая куски горных пород, материалы и компоненты. Производит случайный ресурс примерно раз в 6 часов.</PRF_DeepQuarry_mkII.description>
 
   <PaperclipFactory.label>Завод скрепки</PaperclipFactory.label>
   <PaperclipFactory.description>Машина, которая превращает скрепки из любого сырого материала, вставленного в нее - металл, растение или труп.</PaperclipFactory.description>
 
-  <FuelingMachine.label>Заправочная машина</FuelingMachine.label>
-  <FuelingMachine.description>Роботизированная рука построена на небольшой раме машины, которая может автоматически подпитывать здание перед ним.</FuelingMachine.description>
+  <PRF_FuelingMachine.label>Заправочная машина</PRF_FuelingMachine.label>
+  <PRF_FuelingMachine.description>Роботизированная рука построена на небольшой раме машины, которая может автоматически подпитывать здание перед ним.</PRF_FuelingMachine.description>
 
   <PRFPaperclipPowerGenerator.label>Генератор на скрепках</PRFPaperclipPowerGenerator.label>
   <PRFPaperclipPowerGenerator.description>Производит энергию, потребляя скрепки. Должен подпитываться вручную.</PRFPaperclipPowerGenerator.description>

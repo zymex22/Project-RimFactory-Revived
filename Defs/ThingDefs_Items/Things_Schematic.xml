@@ -3,7 +3,7 @@
 
   <!--==================================== data disk ==============================-->
   <ThingDef>
-    <defName>RimFactory_Data_Disk</defName>
+    <defName>PRF_DataDisk</defName>
     <label>recipe data disk</label>
     <thingClass>ThingWithComps</thingClass>
     <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive... Its used to create Recipe DataBases(project rimfactory)</description>
@@ -50,7 +50,7 @@
 
   <!--==================================== Small frame ===============================-->
   <ThingDef ParentName="PRF_ResourceBase">
-    <defName>PRFMachineFrameSmall</defName>
+    <defName>PRF_MachineFrame_I</defName>
     <label>simple machine frame</label>
     <description>The empty shell of a small automation building.</description>
     <graphicData>
@@ -79,7 +79,7 @@
 
   <!--==================================== Medium frame ==============================-->
   <ThingDef ParentName="PRF_ResourceBase">
-    <defName>PRFMachineFrame</defName>
+    <defName>PRF_MachineFrame_II</defName>
     <label>machine frame</label>
     <description>The empty shell of a medium-sized automation building.</description>
     <graphicData>
@@ -108,7 +108,7 @@
 
   <!--==================================== Large frame ===============================-->
   <ThingDef ParentName="PRF_ResourceBase">
-    <defName>PRFMachineFrameLarge</defName>
+    <defName>PRF_MachineFrame_III</defName>
     <label>adv. machine frame</label>
     <description>The empty shell of a advanced automation building.</description>
     <graphicData>

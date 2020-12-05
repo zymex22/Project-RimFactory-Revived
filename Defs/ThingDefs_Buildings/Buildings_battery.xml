@@ -36,7 +36,7 @@
 
   <!-- ==================================== 4k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
-    <defName>Battery4k</defName>
+    <defName>PRF_4k_Battery</defName>
     <label>4k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
@@ -82,7 +82,7 @@
 
   <!-- ==================================== 16k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
-    <defName>Battery16k</defName>
+    <defName>PRF_16k_Battery</defName>
     <label>16k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
@@ -129,7 +129,7 @@
 
   <!-- ==================================== 64k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
-    <defName>Battery64k</defName>
+    <defName>PRF_64k_Battery</defName>
     <label>64k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
@@ -154,7 +154,7 @@
       <Gold>50</Gold>
       <ComponentIndustrial>15</ComponentIndustrial>
       <ComponentSpacer>4</ComponentSpacer>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
     <comps>
       <li Class="CompProperties_Battery">
@@ -178,7 +178,7 @@
 
   <!-- ==================================== 256k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
-    <defName>Battery256k</defName>
+    <defName>PRF_256k_Battery</defName>
     <label>256k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
@@ -204,7 +204,7 @@
       <Plasteel>200</Plasteel>
       <Gold>200</Gold>
       <ComponentSpacer>12</ComponentSpacer>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
       <ComponentIndustrial>30</ComponentIndustrial>
       <AIPersonaCore>1</AIPersonaCore>
     </costList>

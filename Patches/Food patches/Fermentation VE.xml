@@ -9,7 +9,7 @@
       <success>Always</success>
       <operations>
         <li Class="PatchOperationAdd">
-          <xpath>/Defs/ThingDef[defName = "PRFFermentingBarrel"]/recipes</xpath>
+          <xpath>/Defs/ThingDef[defName = "PRF_FermentingBarrel"]/recipes</xpath>
           <value>
             <li>Brew_VBE_AmbrandyNormal</li>
             <li>Brew_VBE_Gin</li>
@@ -25,7 +25,7 @@
           </value>
         </li>
         <li Class="PatchOperationAdd">
-          <xpath>/Defs/ThingDef[defName = "PRFStorageUnitIOPortFridge"]/building/fixedStorageSettings/filter/categories</xpath>
+          <xpath>/Defs/ThingDef[defName = "PRF_IOPort_IFridge"]/building/fixedStorageSettings/filter/categories</xpath>
           <value>
             <li>VBE_Musts</li>
           </value>
@@ -42,7 +42,7 @@
       <success>Always</success>
       <operations>
         <li Class="PatchOperationAdd">
-          <xpath>/Defs/ThingDef[defName = "PRFFermentingBarrel"]/recipes</xpath>
+          <xpath>/Defs/ThingDef[defName = "PRF_FermentingBarrel"]/recipes</xpath>
           <value>
             <li>Brew_VFEM_Wine</li>
           </value>
@@ -59,7 +59,7 @@
       <success>Always</success>
       <operations>
         <li Class="PatchOperationAdd">
-          <xpath>/Defs/ThingDef[defName = "PRFFermentingBarrel"]/recipes</xpath>
+          <xpath>/Defs/ThingDef[defName = "PRF_FermentingBarrel"]/recipes</xpath>
           <value>
             <li>Brew_VFEV_Mead</li>
           </value>
@@ -80,7 +80,7 @@
         <success>Always</success>
         <operations>
           <li Class="PatchOperationAdd">
-            <xpath>/Defs/ThingDef[defName = "PRFFermentingBarrel"]/recipes</xpath>
+            <xpath>/Defs/ThingDef[defName = "PRF_FermentingBarrel"]/recipes</xpath>
             <value>
               <li>Brew_VBE_Cider</li>
             </value>
@@ -103,7 +103,7 @@
         <success>Always</success>
         <operations>
           <li Class="PatchOperationAdd">
-            <xpath>/Defs/ThingDef[defName = "PRFStorageUnitIOPortFridge"]/building/fixedStorageSettings/filter/thingDefs</xpath>
+            <xpath>/Defs/ThingDef[defName = "PRF_IOPort_IFridge"]/building/fixedStorageSettings/filter/thingDefs</xpath>
             <value>
               <li>VFEM_Must</li>
             </value>

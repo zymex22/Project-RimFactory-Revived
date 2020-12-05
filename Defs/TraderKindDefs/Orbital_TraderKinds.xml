@@ -45,47 +45,47 @@
       </li>
       <!-- ====================== Prf Items ==================== -->
       <li Class="StockGenerator_SingleDef">
-        <thingDef>RimFactory_Data_Disk</thingDef>
+        <thingDef>PRF_DataDisk</thingDef>
         <price>Cheap</price>
         <countRange>0~20</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRFMachineFrameSmall</thingDef>
+        <thingDef>PRF_MachineFrame_I</thingDef>
         <price>Cheap</price>
         <countRange>0~20</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRFMachineFrame</thingDef>
+        <thingDef>PRF_MachineFrame_II</thingDef>
         <price>Cheap</price>
         <countRange>0~10</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRFMachineFrameLarge</thingDef>
+        <thingDef>PRF_MachineFrame_III</thingDef>
         <price>Expensive</price>
         <countRange>0~5</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRFRoboticArm</thingDef>
+        <thingDef>PRF_RoboticArm</thingDef>
         <price>Cheap</price>
         <countRange>0~30</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRFDroneModule</thingDef>
+        <thingDef>PRF_DroneModule</thingDef>
         <price>Cheap</price>
         <countRange>0~20</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRFWeakAIChip</thingDef>
+        <thingDef>PRF_ElectronicChip_I</thingDef>
         <price>Cheap</price>
         <countRange>0~10</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRFAdvancedAIChip</thingDef>
+        <thingDef>PRF_ElectronicChip_II</thingDef>
         <price>Expensive</price>
         <countRange>0~3</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRFQubitProcessor</thingDef>
+        <thingDef>PRF_ElectronicChip_III</thingDef>
         <price>Expensive</price>
         <countRange>0~1</countRange>
       </li>
@@ -100,24 +100,24 @@
         <countRange>0~10</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>Battery4k</thingDef>
+        <thingDef>PRF_4k_Battery</thingDef>
         <countRange>0~5</countRange>
       </li>
       <!-- Storage -->
       <li Class="StockGenerator_SingleDef">
-        <thingDef>StockpileCrateSmall</thingDef>
+        <thingDef>PRF_WoodCrate_I</thingDef>
         <countRange>0~5</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>StockpileCrate</thingDef>
+        <thingDef>PRF_WoodCrate_II</thingDef>
         <countRange>0~5</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>StockpileCrateReinforcedTiny</thingDef>
+        <thingDef>PRF_SteelCrate_I</thingDef>
         <countRange>0~5</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>StockpileCrateReinforced</thingDef>
+        <thingDef>PRF_SteelCrate_II</thingDef>
         <countRange>0~5</countRange>
       </li>
       <!-- Lamps -->
@@ -155,14 +155,14 @@
         <thingDefCountRange>10~40</thingDefCountRange>
         <countRange>0~5</countRange>
         <excludedThingDefs>
-          <li>Building_AutoMachineTool_BeltConveyor</li>
-          <li>Building_AutoMachineTool_BeltConveyor_Wall</li>
-          <li>Building_AutoMachineTool_BeltConveyor_Underground</li>
-          <li>Building_AutoMachineTool_BeltConveyor_ToUnderground</li>
-          <li>Building_AutoMachineTool_BeltConveyor_ToFloor</li>
-          <li>Building_AutoMachineTool_BeltSplitter</li>
-          <li>Building_AutoMachineTool_BeltSplitter_UG</li>
-          <li>Building_AutoMachineTool_BeltSplitter_Wall</li>
+          <li>PRF_Conveyor_Simple_I</li>
+          <li>PRF_Conveyor_Wall_I</li>
+          <li>PRF_Conveyor_UG_I</li>
+          <li>PRF_Conveyor_Connector_To_UG</li>
+          <li>PRF_Conveyor_Connector_To_Floor</li>
+          <li>PRF_Conveyor_Splitter_I</li>
+          <li>PRF_Conveyor_Splitter_UG</li>
+          <li>PRF_Conveyor_Splitter_Wall</li>
         </excludedThingDefs>
       </li>
       <!-- ======================  ==================== -->

@@ -22,8 +22,8 @@
 							
 							<description>A mini Atomic Workshop helper for RimAtomics to do maintain and fuel your reactors it can flick, haul, atomic, firefight</description>
 							<costList>
-								<PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-								<PRFDroneModule>2</PRFDroneModule>
+								<PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+								<PRF_DroneModule>2</PRF_DroneModule>
 								<Steel>30</Steel>
 								<Plasteel>20</Plasteel>
 								<ComponentIndustrial>3</ComponentIndustrial>
@@ -40,7 +40,7 @@
 									<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
 									<fuelFilter>
 										<thingDefs>
-											<li>PRFDroneModule</li>
+											<li>PRF_DroneModule</li>
 										</thingDefs>
 									</fuelFilter>
 									<targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>

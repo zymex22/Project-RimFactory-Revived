@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <PRFStorageUnitIOPort.label>仓储平台I/O接口</PRFStorageUnitIOPort.label>
-  <PRFStorageUnitIOPort.description>一种重新设计的智能进料口，可以从仓储平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPort.description>
-  <PRFStorageUnitIOPort_Blueprint.label>仓储平台I/O接口（蓝图）</PRFStorageUnitIOPort_Blueprint.label>
-  <PRFStorageUnitIOPort_Blueprint_Install.label>仓储平台I/O接口（蓝图）</PRFStorageUnitIOPort_Blueprint_Install.label>
-  <PRFStorageUnitIOPort_Frame.label>仓储平台I/O接口（建造中）</PRFStorageUnitIOPort_Frame.label>
-  <PRFStorageUnitIOPort_Frame.description>一种重新设计的智能进料口，可以从仓储平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPort_Frame.description>
+  <PRF_IOPort_I.label>仓储平台I/O接口</PRF_IOPort_I.label>
+  <PRF_IOPort_I.description>一种重新设计的智能进料口，可以从仓储平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRF_IOPort_I.description>
+  <PRF_IOPort_I_Blueprint.label>仓储平台I/O接口（蓝图）</PRF_IOPort_I_Blueprint.label>
+  <PRF_IOPort_I_Blueprint_Install.label>仓储平台I/O接口（蓝图）</PRF_IOPort_I_Blueprint_Install.label>
+  <PRF_IOPort_I_Frame.label>仓储平台I/O接口（建造中）</PRF_IOPort_I_Frame.label>
+  <PRF_IOPort_I_Frame.description>一种重新设计的智能进料口，可以从仓储平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRF_IOPort_I_Frame.description>
 
-  <PRFStorageUnitIOPortFridge.label>冰箱平台I/O接口</PRFStorageUnitIOPortFridge.label>
-  <PRFStorageUnitIOPortFridge.description>一种重新设计的智能进料口，可以从冰箱平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPortFridge.description>
-  <PRFStorageUnitIOPortFridge_Blueprint.label>冰箱平台I/O接口（蓝图）</PRFStorageUnitIOPortFridge_Blueprint.label>
-  <PRFStorageUnitIOPortFridge_Blueprint_Install.label>冰箱平台I/O接口（蓝图）</PRFStorageUnitIOPortFridge_Blueprint_Install.label>
-  <PRFStorageUnitIOPortFridge_Frame.label>冰箱平台I/O接口（建造中）</PRFStorageUnitIOPortFridge_Frame.label>
-  <PRFStorageUnitIOPortFridge_Frame.description>一种重新设计的智能进料口，可以从冰箱平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRFStorageUnitIOPortFridge_Frame.description>
+  <PRF_IOPort_IFridge.label>冰箱平台I/O接口</PRF_IOPort_IFridge.label>
+  <PRF_IOPort_IFridge.description>一种重新设计的智能进料口，可以从冰箱平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRF_IOPort_IFridge.description>
+  <PRF_IOPort_IFridge_Blueprint.label>冰箱平台I/O接口（蓝图）</PRF_IOPort_IFridge_Blueprint.label>
+  <PRF_IOPort_IFridge_Blueprint_Install.label>冰箱平台I/O接口（蓝图）</PRF_IOPort_IFridge_Blueprint_Install.label>
+  <PRF_IOPort_IFridge_Frame.label>冰箱平台I/O接口（建造中）</PRF_IOPort_IFridge_Frame.label>
+  <PRF_IOPort_IFridge_Frame.description>一种重新设计的智能进料口，可以从冰箱平台中存取物品。（译者注：I/O即输入与输出的缩写。）</PRF_IOPort_IFridge_Frame.description>
   
   <PRFCoolDSU.label>仓储平台(冷藏)</PRFCoolDSU.label>
   <PRFCoolDSU.description>冰箱版本的数字存储单元，可以存储食物\n\n最多可存储512个堆栈。 每堆物品消耗10 W的功率。 当您的殖民地断电时，已经在里面的物品将是安全的，但建筑物将无法存储更多物品。\n\n仅由于安装了RimFridge，此功能才可用。</PRFCoolDSU.description>

@@ -26,7 +26,7 @@
       <Steel>100</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
       <ComponentSpacer>2</ComponentSpacer>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <graphicData>
       <texPath>Common/ResearchBenchAI</texPath>

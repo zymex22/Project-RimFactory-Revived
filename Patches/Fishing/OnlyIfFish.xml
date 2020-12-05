@@ -43,9 +43,9 @@
 							  <Plasteel>200</Plasteel>
 							  <ComponentIndustrial>10</ComponentIndustrial>
 							  <ComponentSpacer>2</ComponentSpacer>
-							  <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-							  <PRFRoboticArm>2</PRFRoboticArm>
-							  <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+							  <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+							  <PRF_RoboticArm>2</PRF_RoboticArm>
+							  <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
 							</costList>
 							<recipes>
 							  <li>PRF_FreshwaterFish</li>
@@ -123,9 +123,9 @@
 							  <Plasteel>225</Plasteel>
 							  <ComponentIndustrial>15</ComponentIndustrial>
 							  <ComponentSpacer>6</ComponentSpacer>
-							  <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-							  <PRFRoboticArm>2</PRFRoboticArm>
-							  <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+							  <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+							  <PRF_RoboticArm>2</PRF_RoboticArm>
+							  <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
 							</costList>
 							<recipes>
 							  <li>PRF_OceanwaterFish</li>

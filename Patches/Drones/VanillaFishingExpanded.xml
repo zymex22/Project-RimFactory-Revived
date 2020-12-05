@@ -21,11 +21,11 @@
 							</graphicData>
 							<description>A mini Fishing Station capable of helping you with catching fish. it will take breaks to prevent curcuits getting too wet.</description>
 							<costList>
-								<PRFMachineFrameSmall>1</PRFMachineFrameSmall>
-								<PRFDroneModule>1</PRFDroneModule>
+								<PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+								<PRF_DroneModule>1</PRF_DroneModule>
 								<Steel>30</Steel>
 								<Plasteel>20</Plasteel>
-								<PRFWeakAIChip>1</PRFWeakAIChip>
+								<PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
 								<ComponentIndustrial>3</ComponentIndustrial>
 								<ComponentSpacer>1</ComponentSpacer>
 							</costList>
@@ -44,7 +44,7 @@
 									<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
 									<fuelFilter>
 										<thingDefs>
-											<li>PRFDroneModule</li>
+											<li>PRF_DroneModule</li>
 										</thingDefs>
 									</fuelFilter>
 									<targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>

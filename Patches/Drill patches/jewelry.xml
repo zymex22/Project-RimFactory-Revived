@@ -19,7 +19,7 @@
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">					<!-- T2 miner Remove from standard chance -->
-					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
 					<value>
 						<li>Sapphire</li>
 						<li>Ruby</li>
@@ -27,7 +27,7 @@
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">					<!-- T3 miner Remove from Bill list -->
-					<xpath>/Defs/ThingDef[defName="Building_AutoMachineTool_Miner"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_BillTypeMiner_I"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
 					<value>
 						<li>Sapphire</li>
 						<li>Ruby</li>
@@ -44,7 +44,7 @@
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">					<!-- T2 miner miner add it back to customize it-->
-					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_BonusYield"]/bonusYields</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_BonusYield"]/bonusYields</xpath>
 					<value>
 						<Sapphire Weight="0.4" Count="20" />
 						<Ruby Weight="0.4" Count="20" />
@@ -52,7 +52,7 @@
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">					<!-- T3 miner Add it as a special extra chance -->
-					<xpath>/Defs/ThingDef[defName="Building_AutoMachineTool_Miner"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_BonusYield"]/bonusYields</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_BillTypeMiner_I"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_BonusYield"]/bonusYields</xpath>
 					<value>
 						<Sapphire Weight="0.45" Count="20" />
 						<Ruby Weight="0.4" Count="20" />

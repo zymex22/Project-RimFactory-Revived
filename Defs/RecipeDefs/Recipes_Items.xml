@@ -35,7 +35,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <RimFactory_Data_Disk>1</RimFactory_Data_Disk>
+      <PRF_DataDisk>1</PRF_DataDisk>
     </products>
     <skillRequirements>
       <Crafting>8</Crafting>
@@ -50,7 +50,7 @@
 
   <!--==================================== Robotarm ==============================-->
   <RecipeDef>
-    <defName>MakePRFRoboticArm</defName>
+    <defName>MakePRF_RoboticArm</defName>
     <label>make robotic arm</label>
     <description>Make robotic arm</description>
     <jobString>Making robotic arm</jobString>
@@ -83,7 +83,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <PRFRoboticArm>1</PRFRoboticArm>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
     </products>
     <skillRequirements>
       <Crafting>8</Crafting>
@@ -98,7 +98,7 @@
 
   <!--==================================== Weak Chip ==============================-->
   <RecipeDef>
-    <defName>MakePRFWeakAIChip</defName>
+    <defName>MakePRF_ElectronicChip_I</defName>
     <label>make weak AI chip</label>
     <description>Make weak AI chip</description>
     <jobString>Making weak AI chip</jobString>
@@ -131,7 +131,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </products>
     <skillRequirements>
       <Crafting>8</Crafting>
@@ -145,7 +145,7 @@
 
   <!--==================================== Advanced AI Core ==============================-->
   <RecipeDef>
-    <defName>MakePRFAdvancedAIChip</defName>
+    <defName>MakePRF_ElectronicChip_II</defName>
     <label>make Adv. AI core</label>
     <description>Make Adv. AI core</description>
     <jobString>Making Adv. AI core</jobString>
@@ -173,7 +173,7 @@
       <li>
         <filter>
           <thingDefs>
-            <li>PRFWeakAIChip</li>
+            <li>PRF_ElectronicChip_I</li>
           </thingDefs>
         </filter>
         <count>1</count>
@@ -191,12 +191,12 @@
       <thingDefs>
         <li>ComponentSpacer</li>
         <li>Steel</li>
-        <li>PRFWeakAIChip</li>
+        <li>PRF_ElectronicChip_I</li>
         <li>Plasteel</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </products>
     <skillRequirements>
       <Crafting>15</Crafting>
@@ -210,7 +210,7 @@
 
   <!--==================================== qubit processor ==============================-->
   <RecipeDef>
-    <defName>MakePRFQubitProcessor</defName>
+    <defName>MakePRF_ElectronicChip_III</defName>
     <label>make qubit processor</label>
     <description>Make qubit processor</description>
     <jobString>Making qubit processor</jobString>
@@ -238,7 +238,7 @@
       <li>
         <filter>
           <thingDefs>
-            <li>PRFAdvancedAIChip</li>
+            <li>PRF_ElectronicChip_II</li>
           </thingDefs>
         </filter>
         <count>5</count>
@@ -256,12 +256,12 @@
       <thingDefs>
         <li>ComponentSpacer</li>
         <li>Gold</li>
-        <li>PRFAdvancedAIChip</li>
+        <li>PRF_ElectronicChip_II</li>
         <li>Plasteel</li>
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <PRFQubitProcessor>1</PRFQubitProcessor>
+      <PRF_ElectronicChip_III>1</PRF_ElectronicChip_III>
     </products>
     <skillRequirements>
       <Crafting>18</Crafting>
@@ -275,7 +275,7 @@
 
   <!--==================================== Drone module ==============================-->
   <RecipeDef>
-    <defName>MakePRFDroneModule</defName>
+    <defName>MakePRF_DroneModule</defName>
     <label>make drone module</label>
     <description>Make drone module</description>
     <jobString>Making drone module</jobString>
@@ -317,7 +317,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <PRFDroneModule>1</PRFDroneModule>
+      <PRF_DroneModule>1</PRF_DroneModule>
     </products>
     <skillRequirements>
       <Crafting>8</Crafting>
@@ -364,7 +364,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </products>
     <skillRequirements>
       <Crafting>6</Crafting>
@@ -419,7 +419,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
     </products>
     <skillRequirements>
       <Crafting>8</Crafting>
@@ -474,7 +474,7 @@
       </thingDefs>
     </fixedIngredientFilter>
     <products>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
     </products>
     <skillRequirements>
       <Crafting>8</Crafting>

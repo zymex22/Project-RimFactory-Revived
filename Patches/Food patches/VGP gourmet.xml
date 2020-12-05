@@ -10,7 +10,7 @@
 			<success>Always</success>
 			<operations>
 				<li Class="PatchOperationAdd">					<!-- adding recipes to food prepper -->
-					<xpath>/Defs/ThingDef[defName="SelfPrepper"]/recipes</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_SelfPrepper"]/recipes</xpath>
 					<value>
 						<li>Maketofu</li>
 						<li>Makebulktofu</li>
@@ -48,7 +48,7 @@
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">					<!-- adding new food types to self cooker -->
-					<xpath>/Defs/ThingDef[defName="PRF_SpacerCooker"]/recipes</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_SelfCookerIII"]/recipes</xpath>
 					<value>
 						<li>BakeBread</li>
 						<li>Bakesweetroll</li>

@@ -15,7 +15,7 @@
 					<xpath>/Defs</xpath>
 					<value>
 						<ThingDef ParentName="PRF_BuildingBase">
-							<defName>PRFStorageUnitIOPortFridge</defName>
+							<defName>PRF_IOPort_IFridge</defName>
 							<label>I/O Fridge Port</label>
 							<thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
 							<designatorDropdown>IO_gr</designatorDropdown>
@@ -200,8 +200,8 @@
 								<Plasteel>100</Plasteel>
 								<ComponentIndustrial>100</ComponentIndustrial>
 								<ComponentSpacer>15</ComponentSpacer>
-								<PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-								<PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+								<PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+								<PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
 							</costList>
 							
 							<tickerType>Normal</tickerType>
@@ -250,7 +250,7 @@
 				</li>
 				<!-- ============== Adding fridge comp to Generic Animal Harvester =============== -->
 				<li Class="PatchOperationAdd">
-					<xpath>/Defs/ThingDef[defName="GenericAnimalHarvester"]/comps</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_GenericAnimalHarvester"]/comps</xpath>
 					<value>
 						<li Class="RimFridge.CompProperties_Refrigerator">
 							<drinksBestCold>
@@ -265,7 +265,7 @@
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">
-					<xpath>/Defs/ThingDef[defName="PRF_GlitterHarvester"]/comps</xpath>
+					<xpath>/Defs/ThingDef[defName="PRF_GenericAnimalHarvester_II"]/comps</xpath>
 					<value>
 						<li Class="RimFridge.CompProperties_Refrigerator">
 							<drinksBestCold>

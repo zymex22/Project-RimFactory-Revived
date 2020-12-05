@@ -108,7 +108,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             //   [DefOf] notation.
             // However, string comparison in C# is already super fast, so it's
             //   probably all fine.
-            if ((billGiver as Building)?.def.defName=="PRF_SpacerCooker") {
+            if ((billGiver as Building)?.def.defName=="PRF_SelfCookerIII") {
                 // Log.Message("Using Spacer Cooker - skipping poison test");
                 return true;
             }

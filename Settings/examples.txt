@@ -83,11 +83,11 @@
     <label>self cooker name</label>
     <description>self cooler name</description>
     <!-- Default value -->
-    <value>SelfCooker</value>
+    <value>PRF_SelfCookerI</value>
     <!-- PatchOperation executed at check on -->
     <Patch>
       <Operation Class="PatchOperationReplace">
-        <xpath>/Defs/ThingDef[defName="SelfCooker"]/label</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_SelfCookerI"]/label</xpath>
         <value>
           <!-- ${value} is replaced with the entered value. -->
           <label>${value}</label>
@@ -108,7 +108,7 @@
     <!-- PatchOperation executed at check on -->
     <Patch>
       <Operation Class="PatchOperationReplace">
-        <xpath>/Defs/ThingDef[defName="SelfCooker"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/workSpeedBaseFactor</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_SelfCookerI"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/workSpeedBaseFactor</xpath>
         <value>
           <!-- ${value} is replaced with the entered value. -->
           <workSpeedBaseFactor>${value}</workSpeedBaseFactor>
@@ -129,7 +129,7 @@
     <!-- PatchOperation executed at check on -->
     <Patch>
       <Operation Class="PatchOperationReplace">
-        <xpath>/Defs/ThingDef[defName="SelfCooker"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/skillLevel</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_SelfCookerI"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/skillLevel</xpath>
         <value>
           <!-- ${value} is replaced with the entered value. -->
           <skillLevel>${value}</skillLevel>
@@ -147,7 +147,7 @@
     <!-- PatchOperation executed at check on -->
     <Patch>
       <Operation Class="PatchOperationReplace">
-        <xpath>/Defs/ThingDef[defName="SelfCooker"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/drawStatus</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_SelfCookerI"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/drawStatus</xpath>
         <value>
           <!-- ${value} is replaced with the entered value. -->
           <drawStatus>${value}</drawStatus>
@@ -168,7 +168,7 @@
     <!-- PatchOperation executed at check on -->
     <Patch>
       <Operation Class="PatchOperationReplace">
-        <xpath>/Defs/ThingDef[defName="SelfCooker"]/drawerType</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_SelfCookerI"]/drawerType</xpath>
         <value>
           <!-- ${value} is replaced with the entered value. -->
           <drawerType>${value}</drawerType>
@@ -195,7 +195,7 @@
     <!-- PatchOperation executed at check on -->
     <Patch>
       <Operation Class="PatchOperationReplace">
-        <xpath>/Defs/ThingDef[defName="SelfCooker"]/comps/li [@Class="CompProperties_Power"]/basePowerConsumption</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_SelfCookerI"]/comps/li [@Class="CompProperties_Power"]/basePowerConsumption</xpath>
         <value>
           <!-- ${value} is replaced with the entered value. -->
           <basePowerConsumption>${value}</basePowerConsumption>

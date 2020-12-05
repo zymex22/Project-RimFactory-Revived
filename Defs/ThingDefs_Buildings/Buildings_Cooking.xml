@@ -22,7 +22,7 @@
     </graphicData>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <drawerType>RealtimeOnly</drawerType>
-       <!-- The layer this thing is rendered on. Usually the same value as category. -->
+    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, passthroughonly -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
@@ -53,8 +53,9 @@
   </ThingDef>
 
   <!--==================== T1 Industrial Cooker ====================-->
+  <!-- This is using Simple Assembler thingclass, thats more or less a normal assembler just with preset recipes -->
   <ThingDef ParentName="PRF_CookingBase">
-    <defName>SelfCooker</defName>
+    <defName>PRF_SelfCookerI</defName>
     <label>industrial cooker</label>
     <uiIconScale>0.7</uiIconScale>
     <graphicData>
@@ -69,8 +70,8 @@
     </statBases>
     <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\nOnly cooks simple foods but with a cooking level of 8 at 1x speed \n\nWhite cell is input\nYellow are output cell</description>
     <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
       <Steel>10</Steel>
     </costList>
     <comps>
@@ -138,10 +139,10 @@
     </statBases>
     <description>An improved assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1.5x speed \n 5 cleanliness \n cook level 12</description>
     <costList>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
       <Steel>10</Steel>
-      <PRFWeakAIChip>1</PRFWeakAIChip>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
       <li Class="CompProperties_Breakdownable"/>
@@ -189,7 +190,7 @@
 
   <!--==================== T3 Spacer Cooker ====================-->
   <ThingDef ParentName="PRF_CookingBase">
-    <defName>PRF_SpacerCooker</defName>
+    <defName>PRF_SelfCookerIII</defName>
     <label>spacer cooker</label>
     <graphicData>
       <texPath>SAL3/SpacerCooker</texPath>
@@ -203,9 +204,9 @@
     </statBases>
     <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 2x speed \n 20cleanliness \n cook level 20</description>
     <costList>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFMachineFrameLarge>1</PRFMachineFrameLarge>
-      <PRFAdvancedAIChip>1</PRFAdvancedAIChip>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
       <Steel>10</Steel>
     </costList>
     <comps>
@@ -242,7 +243,6 @@
     </comps>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
-      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <recipes>      <!-- Defines recipe to make it in ThingDef directly.	 (extra from importrecipesfrom) -->
       <li>MakeNutrientPaste</li>
@@ -289,7 +289,7 @@
 
   <!--====================Meat Grinder====================-->
   <ThingDef ParentName="PRF_CookingBase">
-    <defName>MeatGrinder</defName>
+    <defName>PRF_MeatGrinder</defName>
     <label>meat grinder</label>
     <graphicData>
       <texPath>SAL3/smart_butcher</texPath>
@@ -310,8 +310,8 @@
     </statBases>
     <description>Precise grinder which processes corpses into piles of usable materials: meat, leather, etc.</description>
     <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
       <Steel>10</Steel>
     </costList>
     <comps>
@@ -360,7 +360,7 @@
 
   <!--====================Fermenting Barrel====================-->
   <ThingDef ParentName="PRF_CookingBase">
-    <defName>PRFFermentingBarrel</defName>
+    <defName>PRF_FermentingBarrel</defName>
     <label>fermenting tank</label>
     <description>Fully automated fermenting. Self-regulates temperature to maintain the best quality.</description>
     <graphicData>
@@ -380,8 +380,8 @@
       <MarketValue>820</MarketValue>
     </statBases>
     <costList>
-      <PRFRoboticArm>1</PRFRoboticArm>
-      <PRFMachineFrameSmall>1</PRFMachineFrameSmall>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <Steel>100</Steel>
     </costList>
     <comps>
@@ -420,7 +420,7 @@
 
   <!--==================== Food Prepper ====================-->
   <ThingDef ParentName="PRF_CookingBase">
-    <defName>SelfPrepper</defName>
+    <defName>PRF_SelfPrepper</defName>
     <label>industrial food processor</label>
     <graphicData>
       <texPath>SAL3/smart_prepper</texPath>
@@ -433,8 +433,8 @@
     </statBases>
     <description>A machine designed to boil, grind, or mill raw food resources into ingredients more suitable for cooking and brewing.</description>
     <costList>
-      <PRFRoboticArm>2</PRFRoboticArm>
-      <PRFMachineFrame>1</PRFMachineFrame>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
       <Steel>10</Steel>
     </costList>
     <comps>
