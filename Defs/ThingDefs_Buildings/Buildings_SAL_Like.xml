@@ -29,6 +29,7 @@
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <fillPercent>1</fillPercent>
     <comps>
+<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
     </comps>

@@ -151,9 +151,7 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_CreatesInfestations" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>6</heatPerSecond>
@@ -228,9 +226,7 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_CreatesInfestations" />
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
@@ -473,9 +469,7 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>5000</basePowerConsumption>
       </li>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>20</heatPerSecond>
@@ -554,6 +548,7 @@
     </researchPrerequisites>
     <size>(3,3)</size>
     <comps>
+<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>

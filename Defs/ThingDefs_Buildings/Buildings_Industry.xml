@@ -77,9 +77,7 @@
         <basePowerConsumption>300</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
@@ -156,9 +154,7 @@
         <basePowerConsumption>300</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
@@ -225,9 +221,7 @@
         <basePowerConsumption>300</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
@@ -311,9 +305,7 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>
       </li>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
@@ -410,9 +402,7 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>
       </li>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
@@ -472,9 +462,7 @@
       <Flammability>0.5</Flammability>
     </statBases>
     <comps>
-      <li>
-        <compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-      </li>
+<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>

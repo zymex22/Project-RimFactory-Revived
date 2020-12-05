@@ -9,6 +9,7 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -42,6 +43,15 @@ namespace ProjectRimFactory.AutoMachineTool
         protected bool readyOnStart = false;
         [Unsaved]
         protected int startCheckIntervalTicks = 30;
+
+        public CompOutputAdjustable compOutputAdjustable;
+
+
+        public override void PostMake()
+        {
+            base.PostMake();
+            compOutputAdjustable = GetComp<CompOutputAdjustable>();
+        }
 
         private MapTickManager mapManager;
         public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null) {
