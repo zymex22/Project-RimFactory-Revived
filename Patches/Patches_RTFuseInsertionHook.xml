@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Patch>
   <Operation Class="ProjectRimFactory.Common.PatchOperationRTFuseInsertionHook">
-    <xpath>/Defs[ThingDef/defName = "Battery10k"]</xpath>
+    <xpath>/Defs[ThingDef/defName = "PRF_4k_Battery"]</xpath>
     <value>
 	<ThingDef Name="PRFLargeFuseBase" Abstract="True">
 		<designationCategory>Power</designationCategory>
@@ -18,7 +18,6 @@
 		</graphicData>
 		<drawerType>MapMeshAndRealTime</drawerType>
 		<repairEffect>Repair</repairEffect>
-		
 		<soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
 		<filthLeaving>Filth_RubbleBuilding</filthLeaving>
 		<staticSunShadowHeight>0.5</staticSunShadowHeight>
