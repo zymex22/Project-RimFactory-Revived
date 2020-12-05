@@ -202,8 +202,10 @@ namespace ProjectRimFactory.Common
             }
             if (ShowRangeTypeSelectorButton)
             {
-                inRect = list.GetRect(30f);
 
+                
+                inRect = list.GetRect(30f);
+                Widgets.DrawLineHorizontal(inRect.x, inRect.y - 5, inRect.width);
 
                 Widgets.Label(inRect.LeftHalf(), "PRF_SettingsTab_RangeType_Label".Translate());
                 if (Widgets.ButtonText(inRect.RightHalf(), ( compPropertiesPowerWork.rangeCells as IRangeCells).ToText() ))
