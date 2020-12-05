@@ -57,7 +57,9 @@ namespace ProjectRimFactory.Common
 
         private float powerForSpeed = 0;
 
-        
+
+        public Rot4 RangeTypeRot = Rot4.North;
+
         private float powerForRange = 0;
 
         private enum rangeTypeClassEnum{
@@ -103,6 +105,7 @@ namespace ProjectRimFactory.Common
             Scribe_Values.Look<float>(ref this.powerForSpeed, "powerForSpeed");
             Scribe_Values.Look<float>(ref this.powerForRange, "powerForRange");
             Scribe_Values.Look(ref rangeTypeSeletion, "rangeType",-1);
+            Scribe_Values.Look(ref RangeTypeRot, "RangeTypeRot",Rot4.North);
 
             //Set the Loaded rangeCells Value
             if (Scribe.mode != LoadSaveMode.Saving)
@@ -170,7 +173,7 @@ namespace ProjectRimFactory.Common
         {
             if (this.RangeSetting)
             {
-                return this.RangeCells(this.parent.Position, this.parent.Rotation, this.parent.def, this.GetRange());
+                return this.RangeCells(this.parent.Position, RangeTypeRot, this.parent.def, this.GetRange());
             }
             return null;
         }
@@ -277,6 +280,8 @@ namespace ProjectRimFactory.Common
 
         string ToText();
 
+        bool NeedsRotate { get; }
+
     }
 
     public class CircleRange : IRangeCells
@@ -290,6 +295,8 @@ namespace ProjectRimFactory.Common
         {
             return "PRF_SettingsTab_RangeType_CircleRange".Translate();
         }
+
+        public bool NeedsRotate => false;
     }
 
     public class FacingRectRange : IRangeCells
@@ -303,6 +310,8 @@ namespace ProjectRimFactory.Common
         {
             return "PRF_SettingsTab_RangeType_FacingRectRange".Translate();
         }
+
+        public bool NeedsRotate => true;
     }
 
     public class RectRange : IRangeCells
@@ -317,5 +326,7 @@ namespace ProjectRimFactory.Common
         {
             return "PRF_SettingsTab_RangeType_RectRange".Translate();
         }
+
+        public bool NeedsRotate => false;
     }
 }
