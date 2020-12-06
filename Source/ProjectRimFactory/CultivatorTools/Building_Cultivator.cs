@@ -23,6 +23,12 @@ namespace ProjectRimFactory.CultivatorTools
             compOutputAdjustable = GetComp<CompOutputAdjustable>();
         }
 
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            compOutputAdjustable = GetComp<CompOutputAdjustable>();
+        }
+
         #region Abstract stuff
         public override int TickRate => def.GetModExtension<CultivatorDefModExtension>()?.TickFrequencyDivisor ?? 200;
 
