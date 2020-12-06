@@ -1,101 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using RimWorld;
+using System.Text;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Verse;
+using RimWorld;
 
 namespace ProjectRimFactory.Common
 {
     public class CompPowerWorkSetting : ThingComp, IPowerSupplyMachine
     {
-        [Unsaved] private CompPowerTrader powerComp;
+        public CompProperties_PowerWorkSetting Props => (CompProperties_PowerWorkSetting)this.props;
 
+        public int MinPowerForSpeed => this.Props.minPowerForSpeed;
 
-        private float powerForRange;
+        public int MaxPowerForSpeed => this.Props.maxPowerForSpeed;
 
-        private float powerForSpeed;
+        public int MinPowerForRange => this.Props.minPowerForRange;
 
-        public IRangeCells rangeCells;
+        public int MaxPowerForRange => this.Props.maxPowerForRange;
 
-
-        public IRangeCells[] rangeTypes = {new CircleRange(), new FacingRectRange(), new RectRange()};
-
-        //Used for Saving the rangeCells . This is done as directly saving rangeCells leads to unknown Type Errors on Load
-        private int rangeTypeSeletion = -1;
-        public CompProperties_PowerWorkSetting Props => (CompProperties_PowerWorkSetting) props;
-
-        private int rangeTypeSelection
-        {
-            get
-            {
-                if (rangeCells == null) rangeCells = (IRangeCells) Activator.CreateInstance(Props.rangeType);
-                if (rangeCells.ToText() == new CircleRange().ToText()) return (int) rangeTypeClassEnum.CircleRange;
-                if (rangeCells.ToText() == new FacingRectRange().ToText())
-                    return (int) rangeTypeClassEnum.FacingRectRange;
-                if (rangeCells.ToText() == new RectRange().ToText()) return (int) rangeTypeClassEnum.RectRange;
-                return (int) rangeTypeClassEnum.RectRange;
-            }
-
-            set
-            {
-                if (value == (int) rangeTypeClassEnum.CircleRange) rangeCells = new CircleRange();
-                if (value == (int) rangeTypeClassEnum.FacingRectRange) rangeCells = new FacingRectRange();
-                if (value == (int) rangeTypeClassEnum.RectRange) rangeCells = new RectRange();
-            }
-        }
-
-        public int MinPowerForSpeed => Props.minPowerForSpeed;
-
-        public int MaxPowerForSpeed => Props.maxPowerForSpeed;
-
-        public int MinPowerForRange => Props.minPowerForRange;
-
-        public int MaxPowerForRange => Props.maxPowerForRange;
+        public IRangeCells rangeCells = null;
 
         public float SupplyPowerForSpeed
         {
-            get => powerForSpeed;
+            get => this.powerForSpeed;
             set
             {
-                powerForSpeed = value;
-                AdjustPower();
-                RefreshPowerStatus();
+                this.powerForSpeed = value;
+                this.AdjustPower();
+                this.RefreshPowerStatus();
             }
         }
 
         public float SupplyPowerForRange
         {
-            get => powerForRange;
+            get => this.powerForRange;
             set
             {
-                powerForRange = value;
-                AdjustPower();
-                RefreshPowerStatus();
+                this.powerForRange = value;
+                this.AdjustPower();
+                this.RefreshPowerStatus();
             }
         }
 
         public virtual bool Glowable => false;
 
-        public virtual bool Glow
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+        public virtual bool Glow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public virtual bool SpeedSetting => this.Props.speedSetting;
+
+        public bool RangeSetting => this.Props.rangeSetting;
+
+        public virtual float RangeInterval => (this.Props.maxPowerForRange - this.Props.minPowerForRange) / (this.Props.maxRange - this.Props.minRange);
+
+        private float powerForSpeed = 0;
+
+
+        public Rot4 RangeTypeRot = Rot4.North;
+
+        private float powerForRange = 0;
+
+        private enum rangeTypeClassEnum{
+            CircleRange,
+            FacingRectRange,
+            RectRange
         }
 
-        public virtual bool SpeedSetting => Props.speedSetting;
-
-        public bool RangeSetting => Props.rangeSetting;
-
-        public virtual float RangeInterval =>
-            (Props.maxPowerForRange - Props.minPowerForRange) / (Props.maxRange - Props.minRange);
-
-        public void RefreshPowerStatus()
+        private int rangeTypeSelection
         {
-            if (powerComp != null)
-                powerComp.PowerOutput =
-                    -powerComp.Props.basePowerConsumption - SupplyPowerForSpeed - SupplyPowerForRange;
+            get
+            {
+                if (rangeCells == null) rangeCells = (IRangeCells)Activator.CreateInstance(Props.rangeType);
+                if (rangeCells.ToText() == new CircleRange().ToText()) return (int)rangeTypeClassEnum.CircleRange;
+                if (rangeCells.ToText() == new FacingRectRange().ToText()) return (int)rangeTypeClassEnum.FacingRectRange;
+                if (rangeCells.ToText() == new RectRange().ToText()) return (int)rangeTypeClassEnum.RectRange;
+                return (int)rangeTypeClassEnum.RectRange;
+            }
+
+            set
+            {
+                if (value == (int)rangeTypeClassEnum.CircleRange) rangeCells = new CircleRange();
+                if (value == (int)rangeTypeClassEnum.FacingRectRange) rangeCells = new FacingRectRange();
+                if (value == (int)rangeTypeClassEnum.RectRange) rangeCells = new RectRange();
+            }
+
         }
+
+        //Used for Saving the rangeCells . This is done as directly saving rangeCells leads to unknown Type Errors on Load
+        private int rangeTypeSeletion = -1;
 
 
         public override void PostExposeData()
@@ -103,151 +97,181 @@ namespace ProjectRimFactory.Common
             base.PostExposeData();
 
             //Load the Current rangeCells Value
-            if (Scribe.mode == LoadSaveMode.Saving) rangeTypeSeletion = rangeTypeSelection;
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                rangeTypeSeletion = rangeTypeSelection;
+            }
 
-            Scribe_Values.Look(ref powerForSpeed, "powerForSpeed");
-            Scribe_Values.Look(ref powerForRange, "powerForRange");
-            Scribe_Values.Look(ref rangeTypeSeletion, "rangeType", -1);
+            Scribe_Values.Look<float>(ref this.powerForSpeed, "powerForSpeed");
+            Scribe_Values.Look<float>(ref this.powerForRange, "powerForRange");
+            Scribe_Values.Look(ref rangeTypeSeletion, "rangeType",-1);
+            Scribe_Values.Look(ref RangeTypeRot, "RangeTypeRot",Rot4.North);
 
             //Set the Loaded rangeCells Value
             if (Scribe.mode != LoadSaveMode.Saving)
             {
-                if (rangeTypeSeletion == -1)
-                {
+                if (rangeTypeSeletion == -1) {
                     rangeCells = null;
                     rangeTypeSeletion = rangeTypeSelection;
-                }
+                } 
 
                 rangeTypeSelection = rangeTypeSeletion;
             }
 
-            AdjustPower();
-            RefreshPowerStatus();
+            this.AdjustPower();
+            this.RefreshPowerStatus();
         }
+
+        [Unsaved]
+        private CompPowerTrader powerComp;
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
             if (!respawningAfterLoad)
             {
-                powerForSpeed = Props.minPowerForSpeed;
-                powerForRange = Props.minPowerForRange;
+                this.powerForSpeed = this.Props.minPowerForSpeed;
+                this.powerForRange = this.Props.minPowerForRange;
             }
-
-            powerComp = parent.TryGetComp<CompPowerTrader>();
-            AdjustPower();
-            RefreshPowerStatus();
+            this.powerComp = this.parent.TryGetComp<CompPowerTrader>();
+            this.AdjustPower();
+            this.RefreshPowerStatus();
         }
 
         protected virtual void AdjustPower()
         {
-            powerForSpeed = Mathf.Clamp(powerForSpeed, MinPowerForSpeed, MaxPowerForSpeed);
+            this.powerForSpeed = Mathf.Clamp(this.powerForSpeed, this.MinPowerForSpeed, this.MaxPowerForSpeed);
 
-            powerForRange = Mathf.Clamp(powerForRange, MinPowerForRange, MaxPowerForRange);
+            this.powerForRange = Mathf.Clamp(this.powerForRange, this.MinPowerForRange, this.MaxPowerForRange);
+        }
+
+        public void RefreshPowerStatus()
+        {
+            if(this.powerComp != null)
+            {
+                this.powerComp.PowerOutput = -this.powerComp.Props.basePowerConsumption - this.SupplyPowerForSpeed - this.SupplyPowerForRange;
+            }
         }
 
         public virtual float GetSpeedFactor()
         {
-            var f = (powerForSpeed - MinPowerForSpeed) / (MaxPowerForSpeed - MinPowerForSpeed);
-            return Mathf.Lerp(Props.minSpeedFactor, Props.maxSpeedFactor, f);
+            var f = (this.powerForSpeed - this.MinPowerForSpeed) / (this.MaxPowerForSpeed - this.MinPowerForSpeed);
+            return Mathf.Lerp(this.Props.minSpeedFactor, this.Props.maxSpeedFactor, f);
         }
 
         public virtual float GetRange()
         {
-            if (RangeSetting)
+            if (this.RangeSetting)
             {
-                var f = (powerForRange - MinPowerForRange) / (MaxPowerForRange - MinPowerForRange);
-                return Mathf.Lerp(Props.minRange, Props.maxRange, f);
+                var f = (this.powerForRange - this.MinPowerForRange) / (this.MaxPowerForRange - this.MinPowerForRange);
+                return Mathf.Lerp(this.Props.minRange, this.Props.maxRange, f);
             }
-
             return 0f;
         }
 
         public virtual IEnumerable<IntVec3> GetRangeCells()
         {
-            if (RangeSetting) return RangeCells(parent.Position, parent.Rotation, parent.def, GetRange());
+            if (this.RangeSetting)
+            {
+                return this.RangeCells(this.parent.Position, RangeTypeRot, this.parent.def, this.GetRange());
+            }
             return null;
         }
 
         public override void PostDrawExtraSelectionOverlays()
         {
             base.PostDrawExtraSelectionOverlays();
-            if (RangeSetting) DrawRangeCells(Props.instance);
+            if (this.RangeSetting)
+            {
+                this.DrawRangeCells(this.Props.instance);
+            }
         }
 
         public virtual void DrawRangeCells(Color color)
         {
             var range = GetRange();
-            GenDraw.DrawFieldEdges(GetRangeCells().ToList(), color);
+            GenDraw.DrawFieldEdges(this.GetRangeCells().ToList(), color);
         }
 
+
+        
 
         public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
         {
-            if (rangeCells == null) rangeCells = (IRangeCells) Activator.CreateInstance(Props.rangeType);
-            return rangeCells.RangeCells(center, rot, thingDef, range);
+            if (this.rangeCells == null)
+            {
+                this.rangeCells = (IRangeCells)Activator.CreateInstance(Props.rangeType);
+            }
+            return (this.rangeCells as IRangeCells).RangeCells(center, rot, thingDef, range);
         }
 
-        private enum rangeTypeClassEnum
-        {
-            CircleRange,
-            FacingRectRange,
-            RectRange
-        }
+
+
+
+        public IRangeCells[] rangeTypes = new IRangeCells[] { new  CircleRange() , new FacingRectRange() , new RectRange() }; 
+
+
+
+
+
+
+
+
     }
 
     public class CompProperties_PowerWorkSetting : CompProperties
     {
-        public bool allowManualRangeTypeChange = false;
-        public Color blueprintMax = Color.gray.A(0.6f);
-
-        public Color blueprintMin = Color.white;
-        public Color instance = Color.white;
-        public int maxPowerForRange = 1000;
         public int maxPowerForSpeed = 0;
-        public float maxRange = 6;
+        public int minPowerForSpeed = 1000;
+
+        public float minSpeedFactor = 1;
         public float maxSpeedFactor = 2;
 
         public int minPowerForRange = 0;
-        public int minPowerForSpeed = 1000;
+        public int maxPowerForRange = 1000;
 
         public float minRange = 3;
+        public float maxRange = 6;
 
-        public float minSpeedFactor = 1;
-        public Color otherInstance = Color.white.A(0.35f);
+        public bool speedSetting = true;
         public bool rangeSetting = false;
+
+        public bool allowManualRangeTypeChange = false;
+
+        public Color blueprintMin = Color.white;
+        public Color blueprintMax = Color.gray.A(0.6f);
+        public Color instance = Color.white;
+        public Color otherInstance = Color.white.A(0.35f);
 
         public Type rangeType;
 
-        public bool speedSetting = true;
+        private IRangeCells propsRangeType => (IRangeCells)Activator.CreateInstance(rangeType);
 
         public CompProperties_PowerWorkSetting()
         {
-            compClass = typeof(CompPowerWorkSetting);
+            this.compClass = typeof(CompPowerWorkSetting);
         }
 
-        private IRangeCells propsRangeType => (IRangeCells) Activator.CreateInstance(rangeType);
-
-        public override void DrawGhost(IntVec3 center, Rot4 rot, ThingDef thingDef, Color ghostCol,
-            AltitudeLayer drawAltitude, Thing thing = null)
+        public override void DrawGhost(IntVec3 center, Rot4 rot, ThingDef thingDef, Color ghostCol, AltitudeLayer drawAltitude, Thing thing = null)
         {
-            if (rangeSetting)
+            if (this.rangeSetting)
             {
                 base.DrawGhost(center, rot, thingDef, ghostCol, drawAltitude, thing);
-                var min = propsRangeType.RangeCells(center, rot, thingDef, minRange);
-                var max = propsRangeType.RangeCells(center, rot, thingDef, maxRange);
-                min.Select(c => new {Cell = c, Color = blueprintMin})
-                    .Concat(max.Select(c => new {Cell = c, Color = blueprintMax}))
+                var min = propsRangeType.RangeCells(center, rot, thingDef, this.minRange);
+                var max = propsRangeType.RangeCells(center, rot, thingDef, this.maxRange);
+                min.Select(c => new { Cell = c, Color = this.blueprintMin })
+                    .Concat(max.Select(c => new { Cell = c, Color = this.blueprintMax }))
                     .GroupBy(a => a.Color)
                     .ToList()
                     .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
 
-                var map = Find.CurrentMap;
-                map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>())
-                    .Where(c => c != null)
-                    .ToList().ForEach(c => c.DrawRangeCells(otherInstance));
+                Map map = Find.CurrentMap;
+                map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null)
+                    .ToList().ForEach(c => c.DrawRangeCells(this.otherInstance));
             }
         }
+
+        
     }
 
     public interface IRangeCells
@@ -255,6 +279,9 @@ namespace ProjectRimFactory.Common
         IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range);
 
         string ToText();
+
+        bool NeedsRotate { get; }
+
     }
 
     public class CircleRange : IRangeCells
@@ -268,6 +295,8 @@ namespace ProjectRimFactory.Common
         {
             return "PRF_SettingsTab_RangeType_CircleRange".Translate();
         }
+
+        public bool NeedsRotate => false;
     }
 
     public class FacingRectRange : IRangeCells
@@ -281,6 +310,8 @@ namespace ProjectRimFactory.Common
         {
             return "PRF_SettingsTab_RangeType_FacingRectRange".Translate();
         }
+
+        public bool NeedsRotate => true;
     }
 
     public class RectRange : IRangeCells
@@ -288,14 +319,14 @@ namespace ProjectRimFactory.Common
         public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
         {
             var under = GenAdj.CellsOccupiedBy(center, rot, thingDef.size).ToHashSet();
-            return GenAdj.CellsOccupiedBy(center, rot,
-                    thingDef.size + new IntVec2(Mathf.RoundToInt(range) * 2, Mathf.RoundToInt(range) * 2))
+            return GenAdj.CellsOccupiedBy(center, rot, thingDef.size + new IntVec2(Mathf.RoundToInt(range) * 2, Mathf.RoundToInt(range) * 2))
                 .Where(c => !under.Contains(c));
         }
-
         public string ToText()
         {
             return "PRF_SettingsTab_RangeType_RectRange".Translate();
         }
+
+        public bool NeedsRotate => false;
     }
 }
