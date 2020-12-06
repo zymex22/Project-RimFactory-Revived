@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
-using System.Text;
 using System.Xml;
 using UnityEngine;
 using Verse;
@@ -11,29 +10,39 @@ namespace ProjectRimFactory.Common
 {
     public class ProjectRimFactory_ModSettings : ModSettings
     {
+        private static ContainerRow root;
+        private float lastHeight = 1000f;
+
+        private Vector2 scrollPosition;
+
+        public bool RequireReboot => root.RequireReboot;
+
+        public virtual IEnumerable<PatchOperation> Patches => root.GetValidPatches();
+
         public static void LoadXml(ModContentPack content)
         {
             root = ParseSettingRows(content);
             root.Initialize();
         }
 
-        private static ContainerRow root;
-
         private static ContainerRow ParseSettingRows(ModContentPack content)
         {
             var r = new ContainerRow();
-            var xmlDoc = DirectXmlLoader.XmlAssetsInModFolder(content, "Settings")?.Where(x => x.name == "Settings.xml")?.ToList().FirstOrDefault();
+            var xmlDoc = DirectXmlLoader.XmlAssetsInModFolder(content, "Settings")?.Where(x => x.name == "Settings.xml")
+                ?.ToList().FirstOrDefault();
             if (xmlDoc == null || xmlDoc.xmlDoc == null)
             {
                 Log.Error("Settings/Settings.xml not found or invalid xml.");
                 return r;
             }
+
             var rootElem = xmlDoc.xmlDoc.DocumentElement;
             if (rootElem.Name != "SettingRows")
             {
                 Log.Error("SettingRows not found. name=" + rootElem.Name);
                 return r;
             }
+
             r.Rows.LoadDataFromXmlCustom(rootElem);
             return r;
         }
@@ -42,59 +51,52 @@ namespace ProjectRimFactory.Common
         {
             base.ExposeData();
             root.ExposeData();
-            Scribe_Values.Look<Debug.Flag>(ref Debug.activeFlags, "debugFlags", 0);
+            Scribe_Values.Look<Debug.Flag>(ref Debug.activeFlags, "debugFlags");
         }
 
         public void DoWindowContents(Rect inRect)
         {
-            Rect outRect = new Rect(inRect);
+            var outRect = new Rect(inRect);
             outRect.yMin += 20f;
             outRect.yMax -= 20f;
             outRect.xMin += 20f;
             outRect.xMax -= 20f;
 
-            Rect viewRect = new Rect(0f, 0f, outRect.width - 16f, this.lastHeight);
+            var viewRect = new Rect(0f, 0f, outRect.width - 16f, lastHeight);
 
-            Widgets.BeginScrollView(outRect, ref this.scrollPosition, viewRect);
+            Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
             var list = new Listing_Standard();
             list.Begin(viewRect);
-            #if DEBUG
+#if DEBUG
             list.Label("Debug Symbols:");
-            foreach (var f in (Debug.Flag [])Enum.GetValues(typeof(Debug.Flag))) {
-                bool ischecked = (f & Debug.activeFlags) > 0;
-                list.CheckboxLabeled(f.ToString(), ref ischecked, f.ToString());// use Desc to force list to highlight
-                if (!ischecked == (f & Debug.activeFlags) > 0) {
-                    Debug.activeFlags ^= f; // toggle f
-                }
+            foreach (var f in (Debug.Flag[]) Enum.GetValues(typeof(Debug.Flag)))
+            {
+                var ischecked = (f & Debug.activeFlags) > 0;
+                list.CheckboxLabeled(f.ToString(), ref ischecked, f.ToString()); // use Desc to force list to highlight
+                if (!ischecked == (f & Debug.activeFlags) > 0) Debug.activeFlags ^= f; // toggle f
             }
+
             list.GapLine();
-            #endif
+#endif
             root.Draw(list);
             list.End();
             Widgets.EndScrollView();
 
-            this.lastHeight = list.CurHeight + 16f;
+            lastHeight = list.CurHeight + 16f;
         }
-
-        private Vector2 scrollPosition;
-        private float lastHeight = 1000f;
 
         public void Apply()
         {
             root.Apply();
         }
-
-        public bool RequireReboot => root.RequireReboot;
-
-        public virtual IEnumerable<PatchOperation> Patches => root.GetValidPatches();
     }
 
     public interface ISettingRow
     {
+        bool RequireReboot { get; }
         void Draw(Listing_Standard list);
         void ExposeData();
         void Apply();
-        bool RequireReboot { get; }
         bool Initialize();
         IEnumerable<PatchOperation> GetValidPatches();
     }
@@ -126,10 +128,10 @@ namespace ProjectRimFactory.Common
 
     public abstract class SettingItemBase : ISettingRow
     {
+        public string description;
         public string key;
         public string label;
-        public string description;
-        public virtual bool RequireReboot { get; protected set; } = false;
+        public virtual bool RequireReboot { get; protected set; }
 
         public abstract void Draw(Listing_Standard list);
 
@@ -157,17 +159,18 @@ namespace ProjectRimFactory.Common
     {
         public PatchElement Patch;
 
-        protected IEnumerable<PatchOperation> Patches => this.Patch?.Patches ?? Enumerable.Empty<PatchOperation>();
+        protected IEnumerable<PatchOperation> Patches => Patch?.Patches ?? Enumerable.Empty<PatchOperation>();
     }
 
     public class PatchElement
     {
+        public XmlNode rootNode;
         public List<PatchOperation> Patches { get; private set; }
 
         public void LoadDataFromXmlCustom(XmlNode xmlRoot)
         {
-            this.rootNode = xmlRoot;
-            this.Patches = LoadDataFromXml(xmlRoot);
+            rootNode = xmlRoot;
+            Patches = LoadDataFromXml(xmlRoot);
         }
 
         public static List<PatchOperation> LoadDataFromXml(XmlNode xmlRoot)
@@ -180,31 +183,29 @@ namespace ProjectRimFactory.Common
                 .Select(e => DirectXmlToObject.ObjectFromXml<PatchOperation>(e, false))
                 .ToList();
         }
-
-        public XmlNode rootNode;
     }
 
     public abstract class ContainerRowBase : ISettingRow
     {
         protected List<ISettingRow> rows = new List<ISettingRow>();
 
-        public bool RequireReboot => this.rows.Any(r => r.RequireReboot);
+        public bool RequireReboot => rows.Any(r => r.RequireReboot);
 
         public void Apply()
         {
-            this.rows.ForEach(r => r.Apply());
+            rows.ForEach(r => r.Apply());
         }
 
         public abstract void Draw(Listing_Standard list);
 
         public void ExposeData()
         {
-            this.rows.ForEach(r => r.ExposeData());
+            rows.ForEach(r => r.ExposeData());
         }
 
         public IEnumerable<PatchOperation> GetValidPatches()
         {
-            return this.rows.SelectMany(r => r.GetValidPatches());
+            return rows.SelectMany(r => r.GetValidPatches());
         }
 
         public abstract bool Initialize();
@@ -216,7 +217,7 @@ namespace ProjectRimFactory.Common
 
         public void LoadDataFromXmlCustom(XmlNode xmlRoot)
         {
-            this.rows = LoadDataFromXml(xmlRoot);
+            rows = LoadDataFromXml(xmlRoot);
         }
 
         public static List<ISettingRow> LoadDataFromXml(XmlNode xmlRoot)
@@ -233,116 +234,106 @@ namespace ProjectRimFactory.Common
 
     public class ContainerRow : ContainerRowBase
     {
-        public RowsElement Rows = new RowsElement();
-
         public Color backgroundColor = Color.clear;
 
         private float lastHeight = 100000;
+        public RowsElement Rows = new RowsElement();
 
         public override void Draw(Listing_Standard list)
         {
-            var rect = list.GetRect(this.lastHeight);
-            if (this.backgroundColor != Color.clear)
-            {
-                Widgets.DrawRectFast(rect, this.backgroundColor);
-            }
+            var rect = list.GetRect(lastHeight);
+            if (backgroundColor != Color.clear) Widgets.DrawRectFast(rect, backgroundColor);
             var child = new Listing_Standard();
             child.Begin(rect);
-            this.rows.ForEach(r => r.Draw(child));
+            rows.ForEach(r => r.Draw(child));
             child.End();
-            this.lastHeight = child.CurHeight;
+            lastHeight = child.CurHeight;
             list.Gap(list.verticalSpacing);
         }
 
         public override bool Initialize()
         {
-            if(this.Rows == null || this.Rows.rows == null)
-            {
-                return false;
-            }
-            this.rows = this.Rows.rows.Where(r => r.Initialize()).ToList();
-            return this.rows.Count > 0;
+            if (Rows == null || Rows.rows == null) return false;
+            rows = Rows.rows.Where(r => r.Initialize()).ToList();
+            return rows.Count > 0;
         }
     }
 
     public class SplitRow : ContainerRowBase
     {
-        public float rate = 0.5f;
-
-        public ISettingRow LeftRow;
-
-        public ISettingRow RightRow;
-
         private float lastHeight = 300;
 
         public Color leftBackgroundColor = Color.clear;
 
+        public ISettingRow LeftRow;
+        public float rate = 0.5f;
+
         public Color rightBackgroundColor = Color.clear;
+
+        public ISettingRow RightRow;
 
         public override void Draw(Listing_Standard list)
         {
-            var rect = list.GetRect(this.lastHeight);
+            var rect = list.GetRect(lastHeight);
 
-            var lr = new[]{
-                new { Row = this.LeftRow, List = new Listing_Standard(), Rect = rect.LeftPart(this.rate), BGColor = this.leftBackgroundColor },
-                new { Row = this.RightRow, List = new Listing_Standard(), Rect = rect.RightPart(1f - this.rate), BGColor = this.rightBackgroundColor }
+            var lr = new[]
+            {
+                new
+                {
+                    Row = LeftRow, List = new Listing_Standard(), Rect = rect.LeftPart(rate),
+                    BGColor = leftBackgroundColor
+                },
+                new
+                {
+                    Row = RightRow, List = new Listing_Standard(), Rect = rect.RightPart(1f - rate),
+                    BGColor = rightBackgroundColor
+                }
             }.ToList();
 
             lr.ForEach(s =>
             {
-                if (s.BGColor != Color.clear)
-                {
-                    Widgets.DrawRectFast(s.Rect, s.BGColor);
-                }
+                if (s.BGColor != Color.clear) Widgets.DrawRectFast(s.Rect, s.BGColor);
                 s.List.Begin(s.Rect);
                 s.Row.Draw(s.List);
                 s.List.End();
             });
-            this.lastHeight = lr.Select(s => s.List.CurHeight).Max();
+            lastHeight = lr.Select(s => s.List.CurHeight).Max();
 
             list.Gap(list.verticalSpacing);
         }
 
         public override bool Initialize()
         {
-            this.rows = new ISettingRow[] { this.LeftRow, this.RightRow }.Where(r => r.Initialize()).ToList();
-            return this.rows.Count > 0;
+            rows = new[] {LeftRow, RightRow}.Where(r => r.Initialize()).ToList();
+            return rows.Count > 0;
         }
     }
 
     public class TextRow : SettingRow
     {
-        public GameFont font = GameFont.Small;
         public TextAnchor anchor = TextAnchor.MiddleLeft;
-        public string text = "";
-        public float height;
         public Color backgroundColor = Color.clear;
+        public GameFont font = GameFont.Small;
+        public float height;
         public bool noTranslate = false;
+        public string text = "";
+
         public override void Draw(Listing_Standard list)
         {
             var tmp = Text.Font;
             var tmpAnc = Text.Anchor;
             try
             {
-                Text.Font = this.font;
-                Text.Anchor = this.anchor;
-                var h = this.height;
-                var t = this.text.Translate();
-                if (h == 0)
-                {
-                    h = Text.CalcHeight(t, list.ColumnWidth);
-                }
+                Text.Font = font;
+                Text.Anchor = anchor;
+                var h = height;
+                var t = text.Translate();
+                if (h == 0) h = Text.CalcHeight(t, list.ColumnWidth);
 
                 var rect = list.GetRect(h);
-                if (this.backgroundColor != Color.clear)
-                {
-                    Widgets.DrawRectFast(rect, this.backgroundColor);
-                }
-                var label = this.text.Translate();
-                if (noTranslate)
-                {
-                    label = this.text;
-                }
+                if (backgroundColor != Color.clear) Widgets.DrawRectFast(rect, backgroundColor);
+                var label = text.Translate();
+                if (noTranslate) label = text;
                 Widgets.Label(rect, label);
                 list.Gap(list.verticalSpacing);
             }
@@ -356,23 +347,17 @@ namespace ProjectRimFactory.Common
 
     public class ImageRow : SettingRow
     {
-        public string texPath;
-        public float height;
         public Color backgroundColor = Color.clear;
+        public float height;
+        public string texPath;
 
         public override void Draw(Listing_Standard list)
         {
-            var tex = ContentFinder<Texture2D>.Get(this.texPath, true);
-            float h = this.height;
-            if(h == 0)
-            {
-                h = tex.height;
-            }
+            var tex = ContentFinder<Texture2D>.Get(texPath);
+            var h = height;
+            if (h == 0) h = tex.height;
             var rect = list.GetRect(h);
-            if (this.backgroundColor != Color.clear)
-            {
-                Widgets.DrawRectFast(rect, this.backgroundColor);
-            }
+            if (backgroundColor != Color.clear) Widgets.DrawRectFast(rect, backgroundColor);
 
             Widgets.DrawTextureFitted(rect, tex, 1);
             list.Gap(list.verticalSpacing);
@@ -381,21 +366,16 @@ namespace ProjectRimFactory.Common
 
     public class GapLineRow : SettingRow
     {
-        public float height = 12f;
         public Color color = Color.clear;
+        public float height = 12f;
+
         public override void Draw(Listing_Standard list)
         {
-            Color tmp = GUI.color;
+            var tmp = GUI.color;
             try
             {
-                if(this.color != Color.clear)
-                {
-                    GUI.color = this.color;
-                }
-                if (height != 0f)
-                {
-                    list.GapLine(height);
-                }
+                if (color != Color.clear) GUI.color = color;
+                if (height != 0f) list.GapLine(height);
             }
             finally
             {
@@ -407,130 +387,119 @@ namespace ProjectRimFactory.Common
     public class GapRow : SettingRow
     {
         public float height = 12f;
+
         public override void Draw(Listing_Standard list)
         {
-            if (height != 0f)
-            {
-                list.Gap(this.height);
-            }
+            if (height != 0f) list.Gap(height);
         }
     }
 
 
     public class PatchItem : PatchSettingItem
     {
-        private bool checkOn = false;
+        private bool checkOn;
         private bool currentCheckOn;
 
         public override IEnumerable<PatchOperation> GetValidPatches()
         {
-            return this.checkOn ? this.Patches : Enumerable.Empty<PatchOperation>();
+            return checkOn ? Patches : Enumerable.Empty<PatchOperation>();
         }
 
         public override void Apply()
         {
-            if(this.currentCheckOn != this.checkOn)
+            if (currentCheckOn != checkOn)
             {
-                this.RequireReboot = true;
-                this.checkOn = this.currentCheckOn;
+                RequireReboot = true;
+                checkOn = currentCheckOn;
             }
         }
 
         public override void Draw(Listing_Standard list)
         {
-            list.CheckboxLabeled(this.label.Translate(), ref this.currentCheckOn, this.description.Translate());
+            list.CheckboxLabeled(label.Translate(), ref currentCheckOn, description.Translate());
         }
 
         public override void ExposeData()
         {
-            Scribe_Values.Look<bool>(ref this.checkOn, this.key);
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                this.currentCheckOn = this.checkOn;
-            }
+            Scribe_Values.Look(ref checkOn, key);
+            if (Scribe.mode != LoadSaveMode.Saving) currentCheckOn = checkOn;
         }
     }
 
     public abstract class PatchValueItem : PatchSettingItem
     {
-        public bool checkOn = false;
+        public bool checkOn;
         protected bool currentCheckOn;
 
-        protected abstract string ReplaceText { get; }
-
         protected List<PatchOperation> replaced;
+
+        protected abstract string ReplaceText { get; }
 
         protected IEnumerable<PatchOperation> ReplacedPatch
         {
             get
             {
-                if (this.replaced == null)
+                if (replaced == null)
                 {
-                    var xmlText = this.Patch.rootNode.OuterXml.Replace("${value}", SecurityElement.Escape(this.ReplaceText));
+                    var xmlText = Patch.rootNode.OuterXml.Replace("${value}", SecurityElement.Escape(ReplaceText));
                     var doc = new XmlDocument();
                     doc.LoadXml(xmlText);
                     var p = PatchElement.LoadDataFromXml(doc.FirstChild);
-                    this.replaced = PatchElement.LoadDataFromXml(doc.FirstChild);
+                    replaced = PatchElement.LoadDataFromXml(doc.FirstChild);
                 }
-                return this.replaced;
+
+                return replaced;
             }
         }
 
         public override void Apply()
         {
-            if (this.checkOn != this.currentCheckOn)
+            if (checkOn != currentCheckOn)
             {
-                this.RequireReboot = true;
-                this.checkOn = this.currentCheckOn;
+                RequireReboot = true;
+                checkOn = currentCheckOn;
             }
         }
 
         public override void ExposeData()
         {
-            Scribe_Values.Look<bool>(ref this.checkOn, this.key + "__check");
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                this.currentCheckOn = this.checkOn;
-            }
+            Scribe_Values.Look(ref checkOn, key + "__check");
+            if (Scribe.mode != LoadSaveMode.Saving) currentCheckOn = checkOn;
         }
 
         public override IEnumerable<PatchOperation> GetValidPatches()
         {
-            return this.checkOn ? this.ReplacedPatch : Enumerable.Empty<PatchOperation>();
+            return checkOn ? ReplacedPatch : Enumerable.Empty<PatchOperation>();
         }
     }
 
     public abstract class PatchValueItem<T> : PatchValueItem
     {
+        protected T currentValue;
         public T value;
 
-        protected T currentValue;
+        protected override string ReplaceText => value.ToString();
 
         public override void Apply()
         {
             base.Apply();
-            if (!object.Equals(this.value, this.currentValue))
+            if (!Equals(value, currentValue))
             {
-                this.RequireReboot = true;
-                this.value = this.currentValue;
+                RequireReboot = true;
+                value = currentValue;
             }
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<T>(ref this.value, this.key);
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                this.currentValue = this.value;
-            }
+            Scribe_Values.Look(ref value, key);
+            if (Scribe.mode != LoadSaveMode.Saving) currentValue = value;
         }
-
-        protected override string ReplaceText => this.value.ToString();
 
         public override bool Initialize()
         {
-            this.currentValue = this.value;
+            currentValue = value;
             return base.Initialize();
         }
     }
@@ -541,18 +510,17 @@ namespace ProjectRimFactory.Common
         {
             var rect = list.GetRect(Text.LineHeight);
             var left = rect.LeftHalf();
-            Widgets.Label(left.LeftHalf(), new GUIContent(this.label.Translate(), this.description.Translate()));
-            Widgets.Checkbox(left.RightHalf().position, ref this.currentCheckOn);
-            this.currentValue = Widgets.TextField(rect.RightHalf(), this.currentValue);
+            Widgets.Label(left.LeftHalf(), new GUIContent(label.Translate(), description.Translate()));
+            Widgets.Checkbox(left.RightHalf().position, ref currentCheckOn);
+            currentValue = Widgets.TextField(rect.RightHalf(), currentValue);
             list.Gap(list.verticalSpacing);
         }
     }
 
     public class PatchFloatValueItem : PatchValueItem<float>
     {
-        public float minValue = 0f;
-
         public float maxValue = 100000f;
+        public float minValue;
 
         public float roundTo = -1;
 
@@ -560,22 +528,22 @@ namespace ProjectRimFactory.Common
         {
             var rect = list.GetRect(Text.LineHeight * 2f);
             var left = rect.LeftHalf();
-            Widgets.Label(left.LeftHalf(), new GUIContent(this.label.Translate(), this.description.Translate()));
-            Widgets.Checkbox(left.RightHalf().position, ref this.currentCheckOn);
+            Widgets.Label(left.LeftHalf(), new GUIContent(label.Translate(), description.Translate()));
+            Widgets.Checkbox(left.RightHalf().position, ref currentCheckOn);
 
             var rectSlider = rect.RightHalf();
             rectSlider.xMin += 20;
             rectSlider.xMax -= 20;
-            this.currentValue = Widgets.HorizontalSlider(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
+            currentValue = Widgets.HorizontalSlider(rectSlider, currentValue, minValue, maxValue, true,
+                currentValue.ToString(), minValue.ToString(), maxValue.ToString(), roundTo);
             list.Gap(list.verticalSpacing);
         }
     }
 
     public class PatchIntValueItem : PatchValueItem<int>
     {
-        public int minValue = 0;
-
         public int maxValue = 100000;
+        public int minValue;
 
         public int roundTo = 1;
 
@@ -583,13 +551,14 @@ namespace ProjectRimFactory.Common
         {
             var rect = list.GetRect(Text.LineHeight * 2f);
             var left = rect.LeftHalf();
-            Widgets.Label(left.LeftHalf(), new GUIContent(this.label.Translate(), this.description.Translate()));
-            Widgets.Checkbox(left.RightHalf().position, ref this.currentCheckOn);
+            Widgets.Label(left.LeftHalf(), new GUIContent(label.Translate(), description.Translate()));
+            Widgets.Checkbox(left.RightHalf().position, ref currentCheckOn);
 
             var rectSlider = rect.RightHalf();
             rectSlider.xMin += 20;
             rectSlider.xMax -= 20;
-            this.currentValue = (int)Widgets.HorizontalSlider(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
+            currentValue = (int) Widgets.HorizontalSlider(rectSlider, currentValue, minValue, maxValue, true,
+                currentValue.ToString(), minValue.ToString(), maxValue.ToString(), roundTo);
             list.Gap(list.verticalSpacing);
         }
     }
@@ -600,10 +569,10 @@ namespace ProjectRimFactory.Common
         {
             var rect = list.GetRect(Text.LineHeight);
             var left = rect.LeftHalf();
-            Widgets.Label(left.LeftHalf(), new GUIContent(this.label.Translate(), this.description.Translate()));
-            Widgets.Checkbox(left.RightHalf().position, ref this.currentCheckOn);
+            Widgets.Label(left.LeftHalf(), new GUIContent(label.Translate(), description.Translate()));
+            Widgets.Checkbox(left.RightHalf().position, ref currentCheckOn);
 
-            Widgets.Checkbox(rect.RightHalf().position, ref this.currentValue);
+            Widgets.Checkbox(rect.RightHalf().position, ref currentValue);
             list.Gap(list.verticalSpacing);
         }
     }
@@ -612,33 +581,34 @@ namespace ProjectRimFactory.Common
     {
         public Type enumType;
 
-        public List<object> EnumValues => this.enumType.GetEnumValues().Cast<object>().ToList();
+        public List<object> EnumValues => enumType.GetEnumValues().Cast<object>().ToList();
+
+        protected override string ReplaceText => EnumValues[value].ToString();
 
         public override void Draw(Listing_Standard list)
         {
             var rect = list.GetRect(Text.LineHeight);
             var left = rect.LeftHalf();
-            Widgets.Label(left.LeftHalf(), new GUIContent(this.label.Translate(), this.description.Translate()));
-            Widgets.Checkbox(left.RightHalf().position, ref this.currentCheckOn);
-            if (Widgets.ButtonText(rect.RightHalf(), "PRF.Settings.Select".Translate() + " (" + this.EnumValues[this.currentValue] + ")"))
-            {
-                Find.WindowStack.Add(new FloatMenu(this.enumType.GetEnumValues().Cast<object>().Select((o, idx) => new FloatMenuOption(o.ToString(), () => this.currentValue = idx)).ToList()));
-            }
+            Widgets.Label(left.LeftHalf(), new GUIContent(label.Translate(), description.Translate()));
+            Widgets.Checkbox(left.RightHalf().position, ref currentCheckOn);
+            if (Widgets.ButtonText(rect.RightHalf(),
+                "PRF.Settings.Select".Translate() + " (" + EnumValues[currentValue] + ")"))
+                Find.WindowStack.Add(new FloatMenu(enumType.GetEnumValues().Cast<object>()
+                    .Select((o, idx) => new FloatMenuOption(o.ToString(), () => currentValue = idx)).ToList()));
 
             list.Gap(list.verticalSpacing);
         }
-
-        protected override string ReplaceText => this.EnumValues[this.value].ToString();
 
         public override bool Initialize()
         {
             if (!base.Initialize())
                 return false;
-            if (enumType == null || this.enumType.GetEnumValues().Cast<object>().Count() ==  0)
+            if (enumType == null || enumType.GetEnumValues().Cast<object>().Count() == 0)
             {
                 Log.Error("invalid enumType on Settings.xml");
                 return false;
             }
+
             return true;
         }
     }
@@ -647,31 +617,32 @@ namespace ProjectRimFactory.Common
     {
         public List<string> options;
 
+        protected override string ReplaceText => options[value];
+
         public override void Draw(Listing_Standard list)
         {
             var rect = list.GetRect(Text.LineHeight);
             var left = rect.LeftHalf();
-            Widgets.Label(left.LeftHalf(), new GUIContent(this.label.Translate(), this.description.Translate()));
-            Widgets.Checkbox(left.RightHalf().position, ref this.currentCheckOn);
-            if (Widgets.ButtonText(rect.RightHalf(), "PRF.Settings.Select".Translate() + " (" + this.options[this.currentValue] + ")"))
-            {
-                Find.WindowStack.Add(new FloatMenu(this.options.Select((o, idx) => new FloatMenuOption(o.ToString(), () => this.currentValue = idx)).ToList()));
-            }
+            Widgets.Label(left.LeftHalf(), new GUIContent(label.Translate(), description.Translate()));
+            Widgets.Checkbox(left.RightHalf().position, ref currentCheckOn);
+            if (Widgets.ButtonText(rect.RightHalf(),
+                "PRF.Settings.Select".Translate() + " (" + options[currentValue] + ")"))
+                Find.WindowStack.Add(new FloatMenu(options
+                    .Select((o, idx) => new FloatMenuOption(o.ToString(), () => currentValue = idx)).ToList()));
 
             list.Gap(list.verticalSpacing);
         }
-
-        protected override string ReplaceText => this.options[this.value].ToString();
 
         public override bool Initialize()
         {
             if (!base.Initialize())
                 return false;
-            if (this.options == null || this.options.Count == 0)
+            if (options == null || options.Count == 0)
             {
                 Log.Error("invalid selectionList on Settings.xml");
                 return false;
             }
+
             return true;
         }
     }

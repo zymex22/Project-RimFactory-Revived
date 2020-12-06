@@ -1,10 +1,8 @@
-﻿using RimWorld;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Verse;
 using ProjectRimFactory.Common;
+using RimWorld;
+using Verse;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers
 {
@@ -13,15 +11,19 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
     {
         public abstract BillStack BillStack { get; }
 
-        public virtual IEnumerable<IntVec3> IngredientStackCells => this.GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenAdj.CellsAdjacent8Way(this);
+        public virtual IEnumerable<IntVec3> IngredientStackCells =>
+            GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenAdj.CellsAdjacent8Way(this);
 
-        public bool CurrentlyUsableForBills() => false;
-
-        public abstract IEnumerable<RecipeDef> GetAllRecipes();
+        public bool CurrentlyUsableForBills()
+        {
+            return false;
+        }
 
         public bool UsableForBillsAfterFueling()
         {
             throw new NotImplementedException();
         }
+
+        public abstract IEnumerable<RecipeDef> GetAllRecipes();
     }
 }

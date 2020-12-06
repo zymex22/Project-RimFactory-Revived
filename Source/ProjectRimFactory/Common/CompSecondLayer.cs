@@ -14,7 +14,7 @@ namespace ProjectRimFactory.Common
     {
         private Graphic graphicInt;
 
-        public CompProperties_SecondLayer Props => (CompProperties_SecondLayer)props;
+        public CompProperties_SecondLayer Props => (CompProperties_SecondLayer) props;
 
         public virtual Graphic Graphic
         {
@@ -24,11 +24,14 @@ namespace ProjectRimFactory.Common
                 {
                     if (Props.graphicData == null)
                     {
-                        Log.ErrorOnce(parent.def + " has no SecondLayer graphicData but we are trying to access it.", 764532);
+                        Log.ErrorOnce(parent.def + " has no SecondLayer graphicData but we are trying to access it.",
+                            764532);
                         return BaseContent.BadGraphic;
                     }
+
                     graphicInt = Props.graphicData.GraphicColoredFor(parent);
                 }
+
                 return graphicInt;
             }
         }
@@ -36,20 +39,21 @@ namespace ProjectRimFactory.Common
         public override void PostDraw()
         {
             base.PostDraw();
-            Graphic.Draw(GenThing.TrueCenter(parent.Position, parent.Rotation, parent.def.size, Props.Altitude), parent.Rotation, parent);
+            Graphic.Draw(GenThing.TrueCenter(parent.Position, parent.Rotation, parent.def.size, Props.Altitude),
+                parent.Rotation, parent);
         }
     }
+
     internal class CompProperties_SecondLayer : CompProperties
     {
-        public GraphicData graphicData = null;
-
         public AltitudeLayer altitudeLayer = AltitudeLayer.MoteOverhead;
-
-        public float Altitude => Altitudes.AltitudeFor(altitudeLayer);
+        public GraphicData graphicData = null;
 
         public CompProperties_SecondLayer()
         {
             compClass = typeof(CompSecondLayer);
         }
+
+        public float Altitude => altitudeLayer.AltitudeFor();
     }
 }

@@ -1,43 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
+﻿using ProjectRimFactory.Common;
 using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory
 {
     [StaticConstructorOnStartup]
     public static class RS
     {
-        static RS()
-        {
-            PregnantIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Pregnant", true);
-            BondIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Bond", true);
-            MaleIcon = GenderUtility.GetIcon(Gender.Male);
-            FemaleIcon = GenderUtility.GetIcon(Gender.Female);
-            SlaughterIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Slaughter", true);
-            TrainedIcon = ContentFinder<Texture2D>.Get("UI/Icons/Trainables/Obedience", true);
-            YoungIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Young", true);
-            AdultIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Adult", true);
-
-
-            OutputDirectionIcon = ContentFinder<Texture2D>.Get("PRFUi/OutputDirection", true);
-            ForbidIcon = ContentFinder<Texture2D>.Get("PRFUi/Forbid", true);
-            PlayIcon = ContentFinder<Texture2D>.Get("PRFUi/Play", true);
-
-            DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
-
-            Arrow = ContentFinder<Texture2D>.Get("UI/Overlays/Arrow", true);
-            // Initialize graphics for SpecialSculptures:
-            foreach (var s in ProjectRimFactory.Common.
-                     ProjectRimFactory_ModComponent.availableSpecialSculptures)
-                s.Init();
-        }
-
         public static readonly Texture2D PregnantIcon;
         public static readonly Texture2D BondIcon;
         public static readonly Texture2D MaleIcon;
@@ -55,5 +24,29 @@ namespace ProjectRimFactory
         public static readonly Texture2D DeleteX;
 
         public static readonly Texture2D Arrow;
+
+        static RS()
+        {
+            PregnantIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Pregnant");
+            BondIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Bond");
+            MaleIcon = Gender.Male.GetIcon();
+            FemaleIcon = Gender.Female.GetIcon();
+            SlaughterIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Slaughter");
+            TrainedIcon = ContentFinder<Texture2D>.Get("UI/Icons/Trainables/Obedience");
+            YoungIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Young");
+            AdultIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Adult");
+
+
+            OutputDirectionIcon = ContentFinder<Texture2D>.Get("PRFUi/OutputDirection");
+            ForbidIcon = ContentFinder<Texture2D>.Get("PRFUi/Forbid");
+            PlayIcon = ContentFinder<Texture2D>.Get("PRFUi/Play");
+
+            DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete");
+
+            Arrow = ContentFinder<Texture2D>.Get("UI/Overlays/Arrow");
+            // Initialize graphics for SpecialSculptures:
+            foreach (var s in ProjectRimFactory_ModComponent.availableSpecialSculptures)
+                s.Init();
+        }
     }
 }

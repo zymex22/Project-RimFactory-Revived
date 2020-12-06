@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Verse;
 
 namespace ProjectRimFactory.Archo
@@ -11,15 +7,9 @@ namespace ProjectRimFactory.Archo
     {
         public static string Decipher(string str)
         {
-            if (Regex.IsMatch(str, "[\"\']\\)?;"))
-            {
-                return "PRF_ArchoCipher_InternalServerError".Translate();
-            }
-            string key = "PRF_ArchoCipherKey_" + str.Replace(' ', '_');
-            if (Translator.TryTranslate(key, out TaggedString result))
-            {
-                return result;
-            }
+            if (Regex.IsMatch(str, "[\"\']\\)?;")) return "PRF_ArchoCipher_InternalServerError".Translate();
+            var key = "PRF_ArchoCipherKey_" + str.Replace(' ', '_');
+            if (key.TryTranslate(out var result)) return result;
             return null;
         }
     }

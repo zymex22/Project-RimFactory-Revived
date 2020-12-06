@@ -1,50 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using Verse.Sound;
-using UnityEngine;
-using System.Collections;
 using ProjectRimFactory.Common;
+using RimWorld;
+using UnityEngine;
+using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
     public interface IRange
     {
-        int GetRange();
         IntVec3 Position { get; }
         IntVec2 Size { get; }
         Rot4 Rotation { get; }
+        int GetRange();
         IEnumerable<IntVec3> GetAllTargetCells();
     }
 
-    public abstract class Building_BaseRange<T> : Building_BaseLimitation<T>, IRange, IPowerSupplyMachineHolder, IPowerSupplyMachine where T : Thing
+    public abstract class Building_BaseRange<T> : Building_BaseLimitation<T>, IRange, IPowerSupplyMachineHolder,
+        IPowerSupplyMachine where T : Thing
     {
-        public override int MinPowerForRange => this.RangeExtension.minPower;
-        public override int MaxPowerForRange => this.RangeExtension.maxPower;
+        private const int CACHE_CLEAR_INTERVAL_TICKS = 180;
 
-        public override bool Glowable { get => false; }
+        [Unsaved] private HashSet<IntVec3> allTargetCellsCache;
 
-        private bool glow = false;
+        private bool glow;
+
+        [Unsaved] private bool nextTargetCells;
+
+        [Unsaved] private List<List<IntVec3>> splittedTargetCells;
+
+        [Unsaved] private int splittedTargetCellsIndex;
+
+        private float supplyPowerForRange;
+
+        [Unsaved] protected int targetEnumrationCount = 100;
+
+        protected ModExtension_WorkIORange RangeExtension => def.GetModExtension<ModExtension_WorkIORange>();
+
+        private bool SplitTargetCells =>
+            targetEnumrationCount > 0 && GetAllTargetCells().Count() > targetEnumrationCount;
+
+        public override int MinPowerForRange => RangeExtension.minPower;
+        public override int MaxPowerForRange => RangeExtension.maxPower;
+
+        public override bool Glowable => false;
+
         public override bool Glow
         {
-            get => this.glow;
+            get => glow;
             set
             {
-                if (this.glow != value)
+                if (glow != value)
                 {
-                    this.glow = value;
-                    this.ChangeGlow();
+                    glow = value;
+                    ChangeGlow();
                 }
             }
         }
-
-        public IntVec2 Size => this.def.Size;
 
         public override bool SpeedSetting => true;
 
@@ -52,125 +66,91 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override float RangeInterval => 500;
 
-        protected ModExtension_WorkIORange RangeExtension => this.def.GetModExtension<ModExtension_WorkIORange>();
-
-        private float supplyPowerForRange;
-
         public override float SupplyPowerForRange
         {
-            get => this.supplyPowerForRange;
+            get => supplyPowerForRange;
             set
             {
-                if (this.supplyPowerForRange != value)
+                if (supplyPowerForRange != value)
                 {
-                    this.supplyPowerForRange = value;
-                    this.ChangeGlow();
-                    this.allTargetCellsCache = null;
+                    supplyPowerForRange = value;
+                    ChangeGlow();
+                    allTargetCellsCache = null;
                 }
-                this.RefreshPowerStatus();
-            }
-        }
 
-        [Unsaved]
-        protected int targetEnumrationCount = 100;
-
-        [Unsaved]
-        private bool nextTargetCells = false;
-
-        [Unsaved]
-        private HashSet<IntVec3> allTargetCellsCache;
-
-        [Unsaved]
-        private List<List<IntVec3>> splittedTargetCells;
-
-        [Unsaved]
-        private int splittedTargetCellsIndex = 0;
-
-        private const int CACHE_CLEAR_INTERVAL_TICKS = 180;
-
-        public IEnumerable<IntVec3> GetAllTargetCells()
-        {
-            this.CacheTargetCells();
-            return allTargetCellsCache;
-        }
-
-        private void CacheTargetCells()
-        {
-            if (this.allTargetCellsCache == null)
-            {
-                this.allTargetCellsCache = this.RangeExtension.TargetCellResolver.GetRangeCells(this.def, this.Position, this.RotatedSize, this.Map, this.Rotation, this.GetRange()).ToHashSet();
-                if (this.targetEnumrationCount > 0)
-                {
-                    this.splittedTargetCells = this.allTargetCellsCache.ToList().Grouped(this.targetEnumrationCount);
-                }
-            }
-        }
-
-        private List<IntVec3> GetCurrentSplittedTargetCells()
-        {
-            this.CacheTargetCells();
-            if (this.splittedTargetCellsIndex >= this.splittedTargetCells.Count)
-            {
-                this.splittedTargetCellsIndex = 0;
-            }
-            return this.splittedTargetCells[this.splittedTargetCellsIndex];
-        }
-
-        private void NextSplittedTargetCells()
-        {
-            this.splittedTargetCellsIndex++;
-            if (this.splittedTargetCellsIndex >= this.splittedTargetCells.Count)
-            {
-                this.splittedTargetCellsIndex = 0;
-            }
-        }
-
-        private void ClearAllTargetCellCache()
-        {
-            if (this.IsActive())
-            {
-                this.allTargetCellsCache = null;
-            }
-            if (this.Spawned)
-            {
-                if (this.RangeExtension.TargetCellResolver.NeedClearingCache)
-                {
-                    MapManager.AfterAction(CACHE_CLEAR_INTERVAL_TICKS, this.ClearAllTargetCellCache);
-                }
-            }
-        }
-
-        protected override void ClearActions()
-        {
-            base.ClearActions();
-            this.MapManager.RemoveAfterAction(this.ClearAllTargetCellCache);
-        }
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look<float>(ref this.supplyPowerForRange, "supplyPowerForRange", this.MinPowerForRange);
-            Scribe_Values.Look<bool>(ref this.glow, "glow", false);
-        }
-
-        protected override void ReloadSettings(object sender, EventArgs e)
-        {
-            if (this.SupplyPowerForRange < this.MinPowerForRange)
-            {
-                this.SupplyPowerForRange = this.MinPowerForRange;
-            }
-            if (this.SupplyPowerForRange > this.MaxPowerForRange)
-            {
-                this.SupplyPowerForRange = this.MaxPowerForRange;
+                RefreshPowerStatus();
             }
         }
 
         public override void RefreshPowerStatus()
         {
-            if (-this.SupplyPowerForRange - this.SupplyPowerForSpeed - (this.Glowable && this.Glow ? 2000 : 0) != this.TryGetComp<CompPowerTrader>().PowerOutput)
+            if (-SupplyPowerForRange - SupplyPowerForSpeed - (Glowable && Glow ? 2000 : 0) !=
+                this.TryGetComp<CompPowerTrader>().PowerOutput)
+                powerComp.PowerOutput = -SupplyPowerForRange - SupplyPowerForSpeed - (Glowable && Glow ? 2000 : 0);
+        }
+
+        public IntVec2 Size => def.Size;
+
+        public IEnumerable<IntVec3> GetAllTargetCells()
+        {
+            CacheTargetCells();
+            return allTargetCellsCache;
+        }
+
+        public int GetRange()
+        {
+            return RangeExtension.TargetCellResolver.GetRange(SupplyPowerForRange);
+        }
+
+        private void CacheTargetCells()
+        {
+            if (allTargetCellsCache == null)
             {
-                this.powerComp.PowerOutput = -this.SupplyPowerForRange - this.SupplyPowerForSpeed - (this.Glowable && this.Glow ? 2000 : 0);
+                allTargetCellsCache = RangeExtension.TargetCellResolver
+                    .GetRangeCells(def, Position, RotatedSize, Map, Rotation, GetRange()).ToHashSet();
+                if (targetEnumrationCount > 0)
+                    splittedTargetCells = allTargetCellsCache.ToList().Grouped(targetEnumrationCount);
             }
+        }
+
+        private List<IntVec3> GetCurrentSplittedTargetCells()
+        {
+            CacheTargetCells();
+            if (splittedTargetCellsIndex >= splittedTargetCells.Count) splittedTargetCellsIndex = 0;
+            return splittedTargetCells[splittedTargetCellsIndex];
+        }
+
+        private void NextSplittedTargetCells()
+        {
+            splittedTargetCellsIndex++;
+            if (splittedTargetCellsIndex >= splittedTargetCells.Count) splittedTargetCellsIndex = 0;
+        }
+
+        private void ClearAllTargetCellCache()
+        {
+            if (IsActive()) allTargetCellsCache = null;
+            if (Spawned)
+                if (RangeExtension.TargetCellResolver.NeedClearingCache)
+                    MapManager.AfterAction(CACHE_CLEAR_INTERVAL_TICKS, ClearAllTargetCellCache);
+        }
+
+        protected override void ClearActions()
+        {
+            base.ClearActions();
+            MapManager.RemoveAfterAction(ClearAllTargetCellCache);
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref supplyPowerForRange, "supplyPowerForRange", MinPowerForRange);
+            Scribe_Values.Look(ref glow, "glow");
+        }
+
+        protected override void ReloadSettings(object sender, EventArgs e)
+        {
+            if (SupplyPowerForRange < MinPowerForRange) SupplyPowerForRange = MinPowerForRange;
+            if (SupplyPowerForRange > MaxPowerForRange) SupplyPowerForRange = MaxPowerForRange;
         }
 
         private void ChangeGlow()
@@ -178,14 +158,14 @@ namespace ProjectRimFactory.AutoMachineTool
             Option(this.TryGetComp<CompGlower>()).ForEach(glower =>
             {
                 var tmp = this.TryGetComp<CompFlickable>().SwitchIsOn;
-                glower.Props.glowRadius = this.Glow ? (this.GetRange() + 2f) * 2f : 0;
-                glower.Props.overlightRadius = this.Glow ? (this.GetRange() + 2.1f) : 0;
+                glower.Props.glowRadius = Glow ? (GetRange() + 2f) * 2f : 0;
+                glower.Props.overlightRadius = Glow ? GetRange() + 2.1f : 0;
                 this.TryGetComp<CompFlickable>().SwitchIsOn = !tmp;
                 // this.TryGetComp<CompPowerTrader>().PowerOn = !tmp;
-                glower.UpdateLit(this.Map);
+                glower.UpdateLit(Map);
                 this.TryGetComp<CompFlickable>().SwitchIsOn = tmp;
                 // this.TryGetComp<CompPowerTrader>().PowerOn = tmp;
-                glower.UpdateLit(this.Map);
+                glower.UpdateLit(Map);
             });
         }
 
@@ -193,43 +173,31 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
 
-            if (!respawningAfterLoad)
-            {
-                this.SupplyPowerForRange = this.MinPowerForRange;
-            }
+            if (!respawningAfterLoad) SupplyPowerForRange = MinPowerForRange;
             Option(this.TryGetComp<CompGlower>()).ForEach(g =>
             {
-                CompProperties_Glower newProp = new CompProperties_Glower();
+                var newProp = new CompProperties_Glower();
                 newProp.compClass = g.Props.compClass;
                 newProp.glowColor = g.Props.glowColor;
                 newProp.glowRadius = g.Props.glowRadius;
                 newProp.overlightRadius = g.Props.overlightRadius;
                 g.props = newProp;
             });
-            this.allTargetCellsCache = null;
-            this.ChangeGlow();
-            if (this.RangeExtension.TargetCellResolver.NeedClearingCache)
-            {
-                MapManager.AfterAction(CACHE_CLEAR_INTERVAL_TICKS, this.ClearAllTargetCellCache);
-            }
-        }
-
-        public int GetRange()
-        {
-            return this.RangeExtension.TargetCellResolver.GetRange(this.SupplyPowerForRange);
+            allTargetCellsCache = null;
+            ChangeGlow();
+            if (RangeExtension.TargetCellResolver.NeedClearingCache)
+                MapManager.AfterAction(CACHE_CLEAR_INTERVAL_TICKS, ClearAllTargetCellCache);
         }
 
         protected virtual IEnumerable<IntVec3> GetTargetCells()
         {
             if (SplitTargetCells)
             {
-                this.nextTargetCells = true;
-                return this.GetCurrentSplittedTargetCells();
+                nextTargetCells = true;
+                return GetCurrentSplittedTargetCells();
             }
-            else
-            {
-                return this.GetAllTargetCells();
-            }
+
+            return GetAllTargetCells();
         }
 
 #if DEBUG
@@ -237,23 +205,19 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.Draw();
 
-            if (Find.Selector.FirstSelectedObject == this && this.SplitTargetCells)
-            {
-                GenDraw.DrawFieldEdges(this.GetCurrentSplittedTargetCells(), Color.red);
-            }
+            if (Find.Selector.FirstSelectedObject == this && SplitTargetCells)
+                GenDraw.DrawFieldEdges(GetCurrentSplittedTargetCells(), Color.red);
         }
 #endif
 
         protected override void Ready()
         {
             base.Ready();
-            if (this.State == WorkingState.Ready && SplitTargetCells && this.nextTargetCells)
-            { 
-                this.NextSplittedTargetCells();
-                this.nextTargetCells = false;
+            if (State == WorkingState.Ready && SplitTargetCells && nextTargetCells)
+            {
+                NextSplittedTargetCells();
+                nextTargetCells = false;
             }
         }
-
-        private bool SplitTargetCells => this.targetEnumrationCount > 0 && this.GetAllTargetCells().Count() > this.targetEnumrationCount;
     }
 }

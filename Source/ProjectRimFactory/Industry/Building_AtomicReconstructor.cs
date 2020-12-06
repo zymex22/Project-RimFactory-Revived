@@ -1,9 +1,6 @@
-﻿using ProjectRimFactory.Common;
+﻿using System.Text;
+using ProjectRimFactory.Common;
 using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -11,20 +8,14 @@ namespace ProjectRimFactory.Industry
 {
     public class Building_AtomicReconstructor : Building
     {
-        private ThingDef thingToGenerate;
+        private CompOutputAdjustable outputComp;
+        private CompPowerTrader powerComp;
         public int progressTicks;
+        private CompRefuelable refuelableComp;
         public int speedFactor = 1; // fuel consumption = efficiencyFactor^2
-        CompPowerTrader powerComp;
-        CompRefuelable refuelableComp;
-        CompOutputAdjustable outputComp;
+        private ThingDef thingToGenerate;
 
-        public int PaperclipConsumptionFactor
-        {
-            get
-            {
-                return speedFactor * speedFactor;
-            }
-        }
+        public int PaperclipConsumptionFactor => speedFactor * speedFactor;
 
         public int TotalWorkRequired
         {
@@ -32,7 +23,8 @@ namespace ProjectRimFactory.Industry
             {
                 if (ThingToGenerate == null)
                     return 0;
-                return Mathf.RoundToInt(StatDefOf.MarketValue.Worker.GetValue(StatRequest.For(ThingToGenerate, null)) * 100 * 2); // 2 work per $0.01
+                return Mathf.RoundToInt(StatDefOf.MarketValue.Worker.GetValue(StatRequest.For(ThingToGenerate, null)) *
+                                        100 * 2); // 2 work per $0.01
             }
         }
 
@@ -52,38 +44,27 @@ namespace ProjectRimFactory.Industry
             {
                 if (ThingToGenerate == null)
                     return 0;
-                return (ItemBaseCost * speedFactor) / TotalWorkRequired;
+                return ItemBaseCost * speedFactor / TotalWorkRequired;
             }
         }
 
-        public string ProgressToStringPercent
-        {
-            get
-            {
-                return ThingToGenerate == null ? 0f.ToStringPercent() : (progressTicks / (float)TotalWorkRequired).ToStringPercent();
-            }
-        }
+        public string ProgressToStringPercent => ThingToGenerate == null
+            ? 0f.ToStringPercent()
+            : (progressTicks / (float) TotalWorkRequired).ToStringPercent();
 
-        public string EstimatedProductionTimeLeftPeriod
-        {
-            get
-            {
-                return ((TotalWorkRequired - progressTicks) / speedFactor).ToStringTicksToPeriod();
-            }
-        }
+        public string EstimatedProductionTimeLeftPeriod =>
+            ((TotalWorkRequired - progressTicks) / speedFactor).ToStringTicksToPeriod();
 
         public ThingDef ThingToGenerate
         {
-            get
-            {
-                return thingToGenerate;
-            }
+            get => thingToGenerate;
             set
             {
                 thingToGenerate = value;
                 progressTicks = 0;
             }
         }
+
         public override void PostMake()
         {
             base.PostMake();
@@ -104,33 +85,28 @@ namespace ProjectRimFactory.Industry
         {
             base.Tick();
             if (powerComp.PowerOn)
-            {
                 if (ThingToGenerate != null)
                 {
-                    float fuel = refuelableComp.Fuel;
+                    var fuel = refuelableComp.Fuel;
                     if (fuel >= FuelConsumptionPerTick)
                     {
                         refuelableComp.ConsumeFuel(FuelConsumptionPerTick);
                         progressTicks += speedFactor;
                         if (progressTicks >= TotalWorkRequired)
                         {
-                            Thing thing = ThingMaker.MakeThing(ThingToGenerate);
+                            var thing = ThingMaker.MakeThing(ThingToGenerate);
                             GenPlace.TryPlaceThing(thing, outputComp.CurrentCell, Map, ThingPlaceMode.Near);
                             progressTicks = 0;
                         }
                     }
                 }
-            }
         }
 
         public override string GetInspectString()
         {
-            StringBuilder builder = new StringBuilder();
-            string str = base.GetInspectString();
-            if (!string.IsNullOrEmpty(str))
-            {
-                builder.AppendLine(str);
-            }
+            var builder = new StringBuilder();
+            var str = base.GetInspectString();
+            if (!string.IsNullOrEmpty(str)) builder.AppendLine(str);
             builder.Append("AtomicReconstructorProgress".Translate(ProgressToStringPercent));
             return builder.ToString().TrimEndNewlines();
         }
@@ -147,9 +123,8 @@ namespace ProjectRimFactory.Industry
         {
             base.DrawGUIOverlay();
             if (Find.CameraDriver.CurrentZoom < CameraZoomRange.Middle)
-            {
-                GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f), thingToGenerate?.LabelCap ?? "AssemblerIdle".Translate(), Color.white);
-            }
+                GenMapUI.DrawThingLabel(GenMapUI.LabelDrawPosFor(this, 0f),
+                    thingToGenerate?.LabelCap ?? "AssemblerIdle".Translate(), Color.white);
         }
     }
 }

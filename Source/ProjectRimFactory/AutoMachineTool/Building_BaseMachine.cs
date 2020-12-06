@@ -1,91 +1,104 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using ProjectRimFactory.Common;
 using RimWorld;
 using Verse;
-using Verse.AI;
-using Verse.Sound;
-using UnityEngine;
-using ProjectRimFactory.Common;
-using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public abstract class Building_BaseMachine<T> : Building_Base<T>, IPowerSupplyMachineHolder, IPowerSupplyMachine, IBeltConveyorSender where T : Thing
+    public abstract class Building_BaseMachine<T> : Building_Base<T>, IPowerSupplyMachineHolder, IPowerSupplyMachine,
+        IBeltConveyorSender where T : Thing
     {
+        protected CompPowerTrader powerComp;
+
+        [Unsaved] protected bool setInitialMinPower = true;
+
+        private float supplyPowerForSpeed;
         protected virtual float SpeedFactor => WorkSpeedExtension.speedFactor;
-        protected virtual int? SkillLevel { get => null; }
+        protected virtual int? SkillLevel => null;
+
+        protected ModExtension_WorkSpeed WorkSpeedExtension => def.GetModExtension<ModExtension_WorkSpeed>();
+
+        protected override float WorkAmountPerTick => 0.01f * SpeedFactor * SupplyPowerForSpeed * Factor2();
 
         public virtual int MinPowerForSpeed => WorkSpeedExtension.minPower;
         public virtual int MaxPowerForSpeed => WorkSpeedExtension.maxPower;
 
-        public IPowerSupplyMachine RangePowerSupplyMachine => this;
-
-        protected ModExtension_WorkSpeed WorkSpeedExtension => this.def.GetModExtension<ModExtension_WorkSpeed>();
-
-        [Unsaved]
-        protected bool setInitialMinPower = true;
-
-        protected CompPowerTrader powerComp;
-
         public virtual float SupplyPowerForSpeed
         {
-            get => this.supplyPowerForSpeed;
+            get => supplyPowerForSpeed;
             set
             {
-                if (this.supplyPowerForSpeed != value)
+                if (supplyPowerForSpeed != value)
                 {
-                    this.supplyPowerForSpeed = value;
-                    this.RefreshPowerStatus();
+                    supplyPowerForSpeed = value;
+                    RefreshPowerStatus();
                 }
             }
         }
-        private float supplyPowerForSpeed;
+
+        public virtual void RefreshPowerStatus()
+        {
+            if (powerComp == null) return;
+            if (SupplyPowerForSpeed != powerComp.PowerOutput) powerComp.PowerOutput = -SupplyPowerForSpeed;
+        }
+
+        public virtual int MinPowerForRange => throw new NotImplementedException();
+
+        public virtual int MaxPowerForRange => throw new NotImplementedException();
+
+        public virtual float SupplyPowerForRange
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public virtual bool Glowable => false;
+
+        public virtual bool Glow
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
+        public virtual bool SpeedSetting => true;
+
+        public virtual bool RangeSetting => false;
+
+        public virtual float RangeInterval => throw new NotImplementedException();
+
+        public IPowerSupplyMachine RangePowerSupplyMachine => this;
 
 
         public override void ExposeData()
         {
             base.ExposeData();
 
-            Scribe_Values.Look<float>(ref this.supplyPowerForSpeed, "supplyPowerForSpeed", this.MinPowerForSpeed);
-            this.ReloadSettings(null, null);
+            Scribe_Values.Look(ref supplyPowerForSpeed, "supplyPowerForSpeed", MinPowerForSpeed);
+            ReloadSettings(null, null);
         }
 
         protected virtual void ReloadSettings(object sender, EventArgs e)
         {
-            if (this.SupplyPowerForSpeed < this.MinPowerForSpeed)
-            {
-                this.SupplyPowerForSpeed = this.MinPowerForSpeed;
-            }
-            if (this.SupplyPowerForSpeed > this.MaxPowerForSpeed)
-            {
-                this.SupplyPowerForSpeed = this.MaxPowerForSpeed;
-            }
+            if (SupplyPowerForSpeed < MinPowerForSpeed) SupplyPowerForSpeed = MinPowerForSpeed;
+            if (SupplyPowerForSpeed > MaxPowerForSpeed) SupplyPowerForSpeed = MaxPowerForSpeed;
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            this.powerComp = this.TryGetComp<CompPowerTrader>();
+            powerComp = this.TryGetComp<CompPowerTrader>();
 
             if (!respawningAfterLoad)
-            {
                 if (setInitialMinPower)
-                    this.SupplyPowerForSpeed = this.MinPowerForSpeed;
-            }
+                    SupplyPowerForSpeed = MinPowerForSpeed;
 
-            this.MapManager.NextAction(this.RefreshPowerStatus);
-            this.MapManager.AfterAction(5, this.RefreshPowerStatus);
+            MapManager.NextAction(RefreshPowerStatus);
+            MapManager.AfterAction(5, RefreshPowerStatus);
         }
 
         protected override bool IsActive()
         {
-            if (this.powerComp == null || !this.powerComp.PowerOn)
-            {
-                return false;
-            }
+            if (powerComp == null || !powerComp.PowerOn) return false;
             return base.IsActive();
         }
 
@@ -93,36 +106,6 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.DeSpawn();
         }
-
-        public virtual void RefreshPowerStatus()
-        {
-            if(this.powerComp == null)
-            {
-                return;
-            }
-            if (this.SupplyPowerForSpeed != this.powerComp.PowerOutput)
-            {
-                this.powerComp.PowerOutput = -this.SupplyPowerForSpeed;
-            }
-        }
-
-        protected override float WorkAmountPerTick => 0.01f * this.SpeedFactor * this.SupplyPowerForSpeed * this.Factor2();
-
-        public virtual int MinPowerForRange => throw new NotImplementedException();
-
-        public virtual int MaxPowerForRange => throw new NotImplementedException();
-
-        public virtual float SupplyPowerForRange { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public virtual bool Glowable => false;
-
-        public virtual bool Glow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public virtual bool SpeedSetting => true;
-
-        public virtual bool RangeSetting => false;
-
-        public virtual float RangeInterval => throw new NotImplementedException();
 
         protected virtual float Factor2()
         {
@@ -132,9 +115,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override void ReceiveCompSignal(string signal)
         {
             if (signal == CompPowerTrader.PowerTurnedOffSignal || signal == CompPowerTrader.PowerTurnedOnSignal)
-            {
-                this.RefreshPowerStatus();
-            }
+                RefreshPowerStatus();
         }
     }
 }

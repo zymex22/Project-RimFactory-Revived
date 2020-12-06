@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using UnityEngine;
-using Verse;
-using RimWorld;
-
-using static ProjectRimFactory.AutoMachineTool.Ops;
-
-namespace ProjectRimFactory.AutoMachineTool {
+﻿namespace ProjectRimFactory.AutoMachineTool
+{
 #if false
     /// <summary>
     /// Note: This works okay for some graphics, but fails when the
@@ -166,8 +156,10 @@ namespace ProjectRimFactory.AutoMachineTool {
             arrow01 = MaterialPool.MatFrom("Belts/SmallArrow01");
             canSendTos[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefSendToRot4AtLevel;
             canGetFroms[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefReceiveFromRot4AtLevel;
-            canSendTos[typeof(Building_BeltConveyorUGConnector)] = Building_BeltConveyorUGConnector.CanDefSendToRot4AtLevel;
-            canGetFroms[typeof(Building_BeltConveyorUGConnector)] = Building_BeltConveyorUGConnector.CanDefReceiveFromRot4AtLevel;
+            canSendTos[typeof(Building_BeltConveyorUGConnector)] =
+ Building_BeltConveyorUGConnector.CanDefSendToRot4AtLevel;
+            canGetFroms[typeof(Building_BeltConveyorUGConnector)] =
+ Building_BeltConveyorUGConnector.CanDefReceiveFromRot4AtLevel;
             canSendTos[typeof(Building_BeltSplitter)] = Building_BeltSplitter.CanDefSendToRot4AtLevel;
             canGetFroms[typeof(Building_BeltSplitter)] = Building_BeltSplitter.CanDefReceiveFromRot4AtLevel;
         }

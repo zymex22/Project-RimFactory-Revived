@@ -1,5 +1,5 @@
-﻿using Verse;
-using RimWorld;
+﻿using RimWorld;
+using Verse;
 
 namespace ProjectRimFactory.CultivatorTools
 {
@@ -15,10 +15,12 @@ namespace ProjectRimFactory.CultivatorTools
             if (plant != null && !Map.reservationManager.IsReservedByAnyoneOf(plant, Faction))
             {
                 var rate = GetGrowthRatePerTickFor(plant);
-                plant.Growth += rate * this.GrowRate;//Growth sped up by 1hr
+                plant.Growth += rate * GrowRate; //Growth sped up by 1hr
             }
+
             return true;
         }
+
         public float GetGrowthRatePerTickFor(Plant p)
         {
             var num = 1f / (60000f * p.def.plant.growDays);

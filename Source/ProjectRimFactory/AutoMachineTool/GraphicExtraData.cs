@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-
+using System.Xml;
+using HarmonyLib;
 using UnityEngine;
 using Verse;
-using RimWorld;
-namespace ProjectRimFactory {
+
+namespace ProjectRimFactory
+{
     /****************************************************************
      * Modders can extend defs by use of DefModExtensions. But there
      * are no such option extensions for GraphicData in the XML, and
@@ -34,96 +35,116 @@ namespace ProjectRimFactory {
      * Final note: I still don't fully understand everything I
      * am doing, so ...good luck, god speed, etc?
      ***************************************************************/
-    public class GraphicExtraData {
+    public class GraphicExtraData
+    {
         // If you add something here, consider adding ToString() for it below
-        public Vector3? arrowDrawOffset;     // Vector3? so we can
+        public Vector3? arrowDrawOffset; // Vector3? so we can
         public Vector3? arrowEastDrawOffset; // test against `null`
+        public Vector3? arrowNorthDrawOffset; // actually changed
+        public Vector3? arrowSouthDrawOffset; // in def's XML.
         public Vector3? arrowWestDrawOffset; // and only update if
-        public Vector3? arrowNorthDrawOffset;  // actually changed
-        public Vector3? arrowSouthDrawOffset;  // in def's XML.
-        public string texPath = null; // actual texPath
-        public string texPath2 = null;  // splitter building, wall edges, whatever?
         public GraphicData graphicData1 = null; // wall transitions?
+        public string inputString;
         public List<string> specialLinkDefs;
-        public string inputString = null;
+        public string texPath = null; // actual texPath
+        public string texPath2 = null; // splitter building, wall edges, whatever?
 
-        public static GraphicExtraData Extract(GraphicRequest req, 
-                                           out GraphicRequest outReq,
-                                           bool removeExtraFromReq=false) {
+        public static GraphicExtraData Extract(GraphicRequest req,
+            out GraphicRequest outReq,
+            bool removeExtraFromReq = false)
+        {
             outReq = CopyGraphicRequest(req);
-            if (req.graphicData.texPath[0] == '[') {
+            if (req.graphicData.texPath[0] == '[')
+            {
                 GraphicExtraData extraData = null;
-                try {
-                    var helperDoc = new System.Xml.XmlDocument();
+                try
+                {
+                    var helperDoc = new XmlDocument();
                     helperDoc.LoadXml(req.graphicData.texPath.Replace('[', '<').Replace(']', '>'));
                     extraData = DirectXmlToObject.ObjectFromXml<GraphicExtraData>(
-                                                   helperDoc.DocumentElement, false);
-                } catch (Exception e) {
+                        helperDoc.DocumentElement, false);
+                }
+                catch (Exception e)
+                {
                     Log.Error("GraphicExtraData was unable to extract XML from \"" + req.graphicData.texPath +
-                    "\"; Exception: " + e);
+                              "\"; Exception: " + e);
                     return null;
                 }
+
                 extraData.inputString = req.graphicData.texPath;
-                if (removeExtraFromReq) {
+                if (removeExtraFromReq)
+                {
                     outReq.graphicData.texPath = extraData.texPath;
                     outReq.path = extraData.texPath;
                 }
+
                 Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data extracted: " + extraData);
                 return extraData;
             }
-            #if DEBUG
-            else {
-                Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data empty: " + req.graphicData.texPath);
-            }
-            #endif
+#if DEBUG
+
+            Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data empty: " + req.graphicData.texPath);
+#endif
             return null;
         }
+
         //no idea if this is necessary, but *it works* 
         //  - "it works" is a general theme here
-        public static GraphicRequest CopyGraphicRequest(GraphicRequest req, string newTexPath = null) {
-            GraphicData gData = new GraphicData();
+        public static GraphicRequest CopyGraphicRequest(GraphicRequest req, string newTexPath = null)
+        {
+            var gData = new GraphicData();
             gData.CopyFrom(req.graphicData);
             var gr = new GraphicRequest(gData.graphicClass, gData.texPath, req.shader,
-                  req.drawSize, req.color, req.colorTwo, gData, req.renderQueue,
-                  req.shaderParameters);
-            if (newTexPath != null) {
+                req.drawSize, req.color, req.colorTwo, gData, req.renderQueue,
+                req.shaderParameters);
+            if (newTexPath != null)
+            {
                 gr.path = newTexPath;
                 gr.graphicData.texPath = newTexPath;
             }
+
             return gr;
         }
-        #if DEBUG
+#if DEBUG
         // This is only used in graphics debugging:
-        public override string ToString() {
-            StringBuilder s = new StringBuilder("[ExtraGraphicRequest for \"" + this.inputString + "\": ");
+        public override string ToString()
+        {
+            var s = new StringBuilder("[ExtraGraphicRequest for \"" + inputString + "\": ");
             var pieces = new List<string>();
-            foreach (var f in HarmonyLib.AccessTools.GetDeclaredFields(typeof(GraphicExtraData))) {
-                if (f.FieldType == typeof(Vector3?)) {
+            foreach (var f in AccessTools.GetDeclaredFields(typeof(GraphicExtraData)))
+                if (f.FieldType == typeof(Vector3?))
+                {
                     var x = f.GetValue(this);
                     if (x != null)
-                        pieces.Add(f.Name + ": " + x.ToString());
-                    else { } //pieces.Add(" " + f.Name + ": null");
-                } else if (f.FieldType == typeof(string) && f.Name!="inputString") {
-                    var x = f.GetValue(this);
-                    if (x != null)
-                        pieces.Add(f.Name + ": \"" + x.ToString() + "\"");
-                } else if (f.FieldType == typeof(GraphicData)) {
-                    var x = f.GetValue(this);
-                    if (x != null)
-                        pieces.Add(f.Name + ": [" + x.ToString() + "]");
+                    {
+                        pieces.Add(f.Name + ": " + x);
+                    }
                 }
-            }
-            if (specialLinkDefs != null) {
-                pieces.Add(" specialLinkDefs: [" + String.Join(", ",
-                             specialLinkDefs) + "]");
-            }
-            if (pieces.Count > 0) s.Append(" ").Append(String.Join(", ", pieces));
+                else if (f.FieldType == typeof(string) && f.Name != "inputString")
+                {
+                    var x = f.GetValue(this);
+                    if (x != null)
+                        pieces.Add(f.Name + ": \"" + x + "\"");
+                }
+                else if (f.FieldType == typeof(GraphicData))
+                {
+                    var x = f.GetValue(this);
+                    if (x != null)
+                        pieces.Add(f.Name + ": [" + x + "]");
+                }
+
+            if (specialLinkDefs != null)
+                pieces.Add(" specialLinkDefs: [" + string.Join(", ",
+                    specialLinkDefs) + "]");
+            if (pieces.Count > 0) s.Append(" ").Append(string.Join(", ", pieces));
             s.Append("]");
             return s.ToString();
         }
-        #endif
+#endif
     }
-    public interface IHaveGraphicExtraData {
+
+    public interface IHaveGraphicExtraData
+    {
         void ExtraInit(GraphicRequest req, GraphicExtraData extraData);
     }
 }

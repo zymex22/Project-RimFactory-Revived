@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Verse;
+﻿using System.Collections.Generic;
 using Verse.AI;
 
 namespace ProjectRimFactory.Drones.AI
@@ -16,12 +12,9 @@ namespace ProjectRimFactory.Drones.AI
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            yield return new Toil()
+            yield return new Toil
             {
-                initAction = () =>
-                {
-                    pawn.Destroy();
-                },
+                initAction = () => { pawn.Destroy(); },
                 defaultCompleteMode = ToilCompleteMode.Instant
             };
         }

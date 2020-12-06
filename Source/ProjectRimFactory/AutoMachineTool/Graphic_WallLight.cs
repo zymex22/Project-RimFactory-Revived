@@ -1,39 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Linq;
 using UnityEngine;
 using Verse;
-using RimWorld;
-
-using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
     public class Graphic_WallLight : Graphic_Link2<Graphic_WallLight>
     {
-        public Graphic_WallLight() : base()
-        {
-        }
+        public override bool ShouldDrawRotated => data == null || data.drawRotated;
 
         public override bool ShouldLinkWith(Rot4 dir, Thing parent)
         {
-            IntVec3 c = parent.Position + dir.FacingCell;
-            if (!c.InBounds(parent.Map))
-            {
-                return false;
-            }
+            var c = parent.Position + dir.FacingCell;
+            if (!c.InBounds(parent.Map)) return false;
 
             return IsWall(c, parent.Map);
-        }
-
-        public override bool ShouldDrawRotated
-        {
-            get
-            {
-                return this.data == null || this.data.drawRotated;
-            }
         }
 
         private bool IsWall(IntVec3 pos, Map map)
@@ -47,35 +27,28 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation)
         {
-            int num = 0;
-            if (thingDef.PlaceWorkers.All(p => p.AllowsPlacing(thingDef, loc.ToIntVec3(), rot, Find.CurrentMap).Accepted))
+            var num = 0;
+            if (thingDef.PlaceWorkers.All(
+                p => p.AllowsPlacing(thingDef, loc.ToIntVec3(), rot, Find.CurrentMap).Accepted))
             {
-                int num2 = 1;
-                for (int i = 0; i < 4; i++)
+                var num2 = 1;
+                for (var i = 0; i < 4; i++)
                 {
-                    IntVec3 c = loc.ToIntVec3() + GenAdj.CardinalDirections[i];
-                    if (this.IsWall(c, Find.CurrentMap))
-                    {
-                        num += num2;
-                    }
+                    var c = loc.ToIntVec3() + GenAdj.CardinalDirections[i];
+                    if (IsWall(c, Find.CurrentMap)) num += num2;
                     num2 *= 2;
                 }
             }
-            LinkDirections linkSet = (LinkDirections)num;
-            var material = this.subMats[(int)linkSet];
+
+            var linkSet = (LinkDirections) num;
+            var material = subMats[(int) linkSet];
             material.shader = ShaderDatabase.Transparent;
 
-            Mesh mesh = this.MeshAt(rot);
-            Quaternion quaternion = this.QuatFromRot(rot);
-            if (extraRotation != 0f)
-            {
-                quaternion *= Quaternion.Euler(Vector3.up * extraRotation);
-            }
+            var mesh = MeshAt(rot);
+            var quaternion = QuatFromRot(rot);
+            if (extraRotation != 0f) quaternion *= Quaternion.Euler(Vector3.up * extraRotation);
             Graphics.DrawMesh(mesh, loc, quaternion, material, 0);
-            if (this.ShadowGraphic != null)
-            {
-                this.ShadowGraphic.DrawWorker(loc, rot, thingDef, thing, extraRotation);
-            }
+            if (ShadowGraphic != null) ShadowGraphic.DrawWorker(loc, rot, thingDef, thing, extraRotation);
         }
     }
 }

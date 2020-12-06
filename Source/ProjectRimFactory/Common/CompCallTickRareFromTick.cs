@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using Verse;
+﻿using Verse;
 
 namespace ProjectRimFactory.Common
 {
@@ -12,10 +7,7 @@ namespace ProjectRimFactory.Common
         public override void CompTick()
         {
             base.CompTick();
-            if (Find.TickManager.TicksGame % 250 == 0)
-            {
-                this.parent?.TickRare();
-            }
+            if (Find.TickManager.TicksGame % 250 == 0) parent?.TickRare();
         }
     }
 }

@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using RimWorld;
+﻿using System.Collections.Generic;
 using Verse;
-using UnityEngine;
-using HarmonyLib;
-using System.Xml;
 
 namespace ProjectRimFactory.Common
 {
@@ -17,7 +9,7 @@ namespace ProjectRimFactory.Common
 
         public bool IsExcluded(ThingDef def)
         {
-            return this.excludeOres?.Contains(def) ?? false;
+            return excludeOres?.Contains(def) ?? false;
         }
     }
 }

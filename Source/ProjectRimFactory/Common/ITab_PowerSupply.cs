@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
+﻿using RimWorld;
 using UnityEngine;
-using static ProjectRimFactory.AutoMachineTool.Ops;
+using Verse;
 
 namespace ProjectRimFactory.Common
 {
@@ -36,7 +29,7 @@ namespace ProjectRimFactory.Common
         void RefreshPowerStatus();
     }
 
-    class ITab_PowerSupply : ITab
+    internal class ITab_PowerSupply : ITab
     {
         private static readonly Vector2 WinSize = new Vector2(600f, 130f);
 
@@ -46,30 +39,31 @@ namespace ProjectRimFactory.Common
 
         private static readonly float HeightGlow = 30;
 
+        private readonly string descriptionForRange;
+
+        private readonly string descriptionForSpeed;
+
         public ITab_PowerSupply()
         {
-            this.size = WinSize;
-            this.labelKey = "PRF.AutoMachineTool.SupplyPower.TabName";
+            size = WinSize;
+            labelKey = "PRF.AutoMachineTool.SupplyPower.TabName";
 
-            this.descriptionForSpeed = "PRF.AutoMachineTool.SupplyPower.Description".Translate();
-            this.descriptionForRange = "PRF.AutoMachineTool.SupplyPower.DescriptionForRange".Translate();
+            descriptionForSpeed = "PRF.AutoMachineTool.SupplyPower.Description".Translate();
+            descriptionForRange = "PRF.AutoMachineTool.SupplyPower.DescriptionForRange".Translate();
         }
-        
-        private string descriptionForSpeed;
 
-        private string descriptionForRange;
+        private IPowerSupplyMachine Machine => (SelThing as IPowerSupplyMachineHolder)?.RangePowerSupplyMachine;
 
-        private IPowerSupplyMachine Machine => (this.SelThing as IPowerSupplyMachineHolder)?.RangePowerSupplyMachine;
-
-        public override bool IsVisible => this.Machine != null && (this.Machine.SpeedSetting || this.Machine.RangeSetting);
+        public override bool IsVisible => Machine != null && (Machine.SpeedSetting || Machine.RangeSetting);
 
         public override void TabUpdate()
         {
             base.TabUpdate();
 
-            float additionalHeight = (this.Machine.SpeedSetting ? HeightSpeed : 0) + (this.Machine.RangeSetting ? HeightRange : 0) + (this.Machine.Glowable ? HeightGlow : 0);
-            this.size = new Vector2(WinSize.x, WinSize.y + additionalHeight);
-            this.UpdateSize();
+            var additionalHeight = (Machine.SpeedSetting ? HeightSpeed : 0) + (Machine.RangeSetting ? HeightRange : 0) +
+                                   (Machine.Glowable ? HeightGlow : 0);
+            size = new Vector2(WinSize.x, WinSize.y + additionalHeight);
+            UpdateSize();
         }
 
         public override void OnOpen()
@@ -79,20 +73,21 @@ namespace ProjectRimFactory.Common
 
         protected override void FillTab()
         {
-            Listing_Standard list = new Listing_Standard();
-            Rect inRect = new Rect(0f, 0f, this.size.x, this.size.y).ContractedBy(10f);
+            var list = new Listing_Standard();
+            var inRect = new Rect(0f, 0f, size.x, size.y).ContractedBy(10f);
 
             list.Begin(inRect);
 
             list.Gap();
             var rect = new Rect();
 
-            if (this.Machine.SpeedSetting)
+            if (Machine.SpeedSetting)
             {
-                int minPowerSpeed = this.Machine.MinPowerForSpeed;
-                int maxPowerSpeed = this.Machine.MaxPowerForSpeed;
+                var minPowerSpeed = Machine.MinPowerForSpeed;
+                var maxPowerSpeed = Machine.MaxPowerForSpeed;
 
-                string valueLabelForSpeed = "PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed".Translate() + " (" + minPowerSpeed + " to " + maxPowerSpeed + ") ";
+                var valueLabelForSpeed = "PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed".Translate() + " (" +
+                                         minPowerSpeed + " to " + maxPowerSpeed + ") ";
 
                 // for speed
                 rect = list.GetRect(50f);
@@ -100,25 +95,28 @@ namespace ProjectRimFactory.Common
                 list.Gap();
 
                 rect = list.GetRect(50f);
-                var speed = (int)Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForSpeed, (float)minPowerSpeed, (float)maxPowerSpeed, true, valueLabelForSpeed, minPowerSpeed.ToString(), maxPowerSpeed.ToString(), 50);
-                this.Machine.SupplyPowerForSpeed = speed;
+                var speed = (int) Widgets.HorizontalSlider(rect, Machine.SupplyPowerForSpeed, minPowerSpeed,
+                    maxPowerSpeed, true, valueLabelForSpeed, minPowerSpeed.ToString(), maxPowerSpeed.ToString(), 50);
+                Machine.SupplyPowerForSpeed = speed;
                 list.Gap();
 
                 rect = list.GetRect(30f);
-                string buf = this.Machine.SupplyPowerForSpeed.ToString();
-                int power = (int)this.Machine.SupplyPowerForSpeed;
+                var buf = Machine.SupplyPowerForSpeed.ToString();
+                var power = (int) Machine.SupplyPowerForSpeed;
                 Widgets.Label(rect.LeftHalf(), valueLabelForSpeed);
-                Widgets.TextFieldNumeric<int>(rect.RightHalf(), ref power, ref buf, this.Machine.SupplyPowerForSpeed, this.Machine.SupplyPowerForSpeed);
+                Widgets.TextFieldNumeric(rect.RightHalf(), ref power, ref buf, Machine.SupplyPowerForSpeed,
+                    Machine.SupplyPowerForSpeed);
                 list.Gap();
-                this.Machine.SupplyPowerForSpeed = power;
+                Machine.SupplyPowerForSpeed = power;
             }
 
-            if (this.Machine.RangeSetting)
+            if (Machine.RangeSetting)
             {
-                int minPowerRange = this.Machine.MinPowerForRange;
-                int maxPowerRange = this.Machine.MaxPowerForRange;
+                var minPowerRange = Machine.MinPowerForRange;
+                var maxPowerRange = Machine.MaxPowerForRange;
 
-                string valueLabelForRange = "PRF.AutoMachineTool.SupplyPower.ValueLabelForRange".Translate() + " (" + minPowerRange + " to " + maxPowerRange + ") ";
+                var valueLabelForRange = "PRF.AutoMachineTool.SupplyPower.ValueLabelForRange".Translate() + " (" +
+                                         minPowerRange + " to " + maxPowerRange + ") ";
 
                 // for range
                 rect = list.GetRect(50f);
@@ -126,18 +124,21 @@ namespace ProjectRimFactory.Common
                 list.Gap();
 
                 rect = list.GetRect(50f);
-                var range = Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForRange, (float)minPowerRange, (float)maxPowerRange, true, valueLabelForRange, minPowerRange.ToString(), maxPowerRange.ToString(), this.Machine.RangeInterval);
-                this.Machine.SupplyPowerForRange = range;
+                var range = Widgets.HorizontalSlider(rect, Machine.SupplyPowerForRange, minPowerRange, maxPowerRange,
+                    true, valueLabelForRange, minPowerRange.ToString(), maxPowerRange.ToString(),
+                    Machine.RangeInterval);
+                Machine.SupplyPowerForRange = range;
                 list.Gap();
             }
 
-            if (this.Machine.Glowable)
+            if (Machine.Glowable)
             {
                 rect = list.GetRect(30f);
-                bool glow = this.Machine.Glow;
+                var glow = Machine.Glow;
                 Widgets.CheckboxLabeled(rect, "PRF.AutoMachineTool.SupplyPower.SunLampText".Translate(), ref glow);
-                this.Machine.Glow = glow;
+                Machine.Glow = glow;
             }
+
             list.Gap();
 
             list.End();

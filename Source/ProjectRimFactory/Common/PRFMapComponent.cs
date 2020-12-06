@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Collections.Generic;
 using Verse;
-using RimWorld;
 
 namespace ProjectRimFactory.Common
 {
     public class PRFMapComponent : MapComponent
     {
-        private List<ITicker> tickers = new List<ITicker>();
+        private readonly List<ITicker> tickers = new List<ITicker>();
 
         public PRFMapComponent(Map map) : base(map)
         {
@@ -20,17 +14,17 @@ namespace ProjectRimFactory.Common
         public override void MapComponentTick()
         {
             base.MapComponentTick();
-            this.tickers.ForEach(t => t.Tick());
+            tickers.ForEach(t => t.Tick());
         }
 
         public void AddTicker(ITicker ticker)
         {
-            this.tickers.Add(ticker);
+            tickers.Add(ticker);
         }
 
         public void RemoveTicker(ITicker ticker)
         {
-            this.tickers.Remove(ticker);
+            tickers.Remove(ticker);
         }
     }
 

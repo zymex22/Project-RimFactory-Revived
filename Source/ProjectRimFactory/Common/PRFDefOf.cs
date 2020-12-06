@@ -1,26 +1,10 @@
-﻿using RimWorld;
-using Verse;
-using System;
-using System.Reflection;
+﻿using Verse;
 
 namespace ProjectRimFactory.Common
 {
     [StaticConstructorOnStartup]
     public static class PRFDefOf
     {
-        static PRFDefOf()
-        {
-            Type thisType = typeof(PRFDefOf);
-            FieldInfo[] fields = thisType.GetFields();
-            for (int i = 0; i < fields.Length; i++)
-            {
-                object def = GenGeneric.InvokeStaticMethodOnGenericType(typeof(DefDatabase<>), fields[i].FieldType, "GetNamedSilentFail", fields[i].Name);
-                if (def != null)
-                {
-                    fields[i].SetValue(null, def);
-                }
-            }
-        }
         public static JobDef PRFDrone_ReturnToStation;
         public static JobDef PRFDrone_SelfTerminate;
 
@@ -54,6 +38,16 @@ namespace ProjectRimFactory.Common
         public static ResearchProjectDef PRF_ImprovedDrones; //For Level 15
         public static ResearchProjectDef PRF_AdvancedDrones; //For Level 20
 
-
+        static PRFDefOf()
+        {
+            var thisType = typeof(PRFDefOf);
+            var fields = thisType.GetFields();
+            for (var i = 0; i < fields.Length; i++)
+            {
+                var def = GenGeneric.InvokeStaticMethodOnGenericType(typeof(DefDatabase<>), fields[i].FieldType,
+                    "GetNamedSilentFail", fields[i].Name);
+                if (def != null) fields[i].SetValue(null, def);
+            }
+        }
     }
 }

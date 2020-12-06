@@ -1,10 +1,5 @@
-﻿using ProjectRimFactory.SAL3.Things.Assemblers;
-using ProjectRimFactory.SAL3.Tools;
-using RimWorld;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -12,41 +7,42 @@ namespace ProjectRimFactory.SAL3.Things
 {
     public class CompRecipeImportRange : ThingComp
     {
-        public CompProperties_RecipeImportRange Props => (CompProperties_RecipeImportRange)this.props;
+        public CompProperties_RecipeImportRange Props => (CompProperties_RecipeImportRange) props;
 
         public IEnumerable<IntVec3> RangeCells()
         {
-            return this.Props.CellsWithinRange(this.parent.Position);
+            return Props.CellsWithinRange(parent.Position);
         }
 
         public override void PostDrawExtraSelectionOverlays()
         {
             base.PostDrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(this.Props.CellsWithinRange(this.parent.Position).ToList() , this.Props.ghostColor);
+            GenDraw.DrawFieldEdges(Props.CellsWithinRange(parent.Position).ToList(), Props.ghostColor);
         }
     }
 
     public class CompProperties_RecipeImportRange : CompProperties
     {
-        public CompProperties_RecipeImportRange()
-        {
-            this.compClass = typeof(CompRecipeImportRange);
-        }
+        public Color ghostColor = Color.blue;
 
         public float range = 5f;
 
-        public Color ghostColor = Color.blue;
+        public CompProperties_RecipeImportRange()
+        {
+            compClass = typeof(CompRecipeImportRange);
+        }
 
-        public override void DrawGhost(IntVec3 center, Rot4 rot, ThingDef thingDef, Color ghostCol, AltitudeLayer drawAltitude, Thing thing = null)
+        public override void DrawGhost(IntVec3 center, Rot4 rot, ThingDef thingDef, Color ghostCol,
+            AltitudeLayer drawAltitude, Thing thing = null)
         {
             base.DrawGhost(center, rot, thingDef, ghostCol, drawAltitude, thing);
             var list = CellsWithinRange(center).ToList();
-            GenDraw.DrawFieldEdges(list, this.ghostColor);
+            GenDraw.DrawFieldEdges(list, ghostColor);
         }
 
         public IEnumerable<IntVec3> CellsWithinRange(IntVec3 center)
         {
-            return GenRadial.RadialCellsAround(center, this.range, true);
+            return GenRadial.RadialCellsAround(center, range, true);
         }
     }
 }

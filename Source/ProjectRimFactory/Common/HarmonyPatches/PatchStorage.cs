@@ -1,117 +1,97 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using RimWorld;
-using Verse;
-using UnityEngine;
 using HarmonyLib;
-using ProjectRimFactory.Storage;
+using RimWorld;
+using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    [HarmonyPatch(typeof(ForbidUtility), "IsForbidden", new Type[] { typeof(Thing), typeof(Pawn) })]
-    class Patch_ForbidUtility_IsForbidden
+    [HarmonyPatch(typeof(ForbidUtility), "IsForbidden", typeof(Thing), typeof(Pawn))]
+    internal class Patch_ForbidUtility_IsForbidden
     {
-        static bool Prefix(Thing t, Pawn pawn, out bool __result)
+        private static bool Prefix(Thing t, Pawn pawn, out bool __result)
         {
             __result = true;
             if (t != null && t.Map != null && t.def.category == ThingCategory.Item)
-            {
                 if (PatchStorageUtil.Get<IForbidPawnOutputItem>(t.Map, t.Position)?.ForbidPawnOutput ?? false)
-                {
                     return false;
-                }
-            }
             return true;
         }
     }
 
     [HarmonyPatch(typeof(Building_Storage), "Accepts")]
-    class Patch_Building_Storage_Accepts
+    internal class Patch_Building_Storage_Accepts
     {
-        static bool Prefix(Building_Storage __instance, Thing t, out bool __result)
+        private static bool Prefix(Building_Storage __instance, Thing t, out bool __result)
         {
             __result = false;
-            if (PatchStorageUtil.Get<IForbidPawnInputItem>(__instance.Map, __instance.Position)?.ForbidPawnInput ?? false)
-            {
+            if (PatchStorageUtil.Get<IForbidPawnInputItem>(__instance.Map, __instance.Position)?.ForbidPawnInput ??
+                false)
                 if (!__instance.slotGroup.HeldThings.Contains(t))
-                {
                     return false;
-                }
-            }
             return true;
         }
     }
 
     [HarmonyPatch(typeof(FloatMenuMakerMap), "ChoicesAtFor")]
-    class Patch_FloatMenuMakerMap_ChoicesAtFor
+    internal class Patch_FloatMenuMakerMap_ChoicesAtFor
     {
-        static bool Prefix(Vector3 clickPos, Pawn pawn, out List<FloatMenuOption> __result)
+        private static bool Prefix(Vector3 clickPos, Pawn pawn, out List<FloatMenuOption> __result)
         {
             __result = new List<FloatMenuOption>();
-            if (PatchStorageUtil.Get<IHideRightClickMenu>(pawn.Map, clickPos.ToIntVec3())?.HideRightClickMenus ?? false)
-            {
-                return false;
-            }
+            if (PatchStorageUtil.Get<IHideRightClickMenu>(pawn.Map, clickPos.ToIntVec3())?.HideRightClickMenus ??
+                false) return false;
             return true;
         }
     }
 
     [HarmonyPatch(typeof(Thing), "DrawGUIOverlay")]
-    class Patch_Thing_DrawGUIOverlay
+    internal class Patch_Thing_DrawGUIOverlay
     {
-        static bool Prefix(Thing __instance)
+        private static bool Prefix(Thing __instance)
         {
             if (__instance.def.category == ThingCategory.Item)
-            {
-                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ?? false)
-                {
+                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ??
+                    false)
                     return false;
-                }
-            }
             return true;
         }
     }
 
     [HarmonyPatch(typeof(ThingWithComps), "Draw")]
-    class Patch_ThingWithComps_Draw
+    internal class Patch_ThingWithComps_Draw
     {
-        static bool Prefix(Thing __instance)
+        private static bool Prefix(Thing __instance)
         {
             if (__instance.def.category == ThingCategory.Item)
-            {
-                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ?? false)
-                {
+                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ??
+                    false)
                     return false;
-                }
-            }
             return true;
         }
     }
 
     [HarmonyPatch(typeof(Thing), "Print")]
-    class Patch_Thing_Print
+    internal class Patch_Thing_Print
     {
-        static bool Prefix(Thing __instance, SectionLayer layer)
+        private static bool Prefix(Thing __instance, SectionLayer layer)
         {
             if (__instance.def.category == ThingCategory.Item)
-            {
-                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ?? false)
-                {
+                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ??
+                    false)
                     return false;
-                }
-            }
             return true;
         }
     }
 
-    static class PatchStorageUtil
+    internal static class PatchStorageUtil
     {
-        private static Dictionary<Tuple<Map, IntVec3, Type>, object> cache = new Dictionary<Tuple<Map, IntVec3, Type>, object>();
-        private static int lastTick = 0;
+        private static readonly Dictionary<Tuple<Map, IntVec3, Type>, object> cache =
+            new Dictionary<Tuple<Map, IntVec3, Type>, object>();
+
+        private static int lastTick;
 
         public static T Get<T>(Map map, IntVec3 pos) where T : class
         {
@@ -125,14 +105,15 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 cache.Clear();
                 lastTick = Find.TickManager.TicksGame;
             }
+
             var key = new Tuple<Map, IntVec3, Type>(map, pos, typeof(T));
-            if (!cache.TryGetValue(key, out object val))
+            if (!cache.TryGetValue(key, out var val))
             {
                 val = Get<T>(map, pos);
                 cache.Add(key, val);
             }
 
-            return (T)val;
+            return (T) val;
         }
     }
 

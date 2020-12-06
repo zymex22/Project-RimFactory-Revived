@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
+using HarmonyLib;
 using RimWorld;
 using Verse;
-using UnityEngine;
-using HarmonyLib;
-using Verse.AI;
 
-namespace ProjectRimFactory {
-    [HarmonyPatch(typeof(RimWorld.CompArt), "GenerateImageDescription")]
-    public class CompArt_GenerateImageDescription {
-        static public bool Prefix(out TaggedString __result, CompArt __instance) {
+namespace ProjectRimFactory
+{
+    [HarmonyPatch(typeof(CompArt), "GenerateImageDescription")]
+    public class CompArt_GenerateImageDescription
+    {
+        public static bool Prefix(out TaggedString __result, CompArt __instance)
+        {
             Thing t = __instance.parent;
             var ss = Current.Game.GetComponent<PRFGameComponent>().specialScupltures;
             if (ss == null) return true;

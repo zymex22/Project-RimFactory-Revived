@@ -1,18 +1,16 @@
 ﻿using System;
 using UnityEngine;
 using Verse;
-using RimWorld;
-using Verse.Sound;
-using ProjectRimFactory.SAL3.Things;
-using ProjectRimFactory.Storage;
 
 namespace ProjectRimFactory.Storage.UI
 {
     public class Dialog_OutputMinMax : Window
     {
-        protected OutputSettings outputSettings;
         private const float TitleLabelHeight = 32f;
-        string minBufferString, maxBufferString;
+        private string minBufferString, maxBufferString;
+        protected OutputSettings outputSettings;
+
+        private readonly Action postClose;
 
         public Dialog_OutputMinMax(OutputSettings settings, Action postClose = null)
         {
@@ -28,24 +26,13 @@ namespace ProjectRimFactory.Storage.UI
             this.postClose = postClose;
         }
 
-        private Action postClose;
-        
-        public override Vector2 InitialSize
-        {
-            get { return new Vector2(500f, 250f); }
-        }
+        public override Vector2 InitialSize => new Vector2(500f, 250f);
 
         public override void DoWindowContents(Rect rect)
         {
-            if (maxBufferString == null)
-            {
-                maxBufferString = outputSettings.max.ToString();
-            }
-            if (minBufferString == null)
-            {
-                minBufferString = outputSettings.min.ToString();
-            }
-            Listing_Standard list = new Listing_Standard(GameFont.Small)
+            if (maxBufferString == null) maxBufferString = outputSettings.max.ToString();
+            if (minBufferString == null) minBufferString = outputSettings.min.ToString();
+            var list = new Listing_Standard(GameFont.Small)
             {
                 ColumnWidth = rect.width
             };
@@ -57,32 +44,34 @@ namespace ProjectRimFactory.Storage.UI
             list.Gap();
             list.Gap();
             list.Gap();
-            list.CheckboxLabeled("SmartHopper_Minimum_Label".Translate(), ref outputSettings.useMin, outputSettings.minTooltip.Translate());
+            list.CheckboxLabeled("SmartHopper_Minimum_Label".Translate(), ref outputSettings.useMin,
+                outputSettings.minTooltip.Translate());
             list.Gap();
             {
-                Rect rectLine = list.GetRect(Text.LineHeight);
-                Rect rectLeft = rectLine.LeftHalf().Rounded();
-                Rect rectRight = rectLine.RightHalf().Rounded();
-                TextAnchor anchorBuffer = Text.Anchor;
+                var rectLine = list.GetRect(Text.LineHeight);
+                var rectLeft = rectLine.LeftHalf().Rounded();
+                var rectRight = rectLine.RightHalf().Rounded();
+                var anchorBuffer = Text.Anchor;
                 Text.Anchor = TextAnchor.MiddleLeft;
                 Widgets.DrawHighlightIfMouseover(rectLine);
                 Widgets.Label(rectLeft, "SmartHopper_MinimumKeyword".Translate());
                 Text.Anchor = anchorBuffer;
-                Widgets.TextFieldNumeric(rectRight, ref outputSettings.min, ref minBufferString, 0);
+                Widgets.TextFieldNumeric(rectRight, ref outputSettings.min, ref minBufferString);
             }
             list.Gap();
-            list.CheckboxLabeled("SmartHopper_Maximum_Label".Translate(), ref outputSettings.useMax, outputSettings.maxTooltip.Translate());
+            list.CheckboxLabeled("SmartHopper_Maximum_Label".Translate(), ref outputSettings.useMax,
+                outputSettings.maxTooltip.Translate());
             list.Gap();
             {
-                Rect rectLine = list.GetRect(Text.LineHeight);
-                Rect rectLeft = rectLine.LeftHalf().Rounded();
-                Rect rectRight = rectLine.RightHalf().Rounded();
-                TextAnchor anchorBuffer = Text.Anchor;
+                var rectLine = list.GetRect(Text.LineHeight);
+                var rectLeft = rectLine.LeftHalf().Rounded();
+                var rectRight = rectLine.RightHalf().Rounded();
+                var anchorBuffer = Text.Anchor;
                 Text.Anchor = TextAnchor.MiddleLeft;
                 Widgets.DrawHighlightIfMouseover(rectLine);
                 Widgets.Label(rectLeft, "SmartHopper_MaximumKeyword".Translate());
                 Text.Anchor = anchorBuffer;
-                Widgets.TextFieldNumeric(rectRight, ref outputSettings.max, ref maxBufferString, 0);
+                Widgets.TextFieldNumeric(rectRight, ref outputSettings.max, ref maxBufferString);
             }
             list.End();
         }
@@ -90,7 +79,7 @@ namespace ProjectRimFactory.Storage.UI
         public override void PostClose()
         {
             base.PostClose();
-            this.postClose?.Invoke();
+            postClose?.Invoke();
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Verse.AI;
 
 namespace ProjectRimFactory.Drones.AI
@@ -10,14 +7,14 @@ namespace ProjectRimFactory.Drones.AI
     {
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            foreach (Toil t in base.MakeNewToils())
+            foreach (var t in base.MakeNewToils())
                 yield return t;
-            yield return new Toil()
+            yield return new Toil
             {
                 initAction = () =>
                 {
                     pawn.Destroy();
-                    ((Pawn_Drone)pawn).station.Notify_DroneGained();
+                    ((Pawn_Drone) pawn).station.Notify_DroneGained();
                 },
                 defaultCompleteMode = ToilCompleteMode.Instant
             };

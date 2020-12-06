@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-
 using RimWorld;
-using Verse;
-using Verse.AI;
-using Verse.Sound;
 using UnityEngine;
+using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
     public class MapTickManager : MapComponent
     {
+        private readonly HashSet<Func<bool>> eachTickActions = new HashSet<Func<bool>>();
+
+
+        private readonly Dictionary<int, HashSet<Action>> tickActionsDict = new Dictionary<int, HashSet<Action>>();
+
         public MapTickManager(Map map) : base(map)
         {
 //            this.thingsList = new ThingLister(map);
@@ -23,49 +26,53 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.MapComponentTick();
 
-            var removeSet = this.eachTickActions.ToList().Where(Exec).ToHashSet();
-            removeSet.ForEach(r => this.eachTickActions.Remove(r));
+            var removeSet = eachTickActions.ToList().Where(Exec).ToHashSet();
+            removeSet.ForEach(r => eachTickActions.Remove(r));
 
 #if DEBUG
-            if ((Debug.activeFlags & Debug.Flag.Benchmark) > 0) {
-                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            if ((Debug.activeFlags & Debug.Flag.Benchmark) > 0)
+            {
+                var sw = new Stopwatch();
                 sw.Start();
 
                 var beforeCount = GC.CollectionCount(0);
 
-                StringBuilder b = new StringBuilder();
-                var tickers = this.tickActionsDict.GetOption(Find.TickManager.TicksGame);
-                if (tickers.HasValue) {
-                    foreach (var a in tickers.Value.ToList()) {
-                        System.Diagnostics.Stopwatch sw2 = new System.Diagnostics.Stopwatch();
+                var b = new StringBuilder();
+                var tickers = tickActionsDict.GetOption(Find.TickManager.TicksGame);
+                if (tickers.HasValue)
+                    foreach (var a in tickers.Value.ToList())
+                    {
+                        var sw2 = new Stopwatch();
                         sw2.Start();
                         Exec(a);
                         sw2.Stop();
-                        var micros = (double)sw2.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency * 1000d * 1000d;
-                        b.Append(a.Target.GetType().ToString() + "." + a.Method.Name + " / elapse : " + micros + "micros \n");
+                        var micros = sw2.ElapsedTicks / (double) Stopwatch.Frequency * 1000d * 1000d;
+                        b.Append(a.Target.GetType() + "." + a.Method.Name + " / elapse : " + micros + "micros \n");
                     }
-                }
 
                 var gcCount = GC.CollectionCount(0) - beforeCount;
 
                 sw.Stop();
-                var millis = (double)sw.ElapsedTicks / (double)System.Diagnostics.Stopwatch.Frequency * 1000d;
-                if (millis > 2d) {
-                    if (gcCount >= 1) {
+                var millis = sw.ElapsedTicks / (double) Stopwatch.Frequency * 1000d;
+                if (millis > 2d)
+                {
+                    if (gcCount >= 1)
                         L("GC called");
-                    } else {
-                        L("millis : " + millis + " / methods : " + b.ToString());
-                    }
+                    else
+                        L("millis : " + millis + " / methods : " + b);
                 }
-            } else { // debug flag off:
-                this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
+            }
+            else
+            {
+                // debug flag off:
+                tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
             }
 #else
             // Need ToList() b/c the list of tickActions can change
             this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
 #endif
-            this.tickActionsDict.Remove(Find.TickManager.TicksGame);
-            }
+            tickActionsDict.Remove(Find.TickManager.TicksGame);
+        }
 
         private static void Exec(Action act)
         {
@@ -88,7 +95,7 @@ namespace ProjectRimFactory.AutoMachineTool
             catch (Exception e)
             {
                 Log.Error(e.ToString());
-                return default(T);
+                return default;
             }
         }
 
@@ -98,10 +105,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
             // ここでいいのか・・・？
             if ((Find.MainTabsRoot.OpenTab?.TabWindow as MainTabWindow_Architect)
-                ?.selectedDesPanel?.def.defName == "Industrial") {
+                ?.selectedDesPanel?.def.defName == "Industrial")
                 OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
-            }
-/*            Option(Find.MainTabsRoot.OpenTab)
+            /*            Option(Find.MainTabsRoot.OpenTab)
                 .Select(r => r.TabWindow)
                 .SelectMany(w => Option(w as MainTabWindow_Architect))
                 .SelectMany(a => Option(a.selectedDesPanel))
@@ -109,25 +115,18 @@ namespace ProjectRimFactory.AutoMachineTool
                 .ForEach(p => OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame());
 */
             if (Find.Selector.FirstSelectedObject is IBeltConveyorLinkable)
-            {
                 OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
-            }
         }
-
-
-        private Dictionary<int, HashSet<Action>> tickActionsDict = new Dictionary<int, HashSet<Action>>();
-
-        private HashSet<Func<bool>> eachTickActions = new HashSet<Func<bool>>();
 
         public void AfterAction(int ticks, Action act)
         {
             if (ticks < 1)
                 ticks = 1;
 
-            if (!this.tickActionsDict.TryGetValue(Find.TickManager.TicksGame + ticks, out HashSet<Action> set))
+            if (!tickActionsDict.TryGetValue(Find.TickManager.TicksGame + ticks, out var set))
             {
                 set = new HashSet<Action>();
-                this.tickActionsDict[Find.TickManager.TicksGame + ticks] = set;
+                tickActionsDict[Find.TickManager.TicksGame + ticks] = set;
             }
 
             set.Add(act);
@@ -135,30 +134,31 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public void NextAction(Action act)
         {
-            this.AfterAction(1, act);
+            AfterAction(1, act);
         }
 
         public void EachTickAction(Func<bool> act)
         {
-            this.eachTickActions.Add(act);
+            eachTickActions.Add(act);
         }
 
         public void RemoveAfterAction(Action act)
         {
-            this.tickActionsDict.ForEach(kv => kv.Value.Remove(act));
+            tickActionsDict.ForEach(kv => kv.Value.Remove(act));
         }
 
         public void RemoveEachTickAction(Func<bool> act)
         {
-            this.eachTickActions.Remove(act);
+            eachTickActions.Remove(act);
         }
 
         public bool IsExecutingThisTick(Action act)
         {
-            return this.tickActionsDict.GetOption(Find.TickManager.TicksGame).Select(l => l.Contains(act)).GetOrDefault(false);
+            return tickActionsDict.GetOption(Find.TickManager.TicksGame).Select(l => l.Contains(act))
+                .GetOrDefault(false);
         }
 
-  //      private ThingLister thingsList;
+        //      private ThingLister thingsList;
 
 //        public ThingLister ThingsList => thingsList;
 
@@ -167,10 +167,10 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.MapComponentOnGUI();
 
-            if(Widgets.ButtonText(new Rect(200, 10, 150, 20), "Test(debug)"))
+            if (Widgets.ButtonText(new Rect(200, 10, 150, 20), "Test(debug)"))
             {
-                this.map.wealthWatcher.ForceRecount();
-                L("wealth items : " + this.map.wealthWatcher.WealthItems);
+                map.wealthWatcher.ForceRecount();
+                L("wealth items : " + map.wealthWatcher.WealthItems);
             }
         }
 #endif
@@ -178,18 +178,18 @@ namespace ProjectRimFactory.AutoMachineTool
 
     public class ThingLister
     {
+        private readonly Map map;
+
+        private readonly Dictionary<Type, List<ThingDef>> typeDic = new Dictionary<Type, List<ThingDef>>();
+
         public ThingLister(Map map)
         {
             this.map = map;
         }
 
-        private Map map;
-
-        private Dictionary<Type, List<ThingDef>> typeDic = new Dictionary<Type, List<ThingDef>>();
-
         public IEnumerable<T> ForAssignableFrom<T>() where T : Thing
         {
-            if (!typeDic.TryGetValue(typeof(T), out List<ThingDef> defs))
+            if (!typeDic.TryGetValue(typeof(T), out var defs))
             {
                 defs = DefDatabase<ThingDef>.AllDefs.Where(d => typeof(T).IsAssignableFrom(d.thingClass)).ToList();
                 typeDic[typeof(T)] = defs;
@@ -197,7 +197,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 L("ThingLister type : " + typeof(T) + " / defs count : " + defs.Count);
 #endif
             }
-            return defs.SelectMany(d => this.map.listerThings.ThingsOfDef(d)).SelectMany(t => Option(t as T));
+
+            return defs.SelectMany(d => map.listerThings.ThingsOfDef(d)).SelectMany(t => Option(t as T));
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using Verse;
 
 namespace ProjectRimFactory.Drones
@@ -13,11 +8,12 @@ namespace ProjectRimFactory.Drones
     {
         public static Backstory childhood;
         public static Backstory adulthood;
+
         static DroneBackstories()
         {
             LongEventHandler.ExecuteWhenFinished(() =>
             {
-                childhood = new Backstory()
+                childhood = new Backstory
                 {
                     title = "PRFDroneName".Translate(),
                     titleShort = "PRFDroneName".Translate(),
@@ -28,10 +24,8 @@ namespace ProjectRimFactory.Drones
                 };
                 //this check is required to avoid an issue with "BetterLoading" as it calls "LongEventHandler.ExecuteWhenFinished" twice 
                 if (!BackstoryDatabase.allBackstories.ContainsKey(childhood.identifier))
-                {
                     BackstoryDatabase.AddBackstory(childhood);
-                }
-                adulthood = new Backstory()
+                adulthood = new Backstory
                 {
                     title = "PRFDroneName".Translate(),
                     titleShort = "PRFDroneName".Translate(),
@@ -42,9 +36,7 @@ namespace ProjectRimFactory.Drones
                 };
                 //this check is required to avoid an issue with "BetterLoading" as it calls "LongEventHandler.ExecuteWhenFinished" twice 
                 if (!BackstoryDatabase.allBackstories.ContainsKey(adulthood.identifier))
-                {
                     BackstoryDatabase.AddBackstory(adulthood);
-                }
             });
         }
     }

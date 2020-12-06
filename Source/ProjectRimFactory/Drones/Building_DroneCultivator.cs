@@ -1,27 +1,23 @@
-﻿using ProjectRimFactory.Common;
-using ProjectRimFactory.Drones;
-using RimWorld;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace ProjectRimFactory.Drones
 {
     public class Building_DroneCultivator : Building_WorkGiverDroneStation
     {
+        private int dronesLeft;
         private int totalDroneCount => spawnedDrones.Count + dronesLeft;
 
-        private int dronesLeft;
+        public override int DronesLeft => dronesLeft - spawnedDrones.Count;
 
-        public override int DronesLeft { get => dronesLeft - spawnedDrones.Count; }
         public override void Notify_DroneLost()
         {
             dronesLeft--;
         }
+
         public override void Notify_DroneGained()
         {
             dronesLeft++;
@@ -36,19 +32,13 @@ namespace ProjectRimFactory.Drones
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            if (totalDroneCount < extension.GetDronesOnSpawn())
-            {
-                dronesLeft = extension.GetDronesOnSpawn();
-            }
+            if (totalDroneCount < extension.GetDronesOnSpawn()) dronesLeft = extension.GetDronesOnSpawn();
         }
- 
+
 
         public override IEnumerable<Gizmo> GetGizmos()
         {
-            foreach (Gizmo baseGizmo in base.GetGizmos())
-            {
-                yield return baseGizmo;
-            }
+            foreach (var baseGizmo in base.GetGizmos()) yield return baseGizmo;
             yield return new Command_Action
             {
                 action = MakeMatchingGrowZone,
@@ -61,10 +51,10 @@ namespace ProjectRimFactory.Drones
 
         protected void MakeMatchingGrowZone()
         {
-            Designator_ZoneAdd_Growing designator = new Designator_ZoneAdd_Growing();
+            var designator = new Designator_ZoneAdd_Growing();
             designator.DesignateMultiCell(from tempCell in cashed_GetCoverageCells
-                                          where designator.CanDesignateCell(tempCell).Accepted
-                                          select tempCell);
+                where designator.CanDesignateCell(tempCell).Accepted
+                select tempCell);
         }
 
         //Save Drone Count
@@ -74,6 +64,4 @@ namespace ProjectRimFactory.Drones
             Scribe_Values.Look(ref dronesLeft, "dronesLeft");
         }
     }
-
-    
 }

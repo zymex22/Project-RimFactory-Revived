@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -9,40 +6,33 @@ namespace ProjectRimFactory.Common
 {
     public class CompOutputAdjustable : ThingComp
     {
-        int index;
+        private int index;
 
-        public CompProperties_CompOutputAdjustable Props => (CompProperties_CompOutputAdjustable)this.props;
+        private List<IntVec3> possibleOutputs = new List<IntVec3>();
 
-        List<IntVec3> possibleOutputs = new List<IntVec3>();
-        public IntVec3 CurrentCell
-        {
-            get
-            {
-                return possibleOutputs[index %= possibleOutputs.Count];
-            }
-        }
+        public CompProperties_CompOutputAdjustable Props => (CompProperties_CompOutputAdjustable) props;
+
+        public IntVec3 CurrentCell => possibleOutputs[index %= possibleOutputs.Count];
+
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
             if (Props.SupportDiagonal)
-            {
                 possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacent8Way(parent));
-            }
             else
-            {
                 possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacentCardinal(parent));
-            }
-            
         }
+
         public override void PostDrawExtraSelectionOverlays()
         {
             base.PostDrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(new List<IntVec3> { CurrentCell }, Color.yellow);
+            GenDraw.DrawFieldEdges(new List<IntVec3> {CurrentCell}, Color.yellow);
         }
+
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
-            foreach (Gizmo g in base.CompGetGizmosExtra()) yield return g;
-            yield return new Command_Action()
+            foreach (var g in base.CompGetGizmosExtra()) yield return g;
+            yield return new Command_Action
             {
                 defaultLabel = "AdjustDirection_Output".Translate(),
                 action = () => index++,
@@ -50,6 +40,7 @@ namespace ProjectRimFactory.Common
                 defaultIconColor = Color.green
             };
         }
+
         public override void PostExposeData()
         {
             base.PostExposeData();
@@ -59,13 +50,11 @@ namespace ProjectRimFactory.Common
 
     public class CompProperties_CompOutputAdjustable : CompProperties
     {
-
         public bool SupportDiagonal = false;
 
         public CompProperties_CompOutputAdjustable()
         {
-            this.compClass = typeof(CompOutputAdjustable);
+            compClass = typeof(CompOutputAdjustable);
         }
-
     }
 }

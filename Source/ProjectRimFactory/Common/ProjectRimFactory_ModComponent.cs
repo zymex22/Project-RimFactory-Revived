@@ -1,27 +1,32 @@
-﻿using HarmonyLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using HarmonyLib;
+using ProjectRimFactory.Storage;
+using SimpleFixes;
 using UnityEngine;
 using Verse;
-using SimpleFixes;
-using ProjectRimFactory.Storage;
 
 namespace ProjectRimFactory.Common
 {
     public class ProjectRimFactory_ModComponent : Mod
     {
+        // I am happy enough to make this static; it's not like there will be more than once
+        //   instance of the mod loaded or anything.
+        public static List<SpecialSculpture>
+            availableSpecialSculptures; // loaded on startup in SpecialScupture; see above
+
         public ProjectRimFactory_ModComponent(ModContentPack content) : base(content)
         {
             try
             {
                 ProjectRimFactory_ModSettings.LoadXml(content);
-                this.Settings = GetSettings<ProjectRimFactory_ModSettings>();
-                this.HarmonyInstance = new Harmony("com.spdskatr.projectrimfactory");
-                this.HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
-                Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");
+                Settings = GetSettings<ProjectRimFactory_ModSettings>();
+                HarmonyInstance = new Harmony("com.spdskatr.projectrimfactory");
+                HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
+                Log.Message(
+                    $"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");
                 NoMessySpawns.Instance.Add(ShouldSuppressDisplace, (Building_MassStorageUnit b, Map map) => true);
                 availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
             }
@@ -31,9 +36,9 @@ namespace ProjectRimFactory.Common
             }
         }
 
-        public Harmony HarmonyInstance { get; private set; }
- 
-        public ProjectRimFactory_ModSettings Settings { get; private set; }
+        public Harmony HarmonyInstance { get; }
+
+        public ProjectRimFactory_ModSettings Settings { get; }
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
@@ -47,20 +52,17 @@ namespace ProjectRimFactory.Common
 
         public override void WriteSettings()
         {
-            this.Settings.Apply();
+            Settings.Apply();
             Settings.Write();
-            if (this.Settings.RequireReboot)
-            {
-                Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("PRF.Settings.RequireReboot".Translate(), () => GenCommandLine.Restart()));
-            }
+            if (Settings.RequireReboot)
+                Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("PRF.Settings.RequireReboot".Translate(),
+                    () => GenCommandLine.Restart()));
         }
 
         public static bool ShouldSuppressDisplace(IntVec3 cell, Map map, bool respawningAfterLoad)
         {
-            return !respawningAfterLoad || map?.thingGrid.ThingsListAtFast(cell).OfType<Building_MassStorageUnit>().Any() != true;
+            return !respawningAfterLoad ||
+                   map?.thingGrid.ThingsListAtFast(cell).OfType<Building_MassStorageUnit>().Any() != true;
         }
-        // I am happy enough to make this static; it's not like there will be more than once
-        //   instance of the mod loaded or anything.
-        public static List<SpecialSculpture> availableSpecialSculptures; // loaded on startup in SpecialScupture; see above
     }
 }

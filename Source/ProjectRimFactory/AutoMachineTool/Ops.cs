@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
 using System.Reflection.Emit;
-
 using RimWorld;
-using Verse;
-using Verse.Sound;
 using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -35,16 +31,12 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             var en = e.GetEnumerator();
             if (en.MoveNext())
-            {
                 return new Just<T>(en.Current);
-            }
-            else
-            {
-                return new Nothing<T>();
-            }
+            return new Nothing<T>();
         }
 
-        public static IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, Option<TResult>> selector)
+        public static IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source,
+            Func<TSource, Option<TResult>> selector)
         {
             return source.SelectMany(e => selector(e).ToList());
         }
@@ -81,10 +73,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public static Option<T> ElementAtOption<T>(this List<T> list, int index)
         {
-            if (index >= list.Count)
-            {
-                return new Nothing<T>();
-            }
+            if (index >= list.Count) return new Nothing<T>();
             return Option(list[index]);
         }
 
@@ -94,26 +83,23 @@ namespace ProjectRimFactory.AutoMachineTool
             var r = rhs.ToList();
             if (l.Count == r.Count)
             {
-                for (int i = 0; i < l.Count; i++)
-                {
+                for (var i = 0; i < l.Count; i++)
                     if (!l[i].Equals(r[i]))
-                    {
                         return false;
-                    }
-                }
                 return true;
             }
+
             return false;
         }
 
         public static void ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
         {
-            foreach (T item in sequence) action(item);
+            foreach (var item in sequence) action(item);
         }
 
         public static IEnumerable<T> Peek<T>(this IEnumerable<T> sequence, Action<T> action)
         {
-            foreach (T item in sequence)
+            foreach (var item in sequence)
             {
                 action(item);
                 yield return item;
@@ -124,22 +110,14 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             var i = sequence.FindIndex(predicate);
             if (i == -1)
-            {
                 return new Nothing<T>();
-            }
-            else
-            {
-                return new Just<T>(sequence[i]);
-            }
+            return new Just<T>(sequence[i]);
         }
 
         public static Option<V> GetOption<K, V>(this Dictionary<K, V> dict, K key)
         {
             V val;
-            if (dict.TryGetValue(key, out val))
-            {
-                return Just(val);
-            }
+            if (dict.TryGetValue(key, out val)) return Just(val);
             return Nothing<V>();
         }
 
@@ -177,6 +155,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 l.Add(source.GetRange(idx, count));
                 idx += count;
             }
+
             return l;
         }
 
@@ -186,8 +165,12 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         #region for rimworld
+
 #if DEBUG
-        public static void L(object obj) { Log.Message(obj == null ? "null" : obj.ToString()); }
+        public static void L(object obj)
+        {
+            Log.Message(obj == null ? "null" : obj.ToString());
+        }
 #endif
 #if false
         public static bool PlaceItem(Thing t, IntVec3 cell, bool forbid, Map map, bool firstAbsorbStack = false)
@@ -247,10 +230,12 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public static List<IntVec3> SlotGroupCells(this IntVec3 c, Map map)
         {
-            return Option(map.haulDestinationManager.SlotGroupAt(c)).Select(g => g.CellsList).GetOrDefault(new List<IntVec3>().Append(c));
+            return Option(map.haulDestinationManager.SlotGroupAt(c)).Select(g => g.CellsList)
+                .GetOrDefault(new List<IntVec3>().Append(c));
         }
 
-        public static TO CopyTo<FROM, TO>(this FROM bill, TO copy) where FROM : Bill_Production where TO : Bill_Production
+        public static TO CopyTo<FROM, TO>(this FROM bill, TO copy)
+            where FROM : Bill_Production where TO : Bill_Production
         {
             copy.allowedSkillRange = bill.allowedSkillRange;
             copy.billStack = bill.billStack;
@@ -285,8 +270,8 @@ namespace ProjectRimFactory.AutoMachineTool
             var maxX = list.Max(c => c.x);
             var minZ = list.Min(c => c.z);
             var maxZ = list.Max(c => c.z);
-            var x = rot.FacingCell.x == 0 ? center.x : (rot.FacingCell.x > 0 ? maxX + 1 : minX - 1);
-            var z = rot.FacingCell.z == 0 ? center.z : (rot.FacingCell.z > 0 ? maxZ + 1 : minZ - 1);
+            var x = rot.FacingCell.x == 0 ? center.x : rot.FacingCell.x > 0 ? maxX + 1 : minX - 1;
+            var z = rot.FacingCell.z == 0 ? center.z : rot.FacingCell.z > 0 ? maxZ + 1 : minZ - 1;
             return new IntVec3(x, center.y, z);
         }
 
@@ -305,13 +290,9 @@ namespace ProjectRimFactory.AutoMachineTool
             var facing = FacingCell(center, size, dir);
             var xoffset = dir.FacingCell.x * range + facing.x;
             var zoffset = dir.FacingCell.z * range + facing.z;
-            for (int x = -range; x <= range; x++)
-            {
-                for (int z = -range; z <= range; z++)
-                {
-                    yield return new IntVec3(x + xoffset, center.y, z + zoffset);
-                }
-            }
+            for (var x = -range; x <= range; x++)
+            for (var z = -range; z <= range; z++)
+                yield return new IntVec3(x + xoffset, center.y, z + zoffset);
         }
 
         public static Rot4 RotateAsNew(this Rot4 rot, RotationDirection dir)
@@ -329,19 +310,15 @@ namespace ProjectRimFactory.AutoMachineTool
                 (x => Option(x));
             */
             var p = pos.GetZone(map) as IPlantToGrowSettable;
-            if (p != null)
-            {
-                return Option(p);
-            }
+            if (p != null) return Option(p);
             foreach (var t in pos.GetThingList(map))
-            {
                 if (t.def.category == ThingCategory.Building)
                 {
                     p = t as IPlantToGrowSettable;
                     if (p != null)
                         return Option(p);
                 }
-            }
+
             return Nothing<IPlantToGrowSettable>();
         }
 
@@ -352,7 +329,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public static Color A(this Color color, float a)
         {
-            Color c = color;
+            var c = color;
             c.a = a;
             return c;
         }
@@ -371,61 +348,68 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return marketValue * 0.1f;
         }
-#endregion
+
+        #endregion
 
         public static Func<T, TValue> GenerateGetFieldDelegate<T, TValue>(FieldInfo field)
         {
-            var d = new DynamicMethod("getter", typeof(TValue), new Type[] { typeof(T) }, true);
+            var d = new DynamicMethod("getter", typeof(TValue), new[] {typeof(T)}, true);
             var g = d.GetILGenerator();
             g.Emit(OpCodes.Ldarg_0);
             g.Emit(OpCodes.Ldfld, field);
             g.Emit(OpCodes.Ret);
 
-            return (Func<T, TValue>)d.CreateDelegate(typeof(Func<T, TValue>));
+            return (Func<T, TValue>) d.CreateDelegate(typeof(Func<T, TValue>));
         }
 
         public static Action<T, TValue> GenerateSetFieldDelegate<T, TValue>(FieldInfo field)
         {
-            var d = new DynamicMethod("setter", typeof(void), new Type[] { typeof(T), typeof(TValue) }, true);
+            var d = new DynamicMethod("setter", typeof(void), new[] {typeof(T), typeof(TValue)}, true);
             var g = d.GetILGenerator();
             g.Emit(OpCodes.Ldarg_0);
             g.Emit(OpCodes.Ldarg_1);
             g.Emit(OpCodes.Stfld, field);
             g.Emit(OpCodes.Ret);
 
-            return (Action<T, TValue>)d.CreateDelegate(typeof(Action<T, TValue>));
+            return (Action<T, TValue>) d.CreateDelegate(typeof(Action<T, TValue>));
         }
 
         public static Func<T, TResult> GenerateMeshodDelegate<T, TResult>(MethodInfo getter)
         {
             var instanceParam = Expression.Parameter(typeof(T), "instance");
-            var args = new List<ParameterExpression>() { };
-            var callExp = Expression.Call(instanceParam, getter, args.Cast<Expression>());
-            return Expression.Lambda<Func<T, TResult>>(callExp, new List<ParameterExpression>().Append(instanceParam).Append(args)).Compile();
+            var args = new List<ParameterExpression>();
+            var callExp = Expression.Call(instanceParam, getter, args);
+            return Expression
+                .Lambda<Func<T, TResult>>(callExp, new List<ParameterExpression>().Append(instanceParam).Append(args))
+                .Compile();
         }
 
         public static Func<T, TParam1, TResult> GenerateMeshodDelegate<T, TParam1, TResult>(MethodInfo getter)
         {
             var instanceParam = Expression.Parameter(typeof(T), "instance");
-            var args = new List<ParameterExpression>() { Expression.Parameter(typeof(TParam1), "param1") };
-            var callExp = Expression.Call(instanceParam, getter, args.Cast<Expression>());
-            return Expression.Lambda<Func<T, TParam1, TResult>>(callExp, new List<ParameterExpression>().Append(instanceParam).Append(args)).Compile();
+            var args = new List<ParameterExpression> {Expression.Parameter(typeof(TParam1), "param1")};
+            var callExp = Expression.Call(instanceParam, getter, args);
+            return Expression
+                .Lambda<Func<T, TParam1, TResult>>(callExp,
+                    new List<ParameterExpression>().Append(instanceParam).Append(args)).Compile();
         }
 
         public static Action<T> GenerateVoidMeshodDelegate<T>(MethodInfo getter)
         {
             var instanceParam = Expression.Parameter(typeof(T), "instance");
-            var args = new List<ParameterExpression>() { };
-            var callExp = Expression.Call(instanceParam, getter, args.Cast<Expression>());
-            return Expression.Lambda<Action<T>>(callExp, new List<ParameterExpression>().Append(instanceParam)).Compile();
+            var args = new List<ParameterExpression>();
+            var callExp = Expression.Call(instanceParam, getter, args);
+            return Expression.Lambda<Action<T>>(callExp, new List<ParameterExpression>().Append(instanceParam))
+                .Compile();
         }
 
         public static Action<T, TParam1> GenerateVoidMeshodDelegate<T, TParam1>(MethodInfo getter)
         {
             var instanceParam = Expression.Parameter(typeof(T), "instance");
-            var args = new List<ParameterExpression>() { Expression.Parameter(typeof(TParam1), "param1") };
-            var callExp = Expression.Call(instanceParam, getter, args.Cast<Expression>());
-            return Expression.Lambda<Action<T, TParam1>>(callExp, new List<ParameterExpression>().Append(instanceParam)).Compile();
+            var args = new List<ParameterExpression> {Expression.Parameter(typeof(TParam1), "param1")};
+            var callExp = Expression.Call(instanceParam, getter, args);
+            return Expression.Lambda<Action<T, TParam1>>(callExp, new List<ParameterExpression>().Append(instanceParam))
+                .Compile();
         }
     }
 
@@ -433,107 +417,93 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         private readonly T value;
 
-        private bool hasValue = false;
-
         public Option(T val)
         {
             if (val != null)
             {
-                this.value = val;
-                hasValue = true;
+                value = val;
+                HasValue = true;
             }
-        }
-
-        public T Value
-        {
-            get { return value; }
-        }
-
-        public bool HasValue
-        {
-            get { return hasValue; }
         }
 
         public Option()
         {
         }
 
+        public T Value => value;
+
+        public bool HasValue { get; }
+
         public Option<TO> SelectMany<TO>(Func<T, Option<TO>> func)
         {
-            return hasValue ? func(value) : new Nothing<TO>();
+            return HasValue ? func(value) : new Nothing<TO>();
         }
 
         public Option<TO> Select<TO>(Func<T, TO> func)
         {
-            return hasValue ? new Option<TO>(func(value)) : new Nothing<TO>();
+            return HasValue ? new Option<TO>(func(value)) : new Nothing<TO>();
         }
 
         public Option<T> Where(Predicate<T> pre)
         {
-            return hasValue ? pre(this.value) ? this : new Nothing<T>() : new Nothing<T>();
+            return HasValue ? pre(value) ? this : new Nothing<T>() : new Nothing<T>();
         }
 
         public void ForEach(Action<T> act)
         {
-            if (hasValue) act(this.value);
+            if (HasValue) act(value);
         }
 
         public List<T> ToList()
         {
-            return this.hasValue ? new List<T>(new T[] { this.value }) : new List<T>();
+            return HasValue ? new List<T>(new[] {value}) : new List<T>();
         }
 
         public T GetOrDefault(T defaultValue)
         {
-            return this.hasValue ? this.value : defaultValue;
+            return HasValue ? value : defaultValue;
         }
 
         public T GetOrDefaultF(Func<T> creator)
         {
-            return this.hasValue ? this.value : creator();
+            return HasValue ? value : creator();
         }
 
         public Func<Func<T, R>, R> Fold<R>(R defaultValue)
         {
-            return this.hasValue ? (f) => f(this.value) : (Func<Func<T, R>, R>)((_) => defaultValue);
+            return HasValue ? f => f(value) : (Func<Func<T, R>, R>) (_ => defaultValue);
         }
 
         public Func<Func<T, R>, R> Fold<R>(Func<R> craetor)
         {
-            return this.hasValue ? (f) => f(this.value) : (Func<Func<T, R>, R>)((_) => craetor());
+            return HasValue ? f => f(value) : (Func<Func<T, R>, R>) (_ => craetor());
         }
 
         public Option<T> Peek(Action<T> act)
         {
-            if (hasValue)
-            {
-                act(this.value);
-            }
+            if (HasValue) act(value);
             return this;
         }
 
         public override bool Equals(object obj)
         {
-            return obj != null && obj is Option<T> && this.hasValue == ((Option<T>)obj).hasValue &&
-                (!this.hasValue || this.value.Equals(((Option<T>)obj).value));
+            return obj != null && obj is Option<T> && HasValue == ((Option<T>) obj).HasValue &&
+                   (!HasValue || value.Equals(((Option<T>) obj).value));
         }
 
         public override int GetHashCode()
         {
-            return this.hasValue ? this.value.GetHashCode() : this.hasValue.GetHashCode();
+            return HasValue ? value.GetHashCode() : HasValue.GetHashCode();
         }
 
         public override string ToString()
         {
-            return this.Fold("Option<Nothing>")(v => "Option<" + v.ToString() + ">");
+            return Fold("Option<Nothing>")(v => "Option<" + v + ">");
         }
     }
 
     public class Nothing<T> : Option<T>
     {
-        public Nothing() : base()
-        {
-        }
     }
 
     public class Just<T> : Option<T>

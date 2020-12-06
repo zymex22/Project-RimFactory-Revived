@@ -1,58 +1,69 @@
 ﻿using System;
+using System.Diagnostics;
 using Verse;
-namespace ProjectRimFactory {
+
+namespace ProjectRimFactory
+{
     /// <summary>
-    /// A set of Debug trace functions for help in tracking weird problems.
-    /// NOTE: These are only compiled in the Debug build.  As far as a Release
-    ///   build is concerned, these methods *do not exist*.
+    ///     A set of Debug trace functions for help in tracking weird problems.
+    ///     NOTE: These are only compiled in the Debug build.  As far as a Release
+    ///     build is concerned, these methods *do not exist*.
     /// </summary>
     /// <use>
-    /// Make sure there is an entry in the Flag enum.
-    /// Set activeFlags to include that Flag (TODO: include this in mod setings)
-    /// Call via:  Debug.Message(Debug.Flag.Conveyors, "Message blah blah blah");
-    /// Note: since these methods only exist in Debug builds, they have no
+    ///     Make sure there is an entry in the Flag enum.
+    ///     Set activeFlags to include that Flag (TODO: include this in mod setings)
+    ///     Call via:  Debug.Message(Debug.Flag.Conveyors, "Message blah blah blah");
+    ///     Note: since these methods only exist in Debug builds, they have no
     ///     performance impact in Release builds.
-    /// Incorrect usage:
+    ///     Incorrect usage:
     ///     string debugString = "really complicated"+(string)ExpensiveMethod();
     ///     Debug.Message(flag, debugString);
-    /// Correct:
+    ///     Correct:
     ///     Debug.Message(flag, "really complicated"+(string)ThatOnlyHappensInDebug());
-    /// Remember: you may also use #if DEBUG #endif to do any other debug-related stuff
-    /// If you have a debugger you might prefer that approach? Whatever makes
-    /// you happy ^.^
+    ///     Remember: you may also use #if DEBUG #endif to do any other debug-related stuff
+    ///     If you have a debugger you might prefer that approach? Whatever makes
+    ///     you happy ^.^
     /// </use>
     /// <onlyAppliesTo>
-    /// The Log messages only appear in the debug build.
+    ///     The Log messages only appear in the debug build.
     /// </onlyAppliesTo>
-    public static class Debug {
+    public static class Debug
+    {
         [Flags]
-        public enum Flag {
-            PlaceThing=0x1,
-            Conveyors=0x2,
-            ConveyorGraphics=0x4,
-            Benchmark=0x8, // performance measurement
+        public enum Flag
+        {
+            PlaceThing = 0x1,
+            Conveyors = 0x2,
+            ConveyorGraphics = 0x4,
+
+            Benchmark = 0x8 // performance measurement
             // NextFlag=0x4,
             // 0x8
             // 0x10
             // 0x20
             // 0x40, etc, as powers of two
         }
-        public static Flag activeFlags = (Flag)0; //Flag.PlaceThing | Flag.Conveyors...
 
-        [System.Diagnostics.Conditional("DEBUG")]
-        public static void Message(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
+        public static Flag activeFlags = 0; //Flag.PlaceThing | Flag.Conveyors...
+
+        [Conditional("DEBUG")]
+        public static void Message(Flag flag, string text, bool ignoreStopLoggingLimit = false)
+        {
             if ((activeFlags & flag) > 0) Log.Message(text, ignoreStopLoggingLimit);
         }
 
-        [System.Diagnostics.Conditional("DEBUG")]
-        public static void Warning(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
+        [Conditional("DEBUG")]
+        public static void Warning(Flag flag, string text, bool ignoreStopLoggingLimit = false)
+        {
             if ((activeFlags & flag) > 0) Log.Warning(text, ignoreStopLoggingLimit);
         }
 
-        [System.Diagnostics.Conditional("DEBUG")]
-        public static void Error(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
+        [Conditional("DEBUG")]
+        public static void Error(Flag flag, string text, bool ignoreStopLoggingLimit = false)
+        {
             if ((activeFlags & flag) > 0) Log.Error(text, ignoreStopLoggingLimit);
         }
+
         // NOTE: Additional options are possible:
         // https://github.com/zymex22/Project-RimFactory-Revived/issues/95
         // For example, allowing a debug trace call to specify the calling method, which

@@ -1,10 +1,6 @@
-﻿using ProjectRimFactory.SAL3.Exposables;
-using RimWorld;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using UnityEngine;
+using ProjectRimFactory.SAL3.Exposables;
 using Verse;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers
@@ -13,27 +9,20 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
     {
         public override IEnumerable<RecipeDef> GetAllRecipes()
         {
-            HashSet<RecipeDef> recipes = new HashSet<RecipeDef>();
+            var recipes = new HashSet<RecipeDef>();
             // Imports recipes from modextension and recipes tag
-            AssemblerDefModExtension extension = def.GetModExtension<AssemblerDefModExtension>();
+            var extension = def.GetModExtension<AssemblerDefModExtension>();
             if ((extension?.importRecipesFrom?.Count ?? 0) > 0)
-            {
-                foreach (RecipeDef r in extension.importRecipesFrom.SelectMany(t => t.AllRecipes))
-                {
+                foreach (var r in extension.importRecipesFrom.SelectMany(t => t.AllRecipes))
                     if (!recipes.Contains(r) && base.SatisfiesSkillRequirements(r))
                     {
                         recipes.Add(r);
                         yield return r;
                     }
-                }
-            }
+
             if (def.recipes != null)
-            {
-                foreach (RecipeDef r in def.recipes)
-                {
+                foreach (var r in def.recipes)
                     yield return r;
-                }
-            }
         }
     }
 }
