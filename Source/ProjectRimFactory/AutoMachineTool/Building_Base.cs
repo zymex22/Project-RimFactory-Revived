@@ -143,7 +143,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.mapManager = map.GetComponent<MapTickManager>();
-
+            compOutputAdjustable = GetComp<CompOutputAdjustable>();
             if (readyOnStart) // No check for respawning after load?
             {
                 this.State = WorkingState.Ready;
