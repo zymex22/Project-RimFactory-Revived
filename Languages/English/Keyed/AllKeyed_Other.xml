@@ -14,7 +14,7 @@
   <PRF.Common.ObeysStorageFiltersDesc>Select behavior when this PRF machine outputs into a stockpile: set  whether the machine pays attention to the stockpile's filter. If not selected, the machine will happily add any products to the stockpile, even if the stockpile is not set to accept them. If it is checked, the machine will hold products until it has a clear place to put them down.</PRF.Common.ObeysStorageFiltersDesc>
   <PRFStorageBuildingGainsName>This storage building is now called {0}.</PRFStorageBuildingGainsName>
   <PRFItemsTabLabel>All items ({0} stacks total, showing {1} result(s))</PRFItemsTabLabel>
-  <PRFItemsTabLabel_Crate>All items ({0}/{1} stacks total, showing {2} result(s))</PRFItemsTabLabel_Crate>
+  <PRFItemsTabLabel_Crate>{0} stacks, max {1}, showing {2} result(s)</PRFItemsTabLabel_Crate>
   <PRFRenameMassStorageUnitLabel>Rename</PRFRenameMassStorageUnitLabel>
   <PRFRenameMassStorageUnitDesc>Rename this building.</PRFRenameMassStorageUnitDesc>
   <PRFMassStorageUIThingLabel>{0} stacks</PRFMassStorageUIThingLabel>
@@ -93,18 +93,18 @@
   <ITab_DroneStation_Sleeptimes>DroneStation Sleep Times (marked in red)</ITab_DroneStation_Sleeptimes>
   <ITab_DroneStation_SetTargetFuel>DroneStation Fuel Level</ITab_DroneStation_SetTargetFuel>
   
-  <PRFOutputItems>output item</PRFOutputItems>
-  <PRFPawnAccessLabel>pawn access</PRFPawnAccessLabel>
-  <PRFPawnAccessDesc>pawn access</PRFPawnAccessDesc>
+  <PRFOutputItems>Output item</PRFOutputItems>
+  <PRFPawnAccessLabel>Pawn access</PRFPawnAccessLabel>
+  <PRFPawnAccessDesc>Pawn access</PRFPawnAccessDesc>
   <!--Lamp colors-->
   <PRF_ChangeColorGizmo>Color ({0})</PRF_ChangeColorGizmo>
-  <PRF_Warm_White>warm white</PRF_Warm_White>
-  <PRF_Cool_White>cold white</PRF_Cool_White>
-  <PRF_Red>red</PRF_Red>
-  <PRF_Blue>blue</PRF_Blue>
-  <PRF_Green>green</PRF_Green>
-  <PRF_Cyan>cyan</PRF_Cyan>
-  <PRF_Yellow>yellow</PRF_Yellow>
-  <PRF_Magenta>magenta</PRF_Magenta>
+  <PRF_Warm_White>Warm white</PRF_Warm_White>
+  <PRF_Cool_White>Cold white</PRF_Cool_White>
+  <PRF_Red>Red</PRF_Red>
+  <PRF_Blue>Blue</PRF_Blue>
+  <PRF_Green>Green</PRF_Green>
+  <PRF_Cyan>Cyan</PRF_Cyan>
+  <PRF_Yellow>Yellow</PRF_Yellow>
+  <PRF_Magenta>Magenta</PRF_Magenta>
   <PRF_None>None</PRF_None>
 </LanguageData>
