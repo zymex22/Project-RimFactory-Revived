@@ -11,11 +11,21 @@ using Verse.AI.Group;
 namespace ProjectRimFactory.Storage.UI
 {
     // Somebody toucha my spaghet code
+    // TODO: Use harmony to make ITab_Items actually a ITab_DeepStorage_Inventory and add right click menu
+    // Only do above if LWM is installed ofc - rider
+    [StaticConstructorOnStartup]
     public class ITab_Items : ITab
     {
+        static ITab_Items()
+        {
+            DropUI = (Texture2D)HarmonyLib.AccessTools.Field(HarmonyLib.AccessTools.TypeByName("Verse.TexButton"), "Drop").GetValue(null);
+        }
+        private static Texture2D DropUI;
         private Vector2 scrollPos;
         private float scrollViewHeight;
+        private string oldSearchQuery;
         private string searchQuery;
+        private List<Thing> itemsToShow;
 
         public ITab_Items()
         {
@@ -37,29 +47,51 @@ namespace ProjectRimFactory.Storage.UI
         {
             Text.Font = GameFont.Small;
             var curY = 0f;
-            var rect = new Rect(10f, 10f, size.x - 10f, size.y - 10f);
-            Widgets.ListSeparator(ref curY, rect.width, "Content");
+            var frame = new Rect(10f, 10f, size.x - 10f, size.y - 10f);
+            GUI.BeginGroup(frame);
+            Widgets.ListSeparator(ref curY, frame.width, "Content");
             curY += 5f;
-            var selected = from Thing t in SelectedMassStorageUnit.StoredItems
-                where string.IsNullOrEmpty(searchQuery) || t.Label.ToLower().Contains(searchQuery.ToLower())
-                select t;
-            var text = SelectedMassStorageUnit.GetITabString(Math.Min(500, selected.Count()));
-            var MainTabText = new Rect(8f, curY, rect.width - 16f, Text.CalcHeight(text, rect.width - 16f));
+
+            // Rider: This new search method is REALLLYYYYYY FAST
+            // This is meant to stop a possible spam call of the Fuzzy Search
+            if (itemsToShow == null || searchQuery != oldSearchQuery)
+            {
+                itemsToShow = new List<Thing>(from Thing t in SelectedMassStorageUnit.StoredItems
+                    where string.IsNullOrEmpty(searchQuery) || t.Label.ToLower().NormalizedFuzzyStrength(searchQuery.ToLower()) <
+                        FuzzySearch.Strength.Strong
+                    select t);
+                oldSearchQuery = searchQuery;
+            }
+            
+
+            var text = SelectedMassStorageUnit.GetITabString(itemsToShow.Count);
+            var MainTabText = new Rect(8f, curY, frame.width - 16f, Text.CalcHeight(text, frame.width - 16f));
             Widgets.Label(MainTabText, text);
             curY += MainTabText.height;
-            searchQuery = Widgets.TextArea(new Rect(rect.x, curY, rect.width, 25f),
-                searchQuery ?? string.Empty);
-            
-            rect.y += MainTabText.height;
-            var position = new Rect(rect);
-            GUI.BeginGroup(position);
+            searchQuery = Widgets.TextArea(new Rect(frame.x, curY, MainTabText.width - 16f, 25f),
+                oldSearchQuery);
+            curY += 28f;
+
             GUI.color = Color.white;
-            var outRect = new Rect(0f, 60f, position.width, position.height - 60f);
+            var outRect = new Rect(0f, curY, frame.width, frame.height - curY);
             var viewRect = new Rect(0f, 0f, outRect.width - 16f, scrollViewHeight);
+            // Scrollview Start
             Widgets.BeginScrollView(outRect, ref scrollPos, viewRect);
             curY = 0f;
-            foreach (var thing in selected.Take(500)) DrawThingRow(ref curY, viewRect.width, thing);
+            if (itemsToShow.Count < 1)
+            {
+                Widgets.Label(viewRect, "PRFItemsTabLabel_Empty".Translate());
+                curY += 22f;
+            }
+
+            // Iterate backwards to compensate for removing elements from enumerable
+            // Learned this is an issue with List-like structures in AP CS 1A
+            for (var i = itemsToShow.Count - 1; i >= 0; i--)
+            {
+                DrawThingRow(ref curY, viewRect.width, itemsToShow[i]);
+            }
             if (Event.current.type == EventType.Layout) scrollViewHeight = curY + 30f;
+            //Scrollview End
             Widgets.EndScrollView();
             GUI.EndGroup();
             GUI.color = Color.white;
@@ -70,6 +102,7 @@ namespace ProjectRimFactory.Storage.UI
         // Credits to LWM Deep Storage :)
         private void DrawThingRow(ref float y, float width, Thing thing)
         {
+            Log.Warning("Triggering redraw");
             width -= 24f;
             // row to hold the item in the GUI
             Widgets.InfoCardButton(width, y, thing);
@@ -79,16 +112,19 @@ namespace ProjectRimFactory.Storage.UI
             var checkmarkRect = new Rect(width, y, 24f, 24f);
             var isItemForbidden = !thing.IsForbidden(Faction.OfPlayer);
             var forbidRowItem = isItemForbidden;
-            if (isItemForbidden)
-            {
-                TooltipHandler.TipRegion(checkmarkRect, "CommandNotForbiddenDesc".Translate());
-            }
-            else
-            {
-                TooltipHandler.TipRegion(checkmarkRect, "CommandForbiddenDesc".Translate());
-            }
+            TooltipHandler.TipRegion(checkmarkRect,
+                isItemForbidden ? "CommandNotForbiddenDesc".Translate() : "CommandForbiddenDesc".Translate());
+
             Widgets.Checkbox(checkmarkRect.x, checkmarkRect.y, ref isItemForbidden);
             if (isItemForbidden != forbidRowItem) thing.SetForbidden(!isItemForbidden, false);
+            width -= 24f;
+            var dropRect = new Rect(width, y, 24f, 24f);
+            TooltipHandler.TipRegion(dropRect, "PRFItemsTabDropTooltip".Translate(thing.LabelShort));
+            if (Widgets.ButtonImage(dropRect, DropUI, Color.gray, Color.white, false))
+            {
+                dropThing(thing);
+            }
+
             var thingRow = new Rect(0f, y, width, 28f);
             // Highlights the row upon mousing over
             if (Mouse.IsOver(thingRow))
@@ -135,19 +171,9 @@ namespace ProjectRimFactory.Storage.UI
                             opts.Add(new FloatMenuOption(p.Name.ToStringFull,
                                 () => { Find.WindowStack.Add(new FloatMenu(choices)); }));   
                     }
-
-                    // Output to IOPort, otherwise drop to ground
-                    if (IOPortSelected)
-                        opts.Add(new FloatMenuOption("PRFOutputItems".Translate(), () => SelectedMassStorageUnit
-                            .StoredItems.Where(i => i == thing)
-                            .ToList().ForEach(t => SelectedIOPort.OutputItem(t))));
-                    else
-                        opts.Add( new FloatMenuOption("PRFOutputItems".Translate(), () => SelectedMassStorageUnit
-                            .StoredItems.Where(i => i == thing)
-                            .ToList().ForEach(t => SelectedMassStorageUnit.OutputItem(t))));
                     
-                    // No idea how to stretch the options window so we're just not going to add a title to the menu
-                    // Find.WindowStack.Add(new FloatMenu(opts, "PRFMassStorageRightClickSelectPawn".Translate()));
+                    opts.Add(new FloatMenuOption("PRFOutputItems".Translate(), () => dropThing(thing)));
+
                     Find.WindowStack.Add(new FloatMenu(opts));
                 }
                 else
@@ -158,6 +184,19 @@ namespace ProjectRimFactory.Storage.UI
             }
 
             y += 28f;
+        }
+
+        // Little helper method to stop a redundant definition I was about to do.
+        private void dropThing(Thing thing)
+        {
+            if (IOPortSelected)
+                SelectedMassStorageUnit
+                    .StoredItems.Where(i => i == thing)
+                    .ToList().ForEach(t => SelectedIOPort.OutputItem(t));
+            else
+                SelectedMassStorageUnit
+                    .StoredItems.Where(i => i == thing)
+                    .ToList().ForEach(t => SelectedMassStorageUnit.OutputItem(t));
         }
 
         // Decompiled code is painful to read... Continue at your own risk
