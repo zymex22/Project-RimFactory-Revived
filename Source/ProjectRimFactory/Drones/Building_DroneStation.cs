@@ -295,8 +295,6 @@ namespace ProjectRimFactory.Drones
             }
         }
 
-        private float LastPowerOutput = 0;
-
         // Used for destroyed pawns
         public abstract void Notify_DroneLost();
         // Used to negate imaginary pawns despawned in WorkGiverDroneStations and JobDriver_ReturnToStation
@@ -331,8 +329,6 @@ namespace ProjectRimFactory.Drones
             //Load the SleepTimes from XML
             cachedSleepTimeList = extension.Sleeptimes.Split(',');
 
-            
-            LastPowerOutput = compPowerTrader.powerOutputInt;
             cashed_GetCoverageCells = StationRangecells.ToList();
 
             //Check for missing WorkTypeDef
@@ -448,13 +444,10 @@ namespace ProjectRimFactory.Drones
 
 
             //Update the Allowed Area Range on Power Change
-            //TODO Check if we should increase the IsHashIntervalTick to enhace performence (will reduce responsivness)
-            if (this.IsHashIntervalTick(60) && compPowerTrader.powerOutputInt != LastPowerOutput)
+            if (this.IsHashIntervalTick(60))
             {
                 //Update the Range
                 Update_droneAllowedArea_forDrones();
-                //Update the last know Val
-                LastPowerOutput = compPowerTrader.powerOutputInt;
 
                 //TODO add cell calc
                 cashed_GetCoverageCells = StationRangecells.ToList();
