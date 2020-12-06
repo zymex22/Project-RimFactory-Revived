@@ -78,7 +78,9 @@
       <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
-        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
@@ -89,7 +91,7 @@
           <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
           <drawSize>(2.1)</drawSize>
         </graphicData>
-               <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
       </li>
     </comps>
     <building>
@@ -153,7 +155,10 @@
       <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
-        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <!-- set output if thingclass allows it -->
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
@@ -164,7 +169,7 @@
           <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
           <drawSize>(2.1)</drawSize>
         </graphicData>
-               <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
       </li>
     </comps>
     <building>
@@ -228,7 +233,10 @@
       <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
-        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <!-- set output if thingclass allows it -->
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>750</basePowerConsumption>
@@ -294,7 +302,10 @@
       <PRF_ElectronicChip_I>2</PRF_ElectronicChip_I>
     </costList>
     <comps>
-        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <!-- set output if thingclass allows it -->
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>850</basePowerConsumption>
@@ -393,7 +404,9 @@
       <canPlaceOverWall>true</canPlaceOverWall>
     </building>
     <comps>
-      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>
