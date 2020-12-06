@@ -10,10 +10,10 @@
     <passability>PassThroughOnly</passability>
     <blockLight>false</blockLight>
     <blockWind>true</blockWind>
-    
+
     <designatorDropdown>miners_gr</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
-    
+
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
@@ -82,7 +82,7 @@
       <Cleanliness>-5</Cleanliness>
     </statBases>
     <size>(3,1)</size>
-    
+
     <designatorDropdown>miners_gr</designatorDropdown>
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
@@ -151,7 +151,9 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_CreatesInfestations" />
-<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>6</heatPerSecond>
@@ -226,7 +228,9 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_CreatesInfestations" />
-<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>5</heatPerSecond>
@@ -469,7 +473,9 @@
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>5000</basePowerConsumption>
       </li>
-<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>20</heatPerSecond>
@@ -548,7 +554,9 @@
     </researchPrerequisites>
     <size>(3,3)</size>
     <comps>
-<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>

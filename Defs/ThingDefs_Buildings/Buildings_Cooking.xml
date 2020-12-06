@@ -44,7 +44,9 @@
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
-        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
       <li Class="CompProperties_Flickable" />
       <!-- option to power off -->
     </comps>

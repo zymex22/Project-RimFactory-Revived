@@ -29,12 +29,14 @@
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <fillPercent>1</fillPercent>
     <comps>
-<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
     </comps>
     <pathCost>0</pathCost>
-    
+
     <rotatable>true</rotatable>
     <blockWind>false</blockWind>
     <castEdgeShadows>false</castEdgeShadows>
@@ -47,7 +49,7 @@
     </placeWorkers>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-    
+
     <size>(1,1)</size>
     <passability>Standable</passability>
     <inspectorTabs>

@@ -104,7 +104,9 @@ Mod extennsion for assemblers
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
-        <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>        <!-- set output if thingclass allows it -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
       <li Class="CompProperties_Flickable" />
       <!-- option to power off -->
     </comps>
@@ -112,7 +114,7 @@ Mod extennsion for assemblers
 
   <!--==================== Recipe database ====================-->
   <!-- This machine can import recipes from any bench and afterwards being moved near a assembler for use. -->
-    <ThingDef ParentName="PRF_BuildingBase">
+  <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_RecipeDatabase</defName>
     <label>recipe database</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
