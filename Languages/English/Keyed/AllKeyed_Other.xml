@@ -13,8 +13,10 @@
   <PRF.Common.ObeysStorageFilters>Obeys Storage Filters</PRF.Common.ObeysStorageFilters>
   <PRF.Common.ObeysStorageFiltersDesc>Select behavior when this PRF machine outputs into a stockpile: set  whether the machine pays attention to the stockpile's filter. If not selected, the machine will happily add any products to the stockpile, even if the stockpile is not set to accept them. If it is checked, the machine will hold products until it has a clear place to put them down.</PRF.Common.ObeysStorageFiltersDesc>
   <PRFStorageBuildingGainsName>This storage building is now called {0}.</PRFStorageBuildingGainsName>
-  <PRFItemsTabLabel>All items ({0} stacks total, showing {1} result(s))</PRFItemsTabLabel>
+  <PRFItemsTabLabel>{0} stacks total, showing {1} result(s)</PRFItemsTabLabel>
   <PRFItemsTabLabel_Crate>{0} stacks, max {1}, showing {2} result(s)</PRFItemsTabLabel_Crate>
+  <PRFItemsTabLabel_Empty>There are currently no items stored.</PRFItemsTabLabel_Empty>
+  <PRFItemsTabDropTooltip>Drop {0}</PRFItemsTabDropTooltip>
   <PRFRenameMassStorageUnitLabel>Rename</PRFRenameMassStorageUnitLabel>
   <PRFRenameMassStorageUnitDesc>Rename this building.</PRFRenameMassStorageUnitDesc>
   <PRFMassStorageUIThingLabel>{0} stacks</PRFMassStorageUIThingLabel>
