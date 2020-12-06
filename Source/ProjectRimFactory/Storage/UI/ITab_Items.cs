@@ -118,7 +118,7 @@ namespace ProjectRimFactory.Storage.UI
             if (isItemForbidden != forbidRowItem) thing.SetForbidden(!isItemForbidden, false);
             width -= 24f;
             var dropRect = new Rect(width, y, 24f, 24f);
-            TooltipHandler.TipRegion(dropRect, "PRFItemsTabDropTooltip".Translate(thing.LabelShort));
+            TooltipHandler.TipRegion(dropRect, "PRF_DropThing".Translate(thing.LabelShort));
             if (Widgets.ButtonImage(dropRect, DropUI, Color.gray, Color.white, false))
             {
                 dropThing(thing);
