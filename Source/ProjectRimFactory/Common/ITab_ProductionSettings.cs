@@ -87,6 +87,9 @@ namespace ProjectRimFactory.Common
 
         private CompPowerWorkSetting compPropertiesPowerWork => selThingWithComps?.GetComp<CompPowerWorkSetting>();
 
+        private static TipSignal rotInputRangeTip = new TipSignal("PRF_SettingsITab_TipSignal_RotInputRange".Translate());
+
+
         protected override void UpdateSize() {
             winSize.y = 0;
             winSize.x = 400f;
@@ -122,6 +125,7 @@ namespace ProjectRimFactory.Common
         {
             Listing_Standard list = new Listing_Standard();
             Rect inRect = new Rect(0f, 0f, winSize.x, winSize.y).ContractedBy(10f);
+            Rect inRect2;
             bool doneSection = false;
 
             list.Begin(inRect);
@@ -198,7 +202,11 @@ namespace ProjectRimFactory.Common
             }
             if (ShowRangeTypeSelectorButton)
             {
+
+                
                 inRect = list.GetRect(30f);
+                Widgets.DrawLineHorizontal(inRect.x, inRect.y - 5, inRect.width);
+
                 Widgets.Label(inRect.LeftHalf(), "PRF_SettingsTab_RangeType_Label".Translate());
                 if (Widgets.ButtonText(inRect.RightHalf(), ( compPropertiesPowerWork.rangeCells as IRangeCells).ToText() ))
                 {
@@ -206,6 +214,22 @@ namespace ProjectRimFactory.Common
                       .Select(d => new FloatMenuOption(d.ToText(),
                       () => compPropertiesPowerWork.rangeCells = d
                       )).ToList()));
+
+                }
+                if ((compPropertiesPowerWork.rangeCells as IRangeCells).NeedsRotate)
+                {
+
+                    inRect2 = inRect;
+                    inRect2.width = 30;
+                    inRect2.height = 30;
+                    // - 10 as a spacer
+                    inRect2.x = inRect.RightHalf().x - inRect2.width - 10;
+                    //Add Rotate Button
+                    if (Widgets.ButtonImage(inRect2, TexUI.RotRightTex))
+                    {
+                        compPropertiesPowerWork.RangeTypeRot.Rotate(RotationDirection.Clockwise);
+                    }
+                    TooltipHandler.TipRegion(inRect2, rotInputRangeTip);
 
                 }
                 list.Gap();
