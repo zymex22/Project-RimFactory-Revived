@@ -21,7 +21,7 @@ namespace ProjectRimFactory.Storage
         public string uniqueName;
 
         public abstract bool CanStoreMoreItems { get; }
-        public IEnumerable<Thing> StoredItems => items;
+        public List<Thing> StoredItems => items;
         public int StoredItemsCount => items.Count;
         public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
         public override string LabelCap => uniqueName ?? base.LabelCap;
