@@ -37,7 +37,7 @@ namespace ProjectRimFactory.Storage.UI
         {
             Text.Font = GameFont.Small;
             var curY = 0f;
-            var rect = new Rect(0f, 0f, size.x, size.y).ContractedBy(10f);
+            var rect = new Rect(10f, 10f, size.x - 10f, size.y - 10f);
             Widgets.ListSeparator(ref curY, rect.width, "Content");
             curY += 5f;
             var selected = from Thing t in SelectedMassStorageUnit.StoredItems
