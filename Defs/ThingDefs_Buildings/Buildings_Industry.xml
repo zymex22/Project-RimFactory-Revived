@@ -256,7 +256,7 @@
         </skills>
       </li>
       <!-- For thorny special sculp when done? -->
-      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
         <!-- <billBonusYields>
           <li>
             <key>Make_SculptureSmall</key>
