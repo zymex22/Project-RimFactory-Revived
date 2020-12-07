@@ -59,6 +59,7 @@ namespace ProjectRimFactory.Storage.UI
                 itemsToShow = new List<Thing>(from Thing t in SelectedMassStorageUnit.StoredItems
                     where string.IsNullOrEmpty(searchQuery) || t.Label.ToLower().NormalizedFuzzyStrength(searchQuery.ToLower()) <
                         FuzzySearch.Strength.Strong
+                        orderby t.Label descending 
                     select t);
                 oldSearchQuery = searchQuery;
             }
