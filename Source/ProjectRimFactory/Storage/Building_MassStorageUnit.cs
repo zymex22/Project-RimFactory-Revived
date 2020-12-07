@@ -163,10 +163,10 @@ namespace ProjectRimFactory.Storage
                 GenMapUI.DrawThingLabel(this, LabelCap + "\n\r" + GetUIThingLabel());
         }
 
-        public void OutputItem(Thing item)
+        public bool OutputItem(Thing item)
         {
             var outputCell = GetComp<CompOutputAdjustable>()?.CurrentCell ?? Position + new IntVec3(0, 0, -2);
-            GenPlace.TryPlaceThing(item.SplitOff(item.stackCount), outputCell, Map, ThingPlaceMode.Near);
+            return GenPlace.TryPlaceThing(item.SplitOff(item.stackCount), outputCell, Map, ThingPlaceMode.Near);
         }
 
         public virtual void RefreshStorage()
