@@ -54,7 +54,7 @@ namespace ProjectRimFactory.Storage.UI
 
             // Rider: This new search method is REALLLYYYYYY FAST
             // This is meant to stop a possible spam call of the Fuzzy Search
-            if (itemsToShow == null || searchQuery != oldSearchQuery)
+            if (itemsToShow == null || searchQuery != oldSearchQuery || SelectedMassStorageUnit.StoredItemsCount != itemsToShow.Count)
             {
                 itemsToShow = new List<Thing>(from Thing t in SelectedMassStorageUnit.StoredItems
                     where string.IsNullOrEmpty(searchQuery) || t.Label.ToLower().NormalizedFuzzyStrength(searchQuery.ToLower()) <
@@ -68,7 +68,7 @@ namespace ProjectRimFactory.Storage.UI
             var MainTabText = new Rect(8f, curY, frame.width - 16f, Text.CalcHeight(text, frame.width - 16f));
             Widgets.Label(MainTabText, text);
             curY += MainTabText.height;
-            searchQuery = Widgets.TextArea(new Rect(frame.x, curY, MainTabText.width - 16f, 25f),
+            searchQuery = Widgets.TextField(new Rect(frame.x, curY, MainTabText.width - 16f, 25f),
                 oldSearchQuery);
             curY += 28f;
 
@@ -188,14 +188,12 @@ namespace ProjectRimFactory.Storage.UI
         // Little helper method to stop a redundant definition I was about to do.
         private void dropThing(Thing thing)
         {
-            if (IOPortSelected)
-                SelectedMassStorageUnit
-                    .StoredItems.Where(i => i == thing)
-                    .ToList().ForEach(t => SelectedIOPort.OutputItem(t));
-            else
-                SelectedMassStorageUnit
-                    .StoredItems.Where(i => i == thing)
-                    .ToList().ForEach(t => SelectedMassStorageUnit.OutputItem(t));
+            var item = SelectedMassStorageUnit
+                .StoredItems.Where(i => i == thing).ToList();
+            if (IOPortSelected && SelectedIOPort.OutputItem(item[0]))
+                itemsToShow.Remove(thing);
+            else if (SelectedMassStorageUnit.OutputItem(item[0]))
+                itemsToShow.Remove(thing);
         }
 
         // Decompiled code is painful to read... Continue at your own risk
