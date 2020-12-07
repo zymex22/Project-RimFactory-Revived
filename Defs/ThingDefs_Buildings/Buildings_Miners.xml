@@ -10,10 +10,8 @@
     <passability>PassThroughOnly</passability>
     <blockLight>false</blockLight>
     <blockWind>true</blockWind>
-
     <designatorDropdown>miners_gr</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
-
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
@@ -46,10 +44,13 @@
     <label>MiningShaft</label>
     <description>A early random ore mineshaft capable of finding stones, steel slag, and other low end resources, also a slim chance to find rares</description>
     <thingClass>Building_WorkTable</thingClass>
+    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
+    <clearBuildingArea>false</clearBuildingArea>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
     <graphicData>
       <texPath>Industry/MiningShaft</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(4.5,2.5)</drawSize>
+      <drawSize>(3,1.1)</drawSize>
       <shaderType>CutoutComplex</shaderType>
       <shadowData>
         <volume>(2.85, 0.3, 0.62)</volume>
@@ -72,7 +73,6 @@
       <li>PRF_Excavate_Slate</li>
       <li>PRF_Excavate_Marble</li>
     </recipes>
-    <altitudeLayer>Building</altitudeLayer>
     <fillPercent>0.5</fillPercent>
     <useHitPoints>True</useHitPoints>
     <statBases>
@@ -82,7 +82,6 @@
       <Cleanliness>-5</Cleanliness>
     </statBases>
     <size>(3,1)</size>
-
     <designatorDropdown>miners_gr</designatorDropdown>
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
@@ -94,6 +93,7 @@
       <li>ITab_Bills</li>
     </inspectorTabs>
     <building>
+      <isEdifice>false</isEdifice>
       <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
     </building>
     <comps>
@@ -103,7 +103,7 @@
     </researchPrerequisites>
     <designationHotKey>Misc9</designationHotKey>
     <placeWorkers>
-      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
     </placeWorkers>
   </ThingDef>
 
