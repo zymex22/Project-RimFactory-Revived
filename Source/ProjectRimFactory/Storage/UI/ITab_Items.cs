@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using HarmonyLib;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
@@ -18,8 +19,11 @@ namespace ProjectRimFactory.Storage.UI
     {
         static ITab_Items()
         {
-            DropUI = (Texture2D)HarmonyLib.AccessTools.Field(HarmonyLib.AccessTools.TypeByName("Verse.TexButton"), "Drop").GetValue(null);
+            DropUI = (Texture2D)AccessTools.Field(AccessTools.TypeByName("Verse.TexButton"), "Drop").GetValue(null);
+            menuUI = (Texture2D)AccessTools.Field(AccessTools.TypeByName("Verse.TexButton"), "ToggleLog").GetValue(null);; // ToggleLog
         }
+
+        private static Texture2D menuUI;
         private static Texture2D DropUI;
         private Vector2 scrollPos;
         private float scrollViewHeight;
@@ -49,7 +53,7 @@ namespace ProjectRimFactory.Storage.UI
             var curY = 0f;
             var frame = new Rect(10f, 10f, size.x - 10f, size.y - 10f);
             GUI.BeginGroup(frame);
-            Widgets.ListSeparator(ref curY, frame.width, "Content");
+            Widgets.ListSeparator(ref curY, frame.width, labelKey.Translate());
             curY += 5f;
 
             // Rider: This new search method is REALLLYYYYYY FAST
@@ -125,6 +129,30 @@ namespace ProjectRimFactory.Storage.UI
                 dropThing(thing);
             }
 
+            var p = thing.Map.mapPawns.FreeColonists
+                .Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray()[0];
+            if (ChoicesForThing(thing, p).Count > 0)
+            {
+                width -= 24f;
+                var pawnInteract = new Rect(width, y, 24f, 24f);
+                if (Widgets.ButtonImage(pawnInteract, menuUI, Color.gray, Color.white, false))
+                {
+                    var opts = new List<FloatMenuOption>();
+                    foreach (var pawn in from Pawn col in thing.Map.mapPawns.FreeColonists
+                        where col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed
+                        select col)
+                    {
+                        var choices =
+                            ChoicesForThing(thing, pawn);
+                        if (choices.Count > 0)
+                            opts.Add(new FloatMenuOption(pawn.Name.ToStringFull,
+                                () => { Find.WindowStack.Add(new FloatMenu(choices)); }));
+                    }
+
+                    Find.WindowStack.Add(new FloatMenu(opts));
+                }
+            }
+
             var thingRow = new Rect(0f, y, width, 28f);
             // Highlights the row upon mousing over
             if (Mouse.IsOver(thingRow))
@@ -155,33 +183,6 @@ namespace ProjectRimFactory.Storage.UI
             
             // Custom rightclick menu
             TooltipHandler.TipRegion(thingRow, text2);
-            if (GUI.Button(thingRow, "", Widgets.EmptyStyle))
-            {
-                // if right click
-                if (Event.current.button == 1)
-                {
-                    // create a menu with all of the pawn names
-                    var opts = new List<FloatMenuOption>();
-                    foreach (var p in from Pawn col in thing.Map.mapPawns.FreeColonists
-                        where col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed
-                        select col)
-                    {
-                        var choices = ChoicesForThing(thing, p);
-                        if (ChoicesForThing(thing, p).Count > 0)
-                            opts.Add(new FloatMenuOption(p.Name.ToStringFull,
-                                () => { Find.WindowStack.Add(new FloatMenu(choices)); }));   
-                    }
-                    
-                    opts.Add(new FloatMenuOption("PRFOutputItems".Translate(), () => dropThing(thing)));
-
-                    Find.WindowStack.Add(new FloatMenu(opts));
-                }
-                else
-                {
-                    Find.Selector.ClearSelection();
-                    Find.Selector.Select(thing);
-                }
-            }
 
             y += 28f;
         }
