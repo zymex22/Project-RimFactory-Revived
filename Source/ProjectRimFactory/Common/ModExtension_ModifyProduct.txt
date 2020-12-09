@@ -1,0 +1,62 @@
+﻿ ModExtension_ModifyProduct
+ A DefModExtension that allows you to add bonuses or otherwise modify bill products/trigger callbacks
+   Note that while this was originally set up to provide bonus items for a factory mod, the possible
+   uses are mostly limited by your imagination.
+ Sample XML:
+  ...
+  <modExtensions>
+    <li Class="[namespace].ModExtension_ModifyProducts">
+      <doAll>true</doAll>   - whether to process all "bonuses"
+      <bonuses>
+        <li> - 1st child "bonus"
+          <chance>.5</chance> - half the time
+          <altChanger>MyMod.KillAllHumans</altChanger> - alternate callback; this one
+                                             may not actually be considered a "bonus"
+                                             See ProductChangerDel in the C#
+        </li>
+        <li><def>Gold</def><count>3</count></li> - automatically always add 3 gold
+        <li>
+          <replaceOrigProduct>true</replaceOrigProduct>    - we didn't want that gold anyway
+          <bonusYields Chance="0.18">                  - an alternate way to specify bonus rewards:
+            <ChunkSlagSteel Weight="1" Count="1" />    - 18% chance of something replacing the orig
+            <Gold Weight="0.33" Count="10" />            product, with a weighted random choice of
+            <Jade Weight="0.33" Count="10" />            slag, gold, jade, silver, or a sculpture
+            <Silver Weight="0.33" Count="30" />
+            <SculptureLarge Weight="0.01" Count="1" Quality="6" MaterialDef="Jade" />
+          </bonusYields>
+          <billBonusYields> - only works with bonusYields, I'm afraid.  If you get a bonus
+            <li>              yield (as above), this has a chance to replace it with a 
+              <key>Make_SculptureSmall</key>    - recipe-specific bonus item
+              <value Chance="1"><ChunkSlagSteel Weight="1" Count="1" /> - no one likes small scupltures?
+            </li>
+          </billBonusYields>
+        </li>
+        <li>
+          <chance>0.25</chance>       - 25% chance of either 1 gold or 1 silver (50% chance of either)
+          <bonuses>
+            <li><weight>1</weight><def>Gold</def></li>
+            <li><weight>1</weight><def>Silver</def></li>
+          </bonuses>
+        </li>
+        <li>
+          <chance>0.25</chance>       - 25% chance of either 1 gold or 1 silver (50% chance of either)
+          <bonuses>                   - (note: doAll is false by default)
+            <li><chance>0.5</chance><def>gold</def></li>
+            <li><def>Silver</def></li>  (note: chance defaults to 1)
+          </bonuses>
+       </li>
+      </bonuses>
+    </li>
+    ...
+C# Note:
+If you make products but do not do so using the vanilla recipe bill product creation (GenRecipe's MakeRecipeProducts),
+you can still use this by calling the DefModExtension directly:
+this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList, this as IBillGiver, this);
+
+Note also: This can be expanded to add new fields fairly easily.  As it's a DefModExtension and only called 
+when products are actually produced, impact should be minimal.
+
+Happy producing!
+
+Authors: Nobo - original BonusYields
+         LWM - universal application

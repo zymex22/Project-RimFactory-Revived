@@ -6,9 +6,74 @@ using HarmonyLib;  // AccessTools for methods
 using RimWorld;
 using UnityEngine;
 using Verse;
-
+/***************************************************************
+ * ModExtension_ModifyProduct
+ * A DefModExtension that allows you to add bonuses or otherwise modify bill products/trigger callbacks
+ *   Note that while this was originally set up to provide bonus items for a factory mod, the possible
+ *   uses are mostly limited by your imagination.
+ * Sample XML:
+ * ...
+ * <modExtensions>
+ *   <li Class="[namespace].ModExtension_ModifyProducts">
+ *     <doAll>true</doAll>   - whether to process all "bonuses"
+ *     <bonuses>
+ *       <li> - 1st child "bonus"
+ *         <chance>.5</chance> - half the time
+ *         <altChanger>MyMod.KillAllHumans</altChanger> - alternate callback; this one
+ *                                            may not actually be considered a "bonus"
+ *                                            See ProductChangerDel in the C#
+ *       </li>
+ *       <li><def>Gold</def><count>3</count></li> - automatically always add 3 gold
+ *       <li>
+ *         <replaceOrigProduct>true</replaceOrigProduct>    - we didn't want that gold anyway
+ *         <bonusYields Chance="0.18">                  - an alternate way to specify bonus rewards:
+ *           <ChunkSlagSteel Weight="1" Count="1" />    - 18% chance of something replacing the orig
+ *           <Gold Weight="0.33" Count="10" />            product, with a weighted random choice of
+ *           <Jade Weight="0.33" Count="10" />            slag, gold, jade, silver, or a sculpture
+ *           <Silver Weight="0.33" Count="30" />
+ *           <SculptureLarge Weight="0.01" Count="1" Quality="6" MaterialDef="Jade" />
+ *         </bonusYields>
+ *         <billBonusYields> - only works with bonusYields, I'm afraid.  If you get a bonus
+ *           <li>              yield (as above), this has a chance to replace it with a 
+ *             <key>Make_SculptureSmall</key>    - recipe-specific bonus item
+ *             <value Chance="1"><ChunkSlagSteel Weight="1" Count="1" /> - no one likes small scupltures?
+ *           </li>
+ *         </billBonusYields>
+ *       </li>
+ *       <li>
+ *         <chance>0.25</chance>       - 25% chance of either 1 gold or 1 silver (50% chance of either)
+ *         <bonuses>
+ *           <li><weight>1</weight><def>Gold</def></li>
+ *           <li><weight>1</weight><def>Silver</def></li>
+ *         </bonuses>
+ *       </li>
+ *       <li>
+ *         <chance>0.25</chance>       - 25% chance of either 1 gold or 1 silver (50% chance of either)
+ *         <bonuses>                   - (note: doAll is false by default)
+ *           <li><chance>0.5</chance><def>gold</def></li>
+ *           <li><def>Silver</def></li>  (note: chance defaults to 1)
+ *         </bonuses>
+ *       </li>
+ *     </bonuses>
+ *   </li>
+ *   ...
+ * C# Note:
+ * If you make products but do not do so using the vanilla recipe bill product creation (GenRecipe's MakeRecipeProducts),
+ * you can still use this by calling the DefModExtension directly:
+ * this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList, this as IBillGiver, this);
+ *
+ * Note also: This can be expanded to add new fields fairly easily.  As it's a DefModExtension and only called 
+ * when products are actually produced, impact should be minimal.
+ *
+ * Happy producing!
+ *
+ * Authors: Nobo - original BonusYields
+ *          LWM - universal application
+ *
+ **********/
 namespace ProjectRimFactory.Common {
-    //TODO: this is needed for VE's mech mod and our GenProducts2
+    //NOTE: anything that does not use vanilla's bill recipe products generation must directy call
+    //   this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList, this as IBillGiver, this);
     [HarmonyPatch(typeof(Verse.GenRecipe), "MakeRecipeProducts")]
     static class Patch_GenRecipe_MakeRecipeProducts_BonusYield {
         static IEnumerable<Thing> Postfix(IEnumerable<Thing> __result, RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
@@ -25,158 +90,16 @@ namespace ProjectRimFactory.Common {
             }
         }
     }
-#if false
-    public class ModExtension_ModifyProductX : DefModExtension
-    {
-        public bool autoModify = true; // Whether Vanilla's Product generation (bills) will automatically add bonuses
-                                       // (turn off if calling update internally.)
-        //needs to be string instead of RecipeDef as most RecipeDef(s) are created in C# and that occurs after the XML causing a cant refrence error
-        public Dictionary<string , BonusYieldList> billBonusYields;
-        // Internal system for yield changers: C# methods that can determine yields with a lot of flexibility
-        //   We have to set this aside as a separate object type, becaus
-        //   Well, because several reasons, having to do with C# limitations
-        //   and RW XML->C# limits.  Making our own object 
-        public ProductChangerList productChangers;
-        // Generic bill independent reward
-        //  A different object instead of a List<BonusYield> for similar reason - it's the easiest
-        //  way to make the XML->C# straightforward.  Note that in this case, it's harder to expand
-        //  in a generic way, so ...good luck whoever maintains after this; I'm not going to fix it
-        //  myself? Whoever wrote it did make the XML elegant.
-        public BonusYieldList bonusYields;
-//        public List<RequiredQuality> requiredQualities; //for bonuses that require certin qualities
-        public bool doAll = true;
-        public bool replaceOrigProduct = false;
-        // Quality of bonus items, if they have a quality....//TODO: this should be in a per bonus item :p
-        public QualityCategory minQuality = QualityCategory.Normal;
-        public QualityCategory maxQuality = QualityCategory.Legendary;
+    // Utility class that allows fairly arbitrary access to the bill production product list
+    //   As long as a static method meets the requirements to e a ProductChangerDel, it can
+    //   be called by the ModExtension_ProductModifier
+    // Technical: we have to do this delegate declaration b/c C# doesn't have
+    //   any other way to define a set of these methods - no Func<ref Thing, bool> etc.
+    public delegate bool ProductChangerDel(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
+                                         IBillGiver billGiver = null, Thing productMaker = null,
+                                         RecipeDef recipeDef = null, Pawn worker = null,
+                                         List<Thing> ingredients = null, Thing dominantIngredient = null);
 
-        public void ProcessProducts(List<Thing> products, IBillGiver billGiver = null, Thing productMaker = null, RecipeDef recipeDef=null, Pawn worker=null, 
-            List<Thing> ingredients=null, Thing dominantIngredient=null) {
-            Log.Message("GABP called for " + (billGiver==null?"nll":billGiver.ToString()));
-            if (this.productChangers == null || productChangers.changers.NullOrEmpty()) {
-                this.productChangers = new ProductChangerList();
-                productChangers.changers.Add(TryGetDefaultBonusYield);
-            }
-            foreach (var giver in productChangers.changers) {
-                if (giver(products, this, billGiver, productMaker, recipeDef, worker, ingredients, dominantIngredient)) {
-                    if (!doAll) return;
-                }
-            }
-        }
-
-        public static bool TryGetDefaultBonusYield(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
-                                          IBillGiver billGiver, Thing productMaker,
-                                          RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
-                                          Thing dominantIngredient
-                                     ) {
-            Thing t = modifyYieldExt.GetBonusYield(recipeDef);
-            if (t != null) {
-                if (modifyYieldExt.replaceOrigProduct) {
-                    products.Clear();
-                }
-                products.Add(t);
-                return true;
-            }
-            return false;
-        }
-
-        public static bool TryGetSimpleBonusYield(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
-                                          IBillGiver billGiver, Thing productMaker,
-                                          RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
-                                          Thing dominantIngredient
-                                     ) {
-            Thing t = modifyYieldExt.GetSimpleBonusYield();
-            if (t != null) {
-                if (modifyYieldExt.replaceOrigProduct) {
-                    products.Clear();
-                }
-                products.Add(t);
-                return true;
-            }
-            return false;
-        }
-        public static bool TryGetRecipeBonusYield(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
-                                          IBillGiver billGiver, Thing productMaker,
-                                          RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
-                                          Thing dominantIngredient
-                                     ) {
-            Thing t = modifyYieldExt.GetRecipeBonusYield(recipeDef);
-            if (t!=null) {
-                if (modifyYieldExt.replaceOrigProduct) {
-                    products.Clear();
-                }
-                products.Add(t);
-                return true;
-            }
-            return false;
-        }
-
-        // If something is Awful, but minimum acceptable quality is Normal, make it Normal
-        private void EnsureProperQuality(Thing t, QualityCategory? min=null, QualityCategory? max=null) {
-            var compQ = t?.TryGetComp<CompQuality>();
-            if (compQ != null) {
-                if (min == null) min = this.minQuality;
-                if (max == null) max = this.maxQuality;
-                // restrict to acceptable qualities:
-                var quality = (QualityCategory)Mathf.Clamp((float)compQ.Quality, (float)min, (float)max);
-                compQ.SetQuality(quality, ArtGenerationContext.Colony);
-            }
-        }
-        /*
-        public Thing GetBonusYield(RecipeDef recipe = null, QualityCategory min_quality = QualityCategory.Awful, 
-                                   QualityCategory max_quality = QualityCategory.Legendary)
-        {
-            Thing genericThing = this.bonusYields?.GetBonusYield();
-            Thing billThing = null;
-            Thing thingYield = null;
-
-            if (billBonusYields != null && recipe != null && billBonusYields.ContainsKey(recipe.defName))
-            {
-                
-                billThing = this.billBonusYields[recipe.defName]?.GetBonusYield();
-            }
-            thingYield = billThing ?? genericThing;
-
-            QualityCategory thingQuality = QualityCategory.Normal;
-            if (thingYield.TryGetQuality(out thingQuality))
-            {
-                //Try Update Quality
-                thingQuality = (QualityCategory)Mathf.Clamp((float)thingQuality, (float)min_quality, (float)max_quality);
-                thingYield.TryGetComp<CompQuality>()?.SetQuality(thingQuality, ArtGenerationContext.Colony);
-
-            }
-
-            return thingYield;
-        }
-        */
-        /// <summary>
-        /// Try to return a bonus yield if the player got lucky.  Recipe bonus yields will replace
-        ///   regular bonus yields and only appear if regular bonus yield procs.
-        /// </summary>
-        /// <returns>The bonus yield or null.</returns>
-        public Thing GetBonusYield(RecipeDef recipe=null, QualityCategory? overrideMinQ = null, QualityCategory? overrideMaxQ = null) {
-            Thing t = GetSimpleBonusYield(overrideMinQ, overrideMaxQ);
-            if (t != null) return (GetRecipeBonusYield(recipe, overrideMinQ, overrideMaxQ) ?? t);
-            return null;
-        }
-        public Thing GetRecipeBonusYield(RecipeDef recipe=null, QualityCategory? minQ = null, QualityCategory? maxQ = null) {
-            if (recipe != null && this.billBonusYields!=null && 
-                billBonusYields.TryGetValue(recipe.defName, out BonusYieldList bonusYieldList)) {
-                var thing = bonusYieldList.GetBonusYield();
-                if (thing == null) return null;
-                EnsureProperQuality(thing, minQ, maxQ);
-                return thing;
-            }
-            return null;
-        }
-        public Thing GetSimpleBonusYield(QualityCategory? minQ = null, QualityCategory? maxQ = null) {
-            Thing t = this.bonusYields?.GetBonusYield();
-            if (t != null) EnsureProperQuality(t, minQ, maxQ);
-            return t;
-        }
-
-    }
-#endif
     public class ProductChanger
     {
         public ProductChangerDel del;
@@ -192,7 +115,6 @@ namespace ProjectRimFactory.Common {
             { "test", ModExtension_ModifyProduct.TestChanger },
             #endif
         };
-
         //   We translate string->YieldGiver with the LoadDataFromXmlCustom, which overrides
         //   vanilla's XML->C# engine completely.
         //   There is NO WAY RW will handle that XML->C# translation for us ;p
@@ -216,49 +138,15 @@ namespace ProjectRimFactory.Common {
             }
         }
     }
-    // Technical: we have to do this delegate declaration b/c C# doesn't have
-    //   any other way to define a set of these methods - no Func<ref Thing, bool> etc.
-    public delegate bool ProductChangerDel(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
-                                         IBillGiver billGiver = null, Thing productMaker = null,
-                                         RecipeDef recipeDef = null, Pawn worker = null,
-                                         List<Thing> ingredients = null, Thing dominantIngredient = null);
-    /*
-    public class ProductChangerList {
-        public static Dictionary<string, ProductChangerDel> specialNames = new Dictionary<string, ProductChangerDel>
-        { // case INsensitive:
-            { "default", ModExtension_ModifyProduct.TryGetDefaultBonusYield },
-            { "simplebonus", ModExtension_ModifyProduct.TryGetSimpleBonusYield },
-            { "recipebonus", ModExtension_ModifyProduct.TryGetRecipeBonusYield },
-        };
-        //   We translate string->YieldGiver with the LoadDataFromXmlCustom, which overrides
-        //   vanilla's XML->C# engine completely.
-        //   There is NO WAY RW will handle that XML->C# translation for us ;p
-       
-        public List<ProductChangerDel> changers = new List<ProductChangerDel>();
-        // Override RW XML->C#
-        public void LoadDataFromXmlCustom(XmlNode xmlRoot) {
-            // Copying Nobo's code below - there may be a better way to do this?
-            foreach (var s in xmlRoot.ChildNodes.Cast<XmlNode>()
-                    .Where(n => n.NodeType == XmlNodeType.Element)
-                    .OfType<XmlElement>()
-                    .Where(x => x.Name.ToLower() == "li")
-                    .Select(e=>e.InnerText)) {
-                try {
-                    var checkSpecial = s.ToLower();
-                    if (specialNames.ContainsKey(checkSpecial)) {
-                        changers.Add(specialNames[checkSpecial]);
-                    } else {
-                        var method = AccessTools.Method(s);
-                        changers.Add((ProductChangerDel)Delegate.CreateDelegate(typeof(ProductChangerDel), method));
-                    }
-                } catch (Exception e) {
-                    Log.Error("ModExtension_BonusYield could not parse method \"" + s + "\"\nFull Exception: "+e);
-                    continue;
-                }
-            }
-        }
-    }*/
 
+    // Note: This is a recursive class - you can define children with great flexibility
+    //    ("bonuses" below, as the def mod extension was originally designed to allow
+    //    bonus items during item production.)
+    //    The children can have their own "bonuses" etc.
+    //    Using altChanger, you can also produce other effects/things/whatever.
+    //    See, e.g., the Special Sculpture system.  You can do other things, too.
+    //    Maybe whenever something is butchered, there's  risk of blood demons 
+    //    surrounding the pawn, etc.  Go wild.
     public class ModExtension_ModifyProduct : DefModExtension
     {
         //------ general options for this level ------//
@@ -298,6 +186,9 @@ namespace ProjectRimFactory.Common {
         public string extraData;
         public string extraData2;
 
+        // The main way to use the mod extension.  This is called via Harmony when a vanilla bill makes product items
+        //   If products are made some other way and you want to use this def mod extension, you must call this directly:
+        // this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList, this as IBillGiver, this, etc);
         public bool ProcessProducts(List<Thing> products, IBillGiver billGiver = null, 
                Thing productMaker = null, RecipeDef recipeDef = null, Pawn worker = null,
                List<Thing> ingredients = null, Thing dominantIngredient = null)
@@ -336,6 +227,7 @@ namespace ProjectRimFactory.Common {
             return gotSomeResult;
         }
 
+        // A direct attempt to get a single bonus item; calling ProcessProducts is preferred
         public Thing TryGetBonus(RecipeDef recipe=null, QualityCategory? minQuality = null, QualityCategory? maxQuality = null)
         {
             if (this.MeetsRequirements()) {
@@ -347,7 +239,6 @@ namespace ProjectRimFactory.Common {
                         return tmpList[0];
                     }
                 }
-                //TODO: empty products -> dels
                 if (def != null) return BonusThing(recipe, minQuality, maxQuality);
                 if (!bonuses.NullOrEmpty()) {
                     if (bonuses[0].weight > 0) { // do by weight, not by order
@@ -457,13 +348,18 @@ namespace ProjectRimFactory.Common {
                 if (max == null) max = this.maxQuality;
                 var q = this.quality ?? compQ.Quality;
                 // restrict to acceptable qualities:
-                q = (QualityCategory)Mathf.Clamp((float)q, (float)min, (float)max);
+                if (min != null) {
+                    q = (QualityCategory)Math.Max((int)min, (int)q);
+                }
+                if (max != null) {
+                    q = (QualityCategory)Math.Min((int)max, (int)q);
+                }
                 compQ.SetQuality(q, ArtGenerationContext.Colony);
             }
         }
 
         /********************* Static methods for default generic bonuses *************************/
-        public static bool TryGetDefaultBonusYield(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
+public static bool TryGetDefaultBonusYield(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
                                           IBillGiver billGiver, Thing productMaker,
                                           RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
                                           Thing dominantIngredient
@@ -514,7 +410,8 @@ namespace ProjectRimFactory.Common {
             }
             return false;
         }
-#if DEBUG
+        #if DEBUG
+        // Simply displays a message in the log.  Useful for testing?
         public static bool TestChanger(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
                                   IBillGiver billGiver, Thing productMaker,
                                   RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
@@ -525,17 +422,17 @@ namespace ProjectRimFactory.Common {
             products.Add(ThingMaker.MakeThing(ThingDefOf.MealNutrientPaste));
             return true;
         }
-#endif
-
+        #endif
     }
 
+    // Another approach that makes pretty XML, so I kept it around (altho it's much more limited)
     public class BonusYieldList
     {
         public List<BonusYield> bonuses;
-
         public float chance;
 
         // Completely override default RW read from XML:
+        //   We do this to allow pretty XML
         public void LoadDataFromXmlCustom(XmlNode xmlRoot)
         {
             if (xmlRoot.Attributes["Chance"] != null)
@@ -605,6 +502,10 @@ namespace ProjectRimFactory.Common {
         }
 
         // override vanilla load from XML:
+        //   Read in things of the form
+        //      <Gold Weight="0.02" Count="10" />
+        //      <SculptureLarge Weight="0.5" Count="1" Quality="6" MaterialDef="Gold" />
+        // etc.
         public void LoadDataFromXmlCustom(XmlNode xmlRoot)
         {
             DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, "def", xmlRoot.Name, null, null);
