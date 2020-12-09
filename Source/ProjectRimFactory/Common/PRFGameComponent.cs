@@ -21,9 +21,12 @@ namespace ProjectRimFactory {
         /// <returns><c>true</c>, if the sculpture is now Special.</returns>
         /// <param name="item">Art item to make Special.</param>
         /// <param name="specialSculpture">Specific special sculpture; otherwise random</param>
-        public bool TryAddSpecialSculpture(Thing item, SpecialSculpture specialSculpture=null) {
-            if (specialSculpture == null) { // find an acceptable special sculpture
-                foreach (var ss in ProjectRimFactory_ModComponent.availableSpecialSculptures
+        public bool TryAddSpecialSculpture(Thing item, SpecialSculpture specialSculpture=null, bool verifyProvidedSculpture = true) {
+            if (specialSculpture != null) {
+                if (verifyProvidedSculpture && (specialSculpture.limitToDefs?.Contains(item.def) == false)) return false;
+            } else {  // find an acceptable special sculpture
+            foreach (var ss in ProjectRimFactory_ModComponent.availableSpecialSculptures
+                                .Where(s => (s.limitToDefs?.Contains(item.def) != false))
                                 .InRandomOrder()) {
                     if (this.specialScupltures == null) { specialSculpture = ss; break; }
                     var inGameWithSameId = specialScupltures.FirstOrDefault(s => s.id == ss.id);
