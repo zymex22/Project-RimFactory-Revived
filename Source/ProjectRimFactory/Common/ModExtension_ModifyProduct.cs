@@ -339,6 +339,14 @@ namespace ProjectRimFactory.Common {
         public Thing TryGetBonus(RecipeDef recipe=null, QualityCategory? minQuality = null, QualityCategory? maxQuality = null)
         {
             if (this.MeetsRequirements()) {
+                if (altChanger != null) {
+                    var tmpList = new List<Thing>();
+                    altChanger.del(tmpList, this, null, null, recipe);
+                    if (tmpList.Count>0) {
+                        EnsureProperQuality(tmpList[0], minQuality, maxQuality);
+                        return tmpList[0];
+                    }
+                }
                 //TODO: empty products -> dels
                 if (def != null) return BonusThing(recipe, minQuality, maxQuality);
                 if (!bonuses.NullOrEmpty()) {
