@@ -257,17 +257,10 @@
       </li>
       <!-- For thorny special sculp when done? -->
       <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
-        <!-- <billBonusYields>
-          <li>
-            <key>Make_SculptureSmall</key>
-            <value Chance="1">
-              <SculptureLarge Weight="0.5" Count="1" Quality="6" MaterialDef="Gold" />
-            </value>
-          </li>
-        </billBonusYields> -->
-        <bonusYields Chance="0.25">
-          <SculptureLarge Weight="0.5" Count="1" Quality="6" MaterialDef="Jade" />
-        </bonusYields>
+        <bonuses>
+          <li><requiredQuality>Masterwork</requiredQuality><chance>0.15</chance><altChanger>ProjectRimFactory.PRFGameComponent:TryMakeProductSpecialScupture</altChanger></li>
+          <li><requiredQuality>Legendary</requiredQuality><chance>0.33</chance><altChanger>ProjectRimFactory.PRFGameComponent:TryMakeProductSpecialScupture</altChanger></li>
+        </bonuses>
       </li>
     </modExtensions>
     <staticSunShadowHeight>1</staticSunShadowHeight>

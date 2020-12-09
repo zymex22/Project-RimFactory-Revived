@@ -6,7 +6,7 @@ using Verse;
 using ProjectRimFactory.Common;
 namespace ProjectRimFactory {
     public class PRFGameComponent : GameComponent {
-        public List<SpecialSculpture> specialScupltures;
+        public List<SpecialSculpture> specialScupltures;  // currently in game
         public PRFGameComponent(Game game) {
             SpecialSculpture.PreStartGame();
         }
@@ -16,7 +16,7 @@ namespace ProjectRimFactory {
         }
         /// <summary>
         /// Make a sculpture Special!
-        /// Use: Current.Game.GetComponent&lt;PRFGrameComponent&gt;().TryAddSpecialSculpture(...)
+        /// Use: Current.Game.GetComponent&lt;PRFGameComponent&gt;().TryAddSpecialSculpture(...)
         /// </summary>
         /// <returns><c>true</c>, if the sculpture is now Special.</returns>
         /// <param name="item">Art item to make Special.</param>
@@ -55,6 +55,20 @@ namespace ProjectRimFactory {
             }
             // Note: autocompletion was essential for all that.
             return true;
+        }
+        // For use with ModExtension_ModifyProduct
+        public static bool TryMakeProductSpecialScupture(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
+                                          IBillGiver billGiver, Thing productMaker,
+                                          RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
+                                          Thing dominantIngredient)
+        {
+            //TODO: allow extraData to specify which special sculpture?
+            foreach (Thing p in products) {
+                if (Current.Game.GetComponent<PRFGameComponent>().TryAddSpecialSculpture(p)) {
+                    return true;
+                }
+            }
+            return false;
         }
         /*
         // A quick way to test all the scupltures available, if need be.       
