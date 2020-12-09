@@ -67,8 +67,9 @@ using Verse;
  *
  * Happy producing!
  *
- * Authors: Nobo - original BonusYields
- *          LWM - universal application
+ * Authors: Nobo -  original BonusYields
+ *          Sn1p3rr3c0n - made it better
+ *          LWM -  universal application
  *
  **********/
 namespace ProjectRimFactory.Common {
