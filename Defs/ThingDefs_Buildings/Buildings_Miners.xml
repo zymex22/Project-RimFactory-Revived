@@ -42,7 +42,7 @@
   <ThingDef ParentName="BenchBase">
     <defName>PRF_MineShaft</defName>
     <label>MiningShaft</label>
-    <description>A early random ore mineshaft capable of finding stones, steel slag, and other low end resources, also a slim chance to find rares</description>
+    <description>A early random ore mineshaft capable of finding stones, steel slag, and other low end resources, also a slim chance to find rares.\nShould be placed in a mountain wall to operate.</description>
     <thingClass>Building_WorkTable</thingClass>
     <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
     <clearBuildingArea>false</clearBuildingArea>
@@ -63,8 +63,13 @@
         <cornerBR>Damage/Corner</cornerBR>
       </damageData>
     </graphicData>
+    <constructEffect></constructEffect>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>75</costStuffCount>    <!-- Set price for stone blocks -->
     <costList>
-      <Steel>100</Steel>
+      <WoodLog>50</WoodLog>
     </costList>
     <recipes>
       <li>PRF_Excavate_Granite</li>
@@ -76,13 +81,13 @@
     <fillPercent>0.5</fillPercent>
     <useHitPoints>True</useHitPoints>
     <statBases>
-      <WorkToBuild>2000</WorkToBuild>
-      <MaxHitPoints>180</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <Cleanliness>-5</Cleanliness>
+      <WorkToBuild>3500</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <Cleanliness>-10</Cleanliness>
     </statBases>
     <size>(3,1)</size>
-    <designatorDropdown>PRF_MinersGroup</designatorDropdown>
+    <!-- <designatorDropdown>PRF_MinersGroup</designatorDropdown> -->
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
     <hasInteractionCell>True</hasInteractionCell>

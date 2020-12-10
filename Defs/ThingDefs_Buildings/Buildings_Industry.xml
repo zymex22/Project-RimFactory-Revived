@@ -9,9 +9,7 @@
     <passability>PassThroughOnly</passability>
     <blockLight>false</blockLight>
     <blockWind>true</blockWind>
-
     <altitudeLayer>Building</altitudeLayer>
-
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
@@ -499,6 +497,7 @@
     <label>Blast Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <altitudeLayer>Gas</altitudeLayer>
+    <designatorDropdown></designatorDropdown>
     <graphicData>
       <texPath>Industry/smelter_t0off</texPath>
       <drawSize>(5,7.9)</drawSize>
@@ -510,9 +509,14 @@
       <MarketValue>1340</MarketValue>
     </statBases>
     <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)\n Use wood to smelt</description>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>500</costStuffCount>    <!-- Set price for stone blocks -->
+    <constructEffect></constructEffect>
     <costList>
-      <Steel>200</Steel>
-      <BlocksGranite>500</BlocksGranite>
+      <Steel>150</Steel>
+      <WoodLog>50</WoodLog>
     </costList>
     <recipes>
       <li>BurnApparel</li>
