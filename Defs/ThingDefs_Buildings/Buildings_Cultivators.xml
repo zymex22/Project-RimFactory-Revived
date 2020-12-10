@@ -336,10 +336,10 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>600</basePowerConsumption>
       </li>
-      <li Class="CompProperties_HeatPusher">
+<!--       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>1</heatPerSecond>
-      </li>
+      </li> -->
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
@@ -394,10 +394,10 @@
         </moreColors>
       </li>
       <li Class="CompProperties_Flickable" />
-      <li Class="CompProperties_HeatPusher">
+<!--       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>2</heatPerSecond>
-      </li>
+      </li> -->
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
@@ -439,10 +439,10 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>2400</basePowerConsumption>
       </li>
-      <li Class="CompProperties_HeatPusher">
+<!--       <li Class="CompProperties_HeatPusher">
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>1</heatPerSecond>
-      </li>
+      </li> -->
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
