@@ -21,7 +21,7 @@
     <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.\nThis one will unlock simple food stuff and dedicated machines, good entry into automation.</description>
   </ResearchProjectDef>
 
-    <ResearchProjectDef ParentName="PRF_AssemblersResearch">
+  <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCookingII</defName>
     <label>Improved Self-cooking</label>
     <baseCost>1500</baseCost>
@@ -84,7 +84,10 @@
     <description>Learn how to make a new type of assembler that slowly improves its crafting speed.</description>
     <techLevel>Spacer</techLevel>
     <baseCost>2250</baseCost>
-    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
     <prerequisites>
       <li>PRF_CoreTierIII</li>
       <li>PRF_UniversalAutocrafting</li>
@@ -102,7 +105,10 @@
       <li>PRF_CoreTierIII</li>
       <li>AdvancedFabrication</li>
     </prerequisites>
-    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
     <researchViewX>9</researchViewX>
     <researchViewY>2.4</researchViewY>
   </ResearchProjectDef>

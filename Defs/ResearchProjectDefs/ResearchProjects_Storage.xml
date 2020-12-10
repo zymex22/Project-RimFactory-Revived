@@ -45,6 +45,9 @@
       <li>PRF_SteelCrates</li>
       <li>PRF_CoreTierIII</li>
     </prerequisites>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
   </ResearchProjectDef>
 </Defs>

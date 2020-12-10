@@ -26,7 +26,6 @@
     <defName>PRF_AutonomousMiningII</defName>
     <label>Pulse Drill II</label>
     <baseCost>3000</baseCost>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>DeepDrilling</li>
       <li>PRF_CoreTierII</li>
@@ -46,13 +45,13 @@
     <label>Plasma Drill III</label>
     <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
-    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_AutonomousMiningII</li>
       <li>PRF_CoreTierIII</li>
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>9</researchViewX>
     <description>A advanced miner that can select a main ore to mine for and get secondaries as rare/junk bonus chance(no infestation)</description>

@@ -10,6 +10,15 @@
     <value>ResearchBenchVanilla</value>
   </Operation>
 
+  <!--================================ add linkable for factory research linkable ====================================== -->
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="HiTechResearchBench"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+    <value>
+      <li>PRF_ResearchTerminal</li>
+    </value>
+  </Operation>
+
   <!--================================ Add concrete dropdown Menu ====================================== -->
 
   <Operation Class="PatchOperationFindMod">

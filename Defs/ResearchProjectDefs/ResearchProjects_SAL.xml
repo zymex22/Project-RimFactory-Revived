@@ -118,6 +118,7 @@
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>10</researchViewX>
     <researchViewY>4.3</researchViewY>
@@ -134,6 +135,7 @@
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>11</researchViewX>
     <researchViewY>4.3</researchViewY>
@@ -152,6 +154,7 @@
     </prerequisites>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>12</researchViewX>
     <researchViewY>4.3</researchViewY>

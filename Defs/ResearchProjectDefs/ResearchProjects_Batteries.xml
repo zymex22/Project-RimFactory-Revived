@@ -44,7 +44,10 @@
     <description>Learn alternate methods of power storage, and create 256k battery cells for mass storage of power.</description>
     <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
-    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
     <prerequisites>
       <li>PRF_LargeBatteries</li>
       <li>PRF_CoreTierIII</li>
