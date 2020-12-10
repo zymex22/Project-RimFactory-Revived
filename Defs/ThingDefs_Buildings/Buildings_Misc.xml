@@ -17,7 +17,7 @@
       <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
       <drawSize>(1,1)</drawSize>      <!-- Scale texture up/down to fit -->
     </graphicData>
-       <!-- The layer this thing is rendered on. Usually the same value as category. -->
+    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
@@ -27,7 +27,7 @@
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
     <neverMultiSelect>false</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
-        <!--architect menu location-->
+    <!--architect menu location-->
   </ThingDef>
 
   <!--======================================= NR Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->
@@ -277,7 +277,7 @@
 
   <!-- ======================================= Floor spotlight =============================================== -->
   <ThingDef ParentName="PRF_MiscBase">
-    <defName>PRF_StripedFloorGrouppotlight</defName>
+    <defName>PRF_Floorspotlight</defName>
     <label>Floor Spotlight</label>
     <altitudeLayer>Floor</altitudeLayer>
     <passability>Standable</passability>
