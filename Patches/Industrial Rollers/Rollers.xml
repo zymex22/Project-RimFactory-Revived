@@ -16,7 +16,7 @@
 						defName="MovingRailPuller"]
 					</xpath>
 					<value>
-					<designatorDropdown>Pullers_gr</designatorDropdown>
+					<designatorDropdown>PRF_PullersGroup</designatorDropdown>
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">

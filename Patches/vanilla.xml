@@ -19,7 +19,7 @@
     <nomatch Class="PatchOperationAdd">
       <xpath>/Defs/TerrainDef[defName="Concrete"]</xpath>
       <value>
-        <designatorDropdown>PRF_ConcreteFloor</designatorDropdown>
+        <designatorDropdown>PRF_ConcreteFloorGroup</designatorDropdown>
       </value>
     </nomatch>
   </Operation>

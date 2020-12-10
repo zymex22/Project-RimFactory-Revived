@@ -2,7 +2,7 @@
 <Defs>
 
   <DesignatorDropdownGroupDef>
-    <defName>Cultivator_gr</defName>
+    <defName>PRF_CultivatorGroup</defName>
   </DesignatorDropdownGroupDef>
   <!--=========================== Cultivator Base ==================================-->
   <ThingDef Name="PRF_CultivatorBaseBase" ParentName="PRF_BuildingBase" Abstract="True">
@@ -34,7 +34,7 @@
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
-    <designatorDropdown>Cultivator_gr</designatorDropdown>
+    <designatorDropdown>PRF_CultivatorGroup</designatorDropdown>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
 
 
@@ -462,7 +462,7 @@
     <defName>PRF_Sprinkler_I</defName>
     <label>Sprinkler</label>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
-    <designatorDropdown>Cultivator_gr</designatorDropdown>
+    <designatorDropdown>PRF_CultivatorGroup</designatorDropdown>
     <minifiedDef>MinifiedThing</minifiedDef>
     <graphicData>
       <texPath>Farm/CultivatorTools_Sprinkler</texPath>
@@ -521,7 +521,7 @@
     <defName>PRF_Sprinkler_II</defName>
     <label>Sprinkler mkII</label>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
-    <designatorDropdown>Cultivator_gr</designatorDropdown>
+    <designatorDropdown>PRF_CultivatorGroup</designatorDropdown>
     <minifiedDef>MinifiedThing</minifiedDef>
     <graphicData>
       <texPath>Farm/CultivatorTools_SprinklerSpacer</texPath>

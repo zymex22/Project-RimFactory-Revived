@@ -3,7 +3,7 @@
 
   <!--==================== Dropdown for cooking Equipment ====================-->
   <DesignatorDropdownGroupDef>    <!-- Create Downdown group, one for each dropdown -->
-    <defName>assembler_food_gr</defName>
+    <defName>PRF_CookingGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <!--==================== Cooker Base ====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
@@ -36,7 +36,7 @@
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
     <neverMultiSelect>true</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
-    <designatorDropdown>assembler_food_gr</designatorDropdown>    <!-- Assign Dropdown menu -->
+    <designatorDropdown>PRF_CookingGroup</designatorDropdown>    <!-- Assign Dropdown menu -->
     <staticSunShadowHeight>0.3</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <drawGUIOverlay>true</drawGUIOverlay>    <!-- Whether GUI will show up when you select this thing. -->
     <inspectorTabs>      <!-- A list of ITabs that will show up in the inspector when you select this item. These ITabs are for example the "Bills" buttons (ITab_Bills) and the art description (ITab_Art). -->

@@ -3,7 +3,7 @@
   <!-- ==================================== Battery base ===================================== -->
   <!-- Batteries Taken from SS bigger batteries-->
   <ThingDef Name="BiggerBatteries_BuildingBase" ParentName="PRF_BuildingBase" Abstract="True">
-    <designatorDropdown>prf_batteries_gr</designatorDropdown>
+    <designatorDropdown>PRF_BatteryGroup</designatorDropdown>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
       <damageData>
@@ -30,7 +30,7 @@
 
 
   <DesignatorDropdownGroupDef>
-    <defName>prf_batteries_gr</defName>
+    <defName>PRF_BatteryGroup</defName>
   </DesignatorDropdownGroupDef>
 
 

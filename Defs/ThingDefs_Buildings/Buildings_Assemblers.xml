@@ -67,7 +67,7 @@ Mod extennsion for assemblers
 
 
   <DesignatorDropdownGroupDef>    <!-- Create Downdown group, one for each dropdown -->
-    <defName>assembler_gr</defName>
+    <defName>PRF_AssemblerGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <!--====================AssemblerBase====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
@@ -118,7 +118,7 @@ Mod extennsion for assemblers
     <defName>PRF_RecipeDatabase</defName>
     <label>recipe database</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
-    <designatorDropdown>assembler_gr</designatorDropdown>
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <graphicData>
       <texPath>SAL3/DISK_HARDWARE4</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -182,7 +182,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeOneAssembler_I</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
     <label>assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
-    <designatorDropdown>assembler_gr</designatorDropdown>    <!-- Use Dropdown Group -->
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>    <!-- Use Dropdown Group -->
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>    <!-- What C# class to call when doing anything with this thing. Unless you know what you're doing, it's suggested to use the same thingClass similar things use. -->
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>      <!-- for being able to swap between textures each rotation -->
@@ -249,7 +249,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_I</defName>
     <label>adaptive assembler</label>
-    <designatorDropdown>assembler_gr</designatorDropdown>
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>

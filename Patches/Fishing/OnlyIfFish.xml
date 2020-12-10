@@ -27,7 +27,7 @@
 							  <drawSize>(5.5,5.5)</drawSize>
 							</graphicData>
 							<uiIconScale>0.8</uiIconScale>
-							<designatorDropdown>AnimalStations_gr</designatorDropdown>
+							<designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
 							<size>(5,5)</size>
 							<inspectorTabs>
 							  <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
@@ -107,7 +107,7 @@
 							  <drawSize>(5.5,5.5)</drawSize>
 							</graphicData>
 							<uiIconScale>0.8</uiIconScale>
-							<designatorDropdown>AnimalStations_gr</designatorDropdown>
+							<designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
 							<size>(5,5)</size>
 							<inspectorTabs>
 							  <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>

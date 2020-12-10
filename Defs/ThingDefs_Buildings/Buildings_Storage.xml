@@ -2,12 +2,12 @@
 <Defs>
   <!--==================== Dropdown Groups ====================-->
   <DesignatorDropdownGroupDef>
-    <defName>prfstorage_gr</defName>
+    <defName>PRF_StorageGroup</defName>
   </DesignatorDropdownGroupDef>
   <!--==================== Base ====================-->
   <ThingDef Name="PRF_MassStorageBase" ParentName="PRF_BuildingBase" Abstract="True">
     <thingClass>ProjectRimFactory.Storage.Building_Crate</thingClass>
-    <designatorDropdown>prfstorage_gr</designatorDropdown>
+    <designatorDropdown>PRF_StorageGroup</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
     <tradeTags>
       <li>Furniture</li>
@@ -275,7 +275,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_DigitalStorageUnit_I</defName>
     <label>digital storage unit</label>
-    <designatorDropdown>IO_gr</designatorDropdown>
+    <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
     <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
     <graphicData>
@@ -361,7 +361,7 @@
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>
-    <designatorDropdown>IO_gr</designatorDropdown>
+    <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <graphicData>
       <texPath>Storage/IO_Port</texPath>
       <graphicClass>Graphic_Single</graphicClass>

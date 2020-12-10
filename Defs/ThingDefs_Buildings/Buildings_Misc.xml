@@ -277,7 +277,7 @@
 
   <!-- ======================================= Floor spotlight =============================================== -->
   <ThingDef ParentName="PRF_MiscBase">
-    <defName>PRF_FloorSpotlight</defName>
+    <defName>PRF_StripedFloorGrouppotlight</defName>
     <label>Floor Spotlight</label>
     <altitudeLayer>Floor</altitudeLayer>
     <passability>Standable</passability>

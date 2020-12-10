@@ -131,7 +131,7 @@
         <countRange>5~40</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRF_FloorSpotlight</thingDef>
+        <thingDef>PRF_StripedFloorGrouppotlight</thingDef>
         <price>Cheap</price>
         <countRange>5~40</countRange>
       </li>

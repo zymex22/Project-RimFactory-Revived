@@ -2,11 +2,11 @@
 <Defs>
 
   <DesignatorDropdownGroupDef>    <!-- create dropdown menu def -->
-    <defName>PRF_floors</defName>
+    <defName>PRF_StripedFloorGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <DesignatorDropdownGroupDef>    <!-- create dropdown menu def -->
-    <defName>PRF_ConcreteFloor</defName>
+    <defName>PRF_ConcreteFloorGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <!-- ================= Colored Concrete floor ================= -->
@@ -24,7 +24,7 @@
     <fertility>0</fertility>
     <constructEffect>ConstructDirt</constructEffect>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-    <designatorDropdown>PRF_ConcreteFloor</designatorDropdown>
+    <designatorDropdown>PRF_ConcreteFloorGroup</designatorDropdown>
     <designationCategory>Floors</designationCategory>
     <description>Rough concrete. It is cheap and quick to build\n\nThis Colored version take slightly longer to build but also less ugly\n\nThis is added by Project RimFactory</description>
     <texturePath>Terrain/Surfaces/Concrete</texturePath>
@@ -110,9 +110,9 @@
     <costList>
       <Steel>7</Steel>
     </costList>
-    <designatorDropdown>PRF_floors</designatorDropdown>    <!-- assign to dropdown menu -->
+    <designatorDropdown>PRF_StripedFloorGroup</designatorDropdown>    <!-- assign to dropdown menu -->
     <designationCategory>Floors</designationCategory>    <!-- Defines which category in the Architect tab contains the terrain or floor building order -->
-    
+
     <designationHotKey>Misc9</designationHotKey>    <!-- Optional. Defines a HotKey to use in the designation category menu when selecting the terrain -->
   </TerrainDef>
 
@@ -132,9 +132,9 @@
     <costList>
       <Steel>7</Steel>
     </costList>
-    <designatorDropdown>PRF_floors</designatorDropdown>    <!-- assign to dropdown menu -->
+    <designatorDropdown>PRF_StripedFloorGroup</designatorDropdown>    <!-- assign to dropdown menu -->
     <designationCategory>Floors</designationCategory>    <!-- Defines which category in the Architect tab contains the terrain or floor building order -->
-    
+
     <designationHotKey>Misc9</designationHotKey>
   </TerrainDef>
 

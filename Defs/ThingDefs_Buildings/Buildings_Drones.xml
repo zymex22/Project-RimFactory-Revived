@@ -3,11 +3,11 @@
 
   <!--=========================== Drones drop down category ==================================-->
   <DesignatorDropdownGroupDef>
-    <defName>Drone_gr</defName>
+    <defName>PRF_DroneStationGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <DesignatorDropdownGroupDef>
-    <defName>MiniDrone_gr</defName>
+    <defName>PRF_MiniDroneStationGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <!--=========================== Bases for Dronestation types ==================================-->
@@ -37,7 +37,7 @@
         <offset>(0,0,-0.23)</offset>
       </shadowData>
     </graphicData>
-       <!-- The layer this thing is rendered on. Usually the same value as category. -->
+    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
     <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
@@ -49,7 +49,7 @@
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
-        <!--architect menu location-->
+    <!--architect menu location-->
     <placeWorkers>
       <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
     </placeWorkers>
@@ -109,11 +109,11 @@
       </li>
     </comps>
     <rotatable>false</rotatable>
-    
+
     <placeWorkers>
       <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
     </placeWorkers>
-    <designatorDropdown>Drone_gr</designatorDropdown>
+    <designatorDropdown>PRF_DroneStationGroup</designatorDropdown>
   </ThingDef>
 
 
@@ -194,7 +194,7 @@
     <researchPrerequisites>
       <li>PRF_ImprovedDrones</li>
     </researchPrerequisites>
-    <designatorDropdown>MiniDrone_gr</designatorDropdown>
+    <designatorDropdown>PRF_MiniDroneStationGroup</designatorDropdown>
   </ThingDef>
 
   <!--=========================== Drone Column (for thronerooms) ==================================-->
