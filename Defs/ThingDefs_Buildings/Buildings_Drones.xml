@@ -76,6 +76,7 @@
       <shaderType>CutoutComplex</shaderType>
       <drawSize>(2,2)</drawSize>
     </graphicData>
+    <minifiedDef>MinifiedThing</minifiedDef>
     <size>(2,2)</size>
     <canOverlapZones>false</canOverlapZones>
     <altitudeLayer>Building</altitudeLayer>
