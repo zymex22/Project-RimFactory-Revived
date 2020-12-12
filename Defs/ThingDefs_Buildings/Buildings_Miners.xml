@@ -108,7 +108,7 @@
     </researchPrerequisites>
     <designationHotKey>Misc9</designationHotKey>
     <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
+      <li>ProjectRimFactory.Common.PlaceWorker_NaturalWall</li>
     </placeWorkers>
   </ThingDef>
 
