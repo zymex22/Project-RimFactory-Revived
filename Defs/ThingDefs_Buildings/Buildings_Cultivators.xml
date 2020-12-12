@@ -128,7 +128,7 @@
     <graphicData>
       <texPath>Farm/CultivatorII</texPath>
     </graphicData>
-    <description>MkII Automated cultivator. By using improved drones to do your agriculture jobs, they now have improved functions to offer.They will haul to a stockpile, I/O, crate if its within range.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + hauling\nWorktime: fulltime\nSkill lv.: 15\n</description>
+    <description>MkII Automated cultivator. By using improved drones to do your agriculture jobs, they now have improved functions to offer.They will haul to a stockpile, I/O, crate if its within range.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + hauling\nWorktime: fulltime\nSkill lv.: 15</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_DroneModule>2</PRF_DroneModule>
@@ -181,7 +181,7 @@
       <texPath>Farm/CultivatorWithSunLamp</texPath>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
-    <description>MkII Automated cultivator. By using improved drones to do your agriculture jobs, they now have improved functions to offer.They will haul to a stockpile, I/O, crate if its within range. This one have a sunlamp and WILL upgrade your drones with research to lv 20.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + hauling\nWorktime: fulltime\nSkill lv.: 15\n</description>
+    <description>MkII Automated cultivator. By using improved drones to do your agriculture jobs, they now have improved functions to offer.They will haul to a stockpile, I/O, crate if its within range. This one have a sunlamp and WILL upgrade your drones with research to lv 20.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + hauling\nWorktime: fulltime\nSkill lv.: 15</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_DroneModule>2</PRF_DroneModule>
@@ -249,7 +249,7 @@
     <graphicData>
       <texPath>Farm/CultivatorIII</texPath>
     </graphicData>
-    <description>MkIII Automated cultivator. By using improved drones to do your agriculture jobs, they now have improved functions to offer. They will haul to a stockpile, I/O, crate if its within range.\n\nBase Stats:\nDrones: 5\nWorkArea: 11x11 - 33x33\nJobtypes: Growing + hauling\nWorktime: fulltime\nSkill lv.: 20\n</description>
+    <description>MkIII Automated cultivator. By using improved drones to do your agriculture jobs, they now have improved functions to offer. They will haul to a stockpile, I/O, crate if its within range.\n\nBase Stats:\nDrones: 5\nWorkArea: 11x11 - 33x33\nJobtypes: Growing + hauling\nWorktime: fulltime\nSkill lv.: 20</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_DroneModule>5</PRF_DroneModule>
@@ -320,7 +320,7 @@
       <MaxHitPoints>350</MaxHitPoints>
       <MarketValue>2995</MarketValue>
     </statBases>
-    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20\n</description>
+    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_RoboticArm>3</PRF_RoboticArm>
@@ -364,7 +364,7 @@
       <MaxHitPoints>350</MaxHitPoints>
       <MarketValue>3631</MarketValue>
     </statBases>
-    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20\n</description>
+    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_RoboticArm>3</PRF_RoboticArm>
@@ -422,7 +422,7 @@
       <MaxHitPoints>500</MaxHitPoints>
       <MarketValue>10646</MarketValue>
     </statBases>
-    <description>This is a hightech XL Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 22x22\nWorktime: fulltime\nSpeed: 12 (5x faster)\nSkill lv.: 20\n</description>
+    <description>This is a hightech XL Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 22x22\nWorktime: fulltime\nSpeed: 12 (5x faster)\nSkill lv.: 20</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_RoboticArm>9</PRF_RoboticArm>
