@@ -482,10 +482,7 @@
     <building>
       <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
     </building>
-    <designatorDropdown>furnace_gr</designatorDropdown>
   </ThingDef>
-
-
 
   <DesignatorDropdownGroupDef>
     <defName>furnace_gr</defName>
@@ -580,6 +577,7 @@
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
     <size>(3,3)</size>
+    <designatorDropdown>furnace_gr</designatorDropdown>
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <Cleanliness>-1</Cleanliness>
@@ -661,6 +659,7 @@
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
     <size>(3,3)</size>
+    <designatorDropdown>furnace_gr</designatorDropdown>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
       <Cleanliness>1</Cleanliness>
