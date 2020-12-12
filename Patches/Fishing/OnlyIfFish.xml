@@ -243,7 +243,7 @@
 							  </li>
 							</ingredients>
 							<products>
-							  <PRF_FishFood>20</PRF_FishFood>
+							  <PRF_FishFood>30</PRF_FishFood>
 							</products>
 							<fixedIngredientFilter>
 							  <categories>
@@ -272,7 +272,7 @@
 							<workSkill>Cooking</workSkill>
 							<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 							<soundWorking>Recipe_CookMeal</soundWorking>
-							<workAmount>5000</workAmount>
+							<workAmount>3000</workAmount>
 							<ingredients>
 							  <li>
 								<filter>
@@ -301,7 +301,7 @@
 							<workSkill>Cooking</workSkill>
 							<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 							<soundWorking>Recipe_CookMeal</soundWorking>
-							<workAmount>6000</workAmount>
+							<workAmount>4000</workAmount>
 							<ingredients>
 							  <li>
 								<filter>
