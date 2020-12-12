@@ -418,8 +418,6 @@ public static bool TryGetDefaultBonusYield(List<Thing> products, ModExtension_Mo
                                   RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
                                   Thing dominantIngredient)
         {
-            Log.Message("Test Product Yield changer called for " + (billGiver == null ? "nll" : billGiver.ToString())
-                        + (modifyYieldExt.extraData == null ? "" : ("; extra data: " + modifyYieldExt.extraData)));
             products.Add(ThingMaker.MakeThing(ThingDefOf.MealNutrientPaste));
             return true;
         }
