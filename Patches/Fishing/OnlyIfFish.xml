@@ -24,7 +24,7 @@
 							<thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
 							<graphicData>
 							  <texPath>Industry/aquaT1</texPath>
-							  <drawSize>(5.5,5.5)</drawSize>
+							  <drawSize>(5,5)</drawSize>
 							</graphicData>
 							<uiIconScale>0.8</uiIconScale>
 							<designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
@@ -104,7 +104,7 @@
 							<thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
 							<graphicData>
 							  <texPath>Industry/aquaT2</texPath>
-							  <drawSize>(5.5,5.5)</drawSize>
+							  <drawSize>(5,5)</drawSize>
 							</graphicData>
 							<uiIconScale>0.8</uiIconScale>
 							<designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
