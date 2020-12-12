@@ -21,6 +21,8 @@ namespace ProjectRimFactory.Drones
         {
         }
 
+
+
         public DroneArea(AreaManager areaManager, string label = null) : base(areaManager)
         {
             base.areaManager = areaManager;
@@ -55,6 +57,8 @@ namespace ProjectRimFactory.Drones
         public override Color Color => colorInt;
 
         public override int ListPriority => 3000;
+
+        public override bool Mutable => true;
 
         public override string GetUniqueLoadID()
         {
@@ -179,7 +183,7 @@ namespace ProjectRimFactory.Drones
 
         }
 
-        private CompPowerWorkSetting compPowerWorkSetting => this.GetComp<CompPowerWorkSetting>();
+        private CompPowerWorkSetting compPowerWorkSetting;
 
         public IEnumerable<IntVec3> StationRangecells
         {
@@ -195,6 +199,7 @@ namespace ProjectRimFactory.Drones
                 }
             }
         }
+        private IEnumerable<IntVec3> StationRangecells_old;
 
         public List<IntVec3> cashed_GetCoverageCells = null;
 
@@ -213,12 +218,16 @@ namespace ProjectRimFactory.Drones
                 {
                     droneArea = new DroneArea(this.Map.areaManager);
                     //Need to set the Area to a size
+                    
+                   
+
 
 
                     foreach (IntVec3 cell in StationRangecells)
                     {
                         droneArea[cell] = true;
                     }
+
                     //Not shure if i need that but just to be shure
                     droneArea[Position] = true;
                     this.Map.areaManager.AllAreas.Add(droneArea);
@@ -232,10 +241,20 @@ namespace ProjectRimFactory.Drones
 
         //This function can be used to Update the Allowed area for all Drones (Active and future)
         //Just need to auto call tha on Change from CompPowerWorkSetting
-        public void Update_droneAllowedArea_forDrones(Area dr = null)
+        public void Update_droneAllowedArea_forDrones(Area dr)
         {
-            //Refresh the area
+            //Refresh area if current is null
             droneAllowedArea = dr ?? (Area)GetDroneAllowedArea;
+
+            //TODO Check timing cost of .Equals
+            if (!StationRangecells_old.Equals(StationRangecells))
+            {
+                droneAllowedArea.Delete();
+                
+                droneAllowedArea = (Area)GetDroneAllowedArea;
+                StationRangecells_old = StationRangecells;
+            }
+
             for (int i = 0; i < spawnedDrones.Count; i++)
             {
                 spawnedDrones[i].playerSettings.AreaRestriction = droneAllowedArea;
@@ -306,6 +325,7 @@ namespace ProjectRimFactory.Drones
             extension = def.GetModExtension<DefModExtension_DroneStation>();
             refuelableComp = GetComp<CompRefuelable>();
             compPowerTrader = GetComp<CompPowerTrader>();
+            compPowerWorkSetting = GetComp<CompPowerWorkSetting>();
         }
 
         private MapTickManager mapManager;
@@ -320,11 +340,13 @@ namespace ProjectRimFactory.Drones
             refuelableComp = GetComp<CompRefuelable>();
             compPowerTrader = GetComp<CompPowerTrader>();
             extension = def.GetModExtension<DefModExtension_DroneStation>();
+            compPowerWorkSetting = GetComp<CompPowerWorkSetting>();
+            StationRangecells_old = StationRangecells;
             //Setup Allowd Area
             //Enssuring that Update_droneAllowedArea_forDrones() is run resolves #224 (May need to add a diffrent check)
             if (droneAllowedArea == null) {
                 //Log.Message("droneAllowedArea was null");
-                Update_droneAllowedArea_forDrones();
+                Update_droneAllowedArea_forDrones(droneAllowedArea);
             }
             //Load the SleepTimes from XML
             cachedSleepTimeList = extension.Sleeptimes.Split(',');
@@ -447,7 +469,7 @@ namespace ProjectRimFactory.Drones
             if (this.IsHashIntervalTick(60))
             {
                 //Update the Range
-                Update_droneAllowedArea_forDrones();
+                Update_droneAllowedArea_forDrones(droneAllowedArea);
 
                 //TODO add cell calc
                 cashed_GetCoverageCells = StationRangecells.ToList();
@@ -543,6 +565,10 @@ namespace ProjectRimFactory.Drones
             if (refuelableComp == null)
             {
                 refuelableComp = this.GetComp<CompRefuelable>();
+            }
+            if (StationRangecells_old == null)
+            {
+                StationRangecells_old = StationRangecells;
             }
 
 
