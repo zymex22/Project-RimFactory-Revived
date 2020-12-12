@@ -5,6 +5,9 @@
     <titleKey>PRF.ThornyMemorialTitle</titleKey>
     <descKey>PRF.ThornyMemorialDesc</descKey>
     <authorKey>PRF.ThornyAuthor</authorKey>
+    <limitToDefs>
+      <li>SculptureLarge</li>
+    </limitToDefs>
     <graphicData>
       <texPath>InMemoryOf/Thornsworth</texPath>
       <graphicClass>Graphic_Single</graphicClass>

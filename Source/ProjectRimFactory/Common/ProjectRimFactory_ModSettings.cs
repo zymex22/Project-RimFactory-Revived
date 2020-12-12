@@ -11,6 +11,8 @@ namespace ProjectRimFactory.Common
 {
     public class ProjectRimFactory_ModSettings : ModSettings
     {
+        public static bool allowAllMultipleSpecialSculptures;
+        public static Dictionary<string, int> maxNumbersSpecialSculptures; 
         public static void LoadXml(ModContentPack content)
         {
             root = ParseSettingRows(content);
@@ -18,6 +20,14 @@ namespace ProjectRimFactory.Common
         }
 
         private static ContainerRow root;
+
+        // All C# based mod settings can go here.  If better organization
+        //   is desired, we can set up some ContainerRow classes that are
+        //   organized by XML?  But that's a lot of work.
+        private static void CSharpSettings(Listing_Standard list) {
+            // Style: do your section of settings and then list.GapLine();
+
+        }
 
         private static ContainerRow ParseSettingRows(ModContentPack content)
         {
@@ -69,6 +79,7 @@ namespace ProjectRimFactory.Common
             }
             list.GapLine();
             #endif
+            CSharpSettings(list);
             root.Draw(list);
             list.End();
             Widgets.EndScrollView();

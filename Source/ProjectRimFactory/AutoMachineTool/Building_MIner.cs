@@ -83,15 +83,10 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool FinishWorking(Building_Miner working, out List<Thing> products)
         {
-            var bonus = this.def.GetModExtension<ModExtension_BonusYield>()?.GetBonusYield(this.workingBill.recipe);
-            if (bonus == null)
-            {
-                products = GenRecipe2.MakeRecipeProducts(this.workingBill.recipe, this, new List<Thing>(), null, this).ToList();
-            }
-            else
-            {
-                products = new List<Thing>().Append(bonus);
-            }
+            products = GenRecipe2.MakeRecipeProducts(this.workingBill.recipe, this, new List<Thing>(), null, this).ToList();
+            // Because we use custom GenRecipe2, we have to handle bonus items and product modifications (bonuses) directly:
+            this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(products, 
+                                                        this as IBillGiver, this, this.workingBill.recipe);
             this.workingBill.Notify_IterationCompleted(null, new List<Thing>());
             this.workingBill = null;
             return true;

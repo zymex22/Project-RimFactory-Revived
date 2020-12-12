@@ -171,12 +171,7 @@
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
         <TickCount>8</TickCount>
       </li>
-      <!-- excludeOres : exclude ore list.
-           bonusYield  : Bonus yield ore list. for example, 10% bonus yield chance, Steel bonus : Plasteel bonus = 1 : 2
-           <bonusYields Chance="0.1">
-           <Steel Weight="1" Count="10" />
-           <Plasteel Weight="2" Count="15" />
-           </<bonusYields> -->
+      <!-- excludeOres : exclude ore list. -->
       <li Class="ProjectRimFactory.Common.ModExtension_Miner">
         <excludeOres>
           <li>Gold</li>
@@ -188,7 +183,17 @@
           <li>Silver</li>
         </excludeOres>
       </li>
-      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+      <!-- ModifyProduct - give bonus items :
+           Bonus yield ore list. for example: 10% bonus yield chance, Steel bonus : Plasteel bonus = 1 : 2
+               (so 10% of anything, and get twice as much bonus plasteel as bonus steel)
+           <bonusYields Chance="0.1">
+             <Steel Weight="1" Count="10" />
+             <Plasteel Weight="2" Count="15" />
+           </bonusYields>
+           <replaceOrigProduct>true</replaceOrigProduct> - whether to replace product or add bonus in addition; defaults to false (add)  
+      -->
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
         <bonusYields Chance="0.18">
           <ChunkSlagSteel Weight="1" Count="1" />
           <Gold Weight="0.02" Count="10" />
@@ -263,7 +268,8 @@
           <li>ChunkMarble</li>
         </excludeOres>
       </li>
-      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
         <bonusYields Chance="0.1">
           <ChunkSandstone Weight="1" Count="1" />
           <ChunkGranite Weight="1" Count="1" />
@@ -505,7 +511,8 @@
           <li>ChunkMarble</li>
         </excludeOres>
       </li>
-      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
         <bonusYields Chance="0.1">
           <!-- Junks -->
           <InsectJelly Weight="0.2" Count="30" />
@@ -606,7 +613,8 @@
           <li>Silver</li>
         </excludeOres>
       </li>
-      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
         <bonusYields Chance="0.05">
           <!-- Junks -->
           <InsectJelly Weight="0.2" Count="30" />

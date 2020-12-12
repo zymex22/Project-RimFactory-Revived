@@ -33,12 +33,14 @@ namespace ProjectRimFactory {
         }
         public string id;
         public int maxNumberCopies = 1;
+        public List<ThingDef> limitToDefs;
         public GraphicData graphicData;
         public string titleKey;
         public string descKey;
         public string authorKey; // Just putting author ok
-        public List<Thing> currentInstances = null; // item in game
         public Graphic graphic; // setup in game
+        public List<Thing> currentInstances = null; // item in game
+
         public void ExposeData() {
             if (Scribe.mode == LoadSaveMode.Saving) {
                 // make sure we should bother saving:
