@@ -482,7 +482,10 @@
     <building>
       <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
     </building>
+    <designatorDropdown>furnace_gr</designatorDropdown>
   </ThingDef>
+
+
 
   <DesignatorDropdownGroupDef>
     <defName>furnace_gr</defName>
