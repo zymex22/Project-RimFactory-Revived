@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_IndustryGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!--==================== Industrial Base ====================-->
+  <ThingDef Name="PRF_IndustrialBase" ParentName="PRF_BuildingBase" Abstract="True">
+    <passability>PassThroughOnly</passability>
+    <blockLight>false</blockLight>
+    <blockWind>true</blockWind>
+    <altitudeLayer>Building</altitudeLayer>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>0.8</Flammability>
+      <Mass>80</Mass>
+    </statBases>
+    <canOverlapZones>false</canOverlapZones>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <rotatable>false</rotatable>
+    <pathCost>70</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Ground type to build on -->
+    <castEdgeShadows>true</castEdgeShadows>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <building>
+      <uninstallWork>1800</uninstallWork>
+    </building>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <tickerType>Normal</tickerType>
+    <comps>
+      <li Class="CompProperties_Flickable" />
+    </comps>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
+  </ThingDef>
+
+  <!--==================== Stoneworks ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_StoneWorks</defName>
+    <label>Industrial Stoneworks</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
+    <graphicData>
+      <texPath>Industry/StoneCutter</texPath>
+      <drawSize>(2.1,2.1)</drawSize>
+    </graphicData>
+    <uiIconScale>0.8</uiIconScale>
+    <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
+    <size>(2,2)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <MarketValue>2184</MarketValue>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>A CNC router like automated machine that are capable of turning stone into bricks and even abit mid skilled art too. \nArt level: 10</description>
+    <costList>
+      <Steel>400</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+    </costList>
+    <recipes>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+        <importRecipesFrom>
+          <li>TableStonecutter</li>
+        </importRecipesFrom>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <castEdgeShadows>false</castEdgeShadows>
+    <researchPrerequisites>
+      <li>Stonecutting</li>
+      <li>PRF_CoreTierI</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Recycler ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_Recycler</defName>
+    <label>Smart Recycler</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
+    <graphicData>
+      <texPath>Industry/smart_recycler</texPath>
+      <drawSize>(2.1,2.1)</drawSize>
+    </graphicData>
+    <uiIconScale>0.8</uiIconScale>
+    <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
+    <size>(2,2)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <MarketValue>2246</MarketValue>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>A recycler that turns almost any apparel and weapons into usable resources, at the cost of some lost materials.</description>
+    <costList>
+      <Steel>250</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+    </costList>
+    <recipes>
+      <li>PRF_Recycle_Weapon</li>
+      <li>PRF_Recycle_Apparel</li>
+      <!-- <li>PRF_Destroy_Art</li> -->
+      <li>PRF_Destroy_Chunks</li>
+      <li>PRF_Destroy_Anything</li>
+      <li>ButcherCorpseMechanoid</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRF_MachineLearning</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Tribute To Tornsworth ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_MrTsArtMachine</defName>
+    <label>T's Art Machine</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
+    <graphicData>
+      <texPath>Industry/ArtPrinter</texPath>
+      <drawSize>(2.3,2.3)</drawSize>
+    </graphicData>
+    <uiIconScale>0.8</uiIconScale>
+    <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
+    <size>(2,2)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <MarketValue>5000</MarketValue>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <description>Thornsworth's Art machine, capable of producing art with a art level of 14.\nThorny had a big passion for 3D printers and Producing art with hes large army of assemblers, he made this machine before he passed away, and now its finally added to produce a army of sculptures in future.\nRIP Thornsworth 2020</description>
+    <costList>
+      <Steel>250</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <recipes>
+      <!-- <li>PRF_Destroy_Art</li> -->
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+        <workSpeedBaseFactor>1.5</workSpeedBaseFactor>
+        <importRecipesFrom>
+          <li>TableSculpting</li>
+        </importRecipesFrom>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>14</levelInt>
+          </li>
+        </skills>
+      </li>
+      <!-- For thorny special sculp when done? -->
+      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+        <!-- <billBonusYields>
+          <li>
+            <key>Make_SculptureSmall</key>
+            <value Chance="1">
+              <SculptureLarge Weight="0.5" Count="1" Quality="6" MaterialDef="Gold" />
+            </value>
+          </li>
+        </billBonusYields> -->
+        <bonusYields Chance="0.25">
+          <SculptureLarge Weight="0.5" Count="1" Quality="6" MaterialDef="Jade" />
+        </bonusYields>
+      </li>
+    </modExtensions>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRF_MachineLearning</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Metal Refinery ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_MetalRefinery</defName>
+    <label>Metal Refinery</label>
+    <description>A metal refinery able to produce rare metals through polymer lamination</description>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
+    <graphicData>
+      <texPath>Industry/MetalRefinery</texPath>
+      <drawSize>(3.1,3.1)</drawSize>
+    </graphicData>
+    <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
+    <size>(3,3)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>5000</WorkToBuild>
+      <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>5050</MarketValue>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <costList>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <Plasteel>25</Plasteel>
+      <Steel>250</Steel>
+      <ComponentIndustrial>12</ComponentIndustrial>
+    </costList>
+    <recipes>
+      <li>PRF_RefinePlasteel</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- speed settings -->
+        <speedSetting>true</speedSetting>
+        <minPowerForSpeed>3000</minPowerForSpeed>
+        <minSpeedFactor>1</minSpeedFactor>
+        <maxPowerForSpeed>10000</maxPowerForSpeed>
+        <maxSpeedFactor>3.5</maxSpeedFactor>
+        <!-- range settings -->
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>1</minRange>
+        <maxPowerForRange>500</maxPowerForRange>
+        <maxRange>5</maxRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+        <importRecipesFrom>
+        </importRecipesFrom>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRF_MetalRefining</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Part Assembler ====================-->
+  <ThingDef ParentName="PRF_IndustrialBase">
+    <defName>PRF_PartAssembler</defName>
+    <label>Part Assembler</label>
+    <description>This is a preset assembler that create parts for further production like components, prf parts and more.</description>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
+    <graphicData>
+      <texPath>Industry/part_assembler</texPath>
+      <drawSize>(3.1,3.1)</drawSize>
+    </graphicData>
+    <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
+    <size>(3,3)</size>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>5000</WorkToBuild>
+      <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>3060</MarketValue>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <costList>      <!-- cost list for fixed prices, uses def names -->
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <ComponentIndustrial>12</ComponentIndustrial>
+      <Steel>120</Steel>
+      <Plasteel>10</Plasteel>
+    </costList>
+    <recipes>
+      <li>Make_ComponentIndustrial</li>
+      <li>Make_ComponentSpacer</li>
+      <li>MakePRF_RoboticArm</li>
+      <li>MakePRF_ElectronicChip_I</li>
+      <li>MakePRF_ElectronicChip_II</li>
+      <li>MakePRF_ElectronicChip_III</li>
+      <li>MakePRF_DroneModule</li>
+      <li>MakeDataDisk</li>
+      <li>MakeSmallFrame</li>
+      <li>MakeMediumFrame</li>
+      <li>MakeLargeFrame</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>0</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- speed settings -->
+        <speedSetting>true</speedSetting>
+        <minPowerForSpeed>750</minPowerForSpeed>
+        <minSpeedFactor>1</minSpeedFactor>
+        <maxPowerForSpeed>3000</maxPowerForSpeed>
+        <maxSpeedFactor>4</maxSpeedFactor>
+        <!-- range settings -->
+        <rangeSetting>true</rangeSetting>
+        <minPowerForRange>0</minPowerForRange>
+        <minRange>1</minRange>
+        <maxPowerForRange>500</maxPowerForRange>
+        <maxRange>5</maxRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRF_MachineLearning</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Furnace Base ====================-->
+  <ThingDef Name="PRF_FurnaceBase" ParentName="PRF_IndustrialBase" Abstract="True">
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+    </inspectorTabs>
+    <statBases>
+      <WorkToBuild>3500</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <comps>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>12</heatPerSecond>
+      </li>
+    </comps>
+    <building>
+      <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
+    </building>
+    <designatorDropdown>furnace_gr</designatorDropdown>
+  </ThingDef>
+
+
+
+  <DesignatorDropdownGroupDef>
+    <defName>furnace_gr</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!--==================== T0 Blast Furnace ====================-->
+  <ThingDef ParentName="PRF_FurnaceBase">
+    <defName>PRF_FurnaceI</defName>
+    <label>Blast Furnace</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <altitudeLayer>Gas</altitudeLayer>
+    <designatorDropdown></designatorDropdown>
+    <graphicData>
+      <texPath>Industry/smelter_t0off</texPath>
+      <drawSize>(5,7.9)</drawSize>
+    </graphicData>
+    <size>(5,5)</size>
+    <statBases>
+      <Cleanliness>-5</Cleanliness>
+      <Beauty>-10</Beauty>
+      <MarketValue>1340</MarketValue>
+    </statBases>
+    <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)\n Use wood to smelt</description>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>500</costStuffCount>    <!-- Set price for stone blocks -->
+    <constructEffect></constructEffect>
+    <costList>
+      <Steel>150</Steel>
+      <WoodLog>50</WoodLog>
+    </costList>
+    <recipes>
+      <li>BurnApparel</li>
+      <li>CremateCorpse</li>
+      <li>ExtractMetalFromSlag</li>
+      <li>MakeSmallFrame</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>80.0</fuelConsumptionRate>
+        <fuelCapacity>50.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>false</consumeFuelOnlyWhenUsed>
+        <!--<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>-->
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>8</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <workSpeedBaseFactor>0.1</workSpeedBaseFactor>
+        <doEffect>false</doEffect>
+        <drawStatus>true</drawStatus>
+        <workingGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Industry/smelter_t0</texPath>
+          <drawSize>(5,7.9)</drawSize>
+        </workingGraphicData>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>5</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>PRF_CoreTierO</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== T1 industrial Furnace ====================-->
+  <ThingDef ParentName="PRF_FurnaceBase">
+    <defName>PRF_FurnaceII</defName>
+    <label>industrial Furnace</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>Industry/smelter_t1off</texPath>
+      <drawSize>(3.1,3.1)</drawSize>
+    </graphicData>
+    <size>(3,3)</size>
+    <designatorDropdown>furnace_gr</designatorDropdown>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Cleanliness>-1</Cleanliness>
+      <Beauty>-1</Beauty>
+      <MarketValue>2716</MarketValue>
+    </statBases>
+    <description>This Second Furnace is an advanced industrial Furnace capable of burning items and smelting raw resources into useful materials\nUses electricity to reduce wood amount for burning</description>
+    <costList>
+      <Steel>500</Steel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+    </costList>
+    <recipes>
+      <li>CremateCorpse</li>
+      <li>BurnApparel</li>
+      <li>BurnWeapon</li>
+      <li>BurnDrugs</li>
+      <li>ExtractMetalFromSlag</li>
+      <li>MakeSmallFrame</li>
+      <li>MakeMediumFrame</li>
+      <li>MakeLargeFrame</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>20.0</fuelConsumptionRate>
+        <fuelCapacity>50.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <doEffect>false</doEffect>
+        <drawStatus>true</drawStatus>
+        <workingGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Industry/smelter_t1</texPath>
+          <drawSize>(3.1,3.1)</drawSize>
+        </workingGraphicData>
+        <workSpeedBaseFactor>1.5</workSpeedBaseFactor>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>15</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>5</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_CoreTierI</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== T2 Electric Furnace ====================-->
+  <ThingDef ParentName="PRF_FurnaceBase">
+    <defName>PRF_FurnaceIII</defName>
+    <label>Electric Furnace</label>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <graphicData>
+      <texPath>Industry/smelter_t2off</texPath>
+      <drawSize>(3.1,3.1)</drawSize>
+    </graphicData>
+    <size>(3,3)</size>
+    <designatorDropdown>furnace_gr</designatorDropdown>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <Cleanliness>1</Cleanliness>
+      <Beauty>1</Beauty>
+      <MarketValue>4934</MarketValue>
+    </statBases>
+    <description>Advanced Furnace capable of burning stuff and smelting raw resources into useful materials, faster than previous iterations.\n\n(This furnace is the best and fastest in Project RimFactory.)\n\nImports any recipe from the Electric Smelter and the Crematorium.</description>
+    <costList>
+      <Steel>350</Steel>
+      <Plasteel>200</Plasteel>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+    </costList>
+    <recipes>
+      <li>MakeSmallFrame</li>
+      <li>MakeMediumFrame</li>
+      <li>MakeLargeFrame</li>
+      <li>ButcherCorpseDrone</li>
+    </recipes>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>350</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
+      </li>
+    </comps>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <workSpeedBaseFactor>2</workSpeedBaseFactor>
+        <importRecipesFrom>
+          <li>ElectricSmelter</li>
+          <li>ElectricCrematorium</li>
+        </importRecipesFrom>
+        <doEffect>false</doEffect>
+        <drawStatus>true</drawStatus>
+        <workingGraphicData>
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>Industry/smelter_t2</texPath>
+          <drawSize>(3.1,3.1)</drawSize>
+        </workingGraphicData>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_MachineLearning</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>
