@@ -218,10 +218,6 @@ namespace ProjectRimFactory.Drones
                 {
                     droneArea = new DroneArea(this.Map.areaManager);
                     //Need to set the Area to a size
-                    
-                   
-
-
 
                     foreach (IntVec3 cell in StationRangecells)
                     {
@@ -246,8 +242,7 @@ namespace ProjectRimFactory.Drones
             //Refresh area if current is null
             droneAllowedArea = dr ?? (Area)GetDroneAllowedArea;
 
-            //TODO Check timing cost of .Equals
-            if (!StationRangecells_old.Equals(StationRangecells))
+            if (!StationRangecells_old.SequenceEqual(StationRangecells))
             {
                 droneAllowedArea.Delete();
                 
