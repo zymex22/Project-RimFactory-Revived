@@ -471,7 +471,7 @@ namespace ProjectRimFactory.Drones
             }
 
             //Search for Job
-            if (this.IsHashIntervalTick(60 + additionJobSearchTickDelay) && DronesLeft > 0 && !lockdown)
+            if (this.IsHashIntervalTick(60 + additionJobSearchTickDelay) && DronesLeft > 0 && !lockdown && compPowerTrader?.PowerOn != false)
             {
                 //The issue appears to be 100% with TryGiveJob
                 Job job = TryGiveJob();
