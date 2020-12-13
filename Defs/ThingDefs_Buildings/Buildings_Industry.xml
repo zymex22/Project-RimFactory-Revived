@@ -494,6 +494,7 @@
     <graphicData>
       <texPath>Industry/smelter_t0off</texPath>
       <drawSize>(5,7.9)</drawSize>
+      <shaderType>CutoutComplex</shaderType>
     </graphicData>
     <size>(5,5)</size>
     <statBases>
