@@ -200,7 +200,9 @@ namespace ProjectRimFactory.Common {
             bool gotSomeResult = false;
             bool tmp;
             if (altChanger != null) {
+                #if DEBUG
                 Debug.Message(Debug.Flag.ExtModifyProduct, "  Calling altChanger " + altChanger.name);
+                #endif
                 tmp = altChanger.del(products, this, billGiver, productMaker, recipeDef, worker, ingredients, dominantIngredient);
                 if (!doAll) return tmp;
                 if (tmp) gotSomeResult = true;
@@ -411,7 +413,7 @@ public static bool TryGetDefaultBonusYield(List<Thing> products, ModExtension_Mo
             }
             return false;
         }
-        #if DEBUG
+#if DEBUG
         // Simply displays a message in the log.  Useful for testing?
         public static bool TestChanger(List<Thing> products, ModExtension_ModifyProduct modifyYieldExt,
                                   IBillGiver billGiver, Thing productMaker,
@@ -421,7 +423,7 @@ public static bool TryGetDefaultBonusYield(List<Thing> products, ModExtension_Mo
             products.Add(ThingMaker.MakeThing(ThingDefOf.MealNutrientPaste));
             return true;
         }
-        #endif
+#endif
     }
 
     // Another approach that makes pretty XML, so I kept it around (altho it's much more limited)
