@@ -215,7 +215,7 @@
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <graphicData>
       <texPath>Industry/DeepQuarry</texPath>
-      <drawSize>(2.5,2.5)</drawSize>
+      <drawSize>(2.4,2.4)</drawSize>
     </graphicData>
     <size>(2,2)</size>
     <statBases>
@@ -461,7 +461,7 @@
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <graphicData>
       <texPath>Industry/DrillT32</texPath>
-      <drawSize>(3.3,3.3)</drawSize>
+      <drawSize>(3,3)</drawSize>
     </graphicData>
     <size>(3,3)</size>
     <statBases>
@@ -545,7 +545,7 @@
     <tickerType>Never</tickerType>
     <graphicData>
       <texPath>Industry/DrillT3</texPath>
-      <drawSize>(3.3,3.3)</drawSize>
+      <drawSize>(3,3)</drawSize>
     </graphicData>
     <costList>
       <Steel>1000</Steel>
