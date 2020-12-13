@@ -12,7 +12,9 @@
     <soundWorking>Recipe_Smelt</soundWorking>
     <allowMixingIngredients>true</allowMixingIngredients>
     <recipeUsers>
-      <li>ElectricSmelter</li>
+      <li>PRF_FurnaceI</li>
+      <li>PRF_FurnaceII</li>
+      <li>PRF_FurnaceIII</li>
     </recipeUsers>
     <ingredients>
       <li>
@@ -64,6 +66,9 @@
     <skillRequirements>
       <Crafting>6</Crafting>
     </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
   </RecipeDef>
   
   <RecipeDef ParentName="MakeStoneBlocksBase">
@@ -92,6 +97,9 @@
     <skillRequirements>
       <Crafting>6</Crafting>
     </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
   </RecipeDef>
   
   <RecipeDef ParentName="MakeStoneBlocksBase">
@@ -120,7 +128,11 @@
     <skillRequirements>
       <Crafting>6</Crafting>
     </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
   </RecipeDef>
+  
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_LimestoneBlocksBulk</defName>
     <label>make limestone blocks in bulk</label>
@@ -147,6 +159,9 @@
     <skillRequirements>
       <Crafting>6</Crafting>
     </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
   </RecipeDef>
   
   <RecipeDef ParentName="MakeStoneBlocksBase">
@@ -175,6 +190,9 @@
     <skillRequirements>
       <Crafting>6</Crafting>
     </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
   </RecipeDef>
   
   <RecipeDef ParentName="MakeStoneBlocksBase">
@@ -203,6 +221,9 @@
     <skillRequirements>
       <Crafting>6</Crafting>
     </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
   </RecipeDef>
   
 </Defs>
