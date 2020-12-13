@@ -81,7 +81,7 @@
 								  </li>
 								</skills>
 							  </li>
-							  <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+							  <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
 								<bonusYields Chance="1">
 								</bonusYields>
 							  </li>
@@ -161,7 +161,7 @@
 								  </li>
 								</skills>
 							  </li>
-							  <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+							  <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
 								<bonusYields Chance="1">
 								</bonusYields>
 							  </li>
