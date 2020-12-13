@@ -40,7 +40,7 @@
     <label>4k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
-      <texPath>Industry/Battery/4k</texPath>
+      <texPath>Industry/Battery/PRF_4k_Battery</texPath>
       <drawSize>(1,1)</drawSize>
     </graphicData>
     <rotatable>false</rotatable>
@@ -86,7 +86,7 @@
     <label>16k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
-      <texPath>Industry/Battery/Building_Battery_16k</texPath>
+      <texPath>Industry/Battery/PRF_16k_Battery</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(2,1)</drawSize>
     </graphicData>
@@ -133,7 +133,7 @@
     <label>64k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
-      <texPath>Industry/Battery/Building_Battery_64k</texPath>
+      <texPath>Industry/Battery/PRF_64k_Battery</texPath>
       <drawSize>(2,2)</drawSize>
     </graphicData>
     <rotatable>false</rotatable>
@@ -182,7 +182,7 @@
     <label>256k battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
     <graphicData>
-      <texPath>Industry/Battery/batteryT3</texPath>
+      <texPath>Industry/Battery/PRF_256k_Battery</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(4,2)</drawSize>
     </graphicData>
