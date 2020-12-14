@@ -44,6 +44,7 @@ namespace ProjectRimFactory.AutoMachineTool
 ///   it will already be saved by the map.  This creates a small
 ///   window in which a problem can occur.
 /// </designNotes>
+    [StaticConstructorOnStartup]
     public class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConveyorLinkable, IThingHolder, IHideItem, IHideRightClickMenu, IForbidPawnOutputItem
     {
         public Building_BeltConveyor()
@@ -56,12 +57,13 @@ namespace ProjectRimFactory.AutoMachineTool
             products = thingOwnerInt.InnerListForReading;
             // Conveyors are dumb. They just dump their stuff onto the ground when they end!
             this.obeysStorageFilters = false;
-    }
+        }
 
         protected ThingOwner_Conveyor thingOwnerInt;
 
         public static float supplyPower = 10f;
         protected bool stuck = false;
+        private bool isEndOfLine = false; //todo: show window text explaining WhyTF it's outputting anything.
 
         // A few display constants:
         // how far towards the next belt to stop:
@@ -112,6 +114,24 @@ namespace ProjectRimFactory.AutoMachineTool
         /************* Conveyors IBeltConveyor ***********/
         public bool IsStuck => this.stuck;
         public bool IsUnderground { get => this.Extension?.underground ?? false; }
+        public bool IsEndOfLine {
+            get { return isEndOfLine; }
+            set {
+                if (isEndOfLine && value == false) {
+                    isEndOfLine = false;
+                    if (this.working != null) {
+                        this.ForceStartWork(working, 1);
+                    } else {
+                        Reset();
+                    }
+                } else {
+                    isEndOfLine = value;
+                }
+                // force redraw of graphic - links might have changed?
+                if (Spawned) this.Map.mapDrawer.MapMeshDirty(this.Position,
+                          MapMeshFlag.Buildings | MapMeshFlag.Things);
+            }
+        }
         // Note: it might be worth making link and unlink do something with a cached
         //   conveyor link; it will certainly be faster in some specific scenarios
         //   (underground belts going through a storehouse with DeepStorage or DSUs?)
@@ -228,6 +248,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.ExposeData();
 
             Scribe_Values.Look(ref supplyPower, "supplyPower", 10f);
+            Scribe_Values.Look(ref isEndOfLine, "isEOL", false);
             Scribe_Deep.Look(ref thingOwnerInt, "thingOwner", new object[] { this });
             if (Scribe.mode == LoadSaveMode.PostLoadInit) {
                 if (thingOwnerInt == null) {
@@ -330,6 +351,9 @@ namespace ProjectRimFactory.AutoMachineTool
             g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
         }
         protected Vector3 CarryPosition() {
+            if (IsEndOfLine) {
+                return (this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0));
+            }
             if (stuck) {
                 return (this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0) +
                   this.OutputDirection.FacingCell.ToVector3()
@@ -434,12 +458,15 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         protected override void ForceStartWork(Thing working, float workAmount) {
             CalculateCarriedItemDrawHeight();
+            if (thingOwnerInt.Contains(working)) {
+                thingOwnerInt.Remove(working);
+            }
             base.ForceStartWork(working, workAmount);
             thingOwnerInt.TryAdd(working);
         }
 
         protected override void Reset() {
-            //TODO: Underground belts should not spawn items above ground on reset...
+            //TODO: Underground belts should not spawn items above ground on reset...?
             if (thingOwnerInt.Any) {// remove them from care of thingOwner:
                 this.products = new List<Thing>(thingOwnerInt.InnerListForReading);
                 thingOwnerInt.Clear();
@@ -454,8 +481,6 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         protected override bool PlaceProduct(ref List<Thing> products) {
-            //            var thing = products[0];
-            //todo: test for work interruption first....
             if (thingOwnerInt.Count == 0) {
                 Debug.Message(Debug.Flag.Conveyors, "Conveyor " + this + " no longer has anything to place");
                 return true; // ready for next action.
@@ -465,6 +490,10 @@ namespace ProjectRimFactory.AutoMachineTool
                 Debug.Message(Debug.Flag.Conveyors, "  but something has already moved the item.");
                 return true;
             }
+            // this will continue to get called every ~30 ticks; this is okay. In case something goes wrong,
+            //   it might fix itself.
+            if (IsEndOfLine) return false;
+
             Thing thing = thingOwnerInt.Take(thingOwnerInt[0]);
             Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this +
                 (stuck ? " is stuck with " : " is about to try placing ") + thing);
@@ -570,10 +599,9 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         protected override void CheckWork() {
-            if (working==null || this.thingOwnerInt.Count==0) {
+            if (working==null || this.thingOwnerInt.Count==0 || this.IsEndOfLine) {
                 return;
             }
-            //TODO: Add test here :p
             if (stuck) {
                 if (CanOutput(working)) {
                     // start going forward again:
@@ -582,7 +610,7 @@ namespace ProjectRimFactory.AutoMachineTool
             } else {
                 this.CalculateCarriedItemDrawHeight();
                 // if work done is below stuckDrawPercent, let it continue forward
-                if (WorkLeft < 1-this.stuckDrawPercent) {
+                if (WorkLeft < 1 - this.stuckDrawPercent) {
                     if (!CanOutput(working)) {
                         ChangeStuckStatus(working);
                         return;
@@ -628,7 +656,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 stuck = false;
             }
         }
-
         public virtual bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             // First test: level (e.g., Ground vs Underground):
             bool flag = false;
@@ -683,6 +710,31 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return null;
         }
+
+        // Static Constructor: rgister with Settings ITab:
+        static Building_BeltConveyor()
+        {
+            ITab_ProductionSettings.RegisterSetting(ShowEndOfLineSetting, HeightForEOLSetting, DoEOLSettingsWindowContents);
+        }
+        // End of Line setting: is the conveyor at the end of its line
+        //   If it is, it should hold onto whatever it has unless something takes it?
+        static bool ShowEndOfLineSetting(Thing t)
+        {
+            return (t is IBeltConveyorLinkable);
+        }
+        static float HeightForEOLSetting(Thing t)
+        {
+            return 23f;
+        }
+        static void DoEOLSettingsWindowContents(Thing t, Listing_Standard list)
+        {
+            if (t is IBeltConveyorLinkable belt) {
+                bool tmp = belt.IsEndOfLine;
+                list.CheckboxLabeled("End of Line?", ref tmp, "Is this belt the end of its line?  If it is, it will hold onto items until something takes them.");
+                if (tmp != belt.IsEndOfLine) belt.IsEndOfLine = tmp;
+            }
+        }
+
 
         public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
                              Rot4 queryRotation, ConveyorLevel queryLevel) {

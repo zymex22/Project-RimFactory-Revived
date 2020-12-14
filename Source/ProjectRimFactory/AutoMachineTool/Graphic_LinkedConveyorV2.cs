@@ -119,7 +119,7 @@ namespace ProjectRimFactory.AutoMachineTool {
                 var belt = parent as IBeltConveyorLinkable;
                 return c.GetThingList(parent.Map)
                     .OfType<IBeltConveyorLinkable>()
-                    .Any(belt.HasLinkWith);
+                    .Any(other => other.CanLinkTo(belt) || (!belt.IsEndOfLine && belt.CanLinkTo(other)));
             }
             var def = (ThingDef)parent.def.entityDefToBuild;
             Rot4 dir;

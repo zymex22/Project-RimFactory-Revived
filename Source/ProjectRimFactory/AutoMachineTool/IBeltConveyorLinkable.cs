@@ -72,6 +72,11 @@ namespace ProjectRimFactory.AutoMachineTool
         ///   items on their way to the IBCL.  Return 0 if no carried items are drawn.
         /// </summary>
         float CarriedItemDrawHeight { get; }
+        /// <summary>
+        /// Should the Conveyor be the "End of the Line" and not output any items?
+        /// </summary>
+        /// <value><c>true</c> if is end of line; otherwise, <c>false</c>.</value>
+        bool IsEndOfLine { get; set; }
 
         // // // // RimWorld stuff // // // //
         Rot4 Rotation { get; }
