@@ -4,7 +4,7 @@
   <PRF_SettingsITab_TipSignal_RotInputRange>Rotate the Input Range Clockwise</PRF_SettingsITab_TipSignal_RotInputRange>
   <PRF_DropThing>Drop {0}</PRF_DropThing>
   <PRF_CouldNotPlaceThing>No valid place found to place {0}.</PRF_CouldNotPlaceThing>
-  <PRFBlockedBy>Blocked by {0}</PRFBlockedBy><!-- Cannot be placed b/c of, etc -->
+  <PRFBlockedBy>Blocked by {0}</PRFBlockedBy>  <!-- Cannot be placed b/c of, etc -->
   <!-- Some languages are RtoL, and might want "(default) {0}" -->
   <PRF_Default_Tag>{0} (default)</PRF_Default_Tag>
   <PRF_TotalStacksNum>Total number of stacks: {0}</PRF_TotalStacksNum>
@@ -15,13 +15,14 @@
   <PRF.Common.ObeysStorageFilters>Obeys Storage Filters</PRF.Common.ObeysStorageFilters>
   <PRF.Common.ObeysStorageFiltersDesc>Select behavior when this PRF machine outputs into a stockpile: set  whether the machine pays attention to the stockpile's filter. If not selected, the machine will happily add any products to the stockpile, even if the stockpile is not set to accept them. If it is checked, the machine will hold products until it has a clear place to put them down.</PRF.Common.ObeysStorageFiltersDesc>
   <PRFStorageBuildingGainsName>This storage building is now called {0}.</PRFStorageBuildingGainsName>
-  <PRFItemsTabLabel>All items ({0} stacks total, showing {1} result(s))</PRFItemsTabLabel>
-  <PRFItemsTabLabel_Crate>All items ({0}/{1} stacks total, showing {2} result(s))</PRFItemsTabLabel_Crate>
+  <PRFItemsTabLabel>{0} stacks total, showing {1} result(s)</PRFItemsTabLabel>
+  <PRFItemsTabLabel_Crate>{0} stacks, max {1}, showing {2} result(s)</PRFItemsTabLabel_Crate>
+  <PRFItemsTabLabel_Empty>There are currently no items stored.</PRFItemsTabLabel_Empty>
   <PRFRenameMassStorageUnitLabel>Rename</PRFRenameMassStorageUnitLabel>
   <PRFRenameMassStorageUnitDesc>Rename this building.</PRFRenameMassStorageUnitDesc>
   <PRFMassStorageUIThingLabel>{0} stacks</PRFMassStorageUIThingLabel>
   <PRFCrateUIThingLabel>{0}/{1} stacks</PRFCrateUIThingLabel>
-  <PRFMassStorageRightClickSelectPawn>Select colonist...</PRFMassStorageRightClickSelectPawn>  
+  <PRFMassStorageRightClickSelectPawn>Select colonist...</PRFMassStorageRightClickSelectPawn>
   <PRFReorganize>Reorganize</PRFReorganize>
   <PRFIOOutputSettings>Output settings...</PRFIOOutputSettings>
   <PRFReorganize_Desc>Re-register I/O ports, reorganize and re-stack items.</PRFReorganize_Desc>
@@ -32,9 +33,9 @@
   <PRFBoundStorageBuilding>Item source</PRFBoundStorageBuilding>
   <IOPort_Minimum_UseTooltip>When this is enabled, the I/O port will return the outputted item to the cargo platform if the item has less than X stack size. It will also only take items if there are enough items in storage to exceed the minimum.</IOPort_Minimum_UseTooltip>
   <IOPort_Maximum_UseTooltip>When this is enabled, the I/O port will stop taking items if either the stack is full, or the stack size is greater than or equal to X.</IOPort_Maximum_UseTooltip>
-  
+
   <PRFNoDesc>No description.</PRFNoDesc>
-  
+
   <PaperclipFuelConsumption>Fuel consumption: {0} paperclips/second</PaperclipFuelConsumption>
   <PaperclipProductionPerSecond>Paperclip production: {0} paperclips/second</PaperclipProductionPerSecond>
   <PaperclipGeneratorEfficiency>Current efficiency: {0}%/{1}%</PaperclipGeneratorEfficiency>
@@ -43,7 +44,7 @@
   <SetPaperclipProductionPerSecond>Adjust paperclip production</SetPaperclipProductionPerSecond>
   <SetPaperclipConsumptionPerSecond_Desc>Change the number of paperclips consumed per second.</SetPaperclipConsumptionPerSecond_Desc>
   <SetPaperclipProductionPerSecond_Desc>Change the number of paperclips produced per second.</SetPaperclipProductionPerSecond_Desc>
-  
+
   <AtomicReconstructorProgress>Reconstruction progress: {0}</AtomicReconstructorProgress>
   <PRFAtomicReconstructionTab>Config</PRFAtomicReconstructionTab>
   <AtomicReconstructionTab_NowProducing>Producing:</AtomicReconstructionTab_NowProducing>
@@ -51,15 +52,15 @@
   <AtomicReconstructionTab_ConsumptionPerSecond>Consumption per second:</AtomicReconstructionTab_ConsumptionPerSecond>
   <AtomicReconstructionTab_Progress>Progress:</AtomicReconstructionTab_Progress>
   <AtomicReconstructionTab_Speed>Speed multiplier: {0} (Paperclip consumption modifier: {1}x)</AtomicReconstructionTab_Speed>
-  
+
   <PRF_ArchoCipher_BankOverflow>The AI chip from your paperclip duplicator has sent you a message:\n\Congratulations! You have achieved the maximum balance of paperclips in your duplicator. The real question is: What are you going to do with all these paperclips?</PRF_ArchoCipher_BankOverflow>
-  
+
   <PRF_SettingsTab_RangeType_Label>Change Zone Type</PRF_SettingsTab_RangeType_Label>
   <PRF_SettingsTab_RangeType_CircleRange>Circle Type</PRF_SettingsTab_RangeType_CircleRange>
   <PRF_SettingsTab_RangeType_FacingRectRange>Facing Rectangle</PRF_SettingsTab_RangeType_FacingRectRange>
   <PRF_SettingsTab_RangeType_RectRange>Center Square</PRF_SettingsTab_RangeType_RectRange>
-  
-  
+
+
   <PRF_TimeLeftToDisintegrate>Time left until disintegrate: {0}</PRF_TimeLeftToDisintegrate>
   <PRF_DisintegrationMessage>{0} has disintegrated.</PRF_DisintegrationMessage>
   <PRFPaperclipDuplicatorTab>Duplicator</PRFPaperclipDuplicatorTab>
@@ -76,7 +77,7 @@
   <PRFBoundStorageUnitNotAvailableForIO>Bound storage unit is not available for item transfer.</PRFBoundStorageUnitNotAvailableForIO>
   <SuccessfullyDepositedPaperclips>Successfully deposited {0} paperclips.</SuccessfullyDepositedPaperclips>
   <SuccessfullyWithdrawnPaperclips>Succesfully withdrawn {0} paperclips.</SuccessfullyWithdrawnPaperclips>
-  
+
   <PRFDroneStation_NumberOfDrones>Stored drones: {0}</PRFDroneStation_NumberOfDrones>
   <PRFDroneName>Drone</PRFDroneName>
   <PRFDroneStationLockdown>Lockdown</PRFDroneStationLockdown>
@@ -86,18 +87,18 @@
   <PRFDroneStationLiftLockdownAll>Reactivate all</PRFDroneStationLiftLockdownAll>
   <PRFDroneStationLfttLockdownAllDesc>Lift the Lockdown for all drone stations on the map.</PRFDroneStationLfttLockdownAllDesc>
   <PRFDroneStationSelectArea>{0}\nSelect Area</PRFDroneStationSelectArea>
-  
+
   <ITab_DroneStation_labelKey>Settings</ITab_DroneStation_labelKey>
   <ITab_DroneStation_InfoLabel>Toggle Jobs for this Drone Station</ITab_DroneStation_InfoLabel>
   <ITab_DroneStation_HeaderLabel>Drone Station Settings</ITab_DroneStation_HeaderLabel>
   <ITab_DroneStation_averageskill>Avg. relevant skills: </ITab_DroneStation_averageskill>
-  
+
   <ITab_DroneStation_Sleeptimes>DroneStation Sleep Times (marked in red)</ITab_DroneStation_Sleeptimes>
   <ITab_DroneStation_SetTargetFuel>DroneStation Fuel Level</ITab_DroneStation_SetTargetFuel>
-  
-  <PRFOutputItems>output item</PRFOutputItems>
-  <PRFPawnAccessLabel>pawn access</PRFPawnAccessLabel>
-  <PRFPawnAccessDesc>pawn access</PRFPawnAccessDesc>
+
+  <PRFOutputItems>Output item</PRFOutputItems>
+  <PRFPawnAccessLabel>Pawn access</PRFPawnAccessLabel>
+  <PRFPawnAccessDesc>Pawn access</PRFPawnAccessDesc>
   <!--Lamp colors-->
   <PRF_ChangeColorGizmo>Color ({0})</PRF_ChangeColorGizmo>
   <PRF_Warm_White>warm white</PRF_Warm_White>
@@ -108,5 +109,5 @@
   <PRF_Cyan>cyan</PRF_Cyan>
   <PRF_Yellow>yellow</PRF_Yellow>
   <PRF_Magenta>magenta</PRF_Magenta>
-  <PRF_None>None</PRF_None>
+  <PRF_None>none</PRF_None>
 </LanguageData>

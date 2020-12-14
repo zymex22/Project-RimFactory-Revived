@@ -103,7 +103,7 @@ namespace ProjectRimFactory.Common
 
         protected override void UpdateSize() {
             winSize.y = 0;
-            winSize.x = 200f;
+            winSize.x = 400f;
             if (ShowProductLimt) winSize.y += 270f;
             if (ShowOutputToEntireStockpile) winSize.y += 100f;
             if (ShowObeysStorageFilter) winSize.y += 70f;
@@ -120,7 +120,7 @@ namespace ProjectRimFactory.Common
             if(ShowRangeTypeSelectorButton) winSize.y += 100f;
 
             float maxHeight = 900f;
-            float minHeight = 200f;
+            float minHeight = 50f; // if this starts too large, the window will be too high
             float inspectWindowHeight = 268f; // Note: at least one mod makes this larger - this may not be enough.
             if (UI.screenHeight > minHeight - inspectWindowHeight) maxHeight = (float)UI.screenHeight - inspectWindowHeight;
             winSize.y = Mathf.Clamp(winSize.y, minHeight, maxHeight); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
