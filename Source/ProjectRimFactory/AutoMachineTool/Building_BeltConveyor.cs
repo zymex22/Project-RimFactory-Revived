@@ -385,6 +385,13 @@ namespace ProjectRimFactory.AutoMachineTool
                 return this.TrueCenter().y + defaultCarriedItemDrawHeight;
             }
         }
+        public override string GetInspectString()
+        {
+            if (IsEndOfLine) {
+                return base.GetInspectString()+"\n"+"PRF.Conveyor.IsAtEndOfLine".Translate();
+            }
+            return base.GetInspectString();
+        }
 
         /******** IPRF logic *********/
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
@@ -730,7 +737,8 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             if (t is IBeltConveyorLinkable belt) {
                 bool tmp = belt.IsEndOfLine;
-                list.CheckboxLabeled("End of Line?", ref tmp, "Is this belt the end of its line?  If it is, it will hold onto items until something takes them.");
+                list.CheckboxLabeled("PRF.Conveyor.IsEndOfLineSetting".Translate(), ref tmp, 
+                                     "PRF.Conveyor.IsEndOfLineSetting.Desc".Translate());
                 if (tmp != belt.IsEndOfLine) belt.IsEndOfLine = tmp;
             }
         }
