@@ -15,13 +15,24 @@ using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
+    /***************************************
+     *  The belt splitter has several features normal conveyor belts don't have.
+     *   * Omnidirectional - it can take in links from any direction and give them out
+     *     in any direction.
+     *   * It caches valid output links and can even turn them off (block output to 
+     *     them entirely)
+     *   * It switches where the next output item goes each time (splitting input
+     *     items among output lines)
+     *     * NOTE: this may need further consideration with multiple inputs
+     *   * Its graphic has an extra building on top of it.
+     */
     public class Building_BeltSplitter : Building_BeltConveyor
     {
         private Rot4 dest = Rot4.Random; // start in random direction if more than one available
 
-        private Dictionary<Rot4, OutputLink> outputLinks = new Dictionary<Rot4, OutputLink>();
         public Dictionary<Rot4, OutputLink> OutputLinks => outputLinks;
-
+        public IEnumerable<IBeltConveyorLinkable> IncomingLinks => incomingLinks;
+        private Dictionary<Rot4, OutputLink> outputLinks = new Dictionary<Rot4, OutputLink>();
         [Unsaved]
         private HashSet<IBeltConveyorLinkable> incomingLinks = new HashSet<IBeltConveyorLinkable>();
 
