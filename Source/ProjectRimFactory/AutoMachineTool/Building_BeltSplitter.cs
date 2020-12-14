@@ -148,7 +148,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 // I will rotate counterclockwise because that is the "positive" direction
                 Rot4 nextDir = previousDir.RotateAsNew(RotationDirection.Counterclockwise);
                 for (int i = 0; i < 4; i++, nextDir.Rotate(RotationDirection.Counterclockwise)) {
-                    if (//nextDir != this.Rotation.Opposite && // don't look backwards //TODO
+                    if ( // we look for an appropriate next direction:
                                 nextDir != previousDir &&
                                 this.outputLinks.ContainsKey(nextDir) &&
                                 outputLinks[nextDir].priority == priority &&
@@ -334,24 +334,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
             }
             if (!flag) return false;
-            if (!checkPosition) return true; //TODO: clean this up:
-            // Allow to link in any direction:
+            if (!checkPosition) return true;
+            // Allow to link in any direction (including backwards, yes - who knows what direction will be appropriate?):
             return this.Position.IsNextTo(otherBeltLinkable.Position);
-            /*
-            var r = this.Rotation;
-            var i = 0;
-            for (; i < 4; r.Rotate(RotationDirection.Counterclockwise), i++) {
-                if (this.Position + r.FacingCell == otherBeltLinkable.Position) return true;
-            }*/
-            /*
-            // Conveyor Belts can link forward, right, and left:
-            if (this.Position + this.Rotation.FacingCell == otherBeltLinkable.Position ||
-                this.Position + this.Rotation.RighthandCell == otherBeltLinkable.Position ||
-                // Why is there no LefthandCell? Annoying.
-                this.Position + this.Rotation.Opposite.RighthandCell == otherBeltLinkable.Position)
-                return true;
-            return false;
-            */
         }
         public override bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             // First test: level (e.g., Ground vs Underground):
@@ -365,21 +350,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
             }
             if (!flag) return false;
-            if (!checkPosition) return true; //TODO: clean this up:
+            if (!checkPosition) return true;
             // Allow links from any direction (including backwards, yes)
             return Position.IsNextTo(otherBeltLinkable.Position);
-        /*    var r = this.Rotation;
-            var i = 0;
-            for (; i < 4; r.Rotate(RotationDirection.Counterclockwise), i++) {
-                if (this.Position + r.FacingCell == otherBeltLinkable.Position) return true;
-            }
-            */
-            /*
-            // Conveyor belts can receive only from directly behind:
-            if (this.Position + this.Rotation.Opposite.FacingCell == otherBeltLinkable.Position)
-                return true;
-                */
-            //return false;
         }
         public override bool HasLinkWith(IBeltConveyorLinkable otherBelt) {
             return incomingLinks.Contains(otherBelt) ||
