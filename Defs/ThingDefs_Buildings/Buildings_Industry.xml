@@ -4,6 +4,10 @@
     <defName>PRF_IndustryGroup</defName>
   </DesignatorDropdownGroupDef>
 
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_FurnaceGroup</defName>
+  </DesignatorDropdownGroupDef>
+
   <!--==================== Industrial Base ====================-->
   <ThingDef Name="PRF_IndustrialBase" ParentName="PRF_BuildingBase" Abstract="True">
     <passability>PassThroughOnly</passability>
@@ -253,8 +257,16 @@
       <!-- For thorny special sculp when done? -->
       <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
         <bonuses>
-          <li><requiredQuality>Masterwork</requiredQuality><chance>0.15</chance><altChanger>ProjectRimFactory.PRFGameComponent:TryMakeProductSpecialScupture</altChanger></li>
-          <li><requiredQuality>Legendary</requiredQuality><chance>0.33</chance><altChanger>ProjectRimFactory.PRFGameComponent:TryMakeProductSpecialScupture</altChanger></li>
+          <li>
+            <requiredQuality>Masterwork</requiredQuality>
+            <chance>0.15</chance>
+            <altChanger>ProjectRimFactory.PRFGameComponent:TryMakeProductSpecialScupture</altChanger>
+          </li>
+          <li>
+            <requiredQuality>Legendary</requiredQuality>
+            <chance>0.33</chance>
+            <altChanger>ProjectRimFactory.PRFGameComponent:TryMakeProductSpecialScupture</altChanger>
+          </li>
         </bonuses>
       </li>
     </modExtensions>
@@ -475,14 +487,9 @@
     <building>
       <heatPerTickWhileWorking>0.32</heatPerTickWhileWorking>
     </building>
-    <designatorDropdown>furnace_gr</designatorDropdown>
   </ThingDef>
 
 
-
-  <DesignatorDropdownGroupDef>
-    <defName>furnace_gr</defName>
-  </DesignatorDropdownGroupDef>
 
   <!--==================== T0 Blast Furnace ====================-->
   <ThingDef ParentName="PRF_FurnaceBase">
@@ -490,7 +497,6 @@
     <label>Blast Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <altitudeLayer>Gas</altitudeLayer>
-    <designatorDropdown></designatorDropdown>
     <graphicData>
       <texPath>Industry/smelter_t0off</texPath>
       <drawSize>(5,7.9)</drawSize>
@@ -569,12 +575,12 @@
     <defName>PRF_FurnaceII</defName>
     <label>industrial Furnace</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
+    <designatorDropdown>PRF_FurnaceGroup</designatorDropdown>
     <graphicData>
       <texPath>Industry/smelter_t1off</texPath>
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
     <size>(3,3)</size>
-    <designatorDropdown>furnace_gr</designatorDropdown>
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <Cleanliness>-1</Cleanliness>
@@ -656,7 +662,7 @@
       <drawSize>(3.1,3.1)</drawSize>
     </graphicData>
     <size>(3,3)</size>
-    <designatorDropdown>furnace_gr</designatorDropdown>
+    <designatorDropdown>PRF_FurnaceGroup</designatorDropdown>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
       <Cleanliness>1</Cleanliness>
