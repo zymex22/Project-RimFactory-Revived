@@ -107,87 +107,87 @@ namespace ProjectRimFactory.Storage.UI
         // Credits to LWM Deep Storage :)
         private void DrawThingRow(ref float y, float width, Thing thing)
         {
-            Log.Warning("Starting DrawThingRow for zymex's weird problem, drawing " + (thing == null ? "null" : (thing.ToString())+" "+thing.Spawned),true);
-            width -= 24f;
-            // row to hold the item in the GUI
-            Widgets.InfoCardButton(width, y, thing);
-            // rect.width -= 84f;
-            width -= 24f;
-            
-            var checkmarkRect = new Rect(width, y, 24f, 24f);
-            var isItemForbidden = !thing.IsForbidden(Faction.OfPlayer);
-            var forbidRowItem = isItemForbidden;
-            TooltipHandler.TipRegion(checkmarkRect,
-                isItemForbidden ? "CommandNotForbiddenDesc".Translate() : "CommandForbiddenDesc".Translate());
-
-            Widgets.Checkbox(checkmarkRect.x, checkmarkRect.y, ref isItemForbidden);
-            if (isItemForbidden != forbidRowItem) thing.SetForbidden(!isItemForbidden, false);
-            width -= 24f;
-            var dropRect = new Rect(width, y, 24f, 24f);
-            TooltipHandler.TipRegion(dropRect, "PRF_DropThing".Translate(thing.LabelShort));
-            if (Widgets.ButtonImage(dropRect, DropUI, Color.gray, Color.white, false))
-            {
-                dropThing(thing);
-            }
-            Log.Message("zymex reached pt 1", true);
-
-            var p = thing.Map.mapPawns.FreeColonists
-                .Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray()[0];
-            if (ChoicesForThing(thing, p).Count > 0)
-            {
-                Log.Message("zymex checking choices", true);
+            var dstring = "Output: ";
+            try {
+                dstring += "Starting DrawThingRow for zymex's weird problem, drawing " + (thing == null ? "null" : (thing.ToString()) + " " + thing.Spawned);
                 width -= 24f;
-                var pawnInteract = new Rect(width, y, 24f, 24f);
-                if (Widgets.ButtonImage(pawnInteract, menuUI, Color.gray, Color.white, false))
-                {
-                    var opts = new List<FloatMenuOption>();
-                    foreach (var pawn in from Pawn col in thing.Map.mapPawns.FreeColonists
-                        where col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed
-                        select col)
-                    {
-                        var choices =
-                            ChoicesForThing(thing, pawn);
-                        if (choices.Count > 0)
-                            opts.Add(new FloatMenuOption(pawn.Name.ToStringFull,
-                                () => { Find.WindowStack.Add(new FloatMenu(choices)); }));
-                    }
+                // row to hold the item in the GUI
+                Widgets.InfoCardButton(width, y, thing);
+                // rect.width -= 84f;
+                width -= 24f;
 
-                    Find.WindowStack.Add(new FloatMenu(opts));
+                var checkmarkRect = new Rect(width, y, 24f, 24f);
+                var isItemForbidden = !thing.IsForbidden(Faction.OfPlayer);
+                var forbidRowItem = isItemForbidden;
+                TooltipHandler.TipRegion(checkmarkRect,
+                    isItemForbidden ? "CommandNotForbiddenDesc".Translate() : "CommandForbiddenDesc".Translate());
+
+                Widgets.Checkbox(checkmarkRect.x, checkmarkRect.y, ref isItemForbidden);
+                if (isItemForbidden != forbidRowItem) thing.SetForbidden(!isItemForbidden, false);
+                width -= 24f;
+                var dropRect = new Rect(width, y, 24f, 24f);
+                TooltipHandler.TipRegion(dropRect, "PRF_DropThing".Translate(thing.LabelShort));
+                if (Widgets.ButtonImage(dropRect, DropUI, Color.gray, Color.white, false)) {
+                    dropThing(thing);
                 }
-            }
+                dstring += "zymex reached pt 1";
 
-            var thingRow = new Rect(0f, y, width, 28f);
-            // Highlights the row upon mousing over
-            if (Mouse.IsOver(thingRow))
-            {
-                GUI.color = ITab_Pawn_Gear.HighlightColor;
-                GUI.DrawTexture(thingRow, TexUI.HighlightTex);
-            }
-            // Draws the icon of the thingDef in the row
-            if (thing.def.DrawMatSingle != null && thing.def.DrawMatSingle.mainTexture != null)
-                Widgets.ThingIcon(new Rect(4f, y, 28f, 28f), thing);
-            // Draws the item name + info
-            Text.Anchor = TextAnchor.MiddleLeft;
-            GUI.color = ITab_Pawn_Gear.ThingLabelColor;
-            var itemName = new Rect(36f, y, thingRow.width - 36f, thingRow.height);
-            Text.WordWrap = false;
-            // LabelCap is interesting to me(rider)
-            // Really useful I would think
-            // LabelCap == "Wort x75"
-            Widgets.Label(itemName, thing.LabelCap.Truncate(itemName.width));
-            Text.WordWrap = true;
-            Log.Message("Near end", true);
-            // For the toolpit
-            var text2 = thing.LabelCap;
-            
-            // if uses hitpoints draw it
-            if (thing.def.useHitPoints)
-                text2 = string.Concat(thing.LabelCap, "\n", thing.HitPoints, " / ", thing.MaxHitPoints);
-            
-            // Custom rightclick menu
-            TooltipHandler.TipRegion(thingRow, text2);
+                var p = thing.Map.mapPawns.FreeColonists
+                    .Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray()[0];
+                if (ChoicesForThing(thing, p).Count > 0) {
+                    dstring += "zymex checking choice";
+                    width -= 24f;
+                    var pawnInteract = new Rect(width, y, 24f, 24f);
+                    if (Widgets.ButtonImage(pawnInteract, menuUI, Color.gray, Color.white, false)) {
+                        var opts = new List<FloatMenuOption>();
+                        foreach (var pawn in from Pawn col in thing.Map.mapPawns.FreeColonists
+                                             where col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed
+                                             select col) {
+                            var choices =
+                                ChoicesForThing(thing, pawn);
+                            if (choices.Count > 0)
+                                opts.Add(new FloatMenuOption(pawn.Name.ToStringFull,
+                                    () => { Find.WindowStack.Add(new FloatMenu(choices)); }));
+                        }
 
-            y += 28f;
+                        Find.WindowStack.Add(new FloatMenu(opts));
+                    }
+                }
+
+                var thingRow = new Rect(0f, y, width, 28f);
+                // Highlights the row upon mousing over
+                if (Mouse.IsOver(thingRow)) {
+                    GUI.color = ITab_Pawn_Gear.HighlightColor;
+                    GUI.DrawTexture(thingRow, TexUI.HighlightTex);
+                }
+                // Draws the icon of the thingDef in the row
+                if (thing.def.DrawMatSingle != null && thing.def.DrawMatSingle.mainTexture != null)
+                    Widgets.ThingIcon(new Rect(4f, y, 28f, 28f), thing);
+                // Draws the item name + info
+                Text.Anchor = TextAnchor.MiddleLeft;
+                GUI.color = ITab_Pawn_Gear.ThingLabelColor;
+                var itemName = new Rect(36f, y, thingRow.width - 36f, thingRow.height);
+                Text.WordWrap = false;
+                // LabelCap is interesting to me(rider)
+                // Really useful I would think
+                // LabelCap == "Wort x75"
+                Widgets.Label(itemName, thing.LabelCap.Truncate(itemName.width));
+                Text.WordWrap = true;
+                dstring += "Near end";
+                // For the toolpit
+                var text2 = thing.LabelCap;
+
+                // if uses hitpoints draw it
+                if (thing.def.useHitPoints)
+                    text2 = string.Concat(thing.LabelCap, "\n", thing.HitPoints, " / ", thing.MaxHitPoints);
+
+                // Custom rightclick menu
+                TooltipHandler.TipRegion(thingRow, text2);
+
+                y += 28f;
+            } catch (System.Exception e) {
+                Log.Error("zymex triggered the error!\ndmessage: " + dstring + "\nException: " + e);
+            }
         }
 
         // Little helper method to stop a redundant definition I was about to do.
