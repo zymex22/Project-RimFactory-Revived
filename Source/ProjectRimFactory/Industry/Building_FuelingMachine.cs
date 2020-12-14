@@ -17,12 +17,14 @@ namespace ProjectRimFactory.Industry
             base.Tick();
             if (this.IsHashIntervalTick(10)) Refuel();
         }
-        public override void TickRare() { // prefer to use TickRare
+        public override void TickRare()
+        { // prefer to use TickRare
             base.TickRare();
             Refuel();
         }
 
-        public void Refuel() {
+        public void Refuel()
+        {
             if (!GetComp<CompPowerTrader>().PowerOn) return;
             // Get what we are supposed to refuel:
             //   (only refuel one thing - if you need to adjust this to fuel more
@@ -30,23 +32,36 @@ namespace ProjectRimFactory.Industry
             //    instead of all the "return;"s below)
             CompRefuelable refuelableComp = null;
 
-            foreach (Thing tmpThing in Map.thingGrid.ThingsListAt(FuelableCell)) {
-                if (tmpThing is Building) {
+            var thingsOnRefuelCell = Map.thingGrid.ThingsListAt(FuelableCell);
+
+            // Refuel action might cause thing to to be added to that cell, this ensures no list modification while iterating.
+            var clonedThingsOnRefuelCell = new List<Thing>(thingsOnRefuelCell);
+
+            foreach (Thing tmpThing in clonedThingsOnRefuelCell)
+            {
+                if (tmpThing is Building)
+                {
                     refuelableComp = (tmpThing as Building).GetComp<CompRefuelable>();
                     // Check if there is already enough fuel:
                     //  (because Fuel is a float, we check the current fuel + .99, so it
                     //   only refuels when Fuel drops at least one full unit below taret level)
-                    if (refuelableComp != null && refuelableComp.Fuel + 0.9999f < refuelableComp.TargetFuelLevel) {
-                        foreach (Thing item in this.AllThingsForFueling) {
-                            if (refuelableComp.Props.fuelFilter.Allows(item)) {
+                    if (refuelableComp != null && refuelableComp.Fuel + 0.9999f < refuelableComp.TargetFuelLevel)
+                    {
+                        foreach (Thing item in this.AllThingsForFueling)
+                        {
+                            if (refuelableComp.Props.fuelFilter.Allows(item))
+                            {
                                 // round down to not waste fuel:
                                 int num = Mathf.Min(item.stackCount, Mathf.FloorToInt(refuelableComp.TargetFuelLevel - refuelableComp.Fuel));
-                                if (num > 0) {
+                                if (num > 0)
+                                {
                                     refuelableComp.Refuel(num);
                                     item.SplitOff(num).Destroy();
-                                } else { // It's not quite 1 below TargetFuelLevel
-                                         // but we KNOW we are at least .9999f below TargetFuelLevel (see test above)
-                                         // So we call it close enough to 1:
+                                }
+                                else
+                                { // It's not quite 1 below TargetFuelLevel
+                                  // but we KNOW we are at least .9999f below TargetFuelLevel (see test above)
+                                  // So we call it close enough to 1:
                                     refuelableComp.Refuel(1);
                                     item.SplitOff(1).Destroy();
                                 }
@@ -58,14 +73,19 @@ namespace ProjectRimFactory.Industry
                 } // end if is Building
             Fueled:
                 //This is a generalized system for mod compatibility - mostlyfor Mortar like buildings
-                foreach (var rr in registeredRefuelables) {
+                foreach (var rr in registeredRefuelables)
+                {
                     // basically, if (tmpThing is Building_From_rr)
-                    if (rr.buildingType.IsAssignableFrom(tmpThing.GetType())) {
+                    if (rr.buildingType.IsAssignableFrom(tmpThing.GetType()))
+                    {
                         object o = rr.objectThatNeedsFueling(tmpThing as Building);
-                        if (o != null) { // it needs "refueling" - or ammo loaded
-                            foreach (Thing t in AllThingsForFueling) {
+                        if (o != null)
+                        { // it needs "refueling" - or ammo loaded
+                            foreach (Thing t in AllThingsForFueling)
+                            {
                                 int count = rr.fuelTest(o, t);
-                                if (count > 0) { // it wants some of this for fuel/ammo!
+                                if (count > 0)
+                                { // it wants some of this for fuel/ammo!
                                     Thing fuel = t.SplitOff(count);
                                     rr.refuelAction(o, fuel);
                                     goto Fueled; // jump back to beginning to make sure it's fully fueled.
@@ -77,10 +97,14 @@ namespace ProjectRimFactory.Industry
             } // end loop checking for things that need fuel
         }
 
-        protected IEnumerable<Thing> AllThingsForFueling {
-            get {
-                foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this)) {
-                    foreach (Thing item in GatherThingsUtility.AllThingsInCellForUse(cell, Map)) {
+        protected IEnumerable<Thing> AllThingsForFueling
+        {
+            get
+            {
+                foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this))
+                {
+                    foreach (Thing item in GatherThingsUtility.AllThingsInCellForUse(cell, Map))
+                    {
                         yield return item;
                     }
                 }
@@ -94,20 +118,23 @@ namespace ProjectRimFactory.Industry
             GenDraw.DrawFieldEdges(new List<IntVec3>() { FuelableCell }, Color.yellow);
         }
         //****************************** Registering Refuelables from other mods *****************//
-        public static void RegisterRefuelable(Type buildingType, Func<Building, object> objectThatNeedsFueling, 
+        public static void RegisterRefuelable(Type buildingType, Func<Building, object> objectThatNeedsFueling,
                                               Func<object, Thing, int> fuelTest,
-                                              Action<object, Thing> refuelAction) {
+                                              Action<object, Thing> refuelAction)
+        {
             registeredRefuelables.Add(new RegisteredRefuelable(buildingType, objectThatNeedsFueling, fuelTest,
                 refuelAction));
         }
         protected static List<RegisteredRefuelable> registeredRefuelables = new List<RegisteredRefuelable>();
 
-        protected class RegisteredRefuelable {
+        protected class RegisteredRefuelable
+        {
             public readonly Type buildingType;
             public readonly Func<Building, object> objectThatNeedsFueling;
             public readonly Func<object, Thing, int> fuelTest;
             public readonly Action<object, Thing> refuelAction;
-            public RegisteredRefuelable(Type b, Func<Building, object> nf, Func<object, Thing, int> test, Action<object, Thing> a) {
+            public RegisteredRefuelable(Type b, Func<Building, object> nf, Func<object, Thing, int> test, Action<object, Thing> a)
+            {
                 buildingType = b;
                 objectThatNeedsFueling = nf;
                 fuelTest = test;
@@ -125,14 +152,17 @@ namespace ProjectRimFactory.Industry
     /// </summary>
     [StaticConstructorOnStartup]
     // -- Pick your own name! --
-    static class RegisterVanillaMortarsAsRefuelable {
-        static RegisterVanillaMortarsAsRefuelable() {
+    static class RegisterVanillaMortarsAsRefuelable
+    {
+        static RegisterVanillaMortarsAsRefuelable()
+        {
             if (!ModLister.HasActiveModWithName("Project RimFactory Revived")) return;
             // This gets the PRF Building_FuelingMachine from our assembly - it works from any mod's
             //   assembly!
             Type refueler = Type.GetType("ProjectRimFactory.Industry.Building_FuelingMachine, ProjectRimFactory", false);
             // But we still check in case anything went wrong.
-            if (refueler == null) {
+            if (refueler == null)
+            {
                 // -- Feel free to add your own error message if things fail. --
                 Log.Warning("PRF failed to load compatibility for PRF; auto loading mortars won't work");
                 return;
@@ -167,7 +197,8 @@ namespace ProjectRimFactory.Industry
                     t.Destroy();
                 }});
         }
-        static object FindCompNeedsShells(Building b) {
+        static object FindCompNeedsShells(Building b)
+        {
             var changeableProjectileComp = (b as Building_TurretGun).gun?.TryGetComp<CompChangeableProjectile>();
             if (changeableProjectileComp?.Loaded == false) return changeableProjectileComp;
             return null;
