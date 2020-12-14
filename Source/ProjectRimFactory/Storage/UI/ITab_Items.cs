@@ -107,6 +107,7 @@ namespace ProjectRimFactory.Storage.UI
         // Credits to LWM Deep Storage :)
         private void DrawThingRow(ref float y, float width, Thing thing)
         {
+            Log.Warning("Starting DrawThingRow for zymex's weird problem, drawing " + (thing == null ? "null" : (thing.ToString())+" "+thing.Spawned));
             width -= 24f;
             // row to hold the item in the GUI
             Widgets.InfoCardButton(width, y, thing);
@@ -128,11 +129,13 @@ namespace ProjectRimFactory.Storage.UI
             {
                 dropThing(thing);
             }
+            Log.Message("zymex reached pt 1");
 
             var p = thing.Map.mapPawns.FreeColonists
                 .Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray()[0];
             if (ChoicesForThing(thing, p).Count > 0)
             {
+                Log.Message("zymex checking choices");
                 width -= 24f;
                 var pawnInteract = new Rect(width, y, 24f, 24f);
                 if (Widgets.ButtonImage(pawnInteract, menuUI, Color.gray, Color.white, false))
@@ -173,7 +176,7 @@ namespace ProjectRimFactory.Storage.UI
             // LabelCap == "Wort x75"
             Widgets.Label(itemName, thing.LabelCap.Truncate(itemName.width));
             Text.WordWrap = true;
-            
+            Log.Message("Near end");
             // For the toolpit
             var text2 = thing.LabelCap;
             
