@@ -158,7 +158,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         ModExtension_Skills extension_Skills;
 
-        public ModExtension_BonusYield modExtension_BonusYield => this.def.GetModExtension<ModExtension_BonusYield>();
+        public ModExtension_ModifyProduct ModifyProductExt => this.def.GetModExtension<ModExtension_ModifyProduct>();
 
         public int GetSkillLevel(SkillDef def)
         {
@@ -404,11 +404,8 @@ namespace ProjectRimFactory.AutoMachineTool
             this.dominant = null;
             this.unfinished = null;
             this.ingredients = null;
-            Thing bonus = modExtension_BonusYield?.GetBonusYield(this.bill.recipe,QualityCategory.Normal) ?? null;
-            if (bonus != null)
-            {
-                products.Add(bonus);
-            }
+            // Because we use custom GenRecipe2, we have to handle bonus items and product modifications directly:
+            ModifyProductExt?.ProcessProducts(products, this as IBillGiver, this, this.bill.recipe); // this as IBillGiver is probably null
 
             return true;
         }

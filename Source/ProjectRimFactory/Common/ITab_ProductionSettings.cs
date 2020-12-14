@@ -15,24 +15,22 @@ using ProjectRimFactory.Drones;
 namespace ProjectRimFactory.Common
 {
 
-    interface IPRF_SettingsContent
+    public interface IPRF_SettingsContent
     {
-        abstract public float ITab_Settings_Minimum_x { get; }
-        abstract public float ITab_Settings_Additional_y { get; }
+        float ITab_Settings_Minimum_x { get; }
+        float ITab_Settings_Additional_y { get; }
 
         //may need to pass some pos context
-        abstract public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect);
+        Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect);
 
 
 
     }
 
-    interface IPRF_SettingsContentLink
+    public interface IPRF_SettingsContentLink
     {
-        public IPRF_SettingsContent PRF_SettingsContentOb { get; }
+        IPRF_SettingsContent PRF_SettingsContentOb { get; }
     }
-
-
 
 
 
@@ -42,6 +40,19 @@ namespace ProjectRimFactory.Common
     ///  * whether to obey IProductLimitation limits on production/storing
     /// </summary>
     class ITab_ProductionSettings : ITab {
+        static List<Func<Thing, bool>> showITabTests = new List<Func<Thing, bool>>();
+        static List<Func<Thing, float>> extraHeightRequests = new List<Func<Thing, float>>();
+        static List<Action<Thing, Listing_Standard>> windowContentDrawers = new List<Action<Thing, Listing_Standard>>();
+        public static void RegisterSetting(Func<Thing, bool> showResultTest, Func<Thing, float> extraHeightRequest,
+                                           Action<Thing, Listing_Standard> windowContents)
+        {
+            showITabTests.Add(showResultTest);
+            extraHeightRequests.Add(extraHeightRequest);
+            windowContentDrawers.Add(windowContents);
+            // onOpen=null, etc.
+        }
+
+
 
         private Vector2 winSize = new Vector2(400f, 0f);
         private List<SlotGroup> groups;
@@ -52,7 +63,7 @@ namespace ProjectRimFactory.Common
 
         public override bool IsVisible {
             get {
-                return ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton;
+                return showITabTests.FirstOrDefault(t=>(t!=null && t(SelThing))) != null || ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton;
             }
         }
         bool ShowProductLimt => Machine != null;
@@ -92,10 +103,15 @@ namespace ProjectRimFactory.Common
 
         protected override void UpdateSize() {
             winSize.y = 0;
-            winSize.x = 400f;
+            winSize.x = 200f;
             if (ShowProductLimt) winSize.y += 270f;
             if (ShowOutputToEntireStockpile) winSize.y += 100f;
             if (ShowObeysStorageFilter) winSize.y += 70f;
+            for (int i = 0; i < showITabTests.Count; i++) {
+                if (showITabTests[i]?.Invoke(this.SelThing) == true) {
+                    winSize.y += (extraHeightRequests[i]?.Invoke(this.SelThing) ?? 0);
+                }
+            }
             if (pRF_SettingsContent != null) {
                 
                 winSize.y += pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Additional_y;
@@ -103,11 +119,14 @@ namespace ProjectRimFactory.Common
             }
             if(ShowRangeTypeSelectorButton) winSize.y += 100f;
 
-            winSize.y = Mathf.Clamp(winSize.y, 0, Prefs.ScreenHeight - 268); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
-
-
+            float maxHeight = 900f;
+            float minHeight = 200f;
+            float inspectWindowHeight = 268f; // Note: at least one mod makes this larger - this may not be enough.
+            if (UI.screenHeight > minHeight - inspectWindowHeight) maxHeight = (float)UI.screenHeight - inspectWindowHeight;
+            winSize.y = Mathf.Clamp(winSize.y, minHeight, maxHeight); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
 
             this.size = winSize;
+            //Log.Message("Size is currently: " + size.x + "," + size.y);
             base.UpdateSize();
         }
 
@@ -148,6 +167,15 @@ namespace ProjectRimFactory.Common
                     "PRF.Common.ObeysStorageFiltersDesc".Translate());
                 if (tmpB != PRFB.ObeysStorageFilters)
                     PRFB.ObeysStorageFilters = tmpB;
+            }
+            for (int i = 0; i < showITabTests.Count; i++) {
+                if (showITabTests[i]?.Invoke(this.SelThing) == true) {
+                    if (windowContentDrawers[i] != null) {
+                        if (doneSection) list.GapLine();
+                        windowContentDrawers[i](this.SelThing, list);
+                        doneSection = true;
+                    }
+                }
             }
             if (Machine != null) {
                 if (doneSection) list.GapLine();

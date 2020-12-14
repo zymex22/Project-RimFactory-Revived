@@ -85,7 +85,7 @@
 							<researchPrerequisites>
 								<li>PRF_ImprovedDrones</li>
 							</researchPrerequisites>
-							<designatorDropdown>MiniDrone_gr</designatorDropdown>
+							<designatorDropdown>PRF_MiniDroneStationGroup</designatorDropdown>
 						</ThingDef>
 					</value>
 				</li>

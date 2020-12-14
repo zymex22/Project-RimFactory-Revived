@@ -1,53 +1,48 @@
 # Project-RimFactory-Revived
 
-## This mod adds
-This mod add a lot of automation and is heavily inspired by games like Factorio and Satisfactory and modded minecraft MFFR.
+## Factorio Inspired Automation mod in RimWorld
+This is my overhaul of one of my favorite mods from B18 RW.
+I tried stay in line with how it was back then but expanding on functions and machines to great a even better story for it.
 
-It adds machines that can replace pawns for working, so your pawns can do other stuff like chilling, raiding and defending your colony.
-Its focused around crafting and resource gathering and have no stuff for raid/defence/medical.
+Over the past month i have been working on this mod, many great ppl have joined and contributed to make this mod truly amazing and better than i ever imagined.
+I Truly appriciate what this have become, not just some modding experiance, but it became a great little community of modders, helping on PRF and share skills across their own mods.
 
-
-(outdated, will get updated soon)
-Kitchen
-- 2 Auto cooker
-- 1 Meat grinder (New)
-- 1 Food prepper (support for other mods)(New)
-- 1 Auto Fermenting barrel (New)
-Resource gathering
-- 3 Miners / Quarry / Deep drills (New)
-Farming and Animals
-- 4 Cultivator machines/harvesters
-- 1 Sprinkler (Original)
-- 1 Animal manager / auto killer (New)
-- 3 Animal Harvesters (milk, egg, fur)
-Automations
-1 Smart Hopper
-- 1 Item Pusher (New)
-- 1 Fueling machine
-Production
-- 2 Assemblers + 1 Recorder(copy bills)
-- 1 Recycler to recycle apperal, weapons & armor (New)
-Storage management
-- 2 Storage crates
-- 1 Digital Storage Unit
-- 1 In/Out port for Wireless Storage
-Other
-- 2 Striped factory floors (New)
-- 6 Floor signs (New)
-
-## Disclaimer
-This was my Favorite mod in B18 and B19 and there never really came a 1.0 or 1.1
-So i was looking into updating it, since Spdskatr properbly wont come back.
-i saw AbnerChen made asemblies update and created a PR but Spdskatr didnt update.
-
-I used this in combination with my own work and original to update to 1.1
-I hope this mod can be a Continuation of Spdskatr excellent mod.
-i dont want credit, i really just want my favorite mod back to rimworld 1.1/1.2 standard
+This is still a work in progress project, and it properly always will be.
+But we are very close to a stable release with our 2.5.0 release which overhauled MANY mechanics.
 
 
-# Mod suggestion to use with PRF
-- RimFridge
-- Ogrestack / StackXl
+If you have any ideas, bugs or other things, feel free to share them with us with a Issue, steam comment or our discord.
+
+
+
+
+## Idea behind this mod
+PRF is a mod that focus on automating many task in RW without going too far away from Vanilla balance.
+This fit in line with many other great mods.
+
+We have tried keep core clean and not Too OverPowered, and moved OP stuff out in Insanity and other sub mods instead.
+
+This mod adds a bunch of machines and new types of automation, that will let you automate certain things in RW that otherwise would had pawns needed.
+Not every task can be automated though. you will still need pawns to eat your food, defend your colony, do raiding and trading and research.
+
+This adds new Factorio like buildings that has a Input and a Output and will work be them self if you supply resources.
+It also adds conveyor belts that let you move things around on your base.
+
+It has a small selection of storage options too.
+
+We have tried make more of balance and story than there earlier was in PRF, so it now has more ingame content, and info/story/flavour text to give at good all around Feeling.
+
+
+
+## PRF Series
+Project RimFactory - Core (This one)
+Project RimFactory - Lite (Cut down version made as a replacement for Industrial roller)
+Project RimFactory - Drones (Some drone stations, this will get a update later)
+Project RimFactory - Insanity (Equivalent Exchange, Alchemy, and crazy scientist?)
+Project RimFactory - Materials (A lite Material mod focused around factorio/satisfactory genre)
+Project RimFactory - Extras (Random stuff, comming later...)
+ATS - Framework (will be a future framework where many universal stuff will go)
+
 
 
 # Credits:
@@ -59,10 +54,10 @@ Spdskatr - Rimfactory original! see: https://github.com/spdskatr/ProjectRimFacto
 Nobo / Nullre - For porting thing from NR_AutoMachineTools to prf and genral C#
 
 Coders: Spdskatr, Nobo, abnerchen, LWM, Sn1p3rr3c0n
-Artists: Shotgunfrenzy, Chicken Plucker, Xen, Scythe, totobrother, "unknown alien", Argon
+Artists: Shotgunfrenzy, Chicken Plucker, Xen, Scythe, totobrother, "unknown alien", Argon, Thornsworth, 
 
 Translaters:
 Russian: Natsu_Zirok, Chinese Simplified: 十里小飞 , Chinese Traditional: AbnerChen
 
 Resources: Freepik, Flaticon
-Other worth mentioning: Malkav, Thornsworth,
+Other worth mentioning: Malkav, and whole test squad

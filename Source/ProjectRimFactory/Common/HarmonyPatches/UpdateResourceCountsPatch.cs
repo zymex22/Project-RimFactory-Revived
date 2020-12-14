@@ -17,7 +17,35 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     }
 
 
-    //Art & maybe other things too need a patch for public virtual int CountProducts(Bill_Production bill)
+    //Art & maybe other things too need a seperate patch
+    [HarmonyPatch(typeof(RecipeWorkerCounter), "CountProducts")]
+    class Patch_CountProducts_AssemblerQueue
+    {
+
+        static void Postfix(RecipeWorkerCounter __instance,ref int __result, Bill_Production bill)
+        {
+            if (bill.includeFromZone == null) {
+                int i = 0;
+                ThingDef targetDef = __instance.recipe.products[0].thingDef;
+
+
+                for (i = 0; i < PRFGameComponent.AssemblerQueue.Count; i++)
+                {
+                    foreach (Thing heldThing in PRFGameComponent.AssemblerQueue[i].GetThingQueue())
+                    {
+                        Thing innerIfMinified = heldThing.GetInnerIfMinified();
+                        if (innerIfMinified.def == targetDef)
+                        {
+
+                            __result += innerIfMinified.stackCount;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
 
     [HarmonyPatch(typeof(ResourceCounter), "UpdateResourceCounts")]
     class Patch_UpdateResourceCounts_AssemblerQueue

@@ -2,7 +2,7 @@
 <Defs>
 
   <DesignatorDropdownGroupDef>
-    <defName>miners_gr</defName>
+    <defName>PRF_MinersGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <!--==================== Miners Base ====================-->
@@ -10,10 +10,8 @@
     <passability>PassThroughOnly</passability>
     <blockLight>false</blockLight>
     <blockWind>true</blockWind>
-
-    <designatorDropdown>miners_gr</designatorDropdown>
+    <designatorDropdown>PRF_MinersGroup</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
-
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
@@ -44,12 +42,15 @@
   <ThingDef ParentName="BenchBase">
     <defName>PRF_MineShaft</defName>
     <label>MiningShaft</label>
-    <description>A early random ore mineshaft capable of finding stones, steel slag, and other low end resources, also a slim chance to find rares</description>
+    <description>A early random ore mineshaft capable of finding stones, steel slag, and other low end resources, also a slim chance to find rares.\nShould be placed in a mountain wall to operate.</description>
     <thingClass>Building_WorkTable</thingClass>
+    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
+    <clearBuildingArea>false</clearBuildingArea>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
     <graphicData>
       <texPath>Industry/MiningShaft</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(4.5,2.5)</drawSize>
+      <drawSize>(3,1.1)</drawSize>
       <shaderType>CutoutComplex</shaderType>
       <shadowData>
         <volume>(2.85, 0.3, 0.62)</volume>
@@ -62,8 +63,13 @@
         <cornerBR>Damage/Corner</cornerBR>
       </damageData>
     </graphicData>
+    <constructEffect></constructEffect>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>75</costStuffCount>    <!-- Set price for stone blocks -->
     <costList>
-      <Steel>100</Steel>
+      <WoodLog>50</WoodLog>
     </costList>
     <recipes>
       <li>PRF_Excavate_Granite</li>
@@ -72,18 +78,16 @@
       <li>PRF_Excavate_Slate</li>
       <li>PRF_Excavate_Marble</li>
     </recipes>
-    <altitudeLayer>Building</altitudeLayer>
     <fillPercent>0.5</fillPercent>
     <useHitPoints>True</useHitPoints>
     <statBases>
-      <WorkToBuild>2000</WorkToBuild>
-      <MaxHitPoints>180</MaxHitPoints>
-      <Flammability>1.0</Flammability>
-      <Cleanliness>-5</Cleanliness>
+      <WorkToBuild>3500</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <Cleanliness>-10</Cleanliness>
     </statBases>
     <size>(3,1)</size>
-
-    <designatorDropdown>miners_gr</designatorDropdown>
+    <!-- <designatorDropdown>PRF_MinersGroup</designatorDropdown> -->
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
     <hasInteractionCell>True</hasInteractionCell>
@@ -94,6 +98,7 @@
       <li>ITab_Bills</li>
     </inspectorTabs>
     <building>
+      <isEdifice>false</isEdifice>
       <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
     </building>
     <comps>
@@ -103,7 +108,7 @@
     </researchPrerequisites>
     <designationHotKey>Misc9</designationHotKey>
     <placeWorkers>
-      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+      <li>ProjectRimFactory.Common.PlaceWorker_NaturalWall</li>
     </placeWorkers>
   </ThingDef>
 
@@ -166,12 +171,7 @@
       <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
         <TickCount>8</TickCount>
       </li>
-      <!-- excludeOres : exclude ore list.
-           bonusYield  : Bonus yield ore list. for example, 10% bonus yield chance, Steel bonus : Plasteel bonus = 1 : 2
-           <bonusYields Chance="0.1">
-           <Steel Weight="1" Count="10" />
-           <Plasteel Weight="2" Count="15" />
-           </<bonusYields> -->
+      <!-- excludeOres : exclude ore list. -->
       <li Class="ProjectRimFactory.Common.ModExtension_Miner">
         <excludeOres>
           <li>Gold</li>
@@ -183,7 +183,17 @@
           <li>Silver</li>
         </excludeOres>
       </li>
-      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+      <!-- ModifyProduct - give bonus items :
+           Bonus yield ore list. for example: 10% bonus yield chance, Steel bonus : Plasteel bonus = 1 : 2
+               (so 10% of anything, and get twice as much bonus plasteel as bonus steel)
+           <bonusYields Chance="0.1">
+             <Steel Weight="1" Count="10" />
+             <Plasteel Weight="2" Count="15" />
+           </bonusYields>
+           <replaceOrigProduct>true</replaceOrigProduct> - whether to replace product or add bonus in addition; defaults to false (add)  
+      -->
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
         <bonusYields Chance="0.18">
           <ChunkSlagSteel Weight="1" Count="1" />
           <Gold Weight="0.02" Count="10" />
@@ -205,7 +215,7 @@
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <graphicData>
       <texPath>Industry/DeepQuarry</texPath>
-      <drawSize>(2.5,2.5)</drawSize>
+      <drawSize>(2.4,2.4)</drawSize>
     </graphicData>
     <size>(2,2)</size>
     <statBases>
@@ -258,7 +268,8 @@
           <li>ChunkMarble</li>
         </excludeOres>
       </li>
-      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
         <bonusYields Chance="0.1">
           <ChunkSandstone Weight="1" Count="1" />
           <ChunkGranite Weight="1" Count="1" />
@@ -279,7 +290,7 @@
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_PortableMinerMkI</defName>
     <label>Portable Miner MkI</label>
-    <designatorDropdown>miners_gr</designatorDropdown>
+    <designatorDropdown>PRF_MinersGroup</designatorDropdown>
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
       <drawRotated>false</drawRotated>
@@ -359,7 +370,7 @@
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_PortableMinerMkII</defName>
     <label>Portable Miner MkII</label>
-    <designatorDropdown>miners_gr</designatorDropdown>
+    <designatorDropdown>PRF_MinersGroup</designatorDropdown>
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
       <drawRotated>false</drawRotated>
@@ -450,7 +461,7 @@
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <graphicData>
       <texPath>Industry/DrillT32</texPath>
-      <drawSize>(3.3,3.3)</drawSize>
+      <drawSize>(3,3)</drawSize>
     </graphicData>
     <size>(3,3)</size>
     <statBases>
@@ -500,7 +511,8 @@
           <li>ChunkMarble</li>
         </excludeOres>
       </li>
-      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
         <bonusYields Chance="0.1">
           <!-- Junks -->
           <InsectJelly Weight="0.2" Count="30" />
@@ -533,7 +545,7 @@
     <tickerType>Never</tickerType>
     <graphicData>
       <texPath>Industry/DrillT3</texPath>
-      <drawSize>(3.3,3.3)</drawSize>
+      <drawSize>(3,3)</drawSize>
     </graphicData>
     <costList>
       <Steel>1000</Steel>
@@ -601,7 +613,8 @@
           <li>Silver</li>
         </excludeOres>
       </li>
-      <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
         <bonusYields Chance="0.05">
           <!-- Junks -->
           <InsectJelly Weight="0.2" Count="30" />

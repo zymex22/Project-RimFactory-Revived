@@ -4,15 +4,15 @@
   <!--============================== DropDown Categories ==============================-->
 
   <DesignatorDropdownGroupDef>
-    <defName>Pullers_gr</defName>
+    <defName>PRF_PullersGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <DesignatorDropdownGroupDef>
-    <defName>IO_gr</defName>
+    <defName>PRF_IoGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <DesignatorDropdownGroupDef>
-    <defName>PRF_Fuel_gr</defName>
+    <defName>PRF_FuelersGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <!--==================== Fueling Machine ====================-->
@@ -20,7 +20,7 @@
     <defName>PRF_FuelingMachine</defName>
     <label>fueling machine</label>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
-    <!-- <designatorDropdown>PRF_Fuel_gr</designatorDropdown> -->
+    <!-- <designatorDropdown>PRF_FuelersGroup</designatorDropdown> -->
     <graphicData>
       <texPath>Industry/FuelingMachine</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -70,7 +70,7 @@
     <defName>PRF_SmartHopper</defName>
     <label>Vacuum Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
-    <!-- <designatorDropdown>PRF_Fuel_gr</designatorDropdown> -->
+    <!-- <designatorDropdown>PRF_FuelersGroup</designatorDropdown> -->
     <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <texPath>Storage/vacuum</texPath>
@@ -163,7 +163,7 @@
     <drawerType>RealtimeOnly</drawerType>
     <tickerType>Never</tickerType>
     <uiIconScale>0.7</uiIconScale>
-    <designatorDropdown>Pullers_gr</designatorDropdown>
+    <designatorDropdown>PRF_PullersGroup</designatorDropdown>
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
@@ -509,11 +509,11 @@
   <!--======================================= =============== ===============================================-->
   <!--======================================= Dropdown Groups ===============================================-->
   <DesignatorDropdownGroupDef>
-    <defName>UgRollers_gr</defName>
+    <defName>PRF_UgBeltsGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <DesignatorDropdownGroupDef>
-    <defName>Rollers_gr</defName>
+    <defName>PRF_BeltsGroup</defName>
   </DesignatorDropdownGroupDef>
   <!--======================================= ============= ===============================================-->
   <!--======================================= Conveyor base ===============================================-->
@@ -521,7 +521,7 @@
   <ThingDef Name="PRF_Conveyor_Base" ParentName="PRF_BuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <altitudeLayer>Building</altitudeLayer>
-    <designatorDropdown>Rollers_gr</designatorDropdown>
+    <designatorDropdown>PRF_BeltsGroup</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
     <costList>
       <Steel>2</Steel>
@@ -636,7 +636,7 @@
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>PRF_Conveyor_UG_I</defName>
     <label>underground belt</label>
-    <designatorDropdown>UgRollers_gr</designatorDropdown>
+    <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
     <description>Underground Conveyor Belts carry items in tunnels under the ground. To move items into the subterrainian passages, you need to use the Underground Conveyor Entrance and Exit.</description>
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
@@ -674,7 +674,7 @@
   <ThingDef Name="PRF_UGConnector_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <clearBuildingArea>true</clearBuildingArea>
-    <designatorDropdown>UgRollers_gr</designatorDropdown>
+    <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
@@ -794,7 +794,7 @@
   <ThingDef ParentName="PRF_Belt_Splitter">
     <defName>PRF_Conveyor_Splitter_UG</defName>
     <label>underground splitter</label>
-    <designatorDropdown>UgRollers_gr</designatorDropdown>
+    <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
     <description>A conveyor splitter unit built into the ground.  This one will hand off items to other underground conveyor belts.</description>
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
@@ -853,7 +853,7 @@
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
-    <designatorDropdown>Rollers_gr</designatorDropdown>
+    <designatorDropdown>PRF_BeltsGroup</designatorDropdown>
     <building>
       <isEdifice>false</isEdifice>
       <!--      <blueprintGraphicData>

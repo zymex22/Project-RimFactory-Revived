@@ -18,7 +18,7 @@
 							<defName>PRF_IOPort_IFridge</defName>
 							<label>I/O Fridge Port</label>
 							<thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
-							<designatorDropdown>IO_gr</designatorDropdown>
+							<designatorDropdown>PRF_IoGroup</designatorDropdown>
 							<drawerType>RealtimeOnly</drawerType>
 							<uiIconScale>0.7</uiIconScale>
 							<graphicData>
@@ -145,7 +145,7 @@
 						<ThingDef ParentName="PRFMassStorageBase">
 							<defName>PRFCoolDSU</defName>
 							<label>cooled digital storage unit</label>
-							<designatorDropdown>IO_gr</designatorDropdown>
+							<designatorDropdown>PRF_IoGroup</designatorDropdown>
 							<uiIconScale>0.9</uiIconScale>
 							<thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
 							<graphicData>

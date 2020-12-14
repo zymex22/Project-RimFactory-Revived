@@ -2,14 +2,14 @@
 <Defs>
   <!--==================== Dropdown Groups ====================-->
   <DesignatorDropdownGroupDef>
-    <defName>SALGroup</defName>
+    <defName>PRF_SALGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <!-- base -->
   <ThingDef Name="PRF_SAL_Base" ParentName="PRF_BuildingBase" Abstract="True">
     <defName>Building_NR_AutoMachineTool_Base</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_AutoMachineTool</thingClass>
-    <designatorDropdown>SALGroup</designatorDropdown>
+    <designatorDropdown>PRF_SALGroup</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
     <uiIconScale>0.7</uiIconScale>
     <graphicData>
@@ -421,7 +421,7 @@
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_SALAutoCooker</defName>
     <label>AutoCooker S.A.L</label>
-    <designatorDropdown>assembler_food_gr</designatorDropdown>
+    <designatorDropdown>PRF_CookingGroup</designatorDropdown>
     <description>Although the auto-assembler performs cooking to a decent level, the auto-cooker is both faster and more accurate in its food production, capable of reaching a level 12 standard.</description>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
     <graphicData>

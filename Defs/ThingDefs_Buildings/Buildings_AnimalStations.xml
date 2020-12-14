@@ -30,7 +30,7 @@
     <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
     <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
     <neverMultiSelect>true</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
-    <designatorDropdown>AnimalStations_gr</designatorDropdown>    <!-- assign dropdown group -->
+    <designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>    <!-- assign dropdown group -->
     <staticSunShadowHeight>0.3</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <drawGUIOverlay>true</drawGUIOverlay>    <!-- Whether GUI will show up when you select this thing. -->
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
@@ -45,7 +45,7 @@
 
   <!--===================================== Animal Station Group / Drop Down =====================================-->
   <DesignatorDropdownGroupDef>
-    <defName>AnimalStations_gr</defName>    <!-- Create dropdown for animal station to group -->
+    <defName>PRF_AnimalStationsGroup</defName>    <!-- Create dropdown for animal station to group -->
   </DesignatorDropdownGroupDef>
 
   <!--===================================== Shearer T1 =====================================-->
@@ -368,7 +368,7 @@
     <defName>PRF_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
     <label>Slaughter House</label>
-    <designatorDropdown>AnimalStations_gr</designatorDropdown>
+    <designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
     <description>An automatic slaughterhouse. Uses cameras and a rudimentary computer to keep track of your animal population, and to keep it within your defined limits.</description>
     <altitudeLayer>Building</altitudeLayer>
     <tickerType>Never</tickerType>

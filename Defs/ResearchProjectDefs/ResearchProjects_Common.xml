@@ -81,7 +81,10 @@
       <li>PRF_CoreTierII</li>
       <li>Fabrication</li>
     </prerequisites>
-    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
     <researchViewX>8</researchViewX>
     <discoveredLetterTitle>About: Tier 3 Factory Unlocked</discoveredLetterTitle>
     <discoveredLetterText>Refinements to machinery allow sophisticated machines, such as those that self-correct (get faster the more time they complete a job), drills with object recognition to only mine what you want and the first mechanite swarm technologies.
@@ -101,7 +104,10 @@
       <li>PRF_CoreTierIII</li>
       <li>ShipBasics</li>
     </prerequisites>
-    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
     <researchViewX>11</researchViewX>
     <discoveredLetterTitle>Quantum Computing: Tier 4 Factory Unlocked</discoveredLetterTitle>
     <discoveredLetterText>Qubit technology is all about advanced computing, highend machines and technolegy, this might even be on the brinck of insanity? whats next?!¤%.

@@ -24,10 +24,10 @@
 							<thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
 							<graphicData>
 							  <texPath>Industry/aquaT1</texPath>
-							  <drawSize>(5.5,5.5)</drawSize>
+							  <drawSize>(5,5)</drawSize>
 							</graphicData>
 							<uiIconScale>0.8</uiIconScale>
-							<designatorDropdown>AnimalStations_gr</designatorDropdown>
+							<designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
 							<size>(5,5)</size>
 							<inspectorTabs>
 							  <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
@@ -56,8 +56,8 @@
 								<basePowerConsumption>600</basePowerConsumption>
 							  </li>
 							  <li Class="CompProperties_Breakdownable"/>
-							  <li>
-								<compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+							  <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+								<SupportDiagonal>true</SupportDiagonal>
 							  </li>
 							  <li Class="CompProperties_Flickable" />
 							  <li Class="CompProperties_Glower">
@@ -81,7 +81,7 @@
 								  </li>
 								</skills>
 							  </li>
-							  <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+							  <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
 								<bonusYields Chance="1">
 								</bonusYields>
 							  </li>
@@ -104,10 +104,10 @@
 							<thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
 							<graphicData>
 							  <texPath>Industry/aquaT2</texPath>
-							  <drawSize>(5.5,5.5)</drawSize>
+							  <drawSize>(5,5)</drawSize>
 							</graphicData>
 							<uiIconScale>0.8</uiIconScale>
-							<designatorDropdown>AnimalStations_gr</designatorDropdown>
+							<designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
 							<size>(5,5)</size>
 							<inspectorTabs>
 							  <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
@@ -136,8 +136,8 @@
 								<basePowerConsumption>650</basePowerConsumption>
 							  </li>
 							  <li Class="CompProperties_Breakdownable"/>
-							  <li>
-								<compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
+							  <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+								<SupportDiagonal>true</SupportDiagonal>
 							  </li>
 							  <li Class="CompProperties_Flickable" />
 							  <li Class="CompProperties_Glower">
@@ -161,7 +161,7 @@
 								  </li>
 								</skills>
 							  </li>
-							  <li Class="ProjectRimFactory.Common.ModExtension_BonusYield">
+							  <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
 								<bonusYields Chance="1">
 								</bonusYields>
 							  </li>
@@ -214,7 +214,7 @@
 					<xpath>/Defs</xpath>
 					<value>
 						  <RecipeDef>
-							<defName>Make_PRF_FisdFood</defName>
+							<defName>Make_PRF_FishFood</defName>
 							<label>make fish food</label>
 							<description>Make fish food by combining raw meat and plants.</description>
 							<jobString>Making fish food.</jobString>
@@ -243,7 +243,7 @@
 							  </li>
 							</ingredients>
 							<products>
-							  <PRF_FishFood>5</PRF_FishFood>
+							  <PRF_FishFood>30</PRF_FishFood>
 							</products>
 							<fixedIngredientFilter>
 							  <categories>
@@ -272,7 +272,7 @@
 							<workSkill>Cooking</workSkill>
 							<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 							<soundWorking>Recipe_CookMeal</soundWorking>
-							<workAmount>5000</workAmount>
+							<workAmount>3000</workAmount>
 							<ingredients>
 							  <li>
 								<filter>
@@ -301,7 +301,7 @@
 							<workSkill>Cooking</workSkill>
 							<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
 							<soundWorking>Recipe_CookMeal</soundWorking>
-							<workAmount>6000</workAmount>
+							<workAmount>4000</workAmount>
 							<ingredients>
 							  <li>
 								<filter>

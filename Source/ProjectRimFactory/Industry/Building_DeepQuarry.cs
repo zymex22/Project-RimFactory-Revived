@@ -176,13 +176,11 @@ namespace ProjectRimFactory.Industry
             ThingDef rock = PossibleRockDefCandidates
                 .Where(d => !this.def.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.building.mineableThing) ?? true)
                 .RandomElementByWeight(d => d.building.isResourceRock ? d.building.mineableScatterCommonality * d.building.mineableScatterLumpSizeRange.Average * d.building.mineableDropChance : 3f);
-
-            var bonus = this.def.GetModExtension<ModExtension_BonusYield>()?.GetBonusYield();
-            if (bonus != null)
-            {
-                return bonus;
-            }
-
+            // Because we make our rocks ourselves, we have to handle bonus items and product modifications (bonuses) directly:
+            var tmpList = new List<Thing>();
+            this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList,
+                                                        this as IBillGiver, this);
+            if (tmpList.Count > 0) return tmpList[0]; // code framework enforces placing only a single thing
             Thing t = ThingMaker.MakeThing(rock.building.mineableThing);
             t.stackCount = rock.building.mineableYield;
             return t;

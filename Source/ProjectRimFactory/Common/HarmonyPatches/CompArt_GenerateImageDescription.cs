@@ -9,6 +9,9 @@ using HarmonyLib;
 using Verse.AI;
 
 namespace ProjectRimFactory {
+    /// <summary>
+    /// Harmony Patch to make special scupltures have a correct description in game
+    /// </summary>
     [HarmonyPatch(typeof(RimWorld.CompArt), "GenerateImageDescription")]
     public class CompArt_GenerateImageDescription {
         static public bool Prefix(out TaggedString __result, CompArt __instance) {

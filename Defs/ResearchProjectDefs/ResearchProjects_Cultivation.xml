@@ -44,9 +44,9 @@
       <li>PRF_AutomaticFarmingII</li>
       <li>PRF_CoreTierIII</li>
     </prerequisites>
-    <requiredResearchBuilding>AIResearchBench</requiredResearchBuilding>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>9</researchViewX>
   </ResearchProjectDef>

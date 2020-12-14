@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!-- ############################################# AI research bench ##################################################### -->
-  <ThingDef ParentName="ResearchBenchVanilla">
+  <!-- <ThingDef ParentName="ResearchBenchVanilla">
     <defName>AIResearchBench</defName>
     <label>AI research bench</label>
     <description>A high-tech bench with an AI module installed. Required for tier 2 automation research and is not a replacement for the hi-tech research bench. Requires power.</description>
@@ -10,11 +10,11 @@
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <selectable>true</selectable>
     <drawerType>MapMeshAndRealTime</drawerType>
-    <repairEffect>Repair</repairEffect>    <!-- Effect when the building is being repaired. Any, Light, Heavy, GrowSoil, Diggable, SmoothHard, SmoothableStone -->
-    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>    <!-- 	Whether it leaves part of its resource cost when killed. -->
+    <repairEffect>Repair</repairEffect> 
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>  
     <filthLeaving>Filth_RubbleBuilding</filthLeaving>
     <castEdgeShadows>true</castEdgeShadows>
-    <staticSunShadowHeight>0.20</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
+    <staticSunShadowHeight>0.20</staticSunShadowHeight> 
     <canOverlapZones>false</canOverlapZones>
     <size>(3,1)</size>
     <stuffCategories>
@@ -57,7 +57,7 @@
         <compClass>CompReportWorkSpeed</compClass>
       </li>
     </comps>
-    <thingCategories>      <!-- Assign there in filters this should go when minified -->
+    <thingCategories>
       <li>BuildingsAutomation</li>
     </thingCategories>
     <fillPercent>0.5</fillPercent>
@@ -69,6 +69,89 @@
     <designationHotKey />
     <constructionSkillPrerequisite />
     <placeWorkers Inherit="false">
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>PRF_CoreTierII</li>
+    </researchPrerequisites>
+  </ThingDef> -->
+
+
+  <!-- ############################################# New Research bench linkable ##################################################### -->
+  <ThingDef ParentName="BenchBase">
+    <defName>PRF_ResearchTerminal</defName>
+    <label>factory research terminal</label>
+    <thingClass>Building_ResearchBench</thingClass>
+    <description>This is a linkable like a multianalyzer but this one have have some special functions.\nIt work as a Simple research table and can research any research not require HitechResearchBench.\nIt will ofcourse also boost your research speed.\nThis is needed for Late tiers Factory research.</description>
+    <uiIconPath>Common/ScienceTerminalIco</uiIconPath>
+    <graphicData>
+      <texPath>Common/ScienceTerminal</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2,2)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <costList>
+      <Steel>50</Steel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+      <Plasteel>60</Plasteel>
+      <Gold>50</Gold>
+      <ComponentSpacer>4</ComponentSpacer>
+      <PRF_ElectronicChip_I>4</PRF_ElectronicChip_I>
+    </costList>
+    <altitudeLayer>Building</altitudeLayer>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>5000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <MarketValue>2080</MarketValue>
+      <ResearchSpeedFactor>0.65</ResearchSpeedFactor>
+      <SellPriceFactor>0.70</SellPriceFactor>
+      <Mass>50</Mass>
+    </statBases>
+    <size>(2,2)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <thingCategories>      <!-- Assign there in filters this should go when minified -->
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Facility">
+        <statOffsets>
+          <ResearchSpeedFactor>0.1</ResearchSpeedFactor>
+        </statOffsets>
+      </li>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>MultiAnalyzer</li>
+        </linkableFacilities>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <fillPercent>0.5</fillPercent>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Misc</designationCategory>
+    <surfaceType>Item</surfaceType>
+    <designationHotKey>Misc4</designationHotKey>
+    <placeWorkers>
       <li>PlaceWorker_ShowFacilitiesConnections</li>
     </placeWorkers>
     <researchPrerequisites>
@@ -135,7 +218,7 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
     </comps>
-    
+
     <researchPrerequisites>
       <li>PRF_CoreTierO</li>
       <li>Electricity</li>

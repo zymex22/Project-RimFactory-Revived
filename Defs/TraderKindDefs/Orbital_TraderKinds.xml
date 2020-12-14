@@ -131,7 +131,7 @@
         <countRange>5~40</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PRF_FloorSpotlight</thingDef>
+        <thingDef>PRF_Floorspotlight</thingDef>
         <price>Cheap</price>
         <countRange>5~40</countRange>
       </li>
@@ -142,7 +142,7 @@
       </li>
       <!-- Basics -->
       <li Class="StockGenerator_SingleDef">
-        <thingDef>AIResearchBench</thingDef>
+        <thingDef>PRF_ResearchTerminal</thingDef>
         <countRange>0~2</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
