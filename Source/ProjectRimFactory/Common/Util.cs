@@ -35,5 +35,51 @@ namespace ProjectRimFactory.Common
         {
             return ProjectRimFactory.AutoMachineTool.Ops.FacingRect(center, size, dir, range);
         }
-    }
+
+		//reverses the action performed by Verse.GenAdj.AdjustForRotation(ref IntVec3 center, ref IntVec2 size, Rot4 rot)
+		//This is needed as the game calls it in CellsOccupiedBy and its purpose is the rotation around the mouse pointer.
+		public static void CounterAdjustForRotation(ref IntVec3 center, ref IntVec2 size, Rot4 rot)
+		{
+			if (size.x == 1 && size.z == 1)
+			{
+				return;
+			}
+			if (rot.IsHorizontal)
+			{
+				int x = size.x;
+				size.x = size.z;
+				size.z = x;
+			}
+			switch (rot.AsInt)
+			{
+				case 0:
+					break;
+				case 1:
+					if (size.z % 2 == 0)
+					{
+						center.z++;
+					}
+					break;
+				case 2:
+					if (size.x % 2 == 0)
+					{
+						center.x++;
+					}
+					if (size.z % 2 == 0)
+					{
+						center.z++;
+					}
+					break;
+				case 3:
+					if (size.x % 2 == 0)
+					{
+						center.x++;
+					}
+					break;
+			}
+		}
+
+
+
+	}
 }
