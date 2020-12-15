@@ -8,7 +8,7 @@
   <SALDataStartEncoding>Importar receita ...</SALDataStartEncoding>
   <SALDataStartEncoding_Desc>Importe uma nova receita de mesas de trabalho próximas.</SALDataStartEncoding_Desc>
   <SALDataCancelBills>Cancelar tarefa</SALDataCancelBills>
-  <AdjustDirection_Output>Ajustar a direção de saída</AdjustDirection_Output>
+  <AdjustDirection_Output>Ajuste a direção de saída</AdjustDirection_Output>
   <SAL_Name>uma máquina</SAL_Name>
   <SALInspect_RecipeReport>Receita atual: {0}\nTrabalho restante: {1}</SALInspect_RecipeReport>
   <SAL3_StoredRecipes>Receitas armazenadas: {0}</SAL3_StoredRecipes>
