@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
 
-  <PRFDrone.label>zangão</PRFDrone.label>
+  <PRFDrone.label>drone</PRFDrone.label>
   <!--Head-->
   <PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.left_sight_sensor.customLabel>sensor de visão esquerdo</PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.left_sight_sensor.customLabel>
-  <PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_sight_sensor.customLabel>sensor de visão certo</PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_sight_sensor.customLabel>
+  <PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_sight_sensor.customLabel>sensor de visão direito</PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_sight_sensor.customLabel>
   <PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.left_hearing_sensor.customLabel>sensor auditivo esquerdo</PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.left_hearing_sensor.customLabel>
   <PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_hearing_sensor.customLabel>sensor auditivo direito</PRFDrone.corePart.parts.MechanicalNeck.parts.MechanicalHead.parts.right_hearing_sensor.customLabel>
   <!--Left Sholder-->
@@ -19,6 +19,6 @@
   <PRFDrone.corePart.parts.left_propeller.customLabel>hélice esquerda</PRFDrone.corePart.parts.left_propeller.customLabel>
   <PRFDrone.corePart.parts.left_propeller.parts.PRFPropellerBlade.customLabel>lâmina da hélice esquerda</PRFDrone.corePart.parts.left_propeller.parts.PRFPropellerBlade.customLabel>
   <PRFDrone.corePart.parts.right_propeller.customLabel>hélice direita</PRFDrone.corePart.parts.right_propeller.customLabel>
-  <PRFDrone.corePart.parts.right_propeller.parts.PRFPropellerBlade.customLabel>lãmina da hélice direita</PRFDrone.corePart.parts.right_propeller.parts.PRFPropellerBlade.customLabel>
+  <PRFDrone.corePart.parts.right_propeller.parts.PRFPropellerBlade.customLabel>lâmina da hélice direita</PRFDrone.corePart.parts.right_propeller.parts.PRFPropellerBlade.customLabel>
 
 </LanguageData>
