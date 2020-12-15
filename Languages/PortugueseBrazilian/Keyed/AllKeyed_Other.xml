@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
   <!-- Some languages are RtoL, and might want "(default) {0}" -->
-  <PRF_Default_Tag>{0} (padrão)</PRF_Default_Tag>
+  <PRF_Default_Tag>{0} (default)</PRF_Default_Tag>
   <PRF_TotalStacksNum>Número total de pilhas: {0}</PRF_TotalStacksNum>
   <PRFItemsTab>Itens</PRFItemsTab>
   <PRFStorageBuildingGainsName>Este edifício de armazenamento agora é chamado {0}.</PRFStorageBuildingGainsName>
-  <PRFItemsTabLabel>Todos os itens ({0} pilhas no total, mostrando {1} resultado(s))</PRFItemsTabLabel>
-  <PRFItemsTabLabel_Crate>Todos os itens ({0}/{1} pilhas no total, mostrando {2} resultado(s))</PRFItemsTabLabel_Crate>
+  <PRFItemsTabLabel>Todos os itens ({0} total de pilhas, mostrando {1} resultado(s))</PRFItemsTabLabel>
+  <PRFItemsTabLabel_Crate>Todos os itens ({0}/{1} total de pilhas, mostrando {2} resultado(s))</PRFItemsTabLabel_Crate>
   <PRFRenameMassStorageUnitLabel>Renomear</PRFRenameMassStorageUnitLabel>
   <PRFRenameMassStorageUnitDesc>Renomeie este edifício.</PRFRenameMassStorageUnitDesc>
   <PRFMassStorageUIThingLabel>{0} pilhas</PRFMassStorageUIThingLabel>

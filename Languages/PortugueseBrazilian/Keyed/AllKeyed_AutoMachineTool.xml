@@ -9,7 +9,7 @@ Mesmo que o destino de saída esteja na zona de armazenamento, o produto acabado
   
   <PRF.AutoMachineTool.StatWorking>Trabalhando. [{0} / {1} ({2} %)]</PRF.AutoMachineTool.StatWorking>
   <PRF.AutoMachineTool.StatWorkingNotParam>Trabalhando.</PRF.AutoMachineTool.StatWorkingNotParam>
-  <PRF.AutoMachineTool.StatReady>Pronto.</PRF.AutoMachineTool.StatReady>
+  <PRF.AutoMachineTool.StatReady>pronto.</PRF.AutoMachineTool.StatReady>
   <PRF.AutoMachineTool.StatPlacing>Colocação. [colocação pendente {0}]</PRF.AutoMachineTool.StatPlacing>
   
   <PRF.AutoMachineTool.Priority>prioridade</PRF.AutoMachineTool.Priority>
@@ -25,7 +25,7 @@ Mesmo que o destino de saída esteja na zona de armazenamento, o produto acabado
   <PRF.AutoMachineTool.OutputDirection.NW>Noroeste</PRF.AutoMachineTool.OutputDirection.NW>
   
   <!-- PowerTab -->
-  <PRF.AutoMachineTool.SupplyPower.TabName>Energia</PRF.AutoMachineTool.SupplyPower.TabName>
+  <PRF.AutoMachineTool.SupplyPower.TabName>Poder</PRF.AutoMachineTool.SupplyPower.TabName>
   <PRF.AutoMachineTool.SupplyPower.Description>Defina o uso de energia. Mais potência = velocidade de trabalho mais rápida</PRF.AutoMachineTool.SupplyPower.Description>
   <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Defina o uso de energia. Mais potência = Maior alcance</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
   <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Aumentar a potência (velocidade)</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
@@ -33,7 +33,7 @@ Mesmo que o destino de saída esteja na zona de armazenamento, o produto acabado
   <PRF.AutoMachineTool.SupplyPower.SunLampText>Lâmpada solar (potência: 2000)</PRF.AutoMachineTool.SupplyPower.SunLampText>
   
   <!-- LimitationTab -->
-  <PRF.AutoMachineTool.ProductLimitation.TabName>Configurações</PRF.AutoMachineTool.ProductLimitation.TabName>
+  <PRF.AutoMachineTool.ProductLimitation.TabName>Definições</PRF.AutoMachineTool.ProductLimitation.TabName>
   <PRF.AutoMachineTool.ProductLimitation.Description>O processamento é interrompido quando o número de produtos e itens excede o valor limite. Você pode especificar a zona. verifique se ele pode ser colocado nessa zona.</PRF.AutoMachineTool.ProductLimitation.Description>
   <PRF.AutoMachineTool.ProductLimitation.ValueLabel>Valor limite</PRF.AutoMachineTool.ProductLimitation.ValueLabel>
   <PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>Limite de ativação</PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>
@@ -44,11 +44,11 @@ Mesmo que o destino de saída esteja na zona de armazenamento, o produto acabado
   <!-- Slaughterhouse SettingTab -->
   <PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>Configuração</PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>
   <PRF.AutoMachineTool.Slaughterhouse.Setting.Description>Configuração para meta de abate</PRF.AutoMachineTool.Slaughterhouse.Setting.Description>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>Abater animais se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>Abater animais ligados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>Abater animais gestantes se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>Abater animais treinados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>Especifique o número de {0} {1} para manter sem abater.</PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>abate animais se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>abate animais ligados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>abater animais grávidos se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>abate animais treinados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>Especifique o número de {0} {1} manter sem matança.</PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>
   <PRF.AutoMachineTool.Male>Masculino</PRF.AutoMachineTool.Male>
   <PRF.AutoMachineTool.Female>Fêmea</PRF.AutoMachineTool.Female>
   <PRF.AutoMachineTool.Adult>Adulto</PRF.AutoMachineTool.Adult>
