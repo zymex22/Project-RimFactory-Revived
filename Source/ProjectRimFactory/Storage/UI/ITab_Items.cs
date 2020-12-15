@@ -107,7 +107,7 @@ namespace ProjectRimFactory.Storage.UI
         // Credits to LWM Deep Storage :)
         private void DrawThingRow(ref float y, float width, Thing thing)
         {
-            if (thing == null || thing.Destroyed || !thing.Spawned) return; // not here, whatever happened...
+            if (thing == null || !thing.Spawned) return; // not here, whatever happened...
             width -= 24f;
             // row to hold the item in the GUI
             Widgets.InfoCardButton(width, y, thing);
