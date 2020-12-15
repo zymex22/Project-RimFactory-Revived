@@ -7,7 +7,7 @@
   <PRF.AutoMachineTool.SelectOutputDirectionDesc>Especifique o destino de saída para o produto acabado. Se o destino da saída fizer parte da zona de armazenamento e o produto acabado puder ser armazenado, ele será enviado para lá.
 Mesmo que o destino de saída esteja na zona de armazenamento, o produto acabado não pode ser colocado, mas é colocado na célula especificada como destino de saída.</PRF.AutoMachineTool.SelectOutputDirectionDesc>
   
-  <PRF.AutoMachineTool.StatWorking>Trabalhando. [{0} / {1} ({2}%)]</PRF.AutoMachineTool.StatWorking>
+  <PRF.AutoMachineTool.StatWorking>Trabalhando. [{0} / {1} ({2} %)]</PRF.AutoMachineTool.StatWorking>
   <PRF.AutoMachineTool.StatWorkingNotParam>Trabalhando.</PRF.AutoMachineTool.StatWorkingNotParam>
   <PRF.AutoMachineTool.StatReady>Pronto.</PRF.AutoMachineTool.StatReady>
   <PRF.AutoMachineTool.StatPlacing>Colocação. [colocação pendente {0}]</PRF.AutoMachineTool.StatPlacing>
@@ -45,10 +45,10 @@ Mesmo que o destino de saída esteja na zona de armazenamento, o produto acabado
   <PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>Configuração</PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>
   <PRF.AutoMachineTool.Slaughterhouse.Setting.Description>Configuração para meta de abate</PRF.AutoMachineTool.Slaughterhouse.Setting.Description>
   <PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>Abater animais se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>Abater animais vinculados, se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>Abater animais gestantes, se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>Abate animais treinados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>Especifique o número de {0} {1} para manter sem abate.</PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>Abater animais ligados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>Abater animais gestantes se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>Abater animais treinados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>Especifique o número de {0} {1} para manter sem abater.</PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>
   <PRF.AutoMachineTool.Male>Masculino</PRF.AutoMachineTool.Male>
   <PRF.AutoMachineTool.Female>Fêmea</PRF.AutoMachineTool.Female>
   <PRF.AutoMachineTool.Adult>Adulto</PRF.AutoMachineTool.Adult>
@@ -57,9 +57,9 @@ Mesmo que o destino de saída esteja na zona de armazenamento, o produto acabado
   
   <!-- ItemPuller -->
   <PRF.AutoMachineTool.Puller.SwitchActiveLabel>Alternar puxando</PRF.AutoMachineTool.Puller.SwitchActiveLabel>
-  <PRF.AutoMachineTool.Puller.SwitchActiveDesc>Ligue/desligue o status operacional.</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
-  <PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>Alterne o lado da saída,</PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>
-  <PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>Alterne o lado da saída.</PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>
+  <PRF.AutoMachineTool.Puller.SwitchActiveDesc>Ligue / desligue o status operacional.</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
+  <PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>Mudar o lado da saída,</PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>
+  <PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>Mudar o lado da saída.</PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>
   <PRF.Puller.TakeForbiddenItems>Puxar proibido</PRF.Puller.TakeForbiddenItems>
   <PRF.Puller.TakeForbiddenItemsDesc>Se configurado, este extrator também pegará itens proibidos. Se eles forem proibidos, o extrator os mudará para "permitidos". Esta é uma configuração por extrator.</PRF.Puller.TakeForbiddenItemsDesc>
   <!-- FilterTab(puller) -->
@@ -78,7 +78,7 @@ Mesmo que o destino de saída esteja na zona de armazenamento, o produto acabado
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.Low>baixo</PRF.AutoMachineTool.Conveyor.DirectionPriority.Low>
   <!-- FilterTab(BeltConveyor) -->
   <PRF.AutoMachineTool.Conveyor.OutputItemFilter.TabName>Filtro</PRF.AutoMachineTool.Conveyor.OutputItemFilter.TabName>
-  <PRF.AutoMachineTool.Conveyor.OutputItemFilter.Description>Defina o filtro para itens na direção de saída. direção</PRF.AutoMachineTool.Conveyor.OutputItemFilter.Description>
+  <PRF.AutoMachineTool.Conveyor.OutputItemFilter.Description>Defina o filtro para itens na direção de saída.</PRF.AutoMachineTool.Conveyor.OutputItemFilter.Description>
   <PRF.AutoMachineTool.Conveyor.OutputItemFilter.NothingOutputDestination>(Desconectado)</PRF.AutoMachineTool.Conveyor.OutputItemFilter.NothingOutputDestination>
   <PRF.AutoMachineTool.Conveyor.FilterCopyFrom>Selecione a cópia de</PRF.AutoMachineTool.Conveyor.FilterCopyFrom>
   
