@@ -15,14 +15,14 @@
   
   <PRFReorganize>Reorganizar</PRFReorganize>
   <PRFIOOutputSettings>Configurações de saída...</PRFIOOutputSettings>
-  <PRFReorganize_Desc>Registre novamente as portas de E / S, reorganize e empilhe itens novamente.</PRFReorganize_Desc>
+  <PRFReorganize_Desc>Registre novamente as portas de E/S, reorganize e empilhe itens novamente.</PRFReorganize_Desc>
   <PRFReorganize_Message>Reorganização completa.</PRFReorganize_Message>
-  <PRFIOMode>Modo I / O</PRFIOMode>
+  <PRFIOMode>Modo E/S</PRFIOMode>
   <PRFIOInput>Entrada</PRFIOInput>
   <PRFIOOutput>Resultado</PRFIOOutput>
   <PRFBoundStorageBuilding>Fonte do item</PRFBoundStorageBuilding>
-  <IOPort_Minimum_UseTooltip>Quando ativado, a porta de E / S retornará o item enviado para a plataforma de carga se o item tiver menos que X tamanho de pilha. Também só levará itens se houver itens suficientes no armazenamento para exceder o mínimo.</IOPort_Minimum_UseTooltip>
-  <IOPort_Maximum_UseTooltip>Quando ativado, a porta de E / S irá parar de receber itens se a pilha estiver cheia ou se o tamanho da pilha for maior ou igual a X.</IOPort_Maximum_UseTooltip>
+  <IOPort_Minimum_UseTooltip>Quando ativado, a porta de E/S retornará o item enviado para a plataforma de carga se o item tiver menos que X tamanho de pilha. Também só levará itens se houver itens suficientes no armazenamento para exceder o mínimo.</IOPort_Minimum_UseTooltip>
+  <IOPort_Maximum_UseTooltip>Quando ativado, a porta de E/S irá parar de receber itens se a pilha estiver cheia ou se o tamanho da pilha for maior ou igual a X.</IOPort_Maximum_UseTooltip>
   
   <PRFNoDesc>Sem descrição.</PRFNoDesc>
   
