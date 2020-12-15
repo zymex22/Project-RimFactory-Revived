@@ -7,13 +7,13 @@
   <SALMessage_NoRecipes>Nenhuma receita encontrada.</SALMessage_NoRecipes>
   <SALDataStartEncoding>Importar receita ...</SALDataStartEncoding>
   <SALDataStartEncoding_Desc>Importe uma nova receita de mesas de trabalho próximas.</SALDataStartEncoding_Desc>
-  <SALDataCancelBills>Cancelar tarefas</SALDataCancelBills>
+  <SALDataCancelBills>Cancelar tarefa</SALDataCancelBills>
   <AdjustDirection_Output>Ajuste a direção de saída</AdjustDirection_Output>
   <SAL_Name>uma máquina</SAL_Name>
   <SALInspect_RecipeReport>Receita atual: {0}\nTrabalho restante: {1}</SALInspect_RecipeReport>
   <SAL3_StoredRecipes>Receitas armazenadas: {0}</SAL3_StoredRecipes>
   <SAL3Alert_SomeBillsRemoved>Algumas contas foram excluídas porque o montador inteligente não pode mais fazê-las.</SAL3Alert_SomeBillsRemoved>
-  <SAL3_BillsTabLabel>Contas</SAL3_BillsTabLabel>
+  <SAL3_BillsTabLabel>Tarefas</SAL3_BillsTabLabel>
   <AssemblerIdle>Ocioso</AssemblerIdle>
   <AssemblerNoBills>Aguardando instruções</AssemblerNoBills>
   <SwitchedOff>Desligado</SwitchedOff>
@@ -21,7 +21,7 @@
   <SALToggleForbidden_Desc>Permitir/proibir que o montador automático pegue itens proibidos. Assinalar significa permitir.</SALToggleForbidden_Desc>
   <SALCurrentProductionSpeed>Velocidade de produção para a receita atual ({0}): {1}</SALCurrentProductionSpeed>
   <DeepQuarry_TotalSoFar>Número total de rochas mineradas até agora: {0}</DeepQuarry_TotalSoFar>
-  <SmartHopper_SetTargetAmount>Definir valores mín. / Máx.</SmartHopper_SetTargetAmount>
+  <SmartHopper_SetTargetAmount>Definir valores mín./Máx.</SmartHopper_SetTargetAmount>
   <SmartHopper_Minimum_Label>Usar Min?</SmartHopper_Minimum_Label>
   <SmartHopper_Maximum_Label>Usar Max?</SmartHopper_Maximum_Label>
   <SmartHopper_MaximumKeyword>Máximo</SmartHopper_MaximumKeyword>
