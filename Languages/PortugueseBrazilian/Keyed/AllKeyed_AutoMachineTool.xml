@@ -45,7 +45,7 @@ Mesmo que o destino de saída esteja na zona de armazenamento, o produto acabado
   <PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>Configuração</PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>
   <PRF.AutoMachineTool.Slaughterhouse.Setting.Description>Configuração para meta de abate</PRF.AutoMachineTool.Slaughterhouse.Setting.Description>
   <PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>Abate animais se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>Abate animais ligados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>Abate animais vinculados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>
   <PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>Abater animais gestantes se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>
   <PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>Abate animais treinados se verificado.</PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>
   <PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>Especifique o número de {0} {1} manter sem matança.</PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>
