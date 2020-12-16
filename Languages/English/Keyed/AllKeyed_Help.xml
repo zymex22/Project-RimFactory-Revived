@@ -97,15 +97,17 @@ Section 1.1 - Physical properties
 
 
   <!--================================ Cultivators ==============================-->
-  <PRF_OldTypeCultivator_I_HelpText>The cultivator operates automatically if it is given power. It will sow and harvest crops in growing zones and output them into a nearby cell. If you also have the mod SeedsPlease installed, the cultivator requires seeds to be placed next to it for sowing to work.</PRF_OldTypeCultivator_I_HelpText>
-  <PRF_OldTypeCultivator_Sun_HelpText>The cultivator operates automatically if it is given power. It will sow and harvest crops in growing zones and output them into a nearby cell. If you also have the mod SeedsPlease installed, the cultivator requires seeds to be placed next to it for sowing to work.</PRF_OldTypeCultivator_Sun_HelpText>
-  <PRF_DroneCultivator_I_HelpText>The cultivator operates automatically if it is given power. It will sow and harvest crops in growing zones and output them into ground, use a growzone puller to collect. If you also have the mod SeedsPlease installed, the cultivator requires seeds to be placed next to it for sowing to work.</PRF_DroneCultivator_I_HelpText>
+  <!-- Drone ones -->
+  <PRF_DroneCultivator_I_HelpText>Tier 1 Drone cultivator, your gateway to fully automated agriculture.\n\nThis one works by placing it within range of growing zones or hydroponics. It will work on all zones and crops in range without a problem.  Tier 1 models will NOT autohaul harvested crops into storage, this is available at higher tier models after conducting the required Research.\n\nBase Stats:\nDrones: 1\nWorkArea: 11x11\nJobtypes: Growing\nWorktime: 1hour shifts\nSkill lv.: 10</PRF_DroneCultivator_I_HelpText>
   <PRF_DroneCultivator_II_sun_HelpText>The cultivator operates automatically if it is given power. It will sow and harvest crops in growing zones and output them into ground, use a growzone puller to collect. If you also have the mod SeedsPlease installed, the cultivator requires seeds to be placed next to it for sowing to work.</PRF_DroneCultivator_II_sun_HelpText>
-  <PRF_Sprinkler_I_HelpText>The sprinkler randomly boosts the growth of crops and plants by 1 hour each round. You can see which cell it is currently working at by selecting it.</PRF_Sprinkler_I_HelpText>
-
   <PRF_DroneCultivator_II_HelpText></PRF_DroneCultivator_II_HelpText>
   <PRF_DroneCultivator_III_HelpText></PRF_DroneCultivator_III_HelpText>
+  <!-- Mecha ones-->
+  <PRF_OldTypeCultivator_I_HelpText>The cultivator operates automatically if it is given power. It will sow and harvest crops in growing zones and output them into a nearby cell. If you also have the mod SeedsPlease installed, the cultivator requires seeds to be placed next to it for sowing to work.</PRF_OldTypeCultivator_I_HelpText>
+  <PRF_OldTypeCultivator_Sun_HelpText>The cultivator operates automatically if it is given power. It will sow and harvest crops in growing zones and output them into a nearby cell. If you also have the mod SeedsPlease installed, the cultivator requires seeds to be placed next to it for sowing to work.</PRF_OldTypeCultivator_Sun_HelpText>
   <PRF_OldTypeCultivator_Xl_HelpText></PRF_OldTypeCultivator_Xl_HelpText>
+  <!-- Sprinklers -->
+  <PRF_Sprinkler_I_HelpText>The sprinkler randomly boosts the growth of crops and plants by 1 hour each round. You can see which cell it is currently working at by selecting it.</PRF_Sprinkler_I_HelpText>
   <PRF_Sprinkler_II_HelpText></PRF_Sprinkler_II_HelpText>
 
 
