@@ -377,7 +377,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (def.GetModExtension<ModExtension_Conveyor>()?.underground == true)
                     return false;
             }
-            return defRotation == queryRotation;
+            return true;
         }
         /*public static IEnumerable<Rot4> AllRot4DefCanSendToAtLevel(ThingDef def, Rot4 defRotation,
             ConveyorLevel level) {
@@ -391,7 +391,7 @@ namespace ProjectRimFactory.AutoMachineTool
                  def.GetModExtension<ModExtension_Conveyor>()?.underground != true)
                 || (queryLevel == ConveyorLevel.Underground &&
                     def.GetModExtension<ModExtension_Conveyor>()?.underground == true))
-                return (defRotation != queryRotation.Opposite);
+                return true;
             return false;
         }
         /// <summary> /////////////////////////////////////////////////////////////////

@@ -769,7 +769,7 @@ namespace ProjectRimFactory.AutoMachineTool
                  def.GetModExtension<ModExtension_Conveyor>()?.underground != true)
                 || (queryLevel == ConveyorLevel.Underground &&
                     def.GetModExtension<ModExtension_Conveyor>()?.underground == true))
-                return (defRotation != queryRotation.Opposite);
+                return (defRotation != queryRotation);
             return false;
         }
     }
