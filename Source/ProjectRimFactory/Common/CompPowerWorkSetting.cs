@@ -88,6 +88,12 @@ namespace ProjectRimFactory.Common
 
         }
 
+        public int BasePowerConsumption => (int)this.powerComp.Props.basePowerConsumption;
+
+        public int CurrentPowerConsumption => (int)this.powerComp.PowerOutput;
+
+        public Dictionary<string, int> AdditionalPowerConsumption => throw new NotImplementedException();
+
         //Used for Saving the rangeCells . This is done as directly saving rangeCells leads to unknown Type Errors on Load
         private int rangeTypeSeletion = -1;
 

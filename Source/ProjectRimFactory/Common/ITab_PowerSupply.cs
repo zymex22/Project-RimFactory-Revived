@@ -18,6 +18,12 @@ namespace ProjectRimFactory.Common
 
     public interface IPowerSupplyMachine
     {
+        int BasePowerConsumption { get; }
+        int CurrentPowerConsumption { get; }
+
+        //Strig will be formated for the overview and the value will hold the additional consumption
+        Dictionary<string,int> AdditionalPowerConsumption { get; }
+
         int MinPowerForSpeed { get; }
         int MaxPowerForSpeed { get; }
         int MinPowerForRange { get; }
@@ -87,6 +93,16 @@ namespace ProjectRimFactory.Common
             list.Gap();
             var rect = new Rect();
 
+            //Add Power usage Breackdown
+            rect = list.GetRect(50f);
+            string powerUsageBreackdown;
+            powerUsageBreackdown = String.Format("Total Power Usage:\nBase [{0}] + Work Speed [{1}] + Range [{2}] = [{3}]", this.Machine.BasePowerConsumption, this.Machine.SupplyPowerForSpeed, this.Machine.SupplyPowerForRange, -1 * this.Machine.CurrentPowerConsumption);
+
+            Widgets.Label(rect, powerUsageBreackdown);
+
+            list.Gap();
+            //----------------------------
+
             if (this.Machine.SpeedSetting)
             {
                 int minPowerSpeed = this.Machine.MinPowerForSpeed;
@@ -104,13 +120,12 @@ namespace ProjectRimFactory.Common
                 this.Machine.SupplyPowerForSpeed = speed;
                 list.Gap();
 
-                rect = list.GetRect(30f);
-                string buf = this.Machine.SupplyPowerForSpeed.ToString();
-                int power = (int)this.Machine.SupplyPowerForSpeed;
-                Widgets.Label(rect.LeftHalf(), valueLabelForSpeed);
-                Widgets.TextFieldNumeric<int>(rect.RightHalf(), ref power, ref buf, this.Machine.SupplyPowerForSpeed, this.Machine.SupplyPowerForSpeed);
-                list.Gap();
-                this.Machine.SupplyPowerForSpeed = power;
+                //Check if this.Machine.RangeSetting is active to place a Devider line
+                if (this.Machine.RangeSetting)
+                {
+                    rect = list.GetRect(10f);
+                    Widgets.DrawLineHorizontal(rect.x, rect.y, WinSize.x);
+                }
             }
 
             if (this.Machine.RangeSetting)

@@ -124,6 +124,12 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public virtual float RangeInterval => throw new NotImplementedException();
 
+        public int BasePowerConsumption => (int)this.powerComp.Props.basePowerConsumption;
+
+        public int CurrentPowerConsumption => (int)this.powerComp.PowerOutput;
+
+        public Dictionary<string, int> AdditionalPowerConsumption => throw new NotImplementedException();
+
         protected virtual float Factor2()
         {
             return 0.1f;
