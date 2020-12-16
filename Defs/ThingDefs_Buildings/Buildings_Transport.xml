@@ -624,10 +624,10 @@
     <building>
       <isEdifice>false</isEdifice>
       <blueprintGraphicData>
-        <texPath>AutoMachineTool/Buildings/BeltConveyorTest</texPath>
-        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorV2</graphicClass>
+        <texPath>[notActualTexPath>[texPath>Belts/v3/Atlas_PRF_Rollers_512x512_Padded_Walls_v3_bp[/texPath>[arrowDrawOffset](0,0.2,0)[/arrowDrawOffset][/notActualTexPath></texPath>        <!--TODO-->
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
         <drawRotated>true</drawRotated>
-        <drawSize>(0.8,0.8)</drawSize>
+        <drawSize>(1, 1)</drawSize>
       </blueprintGraphicData>
     </building>
   </ThingDef>
