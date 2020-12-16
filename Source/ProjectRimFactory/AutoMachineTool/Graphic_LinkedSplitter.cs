@@ -78,9 +78,11 @@ namespace ProjectRimFactory.AutoMachineTool {
             if (thing is Building_BeltSplitter splitter) {
                 if (splitter.IsUnderground && !(layer is SectionLayer_UGConveyor))
                     return;
-                if ((splitter.OutputLinks.ContainsKey(Rot4.South) &&
-                     splitter.OutputLinks[Rot4.South].Active)
-                    || splitter.Rotation == Rot4.North) {
+                // We want to draw the open door only if something is using the S
+                //   facing wall, so either an output link to the S or an incoming link:
+                if ((splitter.OutputLinks.TryGetValue(Rot4.South, out var link) &&
+                     link.Active)
+                    || splitter.IncomingLinks.Any(o => splitter.Position + Rot4.South.FacingCell == o.Position)) {
                     // Draw open door
                     var mat = splitterBuildingDoorOpen.Graphic.MatSingleFor(thing);
                     Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.3f, 0),

@@ -15,13 +15,24 @@ using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
+    /***************************************
+     *  The belt splitter has several features normal conveyor belts don't have.
+     *   * Omnidirectional - it can take in links from any direction and give them out
+     *     in any direction.
+     *   * It caches valid output links and can even turn them off (block output to 
+     *     them entirely)
+     *   * It switches where the next output item goes each time (splitting input
+     *     items among output lines)
+     *     * NOTE: this may need further consideration with multiple inputs
+     *   * Its graphic has an extra building on top of it.
+     */
     public class Building_BeltSplitter : Building_BeltConveyor
     {
         private Rot4 dest = Rot4.Random; // start in random direction if more than one available
 
-        private Dictionary<Rot4, OutputLink> outputLinks = new Dictionary<Rot4, OutputLink>();
         public Dictionary<Rot4, OutputLink> OutputLinks => outputLinks;
-
+        public IEnumerable<IBeltConveyorLinkable> IncomingLinks => incomingLinks;
+        private Dictionary<Rot4, OutputLink> outputLinks = new Dictionary<Rot4, OutputLink>();
         [Unsaved]
         private HashSet<IBeltConveyorLinkable> incomingLinks = new HashSet<IBeltConveyorLinkable>();
 
@@ -148,7 +159,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 // I will rotate counterclockwise because that is the "positive" direction
                 Rot4 nextDir = previousDir.RotateAsNew(RotationDirection.Counterclockwise);
                 for (int i = 0; i < 4; i++, nextDir.Rotate(RotationDirection.Counterclockwise)) {
-                    if (nextDir != this.Rotation.Opposite && // don't look backwards
+                    if ( // we look for an appropriate next direction:
                                 nextDir != previousDir &&
                                 this.outputLinks.ContainsKey(nextDir) &&
                                 outputLinks[nextDir].priority == priority &&
@@ -213,7 +224,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return false;
         }
 
-        /***************** Outgoing Links ********************/
+        /***************** Outgoing/Incoming Links ********************/
         public override void Link(IBeltConveyorLinkable link)
         {
             if (this.CanLinkTo(link) && link.CanLinkFrom(this)) {
@@ -278,7 +289,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         //TODO: <)?
-        private void NotifyAroundSender()
+        private void NotifyAroundSender() //TODO: rotation directions okay?
         {
             new Rot4[] { this.Rotation.Opposite, this.Rotation.Opposite.RotateAsNew(RotationDirection.Clockwise), this.Rotation.Opposite.RotateAsNew(RotationDirection.Counterclockwise) }
                 .Select(r => this.Position + r.FacingCell)
@@ -335,13 +346,8 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             if (!flag) return false;
             if (!checkPosition) return true;
-            // Conveyor Belts can link forward, right, and left:
-            if (this.Position + this.Rotation.FacingCell == otherBeltLinkable.Position ||
-                this.Position + this.Rotation.RighthandCell == otherBeltLinkable.Position ||
-                // Why is there no LefthandCell? Annoying.
-                this.Position + this.Rotation.Opposite.RighthandCell == otherBeltLinkable.Position)
-                return true;
-            return false;
+            // Allow to link in any direction (including backwards, yes - who knows what direction will be appropriate?):
+            return this.Position.IsNextTo(otherBeltLinkable.Position);
         }
         public override bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
             // First test: level (e.g., Ground vs Underground):
@@ -356,16 +362,15 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             if (!flag) return false;
             if (!checkPosition) return true;
-            // Conveyor belts can receive only from directly behind:
-            if (this.Position + this.Rotation.Opposite.FacingCell == otherBeltLinkable.Position)
-                return true;
-            return false;
+            // Allow links from any direction (including backwards, yes)
+            return Position.IsNextTo(otherBeltLinkable.Position);
         }
         public override bool HasLinkWith(IBeltConveyorLinkable otherBelt) {
             return incomingLinks.Contains(otherBelt) ||
                 outputLinks.Any(kvp => kvp.Value.link == otherBelt);
         }
 
+        //TODO: this is all probably wrong?
         new public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
                      Rot4 queryRotation, ConveyorLevel queryLevel) {
             // Not going to error check here: if there's a config error, there will be prominent
@@ -480,6 +485,22 @@ namespace ProjectRimFactory.AutoMachineTool
             private bool active = true;
             private IntVec3 position = IntVec3.Invalid;
             private Building_BeltSplitter parent;
+        }
+    }
+    public static class StupidCSharpStaticClassRequirements
+    {
+        public static bool IsNextTo(this IntVec3 one, IntVec3 two)
+        {
+            int t;
+            if (one.x == two.x) {
+                t = one.z - two.z;
+                return t == 1 || t == -1;
+            }
+            if (one.z == two.z) {
+                t = one.x - two.x;
+                return t == 1 || t == -1;
+            }
+            return false;
         }
     }
 }
