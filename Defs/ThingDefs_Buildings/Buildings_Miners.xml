@@ -39,12 +39,13 @@
   </ThingDef>
 
   <!--==================== MineShaft T0 ====================-->
+  <!-- This one functions like a vanilla bench and just uses normal recipes, but mod extension make random outputs -->
   <ThingDef ParentName="BenchBase">
     <defName>PRF_MineShaft</defName>
-    <label>MiningShaft</label>
-    <description>A early random ore mineshaft capable of finding stones, steel slag, and other low end resources, also a slim chance to find rares.\nShould be placed in a mountain wall to operate.</description>
+    <label>Mine Shaft</label>
+    <description>This is a early mine shaft you can set bills to target what you want, it also have a slim chance of finding rare/junk bonus while operating.\nShould be placed in a mountain wall to operate.</description>
     <thingClass>Building_WorkTable</thingClass>
-    <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
+    <designationCategory>Production</designationCategory>    <!--architect menu location-->
     <clearBuildingArea>false</clearBuildingArea>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <graphicData>
@@ -101,8 +102,23 @@
       <isEdifice>false</isEdifice>
       <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
     </building>
-    <comps>
-    </comps>
+    <!-- Here is where magic starts: -->
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">        <!-- see info: Source/ProjectRimFactory/Common/ModExtension_ModifyProduct.txt -->
+        <replaceOrigProduct>true</replaceOrigProduct>
+        <bonusYields Chance="0.10">          <!-- this apply to ALL bills on T0 miner (10% chance) -->
+          <!-- Rare ore Bonus: -->
+          <ChunkSlagSteel Weight="1" Count="1" />
+          <Gold Weight="0.005" Count="5" />
+          <Jade Weight="0.01" Count="5" />
+          <Silver Weight="0.015" Count="10" />
+          <!-- Junk Bonus -->
+          <InsectJelly Weight="0.05" Count="5" />
+          <Steel Weight="0.01" Count="10" />
+          <ComponentIndustrial Weight="0.002" Count="5" />
+        </bonusYields>
+      </li>
+    </modExtensions>
     <researchPrerequisites>
       <li>Stonecutting</li>
     </researchPrerequisites>

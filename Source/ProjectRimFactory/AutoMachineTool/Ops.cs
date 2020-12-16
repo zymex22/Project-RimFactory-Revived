@@ -11,6 +11,7 @@ using RimWorld;
 using Verse;
 using Verse.Sound;
 using UnityEngine;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -302,6 +303,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public static IEnumerable<IntVec3> FacingRect(IntVec3 center, IntVec2 size, Rot4 dir, int range)
         {
+            Util.CounterAdjustForRotation(ref center, ref size, dir);
             var facing = FacingCell(center, size, dir);
             var xoffset = dir.FacingCell.x * range + facing.x;
             var zoffset = dir.FacingCell.z * range + facing.z;

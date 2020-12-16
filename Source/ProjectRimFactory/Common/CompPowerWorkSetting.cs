@@ -318,7 +318,11 @@ namespace ProjectRimFactory.Common
     {
         public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
         {
-            var under = GenAdj.CellsOccupiedBy(center, rot, thingDef.size).ToHashSet();
+            IntVec2 size = thingDef.size;
+            Util.CounterAdjustForRotation(ref center,ref size, rot);
+
+
+            var under = GenAdj.CellsOccupiedBy(center, rot, size).ToHashSet();
             return GenAdj.CellsOccupiedBy(center, rot, thingDef.size + new IntVec2(Mathf.RoundToInt(range) * 2, Mathf.RoundToInt(range) * 2))
                 .Where(c => !under.Contains(c));
         }
