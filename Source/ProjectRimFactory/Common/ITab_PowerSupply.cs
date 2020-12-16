@@ -95,9 +95,19 @@ namespace ProjectRimFactory.Common
 
             //Add Power usage Breackdown
             rect = list.GetRect(50f);
+            //TODO Use string builder
             string powerUsageBreackdown;
-            powerUsageBreackdown = String.Format("Total Power Usage:\nBase [{0}] + Work Speed [{1}] + Range [{2}] = [{3}]", this.Machine.BasePowerConsumption, this.Machine.SupplyPowerForSpeed, this.Machine.SupplyPowerForRange, -1 * this.Machine.CurrentPowerConsumption);
-
+            powerUsageBreackdown = String.Format("Total Power Usage:\nBase [{0}] + Work Speed [{1}] + Range [{2}]", this.Machine.BasePowerConsumption, this.Machine.SupplyPowerForSpeed, this.Machine.SupplyPowerForRange);
+            //Add breackdown for additional Power usage if any
+            if (this.Machine.AdditionalPowerConsumption != null && this.Machine.AdditionalPowerConsumption.Count > 0)
+            {
+                foreach(KeyValuePair<string,int> pair in this.Machine.AdditionalPowerConsumption)
+                {
+                    powerUsageBreackdown += String.Format(" + {0} [{1}]",pair.Key,pair.Value);
+                }
+            }
+            //Display the Sum
+            powerUsageBreackdown += String.Format(" = [{0}]", -1 * this.Machine.CurrentPowerConsumption);
             Widgets.Label(rect, powerUsageBreackdown);
 
             list.Gap();
@@ -146,6 +156,8 @@ namespace ProjectRimFactory.Common
                 list.Gap();
             }
 
+
+            //TODO Maybe move this to the settings tab
             if (this.Machine.Glowable)
             {
                 rect = list.GetRect(30f);

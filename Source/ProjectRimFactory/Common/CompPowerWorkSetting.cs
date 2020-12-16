@@ -92,7 +92,23 @@ namespace ProjectRimFactory.Common
 
         public int CurrentPowerConsumption => (int)this.powerComp.PowerOutput;
 
-        public Dictionary<string, int> AdditionalPowerConsumption => throw new NotImplementedException();
+        public Dictionary<string, int> AdditionalPowerConsumption => null;
+
+        private int AdditionalPowerDrain
+        {
+            get
+            {
+                if (AdditionalPowerConsumption != null && AdditionalPowerConsumption.Count > 0)
+                {
+
+                    return AdditionalPowerConsumption.Values.ToList().Sum();
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         //Used for Saving the rangeCells . This is done as directly saving rangeCells leads to unknown Type Errors on Load
         private int rangeTypeSeletion = -1;
@@ -155,7 +171,7 @@ namespace ProjectRimFactory.Common
         {
             if(this.powerComp != null)
             {
-                this.powerComp.PowerOutput = -this.powerComp.Props.basePowerConsumption - this.SupplyPowerForSpeed - this.SupplyPowerForRange;
+                this.powerComp.PowerOutput = -this.powerComp.Props.basePowerConsumption - this.SupplyPowerForSpeed - this.SupplyPowerForRange - AdditionalPowerDrain;
             }
         }
 

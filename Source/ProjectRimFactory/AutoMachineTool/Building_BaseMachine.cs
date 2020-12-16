@@ -112,7 +112,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public virtual int MaxPowerForRange => throw new NotImplementedException();
 
-        public virtual float SupplyPowerForRange { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public virtual float SupplyPowerForRange { get => 0; set => throw new NotImplementedException(); }
 
         public virtual bool Glowable => false;
 
@@ -128,7 +128,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public int CurrentPowerConsumption => (int)this.powerComp.PowerOutput;
 
-        public Dictionary<string, int> AdditionalPowerConsumption => throw new NotImplementedException();
+        public Dictionary<string, int> AdditionalPowerConsumption => null;
 
         protected virtual float Factor2()
         {
