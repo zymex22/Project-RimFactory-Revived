@@ -68,7 +68,7 @@
   <!--============================== Smart Puller / vacuum Hopper ==============================-->
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_SmartHopper</defName>
-    <label>Vacuum Hopper</label>
+    <label>Smart Hopper</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
     <!-- <designatorDropdown>PRF_FuelersGroup</designatorDropdown> -->
     <uiIconScale>0.7</uiIconScale>
@@ -114,7 +114,7 @@
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
-    <description>A Vacuum Hopper that sucks in any items on stockpiles within a 5-tile range. As long as items are in range, they can be pulled in, even from different stockpiles. Can be set up with a specific amount and type of item, and holds onto the item until it is pulled away.</description>
+    <description>A Smart Hopper that will pull in any nearby set resources/items and hold onto it until needed. This is usefull for setup close to assemblers to them to grab off when materials needed.\nIt can pull from belts, ground, stockpile cells within range.\nIt Can't feed a Nutrient paste dispenser yet...</description>
     <costList>
       <Steel>30</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -157,6 +157,9 @@
     </modExtensions>
   </ThingDef>
 
+
+  <!--======================================= ===  PULLERS === ===============================================-->
+  <!--======================================= ================ ===============================================-->
   <!--======================================= Item Puller base ===============================================-->
   <ThingDef Name="PRF_Puller_Base" ParentName="PRF_BuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_ItemPuller</thingClass>
@@ -505,7 +508,7 @@
   </ThingDef>
 
 
-
+  <!--======================================= ==== BELTS ==== ===============================================-->
   <!--======================================= =============== ===============================================-->
   <!--======================================= Dropdown Groups ===============================================-->
   <DesignatorDropdownGroupDef>
