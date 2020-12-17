@@ -177,7 +177,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<bool>(ref this.forbidItem, "forbidItem");//todo: is this in base class already?
+            Scribe_Values.Look<bool>(ref this.forbidItem, "forbidItem");
 
             Scribe_Deep.Look<UnfinishedThing>(ref this.unfinished, "unfinished");
 
