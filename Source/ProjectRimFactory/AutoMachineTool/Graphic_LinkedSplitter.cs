@@ -71,6 +71,19 @@ namespace ProjectRimFactory.AutoMachineTool {
             };
         }
 
+        //Note: if someone wanted to make this accessible via XML, go for it!
+        public Vector3 BuildingOffset => new Vector3(0, 0.3f, 0); // mostly picked by trial and error
+        // Make sure arrows show over building:
+        public Vector3 ArrowOffset(Rot4 rot)
+        {
+            var preOffset = this.arrowOffsetsByRot4[rot.AsInt];
+            var building = this.BuildingOffset;
+            var offset = new Vector3(preOffset.x,
+                     Mathf.Max(preOffset.y, building.y + 0.01f),
+                     preOffset.z);
+            return offset;
+        }
+
         public override void Print(SectionLayer layer, Thing thing) {
             base.Print(layer, thing);
             // Similar to Graphic_LinkedConveyor, we need to not print this
@@ -85,22 +98,31 @@ namespace ProjectRimFactory.AutoMachineTool {
                     || splitter.IncomingLinks.Any(o => splitter.Position + Rot4.South.FacingCell == o.Position)) {
                     // Draw open door
                     var mat = splitterBuildingDoorOpen.Graphic.MatSingleFor(thing);
-                    Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.3f, 0),
+                    Printer_Plane.PrintPlane(layer, thing.TrueCenter() + BuildingOffset,
                         Vector2.one, mat);
                 } else {
                     // Draw closed door
                     var mat = splitterBuildingDoorClosed.Graphic.MatSingleFor(thing);
-                    Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.3f, 0),
+                    Printer_Plane.PrintPlane(layer, thing.TrueCenter() + BuildingOffset,
                         Vector2.one, mat);
                 }
-                // Print the splitter version of the tiny yellow arrow showing direction:
-                Printer_Plane.PrintPlane(layer, thing.TrueCenter()
-                    + new Vector3(0, 1f, 0), this.drawSize, arrow00b,
-                    thing.Rotation.AsAngle);
+                // Print the splitter version of the tiny yellow arrow showing input direction:
+                //   Note: these arrows texPaths should probably be exposed to XML via IHaveExtraGrahicData or something
+                foreach (var i in splitter.IncomingLinks) {
+                    if (i.Position.IsNextTo(splitter.Position)) { // otherwise need new logic
+                        // splitter.Position + offset = i.Position, so
+                        // offset = i.Position - splitter.Position
+                        var r = Rot4.FromIntVec3(i.Position - splitter.Position);
+                        Printer_Plane.PrintPlane(layer, thing.TrueCenter()
+                                     + ArrowOffset(r), this.drawSize, arrow00b,
+                                     r.Opposite.AsAngle);
+                    }
+                }
                 // print tiny brown arrows pointing in output directions:
+                //   Note: the texPaths for these should probably be exposed to XML too.
                 foreach (var d in splitter.ActiveOutputDirections) {
                     Printer_Plane.PrintPlane(layer, thing.TrueCenter() + 
-                             this.arrowOffsetsByRot4[d.AsInt],
+                             ArrowOffset(d),
                              this.drawSize, arrow01, d.AsAngle);
                 }
             } else { // blueprint?
