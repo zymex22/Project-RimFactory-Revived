@@ -193,13 +193,16 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
+    <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+<maxPowerForSpeed>1000</maxPowerForSpeed>
+<minPowerForSpeed>100</minPowerForSpeed>
+<minSpeedFactor>31</minSpeedFactor>
+<maxSpeedFactor>31</maxSpeedFactor>
+<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+</li>
     </comps>
+    
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>31</speedFactor>
-        <minPower>100</minPower>
-        <maxPower>1000</maxPower>
-      </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerOutputCellResolver</outputCellResolverType>
         <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerInputCellResolver</inputCellResolverType>
@@ -331,11 +334,6 @@
           </Working>
         </graphicDataList>
       </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>15</speedFactor>
-        <minPower>100</minPower>
-        <maxPower>500</maxPower>
-      </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerOutputCellResolver</outputCellResolverType>
         <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerInputCellResolver</inputCellResolverType>
@@ -344,6 +342,16 @@
         <forcePlacing>false</forcePlacing>
       </li>
     </modExtensions>
+
+    <comps  Inherit="false">
+            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+<maxPowerForSpeed>500</maxPowerForSpeed>
+<minPowerForSpeed>100</minPowerForSpeed>
+<minSpeedFactor>15</minSpeedFactor>
+<maxSpeedFactor>15</maxSpeedFactor>
+<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+</li>
+    </comps>
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsII</li>
     </researchPrerequisites>
@@ -558,14 +566,14 @@
       </li>
       <li Class="CompProperties_Flickable"/>
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+    <maxPowerForSpeed>10</maxPowerForSpeed>
+    <minPowerForSpeed>10</minPowerForSpeed>
+    <minSpeedFactor>5</minSpeedFactor>
+    <maxSpeedFactor>5</maxSpeedFactor>
+    <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+    </li>
     </comps>
-    <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>5</speedFactor>
-        <minPower>10</minPower>
-        <maxPower>10</maxPower>
-      </li>
-    </modExtensions>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>

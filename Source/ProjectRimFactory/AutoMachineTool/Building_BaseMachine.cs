@@ -15,15 +15,16 @@ namespace ProjectRimFactory.AutoMachineTool
 {
     public abstract class Building_BaseMachine<T> : Building_Base<T>, IPowerSupplyMachineHolder, IPowerSupplyMachine, IBeltConveyorSender where T : Thing
     {
-        protected virtual float SpeedFactor => WorkSpeedExtension.speedFactor;
+
+        private CompPowerWorkSetting powerWorkSetting;
+
+        protected virtual float SpeedFactor => powerWorkSetting.SupplyPowerForSpeed;
         protected virtual int? SkillLevel { get => null; }
 
-        public virtual int MinPowerForSpeed => WorkSpeedExtension.minPower;
-        public virtual int MaxPowerForSpeed => WorkSpeedExtension.maxPower;
+        public virtual int MinPowerForSpeed => powerWorkSetting.MinPowerForSpeed;
+        public virtual int MaxPowerForSpeed => powerWorkSetting.MaxPowerForSpeed;
 
         public IPowerSupplyMachine RangePowerSupplyMachine => this;
-
-        protected ModExtension_WorkSpeed WorkSpeedExtension => this.def.GetModExtension<ModExtension_WorkSpeed>();
 
         [Unsaved]
         protected bool setInitialMinPower = true;
@@ -48,7 +49,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void ExposeData()
         {
             base.ExposeData();
-
+            powerWorkSetting = this.GetComp<CompPowerWorkSetting>();
             Scribe_Values.Look<float>(ref this.supplyPowerForSpeed, "supplyPowerForSpeed", this.MinPowerForSpeed);
             this.ReloadSettings(null, null);
         }
@@ -69,6 +70,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
             this.powerComp = this.TryGetComp<CompPowerTrader>();
+            powerWorkSetting = this.GetComp<CompPowerWorkSetting>();
 
             if (!respawningAfterLoad)
             {

@@ -598,6 +598,13 @@
         <glowRadius>6</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <maxPowerForSpeed>10000</maxPowerForSpeed>
+        <minPowerForSpeed>3000</minPowerForSpeed>
+        <minSpeedFactor>10</minSpeedFactor>
+        <maxSpeedFactor>10</maxSpeedFactor>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+      </li>
     </comps>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <placeWorkers>
@@ -608,11 +615,6 @@
       <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>      <!-- AutomachineTool ITab not PRF -->
     </inspectorTabs>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>10</speedFactor>        <!-- Speed multiplier for mining -->
-        <minPower>3000</minPower>        <!-- minimum boost power -->
-        <maxPower>10000</maxPower>        <!-- maximum boost power -->
-      </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
         <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
       </li>

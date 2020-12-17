@@ -416,6 +416,13 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>10</heatPerSecond>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <maxPowerForSpeed>2000</maxPowerForSpeed>
+        <minPowerForSpeed>700</minPowerForSpeed>
+        <minSpeedFactor>1</minSpeedFactor>
+        <maxSpeedFactor>1</maxSpeedFactor>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+    </li>
     </comps>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_TargetCellsHilight</li>      <!-- Highlight input cell when selected-->
@@ -426,11 +433,6 @@
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>700</minPower>        <!-- power usage lowest range -->
-        <maxPower>2000</maxPower>        <!-- Power for max range -->
-      </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">        <!-- Power / Range boost, set to min/max same to set fixed value -->
         <minPower>0</minPower>        <!-- power usage lowest range -->
         <maxPower>2000</maxPower>        <!-- Power for max range -->
