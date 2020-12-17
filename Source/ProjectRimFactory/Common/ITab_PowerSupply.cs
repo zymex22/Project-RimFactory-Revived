@@ -16,6 +16,11 @@ namespace ProjectRimFactory.Common
         IPowerSupplyMachine RangePowerSupplyMachine { get; }
     }
 
+    public interface IAdditionalPowerConsumption
+    {
+        Dictionary<string, int> AdditionalPowerConsumption { get; }
+    }
+
     public interface IPowerSupplyMachine
     {
         int BasePowerConsumption { get; }

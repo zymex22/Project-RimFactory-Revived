@@ -92,7 +92,7 @@ namespace ProjectRimFactory.Common
 
         public int CurrentPowerConsumption => (int)this.powerComp.PowerOutput;
 
-        public Dictionary<string, int> AdditionalPowerConsumption => null;
+        public Dictionary<string, int> AdditionalPowerConsumption => (this.parent as IAdditionalPowerConsumption)?.AdditionalPowerConsumption ?? null;
 
         private int AdditionalPowerDrain
         {
