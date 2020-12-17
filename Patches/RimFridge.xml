@@ -16,7 +16,7 @@
 					<value>
 						<ThingDef ParentName="PRF_BuildingBase">
 							<defName>PRF_IOPort_IFridge</defName>
-							<label>I/O Fridge Port</label>
+							<label>Fridge I/O Port</label>
 							<thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
 							<designatorDropdown>PRF_IoGroup</designatorDropdown>
 							<drawerType>RealtimeOnly</drawerType>
@@ -72,6 +72,7 @@
 							</building>
 							<inspectorTabs>
 								<li>ProjectRimFactory.Storage.UI.ITab_IOPortStorage</li>
+								<li>ProjectRimFactory.Storage.UI.ITab_Items</li>
 							</inspectorTabs>
 							<castEdgeShadows>true</castEdgeShadows>
 							<statBases>
@@ -117,10 +118,8 @@
 								</li>
 							</comps>
 							<rotatable>false</rotatable>
-							
 							<staticSunShadowHeight>0.3</staticSunShadowHeight>
 							<surfaceType>Item</surfaceType>
-							
 							<minifiedDef>MinifiedThing</minifiedDef>
 							<thingCategories>
 								<li>BuildingsFurniture</li>
@@ -142,9 +141,9 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs</xpath>
 					<value>
-						<ThingDef ParentName="PRFMassStorageBase">
+						<ThingDef ParentName="PRF_MassStorageBase">
 							<defName>PRFCoolDSU</defName>
-							<label>cooled digital storage unit</label>
+							<label>Fridge digital storage unit</label>
 							<designatorDropdown>PRF_IoGroup</designatorDropdown>
 							<uiIconScale>0.9</uiIconScale>
 							<thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
@@ -203,7 +202,6 @@
 								<PRF_MachineFrame_III>1</PRF_MachineFrame_III>
 								<PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
 							</costList>
-							
 							<tickerType>Normal</tickerType>
 							<researchPrerequisites>
 								<li>PRF_StorageIO</li>
@@ -227,9 +225,7 @@
 									</drinksBestCold>
 									<findAllRottableForFilters>false</findAllRottableForFilters>
 								</li>
-								<li>
-									<compClass>ProjectRimFactory.Common.CompOutputAdjustable</compClass>
-								</li>
+								<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
 								<li>
 									<compClass>ProjectRimFactory.Common.CompCallTickRareFromTick</compClass>
 								</li>
@@ -239,7 +235,7 @@
 								<li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
 								<li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
 									<limit>512</limit>
-									<destroyContainsItems>false</destroyContainsItems>
+									<destroyContainsItems>true</destroyContainsItems>
 									<hideItems>true</hideItems>
 									<forbidPawnAccess>false</forbidPawnAccess>
 									<hideRightClickMenus>true</hideRightClickMenus>
