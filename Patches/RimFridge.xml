@@ -142,7 +142,7 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs</xpath>
 					<value>
-						<ThingDef ParentName="PRFMassStorageBase">
+						<ThingDef ParentName="PRF_MassStorageBase">
 							<defName>PRFCoolDSU</defName>
 							<label>cooled digital storage unit</label>
 							<designatorDropdown>PRF_IoGroup</designatorDropdown>

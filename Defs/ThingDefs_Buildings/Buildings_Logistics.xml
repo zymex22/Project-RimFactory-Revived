@@ -52,6 +52,7 @@
         <basePowerConsumption>50</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable" />
     </comps>
     <tickerType>Rare</tickerType>
     <rotatable>true</rotatable>
