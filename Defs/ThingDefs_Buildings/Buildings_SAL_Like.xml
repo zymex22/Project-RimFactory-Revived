@@ -104,7 +104,6 @@
         <minPower>0</minPower>        <!-- power usage lowest range -->
         <maxPower>1000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
@@ -167,7 +166,6 @@
         <minPower>0</minPower>        <!-- power usage lowest range -->
         <maxPower>1000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
@@ -235,7 +233,6 @@
         <minPower>0</minPower>        <!-- power usage lowest range -->
         <maxPower>1000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
@@ -299,7 +296,6 @@
         <minPower>0</minPower>        <!-- power usage lowest range -->
         <maxPower>1000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
@@ -363,7 +359,6 @@
         <minPower>0</minPower>        <!-- power usage lowest range -->
         <maxPower>1000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
@@ -419,7 +414,6 @@
         <minPower>0</minPower>        <!-- power usage lowest range -->
         <maxPower>1000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
@@ -476,7 +470,6 @@
         <minPower>0</minPower>        <!-- power usage lowest range -->
         <maxPower>400</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
@@ -601,7 +594,6 @@
         <minPower>0</minPower>        <!-- power usage lowest range -->
         <maxPower>1000</maxPower>        <!-- Power for max range -->
         <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
