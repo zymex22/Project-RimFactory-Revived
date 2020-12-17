@@ -177,7 +177,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<bool>(ref this.forbidItem, "forbidItem");
+            Scribe_Values.Look<bool>(ref this.forbidItem, "forbidItem");//todo: is this in base class already?
 
             Scribe_Deep.Look<UnfinishedThing>(ref this.unfinished, "unfinished");
 
@@ -423,8 +423,7 @@ namespace ProjectRimFactory.AutoMachineTool
         private List<Thing> Consumable()
         {
             return this.GetAllTargetCells()
-                .SelectMany(c => c.GetThingList(M))
-                .Where(c => c.def.category == ThingCategory.Item)
+                .SelectMany(c=> c.AllThingsInCellForUse(M)) // Use GatherThingsUtility to also grab from belts
                 .ToList();
         }
 
