@@ -13,7 +13,7 @@
     <baseCost>1500</baseCost>
     <label>Wooden stockpile crates</label>
     <researchViewX>3</researchViewX>
-    <description>Allows colonists to build large crates for more compact storage.</description>
+    <description>Allows your colonists to build Wooden Stockpile crates, they take up less space and clutter in your base.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
     </prerequisites>
@@ -25,7 +25,7 @@
     <baseCost>2000</baseCost>
     <label>Steel stockpile crates</label>
     <researchViewX>6</researchViewX>
-    <description>Allows colonists to build reinforced stockpile crates.</description>
+    <description>Allows colonists to build reinforced stockpile crates. They can hold more than woodden ones and are probably more fire resistant also.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
       <li>PRF_Crates</li>
