@@ -238,7 +238,13 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
             }
             if (this.CanLinkFrom(link) && link.CanLinkTo(this)) {
+                UpdateGraphic();
                 incomingLinks.Add(link);
+                if (PositionToRot4(link, out Rot4 r)) {
+                    if (outputLinks.TryGetValue(r, out OutputLink output)) {
+                        output.Active = false;
+                    }
+                }
             }
         }
         // Utility fn for linking to belt link
