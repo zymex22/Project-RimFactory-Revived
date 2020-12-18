@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using Verse;
 using RimWorld;
@@ -12,7 +13,7 @@ namespace ProjectRimFactory.AutoMachineTool {
             // thing is if it's an actual Thing that's being moved?
 
             var def = checkingDef as ThingDef;
-            if (def == null) return AcceptanceReport.WasAccepted; // No idea WTF it is??
+            if (def == null) return AcceptanceReport.WasAccepted; // probably terrain, not our problem
 
             var defModExtConveyor = checkingDef.GetModExtension<ModExtension_Conveyor>();
             // underground:
@@ -21,13 +22,34 @@ namespace ProjectRimFactory.AutoMachineTool {
                 // Cannot place these over (other) underground or connectors
                 foreach (var t in map.thingGrid.ThingsListAt(loc)) {
                     if (t == thingToIgnore || t == thing) continue;
-                    if (t is Building_BeltConveyorUGConnector
-                        || (t as Building_BeltConveyor)?.IsUnderground == true) {
+                    if (t is Building_BeltConveyorUGConnector // other UGConnectors
+                        || (t as Building_BeltConveyor)?.IsUnderground == true // UG stuff
+                        // Blueprints:
+                        || (t is Blueprint blue && blue.def.entityDefToBuild is ThingDef td &&
+                           (typeof(Building_BeltConveyorUGConnector).IsAssignableFrom(td.thingClass) || // other UG
+                           // and other UG stuff:
+                            td.modExtensions?.Any(dme=> dme is ModExtension_Conveyor mec && mec.underground)==true ))) {
                         return new AcceptanceReport("PRFBlockedBy".Translate(t.Label));
                     }
                 }
             }
-
+            // in walls
+            if (checkingDef.placeWorkers?.Contains(typeof(PlaceWorker_WallEmbedded)) == true)
+            {
+                foreach (var t in map.thingGrid.ThingsListAt(loc)) {
+                    if (t == thingToIgnore || t == thing) continue;
+                    if (t is IBeltConveyorLinkable blet && blet is Thing bla
+                        && bla.def.placeWorkers?.Contains(typeof(PlaceWorker_WallEmbedded)) == true) {
+                        return new AcceptanceReport("PRFBlockedBy".Translate(t.Label));
+                    }
+                    if (t is Blueprint blue && blue.def.entityDefToBuild is ThingDef td) {
+                        if (typeof(Building_BeltConveyor).IsAssignableFrom(td.thingClass) &&
+                            td.placeWorkers?.Contains(typeof(PlaceWorker_WallEmbedded))==true) {
+                            return new AcceptanceReport("PRFBlockedBy".Translate(t.Label));
+                        }
+                    }
+                }
+            }
             return AcceptanceReport.WasAccepted;
         }
     }

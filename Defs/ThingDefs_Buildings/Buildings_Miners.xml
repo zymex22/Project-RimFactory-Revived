@@ -88,7 +88,6 @@
       <Cleanliness>-10</Cleanliness>
     </statBases>
     <size>(3,1)</size>
-    <!-- <designatorDropdown>PRF_MinersGroup</designatorDropdown> -->
     <passability>PassThroughOnly</passability>
     <pathCost>50</pathCost>
     <hasInteractionCell>True</hasInteractionCell>
@@ -303,7 +302,7 @@
 
   <!--=========================== Portable Miner MkI ==================================-->
   <!-- This is a drone/cultivator type miner that can mine in a selected area. -->
-  <ThingDef ParentName="PRF_MiniDroneStation">
+  <!-- <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_PortableMinerMkI</defName>
     <label>Portable Miner MkI</label>
     <designatorDropdown>PRF_MinersGroup</designatorDropdown>
@@ -380,10 +379,10 @@
       <li>PRF_AutonomousMiningII</li>
       <li>PRF_BasicDrones</li>
     </researchPrerequisites>
-  </ThingDef>
+  </ThingDef> -->
 
   <!--=========================== Portable Miner MkII ==================================-->
-  <ThingDef ParentName="PRF_MiniDroneStation">
+  <!-- <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_PortableMinerMkII</defName>
     <label>Portable Miner MkII</label>
     <designatorDropdown>PRF_MinersGroup</designatorDropdown>
@@ -468,7 +467,7 @@
       <li>PRF_AutonomousMiningIII</li>
       <li>PRF_BasicDrones</li>
     </researchPrerequisites>
-  </ThingDef>
+  </ThingDef> -->
 
   <!--==================== Quarry T3.2  ====================-->
   <ThingDef ParentName="PRF_MinersBase">

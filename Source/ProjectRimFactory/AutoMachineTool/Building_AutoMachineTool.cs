@@ -138,9 +138,6 @@ namespace ProjectRimFactory.AutoMachineTool
             this.targetEnumrationCount = 0;
         }
 
-        private Map M { get { return this.Map; } }
-        private IntVec3 P { get { return this.Position; } }
-
         private Bill bill;
         private List<Thing> ingredients;
         private Thing dominant;
@@ -212,11 +209,11 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 if (this.unfinished == null)
                 {
-                    this.ingredients.ForEach(t => GenPlace.TryPlaceThing(t, P, this.M, ThingPlaceMode.Near));
+                    this.ingredients.ForEach(t => GenPlace.TryPlaceThing(t, Position, this.Map, ThingPlaceMode.Near));
                 }
                 else
                 {
-                    GenPlace.TryPlaceThing(this.unfinished, P, this.M, ThingPlaceMode.Near);
+                    GenPlace.TryPlaceThing(this.unfinished, Position, this.Map, ThingPlaceMode.Near);
                     this.unfinished.Destroy(DestroyMode.Cancel);
                 }
             }
@@ -352,7 +349,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private Option<Building_WorkTable> GetTargetWorkTable()
         {
-            return this.FacingCell().GetThingList(M)
+            return this.FacingCell().GetThingList(Map)
                 .Where(t => t.def.category == ThingCategory.Building)
                 .SelectMany(t => Option(t as Building_WorkTable))
                 .Where(t => t.InteractionCell == this.Position)
@@ -396,7 +393,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool FinishWorking(Building_AutoMachineTool working, out List<Thing> products)
         {
             products = GenRecipe2.MakeRecipeProducts(this.bill.recipe, this, this.ingredients, this.dominant, this.workTable.GetOrDefault(null)).ToList();
-            this.ingredients.ForEach(i => bill.recipe.Worker.ConsumeIngredient(i, bill.recipe, M));
+            this.ingredients.ForEach(i => bill.recipe.Worker.ConsumeIngredient(i, bill.recipe, Map));
             Option(this.unfinished).ForEach(u => u.Destroy(DestroyMode.Vanish));
             this.bill.Notify_IterationCompleted(null, this.ingredients);
 
@@ -412,7 +409,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public List<IntVec3> OutputZone()
         {
-            return this.OutputCell().SlotGroupCells(M);
+            return this.OutputCell().SlotGroupCells(Map);
         }
         
         public override IntVec3 OutputCell()
@@ -423,8 +420,7 @@ namespace ProjectRimFactory.AutoMachineTool
         private List<Thing> Consumable()
         {
             return this.GetAllTargetCells()
-                .SelectMany(c => c.GetThingList(M))
-                .Where(c => c.def.category == ThingCategory.Item)
+                .SelectMany(c=> c.AllThingsInCellForUse(Map)) // Use GatherThingsUtility to also grab from belts
                 .ToList();
         }
 
