@@ -56,21 +56,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private float supplyPowerForRange;
 
-        //public override float SupplyPowerForRange
-        //{
-        //    get => this.supplyPowerForRange;
-        //    set
-        //    {
-        //        if (this.supplyPowerForRange != value)
-        //        {
-        //            this.supplyPowerForRange = value;
-        //            this.ChangeGlow();
-        //            this.allTargetCellsCache = null;
-        //        }
-        //        this.RefreshPowerStatus();
-        //    }
-        //}
-
         [Unsaved]
         protected int targetEnumrationCount = 100;
 
@@ -98,18 +83,6 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             if (this.allTargetCellsCache == null)
             {
-             
-
-                Log.Message("powerWorkSetting.RangeSetting " + powerWorkSetting.RangeSetting);
-                Log.Message("powerWorkSetting.MinPowerForRange" + powerWorkSetting.MinPowerForRange);
-                Log.Message("powerWorkSetting.MaxPowerForRange" + powerWorkSetting.MaxPowerForRange);
-                Log.Message("powerWorkSetting.Props.minRange" + powerWorkSetting.Props.minRange);
-                Log.Message("powerWorkSetting.Props.maxRange" + powerWorkSetting.Props.maxRange);
-                Log.Message("powerWorkSetting.SupplyPowerForRange"+ powerWorkSetting.SupplyPowerForRange);
-                Log.Message("powerWorkSetting.GetRange() " + powerWorkSetting.GetRange());
-                Log.Message("powerWorkSetting.GetRangeCells() " + powerWorkSetting.GetRangeCells());
-                
-
                 this.allTargetCellsCache = powerWorkSetting.GetRangeCells().ToHashSet();
                 if (this.targetEnumrationCount > 0)
                 {

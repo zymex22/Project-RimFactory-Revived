@@ -334,16 +334,12 @@
           </Working>
         </graphicDataList>
       </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerOutputCellResolver</outputCellResolverType>
-        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerInputCellResolver</inputCellResolverType>
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
-        <forcePlacing>false</forcePlacing>
-      </li>
     </modExtensions>
 
-    <comps  Inherit="false">
+    <comps>
+
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable"/>
             <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
 <maxPowerForSpeed>500</maxPowerForSpeed>
 <minPowerForSpeed>100</minPowerForSpeed>
