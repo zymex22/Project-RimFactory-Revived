@@ -12,7 +12,7 @@
     <defName>PRF_BeltsI</defName>
     <label>Basic Conveyors</label>
     <baseCost>300</baseCost>
-    <description>First introduction to conveyor belts and fueling machines.\nThis will get you started with moving stuff around.</description>
+    <description>Hauling thing within a factory can be dangerous and tedious, Conveyor belts take care of it.\nUnlocks: belts and fueling machines.</description>
     <prerequisites>
       <li>Electricity</li>
     </prerequisites>
@@ -23,7 +23,7 @@
     <defName>PRF_BeltsII</defName>
     <label>Basic Item Sorting</label>
     <baseCost>400</baseCost>
-    <description>Item Sorting will unlock a simple puller growzone puller and a splitter for normal belts.</description>
+    <description>Directing things to the area of the factory it belongs to will streamline and diversify the factory layout.\nUnlocks: Simple puller, Growzone puller and Belt splitter for normal belts.</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_BeltsI</li>
@@ -36,7 +36,7 @@
     <label>Advanced Item Sorting</label>
     <techLevel>Industrial</techLevel>
     <baseCost>500</baseCost>
-    <description>Advanced itemsorting will unlock Wall and UnderGround belts and splitters. It will also unlock Smart hoppers, mkII-, angle- and wall pullers. For your advanced item management.</description>
+    <description>More sophisticed logistical implementation allows advanced itemsorting.\nUnlocks: Wall-, UnderGround belts and splitters. Smart hoppers, mkII-, angle- and wall pullers. For your advanced item management.</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_BeltsII</li>
