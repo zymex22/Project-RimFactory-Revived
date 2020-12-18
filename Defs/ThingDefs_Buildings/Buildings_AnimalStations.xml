@@ -421,30 +421,20 @@
         <minPowerForSpeed>700</minPowerForSpeed>
         <minSpeedFactor>1</minSpeedFactor>
         <maxSpeedFactor>1</maxSpeedFactor>
-        <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+        <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>
+        <minPowerForRange>0</minPowerForRange>
+        <maxPowerForRange>2000</maxPowerForRange>
+        <minRange>3</minRange>
+        <maxRange>6</maxRange>
+        <rangeSetting>true</rangeSetting>
+        
     </li>
     </comps>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_TargetCellsHilight</li>      <!-- Highlight input cell when selected-->
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>      <!-- Highlight Output cell when selected -->
-    </placeWorkers>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power option tab -->
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">        <!-- Power / Range boost, set to min/max same to set fixed value -->
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>2000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_SlaughterhouseTargetCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
-        <!-- for targetCellResolverType
-        <blueprintMin>(1, 1, 1, 1)</blueprintMin>
-        <blueprintMax>(0.5, 0.5, 0.5, 0.6)</blueprintMax>
-        <instance>(1, 1, 1, 1)</instance>
-        <otherInstance>(1, 1, 1, 0.35)</otherInstance>
-        -->        <!-- Change color on input output cells -->
-      </li>
     </modExtensions>
   </ThingDef>
 

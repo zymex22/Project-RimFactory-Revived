@@ -16,7 +16,7 @@ namespace ProjectRimFactory.AutoMachineTool
     public abstract class Building_BaseMachine<T> : Building_Base<T>, IPowerSupplyMachineHolder, IPowerSupplyMachine, IBeltConveyorSender where T : Thing
     {
 
-        private CompPowerWorkSetting powerWorkSetting;
+        public CompPowerWorkSetting powerWorkSetting;
 
         protected virtual float SpeedFactor => powerWorkSetting.SupplyPowerForSpeed;
         protected virtual int? SkillLevel { get => null; }
@@ -110,11 +110,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override float WorkAmountPerTick => 0.01f * this.SpeedFactor * this.SupplyPowerForSpeed * this.Factor2();
 
-        public virtual int MinPowerForRange => throw new NotImplementedException();
+        public virtual int MinPowerForRange => powerWorkSetting.MinPowerForRange;
 
-        public virtual int MaxPowerForRange => throw new NotImplementedException();
+        public virtual int MaxPowerForRange => powerWorkSetting.MaxPowerForRange;
 
-        public virtual float SupplyPowerForRange { get => 0; set => throw new NotImplementedException(); }
+        public virtual float SupplyPowerForRange { get => powerWorkSetting.SupplyPowerForRange; set => powerWorkSetting.SupplyPowerForRange = value; }
 
         public virtual bool Glowable => false;
 
@@ -124,7 +124,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public virtual bool RangeSetting => false;
 
-        public virtual float RangeInterval => throw new NotImplementedException();
+        public virtual float RangeInterval => powerWorkSetting.RangeInterval;
 
         public int BasePowerConsumption => (int)this.powerComp.Props.basePowerConsumption;
 

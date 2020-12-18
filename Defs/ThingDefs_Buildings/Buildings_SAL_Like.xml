@@ -93,6 +93,11 @@
 <minSpeedFactor>2</minSpeedFactor>
 <maxSpeedFactor>2</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+<minPowerForRange>0</minPowerForRange>
+<maxPowerForRange>1000</maxPowerForRange>
+<minRange>3</minRange>
+<maxRange>6</maxRange>
+<rangeSetting>true</rangeSetting>
 </li>
     </comps>
     
@@ -100,11 +105,6 @@
       <li>PRF_SALResearchI</li>
     </researchPrerequisites>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>1</BaseSkill>
@@ -159,14 +159,14 @@
 <minSpeedFactor>1</minSpeedFactor>
 <maxSpeedFactor>1</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+<minPowerForRange>0</minPowerForRange>
+<maxPowerForRange>1000</maxPowerForRange>
+<minRange>3</minRange>
+<maxRange>6</maxRange>
+<rangeSetting>true</rangeSetting>
 </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>5</BaseSkill>
@@ -226,14 +226,14 @@
 <minSpeedFactor>1</minSpeedFactor>
 <maxSpeedFactor>1</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+<minPowerForRange>0</minPowerForRange>
+<maxPowerForRange>1000</maxPowerForRange>
+<minRange>3</minRange>
+<maxRange>6</maxRange>
+<rangeSetting>true</rangeSetting>
 </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>3</BaseSkill>
@@ -289,14 +289,14 @@
 <minSpeedFactor>1</minSpeedFactor>
 <maxSpeedFactor>1</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+<minPowerForRange>0</minPowerForRange>
+<maxPowerForRange>1000</maxPowerForRange>
+<minRange>3</minRange>
+<maxRange>6</maxRange>
+<rangeSetting>true</rangeSetting>
 </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>3</BaseSkill>
@@ -352,14 +352,14 @@
 <minSpeedFactor>5</minSpeedFactor>
 <maxSpeedFactor>5</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+<minPowerForRange>0</minPowerForRange>
+<maxPowerForRange>1000</maxPowerForRange>
+<minRange>3</minRange>
+<maxRange>6</maxRange>
+<rangeSetting>true</rangeSetting>
 </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>1</BaseSkill>
@@ -407,14 +407,14 @@
 <minSpeedFactor>12</minSpeedFactor>
 <maxSpeedFactor>12</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+<minPowerForRange>0</minPowerForRange>
+<maxPowerForRange>1000</maxPowerForRange>
+<minRange>3</minRange>
+<maxRange>6</maxRange>
+<rangeSetting>true</rangeSetting>
 </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>1</BaseSkill>
@@ -463,14 +463,14 @@
 <minSpeedFactor>1</minSpeedFactor>
 <maxSpeedFactor>1</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+<minPowerForRange>0</minPowerForRange>
+<maxPowerForRange>400</maxPowerForRange>
+<minRange>3</minRange>
+<maxRange>6</maxRange>
+<rangeSetting>true</rangeSetting>
 </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>400</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>5</BaseSkill>
@@ -587,14 +587,14 @@
 <minSpeedFactor>666</minSpeedFactor>
 <maxSpeedFactor>666</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+<minPowerForRange>0</minPowerForRange>
+<maxPowerForRange>1000</maxPowerForRange>
+<minRange>3</minRange>
+<maxRange>6</maxRange>
+<rangeSetting>true</rangeSetting>
 </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>20</BaseSkill>
