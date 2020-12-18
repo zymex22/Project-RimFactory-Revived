@@ -136,19 +136,4 @@ namespace ProjectRimFactory.AutoMachineTool
       
     }
 
-    public class Building_SlaughterhouseTargetCellResolver : BaseTargetCellResolver
-    {
-        public override IEnumerable<IntVec3> GetRangeCells(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot, int range)
-        {
-            return FacingRect(center, size, rot, range)
-                .Where(c => FacingCell(center, size, rot).GetRoom(map) == c.GetRoom(map));
-        }
-
-        public override int GetRange(float power)
-        {
-            return Mathf.RoundToInt(power / 500) + 1;
-        }
-
-        public override bool NeedClearingCache => true;
-    }
 }

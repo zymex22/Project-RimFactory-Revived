@@ -207,18 +207,6 @@
     </comps>
     
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerOutputCellResolver</outputCellResolverType>
-        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerInputCellResolver</inputCellResolverType>
-        <!-- for inputCellResolverType
-        <inputCell>(1, 1, 1, 1)</inputCell>
-        <inputZone>(1, 1, 1, 0.5)</inputZone>
-        -->
-        <!-- for outputCellResolverType
-        <outputCell>(1, 0.92, 0.016, 1)</outputCell>
-        <outputZone>(1, 0.92, 0.016, 0.5)</outputZone>
-        -->
-      </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
         <forcePlacing>false</forcePlacing>
       </li>

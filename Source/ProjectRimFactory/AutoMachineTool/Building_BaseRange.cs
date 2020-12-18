@@ -52,7 +52,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override float RangeInterval => 500;
 
-        protected ModExtension_WorkIORange RangeExtension => this.def.GetModExtension<ModExtension_WorkIORange>();
 
         private float supplyPowerForRange;
 
@@ -118,10 +117,6 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             if (this.Spawned)
             {
-                if (this.RangeExtension.TargetCellResolver.NeedClearingCache)
-                {
-                    MapManager.AfterAction(CACHE_CLEAR_INTERVAL_TICKS, this.ClearAllTargetCellCache);
-                }
             }
         }
 
@@ -194,7 +189,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public int GetRange()
         {
-            return this.RangeExtension.TargetCellResolver.GetRange(this.SupplyPowerForRange);
+            Log.ErrorOnce("ERROR Sniper needs to fix C# Building_BaseRange GetRange()", 684546864);
+            return 0;
         }
 
         protected virtual IEnumerable<IntVec3> GetTargetCells()

@@ -603,33 +603,4 @@ namespace ProjectRimFactory.AutoMachineTool
         }
     }
 
-    public class Building_AutoMachineToolCellResolver : BaseTargetCellResolver, IOutputCellResolver
-    {
-        public override bool NeedClearingCache => false;
-
-        public override IEnumerable<IntVec3> GetRangeCells(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot, int range)
-        {
-            return GenAdj.CellsOccupiedBy(center, rot, new IntVec2(1, 1) + new IntVec2(range * 2, range * 2));
-        }
-
-        public override int GetRange(float power)
-        {
-            return Mathf.RoundToInt(power / 500) + 1;
-        }
-
-        public Option<IntVec3> OutputCell(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot)
-        {
-            return center.GetThingList(map)
-                .SelectMany(b => Option(b as Building_AutoMachineTool))
-                .FirstOption()
-                .Select(b => b.OutputCell());
-        }
-
-        private readonly static List<IntVec3> EmptyList = new List<IntVec3>();
-
-        public IEnumerable<IntVec3> OutputZoneCells(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot)
-        {
-            return this.OutputCell(def, center, size, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
-        }
-    }
 }

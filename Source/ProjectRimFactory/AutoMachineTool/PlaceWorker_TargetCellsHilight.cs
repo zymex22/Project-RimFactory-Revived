@@ -9,43 +9,45 @@ using Verse.AI;
 using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    class PlaceWorker_TargetCellsHilight : PlaceWorker
+
+    //TODO Update to Hilight the Workbech cell for S.A.L
+    class PlaceWorker_SALTargetWorkCellsHilight : PlaceWorker
     {
         public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
         {
             Map map = Find.CurrentMap;
-            var ext = def.GetModExtension<ModExtension_WorkIORange>();
 
-            if (ext == null || ext.TargetCellResolver == null)
+            if (true)
             {
-                UnityEngine.Debug.LogWarning("targetCellResolver not found.");
+                //Log.Message("--------- targetCellResolver not found. - Sniper");
                 return;
             }
 
-            var machine = center.GetThingList(map).Where(t => t.def == def).SelectMany(t => Option(t as IRange)).FirstOption();
-            if (machine.HasValue)
-            {
-                machine.Value.GetAllTargetCells().Select(c => new { Cell = c, Color = ext.TargetCellResolver.GetColor(c, map, rot, CellPattern.Instance) })
-                    .GroupBy(a => a.Color)
-                    .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
-            }
-            else
-            {
-                var min = ext.TargetCellResolver.GetRangeCells(def, center, def.size, map, rot, ext.TargetCellResolver.MinRange());
-                var max = ext.TargetCellResolver.GetRangeCells(def, center, def.size, map, rot, ext.TargetCellResolver.MaxRange());
-                min.Select(c => new { Cell = c, Color = ext.TargetCellResolver.GetColor(c, map, rot, CellPattern.BlurprintMin) })
-                    .Concat(max.Select(c => new { Cell = c, Color = ext.TargetCellResolver.GetColor(c, map, rot, CellPattern.BlurprintMax) }))
-                    .GroupBy(a => a.Color)
-                    .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
-            }
+            //var machine = center.GetThingList(map).Where(t => t.def == def).SelectMany(t => Option(t as IRange)).FirstOption();
+            //if (machine.HasValue)
+            //{
+            //    machine.Value.GetAllTargetCells().Select(c => new { Cell = c, Color = CommonColors.GetCellPatternColor(CommonColors.CellPattern.Instance) })
+            //        .GroupBy(a => a.Color)
+            //        .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
+            //}
+            //else
+            //{
+            //    var min = ext.TargetCellResolver.GetRangeCells(def, center, def.size, map, rot, ext.TargetCellResolver.MinRange());
+            //    var max = ext.TargetCellResolver.GetRangeCells(def, center, def.size, map, rot, ext.TargetCellResolver.MaxRange());
+            //    min.Select(c => new { Cell = c, Color = CommonColors.GetCellPatternColor(CommonColors.CellPattern.BlurprintMin) })
+            //        .Concat(max.Select(c => new { Cell = c, Color = CommonColors.GetCellPatternColor(CommonColors.CellPattern.BlurprintMax) }))
+            //        .GroupBy(a => a.Color)
+            //        .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
+            //}
 
-            map.listerThings.ThingsOfDef(def).SelectMany(t => Option(t as IRange)).Where(r => r.Position != center).ForEach(r =>
-                    r.GetAllTargetCells().Select(c => new { Cell = c, Color = ext.TargetCellResolver.GetColor(c, map, rot, CellPattern.OtherInstance) })
-                        .GroupBy(a => a.Color)
-                        .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key)));
+            //map.listerThings.ThingsOfDef(def).SelectMany(t => Option(t as IRange)).Where(r => r.Position != center).ForEach(r =>
+            //        r.GetAllTargetCells().Select(c => new { Cell = c, Color = CommonColors.GetCellPatternColor(CommonColors.CellPattern.OtherInstance) })
+            //            .GroupBy(a => a.Color)
+            //            .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key)));
         }
     }
 }
