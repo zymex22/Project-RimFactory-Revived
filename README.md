@@ -61,3 +61,29 @@ Russian: Natsu_Zirok, Chinese Simplified: 十里小飞 , Chinese Traditional: Ab
 
 Resources: Freepik, Flaticon
 Other worth mentioning: Malkav, and whole test squad
+
+
+## Links:
+Project RimFactory - Core
+https://github.com/zymex22/Project-RimFactory-Revived
+https://steamcommunity.com/sharedfiles/filedetails/?id=2033979700
+
+Project RimFactory - Insanity
+https://github.com/zymex22/Project-RimFactory-Revived-Insanity 
+https://steamcommunity.com/sharedfiles/filedetails/?id=2037492036
+
+Project RimFactory - Drones
+https://github.com/zymex22/Project-RimFactory-Revived-drones
+https://steamcommunity.com/sharedfiles/filedetails/?id=2037491557
+
+Project RimFactory - Materials
+https://github.com/zymex22/Project-RimFactory-Revived-Materials
+
+
+Project RimFactory - Lite (This is not compatible with Core)
+https://github.com/zymex22/PRF-Lite
+
+
+Discord
+Our Augmented Turtle Squad discord channel:
+https://discord.gg/QBr7Wby
