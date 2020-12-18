@@ -684,7 +684,7 @@
     </statBases>
     <pathCost>0</pathCost>
     <fillPercent>0.4</fillPercent>    <!-- Cover from shell -->
-    <comps Inherit="false">>
+    <comps Inherit="false">
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>0</basePowerConsumption>
