@@ -65,6 +65,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private bool right = false;
 
+        public bool Getright => right;
+
         private bool OutputSides => this.def.GetModExtension<ModExtension_Puller>()?.outputSides ?? false;
 
         private bool pickupConveyor = false;
@@ -170,19 +172,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override IntVec3 OutputCell()
         {
-            if(this.OutputSides)
-            {
-                RotationDirection dir = RotationDirection.Clockwise;
-                if (!this.right)
-                {
-                    dir = RotationDirection.Counterclockwise;
-                }
-                return this.Position + this.Rotation.RotateAsNew(dir).FacingCell;
-            }
-            else
-            {
-                return this.Position + this.Rotation.FacingCell;
-            }
+            return this.def.GetModExtension<ModExtension_Puller>().GetOutputCell(this.Position, this.Rotation, this.right);
         }
 
         public override IEnumerable<Gizmo> GetGizmos()

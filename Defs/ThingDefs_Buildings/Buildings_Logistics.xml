@@ -270,6 +270,9 @@
       </fixedStorageSettings>
     </building>
     <modExtensions>
+          <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+        <outputSides>false</outputSides>
+      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
@@ -308,6 +311,9 @@
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
     <modExtensions Inherit="false">
+          <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+        <outputSides>false</outputSides>
+      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
@@ -361,6 +367,9 @@
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
     <modExtensions>
+          <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+        <outputSides>false</outputSides>
+      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
@@ -468,6 +477,9 @@
       <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
     <modExtensions>
+          <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+        <outputSides>false</outputSides>
+      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
