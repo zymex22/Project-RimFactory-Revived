@@ -43,7 +43,8 @@
     <scatterableOnMapGen>false</scatterableOnMapGen>
     <minifiedDef>MinifiedThing</minifiedDef>
     <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_SALTargetWorkCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_AutoMachineTool</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_SALTargetCellHilight</li>
     </placeWorkers>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>

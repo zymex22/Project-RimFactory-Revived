@@ -220,6 +220,7 @@
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
     <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_PullerCellsHilight</li>
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
   </ThingDef>
@@ -241,10 +242,6 @@
     <passability>Impassable</passability>
     <description>(PRF) A Puller that pulls foodstuffs from growzones and places them into storage or onto a belt.</description>
     <altitudeLayer>Building</altitudeLayer>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
     <graphicData>
       <texPath>Belts/Growzone</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -305,10 +302,6 @@
     <passability>Impassable</passability>
     <description>A Puller That Pull items from A to B. Place it down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
     <graphicData>
       <texPath>Belts/PullerI</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -362,10 +355,6 @@
     <passability>Impassable</passability>
     <description>A upgraded puller which run at a higher speed than mkI puller. pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
     <graphicData>
       <texPath>Belts/Puller</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -405,10 +394,6 @@
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
 
     <graphicData>
       <texPath>Belts/PullerL</texPath>
@@ -475,8 +460,6 @@
     <clearBuildingArea>false</clearBuildingArea>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
     <graphicData>
       <texPath>Belts/PullerWall</texPath>
