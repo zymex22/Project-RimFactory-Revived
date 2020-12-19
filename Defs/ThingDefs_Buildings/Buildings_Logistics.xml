@@ -568,6 +568,7 @@
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
+    <tradeability>None</tradeability>
   </ThingDef>
   <!--======================================= Conveyor belt base   ===============================================-->
   <ThingDef Name="PRF_DraggableConveyorBelt_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
