@@ -513,6 +513,10 @@
   <DesignatorDropdownGroupDef>
     <defName>PRF_BeltsGroup</defName>
   </DesignatorDropdownGroupDef>
+
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_WallBeltsGroup</defName>
+  </DesignatorDropdownGroupDef>
   <!--======================================= ============= ===============================================-->
   <!--==================================== Conveyor Belts base ============================================-->
   <!--======================================= ============= ===============================================-->
@@ -601,8 +605,9 @@
   <!--======================================= Conveyor wall ===============================================-->
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>PRF_Conveyor_Wall_I</defName>
-    <label>Wall conveyor belt</label>
+    <label>Wall Belt</label>
     <description>Moves items - through walls! You can use these to traverse walls or move items along inside them. When items hit the end, they will move out onto the ground, as long as there is room.</description>
+    <designatorDropdown>PRF_WallBeltsGroup</designatorDropdown>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <pathCost>0</pathCost>
     <fillPercent>0.0</fillPercent>
@@ -841,6 +846,7 @@
     <defName>PRF_Conveyor_Splitter_Wall</defName>
     <label>wall splitter</label>
     <description>A conveyor splitter unit built into the walls.  This one will hand off items to wall belts and Overground ones.</description>
+    <designatorDropdown>PRF_WallBeltsGroup</designatorDropdown>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <pathCost>0</pathCost>
     <passability>Standable</passability>
@@ -861,7 +867,6 @@
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
-    <designatorDropdown>PRF_BeltsGroup</designatorDropdown>
     <building>
       <isEdifice>false</isEdifice>
       <!--      <blueprintGraphicData>

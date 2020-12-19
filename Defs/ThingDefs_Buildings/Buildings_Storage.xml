@@ -340,6 +340,7 @@
         <basePowerConsumption>0</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
+      <li Class="CompProperties_Flickable"/>
     </comps>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <modExtensions>

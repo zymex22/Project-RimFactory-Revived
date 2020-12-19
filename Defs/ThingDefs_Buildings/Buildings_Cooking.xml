@@ -325,7 +325,8 @@
         <heatPerSecond>2</heatPerSecond>
       </li>
     </comps>
-    <!--<recipes></recipes>-->
+    <recipes>
+    </recipes>
     <researchPrerequisites>
       <li>PRF_SelfCooking</li>
     </researchPrerequisites>
@@ -368,7 +369,7 @@
       <drawSize>(1.8,1.8)</drawSize>
     </graphicData>
     <size>(1,1)</size>
-    <altitudeLayer>Building</altitudeLayer>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
     <fillPercent>1.0</fillPercent>
     <pathCost>60</pathCost>
     <uiIconScale>0.6</uiIconScale>
