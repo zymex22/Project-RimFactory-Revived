@@ -13,7 +13,7 @@
   <PRF_DeepQuarry_Frame.label>深矿机（中）（建造中）</PRF_DeepQuarry_Frame.label>
   <PRF_DeepQuarry_Frame.description>自动采矿机，不断从地下挖掘矿物，包括石块、原材料和零部件。每6小时生产一次随机资源。</PRF_DeepQuarry_Frame.description>
 
-  <PaperclipFactory.label>回形针工厂</PaperclipFactory.label>
+  <!-- <PaperclipFactory.label>回形针工厂</PaperclipFactory.label>
   <PaperclipFactory.description>能够将金属、植物、尸体等任何原材料转换为回形针的机器。</PaperclipFactory.description>
   <PaperclipFactory_Blueprint.label>回形针工厂（蓝图）</PaperclipFactory_Blueprint.label>
   <PaperclipFactory_Blueprint_Install.label>回形针工厂（蓝图）</PaperclipFactory_Blueprint_Install.label>
@@ -38,7 +38,7 @@
   <AtomicReconstructor_Blueprint.label>原子重建机（蓝图）</AtomicReconstructor_Blueprint.label>
   <AtomicReconstructor_Blueprint_Install.label>原子重建机（蓝图）</AtomicReconstructor_Blueprint_Install.label>
   <AtomicReconstructor_Frame.label>原子重建机（建造中）</AtomicReconstructor_Frame.label>
-  <AtomicReconstructor_Frame.description>将回形针转换为更有用的东西。</AtomicReconstructor_Frame.description>
+  <AtomicReconstructor_Frame.description>将回形针转换为更有用的东西。</AtomicReconstructor_Frame.description> -->
 
   <PRF_4k_Battery.label>4k电池</PRF_4k_Battery.label>
   <PRF_4k_Battery.description>可以存储4000Wd的电池。</PRF_4k_Battery.description>

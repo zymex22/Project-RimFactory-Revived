@@ -36,24 +36,24 @@
 
   <PRFNoDesc>No description.</PRFNoDesc>
 
-  <PaperclipFuelConsumption>Fuel consumption: {0} paperclips/second</PaperclipFuelConsumption>
-  <PaperclipProductionPerSecond>Paperclip production: {0} paperclips/second</PaperclipProductionPerSecond>
+  <PaperclipFuelConsumption>Fuel consumption: {0} EMC/second</PaperclipFuelConsumption>
+  <PaperclipProductionPerSecond>EMC production: {0} EMC/second</PaperclipProductionPerSecond>
   <PaperclipGeneratorEfficiency>Current efficiency: {0}%/{1}%</PaperclipGeneratorEfficiency>
-  <PaperclipsRunOutIn>Runs out of paperclips in: {0}</PaperclipsRunOutIn>
-  <SetPaperclipConsumptionPerSecond>Adjust paperclip consumption</SetPaperclipConsumptionPerSecond>
-  <SetPaperclipProductionPerSecond>Adjust paperclip production</SetPaperclipProductionPerSecond>
-  <SetPaperclipConsumptionPerSecond_Desc>Change the number of paperclips consumed per second.</SetPaperclipConsumptionPerSecond_Desc>
-  <SetPaperclipProductionPerSecond_Desc>Change the number of paperclips produced per second.</SetPaperclipProductionPerSecond_Desc>
+  <PaperclipsRunOutIn>Runs out of EMC in: {0}</PaperclipsRunOutIn>
+  <SetPaperclipConsumptionPerSecond>Adjust EMC consumption</SetPaperclipConsumptionPerSecond>
+  <SetPaperclipProductionPerSecond>Adjust EMC production</SetPaperclipProductionPerSecond>
+  <SetPaperclipConsumptionPerSecond_Desc>Change the number of EMC consumed per second.</SetPaperclipConsumptionPerSecond_Desc>
+  <SetPaperclipProductionPerSecond_Desc>Change the number of EMC produced per second.</SetPaperclipProductionPerSecond_Desc>
 
   <AtomicReconstructorProgress>Reconstruction progress: {0}</AtomicReconstructorProgress>
   <PRFAtomicReconstructionTab>Config</PRFAtomicReconstructionTab>
   <AtomicReconstructionTab_NowProducing>Producing:</AtomicReconstructionTab_NowProducing>
-  <AtomicReconstructionTab_PaperclipCost>Paperclip cost:</AtomicReconstructionTab_PaperclipCost>
+  <AtomicReconstructionTab_PaperclipCost>EMC cost:</AtomicReconstructionTab_PaperclipCost>
   <AtomicReconstructionTab_ConsumptionPerSecond>Consumption per second:</AtomicReconstructionTab_ConsumptionPerSecond>
   <AtomicReconstructionTab_Progress>Progress:</AtomicReconstructionTab_Progress>
-  <AtomicReconstructionTab_Speed>Speed multiplier: {0} (Paperclip consumption modifier: {1}x)</AtomicReconstructionTab_Speed>
+  <AtomicReconstructionTab_Speed>Speed multiplier: {0} (EMC consumption modifier: {1}x)</AtomicReconstructionTab_Speed>
 
-  <PRF_ArchoCipher_BankOverflow>The AI chip from your paperclip duplicator has sent you a message:\n\Congratulations! You have achieved the maximum balance of paperclips in your duplicator. The real question is: What are you going to do with all these paperclips?</PRF_ArchoCipher_BankOverflow>
+  <PRF_ArchoCipher_BankOverflow>The AI chip from your EMC duplicator has sent you a message:\n\Congratulations! You have achieved the maximum balance of EMC in your duplicator. The real question is: What are you going to do with all these EMC?</PRF_ArchoCipher_BankOverflow>
 
   <PRF_SettingsTab_RangeType_Label>Change Zone Type</PRF_SettingsTab_RangeType_Label>
   <PRF_SettingsTab_RangeType_CircleRange>Circle Type</PRF_SettingsTab_RangeType_CircleRange>
@@ -64,19 +64,19 @@
   <PRF_TimeLeftToDisintegrate>Time left until disintegrate: {0}</PRF_TimeLeftToDisintegrate>
   <PRF_DisintegrationMessage>{0} has disintegrated.</PRF_DisintegrationMessage>
   <PRFPaperclipDuplicatorTab>Duplicator</PRFPaperclipDuplicatorTab>
-  <PaperclipsInDuplicator>Paperclips in duplicator: {0}</PaperclipsInDuplicator>
-  <PaperclipsInStorageUnit>Paperclips in storage unit: {0}</PaperclipsInStorageUnit>
+  <PaperclipsInDuplicator>EMC in duplicator: {0}</PaperclipsInDuplicator>
+  <PaperclipsInStorageUnit>EMC in storage unit: {0}</PaperclipsInStorageUnit>
   <PRFDepositWithdraw>Deposit/Withdraw</PRFDepositWithdraw>
   <PRFDepositWithdrawMode>Mode:</PRFDepositWithdrawMode>
   <PRFDeposit>Deposit</PRFDeposit>
   <PRFWithdraw>Withdraw</PRFWithdraw>
   <PRFAmount>Amount</PRFAmount>
-  <PRFNotEnoughPaperclips>Not enough paperclips.</PRFNotEnoughPaperclips>
+  <PRFNotEnoughPaperclips>Not enough EMC.</PRFNotEnoughPaperclips>
   <PRFInputInvalid>Invalid input.</PRFInputInvalid>
   <PRFNoBoundStorageUnit>No bound storage unit.</PRFNoBoundStorageUnit>
   <PRFBoundStorageUnitNotAvailableForIO>Bound storage unit is not available for item transfer.</PRFBoundStorageUnitNotAvailableForIO>
-  <SuccessfullyDepositedPaperclips>Successfully deposited {0} paperclips.</SuccessfullyDepositedPaperclips>
-  <SuccessfullyWithdrawnPaperclips>Succesfully withdrawn {0} paperclips.</SuccessfullyWithdrawnPaperclips>
+  <SuccessfullyDepositedPaperclips>Successfully deposited {0} EMC.</SuccessfullyDepositedPaperclips>
+  <SuccessfullyWithdrawnPaperclips>Succesfully withdrawn {0} EMC.</SuccessfullyWithdrawnPaperclips>
 
   <PRFDroneStation_NumberOfDrones>Stored drones: {0}</PRFDroneStation_NumberOfDrones>
   <PRFDroneName>Drone</PRFDroneName>
