@@ -19,6 +19,23 @@ namespace ProjectRimFactory.Common
                 return new AcceptanceReport("PRF_PlaceWorker_NaturalWall_denied".Translate());
             }
         }
+
+        public override bool ForceAllowPlaceOver(BuildableDef other)
+        {
+            if (other.blueprintDef != null && other.blueprintDef.IsSmoothed)
+            {
+
+                return true;
+            }
+            var def = other as ThingDef;
+            if (def != null && def.IsNonResourceNaturalRock)
+            {
+
+                return true;
+            }
+
+            return base.ForceAllowPlaceOver(other);
+        }
     }
 
 }
