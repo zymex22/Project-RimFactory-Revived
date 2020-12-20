@@ -130,8 +130,8 @@
       <li Class="CompProperties_Flickable" />
       <!-- Either specialDisplayRadius or CompProperties_PowerWorkSetting -->
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
+        
+        
         
         <minRange>5</minRange>
         <maxPowerForRange>500</maxPowerForRange>
@@ -551,7 +551,7 @@
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
     <maxPowerForSpeed>0</maxPowerForSpeed>
-    <speedSetting>false</speedSetting>
+    
     <minSpeedFactor>5</minSpeedFactor>
     <maxSpeedFactor>5</maxSpeedFactor>
     <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->

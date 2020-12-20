@@ -269,8 +269,8 @@
         <basePowerConsumption>750</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
+        
+        
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         
         <minRange>5</minRange>

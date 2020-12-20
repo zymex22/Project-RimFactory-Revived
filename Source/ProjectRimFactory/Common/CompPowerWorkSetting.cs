@@ -45,9 +45,9 @@ namespace ProjectRimFactory.Common
 
         public virtual bool Glow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public virtual bool SpeedSetting => this.Props.speedSetting;
+        public virtual bool SpeedSetting => this.Props.maxPowerForSpeed > 0;
 
-        public bool RangeSetting => this.Props.rangeSetting;
+        public bool RangeSetting => this.Props.maxPowerForRange > 0;
 
         public virtual float RangeInterval => (this.Props.maxPowerForRange) / (this.Props.maxRange - this.Props.minRange);
 
@@ -249,9 +249,6 @@ namespace ProjectRimFactory.Common
         public float minRange = 3;
         public float maxRange = 6;
 
-        public bool speedSetting = true;
-        public bool rangeSetting = false;
-
         public bool allowManualRangeTypeChange = false;
 
         public Color blueprintMin = Color.white;
@@ -270,7 +267,10 @@ namespace ProjectRimFactory.Common
 
         public override void DrawGhost(IntVec3 center, Rot4 rot, ThingDef thingDef, Color ghostCol, AltitudeLayer drawAltitude, Thing thing = null)
         {
-            if (this.rangeSetting)
+            
+            
+            
+            if (this.maxPowerForRange > 0)
             {
                 base.DrawGhost(center, rot, thingDef, ghostCol, drawAltitude, thing);
                 var min = propsRangeType.RangeCells(center, rot, thingDef, this.minRange);

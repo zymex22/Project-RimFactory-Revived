@@ -345,8 +345,8 @@
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
+        
+        
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <minPowerForRange>850</minPowerForRange>
         <minRange>6</minRange>
@@ -432,8 +432,8 @@
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
+        
+        
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         
         <minRange>8</minRange>

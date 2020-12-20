@@ -158,8 +158,8 @@
         <basePowerConsumption>300</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
+        
+        
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         
         <minRange>3</minRange>
@@ -268,8 +268,8 @@
         <basePowerConsumption>200</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
+        
+        
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         
         <minRange>2</minRange>

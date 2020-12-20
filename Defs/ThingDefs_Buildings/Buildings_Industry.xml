@@ -323,13 +323,13 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- speed settings -->
-        <speedSetting>true</speedSetting>
+        
         
         <minSpeedFactor>1</minSpeedFactor>
         <maxPowerForSpeed>10000</maxPowerForSpeed>
         <maxSpeedFactor>3.5</maxSpeedFactor>
         <!-- range settings -->
-        <rangeSetting>true</rangeSetting>
+        
         
         <minRange>1</minRange>
         <maxPowerForRange>500</maxPowerForRange>
@@ -422,13 +422,13 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- speed settings -->
-        <speedSetting>true</speedSetting>
+        
         
         <minSpeedFactor>1</minSpeedFactor>
         <maxPowerForSpeed>3000</maxPowerForSpeed>
         <maxSpeedFactor>4</maxSpeedFactor>
         <!-- range settings -->
-        <rangeSetting>true</rangeSetting>
+        
         
         <minRange>1</minRange>
         <maxPowerForRange>500</maxPowerForRange>
