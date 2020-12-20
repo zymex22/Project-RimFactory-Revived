@@ -290,13 +290,14 @@ Mod extennsion for assemblers
         <ghostColor>(0,1,1,1)</ghostColor>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        
-        <!-- range settings -->
-        
-        
-        <minRange>1</minRange>
-        <maxPowerForRange>1500</maxPowerForRange>
-        <maxRange>5</maxRange>
+        <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>1~5</floatrange_Range>
+<powerPerStepRange>375</powerPerStepRange>
+
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>

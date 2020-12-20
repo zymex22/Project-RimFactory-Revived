@@ -13,9 +13,9 @@ namespace ProjectRimFactory.Common
     {
         public CompProperties_PowerWorkSetting Props => (CompProperties_PowerWorkSetting)this.props;
 
-        public int MaxPowerForSpeed => this.Props.maxPowerForSpeed;
+        public int MaxPowerForSpeed =>  (int)(this.Props.floatrange_SpeedFactor.Span * this.Props.powerPerStepSpeed);
 
-        public int MaxPowerForRange => this.Props.maxPowerForRange;
+        public int MaxPowerForRange =>  (int)(this.Props.floatrange_Range.Span * this.Props.powerPerStepRange);
 
         public IRangeCells rangeCells = null;
 
@@ -45,11 +45,9 @@ namespace ProjectRimFactory.Common
 
         public virtual bool Glow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public virtual bool SpeedSetting => this.Props.maxPowerForSpeed > 0;
+        public virtual bool SpeedSetting => this.Props.floatrange_SpeedFactor.Span > 0;
 
-        public bool RangeSetting => this.Props.maxPowerForRange > 0;
-
-        public virtual float RangeInterval => (this.Props.maxPowerForRange) / (this.Props.maxRange - this.Props.minRange);
+        public bool RangeSetting => this.Props.floatrange_Range.Span > 0;
 
         private float powerForSpeed = 0;
 
@@ -105,6 +103,18 @@ namespace ProjectRimFactory.Common
                 }
             }
         }
+
+        public float PowerPerStepSpeed => this.Props.powerPerStepSpeed / this.Props.powerStepFactor;
+
+        public float PowerPerStepRange => this.Props.powerPerStepRange;
+
+        public FloatRange FloatRange_Range => this.Props.floatrange_Range;
+
+        public float CurrentRange => this.GetRange();
+
+        public FloatRange FloatRange_SpeedFactor => this.Props.floatrange_SpeedFactor;
+
+        public float CurrentSpeedFactor => this.GetSpeedFactor();
 
         //Used for Saving the rangeCells . This is done as directly saving rangeCells leads to unknown Type Errors on Load
         private int rangeTypeSeletion = -1;
@@ -174,7 +184,7 @@ namespace ProjectRimFactory.Common
         public virtual float GetSpeedFactor()
         {
             var f = (this.powerForSpeed) / (this.MaxPowerForSpeed);
-            return Mathf.Lerp(this.Props.minSpeedFactor, this.Props.maxSpeedFactor, f);
+            return Mathf.Lerp(this.Props.floatrange_SpeedFactor.min, this.Props.floatrange_SpeedFactor.max, f);
         }
 
         public virtual float GetRange()
@@ -182,7 +192,7 @@ namespace ProjectRimFactory.Common
             if (this.RangeSetting)
             {
                 var f = (this.powerForRange) / (this.MaxPowerForRange);
-                return Mathf.Lerp(this.Props.minRange, this.Props.maxRange, f);
+                return Mathf.Lerp(this.Props.floatrange_Range.min, this.Props.floatrange_Range.max, f);
             }
             return 0f;
         }
@@ -201,7 +211,7 @@ namespace ProjectRimFactory.Common
             base.PostDrawExtraSelectionOverlays();
             if (this.RangeSetting)
             {
-                this.DrawRangeCells(this.Props.instance);
+                this.DrawRangeCells(CommonColors.instance);
             }
         }
 
@@ -228,35 +238,24 @@ namespace ProjectRimFactory.Common
 
         public IRangeCells[] rangeTypes = new IRangeCells[] { new  CircleRange() , new FacingRectRange() , new RectRange() }; 
 
-
-
-
-
-
-
-
     }
 
     public class CompProperties_PowerWorkSetting : CompProperties
     {
-        public int maxPowerForSpeed = 0;
+        //speed
+        public FloatRange floatrange_SpeedFactor;
+        public float powerPerStepSpeed;
+        public float powerStepFactor = 1;
 
-        public float minSpeedFactor = 1;
-        public float maxSpeedFactor = 2;
+        //Range
+        public FloatRange floatrange_Range;
+        public float powerPerStepRange;
 
-        public int maxPowerForRange = 0;
-
-        public float minRange = 3;
-        public float maxRange = 6;
-
+        //Range Type Settings
         public bool allowManualRangeTypeChange = false;
-
-        public Color blueprintMin = Color.white;
-        public Color blueprintMax = Color.gray.A(0.6f);
-        public Color instance = Color.white;
-        public Color otherInstance = Color.white.A(0.35f);
-
         public Type rangeType;
+
+
 
         private IRangeCells propsRangeType => (IRangeCells)Activator.CreateInstance(rangeType);
 
@@ -267,20 +266,20 @@ namespace ProjectRimFactory.Common
 
         public override void DrawGhost(IntVec3 center, Rot4 rot, ThingDef thingDef, Color ghostCol, AltitudeLayer drawAltitude, Thing thing = null)
         {
-            if (this.maxPowerForRange > 0)
+            if (this.floatrange_Range.Span > 0)
             {
                 base.DrawGhost(center, rot, thingDef, ghostCol, drawAltitude, thing);
-                var min = propsRangeType.RangeCells(center, rot, thingDef, this.minRange);
-                var max = propsRangeType.RangeCells(center, rot, thingDef, this.maxRange);
-                min.Select(c => new { Cell = c, Color = this.blueprintMin })
-                    .Concat(max.Select(c => new { Cell = c, Color = this.blueprintMax }))
+                var min = propsRangeType.RangeCells(center, rot, thingDef, this.floatrange_Range.min);
+                var max = propsRangeType.RangeCells(center, rot, thingDef, this.floatrange_Range.max);
+                min.Select(c => new { Cell = c, Color = CommonColors.blueprintMin })
+                    .Concat(max.Select(c => new { Cell = c, Color = CommonColors.blueprintMax }))
                     .GroupBy(a => a.Color)
                     .ToList()
                     .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
 
                 Map map = Find.CurrentMap;
                 map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null)
-                    .ToList().ForEach(c => c.DrawRangeCells(this.otherInstance));
+                    .ToList().ForEach(c => c.DrawRangeCells(CommonColors.otherInstance));
             }
         } 
     }

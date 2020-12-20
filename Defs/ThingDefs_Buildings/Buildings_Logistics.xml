@@ -130,12 +130,13 @@
       <li Class="CompProperties_Flickable" />
       <!-- Either specialDisplayRadius or CompProperties_PowerWorkSetting -->
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        
-        
-        
-        <minRange>5</minRange>
-        <maxPowerForRange>500</maxPowerForRange>
-        <maxRange>10</maxRange>
+        <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>5~10</floatrange_Range>
+<powerPerStepRange>100</powerPerStepRange>
         <rangeType>ProjectRimFactory.Common.CircleRange</rangeType>
       </li>
     </comps>
@@ -198,10 +199,14 @@
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
     <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>1000</maxPowerForSpeed>
+    <!-- Speed Settings -->
+<floatrange_SpeedFactor>31~31</floatrange_SpeedFactor>
+<powerPerStepSpeed>1000</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>0~0</floatrange_Range>
+<powerPerStepRange>0</powerPerStepRange>
 
-<minSpeedFactor>31</minSpeedFactor>
-<maxSpeedFactor>31</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
 </li>
     </comps>
@@ -332,10 +337,14 @@
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
             <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>500</maxPowerForSpeed>
+            <!-- Speed Settings -->
+<floatrange_SpeedFactor>15~15</floatrange_SpeedFactor>
+<powerPerStepSpeed>500</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>0~0</floatrange_Range>
+<powerPerStepRange>0</powerPerStepRange>
 
-<minSpeedFactor>15</minSpeedFactor>
-<maxSpeedFactor>15</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
 </li>
     </comps>
@@ -550,10 +559,14 @@
       <li Class="CompProperties_Flickable"/>
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-    <maxPowerForSpeed>0</maxPowerForSpeed>
-    
-    <minSpeedFactor>5</minSpeedFactor>
-    <maxSpeedFactor>5</maxSpeedFactor>
+      <!-- Speed Settings -->
+<floatrange_SpeedFactor>5~5</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>0~0</floatrange_Range>
+<powerPerStepRange>0</powerPerStepRange>
+
     <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
     </li>
     </comps>

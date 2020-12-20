@@ -87,16 +87,15 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
     <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>0</maxPowerForSpeed>
-
-
-<minSpeedFactor>2</minSpeedFactor>
-<maxSpeedFactor>2</maxSpeedFactor>
+    <!-- Speed Settings -->
+<floatrange_SpeedFactor>2~2</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>1~3</floatrange_Range>
+<powerPerStepRange>250</powerPerStepRange>
+    
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-<maxPowerForRange>1000</maxPowerForRange>
-<minRange>3</minRange>
-<maxRange>6</maxRange>
 
 </li>
     </comps>
@@ -154,16 +153,14 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>0</maxPowerForSpeed>
-
-
-<minSpeedFactor>1</minSpeedFactor>
-<maxSpeedFactor>1</maxSpeedFactor>
+      <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>3~6</floatrange_Range>
+<powerPerStepRange>250</powerPerStepRange>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-<maxPowerForRange>1000</maxPowerForRange>
-<minRange>3</minRange>
-<maxRange>6</maxRange>
 
 </li>
     </comps>
@@ -222,16 +219,13 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>0</maxPowerForSpeed>
-
-
-<minSpeedFactor>1</minSpeedFactor>
-<maxSpeedFactor>1</maxSpeedFactor>
+      <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<!-- Range Settings -->
+<floatrange_Range>3~6</floatrange_Range>
+<powerPerStepRange>250</powerPerStepRange>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-<maxPowerForRange>1000</maxPowerForRange>
-<minRange>3</minRange>
-<maxRange>6</maxRange>
 
 </li>
     </comps>
@@ -286,16 +280,15 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>0</maxPowerForSpeed>
+      <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<!-- Range Settings -->
+<floatrange_Range>1~3</floatrange_Range>
+<powerPerStepRange>100</powerPerStepRange>
 
-
-<minSpeedFactor>1</minSpeedFactor>
-<maxSpeedFactor>1</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
 
-<maxPowerForRange>1000</maxPowerForRange>
-<minRange>3</minRange>
-<maxRange>6</maxRange>
 
 </li>
     </comps>
@@ -350,16 +343,14 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>0</maxPowerForSpeed>
+      
+<floatrange_SpeedFactor>5~5</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<!-- Range Settings -->
+<floatrange_Range>1~3</floatrange_Range>
+<powerPerStepRange>100</powerPerStepRange>
 
-
-<minSpeedFactor>5</minSpeedFactor>
-<maxSpeedFactor>5</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-<maxPowerForRange>1000</maxPowerForRange>
-<minRange>3</minRange>
-<maxRange>6</maxRange>
 
 </li>
     </comps>
@@ -406,15 +397,14 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>1000</maxPowerForSpeed>
-
-<minSpeedFactor>12</minSpeedFactor>
-<maxSpeedFactor>12</maxSpeedFactor>
+      
+<floatrange_SpeedFactor>12~12</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<!-- Range Settings -->
+<floatrange_Range>1~3</floatrange_Range>
+<powerPerStepRange>100</powerPerStepRange>
+      
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-<maxPowerForRange>1000</maxPowerForRange>
-<minRange>3</minRange>
-<maxRange>6</maxRange>
 
 </li>
     </comps>
@@ -462,16 +452,14 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>0</maxPowerForSpeed>
-
-
-<minSpeedFactor>1</minSpeedFactor>
-<maxSpeedFactor>1</maxSpeedFactor>
+      
+<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<!-- Range Settings -->
+<floatrange_Range>1~3</floatrange_Range>
+<powerPerStepRange>100</powerPerStepRange>
+      
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-<maxPowerForRange>400</maxPowerForRange>
-<minRange>3</minRange>
-<maxRange>6</maxRange>
 
 </li>
     </comps>
@@ -576,16 +564,14 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>0</maxPowerForSpeed>
-
-
-<minSpeedFactor>666</minSpeedFactor>
-<maxSpeedFactor>666</maxSpeedFactor>
+      
+<floatrange_SpeedFactor>666~666</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<!-- Range Settings -->
+<floatrange_Range>1~5</floatrange_Range>
+<powerPerStepRange>100</powerPerStepRange>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
 
-<maxPowerForRange>1000</maxPowerForRange>
-<minRange>3</minRange>
-<maxRange>6</maxRange>
 
 </li>
     </comps>

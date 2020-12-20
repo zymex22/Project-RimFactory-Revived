@@ -269,13 +269,16 @@
         <basePowerConsumption>750</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        
+        <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>5~15</floatrange_Range>
+<powerPerStepRange>150</powerPerStepRange>
         
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         
-        <minRange>5</minRange>
-        <maxPowerForRange>1500</maxPowerForRange>
-        <maxRange>15</maxRange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
     </comps>

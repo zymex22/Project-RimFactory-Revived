@@ -32,10 +32,17 @@ namespace ProjectRimFactory.Common
         int MaxPowerForSpeed { get; }
         int MaxPowerForRange { get; }
 
+        float PowerPerStepSpeed { get; }
+        float PowerPerStepRange { get; }
+
+        FloatRange FloatRange_Range { get; }
+        float CurrentRange { get; }
+
+        FloatRange FloatRange_SpeedFactor { get; }
+        float CurrentSpeedFactor { get; }
+
         float SupplyPowerForSpeed { get; set; }
         float SupplyPowerForRange { get; set; }
-
-        float RangeInterval { get; }
 
         bool Glowable { get; }
         bool Glow { get; set; }
@@ -49,9 +56,9 @@ namespace ProjectRimFactory.Common
     {
         private static readonly Vector2 WinSize = new Vector2(600f, 130f);
 
-        private static readonly float HeightSpeed = 120;
+        private static readonly float HeightSpeed = 120 + 30;
 
-        private static readonly float HeightRange = 100;
+        private static readonly float HeightRange = 100 + 30;
 
         private static readonly float HeightGlow = 30;
 
@@ -88,6 +95,8 @@ namespace ProjectRimFactory.Common
 
         protected override void FillTab()
         {
+            TextAnchor anchor;
+
             Listing_Standard list = new Listing_Standard();
             Rect inRect = new Rect(0f, 0f, this.size.x, this.size.y).ContractedBy(10f);
 
@@ -132,8 +141,20 @@ namespace ProjectRimFactory.Common
 
                 rect = list.GetRect(50f);
                 var speed = (int)Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForSpeed, (float)minPowerSpeed, (float)maxPowerSpeed, true, valueLabelForSpeed,
-                    "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(minPowerSpeed), "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(maxPowerSpeed), 50);
+                    "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(minPowerSpeed), "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(maxPowerSpeed), this.Machine.PowerPerStepSpeed);
                 this.Machine.SupplyPowerForSpeed = speed;
+                //Add info Labels below
+                rect = list.GetRect(30f);
+                anchor = Text.Anchor;
+                Text.Anchor = TextAnchor.UpperLeft;
+                Widgets.Label(rect, this.Machine.FloatRange_SpeedFactor.min.ToString());
+                Text.Anchor = TextAnchor.UpperRight;
+                Widgets.Label(rect, this.Machine.FloatRange_SpeedFactor.max.ToString());
+                Text.Anchor = TextAnchor.UpperCenter;
+                Widgets.Label(rect, this.Machine.CurrentSpeedFactor.ToString());
+                Text.Anchor = anchor;
+
+
                 list.Gap();
 
                 //Check if this.Machine.RangeSetting is active to place a Devider line
@@ -158,8 +179,18 @@ namespace ProjectRimFactory.Common
 
                 rect = list.GetRect(50f);
                 var range = Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForRange, (float)minPowerRange, (float)maxPowerRange, true, valueLabelForRange, 
-                    "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(minPowerRange), "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(maxPowerRange), this.Machine.RangeInterval);
+                    "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(minPowerRange), "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(maxPowerRange), this.Machine.PowerPerStepRange);
                 this.Machine.SupplyPowerForRange = range;
+                //Add info Labels below
+                rect = list.GetRect(30f);
+                anchor = Text.Anchor;
+                Text.Anchor = TextAnchor.UpperLeft;
+                Widgets.Label(rect, this.Machine.FloatRange_Range.min.ToString());
+                Text.Anchor = TextAnchor.UpperRight;
+                Widgets.Label(rect, this.Machine.FloatRange_Range.max.ToString());
+                Text.Anchor = TextAnchor.UpperCenter;
+                Widgets.Label(rect, this.Machine.CurrentRange.ToString());
+                Text.Anchor = anchor;
                 list.Gap();
             }
 

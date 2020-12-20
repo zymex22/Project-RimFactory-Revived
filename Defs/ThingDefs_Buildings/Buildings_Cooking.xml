@@ -219,18 +219,14 @@
         <glowColor>(115,198,206,0)</glowColor>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <!-- speed settings -->
-        
-        
-        <minSpeedFactor>1</minSpeedFactor>
-        <maxPowerForSpeed>3000</maxPowerForSpeed>
-        <maxSpeedFactor>3</maxSpeedFactor>
-        <!-- range settings -->
-        
-        
-        <minRange>1</minRange>
-        <maxPowerForRange>1500</maxPowerForRange>
-        <maxRange>4</maxRange>
+        <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~3</floatrange_SpeedFactor>
+<powerPerStepSpeed>1500</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>1~4</floatrange_Range>
+<powerPerStepRange>500</powerPerStepRange>
+
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
         <!-- range color settings
