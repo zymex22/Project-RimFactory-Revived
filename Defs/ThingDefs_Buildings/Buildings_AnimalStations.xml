@@ -317,13 +317,13 @@
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- speed settings -->
         <speedSetting>false</speedSetting>
-        <minPowerForSpeed>0</minPowerForSpeed>
+        
         <minSpeedFactor>1</minSpeedFactor>
         <maxPowerForSpeed>3000</maxPowerForSpeed>
         <maxSpeedFactor>3</maxSpeedFactor>
         <!-- range settings -->
         <rangeSetting>true</rangeSetting>
-        <minPowerForRange>0</minPowerForRange>
+        
         <minRange>1</minRange>
         <maxPowerForRange>1500</maxPowerForRange>
         <maxRange>4</maxRange>
@@ -418,11 +418,11 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <maxPowerForSpeed>2000</maxPowerForSpeed>
-        <minPowerForSpeed>0</minPowerForSpeed>
+        
         <minSpeedFactor>1</minSpeedFactor>
         <maxSpeedFactor>1</maxSpeedFactor>
         <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>
-        <minPowerForRange>0</minPowerForRange>
+        
         <maxPowerForRange>2000</maxPowerForRange>
         <minRange>3</minRange>
         <maxRange>6</maxRange>

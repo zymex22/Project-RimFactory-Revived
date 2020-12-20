@@ -29,9 +29,7 @@ namespace ProjectRimFactory.Common
         //Strig will be formated for the overview and the value will hold the additional consumption
         Dictionary<string,int> AdditionalPowerConsumption { get; }
 
-        int MinPowerForSpeed { get; }
         int MaxPowerForSpeed { get; }
-        int MinPowerForRange { get; }
         int MaxPowerForRange { get; }
 
         float SupplyPowerForSpeed { get; set; }
@@ -122,7 +120,7 @@ namespace ProjectRimFactory.Common
 
             if (this.Machine.SpeedSetting)
             {
-                int minPowerSpeed = this.Machine.MinPowerForSpeed;
+                int minPowerSpeed = 0;
                 int maxPowerSpeed = this.Machine.MaxPowerForSpeed;
 
                 string valueLabelForSpeed = "PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed".Translate(Machine.SupplyPowerForSpeed);
@@ -148,7 +146,7 @@ namespace ProjectRimFactory.Common
 
             if (this.Machine.RangeSetting)
             {
-                int minPowerRange = this.Machine.MinPowerForRange;
+                int minPowerRange = 0;
                 int maxPowerRange = this.Machine.MaxPowerForRange;
 
                 string valueLabelForRange = "PRF.AutoMachineTool.SupplyPower.ValueLabelForRange".Translate(Machine.SupplyPowerForRange);

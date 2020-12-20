@@ -272,7 +272,7 @@
         <speedSetting>false</speedSetting>
         <rangeSetting>true</rangeSetting>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        <minPowerForRange>0</minPowerForRange>
+        
         <minRange>5</minRange>
         <maxPowerForRange>1500</maxPowerForRange>
         <maxRange>15</maxRange>

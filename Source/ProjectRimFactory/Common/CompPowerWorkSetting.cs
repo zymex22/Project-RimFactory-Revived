@@ -13,11 +13,7 @@ namespace ProjectRimFactory.Common
     {
         public CompProperties_PowerWorkSetting Props => (CompProperties_PowerWorkSetting)this.props;
 
-        public int MinPowerForSpeed => this.Props.minPowerForSpeed;
-
         public int MaxPowerForSpeed => this.Props.maxPowerForSpeed;
-
-        public int MinPowerForRange => this.Props.minPowerForRange;
 
         public int MaxPowerForRange => this.Props.maxPowerForRange;
 
@@ -53,7 +49,7 @@ namespace ProjectRimFactory.Common
 
         public bool RangeSetting => this.Props.rangeSetting;
 
-        public virtual float RangeInterval => (this.Props.maxPowerForRange - this.Props.minPowerForRange) / (this.Props.maxRange - this.Props.minRange);
+        public virtual float RangeInterval => (this.Props.maxPowerForRange) / (this.Props.maxRange - this.Props.minRange);
 
         private float powerForSpeed = 0;
 
@@ -152,8 +148,8 @@ namespace ProjectRimFactory.Common
             base.PostSpawnSetup(respawningAfterLoad);
             if (!respawningAfterLoad)
             {
-                this.powerForSpeed = this.Props.minPowerForSpeed;
-                this.powerForRange = this.Props.minPowerForRange;
+                this.powerForSpeed = 0;
+                this.powerForRange = 0;
             }
             this.powerComp = this.parent.TryGetComp<CompPowerTrader>();
             this.AdjustPower();
@@ -162,9 +158,9 @@ namespace ProjectRimFactory.Common
 
         protected virtual void AdjustPower()
         {
-            this.powerForSpeed = Mathf.Clamp(this.powerForSpeed, this.MinPowerForSpeed, this.MaxPowerForSpeed);
+            this.powerForSpeed = Mathf.Clamp(this.powerForSpeed, 0, this.MaxPowerForSpeed);
 
-            this.powerForRange = Mathf.Clamp(this.powerForRange, this.MinPowerForRange, this.MaxPowerForRange);
+            this.powerForRange = Mathf.Clamp(this.powerForRange, 0, this.MaxPowerForRange);
         }
 
         public void RefreshPowerStatus()
@@ -177,7 +173,7 @@ namespace ProjectRimFactory.Common
 
         public virtual float GetSpeedFactor()
         {
-            var f = (this.powerForSpeed - this.MinPowerForSpeed) / (this.MaxPowerForSpeed - this.MinPowerForSpeed);
+            var f = (this.powerForSpeed) / (this.MaxPowerForSpeed);
             return Mathf.Lerp(this.Props.minSpeedFactor, this.Props.maxSpeedFactor, f);
         }
 
@@ -185,7 +181,7 @@ namespace ProjectRimFactory.Common
         {
             if (this.RangeSetting)
             {
-                var f = (this.powerForRange - this.MinPowerForRange) / (this.MaxPowerForRange - this.MinPowerForRange);
+                var f = (this.powerForRange) / (this.MaxPowerForRange);
                 return Mathf.Lerp(this.Props.minRange, this.Props.maxRange, f);
             }
             return 0f;
@@ -244,12 +240,10 @@ namespace ProjectRimFactory.Common
     public class CompProperties_PowerWorkSetting : CompProperties
     {
         public int maxPowerForSpeed = 0;
-        public int minPowerForSpeed = 1000;
 
         public float minSpeedFactor = 1;
         public float maxSpeedFactor = 2;
 
-        public int minPowerForRange = 0;
         public int maxPowerForRange = 1000;
 
         public float minRange = 3;

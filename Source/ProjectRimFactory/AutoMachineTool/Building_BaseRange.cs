@@ -129,15 +129,15 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<float>(ref this.supplyPowerForRange, "supplyPowerForRange", this.MinPowerForRange);
+            Scribe_Values.Look<float>(ref this.supplyPowerForRange, "supplyPowerForRange", 0);
             Scribe_Values.Look<bool>(ref this.glow, "glow", false);
         }
 
         protected override void ReloadSettings(object sender, EventArgs e)
         {
-            if (this.SupplyPowerForRange < this.MinPowerForRange)
+            if (this.SupplyPowerForRange < 0)
             {
-                this.SupplyPowerForRange = this.MinPowerForRange;
+                this.SupplyPowerForRange = 0;
             }
             if (this.SupplyPowerForRange > this.MaxPowerForRange)
             {
@@ -172,7 +172,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.SpawnSetup(map, respawningAfterLoad);
             if (!respawningAfterLoad)
             {
-                this.SupplyPowerForRange = this.MinPowerForRange;
+                this.SupplyPowerForRange = 0;
             }
             Option(this.TryGetComp<CompGlower>()).ForEach(g =>
             {

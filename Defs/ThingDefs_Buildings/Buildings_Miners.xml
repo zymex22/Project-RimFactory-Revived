@@ -435,7 +435,7 @@
         <speedSetting>false</speedSetting>
         <rangeSetting>true</rangeSetting>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        <minPowerForRange>0</minPowerForRange>
+        
         <minRange>8</minRange>
         <maxPowerForRange>1700</maxPowerForRange>
         <maxRange>20</maxRange>
@@ -599,7 +599,7 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <maxPowerForSpeed>10000</maxPowerForSpeed>
-        <minPowerForSpeed>0</minPowerForSpeed>
+        
         <minSpeedFactor>10</minSpeedFactor>
         <maxSpeedFactor>10</maxSpeedFactor>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->

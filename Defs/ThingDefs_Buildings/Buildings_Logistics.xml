@@ -132,7 +132,7 @@
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <speedSetting>false</speedSetting>
         <rangeSetting>true</rangeSetting>
-        <minPowerForRange>0</minPowerForRange>
+        
         <minRange>5</minRange>
         <maxPowerForRange>500</maxPowerForRange>
         <maxRange>10</maxRange>
@@ -199,7 +199,7 @@
       <li Class="CompProperties_Flickable"/>
     <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
 <maxPowerForSpeed>1000</maxPowerForSpeed>
-<minPowerForSpeed>0</minPowerForSpeed>
+
 <minSpeedFactor>31</minSpeedFactor>
 <maxSpeedFactor>31</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -333,7 +333,7 @@
       <li Class="CompProperties_Flickable"/>
             <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
 <maxPowerForSpeed>500</maxPowerForSpeed>
-<minPowerForSpeed>0</minPowerForSpeed>
+
 <minSpeedFactor>15</minSpeedFactor>
 <maxSpeedFactor>15</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -543,15 +543,15 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>10</basePowerConsumption>
         <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-    <maxPowerForSpeed>10</maxPowerForSpeed>
-    <minPowerForSpeed>10</minPowerForSpeed>
+    <maxPowerForSpeed>0</maxPowerForSpeed>
+    <speedSetting>false</speedSetting>
     <minSpeedFactor>5</minSpeedFactor>
     <maxSpeedFactor>5</maxSpeedFactor>
     <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->

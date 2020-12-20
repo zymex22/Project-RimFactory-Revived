@@ -21,7 +21,6 @@ namespace ProjectRimFactory.AutoMachineTool
         protected virtual float SpeedFactor => powerWorkSetting.SupplyPowerForSpeed;
         protected virtual int? SkillLevel { get => null; }
 
-        public virtual int MinPowerForSpeed => powerWorkSetting.MinPowerForSpeed;
         public virtual int MaxPowerForSpeed => powerWorkSetting.MaxPowerForSpeed;
 
         public IPowerSupplyMachine RangePowerSupplyMachine => this;
@@ -50,15 +49,15 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.ExposeData();
             powerWorkSetting = this.GetComp<CompPowerWorkSetting>();
-            Scribe_Values.Look<float>(ref this.supplyPowerForSpeed, "supplyPowerForSpeed", this.MinPowerForSpeed);
+            Scribe_Values.Look<float>(ref this.supplyPowerForSpeed, "supplyPowerForSpeed", 0);
             this.ReloadSettings(null, null);
         }
 
         protected virtual void ReloadSettings(object sender, EventArgs e)
         {
-            if (this.SupplyPowerForSpeed < this.MinPowerForSpeed)
+            if (this.SupplyPowerForSpeed < 0)
             {
-                this.SupplyPowerForSpeed = this.MinPowerForSpeed;
+                this.SupplyPowerForSpeed = 0;
             }
             if (this.SupplyPowerForSpeed > this.MaxPowerForSpeed)
             {
@@ -75,7 +74,7 @@ namespace ProjectRimFactory.AutoMachineTool
             if (!respawningAfterLoad)
             {
                 if (setInitialMinPower)
-                    this.SupplyPowerForSpeed = this.MinPowerForSpeed;
+                    this.SupplyPowerForSpeed = 0;
             }
 
             this.MapManager.NextAction(this.RefreshPowerStatus);
@@ -109,8 +108,6 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         protected override float WorkAmountPerTick => 0.01f * this.SpeedFactor * this.SupplyPowerForSpeed * this.Factor2();
-
-        public virtual int MinPowerForRange => powerWorkSetting.MinPowerForRange;
 
         public virtual int MaxPowerForRange => powerWorkSetting.MaxPowerForRange;
 
