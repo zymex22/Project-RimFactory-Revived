@@ -244,7 +244,7 @@ namespace ProjectRimFactory.Common
         public float minSpeedFactor = 1;
         public float maxSpeedFactor = 2;
 
-        public int maxPowerForRange = 1000;
+        public int maxPowerForRange = 0;
 
         public float minRange = 3;
         public float maxRange = 6;
@@ -267,9 +267,6 @@ namespace ProjectRimFactory.Common
 
         public override void DrawGhost(IntVec3 center, Rot4 rot, ThingDef thingDef, Color ghostCol, AltitudeLayer drawAltitude, Thing thing = null)
         {
-            
-            
-            
             if (this.maxPowerForRange > 0)
             {
                 base.DrawGhost(center, rot, thingDef, ghostCol, drawAltitude, thing);
@@ -285,9 +282,7 @@ namespace ProjectRimFactory.Common
                 map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null)
                     .ToList().ForEach(c => c.DrawRangeCells(this.otherInstance));
             }
-        }
-
-        
+        } 
     }
 
     public interface IRangeCells

@@ -23,7 +23,7 @@ namespace ProjectRimFactory.AutoMachineTool
         IEnumerable<IntVec3> GetAllTargetCells();
     }
 
-    public abstract class Building_BaseRange<T> : Building_BaseLimitation<T>, IRange, IPowerSupplyMachineHolder, IPowerSupplyMachine where T : Thing
+    public abstract class Building_BaseRange<T> : Building_BaseLimitation<T>, IRange, IPowerSupplyMachineHolder where T : Thing
     {
        // public override int MinPowerForRange => this.RangeExtension.minPower;
        // public override int MaxPowerForRange => this.RangeExtension.maxPower;
@@ -45,13 +45,6 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         public IntVec2 Size => this.def.Size;
-
-        public override bool SpeedSetting => powerWorkSetting.SpeedSetting;
-
-        public override bool RangeSetting => powerWorkSetting.RangeSetting;
-
-        public override float RangeInterval => powerWorkSetting.RangeInterval;
-
 
         private float supplyPowerForRange;
 
@@ -133,11 +126,6 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look<bool>(ref this.glow, "glow", false);
         }
 
-        public override void RefreshPowerStatus()
-        {
-            powerWorkSetting.RefreshPowerStatus();
-        }
-
         private void ChangeGlow()
         {
             Option(this.TryGetComp<CompGlower>()).ForEach(glower =>
@@ -157,7 +145,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.SpawnSetup(map, respawningAfterLoad);
             if (!respawningAfterLoad)
             {
-                this.SupplyPowerForRange = 0;
+                powerWorkSetting.SupplyPowerForRange = 0;
             }
             Option(this.TryGetComp<CompGlower>()).ForEach(g =>
             {
