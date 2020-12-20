@@ -114,6 +114,8 @@ namespace ProjectRimFactory.Common
             //Display the Sum
             powerUsageBreackdown += "PRF.AutoMachineTool.SupplyPower.BreakDownLine_End".Translate( -1 * this.Machine.CurrentPowerConsumption);
             Widgets.Label(rect, powerUsageBreackdown);
+            rect = list.GetRect(2f);
+            Widgets.DrawLineHorizontal(rect.x, rect.y, WinSize.x);
 
             list.Gap();
             //----------------------------
@@ -123,7 +125,7 @@ namespace ProjectRimFactory.Common
                 int minPowerSpeed = this.Machine.MinPowerForSpeed;
                 int maxPowerSpeed = this.Machine.MaxPowerForSpeed;
 
-                string valueLabelForSpeed = "PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed".Translate() + " (" + minPowerSpeed + " to " + maxPowerSpeed + ") ";
+                string valueLabelForSpeed = "PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed".Translate() + " (" + Machine.SupplyPowerForSpeed + ") ";
 
                 // for speed
                 rect = list.GetRect(50f);
@@ -148,7 +150,7 @@ namespace ProjectRimFactory.Common
                 int minPowerRange = this.Machine.MinPowerForRange;
                 int maxPowerRange = this.Machine.MaxPowerForRange;
 
-                string valueLabelForRange = "PRF.AutoMachineTool.SupplyPower.ValueLabelForRange".Translate() + " (" + minPowerRange + " to " + maxPowerRange + ") ";
+                string valueLabelForRange = "PRF.AutoMachineTool.SupplyPower.ValueLabelForRange".Translate() + " (" + Machine.SupplyPowerForRange + ") ";
 
                 // for range
                 rect = list.GetRect(50f);
