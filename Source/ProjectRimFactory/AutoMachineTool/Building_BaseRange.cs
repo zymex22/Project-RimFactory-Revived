@@ -46,11 +46,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public IntVec2 Size => this.def.Size;
 
-        public override bool SpeedSetting => true;
+        public override bool SpeedSetting => powerWorkSetting.SpeedSetting;
 
-        public override bool RangeSetting => true;
+        public override bool RangeSetting => powerWorkSetting.RangeSetting;
 
-        public override float RangeInterval => 500;
+        public override float RangeInterval => powerWorkSetting.RangeInterval;
 
 
         private float supplyPowerForRange;
@@ -133,24 +133,9 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look<bool>(ref this.glow, "glow", false);
         }
 
-        protected override void ReloadSettings(object sender, EventArgs e)
-        {
-            if (this.SupplyPowerForRange < 0)
-            {
-                this.SupplyPowerForRange = 0;
-            }
-            if (this.SupplyPowerForRange > this.MaxPowerForRange)
-            {
-                this.SupplyPowerForRange = this.MaxPowerForRange;
-            }
-        }
-
         public override void RefreshPowerStatus()
         {
-            if (-this.SupplyPowerForRange - this.SupplyPowerForSpeed - (this.Glowable && this.Glow ? 2000 : 0) != this.TryGetComp<CompPowerTrader>().PowerOutput)
-            {
-                this.powerComp.PowerOutput = -this.SupplyPowerForRange - this.SupplyPowerForSpeed - (this.Glowable && this.Glow ? 2000 : 0);
-            }
+            powerWorkSetting.RefreshPowerStatus();
         }
 
         private void ChangeGlow()

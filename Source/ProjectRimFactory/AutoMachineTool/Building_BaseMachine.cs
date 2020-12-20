@@ -32,37 +32,18 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public virtual float SupplyPowerForSpeed
         {
-            get => this.supplyPowerForSpeed;
+            get => powerWorkSetting.SupplyPowerForSpeed;
             set
             {
-                if (this.supplyPowerForSpeed != value)
-                {
-                    this.supplyPowerForSpeed = value;
-                    this.RefreshPowerStatus();
-                }
+                powerWorkSetting.SupplyPowerForSpeed = value;
             }
         }
-        private float supplyPowerForSpeed;
 
 
         public override void ExposeData()
         {
             base.ExposeData();
             powerWorkSetting = this.GetComp<CompPowerWorkSetting>();
-            Scribe_Values.Look<float>(ref this.supplyPowerForSpeed, "supplyPowerForSpeed", 0);
-            this.ReloadSettings(null, null);
-        }
-
-        protected virtual void ReloadSettings(object sender, EventArgs e)
-        {
-            if (this.SupplyPowerForSpeed < 0)
-            {
-                this.SupplyPowerForSpeed = 0;
-            }
-            if (this.SupplyPowerForSpeed > this.MaxPowerForSpeed)
-            {
-                this.SupplyPowerForSpeed = this.MaxPowerForSpeed;
-            }
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -97,14 +78,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public virtual void RefreshPowerStatus()
         {
-            if(this.powerComp == null)
-            {
-                return;
-            }
-            if (this.SupplyPowerForSpeed != this.powerComp.PowerOutput)
-            {
-                this.powerComp.PowerOutput = -this.SupplyPowerForSpeed;
-            }
+            powerWorkSetting.RefreshPowerStatus();
         }
 
         protected override float WorkAmountPerTick => 0.01f * this.SpeedFactor * this.SupplyPowerForSpeed * this.Factor2();
@@ -123,9 +97,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public virtual float RangeInterval => powerWorkSetting.RangeInterval;
 
-        public int BasePowerConsumption => (int)this.powerComp.Props.basePowerConsumption;
+        public int BasePowerConsumption => powerWorkSetting.BasePowerConsumption;
 
-        public int CurrentPowerConsumption => (int)this.powerComp.PowerOutput;
+        public int CurrentPowerConsumption => powerWorkSetting.CurrentPowerConsumption;
 
         public Dictionary<string, int> AdditionalPowerConsumption => null;
 
