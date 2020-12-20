@@ -102,17 +102,17 @@ namespace ProjectRimFactory.Common
             rect = list.GetRect(50f);
             //TODO Use string builder
             string powerUsageBreackdown;
-            powerUsageBreackdown = String.Format("Total Power Usage:\nBase [{0}] + Work Speed [{1}] + Range [{2}]", this.Machine.BasePowerConsumption, this.Machine.SupplyPowerForSpeed, this.Machine.SupplyPowerForRange);
+            powerUsageBreackdown = "PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start".Translate( this.Machine.BasePowerConsumption, this.Machine.SupplyPowerForSpeed, this.Machine.SupplyPowerForRange);
             //Add breackdown for additional Power usage if any
             if (this.Machine.AdditionalPowerConsumption != null && this.Machine.AdditionalPowerConsumption.Count > 0)
             {
                 foreach(KeyValuePair<string,int> pair in this.Machine.AdditionalPowerConsumption)
                 {
-                    powerUsageBreackdown += String.Format(" + {0} [{1}]",pair.Key,pair.Value);
+                    powerUsageBreackdown += "PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append".Translate( pair.Key,pair.Value);
                 }
             }
             //Display the Sum
-            powerUsageBreackdown += String.Format(" = [{0}]", -1 * this.Machine.CurrentPowerConsumption);
+            powerUsageBreackdown += "PRF.AutoMachineTool.SupplyPower.BreakDownLine_End".Translate( -1 * this.Machine.CurrentPowerConsumption);
             Widgets.Label(rect, powerUsageBreackdown);
 
             list.Gap();

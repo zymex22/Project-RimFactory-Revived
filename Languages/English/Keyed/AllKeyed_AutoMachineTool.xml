@@ -40,11 +40,15 @@ Even if the output destination is in the stockpiling zone, the finished product 
   
   <!-- PowerTab -->
   <PRF.AutoMachineTool.SupplyPower.TabName>Overclock</PRF.AutoMachineTool.SupplyPower.TabName>
-  <PRF.AutoMachineTool.SupplyPower.Description>Overclock power usage to increace WorkSpeed</PRF.AutoMachineTool.SupplyPower.Description>
-  <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Overclock power usage to increace Work Range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
+  <PRF.AutoMachineTool.SupplyPower.Description>Overclock power usage to increase WorkSpeed</PRF.AutoMachineTool.SupplyPower.Description>
+  <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Overclock power usage to increase Work Range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
   <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Overclock Power For Speed</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
   <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Overclock Power For Range</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
   <PRF.AutoMachineTool.SupplyPower.SunLampText>Sun Lamp(power:2000)</PRF.AutoMachineTool.SupplyPower.SunLampText>
+  <PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start>Total Power Usage:\nBase [{0}] + Work Speed [{1}] + Range [{2}]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start>
+  <PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append> + {0} [{1}]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append>
+  <PRF.AutoMachineTool.SupplyPower.BreakDownLine_End> = [{0}]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_End>
+  
   
   <!-- LimitationTab -->
   <!--<PRF.AutoMachineTool.ProductLimitation.TabName>Settings</PRF.AutoMachineTool.ProductLimitation.TabName>-->
