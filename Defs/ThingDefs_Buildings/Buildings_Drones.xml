@@ -55,11 +55,6 @@
     </placeWorkers>
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />
-      <li Class="CompProperties_Power">
-        <compClass>CompPowerTrader</compClass>
-        <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>0</basePowerConsumption>
-      </li>
     </comps>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
@@ -157,11 +152,16 @@
         <initialConfigurableTargetFuelLevel>1</initialConfigurableTargetFuelLevel>
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <speedSetting>false</speedSetting>
         <rangeSetting>true</rangeSetting>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        <minPowerForRange>300</minPowerForRange>
+        <minPowerForRange>0</minPowerForRange>
         <minRange>3</minRange>
         <maxPowerForRange>1000</maxPowerForRange>
         <maxRange>10</maxRange>
@@ -262,11 +262,16 @@
         <initialConfigurableTargetFuelLevel>2</initialConfigurableTargetFuelLevel>
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
+            <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <speedSetting>false</speedSetting>
         <rangeSetting>true</rangeSetting>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        <minPowerForRange>200</minPowerForRange>
+        <minPowerForRange>0</minPowerForRange>
         <minRange>2</minRange>
         <maxPowerForRange>500</maxPowerForRange>
         <maxRange>5</maxRange>

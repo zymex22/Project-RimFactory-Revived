@@ -83,12 +83,13 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>400</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
     <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>400</maxPowerForSpeed>
-<minPowerForSpeed>400</minPowerForSpeed>
+<maxPowerForSpeed>0</maxPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
+<speedSetting>false</speedSetting>
 <minSpeedFactor>2</minSpeedFactor>
 <maxSpeedFactor>2</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -149,12 +150,13 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1200</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>800</maxPowerForSpeed>
-<minPowerForSpeed>800</minPowerForSpeed>
+<maxPowerForSpeed>0</maxPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
+<speedSetting>false</speedSetting>
 <minSpeedFactor>1</minSpeedFactor>
 <maxSpeedFactor>1</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -216,12 +218,13 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1200</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>800</maxPowerForSpeed>
-<minPowerForSpeed>800</minPowerForSpeed>
+<maxPowerForSpeed>0</maxPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
+<speedSetting>false</speedSetting>
 <minSpeedFactor>1</minSpeedFactor>
 <maxSpeedFactor>1</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -279,12 +282,13 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1200</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>800</maxPowerForSpeed>
-<minPowerForSpeed>800</minPowerForSpeed>
+<maxPowerForSpeed>0</maxPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
+<speedSetting>false</speedSetting>
 <minSpeedFactor>1</minSpeedFactor>
 <maxSpeedFactor>1</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -342,12 +346,13 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1700</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>1300</maxPowerForSpeed>
-<minPowerForSpeed>1300</minPowerForSpeed>
+<maxPowerForSpeed>0</maxPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
+<speedSetting>false</speedSetting>
 <minSpeedFactor>5</minSpeedFactor>
 <maxSpeedFactor>5</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -397,12 +402,12 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1900</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>2500</maxPowerForSpeed>
-<minPowerForSpeed>1500</minPowerForSpeed>
+<maxPowerForSpeed>1000</maxPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
 <minSpeedFactor>12</minSpeedFactor>
 <maxSpeedFactor>12</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -453,12 +458,13 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1200</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>800</maxPowerForSpeed>
-<minPowerForSpeed>800</minPowerForSpeed>
+<maxPowerForSpeed>0</maxPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
+<speedSetting>false</speedSetting>
 <minSpeedFactor>1</minSpeedFactor>
 <maxSpeedFactor>1</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -566,12 +572,13 @@
       </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>20000</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-<maxPowerForSpeed>20000</maxPowerForSpeed>
-<minPowerForSpeed>20000</minPowerForSpeed>
+<maxPowerForSpeed>0</maxPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
+<speedSetting>false</speedSetting>
 <minSpeedFactor>666</minSpeedFactor>
 <maxSpeedFactor>666</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->

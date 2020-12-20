@@ -193,13 +193,13 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>60</basePowerConsumption>
+        <basePowerConsumption>160</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
     <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
 <maxPowerForSpeed>1000</maxPowerForSpeed>
-<minPowerForSpeed>100</minPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
 <minSpeedFactor>31</minSpeedFactor>
 <maxSpeedFactor>31</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
@@ -333,7 +333,7 @@
       <li Class="CompProperties_Flickable"/>
             <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
 <maxPowerForSpeed>500</maxPowerForSpeed>
-<minPowerForSpeed>100</minPowerForSpeed>
+<minPowerForSpeed>0</minPowerForSpeed>
 <minSpeedFactor>15</minSpeedFactor>
 <maxSpeedFactor>15</maxSpeedFactor>
 <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->

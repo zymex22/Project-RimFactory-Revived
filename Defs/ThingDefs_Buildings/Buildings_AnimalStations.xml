@@ -409,7 +409,7 @@
       </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>700</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_HeatPusher">
@@ -418,7 +418,7 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <maxPowerForSpeed>2000</maxPowerForSpeed>
-        <minPowerForSpeed>700</minPowerForSpeed>
+        <minPowerForSpeed>0</minPowerForSpeed>
         <minSpeedFactor>1</minSpeedFactor>
         <maxSpeedFactor>1</maxSpeedFactor>
         <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>

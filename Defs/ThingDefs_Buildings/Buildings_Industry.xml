@@ -312,7 +312,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>3000</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
         <SupportDiagonal>true</SupportDiagonal>
@@ -324,7 +324,7 @@
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- speed settings -->
         <speedSetting>true</speedSetting>
-        <minPowerForSpeed>3000</minPowerForSpeed>
+        <minPowerForSpeed>0</minPowerForSpeed>
         <minSpeedFactor>1</minSpeedFactor>
         <maxPowerForSpeed>10000</maxPowerForSpeed>
         <maxSpeedFactor>3.5</maxSpeedFactor>
@@ -411,7 +411,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>750</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
         <SupportDiagonal>true</SupportDiagonal>
@@ -423,7 +423,7 @@
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- speed settings -->
         <speedSetting>true</speedSetting>
-        <minPowerForSpeed>750</minPowerForSpeed>
+        <minPowerForSpeed>0</minPowerForSpeed>
         <minSpeedFactor>1</minSpeedFactor>
         <maxPowerForSpeed>3000</maxPowerForSpeed>
         <maxSpeedFactor>4</maxSpeedFactor>

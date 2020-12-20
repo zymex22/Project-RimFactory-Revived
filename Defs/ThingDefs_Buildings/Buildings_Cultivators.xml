@@ -266,13 +266,13 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>750</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <speedSetting>false</speedSetting>
         <rangeSetting>true</rangeSetting>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        <minPowerForRange>750</minPowerForRange>
+        <minPowerForRange>0</minPowerForRange>
         <minRange>5</minRange>
         <maxPowerForRange>1500</maxPowerForRange>
         <maxRange>15</maxRange>
