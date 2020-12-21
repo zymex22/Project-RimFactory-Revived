@@ -40,9 +40,6 @@
 
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />
-      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
-        <SupportDiagonal>true</SupportDiagonal>
-      </li>
     </comps>
   </ThingDef>
 
@@ -63,6 +60,11 @@
     <placeWorkers>
       <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
     </placeWorkers>
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+    </comps>
   </ThingDef>
 
 
