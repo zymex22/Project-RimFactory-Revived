@@ -20,7 +20,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public IPowerSupplyMachine RangePowerSupplyMachine => powerWorkSetting;
 
-        protected virtual float SpeedFactor => powerWorkSetting.SupplyPowerForSpeed;
         protected virtual int? SkillLevel { get => null; }
 
         [Unsaved]
@@ -65,17 +64,11 @@ namespace ProjectRimFactory.AutoMachineTool
             base.DeSpawn();
         }
 
-        protected override float WorkAmountPerTick => 0.01f * this.SpeedFactor * powerWorkSetting.SupplyPowerForSpeed * this.Factor2();
-
+        protected override float WorkAmountPerTick => 10 * this.powerWorkSetting.GetSpeedFactor();
 
         public virtual bool Glowable => false;
 
         public virtual bool Glow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        protected virtual float Factor2()
-        {
-            return 0.1f;
-        }
 
         protected override void ReceiveCompSignal(string signal)
         {

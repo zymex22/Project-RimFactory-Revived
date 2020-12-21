@@ -147,11 +147,11 @@ namespace ProjectRimFactory.Common
                 rect = list.GetRect(30f);
                 anchor = Text.Anchor;
                 Text.Anchor = TextAnchor.UpperLeft;
-                Widgets.Label(rect, this.Machine.FloatRange_SpeedFactor.min.ToString());
+                Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.PercentLabel".Translate((this.Machine.FloatRange_SpeedFactor.min / this.Machine.FloatRange_SpeedFactor.min) * 100));
                 Text.Anchor = TextAnchor.UpperRight;
-                Widgets.Label(rect, this.Machine.FloatRange_SpeedFactor.max.ToString());
+                Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.PercentLabel".Translate((this.Machine.FloatRange_SpeedFactor.max / this.Machine.FloatRange_SpeedFactor.min) * 100));
                 Text.Anchor = TextAnchor.UpperCenter;
-                Widgets.Label(rect, this.Machine.CurrentSpeedFactor.ToString());
+                Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.CurrentPercent".Translate((this.Machine.CurrentSpeedFactor / this.Machine.FloatRange_SpeedFactor.min) * 100));
                 Text.Anchor = anchor;
 
 
@@ -185,11 +185,11 @@ namespace ProjectRimFactory.Common
                 rect = list.GetRect(30f);
                 anchor = Text.Anchor;
                 Text.Anchor = TextAnchor.UpperLeft;
-                Widgets.Label(rect, this.Machine.FloatRange_Range.min.ToString());
+                Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.CellsLabel".Translate(this.Machine.FloatRange_Range.min));
                 Text.Anchor = TextAnchor.UpperRight;
-                Widgets.Label(rect, this.Machine.FloatRange_Range.max.ToString());
+                Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.CellsLabel".Translate(this.Machine.FloatRange_Range.max));
                 Text.Anchor = TextAnchor.UpperCenter;
-                Widgets.Label(rect, this.Machine.CurrentRange.ToString());
+                Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.CurrentCellRadius".Translate(this.Machine.CurrentRange));
                 Text.Anchor = anchor;
                 list.Gap();
             }

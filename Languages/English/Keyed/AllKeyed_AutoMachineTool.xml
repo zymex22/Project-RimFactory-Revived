@@ -49,6 +49,14 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append> + {0} [{1}]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append>
   <PRF.AutoMachineTool.SupplyPower.BreakDownLine_End> = [{0} wd]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_End>
   <PRF.AutoMachineTool.SupplyPower.wdLabel>{0} wd</PRF.AutoMachineTool.SupplyPower.wdLabel>
+  <PRF.AutoMachineTool.SupplyPower.PercentLabel>{0}%</PRF.AutoMachineTool.SupplyPower.PercentLabel>
+  <PRF.AutoMachineTool.SupplyPower.CurrentPercent>Current work speed {0}%</PRF.AutoMachineTool.SupplyPower.CurrentPercent>
+  <PRF.AutoMachineTool.SupplyPower.CellsLabel>{0} cells</PRF.AutoMachineTool.SupplyPower.CellsLabel>
+  <PRF.AutoMachineTool.SupplyPower.CurrentCellRadius>Current Range Radius {0} Cells</PRF.AutoMachineTool.SupplyPower.CurrentCellRadius>
+  
+  
+  
+  
   
   
   <!-- LimitationTab -->
