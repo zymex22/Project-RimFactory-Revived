@@ -325,7 +325,7 @@
         <!-- Speed Settings -->
 <floatrange_SpeedFactor>1~3.5</floatrange_SpeedFactor>
 <powerPerStepSpeed>4000</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
+<powerStepFactor>10</powerStepFactor>
 <!-- Range Settings -->
 <floatrange_Range>1~5</floatrange_Range>
 <powerPerStepRange>125</powerPerStepRange>
