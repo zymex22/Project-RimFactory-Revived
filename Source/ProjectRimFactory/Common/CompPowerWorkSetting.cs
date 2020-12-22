@@ -183,7 +183,11 @@ namespace ProjectRimFactory.Common
 
         public virtual float GetSpeedFactor()
         {
-            var f = (this.powerForSpeed) / (this.MaxPowerForSpeed);
+            var f = 0f;
+            if (this.MaxPowerForSpeed != 0)
+            {
+                f = (this.powerForSpeed) / (this.MaxPowerForSpeed);
+            }
             return Mathf.Lerp(this.Props.floatrange_SpeedFactor.min, this.Props.floatrange_SpeedFactor.max, f);
         }
 
