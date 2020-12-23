@@ -21,6 +21,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         protected bool active = false;
         protected bool takeForbiddenItems=true;
+        protected bool takeSingleItems = false;
         public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
 
         private string GetGraphicName()
@@ -124,48 +125,23 @@ namespace ProjectRimFactory.AutoMachineTool
             return this;
         }
 
+        //TODO: stop using Option<Thing> and just use Thing
         protected virtual Option<Thing> TargetThing()
         {
-            var conveyor = this.GetPickableConveyor();
-            if (conveyor.HasValue)
-            {
-                this.pickupConveyor = true;
-                return Option(conveyor.Value.GetThingBy(null)); // already verified it's what we want
-            }
+            Thing target;
             if (this.takeForbiddenItems)
-                return (this.Position + this.Rotation.Opposite.FacingCell).SlotGroupCells(this.Map)
-                    .SelectMany(c => c.GetThingList(this.Map))
-                    .Where(t => t.def.category == ThingCategory.Item)
-                    .Where(t => this.settings.AllowedToAccept(t))
-                    .Where(t => !this.IsLimit(t))
-                    .FirstOption();
+                target = this.Rotation.Opposite.FacingCell.AllThingsInCellForUse(this.Map)
+                        .Where(t => this.settings.AllowedToAccept(t))
+                        .FirstOrDefault(t => !this.IsLimit(t));
             else
-                return (this.Position + this.Rotation.Opposite.FacingCell).SlotGroupCells(this.Map)
-                    .SelectMany(c => c.GetThingList(this.Map))
-                    .Where(t => t.def.category == ThingCategory.Item)
-                    .Where(t => !t.IsForbidden(Faction.OfPlayer))
-                    .Where(t => this.settings.AllowedToAccept(t))
-                    .Where(t => !this.IsLimit(t))
-                    .FirstOption();
-        }
-
-        private Option<Building_BeltConveyor> GetPickableConveyor()
-        {
-            if (this.takeForbiddenItems)
-                return (this.Position + this.Rotation.Opposite.FacingCell).GetThingList(this.Map)
-                    .OfType<Building_BeltConveyor>() // get any conveyors, also casts to conveyors
-                    .Where(b => !b.IsUnderground && b.Carrying() != null)
-                    .Where(b => this.settings.AllowedToAccept(b.Carrying()))
-                    .Where(b => !this.IsLimit(b.Carrying()))
-                    .FirstOption();
-            else
-                return (this.Position + this.Rotation.Opposite.FacingCell).GetThingList(this.Map)
-                    .OfType<Building_BeltConveyor>() // get any conveyors, also casts to conveyors
-                    .Where(b => !b.IsUnderground && b.Carrying() != null)
-                    .Where(b => !b.Carrying().IsForbidden(Faction.OfPlayer))
-                    .Where(b => this.settings.AllowedToAccept(b.Carrying()))
-                    .Where(b => !this.IsLimit(b.Carrying()))
-                    .FirstOption();
+                target = this.Rotation.Opposite.FacingCell.AllThingsInCellForUse(this.Map)
+                        .Where(t => !t.IsForbidden(Faction.OfPlayer))
+                        .Where(t => this.settings.AllowedToAccept(t))
+                        .FirstOrDefault(t => !this.IsLimit(t));
+            if (target == null) return new Option<Thing>(null);
+            if (this.takeSingleItems) return new Option<Thing>(target.SplitOff(1));
+            // SplitOff ensures any item-removal effects happen:
+            return new Option<Thing>(target.SplitOff(target.stackCount));
         }
 
         public override IntVec3 OutputCell()
