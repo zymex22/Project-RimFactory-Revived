@@ -56,9 +56,9 @@ namespace ProjectRimFactory.Common
     {
         private static readonly Vector2 WinSize = new Vector2(600f, 130f);
 
-        private static readonly float HeightSpeed = 120 + 10;
+        private static readonly float HeightSpeed = 120 - 25;
 
-        private static readonly float HeightRange = 100 + 10;
+        private static readonly float HeightRange = 100 - 25;
 
         private static readonly float HeightGlow = 30;
 
@@ -96,6 +96,7 @@ namespace ProjectRimFactory.Common
         protected override void FillTab()
         {
             TextAnchor anchor;
+            GameFont font;
 
             Listing_Standard list = new Listing_Standard();
             Rect inRect = new Rect(0f, 0f, this.size.x, this.size.y).ContractedBy(10f);
@@ -138,13 +139,16 @@ namespace ProjectRimFactory.Common
                 Widgets.Label(rect, descriptionForSpeed);
                 list.Gap();
 
-                rect = list.GetRect(50f);
+                rect = list.GetRect(20f);
                 var speed = (int)Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForSpeed, (float)minPowerSpeed, (float)maxPowerSpeed, true, valueLabelForSpeed,
                     "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(minPowerSpeed), "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(maxPowerSpeed), this.Machine.PowerPerStepSpeed);
                 this.Machine.SupplyPowerForSpeed = speed;
                 //Add info Labels below
                 rect = list.GetRect(30f);
                 anchor = Text.Anchor;
+                font = Text.Font;
+                Text.Font = GameFont.Tiny;
+
                 Text.Anchor = TextAnchor.UpperLeft;
                 Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.PercentLabel".Translate((this.Machine.FloatRange_SpeedFactor.min / this.Machine.FloatRange_SpeedFactor.min) * 100));
                 Text.Anchor = TextAnchor.UpperRight;
@@ -152,7 +156,7 @@ namespace ProjectRimFactory.Common
                 Text.Anchor = TextAnchor.UpperCenter;
                 Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.CurrentPercent".Translate((this.Machine.CurrentSpeedFactor / this.Machine.FloatRange_SpeedFactor.min) * 100));
                 Text.Anchor = anchor;
-
+                Text.Font = font;
 
                 list.Gap();
 
@@ -176,13 +180,15 @@ namespace ProjectRimFactory.Common
                 Widgets.Label(rect, descriptionForRange);
                 list.Gap();
 
-                rect = list.GetRect(50f);
+                rect = list.GetRect(20f);
                 var range = Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForRange, (float)minPowerRange, (float)maxPowerRange, true, valueLabelForRange, 
                     "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(minPowerRange), "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(maxPowerRange), this.Machine.PowerPerStepRange);
                 this.Machine.SupplyPowerForRange = range;
                 //Add info Labels below
                 rect = list.GetRect(30f);
                 anchor = Text.Anchor;
+                font = Text.Font;
+                Text.Font = GameFont.Tiny;
                 Text.Anchor = TextAnchor.UpperLeft;
                 Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.CellsLabel".Translate(this.Machine.FloatRange_Range.min));
                 Text.Anchor = TextAnchor.UpperRight;
@@ -190,6 +196,7 @@ namespace ProjectRimFactory.Common
                 Text.Anchor = TextAnchor.UpperCenter;
                 Widgets.Label(rect, "PRF.AutoMachineTool.SupplyPower.CurrentCellRadius".Translate(this.Machine.CurrentRange));
                 Text.Anchor = anchor;
+                Text.Font = font;
                 list.Gap();
             }
 
