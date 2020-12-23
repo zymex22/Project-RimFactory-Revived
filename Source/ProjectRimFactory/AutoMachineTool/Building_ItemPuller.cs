@@ -14,6 +14,7 @@ using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
+    [StaticConstructorOnStartup] // for registering settings
     public class Building_ItemPuller : Building_BaseLimitation<Thing>, IStorageSetting, IStoreSettingsParent
     {
         public Building_ItemPuller() {
@@ -71,6 +72,11 @@ namespace ProjectRimFactory.AutoMachineTool
         private bool pickupConveyor = false;
 
         protected override LookMode WorkingLookMode { get => LookMode.Deep; } // despawned
+        /// <summary>
+        /// Whether the puller grabs a single item or the entire stack
+        /// </summary>
+        public bool TakeSingleItems { get => takeSingleItems; set => takeSingleItems = value; }
+
         public override void ExposeData()
         {
             Scribe_Values.Look<bool>(ref this.pickupConveyor, "pickupConveyor", false);
@@ -235,6 +241,28 @@ namespace ProjectRimFactory.AutoMachineTool
                         t.SetForbidden(false);
             }
             base.Placing();
+        }
+
+        static Building_ItemPuller()
+        {
+            Common.ITab_ProductionSettings.RegisterSetting(ShouldShowSingleVsStackSetting,
+                                           ExtraHeightNeeded, DoSettingsWindowContents);
+        }
+        public static bool ShouldShowSingleVsStackSetting(Thing thing)
+        {
+            return thing is Building_ItemPuller;
+        }
+        public static float ExtraHeightNeeded(Thing t)
+        {
+            return 21f;
+        }
+        public static void DoSettingsWindowContents(Thing t, Listing_Standard ls)
+        {
+            if (t is Building_ItemPuller puller) {
+                bool tmp = puller.takeSingleItems;
+                ls.CheckboxLabeled("PRF.Puller.takeSingleItemsHmm".Translate(), ref tmp, "PRF.Puller.takeSingleItemsDesc".Translate());
+                if (tmp != puller.takeSingleItems) puller.TakeSingleItems = tmp;
+            }
         }
     }
 
