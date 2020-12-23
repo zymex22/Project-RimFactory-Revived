@@ -56,9 +56,9 @@ namespace ProjectRimFactory.Common
     {
         private static readonly Vector2 WinSize = new Vector2(600f, 130f);
 
-        private static readonly float HeightSpeed = 120 + 30;
+        private static readonly float HeightSpeed = 120 + 10;
 
-        private static readonly float HeightRange = 100 + 30;
+        private static readonly float HeightRange = 100 + 10;
 
         private static readonly float HeightGlow = 30;
 
@@ -121,10 +121,9 @@ namespace ProjectRimFactory.Common
             //Display the Sum
             powerUsageBreackdown += "PRF.AutoMachineTool.SupplyPower.BreakDownLine_End".Translate( -1 * this.Machine.CurrentPowerConsumption);
             Widgets.Label(rect, powerUsageBreackdown);
-            rect = list.GetRect(2f);
+            rect = list.GetRect(10f);
             Widgets.DrawLineHorizontal(rect.x, rect.y, WinSize.x);
-
-            list.Gap();
+            
             //----------------------------
 
             if (this.Machine.SpeedSetting)
@@ -135,7 +134,7 @@ namespace ProjectRimFactory.Common
                 string valueLabelForSpeed = "PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed".Translate(Machine.SupplyPowerForSpeed);
 
                 // for speed
-                rect = list.GetRect(50f);
+                rect = list.GetRect(30f);
                 Widgets.Label(rect, descriptionForSpeed);
                 list.Gap();
 
@@ -173,7 +172,7 @@ namespace ProjectRimFactory.Common
                 string valueLabelForRange = "PRF.AutoMachineTool.SupplyPower.ValueLabelForRange".Translate(Machine.SupplyPowerForRange);
 
                 // for range
-                rect = list.GetRect(50f);
+                rect = list.GetRect(30f);
                 Widgets.Label(rect, descriptionForRange);
                 list.Gap();
 
