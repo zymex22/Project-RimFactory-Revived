@@ -45,21 +45,21 @@
   </Row>
 
   <!-- swap texture -->
-  <Row Class="ProjectRimFactory.Common.PatchItem">
-    <key>turn.off.swap.texture</key>
-    <label>PRF.Settings.TurnOffSwapTexture.Label</label>
-    <description>PRF.Settings.TurnOffSwapTexture.Desc</description>
-    <Patch>
-      <Operation Class="PatchOperationRemove">
-        <success>Always</success>
-        <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/workingGraphicData</xpath>
-      </Operation>
-      <Operation Class="PatchOperationRemove">
-        <success>Always</success>
-        <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/powerOffGraphicData</xpath>
-      </Operation>
-    </Patch>
-  </Row>
+  <!-- <Row Class="ProjectRimFactory.Common.PatchItem"> -->
+    <!-- <key>turn.off.swap.texture</key> -->
+    <!-- <label>PRF.Settings.TurnOffSwapTexture.Label</label> -->
+    <!-- <description>PRF.Settings.TurnOffSwapTexture.Desc</description> -->
+    <!-- <Patch> -->
+      <!-- <Operation Class="PatchOperationRemove"> -->
+        <!-- <success>Always</success> -->
+        <!-- <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/workingGraphicData</xpath> -->
+      <!-- </Operation> -->
+      <!-- <Operation Class="PatchOperationRemove"> -->
+        <!-- <success>Always</success> -->
+        <!-- <xpath>/Defs/ThingDef/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/powerOffGraphicData</xpath> -->
+      <!-- </Operation> -->
+    <!-- </Patch> -->
+  <!-- </Row> -->
 
   <!-- draw status -->
   <Row Class="ProjectRimFactory.Common.PatchItem">
