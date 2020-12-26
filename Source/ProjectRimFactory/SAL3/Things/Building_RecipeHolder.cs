@@ -24,8 +24,6 @@ namespace ProjectRimFactory.SAL3.Things
                                                          where building != null
                                                          select building;
 
-        public List<RecipeDef> Saved_Recipes => recipes;
-
         private List<RecipeDef> quered_recipes = new List<RecipeDef>();
 
         public List<RecipeDef> Quered_Recipes {
@@ -40,7 +38,10 @@ namespace ProjectRimFactory.SAL3.Things
 
         public List<RecipeDef> Learnable_Recipes => GetAllProvidedRecipeDefs().ToList();
 
-        public RecipeDef Recipe_Learning => workingRecipe;
+        public float Progress_Learning => workAmount;
+
+        RecipeDef IRecipeHolderInterface.Recipe_Learning { get => workingRecipe; set => workingRecipe = value; }
+        List<RecipeDef> IRecipeHolderInterface.Saved_Recipes { get => recipes; set => recipes = value; }
 
         public virtual IEnumerable<RecipeDef> GetAllProvidedRecipeDefs()
         {
@@ -66,36 +67,6 @@ namespace ProjectRimFactory.SAL3.Things
             foreach (Gizmo g in base.GetGizmos())
             {
                 yield return g;
-            }
-            if (workingRecipe == null)
-            {
-                yield return new Command_Action()
-                {
-                    defaultLabel = "SALDataStartEncoding".Translate(),
-                    defaultDesc = "SALDataStartEncoding_Desc".Translate(),
-                    icon = ContentFinder<Texture2D>.Get("SAL3/NewDisk"),
-                    action = () =>
-                    {
-                        List<FloatMenuOption> options = GetPossibleOptions().ToList();
-                        if (options.Count > 0)
-                        {
-                            Find.WindowStack.Add(new FloatMenu(options));
-                        }
-                        else
-                        {
-                            Messages.Message("SALMessage_NoRecipes".Translate(), MessageTypeDefOf.RejectInput);
-                        }
-                    }
-                };
-            }
-            else
-            {
-                yield return new Command_Action()
-                {
-                    defaultLabel = "SALDataCancelBills".Translate(),
-                    icon = ContentFinder<Texture2D>.Get("UI/Designators/Cancel", true),
-                    action = ResetProgress
-                };
             }
             if (Prefs.DevMode)
             {
