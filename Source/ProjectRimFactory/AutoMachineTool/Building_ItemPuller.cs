@@ -67,6 +67,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private bool right = false;
 
+        public bool Getright => right;
+
         private bool OutputSides => this.def.GetModExtension<ModExtension_Puller>()?.outputSides ?? false;
 
         private bool pickupConveyor = false;
@@ -152,19 +154,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override IntVec3 OutputCell()
         {
-            if(this.OutputSides)
-            {
-                RotationDirection dir = RotationDirection.Clockwise;
-                if (!this.right)
-                {
-                    dir = RotationDirection.Counterclockwise;
-                }
-                return this.Position + this.Rotation.RotateAsNew(dir).FacingCell;
-            }
-            else
-            {
-                return this.Position + this.Rotation.FacingCell;
-            }
+            return this.def.GetModExtension<ModExtension_Puller>().GetOutputCell(this.Position, this.Rotation, this.right);
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -263,47 +253,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 ls.CheckboxLabeled("PRF.Puller.takeSingleItemsHmm".Translate(), ref tmp, "PRF.Puller.takeSingleItemsDesc".Translate());
                 if (tmp != puller.takeSingleItems) puller.TakeSingleItems = tmp;
             }
-        }
-    }
-
-    public class Building_ItemPullerInputCellResolver : IInputCellResolver
-    {
-        public ModExtension_WorkIORange Parent { get; set; }
-
-        public Color GetColor(IntVec3 cell, Map map, Rot4 rot, CellPattern cellPattern)
-        {
-            return this.Parent.GetCellPatternColor(cellPattern);
-        }
-
-        public Option<IntVec3> InputCell(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot)
-        {
-            return Option(FacingCell(center, size, rot.Opposite));
-        }
-
-        private static readonly List<IntVec3> EmptyList = new List<IntVec3>();
-
-        public IEnumerable<IntVec3> InputZoneCells(ThingDef def, IntVec3 cell, IntVec2 size, Map map, Rot4 rot)
-        {
-            return InputCell(def, cell, size, map, rot).Select(c => c.SlotGroupCells(map)).GetOrDefault(EmptyList);
-        }
-    }
-
-    public class Building_ItemPullerOutputCellResolver : ProductOutputCellResolver
-    {
-        public override Option<IntVec3> OutputCell(ThingDef def, IntVec3 center, IntVec2 size, Map map, Rot4 rot)
-        {
-            IntVec3 defaultCell = IntVec3.Zero;
-            if (def.GetModExtension<ModExtension_Puller>()?.outputSides ?? false)
-            {
-                defaultCell = center + rot.RotateAsNew(RotationDirection.Counterclockwise).FacingCell;
-
-            }
-            else
-            {
-                defaultCell = center + rot.FacingCell;
-            }
-
-            return Option(base.OutputCell(def, center, size, map, rot).GetOrDefault(defaultCell));
         }
     }
 }

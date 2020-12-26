@@ -345,8 +345,8 @@
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
+        
+        
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <minPowerForRange>850</minPowerForRange>
         <minRange>6</minRange>
@@ -432,10 +432,10 @@
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
+        
+        
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        <minPowerForRange>0</minPowerForRange>
+        
         <minRange>8</minRange>
         <maxPowerForRange>1700</maxPowerForRange>
         <maxRange>20</maxRange>
@@ -586,7 +586,7 @@
       </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>3000</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_HeatPusher">
@@ -597,24 +597,23 @@
         <glowRadius>6</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>5~15</floatrange_SpeedFactor>
+        <powerPerStepSpeed>1000</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-    </placeWorkers>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
       <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>      <!-- AutomachineTool ITab not PRF -->
     </inspectorTabs>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>10</speedFactor>        <!-- Speed multiplier for mining -->
-        <minPower>3000</minPower>        <!-- minimum boost power -->
-        <maxPower>10000</maxPower>        <!-- maximum boost power -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.ProductOutputCellResolver</outputCellResolverType>
-      </li>
       <!--  <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
         <effectWorking>Drill</effectWorking>
       </li>        -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
