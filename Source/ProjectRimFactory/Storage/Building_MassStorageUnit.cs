@@ -147,7 +147,7 @@ namespace ProjectRimFactory.Storage
                     GenPlace.TryPlaceThing(thingsToSplurge[i], Position, Map, ThingPlaceMode.Near);
                 }
 
-            base.DeSpawn();
+            base.DeSpawn(mode);
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
