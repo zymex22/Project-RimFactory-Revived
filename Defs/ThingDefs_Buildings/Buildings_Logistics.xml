@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <!--============================== DropDown Categories ==============================-->
+  <!--====== Other DropDown Groups ======-->
 
   <DesignatorDropdownGroupDef>
     <defName>PRF_PullersGroup</defName>
@@ -9,6 +9,19 @@
 
   <DesignatorDropdownGroupDef>
     <defName>PRF_IoGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!--====== Belt Dropdown Groups ======-->
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_UgBeltsGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_BeltsGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_WallBeltsGroup</defName>
   </DesignatorDropdownGroupDef>
 
   <!--==================== Fueling Machine ====================-->
@@ -39,6 +52,11 @@
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
+    <!-- Cost list for lite
+    <costList>
+      <Steel>30</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>-->
     <minifiedDef>MinifiedThing</minifiedDef>
     <comps>
       <li Class="CompProperties_Power">
@@ -115,6 +133,12 @@
       <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
+    <!-- Costlist for lite
+        <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    -->
     <comps>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Power">
@@ -170,6 +194,13 @@
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
+    <!--Costlist for lite
+        <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>5</ComponentSpacer>
+    </costList>
+    -->
     <statBases>
       <MaxHitPoints>120</MaxHitPoints>
       <WorkToBuild>300</WorkToBuild>
@@ -227,7 +258,7 @@
     <defName>PRF_GrowzonePuller_I</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_HarvestPuller</thingClass>
     <label>growzone Puller</label>
-    <costList>
+    <costList>      <!-- Remove in Lite -->
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
       <PRF_RoboticArm>1</PRF_RoboticArm>
@@ -291,7 +322,7 @@
   <ThingDef ParentName="PRF_Puller_Base">
     <defName>PRF_SimplePuller_I</defName>
     <label>Item Puller mkI</label>
-    <costList>
+    <costList>      <!-- Remove in Lite -->
       <ComponentIndustrial>2</ComponentIndustrial>
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
@@ -353,6 +384,13 @@
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
+    <!-- costlist for lite
+        <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
+    </costList>
+    -->
     <statBases>
       <MarketValue>2450</MarketValue>
     </statBases>
@@ -392,6 +430,13 @@
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
+    <!-- costlist for lite
+        <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
+    </costList>
+    -->
     <statBases>
       <MarketValue>1404</MarketValue>
     </statBases>
@@ -456,6 +501,13 @@
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
+    <!-- costlist for lite
+        <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
+    </costList>
+    -->
     <statBases>
       <MarketValue>1200</MarketValue>
     </statBases>
@@ -494,20 +546,6 @@
   </ThingDef>
 
 
-  <!--======================================= ==== BELTS ==== ===============================================-->
-  <!--======================================= =============== ===============================================-->
-  <!--======================================= Dropdown Groups ===============================================-->
-  <DesignatorDropdownGroupDef>
-    <defName>PRF_UgBeltsGroup</defName>
-  </DesignatorDropdownGroupDef>
-
-  <DesignatorDropdownGroupDef>
-    <defName>PRF_BeltsGroup</defName>
-  </DesignatorDropdownGroupDef>
-
-  <DesignatorDropdownGroupDef>
-    <defName>PRF_WallBeltsGroup</defName>
-  </DesignatorDropdownGroupDef>
   <!--======================================= ============= ===============================================-->
   <!--==================================== Conveyor Belts base ============================================-->
   <!--======================================= ============= ===============================================-->
@@ -516,7 +554,7 @@
     <altitudeLayer>Building</altitudeLayer>
     <designatorDropdown>PRF_BeltsGroup</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
-    <costList>
+    <costList>      <!-- same in Lite -->
       <Steel>2</Steel>
     </costList>
     <statBases>
@@ -559,7 +597,7 @@
         <!-- Range Settings -->
         <floatrange_Range>0~0</floatrange_Range>
         <powerPerStepRange>0</powerPerStepRange>
-        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
     </comps>
     <inspectorTabs>
@@ -594,6 +632,102 @@
         <drawSize>(1, 1)</drawSize>
       </blueprintGraphicData>
     </building>
+  </ThingDef>
+
+  <!--======================================= Fast Conveyor belt ===============================================-->
+  <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
+    <defName>PRF_Conveyor_Simple_II</defName>
+    <label>Fast conveyor belt</label>
+    <description>Conveyor belts transport items from one end to the other. It will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.\nBut because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by just leading the belt into the side of another belt and will seamlessly continue.</description>
+    <clearBuildingArea>false</clearBuildingArea>
+    <costList>      <!-- same in Lite -->
+      <Steel>10</Steel>
+    </costList>
+    <uiIconPath>Belts/v3/BeltConveyorIcon</uiIconPath>
+    <graphicData>
+      <texPath>[extraData][texPath]Belts/v3/Belts Atlas 640x640 GroundLevel Padded[/texPath][arrowEastDrawOffset](0,0.0,0)[/arrowEastDrawOffset][/extraData]</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
+      <drawRotated>true</drawRotated>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+    <building>
+      <blueprintGraphicData>
+        <texPath>[notActualTexPath>[texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint[/texPath>[arrowDrawOffset](0,0.2,0)[/arrowDrawOffset][/notActualTexPath></texPath>        <!--TODO-->
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
+        <drawRotated>true</drawRotated>
+        <drawSize>(1, 1)</drawSize>
+      </blueprintGraphicData>
+    </building>
+    <comps Inherit="false">
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.004~0.004</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>PRF_BeltsII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--======================================= Express Conveyor belt ===============================================-->
+  <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
+    <defName>PRF_Conveyor_Simple_III</defName>
+    <label>Express conveyor belt</label>
+    <description>Conveyor belts transport items from one end to the other. It will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.\nBut because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by just leading the belt into the side of another belt and will seamlessly continue.</description>
+    <clearBuildingArea>false</clearBuildingArea>
+    <costList>      <!-- same in Lite -->
+      <Steel>20</Steel>
+    </costList>
+    <uiIconPath>Belts/v3/BeltConveyorIcon</uiIconPath>
+    <graphicData>
+      <texPath>[extraData][texPath]Belts/v3/Belts Atlas 640x640 GroundLevel Padded[/texPath][arrowEastDrawOffset](0,0.0,0)[/arrowEastDrawOffset][/extraData]</texPath>
+      <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
+      <drawRotated>true</drawRotated>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+    <building>
+      <blueprintGraphicData>
+        <texPath>[notActualTexPath>[texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint[/texPath>[arrowDrawOffset](0,0.2,0)[/arrowDrawOffset][/notActualTexPath></texPath>        <!--TODO-->
+        <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
+        <drawRotated>true</drawRotated>
+        <drawSize>(1, 1)</drawSize>
+      </blueprintGraphicData>
+    </building>
+    <comps Inherit="false">
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.006~0.006</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>PRF_BeltsIII</li>
+    </researchPrerequisites>
   </ThingDef>
 
   <!--======================================= Conveyor wall ===============================================-->
@@ -757,6 +891,12 @@
       <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
       <Steel>40</Steel>
     </costList>
+    <!-- costlist for lite
+        <costList>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <Steel>40</Steel>
+    </costList>
+    -->
     <statBases>
       <MarketValue>1195</MarketValue>
       <WorkToBuild Inherit="false">450</WorkToBuild>
@@ -776,6 +916,16 @@
       </li>
       <li Class="CompProperties_Flickable"/>
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.002~0.002</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
       <li>
         <compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>        <!-- PRF Internal help tab/icon setup in language -->
       </li>
