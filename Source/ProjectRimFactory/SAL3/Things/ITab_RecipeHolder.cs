@@ -90,6 +90,12 @@ namespace ProjectRimFactory.SAL3.Things
             this.labelKey = "DB";
         }
         private Vector2 scrollPos;
+
+        private bool showSaved = true;
+        private bool showLearnable = true;
+        private bool showQuered = true;
+        
+
         protected override void FillTab()
         {
 
@@ -97,10 +103,26 @@ namespace ProjectRimFactory.SAL3.Things
             Rect inRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
             Rect rect;
             Rect rect2;
+
+            
+            int currY = 0;
             list.Begin(inRect);
             list.Gap();
-            int currY = 0;
-            var outRect = new Rect(5f, 5, WinSize.x - 80, WinSize.y - 200);
+ 
+
+            rect = list.GetRect(30);
+
+            rect.width = (WinSize.x / 3) - 50;
+            Widgets.CheckboxLabeled(rect, "Show Saved", ref showSaved);
+            rect.x += rect.width + 20;
+            Widgets.CheckboxLabeled(rect, "Show Learnable", ref showLearnable);
+            rect.x += rect.width + 20;
+            Widgets.CheckboxLabeled(rect, "Show Quered", ref showQuered);
+
+            currY += 40;
+
+     
+            var outRect = new Rect(5f, currY + 5, WinSize.x - 80, WinSize.y - 200);
             var viewRect = new Rect(0f, 0, outRect.width - 16f, (itemcount + 1) * 30);
             Widgets.BeginScrollView(outRect, ref scrollPos, viewRect,true);
 
@@ -109,6 +131,10 @@ namespace ProjectRimFactory.SAL3.Things
 
             foreach (RecipeDef recipe in Recipes.Keys)
             {
+                if (!showLearnable && Recipes[recipe] == enum_RecipeStatus.Learnable) continue;
+                if (!showQuered && Recipes[recipe] == enum_RecipeStatus.Quered) continue;
+                if (!showSaved && Recipes[recipe] == enum_RecipeStatus.Saved) continue;
+
                 rect = new Rect(0, currY, viewRect.width, 30);
                 currY += 30;
 
@@ -119,8 +145,6 @@ namespace ProjectRimFactory.SAL3.Things
                     rect2.width = 30;
                     rect2.height = 30;
                     Widgets.DefIcon(rect2, recipe.products[0].thingDef);
-                       
-                    
                 }
                 
                 
