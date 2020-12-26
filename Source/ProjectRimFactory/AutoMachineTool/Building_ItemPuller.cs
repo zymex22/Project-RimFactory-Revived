@@ -138,11 +138,11 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             Thing target;
             if (this.takeForbiddenItems)
-                target = this.Rotation.Opposite.FacingCell.AllThingsInCellForUse(this.Map)
+                target = (this.Position +  this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map)
                         .Where(t => this.settings.AllowedToAccept(t))
                         .FirstOrDefault(t => !this.IsLimit(t));
             else
-                target = this.Rotation.Opposite.FacingCell.AllThingsInCellForUse(this.Map)
+                target = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map)
                         .Where(t => !t.IsForbidden(Faction.OfPlayer))
                         .Where(t => this.settings.AllowedToAccept(t))
                         .FirstOrDefault(t => !this.IsLimit(t));
