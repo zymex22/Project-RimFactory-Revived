@@ -131,12 +131,12 @@
       <!-- Either specialDisplayRadius or CompProperties_PowerWorkSetting -->
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>5~10</floatrange_Range>
-<powerPerStepRange>100</powerPerStepRange>
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>5~10</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
         <rangeType>ProjectRimFactory.Common.CircleRange</rangeType>
       </li>
     </comps>
@@ -198,19 +198,17 @@
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
-    <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-    <!-- Speed Settings -->
-<floatrange_SpeedFactor>31~31</floatrange_SpeedFactor>
-<powerPerStepSpeed>1000</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>0~0</floatrange_Range>
-<powerPerStepRange>0</powerPerStepRange>
-
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-</li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~10</floatrange_SpeedFactor>
+        <powerPerStepSpeed>20</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
-    
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
         <forcePlacing>false</forcePlacing>
@@ -275,7 +273,7 @@
       </fixedStorageSettings>
     </building>
     <modExtensions>
-          <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
         <outputSides>false</outputSides>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
@@ -316,7 +314,7 @@
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
     <modExtensions Inherit="false">
-          <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
         <outputSides>false</outputSides>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
@@ -331,22 +329,19 @@
         </graphicDataList>
       </li>
     </modExtensions>
-
     <comps>
-
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
-            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-            <!-- Speed Settings -->
-<floatrange_SpeedFactor>15~15</floatrange_SpeedFactor>
-<powerPerStepSpeed>500</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>0~0</floatrange_Range>
-<powerPerStepRange>0</powerPerStepRange>
-
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-</li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.01~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>10</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsII</li>
@@ -376,7 +371,7 @@
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
     <modExtensions>
-          <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
         <outputSides>false</outputSides>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
@@ -486,7 +481,7 @@
       <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
     <modExtensions>
-          <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
         <outputSides>false</outputSides>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
@@ -559,16 +554,15 @@
       <li Class="CompProperties_Flickable"/>
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-      <!-- Speed Settings -->
-<floatrange_SpeedFactor>5~5</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>0~0</floatrange_Range>
-<powerPerStepRange>0</powerPerStepRange>
-
-    <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-    </li>
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.002~0.002</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>

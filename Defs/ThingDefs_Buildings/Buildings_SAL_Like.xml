@@ -36,7 +36,6 @@
       <li Class="CompProperties_Flickable"/>
     </comps>
     <pathCost>0</pathCost>
-
     <rotatable>true</rotatable>
     <blockWind>false</blockWind>
     <castEdgeShadows>false</castEdgeShadows>
@@ -48,7 +47,6 @@
     </placeWorkers>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-
     <size>(1,1)</size>
     <passability>Standable</passability>
     <inspectorTabs>
@@ -86,20 +84,17 @@
         <basePowerConsumption>400</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
-    <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-    <!-- Speed Settings -->
-<floatrange_SpeedFactor>2~2</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>1~3</floatrange_Range>
-<powerPerStepRange>250</powerPerStepRange>
-    
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-</li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.2~0.2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>250</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
-    
     <researchPrerequisites>
       <li>PRF_SALResearchI</li>
     </researchPrerequisites>
@@ -153,16 +148,15 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-      <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>3~6</floatrange_Range>
-<powerPerStepRange>250</powerPerStepRange>
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-</li>
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>3~6</floatrange_Range>
+        <powerPerStepRange>250</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
@@ -219,15 +213,14 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-      <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<!-- Range Settings -->
-<floatrange_Range>3~6</floatrange_Range>
-<powerPerStepRange>250</powerPerStepRange>
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-</li>
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>3~6</floatrange_Range>
+        <powerPerStepRange>250</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
@@ -280,17 +273,14 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-      <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<!-- Range Settings -->
-<floatrange_Range>1~3</floatrange_Range>
-<powerPerStepRange>100</powerPerStepRange>
-
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-
-</li>
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
@@ -343,16 +333,13 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-      
-<floatrange_SpeedFactor>5~5</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<!-- Range Settings -->
-<floatrange_Range>1~3</floatrange_Range>
-<powerPerStepRange>100</powerPerStepRange>
-
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-</li>
+        <floatrange_SpeedFactor>0.5~0.5</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
@@ -397,16 +384,13 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-      
-<floatrange_SpeedFactor>12~12</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<!-- Range Settings -->
-<floatrange_Range>1~3</floatrange_Range>
-<powerPerStepRange>100</powerPerStepRange>
-      
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-</li>
+        <floatrange_SpeedFactor>1.2~1.2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
@@ -452,16 +436,13 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-      
-<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<!-- Range Settings -->
-<floatrange_Range>1~3</floatrange_Range>
-<powerPerStepRange>100</powerPerStepRange>
-      
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-</li>
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
@@ -564,16 +545,13 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-      
-<floatrange_SpeedFactor>666~666</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<!-- Range Settings -->
-<floatrange_Range>1~5</floatrange_Range>
-<powerPerStepRange>100</powerPerStepRange>
-<rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
-
-
-</li>
+        <floatrange_SpeedFactor>6.66~6.66</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~5</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">

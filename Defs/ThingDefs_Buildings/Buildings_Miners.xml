@@ -598,14 +598,14 @@
         <glowColor>(115,198,206,0)</glowColor>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-      <!-- Speed Settings -->
-<floatrange_SpeedFactor>5~10</floatrange_SpeedFactor>
-<powerPerStepSpeed>33</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>0~0</floatrange_Range>
-<powerPerStepRange>0</powerPerStepRange>
-        <rangeType>ProjectRimFactory.Common.RectRange</rangeType><!--Temp-->
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>5~15</floatrange_SpeedFactor>
+        <powerPerStepSpeed>1000</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>

@@ -316,15 +316,14 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~3</floatrange_SpeedFactor>
-<powerPerStepSpeed>1500</powerPerStepSpeed>
-<powerStepFactor>3</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>1~4</floatrange_Range>
-<powerPerStepRange>500</powerPerStepRange>
-
+        <floatrange_SpeedFactor>1~3</floatrange_SpeedFactor>
+        <powerPerStepSpeed>1500</powerPerStepSpeed>
+        <powerStepFactor>3</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~4</floatrange_Range>
+        <powerPerStepRange>500</powerPerStepRange>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
     </comps>
     <building>
@@ -414,15 +413,15 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~2</floatrange_SpeedFactor>
-<powerPerStepSpeed>2000</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>3~6</floatrange_Range>
-<powerPerStepRange>750</powerPerStepRange>
+        <floatrange_SpeedFactor>1~2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>1000</powerPerStepSpeed>
+        <powerStepFactor>4</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>3~6</floatrange_Range>
+        <powerPerStepRange>750</powerPerStepRange>
         <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>
 
-    </li>
+      </li>
     </comps>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power option tab -->
