@@ -312,7 +312,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>3000</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
         <SupportDiagonal>true</SupportDiagonal>
@@ -322,18 +322,14 @@
         <heatPerSecond>5</heatPerSecond>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <!-- speed settings -->
-        <speedSetting>true</speedSetting>
-        <minPowerForSpeed>3000</minPowerForSpeed>
-        <minSpeedFactor>1</minSpeedFactor>
-        <maxPowerForSpeed>10000</maxPowerForSpeed>
-        <maxSpeedFactor>3.5</maxSpeedFactor>
-        <!-- range settings -->
-        <rangeSetting>true</rangeSetting>
-        <minPowerForRange>0</minPowerForRange>
-        <minRange>1</minRange>
-        <maxPowerForRange>500</maxPowerForRange>
-        <maxRange>5</maxRange>
+        <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~3.5</floatrange_SpeedFactor>
+<powerPerStepSpeed>4000</powerPerStepSpeed>
+<powerStepFactor>10</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>1~5</floatrange_Range>
+<powerPerStepRange>125</powerPerStepRange>
+
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
@@ -411,7 +407,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>750</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
         <SupportDiagonal>true</SupportDiagonal>
@@ -421,18 +417,13 @@
         <heatPerSecond>5</heatPerSecond>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <!-- speed settings -->
-        <speedSetting>true</speedSetting>
-        <minPowerForSpeed>750</minPowerForSpeed>
-        <minSpeedFactor>1</minSpeedFactor>
-        <maxPowerForSpeed>3000</maxPowerForSpeed>
-        <maxSpeedFactor>4</maxSpeedFactor>
-        <!-- range settings -->
-        <rangeSetting>true</rangeSetting>
-        <minPowerForRange>0</minPowerForRange>
-        <minRange>1</minRange>
-        <maxPowerForRange>500</maxPowerForRange>
-        <maxRange>5</maxRange>
+        <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~4</floatrange_SpeedFactor>
+<powerPerStepSpeed>1000</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>1~5</floatrange_Range>
+<powerPerStepRange>125</powerPerStepRange>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>

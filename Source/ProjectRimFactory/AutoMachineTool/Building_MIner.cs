@@ -15,7 +15,6 @@ namespace ProjectRimFactory.AutoMachineTool
 {
     public class Building_Miner : Building_BaseMachine<Building_Miner>, IBillGiver, IRecipeProductWorker, ITabBillTable
     {
-        private ModExtension_WorkIORange Extension { get { return this.def.GetModExtension<ModExtension_WorkIORange>(); } }
 
         public BillStack BillStack => this.billStack;
 

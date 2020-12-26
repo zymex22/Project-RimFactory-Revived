@@ -84,19 +84,6 @@ namespace ProjectRimFactory.AutoMachineTool
         // AutoMachineTool: Building_Base
         public override IntVec3 OutputCell() => this.Position + this.OutputDirection.FacingCell;
 
-        public override float SupplyPowerForSpeed
-        {
-            get
-            {
-                return supplyPower;
-            }
-
-            set
-            {
-                supplyPower = value;
-                this.RefreshPowerStatus();
-            }
-        }
         /**************** IPRF_Building ***************/
         public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null) {
             // TODO: underground?  Mod Setting?

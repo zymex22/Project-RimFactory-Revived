@@ -36,7 +36,6 @@
       <li Class="CompProperties_Flickable"/>
     </comps>
     <pathCost>0</pathCost>
-
     <rotatable>true</rotatable>
     <blockWind>false</blockWind>
     <castEdgeShadows>false</castEdgeShadows>
@@ -44,12 +43,10 @@
     <minifiedDef>MinifiedThing</minifiedDef>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_AutoMachineTool</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_TargetCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_SALTargetCellHilight</li>
     </placeWorkers>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
-
     <size>(1,1)</size>
     <passability>Standable</passability>
     <inspectorTabs>
@@ -84,25 +81,24 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>400</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.2~0.2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>250</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
     <researchPrerequisites>
       <li>PRF_SALResearchI</li>
     </researchPrerequisites>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>2</speedFactor>        <!-- Base speed -->
-        <minPower>400</minPower>        <!-- power usage lowest range -->
-        <maxPower>400</maxPower>        <!-- Power for max range -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>1</BaseSkill>
@@ -148,22 +144,21 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1200</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>3~6</floatrange_Range>
+        <powerPerStepRange>250</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>800</minPower>        <!-- power usage lowest range -->
-        <maxPower>800</maxPower>        <!-- Power for max range -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>5</BaseSkill>
@@ -214,22 +209,20 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1200</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>3~6</floatrange_Range>
+        <powerPerStepRange>250</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>800</minPower>        <!-- power usage lowest range -->
-        <maxPower>800</maxPower>        <!-- Power for max range -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>3</BaseSkill>
@@ -276,22 +269,20 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1200</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>800</minPower>        <!-- power usage lowest range -->
-        <maxPower>800</maxPower>        <!-- Power for max range -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>3</BaseSkill>
@@ -338,22 +329,19 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1700</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>0.5~0.5</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>5</speedFactor>        <!-- Base speed -->
-        <minPower>1300</minPower>        <!-- power usage lowest range -->
-        <maxPower>1300</maxPower>        <!-- Power for max range -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>1</BaseSkill>
@@ -392,22 +380,19 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1900</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>1.2~1.2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>12</speedFactor>        <!-- Base speed -->
-        <minPower>1500</minPower>        <!-- power usage lowest range -->
-        <maxPower>2500</maxPower>        <!-- Power for max range -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>1</BaseSkill>
@@ -447,22 +432,19 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>400</basePowerConsumption>
+        <basePowerConsumption>1200</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>1</speedFactor>        <!-- Base speed -->
-        <minPower>800</minPower>        <!-- power usage lowest range -->
-        <maxPower>800</maxPower>        <!-- Power for max range -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>400</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>5</BaseSkill>
@@ -506,17 +488,6 @@
       <li>PRF_AutonomousMining</li>
     </researchPrerequisites>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>1</speedFactor>    
-        <minPower>800</minPower>       
-        <maxPower>800</maxPower>       
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        
-        <maxPower>400</maxPower>     
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>1</BaseSkill>
@@ -570,22 +541,19 @@
       </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>20000</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>6.66~6.66</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~5</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">        <!-- Power / Speed Boost, set to min/max same to set fixed value -->
-        <speedFactor>666</speedFactor>        <!-- Base speed -->
-        <minPower>20000</minPower>        <!-- power usage lowest range -->
-        <maxPower>20000</maxPower>        <!-- Power for max range -->
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <minPower>0</minPower>        <!-- power usage lowest range -->
-        <maxPower>1000</maxPower>        <!-- Power for max range -->
-        <targetCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</targetCellResolverType>
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_AutoMachineToolCellResolver</outputCellResolverType>
-      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
         <BaseSkill>20</BaseSkill>

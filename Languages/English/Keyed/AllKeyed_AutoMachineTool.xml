@@ -5,7 +5,7 @@
   <PRF.AutoMachineTool.MustInWall>Must be installed in a wall.</PRF.AutoMachineTool.MustInWall>
   <PRF.AutoMachineTool.SelectOutputDirectionDesc>Specify the output destination of the finished product. If the output destination is part of the stockpiling zone and the finished product can be stored, it is output in it.
 Even if the output destination is in the stockpiling zone, the finished product can not be placed, but it is placed in the cell specified as the output destination.</PRF.AutoMachineTool.SelectOutputDirectionDesc>
-  
+
   <PRF.AutoMachineTool.ForbidOutputItemLabel>Forbid output items</PRF.AutoMachineTool.ForbidOutputItemLabel>
   <PRF.AutoMachineTool.ForbidOutputItemDesc>Machine tools forbid items that are output as finished goods, so that colonists are not involved.</PRF.AutoMachineTool.ForbidOutputItemDesc>
 
@@ -17,17 +17,17 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.OutputDirectionSW>Southwest</PRF.AutoMachineTool.OutputDirectionSW>
   <PRF.AutoMachineTool.OutputDirectionW>West</PRF.AutoMachineTool.OutputDirectionW>
   <PRF.AutoMachineTool.OutputDirectionNW>Northwest</PRF.AutoMachineTool.OutputDirectionNW>
-  
+
   <PRF.AutoMachineTool.PlaceNotAllowed>AutoMachineTool must face work table and be placed in working position.</PRF.AutoMachineTool.PlaceNotAllowed>
-  
+
   <PRF.AutoMachineTool.StatWorking>Working. [{0} / {1} ({2} %)]</PRF.AutoMachineTool.StatWorking>
   <PRF.AutoMachineTool.StatWorkingNotParam>Working.</PRF.AutoMachineTool.StatWorkingNotParam>
   <PRF.AutoMachineTool.StatReady>Ready.</PRF.AutoMachineTool.StatReady>
   <PRF.AutoMachineTool.StatPlacing>Placing. [pending placement {0}]</PRF.AutoMachineTool.StatPlacing>
   <PRF.AutoMachineTool.PlacingSingle>Placing {0}.</PRF.AutoMachineTool.PlacingSingle>
-  
+
   <PRF.AutoMachineTool.Priority>priority</PRF.AutoMachineTool.Priority>
-  
+
   <PRF.AutoMachineTool.OutputDirection>Output destination. [{0}]</PRF.AutoMachineTool.OutputDirection>
   <PRF.AutoMachineTool.OutputDirection.N>North</PRF.AutoMachineTool.OutputDirection.N>
   <PRF.AutoMachineTool.OutputDirection.NE>Northeast</PRF.AutoMachineTool.OutputDirection.NE>
@@ -37,15 +37,28 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.OutputDirection.SW>Southwest</PRF.AutoMachineTool.OutputDirection.SW>
   <PRF.AutoMachineTool.OutputDirection.W>West</PRF.AutoMachineTool.OutputDirection.W>
   <PRF.AutoMachineTool.OutputDirection.NW>Northwest</PRF.AutoMachineTool.OutputDirection.NW>
-  
+
   <!-- PowerTab -->
   <PRF.AutoMachineTool.SupplyPower.TabName>Overclock</PRF.AutoMachineTool.SupplyPower.TabName>
-  <PRF.AutoMachineTool.SupplyPower.Description>Overclock power usage to increace WorkSpeed</PRF.AutoMachineTool.SupplyPower.Description>
-  <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Overclock power usage to increace Work Range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
-  <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Overclock Power For Speed</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
-  <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Overclock Power For Range</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
+  <PRF.AutoMachineTool.SupplyPower.Description>Overclock power usage to increase WorkSpeed</PRF.AutoMachineTool.SupplyPower.Description>
+  <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Overclock power usage to increase Work Range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Overclock Power For Speed ({0} W)</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Overclock Power For Range ({0} W)</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
   <PRF.AutoMachineTool.SupplyPower.SunLampText>Sun Lamp(power:2000)</PRF.AutoMachineTool.SupplyPower.SunLampText>
-  
+  <PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start>Total Power Usage:\nBase [{0}] + Work Speed [{1}] + Range [{2}]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start>
+  <PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append> + {0} [{1}]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append>
+  <PRF.AutoMachineTool.SupplyPower.BreakDownLine_End> = [{0} W]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_End>
+  <PRF.AutoMachineTool.SupplyPower.wdLabel>{0} W</PRF.AutoMachineTool.SupplyPower.wdLabel>
+  <PRF.AutoMachineTool.SupplyPower.PercentLabel>{0}%</PRF.AutoMachineTool.SupplyPower.PercentLabel>
+  <PRF.AutoMachineTool.SupplyPower.CurrentPercent>Current work speed {0}%</PRF.AutoMachineTool.SupplyPower.CurrentPercent>
+  <PRF.AutoMachineTool.SupplyPower.CellsLabel>{0} cells</PRF.AutoMachineTool.SupplyPower.CellsLabel>
+  <PRF.AutoMachineTool.SupplyPower.CurrentCellRadius>Current Range Radius {0} Cells</PRF.AutoMachineTool.SupplyPower.CurrentCellRadius>
+
+
+
+
+
+
   <!-- LimitationTab -->
   <!--<PRF.AutoMachineTool.ProductLimitation.TabName>Settings</PRF.AutoMachineTool.ProductLimitation.TabName>-->
   <PRF.AutoMachineTool.ProductLimitation.Description>Processing stops when the number of products and items exceeds the limit value. You can specify the zone. please check if it can be placed in that zone.</PRF.AutoMachineTool.ProductLimitation.Description>
@@ -54,7 +67,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.ProductLimitation.CountStacks>Count stacks</PRF.AutoMachineTool.ProductLimitation.CountStacks>
   <PRF.AutoMachineTool.EntierMap>No zone - DO FOREVER</PRF.AutoMachineTool.EntierMap>
   <PRF.AutoMachineTool.CountZone>For what zone?</PRF.AutoMachineTool.CountZone>
-  
+
   <!-- Slaughterhouse SettingTab -->
   <PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>Setting</PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>
   <PRF.AutoMachineTool.Slaughterhouse.Setting.Description>Setting for slaughter target</PRF.AutoMachineTool.Slaughterhouse.Setting.Description>
@@ -68,7 +81,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.Adult>Adult</PRF.AutoMachineTool.Adult>
   <PRF.AutoMachineTool.Young>Young</PRF.AutoMachineTool.Young>
   <PRF.AutoMachineTool.RaceName>Race name</PRF.AutoMachineTool.RaceName>
-  
+
   <!-- ItemPuller -->
   <PRF.AutoMachineTool.Puller.SwitchActiveLabel>Toggle Pulling</PRF.AutoMachineTool.Puller.SwitchActiveLabel>
   <PRF.NeedToTurnOnPuller>Puller is inactive until toggled on.</PRF.NeedToTurnOnPuller>
@@ -83,13 +96,16 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>Storage</PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>
   <PRF.AutoMachineTool.Puller.OutputItemFilter.Description>Set filter for what item to be pulled out.</PRF.AutoMachineTool.Puller.OutputItemFilter.Description>
   <PRF.AutoMachineTool.Puller.FilterCopyFrom>Select copy from</PRF.AutoMachineTool.Puller.FilterCopyFrom>
-  
-  
+
+
   <!-- AutoMiner -->
   <PRF.AutoMachineTool.AutoMiner.MineOre>Mining {0}</PRF.AutoMachineTool.AutoMiner.MineOre>
-  
+
   <!-- BeltConveyor -->
   <PRF_DropFromConveyorDesc>Drop the item on the conveyor onto the ground - somewhere off a conveyor. Obviously, this doesn't make sense for underground conveyors, but it's a lot easier to let you do this than it is to script pawns getting weird things unstuck from tunnels.</PRF_DropFromConveyorDesc>
+  <PRF.Conveyor.IsEndOfLineSetting>End of Line?</PRF.Conveyor.IsEndOfLineSetting>
+  <PRF.Conveyor.IsEndOfLineSetting.Desc>Is this belt the end of its line?  If checked, it will hold onto items until something takes them.  If unchecked, it will send items on to the next conveyor or dump them on the ground (if there is room).</PRF.Conveyor.IsEndOfLineSetting.Desc>
+  <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine>  <!-- 1 line for Inspect Window -->
   <PRF.Conveyor.IsEndOfLineSetting>Holding Belt</PRF.Conveyor.IsEndOfLineSetting>
   <PRF.Conveyor.IsEndOfLineSetting.Desc>Is this belt the end of its line or unloading into a assembler?  If checked, it will hold onto items until something takes them.  If unchecked, it will send items on to the next conveyor or dump them on the ground (if there is room).</PRF.Conveyor.IsEndOfLineSetting.Desc>
   <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine><!-- 1 line for Inspect Window -->
@@ -102,5 +118,4 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.Conveyor.OutputItemFilter.Description>Set the filter for items in the output direction. direction</PRF.AutoMachineTool.Conveyor.OutputItemFilter.Description>
   <PRF.AutoMachineTool.Conveyor.OutputItemFilter.NothingOutputDestination>(Disconnected)</PRF.AutoMachineTool.Conveyor.OutputItemFilter.NothingOutputDestination>
   <PRF.AutoMachineTool.Conveyor.FilterCopyFrom>Select copy from</PRF.AutoMachineTool.Conveyor.FilterCopyFrom>
-  
- </LanguageData>
+</LanguageData>

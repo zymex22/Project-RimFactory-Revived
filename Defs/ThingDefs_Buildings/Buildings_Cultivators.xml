@@ -40,9 +40,6 @@
 
     <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
       <li Class="CompProperties_Flickable" />
-      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
-        <SupportDiagonal>true</SupportDiagonal>
-      </li>
     </comps>
   </ThingDef>
 
@@ -63,6 +60,11 @@
     <placeWorkers>
       <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
     </placeWorkers>
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+    </comps>
   </ThingDef>
 
 
@@ -266,16 +268,19 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>750</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
+        <!-- Speed Settings -->
+<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+<powerPerStepSpeed>0</powerPerStepSpeed>
+<powerStepFactor>1</powerStepFactor>
+<!-- Range Settings -->
+<floatrange_Range>5~15</floatrange_Range>
+<powerPerStepRange>150</powerPerStepRange>
+        
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        <minPowerForRange>750</minPowerForRange>
-        <minRange>5</minRange>
-        <maxPowerForRange>1500</maxPowerForRange>
-        <maxRange>15</maxRange>
+        
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
     </comps>

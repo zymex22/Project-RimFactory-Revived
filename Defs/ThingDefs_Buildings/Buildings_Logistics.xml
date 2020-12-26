@@ -124,12 +124,13 @@
       <li Class="CompProperties_Flickable" />
       <!-- Either specialDisplayRadius or CompProperties_PowerWorkSetting -->
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        <speedSetting>false</speedSetting>
-        <rangeSetting>true</rangeSetting>
-        <minPowerForRange>0</minPowerForRange>
-        <minRange>5</minRange>
-        <maxPowerForRange>500</maxPowerForRange>
-        <maxRange>10</maxRange>
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>5~10</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
         <rangeType>ProjectRimFactory.Common.CircleRange</rangeType>
       </li>
     </comps>
@@ -187,29 +188,22 @@
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
-        <basePowerConsumption>60</basePowerConsumption>
+        <basePowerConsumption>160</basePowerConsumption>
       </li>
       <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~10</floatrange_SpeedFactor>
+        <powerPerStepSpeed>20</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
     </comps>
     <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>31</speedFactor>
-        <minPower>100</minPower>
-        <maxPower>1000</maxPower>
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerOutputCellResolver</outputCellResolverType>
-        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerInputCellResolver</inputCellResolverType>
-        <!-- for inputCellResolverType
-        <inputCell>(1, 1, 1, 1)</inputCell>
-        <inputZone>(1, 1, 1, 0.5)</inputZone>
-        -->
-        <!-- for outputCellResolverType
-        <outputCell>(1, 0.92, 0.016, 1)</outputCell>
-        <outputZone>(1, 0.92, 0.016, 0.5)</outputZone>
-        -->
-      </li>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
         <forcePlacing>false</forcePlacing>
       </li>
@@ -223,6 +217,7 @@
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
     <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_PullerCellsHilight</li>
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
   </ThingDef>
@@ -244,10 +239,6 @@
     <passability>Impassable</passability>
     <description>Attach to end of grow zone, will pull set items within selected growzone. Will not pull from neighboring grow zones.</description>
     <altitudeLayer>Building</altitudeLayer>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
     <graphicData>
       <texPath>Belts/Growzone</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -276,6 +267,9 @@
       </fixedStorageSettings>
     </building>
     <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+        <outputSides>false</outputSides>
+      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
@@ -308,16 +302,15 @@
     <passability>Impassable</passability>
     <description>A Puller That Pull items from A to B. Place it down and switch it on to start pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!\n\nREMEMBER to turn it on after placing!</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
     <graphicData>
       <texPath>Belts/PullerI</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
     <modExtensions Inherit="false">
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+        <outputSides>false</outputSides>
+      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
@@ -329,19 +322,21 @@
           </Working>
         </graphicDataList>
       </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>15</speedFactor>
-        <minPower>100</minPower>
-        <maxPower>500</maxPower>
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkIORange">
-        <outputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerOutputCellResolver</outputCellResolverType>
-        <inputCellResolverType>ProjectRimFactory.AutoMachineTool.Building_ItemPullerInputCellResolver</inputCellResolverType>
-      </li>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
-        <forcePlacing>false</forcePlacing>
-      </li>
     </modExtensions>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.01~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>10</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsII</li>
     </researchPrerequisites>
@@ -364,16 +359,15 @@
     <passability>Impassable</passability>
     <description>A upgraded puller which run at a higher speed than mkI puller. pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
     <graphicData>
       <texPath>Belts/Puller</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1.1,1.1)</drawSize>
     </graphicData>
     <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+        <outputSides>false</outputSides>
+      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
@@ -407,10 +401,6 @@
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
-    <placeWorkers>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
-    </placeWorkers>
 
     <graphicData>
       <texPath>Belts/PullerL</texPath>
@@ -477,8 +467,6 @@
     <clearBuildingArea>false</clearBuildingArea>
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_OutputCellsHilight</li>
-      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_InputCellsHilight</li>
     </placeWorkers>
     <graphicData>
       <texPath>Belts/PullerWall</texPath>
@@ -487,6 +475,9 @@
       <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
     <modExtensions>
+      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Puller">
+        <outputSides>false</outputSides>
+      </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Graphic">
         <graphicDataList>
           <Working>
@@ -554,20 +545,23 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>10</basePowerConsumption>
         <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
-    </comps>
-    <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_WorkSpeed">
-        <speedFactor>5</speedFactor>
-        <minPower>10</minPower>
-        <maxPower>10</maxPower>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.002~0.002</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
-    </modExtensions>
+    </comps>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
