@@ -2,10 +2,10 @@
 <Defs>
 
   <!--===================== Achievement Tab =====================-->
-  <AchievementsExpanded.AchievementTabDef>
+  <!-- <AchievementsExpanded.AchievementTabDef>
     <defName>PRF_Achievement</defName>
     <label>Project RimFactory</label>
-  </AchievementsExpanded.AchievementTabDef>
+  </AchievementsExpanded.AchievementTabDef> -->
 
   <!--===================== example =====================-->
   <!-- <AchievementsExpanded.AchievementDef>
@@ -25,7 +25,7 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
 -->
   <!--======================== Getting started ========================-->
   <!-- Tier 0-->
-  <AchievementsExpanded.AchievementDef>
+  <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_GettingStarted</defName>
     <tab>PRF_Achievement</tab>
     <label>Getting Started</label>
@@ -37,10 +37,10 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
 
     <texPath>Achievements/OutOfTheDarkAge</texPath>
     <points>5</points>
-  </AchievementsExpanded.AchievementDef>
+  </AchievementsExpanded.AchievementDef> -->
 
   <!-- Tier 1-->
-  <AchievementsExpanded.AchievementDef>
+  <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierI</defName>
     <tab>PRF_Achievement</tab>
     <label>Early Automation</label>
@@ -48,14 +48,14 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
       <def>PRF_CoreTierI</def>
-    </tracker>
+    </tracker> 
 
     <texPath>Achievements/OutOfTheDarkAge</texPath>
     <points>10</points>
-  </AchievementsExpanded.AchievementDef>
+  </AchievementsExpanded.AchievementDef> -->
 
   <!-- Tier 2-->
-  <AchievementsExpanded.AchievementDef>
+  <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierII</defName>
     <tab>PRF_Achievement</tab>
     <label>Getting Advanced</label>
@@ -67,10 +67,10 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
 
     <texPath>Achievements/OutOfTheDarkAge</texPath>
     <points>15</points>
-  </AchievementsExpanded.AchievementDef>
+  </AchievementsExpanded.AchievementDef> -->
 
   <!-- Tier 3-->
-  <AchievementsExpanded.AchievementDef>
+  <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierIII</defName>
     <tab>PRF_Achievement</tab>
     <label>Self learning</label>
@@ -82,10 +82,10 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
 
     <texPath>Achievements/OutOfTheDarkAge</texPath>
     <points>25</points>
-  </AchievementsExpanded.AchievementDef>
+  </AchievementsExpanded.AchievementDef> -->
 
   <!-- Tier 4-->
-  <AchievementsExpanded.AchievementDef>
+  <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierIV</defName>
     <tab>PRF_Achievement</tab>
     <label>Now its getting crazy</label>
@@ -97,5 +97,5 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
 
     <texPath>Achievements/OutOfTheDarkAge</texPath>
     <points>50</points>
-  </AchievementsExpanded.AchievementDef>
+  </AchievementsExpanded.AchievementDef> -->
 </Defs>

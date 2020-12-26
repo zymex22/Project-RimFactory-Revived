@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Alpha Biomes</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName = "PRF_T1_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+					<value>
+						<VCEF_BloodLeech Weight="0.1" Count="6" />
+						<VCEF_GiantPolarPrawn Weight="0.1" Count="6" />
+						<VCEF_MudSplasherCarp Weight="0.1" Count="6" />
+						<VCEF_MutantFlatfish Weight="0.1" Count="6" />
+						<VCEF_OcularFish Weight="0.1" Count="6" />
+						<VCEF_PropaneBag Weight="0.1" Count="6" />
+						<VCEF_ShadowFry Weight="0.2" Count="6" />
+						<VCEF_Slimefish Weight="0.2" Count="6" />
+						<VCEF_Spinyfish Weight="0.1" Count="6" />
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName = "PRF_T2_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+					<value>
+						<VCEF_AbyssalEel Weight="0.2" Count="6" />
+						<VCEF_BorealSardine Weight="0.1" Count="6" />
+						<VCEF_DuskySprat Weight="0.1" Count="6" />
+						<VCEF_ForsakenAnglerfish Weight="0.1" Count="6" />
+						<VCEF_FrigidSwimmer Weight="0.1" Count="6" />
+						<VCEF_HabdakLongfin Weight="0.1" Count="6" />
+						<VCEF_Jellyfungus Weight="0.1" Count="6" />
+						<VCEF_MutantFlatfish Weight="0.1" Count="6" />
+						<VCEF_PinkBlobfish Weight="0.1" Count="6" />
+						<VCEF_Spiderfish Weight="0.2" Count="6" />
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

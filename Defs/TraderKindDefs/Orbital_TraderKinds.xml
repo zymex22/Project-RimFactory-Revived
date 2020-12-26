@@ -185,11 +185,6 @@
       </li> -->
       <!-- POWER items vanilla -->
       <li Class="StockGenerator_SingleDef">
-        <thingDef>PowerSwitch</thingDef>
-        <price>Cheap</price>
-        <countRange>5~40</countRange>
-      </li>
-      <li Class="StockGenerator_SingleDef">
         <thingDef>WoodFiredGenerator</thingDef>
         <price>Cheap</price>
         <countRange>1~10</countRange>

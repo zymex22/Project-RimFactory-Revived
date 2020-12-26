@@ -17,6 +17,7 @@
       <SellPriceFactor>0.70</SellPriceFactor>      <!-- 	A factor denoting how much traders will pay you less for this weapon than they would sell it for (when negotiating at maximal social skill). default value on weaponry is 0.5 -->
       <Beauty>-1</Beauty>      <!-- +is good -is bad ;) -->
       <Mass>10</Mass>      <!-- mass in kg -->
+      <Flammability>0.9</Flammability>      <!-- 0.0=0%, 1=100% -->
     </statBases>
     <comps>
       <li>
@@ -27,10 +28,6 @@
       <li>BuildingsAutomation</li>
     </thingCategories>
     <designationCategory>Industrial</designationCategory>    <!--architect menu location-->
-  </ThingDef>
-
-  <!-- Just to make sure if any other mod still use old base -->
-  <ThingDef Name="PRFBuildingBase" ParentName="PRF_BuildingBase" Abstract="True">
   </ThingDef>
 
 

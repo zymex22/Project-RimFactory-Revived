@@ -511,7 +511,7 @@
     <constructionSkillPrerequisite>18</constructionSkillPrerequisite>
     <graphicData>
       <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
-      <!-- <color>(15,100,130,256)</color> -->      <!--change color on maske manually -->
+      <color>(153,0,0,256)</color>      <!--change color on maske manually -->
     </graphicData>
     <costList>
       <Steel>10000</Steel>

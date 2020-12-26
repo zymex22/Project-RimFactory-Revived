@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <MakeDataDisk.label>制作配方数据磁带</MakeDataDisk.label>
+  <!--<MakeDataDisk.label>制作配方数据磁带</MakeDataDisk.label>
   <MakeDataDisk.description>制作一卷磁性数据磁带。</MakeDataDisk.description>
   <MakeDataDisk.jobString>正在制作配方数据磁带。</MakeDataDisk.jobString>
 
@@ -15,7 +15,7 @@
 
   <MakePaperclipsTake75Items.label>制作回形针（75个物品）</MakePaperclipsTake75Items.label>
   <MakePaperclipsTake75Items.description>制作回形针，一次处理75个物品（小体积材料，比如黄金消耗X750）。</MakePaperclipsTake75Items.description>
-  <MakePaperclipsTake75Items.jobString>正在制作回形针。</MakePaperclipsTake75Items.jobString>
+  <MakePaperclipsTake75Items.jobString>正在制作回形针。</MakePaperclipsTake75Items.jobString> -->
 
   <MakeAIPersonaCoreFromWeakAIChips.label>制作AI伪人格核心</MakeAIPersonaCoreFromWeakAIChips.label>
   <MakeAIPersonaCoreFromWeakAIChips.description>融合10个弱AI芯片来制作AI伪人格核心。</MakeAIPersonaCoreFromWeakAIChips.description>
