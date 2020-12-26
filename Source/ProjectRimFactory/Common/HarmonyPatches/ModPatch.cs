@@ -19,7 +19,16 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             if(__instance.PackageId.ToLower() == LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().Content.PackageId.ToLower())
             {
                 var setting = LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().Settings;
-                __result = __result.Concat(setting.Patches);
+                var patches = setting.Patches;
+                int count = 0;
+
+                foreach (PatchOperation patch in patches)
+                {
+                    count++;
+                    patch.sourceFile = "PRF_SettingsPatch_" + count + "_";
+                }
+
+                __result = __result.Concat(patches);
             }
         }
     }
