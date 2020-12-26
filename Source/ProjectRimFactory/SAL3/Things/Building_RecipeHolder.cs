@@ -10,7 +10,7 @@ using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
 {
-    public class Building_RecipeHolder : Building
+    public class Building_RecipeHolder : Building, IRecipeHolderInterface
     {
         static readonly IntVec3 Up = new IntVec3(0, 0, 1);
         //================================ Fields
@@ -23,6 +23,25 @@ namespace ProjectRimFactory.SAL3.Things
                                                          let building = t as Building_WorkTable
                                                          where building != null
                                                          select building;
+
+        public List<RecipeDef> Saved_Recipes => recipes;
+
+        private List<RecipeDef> quered_recipes = new List<RecipeDef>();
+
+        public List<RecipeDef> Quered_Recipes {
+            get {
+
+                return quered_recipes;
+            } 
+            set {
+                quered_recipes = value;
+            }
+        }
+
+        public List<RecipeDef> Learnable_Recipes => GetAllProvidedRecipeDefs().ToList();
+
+        public RecipeDef Recipe_Learning => workingRecipe;
+
         public virtual IEnumerable<RecipeDef> GetAllProvidedRecipeDefs()
         {
             HashSet<RecipeDef> result = new HashSet<RecipeDef>();
@@ -139,15 +158,27 @@ namespace ProjectRimFactory.SAL3.Things
 
         public override void Tick()
         {
-            if (this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>()?.PowerOn != false && workingRecipe != null)
+            if (this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>()?.PowerOn != false)
             {
-                workAmount -= 60f;
-                if (workAmount < 0)
+
+                if (workingRecipe != null)
                 {
-                    // Encode recipe
-                    recipes.Add(workingRecipe);
-                    ResetProgress();
+                    workAmount -= 60f;
+                    if (workAmount < 0)
+                    {
+                        // Encode recipe
+                        recipes.Add(workingRecipe);
+                        ResetProgress();
+                    }
                 }
+                else if (Quered_Recipes.Count >= 1)
+                {
+                    workingRecipe = Quered_Recipes[0];
+                    workAmount = GetLearnRecipeWorkAmount(workingRecipe);
+                    Quered_Recipes.RemoveAt(0);
+                }
+                
+                
             }
             base.Tick();
         }

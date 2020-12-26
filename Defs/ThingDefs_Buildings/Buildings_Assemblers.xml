@@ -150,6 +150,9 @@ Mod extennsion for assemblers
     <tickerType>Normal</tickerType>
     <neverMultiSelect>true</neverMultiSelect>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
+        <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.Things.ITab_RecipeHolder</li>
+    </inspectorTabs>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
