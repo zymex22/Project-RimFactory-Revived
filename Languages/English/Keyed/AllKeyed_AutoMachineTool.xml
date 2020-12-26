@@ -90,8 +90,8 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>Switch output side.</PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>
   <PRF.Puller.TakeForbiddenItems>Pull forbidden</PRF.Puller.TakeForbiddenItems>
   <PRF.Puller.TakeForbiddenItemsDesc>If set, this puller will also take forbidden items.  If they were forbidden, the puller will change them to "allowed."  This is a per-puller setting.</PRF.Puller.TakeForbiddenItemsDesc>
-  <PRF.Puller.TakeSingleItems>Take Single items at a time</PRF.Puller.TakeSingleItems>
-  <PRF.Puller.TakeSingleItems>If set, this puller will only take a single item at a time.  Otherwise, it pulls entire stacks of items at once!  This is a per-puller setting.</PRF.Puller.TakeSingleItems>
+  <PRF.Puller.takeSingleItemsHmm>Take Single items at a time</PRF.Puller.takeSingleItemsHmm>
+  <PRF.Puller.takeSingleItemsDesc>If set, this puller will only take a single item at a time.  Otherwise, it pulls entire stacks of items at once!  This is a per-puller setting.</PRF.Puller.takeSingleItemsDesc>
   <!-- FilterTab(puller) -->
   <PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>Storage</PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>
   <PRF.AutoMachineTool.Puller.OutputItemFilter.Description>Set filter for what item to be pulled out.</PRF.AutoMachineTool.Puller.OutputItemFilter.Description>
@@ -108,7 +108,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine>  <!-- 1 line for Inspect Window -->
   <PRF.Conveyor.IsEndOfLineSetting>Holding Belt</PRF.Conveyor.IsEndOfLineSetting>
   <PRF.Conveyor.IsEndOfLineSetting.Desc>Is this belt the end of its line or unloading into a assembler?  If checked, it will hold onto items until something takes them.  If unchecked, it will send items on to the next conveyor or dump them on the ground (if there is room).</PRF.Conveyor.IsEndOfLineSetting.Desc>
-  <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine><!-- 1 line for Inspect Window -->
+  <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine>  <!-- 1 line for Inspect Window -->
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>very high</PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.High>high</PRF.AutoMachineTool.Conveyor.DirectionPriority.High>
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.Normal>normal</PRF.AutoMachineTool.Conveyor.DirectionPriority.Normal>
