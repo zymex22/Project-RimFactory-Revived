@@ -43,7 +43,5 @@
     <li>vanillaexpanded.achievements</li>
   </loadAfter>
   <incompatibleWith>
-    <li>Spdskatr.ssBiggerBatteries</li>
-    <li>automatic.startupimpact</li>
   </incompatibleWith>
 </ModMetaData>

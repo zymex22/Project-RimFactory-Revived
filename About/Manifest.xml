@@ -7,8 +7,6 @@
     <li>brrainz.harmony</li>
   </dependencies>
   <incompatibleWith>
-    <li>Spdskatr.ssBiggerBatteries</li>
-    <li>automatic.startupimpact</li>
   </incompatibleWith>
   <loadAfter>
     <li>brrainz.harmony</li>
@@ -17,7 +15,6 @@
     <li>essecoisa.Floored</li>
   </loadAfter>
   <suggests>
-    <li>historic.IndustrialRollers</li>
     <li>Spdskatr.ssBatteryFuse</li>
   </suggests>
   <showCrossPromotions>true</showCrossPromotions>
