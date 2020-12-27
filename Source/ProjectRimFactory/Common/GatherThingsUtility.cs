@@ -45,7 +45,7 @@ namespace ProjectRimFactory {
             }
             //Pull from Storage Zones
             if (allowStorageZones && c.GetZone(map) is Zone_Stockpile sz){
-                foreach (Thing thing in sz.AllContainedThings)
+                foreach (Thing thing in sz.AllContainedThings.Where(t => !(t is Building)))
                 {
                     yield return thing;
                 }
