@@ -777,6 +777,24 @@
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
     <clearBuildingArea>false</clearBuildingArea>
+    <comps Inherit="false">
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
     <statBases>
       <WorkToBuild Inherit="false">400</WorkToBuild>      <!--harder to dig tunnel-->
     </statBases>
@@ -821,9 +839,19 @@
     <comps Inherit="false">
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>0</basePowerConsumption>
+        <basePowerConsumption>10</basePowerConsumption>
         <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
     </comps>
@@ -846,6 +874,24 @@
         <toUnderground>true</toUnderground>
       </li>
     </modExtensions>
+    <comps Inherit="false">
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
   </ThingDef>
 
   <!--======================================= Conveyor underground connector to floor ===============================================-->
@@ -868,6 +914,24 @@
         <toUnderground>false</toUnderground>
       </li>
     </modExtensions>
+    <comps Inherit="false">
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
   </ThingDef>
   <!--======================================= Conveyor Splitters ===============================================-->
   <ThingDef ParentName="PRF_Conveyor_Base" Name="PRF_Belt_Splitter">
@@ -983,6 +1047,24 @@
         <drawRotated>false</drawRotated>
       </blueprintGraphicData>-->
     </building>
+    <comps Inherit="false">
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
   </ThingDef>
 
   <!--======================================= Conveyor Splitter Wall ===============================================-->
@@ -1011,7 +1093,26 @@
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
+    <comps Inherit="false">
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>10</basePowerConsumption>
+        <transmitsPower>false</transmitsPower>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
     <building>
+    
       <isEdifice>false</isEdifice>
       <!--      <blueprintGraphicData>
         <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
