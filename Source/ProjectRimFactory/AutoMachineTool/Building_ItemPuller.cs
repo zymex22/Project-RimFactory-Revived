@@ -133,23 +133,17 @@ namespace ProjectRimFactory.AutoMachineTool
             return this;
         }
 
-        //TODO: stop using Option<Thing> and just use Thing
-        protected virtual Option<Thing> TargetThing()
+        protected virtual Thing TargetThing()
         {
             Thing target;
-            if (this.takeForbiddenItems)
-                target = (this.Position +  this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map)
+            target = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map)
+                        .Where(t => !t.IsForbidden(Faction.OfPlayer) || this.takeForbiddenItems)
                         .Where(t => this.settings.AllowedToAccept(t))
                         .FirstOrDefault(t => !this.IsLimit(t));
-            else
-                target = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map)
-                        .Where(t => !t.IsForbidden(Faction.OfPlayer))
-                        .Where(t => this.settings.AllowedToAccept(t))
-                        .FirstOrDefault(t => !this.IsLimit(t));
-            if (target == null) return new Option<Thing>(null);
-            if (this.takeSingleItems) return new Option<Thing>(target.SplitOff(1));
+            if (target == null) return target;
+            if (this.takeSingleItems) return (target.SplitOff(1));
             // SplitOff ensures any item-removal effects happen:
-            return new Option<Thing>(target.SplitOff(target.stackCount));
+            return (target.SplitOff(target.stackCount));
         }
 
         public override IntVec3 OutputCell()
@@ -207,7 +201,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
             workAmount = 120;
-            target = TargetThing().GetOrDefault(null);
+            target = TargetThing();
             if (target?.Spawned == true) target.DeSpawn();
             return target != null;
         }

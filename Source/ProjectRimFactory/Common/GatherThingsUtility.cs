@@ -22,7 +22,7 @@ namespace ProjectRimFactory {
         /// <returns>The items in cell <paramref name="c"/> for use.</returns>
         /// <param name="c">Cell</param>
         /// <param name="map">Map</param>
-        public static IEnumerable<Thing> AllThingsInCellForUse(this IntVec3 c, Map map) {
+        public static IEnumerable<Thing> AllThingsInCellForUse(this IntVec3 c, Map map, bool allowStorageZones = true) {
             List<Thing> thingList = map.thingGrid.ThingsListAt(c);
             for (int i=thingList.Count-1; i>=0; i--) {
                 Thing t = thingList[i];
@@ -33,6 +33,21 @@ namespace ProjectRimFactory {
                     }
                 } else if (t.def.category == ThingCategory.Item) {
                     yield return t;
+                }
+                //This shold support all other storage Buildings
+                else if (t is Building_Storage storage)
+                {
+                    foreach (Thing thing in storage.GetSlotGroup().HeldThings)
+                    {
+                        yield return thing;
+                    }
+                }
+            }
+            //Pull from Storage Zones
+            if (allowStorageZones && c.GetZone(map) is Zone_Stockpile sz){
+                foreach (Thing thing in sz.AllContainedThings)
+                {
+                    yield return thing;
                 }
             }
         }
