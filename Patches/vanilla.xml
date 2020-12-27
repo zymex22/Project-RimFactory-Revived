@@ -4,11 +4,11 @@
   <!--================================ Patches for vanilla ====================================== -->
 
   <!--================================ Add name for vanilla Research bench so we can use it as parent ====================================== -->
-  <Operation Class="PatchOperationAttributeSet">
+  <!--<Operation Class="PatchOperationAttributeSet">
     <xpath>/Defs/ThingDef[defName="HiTechResearchBench"]</xpath>
     <attribute>Name</attribute>
     <value>ResearchBenchVanilla</value>
-  </Operation>
+  </Operation> -->
 
   <!--================================ add linkable for factory research linkable ====================================== -->
 

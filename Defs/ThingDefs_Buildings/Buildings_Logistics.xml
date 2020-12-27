@@ -591,7 +591,7 @@
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-        <floatrange_SpeedFactor>0.002~0.002</floatrange_SpeedFactor>
+        <floatrange_SpeedFactor>0.003~0.003</floatrange_SpeedFactor>
         <powerPerStepSpeed>0</powerPerStepSpeed>
         <powerStepFactor>1</powerStepFactor>
         <!-- Range Settings -->
@@ -668,7 +668,7 @@
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-        <floatrange_SpeedFactor>0.004~0.004</floatrange_SpeedFactor>
+        <floatrange_SpeedFactor>0.006~0.006</floatrange_SpeedFactor>
         <powerPerStepSpeed>0</powerPerStepSpeed>
         <powerStepFactor>1</powerStepFactor>
         <!-- Range Settings -->
@@ -716,7 +716,7 @@
       <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-        <floatrange_SpeedFactor>0.006~0.006</floatrange_SpeedFactor>
+        <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
         <powerPerStepSpeed>0</powerPerStepSpeed>
         <powerStepFactor>1</powerStepFactor>
         <!-- Range Settings -->
