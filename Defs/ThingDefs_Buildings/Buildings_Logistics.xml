@@ -641,21 +641,21 @@
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>PRF_Conveyor_Simple_II</defName>
     <label>Fast conveyor belt</label>
-    <description>Conveyor belts transport items from one end to the other. It will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.\nBut because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by just leading the belt into the side of another belt and will seamlessly continue.</description>
+    <description>Fast Conveyor belts transport items from one end to the other. This moves at 2x speed of Normal belts. It will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.\nBut because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by just leading the belt into the side of another belt and will seamlessly continue.</description>
     <clearBuildingArea>false</clearBuildingArea>
     <costList>      <!-- same in Lite -->
       <Steel>10</Steel>
     </costList>
-    <uiIconPath>Belts/v3/BeltConveyorIcon</uiIconPath>
+    <uiIconPath>Belts/v3/BeltConveyorIcon2</uiIconPath>
     <graphicData>
-      <texPath>[extraData][texPath]Belts/v3/Belts Atlas 640x640 GroundLevel Padded[/texPath][arrowEastDrawOffset](0,0.0,0)[/arrowEastDrawOffset][/extraData]</texPath>
+      <texPath>[extraData][texPath]Belts/v3/Belts Atlas 640x640 GroundLevel Padded[/texPath][arrowEastDrawOffset](0,0.0,0)[/arrowEastDrawOffset][arrowTexPath1]Belts/T2SmallArrow00[/arrowTexPath1][arrowTexPath2]Belts/T2SmallArrow01[/arrowTexPath2][/extraData]</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1, 1)</drawSize>
     </graphicData>
     <building>
       <blueprintGraphicData>
-        <texPath>[notActualTexPath>[texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint[/texPath>[arrowDrawOffset](0,0.2,0)[/arrowDrawOffset][/notActualTexPath></texPath>        <!--TODO-->
+        <texPath>[notActualTexPath>[texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint[/texPath>[arrowDrawOffset](0,0.2,0)[/arrowDrawOffset][arrowTexPath1]Belts/T2SmallArrow00[/arrowTexPath1][arrowTexPath2]Belts/T2SmallArrow01[/arrowTexPath2][/notActualTexPath></texPath>        <!--TODO-->
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
         <drawRotated>true</drawRotated>
         <drawSize>(1, 1)</drawSize>
@@ -689,21 +689,21 @@
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>PRF_Conveyor_Simple_III</defName>
     <label>Express conveyor belt</label>
-    <description>Conveyor belts transport items from one end to the other. It will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.\nBut because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by just leading the belt into the side of another belt and will seamlessly continue.</description>
+    <description>Express Conveyor belts transport items from one end to the other. This moves at 3x speed of Normal belts or 1.5x of Fast belts. It will dump into Storage or stockpiles - or just leave stuff on the ground when the belts end.\nBut because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by just leading the belt into the side of another belt and will seamlessly continue.</description>
     <clearBuildingArea>false</clearBuildingArea>
     <costList>      <!-- same in Lite -->
       <Steel>20</Steel>
     </costList>
-    <uiIconPath>Belts/v3/BeltConveyorIcon</uiIconPath>
+    <uiIconPath>Belts/v3/BeltConveyorIcon3</uiIconPath>
     <graphicData>
-      <texPath>[extraData][texPath]Belts/v3/Belts Atlas 640x640 GroundLevel Padded[/texPath][arrowEastDrawOffset](0,0.0,0)[/arrowEastDrawOffset][/extraData]</texPath>
+      <texPath>[extraData][texPath]Belts/v3/Belts Atlas 640x640 GroundLevel Padded[/texPath][arrowEastDrawOffset](0,0.0,0)[/arrowEastDrawOffset][arrowTexPath1]Belts/T3SmallArrow00[/arrowTexPath1][arrowTexPath2]Belts/T3SmallArrow01[/arrowTexPath2][/extraData]</texPath>
       <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
       <drawRotated>true</drawRotated>
       <drawSize>(1, 1)</drawSize>
     </graphicData>
     <building>
       <blueprintGraphicData>
-        <texPath>[notActualTexPath>[texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint[/texPath>[arrowDrawOffset](0,0.2,0)[/arrowDrawOffset][/notActualTexPath></texPath>        <!--TODO-->
+        <texPath>[notActualTexPath>[texPath>Belts/v3/Belts Atlas 640x640 GroundLevel Padded Blueprint[/texPath>[arrowDrawOffset](0,0.2,0)[/arrowDrawOffset][arrowTexPath1]Belts/T3SmallArrow00[/arrowTexPath1][arrowTexPath2]Belts/T3SmallArrow01[/arrowTexPath2][/notActualTexPath></texPath>        <!--TODO-->
         <graphicClass>ProjectRimFactory.AutoMachineTool.Graphic_LinkedConveyorTwo</graphicClass>
         <drawRotated>true</drawRotated>
         <drawSize>(1, 1)</drawSize>
