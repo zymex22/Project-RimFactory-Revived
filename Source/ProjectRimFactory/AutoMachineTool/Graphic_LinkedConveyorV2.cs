@@ -17,7 +17,9 @@ namespace ProjectRimFactory.AutoMachineTool {
     [StaticConstructorOnStartup]
     public class Graphic_LinkedConveyorV2 : Verse.Graphic_Linked, IHaveGraphicExtraData {
         // Little yellow arrow that points the direction of conveyor travel:
-        public static Material arrow00; // initialized in the static constructor
+        // HARDCODED DEFAULT:
+        public static Material arrow00; // default arrow, initialized in the static constructor
+        protected Material arrow; // used by the graphic
         // Offsets used for placing those arrows:
         public Vector3[] arrowOffsetsByRot4 = {
                     new Vector3(0f, 0.1f, 0f),
@@ -32,6 +34,7 @@ namespace ProjectRimFactory.AutoMachineTool {
         }
 
         public override void Init(GraphicRequest req) {
+            arrow = arrow00;
             // I'm sure "req ... out req" is perfectly safe?
             var extraData = GraphicExtraData.Extract(req, out req);
             ExtraInit(req, extraData);
@@ -64,6 +67,9 @@ namespace ProjectRimFactory.AutoMachineTool {
                 arrowOffsetsByRot4[0] = extraData.arrowNorthDrawOffset.Value;
             if (extraData.arrowSouthDrawOffset != null)
                 arrowOffsetsByRot4[2] = extraData.arrowSouthDrawOffset.Value;
+            if (extraData.arrowTexPath1 != null) {
+                this.arrow = MaterialPool.MatFrom(extraData.arrowTexPath1);
+            }
         }
 
         public override void Print(SectionLayer layer, Thing thing) {
@@ -90,7 +96,7 @@ namespace ProjectRimFactory.AutoMachineTool {
             base.Print(layer, thing);
             // Print the tiny yellow arrow showing direction:
             Printer_Plane.PrintPlane(layer, thing.TrueCenter()
-                + arrowOffsetsByRot4[thing.Rotation.AsInt], this.drawSize, arrow00,
+                + arrowOffsetsByRot4[thing.Rotation.AsInt], this.drawSize, arrow,
                 thing.Rotation.AsAngle);
         }
 

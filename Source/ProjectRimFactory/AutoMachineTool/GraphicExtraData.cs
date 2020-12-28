@@ -43,6 +43,8 @@ namespace ProjectRimFactory {
         public Vector3? arrowSouthDrawOffset;  // in def's XML.
         public string texPath = null; // actual texPath
         public string texPath2 = null;  // splitter building, wall edges, whatever?
+        public string arrowTexPath1 = null;
+        public string arrowTexPath2 = null;
         public GraphicData graphicData1 = null; // wall transitions?
         public List<string> specialLinkDefs;
         public string inputString = null;
