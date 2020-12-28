@@ -23,14 +23,17 @@ namespace ProjectRimFactory.AutoMachineTool {
     /// </summary>
     [StaticConstructorOnStartup]
     public class Graphic_LinkedSplitter : Graphic_LinkedConveyorV2, IHaveGraphicExtraData {
-        // to show the input direction for the splitter:
+        // default arrow to show the input direction for the splitter:
         public static Material arrow00b;
-        // to show all output directions for the splitter:
+        // default arrow to show all output directions for the splitter:
         public static Material arrow01;
 
-        private GraphicData splitterBuildingDoorOpen;
-        private GraphicData splitterBuildingDoorClosed;
-        private GraphicData splitterBuildingBlueprint;
+        public GraphicData splitterBuildingDoorOpen;
+        public GraphicData splitterBuildingDoorClosed;
+        public GraphicData splitterBuildingBlueprint;
+
+        public Material arrowInput;
+        public Material arrowOutput;
 
         static Graphic_LinkedSplitter() {
             arrow01 = MaterialPool.MatFrom("Belts/SmallArrow01");
@@ -38,6 +41,8 @@ namespace ProjectRimFactory.AutoMachineTool {
         }
 
         public override void Init(GraphicRequest req) {
+            arrowInput = arrow00b;
+            arrowOutput = arrow01;
             var extraData = GraphicExtraData.Extract(req, out GraphicRequest newReq);
             ExtraInit(newReq, extraData);
         }
@@ -69,6 +74,12 @@ namespace ProjectRimFactory.AutoMachineTool {
                 texPath = doorBasePath + "_Blueprint",
                 drawSize = Vector2.one
             };
+            if (extraData.arrowTexPath1 != null) {
+                this.arrowOutput = MaterialPool.MatFrom(extraData.arrowTexPath1);
+            }
+            if (extraData.arrowTexPath2 != null) {
+                this.arrowInput = MaterialPool.MatFrom(extraData.arrowTexPath2);
+            }
         }
 
         //Note: if someone wanted to make this accessible via XML, go for it!
@@ -107,23 +118,21 @@ namespace ProjectRimFactory.AutoMachineTool {
                         Vector2.one, mat);
                 }
                 // Print the splitter version of the tiny yellow arrow showing input direction:
-                //   Note: these arrows texPaths should probably be exposed to XML via IHaveExtraGrahicData or something
                 foreach (var i in splitter.IncomingLinks) {
                     if (i.Position.IsNextTo(splitter.Position)) { // otherwise need new logic
                         // splitter.Position + offset = i.Position, so
                         // offset = i.Position - splitter.Position
                         var r = Rot4.FromIntVec3(i.Position - splitter.Position);
                         Printer_Plane.PrintPlane(layer, thing.TrueCenter()
-                                     + ArrowOffset(r), this.drawSize, arrow00b,
+                                     + ArrowOffset(r), this.drawSize, arrowInput,
                                      r.Opposite.AsAngle);
                     }
                 }
                 // print tiny brown arrows pointing in output directions:
-                //   Note: the texPaths for these should probably be exposed to XML too.
                 foreach (var d in splitter.ActiveOutputDirections) {
                     Printer_Plane.PrintPlane(layer, thing.TrueCenter() + 
                              ArrowOffset(d),
-                             this.drawSize, arrow01, d.AsAngle);
+                             this.drawSize, arrowOutput, d.AsAngle);
                 }
             } else { // blueprint?
                 //var mat = FadedMaterialPool.FadedVersionOf(splitterBuildingDoorClosed.Graphic.MatSingleFor(thing), 0.5f);

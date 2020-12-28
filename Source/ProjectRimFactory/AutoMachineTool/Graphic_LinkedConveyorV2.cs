@@ -19,7 +19,7 @@ namespace ProjectRimFactory.AutoMachineTool {
         // Little yellow arrow that points the direction of conveyor travel:
         // HARDCODED DEFAULT:
         public static Material arrow00; // default arrow, initialized in the static constructor
-        protected Material arrow; // used by the graphic
+        public Material arrow; // used by the graphic
         // Offsets used for placing those arrows:
         public Vector3[] arrowOffsetsByRot4 = {
                     new Vector3(0f, 0.1f, 0f),
