@@ -34,12 +34,13 @@ namespace ProjectRimFactory.AutoMachineTool {
         }
 
         public override void Init(GraphicRequest req) {
-            arrow = arrow00;
             // I'm sure "req ... out req" is perfectly safe?
+            // Move all initialization to ExtraInit
             var extraData = GraphicExtraData.Extract(req, out req);
             ExtraInit(req, extraData);
         }
         public virtual void ExtraInit(GraphicRequest req, GraphicExtraData extraData) {
+            arrow = arrow00;
             this.data = req.graphicData;
             this.color = req.color;
             this.colorTwo = req.colorTwo;
@@ -92,20 +93,15 @@ namespace ProjectRimFactory.AutoMachineTool {
                 // So....don't print underground belts?
                 return;
             }
-            //TODO: print ourself if it's underground, so it's higher than walls and visible
             base.Print(layer, thing);
             // Print the tiny yellow arrow showing direction:
-
-            //arrow is null on spawn (@LWM your init is not working)
-            arrow = arrow ?? arrow00;
-
             Printer_Plane.PrintPlane(layer, thing.TrueCenter()
                 + arrowOffsetsByRot4[thing.Rotation.AsInt], this.drawSize, arrow,
                 thing.Rotation.AsAngle);
         }
 
         public override bool ShouldLinkWith(IntVec3 c, Thing parent) {
-            //TODO: should probably cache this in the conveyor, for speed
+            // maybe we should probably cache this in the conveyor, for speed?
             if (!c.InBounds(parent.Map)) {
                 return false;
             }

@@ -41,13 +41,14 @@ namespace ProjectRimFactory.AutoMachineTool {
         }
 
         public override void Init(GraphicRequest req) {
-            arrowInput = arrow00b;
-            arrowOutput = arrow01;
+            // Move all Init to ExtraInit
             var extraData = GraphicExtraData.Extract(req, out GraphicRequest newReq);
             ExtraInit(newReq, extraData);
         }
 
         public override void ExtraInit(GraphicRequest req, GraphicExtraData extraData) {
+            arrowInput = arrow00b;
+            arrowOutput = arrow01;
             base.ExtraInit(req, extraData);
             if (extraData == null) {
                 Log.Error("PRF: invalid XML for conveyor Splitter's graphic:\n" +
