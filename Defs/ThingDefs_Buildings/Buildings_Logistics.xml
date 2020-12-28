@@ -258,6 +258,9 @@
     <defName>PRF_GrowzonePuller_I</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_HarvestPuller</thingClass>
     <label>growzone Puller</label>
+     <placeWorkers>
+      <li>ProjectRimFactory.Common.PlaceWorker_GrowZonePuller</li>
+    </placeWorkers>
     <costList>      <!-- Remove in Lite -->
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>

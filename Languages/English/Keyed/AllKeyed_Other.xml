@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
   <PRF_PlaceWorker_NaturalWall_denied>Must Place in Natual Rock</PRF_PlaceWorker_NaturalWall_denied>
+  <PRF_PlaceWorker_GrowZonePuller>Input Cell must touch a Growzone</PRF_PlaceWorker_GrowZonePuller>
+  
+  
   <PRF_SettingsITab_TipSignal_RotInputRange>Rotate the Input Range Clockwise</PRF_SettingsITab_TipSignal_RotInputRange>
   <PRF_DropThing>Drop {0}</PRF_DropThing>
   <PRF_CouldNotPlaceThing>No valid place found to place {0}.</PRF_CouldNotPlaceThing>
