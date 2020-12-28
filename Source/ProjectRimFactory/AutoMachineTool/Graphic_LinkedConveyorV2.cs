@@ -95,6 +95,10 @@ namespace ProjectRimFactory.AutoMachineTool {
             //TODO: print ourself if it's underground, so it's higher than walls and visible
             base.Print(layer, thing);
             // Print the tiny yellow arrow showing direction:
+
+            //arrow is null on spawn (@LWM your init is not working)
+            arrow = arrow ?? arrow00;
+
             Printer_Plane.PrintPlane(layer, thing.TrueCenter()
                 + arrowOffsetsByRot4[thing.Rotation.AsInt], this.drawSize, arrow,
                 thing.Rotation.AsAngle);
