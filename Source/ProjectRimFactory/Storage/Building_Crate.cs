@@ -9,7 +9,7 @@ namespace ProjectRimFactory.Storage
 {
     public class Building_Crate : Building_MassStorageUnit
     {
-        public override bool CanStoreMoreItems => Position.GetThingList(Map).Count(t => t.def.category == ThingCategory.Item) < (Extension.limit - def.Size.Area + 1);
+        public override bool CanStoreMoreItems => Position.GetThingList(Map).Count(t => t.def.category == ThingCategory.Item) < MaxNumberItemsInternal;
         public DefModExtension_Crate Extension => def.GetModExtension<DefModExtension_Crate>();
         public override string GetITabString(int itemsSelected)
         {

@@ -15,64 +15,12 @@ namespace ProjectRimFactory.Storage
         private static Texture2D StoragePawnAccessSwitchIcon = ContentFinder<Texture2D>.Get("PRFUi/dsu", true);
 
         public override bool CanStoreMoreItems => GetComp<CompPowerTrader>().PowerOn && this.Spawned &&
-            (!def.HasModExtension<DefModExtension_Crate>() || Position.GetThingList(Map).Count(t => t.def.category == ThingCategory.Item) < (def.GetModExtension<DefModExtension_Crate>()?.limit ?? int.MaxValue));
+            (!def.HasModExtension<DefModExtension_Crate>() || Position.GetThingList(Map).Count(t => t.def.category == ThingCategory.Item) < MaxNumberItemsInternal);
         public override bool CanReceiveIO => base.CanReceiveIO && GetComp<CompPowerTrader>().PowerOn && this.Spawned;
 
         public override bool ForbidPawnInput => this.ForbidPawnAccess || !this.pawnAccess || !this.CanStoreMoreItems;
 
         public override bool ForbidPawnOutput => this.ForbidPawnAccess || !this.pawnAccess;
-
-        // true if can store, capacity is how many can store (more than one stack possible)
-        public bool CapacityAt(Thing thing, IntVec3 cell, Map map, out int capacity) {
-            //Some Sanity Checks
-            capacity = 0;
-            if (map == null || map != this.Map || cell == null || cell != this.Position || !this.Spawned)
-            {
-                Log.Error("PRF DSU CapacityAt Sanity Check Error");
-                return false;
-            }
-
-            //Check if thing can be stored based upon the storgae settings
-            if (thing != null && !this.Accepts(thing))
-            {
-                return false;
-            }
-
-            //TDOO Check if we want to forbid access if power is off
-            //if (!GetComp<CompPowerTrader>().PowerOn) return false;
-
-
-            //Get List of items stored in the DSU
-            List<Thing> things = Position.GetThingList(Map);
-
-            //Find the Stack size for the thing (default to 75 for now)
-            int maxstacksize = 75;
-            if (thing == null)
-            {
-                Log.Warning("PRF DSU CapacityAt for null thing - result my be inaccurate");
-            }
-            else
-            {
-                maxstacksize = thing.def.stackLimit;
-                //Get capacity of prtial Stacks
-                foreach (Thing partialStack in things.Where(t => t.def == thing.def && t.stackCount < maxstacksize))
-                {
-                    capacity += maxstacksize - partialStack.stackCount;
-                }
-            }
-           
-
-            //capacity of empy slots
-            capacity += ((def.GetModExtension<DefModExtension_Crate>()?.limit ?? int.MaxValue) - things.Count()) * maxstacksize;
-
-            return capacity > 0;
-
-        }
-        // ...The above? I think?  But without needing to know how many
-        public bool StackableAt(Thing thing, IntVec3 cell, Map map) {
-            return CapacityAt(thing, cell, map, out _);
-        }
-
 
         private bool pawnAccess = true;
 
