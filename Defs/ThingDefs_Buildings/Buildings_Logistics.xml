@@ -258,7 +258,7 @@
     <defName>PRF_GrowzonePuller_I</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_HarvestPuller</thingClass>
     <label>growzone Puller</label>
-     <placeWorkers>
+    <placeWorkers>
       <li>ProjectRimFactory.Common.PlaceWorker_GrowZonePuller</li>
     </placeWorkers>
     <costList>      <!-- Remove in Lite -->
@@ -846,7 +846,8 @@
         <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
-            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
         <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
         <powerPerStepSpeed>0</powerPerStepSpeed>
@@ -856,7 +857,6 @@
         <powerPerStepRange>0</powerPerStepRange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
-      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
     </comps>
   </ThingDef>
 
@@ -884,7 +884,8 @@
         <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
-            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
         <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
         <powerPerStepSpeed>0</powerPerStepSpeed>
@@ -924,7 +925,8 @@
         <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
-            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
         <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
         <powerPerStepSpeed>0</powerPerStepSpeed>
@@ -1057,7 +1059,8 @@
         <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
-            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
         <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
         <powerPerStepSpeed>0</powerPerStepSpeed>
@@ -1103,7 +1106,8 @@
         <transmitsPower>false</transmitsPower>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
-            <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+      <li Class="ProjectRimFactory.CompProperties_TransmitsPower" />
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
         <floatrange_SpeedFactor>0.009~0.009</floatrange_SpeedFactor>
         <powerPerStepSpeed>0</powerPerStepSpeed>
@@ -1115,7 +1119,7 @@
       </li>
     </comps>
     <building>
-    
+
       <isEdifice>false</isEdifice>
       <!--      <blueprintGraphicData>
         <texPath>AutoMachineTool/Buildings/BeltConveyorUG</texPath>
