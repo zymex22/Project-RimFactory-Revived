@@ -34,7 +34,7 @@ namespace ProjectRimFactory {
                 } else if (t.def.category == ThingCategory.Item) {
                     yield return t;
                 }
-                //This shold support all other storage Buildings
+                //This should support all other storage Buildings
                 else if (t is Building_Storage storage)
                 {
                     foreach (Thing thing in storage.GetSlotGroup().HeldThings)
@@ -45,7 +45,7 @@ namespace ProjectRimFactory {
             }
             //Pull from Storage Zones
             if (allowStorageZones && c.GetZone(map) is Zone_Stockpile sz){
-                foreach (Thing thing in sz.AllContainedThings.Where(t => !(t is Building)))
+                foreach (Thing thing in sz.AllContainedThings.Where(t => t.def.category == ThingCategory.Item))
                 {
                     yield return thing;
                 }
