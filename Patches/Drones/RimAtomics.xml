@@ -19,7 +19,7 @@
 							<graphicData>
 								<texPath>Drones/MiniDroneStationAtomic</texPath>
 							</graphicData>
-							
+
 							<description>A mini Atomic Workshop helper for RimAtomics to do maintain and fuel your reactors it can flick, haul, atomic, firefight</description>
 							<costList>
 								<PRF_MachineFrame_I>1</PRF_MachineFrame_I>
@@ -47,13 +47,20 @@
 									<initialConfigurableTargetFuelLevel>1</initialConfigurableTargetFuelLevel>
 									<drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
 								</li>
+								<li Class="CompProperties_Power">
+									<compClass>CompPowerTrader</compClass>
+									<shortCircuitInRain>false</shortCircuitInRain>
+									<basePowerConsumption>300</basePowerConsumption>
+								</li>
 								<li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-									<speedSetting>false</speedSetting>
-									<rangeSetting>true</rangeSetting>
-									<minPowerForRange>300</minPowerForRange>
-									<minRange>3</minRange>
-									<maxPowerForRange>1000</maxPowerForRange>
-									<maxRange>10</maxRange>
+									<!-- Speed Settings -->
+									<floatrange_SpeedFactor>0</floatrange_SpeedFactor>
+									<powerPerStepSpeed>0</powerPerStepSpeed>
+									<powerStepFactor>1</powerStepFactor>
+									<!-- Range Settings -->
+									<floatrange_Range>3~6</floatrange_Range>
+									<powerPerStepRange>200</powerPerStepRange>
+									<allowManualRangeTypeChange>true</allowManualRangeTypeChange>
 									<rangeType>ProjectRimFactory.Common.RectRange</rangeType>
 								</li>
 							</comps>
@@ -72,7 +79,7 @@
 									<SkillUsage>ReserchOverrides</SkillUsage>
 									<BaseSkill>10</BaseSkill>
 									<skills>
-									<!--<li>
+										<!--<li>
             						<def>Intellectual</def>
             						<levelInt>11</levelInt>
           							</li>-->

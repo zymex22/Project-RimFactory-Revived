@@ -159,13 +159,12 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>3~10</floatrange_Range>
-<powerPerStepRange>150</powerPerStepRange>
-        
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>3~10</floatrange_Range>
+        <powerPerStepRange>150</powerPerStepRange>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
@@ -264,22 +263,22 @@
         <initialConfigurableTargetFuelLevel>2</initialConfigurableTargetFuelLevel>
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
-            <li Class="CompProperties_Power">
+      <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>200</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>2~5</floatrange_Range>
-<powerPerStepRange>150</powerPerStepRange>
-        
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>2~5</floatrange_Range>
+        <powerPerStepRange>150</powerPerStepRange>
+
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        
+
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
       <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
