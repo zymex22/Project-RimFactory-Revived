@@ -410,7 +410,14 @@ namespace ProjectRimFactory.Drones
             {
                 drones[i].Destroy();
             }
+            if (droneAllowedArea != null)
+            {
+                //Deleate the old Zone
+                droneAllowedArea.Delete();
+            }
+            
             droneAllowedArea = null;
+
 
         }
 
