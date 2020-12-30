@@ -108,7 +108,7 @@
 										<li>RC2_Grog</li>
 										<li>RC2_Stout</li>
 									</drinksBestCold>
-									<findAllRottableForFilters>false</findAllRottableForFilters>
+									<findAllRottableForFilters>true</findAllRottableForFilters>
 								</li>
 								<li>
 									<compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
@@ -223,7 +223,7 @@
 										<li>RC2_Grog</li>
 										<li>RC2_Stout</li>
 									</drinksBestCold>
-									<findAllRottableForFilters>false</findAllRottableForFilters>
+									<findAllRottableForFilters>true</findAllRottableForFilters>
 								</li>
 								<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
 								<li>

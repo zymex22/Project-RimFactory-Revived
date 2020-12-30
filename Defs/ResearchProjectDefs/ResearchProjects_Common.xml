@@ -30,9 +30,7 @@
     <defName>PRF_CoreTierI</defName>
     <label>Euler's identity</label>
     <baseCost>750</baseCost>
-    <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the basics of automation and mechanisms, the gateway to an industrialized colony.
-    \nDevelop the mathematical models necessary to further automate simple processes with electricity such as stonecutting and cooking.</description>
-
+    <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the basics of automation and mechanisms, the gateway to an industrialized colony.\nDevelop the mathematical models necessary to further automate simple processes with electricity such as stonecutting and cooking.</description>
     <prerequisites>
       <li>Electricity</li>
       <li>Machining</li>
