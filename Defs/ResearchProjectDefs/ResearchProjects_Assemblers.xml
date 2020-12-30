@@ -37,7 +37,7 @@
     <defName>PRF_MachineLearning</defName>
     <label>Machine learning</label>
     <baseCost>2000</baseCost>
-    <description>Teach machines how to improve their abilities by themselves. Unlocks the AI research bench. Also lets you craft drone modules at the robotic machining table.</description>
+    <description>Teach machines how to improve their abilities by themselves. this is usefull for smart assemblers which can learn any recipe.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
     </prerequisites>

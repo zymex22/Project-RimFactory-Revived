@@ -14,8 +14,8 @@
     <defName>PRF_CoreTierO</defName>
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
-    <baseCost>500</baseCost>
-    <description>Automation begins here. Trash, raw material, or scrap metal goes in one side and useful products come out the other.\nCogs and chutes powered by wood and coal.</description>
+    <baseCost>400</baseCost>
+    <description>Early industrialisation, this teaches you how to setup more advanced way of gathering resources and process them into more usefull things. Trash, raw material, or scrap metal goes in one side and useful products come out the other.\nCogs and chutes powered by wood and coal.</description>
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>
@@ -34,12 +34,13 @@
     \nDevelop the mathematical models necessary to further automate simple processes with electricity such as stonecutting and cooking.</description>
 
     <prerequisites>
+      <li>Electricity</li>
       <li>Machining</li>
       <li>PRF_CoreTierO</li>
     </prerequisites>
     <researchViewX>2</researchViewX>
     <discoveredLetterTitle>True Automation begins</discoveredLetterTitle>
-    <discoveredLetterText>Leonard Euler developed mathematical systems for interactions between physics, geometry and algebra.\nWith these formulas, automated production of basic materials such as stone bricks and simple art is possible.\nPlace items within the white designation for the bills to consume, they will be output to the adjustable green tile</discoveredLetterText>
+    <discoveredLetterText>Leonard Euler developed mathematical systems for intemacractions between physics, geometry and algebra.\nWith these formulas, automated production of basic materials such as stone bricks and simple art is possible.\nPlace items within the white designation for the bills to consume, they will be output to the adjustable green tile</discoveredLetterText>
   </ResearchProjectDef>
 
 

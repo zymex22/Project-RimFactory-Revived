@@ -43,7 +43,7 @@
   <ThingDef ParentName="BenchBase">
     <defName>PRF_MineShaft</defName>
     <label>Mine Shaft</label>
-    <description>This is a early mine shaft you can set bills to target what you want, it also have a slim chance of finding rare/junk bonus while operating.\nShould be placed in a mountain wall to operate.</description>
+    <description>Early mine shaft entrance, which let you set a target mine operation where pawn will go into the mountain and mine out what you desire, it also have a slim chance of finding rare/junk bonus items while operating.\nShould be placed in a mountain wall to operate.(may conflict with replace stuff mod)</description>
     <thingClass>Building_WorkTable</thingClass>
     <designationCategory>Production</designationCategory>    <!--architect menu location-->
     <clearBuildingArea>false</clearBuildingArea>
