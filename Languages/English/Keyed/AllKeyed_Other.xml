@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
-  <PRF_PlaceWorker_NaturalWall_denied>Must Place in Natual Rock</PRF_PlaceWorker_NaturalWall_denied>
+  <PRF_PlaceWorker_NaturalWall_denied>Must Place in Natual or Smoothed Rock</PRF_PlaceWorker_NaturalWall_denied>
+  <PRF_PlaceWorker_NaturalWall_denied_ReplaceStuff>Must Place in Smoothed Rock (Replace Stuff Incompaibility)</PRF_PlaceWorker_NaturalWall_denied_ReplaceStuff>
   <PRF_PlaceWorker_GrowZonePuller>Input Cell must touch a Growzone</PRF_PlaceWorker_GrowZonePuller>
   
   
