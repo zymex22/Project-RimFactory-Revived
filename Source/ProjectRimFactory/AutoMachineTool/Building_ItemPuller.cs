@@ -97,6 +97,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override void Reset()
         {
+            if (this.working != null) {
+                if (!working.Spawned) {
+                    GenPlace.TryPlaceThing(working, Position, Map, ThingPlaceMode.Near, null, p => p != Position);
+                }
+            }
             base.Reset();
         }
 
