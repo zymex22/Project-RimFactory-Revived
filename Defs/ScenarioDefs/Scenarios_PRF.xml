@@ -102,7 +102,7 @@ You should quickly prepare for the raid.</text>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
-                    <thingDef>PRF_FurnaceI</thingDef>
+                    <thingDef>PRF_FurnaceII</thingDef>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
