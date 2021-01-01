@@ -68,8 +68,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private bool OutputSides => this.def.GetModExtension<ModExtension_Puller>()?.outputSides ?? false;
 
-        private bool pickupConveyor = false;
-
         protected override LookMode WorkingLookMode { get => LookMode.Deep; } // despawned
         /// <summary>
         /// Whether the puller grabs a single item or the entire stack
@@ -78,8 +76,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void ExposeData()
         {
-            Scribe_Values.Look<bool>(ref this.pickupConveyor, "pickupConveyor", false);
-
             base.ExposeData();
 
             Scribe_Values.Look<bool>(ref this.active, "active", false);
@@ -101,9 +97,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override void Reset()
         {
-
             base.Reset();
-            this.pickupConveyor = false;
         }
 
         protected override TargetInfo ProgressBarTarget()
@@ -173,7 +167,6 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool WorkInterruption(Thing working)
         {
             return false;
-            //return this.pickupConveyor ? !this.GetPickableConveyor().HasValue : !working.Spawned || working.Destroyed;
         }
 
         protected override bool TryStartWorking(out Thing target, out float workAmount)
