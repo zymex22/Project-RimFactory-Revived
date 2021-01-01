@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <PRF_PlaceWorker_NaturalWall_denied>세 칸 너비의 자연 암석에 설치해야 합니다.</PRF_PlaceWorker_NaturalWall_denied>
+  <PRF_PlaceWorker_GrowZonePuller>흡입 영역이 재배구역 위에 위치해야 합니다.</PRF_PlaceWorker_GrowZonePuller>
+
+
+  <PRF_SettingsITab_TipSignal_RotInputRange>Rotate the Input Range Clockwise</PRF_SettingsITab_TipSignal_RotInputRange>
+  <PRF_DropThing>Drop {0}</PRF_DropThing>
+  <PRF_CouldNotPlaceThing>No valid place found to place {0}.</PRF_CouldNotPlaceThing>
+  <PRFBlockedBy>Blocked by {0}</PRFBlockedBy>  <!-- Cannot be placed b/c of, etc -->
+  <!-- Some languages are RtoL, and might want "(default) {0}" -->
+  <PRF_Default_Tag>{0} (default)</PRF_Default_Tag>
+  <PRF_TotalStacksNum>Total number of stacks: {0}</PRF_TotalStacksNum>
+  <PRFItemsTab>Items</PRFItemsTab>
+  <PRFSettingsTab>설정</PRFSettingsTab>
+  <PRF.Common.OutputToStockpile>저장구역 전체 영역으로 이송</PRF.Common.OutputToStockpile>
+  <PRF.Common.OutputToStockpileDesc>체크하면 저장구역으로 물건을 옮길 때 바로 앞 한 칸에 물건을 내려놓는 것이 아니라 해당 구역의 임의의 지점에 자동으로 놓습니다.\n\n상식적으론 바로 앞에 내려두는게 맞겠지만...\n뭐, 마음대로 해봅시다!</PRF.Common.OutputToStockpileDesc>
+  <PRF.Common.ObeysStorageFilters>저장구역 필터 적용</PRF.Common.ObeysStorageFilters>
+  <PRF.Common.ObeysStorageFiltersDesc>저장구역으로 물건을 옮길 때 행동 양식을 설정합니다.\n\n체크하면 저장구역의 필터 설정에 따라 물건을 옮길지, 또는 멈출지 여부를 판단합니다.\n해제하면 저장구역의 필터 설정은 신경쓰지 않고 물건을 마구잡이로 넘겨버립니다.</PRF.Common.ObeysStorageFiltersDesc>
+  <PRFStorageBuildingGainsName>This storage building is now called {0}.</PRFStorageBuildingGainsName>
+  <PRFItemsTabLabel>{0} stacks total, showing {1} result(s)</PRFItemsTabLabel>
+  <PRFItemsTabLabel_Crate>{0} stacks, max {1}, showing {2} result(s)</PRFItemsTabLabel_Crate>
+  <PRFItemsTabLabel_Empty>There are currently no items stored.</PRFItemsTabLabel_Empty>
+  <PRFRenameMassStorageUnitLabel>Rename</PRFRenameMassStorageUnitLabel>
+  <PRFRenameMassStorageUnitDesc>Rename this building.</PRFRenameMassStorageUnitDesc>
+  <PRFMassStorageUIThingLabel>{0} stacks</PRFMassStorageUIThingLabel>
+  <PRFCrateUIThingLabel>{0}/{1} stacks</PRFCrateUIThingLabel>
+  <PRFMassStorageRightClickSelectPawn>Select colonist...</PRFMassStorageRightClickSelectPawn>
+  <PRFReorganize>Reorganize</PRFReorganize>
+  <PRFIOOutputSettings>Output settings...</PRFIOOutputSettings>
+  <PRFReorganize_Desc>Re-register I/O ports, reorganize and re-stack items.</PRFReorganize_Desc>
+  <PRFReorganize_Message>Reorganize complete.</PRFReorganize_Message>
+  <PRFIOMode>I/O mode</PRFIOMode>
+  <PRFIOInput>Input</PRFIOInput>
+  <PRFIOOutput>Output</PRFIOOutput>
+  <PRFBoundStorageBuilding>Item source</PRFBoundStorageBuilding>
+  <IOPort_Minimum_UseTooltip>When this is enabled, the I/O port will return the outputted item to the cargo platform if the item has less than X stack size. It will also only take items if there are enough items in storage to exceed the minimum.</IOPort_Minimum_UseTooltip>
+  <IOPort_Maximum_UseTooltip>When this is enabled, the I/O port will stop taking items if either the stack is full, or the stack size is greater than or equal to X.</IOPort_Maximum_UseTooltip>
+
+  <PRFNoDesc></PRFNoDesc>
+
+  <PaperclipFuelConsumption>Fuel consumption: {0} EMC/second</PaperclipFuelConsumption>
+  <PaperclipProductionPerSecond>EMC production: {0} EMC/second</PaperclipProductionPerSecond>
+  <PaperclipGeneratorEfficiency>Current efficiency: {0}%/{1}%</PaperclipGeneratorEfficiency>
+  <PaperclipsRunOutIn>Runs out of EMC in: {0}</PaperclipsRunOutIn>
+  <SetPaperclipConsumptionPerSecond>Adjust EMC consumption</SetPaperclipConsumptionPerSecond>
+  <SetPaperclipProductionPerSecond>Adjust EMC production</SetPaperclipProductionPerSecond>
+  <SetPaperclipConsumptionPerSecond_Desc>Change the number of EMC consumed per second.</SetPaperclipConsumptionPerSecond_Desc>
+  <SetPaperclipProductionPerSecond_Desc>Change the number of EMC produced per second.</SetPaperclipProductionPerSecond_Desc>
+
+  <AtomicReconstructorProgress>Reconstruction progress: {0}</AtomicReconstructorProgress>
+  <PRFAtomicReconstructionTab>Config</PRFAtomicReconstructionTab>
+  <AtomicReconstructionTab_NowProducing>Producing:</AtomicReconstructionTab_NowProducing>
+  <AtomicReconstructionTab_PaperclipCost>EMC cost:</AtomicReconstructionTab_PaperclipCost>
+  <AtomicReconstructionTab_ConsumptionPerSecond>Consumption per second:</AtomicReconstructionTab_ConsumptionPerSecond>
+  <AtomicReconstructionTab_Progress>Progress:</AtomicReconstructionTab_Progress>
+  <AtomicReconstructionTab_Speed>Speed multiplier: {0} (EMC consumption modifier: {1}x)</AtomicReconstructionTab_Speed>
+
+  <PRF_ArchoCipher_BankOverflow>The AI chip from your EMC duplicator has sent you a message:\n\Congratulations! You have achieved the maximum balance of EMC in your duplicator. The real question is: What are you going to do with all these EMC?</PRF_ArchoCipher_BankOverflow>
+
+  <PRF_SettingsTab_RangeType_Label>Change Zone Type</PRF_SettingsTab_RangeType_Label>
+  <PRF_SettingsTab_RangeType_CircleRange>Circle Type</PRF_SettingsTab_RangeType_CircleRange>
+  <PRF_SettingsTab_RangeType_FacingRectRange>Facing Rectangle</PRF_SettingsTab_RangeType_FacingRectRange>
+  <PRF_SettingsTab_RangeType_RectRange>Center Square</PRF_SettingsTab_RangeType_RectRange>
+
+
+  <PRF_TimeLeftToDisintegrate>Time left until disintegrate: {0}</PRF_TimeLeftToDisintegrate>
+  <PRF_DisintegrationMessage>{0} has disintegrated.</PRF_DisintegrationMessage>
+  <PRFPaperclipDuplicatorTab>Duplicator</PRFPaperclipDuplicatorTab>
+  <PaperclipsInDuplicator>EMC in duplicator: {0}</PaperclipsInDuplicator>
+  <PaperclipsInStorageUnit>EMC in storage unit: {0}</PaperclipsInStorageUnit>
+  <PRFDepositWithdraw>Deposit/Withdraw</PRFDepositWithdraw>
+  <PRFDepositWithdrawMode>Mode:</PRFDepositWithdrawMode>
+  <PRFDeposit>Deposit</PRFDeposit>
+  <PRFWithdraw>Withdraw</PRFWithdraw>
+  <PRFAmount>Amount</PRFAmount>
+  <PRFNotEnoughPaperclips>Not enough EMC.</PRFNotEnoughPaperclips>
+  <PRFInputInvalid>Invalid input.</PRFInputInvalid>
+  <PRFNoBoundStorageUnit>No bound storage unit.</PRFNoBoundStorageUnit>
+  <PRFBoundStorageUnitNotAvailableForIO>Bound storage unit is not available for item transfer.</PRFBoundStorageUnitNotAvailableForIO>
+  <SuccessfullyDepositedPaperclips>Successfully deposited {0} EMC.</SuccessfullyDepositedPaperclips>
+  <SuccessfullyWithdrawnPaperclips>Succesfully withdrawn {0} EMC.</SuccessfullyWithdrawnPaperclips>
+
+  <PRFDroneStation_NumberOfDrones>{0}기의 드론 수납 중</PRFDroneStation_NumberOfDrones>
+  <PRFDroneName>드론</PRFDroneName>
+  <PRFDroneStationLockdown>강제 휴면</PRFDroneStationLockdown>
+  <PRFDroneStationLockdownDesc>작업중인 모든 드론을 불러들이고 드론 스테이션을 비활성시킵니다.</PRFDroneStationLockdownDesc>
+  <PRFDroneStationLockdownAll>전체 휴면</PRFDroneStationLockdownAll>
+  <PRFDroneStationLockdownAllDesc>맵 상에 존재하는 모든 드론 스테이션을 휴면 상태로 전환합니다.</PRFDroneStationLockdownAllDesc>
+  <PRFDroneStationLiftLockdownAll>전체 활성</PRFDroneStationLiftLockdownAll>
+  <PRFDroneStationLiftLockdownAllDesc>맵 상에 존재하는 모든 드론 스테이션을 활성 상태로 전환합니다.</PRFDroneStationLiftLockdownAllDesc>
+  <PRFDroneStationSelectArea>{0}\nSelect Area</PRFDroneStationSelectArea>
+
+  <ITab_DroneStation_labelKey>설정</ITab_DroneStation_labelKey>
+  <ITab_DroneStation_InfoLabel>이 스테이션에서 수행할 작업을 선택해주세요.</ITab_DroneStation_InfoLabel>
+  <ITab_DroneStation_HeaderLabel>드론 스테이션 설정</ITab_DroneStation_HeaderLabel>
+  <ITab_DroneStation_averageskill>평균 작업 레벨 - </ITab_DroneStation_averageskill>
+
+  <ITab_DroneStation_Sleeptimes>드론 스테이션 휴면 시간 (빨간색)</ITab_DroneStation_Sleeptimes>
+  <ITab_DroneStation_SetTargetFuel>드론 스테이션 연료 레벨</ITab_DroneStation_SetTargetFuel>
+
+  <PRFOutputItems>Output item</PRFOutputItems>
+  <PRFPawnAccessLabel>Pawn access</PRFPawnAccessLabel>
+  <PRFPawnAccessDesc>Pawn access</PRFPawnAccessDesc>
+  <!--Lamp colors-->
+  <PRF_ChangeColorGizmo>조명 색상 ({0})</PRF_ChangeColorGizmo>
+  <PRF_Warm_White>온백색</PRF_Warm_White>
+  <PRF_Cool_White>백색</PRF_Cool_White>
+  <PRF_Red>빨간색</PRF_Red>
+  <PRF_Blue>파란색</PRF_Blue>
+  <PRF_Green>초록색</PRF_Green>
+  <PRF_Cyan>cyan</PRF_Cyan>
+  <PRF_Yellow>노란색</PRF_Yellow>
+  <PRF_Magenta>자홍색</PRF_Magenta>
+  <PRF_None>없음</PRF_None>
+
+</LanguageData>
