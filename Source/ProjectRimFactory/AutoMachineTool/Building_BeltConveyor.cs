@@ -198,8 +198,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public void Notify_LostItem(Thing item) {
             Debug.Warning(Debug.Flag.Conveyors, this + " was notified it has lost " + item);
             if ((item.holdingOwner != this.thingOwnerInt) && !thingOwnerInt.Any
-                 && this.State != WorkingState.Ready // nothing happening
-                 && this.State != WorkingState.Placing) // already placing; should know it's gone
+                 && this.State != WorkingState.Ready) // nothing happening
             {
                 Reset(); // something took it!
             }
@@ -421,7 +420,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 case WorkingState.Working:
                     return ThisCanAcceptThat(this.Working, thing);
                 case WorkingState.Placing:
-                    return ThisCanAcceptThat(this.products[0], thing);
+                    // in case anything has already placed/removed carried item:
+                    return this.products.Count == 0 || ThisCanAcceptThat(this.products[0], thing);
                 default:
                     return false;
             }
