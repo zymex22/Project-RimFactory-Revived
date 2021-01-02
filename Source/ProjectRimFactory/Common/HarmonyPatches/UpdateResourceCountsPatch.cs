@@ -64,8 +64,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     //Fresh Check is from ShouldCount (maybe we can hit that via harmony/reflection somhow)
                     if (innerIfMinified.def.EverStorable(false) && !innerIfMinified.IsNotFresh())
                     {
-                        
-                        ___countedAmounts[innerIfMinified.def] += innerIfMinified.stackCount;
+                        //Causes an error otherwise #345 (seems to be clothing that causes it)
+                        if (___countedAmounts.Keys.Contains(innerIfMinified.def)){
+                            ___countedAmounts[innerIfMinified.def] += innerIfMinified.stackCount;
+                        }
                     }
                     
                 }
