@@ -60,8 +60,6 @@ namespace ProjectRimFactory.AutoMachineTool
         protected StorageSettings storageSettings;
         public StorageSettings StorageSettings => this.storageSettings;
 
-        private bool ForcePlace => this.def.GetModExtension<ModExtension_Testing>()?.forcePlacing ?? false;
-
         private bool right = false;
 
         public bool Getright => right;
@@ -89,7 +87,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.SpawnSetup(map, respawningAfterLoad);
 
             this.settings = GetStoreSettings(); // force init
-            this.forcePlace = ForcePlace;
+            this.forcePlace = false;
 
             if (!respawningAfterLoad) Messages.Message("PRF.NeedToTurnOnPuller".Translate(), 
                      this, MessageTypeDefOf.CautionInput);
