@@ -19,16 +19,29 @@ namespace ProjectRimFactory {
         }
         public static void RegisterAssemblerQueue(IAssemblerQueue queue)
         {
+            //enshure that there are no duplicates
+            //im shure there is a better way
+            AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
+
             AssemblerQueue.Add(queue);
         }
-        /// <summary>
-        /// Make a sculpture Special!
-        /// Use: Current.Game.GetComponent&lt;PRFGameComponent&gt;().TryAddSpecialSculpture(...)
-        /// </summary>
-        /// <returns><c>true</c>, if the sculpture is now Special.</returns>
-        /// <param name="item">Art item to make Special.</param>
-        /// <param name="specialSculpture">Specific special sculpture; otherwise random</param>
-        public bool TryAddSpecialSculpture(Thing item, SpecialSculpture specialSculpture=null, bool verifyProvidedSculpture = true) {
+        public static void DeRegisterAssemblerQueue(IAssemblerQueue queue)
+        {
+            //im shure there is a better way
+            AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
+
+        }
+
+
+
+            /// <summary>
+            /// Make a sculpture Special!
+            /// Use: Current.Game.GetComponent&lt;PRFGameComponent&gt;().TryAddSpecialSculpture(...)
+            /// </summary>
+            /// <returns><c>true</c>, if the sculpture is now Special.</returns>
+            /// <param name="item">Art item to make Special.</param>
+            /// <param name="specialSculpture">Specific special sculpture; otherwise random</param>
+            public bool TryAddSpecialSculpture(Thing item, SpecialSculpture specialSculpture=null, bool verifyProvidedSculpture = true) {
             if (specialSculpture != null) {
                 if (verifyProvidedSculpture && (specialSculpture.limitToDefs?.Contains(item.def) == false)) return false;
             } else {  // find an acceptable special sculpture
@@ -80,14 +93,49 @@ namespace ProjectRimFactory {
             }
             return false;
         }
-        /*
-        // A quick way to test all the scupltures available, if need be.       
-        public override void LoadedGame() {
-            base.LoadedGame();
-            foreach (var t in Current.Game.CurrentMap.spawnedThings.Where(x => x is Building_Art)) {
-                if (!Current.Game.GetComponent<PRFGameComponent>().TryAddSpecialSculpture(t)) return;
-                Log.Warning("---------added test special scuplture: " + t + " at " + t.Position);
+
+        public override void LoadedGame()
+        {
+            //Remove all entrys where the Building is not where it says it is
+            //I would prefer to call a AssemblerQueue.Clear but LoadedGame() gets called after all buildings have spawn. therfor this is not possible & i need another way to remove invalid / irelevant entrys
+            for (int i = AssemblerQueue.Count - 1; i >= 0; i--)
+            {
+                if (!AssemblerQueue[i].map.thingGrid.ThingsAt( (AssemblerQueue[i] as Building).Position).Any(t => t.ToString() == AssemblerQueue[i].ToString()))
+                {
+                    AssemblerQueue.RemoveAt(i);
+                }
             }
-        }*/
+
+            //List all queue's for debug use
+            //foreach (IAssemblerQueue queue in AssemblerQueue)
+            //{
+            //    Log.Message("" + queue + "  - " + AssemblerQueue[AssemblerQueue.IndexOf(queue)].map);
+            //    Building building = queue as Building;
+            //    Log.Message("" + building.Map + " " + building.Position + "  --- ");
+            //    foreach (Thing thing in AssemblerQueue[AssemblerQueue.IndexOf(queue)].map.thingGrid.ThingsAt(building.Position))
+            //    {
+            //        Log.Message(" " + thing + " is at " + building.Position);
+            //    }
+            //}
+
+
+        }
+
+        public override void StartedNewGame()
+        {
+            base.StartedNewGame();
+            //Can be called a there wont be a Queue in a brand new game / an allready placed assembler
+            AssemblerQueue.Clear();
+
+        }
+        /*
+// A quick way to test all the scupltures available, if need be.       
+public override void LoadedGame() {
+base.LoadedGame();
+foreach (var t in Current.Game.CurrentMap.spawnedThings.Where(x => x is Building_Art)) {
+if (!Current.Game.GetComponent<PRFGameComponent>().TryAddSpecialSculpture(t)) return;
+Log.Warning("---------added test special scuplture: " + t + " at " + t.Position);
+}
+}*/
     }
 }

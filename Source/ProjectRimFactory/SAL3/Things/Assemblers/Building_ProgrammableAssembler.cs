@@ -549,6 +549,18 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             return thingQueue;
         }
 
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            base.DeSpawn(mode);
+            PRFGameComponent.DeRegisterAssemblerQueue(this);
+        }
+
+        public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
+        {
+            base.Destroy(mode);
+            PRFGameComponent.DeRegisterAssemblerQueue(this);
+        }
+
         // (Some) Internal variables:
         // Logic
         protected BillReport currentBillReport;
@@ -561,6 +573,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         protected bool AllowProduction_thingQueue => thingQueue.Count < max_thingQueue_Count;
 
+        Map IAssemblerQueue.map => this.Map;
 
         [Unsaved]
         private Effecter effecter = null;

@@ -13,6 +13,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     
     public interface IAssemblerQueue
     {
+        Map map { get; }
         List<Thing> GetThingQueue();
     }
 
@@ -31,6 +32,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
                 for (i = 0; i < PRFGameComponent.AssemblerQueue.Count; i++)
                 {
+                    //This only works for diffrent maps in the same save
+                    if (bill.Map != PRFGameComponent.AssemblerQueue[i].map) continue;
                     foreach (Thing heldThing in PRFGameComponent.AssemblerQueue[i].GetThingQueue())
                     {
                         Thing innerIfMinified = heldThing.GetInnerIfMinified();
@@ -51,11 +54,15 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_UpdateResourceCounts_AssemblerQueue
     {
 
-        static void Postfix(ResourceCounter __instance, Dictionary<ThingDef, int> ___countedAmounts )
+        static void Postfix(ResourceCounter __instance, Dictionary<ThingDef, int> ___countedAmounts, Map ___map )
         {
             int i = 0;
+            
             for (i = 0; i < PRFGameComponent.AssemblerQueue.Count; i++)
             {
+                //This only works for diffrent maps in the same save
+                if (PRFGameComponent.AssemblerQueue[i].map != ___map) continue;
+
                 foreach (Thing heldThing in PRFGameComponent.AssemblerQueue[i].GetThingQueue())
                 {
                     Thing innerIfMinified = heldThing.GetInnerIfMinified();
