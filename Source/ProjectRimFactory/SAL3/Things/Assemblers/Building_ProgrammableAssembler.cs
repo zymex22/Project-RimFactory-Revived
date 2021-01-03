@@ -551,13 +551,30 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
+            for (int i = thingQueue.Count - 1; i >= 0; i--)
+            {
+                //some of the things contaned are marked as Destroyed for some reason
+                if (thingQueue[i].Destroyed) thingQueue[i].ForceSetStateToUnspawned();
+
+                PlaceThingUtility.PRFTryPlaceThing(this, thingQueue[i], this.Position, this.Map, true);
+            }
             base.DeSpawn(mode);
+
+
+
             PRFGameComponent.DeRegisterAssemblerQueue(this);
         }
 
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
+            //this.Map is null after base.Destroy(mode);
+            for (int i = thingQueue.Count - 1; i >= 0; i--)
+            {
+                PlaceThingUtility.PRFTryPlaceThing(this, thingQueue[i], this.Position, this.Map, true);
+            }
+
             base.Destroy(mode);
+            
             PRFGameComponent.DeRegisterAssemblerQueue(this);
         }
 
