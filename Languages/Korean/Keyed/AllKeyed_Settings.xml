@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
 
-  <PRF.Settings.RequireReboot>변경된 설정은 게임을 재시작해야 적용됩니다.</PRF.Settings.RequireReboot>
+  <PRF.Settings.RequireReboot><![CDATA[<size=16><b><color=red>확인 버튼을 누를 경우 게임이 즉시 재시작됩니다.</color></b></size>]]></PRF.Settings.RequireReboot>
   <PRF.Settings.Select>Select</PRF.Settings.Select>
   <PRF.Settings.TopMessage><![CDATA[<size=20>모든 변경사항은 <b><i><color=red>게임을 재시작해야 적용됩니다.</color></i></b></size>]]></PRF.Settings.TopMessage>
   <PRF.Settings.restartMessage>설정을 변경하고 확인 버튼을 누를 경우 게임이 즉시 재시작됩니다.\n이 때 Startup Impact 모드와 충돌이 있을 수 있으니 참고해주세요.</PRF.Settings.restartMessage>
@@ -9,8 +9,8 @@
   <PRF.Settings.OtherMessage>기타 설정</PRF.Settings.OtherMessage>
   <PRF.Settings.StorageMessage>저장소 설정</PRF.Settings.StorageMessage>
 
-  <PRF.Settings.TurnOffHelpButton.Label>Turn off help button</PRF.Settings.TurnOffHelpButton.Label>
-  <PRF.Settings.TurnOffHelpButton.Desc>Turn off help button</PRF.Settings.TurnOffHelpButton.Desc>
+  <PRF.Settings.TurnOffHelpButton.Label>도움말 버튼 제거</PRF.Settings.TurnOffHelpButton.Label>
+  <PRF.Settings.TurnOffHelpButton.Desc>도움말 버튼 제거</PRF.Settings.TurnOffHelpButton.Desc>
 
   <PRF.Settings.TurnOffPulseGlowerEffect.Label>Turn On pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Label>
   <PRF.Settings.TurnOffPulseGlowerEffect.Desc>Turn On pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Desc>
@@ -34,7 +34,7 @@
   <PRF.Settings.DsuLimit.Desc>디지털 스토리지 유닛 최대 용량</PRF.Settings.DsuLimit.Desc>
 
   <PRF.Settings.recipeDB.Label>계획서 데이터베이스 전송 거리</PRF.Settings.recipeDB.Label>
-  <PRF.Settings.recipeDB.Desc>Set range for Recipe DB</PRF.Settings.recipeDB.Desc>
+  <PRF.Settings.recipeDB.Desc>계획서 데이터베이스 전송 거리</PRF.Settings.recipeDB.Desc>
 
   <PRF.Settings.TurnOffInfestation.Label>T1, T2 드릴의 곤충 군락 감염 가능성 제거 (OP)</PRF.Settings.TurnOffInfestation.Label>
   <PRF.Settings.TurnOffInfestation.Desc>T1, T2 드릴의 곤충 군락 감염 가능성 제거 (OP)</PRF.Settings.TurnOffInfestation.Desc>
