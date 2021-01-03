@@ -221,7 +221,6 @@
         <shortCircuitInRain>false</shortCircuitInRain>
         <basePowerConsumption>160</basePowerConsumption>
       </li>
-      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Flickable"/>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
@@ -234,11 +233,6 @@
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
       </li>
     </comps>
-    <modExtensions>
-      <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Testing">
-        <forcePlacing>false</forcePlacing>
-      </li>
-    </modExtensions>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_Filter</li>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
@@ -359,7 +353,6 @@
     </modExtensions>
     <comps>
       <li Class="CompProperties_Breakdownable"/>
-      <li Class="CompProperties_Flickable"/>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
         <floatrange_SpeedFactor>0.01~0.1</floatrange_SpeedFactor>
