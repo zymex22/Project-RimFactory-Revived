@@ -198,7 +198,8 @@ namespace ProjectRimFactory.AutoMachineTool
         public void Notify_LostItem(Thing item) {
             Debug.Warning(Debug.Flag.Conveyors, this + " was notified it has lost " + item);
             if ((item.holdingOwner != this.thingOwnerInt) && !thingOwnerInt.Any
-                 && this.State != WorkingState.Ready) // nothing happening
+                 && this.State != WorkingState.Ready // nothing happening
+                 && this.State != WorkingState.Placing) // Placing removes the item from ThingHolder
             {
                 Reset(); // something took it!
             }
@@ -476,6 +477,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool PlaceProduct(ref List<Thing> products) {
             if (thingOwnerInt.Count == 0) {
+                // (this can happen if the belt is in Placing mode and something takes it from belt)
                 Debug.Message(Debug.Flag.Conveyors, "Conveyor " + this + " no longer has anything to place");
                 return true; // ready for next action.
             }
