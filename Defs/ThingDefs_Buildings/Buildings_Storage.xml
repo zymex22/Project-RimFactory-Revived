@@ -58,7 +58,6 @@
       <texPath>Storage/Wood_Crate6</texPath>
       <drawSize>(2.8,1.3)</drawSize>
       <color>(133,97,67,256)</color>      <!-- used to set wood color because stuffed isnt used -->
-      <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
     <statBases>
       <Mass>10</Mass>
@@ -170,7 +169,6 @@
       <texPath>Storage/Steel_Crate</texPath>
       <drawSize>(2.8,1.3)</drawSize>
       <color>(102,102,105,256)</color>
-      <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
     <statBases>
       <Mass>10</Mass>
