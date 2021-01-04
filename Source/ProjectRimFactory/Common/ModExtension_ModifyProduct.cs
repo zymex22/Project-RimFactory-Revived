@@ -79,7 +79,7 @@ namespace ProjectRimFactory.Common {
     static class Patch_GenRecipe_MakeRecipeProducts_BonusYield {
         static IEnumerable<Thing> Postfix(IEnumerable<Thing> __result, RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
             Thing dominantIngredient, IBillGiver billGiver) {
-            Log.Warning("Harmony P called");
+            //Log.Warning("Harmony P called");
             List<Thing> products = new List<Thing>(__result); // List->IEnumerable->List, etc. As one does.
             if (billGiver is Thing t && // `is` implies non-null
                 t.def.GetModExtension<ModExtension_ModifyProduct>() is ModExtension_ModifyProduct productExt
