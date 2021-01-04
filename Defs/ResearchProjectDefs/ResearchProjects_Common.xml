@@ -49,7 +49,7 @@
     <label>Moritz Machinery</label>
     <baseCost>2000</baseCost>
     <description>A machine that can predict outcomes will solve many of the design flaws we have been facing. Imagine a machine that could improve itself...
-    \nWe will need an AI research bench to go further.</description>
+    \nWe will need an factory research terminal linked to our hi-tech research bench to go further.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
       <li>MicroelectronicsBasics</li>
