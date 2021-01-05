@@ -4,9 +4,10 @@
     <mods>
       <li>Alpha Biomes</li>
     </mods>
+    <!-- Nice Creation by Marr75 on github, thanks for this truly amazing new way of patching!-->
     <!-- Mark III deep quarry shouldn't yield Alpha Biomes chunks -->
     <match Class="PatchOperationAdd">
-      <xpath>/Defs/ThingDef[starts-with(defName, "PRF_DeepQuarry_MarkIII")]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+      <xpath>/Defs/ThingDef[starts-with(defName, "PRF_DeepQuarry_mkIII")]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
       <value>
         <li>AB_AlcyoniteChunk</li>
         <li>GU_ChunkRoseQuartz</li>
