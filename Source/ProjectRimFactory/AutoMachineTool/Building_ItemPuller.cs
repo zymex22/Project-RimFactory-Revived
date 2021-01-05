@@ -80,6 +80,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look<bool>(ref this.right, "right", false);
             Scribe_Deep.Look(ref settings, "settings", new object[] { this });
             Scribe_Values.Look<bool>(ref this.takeForbiddenItems, "takeForbidden", true);
+            Scribe_Values.Look<bool>(ref this.takeSingleItems, "takeSingleItems", false);
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
