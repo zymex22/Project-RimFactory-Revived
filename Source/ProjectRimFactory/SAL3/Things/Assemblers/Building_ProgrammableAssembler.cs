@@ -195,6 +195,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         private MapTickManager mapManager;
         protected MapTickManager MapManager => this.mapManager;
+
+        private PRFGameComponent prf_gamecomp = Current.Game.GetComponent<PRFGameComponent>();
+
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
@@ -211,6 +214,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             this.compPowerTrader = GetComp<CompPowerTrader>();
             this.compRefuelable  = GetComp<CompRefuelable>();
             this.compFlick       = GetComp<CompFlickable>();
+            this.prf_gamecomp = Current.Game.GetComponent<PRFGameComponent>();
 
             //Assign Pawn's mapIndexOrState to building's mapIndexOrState
             ReflectionUtility.mapIndexOrState.SetValue(buildingPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
@@ -224,7 +228,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 this.MapManager.NextAction(rangePowerSupplyMachine.RefreshPowerStatus);
                 this.MapManager.AfterAction(5, rangePowerSupplyMachine.RefreshPowerStatus);
             }
-            PRFGameComponent.RegisterAssemblerQueue(this);
+            prf_gamecomp.RegisterAssemblerQueue(this);
 
 
 
@@ -551,31 +555,32 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
+            //Spawn Items in Queue on Minify
             for (int i = thingQueue.Count - 1; i >= 0; i--)
             {
-                //some of the things contaned are marked as Destroyed for some reason
+                //some of the things contaned are marked as Destroyed for some reason. they should not be Destroyed
                 if (thingQueue[i].Destroyed) thingQueue[i].ForceSetStateToUnspawned();
 
                 PlaceThingUtility.PRFTryPlaceThing(this, thingQueue[i], this.Position, this.Map, true);
             }
+
             base.DeSpawn(mode);
 
-
-
-            PRFGameComponent.DeRegisterAssemblerQueue(this);
+            prf_gamecomp.DeRegisterAssemblerQueue(this);
         }
 
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             //this.Map is null after base.Destroy(mode);
+            //Spawn Items in Queue on Deconstruct or Destruction of Assembler
             for (int i = thingQueue.Count - 1; i >= 0; i--)
             {
                 PlaceThingUtility.PRFTryPlaceThing(this, thingQueue[i], this.Position, this.Map, true);
             }
 
             base.Destroy(mode);
-            
-            PRFGameComponent.DeRegisterAssemblerQueue(this);
+
+            prf_gamecomp.DeRegisterAssemblerQueue(this);
         }
 
         // (Some) Internal variables:
@@ -590,7 +595,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         protected bool AllowProduction_thingQueue => thingQueue.Count < max_thingQueue_Count;
 
-        Map IAssemblerQueue.map => this.Map;
+        Map IAssemblerQueue.Map => this.Map;
 
         [Unsaved]
         private Effecter effecter = null;

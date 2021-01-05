@@ -8,7 +8,7 @@ using ProjectRimFactory.Common.HarmonyPatches;
 namespace ProjectRimFactory {
     public class PRFGameComponent : GameComponent {
         public List<SpecialSculpture> specialScupltures;  // currently in game
-        public static List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
+        public List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
 
         public PRFGameComponent(Game game) {
             SpecialSculpture.PreStartGame();
@@ -17,19 +17,20 @@ namespace ProjectRimFactory {
             base.ExposeData();
             Scribe_Collections.Look(ref specialScupltures, "specialSculptures");
         }
-        public static void RegisterAssemblerQueue(IAssemblerQueue queue)
+        public void RegisterAssemblerQueue(IAssemblerQueue queue)
         {
             //enshure that there are no duplicates
             //im shure there is a better way
-            AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
+           // AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
 
             AssemblerQueue.Add(queue);
+#if DEBUG
+            Debug.Message(Debug.Flag.AssemblerQueue, "RegisterAssemblerQueue " + queue);
+#endif
         }
-        public static void DeRegisterAssemblerQueue(IAssemblerQueue queue)
+        public void DeRegisterAssemblerQueue(IAssemblerQueue queue)
         {
-            //im shure there is a better way
             AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
-
         }
 
 
@@ -96,38 +97,23 @@ namespace ProjectRimFactory {
 
         public override void LoadedGame()
         {
-            //Remove all entrys where the Building is not where it says it is
-            //I would prefer to call a AssemblerQueue.Clear but LoadedGame() gets called after all buildings have spawn. therfor this is not possible & i need another way to remove invalid / irelevant entrys
-            for (int i = AssemblerQueue.Count - 1; i >= 0; i--)
+            base.LoadedGame();
+#if DEBUG
+            //List all queue's for debug use
+            foreach (IAssemblerQueue queue in AssemblerQueue)
             {
-                if (!AssemblerQueue[i].map.thingGrid.ThingsAt( (AssemblerQueue[i] as Building).Position).Any(t => t.ToString() == AssemblerQueue[i].ToString()))
+                Debug.Message(Debug.Flag.AssemblerQueue, "" + queue + "  - " + AssemblerQueue[AssemblerQueue.IndexOf(queue)].Map);
+                Building building = queue as Building;
+                Debug.Message(Debug.Flag.AssemblerQueue, "" + building.Map + " " + building.Position + "  --- ");
+                foreach (Thing thing in AssemblerQueue[AssemblerQueue.IndexOf(queue)].Map.thingGrid.ThingsAt(building.Position))
                 {
-                    AssemblerQueue.RemoveAt(i);
+                    Debug.Message(Debug.Flag.AssemblerQueue, " " + thing + " is at " + building.Position);
                 }
             }
-
-            //List all queue's for debug use
-            //foreach (IAssemblerQueue queue in AssemblerQueue)
-            //{
-            //    Log.Message("" + queue + "  - " + AssemblerQueue[AssemblerQueue.IndexOf(queue)].map);
-            //    Building building = queue as Building;
-            //    Log.Message("" + building.Map + " " + building.Position + "  --- ");
-            //    foreach (Thing thing in AssemblerQueue[AssemblerQueue.IndexOf(queue)].map.thingGrid.ThingsAt(building.Position))
-            //    {
-            //        Log.Message(" " + thing + " is at " + building.Position);
-            //    }
-            //}
-
+#endif
 
         }
 
-        public override void StartedNewGame()
-        {
-            base.StartedNewGame();
-            //Can be called a there wont be a Queue in a brand new game / an allready placed assembler
-            AssemblerQueue.Clear();
-
-        }
         /*
 // A quick way to test all the scupltures available, if need be.       
 public override void LoadedGame() {

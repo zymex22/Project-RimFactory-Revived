@@ -32,6 +32,7 @@ namespace ProjectRimFactory {
             ConveyorGraphics=0x4,
             Benchmark=0x8, // performance measurement
             ExtModifyProduct=0x10,
+            AssemblerQueue=0x20,
             // NextFlag=0x4,
             // 0x8
             // 0x10
