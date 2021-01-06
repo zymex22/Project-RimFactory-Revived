@@ -137,7 +137,7 @@
       <MarketValue>1575</MarketValue>
       <Cleanliness>5</Cleanliness>
     </statBases>
-    <description>An improved assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 1.5x speed \n 5 cleanliness \n cook level 12</description>
+    <description>An improved assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n Copies Electric stove recipes\n 1.5x speed \n 5 cleanliness \n cook level 12</description>
     <costList>
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
