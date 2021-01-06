@@ -22,7 +22,7 @@
     <size>(2,2)</size>    <!-- Ingame cell/ground size (x,y) -->
     <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
     <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
-    <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
+    <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>    <!-- Show input/output cells when selected -->
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Ground type to build on -->
     <surfaceType>Item</surfaceType>    <!-- What kind of object can be placed on building? -->
@@ -60,7 +60,7 @@
       <!-- <color>(133,97,67,256)</color> -->      <!--change color on maske manually -->
     </graphicData>
     <passability>Standable</passability>    <!-- let pawn stand ontop -->
-    <altitudeLayer>Gas</altitudeLayer>    <!-- will hide stuff under texture if "Gas" used -->
+    <altitudeLayer>Projectile</altitudeLayer>    <!-- will hide stuff under texture if "Gas" used -->
     <statBases>
       <Mass>50</Mass>      <!-- weight when minified -->
       <MarketValue>1650</MarketValue>
@@ -92,6 +92,7 @@
           <drawSize>(2.1)</drawSize>
         </graphicData>
         <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+        <altitudeLayer>Building</altitudeLayer>
       </li>
     </comps>
     <building>
@@ -137,7 +138,7 @@
       <!-- <color>(133,97,67,256)</color> -->
     </graphicData>
     <passability>Standable</passability>
-    <altitudeLayer>Gas</altitudeLayer>
+    <altitudeLayer>Projectile</altitudeLayer>
     <statBases>
       <Mass>50</Mass>
       <MarketValue>1650</MarketValue>
@@ -170,6 +171,7 @@
           <drawSize>(2.1)</drawSize>
         </graphicData>
         <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+        <altitudeLayer>Building</altitudeLayer>
       </li>
     </comps>
     <building>
@@ -215,7 +217,7 @@
       <!-- <color>(133,97,67,256)</color> -->
     </graphicData>
     <passability>Standable</passability>
-    <altitudeLayer>Gas</altitudeLayer>
+    <altitudeLayer>Projectile</altitudeLayer>
     <statBases>
       <Mass>50</Mass>
       <MarketValue>2110</MarketValue>
@@ -284,7 +286,7 @@
       <drawSize>(2.1)</drawSize>
     </graphicData>
     <passability>Standable</passability>
-    <altitudeLayer>Gas</altitudeLayer>
+    <altitudeLayer>Projectile</altitudeLayer>
     <statBases>
       <Mass>50</Mass>
       <MarketValue>2530</MarketValue>
