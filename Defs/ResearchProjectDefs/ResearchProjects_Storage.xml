@@ -10,7 +10,7 @@
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_Crates</defName>
     <techLevel>Industrial</techLevel>
-    <baseCost>1500</baseCost>
+    <baseCost>1000</baseCost>
     <label>Wooden stockpile crates</label>
     <researchViewX>3</researchViewX>
     <description>Rudimentary storage boxes allow many stacks of items to stay organized and space efficient.</description>
