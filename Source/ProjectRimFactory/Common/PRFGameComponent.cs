@@ -8,7 +8,7 @@ using ProjectRimFactory.Common.HarmonyPatches;
 namespace ProjectRimFactory {
     public class PRFGameComponent : GameComponent {
         public List<SpecialSculpture> specialScupltures;  // currently in game
-        public static List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
+        public List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
 
         public PRFGameComponent(Game game) {
             SpecialSculpture.PreStartGame();
@@ -17,18 +17,32 @@ namespace ProjectRimFactory {
             base.ExposeData();
             Scribe_Collections.Look(ref specialScupltures, "specialSculptures");
         }
-        public static void RegisterAssemblerQueue(IAssemblerQueue queue)
+        public void RegisterAssemblerQueue(IAssemblerQueue queue)
         {
+            //enshure that there are no duplicates
+            //im shure there is a better way
+           // AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
+
             AssemblerQueue.Add(queue);
+#if DEBUG
+            Debug.Message(Debug.Flag.AssemblerQueue, "RegisterAssemblerQueue " + queue);
+#endif
         }
-        /// <summary>
-        /// Make a sculpture Special!
-        /// Use: Current.Game.GetComponent&lt;PRFGameComponent&gt;().TryAddSpecialSculpture(...)
-        /// </summary>
-        /// <returns><c>true</c>, if the sculpture is now Special.</returns>
-        /// <param name="item">Art item to make Special.</param>
-        /// <param name="specialSculpture">Specific special sculpture; otherwise random</param>
-        public bool TryAddSpecialSculpture(Thing item, SpecialSculpture specialSculpture=null, bool verifyProvidedSculpture = true) {
+        public void DeRegisterAssemblerQueue(IAssemblerQueue queue)
+        {
+            AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
+        }
+
+
+
+            /// <summary>
+            /// Make a sculpture Special!
+            /// Use: Current.Game.GetComponent&lt;PRFGameComponent&gt;().TryAddSpecialSculpture(...)
+            /// </summary>
+            /// <returns><c>true</c>, if the sculpture is now Special.</returns>
+            /// <param name="item">Art item to make Special.</param>
+            /// <param name="specialSculpture">Specific special sculpture; otherwise random</param>
+            public bool TryAddSpecialSculpture(Thing item, SpecialSculpture specialSculpture=null, bool verifyProvidedSculpture = true) {
             if (specialSculpture != null) {
                 if (verifyProvidedSculpture && (specialSculpture.limitToDefs?.Contains(item.def) == false)) return false;
             } else {  // find an acceptable special sculpture
@@ -80,14 +94,34 @@ namespace ProjectRimFactory {
             }
             return false;
         }
-        /*
-        // A quick way to test all the scupltures available, if need be.       
-        public override void LoadedGame() {
+
+        public override void LoadedGame()
+        {
             base.LoadedGame();
-            foreach (var t in Current.Game.CurrentMap.spawnedThings.Where(x => x is Building_Art)) {
-                if (!Current.Game.GetComponent<PRFGameComponent>().TryAddSpecialSculpture(t)) return;
-                Log.Warning("---------added test special scuplture: " + t + " at " + t.Position);
+#if DEBUG
+            //List all queue's for debug use
+            foreach (IAssemblerQueue queue in AssemblerQueue)
+            {
+                Debug.Message(Debug.Flag.AssemblerQueue, "" + queue + "  - " + AssemblerQueue[AssemblerQueue.IndexOf(queue)].Map);
+                Building building = queue as Building;
+                Debug.Message(Debug.Flag.AssemblerQueue, "" + building.Map + " " + building.Position + "  --- ");
+                foreach (Thing thing in AssemblerQueue[AssemblerQueue.IndexOf(queue)].Map.thingGrid.ThingsAt(building.Position))
+                {
+                    Debug.Message(Debug.Flag.AssemblerQueue, " " + thing + " is at " + building.Position);
+                }
             }
-        }*/
+#endif
+
+        }
+
+        /*
+// A quick way to test all the scupltures available, if need be.       
+public override void LoadedGame() {
+base.LoadedGame();
+foreach (var t in Current.Game.CurrentMap.spawnedThings.Where(x => x is Building_Art)) {
+if (!Current.Game.GetComponent<PRFGameComponent>().TryAddSpecialSculpture(t)) return;
+Log.Warning("---------added test special scuplture: " + t + " at " + t.Position);
+}
+}*/
     }
 }
