@@ -6,7 +6,7 @@
     </mods>
     <!-- Remove/Exclude Cupro's Stones from Mark III -->
     <match Class="PatchOperationAdd">
-      <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_MarkIII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+      <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkIII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
       <value>
         <li>ChunkClaystone</li>
         <li>ChunkAndesite</li>
