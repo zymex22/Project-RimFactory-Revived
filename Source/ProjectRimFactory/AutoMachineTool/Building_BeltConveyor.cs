@@ -45,7 +45,8 @@ namespace ProjectRimFactory.AutoMachineTool
 ///   window in which a problem can occur.
 /// </designNotes>
     [StaticConstructorOnStartup]
-    public class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConveyorLinkable, IThingHolder, IHideItem, IHideRightClickMenu, IForbidPawnOutputItem
+    public class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConveyorLinkable, 
+                     IThingHolder, IHideItem, IHideRightClickMenu
     {
         public Building_BeltConveyor()
         {
@@ -141,7 +142,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         /********** Pawn Interactions ********/
         public bool HideRightClickMenus => !this.IsUnderground && this.State != WorkingState.Ready;
-        public bool ForbidPawnOutput => !this.IsUnderground && this.State != WorkingState.Ready;
         public override IEnumerable<Gizmo> GetGizmos() {
             foreach (Gizmo gizmo in base.GetGizmos()) {
                 yield return gizmo;
