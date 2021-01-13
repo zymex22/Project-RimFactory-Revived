@@ -21,15 +21,13 @@ namespace ProjectRimFactory.Drones.AI
                     Job result = null;
                     if (drone.station is Building_WorkGiverDroneStation b)
                     {
-                        
-                        if (!(drone.station.cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(drone).ToString()))) { 
-                        pawn.workSettings = new Pawn_WorkSettings(pawn);
-                        pawn.workSettings.EnableAndInitialize();
-                        pawn.workSettings.DisableAll();
-                        foreach (WorkTypeDef def in b.WorkTypes)
+
+                        if (!(drone.station.cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(drone).ToString())))
                         {
-                            pawn.workSettings.SetPriority(def, 3);
-                        }
+                            pawn.workSettings = new Pawn_WorkSettings(pawn);
+                            pawn.workSettings.EnableAndInitialize();
+                            pawn.workSettings.DisableAll();
+                            
                             foreach (WorkTypeDef def in b.WorkSettings_dict.Keys)
                             {
                                 if (b.WorkSettings_dict[def])
@@ -45,13 +43,13 @@ namespace ProjectRimFactory.Drones.AI
 
                             // So the station finds the best job for the pawn
                             result = b.TryIssueJobPackageDrone(drone, true).Job;
-                        if (result == null)
-                        {
-                            result = b.TryIssueJobPackageDrone(drone, false).Job;
+                            if (result == null)
+                            {
+                                result = b.TryIssueJobPackageDrone(drone, false).Job;
+                            }
+
                         }
-                        
-                        }
-                        
+
                     }
                     else
                     {
