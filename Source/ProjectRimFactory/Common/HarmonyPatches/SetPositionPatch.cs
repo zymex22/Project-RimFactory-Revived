@@ -17,10 +17,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             IntVec3 pos = __instance.Position;
             if (__instance.def.category == ThingCategory.Item && pos.IsValid && __instance.Map != null)
             {
-                if (pos.GetFirst<Building_MassStorageUnit>(__instance.Map) is Building_MassStorageUnit b)
-                {
-                    __state = b;
-                }
+                __state = pos.GetFirst<Building_MassStorageUnit>(__instance.Map);
             }
         }
         public static void Postfix(Thing __instance, Building_MassStorageUnit __state)
