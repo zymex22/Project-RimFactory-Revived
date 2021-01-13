@@ -323,12 +323,12 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~3.5</floatrange_SpeedFactor>
-<powerPerStepSpeed>4000</powerPerStepSpeed>
-<powerStepFactor>10</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>1~5</floatrange_Range>
-<powerPerStepRange>125</powerPerStepRange>
+        <floatrange_SpeedFactor>1~3.5</floatrange_SpeedFactor>
+        <powerPerStepSpeed>4000</powerPerStepSpeed>
+        <powerStepFactor>10</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~5</floatrange_Range>
+        <powerPerStepRange>125</powerPerStepRange>
 
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
@@ -418,12 +418,12 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~4</floatrange_SpeedFactor>
-<powerPerStepSpeed>1000</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>1~5</floatrange_Range>
-<powerPerStepRange>125</powerPerStepRange>
+        <floatrange_SpeedFactor>1~4</floatrange_SpeedFactor>
+        <powerPerStepSpeed>1000</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~5</floatrange_Range>
+        <powerPerStepRange>125</powerPerStepRange>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
@@ -503,7 +503,7 @@
     <stuffCategories>
       <li>Stony</li>
     </stuffCategories>
-    <costStuffCount>500</costStuffCount>    <!-- Set price for stone blocks -->
+    <costStuffCount>250</costStuffCount>    <!-- Set price for stone blocks -->
     <constructEffect></constructEffect>
     <costList>
       <Steel>150</Steel>
@@ -517,8 +517,8 @@
     </recipes>
     <comps>
       <li Class="CompProperties_Refuelable">
-        <fuelConsumptionRate>80.0</fuelConsumptionRate>
-        <fuelCapacity>50.0</fuelCapacity>
+        <fuelConsumptionRate>50.0</fuelConsumptionRate>
+        <fuelCapacity>150.0</fuelCapacity>
         <fuelFilter>
           <thingDefs>
             <li>WoodLog</li>
