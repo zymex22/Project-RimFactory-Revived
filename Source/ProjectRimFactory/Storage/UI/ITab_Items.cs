@@ -8,6 +8,7 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.Storage.UI
 {
@@ -56,6 +57,19 @@ namespace ProjectRimFactory.Storage.UI
         private static List<Pawn> pawnCanReach_Oncell_Deadly = new List<Pawn>();
 
         private static Dictionary<Thing, int> thing_MaxHitPoints = new Dictionary<Thing, int>();
+
+        private struct thingIconTextureData
+        {
+            public thingIconTextureData(Texture texture, Color color)
+            {
+                this.texture = texture;
+                this.color = color;
+            }
+
+            public Texture texture;
+            public Color color;
+        }
+        private static Dictionary<Thing, thingIconTextureData> thingIconCache = new Dictionary<Thing, thingIconTextureData>();
 
 
         protected override void FillTab()
@@ -127,6 +141,16 @@ namespace ProjectRimFactory.Storage.UI
                 {
                     thing_MaxHitPoints.Add(thing, thing.MaxHitPoints);
                 }
+
+
+                if (!thingIconCache.ContainsKey(thing))
+                {
+                    Color color;
+                    Texture texture = CommonGUIFunctions.GetThingTextue(new Rect(4f, curY, 28f, 28f), thing, out color);
+
+                    thingIconCache.Add(thing, new thingIconTextureData(texture, color));
+                }
+
                 
                     
                     DrawThingRow(ref curY, viewRect.width, thing, pawns);
@@ -202,9 +226,20 @@ namespace ProjectRimFactory.Storage.UI
                 GUI.color = ITab_Pawn_Gear.HighlightColor;
                 GUI.DrawTexture(thingRow, TexUI.HighlightTex);
             }
+
+
+            //we need to cache the Graphic to save performence 
+            // Widgets.ThingIcon dos not do that
             // Draws the icon of the thingDef in the row
+
+            
             if (thing.def.DrawMatSingle != null && thing.def.DrawMatSingle.mainTexture != null)
-                Widgets.ThingIcon(new Rect(4f, y, 28f, 28f), thing);
+            {
+                thingIconTextureData data = thingIconCache[thing];
+                CommonGUIFunctions.ThingIcon(new Rect(4f, y, 28f, 28f), thing, data.texture, data.color);
+            }
+            
+
             // Draws the item name + info
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = ITab_Pawn_Gear.ThingLabelColor;
@@ -239,6 +274,7 @@ namespace ProjectRimFactory.Storage.UI
             else if (SelectedMassStorageUnit.OutputItem(item[0]))
                 itemsToShow.Remove(thing);
         }
+
 
         // Decompiled code is painful to read... Continue at your own risk
         // TODO: Replace this with a cleaner solution
