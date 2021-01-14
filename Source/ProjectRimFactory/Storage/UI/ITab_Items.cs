@@ -11,6 +11,8 @@ using Verse.AI.Group;
 
 namespace ProjectRimFactory.Storage.UI
 {
+    
+    
     // Somebody toucha my spaghet code
     // TODO: Use harmony to make ITab_Items actually a ITab_DeepStorage_Inventory and add right click menu
     // Only do above if LWM is installed ofc - rider
@@ -46,6 +48,9 @@ namespace ProjectRimFactory.Storage.UI
         protected bool IOPortSelected => SelThing is Building_StorageUnitIOPort;
 
         protected Building_StorageUnitIOPort SelectedIOPort => SelThing as Building_StorageUnitIOPort;
+
+        private static Dictionary<Thing, List<Pawn>> canBeConsumedby = new Dictionary<Thing, List<Pawn>>();
+
 
         protected override void FillTab()
         {
@@ -91,9 +96,23 @@ namespace ProjectRimFactory.Storage.UI
 
             // Iterate backwards to compensate for removing elements from enumerable
             // Learned this is an issue with List-like structures in AP CS 1A
+
+            List<Pawn> pawns = SelectedMassStorageUnit.Map.mapPawns.FreeColonists;
+
+           
+
+
+
             for (var i = itemsToShow.Count - 1; i >= 0; i--)
             {
-                DrawThingRow(ref curY, viewRect.width, itemsToShow[i]);
+                //Construct cache
+                if (!canBeConsumedby.ContainsKey(itemsToShow[i]))
+                {
+                    canBeConsumedby.Add(itemsToShow[i], pawns.Where(p => p.RaceProps.CanEverEat(itemsToShow[i]) == true).ToList());
+                }
+                
+                    
+                    DrawThingRow(ref curY, viewRect.width, itemsToShow[i], pawns);
             }
             if (Event.current.type == EventType.Layout) scrollViewHeight = curY + 30f;
             //Scrollview End
@@ -105,7 +124,7 @@ namespace ProjectRimFactory.Storage.UI
         
         // Attempt at mimicking LWM Deep Storage
         // Credits to LWM Deep Storage :)
-        private void DrawThingRow(ref float y, float width, Thing thing)
+        private void DrawThingRow(ref float y, float width, Thing thing, List<Pawn> colonists)
         {
             if (thing == null || !thing.Spawned) return; // not here, whatever happened...
             width -= 24f;
@@ -130,8 +149,7 @@ namespace ProjectRimFactory.Storage.UI
                 dropThing(thing);
             }
 
-            var p = thing.Map.mapPawns.FreeColonists
-                .Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray()[0];
+            var p = colonists.Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray()[0];
             if (ChoicesForThing(thing, p).Count > 0)
             {
                 width -= 24f;
@@ -139,8 +157,8 @@ namespace ProjectRimFactory.Storage.UI
                 if (Widgets.ButtonImage(pawnInteract, menuUI, Color.gray, Color.white, false))
                 {
                     var opts = new List<FloatMenuOption>();
-                    foreach (var pawn in from Pawn col in thing.Map.mapPawns.FreeColonists
-                        where col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed
+                    foreach (var pawn in from Pawn col in colonists
+                                         where col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed
                         select col)
                     {
                         var choices =
@@ -208,8 +226,10 @@ namespace ProjectRimFactory.Storage.UI
             var t = thing;
 
 
+            
+
             // Copied from FloatMenuMakerMap.AddHumanlikeOrders
-            if (t.def.ingestible != null && pawn.RaceProps.CanEverEat(t) && t.IngestibleNow)
+            if (t.def.ingestible != null && canBeConsumedby[t].Contains(pawn) && t.IngestibleNow)
             {
                 string text;
                 if (t.def.ingestible.ingestCommandString.NullOrEmpty())
