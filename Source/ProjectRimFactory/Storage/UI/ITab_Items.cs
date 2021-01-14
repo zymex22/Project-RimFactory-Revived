@@ -51,6 +51,10 @@ namespace ProjectRimFactory.Storage.UI
 
         private static Dictionary<Thing, List<Pawn>> canBeConsumedby = new Dictionary<Thing, List<Pawn>>();
 
+        private static List<Pawn> pawnCanReach_Touch_Deadly = new List<Pawn>();
+
+        private static List<Pawn> pawnCanReach_Oncell_Deadly = new List<Pawn>();
+
 
         protected override void FillTab()
         {
@@ -99,7 +103,11 @@ namespace ProjectRimFactory.Storage.UI
 
             List<Pawn> pawns = SelectedMassStorageUnit.Map.mapPawns.FreeColonists;
 
-           
+
+            //Do it once as they are all on the same spot in the DSU
+            //Even if is where to have multible sport's that way should work I think 
+            pawnCanReach_Touch_Deadly = pawns.Where(p => p.CanReach(SelectedMassStorageUnit, PathEndMode.ClosestTouch, Danger.Deadly)).ToList();
+            pawnCanReach_Oncell_Deadly = pawns.Where(p => p.CanReach(SelectedMassStorageUnit, PathEndMode.OnCell, Danger.Deadly)).ToList();
 
 
 
@@ -225,9 +233,6 @@ namespace ProjectRimFactory.Storage.UI
             var opts = new List<FloatMenuOption>();
             var t = thing;
 
-
-            
-
             // Copied from FloatMenuMakerMap.AddHumanlikeOrders
             if (t.def.ingestible != null && canBeConsumedby[t].Contains(pawn) && t.IngestibleNow)
             {
@@ -242,7 +247,7 @@ namespace ProjectRimFactory.Storage.UI
                 {
                     item7 = new FloatMenuOption(text + " (" + TraitDefOf.DrugDesire.DataAtDegree(-1).label + ")", null);
                 }
-                else if (!pawn.CanReach(t, PathEndMode.OnCell, Danger.Deadly))
+                else if (!pawnCanReach_Oncell_Deadly.Contains(pawn))
                 {
                     item7 = new FloatMenuOption(text + " (" + "NoPath".Translate() + ")", null);
                 }
@@ -262,7 +267,6 @@ namespace ProjectRimFactory.Storage.UI
                 opts.Add(item7);
             }
 
-
             // Add equipment commands
             // Copied from FloatMenuMakerMap.AddHumanlikeOrders
             if (thing is ThingWithComps equipment && equipment.GetComp<CompEquippable>() != null)
@@ -275,7 +279,7 @@ namespace ProjectRimFactory.Storage.UI
                         "CannotEquip".Translate(labelShort) + " (" +
                         "IsIncapableOfViolenceLower".Translate(pawn.LabelShort, pawn) + ")", null);
                 }
-                else if (!pawn.CanReach(equipment, PathEndMode.ClosestTouch, Danger.Deadly))
+                else if (!pawnCanReach_Touch_Deadly.Contains(pawn))
                 {
                     item4 = new FloatMenuOption("CannotEquip".Translate(labelShort) + " (" + "NoPath".Translate() + ")",
                         null);
@@ -309,7 +313,7 @@ namespace ProjectRimFactory.Storage.UI
             if (apparel != null)
             {
                 FloatMenuOption item5;
-                if (!pawn.CanReach(apparel, PathEndMode.ClosestTouch, Danger.Deadly))
+                if (!pawnCanReach_Touch_Deadly.Contains(pawn))
                     item5 = new FloatMenuOption(
                         "CannotWear".Translate(apparel.Label, apparel) + " (" + "NoPath".Translate() + ")", null);
                 else if (!ApparelUtility.HasPartsToWear(pawn, apparel.def))
@@ -334,7 +338,7 @@ namespace ProjectRimFactory.Storage.UI
                 {
                     var packTarget = GiveToPackAnimalUtility.UsablePackAnimalWithTheMostFreeSpace(pawn) ?? pawn;
                     var jobDef = packTarget != pawn ? JobDefOf.GiveToPackAnimal : JobDefOf.TakeInventory;
-                    if (!pawn.CanReach(thing, PathEndMode.ClosestTouch, Danger.Deadly))
+                    if (!pawnCanReach_Touch_Deadly.Contains(pawn))
                     {
                         opts.Add(new FloatMenuOption(
                             "CannotLoadIntoCaravan".Translate(thing.Label, thing) + " (" + "NoPath".Translate() + ")",
