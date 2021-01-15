@@ -673,7 +673,7 @@
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
     </comps>
-    <researchPrerequisites>
+    <researchPrerequisites Inherit="false">
       <li>PRF_BeltsII</li>
     </researchPrerequisites>
   </ThingDef>
@@ -721,7 +721,7 @@
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
     </comps>
-    <researchPrerequisites>
+    <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
   </ThingDef>
