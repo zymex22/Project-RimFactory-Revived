@@ -104,6 +104,9 @@
       <ComponentSpacer>4</ComponentSpacer>
       <PRF_ElectronicChip_I>4</PRF_ElectronicChip_I>
     </costList>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
     <altitudeLayer>Building</altitudeLayer>
     <useHitPoints>True</useHitPoints>
     <statBases>
@@ -112,7 +115,6 @@
       <Flammability>1.0</Flammability>
       <MarketValue>2080</MarketValue>
       <ResearchSpeedFactor>0.65</ResearchSpeedFactor>
-      <SellPriceFactor>0.70</SellPriceFactor>
       <Mass>60</Mass>
     </statBases>
     <size>(2,2)</size>
@@ -128,11 +130,6 @@
         <shortCircuitInRain>true</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
-      <li Class="CompProperties_Facility">
-        <statOffsets>
-          <ResearchSpeedFactor>0.1</ResearchSpeedFactor>
-        </statOffsets>
-      </li>
       <li Class="CompProperties_AffectedByFacilities">
         <linkableFacilities>
           <li>MultiAnalyzer</li>
@@ -144,7 +141,6 @@
         </statOffsets>
         <maxSimultaneous>2</maxSimultaneous>
       </li>
-      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Glower">
         <glowRadius>5</glowRadius>
         <glowColor>(115,198,206,0)</glowColor>
@@ -153,15 +149,18 @@
     <fillPercent>0.5</fillPercent>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>
     <hasInteractionCell>true</hasInteractionCell>
-    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <designationCategory>Misc</designationCategory>
     <surfaceType>Item</surfaceType>
     <designationHotKey>Misc4</designationHotKey>
     <placeWorkers>
       <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
     </placeWorkers>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
     <researchPrerequisites>
       <li>PRF_CoreTierII</li>
+      <li>MultiAnalyzer</li>
     </researchPrerequisites>
   </ThingDef>
 

@@ -92,6 +92,7 @@
     <pathCost>50</pathCost>
     <hasInteractionCell>True</hasInteractionCell>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <interactionCellIcon />
     <surfaceType>Item</surfaceType>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <inspectorTabs>

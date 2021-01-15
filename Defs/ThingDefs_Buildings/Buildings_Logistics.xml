@@ -767,6 +767,7 @@
     <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
     <description>Underground Conveyor Belts carry items in tunnels under the ground. To move items into the subterrainian passages, you need to use the Underground Conveyor Entrance and Exit.\nThis can move under Walls, machines and other belts without connecting.</description>
     <altitudeLayer>Gas</altitudeLayer>    <!-- FloorEmplacement -->
+    <canOverlapZones>true</canOverlapZones>
     <pathCost>0</pathCost>
     <fillPercent>0.0</fillPercent>
     <researchPrerequisites Inherit="false">
@@ -821,6 +822,7 @@
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <clearBuildingArea>true</clearBuildingArea>
     <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
+    <canOverlapZones>true</canOverlapZones>
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
@@ -1015,6 +1017,7 @@
     <label>underground splitter</label>
     <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
     <description>Splitting features of a normal splitter without the surface eyesore</description>
+    <canOverlapZones>true</canOverlapZones>
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
     <passability>Standable</passability>
