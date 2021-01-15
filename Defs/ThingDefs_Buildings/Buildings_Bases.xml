@@ -6,7 +6,6 @@
     <thingClass>Building</thingClass>    <!-- 	Provides an attachment to an internal class in the code. -->
     <altitudeLayer>Building</altitudeLayer>    <!-- The layer this thing is rendered on. Usually the same value as category. -->
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
-    <canOverlapZones>false</canOverlapZones>
     <constructEffect>ConstructMetal</constructEffect>
     <selectable>true</selectable>    <!-- Specifies whether or not the item can be selected in the atlas. -->
     <drawerType>MapMeshAndRealTime</drawerType>    <!-- ??? options:	None, RealtimeOnly, MepMeshOnly, MapMeshAndRealTime -->

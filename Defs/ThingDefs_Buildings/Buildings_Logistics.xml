@@ -548,6 +548,7 @@
   <ThingDef Name="PRF_Conveyor_Base" ParentName="PRF_BuildingBase" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyor</thingClass>
     <altitudeLayer>Building</altitudeLayer>
+    <canOverlapZones>false</canOverlapZones>
     <designatorDropdown>PRF_BeltsGroup</designatorDropdown>
     <uiIconScale>0.7</uiIconScale>
     <costList>      <!-- same in Lite -->
@@ -764,6 +765,7 @@
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>PRF_Conveyor_UG_I</defName>
     <label>underground belt</label>
+        <canOverlapZones>true</canOverlapZones>
     <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
     <description>Underground Conveyor Belts carry items in tunnels under the ground. To move items into the subterrainian passages, you need to use the Underground Conveyor Entrance and Exit.\nThis can move under Walls, machines and other belts without connecting.</description>
     <altitudeLayer>Gas</altitudeLayer>    <!-- FloorEmplacement -->
@@ -820,6 +822,7 @@
   <ThingDef Name="PRF_UGConnector_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_BeltConveyorUGConnector</thingClass>
     <clearBuildingArea>true</clearBuildingArea>
+    <canOverlapZones>true</canOverlapZones>
     <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
@@ -1014,6 +1017,7 @@
     <defName>PRF_Conveyor_Splitter_UG</defName>
     <label>underground splitter</label>
     <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
+    <canOverlapZones>true</canOverlapZones>
     <description>Splitting features of a normal splitter without the surface eyesore</description>
     <altitudeLayer>FloorEmplacement</altitudeLayer>
     <pathCost>0</pathCost>
