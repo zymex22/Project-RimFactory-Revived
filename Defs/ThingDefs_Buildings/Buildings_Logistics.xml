@@ -740,7 +740,7 @@
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_WallEmbedded</li>
     </placeWorkers>
     <researchPrerequisites Inherit="false">
-      <li>PRF_BeltsIII</li>
+      <li>PRF_BeltsI</li>
     </researchPrerequisites>
     <uiIconPath>Belts/v3/BeltConveyorWallIcon</uiIconPath>
     <graphicData>
@@ -771,7 +771,7 @@
     <pathCost>0</pathCost>
     <fillPercent>0.0</fillPercent>
     <researchPrerequisites Inherit="false">
-      <li>PRF_BeltsIII</li>
+      <li>PRF_BeltsI</li>
     </researchPrerequisites>
     <clearBuildingArea>false</clearBuildingArea>
     <comps Inherit="false">
@@ -824,7 +824,7 @@
     <designatorDropdown>PRF_UgBeltsGroup</designatorDropdown>
     <canOverlapZones>true</canOverlapZones>
     <researchPrerequisites Inherit="false">
-      <li>PRF_BeltsIII</li>
+      <li>PRF_BeltsI</li>
     </researchPrerequisites>
     <costList>
       <Steel>20</Steel>
