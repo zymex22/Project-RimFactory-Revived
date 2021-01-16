@@ -289,12 +289,13 @@ namespace ProjectRimFactory.AutoMachineTool
                 // 地下コンベアの場合には表示しない.
                 return;
             }
-            if (this.State != WorkingState.Ready && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
+            Thing c = this.CarryingThing();
+            if (c != null && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
             {
                 var p = CarryPosition();
                 Vector2 result = Find.Camera.WorldToScreenPoint(p + new Vector3(0, 0, -0.4f)) / Prefs.UIScale;
                 result.y = (float)UI.screenHeight - result.y;
-                GenMapUI.DrawThingLabel(result, this.CarryingThing().stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
+                GenMapUI.DrawThingLabel(result, c.stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
             }
         }
         public override void Draw()
@@ -540,7 +541,8 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else if (this.State == WorkingState.Placing)
             {
-                return this.products?[0];
+                if (this.products == null || products.Count == 0) return null;
+                return products[0];
             }
             return null;
         }
