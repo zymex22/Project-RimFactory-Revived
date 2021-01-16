@@ -72,6 +72,25 @@ namespace ProjectRimFactory.Storage.UI
         private static Dictionary<Thing, thingIconTextureData> thingIconCache = new Dictionary<Thing, thingIconTextureData>();
 
 
+        private static bool itemIsVisible(float curY,float ViewRecthight, float scrollY, float rowHight = 28f)
+        {
+            //The item is above the view (including a safty margin of one item)
+            if((curY + rowHight - scrollY) < 0)
+            {
+                return false;
+            }
+
+            // the item is above the lower limit (including a safty margin of one item)
+            if ((curY - rowHight - scrollY - ViewRecthight) < 0)
+            {
+                return true;
+            }
+
+            //Item is below the lower limit
+            return false;
+        }
+
+
         protected override void FillTab()
         {
             Text.Font = GameFont.Small;
@@ -130,6 +149,16 @@ namespace ProjectRimFactory.Storage.UI
 
             for (var i = itemsToShow.Count - 1; i >= 0; i--)
             {
+                //Check if we need to display it
+                if (!itemIsVisible(curY, outRect.height, scrollPos.y))
+                {
+                    curY += 28;
+                    continue;
+                }
+
+
+
+
                 Thing thing = itemsToShow[i];
                 //Construct cache
                 if (!canBeConsumedby.ContainsKey(thing))
@@ -151,6 +180,7 @@ namespace ProjectRimFactory.Storage.UI
                     thingIconCache.Add(thing, new thingIconTextureData(texture, color));
                 }
 
+                //Log.Message("curY: " + curY + " scrollPos: " + scrollPos + " viewRect.size: " + viewRect.size + " outRect.size: " + outRect.size + " --- " + thing.Label);
                 
                     
                     DrawThingRow(ref curY, viewRect.width, thing, pawns);
