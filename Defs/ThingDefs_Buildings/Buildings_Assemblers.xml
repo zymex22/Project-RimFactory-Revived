@@ -224,7 +224,6 @@ Mod extennsion for assemblers
     <researchPrerequisites>      <!-- Needed Research to see in menus -->
       <li>PRF_UniversalAutocrafting</li>
     </researchPrerequisites>
-    <rotatable>false</rotatable>
     <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
         <drawStatus>true</drawStatus>
@@ -291,12 +290,12 @@ Mod extennsion for assemblers
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>1~5</floatrange_Range>
-<powerPerStepRange>375</powerPerStepRange>
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~5</floatrange_Range>
+        <powerPerStepRange>375</powerPerStepRange>
 
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
@@ -327,7 +326,6 @@ Mod extennsion for assemblers
     <researchPrerequisites>
       <li>PRF_SelfCorrectingAssemblers</li>
     </researchPrerequisites>
-    <rotatable>false</rotatable>
   </ThingDef>
 
 </Defs>
