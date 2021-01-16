@@ -151,13 +151,14 @@ namespace ProjectRimFactory.Storage
                     thingsToSplurge[i].DeSpawn();
                     GenPlace.TryPlaceThing(thingsToSplurge[i], Position, Map, ThingPlaceMode.Near);
                 }
-
+            Map.GetComponent<PRFMapComponent>().RemoveIHideRightClickMenu(this);
             base.DeSpawn(mode);
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            Map.GetComponent<PRFMapComponent>().AddIHideRightClickMenu(this);
             RefreshStorage();
         }
 
