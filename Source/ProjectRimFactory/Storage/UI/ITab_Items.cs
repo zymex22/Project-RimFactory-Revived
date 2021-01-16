@@ -169,8 +169,21 @@ namespace ProjectRimFactory.Storage.UI
         {
             if (thing == null || !thing.Spawned) return; // not here, whatever happened...
 
+
             //each call to LabelCap also accesses MaxHitPoints therefor it is read here slightly diffrently;
-            string labelMoCount = GenLabel.ThingLabel(thing, thing.stackCount, false);
+            string labelMoCount;
+            if (thing is Corpse)
+            {
+                labelMoCount = (thing as Corpse).Label;
+            }
+            else
+            {
+                labelMoCount = GenLabel.ThingLabel(thing, thing.stackCount, false);
+            }
+            
+            
+            
+
             string labelCap = labelMoCount.CapitalizeFirst(thing.def);
 
 
