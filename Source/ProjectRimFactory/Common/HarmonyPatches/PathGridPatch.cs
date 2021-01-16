@@ -12,7 +12,13 @@ using System.Reflection.Emit;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    //[HarmonyPatch(typeof(PathGrid), "CalculatedCostAt")]
+    // Removed at LWM's suggestion - see
+    //   https://github.com/zymex22/Project-RimFactory-Revived/commit/b1fafb73aaa45c7dbaa151fc0fc09f2b2df144b8
+    // LWM's thoughts: this would give a tiny bit of value for a small amount of performance cost
+    //    so maybe not worth it
+    // If not disabled, it throws errors, so it would need to be fixed to be used
+#if false
+    [HarmonyPatch(typeof(PathGrid), "CalculatedCostAt")]
     public static class PathGridPatch
     {
         [HarmonyTranspiler]
@@ -47,4 +53,5 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             return def.pathCost;
         }
     }
+#endif
 }
