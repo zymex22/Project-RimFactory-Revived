@@ -156,22 +156,17 @@ namespace ProjectRimFactory.Storage.UI
                     continue;
                 }
 
-
-
-
                 Thing thing = itemsToShow[i];
+
                 //Construct cache
                 if (!canBeConsumedby.ContainsKey(thing))
                 {
                     canBeConsumedby.Add(thing, pawns.Where(p => p.RaceProps.CanEverEat(thing) == true).ToList());
                 }
-
                 if (!thing_MaxHitPoints.ContainsKey(thing))
                 {
                     thing_MaxHitPoints.Add(thing, thing.MaxHitPoints);
                 }
-
-
                 if (!thingIconCache.ContainsKey(thing))
                 {
                     Color color;
@@ -180,10 +175,7 @@ namespace ProjectRimFactory.Storage.UI
                     thingIconCache.Add(thing, new thingIconTextureData(texture, color));
                 }
 
-                //Log.Message("curY: " + curY + " scrollPos: " + scrollPos + " viewRect.size: " + viewRect.size + " outRect.size: " + outRect.size + " --- " + thing.Label);
-                
-                    
-                    DrawThingRow(ref curY, viewRect.width, thing, pawns);
+                DrawThingRow(ref curY, viewRect.width, thing, pawns);
             }
             if (Event.current.type == EventType.Layout) scrollViewHeight = curY + 30f;
             //Scrollview End
@@ -529,6 +521,17 @@ namespace ProjectRimFactory.Storage.UI
                     }
                 }
             return opts;
+        }
+
+        public override void OnOpen()
+        {
+            base.OnOpen();
+
+            //Clear all the cache Lists on Tab Open to Prevent unessesary memmory usage / "leek"
+            canBeConsumedby.Clear();
+            pawnCanReach_Touch_Deadly.Clear();
+            pawnCanReach_Oncell_Deadly.Clear();
+            thing_MaxHitPoints.Clear();
         }
     }
 } 
