@@ -40,6 +40,8 @@ namespace ProjectRimFactory.Storage.UI
             labelKey = "PRFItemsTab";
         }
 
+        private static Building_MassStorageUnit oldSelectedMassStorageUnit = null;
+
         public Building_MassStorageUnit SelectedMassStorageUnit =>
             IOPortSelected ? SelectedIOPort.BoundStorageUnit : (Building_MassStorageUnit) SelThing;
 
@@ -103,7 +105,7 @@ namespace ProjectRimFactory.Storage.UI
             // Sniper: t.Label also contains the count (Rice x20) do we want that?
             // Rider: This new search method is REALLLYYYYYY FAST
             // This is meant to stop a possible spam call of the Fuzzy Search
-            if (itemsToShow == null || searchQuery != oldSearchQuery || SelectedMassStorageUnit.StoredItemsCount != itemsToShow.Count)
+            if (itemsToShow == null || searchQuery != oldSearchQuery || SelectedMassStorageUnit.StoredItemsCount != itemsToShow.Count || oldSelectedMassStorageUnit == null || oldSelectedMassStorageUnit != SelectedMassStorageUnit)
             {
                 itemsToShow = new List<Thing>(from Thing t in SelectedMassStorageUnit.StoredItems
                     where string.IsNullOrEmpty(searchQuery) || t.Label.ToLower().NormalizedFuzzyStrength(searchQuery.ToLower()) <
@@ -112,7 +114,7 @@ namespace ProjectRimFactory.Storage.UI
                     select t);
                 oldSearchQuery = searchQuery;
             }
-            
+            oldSelectedMassStorageUnit = SelectedMassStorageUnit;
 
             var text = SelectedMassStorageUnit.GetITabString(itemsToShow.Count);
             var MainTabText = new Rect(8f, curY, frame.width - 16f, Text.CalcHeight(text, frame.width - 16f));
