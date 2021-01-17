@@ -8,9 +8,12 @@ using UnityEngine;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.Storage.UI
 {
+    
+    
     // Somebody toucha my spaghet code
     // TODO: Use harmony to make ITab_Items actually a ITab_DeepStorage_Inventory and add right click menu
     // Only do above if LWM is installed ofc - rider
@@ -47,6 +50,47 @@ namespace ProjectRimFactory.Storage.UI
 
         protected Building_StorageUnitIOPort SelectedIOPort => SelThing as Building_StorageUnitIOPort;
 
+        private static Dictionary<Thing, List<Pawn>> canBeConsumedby = new Dictionary<Thing, List<Pawn>>();
+
+        private static List<Pawn> pawnCanReach_Touch_Deadly = new List<Pawn>();
+
+        private static List<Pawn> pawnCanReach_Oncell_Deadly = new List<Pawn>();
+
+        private static Dictionary<Thing, int> thing_MaxHitPoints = new Dictionary<Thing, int>();
+
+        private struct thingIconTextureData
+        {
+            public thingIconTextureData(Texture texture, Color color)
+            {
+                this.texture = texture;
+                this.color = color;
+            }
+
+            public Texture texture;
+            public Color color;
+        }
+        private static Dictionary<Thing, thingIconTextureData> thingIconCache = new Dictionary<Thing, thingIconTextureData>();
+
+
+        private static bool itemIsVisible(float curY,float ViewRecthight, float scrollY, float rowHight = 28f)
+        {
+            //The item is above the view (including a safty margin of one item)
+            if((curY + rowHight - scrollY) < 0)
+            {
+                return false;
+            }
+
+            // the item is above the lower limit (including a safty margin of one item)
+            if ((curY - rowHight - scrollY - ViewRecthight) < 0)
+            {
+                return true;
+            }
+
+            //Item is below the lower limit
+            return false;
+        }
+
+
         protected override void FillTab()
         {
             Text.Font = GameFont.Small;
@@ -56,6 +100,7 @@ namespace ProjectRimFactory.Storage.UI
             Widgets.ListSeparator(ref curY, frame.width, labelKey.Translate());
             curY += 5f;
 
+            // Sniper: t.Label also contains the count (Rice x20) do we want that?
             // Rider: This new search method is REALLLYYYYYY FAST
             // This is meant to stop a possible spam call of the Fuzzy Search
             if (itemsToShow == null || searchQuery != oldSearchQuery || SelectedMassStorageUnit.StoredItemsCount != itemsToShow.Count)
@@ -91,9 +136,46 @@ namespace ProjectRimFactory.Storage.UI
 
             // Iterate backwards to compensate for removing elements from enumerable
             // Learned this is an issue with List-like structures in AP CS 1A
+
+            List<Pawn> pawns = SelectedMassStorageUnit.Map.mapPawns.FreeColonists;
+
+
+            //Do it once as they are all on the same spot in the DSU
+            //Even if is where to have multible sport's that way should work I think 
+            pawnCanReach_Touch_Deadly = pawns.Where(p => p.CanReach(SelectedMassStorageUnit, PathEndMode.ClosestTouch, Danger.Deadly)).ToList();
+            pawnCanReach_Oncell_Deadly = pawns.Where(p => p.CanReach(SelectedMassStorageUnit, PathEndMode.OnCell, Danger.Deadly)).ToList();
+
+
+
             for (var i = itemsToShow.Count - 1; i >= 0; i--)
             {
-                DrawThingRow(ref curY, viewRect.width, itemsToShow[i]);
+                //Check if we need to display it
+                if (!itemIsVisible(curY, outRect.height, scrollPos.y))
+                {
+                    curY += 28;
+                    continue;
+                }
+
+                Thing thing = itemsToShow[i];
+
+                //Construct cache
+                if (!canBeConsumedby.ContainsKey(thing))
+                {
+                    canBeConsumedby.Add(thing, pawns.Where(p => p.RaceProps.CanEverEat(thing) == true).ToList());
+                }
+                if (!thing_MaxHitPoints.ContainsKey(thing))
+                {
+                    thing_MaxHitPoints.Add(thing, thing.MaxHitPoints);
+                }
+                if (!thingIconCache.ContainsKey(thing))
+                {
+                    Color color;
+                    Texture texture = CommonGUIFunctions.GetThingTextue(new Rect(4f, curY, 28f, 28f), thing, out color);
+
+                    thingIconCache.Add(thing, new thingIconTextureData(texture, color));
+                }
+
+                DrawThingRow(ref curY, viewRect.width, thing, pawns);
             }
             if (Event.current.type == EventType.Layout) scrollViewHeight = curY + 30f;
             //Scrollview End
@@ -105,9 +187,28 @@ namespace ProjectRimFactory.Storage.UI
         
         // Attempt at mimicking LWM Deep Storage
         // Credits to LWM Deep Storage :)
-        private void DrawThingRow(ref float y, float width, Thing thing)
+        private void DrawThingRow(ref float y, float width, Thing thing, List<Pawn> colonists)
         {
             if (thing == null || !thing.Spawned) return; // not here, whatever happened...
+
+
+            //each call to LabelCap also accesses MaxHitPoints therefor it is read here slightly diffrently;
+            string labelMoCount;
+            if (thing is Corpse)
+            {
+                labelMoCount = (thing as Corpse).Label;
+            }
+            else
+            {
+                labelMoCount = GenLabel.ThingLabel(thing, thing.stackCount, false);
+            }
+            
+            
+            
+
+            string labelCap = labelMoCount.CapitalizeFirst(thing.def);
+
+
             width -= 24f;
             // row to hold the item in the GUI
             Widgets.InfoCardButton(width, y, thing);
@@ -124,27 +225,26 @@ namespace ProjectRimFactory.Storage.UI
             if (isItemForbidden != forbidRowItem) thing.SetForbidden(!isItemForbidden, false);
             width -= 24f;
             var dropRect = new Rect(width, y, 24f, 24f);
-            TooltipHandler.TipRegion(dropRect, "PRF_DropThing".Translate(thing.LabelShort));
+            TooltipHandler.TipRegion(dropRect, "PRF_DropThing".Translate(labelMoCount));
             if (Widgets.ButtonImage(dropRect, DropUI, Color.gray, Color.white, false))
             {
                 dropThing(thing);
             }
 
-            var p = thing.Map.mapPawns.FreeColonists
-                .Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray()[0];
-            if (ChoicesForThing(thing, p).Count > 0)
+            var p = colonists.Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray()[0];
+            if (ChoicesForThing(thing, p, labelMoCount).Count > 0)
             {
                 width -= 24f;
                 var pawnInteract = new Rect(width, y, 24f, 24f);
                 if (Widgets.ButtonImage(pawnInteract, menuUI, Color.gray, Color.white, false))
                 {
                     var opts = new List<FloatMenuOption>();
-                    foreach (var pawn in from Pawn col in thing.Map.mapPawns.FreeColonists
-                        where col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed
+                    foreach (var pawn in from Pawn col in colonists
+                                         where col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed
                         select col)
                     {
                         var choices =
-                            ChoicesForThing(thing, pawn);
+                            ChoicesForThing(thing, pawn, labelMoCount);
                         if (choices.Count > 0)
                             opts.Add(new FloatMenuOption(pawn.Name.ToStringFull,
                                 () => { Find.WindowStack.Add(new FloatMenu(choices)); }));
@@ -161,9 +261,20 @@ namespace ProjectRimFactory.Storage.UI
                 GUI.color = ITab_Pawn_Gear.HighlightColor;
                 GUI.DrawTexture(thingRow, TexUI.HighlightTex);
             }
+
+
+            //we need to cache the Graphic to save performence 
+            // Widgets.ThingIcon dos not do that
             // Draws the icon of the thingDef in the row
+
+            
             if (thing.def.DrawMatSingle != null && thing.def.DrawMatSingle.mainTexture != null)
-                Widgets.ThingIcon(new Rect(4f, y, 28f, 28f), thing);
+            {
+                thingIconTextureData data = thingIconCache[thing];
+                CommonGUIFunctions.ThingIcon(new Rect(4f, y, 28f, 28f), thing, data.texture, data.color);
+            }
+            
+
             // Draws the item name + info
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = ITab_Pawn_Gear.ThingLabelColor;
@@ -172,15 +283,15 @@ namespace ProjectRimFactory.Storage.UI
             // LabelCap is interesting to me(rider)
             // Really useful I would think
             // LabelCap == "Wort x75"
-            Widgets.Label(itemName, thing.LabelCap.Truncate(itemName.width));
+            Widgets.Label(itemName, labelCap.Truncate(itemName.width));
             Text.WordWrap = true;
             
             // For the toolpit
-            var text2 = thing.LabelCap;
+            var text2 = labelCap;
             
             // if uses hitpoints draw it
             if (thing.def.useHitPoints)
-                text2 = string.Concat(thing.LabelCap, "\n", thing.HitPoints, " / ", thing.MaxHitPoints);
+                text2 = string.Concat(labelCap, "\n", thing.HitPoints, " / ", thing_MaxHitPoints[thing]);
             
             // Custom rightclick menu
             TooltipHandler.TipRegion(thingRow, text2);
@@ -199,30 +310,35 @@ namespace ProjectRimFactory.Storage.UI
                 itemsToShow.Remove(thing);
         }
 
+
         // Decompiled code is painful to read... Continue at your own risk
         // TODO: Replace this with a cleaner solution
         // Maybe explore FloatMenuMakerMap
-        public static List<FloatMenuOption> ChoicesForThing(Thing thing, Pawn pawn)
+        public static List<FloatMenuOption> ChoicesForThing(Thing thing, Pawn pawn, string thingLabelShort)
         {
             var opts = new List<FloatMenuOption>();
             var t = thing;
+            string labelShort = "";
+            string label = thingLabelShort;
+            if (thing.stackCount > 1) label += " x" + thing.stackCount.ToStringCached();
+
 
 
             // Copied from FloatMenuMakerMap.AddHumanlikeOrders
-            if (t.def.ingestible != null && pawn.RaceProps.CanEverEat(t) && t.IngestibleNow)
+            if (t.def.ingestible != null && canBeConsumedby[t].Contains(pawn) && t.IngestibleNow)
             {
                 string text;
                 if (t.def.ingestible.ingestCommandString.NullOrEmpty())
-                    text = "ConsumeThing".Translate(t.LabelShort, t);
+                    text = "ConsumeThing".Translate(thingLabelShort, t);
                 else
-                    text = string.Format(t.def.ingestible.ingestCommandString, t.LabelShort);
+                    text = string.Format(t.def.ingestible.ingestCommandString, thingLabelShort);
                 if (!t.IsSociallyProper(pawn)) text = text + " (" + "ReservedForPrisoners".Translate() + ")";
                 FloatMenuOption item7;
                 if (t.def.IsNonMedicalDrug && pawn.IsTeetotaler())
                 {
                     item7 = new FloatMenuOption(text + " (" + TraitDefOf.DrugDesire.DataAtDegree(-1).label + ")", null);
                 }
-                else if (!pawn.CanReach(t, PathEndMode.OnCell, Danger.Deadly))
+                else if (!pawnCanReach_Oncell_Deadly.Contains(pawn))
                 {
                     item7 = new FloatMenuOption(text + " (" + "NoPath".Translate() + ")", null);
                 }
@@ -242,12 +358,22 @@ namespace ProjectRimFactory.Storage.UI
                 opts.Add(item7);
             }
 
-
             // Add equipment commands
             // Copied from FloatMenuMakerMap.AddHumanlikeOrders
             if (thing is ThingWithComps equipment && equipment.GetComp<CompEquippable>() != null)
             {
-                var labelShort = equipment.LabelShort;
+                //ThingWithComps != Thing --> Label is diffrent implementing the override string LabelNoCount
+                labelShort = thingLabelShort;
+                if (equipment.AllComps != null)
+                {
+                    int i = 0;
+                    for (int count = equipment.AllComps.Count; i < count; i++)
+                    {
+                        labelShort = equipment.AllComps[i].TransformLabel(labelShort);
+                    }
+                }
+
+                
                 FloatMenuOption item4;
                 if (equipment.def.IsWeapon && pawn.WorkTagIsDisabled(WorkTags.Violent))
                 {
@@ -255,7 +381,7 @@ namespace ProjectRimFactory.Storage.UI
                         "CannotEquip".Translate(labelShort) + " (" +
                         "IsIncapableOfViolenceLower".Translate(pawn.LabelShort, pawn) + ")", null);
                 }
-                else if (!pawn.CanReach(equipment, PathEndMode.ClosestTouch, Danger.Deadly))
+                else if (!pawnCanReach_Touch_Deadly.Contains(pawn))
                 {
                     item4 = new FloatMenuOption("CannotEquip".Translate(labelShort) + " (" + "NoPath".Translate() + ")",
                         null);
@@ -288,17 +414,18 @@ namespace ProjectRimFactory.Storage.UI
             var apparel = thing as Apparel;
             if (apparel != null)
             {
+                //replaced apparel.Label label (the former would spawm MaxHitPonts)
                 FloatMenuOption item5;
-                if (!pawn.CanReach(apparel, PathEndMode.ClosestTouch, Danger.Deadly))
+                if (!pawnCanReach_Touch_Deadly.Contains(pawn))
                     item5 = new FloatMenuOption(
-                        "CannotWear".Translate(apparel.Label, apparel) + " (" + "NoPath".Translate() + ")", null);
+                        "CannotWear".Translate(label, apparel) + " (" + "NoPath".Translate() + ")", null);
                 else if (!ApparelUtility.HasPartsToWear(pawn, apparel.def))
                     item5 = new FloatMenuOption(
-                        "CannotWear".Translate(apparel.Label, apparel) + " (" +
+                        "CannotWear".Translate(label, apparel) + " (" +
                         "CannotWearBecauseOfMissingBodyParts".Translate() + ")", null);
-                else
+                else /*Apparel has no override for LabelShort therefor we can still use labelShort from ThingWithComps*/
                     item5 = FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(
-                        "ForceWear".Translate(apparel.LabelShort, apparel), delegate
+                        "ForceWear".Translate(labelShort, apparel), delegate
                         {
                             apparel.SetForbidden(false);
                             var job = new Job(JobDefOf.Wear, apparel);
@@ -314,16 +441,17 @@ namespace ProjectRimFactory.Storage.UI
                 {
                     var packTarget = GiveToPackAnimalUtility.UsablePackAnimalWithTheMostFreeSpace(pawn) ?? pawn;
                     var jobDef = packTarget != pawn ? JobDefOf.GiveToPackAnimal : JobDefOf.TakeInventory;
-                    if (!pawn.CanReach(thing, PathEndMode.ClosestTouch, Danger.Deadly))
+                    //replaced thing.Label label (the former would spawm MaxHitPonts)
+                    if (!pawnCanReach_Touch_Deadly.Contains(pawn))
                     {
                         opts.Add(new FloatMenuOption(
-                            "CannotLoadIntoCaravan".Translate(thing.Label, thing) + " (" + "NoPath".Translate() + ")",
+                            "CannotLoadIntoCaravan".Translate(label, thing) + " (" + "NoPath".Translate() + ")",
                             null));
                     }
                     else if (MassUtility.WillBeOverEncumberedAfterPickingUp(packTarget, thing, 1))
                     {
                         opts.Add(new FloatMenuOption(
-                            "CannotLoadIntoCaravan".Translate(thing.Label, thing) + " (" + "TooHeavy".Translate() + ")",
+                            "CannotLoadIntoCaravan".Translate(label, thing) + " (" + "TooHeavy".Translate() + ")",
                             null));
                     }
                     else
@@ -335,7 +463,7 @@ namespace ProjectRimFactory.Storage.UI
                             var capacityLeft4 = capacityLeft - thing.GetStatValue(StatDefOf.Mass);
                             opts.Add(FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(
                                 CaravanFormingUtility.AppendOverweightInfo(
-                                    "LoadIntoCaravan".Translate(thing.Label, thing), capacityLeft4), delegate
+                                    "LoadIntoCaravan".Translate(label, thing), capacityLeft4), delegate
                                 {
                                     thing.SetForbidden(false, false);
                                     var job = new Job(jobDef, thing);
@@ -349,7 +477,7 @@ namespace ProjectRimFactory.Storage.UI
                             if (MassUtility.WillBeOverEncumberedAfterPickingUp(packTarget, thing, thing.stackCount))
                             {
                                 opts.Add(new FloatMenuOption(
-                                    "CannotLoadIntoCaravanAll".Translate(thing.Label, thing) + " (" +
+                                    "CannotLoadIntoCaravanAll".Translate(label, thing) + " (" +
                                     "TooHeavy".Translate() + ")", null));
                             }
                             else
@@ -358,7 +486,7 @@ namespace ProjectRimFactory.Storage.UI
                                     capacityLeft - thing.stackCount * thing.GetStatValue(StatDefOf.Mass);
                                 opts.Add(FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(
                                     CaravanFormingUtility.AppendOverweightInfo(
-                                        "LoadIntoCaravanAll".Translate(thing.Label, thing), capacityLeft2), delegate
+                                        "LoadIntoCaravanAll".Translate(label, thing), capacityLeft2), delegate
                                     {
                                         thing.SetForbidden(false, false);
                                         var job = new Job(jobDef, thing);
@@ -369,7 +497,7 @@ namespace ProjectRimFactory.Storage.UI
                             }
 
                             opts.Add(FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(
-                                "LoadIntoCaravanSome".Translate(thing.LabelNoCount, thing), delegate
+                                "LoadIntoCaravanSome".Translate(thingLabelShort, thing), delegate
                                 {
                                     var to = Mathf.Min(MassUtility.CountToPickUpUntilOverEncumbered(packTarget, thing),
                                         thing.stackCount);
@@ -377,7 +505,7 @@ namespace ProjectRimFactory.Storage.UI
                                     {
                                         var capacityLeft3 = capacityLeft - val * thing.GetStatValue(StatDefOf.Mass);
                                         return CaravanFormingUtility.AppendOverweightInfo(
-                                            string.Format("LoadIntoCaravanCount".Translate(thing.LabelNoCount, thing),
+                                            string.Format("LoadIntoCaravanCount".Translate(thingLabelShort, thing),
                                                 val), capacityLeft3);
                                     }, 1, to, delegate(int count)
                                     {
@@ -393,6 +521,17 @@ namespace ProjectRimFactory.Storage.UI
                     }
                 }
             return opts;
+        }
+
+        public override void OnOpen()
+        {
+            base.OnOpen();
+
+            //Clear all the cache Lists on Tab Open to Prevent unessesary memmory usage / "leek"
+            canBeConsumedby.Clear();
+            pawnCanReach_Touch_Deadly.Clear();
+            pawnCanReach_Oncell_Deadly.Clear();
+            thing_MaxHitPoints.Clear();
         }
     }
 } 
