@@ -495,6 +495,7 @@
     </graphicData>
     <size>(5,5)</size>
     <statBases>
+      <WorkToBuild>5000</WorkToBuild>
       <Cleanliness>-5</Cleanliness>
       <Beauty>-10</Beauty>
       <MarketValue>1340</MarketValue>
@@ -502,30 +503,32 @@
     <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)\n Use wood to smelt</description>
     <stuffCategories>
       <li>Stony</li>
+      <li>Metallic</li>
     </stuffCategories>
-    <costStuffCount>250</costStuffCount>    <!-- Set price for stone blocks -->
+    <costStuffCount>300</costStuffCount>    <!-- Set price for stone blocks -->
     <constructEffect></constructEffect>
     <costList>
       <Steel>150</Steel>
       <WoodLog>50</WoodLog>
     </costList>
     <recipes>
-      <li>BurnApparel</li>
-      <li>CremateCorpse</li>
       <li>ExtractMetalFromSlag</li>
       <li>MakeSmallFrame</li>
+      <li>CremateCorpse</li>
+      <li>BurnWeapon</li>
+      <li>BurnDrugs</li>
+      <li>BurnApparel</li>
     </recipes>
     <comps>
       <li Class="CompProperties_Refuelable">
         <fuelConsumptionRate>50.0</fuelConsumptionRate>
-        <fuelCapacity>150.0</fuelCapacity>
+        <fuelCapacity>50.0</fuelCapacity>
         <fuelFilter>
           <thingDefs>
             <li>WoodLog</li>
           </thingDefs>
         </fuelFilter>
-        <consumeFuelOnlyWhenUsed>false</consumeFuelOnlyWhenUsed>
-        <!--<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>-->
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
       </li>
       <li Class="CompProperties_Glower">
@@ -550,12 +553,12 @@
         <skills>
           <li>
             <def>Artistic</def>
-            <levelInt>5</levelInt>
+            <levelInt>1</levelInt>
           </li>
         </skills>
       </li>
     </modExtensions>
-    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <researchPrerequisites>
       <li>PRF_CoreTierO</li>
     </researchPrerequisites>

@@ -50,7 +50,7 @@
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <graphicData>
       <texPath>Industry/MiningShaft</texPath>
-      <graphicClass>Graphic_Multi</graphicClass>
+      <graphicClass>Graphic_Single</graphicClass>
       <drawSize>(3,1.1)</drawSize>
       <shaderType>CutoutComplex</shaderType>
       <shadowData>
