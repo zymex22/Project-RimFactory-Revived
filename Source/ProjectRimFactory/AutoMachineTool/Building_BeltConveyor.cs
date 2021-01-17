@@ -61,6 +61,9 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         protected ThingOwner_Conveyor thingOwnerInt;
+        // flag for Notify_ItemLost, to let it know it's okay
+        //   that it lost an item and to not do anything.
+        static protected bool usingThingOwnerInt = false;
 
         public static float supplyPower = 10f;
         protected bool stuck = false;
@@ -196,11 +199,11 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
         public void Notify_LostItem(Thing item) {
-            Debug.Warning(Debug.Flag.Conveyors, this + " was notified it has lost " + item);
             if ((item.holdingOwner != this.thingOwnerInt) && !thingOwnerInt.Any
                  && this.State != WorkingState.Ready // nothing happening
-                 && this.State != WorkingState.Placing) // Placing removes the item from ThingHolder
+                 && !usingThingOwnerInt)
             {
+                Debug.Warning(Debug.Flag.Conveyors, this + " was notified it has lost ----- " + item);
                 Reset(); // something took it!
             }
         }
@@ -422,7 +425,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 case WorkingState.Working:
                     return ThisCanAcceptThat(this.Working, thing);
                 case WorkingState.Placing:
-                    // in case anything has already placed/removed carried item:
                     return this.products.Count == 0 || ThisCanAcceptThat(this.products[0], thing);
                 default:
                     return false;
@@ -467,6 +469,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.products = new List<Thing>(thingOwnerInt.InnerListForReading);
                 thingOwnerInt.Clear();
             }
+            usingThingOwnerInt = false;
             base.Reset();
             this.products = thingOwnerInt.InnerListForReading;
             // Any of thse could come up in weird scenarios: remove them all?
@@ -479,10 +482,11 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool PlaceProduct(ref List<Thing> products) {
             if (thingOwnerInt.Count == 0) {
                 // (this can happen if the belt is in Placing mode and something takes it from belt)
-                Debug.Message(Debug.Flag.Conveyors, "Conveyor " + this + " no longer has anything to place");
+                Debug.Message(Debug.Flag.Conveyors, "Conveyor " + this + " no longer has anything to place!!");
                 return true; // ready for next action.
             }
             // Has something else taken the Thing away from us? (b/c they are spawned? or something else?)
+            // (I don't think anything is actually using this)
             if (this.WorkInterruption(products[0])) {
                 Debug.Message(Debug.Flag.Conveyors, "  but something has already moved the item.");
                 return true;
@@ -490,10 +494,11 @@ namespace ProjectRimFactory.AutoMachineTool
             // this will continue to get called every ~30 ticks; this is okay. In case something goes wrong,
             //   it might fix itself.
             if (IsEndOfLine) return false;
-
+            usingThingOwnerInt = true;
             Thing thing = thingOwnerInt.Take(thingOwnerInt[0]);
+            usingThingOwnerInt = false;
             Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this +
-                (stuck ? " is stuck with " : " is about to try placing ") + thing);
+                (stuck ? " is stuck with " : " is about to try placing ----- ") + thing);
             if (stuck) {
                 thingOwnerInt.TryAdd(thing);
                 if (this.CanOutput(thing)) {
