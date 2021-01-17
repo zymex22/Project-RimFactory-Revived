@@ -51,11 +51,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         static bool Prefix(Vector3 clickPos, Pawn pawn, out List<FloatMenuOption> __result)
         {
-            __result = new List<FloatMenuOption>();
-            if (PatchStorageUtil.Get<IHideRightClickMenu>(pawn.Map, clickPos.ToIntVec3())?.HideRightClickMenus ?? false)
+            if (pawn.Map.GetComponent<PRFMapComponent>().iHideRightMenus.Contains(clickPos.ToIntVec3()))
             {
+                __result = new List<FloatMenuOption>();
                 return false;
             }
+            __result = null;
             return true;
         }
     }
@@ -139,11 +140,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     public interface IHideItem
     {
         bool HideItems { get; }
-    }
-
-    public interface IHideRightClickMenu
-    {
-        bool HideRightClickMenus { get; }
     }
 
     public interface IForbidPawnOutputItem
