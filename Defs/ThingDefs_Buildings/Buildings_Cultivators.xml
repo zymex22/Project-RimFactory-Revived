@@ -104,6 +104,7 @@
         <spawnWithFullDrones>true</spawnWithFullDrones>
         <workTypes>
           <li>Growing</li>
+          <li>PlantCutting</li>
         </workTypes>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
@@ -159,6 +160,7 @@
         <spawnWithFullDrones>true</spawnWithFullDrones>
         <workTypes>
           <li>Growing</li>
+          <li>PlantCutting</li>
           <li>Hauling</li>
         </workTypes>
       </li>
@@ -228,6 +230,7 @@
         <spawnWithFullDrones>true</spawnWithFullDrones>
         <workTypes>
           <li>Growing</li>
+          <li>PlantCutting</li>
           <li>Hauling</li>
         </workTypes>
       </li>
@@ -272,15 +275,13 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-<powerPerStepSpeed>0</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>5~15</floatrange_Range>
-<powerPerStepRange>150</powerPerStepRange>
-        
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>5~15</floatrange_Range>
+        <powerPerStepRange>150</powerPerStepRange>
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
     </comps>
@@ -292,6 +293,7 @@
         <spawnWithFullDrones>true</spawnWithFullDrones>
         <workTypes>
           <li>Growing</li>
+          <li>PlantCutting</li>
           <li>Hauling</li>
         </workTypes>
       </li>
