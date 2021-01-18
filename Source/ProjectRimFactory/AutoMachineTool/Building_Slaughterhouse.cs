@@ -31,6 +31,12 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+
+            if (!powerWorkSetting.Props.allowManualRangeTypeChange)
+            {
+                powerWorkSetting.RangeTypeRot = this.Rotation;
+            }
+           
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -132,8 +138,6 @@ namespace ProjectRimFactory.AutoMachineTool
             return true;
         }
 
-
-      
     }
 
 }
