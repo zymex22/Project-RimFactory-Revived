@@ -48,9 +48,9 @@ namespace ProjectRimFactory.Storage.UI
         public override bool IsVisible =>
             IOPortSelected ? SelectedIOPort.BoundStorageUnit?.CanReceiveIO ?? false : true;
 
-        protected bool IOPortSelected => SelThing is Building_StorageUnitIOPort;
+        protected bool IOPortSelected => SelThing is Building_StorageUnitIOBase;
 
-        protected Building_StorageUnitIOPort SelectedIOPort => SelThing as Building_StorageUnitIOPort;
+        protected Building_StorageUnitIOBase SelectedIOPort => SelThing as Building_StorageUnitIOBase;
 
         private static Dictionary<Thing, List<Pawn>> canBeConsumedby = new Dictionary<Thing, List<Pawn>>();
 

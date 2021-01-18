@@ -13,24 +13,34 @@ using Verse;
 
 namespace ProjectRimFactory.Storage
 {
+
     [StaticConstructorOnStartup]
-    public class Building_StorageUnitIOPort : Building_Storage , IForbidPawnInputItem
+    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem
     {
         public static readonly Texture2D CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
         public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("PRFUi/IoIcon");
 
         public StorageIOMode mode;
-        Building_MassStorageUnit boundStorageUnit;
+        public Building_MassStorageUnit boundStorageUnit;
         protected StorageSettings outputStoreSettings;
         private OutputSettings outputSettings;
 
-        CompPowerTrader powerComp;
+        public virtual IntVec3 WorkPosition => this.Position;
+
+        public CompPowerTrader powerComp;
+
+        public Building_StorageUnitIOBase(Texture2D CargoPlatformTex, Texture2D IOModeTex)
+        {
+            CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
+            IOModeTex = ContentFinder<Texture2D>.Get("PRFUi/IoIcon");
+        }
+
 
         public override Graphic Graphic => this.IOMode == StorageIOMode.Input ?
             base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().inColor, Color.white) :
             base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().outColor, Color.white);
 
-        public StorageIOMode IOMode
+        public virtual StorageIOMode IOMode
         {
             get
             {
@@ -76,15 +86,16 @@ namespace ProjectRimFactory.Storage
         }
 
         //
-        public bool ForbidPawnInput {
+        public bool ForbidPawnInput
+        {
             get
             {
 
                 //maybe we should cache currentItem
-                Thing currentItem = Position.GetFirstItem(Map);
+                Thing currentItem = WorkPosition.GetFirstItem(Map);
                 if (currentItem != null && IOMode == StorageIOMode.Output && outputSettings.useMax)
                 {
-                    return  OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit) <= 0;
+                    return OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit) <= 0;
                 }
                 return false;
             }
@@ -197,11 +208,11 @@ namespace ProjectRimFactory.Storage
             }
         }
 
-        public void RefreshInput()
+        public virtual void RefreshInput()
         {
             if (powerComp.PowerOn)
             {
-                Thing item = Position.GetFirstItem(Map);
+                Thing item = WorkPosition.GetFirstItem(Map);
                 if (mode == StorageIOMode.Input && item != null && boundStorageUnit != null && boundStorageUnit.settings.AllowedToAccept(item) && boundStorageUnit.CanReceiveIO && boundStorageUnit.CanStoreMoreItems)
                 {
                     foreach (IntVec3 cell in boundStorageUnit.AllSlotCells())
@@ -228,7 +239,200 @@ namespace ProjectRimFactory.Storage
                 .FirstOrDefault(g => OutputSettings.SatisfiesMin(g.Sum(t => t.stackCount))) ?? Enumerable.Empty<Thing>();
         }
 
-        protected void RefreshOutput() //
+        protected virtual void RefreshOutput() //
+        {
+            if (powerComp.PowerOn)
+            {
+                Thing currentItem = WorkPosition.GetFirstItem(Map);
+                bool storageSlotAvailable = currentItem == null || (settings.AllowedToAccept(currentItem) &&
+                                                                    OutputSettings.SatisfiesMax(currentItem.stackCount, currentItem.def.stackLimit));
+                if (boundStorageUnit != null && boundStorageUnit.CanReceiveIO)
+                {
+                    if (storageSlotAvailable && OutputSettings.min <= OutputSettings.max)
+                    {
+                        List<Thing> itemCandidates = new List<Thing>(from Thing t in boundStorageUnit.StoredItems where settings.AllowedToAccept(t) select t); // ToList very important - evaluates enumerable
+                        if (ItemsThatSatisfyMin(itemCandidates, currentItem).Any())
+                        {
+                            foreach (Thing item in itemCandidates)
+                            {
+                                if (currentItem != null)
+                                {
+                                    if (currentItem.CanStackWith(item))
+                                    {
+                                        int count = Math.Min(item.stackCount, OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit));
+                                        if (count > 0)
+                                        {
+                                            currentItem.TryAbsorbStack(item.SplitOff(count), true);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    int count = OutputSettings.CountNeededToReachMax(0, item.stackCount);
+                                    if (count > 0)
+                                    {
+                                        currentItem = GenSpawn.Spawn(item.SplitOff(count), WorkPosition, Map);
+                                    }
+                                }
+                                if (currentItem != null && !OutputSettings.SatisfiesMax(currentItem.stackCount, currentItem.def.stackLimit))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    //Transfre a item back if it is either too few or disallowed
+                    if (currentItem != null && (!settings.AllowedToAccept(currentItem) || !OutputSettings.SatisfiesMin(currentItem.stackCount)) && boundStorageUnit.settings.AllowedToAccept(currentItem))
+                    {
+                        boundStorageUnit.RegisterNewItem(currentItem);
+                    }
+                    //Transfer the diffrence back if it is too much
+                    if (currentItem != null && (!OutputSettings.SatisfiesMax(currentItem.stackCount, currentItem.def.stackLimit) && boundStorageUnit.settings.AllowedToAccept(currentItem)))
+                    {
+                        int splitCount = -OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit);
+                        if (splitCount > 0)
+                        {
+                            boundStorageUnit.RegisterNewItem(currentItem.SplitOff(splitCount));
+                        }
+                    }
+                }
+            }
+        }
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            foreach (Gizmo g in base.GetGizmos()) yield return g;
+            yield return new Command_Action()
+            {
+                defaultLabel = "PRFBoundStorageBuilding".Translate() + ": " + (boundStorageUnit?.LabelCap ?? "NoneBrackets".Translate()),
+                action = () =>
+                {
+                    List<FloatMenuOption> list = new List<FloatMenuOption>(
+                        from Building_MassStorageUnit b in Find.CurrentMap.listerBuildings.AllBuildingsColonistOfClass<Building_MassStorageUnit>()
+                        where b.def.GetModExtension<DefModExtension_CanUseStorageIOPorts>() != null
+                        select new FloatMenuOption(b.LabelCap, () => SelectedPorts().ToList().ForEach(p => p.BoundStorageUnit = b))
+                    );
+                    if (list.Count == 0)
+                    {
+                        list.Add(new FloatMenuOption("NoneBrackets".Translate(), null));
+                    }
+                    Find.WindowStack.Add(new FloatMenu(list));
+                },
+                icon = CargoPlatformTex
+            };
+            if (IOMode == StorageIOMode.Output)
+            {
+                yield return new Command_Action()
+                {
+                    icon = ContentFinder<Texture2D>.Get("UI/Commands/SetTargetFuelLevel"),
+                    defaultLabel = "PRFIOOutputSettings".Translate(),
+                    action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings, () => SelectedPorts().Where(p => p.IOMode == StorageIOMode.Output).ToList().ForEach(p => this.OutputSettings.Copy(p.OutputSettings))))
+                };
+            }
+        }
+
+        private IEnumerable<Building_StorageUnitIOBase> SelectedPorts()
+        {
+            var l = Find.Selector.SelectedObjects.Where(o => o is Building_StorageUnitIOBase).Select(o => (Building_StorageUnitIOBase)o).ToList();
+            if (!l.Contains(this))
+            {
+                l.Add(this);
+            }
+            return l;
+        }
+
+        public virtual bool OutputItem(Thing thing)
+        {
+            if (boundStorageUnit?.CanReceiveIO ?? false)
+            {
+                return GenPlace.TryPlaceThing(thing.SplitOff(thing.stackCount), WorkPosition, Map, ThingPlaceMode.Near,
+                    null, pos =>
+                    {
+                        if (settings.AllowedToAccept(thing) && OutputSettings.SatisfiesMin(thing.stackCount))
+                            if (pos == WorkPosition)
+                                return true;
+                        foreach (Thing t in Map.thingGrid.ThingsListAt(pos))
+                        {
+                            if (t is Building_StorageUnitIOPort) return false;
+                        }
+
+                        return true;
+                    });
+            }
+
+            return false;
+        }
+    }
+
+
+
+
+    [StaticConstructorOnStartup]
+    public class Building_StorageUnitIOPort : Building_StorageUnitIOBase
+    {
+
+
+        public Building_StorageUnitIOPort() : base(ContentFinder<Texture2D>.Get("Storage/CargoPlatform"), ContentFinder<Texture2D>.Get("PRFUi/IoIcon"))
+        {
+
+        }
+
+
+        public override Graphic Graphic => this.IOMode == StorageIOMode.Input ?
+            base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().inColor, Color.white) :
+            base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().outColor, Color.white);
+
+        public override StorageIOMode IOMode
+        {
+            get
+            {
+                return mode;
+            }
+            set
+            {
+                if (mode == value) return;
+                mode = value;
+                Notify_NeedRefresh();
+            }
+        }
+
+        public override void Notify_ReceivedThing(Thing newItem)
+        {
+            base.Notify_ReceivedThing(newItem);
+            if (mode == StorageIOMode.Input)
+            {
+                RefreshInput();
+            }
+        }
+
+        public override void Notify_LostThing(Thing newItem)
+        {
+            base.Notify_LostThing(newItem);
+            if (mode == StorageIOMode.Output)
+            {
+                RefreshOutput();
+            }
+        }
+
+        public override void RefreshInput()
+        {
+            if (powerComp.PowerOn)
+            {
+                Thing item = Position.GetFirstItem(Map);
+                if (mode == StorageIOMode.Input && item != null && boundStorageUnit != null && boundStorageUnit.settings.AllowedToAccept(item) && boundStorageUnit.CanReceiveIO && boundStorageUnit.CanStoreMoreItems)
+                {
+                    foreach (IntVec3 cell in boundStorageUnit.AllSlotCells())
+                    {
+                        if (cell.GetFirstItem(Map) == null)
+                        {
+                            boundStorageUnit.RegisterNewItem(item);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        protected override void RefreshOutput()
         {
             if (powerComp.PowerOn)
             {
@@ -303,33 +507,6 @@ namespace ProjectRimFactory.Storage
                 },
                 icon = IOModeTex
             };
-            yield return new Command_Action()
-            {
-                defaultLabel = "PRFBoundStorageBuilding".Translate() + ": " + (boundStorageUnit?.LabelCap ?? "NoneBrackets".Translate()),
-                action = () =>
-                {
-                    List<FloatMenuOption> list = new List<FloatMenuOption>(
-                        from Building_MassStorageUnit b in Find.CurrentMap.listerBuildings.AllBuildingsColonistOfClass<Building_MassStorageUnit>()
-                        where b.def.GetModExtension<DefModExtension_CanUseStorageIOPorts>() != null
-                        select new FloatMenuOption(b.LabelCap, () => SelectedPorts().ToList().ForEach(p => p.BoundStorageUnit = b))
-                    );
-                    if (list.Count == 0)
-                    {
-                        list.Add(new FloatMenuOption("NoneBrackets".Translate(), null));
-                    }
-                    Find.WindowStack.Add(new FloatMenu(list));
-                },
-                icon = CargoPlatformTex
-            };
-            if (IOMode == StorageIOMode.Output)
-            {
-                yield return new Command_Action()
-                {
-                    icon = ContentFinder<Texture2D>.Get("UI/Commands/SetTargetFuelLevel"),
-                    defaultLabel = "PRFIOOutputSettings".Translate(),
-                    action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings, () => SelectedPorts().Where(p => p.IOMode == StorageIOMode.Output).ToList().ForEach(p => this.OutputSettings.Copy(p.OutputSettings))))
-                };
-            }
         }
 
         private IEnumerable<Building_StorageUnitIOPort> SelectedPorts()
@@ -342,7 +519,7 @@ namespace ProjectRimFactory.Storage
             return l;
         }
 
-        public bool OutputItem(Thing thing)
+        public override bool OutputItem(Thing thing)
         {
             if (boundStorageUnit?.CanReceiveIO ?? false)
             {

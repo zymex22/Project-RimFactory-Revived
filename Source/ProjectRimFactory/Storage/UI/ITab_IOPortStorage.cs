@@ -9,7 +9,7 @@ namespace ProjectRimFactory.Storage.UI
 {
     public class ITab_IOPortStorage : ITab_Storage
     {
-        public Building_StorageUnitIOPort SelBuilding => (Building_StorageUnitIOPort)SelThing;
+        public Building_StorageUnitIOBase SelBuilding => (Building_StorageUnitIOBase)SelThing;
         public override bool IsVisible => SelBuilding.mode == StorageIOMode.Output;
         public ITab_IOPortStorage()
         {
