@@ -92,7 +92,7 @@
 
   <Operation Class="PatchOperationFindMod">
     <mods>
-      <li>Vanilla Brewing Expanded</li>
+      <li>Vanilla Factions Expanded - Medieval</li>
     </mods>
     <match Class="PatchOperationFindMod">
       <mods>
