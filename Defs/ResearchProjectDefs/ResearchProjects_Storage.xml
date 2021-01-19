@@ -50,4 +50,21 @@
       <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
   </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_StorageResearch">
+    <defName>PRF_StorageIO_II</defName>
+    <techLevel>Spacer</techLevel>
+    <baseCost>1000</baseCost>
+    <label>Improved Wireless Storage</label>
+    <researchViewX>9</researchViewX>
+    <researchViewY>1.9</researchViewY>
+    <description>With further research we have discovered a way to get more uses out of our Wireless storage solution\nAllow you to build I/O pushers\nMore may be added to this later.</description>
+    <prerequisites>
+      <li>PRF_StorageIO</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
 </Defs>
