@@ -21,7 +21,7 @@
 					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
 					<value>
 						<li>BiomesNEO_ChunkMaria</li>
-						<li>RBiomesNEO_ChunkHighlanduby</li>
+						<li>RBiomesNEO_ChunkHighland</li>
 					</value>
 				</li>
 				<li Class="PatchOperationAdd">					<!-- T3 miner Remove from Bill list -->
