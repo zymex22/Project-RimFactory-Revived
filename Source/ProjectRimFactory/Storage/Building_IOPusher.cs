@@ -36,4 +36,23 @@ namespace ProjectRimFactory.Storage
             base.mode = IOMode;
         }
     }
+
+    class PlaceWorker_IOPusherHilight : PlaceWorker
+    {
+        public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
+        {
+           // base.DrawGhost(def, center, rot, ghostCol, thing);
+
+            IntVec3 outputCell = center + rot.FacingCell;
+
+
+            GenDraw.DrawFieldEdges(new List<IntVec3> { outputCell }, Common.CommonColors.outputCell);
+
+
+
+        }
+    }
+
+
+
 }

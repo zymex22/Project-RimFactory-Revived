@@ -483,6 +483,10 @@
       <li>ProjectRimFactory.Storage.UI.ITab_IOPortStorage</li>
       <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
     </inspectorTabs>
+    <placeWorkers>
+    <li>ProjectRimFactory.PlaceWorker_Arrow</li>
+    <li>ProjectRimFactory.Storage.PlaceWorker_IOPusherHilight</li>
+    </placeWorkers>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
       <WorkToBuild>600</WorkToBuild>
