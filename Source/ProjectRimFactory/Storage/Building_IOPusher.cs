@@ -12,11 +12,6 @@ namespace ProjectRimFactory.Storage
     public class Building_IOPusher : Building_StorageUnitIOBase
     {
 
-        public Building_IOPusher() : base(ContentFinder<Texture2D>.Get("Storage/CargoPlatform"), ContentFinder<Texture2D>.Get("PRFUi/IoIcon"))
-        {
-           
-
-        }
 
         public override IntVec3 WorkPosition {
             get

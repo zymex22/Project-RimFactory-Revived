@@ -27,14 +27,7 @@ namespace ProjectRimFactory.Storage
 
         public virtual IntVec3 WorkPosition => this.Position;
 
-        public CompPowerTrader powerComp;
-
-        public Building_StorageUnitIOBase(Texture2D CargoPlatformTex, Texture2D IOModeTex)
-        {
-            CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
-            IOModeTex = ContentFinder<Texture2D>.Get("PRFUi/IoIcon");
-        }
-
+        protected CompPowerTrader powerComp;
 
         public override Graphic Graphic => this.IOMode == StorageIOMode.Input ?
             base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().inColor, Color.white) :
@@ -369,13 +362,6 @@ namespace ProjectRimFactory.Storage
     [StaticConstructorOnStartup]
     public class Building_StorageUnitIOPort : Building_StorageUnitIOBase
     {
-
-
-        public Building_StorageUnitIOPort() : base(ContentFinder<Texture2D>.Get("Storage/CargoPlatform"), ContentFinder<Texture2D>.Get("PRFUi/IoIcon"))
-        {
-
-        }
-
 
         public override Graphic Graphic => this.IOMode == StorageIOMode.Input ?
             base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().inColor, Color.white) :
