@@ -18,7 +18,7 @@ namespace ProjectRimFactory.Storage
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
         private readonly List<Thing> items = new List<Thing>();
-        private List<Building_StorageUnitIOPort> ports = new List<Building_StorageUnitIOPort>();
+        private List<Building_StorageUnitIOBase> ports = new List<Building_StorageUnitIOBase>();
         public string uniqueName;
 
         public abstract bool CanStoreMoreItems { get; }
@@ -57,12 +57,12 @@ namespace ProjectRimFactory.Storage
         public virtual bool HideRightClickMenus =>
             def.GetModExtension<DefModExtension_Crate>()?.hideRightClickMenus ?? false;
 
-        public void DeregisterPort(Building_StorageUnitIOPort port)
+        public void DeregisterPort(Building_StorageUnitIOBase port)
         {
             ports.Remove(port);
         }
 
-        public void RegisterPort(Building_StorageUnitIOPort port)
+        public void RegisterPort(Building_StorageUnitIOBase port)
         {
             ports.Add(port);
         }

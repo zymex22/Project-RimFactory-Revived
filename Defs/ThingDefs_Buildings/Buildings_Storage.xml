@@ -440,5 +440,93 @@
     </modExtensions>
   </ThingDef>
 
+  <!--============================== I/O Pusher ==============================-->
+  <ThingDef ParentName="PRF_BuildingBase">
+    <defName>PRF_IOPPusher_I</defName>
+    <label>I/O Pusher</label>
+    <thingClass>ProjectRimFactory.Storage.Building_IOPusher</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+    <uiIconScale>0.7</uiIconScale>
+    <designatorDropdown>PRF_IoGroup</designatorDropdown>
+    <graphicData>
+      <texPath>Storage/IO_Pusher</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <building>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+          </categories>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Storage.UI.ITab_IOPortStorage</li>
+      <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
+    </inspectorTabs>
+    <placeWorkers>
+    <li>ProjectRimFactory.PlaceWorker_Arrow</li>
+    <li>ProjectRimFactory.Storage.PlaceWorker_IOPusherHilight</li>
+    </placeWorkers>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>600</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>370</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Mass>30</Mass>
+    </statBases>
+    <description>(tier 3) \n A Connection port for your storage Cargo Platforms. It can be set to Input/output from any Platform remotely in any range within the map.</description>
+    <costList>
+      <Steel>50</Steel>
+      <Plasteel>10</Plasteel>
+      <ComponentSpacer>1</ComponentSpacer>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <rotatable>true</rotatable>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <researchPrerequisites>
+      <li>PRF_StorageIO</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">
+        <inColor>(144, 222, 255, 255)</inColor>
+        <outColor>(215, 169, 72, 255)</outColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
 
 </Defs>
