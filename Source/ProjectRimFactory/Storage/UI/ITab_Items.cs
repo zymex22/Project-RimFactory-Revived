@@ -233,8 +233,8 @@ namespace ProjectRimFactory.Storage.UI
                 dropThing(thing);
             }
 
-            var p = colonists.Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray()[0];
-            if (ChoicesForThing(thing, p, labelMoCount).Count > 0)
+            Pawn p = colonists.Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed).ToArray().FirstOrFallback<Pawn>(null);
+            if (p != null && ChoicesForThing(thing, p, labelMoCount).Count > 0)
             {
                 width -= 24f;
                 var pawnInteract = new Rect(width, y, 24f, 24f);
