@@ -164,6 +164,12 @@ namespace ProjectRimFactory.CultivatorTools
                                           select pos);
         }
 
+        private bool ForbiddenCells(IntVec3 cell)
+        {
+            if (cell == this.Position) return false;
+            return true;
+        }
+
         public virtual void CreatePlantProducts(Plant p)
         {
             int num2 = p.YieldNow();
@@ -171,7 +177,7 @@ namespace ProjectRimFactory.CultivatorTools
             {
                 Thing thing = ThingMaker.MakeThing(p.def.plant.harvestedThingDef, null);
                 thing.stackCount = num2;
-                GenPlace.TryPlaceThing(thing, compOutputAdjustable.CurrentCell, Map, ThingPlaceMode.Near, null);
+                GenPlace.TryPlaceThing(thing, compOutputAdjustable.CurrentCell, Map, ThingPlaceMode.Near, null, ForbiddenCells);
             }
             if (Utilities.SeedsPleaseActive && p.def.blueprintDef != null)
                 CreatePlantProductsSeedsPleaseActive(p);
