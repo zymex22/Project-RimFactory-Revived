@@ -56,7 +56,7 @@
     <techLevel>Spacer</techLevel>
     <baseCost>1000</baseCost>
     <label>Improved Wireless Storage</label>
-    <researchViewX>9</researchViewX>
+    <researchViewX>9.5</researchViewX>
     <researchViewY>1.9</researchViewY>
     <description>With further research we have discovered a way to get more uses out of our Wireless storage solution\nAllow you to build I/O pushers\nMore may be added to this later.</description>
     <prerequisites>
