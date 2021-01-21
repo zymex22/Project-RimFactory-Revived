@@ -256,12 +256,11 @@
       <li>ProjectRimFactory.Common.PlaceWorker_GrowZonePuller</li>
     </placeWorkers>
     <costList>      <!-- Remove in Lite -->
-      <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <statBases>
-      <MarketValue>1200</MarketValue>
+      <MarketValue>597</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>Attach to end of grow zone, will pull set items within selected growzone. Will not pull from neighboring grow zones.</description>
@@ -319,7 +318,6 @@
     <defName>PRF_SimplePuller_I</defName>
     <label>Item Puller mkI</label>
     <costList>      <!-- Remove in Lite -->
-      <ComponentIndustrial>2</ComponentIndustrial>
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
@@ -373,8 +371,7 @@
     <defName>PRF_SimplePuller_II</defName>
     <label>Item Puller mkII</label>
     <costList>
-      <Steel>150</Steel>
-      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
@@ -386,7 +383,7 @@
     </costList>
     -->
     <statBases>
-      <MarketValue>2450</MarketValue>
+      <MarketValue>959</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>A upgraded puller which run at a higher speed than mkI puller. pulling from stockpiles, I/O, belts, crates Into I/O, belts, storage... Very flexible in its connection!</description>    <!--todo: maybe make a message on spawn if not turned on-->
@@ -419,8 +416,7 @@
     <defName>PRF_SimplePuller_II_Side</defName>
     <label>Item Angle Puller</label>
     <costList>
-      <Steel>150</Steel>
-      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
@@ -431,7 +427,7 @@
     </costList>
     -->
     <statBases>
-      <MarketValue>1404</MarketValue>
+      <MarketValue>959</MarketValue>
     </statBases>
     <passability>Impassable</passability>
     <description>A 90 degree angled Puller that moves items from A to B. Similar to normal puller, but allowing turns!\nYou can swap the direction (left/right) after placing.</description>
@@ -489,9 +485,8 @@
     <defName>PRF_SimplePuller_II_Wall</defName>
     <label>Wall Item Puller</label>
     <costList>
-      <Steel>150</Steel>
-      <ComponentIndustrial>10</ComponentIndustrial>
-      <PRF_RoboticArm>1</PRF_RoboticArm>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
     <!-- costlist for lite
@@ -501,7 +496,7 @@
     </costList>
     -->
     <statBases>
-      <MarketValue>1200</MarketValue>
+      <MarketValue>959</MarketValue>
     </statBases>
     <description>An in-wall item Puller that pushes items from A to B.\n\nThis one is placed through a wall, and is well insulated enough for use in freezers and secure enough for prisons where you dont want anyone crawling through.\n\nRemember you still need to turn it on!</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
