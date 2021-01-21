@@ -256,8 +256,7 @@
       <li>ProjectRimFactory.Common.PlaceWorker_GrowZonePuller</li>
     </placeWorkers>
     <costList>      <!-- Remove in Lite -->
-      <Steel>150</Steel>
-      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
@@ -376,7 +375,6 @@
     <costList>
       <Steel>150</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
-      <ComponentSpacer>1</ComponentSpacer>
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
@@ -430,7 +428,6 @@
         <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
-      <ComponentSpacer>10</ComponentSpacer>
     </costList>
     -->
     <statBases>
@@ -501,7 +498,6 @@
         <costList>
       <Steel>200</Steel>
       <ComponentIndustrial>20</ComponentIndustrial>
-      <ComponentSpacer>10</ComponentSpacer>
     </costList>
     -->
     <statBases>
