@@ -412,11 +412,8 @@
     </statBases>
     <description>A Connection port for your Digital Storage Unit (DSU). It can be set to Input/output from any Platform remotely in any range within the map.</description>
     <costList>
-      <Steel>50</Steel>
-      <Plasteel>10</Plasteel>
       <ComponentSpacer>1</ComponentSpacer>
-      <ComponentIndustrial>5</ComponentIndustrial>
-      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
       <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
@@ -504,12 +501,9 @@
     </statBases>
     <description>This modified I/O port allows you to push items directly into next cell, onto a belt, or anywhere else, this save space instead of using a Puller.\n it Cannot, input so its more of a output port than input/output.</description>
     <costList>
-      <Steel>50</Steel>
-      <Plasteel>10</Plasteel>
       <ComponentSpacer>1</ComponentSpacer>
-      <ComponentIndustrial>6</ComponentIndustrial>
       <PRF_RoboticArm>1</PRF_RoboticArm>
-      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
       <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
