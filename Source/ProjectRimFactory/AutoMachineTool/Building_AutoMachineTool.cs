@@ -386,6 +386,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
                 return new { Result = true, WorkAmount = this.bill.recipe.WorkAmountTotal(this.bill.recipe.UsesUnfinishedThing ? this.dominant?.def : null) };
             }).GetOrDefault(new { Result = false, WorkAmount = 0f });
+
             workAmount = result.WorkAmount;
             return result.Result;
         }
