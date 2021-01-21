@@ -78,7 +78,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>Specify the number of {0} {1} to keep without slaughter.</PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>
   <PRF.AutoMachineTool.Male>Male</PRF.AutoMachineTool.Male>
   <PRF.AutoMachineTool.Female>Female</PRF.AutoMachineTool.Female>
-  <PRF.AutoMachineTool.None>None</PRF.AutoMachineTool.Female>
+  <PRF.AutoMachineTool.None>None</PRF.AutoMachineTool.None>
   <PRF.AutoMachineTool.Adult>Adult</PRF.AutoMachineTool.Adult>
   <PRF.AutoMachineTool.Young>Young</PRF.AutoMachineTool.Young>
   <PRF.AutoMachineTool.RaceName>Race name</PRF.AutoMachineTool.RaceName>
