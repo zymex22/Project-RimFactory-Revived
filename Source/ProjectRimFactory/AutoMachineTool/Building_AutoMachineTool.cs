@@ -384,7 +384,14 @@ namespace ProjectRimFactory.AutoMachineTool
                         compColorable.Color = this.dominant.DrawColor;
                     }
                 }
-                return new { Result = true, WorkAmount = this.bill.recipe.WorkAmountTotal(this.bill.recipe.UsesUnfinishedThing ? this.dominant?.def : null) };
+                ThingDef thingDef = null;
+                if (this.bill.recipe.UsesUnfinishedThing && this.bill.recipe.unfinishedThingDef.MadeFromStuff)
+                {
+                    thingDef = this.bill.recipe.UsesUnfinishedThing ? this.dominant?.def : null;
+                }
+                
+
+                return new { Result = true, WorkAmount = this.bill.recipe.WorkAmountTotal(thingDef) };
             }).GetOrDefault(new { Result = false, WorkAmount = 0f });
             workAmount = result.WorkAmount;
             return result.Result;
