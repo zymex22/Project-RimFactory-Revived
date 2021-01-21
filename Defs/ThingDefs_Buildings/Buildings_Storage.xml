@@ -287,7 +287,7 @@
       </damageData>
     </graphicData>
     <statBases>
-      <Mass>15</Mass>
+      <Mass>50</Mass>
       <MaxHitPoints>450</MaxHitPoints>
       <WorkToBuild>5000</WorkToBuild>
       <MarketValue>10880</MarketValue>
@@ -295,6 +295,8 @@
       <Beauty>0.5</Beauty>
     </statBases>
     <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
       <defaultStorageSettings>
         <priority>Normal</priority>
         <filter>
@@ -378,6 +380,8 @@
     <fillPercent>0.5</fillPercent>
     <pathCost>70</pathCost>
     <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
       <fixedStorageSettings>
         <priority>Normal</priority>
         <filter>
@@ -400,18 +404,20 @@
     </inspectorTabs>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
-      <WorkToBuild>600</WorkToBuild>
+      <WorkToBuild>750</WorkToBuild>
       <MaxHitPoints>100</MaxHitPoints>
-      <MarketValue>370</MarketValue>
+      <MarketValue>1000</MarketValue>
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
-    <description>(tier 3) \n A Connection port for your storage Cargo Platforms. It can be set to Input/output from any Platform remotely in any range within the map.</description>
+    <description>A Connection port for your Digital Storage Unit (DSU). It can be set to Input/output from any Platform remotely in any range within the map.</description>
     <costList>
       <Steel>50</Steel>
       <Plasteel>10</Plasteel>
       <ComponentSpacer>1</ComponentSpacer>
-      <ComponentIndustrial>4</ComponentIndustrial>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
@@ -490,9 +496,9 @@
     </placeWorkers>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>
-      <WorkToBuild>750</WorkToBuild>
+      <WorkToBuild>1000</WorkToBuild>
       <MaxHitPoints>150</MaxHitPoints>
-      <MarketValue>750</MarketValue>
+      <MarketValue>1500</MarketValue>
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
@@ -503,6 +509,8 @@
       <ComponentSpacer>1</ComponentSpacer>
       <ComponentIndustrial>6</ComponentIndustrial>
       <PRF_RoboticArm>1</PRF_RoboticArm>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
