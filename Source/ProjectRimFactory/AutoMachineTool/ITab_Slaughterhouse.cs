@@ -20,6 +20,9 @@ namespace ProjectRimFactory.AutoMachineTool
             this.pregnancy = false;
             this.trained = false;
 
+            this.keepNoneAdultCount = 10;
+            this.keepNoneYoungCount = 10;
+
             this.keepMaleAdultCount = 10;
             this.keepMaleYoungCount = 10;
             this.keepFemaleAdultCount = 10;
@@ -31,6 +34,10 @@ namespace ProjectRimFactory.AutoMachineTool
         public bool hasBonds;
         public bool pregnancy;
         public bool trained;
+
+
+        public int keepNoneYoungCount;
+        public int keepNoneAdultCount;
 
         public int keepMaleAdultCount;
         public int keepMaleYoungCount;
@@ -49,6 +56,9 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look<int>(ref this.keepFemaleAdultCount, "keepFemaleAdultCount", 10);
             Scribe_Values.Look<int>(ref this.keepFemaleYoungCount, "keepFemaleYoungCount", 10);
 
+            Scribe_Values.Look<int>(ref this.keepNoneYoungCount, "keepNoneYoungCount", 10);
+            Scribe_Values.Look<int>(ref this.keepNoneAdultCount, "keepNoneAdultCount", 10);
+
             Scribe_Defs.Look<ThingDef>(ref this.def, "def");
         }
 
@@ -61,13 +71,20 @@ namespace ProjectRimFactory.AutoMachineTool
                 else
                     return keepMaleYoungCount;
             }
-            else
+            else if (gender == Gender.Female)
             {
                 if (adult)
                     return keepFemaleAdultCount;
                 else
                     return keepFemaleYoungCount;
             }
+            else
+            {
+                if (adult)
+                    return keepNoneAdultCount;
+                else
+                    return keepNoneYoungCount;
+            }            
         }
     }
 
@@ -119,6 +136,9 @@ namespace ProjectRimFactory.AutoMachineTool
         private static TipSignal keepFemaleChildCountTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip".Translate("PRF.AutoMachineTool.Female".Translate(), "PRF.AutoMachineTool.Young".Translate()));
         private static TipSignal keepMaleAdultCountTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip".Translate("PRF.AutoMachineTool.Male".Translate(), "PRF.AutoMachineTool.Adult".Translate()));
         private static TipSignal keepFemaleAdultCountTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip".Translate("PRF.AutoMachineTool.Female".Translate(), "PRF.AutoMachineTool.Adult".Translate()));
+
+        private static TipSignal keepNoneAdultCountTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip".Translate("PRF.AutoMachineTool.None".Translate(), "PRF.AutoMachineTool.Adult".Translate()));
+        private static TipSignal keepNoneChildCountTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip".Translate("PRF.AutoMachineTool.None".Translate(), "PRF.AutoMachineTool.Young".Translate()));
 
         private Vector2 scrollPosition;
         private static Vector2 sscrollPosition;
@@ -197,7 +217,6 @@ namespace ProjectRimFactory.AutoMachineTool
             this.defs.ForEach(d =>
             {
                 innerlist.GapLine();
-
                 var rowRect = innerlist.GetRect(24f);
 
                 SlaughterSettings s = null;
@@ -230,24 +249,44 @@ namespace ProjectRimFactory.AutoMachineTool
                 Widgets.Checkbox(col.position, ref s.trained, disabled: !s.doSlaughter);
                 TooltipHandler.TipRegion(col, trainedTip);
 
-                col = cutLeft(ColumnWidth[colIndex++]);
-                string buf1 = s.keepMaleYoungCount.ToString();
-                Widgets.TextFieldNumeric<int>(col, ref s.keepMaleYoungCount, ref buf1, 0, 1000);
-                TooltipHandler.TipRegion(col, keepMaleChildCountTip);
+                if (s.def.race.hasGenders)
+                {
+                    col = cutLeft(ColumnWidth[colIndex++]);
+                    string buf1 = s.keepMaleYoungCount.ToString();
+                    Widgets.TextFieldNumeric<int>(col, ref s.keepMaleYoungCount, ref buf1, 0, 1000);
+                    TooltipHandler.TipRegion(col, keepMaleChildCountTip);
 
-                col = cutLeft(ColumnWidth[colIndex++]);
-                string buf2 = s.keepFemaleYoungCount.ToString();
-                Widgets.TextFieldNumeric<int>(col, ref s.keepFemaleYoungCount, ref buf2, 0, 1000);
-                TooltipHandler.TipRegion(col, keepFemaleChildCountTip);
+                    col = cutLeft(ColumnWidth[colIndex++]);
+                    string buf2 = s.keepFemaleYoungCount.ToString();
+                    Widgets.TextFieldNumeric<int>(col, ref s.keepFemaleYoungCount, ref buf2, 0, 1000);
+                    TooltipHandler.TipRegion(col, keepFemaleChildCountTip);
 
-                col = cutLeft(ColumnWidth[colIndex++]);
-                string buf3 = s.keepMaleAdultCount.ToString();
-                Widgets.TextFieldNumeric<int>(col, ref s.keepMaleAdultCount, ref buf3, 0, 1000);
-                TooltipHandler.TipRegion(col, keepMaleAdultCountTip);
+                    col = cutLeft(ColumnWidth[colIndex++]);
+                    string buf3 = s.keepMaleAdultCount.ToString();
+                    Widgets.TextFieldNumeric<int>(col, ref s.keepMaleAdultCount, ref buf3, 0, 1000);
+                    TooltipHandler.TipRegion(col, keepMaleAdultCountTip);
 
-                col = cutLeft(ColumnWidth[colIndex++]);
-                string buf4 = s.keepFemaleAdultCount.ToString();
-                Widgets.TextFieldNumeric<int>(col, ref s.keepFemaleAdultCount, ref buf4, 0, 1000);
+                    col = cutLeft(ColumnWidth[colIndex++]);
+                    string buf4 = s.keepFemaleAdultCount.ToString();
+                    Widgets.TextFieldNumeric<int>(col, ref s.keepFemaleAdultCount, ref buf4, 0, 1000);
+                    TooltipHandler.TipRegion(col, keepFemaleAdultCountTip);
+                }
+                else
+                {
+                    col = cutLeft(ColumnWidth[colIndex++] * 2);
+                    string buf1 = s.keepNoneYoungCount.ToString();
+                    Widgets.TextFieldNumeric<int>(col, ref s.keepNoneYoungCount, ref buf1, 0, 1000);
+                    TooltipHandler.TipRegion(col, keepNoneChildCountTip);
+
+
+                    col = cutLeft(ColumnWidth[colIndex++] * 2);
+                    string buf3 = s.keepNoneAdultCount.ToString();
+                    Widgets.TextFieldNumeric<int>(col, ref s.keepNoneAdultCount, ref buf3, 0, 1000);
+                    TooltipHandler.TipRegion(col, keepNoneAdultCountTip);
+
+                    colIndex += 2;
+                }
+
             });
             innerlist.EndScrollView(ref scrollViewRect);
             innerlist.End();
