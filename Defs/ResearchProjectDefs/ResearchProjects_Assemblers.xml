@@ -96,6 +96,23 @@
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
+    <defName>PRF_SelfCorrectingAssemblersII</defName>
+    <label>Quantum self-correcting assemblers</label>
+    <description>Learn how to make 2 new Adaptive assemblers. One which are super fast but poor quality, other one is slow but starts at good quality.</description>
+    <techLevel>Ultra</techLevel>
+    <baseCost>5000</baseCost>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+    <prerequisites>
+      <li>PRF_CoreTierIV</li>
+      <li>PRF_SelfCorrectingAssemblers</li>
+    </prerequisites>
+    <researchViewX>10</researchViewX>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_MetalRefining</defName>
     <label>Metal Refining</label>
     <techLevel>Spacer</techLevel>

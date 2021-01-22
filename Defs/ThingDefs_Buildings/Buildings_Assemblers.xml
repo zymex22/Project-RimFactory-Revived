@@ -266,7 +266,7 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\nStats\nMin. speed 100% - Max 500%\nMin Qual. Awfull - Max Masterwork\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 5 \n\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -296,7 +296,6 @@ Mod extennsion for assemblers
         <!-- Range Settings -->
         <floatrange_Range>1~5</floatrange_Range>
         <powerPerStepRange>375</powerPerStepRange>
-
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
@@ -310,7 +309,7 @@ Mod extennsion for assemblers
         <MinSpeed>1</MinSpeed>        <!-- 1 = 100%, if not set min= 50% (default: 100%) -->
         <MaxSpeed>5</MaxSpeed>        <!-- 5 = 500%, if not set max= infinite (default: 500%) -->
         <MinQuality>Awful</MinQuality>        <!-- start out at... (default: Awful)(Awful, Poor, Normal, Good, Excellent, Masterwork, Legendary) -->
-        <MaxQuality>Legendary</MaxQuality>        <!-- max out at... (default: Masterwork)-->
+        <MaxQuality>Masterwork</MaxQuality>        <!-- max out at... (default: Masterwork)-->
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
@@ -325,6 +324,174 @@ Mod extennsion for assemblers
     </modExtensions>
     <researchPrerequisites>
       <li>PRF_SelfCorrectingAssemblers</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Adaptive Assembler T4 Good ====================-->
+  <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
+  <ThingDef ParentName="PRF_AssemblerBase">
+    <defName>PRF_TypeTwoAssembler_II</defName>
+    <label>adaptive assembler(Quality Joe)</label>
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>SAL3/T4_assembler_I</texPath>
+    </graphicData>
+    <costList>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_II>4</PRF_ElectronicChip_II>
+      <PRF_ElectronicChip_III>2</PRF_ElectronicChip_III>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <Plasteel>100</Plasteel>
+      <Steel>200</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <description>This Assembler is an upgraded version that works really slow, but it start at normal quality instead of awfull so will ramp up faster. It also have a HUGE db. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 30\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <WorkToBuild>6000</WorkToBuild>
+      <MarketValue>10000</MarketValue>
+    </statBases>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>30</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~10</floatrange_Range>
+        <powerPerStepRange>300</powerPerStepRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.Assemblers.Special.ModExtension_LearningAssembler">        <!-- setting for adaptive assembler only? -->
+        <MinSpeed>0.1</MinSpeed>        <!-- 1 = 100%, if not set min= 50% (default: 100%) -->
+        <MaxSpeed>1</MaxSpeed>        <!-- 5 = 500%, if not set max= infinite (default: 500%) -->
+        <MinQuality>Normal</MinQuality>        <!-- start out at... (default: Awful)(Awful, Poor, Normal, Good, Excellent, Masterwork, Legendary) -->
+        <MaxQuality>Legendary</MaxQuality>        <!-- max out at... (default: Masterwork)-->
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>        <!-- Base level skills if nothing is defined below -->
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>12</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_SelfCorrectingAssemblersII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Adaptive Assembler T4 Fast ====================-->
+  <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
+  <ThingDef ParentName="PRF_AssemblerBase">
+    <defName>PRF_TypeTwoAssembler_III</defName>
+    <label>adaptive assembler(overclocked)</label>
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>SAL3/T4_assembler_II</texPath>
+    </graphicData>
+    <costList>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>4</PRF_ElectronicChip_I>
+      <PRF_ElectronicChip_III>1</PRF_ElectronicChip_III>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <Plasteel>100</Plasteel>
+      <Steel>150</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <description>This version work at a high rate and starts at a faster speed and can ramp higher than other assemblers. it cant produce any good quality though. It also have a HUGE db. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 30\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <WorkToBuild>6000</WorkToBuild>
+      <MarketValue>10000</MarketValue>
+    </statBases>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>30</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~10</floatrange_Range>
+        <powerPerStepRange>300</powerPerStepRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.Assemblers.Special.ModExtension_LearningAssembler">        <!-- setting for adaptive assembler only? -->
+        <MinSpeed>3</MinSpeed>        <!-- 1 = 100%, if not set min= 50% (default: 100%) -->
+        <MaxSpeed>10</MaxSpeed>        <!-- 5 = 500%, if not set max= infinite (default: 500%) -->
+        <MinQuality>Awful</MinQuality>        <!-- start out at... (default: Awful)(Awful, Poor, Normal, Good, Excellent, Masterwork, Legendary) -->
+        <MaxQuality>Normal</MaxQuality>        <!-- max out at... (default: Masterwork)-->
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>        <!-- Base level skills if nothing is defined below -->
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>1</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_SelfCorrectingAssemblersII</li>
     </researchPrerequisites>
   </ThingDef>
 
