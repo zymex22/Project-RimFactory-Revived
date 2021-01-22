@@ -55,7 +55,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return settings;
         }
-        public StorageSettings GetParentStoreSettings() => def.building.fixedStorageSettings;
+        public StorageSettings GetParentStoreSettings() => def.building?.fixedStorageSettings;
 
         protected StorageSettings storageSettings;
         public StorageSettings StorageSettings => this.storageSettings;
