@@ -425,7 +425,7 @@ Mod extennsion for assemblers
     <costList>
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_ElectronicChip_I>4</PRF_ElectronicChip_I>
-      <PRF_ElectronicChip_III>1</PRF_ElectronicChip_III>
+      <PRF_ElectronicChip_III>2</PRF_ElectronicChip_III>
       <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
       <Plasteel>100</Plasteel>
       <Steel>150</Steel>
@@ -434,7 +434,7 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>This version work at a high rate and starts at a faster speed and can ramp higher than other assemblers. it cant produce any good quality though. It also have a HUGE db. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 30\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>This version work at a high rate and starts at a faster speed and can ramp higher than other assemblers. it cant produce any good quality though. It also have a HUGE db. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 30\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
       <WorkToBuild>6000</WorkToBuild>
@@ -458,9 +458,9 @@ Mod extennsion for assemblers
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
-        <powerPerStepSpeed>0</powerPerStepSpeed>
-        <powerStepFactor>1</powerStepFactor>
+        <floatrange_SpeedFactor>1~2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>2500</powerPerStepSpeed>
+        <powerStepFactor>4</powerStepFactor>
         <!-- Range Settings -->
         <floatrange_Range>1~10</floatrange_Range>
         <powerPerStepRange>300</powerPerStepRange>
