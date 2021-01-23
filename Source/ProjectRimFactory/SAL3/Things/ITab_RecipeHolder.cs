@@ -87,7 +87,7 @@ namespace ProjectRimFactory.SAL3.Things
         public ITab_RecipeHolder()
         {
             this.size = WinSize;
-            this.labelKey = "DB";
+            this.labelKey = "PRF_RecipeTab_TabName".Translate(); ;
         }
         private Vector2 scrollPos;
 
@@ -113,11 +113,11 @@ namespace ProjectRimFactory.SAL3.Things
             rect = list.GetRect(30);
 
             rect.width = (WinSize.x / 3) - 50;
-            Widgets.CheckboxLabeled(rect, "Show Saved", ref showSaved);
+            Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterSaved".Translate(), ref showSaved);
             rect.x += rect.width + 20;
-            Widgets.CheckboxLabeled(rect, "Show Learnable", ref showLearnable);
+            Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterLearnable".Translate(), ref showLearnable);
             rect.x += rect.width + 20;
-            Widgets.CheckboxLabeled(rect, "Show Quered", ref showQuered);
+            Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterQueue".Translate(), ref showQuered);
 
             currY += 40;
 
@@ -157,7 +157,7 @@ namespace ProjectRimFactory.SAL3.Things
 
                 if (Recipes[recipe] == enum_RecipeStatus.Learnable)
                 {
-                    if(Widgets.ButtonText(rect, "Learn"))
+                    if(Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Learn".Translate()))
                     {
                         parrentDB.Quered_Recipes.Add(recipe);
 
@@ -165,7 +165,7 @@ namespace ProjectRimFactory.SAL3.Things
                 }
                 else if (Recipes[recipe] == enum_RecipeStatus.Quered)
                 {
-                    if(Widgets.ButtonText(rect, "Cancel"))
+                    if(Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Cancel".Translate()))
                     {
                         if (parrentDB.Quered_Recipes.Contains(recipe))
                         {
@@ -178,7 +178,7 @@ namespace ProjectRimFactory.SAL3.Things
                 else if (Recipes[recipe] == enum_RecipeStatus.Saved)
                 {
                     //TODO add a Are you sure? popup
-                    if (Widgets.ButtonText(rect, "Forget"))
+                    if (Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Forget".Translate()))
                     {
                         parrentDB.Saved_Recipes.Remove(recipe);
                     }
@@ -186,7 +186,7 @@ namespace ProjectRimFactory.SAL3.Things
                 else if (Recipes[recipe] == enum_RecipeStatus.InPorogress)
                 {
                     //TODO add a Are you sure? popup
-                    if (Widgets.ButtonText(rect,  "(" + parrentDB.Progress_Learning.ToStringWorkAmount() + ") Abort"))
+                    if (Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Abort".Translate(parrentDB.Progress_Learning.ToStringWorkAmount())))
                     {
                         parrentDB.Recipe_Learning = null;
                     }
