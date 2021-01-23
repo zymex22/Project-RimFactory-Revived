@@ -142,6 +142,9 @@ namespace ProjectRimFactory.SAL3.Things
             Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterQueue".Translate(), ref showQuered);
 
             currY += 40;
+            rect = list.GetRect(10);
+            currY += 10;
+            Widgets.DrawLineHorizontal(0, rect.y, rect.width);
 
      
             var outRect = new Rect(5f, currY + 5, WinSize.x - 30, WinSize.y - currY - 30);
