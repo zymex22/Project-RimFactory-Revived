@@ -64,6 +64,16 @@
   <PRF_SettingsTab_RangeType_FacingRectRange>Facing Rectangle</PRF_SettingsTab_RangeType_FacingRectRange>
   <PRF_SettingsTab_RangeType_RectRange>Center Square</PRF_SettingsTab_RangeType_RectRange>
 
+<PRF_RecipeTab_TabName>DB</PRF_RecipeTab_TabName>
+<PRF_RecipeTab_FilterSaved>Show Saved</PRF_RecipeTab_FilterSaved>
+<PRF_RecipeTab_FilterLearnable>Show Learnable</PRF_RecipeTab_FilterLearnable>
+<PRF_RecipeTab_FilterQueue>Show Quered</PRF_RecipeTab_FilterQueue>
+<PRF_RecipeTab_Button_Learn>Learn</PRF_RecipeTab_Button_Learn>
+<PRF_RecipeTab_Button_Cancel>Cancel</PRF_RecipeTab_Button_Cancel>
+<PRF_RecipeTab_Button_Forget>Forget</PRF_RecipeTab_Button_Forget>
+<PRF_RecipeTab_Button_Abort>({0}) Abort</PRF_RecipeTab_Button_Abort>
+
+
 
   <PRF_TimeLeftToDisintegrate>Time left until disintegrate: {0}</PRF_TimeLeftToDisintegrate>
   <PRF_DisintegrationMessage>{0} has disintegrated.</PRF_DisintegrationMessage>
