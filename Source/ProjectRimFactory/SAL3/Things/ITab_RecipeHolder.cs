@@ -51,36 +51,31 @@ namespace ProjectRimFactory.SAL3.Things
 
 
 
-        private Dictionary<RecipeDef, enum_RecipeStatus> Recipes { 
-        
-        get
+        private void RefreshRecipeList()
+        {
+            Recipes = new Dictionary<RecipeDef, enum_RecipeStatus>();
+            foreach (RecipeDef r in parrentDB.Learnable_Recipes)
             {
-
-                Dictionary<RecipeDef, enum_RecipeStatus> lRecipes = new Dictionary<RecipeDef, enum_RecipeStatus>();
-                foreach (RecipeDef r in parrentDB.Learnable_Recipes)
+                if (parrentDB.Quered_Recipes.Contains(r))
                 {
-                    if (parrentDB.Quered_Recipes.Contains(r))
-                    {
-                        lRecipes[r] = enum_RecipeStatus.Quered;
-                    }else if (parrentDB.Recipe_Learning == r)
-                    {
-                        lRecipes[r] = enum_RecipeStatus.InPorogress;
-                    }
-                    else
-                    {
-                        lRecipes[r] = enum_RecipeStatus.Learnable;
-                    }
+                    Recipes[r] = enum_RecipeStatus.Quered;
                 }
-                foreach (RecipeDef r in parrentDB.Saved_Recipes)
+                else if (parrentDB.Recipe_Learning == r)
                 {
-                    lRecipes[r] = enum_RecipeStatus.Saved;
+                    Recipes[r] = enum_RecipeStatus.InPorogress;
                 }
-
-                return lRecipes;
+                else
+                {
+                    Recipes[r] = enum_RecipeStatus.Learnable;
+                }
             }
-        
-        
+            foreach (RecipeDef r in parrentDB.Saved_Recipes)
+            {
+                Recipes[r] = enum_RecipeStatus.Saved;
+            }
         }
+
+        private Dictionary<RecipeDef, enum_RecipeStatus> Recipes;
 
 
 
@@ -100,7 +95,9 @@ namespace ProjectRimFactory.SAL3.Things
         
         private bool ShouldDrawRow(RecipeDef recipe, ref float curY, float ViewRecthight, float scrollY)
         {
-            
+            if (!showLearnable && Recipes[recipe] == enum_RecipeStatus.Learnable) return false;
+            if (!showQuered && Recipes[recipe] == enum_RecipeStatus.Quered) return false;
+            if (!showSaved && Recipes[recipe] == enum_RecipeStatus.Saved) return false;
 
             //The item is above the view (including a safty margin of one item)
             if ((curY + ROW_HIGHT - scrollY) < 0)
@@ -113,9 +110,7 @@ namespace ProjectRimFactory.SAL3.Things
             if ((curY - ROW_HIGHT - scrollY - ViewRecthight) < 0)
             {
 
-                if (!showLearnable && Recipes[recipe] == enum_RecipeStatus.Learnable) return false;
-                if (!showQuered && Recipes[recipe] == enum_RecipeStatus.Quered) return false;
-                if (!showSaved && Recipes[recipe] == enum_RecipeStatus.Saved) return false;
+                
 
                 return true;
             }
@@ -131,6 +126,7 @@ namespace ProjectRimFactory.SAL3.Things
 
         protected override void FillTab()
         {
+            RefreshRecipeList();
 
             Listing_Standard list = new Listing_Standard();
             Rect inRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
