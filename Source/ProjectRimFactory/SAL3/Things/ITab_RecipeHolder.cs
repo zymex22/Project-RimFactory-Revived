@@ -34,11 +34,9 @@ namespace ProjectRimFactory.SAL3.Things
         private const int ROW_HIGHT = 30;
         private float scrollViewHeight;
 
-        private static readonly Vector2 WinSize = new Vector2(600f, 630f);
+        private static readonly Vector2 WinSize = new Vector2(520f, 500f);
 
         private IRecipeHolderInterface parrentDB => this.SelThing as IRecipeHolderInterface;
-
-        private int itemcount => parrentDB.Learnable_Recipes.Count() + parrentDB.Saved_Recipes.Count();
 
 
         enum enum_RecipeStatus
@@ -109,9 +107,6 @@ namespace ProjectRimFactory.SAL3.Things
             // the item is above the lower limit (including a safty margin of one item)
             if ((curY - ROW_HIGHT - scrollY - ViewRecthight) < 0)
             {
-
-                
-
                 return true;
             }
 
@@ -119,8 +114,6 @@ namespace ProjectRimFactory.SAL3.Things
             curY += ROW_HIGHT;
 
             return false;
-
-
         }
 
 
@@ -141,17 +134,17 @@ namespace ProjectRimFactory.SAL3.Things
 
             rect = list.GetRect(30);
 
-            rect.width = (WinSize.x / 3) - 50;
+            rect.width = (WinSize.x / 3) - 20;
             Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterSaved".Translate(), ref showSaved);
-            rect.x += rect.width + 20;
+            rect.x += rect.width + 10;
             Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterLearnable".Translate(), ref showLearnable);
-            rect.x += rect.width + 20;
+            rect.x += rect.width + 10;
             Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterQueue".Translate(), ref showQuered);
 
             currY += 40;
 
      
-            var outRect = new Rect(5f, currY + 5, WinSize.x - 80, WinSize.y - 200);
+            var outRect = new Rect(5f, currY + 5, WinSize.x - 30, WinSize.y - currY - 30);
             var viewRect = new Rect(0f, 0, outRect.width - 16f, scrollViewHeight);
             Widgets.BeginScrollView(outRect, ref scrollPos, viewRect,true);
 
@@ -219,14 +212,15 @@ namespace ProjectRimFactory.SAL3.Things
                 }
 
             }
-            else if (Recipes[recipe] == enum_RecipeStatus.Saved)
+            /*Temporaly Disabled Forget Recipe Functionality*/
+            /*else if (Recipes[recipe] == enum_RecipeStatus.Saved)
             {
                 //TODO add a Are you sure? popup
                 if (Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Forget".Translate()))
                 {
                     parrentDB.Saved_Recipes.Remove(recipe);
                 }
-            }
+            }*/
             else if (Recipes[recipe] == enum_RecipeStatus.InPorogress)
             {
                 //TODO add a Are you sure? popup
