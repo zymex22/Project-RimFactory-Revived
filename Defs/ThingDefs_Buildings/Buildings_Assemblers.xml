@@ -137,10 +137,10 @@ Mod extennsion for assemblers
       <MaxHitPoints>150</MaxHitPoints>
       <MarketValue>1140</MarketValue>
       <Flammability>1.0</Flammability>
-      <Mass>25</Mass>
+      <Mass>15</Mass>
     </statBases>
     <minifiedDef>MinifiedThing</minifiedDef>
-    <description>The Portable Recipe Database can import recipes from nearby worktables. Afterwards, when reinstalled near assembler(s), it will upload its recipes to them.\n\nBlue cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
+    <description>The Portable Recipe Database can import recipes from nearby worktables. Afterwards, when reinstalled near assembler(s), it will upload its recipes to them.\n\nWhite cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <Steel>20</Steel>
@@ -163,8 +163,8 @@ Mod extennsion for assemblers
         <glowColor>(115,198,206,0)</glowColor>
       </li>
       <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
-        <range>2</range>
-        <ghostColor>(0,1,1,1)</ghostColor>
+        <range>5</range>
+        <ghostColor>(1,1,1,1)</ghostColor>
       </li>
     </comps>
     <researchPrerequisites>
@@ -353,10 +353,10 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>This Assembler is an upgraded version that works really slow, but it start at normal quality instead of awfull so will ramp up faster. It also have a HUGE db. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 30\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>This Assembler is an upgraded version that works really slow, but it start at normal quality instead of awfull so will ramp up faster. It also have a HUGE db. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
-      <WorkToBuild>6000</WorkToBuild>
+      <WorkToBuild>15000</WorkToBuild>
       <MarketValue>10000</MarketValue>
     </statBases>
     <building>
@@ -372,7 +372,7 @@ Mod extennsion for assemblers
         <glowColor>(115,198,206,0)</glowColor>
       </li>
       <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
-        <range>30</range>
+        <range>24</range>
         <ghostColor>(0,1,1,1)</ghostColor>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
@@ -437,11 +437,11 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>This version work at a high rate and starts at a faster speed and can ramp higher than other assemblers. it cant produce any good quality though. It also have a HUGE db. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 30\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>This version work at a high rate and starts at a faster speed and can ramp higher than other assemblers. it cant produce any good quality though. It also have a HUGE db. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
-      <WorkToBuild>6000</WorkToBuild>
-      <MarketValue>10000</MarketValue>
+      <WorkToBuild>10000</WorkToBuild>
+      <MarketValue>12500</MarketValue>
     </statBases>
     <building>
       <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
@@ -456,7 +456,7 @@ Mod extennsion for assemblers
         <glowColor>(115,198,206,0)</glowColor>
       </li>
       <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
-        <range>30</range>
+        <range>24</range>
         <ghostColor>(0,1,1,1)</ghostColor>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
