@@ -10,6 +10,9 @@ using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 using ProjectRimFactory.Common;
+using ProjectRimFactory.SAL3;
+
+
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -153,6 +156,7 @@ namespace ProjectRimFactory.AutoMachineTool
         //private Option<Building_WorkTable> workTable;
 
         private Building_WorkTable my_workTable = null;
+        private Building drilltypeBuilding = null;
 
 
         ModExtension_Skills extension_Skills;
@@ -205,7 +209,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override void Reset()
         {
-            if (this.State == WorkingState.Working)
+            if (this.State == WorkingState.Working && my_workTable != null)
             {
                 if (this.unfinished == null)
                 {
@@ -217,6 +221,30 @@ namespace ProjectRimFactory.AutoMachineTool
                     this.unfinished.Destroy(DestroyMode.Cancel);
                 }
             }
+            if (drilltypeBuilding != null)
+            {
+
+                CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
+
+                //Handle Progress
+                float statValue = 1000f;
+
+                ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) + statValue);
+                ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) + statValue * 1 / 10000f);
+                ReflectionUtility.drill_lastUsedTick.SetValue(compDeepDrill, Find.TickManager.TicksGame);
+                if ((float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) > 10000f)
+                {
+                    ReflectionUtility.drill_TryProducePortion.Invoke(compDeepDrill, new object[] { ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) });
+                    ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, 0);
+                    ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, 0);
+                }
+
+
+
+
+            }
+
+
             this.bill = null;
             this.dominant = null;
             this.unfinished = null;
@@ -238,14 +266,18 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override void CreateWorkingEffect()
         {
-            base.CreateWorkingEffect();
+            if (my_workTable != null)
+            {
+                base.CreateWorkingEffect();
 
-            this.workingEffect = this.bill.recipe.effectWorking.Spawn();
+                this.workingEffect = this.bill.recipe.effectWorking.Spawn();
 
-            this.workingSound = this.bill.recipe.soundWorking?.TrySpawnSustainer(my_workTable);
-            workingSound?.Maintain();
+                this.workingSound = this.bill.recipe.soundWorking?.TrySpawnSustainer(my_workTable);
+                workingSound?.Maintain();
 
-            MapManager.EachTickAction(this.EffectTick);
+                MapManager.EachTickAction(this.EffectTick);
+            }
+           
         }
 
         protected bool EffectTick()
@@ -334,8 +366,14 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 AllowBills(my_workTable);
             }
+
+            drilltypeBuilding = GetTragetDrill();
             my_workTable = mynewWorkTable;
-            ForbidBills(my_workTable);
+            if (my_workTable != null)
+            {
+                ForbidBills(my_workTable);
+            }
+           
         }
 
         protected override void Ready()
@@ -358,6 +396,15 @@ namespace ProjectRimFactory.AutoMachineTool
 
         }
 
+        private Building GetTragetDrill()
+        {
+            return (Building)this.FacingCell().GetThingList(Map)
+                .Where(t => t.def.category == ThingCategory.Building)
+                .Where(t => t is Building && t.TryGetComp<CompDeepDrill>() != null)
+                .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
+
+        }
+
 
         /// <summary>
         /// Try to start a new Bill to work on
@@ -370,7 +417,25 @@ namespace ProjectRimFactory.AutoMachineTool
             target = this;
             workAmount = 0;
             //Return if there is no bill that shoul be done
-            if (my_workTable == null || !my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow) return false;
+            if ((my_workTable == null || !my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow) && drilltypeBuilding == null) return false;
+
+            if (drilltypeBuilding != null)
+            {
+                CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
+                if (compDeepDrill.CanDrillNow())
+                {
+                   // Log.Message("Started Drill Bill");
+                    workAmount = 100;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+
+
+            }
 
             var consumable = Consumable();
 
@@ -429,6 +494,8 @@ namespace ProjectRimFactory.AutoMachineTool
             this.ingredients = null;
             // Because we use custom GenRecipe2, we have to handle bonus items and product modifications directly:
             ModifyProductExt?.ProcessProducts(products, this as IBillGiver, this, this.bill.recipe); // this as IBillGiver is probably null
+
+           
 
             return true;
         }
