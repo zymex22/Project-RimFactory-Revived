@@ -146,11 +146,11 @@ namespace ProjectRimFactory.AutoMachineTool
         private bool forbidItem = false;
 
         [Unsaved]
-        private Option<Effecter> workingEffect = Nothing<Effecter>();
+        private Effecter workingEffect = null;
         [Unsaved]
-        private Option<Sustainer> workingSound = Nothing<Sustainer>();
+        private Sustainer workingSound = null;
         [Unsaved]
-        private Option<Building_WorkTable> workTable;
+        //private Option<Building_WorkTable> workTable;
 
         private Building_WorkTable my_workTable = null;
 
@@ -166,11 +166,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override int? SkillLevel { get { return this.def.GetModExtension<ModExtension_Tier>()?.skillLevel; } }
 
-        // seem to be included in Building_BaseMachine.cs already (zymex)
-        // public override int MaxPowerForSpeed { get { return this.Setting.AutoMachineToolTier(Extension.tier).maxSupplyPowerForSpeed; } }
-        // public override int MinPowerForSpeed { get { return this.Setting.AutoMachineToolTier(Extension.tier).minSupplyPowerForSpeed; } }
-        // protected override float SpeedFactor { get { return this.Setting.AutoMachineToolTier(Extension.tier).speedFactor; } }
-        
         public override bool Glowable => false;
 
         public override void ExposeData()
@@ -188,14 +183,17 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            this.workTable = Nothing<Building_WorkTable>();
+            //this.workTable = Nothing<Building_WorkTable>();
+            my_workTable = null;
             extension_Skills = def.GetModExtension<ModExtension_Skills>();
 
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            this.workTable.ForEach(this.AllowWorkTable);
+            //this.workTable.ForEach(this.AllowWorkTable);
+            AllowBills(my_workTable);
+
             base.DeSpawn();
         }
 
@@ -229,12 +227,11 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override void CleanupWorkingEffect()
         {
             base.CleanupWorkingEffect();
+            workingEffect?.Cleanup();
+            workingEffect = null;
 
-            this.workingEffect.ForEach(e => e.Cleanup());
-            this.workingEffect = Nothing<Effecter>();
-
-            this.workingSound.ForEach(s => s.End());
-            this.workingSound = Nothing<Sustainer>();
+            workingSound?.End();
+            workingSound = null;
 
             MapManager.RemoveEachTickAction(this.EffectTick);
         }
@@ -243,30 +240,26 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.CreateWorkingEffect();
 
-            this.workingEffect = this.workingEffect.Fold(() => Option(this.bill.recipe.effectWorking).Select(e => e.Spawn()))(e => Option(e));
+            this.workingEffect = this.bill.recipe.effectWorking.Spawn();
 
-            this.workingSound = this.workingSound.Fold(() => this.workTable.SelectMany(t => Option(this.bill.recipe.soundWorking).Select(s => s.TrySpawnSustainer(t))))(s => Option(s))
-                .Peek(s => s.Maintain());
+            this.workingSound = this.bill.recipe.soundWorking.TrySpawnSustainer(my_workTable);
+            workingSound.Maintain();
 
             MapManager.EachTickAction(this.EffectTick);
         }
 
         protected bool EffectTick()
         {
-            this.workingEffect.ForEach(e => this.workTable.ForEach(w => e.EffectTick(new TargetInfo(this), new TargetInfo(w))));
-            return !this.workingEffect.HasValue;
+            workingEffect.EffectTick(new TargetInfo(this), new TargetInfo(my_workTable));
+
+            return this.workingEffect == null;
         }
 
-        private void ForbidWorkTable(Building_WorkTable worktable)
-        {
-            this.ForbidBills(worktable);
-        }
-
-        private void AllowWorkTable(Building_WorkTable worktable)
-        {
-            this.AllowBills(worktable);
-        }
-
+        /// <summary>
+        /// Forbid bills to normal Pawns by converting them to a new bill type
+        /// While saving the Original for restoration later
+        /// </summary>
+        /// <param name="worktable"></param>
         private void ForbidBills(Building_WorkTable worktable)
         {
             if (worktable.BillStack.Bills.Any(b => !(b is IBill_PawnForbidded)))
@@ -295,7 +288,10 @@ namespace ProjectRimFactory.AutoMachineTool
                 }));
             }
         }
-
+        /// <summary>
+        /// Unforbid Bills by restoring them to the correct class Called after ForbidBills
+        /// </summary>
+        /// <param name="worktable"></param>
         private void AllowBills(Building_WorkTable worktable)
         {
             if (worktable.BillStack.Bills.Any(b => b is IBill_PawnForbidded))
@@ -324,18 +320,22 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override TargetInfo ProgressBarTarget()
         {
-            return this.workTable.GetOrDefault(null);
+            return my_workTable;
         }
 
+        /// <summary>
+        /// TODO Check that one again
+        /// </summary>
         private void WorkTableSetting()
         {
-            var currentWotkTable = this.GetTargetWorkTable();
-            if (this.workTable.HasValue && !currentWotkTable.HasValue)
+            var mynewWorkTable = GetmyTragetWorktable();
+            //This If Check seems wrong. What happens if a Workbench gets replaced by another one?
+            if(my_workTable != null && mynewWorkTable == null)
             {
-                this.AllowWorkTable(this.workTable.Value);
+                AllowBills(my_workTable);
             }
-            currentWotkTable.ForEach(w => this.ForbidWorkTable(w));
-            this.workTable = currentWotkTable;
+            my_workTable = mynewWorkTable;
+            ForbidBills(my_workTable);
         }
 
         protected override void Ready()
@@ -349,19 +349,9 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.Position + this.Rotation.FacingCell;
         }
 
-        private Option<Building_WorkTable> GetTargetWorkTable()
+        private Building_WorkTable GetmyTragetWorktable()
         {
-
-            return this.FacingCell().GetThingList(Map)
-                .Where(t => t.def.category == ThingCategory.Building)
-                .SelectMany(t => Option(t as Building_WorkTable))
-                .Where(t => t.InteractionCell == this.Position)
-                .FirstOption();
-        }
-
-        private void GetmyTragetWorktable()
-        {
-            my_workTable = (Building_WorkTable)this.FacingCell().GetThingList(Map)
+            return (Building_WorkTable)this.FacingCell().GetThingList(Map)
                 .Where(t => t.def.category == ThingCategory.Building)
                 .Where(t => t is Building_WorkTable)
                 .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
@@ -369,22 +359,31 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
 
+        /// <summary>
+        /// Try to start a new Bill to work on
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="workAmount"></param>
+        /// <returns></returns>
         protected override bool TryStartWorking(out Building_AutoMachineTool target, out float workAmount)
         {
             target = this;
             workAmount = 0;
-            if (!this.workTable.Where(t => t.CurrentlyUsableForBills() && t.billStack.AnyShouldDoNow).HasValue)
-            {
-                return false;
-            }
+            //Return if there is no bill that shoul be done
+            if (my_workTable == null || !my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow) return false;
+
             var consumable = Consumable();
-            var result = WorkableBill(consumable).Select(tuple =>
+
+            List<ThingAmount> things;
+            
+            Bill nextbill = GetnextBill(consumable, out things);
+            if (nextbill != null)
             {
-                //changed from .value1 and value2 to item1 and item2 when ported over.. (zymex)
-                this.bill = tuple.Item1;
-                //                tuple.Value2.Select(v => v.thing).SelectMany(t => Option(t as Corpse)).ForEach(c => c.Strip());
-                this.ingredients = tuple.Item2.Select(t => t.thing.SplitOff(t.count)).ToList();
+                this.bill = nextbill;
+                this.ingredients = things.Select(t => t.thing.SplitOff(t.count)).ToList();
+                //Get dominant ingredient
                 this.dominant = this.DominantIngredient(this.ingredients);
+                
                 if (this.bill.recipe.UsesUnfinishedThing)
                 {
                     ThingDef stuff = (!this.bill.recipe.unfinishedThingDef.MadeFromStuff) ? null : this.dominant.def;
@@ -397,22 +396,28 @@ namespace ProjectRimFactory.AutoMachineTool
                         compColorable.Color = this.dominant.DrawColor;
                     }
                 }
+
                 ThingDef thingDef = null;
                 if (this.bill.recipe.UsesUnfinishedThing && this.bill.recipe.unfinishedThingDef.MadeFromStuff)
                 {
                     thingDef = this.bill.recipe.UsesUnfinishedThing ? this.dominant?.def : null;
                 }
-                
+                workAmount = this.bill.recipe.WorkAmountTotal(thingDef);
 
-                return new { Result = true, WorkAmount = this.bill.recipe.WorkAmountTotal(thingDef) };
-            }).GetOrDefault(new { Result = false, WorkAmount = 0f });
-            workAmount = result.WorkAmount;
-            return result.Result;
+                return true;
+
+            }
+            else
+            {
+                workAmount = 0;
+                return false;
+            }
         }
 
         protected override bool FinishWorking(Building_AutoMachineTool working, out List<Thing> products)
         {
-            products = GenRecipe2.MakeRecipeProducts(this.bill.recipe, this, this.ingredients, this.dominant, this.workTable.GetOrDefault(null)).ToList();
+            products = GenRecipe2.MakeRecipeProducts(this.bill.recipe, this, this.ingredients, this.dominant, my_workTable).ToList();
+
             this.ingredients.ForEach(i => bill.recipe.Worker.ConsumeIngredient(i, bill.recipe, Map));
             Option(this.unfinished).ForEach(u => u.Destroy(DestroyMode.Vanish));
             this.bill.Notify_IterationCompleted(null, this.ingredients);
@@ -444,19 +449,25 @@ namespace ProjectRimFactory.AutoMachineTool
                 .ToList();
         }
 
-        private Option<Tuple<Bill, List<ThingAmount>>> WorkableBill(List<Thing> consumable)
+
+        private Bill GetnextBill(List<Thing> consumable, out List<ThingAmount> ingredients)
         {
-            return this.workTable
-                .Where(t => t.CurrentlyUsableForBills())
-                .SelectMany(wt => wt.billStack.Bills
-                    .Where(b => b.ShouldDoNow())
-                    .Where(b => b.recipe.AvailableNow)
-                    .Where(b => Option(b.recipe.skillRequirements).Fold(true)(s => s.Where(x => x != null).All(r => r.minLevel <= this.GetSkillLevel(r.skill))))
-                    .Select(b => Tuple(b, Ingredients(b, consumable)))
-                    // changed from Value1 and Value2 to Item1 and Item2 when ported over (zymex)
-                    .Where(t => t.Item1.recipe.ingredients.Count == 0 || t.Item2.Count > 0)
-                    .FirstOption()
-                );
+            ingredients = new List<ThingAmount>();
+            //Return null as Workbench is not ready
+            if (!my_workTable.CurrentlyUsableForBills()) return null;
+            foreach (Bill bill in my_workTable.billStack)
+            {
+                //Ready to start?
+                if (!bill.ShouldDoNow() || !bill.recipe.AvailableNow) continue;
+                //Sufficiant skills?
+                if (!bill.recipe.skillRequirements.All(r => r.minLevel <= this.GetSkillLevel(r.skill))) continue;
+                ingredients = Ingredients(bill, consumable);
+                if (bill.recipe.ingredients.Count == 0 || ingredients.Count > 0) return bill;
+
+            }
+            ingredients = new List<ThingAmount>();
+            return null;
+
         }
 
         private struct ThingDefGroup
@@ -465,6 +476,12 @@ namespace ProjectRimFactory.AutoMachineTool
             public List<ThingAmount> consumable;
         }
 
+        /// <summary>
+        /// I guess thet finds the correct ingridiants for the bill
+        /// </summary>
+        /// <param name="bill"></param>
+        /// <param name="consumable"></param>
+        /// <returns></returns>
         private List<ThingAmount> Ingredients(Bill bill, List<Thing> consumable)
         {
             var initial = consumable
@@ -593,20 +610,10 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Building_AutoMachineTool working)
         {
-            if (!this.workTable.HasValue)
-            {
-                return true;
-            }
-            var currentTable = GetTargetWorkTable();
-            if (!currentTable.HasValue)
-            {
-                return true;
-            }
-            if (currentTable.Value != this.workTable.Value)
-            {
-                return true;
-            }
-            return !this.workTable.Value.CurrentlyUsableForBills();
+            //Interupt if worktable chenged or is null
+            if (my_workTable == null || GetmyTragetWorktable() == null || GetmyTragetWorktable() != my_workTable) return true;
+            //Interrupt if worktable is not ready for work
+            return !my_workTable.CurrentlyUsableForBills();
         }
 
         private class ThingAmount
