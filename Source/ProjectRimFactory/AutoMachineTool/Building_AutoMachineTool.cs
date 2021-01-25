@@ -242,8 +242,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
             this.workingEffect = this.bill.recipe.effectWorking.Spawn();
 
-            this.workingSound = this.bill.recipe.soundWorking.TrySpawnSustainer(my_workTable);
-            workingSound.Maintain();
+            this.workingSound = this.bill.recipe.soundWorking?.TrySpawnSustainer(my_workTable);
+            workingSound?.Maintain();
 
             MapManager.EachTickAction(this.EffectTick);
         }
@@ -380,10 +380,11 @@ namespace ProjectRimFactory.AutoMachineTool
             if (nextbill != null)
             {
                 this.bill = nextbill;
-                this.ingredients = things.Select(t => t.thing.SplitOff(t.count)).ToList();
+                this.ingredients = things?.Select(t => t.thing.SplitOff(t.count)).ToList() ?? new List<Thing>();
                 //Get dominant ingredient
                 this.dominant = this.DominantIngredient(this.ingredients);
-                
+
+
                 if (this.bill.recipe.UsesUnfinishedThing)
                 {
                     ThingDef stuff = (!this.bill.recipe.unfinishedThingDef.MadeFromStuff) ? null : this.dominant.def;
@@ -460,9 +461,16 @@ namespace ProjectRimFactory.AutoMachineTool
                 //Ready to start?
                 if (!bill.ShouldDoNow() || !bill.recipe.AvailableNow) continue;
                 //Sufficiant skills?
-                if (!bill.recipe.skillRequirements.All(r => r.minLevel <= this.GetSkillLevel(r.skill))) continue;
+                if (!bill.recipe.skillRequirements?.All(r => r.minLevel <= this.GetSkillLevel(r.skill)) ?? false) continue;
+
+                if (bill.recipe.ingredients.Count == 0)
+                {
+                    ingredients = null;
+                    return bill;
+                }
+                if (consumable == null) continue;
                 ingredients = Ingredients(bill, consumable);
-                if (bill.recipe.ingredients.Count == 0 || ingredients.Count > 0) return bill;
+                if (ingredients.Count > 0) return bill;
 
             }
             ingredients = new List<ThingAmount>();
