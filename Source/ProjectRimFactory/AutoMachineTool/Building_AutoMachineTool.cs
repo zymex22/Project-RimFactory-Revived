@@ -157,6 +157,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private Building_WorkTable my_workTable = null;
         private Building drilltypeBuilding = null;
+        private Building_ResearchBench researchBench = null;
 
 
         ModExtension_Skills extension_Skills;
@@ -239,8 +240,12 @@ namespace ProjectRimFactory.AutoMachineTool
                     ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, 0);
                 }
 
-
-
+            }
+            if (researchBench != null && Find.ResearchManager.currentProj != null)
+            {
+                float statValue = 100f;
+                statValue /= Find.ResearchManager.currentProj.CostFactor(Faction.OfPlayer.def.techLevel);
+                Find.ResearchManager.ResearchPerformed(statValue, null);
 
             }
 
@@ -368,6 +373,8 @@ namespace ProjectRimFactory.AutoMachineTool
             }
 
             drilltypeBuilding = GetTragetDrill();
+            researchBench = GetTragetresearchBench();
+
             my_workTable = mynewWorkTable;
             if (my_workTable != null)
             {
@@ -405,6 +412,15 @@ namespace ProjectRimFactory.AutoMachineTool
 
         }
 
+        private Building_ResearchBench GetTragetresearchBench()
+        {
+            return (Building_ResearchBench)this.FacingCell().GetThingList(Map)
+                .Where(t => t.def.category == ThingCategory.Building)
+                .Where(t => t is Building_ResearchBench)
+                .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
+
+        }
+
 
         /// <summary>
         /// Try to start a new Bill to work on
@@ -417,8 +433,8 @@ namespace ProjectRimFactory.AutoMachineTool
             target = this;
             workAmount = 0;
             //Return if there is no bill that shoul be done
-            if ((my_workTable == null || !my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow) && drilltypeBuilding == null) return false;
-
+            if ((my_workTable == null || !my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow) && drilltypeBuilding == null && (researchBench == null || Find.ResearchManager.currentProj == null)) return false;
+            
             if (drilltypeBuilding != null)
             {
                 CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
@@ -434,6 +450,19 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
 
 
+
+            }
+            if (researchBench != null)
+            {
+                if (Find.ResearchManager.currentProj != null)
+                {
+                    workAmount = 1000;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
 
             }
 
