@@ -152,6 +152,8 @@ namespace ProjectRimFactory.AutoMachineTool
         [Unsaved]
         private Option<Building_WorkTable> workTable;
 
+        private Building_WorkTable my_workTable = null;
+
 
         ModExtension_Skills extension_Skills;
 
@@ -349,12 +351,23 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private Option<Building_WorkTable> GetTargetWorkTable()
         {
+
             return this.FacingCell().GetThingList(Map)
                 .Where(t => t.def.category == ThingCategory.Building)
                 .SelectMany(t => Option(t as Building_WorkTable))
                 .Where(t => t.InteractionCell == this.Position)
                 .FirstOption();
         }
+
+        private void GetmyTragetWorktable()
+        {
+            my_workTable = (Building_WorkTable)this.FacingCell().GetThingList(Map)
+                .Where(t => t.def.category == ThingCategory.Building)
+                .Where(t => t is Building_WorkTable)
+                .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
+
+        }
+
 
         protected override bool TryStartWorking(out Building_AutoMachineTool target, out float workAmount)
         {
@@ -384,7 +397,14 @@ namespace ProjectRimFactory.AutoMachineTool
                         compColorable.Color = this.dominant.DrawColor;
                     }
                 }
-                return new { Result = true, WorkAmount = this.bill.recipe.WorkAmountTotal(this.bill.recipe.UsesUnfinishedThing ? this.dominant?.def : null) };
+                ThingDef thingDef = null;
+                if (this.bill.recipe.UsesUnfinishedThing && this.bill.recipe.unfinishedThingDef.MadeFromStuff)
+                {
+                    thingDef = this.bill.recipe.UsesUnfinishedThing ? this.dominant?.def : null;
+                }
+                
+
+                return new { Result = true, WorkAmount = this.bill.recipe.WorkAmountTotal(thingDef) };
             }).GetOrDefault(new { Result = false, WorkAmount = 0f });
             workAmount = result.WorkAmount;
             return result.Result;

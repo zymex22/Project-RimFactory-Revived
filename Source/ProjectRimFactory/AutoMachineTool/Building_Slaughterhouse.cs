@@ -55,7 +55,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override void Reset()
         {
-            if (this.Working != null && this.Working.jobs.curJob.def == JobDefOf.Wait_MaintainPosture)
+            if (this.Working != null && this.Working.jobs != null && this.Working.jobs.curJob != null && this.Working.jobs.curJob.def == JobDefOf.Wait_MaintainPosture)
             {
                 this.Working.jobs.EndCurrentJob(JobCondition.InterruptForced, true);
             }
@@ -81,7 +81,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     if (adult) return e.OrderByDescending(p => p.ageTracker.AgeChronologicalTicks);
                     else return e.OrderBy(p => p.ageTracker.AgeChronologicalTicks);
                 };
-                return new[] { new { Gender = Gender.Male, Adult = true }, new { Gender = Gender.Female, Adult = true }, new { Gender = Gender.Male, Adult = false }, new { Gender = Gender.Female, Adult = false } }
+                return new[] { new { Gender = Gender.Male, Adult = true }, new { Gender = Gender.Female, Adult = true }, new { Gender = Gender.Male, Adult = false }, new { Gender = Gender.Female, Adult = false }, new { Gender = Gender.None, Adult = false } , new { Gender = Gender.None, Adult = true } }
                     .Select(a => new { Group = a, Pawns = pawns.Where(p => p.gender == a.Gender && p.IsAdult() == a.Adult) })
                     .Select(g => new { Group = g.Group, Pawns = g.Pawns, SlaughterCount = g.Pawns.Count() - s.KeepCount(g.Group.Gender, g.Group.Adult) })
                     .Where(g => g.SlaughterCount > 0)
