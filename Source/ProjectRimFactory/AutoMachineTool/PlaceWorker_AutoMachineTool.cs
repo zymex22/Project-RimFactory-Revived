@@ -19,9 +19,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var r = base.AllowsPlacing(checkingDef, loc, rot, map, thingToIgnore);
             if (r.Accepted)
             {
-                if ((loc + rot.FacingCell).GetThingList(map).Where(t => t.def.category == ThingCategory.Building).Where(t => t.InteractionCell == loc)
-                    .Select(b => b is Building_WorkTable || (b is Building && b.TryGetComp<CompDeepDrill>() != null))
-                    .Count() == 0)
+                if (!(new PRF_SAL_Trarget(map,loc,rot)).GetTarget(loc,rot))
                 {
                     return new AcceptanceReport("PRF.AutoMachineTool.PlaceNotAllowed".Translate());
                 }

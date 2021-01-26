@@ -16,13 +16,173 @@ using ProjectRimFactory.SAL3;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public class Building_AutoMachineTool : Building_BaseRange<Building_AutoMachineTool>, IRecipeProductWorker
+
+    public class PRF_SAL_Trarget
     {
+        //only tep as public
+        public Building_WorkTable my_workTable = null;
+        private Building drilltypeBuilding = null;
+        private Building_ResearchBench researchBench = null;
+
+        private IntVec3 Position = new IntVec3();
+        private Map Map;
+        private Rot4 Rotation;
+
+
+        public PRF_SAL_Trarget(Map map, IntVec3 cell, Rot4 rot)
+        {
+            Map = map;
+            Position = cell;
+            Rotation = rot;
+        }
+
+
+        public bool ValidTarget => my_workTable != null || drilltypeBuilding != null || researchBench != null;
+
+
+        public bool GetTarget()
+        {
+            return GetTarget(this.Position, this.Rotation);
+        }
+
+        public bool GetTarget(IntVec3 pos, Rot4 rot)
+        {
+
+            Building_WorkTable new_my_workTable = (Building_WorkTable)(pos + rot.FacingCell).GetThingList(Map)
+                .Where(t => t.def.category == ThingCategory.Building)
+                .Where(t => t is Building_WorkTable)
+                .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
+                Building new_drilltypeBuilding = (Building)(pos + rot.FacingCell).GetThingList(Map)
+                .Where(t => t.def.category == ThingCategory.Building)
+                .Where(t => t is Building && t.TryGetComp<CompDeepDrill>() != null)
+                .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
+            Building_ResearchBench new_researchBench = (Building_ResearchBench)(pos + rot.FacingCell).GetThingList(Map)
+                .Where(t => t.def.category == ThingCategory.Building)
+                .Where(t => t is Building_ResearchBench)
+                .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
+
+
+            if ( (my_workTable != null && new_my_workTable == null)  || (researchBench != null && new_researchBench == null) || (drilltypeBuilding != null && new_drilltypeBuilding == null))
+            {
+                FreeTarget();
+            }
+            my_workTable = new_my_workTable;
+            drilltypeBuilding = new_drilltypeBuilding;
+            researchBench = new_researchBench;
+            if (ValidTarget) ReserveTraget();
+
+
+            return ValidTarget;
+
+        }
+
+        /// <summary>
+        /// Return True if the Traget is Ready for work
+        /// </summary>
+        /// <returns></returns>
+        public bool TrargetReady()
+        {
+            //no target --> not ready
+            if (!ValidTarget) return false;
+
+            if ((my_workTable != null && (!my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow) ) ||
+                (researchBench != null && (Find.ResearchManager.currentProj == null || !Find.ResearchManager.currentProj.CanBeResearchedAt(researchBench,false) )) ||
+                (drilltypeBuilding != null && drilltypeBuilding.TryGetComp<CompDeepDrill>().CanDrillNow() == false ) 
+                )
+            {
+                return false;
+            }
+            return true;
+        }
+
+        //TODO
+        public void ReserveTraget()
+        {
+            if (my_workTable != null) ForbidBills();
+            //TODO find somthing for drilltypeBuilding
+            //TODO find somthing for researchBench
+
+        }
+        //TODO
+        public void FreeTarget()
+        {
+            if (my_workTable != null) AllowBills();
+            //TODO find somthing for drilltypeBuilding
+            //TODO find somthing for researchBench
+        }
+
+
+        #region WorkTableReserve
+
         public interface IBill_PawnForbidded
         {
             Bill Original { get; set; }
         }
 
+        /// <summary>
+        /// Forbid bills to normal Pawns by converting them to a new bill type
+        /// While saving the Original for restoration later
+        /// </summary>
+        private void ForbidBills()
+        {
+            if (my_workTable.BillStack.Bills.Any(b => !(b is IBill_PawnForbidded)))
+            {
+                var tmp = my_workTable.BillStack.Bills.ToList();
+                my_workTable.BillStack.Clear();
+                my_workTable.BillStack.Bills.AddRange(tmp.SelectMany(b =>
+                {
+                    var forbidded = b as IBill_PawnForbidded;
+                    if (forbidded == null)
+                    {
+                        if (b is Bill_ProductionWithUft)
+                        {
+                            forbidded = ((Bill_ProductionWithUft)b).CopyTo((Bill_ProductionWithUftPawnForbidded)Activator.CreateInstance(typeof(Bill_ProductionWithUftPawnForbidded), b.recipe));
+                            ((Bill_Production)b).repeatMode = BillRepeatModeDefOf.Forever;
+                            forbidded.Original = b;
+                        }
+                        else if (b is Bill_Production)
+                        {
+                            forbidded = ((Bill_Production)b).CopyTo((Bill_ProductionPawnForbidded)Activator.CreateInstance(typeof(Bill_ProductionPawnForbidded), b.recipe));
+                            ((Bill_Production)b).repeatMode = BillRepeatModeDefOf.Forever;
+                            forbidded.Original = b;
+                        }
+                    }
+                    return Option((Bill)forbidded);
+                }));
+            }
+        }
+        /// <summary>
+        /// Unforbid Bills by restoring them to the correct class Called after ForbidBills
+        /// </summary>
+        private void AllowBills()
+        {
+            if (my_workTable.BillStack.Bills.Any(b => b is IBill_PawnForbidded))
+            {
+                var tmp = my_workTable.BillStack.Bills.ToList();
+                my_workTable.BillStack.Clear();
+                my_workTable.BillStack.Bills.AddRange(tmp.SelectMany(b =>
+                {
+                    var forbidded = b as IBill_PawnForbidded;
+                    Bill unforbbided = b;
+                    if (forbidded != null)
+                    {
+                        if (b is Bill_ProductionWithUft)
+                        {
+                            unforbbided = ((Bill_ProductionWithUft)b).CopyTo((Bill_ProductionWithUft)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_ProductionWithUft), b.recipe));
+                        }
+                        else if (b is Bill_Production)
+                        {
+                            unforbbided = ((Bill_Production)b).CopyTo((Bill_Production)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_Production), b.recipe));
+                        }
+                    }
+                    return Option(unforbbided);
+                }));
+            }
+        }
+
+        /// <summary>
+        /// Used to reseve the workbench
+        /// </summary>
         public class Bill_ProductionPawnForbidded : Bill_Production, IBill_PawnForbidded
         {
             public Bill_ProductionPawnForbidded() : base()
@@ -78,7 +238,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
             // proxy call. override other properties and methods.
         }
-
+        /// <summary>
+        /// Used to reseve the workbench
+        /// </summary>
         public class Bill_ProductionWithUftPawnForbidded : Bill_ProductionWithUft, IBill_PawnForbidded
         {
             public Bill_ProductionWithUftPawnForbidded() : base()
@@ -135,6 +297,105 @@ namespace ProjectRimFactory.AutoMachineTool
             // proxy call. override other properties and methods.
         }
 
+        #endregion
+
+        /*
+        public Effecter GetEffecter()
+        {
+            if (my_workTable != null)
+            {
+                return this.bill.recipe.effectWorking.Spawn();
+            }
+            return null;
+        } 
+        public Sustainer GetSustainer()
+        {
+            if (my_workTable != null)
+            {
+                return this.bill.recipe.soundWorking?.TrySpawnSustainer(my_workTable);
+            }
+            return null;
+        }
+        */
+
+
+        public void SignalWorkDone()
+        {
+            if (drilltypeBuilding != null)
+            {
+
+                CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
+
+                //Handle Progress
+                float statValue = 1000f;
+
+                ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) + statValue);
+                ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) + statValue * 1 / 10000f);
+                ReflectionUtility.drill_lastUsedTick.SetValue(compDeepDrill, Find.TickManager.TicksGame);
+                if ((float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) > 10000f)
+                {
+                    ReflectionUtility.drill_TryProducePortion.Invoke(compDeepDrill, new object[] { ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) });
+                    ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, 0);
+                    ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, 0);
+                }
+
+            }
+            if (researchBench != null && Find.ResearchManager.currentProj != null)
+            {
+                float statValue = 100f;
+                statValue /= Find.ResearchManager.currentProj.CostFactor(Faction.OfPlayer.def.techLevel);
+                Find.ResearchManager.ResearchPerformed(statValue, null);
+
+            }
+
+        }
+        public bool TryStartWork( out float workAmount)
+        {
+            workAmount = 0;
+            if (drilltypeBuilding != null)
+            {
+                CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
+                if (compDeepDrill.CanDrillNow())
+                {
+                    // Log.Message("Started Drill Bill");
+                    workAmount = 100;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+
+
+            }
+            if (researchBench != null)
+            {
+                if (Find.ResearchManager.currentProj != null)
+                {
+                    workAmount = 1000;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+
+            return false;
+        }
+
+
+
+
+    }
+
+
+
+    public class Building_AutoMachineTool : Building_BaseRange<Building_AutoMachineTool>, IRecipeProductWorker
+    {
+  
         public Building_AutoMachineTool()
         {
             this.forcePlace = false;
@@ -152,12 +413,10 @@ namespace ProjectRimFactory.AutoMachineTool
         private Effecter workingEffect = null;
         [Unsaved]
         private Sustainer workingSound = null;
-        [Unsaved]
-        //private Option<Building_WorkTable> workTable;
+
+        private PRF_SAL_Trarget salTarget;
 
         private Building_WorkTable my_workTable = null;
-        private Building drilltypeBuilding = null;
-        private Building_ResearchBench researchBench = null;
 
 
         ModExtension_Skills extension_Skills;
@@ -188,7 +447,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            //this.workTable = Nothing<Building_WorkTable>();
+            salTarget = new PRF_SAL_Trarget(map, Position, Rotation);
             my_workTable = null;
             extension_Skills = def.GetModExtension<ModExtension_Skills>();
 
@@ -196,8 +455,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            //this.workTable.ForEach(this.AllowWorkTable);
-            AllowBills(my_workTable);
+            salTarget.FreeTarget();
 
             base.DeSpawn();
         }
@@ -222,32 +480,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     this.unfinished.Destroy(DestroyMode.Cancel);
                 }
             }
-            if (drilltypeBuilding != null)
-            {
-
-                CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
-
-                //Handle Progress
-                float statValue = 1000f;
-
-                ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) + statValue);
-                ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) + statValue * 1 / 10000f);
-                ReflectionUtility.drill_lastUsedTick.SetValue(compDeepDrill, Find.TickManager.TicksGame);
-                if ((float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) > 10000f)
-                {
-                    ReflectionUtility.drill_TryProducePortion.Invoke(compDeepDrill, new object[] { ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) });
-                    ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, 0);
-                    ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, 0);
-                }
-
-            }
-            if (researchBench != null && Find.ResearchManager.currentProj != null)
-            {
-                float statValue = 100f;
-                statValue /= Find.ResearchManager.currentProj.CostFactor(Faction.OfPlayer.def.techLevel);
-                Find.ResearchManager.ResearchPerformed(statValue, null);
-
-            }
+            salTarget.SignalWorkDone();
 
 
             this.bill = null;
@@ -292,69 +525,6 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.workingEffect == null;
         }
 
-        /// <summary>
-        /// Forbid bills to normal Pawns by converting them to a new bill type
-        /// While saving the Original for restoration later
-        /// </summary>
-        /// <param name="worktable"></param>
-        private void ForbidBills(Building_WorkTable worktable)
-        {
-            if (worktable.BillStack.Bills.Any(b => !(b is IBill_PawnForbidded)))
-            {
-                var tmp = worktable.BillStack.Bills.ToList();
-                worktable.BillStack.Clear();
-                worktable.BillStack.Bills.AddRange(tmp.SelectMany(b =>
-                {
-                    var forbidded = b as IBill_PawnForbidded;
-                    if (forbidded == null)
-                    {
-                        if (b is Bill_ProductionWithUft)
-                        {
-                            forbidded = ((Bill_ProductionWithUft)b).CopyTo((Bill_ProductionWithUftPawnForbidded)Activator.CreateInstance(typeof(Bill_ProductionWithUftPawnForbidded), b.recipe));
-                            ((Bill_Production)b).repeatMode = BillRepeatModeDefOf.Forever;
-                            forbidded.Original = b;
-                        }
-                        else if (b is Bill_Production)
-                        {
-                            forbidded = ((Bill_Production)b).CopyTo((Bill_ProductionPawnForbidded)Activator.CreateInstance(typeof(Bill_ProductionPawnForbidded), b.recipe));
-                            ((Bill_Production)b).repeatMode = BillRepeatModeDefOf.Forever;
-                            forbidded.Original = b;
-                        }
-                    }
-                    return Option((Bill)forbidded);
-                }));
-            }
-        }
-        /// <summary>
-        /// Unforbid Bills by restoring them to the correct class Called after ForbidBills
-        /// </summary>
-        /// <param name="worktable"></param>
-        private void AllowBills(Building_WorkTable worktable)
-        {
-            if (worktable.BillStack.Bills.Any(b => b is IBill_PawnForbidded))
-            {
-                var tmp = worktable.BillStack.Bills.ToList();
-                worktable.BillStack.Clear();
-                worktable.BillStack.Bills.AddRange(tmp.SelectMany(b =>
-                {
-                    var forbidded = b as IBill_PawnForbidded;
-                    Bill unforbbided = b;
-                    if (forbidded != null)
-                    {
-                        if (b is Bill_ProductionWithUft)
-                        {
-                            unforbbided = ((Bill_ProductionWithUft)b).CopyTo((Bill_ProductionWithUft)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_ProductionWithUft), b.recipe));
-                        }
-                        else if (b is Bill_Production)
-                        {
-                            unforbbided = ((Bill_Production)b).CopyTo((Bill_Production)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_Production), b.recipe));
-                        }
-                    }
-                    return Option(unforbbided);
-                }));
-            }
-        }
-
         protected override TargetInfo ProgressBarTarget()
         {
             return my_workTable;
@@ -365,22 +535,8 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         private void WorkTableSetting()
         {
-            var mynewWorkTable = GetmyTragetWorktable();
-            //This If Check seems wrong. What happens if a Workbench gets replaced by another one?
-            if(my_workTable != null && mynewWorkTable == null)
-            {
-                AllowBills(my_workTable);
-            }
-
-            drilltypeBuilding = GetTragetDrill();
-            researchBench = GetTragetresearchBench();
-
-            my_workTable = mynewWorkTable;
-            if (my_workTable != null)
-            {
-                ForbidBills(my_workTable);
-            }
-           
+            salTarget.GetTarget();
+            my_workTable = salTarget.my_workTable;
         }
 
         protected override void Ready()
@@ -403,24 +559,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         }
 
-        private Building GetTragetDrill()
-        {
-            return (Building)this.FacingCell().GetThingList(Map)
-                .Where(t => t.def.category == ThingCategory.Building)
-                .Where(t => t is Building && t.TryGetComp<CompDeepDrill>() != null)
-                .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
-
-        }
-
-        private Building_ResearchBench GetTragetresearchBench()
-        {
-            return (Building_ResearchBench)this.FacingCell().GetThingList(Map)
-                .Where(t => t.def.category == ThingCategory.Building)
-                .Where(t => t is Building_ResearchBench)
-                .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
-
-        }
-
 
         /// <summary>
         /// Try to start a new Bill to work on
@@ -432,39 +570,10 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             target = this;
             workAmount = 0;
-            //Return if there is no bill that shoul be done
-            if ((my_workTable == null || !my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow) && drilltypeBuilding == null && (researchBench == null || Find.ResearchManager.currentProj == null)) return false;
-            
-            if (drilltypeBuilding != null)
-            {
-                CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
-                if (compDeepDrill.CanDrillNow())
-                {
-                   // Log.Message("Started Drill Bill");
-                    workAmount = 100;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+            //Return if not ready
+            if (!salTarget.TrargetReady()) return false;
 
-
-
-            }
-            if (researchBench != null)
-            {
-                if (Find.ResearchManager.currentProj != null)
-                {
-                    workAmount = 1000;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-
-            }
+            if (my_workTable == null) return salTarget.TryStartWork(out workAmount);
 
             var consumable = Consumable();
 
