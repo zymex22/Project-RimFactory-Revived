@@ -23,17 +23,20 @@ namespace ProjectRimFactory.AutoMachineTool
         public Building_WorkTable my_workTable = null;
         private Building drilltypeBuilding = null;
         private Building_ResearchBench researchBench = null;
+        private Building_AutoMachineTool mySAL = null;
+
 
         private IntVec3 Position = new IntVec3();
         private Map Map;
         private Rot4 Rotation;
 
 
-        public PRF_SAL_Trarget(Map map, IntVec3 cell, Rot4 rot)
+        public PRF_SAL_Trarget(Map map, IntVec3 cell, Rot4 rot, Building_AutoMachineTool sal)
         {
             Map = map;
             Position = cell;
             Rotation = rot;
+            mySAL = sal;
         }
 
 
@@ -369,6 +372,8 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         */
 
+        //Based Upon Vanilla but capped at 1 to reduce unessesary calculations
+        private readonly float[] miningyieldfactors = { 0.6f, 0.7f, 0.8f, 0.85f, 0.9f, 0.925f, 0.95f, 0.975f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f };
 
         public void SignalWorkDone()
         {
@@ -377,11 +382,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
                 CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
 
-                //Handle Progress
-                float statValue = 1000f;
+                //Vanilla Mining Speed Calc may need an Update if Vanilla is Updated 
+                float statValue = Mathf.Max( mySAL.powerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Mining) * 0.12f + 0.04f), 0.1f);
 
                 ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) + statValue);
-                ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) + statValue * 1 / 10000f);
+                ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) + statValue * miningyieldfactors[mySAL.GetSkillLevel(SkillDefOf.Mining)] / 10000f);
                 ReflectionUtility.drill_lastUsedTick.SetValue(compDeepDrill, Find.TickManager.TicksGame);
                 if ((float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) > 10000f)
                 {
@@ -393,7 +398,10 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             if (researchBench != null && Find.ResearchManager.currentProj != null)
             {
-                float statValue = 100f;
+
+                float statValue = Mathf.Max(mySAL.powerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Intellectual) * 0.115f + 0.08f), 0.1f);
+                statValue *= researchBench.GetStatValue(StatDefOf.ResearchSpeedFactor);
+
                 statValue /= Find.ResearchManager.currentProj.CostFactor(Faction.OfPlayer.def.techLevel);
                 Find.ResearchManager.ResearchPerformed(statValue, null);
 
@@ -409,7 +417,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (compDeepDrill.CanDrillNow())
                 {
                     // Log.Message("Started Drill Bill");
-                    workAmount = 100;
+                    workAmount = 1000000f;
                     return true;
                 }
                 else
@@ -424,7 +432,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 if (Find.ResearchManager.currentProj != null)
                 {
-                    workAmount = 1000;
+                    workAmount = 1000000f;
                     return true;
                 }
                 else
@@ -498,7 +506,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            salTarget = new PRF_SAL_Trarget(map, Position, Rotation);
+            salTarget = new PRF_SAL_Trarget(map, Position, Rotation,this);
             my_workTable = null;
             extension_Skills = def.GetModExtension<ModExtension_Skills>();
 
@@ -624,7 +632,15 @@ namespace ProjectRimFactory.AutoMachineTool
             //Return if not ready
             if (!salTarget.TrargetReady()) return false;
 
-            if (my_workTable == null) return salTarget.TryStartWork(out workAmount);
+            if (my_workTable == null)
+            {
+                float val = 0;
+                bool status = salTarget.TryStartWork(out val);
+                workAmount = val;
+                Log.Message("Started with " + workAmount);
+                return status;
+
+            }
 
             var consumable = Consumable();
 
