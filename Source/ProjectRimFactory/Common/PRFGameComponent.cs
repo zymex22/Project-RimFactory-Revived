@@ -28,6 +28,18 @@ namespace ProjectRimFactory {
         public override void ExposeData() {
             base.ExposeData();
             Scribe_Collections.Look(ref specialScupltures, "specialSculptures");
+
+            Scribe_Deep.Look(ref PRF_StaticPawn, "PRF_StaticPawn");
+            Scribe_Deep.Look(ref PRF_StaticJob, "PRF_StaticJob");
+
+            if (Scribe.mode != LoadSaveMode.Saving)
+            {
+                PRF_StaticPawn = null;
+                PRF_StaticJob = null;
+
+            }
+          
+
         }
         public void RegisterAssemblerQueue(IAssemblerQueue queue)
         {
