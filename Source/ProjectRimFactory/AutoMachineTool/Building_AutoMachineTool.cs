@@ -116,12 +116,15 @@ namespace ProjectRimFactory.AutoMachineTool
         private void generalReserve()
         {
             if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
+            if (PRFGameComponent.PRF_StaticJob == null) PRFGameComponent.PRF_StaticJob = new Job(PRFDefOf.PRFStaticJob);
 
             Building tb = researchBench ?? drilltypeBuilding;
 
             List<ReservationManager.Reservation> reservations;
             reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(Map.reservationManager);
-            reservations.Add(new ReservationManager.Reservation(PRFGameComponent.PRF_StaticPawn, new Job(PRFDefOf.PRFStaticJob), 1, -1, tb/*(Position + Rotation.FacingCell)*/, null));
+            var res = new ReservationManager.Reservation(PRFGameComponent.PRF_StaticPawn, PRFGameComponent.PRF_StaticJob, 1, -1, tb/*(Position + Rotation.FacingCell)*/, null);
+
+            if (!reservations.Where(r => r.Claimant == PRFGameComponent.PRF_StaticPawn && r.Job == PRFGameComponent.PRF_StaticJob && r.Target == tb).Any()) reservations.Add(res);
             ReflectionUtility.sal_reservations.SetValue(Map.reservationManager, reservations);
 
             //Spammy Debug
@@ -139,9 +142,24 @@ namespace ProjectRimFactory.AutoMachineTool
         private void generalRelease()
         {
             if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
+            if (PRFGameComponent.PRF_StaticJob == null) PRFGameComponent.PRF_StaticJob = new Job(PRFDefOf.PRFStaticJob);
+
             Building tb = researchBench ?? drilltypeBuilding;
-            Map.reservationManager.Release(tb, PRFGameComponent.PRF_StaticPawn, new Job(PRFDefOf.PRFStaticJob));
-            Log.Message("generalRelease for " + (Position + Rotation.FacingCell) );
+            
+            /*
+            Log.Message("----------------------------------");
+            List<ReservationManager.Reservation> reservations;
+            reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(Map.reservationManager);
+            reservations = reservations.Where(r => r.Faction != null && r.Faction.IsPlayer).ToList();
+            foreach (ReservationManager.Reservation res in reservations)
+            {
+                Log.Message("Reservation for " + res.Claimant + " at " + res.Target);
+
+            }
+            */
+
+            Map.reservationManager.Release(tb, PRFGameComponent.PRF_StaticPawn, PRFGameComponent.PRF_StaticJob);
+            //Log.Message("generalRelease for " + (Position + Rotation.FacingCell) );
         }
 
 

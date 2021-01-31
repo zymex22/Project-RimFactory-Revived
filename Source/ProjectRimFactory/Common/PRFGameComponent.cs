@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
+using Verse.AI;
 using ProjectRimFactory.Common;
 using ProjectRimFactory.Common.HarmonyPatches;
 namespace ProjectRimFactory {
@@ -11,6 +12,8 @@ namespace ProjectRimFactory {
         public List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
 
         public static Pawn PRF_StaticPawn = null;
+        public static Job PRF_StaticJob = null;
+
 
         public static void GenStaticPawn()
         {
