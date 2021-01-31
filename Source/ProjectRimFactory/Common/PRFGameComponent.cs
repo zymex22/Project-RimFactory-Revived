@@ -10,8 +10,17 @@ namespace ProjectRimFactory {
         public List<SpecialSculpture> specialScupltures;  // currently in game
         public List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
 
+        public static Pawn PRF_StaticPawn = null;
+
+        public static void GenStaticPawn()
+        {
+            PRF_StaticPawn = PawnGenerator.GeneratePawn(PRFDefOf.PRFSlavePawn, Faction.OfPlayer);
+            PRF_StaticPawn.Name = new NameTriple("...", "PRF_Static", "...");
+        }
+
         public PRFGameComponent(Game game) {
             SpecialSculpture.PreStartGame();
+            
         }
         public override void ExposeData() {
             base.ExposeData();

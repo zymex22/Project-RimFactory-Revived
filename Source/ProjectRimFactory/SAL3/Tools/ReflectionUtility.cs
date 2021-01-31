@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using Verse;
 
+
 namespace ProjectRimFactory.SAL3
 {
     public static class ReflectionUtility
@@ -26,6 +27,12 @@ namespace ProjectRimFactory.SAL3
         public static readonly FieldInfo drill_portionYieldPct = typeof(CompDeepDrill).GetField("portionYieldPct", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly FieldInfo drill_lastUsedTick = typeof(CompDeepDrill).GetField("lastUsedTick", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly MethodInfo drill_TryProducePortion = typeof(CompDeepDrill).GetMethod("TryProducePortion", BindingFlags.NonPublic | BindingFlags.Instance);
+
+
+
+        //reservations
+        public static readonly FieldInfo sal_reservations = typeof(Verse.AI.ReservationManager).GetField("reservations", BindingFlags.NonPublic | BindingFlags.Instance);
+        public static readonly FieldInfo sal_reservations2 = typeof(Verse.AI.ReservationManager).GetField("reservations", BindingFlags.NonPublic | BindingFlags.Static);
 
 
     }

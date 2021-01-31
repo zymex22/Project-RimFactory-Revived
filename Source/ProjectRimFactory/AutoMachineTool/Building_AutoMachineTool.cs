@@ -42,10 +42,13 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public bool GetTarget()
         {
-            return GetTarget(this.Position, this.Rotation);
+            return GetTarget(this.Position, this.Rotation,true);
+
+
+
         }
 
-        public bool GetTarget(IntVec3 pos, Rot4 rot)
+        public bool GetTarget(IntVec3 pos, Rot4 rot , bool spawned = false)
         {
 
             Building_WorkTable new_my_workTable = (Building_WorkTable)(pos + rot.FacingCell).GetThingList(Map)
@@ -60,16 +63,14 @@ namespace ProjectRimFactory.AutoMachineTool
                 .Where(t => t.def.category == ThingCategory.Building)
                 .Where(t => t is Building_ResearchBench)
                 .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
-
-
-            if ( (my_workTable != null && new_my_workTable == null)  || (researchBench != null && new_researchBench == null) || (drilltypeBuilding != null && new_drilltypeBuilding == null))
+            if (spawned && ((my_workTable != null && new_my_workTable == null) || (researchBench != null && new_researchBench == null) || (drilltypeBuilding != null && new_drilltypeBuilding == null)))
             {
                 FreeTarget();
             }
             my_workTable = new_my_workTable;
             drilltypeBuilding = new_drilltypeBuilding;
             researchBench = new_researchBench;
-            if (ValidTarget) ReserveTraget();
+            if (spawned && ValidTarget) ReserveTraget();
 
 
             return ValidTarget;
@@ -99,16 +100,48 @@ namespace ProjectRimFactory.AutoMachineTool
         public void ReserveTraget()
         {
             if (my_workTable != null) ForbidBills();
-            //TODO find somthing for drilltypeBuilding
-            //TODO find somthing for researchBench
+            if (researchBench != null) generalReserve();
+            if (drilltypeBuilding != null) generalReserve();
 
         }
         //TODO
         public void FreeTarget()
         {
             if (my_workTable != null) AllowBills();
-            //TODO find somthing for drilltypeBuilding
-            //TODO find somthing for researchBench
+            if (researchBench != null) generalRelease();
+            if (drilltypeBuilding != null) generalRelease();
+        }
+
+
+        private void generalReserve()
+        {
+            if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
+
+            Building tb = researchBench ?? drilltypeBuilding;
+
+            List<ReservationManager.Reservation> reservations;
+            reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(Map.reservationManager);
+            reservations.Add(new ReservationManager.Reservation(PRFGameComponent.PRF_StaticPawn, new Job(PRFDefOf.PRFStaticJob), 1, -1, tb/*(Position + Rotation.FacingCell)*/, null));
+            ReflectionUtility.sal_reservations.SetValue(Map.reservationManager, reservations);
+
+            //Spammy Debug
+            /*
+            reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(Map.reservationManager);
+            reservations = reservations.Where(r => r.Faction != null && r.Faction.IsPlayer).ToList();
+           foreach (ReservationManager.Reservation res in reservations)
+            {
+                Log.Message("Reservation for " + res.Claimant + " at " + res.Target);
+
+            }
+            */
+        }
+
+        private void generalRelease()
+        {
+            if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
+            Building tb = researchBench ?? drilltypeBuilding;
+            Map.reservationManager.Release(tb, PRFGameComponent.PRF_StaticPawn, new Job(PRFDefOf.PRFStaticJob));
+            Log.Message("generalRelease for " + (Position + Rotation.FacingCell) );
         }
 
 

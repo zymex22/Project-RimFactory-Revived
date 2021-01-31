@@ -21,6 +21,8 @@ namespace ProjectRimFactory.Common
                 }
             }
         }
+        public static JobDef PRFStaticJob;
+
         public static JobDef PRFDrone_ReturnToStation;
         public static JobDef PRFDrone_SelfTerminate;
 
