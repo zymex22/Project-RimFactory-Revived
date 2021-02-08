@@ -416,8 +416,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
                 if (compDeepDrill.CanDrillNow())
                 {
-                    // Log.Message("Started Drill Bill");
-                    workAmount = 1000000f;
+                    workAmount = 1000f;
                     return true;
                 }
                 else
@@ -432,7 +431,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 if (Find.ResearchManager.currentProj != null)
                 {
-                    workAmount = 1000000f;
+                    workAmount = 1000f;
                     return true;
                 }
                 else
@@ -539,8 +538,6 @@ namespace ProjectRimFactory.AutoMachineTool
                     this.unfinished.Destroy(DestroyMode.Cancel);
                 }
             }
-            salTarget.SignalWorkDone();
-
 
             this.bill = null;
             this.dominant = null;
@@ -637,7 +634,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 float val = 0;
                 bool status = salTarget.TryStartWork(out val);
                 workAmount = val;
-                Log.Message("Started with " + workAmount);
                 return status;
 
             }
@@ -687,6 +683,15 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool FinishWorking(Building_AutoMachineTool working, out List<Thing> products)
         {
+
+            if (my_workTable == null)
+            {
+                salTarget.SignalWorkDone();
+                products = new List<Thing>();
+                return true;
+            }
+           
+
             products = GenRecipe2.MakeRecipeProducts(this.bill.recipe, this, this.ingredients, this.dominant, my_workTable).ToList();
 
             this.ingredients.ForEach(i => bill.recipe.Worker.ConsumeIngredient(i, bill.recipe, Map));
@@ -891,9 +896,13 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool WorkInterruption(Building_AutoMachineTool working)
         {
             //Interupt if worktable chenged or is null
-            if (my_workTable == null || GetmyTragetWorktable() == null || GetmyTragetWorktable() != my_workTable) return true;
+            if (salTarget.ValidTarget == false || (my_workTable != null &&  GetmyTragetWorktable() == null || GetmyTragetWorktable() != my_workTable)) return true;
             //Interrupt if worktable is not ready for work
-            return !my_workTable.CurrentlyUsableForBills();
+            //if (my_workTable != null) return !my_workTable.CurrentlyUsableForBills();
+
+            return !salTarget.TrargetReady();
+
+
         }
 
         private class ThingAmount
