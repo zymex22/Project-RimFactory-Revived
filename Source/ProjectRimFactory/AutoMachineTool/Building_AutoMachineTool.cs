@@ -375,15 +375,20 @@ namespace ProjectRimFactory.AutoMachineTool
         //Based Upon Vanilla but capped at 1 to reduce unessesary calculations
         private readonly float[] miningyieldfactors = { 0.6f, 0.7f, 0.8f, 0.85f, 0.9f, 0.925f, 0.95f, 0.975f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f };
 
+        private const float DeepDrill_WorkAmount = 1000f;
+
         public void SignalWorkDone()
         {
             if (drilltypeBuilding != null)
             {
 
+                //From my understanding this WorkDone is added each pawn.tick
+                //We dont want this with reflection so i will use a multiplier instead --> DeepDrill_WorkAmount
+
                 CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
 
                 //Vanilla Mining Speed Calc may need an Update if Vanilla is Updated 
-                float statValue = Mathf.Max( mySAL.powerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Mining) * 0.12f + 0.04f), 0.1f);
+                float statValue = DeepDrill_WorkAmount * Mathf.Max( mySAL.powerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Mining) * 0.12f + 0.04f), 0.1f);
 
                 ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) + statValue);
                 ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) + statValue * miningyieldfactors[mySAL.GetSkillLevel(SkillDefOf.Mining)] / 10000f);
@@ -403,6 +408,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 statValue *= researchBench.GetStatValue(StatDefOf.ResearchSpeedFactor);
 
                 statValue /= Find.ResearchManager.currentProj.CostFactor(Faction.OfPlayer.def.techLevel);
+                //Multiplier set to 100 instead of 1000 as the speedf factor is so powerfull (would be way too fast)
+                statValue *= 100;
+
                 Find.ResearchManager.ResearchPerformed(statValue, null);
 
             }
@@ -416,7 +424,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
                 if (compDeepDrill.CanDrillNow())
                 {
-                    workAmount = 1000f;
+                    workAmount = DeepDrill_WorkAmount;
                     return true;
                 }
                 else
