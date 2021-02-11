@@ -45,9 +45,28 @@ namespace ProjectRimFactory.Common
 
         public virtual bool Glow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public virtual bool SpeedSetting => this.Props.floatrange_SpeedFactor.Span > 0;
+        public virtual bool SpeedSetting
+        {
+            get
+            {
+                if (SpeedSettingHide) return false;
+                return this.Props.floatrange_SpeedFactor.Span > 0;
+            }
+        }
 
-        public bool RangeSetting => this.Props.floatrange_Range.Span > 0;
+        public bool SpeedSettingHide = false;
+
+        public bool RangeSettingHide = false;
+
+        public bool RangeSetting 
+        {
+            get
+            {
+                if (RangeSettingHide) return false;
+                return this.Props.floatrange_Range.Span > 0;
+            }   
+              
+        }
 
         private float powerForSpeed = 0;
 
@@ -282,7 +301,7 @@ namespace ProjectRimFactory.Common
                     .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
 
                 Map map = Find.CurrentMap;
-                map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null)
+                map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null && c.RangeSetting)
                     .ToList().ForEach(c => c.DrawRangeCells(CommonColors.otherInstance));
             }
         } 

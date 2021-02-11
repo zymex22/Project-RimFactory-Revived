@@ -45,8 +45,16 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public bool GetTarget()
         {
-            return GetTarget(this.Position, this.Rotation,true);
+            bool verdict =  GetTarget(this.Position, this.Rotation,true);
+            //Alter visuals based on the target
+            if (verdict && my_workTable == null)
+            {
+                this.mySAL.compOutputAdjustable.Visible = false;
+                this.mySAL.powerWorkSetting.RangeSettingHide = true;
+            }
 
+
+            return verdict;
 
 
         }
@@ -466,6 +474,9 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             this.forcePlace = false;
             this.targetEnumrationCount = 0;
+
+            
+
         }
 
         private Bill bill;
