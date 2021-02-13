@@ -156,8 +156,11 @@ namespace ProjectRimFactory.AutoMachineTool
             Widgets.Label(rect, this.description);
 
             //Need to fix that as step one
-            Rect outRect = new Rect(0f, list.CurHeight, ITab_Settings_Minimum_x, ITab_Settings_Additional_y + list.CurHeight).ContractedBy(10f);
-            //Log.Message("ITab_Settings_Additional_y + (int)list.CurHeight: " + (ITab_Settings_Additional_y + (int)list.CurHeight) + " - parrent_rect.height: " + parrent_rect.height + " - list.CurHeight" + list.CurHeight);
+            float maxPossibleY = (ITab_Settings_Additional_y + (int)list.CurHeight) + 20;
+            maxPossibleY = Mathf.Min(maxPossibleY, parrent_rect.height);
+
+            Rect outRect = new Rect(0f, list.CurHeight, ITab_Settings_Minimum_x, maxPossibleY).ContractedBy(10f);
+           // Log.Message("ITab_Settings_Additional_y + (int)list.CurHeight: " + (ITab_Settings_Additional_y + (int)list.CurHeight) + " - parrent_rect.height: " + parrent_rect.height + " - list.CurHeight" + list.CurHeight);
 
             var headerRect = list.GetRect(24f);
             headerRect.width -= 30f;
@@ -208,12 +211,10 @@ namespace ProjectRimFactory.AutoMachineTool
 
             var scrollViewRect = new Rect(scrollOutRect.x, 0, scrollOutRect.width - 30f, this.defs.Count() * 36f);
 
-
-            //Thats somhow not working
-            //Widgets.BeginScrollView(scrollOutRect, ref this.scrollPosition, scrollViewRect);
             var innerlist = new Listing_Standard();
             innerlist.BeginScrollView(scrollOutRect, ref scrollPosition, ref scrollViewRect);
             innerlist.Begin(scrollViewRect);
+            
             this.defs.ForEach(d =>
             {
                 innerlist.GapLine();
