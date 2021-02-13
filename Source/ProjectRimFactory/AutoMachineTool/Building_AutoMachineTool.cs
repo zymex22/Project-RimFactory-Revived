@@ -474,9 +474,6 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             this.forcePlace = false;
             this.targetEnumrationCount = 0;
-
-            
-
         }
 
         private Bill bill;
@@ -660,12 +657,14 @@ namespace ProjectRimFactory.AutoMachineTool
             var consumable = Consumable();
 
             List<ThingAmount> things;
-            
+
             Bill nextbill = GetnextBill(consumable, out things);
             if (nextbill != null)
             {
                 this.bill = nextbill;
+
                 this.ingredients = things?.Select(t => t.thing.SplitOff(t.count)).ToList() ?? new List<Thing>();
+
                 //Get dominant ingredient
                 this.dominant = this.DominantIngredient(this.ingredients);
 
@@ -743,7 +742,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return this.GetAllTargetCells()
                 .SelectMany(c=> c.AllThingsInCellForUse(Map)) // Use GatherThingsUtility to also grab from belts
-                .ToList();
+                .Distinct<Thing>().ToList();
         }
 
 
