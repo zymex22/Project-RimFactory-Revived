@@ -48,7 +48,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation)
         {
             int num = 0;
-            if (thingDef.PlaceWorkers.All(p => p.AllowsPlacing(thingDef, loc.ToIntVec3(), rot, Find.CurrentMap).Accepted))
+            if (thingDef.PlaceWorkers?.All(p => p.AllowsPlacing(thingDef, loc.ToIntVec3(), rot, Find.CurrentMap).Accepted) ?? false)
             {
                 int num2 = 1;
                 for (int i = 0; i < 4; i++)
