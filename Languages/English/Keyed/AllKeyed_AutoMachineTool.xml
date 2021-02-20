@@ -105,6 +105,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <!-- BeltConveyor -->
   <PRF_DropFromConveyorDesc>Drop the item on the conveyor onto the ground - somewhere off a conveyor. Obviously, this doesn't make sense for underground conveyors, but it's a lot easier to let you do this than it is to script pawns getting weird things unstuck from tunnels.</PRF_DropFromConveyorDesc>
   <PRF.Conveyor.IsEndOfLineSetting>End of Line?</PRF.Conveyor.IsEndOfLineSetting>
+  <PRF.Conveyor.Splitter.MustHaveActiveOutput>Splitters must have an active output link!</PRF.Conveyor.Splitter.MustHaveActiveOutput>
   <PRF.Conveyor.IsEndOfLineSetting.Desc>Is this belt the end of its line?  If checked, it will hold onto items until something takes them.  If unchecked, it will send items on to the next conveyor or dump them on the ground (if there is room).</PRF.Conveyor.IsEndOfLineSetting.Desc>
   <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine>  <!-- 1 line for Inspect Window -->
   <PRF.Conveyor.IsEndOfLineSetting>Holding Belt</PRF.Conveyor.IsEndOfLineSetting>

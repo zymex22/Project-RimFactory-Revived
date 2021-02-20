@@ -105,7 +105,7 @@ namespace ProjectRimFactory.AutoMachineTool
         /************* Conveyors IBeltConveyor ***********/
         public bool IsStuck => this.stuck;
         public bool IsUnderground { get => this.Extension?.underground ?? false; }
-        public bool IsEndOfLine {
+        public virtual bool IsEndOfLine {
             get { return isEndOfLine; }
             set {
                 if (isEndOfLine && value == false) {

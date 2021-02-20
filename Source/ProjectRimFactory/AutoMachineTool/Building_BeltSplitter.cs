@@ -53,6 +53,22 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
             }
         }
+        public override bool IsEndOfLine
+        {
+            get {
+                Debug.Message(Debug.Flag.Benchmark, "Is end of line? "+ 
+                    this.outputLinks.Any(kvp => kvp.Value.Active)+"/"+base.IsEndOfLine);
+                return this.outputLinks.Any(kvp => kvp.Value.Active) && base.IsEndOfLine;
+            }
+            set {
+                if (value == true && !this.outputLinks.Any(kvp=>kvp.Value.Active)) {
+                    Messages.Message("PRF.Conveyor.Splitter.MustHaveActiveOutput".Translate(), this,
+                        MessageTypeDefOf.CautionInput);
+                    return;
+                }
+                base.IsEndOfLine = value;
+            }
+        }
 
         // TODO: revisit:
         //public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
