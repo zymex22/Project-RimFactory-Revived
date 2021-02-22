@@ -24,7 +24,7 @@ namespace ProjectRimFactory.SAL3.Things
                                                          where building != null
                                                          select building;
 
-        private List<RecipeDef> quered_recipes = new List<RecipeDef>();
+        private List<RecipeDef> quered_recipes;
 
         public List<RecipeDef> Quered_Recipes {
             get {
@@ -160,6 +160,10 @@ namespace ProjectRimFactory.SAL3.Things
             Scribe_Defs.Look(ref workingRecipe, "workingRecipe");
             Scribe_Collections.Look(ref recipes, "recipes", LookMode.Def);
             Scribe_Values.Look(ref workAmount, "workAmount");
+
+            Scribe_Collections.Look(ref quered_recipes, "quered_recipes");
+
+            quered_recipes ??= new List<RecipeDef>(); 
         }
         public override string GetInspectString()
         {
