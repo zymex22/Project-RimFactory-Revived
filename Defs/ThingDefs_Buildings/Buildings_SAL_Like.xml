@@ -44,6 +44,7 @@
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_AutoMachineTool</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_SALTargetCellHilight</li>
+      <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
