@@ -16,7 +16,7 @@
 					<value>
 						<ThingDef ParentName="PRF_BuildingBase">
 							<defName>PRF_IOPort_IFridge</defName>
-							<label>Fridge I/O Port</label>
+							<label>Fridge I/O port</label>
 							<thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
 							<designatorDropdown>PRF_IoGroup</designatorDropdown>
 							<drawerType>RealtimeOnly</drawerType>
@@ -82,7 +82,7 @@
 								<Flammability>1.0</Flammability>
 								<Mass>30</Mass>
 							</statBases>
-							<description>(tier 3) \n A Connection port for your DeepStorageUnit. It can be set to Input/output from any DSU remotely in any range within the map. This one also have same option as Rimfidge Coolers.</description>
+							<description>An advanced connection port for the Deep Storage Unit. It can be set to input/output from any DSU remotely within the map. This version interfaces with RimFridge branded coolers.</description>
 							<costList>
 								<ComponentSpacer>1</ComponentSpacer>
 								<PRF_RoboticArm>1</PRF_RoboticArm>
@@ -142,7 +142,7 @@
 					<value>
 						<ThingDef ParentName="PRF_MassStorageBase">
 							<defName>PRFCoolDSU</defName>
-							<label>Fridge digital storage unit</label>
+							<label>Refrigerated digital storage unit</label>
 							<designatorDropdown>PRF_IoGroup</designatorDropdown>
 							<uiIconScale>0.9</uiIconScale>
 							<thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
@@ -187,7 +187,7 @@
 									</filter>
 								</defaultStorageSettings>
 							</building>
-							<description>Fridge version of Digital Storage Unit, that can store food\n\nStores up to 512 stacks. Consumes 10 W of power per stack of items. When your colony loses power, items already inside will be safe, but the building will not be able to store more.\n\nThis is only available because RimFridge is installed.</description>
+							<description>A RimFridge branded, refrigerated version of the Digital Storage Unit that stores up to 512 stacks of food. Consumes 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.</description>
 							<size>(3,3)</size>
 							<pathCost>150</pathCost>
 							<costList>

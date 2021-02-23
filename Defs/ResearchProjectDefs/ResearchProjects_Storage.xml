@@ -25,7 +25,7 @@
     <baseCost>2000</baseCost>
     <label>Steel stockpile crates</label>
     <researchViewX>6</researchViewX>
-    <description>stronger materials means better stacking, even more items can fit into these crates for many good reasons i swear</description>
+    <description>Stronger materials allows for improved storage space.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
       <li>PRF_Crates</li>
@@ -40,7 +40,7 @@
     <label>Thornsworth Holography</label>
     <researchViewX>9</researchViewX>
     <researchViewY>1.9</researchViewY>
-    <description>The holographam artist Thornsworth, despite growing blindness, continued producing masterpieces for many years, and when holographic data storage was finally perfected, he was instrumental in developing Holographic Item Storage.\nAllows Items to be stored wirelessly in a Digital Storage Unit. Can be send to any I/O port on map, and recieve items from I/O ports too.\n\nYou will be missed, Thornsworth.</description>
+    <description>The holographam artist Thornsworth produced masterpieces for many years despite gradual blindness. When holographic data storage was perfected, he was instrumental in developing Holographic Item Storage.\nAllows items to be stored in a Digital Storage Unit, which can transmit and receive wirelessly to any I/O port on the map.\n\nYou will be missed, Thornsworth.</description>
     <prerequisites>
       <li>PRF_SteelCrates</li>
       <li>PRF_CoreTierIII</li>
@@ -58,7 +58,7 @@
     <label>Improved Wireless Storage</label>
     <researchViewX>9.5</researchViewX>
     <researchViewY>1.9</researchViewY>
-    <description>With further research we have discovered a way to get more uses out of our Wireless storage solution\nAllow you to build I/O pushers\nMore may be added to this later.</description>
+    <description>Advancements in wireless storage.\nAllows you to build I/O pushers (and more, soon).</description>
     <prerequisites>
       <li>PRF_StorageIO</li>
     </prerequisites>
