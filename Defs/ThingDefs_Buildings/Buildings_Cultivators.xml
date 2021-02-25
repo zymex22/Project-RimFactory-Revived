@@ -327,7 +327,7 @@
       <MaxHitPoints>350</MaxHitPoints>
       <MarketValue>2995</MarketValue>
     </statBases>
-    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
+    <description>This is a hightech Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_RoboticArm>3</PRF_RoboticArm>
@@ -429,7 +429,7 @@
       <MaxHitPoints>500</MaxHitPoints>
       <MarketValue>10646</MarketValue>
     </statBases>
-    <description>This is a hightech XL Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It has a Full spectrum LED sun light build in its sides. it will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 22x22\nWorktime: fulltime\nSpeed: 12 (5x faster)\nSkill lv.: 20</description>
+    <description>This is a hightech XL Cultivator that houses worker mechanites, that will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 22x22\nWorktime: fulltime\nSpeed: 12 (5x faster)\nSkill lv.: 20</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_RoboticArm>9</PRF_RoboticArm>
