@@ -15,7 +15,9 @@ namespace ProjectRimFactory {
         public static IEnumerable<IntVec3> InputCells(this Building building) {
             return building.GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenAdj.CellsAdjacent8Way(building);
         }
+
         /// <summary>
+        /// WARNING MAY CONTAIN DUPLICATES
         /// A list of items a PRF building might want to use as input resources, either on the ground,
         ///   in storage, or on coveyor belts.
         /// </summary>
@@ -24,12 +26,14 @@ namespace ProjectRimFactory {
         /// <param name="map">Map</param>
         public static IEnumerable<Thing> AllThingsInCellForUse(this IntVec3 c, Map map, bool allowStorageZones = true) {
             List<Thing> thingList = map.thingGrid.ThingsListAt(c);
+            //Risk for duplicate entrys if a cell contins both a Item & a IThingHolder that holds said item
             for (int i=thingList.Count-1; i>=0; i--) {
                 Thing t = thingList[i];
                 if (t is Building && t is IThingHolder holder) {
                     if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner) {
-                        for (int j = owner.InnerListForReading.Count - 1; j >= 0; j--)
+                        for (int j = owner.InnerListForReading.Count - 1; j >= 0; j--) {
                             yield return owner.InnerListForReading[j];
+                        }
                     }
                 } else if (t.def.category == ThingCategory.Item) {
                     yield return t;

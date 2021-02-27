@@ -42,6 +42,8 @@ namespace ProjectRimFactory.Common
         static public Color inputZone = Color.white.A(0.5f);
         static public Color outputCell = Color.yellow;
         static public Color outputZone = Color.yellow.A(0.5f);
+        static public Color WorkbenchCell = Color.blue;
+        static public Color WorkbenchAlpha = Color.blue.A(0.5f);
 
 
         public enum CellPattern

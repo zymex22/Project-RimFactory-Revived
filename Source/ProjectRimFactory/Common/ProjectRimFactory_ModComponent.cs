@@ -24,6 +24,8 @@ namespace ProjectRimFactory.Common
                 Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");
                 NoMessySpawns.Instance.Add(ShouldSuppressDisplace, (Building_MassStorageUnit b, Map map) => true);
                 availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
+
+
             }
             catch (Exception ex)
             {

@@ -11,6 +11,8 @@ namespace ProjectRimFactory.Common
     {
         int index;
 
+        public bool Visible = true;
+
         public CompProperties_CompOutputAdjustable Props => (CompProperties_CompOutputAdjustable)this.props;
 
         List<IntVec3> possibleOutputs = new List<IntVec3>();
@@ -37,18 +39,25 @@ namespace ProjectRimFactory.Common
         public override void PostDrawExtraSelectionOverlays()
         {
             base.PostDrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(new List<IntVec3> { CurrentCell }, Color.yellow);
+            if (Visible)
+            {
+                GenDraw.DrawFieldEdges(new List<IntVec3> { CurrentCell }, Color.yellow);
+            }
+            
         }
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             foreach (Gizmo g in base.CompGetGizmosExtra()) yield return g;
-            yield return new Command_Action()
+            if (Visible)
             {
-                defaultLabel = "AdjustDirection_Output".Translate(),
-                action = () => index++,
-                icon = TexUI.RotRightTex,
-                defaultIconColor = Color.green
-            };
+                yield return new Command_Action()
+                {
+                    defaultLabel = "AdjustDirection_Output".Translate(),
+                    action = () => index++,
+                    icon = TexUI.RotRightTex,
+                    defaultIconColor = Color.green
+                };
+            }
         }
         public override void PostExposeData()
         {
