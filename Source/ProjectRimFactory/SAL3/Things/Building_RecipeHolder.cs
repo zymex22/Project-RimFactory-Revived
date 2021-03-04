@@ -180,5 +180,11 @@ namespace ProjectRimFactory.SAL3.Things
             stringBuilder.AppendLine("SAL3_StoredRecipes".Translate(string.Join(", ", recipes.Select(r => r.label).ToArray())));
             return stringBuilder.ToString().TrimEndNewlines();
         }
+
+        public override void PostMake()
+        {
+            base.PostMake();
+            quered_recipes ??= new List<RecipeDef>();
+        }
     }
 }
