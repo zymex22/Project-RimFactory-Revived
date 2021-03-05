@@ -14,8 +14,15 @@ using Verse;
 namespace ProjectRimFactory.Storage
 {
 
+    public interface IRenameBuilding
+    {
+        public string UniqueName { set;  get; }
+        public Building Building { get; }
+    }
+
+
     [StaticConstructorOnStartup]
-    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem
+    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem , IRenameBuilding
     {
         public static readonly Texture2D CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
         public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("PRFUi/IoIcon");
@@ -28,6 +35,14 @@ namespace ProjectRimFactory.Storage
         public virtual IntVec3 WorkPosition => this.Position;
 
         protected CompPowerTrader powerComp;
+
+
+        public string UniqueName { get => uniqueName; set => uniqueName = value; }
+        private string uniqueName;
+        public Building Building => this;
+        public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
+        public override string LabelCap => uniqueName ?? base.LabelCap;
+        private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
         public override Graphic Graphic => this.IOMode == StorageIOMode.Input ?
             base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().inColor, Color.white) :
@@ -94,6 +109,7 @@ namespace ProjectRimFactory.Storage
             }
         }
 
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -101,6 +117,7 @@ namespace ProjectRimFactory.Storage
             Scribe_References.Look(ref boundStorageUnit, "boundStorageUnit");
             Scribe_Deep.Look(ref outputStoreSettings, "outputStoreSettings", this);
             Scribe_Deep.Look(ref outputSettings, "outputSettings", "IOPort_Minimum_UseTooltip", "IOPort_Maximum_UseTooltip");
+            Scribe_Values.Look(ref uniqueName, "uniqueName");
         }
         public override string GetInspectString()
         {
@@ -311,6 +328,14 @@ namespace ProjectRimFactory.Storage
                     Find.WindowStack.Add(new FloatMenu(list));
                 },
                 icon = CargoPlatformTex
+            };
+            yield return new Command_Action
+            {
+                icon = RenameTex,
+                action = () => Find.WindowStack.Add(new Dialog_RenameMassStorageUnit(this)),
+                hotKey = KeyBindingDefOf.Misc1,
+                defaultLabel = "PRFRenameMassStorageUnitLabel".Translate(),
+                defaultDesc = "PRFRenameMassStorageUnitDesc".Translate()
             };
             if (IOMode == StorageIOMode.Output)
             {
