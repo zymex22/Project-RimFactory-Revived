@@ -580,7 +580,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 base.CreateWorkingEffect();
 
-                this.workingEffect = this.bill.recipe.effectWorking.Spawn();
+                this.workingEffect = this.bill.recipe.effectWorking?.Spawn();
 
                 this.workingSound = this.bill.recipe.soundWorking?.TrySpawnSustainer(my_workTable);
                 workingSound?.Maintain();
@@ -592,7 +592,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected bool EffectTick()
         {
-            workingEffect.EffectTick(new TargetInfo(this), new TargetInfo(my_workTable));
+            workingEffect?.EffectTick(new TargetInfo(this), new TargetInfo(my_workTable));
 
             return this.workingEffect == null;
         }
