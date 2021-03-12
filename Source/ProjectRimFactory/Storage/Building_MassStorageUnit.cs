@@ -13,13 +13,16 @@ namespace ProjectRimFactory.Storage
 {
     [StaticConstructorOnStartup]
     public abstract class Building_MassStorageUnit : Building_Storage, IHideItem, IHideRightClickMenu,
-        IForbidPawnOutputItem, IForbidPawnInputItem
+        IForbidPawnOutputItem, IForbidPawnInputItem ,IRenameBuilding
     {
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
         private readonly List<Thing> items = new List<Thing>();
         private List<Building_StorageUnitIOBase> ports = new List<Building_StorageUnitIOBase>();
-        public string uniqueName;
+
+        public string UniqueName { get => uniqueName; set => uniqueName = value; }
+        private string uniqueName;
+        public Building Building => this;
 
         public abstract bool CanStoreMoreItems { get; }
         // The maximum number of item stacks at this.Position:
