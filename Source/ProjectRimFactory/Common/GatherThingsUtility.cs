@@ -40,7 +40,13 @@ namespace ProjectRimFactory
                 {
                     if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner)
                     {
-                        if (t is Building_BeltConveyor belt && belt.IsUnderground) continue;
+                        switch (t)
+                        {
+                            // If the belt is underground or it's a connector to send items underground, skip it.
+                            case Building_BeltConveyor belt when belt.IsUnderground:
+                            case Building_BeltConveyorUGConnector _:
+                                continue;
+                        }
 
                         for (int j = owner.InnerListForReading.Count - 1; j >= 0; j--)
                         {
