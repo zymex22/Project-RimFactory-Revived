@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectRimFactory.AutoMachineTool;
 using ProjectRimFactory.Common;
 using Verse;
 using RimWorld;
@@ -31,6 +32,8 @@ namespace ProjectRimFactory {
                 Thing t = thingList[i];
                 if (t is Building && t is IThingHolder holder) {
                     if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner) {
+                        if (t is Building_BeltConveyor belt && belt.IsUnderground) continue;
+
                         for (int j = owner.InnerListForReading.Count - 1; j >= 0; j--) {
                             yield return owner.InnerListForReading[j];
                         }
