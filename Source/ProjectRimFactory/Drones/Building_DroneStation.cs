@@ -58,7 +58,14 @@ namespace ProjectRimFactory.Drones
 
         public override int ListPriority => 3000;
 
-        public override bool Mutable => true;
+        private bool mutable = false;
+
+        public override bool Mutable => mutable;
+
+        public void SetMutable(bool val)
+        {
+            mutable = val;
+        }
 
         public override string GetUniqueLoadID()
         {
@@ -244,6 +251,7 @@ namespace ProjectRimFactory.Drones
 
             if (!StationRangecells_old.SequenceEqual(StationRangecells))
             {
+                ((DroneArea)droneAllowedArea).SetMutable(true);
                 droneAllowedArea.Delete();
                 
                 droneAllowedArea = (Area)GetDroneAllowedArea;
@@ -413,6 +421,7 @@ namespace ProjectRimFactory.Drones
             if (droneAllowedArea != null)
             {
                 //Deleate the old Zone
+                ((DroneArea)droneAllowedArea).SetMutable(true);
                 droneAllowedArea.Delete();
             }
             
