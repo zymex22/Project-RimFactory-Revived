@@ -8,10 +8,11 @@ using ProjectRimFactory.SAL3.Tools;
 using ProjectRimFactory.Storage;
 using ProjectRimFactory.Storage.UI;
 using ProjectRimFactory.Common;
+using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.SAL3.Things
 {
-    public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder
+    public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder , INutrientPasteDispenserInput
     {
         private OutputSettings outputSettings;
 
@@ -79,6 +80,8 @@ namespace ProjectRimFactory.SAL3.Things
                 outputSettings = value;
             }
         }
+
+        public Thing NPDI_Item =>  StoredThing;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
