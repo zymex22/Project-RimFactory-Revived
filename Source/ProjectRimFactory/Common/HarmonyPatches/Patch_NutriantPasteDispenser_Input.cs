@@ -57,6 +57,14 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
             if (__result == false)
             {
+                //Support for Rimfrige
+                object rimFridgeCache = null;
+                if (ProjectRimFactory_ModComponent.ModSupport_RrimFrige_Dispenser)
+                {
+                    rimFridgeCache = ProjectRimFactory_ModComponent.ModSupport_RrimFridge_GetFridgeCache.Invoke(null, new object[] { (object)__instance.Map });
+                }
+
+
                 float num = 0f;
                 for (int i = 0; i < __instance.AdjCellsCardinalInBounds.Count; i++)
                 {
@@ -66,27 +74,41 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     {
                         num += (float)input.NPDI_Item.stackCount * input.NPDI_Item.GetStatValue(StatDefOf.Nutrition);
                     }
-
-
-                    Thing thing = null;
-                    Thing thing2 = null;
-                    List<Thing> thingList = c.GetThingList(__instance.Map);
-                    for (int j = 0; j < thingList.Count; j++)
-                    {
-                        Thing thing3 = thingList[j];
-                        if (Building_NutrientPasteDispenser.IsAcceptableFeedstock(thing3.def))
+                    else 
+                    { 
+                        Thing thing = null;
+                        Thing thing2 = null;
+                        List<Thing> thingList = c.GetThingList(__instance.Map);
+                        for (int j = 0; j < thingList.Count; j++)
                         {
-                            thing = thing3;
+                            Thing thing3 = thingList[j];
+                            if (Building_NutrientPasteDispenser.IsAcceptableFeedstock(thing3.def))
+                            {
+                                thing = thing3;
+                            }
+
+                            //Support for Rimfrige
+                            if (rimFridgeCache != null)
+                            {
+                                bool isfc = (bool)ProjectRimFactory_ModComponent.ModSupport_RrimFridge_HasFridgeAt.Invoke(rimFridgeCache, new object[] { (object)c });
+                                if (isfc)
+                                {
+                                    thing2 = thing3;
+                                }
+                            }
+
+                            if (thing3.def == ThingDefOf.Hopper)
+                            {
+                                thing2 = thing3;
+                            }
                         }
-                        if (thing3.def == ThingDefOf.Hopper)
+                        if (thing != null && thing2 != null)
                         {
-                            thing2 = thing3;
+                            num += (float)thing.stackCount * thing.GetStatValue(StatDefOf.Nutrition);
                         }
+
                     }
-                    if (thing != null && thing2 != null)
-                    {
-                        num += (float)thing.stackCount * thing.GetStatValue(StatDefOf.Nutrition);
-                    }
+                    
                     if (num >= __instance.def.building.nutritionCostPerDispense)
                     {
                         __result = true;
