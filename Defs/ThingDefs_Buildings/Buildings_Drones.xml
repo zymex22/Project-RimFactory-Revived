@@ -103,9 +103,19 @@
         <initialConfigurableTargetFuelLevel>3</initialConfigurableTargetFuelLevel>
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <allowManualRangeTypeChange>false</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
     </comps>
     <rotatable>false</rotatable>
-
     <placeWorkers>
       <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
     </placeWorkers>
