@@ -24,7 +24,7 @@ namespace ProjectRimFactory.Common
                 Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");
                 NoMessySpawns.Instance.Add(ShouldSuppressDisplace, (Building_MassStorageUnit b, Map map) => true);
                 availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
-
+                LoadModSupport();
 
             }
             catch (Exception ex)
@@ -32,6 +32,32 @@ namespace ProjectRimFactory.Common
                 Log.Error("Project RimFactory Core :: Caught exception: " + ex);
             }
         }
+
+        //Mod Support
+        //Cached MethodInfo as Reflection is Slow
+        public static System.Reflection.MethodInfo ModSupport_RrimFridge_GetFridgeCache = null;
+        public static System.Reflection.MethodInfo ModSupport_RrimFridge_HasFridgeAt = null;
+        public static bool ModSupport_RrimFrige_Dispenser = false;
+
+        private void LoadModSupport()
+        {
+            if (ModLister.HasActiveModWithName("[KV] RimFridge"))
+            {
+                ModSupport_RrimFridge_GetFridgeCache = AccessTools.Method("RimFridge.FridgeCache:GetFridgeCache");
+                ModSupport_RrimFridge_HasFridgeAt = AccessTools.Method("RimFridge.FridgeCache:HasFridgeAt");
+                if (ModSupport_RrimFridge_GetFridgeCache != null && ModSupport_RrimFridge_HasFridgeAt != null)
+                {
+                    Log.Message("Project Rimfactory - added Support for shared Nutrient Dispenser with [KV] RimFridge");
+                    ModSupport_RrimFrige_Dispenser = true;
+                }
+                else
+                {
+                    Log.Warning("Project Rimfactory - Failed to add Support for shared Nutrient Dispenser with [KV] RimFridge");
+                }
+
+            }
+        }
+
 
         public Harmony HarmonyInstance { get; private set; }
  
