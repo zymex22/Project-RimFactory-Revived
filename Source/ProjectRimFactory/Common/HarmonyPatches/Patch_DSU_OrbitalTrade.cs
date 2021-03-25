@@ -14,7 +14,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 {
     //This patch allows Dsu's to Act as a trade beachon
     [HarmonyPatch(typeof(TradeUtility), "AllLaunchableThingsForTrade")]
-    class Patch_DSU_OrbitalTrade
+    class Patch_TradeUtility_AllLaunchableThingsForTrade
     {
         static void Postfix(Map map, ref IEnumerable<Thing> __result)
         {
@@ -32,7 +32,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     //This Patch Allows the player to start an orvital Trade without a Trade beacon but with a DSU.
     //Without this patch a player would need a dummy beacon to use Patch_DSU_OrbitalTrade
     [HarmonyPatch]
-     public static class Patch_PassingShip_DSUisTradebeacon
+     public static class Patch_PassingShip_c__DisplayClass24_0
     {
         public static Type predicateClass;
         static MethodBase TargetMethod()//The target method is found using the custom logic defined here
@@ -80,6 +80,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 //Find the Check
                 if (instruction.opcode == OpCodes.Brtrue_S && foundLocaterString)
                 {
+                    foundLocaterString = false;
                     //Keep the Inctruction
                     yield return instruction;
                     //this.Map
