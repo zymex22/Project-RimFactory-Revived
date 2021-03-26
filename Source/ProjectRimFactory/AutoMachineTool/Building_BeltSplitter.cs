@@ -130,13 +130,15 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
             var origState = this.State;
-            if (base.AcceptsThing(newThing, giver) && origState == WorkingState.Ready) {
+            var accepts = base.AcceptsThing(newThing, giver);
+            if (accepts && origState == WorkingState.Ready) {
                 NextDirection(newThing, out dest);
                 Debug.Message(Debug.Flag.Conveyors, "  Spitter " + this 
                               + " decided " + newThing + " should go " + dest.ToStringHuman());
                 return true;
             }
-            return false;
+            // accepts could be true here if we aborbed 1 wood into a 4 wood stack.
+            return accepts;
         }
         /// <summary>
         /// Try to find a conveyor/location to pass on the next item to.
@@ -199,19 +201,18 @@ namespace ProjectRimFactory.AutoMachineTool
             return null;
         }
         protected override bool CanOutput(Thing t) {
-            if (!outputLinks.ContainsKey(dest)) return false;
+            if (t == null) return true;
+            if (!outputLinks.ContainsKey(dest)) {
+                Debug.Message(Debug.Flag.Conveyors,
+                              "  CanOutput: No output link to the " + dest.ToStringHuman());
+                return false;
+            }
             return outputLinks[dest].IsValidOutputLinkFor(t);
         }
 
-        protected override bool PlaceProduct(ref List<Thing> products)
+        protected override bool ConveyorPlaceItem(Thing thing)
         {
-            var thing = thingOwnerInt.Take(products[0]);
             Debug.Warning(Debug.Flag.Conveyors, "Splitter " + this + " is about to try placing " + thing);
-            if (this.WorkInterruption(thing))
-            {
-                Debug.Message(Debug.Flag.Conveyors, "   But interrupted; failing");
-                return true;
-            }
             var output = outputLinks.TryGetValue(dest, null);
             if (output != null && output.Allows(thing)) {
                 if (output.TryPlace(thing)) {
@@ -225,7 +226,8 @@ namespace ProjectRimFactory.AutoMachineTool
                                               "; looking for another direction");
             if (NextDirection(thing, out Rot4 tmp))
             {
-                Debug.Message(Debug.Flag.Conveyors, "  going to try new direction " + dest.ToStringHuman());
+                //TODO: change this?
+                Debug.Message(Debug.Flag.Conveyors, "  going to try new direction " + tmp.ToStringHuman());
                 // 他に流す方向があれば、やり直し.
                 // If there is another direction, try again.
                 this.Reset();
@@ -234,9 +236,6 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             // 配置失敗.
             // Placement failure
-            this.stuck = true;
-            thingOwnerInt.TryAdd(thing);//put it back
-            Debug.Message(Debug.Flag.Conveyors, "" + this + ": Is stuck.");
             return false;
         }
 
@@ -464,7 +463,15 @@ namespace ProjectRimFactory.AutoMachineTool
                 return Active && (filter == null || filter.Allows(t));
             }
             public bool IsValidOutputLinkFor(Thing t) {
-                if (!Allows(t)) return false;
+                if (!Allows(t)) {
+                    Debug.Message(Debug.Flag.Conveyors,
+                          "  CanOutput: " + t + " is not allowed at " + this.position);
+                    return false;
+                }
+                Debug.Message(Debug.Flag.Conveyors,
+                    link != null ?
+                      ("  CanOutput: Testing if link " + link + " can accept " + t) :
+                      ("  CanOutput: Testing for storage blockers for " + t + " at " + position));
                 if (link != null) return link.CanAcceptNow(t);
                 return PlaceThingUtility.CallNoStorageBlockersIn(position, 
                                             parent.Map, t);
