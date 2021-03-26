@@ -466,7 +466,8 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override void StartWork()
         {
             base.StartWork();
-            this.CheckWork();  // Make sure we're not stuck
+            MapManager.RemoveAfterAction(CheckWork); // StartWork adds this, but...
+            this.CheckWork();  // ...make sure we're not stuck NOW
         }
 
         protected override void Reset() {
@@ -513,12 +514,9 @@ namespace ProjectRimFactory.AutoMachineTool
             Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this +
                 (stuck ? " is stuck with " : " is about to try placing ----- ") + thing);
             if (stuck) {
-                thingOwnerInt.TryAdd(thing);
-                if (this.CanOutput(thing)) {
-                    ChangeStuckStatus(thing);
-                    return false; // still not ready for new action
-                }
-                return false;
+                thingOwnerInt.TryAdd(thing); // put it back
+                TryUnstick(thing);
+                return false; // whatever happens in TryUnstick, we're not placing *this* iteration
             }
 
             // Do Conveyor placement:
@@ -627,15 +625,19 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         protected override void CheckWork() {
-            if (working==null || this.thingOwnerInt.Count==0 || this.IsEndOfLine) {
+            if (!this.Spawned) return; // maybe a callback hits this after it's destroyed?
+            if (this.thingOwnerInt.Count==0 || thingOwnerInt[0] == null || this.IsEndOfLine) {
+                Debug.Message(Debug.Flag.Conveyors, "      CheckWork: " + this + " empty or EndOfLine");
                 return;
             }
             if (stuck) {
+                Debug.Message(Debug.Flag.Conveyors, "      CheckWork: " + this + " am I still stuck?");
                 if (CanOutput(working)) {
                     // start going forward again:
                     ChangeStuckStatus(working);
                 }
             } else {
+                Debug.Message(Debug.Flag.Conveyors, "      CheckWork: " + this + " checking if all is well");
                 this.CalculateCarriedItemDrawHeight();
                 // if work done is below stuckDrawPercent, let it continue forward
                 if (WorkLeft < 1 - this.stuckDrawPercent) {
@@ -668,6 +670,21 @@ namespace ProjectRimFactory.AutoMachineTool
             return PlaceThingUtility.CallNoStorageBlockersIn(OutputCell(), Map, t);
         }
 
+        /// <summary>
+        /// Attempt to change status from stuck to working
+        /// </summary>
+        /// <returns><c>true</c>, if unstuck, <c>false</c> otherwise.</returns>
+        /// <param name="t">T.</param>
+        protected virtual bool TryUnstick(Thing t)
+        {
+            // a simple check to see if we should be unstuck:
+            if (!stuck) return true; // ??  Only call if stuck, please
+            if (this.CanOutput(t)) {
+                ChangeStuckStatus(t, false);
+                return true;
+            }
+            return false;
+        }
         protected void ChangeStuckStatus(Thing t, bool? willBeStuck = null) {
             if (willBeStuck == null) willBeStuck = !stuck;
             usingThingOwnerInt = true;

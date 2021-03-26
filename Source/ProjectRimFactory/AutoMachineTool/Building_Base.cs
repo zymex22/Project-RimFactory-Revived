@@ -402,7 +402,8 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else
             {
-                MapManager.AfterAction(30, this.Placing);
+                // If we are still Placing, try again in 30
+                if (this.State == WorkingState.Placing) MapManager.AfterAction(30, this.Placing);
             }
         }
 

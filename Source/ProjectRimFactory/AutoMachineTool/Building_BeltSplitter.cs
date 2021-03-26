@@ -200,6 +200,29 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return null;
         }
+        protected override bool TryUnstick(Thing t)
+        {
+            if (base.TryUnstick(t)) return true;
+            // Note: this implementation is not perfect
+            //   the item will probably jump on-screen from one
+            //   location to another.  Careful flow control and
+            //   checking this only when the item has returned
+            //   to neutral would allow better graphics.  But.
+            //   That's more than I want to deal with right now.
+                // Check other options:
+                Debug.Message(Debug.Flag.Conveyors, "      " + this + " checked, cannot place " + dest.ToStringHuman() +
+                                  "; may unstick in another direction?");
+            if (NextDirection(t, out Rot4 tmp)) {
+                Debug.Message(Debug.Flag.Conveyors, "        checked, going to try new direction " + tmp.ToStringHuman());
+                if (this.thingOwnerInt.Contains(t))
+                    thingOwnerInt.Take(t);
+                else
+                    Reset(); // Calling Take() also Reset()s
+                this.AcceptsThing(t, this); // should always work
+                return true;
+            }
+            return false; // we tried
+        }
         protected override bool CanOutput(Thing t) {
             if (t == null) return true;
             if (!outputLinks.ContainsKey(dest)) {
@@ -226,7 +249,6 @@ namespace ProjectRimFactory.AutoMachineTool
                                               "; looking for another direction");
             if (NextDirection(thing, out Rot4 tmp))
             {
-                //TODO: change this?
                 Debug.Message(Debug.Flag.Conveyors, "  going to try new direction " + tmp.ToStringHuman());
                 // 他に流す方向があれば、やり直し.
                 // If there is another direction, try again.
@@ -465,13 +487,13 @@ namespace ProjectRimFactory.AutoMachineTool
             public bool IsValidOutputLinkFor(Thing t) {
                 if (!Allows(t)) {
                     Debug.Message(Debug.Flag.Conveyors,
-                          "  CanOutput: " + t + " is not allowed at " + this.position);
+                          "        IsValidOutputLinkFor: " + t + " is not allowed at " + this.position);
                     return false;
                 }
                 Debug.Message(Debug.Flag.Conveyors,
                     link != null ?
-                      ("  CanOutput: Testing if link " + link + " can accept " + t) :
-                      ("  CanOutput: Testing for storage blockers for " + t + " at " + position));
+                      ("        IsValidOutputLinkFor: Testing if link " + link + " can accept " + t) :
+                      ("        IsValidOutputLinkFor: Testing for storage blockers for " + t + " at " + position));
                 if (link != null) return link.CanAcceptNow(t);
                 return PlaceThingUtility.CallNoStorageBlockersIn(position, 
                                             parent.Map, t);
