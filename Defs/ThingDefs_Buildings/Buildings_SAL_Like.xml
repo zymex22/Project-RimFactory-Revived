@@ -44,6 +44,7 @@
     <placeWorkers>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_AutoMachineTool</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_SALTargetCellHilight</li>
+      <li>ProjectRimFactory.PlaceWorker_Arrow</li>
     </placeWorkers>
     <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
@@ -467,7 +468,7 @@
   </ThingDef>
 
   <!-- auto-miner S.A.L -->
-  <!-- <ThingDef ParentName="PRF_SAL_Base">
+  <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_SALAutoMinerI</defName>
     <label>auto-miner S.A.L</label>
     <description>Modified crafter which is capable of performing high level mining, most useful in front of a deep core miner</description>
@@ -487,6 +488,21 @@
       <li>PRF_SALResearchIII</li>
       <li>PRF_AutonomousMining</li>
     </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1200</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>0.3~0.3</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
     <modExtensions>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
@@ -499,7 +515,7 @@
         </skills>
       </li>
     </modExtensions>
-  </ThingDef> -->
+  </ThingDef>
 
 
 

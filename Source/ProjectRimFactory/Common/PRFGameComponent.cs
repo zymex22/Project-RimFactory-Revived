@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
+using Verse.AI;
 using ProjectRimFactory.Common;
 using ProjectRimFactory.Common.HarmonyPatches;
 namespace ProjectRimFactory {
@@ -10,12 +11,35 @@ namespace ProjectRimFactory {
         public List<SpecialSculpture> specialScupltures;  // currently in game
         public List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
 
+        public static Pawn PRF_StaticPawn = null;
+        public static Job PRF_StaticJob = null;
+
+
+        public static void GenStaticPawn()
+        {
+            PRF_StaticPawn = PawnGenerator.GeneratePawn(PRFDefOf.PRFSlavePawn, Faction.OfPlayer);
+            PRF_StaticPawn.Name = new NameTriple("...", "PRF_Static", "...");
+        }
+
         public PRFGameComponent(Game game) {
             SpecialSculpture.PreStartGame();
+            
         }
         public override void ExposeData() {
             base.ExposeData();
             Scribe_Collections.Look(ref specialScupltures, "specialSculptures");
+
+            Scribe_Deep.Look(ref PRF_StaticPawn, "PRF_StaticPawn");
+            Scribe_Deep.Look(ref PRF_StaticJob, "PRF_StaticJob");
+
+            if (Scribe.mode != LoadSaveMode.Saving)
+            {
+                PRF_StaticPawn = null;
+                PRF_StaticJob = null;
+
+            }
+          
+
         }
         public void RegisterAssemblerQueue(IAssemblerQueue queue)
         {

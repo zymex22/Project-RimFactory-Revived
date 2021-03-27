@@ -19,32 +19,9 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
         {
-
-            IntVec3 tragetCell = center;
-            switch (rot.AsInt)
-            {
-                case 0:
-                    //North
-                    tragetCell.z++;
-                    break;
-                case 1:
-                    //East
-                    tragetCell.x++;
-                    break;
-                case 2:
-                    //South
-                    tragetCell.z--;
-                    break;
-                case 3:
-                    //West
-                    tragetCell.x--;
-                    break;
-                default:
-                    //Default North
-                    tragetCell.z++;
-                    break;
-            }
-            GenDraw.DrawFieldEdges(new List<IntVec3> { tragetCell }, Common.CommonColors.outputZone);
+            IntVec3 tragetCell = center + rot.FacingCell;
+           
+            GenDraw.DrawFieldEdges(new List<IntVec3> { tragetCell }, Common.CommonColors.WorkbenchAlpha);
 
         }
     }
