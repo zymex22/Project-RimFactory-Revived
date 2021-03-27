@@ -74,6 +74,9 @@
 <PRF_RecipeTab_Button_Abort>({0}) Abort</PRF_RecipeTab_Button_Abort>
 
 
+<PRF_DescriptionUpdate_CanMine>Can Mine: \n</PRF_DescriptionUpdate_CanMine>
+<PRF_ModifyProduct_AdditionalChance>{0}% Chance for additional:\n</PRF_ModifyProduct_AdditionalChance>
+<PRF_ModifyProduct_Weight>Weight:</PRF_ModifyProduct_Weight>
 
   <PRF_TimeLeftToDisintegrate>Time left until disintegrate: {0}</PRF_TimeLeftToDisintegrate>
   <PRF_DisintegrationMessage>{0} has disintegrated.</PRF_DisintegrationMessage>
