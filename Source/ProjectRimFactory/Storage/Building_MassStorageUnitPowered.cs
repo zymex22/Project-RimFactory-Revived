@@ -142,5 +142,25 @@ namespace ProjectRimFactory.Storage
                 return base.GetITabString(itemsSelected);
             }
         }
+
+        //This Exists as I don't know how to call .Any() with CodeInstruction
+        //Can be removed if the Transpiler is Updated to inclued that
+        public static bool AnyPowerd(Map map)
+        {
+            return AllPowered(map).Any();
+        }
+
+        public static IEnumerable<Building_MassStorageUnitPowered> AllPowered(Map map)
+        {
+            foreach (Building_MassStorageUnitPowered item in map.listerBuildings.AllBuildingsColonistOfClass<Building_MassStorageUnitPowered>())
+            {
+                CompPowerTrader comp = item.GetComp<CompPowerTrader>();
+                if (comp == null || comp.PowerOn)
+                {
+                    yield return item;
+                }
+            }
+        }
+
     }
 }
