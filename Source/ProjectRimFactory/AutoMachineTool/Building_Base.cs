@@ -180,6 +180,8 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 return false;
             }
+            //Check if Output is in Bounds
+            if (!OutputCell().InBounds(this.Map)) return false;
 
             return true;
         }
