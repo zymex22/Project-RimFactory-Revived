@@ -21,11 +21,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
             //Not shure how i should sopport the angeled one
             bool isRight = false;
-
+            
             if (thing != null && !thing.def.IsBlueprint) {
-                isRight = (thing as Building_ItemPuller).Getright;
+                isRight = (thing as Building_ItemPuller)?.Getright ?? false;
             }
-            if (def.IsBlueprint)
+            if (def.IsBlueprint || def.IsFrame)
             {
                 outputCell = def.entityDefToBuild.GetModExtension<ModExtension_Puller>().GetOutputCell(center, rot, isRight);
             }
