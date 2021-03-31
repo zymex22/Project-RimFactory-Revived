@@ -211,6 +211,10 @@ namespace ProjectRimFactory.Common {
                 Thing t = this.BonusThing();
                 Debug.Message(Debug.Flag.ExtModifyProduct, (t == null ? "  Tried to get bonus item. Failed." : ("  Tried to get bonus item. Got: " + t.ToString())));
                 if (t!=null) {
+                    // There was some debate about whether it's a "bonus" if it
+                    //  removes the original product, but the consensus is that
+                    //  if the XML specifies to replaceOrigProduct, replace it!
+                    if (replaceOrigProduct) products.Clear();
                     products.Add(t);
                     gotSomeResult = true;
                 }
