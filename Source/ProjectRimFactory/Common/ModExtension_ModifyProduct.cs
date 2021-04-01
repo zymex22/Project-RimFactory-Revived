@@ -431,12 +431,21 @@ public static bool TryGetDefaultBonusYield(List<Thing> products, ModExtension_Mo
         {
             string data = "";
 
-            data += "PRF_ModifyProduct_AdditionalChance".Translate( bonusYields.chance * 100);
-            
+            if (replaceOrigProduct)
+            {
+                data += "PRF_ModifyProduct_ReplaceChance".Translate(bonusYields.chance * 100);
+            }
+            else
+            {
+                data += "PRF_ModifyProduct_AdditionalChance".Translate(bonusYields.chance * 100);
+            }
+
+            float totalWeight = bonusYields.bonuses.Sum(b => b.Weight);
+
             foreach ( BonusYield bonus in bonusYields.bonuses)
             {
                 //Canr use .Translate() directly here as it can't handle {0,-20}
-                data += String.Format("    - {0,-20} \t{1}{2}\r\n",bonus.def.LabelCap + " x" + bonus.Count, "PRF_ModifyProduct_Weight".Translate(), bonus.Weight );
+                data += String.Format("    - {0,-20} \t{1} {2:G3}%\r\n",bonus.def.LabelCap + " x" + bonus.Count, "PRF_ModifyProduct_Percent".Translate(), (bonus.Weight / totalWeight) * 100);
             }
 
             return data;

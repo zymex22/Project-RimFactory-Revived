@@ -187,6 +187,12 @@ namespace ProjectRimFactory {
 
         }
 
+        public override void StartedNewGame()
+        {
+            base.StartedNewGame();
+            if (updatedThingDescriptions == false) UpdateThingDescriptions();
+        }
+
         /*
 // A quick way to test all the scupltures available, if need be.       
 public override void LoadedGame() {
