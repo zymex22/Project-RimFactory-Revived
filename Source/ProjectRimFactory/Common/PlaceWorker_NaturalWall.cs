@@ -11,22 +11,16 @@ namespace ProjectRimFactory.Common
         {
             IEnumerable<IntVec3> allcells = GenAdj.CellsOccupiedBy(loc, rot, checkingDef.Size);
             if (
-                allcells.All(t => 
-                    t.GetThingList(map).Where(t => (t.def.IsNonResourceNaturalRock && !ModLister.HasActiveModWithName("Replace Stuff")) || t.def.IsSmoothed).Any()
+                allcells.All(t =>
+                    t.GetThingList(map).Where(t => t.def.IsNonResourceNaturalRock || t.def.IsSmoothed).Any()
                     && !(t.GetThingList(map).Where(t => t.def == (checkingDef as ThingDef)).Any())
-
                 )
-                
             )
             {
                 return AcceptanceReport.WasAccepted;
             }
             else
             {
-                if (ModLister.HasActiveModWithName("Replace Stuff"))
-                {
-                    return new AcceptanceReport("PRF_PlaceWorker_NaturalWall_denied_ReplaceStuff".Translate());
-                }
                 return new AcceptanceReport("PRF_PlaceWorker_NaturalWall_denied".Translate());
             }
         }
@@ -39,7 +33,7 @@ namespace ProjectRimFactory.Common
                 return true;
             }
             var def = other as ThingDef;
-            if (def != null && def.IsNonResourceNaturalRock && !ModLister.HasActiveModWithName("Replace Stuff"))
+            if (def != null && def.IsNonResourceNaturalRock)
             {
 
                 return true;
