@@ -56,6 +56,7 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 foreach (var c in CellsToSelect)
                 {
+                    if (!c.InBounds(this.Map)) continue;
                     foreach (Thing t in GatherThingsUtility.AllThingsInCellForUse(c, Map)) {
                         yield return t;
                     }

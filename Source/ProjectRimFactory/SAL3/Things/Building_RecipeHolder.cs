@@ -19,6 +19,7 @@ namespace ProjectRimFactory.SAL3.Things
         public List<RecipeDef> recipes = new List<RecipeDef>();
         //================================ Misc
         public IEnumerable<Building_WorkTable> Tables => from IntVec3 cell in this.GetComp<CompRecipeImportRange>()?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)
+                                                         where cell.InBounds(this.Map)
                                                          from Thing t in cell.GetThingList(Map)
                                                          let building = t as Building_WorkTable
                                                          where building != null

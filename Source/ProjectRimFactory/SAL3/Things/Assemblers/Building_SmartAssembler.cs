@@ -12,6 +12,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         public override IEnumerable<RecipeDef> GetAllRecipes()
         {
             return from IntVec3 c in this.GetComp<CompRecipeImportRange>()?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)
+                   where c.InBounds(this.Map)
                    from Thing t in c.GetThingList(Map)
                    let h = t as Building_RecipeHolder
                    where h != null

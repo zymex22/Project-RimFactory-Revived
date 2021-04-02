@@ -31,6 +31,8 @@ namespace ProjectRimFactory
         /// <param name="map">Map</param>
         public static IEnumerable<Thing> AllThingsInCellForUse(this IntVec3 c, Map map, bool allowStorageZones = true)
         {
+
+            if (!c.InBounds(map)) yield break;
             List<Thing> thingList = map.thingGrid.ThingsListAt(c);
             //Risk for duplicate entrys if a cell contins both a Item & a IThingHolder that holds said item
             for (int i = thingList.Count - 1; i >= 0; i--)

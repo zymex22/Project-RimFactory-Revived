@@ -230,7 +230,7 @@ namespace ProjectRimFactory.Drones
 
                     foreach (IntVec3 cell in StationRangecells)
                     {
-                        droneArea[cell] = true;
+                        if(cell.InBounds(this.Map)) droneArea[cell] = true;
                     }
 
                     //Not shure if i need that but just to be shure
