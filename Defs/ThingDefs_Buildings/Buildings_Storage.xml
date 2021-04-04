@@ -538,12 +538,12 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_ItemSlide</defName>
     <thingClass>ProjectRimFactory.Storage.Building_ItemSlide</thingClass>
-    <label>ItemSlide</label>
+    <label>Item chute</label>
     <graphicData>
       <texPath>Storage/ItemSlide</texPath>
-      <drawSize>(1.8,2.3)</drawSize>
-      <color>(133,97,67,256)</color>      <!-- used to set wood color because stuffed isnt used -->
-      <drawRotated>true</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
+      <graphicClass>Graphic_Multi</graphicClass>
+      <!-- <drawSize>(1.8,2.3)</drawSize> -->
+      <!-- <drawRotated>true</drawRotated>-->      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
     </graphicData>
     <statBases>
       <Mass>10</Mass>
@@ -572,11 +572,10 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>description......</description>
-    <size>(1,2)</size>
+    <description>Belt Chute/hopper is used for pawns or drones to fill a facing belt without need for a stockpile and a puller. Basicly its a small stockpile that automaticly push onto a belt.</description>
+    <size>(1,1)</size>
      <tickerType>Normal</tickerType>
      <placeWorkers>
-     
      <li>ProjectRimFactory.Storage.PlaceWorker_ItemSlide</li>
      </placeWorkers>
     <rotatable>true</rotatable>
