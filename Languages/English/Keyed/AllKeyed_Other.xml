@@ -39,6 +39,7 @@
   <IOPort_Maximum_UseTooltip>When this is enabled, the I/O port will stop taking items if either the stack is full, or the stack size is greater than or equal to X.</IOPort_Maximum_UseTooltip>
 
   <PRFNoDesc>No description.</PRFNoDesc>
+  <PRF_PlaceWorker_ItemSlide_Denied>Can't place next to another Item chute</PRF_PlaceWorker_ItemSlide_Denied>
 
   <PaperclipFuelConsumption>Fuel consumption: {0} EMC/second</PaperclipFuelConsumption>
   <PaperclipProductionPerSecond>EMC production: {0} EMC/second</PaperclipProductionPerSecond>

@@ -91,6 +91,26 @@ namespace ProjectRimFactory.Storage
 
     class PlaceWorker_ItemSlide : PlaceWorker
     {
+        public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null, Thing thing = null)
+        {
+            AcceptanceReport acceptanceBase = base.AllowsPlacing(checkingDef, loc, rot, map, thingToIgnore, thing);
+            if (acceptanceBase.Accepted)
+            {
+                //Check if the traget is another slide
+                IntVec3 outputCell = loc + rot.FacingCell;
+                List<Thing> thingList = map.thingGrid.ThingsListAt(outputCell);
+                if( thingList.Where(t => t is Building_ItemSlide || t.def.entityDefToBuild == checkingDef).Any()) return new AcceptanceReport("PRF_PlaceWorker_ItemSlide_Denied".Translate());
+             
+                //Check if there is a slide placing there
+                if ( GenAdj.CellsAdjacentCardinal(loc,rot, checkingDef.Size).Where(c => map.thingGrid.ThingsListAt(c).Where(t => (t is Building_ItemSlide || t.def.entityDefToBuild == checkingDef) && (t.Position + t.Rotation.FacingCell == loc) ).Any()).Any() )
+                {
+                    return new AcceptanceReport("PRF_PlaceWorker_ItemSlide_Denied".Translate());
+                }
+            }
+                        
+            return acceptanceBase;
+        }
+
         public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
         {
 
