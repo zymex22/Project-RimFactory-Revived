@@ -224,7 +224,10 @@ namespace ProjectRimFactory.Common
         {
             if (this.RangeSetting)
             {
-                return this.RangeCells(this.parent.Position, RangeTypeRot, this.parent.def, this.GetRange());
+                //While adding a inBounds Check here might seem like a good idea doing so creates a risk to miss bugs.
+                //We currently use many base Game functions as a fallback. those do not check for Bounds.
+                //We should consider to implement a Class dedicated to this Job (When his is done we shall reconsider each check made in this commit / #314)
+                return this.RangeCells(this.parent.Position, RangeTypeRot, this.parent.def, this.GetRange())/*.Where(c => c.InBounds(this.parent.Map))*/;
             }
             return null;
         }

@@ -180,6 +180,8 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 return false;
             }
+            //Check if Output is in Bounds
+            if (!OutputCell().InBounds(this.Map)) return false;
 
             return true;
         }
@@ -402,7 +404,8 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else
             {
-                MapManager.AfterAction(30, this.Placing);
+                // If we are still Placing, try again in 30
+                if (this.State == WorkingState.Placing) MapManager.AfterAction(30, this.Placing);
             }
         }
 
