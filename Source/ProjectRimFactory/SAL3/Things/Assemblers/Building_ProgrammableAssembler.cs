@@ -166,7 +166,23 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                     action = () => Find.WindowStack.Add(new FloatMenu(GetDebugOptions().ToList()))
                 };
             }
+            yield return new Command_Action
+            {
+                action = MakeMatchingStockpileZone,
+                hotKey = KeyBindingDefOf.Misc1,
+                defaultDesc = "DesignatorZoneCreateStorageResourcesDesc".Translate(),
+                icon = ContentFinder<Texture2D>.Get("UI/Designators/ZoneCreate_Stockpile"),
+                defaultLabel = "PRF_MakeStockpileZoneLabel".Translate()
+            };
         }
+
+        private void MakeMatchingStockpileZone()
+        {
+            Designator_ZoneAddStockpile_Resources stockpileZone = new Designator_ZoneAddStockpile_Resources();
+            stockpileZone.DesignateMultiCell(IngredientStackCells.Where(c => c != OutputComp.CurrentCell));
+        }
+
+
         public CompOutputAdjustable OutputComp
         {
             get

@@ -72,7 +72,7 @@
 <PRF_RecipeTab_Button_Forget>Forget</PRF_RecipeTab_Button_Forget>
 <PRF_RecipeTab_Button_Abort>({0}) Abort</PRF_RecipeTab_Button_Abort>
 
-
+<PRF_MakeStockpileZoneLabel>Create Stockpile Zone</PRF_MakeStockpileZoneLabel>
 
   <PRF_TimeLeftToDisintegrate>Time left until disintegrate: {0}</PRF_TimeLeftToDisintegrate>
   <PRF_DisintegrationMessage>{0} has disintegrated.</PRF_DisintegrationMessage>
