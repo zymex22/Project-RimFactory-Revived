@@ -428,6 +428,36 @@ public static bool TryGetDefaultBonusYield(List<Thing> products, ModExtension_Mo
             return true;
         }
 #endif
+
+        //This shall return a String ontaining a Human readable interpretation of the Chances Set
+        //Implementation is incomplete focus is on Miners for #335
+        public string GetBonusOverview_Text()
+        {
+            string data = "";
+
+            if (replaceOrigProduct)
+            {
+                data += "PRF_ModifyProduct_ReplaceChance".Translate(bonusYields.chance * 100);
+            }
+            else
+            {
+                data += "PRF_ModifyProduct_AdditionalChance".Translate(bonusYields.chance * 100);
+            }
+
+            float totalWeight = bonusYields.bonuses.Sum(b => b.Weight);
+
+            foreach ( BonusYield bonus in bonusYields.bonuses)
+            {
+                //Canr use .Translate() directly here as it can't handle {0,-20}
+                data += String.Format("    - {0,-20} \t{1} {2:G3}%\r\n",bonus.def.LabelCap + " x" + bonus.Count, "PRF_ModifyProduct_Percent".Translate(), (bonus.Weight / totalWeight) * 100);
+            }
+
+            return data;
+        }
+
+
+
+
     }
 
     // Another approach that makes pretty XML, so I kept it around (altho it's much more limited)

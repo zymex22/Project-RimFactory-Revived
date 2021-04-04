@@ -119,6 +119,52 @@ namespace ProjectRimFactory {
             return false;
         }
 
+
+        //Ensurs that UpdateThingDescriptions() is only run once.
+        private static bool updatedThingDescriptions = false;
+
+        //Updates the description of Things with ModExtension_ModifyProduct & ModExtension_Miner
+        //It is executed here a it needs to run after all [StaticConstructorOnStartup] have been called 
+        private void UpdateThingDescriptions()
+        {
+            updatedThingDescriptions = true;
+            List<ThingDef> thingDefs = DefDatabase<ThingDef>.AllDefs.Where(d => (d.thingClass == typeof(Industry.Building_DeepQuarry) || d.thingClass == typeof(Building_WorkTable) || d.thingClass == typeof(AutoMachineTool.Building_Miner)) && d.HasModExtension<ModExtension_ModifyProduct>()).ToList();
+            foreach(ThingDef thing in thingDefs)
+            {
+                if (thing != null)
+                {
+                    string HelpText = "\r\n\r\n";
+                    if (thing.recipes != null)
+                    {
+                        HelpText += "PRF_DescriptionUpdate_CanMine".Translate() ;
+                        foreach (RecipeDef recipeDef in thing.recipes)
+                        {
+                            HelpText += String.Format("    - {0} x{1}\r\n", recipeDef.products?[0]?.Label, recipeDef.products?[0]?.count);
+                        }
+                        HelpText += "\r\n\r\n";
+                    }
+
+                    //Get Items that Building_DeepQuarry can Produce
+                    if (thing.thingClass == typeof(Industry.Building_DeepQuarry))
+                    {
+                        List<ThingDef> rocks = Industry.Building_DeepQuarry.PossibleRockDefCandidates.Where(d => !thing.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.building.mineableThing) ?? true).ToList();
+                        HelpText += "PRF_DescriptionUpdate_CanMine".Translate();
+                        foreach (ThingDef rock in rocks)
+                        {
+                            HelpText += String.Format("    - {0} x{1}\r\n", rock.LabelCap , rock.building.mineableYield);
+                        }
+                        HelpText += "\r\n\r\n";
+                    }
+
+
+                        HelpText += thing.GetModExtension<ModExtension_ModifyProduct>()?.GetBonusOverview_Text();
+                    thing.description += HelpText;
+                }
+            }
+
+        }
+
+
         public override void LoadedGame()
         {
             base.LoadedGame();
@@ -135,7 +181,16 @@ namespace ProjectRimFactory {
                 }
             }
 #endif
+            if (updatedThingDescriptions == false) UpdateThingDescriptions();
 
+           
+
+        }
+
+        public override void StartedNewGame()
+        {
+            base.StartedNewGame();
+            if (updatedThingDescriptions == false) UpdateThingDescriptions();
         }
 
         /*
