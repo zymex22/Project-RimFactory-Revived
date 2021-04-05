@@ -211,11 +211,12 @@
         <price>Expensive</price>
         <countRange>0~4</countRange>
       </li>
-      <li Class="StockGenerator_SingleDef">
-        <thingDef>GeothermalGenerator</thingDef>
-        <price>Expensive</price>
-        <countRange>0~1</countRange>
-      </li>
+      <!-- Can only be added when Minify Everything is installed. causes constant error spam after buy if not-->
+      <!-- <li Class="StockGenerator_SingleDef"> -->
+        <!-- <thingDef>GeothermalGenerator</thingDef> -->
+        <!-- <price>Expensive</price> -->
+        <!-- <countRange>0~1</countRange> -->
+      <!-- </li> -->
       <!-- Other Vanilla stuff -->
       <li Class="StockGenerator_SingleDef">
         <thingDef>BiofuelRefinery</thingDef>
