@@ -37,7 +37,7 @@ namespace ProjectRimFactory.Industry
             fuel = GetComp<CompRefuelable>();
         }
 
-        protected static IEnumerable<ThingDef> PossibleRockDefCandidates
+        public static IEnumerable<ThingDef> PossibleRockDefCandidates
         {
             get
             {

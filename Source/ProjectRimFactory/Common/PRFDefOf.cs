@@ -44,6 +44,9 @@ namespace ProjectRimFactory.Common
         public static ThingDef Paperclip;
         public static ThingDef PRFDrone;
         public static ThingDef PRF_DroneModule;
+        public static ThingDef Column;
+        public static ThingDef PRF_MiniDroneColumn;
+
 
         //Reserch Projeckts
         public static ResearchProjectDef PRF_BasicDrones;

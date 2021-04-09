@@ -24,6 +24,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected bool takeForbiddenItems=true;
         protected bool takeSingleItems = false;
         public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
+        protected const float defaultWorkAmount = 120f;
 
         private string GetGraphicName()
         {
@@ -175,7 +176,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
-            workAmount = 120;
+            workAmount = Building_ItemPuller.defaultWorkAmount; // 120
             target = TargetThing();
             if (target?.Spawned == true) target.DeSpawn();
             return target != null;
@@ -200,6 +201,16 @@ namespace ProjectRimFactory.AutoMachineTool
                         t.SetForbidden(false);
             }
             base.Placing();
+        }
+        public override bool AcceptsThing(Thing newThing, IPRF_Building giver)
+        {
+            if (this.State == WorkingState.Ready) {
+                this.ClearActions();
+                if (newThing.Spawned) newThing.DeSpawn();
+                this.ForceStartWork(newThing, defaultWorkAmount);
+                return true;
+            }
+            return false;
         }
 
         static Building_ItemPuller()

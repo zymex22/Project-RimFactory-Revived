@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LanguageData>
   <PRF_PlaceWorker_NaturalWall_denied>Must Place in Natual or Smoothed Rock</PRF_PlaceWorker_NaturalWall_denied>
-  <PRF_PlaceWorker_NaturalWall_denied_ReplaceStuff>Must Place in Smoothed Rock (Replace Stuff Incompaibility)</PRF_PlaceWorker_NaturalWall_denied_ReplaceStuff>
   <PRF_PlaceWorker_GrowZonePuller>Input Cell must touch a Growzone</PRF_PlaceWorker_GrowZonePuller>
-  
+  <PRF_PlaceWorker_ItemSlide_Denied>Can't place next to another Item chute</PRF_PlaceWorker_ItemSlide_Denied>
   
   <PRF_SettingsITab_TipSignal_RotInputRange>Rotate the Input Range Clockwise</PRF_SettingsITab_TipSignal_RotInputRange>
   <PRF_DropThing>Drop {0}</PRF_DropThing>
@@ -39,7 +38,6 @@
   <IOPort_Maximum_UseTooltip>When this is enabled, the I/O port will stop taking items if either the stack is full, or the stack size is greater than or equal to X.</IOPort_Maximum_UseTooltip>
 
   <PRFNoDesc>No description.</PRFNoDesc>
-  <PRF_PlaceWorker_ItemSlide_Denied>Can't place next to another Item chute</PRF_PlaceWorker_ItemSlide_Denied>
 
   <PaperclipFuelConsumption>Fuel consumption: {0} EMC/second</PaperclipFuelConsumption>
   <PaperclipProductionPerSecond>EMC production: {0} EMC/second</PaperclipProductionPerSecond>
@@ -74,6 +72,13 @@
 <PRF_RecipeTab_Button_Forget>Forget</PRF_RecipeTab_Button_Forget>
 <PRF_RecipeTab_Button_Abort>({0}) Abort</PRF_RecipeTab_Button_Abort>
 
+
+
+<PRF_DescriptionUpdate_CanMine>Can Mine: \n</PRF_DescriptionUpdate_CanMine>
+<PRF_ModifyProduct_AdditionalChance>{0}% Chance for additional:\n</PRF_ModifyProduct_AdditionalChance>
+<PRF_ModifyProduct_ReplaceChance>{0}% Chance to Replace with:\n</PRF_ModifyProduct_ReplaceChance>
+<PRF_ModifyProduct_Percent>Chance:</PRF_ModifyProduct_Percent>
+<PRF_MakeStockpileZoneLabel>Create Stockpile Zone</PRF_MakeStockpileZoneLabel>
 
 
   <PRF_TimeLeftToDisintegrate>Time left until disintegrate: {0}</PRF_TimeLeftToDisintegrate>

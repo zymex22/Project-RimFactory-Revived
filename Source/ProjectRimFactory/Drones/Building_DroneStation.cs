@@ -58,7 +58,14 @@ namespace ProjectRimFactory.Drones
 
         public override int ListPriority => 3000;
 
-        public override bool Mutable => true;
+        private bool mutable = false;
+
+        public override bool Mutable => mutable;
+
+        public void SetMutable(bool val)
+        {
+            mutable = val;
+        }
 
         public override string GetUniqueLoadID()
         {
@@ -137,7 +144,7 @@ namespace ProjectRimFactory.Drones
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab, IPRF_SettingsContentLink
+    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab, IPRF_SettingsContentLink, IAdditionalPowerConsumption
     {
         //Sleep Time List (Loaded on Spawn)
         public string[] cachedSleepTimeList;
@@ -183,6 +190,8 @@ namespace ProjectRimFactory.Drones
 
         }
 
+        Dictionary<string, int> IAdditionalPowerConsumption.AdditionalPowerConsumption => new Dictionary<string, int> { { "Drone Count", (int)refuelableComp.Fuel * 10 } };
+
         private CompPowerWorkSetting compPowerWorkSetting;
 
         public IEnumerable<IntVec3> StationRangecells
@@ -221,7 +230,7 @@ namespace ProjectRimFactory.Drones
 
                     foreach (IntVec3 cell in StationRangecells)
                     {
-                        droneArea[cell] = true;
+                        if(cell.InBounds(this.Map)) droneArea[cell] = true;
                     }
 
                     //Not shure if i need that but just to be shure
@@ -244,6 +253,7 @@ namespace ProjectRimFactory.Drones
 
             if (!StationRangecells_old.SequenceEqual(StationRangecells))
             {
+                ((DroneArea)droneAllowedArea).SetMutable(true);
                 droneAllowedArea.Delete();
                 
                 droneAllowedArea = (Area)GetDroneAllowedArea;
@@ -413,6 +423,7 @@ namespace ProjectRimFactory.Drones
             if (droneAllowedArea != null)
             {
                 //Deleate the old Zone
+                ((DroneArea)droneAllowedArea).SetMutable(true);
                 droneAllowedArea.Delete();
             }
             

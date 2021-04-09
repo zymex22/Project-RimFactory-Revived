@@ -156,7 +156,7 @@ namespace ProjectRimFactory.Industry
     {
         static RegisterVanillaMortarsAsRefuelable()
         {
-            if (!ModLister.HasActiveModWithName("Project RimFactory Revived")) return;
+            if (!ModLister.HasActiveModWithName("Project RimFactory Revived") && !ModLister.HasActiveModWithName("Project RimFactory Lite")) return;
             // This gets the PRF Building_FuelingMachine from our assembly - it works from any mod's
             //   assembly!
             Type refueler = Type.GetType("ProjectRimFactory.Industry.Building_FuelingMachine, ProjectRimFactory", false);

@@ -26,6 +26,12 @@ namespace ProjectRimFactory {
         ///   you absolutely positively have to put it down.</param>
         public static bool PRFTryPlaceThing(this IPRF_Building placer, Thing t, IntVec3 cell, Map map,
             bool forcePlace = false) {
+            if (!cell.InBounds(map))
+            {
+                Log.Error("PRF Error Attempting to place Thing out of bounds.");
+                return false;
+            }
+
             // Storage:
             SlotGroup slotGroup = cell.GetSlotGroup(map);
             if (slotGroup != null) {

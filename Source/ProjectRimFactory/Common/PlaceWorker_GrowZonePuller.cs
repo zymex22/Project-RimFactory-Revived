@@ -15,7 +15,7 @@ namespace ProjectRimFactory.Common
             IntVec3 inputCell;
             inputCell = loc + rot.Opposite.FacingCell;
 
-            if (inputCell.GetZone(map) is Zone_Growing)
+            if (inputCell.InBounds(map) && inputCell.GetZone(map) is Zone_Growing)
             {
                 return AcceptanceReport.WasAccepted;
             }
