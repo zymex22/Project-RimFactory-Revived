@@ -19,6 +19,7 @@
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <clearBuildingArea>false</clearBuildingArea>
     <passability>Standable</passability>
+    <canOverlapZones>true</canOverlapZones>
     <costList>
       <Steel>2</Steel>
       <Silver>1</Silver>
