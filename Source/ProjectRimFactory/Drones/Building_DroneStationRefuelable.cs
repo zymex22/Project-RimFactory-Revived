@@ -6,10 +6,11 @@ using System.Text;
 using UnityEngine;
 using Verse;
 using Verse.AI;
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.Drones
 {
-    public class Building_DroneStationRefuelable : Building_WorkGiverDroneStation
+    public class Building_DroneStationRefuelable : Building_WorkGiverDroneStation, IAdditionalPowerConsumption
     {
         public override void PostMake()
         {
@@ -24,6 +25,8 @@ namespace ProjectRimFactory.Drones
                 return Mathf.RoundToInt(refuelableComp.Fuel) - spawnedDrones.Count;
             }
         }
+
+        Dictionary<string, int> IAdditionalPowerConsumption.AdditionalPowerConsumption => new Dictionary<string, int> { { "Drone Count", (int)(refuelableComp?.Fuel ?? 0) * 10 } };
 
         public override void Notify_DroneLost()
         {

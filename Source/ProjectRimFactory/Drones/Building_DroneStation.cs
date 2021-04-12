@@ -144,7 +144,7 @@ namespace ProjectRimFactory.Drones
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab, IPRF_SettingsContentLink, IAdditionalPowerConsumption
+    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab, IPRF_SettingsContentLink
     {
         //Sleep Time List (Loaded on Spawn)
         public string[] cachedSleepTimeList;
@@ -190,7 +190,7 @@ namespace ProjectRimFactory.Drones
 
         }
 
-        Dictionary<string, int> IAdditionalPowerConsumption.AdditionalPowerConsumption => new Dictionary<string, int> { { "Drone Count", (int)refuelableComp.Fuel * 10 } };
+        
 
         private CompPowerWorkSetting compPowerWorkSetting;
 
