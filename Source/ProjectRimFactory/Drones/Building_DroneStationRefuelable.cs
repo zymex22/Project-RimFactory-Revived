@@ -31,10 +31,29 @@ namespace ProjectRimFactory.Drones
         public override void Notify_DroneLost()
         {
             refuelableComp.ConsumeFuel(1);
+            RangePowerSupplyMachine?.RefreshPowerStatus();
         }
         public override void Notify_DroneGained()
         {
             refuelableComp.Refuel(1);
+            RangePowerSupplyMachine?.RefreshPowerStatus();
+        }
+
+        private int last_fuel_cnt = 0;
+
+        public override void Tick()
+        {
+            base.Tick();
+
+            if (this.IsHashIntervalTick(60))
+            {
+                if (last_fuel_cnt != refuelableComp.Fuel)
+                {
+                    last_fuel_cnt = (int)refuelableComp.Fuel;
+                    RangePowerSupplyMachine?.RefreshPowerStatus();
+                }
+
+            }
         }
     }
 }
