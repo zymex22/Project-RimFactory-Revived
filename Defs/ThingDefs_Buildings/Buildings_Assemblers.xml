@@ -70,6 +70,60 @@ Mod extennsion for assemblers
     <defName>PRF_AssemblerGroup</defName>
   </DesignatorDropdownGroupDef>
 
+
+
+  <!--==================== Logic Controller ====================-->
+  <ThingDef ParentName="PRF_BuildingBase">
+    <defName>PRF_LogicController</defName>
+    <label>Logic Controller</label>
+    <thingClass>ProjectRimFactory.Industry.LogicController</thingClass>
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
+    <graphicData>
+      <texPath>SAL3/DISK_HARDWARE4</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <uiIconScale>0.7</uiIconScale>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>800</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <MarketValue>1140</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Mass>15</Mass>
+    </statBases>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <description>Some Words.....</description>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <Steel>20</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <PRF_DataDisk>1</PRF_DataDisk>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <neverMultiSelect>true</neverMultiSelect>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Industry.ITab_LogicController</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+
+
+
   <!--====================AssemblerBase====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
   <ThingDef Name="PRF_AssemblerBase" ParentName="PRF_BuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRF_BuildingBase -->
     <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->

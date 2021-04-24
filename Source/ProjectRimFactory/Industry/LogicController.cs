@@ -405,14 +405,57 @@ namespace ProjectRimFactory.Industry
 
         private Tree logicTree;
 
-
+        public LogicSignal(Tree tree)
+        {
+            logicTree = tree;
+        }
 
     }
-    
-    
-    
-    class LogicController
+
+
+
+    class LogicController : Building
     {
+        //List of Values to be used in leaf_Logics
+        public List<ValueRefrence> valueRefrences = new List<ValueRefrence>();
+        //Comparisions between valueRefrences that yield True or False. To be used in the Algebra of LogicSignals Trees
+        public List<Leaf_Logic> leaf_Logics = new List<Leaf_Logic>();
+        //Complete Logic Signals
+        public List<LogicSignal> LogicSignals = null;
+
+
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            base.DeSpawn(mode);
+        }
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+
+            Scribe_Deep.Look(ref LogicSignals, "signals", new object[] { this });
+            Scribe_Deep.Look(ref leaf_Logics, "leaf_Logics", new object[] { this });
+            Scribe_Deep.Look(ref valueRefrences, "valueRefrences", new object[] { this });
+        }
+
+        public override IEnumerable<Gizmo> GetGizmos()
+        {
+            return base.GetGizmos();
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            if (LogicSignals == null)
+            {
+                LogicSignals = new List<LogicSignal>();
+            }
+        }
+
+        public override void Tick()
+        {
+            base.Tick();
+        }
     }
 
 
