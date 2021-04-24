@@ -45,6 +45,9 @@ namespace ProjectRimFactory.Industry
     abstract class ValueRefrence : ILogicObjeckt
     {
         abstract public int Value { get; set; }
+
+        abstract public string Name { get; set; }
+
     }
 
     /// <summary>
@@ -54,11 +57,15 @@ namespace ProjectRimFactory.Industry
     class ValueRefrence_Fixed : ValueRefrence
     {
         private int pvalue;
-        public override int Value { get => pvalue; set => pvalue = value; }
 
-        public ValueRefrence_Fixed(int initalVal = 0)
+        private string name;
+        public override int Value { get => pvalue; set => pvalue = value; }
+        public override string Name { get => name; set => name = value; }
+
+        public ValueRefrence_Fixed(int initalVal = 0, string Name = "ValueRefrence_Fixed")
         {
             pvalue = initalVal;
+            name = Name;
         }
     }
 
@@ -73,6 +80,7 @@ namespace ProjectRimFactory.Industry
         /// </summary>
         public LogicSignal logicSignal;
 
+        public override string Name { get => logicSignal.Name; set => throw new NotImplementedException(); }
         public override int Value { get => logicSignal.Value; set => throw new NotImplementedException(); }
 
         public ValueRefrence_Signal(LogicSignal signal)
@@ -88,6 +96,10 @@ namespace ProjectRimFactory.Industry
     class ValueRefrence_ThingCount : ValueRefrence
     {
         public override int Value { get => storage.GetItemCount(filter,map); set => throw new NotImplementedException(); }
+
+        private string name;
+
+        public override string Name { get => name; set => name = value; }
 
         //Holds the filter
         public ThingFilter filter;
