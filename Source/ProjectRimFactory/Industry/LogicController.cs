@@ -1,0 +1,423 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using RimWorld;
+using Verse;
+
+
+namespace ProjectRimFactory.Industry
+{
+
+    // grouping
+    // (A && B) || C
+    // (A && B) is a group
+
+    //Logic
+    //And
+    // A && B
+    //
+    //Or
+    // A || B
+
+    //Refrences / Compare
+    //We compare The counts of thing Filters and unser defined Values
+    //
+    //User Defined Value
+    // 1; 55; 100;
+    //
+    //Thing filter
+    //Can be restricted to a Zone / Building_Storage
+    // Components in DSU
+    // Steel on the Map
+    //
+    //Can also be a signal
+
+    //Interface for Logic Ojeckts
+    //A Logic Ojeckt is a Opjeckt that can Compared with: == != < > <= >=
+    public interface ILogicObjeckt
+    {
+        public int Value { get; }
+    }
+
+    //Base Class
+    abstract class ValueRefrence : ILogicObjeckt
+    {
+        abstract public int Value { get; set; }
+    }
+
+    /// <summary>
+    /// ValueRefrence_Fixed Is a Possible Object for the Leaf_Logic Constructor
+    /// This one is Used for Fixed Values that the user can Enter
+    /// </summary>
+    class ValueRefrence_Fixed : ValueRefrence
+    {
+        private int pvalue;
+        public override int Value { get => pvalue; set => pvalue = value; }
+
+        public ValueRefrence_Fixed(int initalVal = 0)
+        {
+            pvalue = initalVal;
+        }
+    }
+
+    /// <summary>
+    /// ValueRefrence_Fixed Is a Possible Object for the Leaf_Logic Constructor
+    /// This one is Used for Refrencing Logic Signals
+    /// </summary>
+    class ValueRefrence_Signal : ValueRefrence
+    {
+        /// <summary>
+        /// The Idea is that if this is public then i dont need a new objeck if the user wants to change the Signal
+        /// </summary>
+        public LogicSignal logicSignal;
+
+        public override int Value { get => logicSignal.Value; set => throw new NotImplementedException(); }
+
+        public ValueRefrence_Signal(LogicSignal signal)
+        {
+            logicSignal = signal;
+        }
+    }
+
+    /// <summary>
+    /// ValueRefrence_Fixed Is a Possible Object for the Leaf_Logic Constructor
+    /// This one is Used for Comparing against Thing Counts within a predefind zone
+    /// </summary>
+    class ValueRefrence_ThingCount : ValueRefrence
+    {
+        public override int Value { get => storage.GetItemCount(filter,map); set => throw new NotImplementedException(); }
+
+        //Holds the filter
+        public ThingFilter filter;
+
+        public StorageLocation storage;
+
+
+        private Map map;
+
+
+        public ValueRefrence_ThingCount(ThingFilter thingFilter, StorageLocation storageLocation, Map thismap)
+        {
+            filter = thingFilter;
+            storage = storageLocation;
+            map = thismap;
+        }
+
+    }
+
+    class StorageLocation
+    {
+        private Zone_Stockpile stockpile_zone = null;
+        private Building_Storage storage_building = null;
+
+        public string GetLocationName(Map map)
+        {
+            if (stockpile_zone != null) return stockpile_zone.label;
+            if (storage_building != null) return storage_building.Label;
+            return "Entire Map";
+        }
+
+        public int GetItemCount(ThingFilter filter , Map map)
+        {
+            int returnval = 0;
+            if (stockpile_zone == null && storage_building == null)
+            {
+                foreach (ThingDef thing in filter.AllowedThingDefs)
+                {
+                    returnval += map.resourceCounter.GetCount(thing);
+                }
+            }
+            else if (stockpile_zone != null)
+            {
+                returnval = stockpile_zone.AllContainedThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
+            }
+            else if  (storage_building != null)
+            {
+                returnval = storage_building.slotGroup.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
+            }
+            return returnval;
+
+
+
+        }
+
+    }
+
+
+
+
+    /// <summary>
+    /// Logic Operators for Leaf_Logic
+    ///  == != < > <= >=
+    /// </summary>
+    enum EnumCompareOperator
+    {
+        Equal,
+        NotEqual,
+        Greater,
+        Smaller,
+        GreaterEqual,
+        SmallerEqual
+    }
+    
+    /// <summary>
+    /// This is is What's behin 'A' and 'B' in: A AND B
+    /// 
+    /// </summary>
+    class Leaf_Logic
+    {
+        private ILogicObjeckt value1;
+        private ILogicObjeckt value2;
+        private EnumCompareOperator op;
+
+        public virtual bool GetVerdict()
+        {
+            switch (op)
+            {
+                case EnumCompareOperator.Equal: return value1.Value == value2.Value;
+                case EnumCompareOperator.Greater: return value1.Value > value2.Value;
+                case EnumCompareOperator.GreaterEqual: return value1.Value >= value2.Value;
+                case EnumCompareOperator.NotEqual: return value1.Value != value2.Value;
+                case EnumCompareOperator.Smaller: return value1.Value < value2.Value;
+                case EnumCompareOperator.SmallerEqual: return value1.Value <= value2.Value;
+                default:
+                    Log.Message("FATAL");
+                    return false;
+            }
+        }
+
+        public Leaf_Logic(ILogicObjeckt obj1, ILogicObjeckt obj2, EnumCompareOperator eoperator)
+        {
+            value1 = obj1;
+            value2 = obj2;
+            op = eoperator;
+        }
+
+
+    }
+
+
+    enum EnumBinaryAlgebra
+    {
+        bNA,
+        bOR,
+        bAND,
+        bNOT,
+        bBracketOpen,
+        bBracketClose
+
+    }
+
+    /// <summary>
+    /// None of the Expression Tree
+    /// </summary>
+    class Tree_node
+    {
+        public bool IsLeaf
+        {
+            get
+            {
+                if (Left == null && Right == null) return true;
+                return false;
+            }
+        }
+
+        public Nullable<bool> Value = null;
+        public EnumBinaryAlgebra Algebra = EnumBinaryAlgebra.bNA;
+
+        public Tree_node Left = null;
+        public Tree_node Right = null;
+
+        public Tree_node(EnumBinaryAlgebra algebra, Nullable<bool> Value )
+        {
+            this.Algebra = algebra;
+            this.Value = Value;
+        }
+
+    }
+
+
+    //The entire Tree
+    class Tree
+    {
+        Tree_node rootNode;
+
+        //Constructs a Tree from Postfix (RPN)
+        private static Tree_node BuildTree(List<Tree_node> input)
+        {
+            Stack<Tree_node> mystack = new Stack<Tree_node>();
+            for (int i = 0; i < input.Count; i++)
+            {
+                Tree_node elenet = input[i];
+                if (elenet.Algebra == EnumBinaryAlgebra.bNA)
+                {
+                    mystack.Push(elenet);
+                }
+                else
+                {
+                    //Adding the not special Code
+                    if (elenet.Algebra == EnumBinaryAlgebra.bNOT)
+                    {
+                        elenet.Right = mystack.Pop();
+                    }
+                    else
+                    {
+                        elenet.Right = mystack.Pop();
+                        elenet.Left = mystack.Pop();
+                    }
+                    mystack.Push(elenet);
+                }
+            }
+            return mystack.Pop();
+        }
+
+        //Converst to Postfix (RPN)
+        private static List<Tree_node> ConvertToPostfix(List<Tree_node> input)
+        {
+
+            List<Tree_node> returnList = new List<Tree_node>();
+            Stack<Tree_node> myStack = new Stack<Tree_node>();
+
+            for (int i = 0; i < input.Count; i++)
+            {
+                Tree_node Celement = input[i];
+                if (Celement.Algebra == EnumBinaryAlgebra.bBracketOpen)
+                {
+                    myStack.Push(Celement);
+                }
+                else if (Celement.Algebra == EnumBinaryAlgebra.bNA)
+                {
+                    returnList.Add(Celement);
+                }
+                else if (Celement.Algebra != EnumBinaryAlgebra.bBracketClose)
+                {
+                myMarker:
+                    if (myStack.Count == 0)
+                    {
+                        myStack.Push(Celement);
+                    }
+                    else
+                    {
+                        if (Celement.Algebra > myStack.Peek().Algebra)
+                        {
+                            myStack.Push(Celement);
+                        }
+                        else
+                        {
+                            returnList.Add(myStack.Pop());
+                            goto myMarker;
+                        }
+                    }
+                }
+                else //Can only be Closing bracket
+                {
+                    while (myStack.Peek().Algebra != EnumBinaryAlgebra.bBracketOpen)
+                    {
+                        returnList.Add(myStack.Pop());
+                    }
+                    myStack.Pop();
+                }
+            }
+
+            while (myStack.Count > 0)
+            {
+                returnList.Add(myStack.Pop());
+            }
+
+            return returnList;
+        }
+
+
+        public bool EvaluateTree()
+        {
+            return Eval(rootNode) ?? false;
+        }
+
+
+        private static Nullable<bool> Eval(Tree_node node)
+        {
+
+            if (node == null) return null;
+            if (node.IsLeaf)
+            {
+                return node.Value ?? false;
+            }
+
+            Nullable<bool> right = Eval(node.Right);
+            Nullable<bool> left = Eval(node.Left);
+
+            switch (node.Algebra)
+            {
+                case EnumBinaryAlgebra.bAND:
+                    return (right ?? false) && (left ?? false);
+                case EnumBinaryAlgebra.bOR:
+                    return (right ?? false) || (left ?? false);
+                case EnumBinaryAlgebra.bNOT:
+                    if (right != null)
+                    {
+                        return !(bool)right;
+                    }
+                    else if (left != null)
+                    {
+                        return !(bool)left;
+                    }
+                    else
+                    {
+                        Log.Message("FATAL");
+                        return false;
+                    }
+                default:
+                    Log.Message("FATAL");
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// Constructs the Tree
+        /// </summary>
+        /// <param name="input">Infix Expression</param>
+        public Tree(List<Tree_node> input)
+        {
+            rootNode = BuildTree(ConvertToPostfix(input));
+        }
+
+    }
+
+
+
+    class LogicSignal : ILogicObjeckt
+    {
+        //Name of the Logic Signal
+        public string Name = "Logic Signal";
+
+        //The true false Value of the signal
+        private bool Value_bool = false;
+
+        public int Value
+        {
+            get
+            {
+                return Value_bool ? 1 : 0;
+            }
+        }
+
+        private Tree logicTree;
+
+
+
+    }
+    
+    
+    
+    class LogicController
+    {
+    }
+
+
+
+
+
+
+}
