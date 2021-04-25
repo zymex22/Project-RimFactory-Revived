@@ -18,9 +18,12 @@ namespace ProjectRimFactory.AutoMachineTool
             if (loc.GetThingList(map)
                 .Where(t => t.def.category == ThingCategory.Building)
                 .Where(t => t.def.building != null)
+                // This keeps natural (unworked/un-smoothed) rocks from also qualifying:
                 .Where(t => !t.def.building.isNaturalRock)
                 .Where(t => t.def.passability == Traversability.Impassable)
-                .Any(t => (t.def.graphicData.linkFlags & LinkFlags.Wall) == LinkFlags.Wall))
+                // Walls or (Smoothed) Rocks:  (smoothed rocks are !.isNaturalRock)
+                .Any(t => (t.def.graphicData.linkFlags & LinkFlags.Wall) > 0    //walls
+                       || (t.def.graphicData.linkFlags & LinkFlags.Rock) > 0))  //smoothed rocks
             {
                 return AcceptanceReport.WasAccepted;
             }
