@@ -39,6 +39,7 @@ namespace ProjectRimFactory.Industry
     public interface ILogicObjeckt
     {
         public int Value { get; }
+        public string Name { get; set; }
     }
 
     //Base Class
@@ -47,6 +48,9 @@ namespace ProjectRimFactory.Industry
         abstract public int Value { get; set; }
 
         abstract public string Name { get; set; }
+
+        abstract public bool Visible { get; }
+
 
     }
 
@@ -62,8 +66,12 @@ namespace ProjectRimFactory.Industry
         public override int Value { get => pvalue; set => pvalue = value; }
         public override string Name { get => name; set => name = value; }
 
-        public ValueRefrence_Fixed(int initalVal = 0, string Name = "ValueRefrence_Fixed")
+        private bool visible = true;
+        public override bool Visible => visible;
+
+        public ValueRefrence_Fixed(int initalVal = 0, string Name = "ValueRefrence_Fixed" , bool vis = true)
         {
+            visible = vis;
             pvalue = initalVal;
             name = Name;
         }
@@ -82,6 +90,9 @@ namespace ProjectRimFactory.Industry
 
         public override string Name { get => logicSignal.Name; set => throw new NotImplementedException(); }
         public override int Value { get => logicSignal.Value; set => throw new NotImplementedException(); }
+
+        private bool visible = true;
+        public override bool Visible => visible;
 
         public ValueRefrence_Signal(LogicSignal signal)
         {
@@ -109,6 +120,8 @@ namespace ProjectRimFactory.Industry
 
         private Map map;
 
+        private bool visible = true;
+        public override bool Visible => visible;
 
         public ValueRefrence_ThingCount(ThingFilter thingFilter, StorageLocation storageLocation, Map thismap, string Name = "ValueRefrence_ThingCount")
         {
@@ -154,7 +167,7 @@ namespace ProjectRimFactory.Industry
     }
 
 
-
+    
 
     /// <summary>
     /// Logic Operators for Leaf_Logic
@@ -176,9 +189,17 @@ namespace ProjectRimFactory.Industry
     /// </summary>
     class Leaf_Logic
     {
+        private string name = "Leaf_Logic";
+        public string Name { get => name; set => name = value; }
+
         private ILogicObjeckt value1;
         private ILogicObjeckt value2;
         private EnumCompareOperator op;
+
+        public ILogicObjeckt Value1 { get => value1; set => value1 = value; }
+        public ILogicObjeckt Value2 { get => value2; set => value2 = value; }
+        public EnumCompareOperator Operator { get => op; set => op = value; }
+
 
         public virtual bool GetVerdict()
         {
@@ -196,11 +217,12 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        public Leaf_Logic(ILogicObjeckt obj1, ILogicObjeckt obj2, EnumCompareOperator eoperator)
+        public Leaf_Logic(ILogicObjeckt obj1, ILogicObjeckt obj2, EnumCompareOperator eoperator, string initName = "Leaf_Logic")
         {
             value1 = obj1;
             value2 = obj2;
             op = eoperator;
+            name = initName;
         }
 
 
@@ -411,6 +433,8 @@ namespace ProjectRimFactory.Industry
             }
         }
 
+        string ILogicObjeckt.Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         private Tree logicTree;
 
         public LogicSignal(Tree tree)
@@ -429,7 +453,7 @@ namespace ProjectRimFactory.Industry
         //Comparisions between valueRefrences that yield True or False. To be used in the Algebra of LogicSignals Trees
         public List<Leaf_Logic> leaf_Logics = new List<Leaf_Logic>();
         //Complete Logic Signals
-        public List<LogicSignal> LogicSignals = null;
+        public List<LogicSignal> LogicSignals = new List<LogicSignal>();
 
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
@@ -455,12 +479,29 @@ namespace ProjectRimFactory.Industry
         {
             base.SpawnSetup(map, respawningAfterLoad);
 
+            
+
             if (valueRefrences == null)
             {
                 valueRefrences = new List<ValueRefrence>();
             }
+            //Not really visible to the User Used for Creating New LeafLogic
+            valueRefrences.Add(new ValueRefrence_Fixed(0, "Dummy-1", false));
+            valueRefrences.Add(new ValueRefrence_Fixed(0, "Dummy-2", false));
 
-            valueRefrences.Add(new ValueRefrence_Fixed(0, "SpawnTesting"));
+
+            valueRefrences.Add(new ValueRefrence_Fixed(5, "SpawnTesting - 1"));
+            valueRefrences.Add(new ValueRefrence_Fixed(0, "SpawnTesting - 2"));
+
+            
+            
+            if (leaf_Logics == null)
+            {
+                leaf_Logics = new List<Leaf_Logic>();
+            }
+            leaf_Logics.Add(new Leaf_Logic(valueRefrences[0], valueRefrences[1], EnumCompareOperator.Greater));
+
+
             if (LogicSignals == null)
             {
                 LogicSignals = new List<LogicSignal>();

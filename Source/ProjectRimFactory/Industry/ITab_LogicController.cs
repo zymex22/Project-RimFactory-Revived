@@ -39,7 +39,6 @@ namespace ProjectRimFactory.Industry
 
         private int ValueRefListItem(ValueRefrence vr,Rect rect,int i , bool selected)
         {
-
             
 
             bool clicked = Widgets.ButtonInvisible(rect);
@@ -67,7 +66,49 @@ namespace ProjectRimFactory.Industry
             
             return clicked ? i : -1;
         }
+
+        private int LeafLogicListItem(Leaf_Logic leaf, Rect rect, int i, bool selected)
+        {
+
+
+            bool clicked = Widgets.ButtonInvisible(rect);
+            string vrString = "";
+
+            if (selected) vrString += "<color=red>";
+  
+            vrString += leaf.Name + "   " + leaf.GetVerdict();
+            if (selected) vrString += "</color>";
+
+            CommonGUIFunctions.Label(rect, vrString, richTextStyle);
+
+
+
+            return clicked ? i : -1;
+        }
+
+
+
+        private string EnumCompareOperator_ToString(EnumCompareOperator enu)
+        {
+            switch (enu)
+            {
+                case EnumCompareOperator.Equal:         return "==";
+                case  EnumCompareOperator.Greater:      return ">";
+                case  EnumCompareOperator.GreaterEqual: return ">=";
+                case  EnumCompareOperator.NotEqual:     return "!=";
+                case  EnumCompareOperator.Smaller:      return "<";
+                case EnumCompareOperator.SmallerEqual:  return "<=";
+                default: return "  ";
+            }
+
+        }
+
+
+
+
+
         int selsecteditem = -1;
+        int selsecteditemleaf = -1;
 
         protected override void FillTab()
         {
@@ -88,6 +129,8 @@ namespace ProjectRimFactory.Industry
 
 
             float currentY = innerFrame.y;
+            float listBoxWidth = 250;
+            float LeftHalveX = innerFrame.x + listBoxWidth + 20;
 
 
             if (currentTab == 0) //Is Algebra Tab
@@ -97,12 +140,140 @@ namespace ProjectRimFactory.Industry
             else if (currentTab == 1) //Is Leaf Logic Tab
             {
 
+
+
+
+
+
+
+                var ListBox_Outside = new Rect(innerFrame.x, currentY, listBoxWidth, 150);
+
+                var ListBox_Inside = ListBox_Outside;
+
+                ListBox_Inside.height *= 3;
+                ListBox_Inside.width -= 20;
+
+                //Left List Box
+
+                Widgets.BeginScrollView(ListBox_Outside, ref scrollPos_ValueList, ListBox_Inside);
+
+
+
+
+                float currY_Scroll = 60;
+                var ValueRefItemRect = new Rect(ListBox_Inside.x, currY_Scroll, ListBox_Inside.width, 30);
+                int selectTemp = -1;
+
+                foreach (Leaf_Logic leaf in this_Controller.leaf_Logics)
+                {
+                    
+                    ValueRefItemRect.y = currY_Scroll;
+                    selectTemp = LeafLogicListItem(leaf, ValueRefItemRect, this_Controller.leaf_Logics.IndexOf(leaf), selsecteditemleaf == this_Controller.leaf_Logics.IndexOf(leaf));
+                    if (selectTemp != -1)
+                    {
+                        selsecteditemleaf = selectTemp;
+                    }
+                    currY_Scroll += 30;
+                }
+                //Log.Message("selsecteditemleaf: " + selsecteditemleaf);
+
+
+                Widgets.EndScrollView();
+
+                //Right Hand Buttons
+
+
+                var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
+                if (Widgets.ButtonText(buttonrect, "Add Leaf Logic"))
+                {
+                    List<ValueRefrence> dummys = this_Controller.valueRefrences.Where(vr => vr.Visible == false).ToList();
+                    this_Controller.leaf_Logics.Add(new Leaf_Logic(dummys[0], dummys[1], EnumCompareOperator.Equal));
+
+                }
+                currentY += 20;
+                
+
+
+                currentY += 60;
+                buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
+                if (Widgets.ButtonText(buttonrect, "Remove Selected"))
+                {
+                    //TODO Maybe add a confirmation Box
+                    if (selsecteditemleaf != -1)
+                    {
+                        this_Controller.leaf_Logics.RemoveAt(selsecteditemleaf);
+                        selsecteditemleaf = -1;
+                    }
+
+
+                }
+
+                currentY += 20;
+
+                currentY += 70; // For the ListBox
+
+                //Edit UI
+                Widgets.DrawLineHorizontal(0, currentY, size.y);
+                currentY += 20;
+
+                if (selsecteditemleaf != -1)
+                {
+
+                    Leaf_Logic selectedItem = this_Controller.leaf_Logics[selsecteditemleaf];
+
+                    var EiditRect = new Rect(innerFrame.x + 10 - 100, currentY, 300, 20);
+                    selectedItem.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedItem.Name);
+
+                    currentY += 20;
+                    currentY += 20;
+
+                    List<FloatMenuOption> floatMenuOptions_ref1 = this_Controller.valueRefrences
+                        .Where(g => g.Visible)
+                        .Select(g => new FloatMenuOption(g.Name, () => selectedItem.Value1 = g))
+                        .ToList();
+                    var DropdownRect = new Rect(innerFrame.x + 10, currentY, buttonWidth, 20);
+                    if (Widgets.ButtonText(DropdownRect, selectedItem.Value1.Name))
+                    {
+                        Find.WindowStack.Add(new FloatMenu(floatMenuOptions_ref1));
+                    }
+
+
+                    List<FloatMenuOption> floatMenuOptions_Compare = new List<FloatMenuOption>();
+                    floatMenuOptions_Compare.Add(new FloatMenuOption("==", () => selectedItem.Operator = EnumCompareOperator.Equal));
+                    floatMenuOptions_Compare.Add(new FloatMenuOption(">", () => selectedItem.Operator = EnumCompareOperator.Greater));
+                    floatMenuOptions_Compare.Add(new FloatMenuOption(">=", () => selectedItem.Operator = EnumCompareOperator.GreaterEqual));
+                    floatMenuOptions_Compare.Add(new FloatMenuOption("!=", () => selectedItem.Operator = EnumCompareOperator.NotEqual));
+                    floatMenuOptions_Compare.Add(new FloatMenuOption("<", () => selectedItem.Operator = EnumCompareOperator.Smaller));
+                    floatMenuOptions_Compare.Add(new FloatMenuOption("<=", () => selectedItem.Operator = EnumCompareOperator.SmallerEqual));
+                    DropdownRect.x += DropdownRect.width + 30;
+                    if (Widgets.ButtonText(DropdownRect, EnumCompareOperator_ToString(selectedItem.Operator)))
+                    {
+                        Find.WindowStack.Add(new FloatMenu(floatMenuOptions_Compare));
+                    }
+
+                    List<FloatMenuOption> floatMenuOptions_ref2 = this_Controller.valueRefrences
+                        .Where(g => g.Visible )
+                        .Select(g => new FloatMenuOption(g.Name, () => selectedItem.Value2 = g))
+                        .ToList();
+                    DropdownRect.x += DropdownRect.width + 30;
+                    if (Widgets.ButtonText(DropdownRect, selectedItem.Value2.Name))
+                    {
+                        Find.WindowStack.Add(new FloatMenu(floatMenuOptions_ref2));
+                    }
+
+                }
+
+
+
+
+
+
             }
-            else if (currentTab == 2) //is Value Tab 
+                else if (currentTab == 2) //is Value Tab 
             {
 
-               float listBoxWidth = 250;
-               float LeftHalveX = innerFrame.x + listBoxWidth + 20;
+               
+               
 
 
                 var ListBox_Outside = new Rect(innerFrame.x, currentY, listBoxWidth, 150);
@@ -125,6 +296,7 @@ namespace ProjectRimFactory.Industry
 
                 foreach (ValueRefrence vr in this_Controller.valueRefrences)
                 {
+                    if (!vr.Visible) continue; //Skip Dummy
                     ValueRefItemRect.y = currY_Scroll;
                     selectTemp = ValueRefListItem(vr, ValueRefItemRect, this_Controller.valueRefrences.IndexOf(vr), selsecteditem == this_Controller.valueRefrences.IndexOf(vr));
                     if (selectTemp != -1)
@@ -231,7 +403,7 @@ namespace ProjectRimFactory.Industry
                         }
                         else
                         {
-                            ZoneButtonStr = "PRF.AutoMachineTool.EntierMap".Translate();
+                            ZoneButtonStr = "Entire Map";
                         }
 
                         
