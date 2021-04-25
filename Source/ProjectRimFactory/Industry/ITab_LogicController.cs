@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using RimWorld;
 using Verse;
 using UnityEngine;
-
+using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.Industry
 {
@@ -24,12 +24,54 @@ namespace ProjectRimFactory.Industry
 
         Vector2 scrollPos_itemFilter = new Vector2();
 
+        Vector2 scrollPos_ValueList = new Vector2();
+
+        private static GUIStyle richTextStyle
+        {
+            get
+            {
+                GUIStyle gtter_richTextStyle = new GUIStyle();
+                gtter_richTextStyle.richText = true;
+                gtter_richTextStyle.normal.textColor = Color.white;
+                return gtter_richTextStyle;
+            }
+        }
+
+        private int ValueRefListItem(ValueRefrence vr,Rect rect,int i , bool selected)
+        {
+
+            
+
+            bool clicked = Widgets.ButtonInvisible(rect);
+            string vrString = "";
+
+            if (selected) vrString += "<color=red>";
+            if (vr is ValueRefrence_Signal)
+            {
+                vrString += "(Signal) ";
+            }
+            else if (vr is ValueRefrence_Fixed)
+            {
+                vrString += "(Fixed) ";
+            }
+            else if (vr is ValueRefrence_ThingCount)
+            {
+                vrString += "(Thing) ";
+            }
+            vrString += vr.Name + "   " + vr.Value;
+            if (selected) vrString += "</color>";
+
+            CommonGUIFunctions.Label(rect, vrString, richTextStyle);
+
+
+            
+            return clicked ? i : -1;
+        }
+        int selsecteditem = -1;
+
         protected override void FillTab()
         {
             //this_Controller.LogicSignals
-
-
-            int FixedValue = 0;
 
 
             //Somhow need to add a Edit UI Here
@@ -58,48 +100,134 @@ namespace ProjectRimFactory.Industry
             }
             else if (currentTab == 2) //is Value Tab 
             {
+
+               float listBoxWidth = 250;
+               float LeftHalveX = innerFrame.x + listBoxWidth + 20;
+
+
+                var ListBox_Outside = new Rect(innerFrame.x, currentY, listBoxWidth, 150);
+
+                var ListBox_Inside =  ListBox_Outside;
+
+                ListBox_Inside.height *= 3;
+                ListBox_Inside.width -= 20;
+
+                //Left List Box
                 
+                Widgets.BeginScrollView(ListBox_Outside, ref scrollPos_ValueList, ListBox_Inside);
+
                 
 
 
-                //Left Hand Buttons
-                float LeftHalveX = innerFrame.x + 200;
+                float currY_Scroll = 60 ;
+                var ValueRefItemRect = new Rect(ListBox_Inside.x, currY_Scroll, ListBox_Inside.width, 30);
+                int selectTemp = -1;
+
+                foreach (ValueRefrence vr in this_Controller.valueRefrences)
+                {
+                    ValueRefItemRect.y = currY_Scroll;
+                    selectTemp = ValueRefListItem(vr, ValueRefItemRect, this_Controller.valueRefrences.IndexOf(vr), selsecteditem == this_Controller.valueRefrences.IndexOf(vr));
+                    if (selectTemp != -1)
+                    {
+                        selsecteditem = selectTemp;
+                    }
+                    currY_Scroll += 30;
+                }
+                //Log.Message("selsecteditem: " + selsecteditem);
                 
+
+                Widgets.EndScrollView();
+
+                //Right Hand Buttons
+
+
                 var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                Widgets.ButtonText(buttonrect, "Add Fixed");
+                if ( Widgets.ButtonText(buttonrect, "Add Fixed"))
+                {
+                    this_Controller.valueRefrences.Add(new ValueRefrence_Fixed());
+
+                }
                 currentY += 20;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                Widgets.ButtonText(buttonrect, "Add Item Rrfrence");
+                if (Widgets.ButtonText(buttonrect, "Add Item Rrfrence"))
+                {
+                    this_Controller.valueRefrences.Add(new ValueRefrence_ThingCount(new ThingFilter(),new StorageLocation(),this_Controller.Map));
+                }
                 currentY += 20;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                Widgets.ButtonText(buttonrect, "Add Signal");
+                if(Widgets.ButtonText(buttonrect, "Add Signal"))
+                {
+                    //TODO Once i have Signals
+                }
                 currentY += 20;
                 
                 
                 currentY += 20;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                Widgets.ButtonText(buttonrect, "Remove Selected");
+                if (Widgets.ButtonText(buttonrect, "Remove Selected"))
+                {
+                    //TODO Maybe add a confirmation Box
+                    if (selsecteditem != -1)
+                    {
+                        this_Controller.valueRefrences.RemoveAt(selsecteditem);
+                        selsecteditem = -1;
+                    }
+                    
+
+                }
 
                 currentY += 20;
+
+                currentY += 70; // For the ListBox
 
                 //Edit UI
                 Widgets.DrawLineHorizontal(0, currentY, size.y);
                 currentY += 20;
+                
+                if (selsecteditem != -1)
+                {
 
-                var EiditRect = new Rect(innerFrame.x + 10, currentY, buttonWidth, 20);
-                Widgets.TextEntryLabeled(EiditRect, "Name", "TODO");
+                    ValueRefrence selectedItem = this_Controller.valueRefrences[selsecteditem];
 
-                currentY += 20;
-                EiditRect = new Rect(innerFrame.x + 10, currentY, buttonWidth, 20);
-                string bufferstr = "";
-                Widgets.TextFieldNumericLabeled<int>(EiditRect, "Number", ref FixedValue, ref bufferstr);
+                    var EiditRect = new Rect(innerFrame.x + 10, currentY, 300, 20);
+                    if (selectedItem is ValueRefrence_Signal)
+                    {
+                        Widgets.TextEntryLabeled(EiditRect, "Name", selectedItem.Name);
+                    }
+                    else
+                    {
+                        selectedItem.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedItem.Name);
+                    }
+                    
 
-                //Thing Filter
-                currentY += 20;
-                EiditRect = new Rect(innerFrame.x + 10, currentY, buttonWidth, 200);
+                    if (selectedItem is ValueRefrence_Fixed)
+                    {
+                        currentY += 20;
+                        EiditRect = new Rect(innerFrame.x + 10, currentY, buttonWidth, 20);
+                        string bufferstr = "" + selectedItem.Value;
+                        int refval = selectedItem.Value;
+                        //Can't pass getter by ref :(
+                        Widgets.TextFieldNumericLabeled<int>(EiditRect, "Number", ref refval, ref bufferstr);
+                        selectedItem.Value = refval;
+                    }
+
+                    if (selectedItem is ValueRefrence_ThingCount)
+                    {
+                        //Thing Filter
+                        currentY += 20;
+                        EiditRect = new Rect(innerFrame.x + 10, currentY, 200, 300);
 
 
-                ThingFilterUI.DoThingFilterConfigWindow(EiditRect, ref  scrollPos_itemFilter, dummyfilter);
+                        ThingFilterUI.DoThingFilterConfigWindow(EiditRect, ref scrollPos_itemFilter, ((ValueRefrence_ThingCount)selectedItem).filter   );
+
+
+
+                    }
+
+
+                }
+
+
 
 
 

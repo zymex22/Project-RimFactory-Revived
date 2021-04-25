@@ -110,11 +110,12 @@ namespace ProjectRimFactory.Industry
         private Map map;
 
 
-        public ValueRefrence_ThingCount(ThingFilter thingFilter, StorageLocation storageLocation, Map thismap)
+        public ValueRefrence_ThingCount(ThingFilter thingFilter, StorageLocation storageLocation, Map thismap, string Name = "ValueRefrence_ThingCount")
         {
             filter = thingFilter;
             storage = storageLocation;
             map = thismap;
+            name = Name;
         }
 
     }
@@ -458,6 +459,13 @@ namespace ProjectRimFactory.Industry
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+
+            if (valueRefrences == null)
+            {
+                valueRefrences = new List<ValueRefrence>();
+            }
+
+            valueRefrences.Add(new ValueRefrence_Fixed(0, "SpawnTesting"));
             if (LogicSignals == null)
             {
                 LogicSignals = new List<LogicSignal>();
