@@ -122,34 +122,29 @@ namespace ProjectRimFactory.Industry
 
     class StorageLocation
     {
-        private Zone_Stockpile stockpile_zone = null;
-        private Building_Storage storage_building = null;
+        public SlotGroup SlotGroup = null;
 
-        public string GetLocationName(Map map)
+        public string GetLocationName()
         {
-            if (stockpile_zone != null) return stockpile_zone.label;
-            if (storage_building != null) return storage_building.Label;
+            if (SlotGroup != null) return SlotGroup.parent.SlotYielderLabel();
             return "Entire Map";
         }
 
         public int GetItemCount(ThingFilter filter , Map map)
         {
             int returnval = 0;
-            if (stockpile_zone == null && storage_building == null)
+            if (SlotGroup != null)
+            {
+                returnval = SlotGroup.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
+            }
+            else
             {
                 foreach (ThingDef thing in filter.AllowedThingDefs)
                 {
                     returnval += map.resourceCounter.GetCount(thing);
                 }
             }
-            else if (stockpile_zone != null)
-            {
-                returnval = stockpile_zone.AllContainedThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
-            }
-            else if  (storage_building != null)
-            {
-                returnval = storage_building.slotGroup.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
-            }
+
             return returnval;
 
 

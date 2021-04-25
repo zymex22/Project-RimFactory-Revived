@@ -189,7 +189,7 @@ namespace ProjectRimFactory.Industry
 
                     ValueRefrence selectedItem = this_Controller.valueRefrences[selsecteditem];
 
-                    var EiditRect = new Rect(innerFrame.x + 10, currentY, 300, 20);
+                    var EiditRect = new Rect(innerFrame.x + 10 - 100, currentY, 300, 20);
                     if (selectedItem is ValueRefrence_Signal)
                     {
                         Widgets.TextEntryLabeled(EiditRect, "Name", selectedItem.Name);
@@ -219,6 +219,32 @@ namespace ProjectRimFactory.Industry
 
 
                         ThingFilterUI.DoThingFilterConfigWindow(EiditRect, ref scrollPos_itemFilter, ((ValueRefrence_ThingCount)selectedItem).filter   );
+
+
+                       
+                        //Add the Zone Selection
+                        var ZoneButtonRect = new Rect(EiditRect.x + EiditRect.width + 20, currentY, 200, 25) ;
+                        string ZoneButtonStr = "";
+                        if (((ValueRefrence_ThingCount)selectedItem).storage.SlotGroup != null)
+                        {
+                            ZoneButtonStr = ((ValueRefrence_ThingCount)selectedItem).storage.SlotGroup.parent.SlotYielderLabel();
+                        }
+                        else
+                        {
+                            ZoneButtonStr = "PRF.AutoMachineTool.EntierMap".Translate();
+                        }
+
+                        
+                        FloatMenuOption floatMenu = new FloatMenuOption("Entire Map", () => ((ValueRefrence_ThingCount)selectedItem).storage.SlotGroup = null);
+                        List<FloatMenuOption> floatMenuOptions = Find.CurrentMap.haulDestinationManager.AllGroups.ToList()
+                                .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => ((ValueRefrence_ThingCount)selectedItem).storage.SlotGroup = g))
+                                .ToList();
+                        floatMenuOptions.Insert(0,floatMenu);
+
+                        if (Widgets.ButtonText(ZoneButtonRect, ZoneButtonStr))
+                        {
+                            Find.WindowStack.Add(new FloatMenu( floatMenuOptions));
+                        }
 
 
 
