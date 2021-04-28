@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using RimWorld;
 using Verse;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.Industry
 {
-    class ITab_LogicController : ITab
+
+    class ITab_LogicController : ITab 
     {
 
         private LogicController this_Controller { get => this.SelThing as LogicController; }
@@ -57,7 +59,14 @@ namespace ProjectRimFactory.Industry
             {
                 vrString += "(Thing) ";
             }
-            vrString += vr.Name + "   " + vr.Value;
+
+            vrString += vr.Name;
+            if (vr.dynamicSlot == EnumDynamicSlotGroupID.NA)
+            {
+                vrString += "   " + vr.GetValue(null,null);
+            }
+
+            
             if (selected) vrString += "</color>";
 
             CommonGUIFunctions.Label(rect, vrString, richTextStyle);
@@ -76,7 +85,14 @@ namespace ProjectRimFactory.Industry
 
             if (selected) vrString += "<color=red>";
   
-            vrString += leaf.Name + "   " + leaf.GetVerdict();
+        
+            vrString += leaf.Name;
+            if (leaf.dynamicSlot == EnumDynamicSlotGroupID.NA)
+            {
+                vrString += "   " + leaf.GetVerdict(null, null);
+            }
+
+
             if (selected) vrString += "</color>";
 
             CommonGUIFunctions.Label(rect, vrString, richTextStyle);
@@ -104,11 +120,13 @@ namespace ProjectRimFactory.Industry
         }
 
 
-
-
-
         int selsecteditem = -1;
         int selsecteditemleaf = -1;
+
+
+        Vector2 dragPos = new Vector2(0,0);
+        Vector2 dragboxSize = new Vector2(50, 50);
+
 
         protected override void FillTab()
         {
@@ -135,6 +153,33 @@ namespace ProjectRimFactory.Industry
 
             if (currentTab == 0) //Is Algebra Tab
             {
+
+                //if (Input.GetMouseButton(0)) Log.Message(" Input.GetMouseButton(0)");
+
+
+                //Input.get_mousePosition()
+                if (dragPos.x == 0 && dragPos.y == 0) dragPos = new Vector2( innerFrame.x, currentY);
+
+                var DragBoxTest = new Rect(dragPos, dragboxSize);
+
+                Widgets.DrawBoxSolid(DragBoxTest, Color.red);
+
+                if (Input.GetMouseButton(0) && Mouse.IsOver(DragBoxTest))
+                {
+                    //Log.Message(dragPos + "  -  " + Event.current.mousePosition);
+
+                    dragPos =  Event.current.mousePosition;
+                }
+
+
+
+
+
+
+
+
+
+
 
             }
             else if (currentTab == 1) //Is Leaf Logic Tab
@@ -376,8 +421,8 @@ namespace ProjectRimFactory.Industry
                     {
                         currentY += 20;
                         EiditRect = new Rect(innerFrame.x + 10, currentY, buttonWidth, 20);
-                        string bufferstr = "" + selectedItem.Value;
-                        int refval = selectedItem.Value;
+                        string bufferstr = "" + selectedItem.GetValue(null,null);
+                        int refval = selectedItem.GetValue(null, null);
                         //Can't pass getter by ref :(
                         Widgets.TextFieldNumericLabeled<int>(EiditRect, "Number", ref refval, ref bufferstr);
                         selectedItem.Value = refval;
@@ -474,6 +519,8 @@ namespace ProjectRimFactory.Industry
 
 
         }
+
+    
 
         public ITab_LogicController()
         {

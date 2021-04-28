@@ -10,48 +10,44 @@ using Verse;
 namespace ProjectRimFactory.Industry
 {
 
-    // grouping
-    // (A && B) || C
-    // (A && B) is a group
-
-    //Logic
-    //And
-    // A && B
-    //
-    //Or
-    // A || B
-
-    //Refrences / Compare
-    //We compare The counts of thing Filters and unser defined Values
-    //
-    //User Defined Value
-    // 1; 55; 100;
-    //
-    //Thing filter
-    //Can be restricted to a Zone / Building_Storage
-    // Components in DSU
-    // Steel on the Map
-    //
-    //Can also be a signal
-
-    //Interface for Logic Ojeckts
-    //A Logic Ojeckt is a Opjeckt that can Compared with: == != < > <= >=
     public interface ILogicObjeckt
     {
-        public int Value { get; }
+        public int GetValue(SlotGroup DynamicSlot_1, SlotGroup DynamicSlot_2);
+        
+        public int Value { set; }
+
         public string Name { get; set; }
     }
 
-    //Base Class
-    abstract class ValueRefrence : ILogicObjeckt
+    public enum EnumDynamicSlotGroupID
     {
-        abstract public int Value { get; set; }
+        NA,
+        Group_1,
+        Group_2,
+        Both
+    }
+
+    public interface IDynamicSlotGroup
+    {
+        public bool UsesDynamicSlotGroup { get; }
+
+        public EnumDynamicSlotGroupID dynamicSlot { get; set; }
+    }
+
+
+    //Base Class
+    abstract class ValueRefrence : ILogicObjeckt , IDynamicSlotGroup
+    {
+        abstract public int Value { set; }
 
         abstract public string Name { get; set; }
 
         abstract public bool Visible { get; }
 
+        virtual public bool UsesDynamicSlotGroup { get => dynamicSlot != EnumDynamicSlotGroupID.NA; }
+        public abstract EnumDynamicSlotGroupID dynamicSlot { get; set; }
 
+        abstract public int GetValue(SlotGroup DynamicSlot_1, SlotGroup DynamicSlot_2);
     }
 
     /// <summary>
@@ -63,17 +59,24 @@ namespace ProjectRimFactory.Industry
         private int pvalue;
 
         private string name;
-        public override int Value { get => pvalue; set => pvalue = value; }
+        public override int Value { set => pvalue = value; }
         public override string Name { get => name; set => name = value; }
 
         private bool visible = true;
         public override bool Visible => visible;
+
+        public override EnumDynamicSlotGroupID dynamicSlot { get => EnumDynamicSlotGroupID.NA ; set => throw new NotImplementedException(); }
 
         public ValueRefrence_Fixed(int initalVal = 0, string Name = "ValueRefrence_Fixed" , bool vis = true)
         {
             visible = vis;
             pvalue = initalVal;
             name = Name;
+        }
+
+        public override int GetValue(SlotGroup DynamicSlot_1, SlotGroup DynamicSlot_2)
+        {
+            return pvalue;
         }
     }
 
@@ -89,14 +92,22 @@ namespace ProjectRimFactory.Industry
         public LogicSignal logicSignal;
 
         public override string Name { get => logicSignal.Name; set => throw new NotImplementedException(); }
-        public override int Value { get => logicSignal.Value; set => throw new NotImplementedException(); }
+
+        public override int Value { set => throw new NotImplementedException(); }
 
         private bool visible = true;
         public override bool Visible => visible;
 
+        public override EnumDynamicSlotGroupID dynamicSlot { get => logicSignal.dynamicSlot; set => throw new NotImplementedException(); }
+
         public ValueRefrence_Signal(LogicSignal signal)
         {
             logicSignal = signal;
+        }
+
+        public override int GetValue(SlotGroup DynamicSlot_1, SlotGroup DynamicSlot_2)
+        {
+            return logicSignal.GetValue(DynamicSlot_1, DynamicSlot_2);
         }
     }
 
@@ -106,7 +117,13 @@ namespace ProjectRimFactory.Industry
     /// </summary>
     class ValueRefrence_ThingCount : ValueRefrence
     {
-        public override int Value { get => storage.GetItemCount(filter,map); set => throw new NotImplementedException(); }
+        public override int Value 
+        {   
+            set 
+            { 
+                throw new NotImplementedException(); 
+            } 
+        }
 
         private string name;
 
@@ -123,6 +140,8 @@ namespace ProjectRimFactory.Industry
         private bool visible = true;
         public override bool Visible => visible;
 
+        public override EnumDynamicSlotGroupID dynamicSlot { get => storage.dynamicSlot; set => storage.dynamicSlot = value; }
+
         public ValueRefrence_ThingCount(ThingFilter thingFilter, StorageLocation storageLocation, Map thismap, string Name = "ValueRefrence_ThingCount")
         {
             filter = thingFilter;
@@ -131,35 +150,76 @@ namespace ProjectRimFactory.Industry
             name = Name;
         }
 
+        public override int GetValue(SlotGroup DynamicSlot_1, SlotGroup DynamicSlot_2)
+        {
+            return storage.GetItemCount(filter, map, DynamicSlot_1, DynamicSlot_2);
+        }
     }
 
-    class StorageLocation
+    class StorageLocation : IDynamicSlotGroup
     {
         public SlotGroup SlotGroup = null;
+
+        private EnumDynamicSlotGroupID privatedynamicSlot = EnumDynamicSlotGroupID.NA;
+
+        public bool UsesDynamicSlotGroup 
+        {
+            get
+            {
+                return dynamicSlot != EnumDynamicSlotGroupID.NA;
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public EnumDynamicSlotGroupID dynamicSlot { get => privatedynamicSlot; set => privatedynamicSlot = value; }
 
         public string GetLocationName()
         {
             if (SlotGroup != null) return SlotGroup.parent.SlotYielderLabel();
+            if (UsesDynamicSlotGroup)
+            {
+                //TODO Check for Dynamic 1 Or 2
+                return "Dynamic 1 or 2";
+
+            }
             return "Entire Map";
         }
 
-        public int GetItemCount(ThingFilter filter , Map map)
+
+        public int GetItemCount(ThingFilter filter, Map map , SlotGroup DynamicSlot_1, SlotGroup DynamicSlot_2)
         {
             int returnval = 0;
-            if (SlotGroup != null)
+            switch (dynamicSlot)
             {
-                returnval = SlotGroup.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
-            }
-            else
-            {
-                foreach (ThingDef thing in filter.AllowedThingDefs)
+                case EnumDynamicSlotGroupID.NA:
                 {
-                    returnval += map.resourceCounter.GetCount(thing);
+                    if (SlotGroup != null)
+                    {
+                        returnval = SlotGroup.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
+                    }
+                    else
+                    {
+                        foreach (ThingDef thing in filter.AllowedThingDefs)
+                        {
+                            returnval += map.resourceCounter.GetCount(thing);
+                        }
+                    }
+                    return returnval;
                 }
+                case EnumDynamicSlotGroupID.Group_1: return DynamicSlot_1.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
+                case EnumDynamicSlotGroupID.Group_2: return DynamicSlot_2.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
+                default:
+                    {
+                        Log.Error("PRF Logic-Controller Invalide DynamicSlot: " + dynamicSlot);
+                        return returnval;
+                    }
+
             }
 
-            return returnval;
-
+            
 
 
         }
@@ -187,7 +247,7 @@ namespace ProjectRimFactory.Industry
     /// This is is What's behin 'A' and 'B' in: A AND B
     /// 
     /// </summary>
-    class Leaf_Logic
+    class Leaf_Logic : IDynamicSlotGroup
     {
         private string name = "Leaf_Logic";
         public string Name { get => name; set => name = value; }
@@ -200,17 +260,33 @@ namespace ProjectRimFactory.Industry
         public ILogicObjeckt Value2 { get => value2; set => value2 = value; }
         public EnumCompareOperator Operator { get => op; set => op = value; }
 
+        public bool UsesDynamicSlotGroup => ((IDynamicSlotGroup)value1).UsesDynamicSlotGroup || ((IDynamicSlotGroup)value2).UsesDynamicSlotGroup;
 
-        public virtual bool GetVerdict()
+        public EnumDynamicSlotGroupID dynamicSlot 
+        { 
+            get 
+            {
+                EnumDynamicSlotGroupID Enum_Var1 = ((IDynamicSlotGroup)value1).dynamicSlot;
+                EnumDynamicSlotGroupID Enum_Var2 = ((IDynamicSlotGroup)value2).dynamicSlot;
+                if (Enum_Var1 == EnumDynamicSlotGroupID.Both || Enum_Var2 == EnumDynamicSlotGroupID.Both) return EnumDynamicSlotGroupID.Both;
+                else if (Enum_Var1 == EnumDynamicSlotGroupID.NA && Enum_Var2 == EnumDynamicSlotGroupID.NA) return EnumDynamicSlotGroupID.NA;
+                else if ((Enum_Var1 == EnumDynamicSlotGroupID.Group_1 || Enum_Var1 == EnumDynamicSlotGroupID.NA) && (Enum_Var2 == EnumDynamicSlotGroupID.NA || Enum_Var2 == EnumDynamicSlotGroupID.Group_1)) return EnumDynamicSlotGroupID.Group_1;
+                else if ((Enum_Var1 == EnumDynamicSlotGroupID.Group_2 || Enum_Var1 == EnumDynamicSlotGroupID.NA) && (Enum_Var2 == EnumDynamicSlotGroupID.NA || Enum_Var2 == EnumDynamicSlotGroupID.Group_2)) return EnumDynamicSlotGroupID.Group_2;
+                else return EnumDynamicSlotGroupID.Both;
+            }
+            set => throw new NotImplementedException(); 
+        }
+
+        public virtual bool GetVerdict(SlotGroup DynamicSlot_1, SlotGroup DynamicSlot_2)
         {
             switch (op)
             {
-                case EnumCompareOperator.Equal: return value1.Value == value2.Value;
-                case EnumCompareOperator.Greater: return value1.Value > value2.Value;
-                case EnumCompareOperator.GreaterEqual: return value1.Value >= value2.Value;
-                case EnumCompareOperator.NotEqual: return value1.Value != value2.Value;
-                case EnumCompareOperator.Smaller: return value1.Value < value2.Value;
-                case EnumCompareOperator.SmallerEqual: return value1.Value <= value2.Value;
+                case EnumCompareOperator.Equal: return value1.GetValue(DynamicSlot_1, DynamicSlot_2) == value2.GetValue(DynamicSlot_1, DynamicSlot_2);
+                case EnumCompareOperator.Greater: return value1.GetValue(DynamicSlot_1, DynamicSlot_2) > value2.GetValue(DynamicSlot_1, DynamicSlot_2);
+                case EnumCompareOperator.GreaterEqual: return value1.GetValue(DynamicSlot_1, DynamicSlot_2) >= value2.GetValue(DynamicSlot_1, DynamicSlot_2);
+                case EnumCompareOperator.NotEqual: return value1.GetValue(DynamicSlot_1, DynamicSlot_2) != value2.GetValue(DynamicSlot_1, DynamicSlot_2);
+                case EnumCompareOperator.Smaller: return value1.GetValue(DynamicSlot_1, DynamicSlot_2) < value2.GetValue(DynamicSlot_1, DynamicSlot_2);
+                case EnumCompareOperator.SmallerEqual: return value1.GetValue(DynamicSlot_1, DynamicSlot_2) <= value2.GetValue(DynamicSlot_1, DynamicSlot_2);
                 default:
                     Log.Message("FATAL");
                     return false;
@@ -254,16 +330,22 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        public Nullable<bool> Value = null;
+
+        public Leaf_Logic Leaf_Logic_ref = null;
+        public Nullable<bool> GetValue(SlotGroup DynamicSlot_1, SlotGroup DynamicSlot_2)
+        {
+            if (Leaf_Logic_ref == null) return null;
+            return Leaf_Logic_ref.GetVerdict(DynamicSlot_1, DynamicSlot_2);
+        }
         public EnumBinaryAlgebra Algebra = EnumBinaryAlgebra.bNA;
 
         public Tree_node Left = null;
         public Tree_node Right = null;
 
-        public Tree_node(EnumBinaryAlgebra algebra, Nullable<bool> Value )
+        public Tree_node(EnumBinaryAlgebra algebra, Leaf_Logic Value )
         {
             this.Algebra = algebra;
-            this.Value = Value;
+            Leaf_Logic_ref = Value;
         }
 
     }
@@ -360,23 +442,23 @@ namespace ProjectRimFactory.Industry
         }
 
 
-        public bool EvaluateTree()
+        public bool EvaluateTree(SlotGroup DynamicSlot_1, SlotGroup DynamicSlot_2 )
         {
-            return Eval(rootNode) ?? false;
+            return Eval(rootNode , DynamicSlot_1 , DynamicSlot_2) ?? false;
         }
 
 
-        private static Nullable<bool> Eval(Tree_node node)
+        private static Nullable<bool> Eval(Tree_node node , SlotGroup DynamicSlot_1 , SlotGroup DynamicSlot_2 )
         {
 
             if (node == null) return null;
             if (node.IsLeaf)
             {
-                return node.Value ?? false;
+                return node.GetValue(DynamicSlot_1, DynamicSlot_2) ?? false;
             }
 
-            Nullable<bool> right = Eval(node.Right);
-            Nullable<bool> left = Eval(node.Left);
+            Nullable<bool> right = Eval(node.Right, DynamicSlot_1, DynamicSlot_2);
+            Nullable<bool> left = Eval(node.Left,  DynamicSlot_1, DynamicSlot_2);
 
             switch (node.Algebra)
             {
@@ -417,7 +499,7 @@ namespace ProjectRimFactory.Industry
 
 
 
-    class LogicSignal : ILogicObjeckt
+    class LogicSignal : IDynamicSlotGroup
     {
         //Name of the Logic Signal
         public string Name = "Logic Signal";
@@ -433,7 +515,27 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        string ILogicObjeckt.Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //TODO
+        public bool UsesDynamicSlotGroup => throw new NotImplementedException();
+        //TODO
+        public EnumDynamicSlotGroupID dynamicSlot { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public int GetValue(SlotGroup DynamicSlot_1 = null, SlotGroup DynamicSlot_2 = null)
+        {
+
+            if (logicTree.EvaluateTree(DynamicSlot_1, DynamicSlot_2))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+
+
+        }
+
+
 
         private Tree logicTree;
 
@@ -444,7 +546,9 @@ namespace ProjectRimFactory.Industry
 
     }
 
-
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     class LogicController : Building
     {
