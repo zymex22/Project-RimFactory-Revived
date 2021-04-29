@@ -181,9 +181,14 @@ namespace ProjectRimFactory.Industry
             if (SlotGroup != null) return SlotGroup.parent.SlotYielderLabel();
             if (UsesDynamicSlotGroup)
             {
-                //TODO Check for Dynamic 1 Or 2
-                return "Dynamic 1 or 2";
-
+                if (privatedynamicSlot == EnumDynamicSlotGroupID.Group_1)
+                {
+                    return "Dynamic 1";
+                }
+                else
+                {
+                    return "Dynamic 2";
+                }
             }
             return "Entire Map";
         }

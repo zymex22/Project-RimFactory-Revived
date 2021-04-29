@@ -430,35 +430,28 @@ namespace ProjectRimFactory.Industry
 
                     if (selectedItem is ValueRefrence_ThingCount)
                     {
+                        ValueRefrence_ThingCount selectedItem_tc = selectedItem as ValueRefrence_ThingCount;
                         //Thing Filter
                         currentY += 20;
                         EiditRect = new Rect(innerFrame.x + 10, currentY, 200, 300);
 
 
-                        ThingFilterUI.DoThingFilterConfigWindow(EiditRect, ref scrollPos_itemFilter, ((ValueRefrence_ThingCount)selectedItem).filter   );
+                        ThingFilterUI.DoThingFilterConfigWindow(EiditRect, ref scrollPos_itemFilter, ((ValueRefrence_ThingCount)selectedItem).filter);
 
 
-                       
+
                         //Add the Zone Selection
-                        var ZoneButtonRect = new Rect(EiditRect.x + EiditRect.width + 20, currentY, 200, 25) ;
-                        string ZoneButtonStr = "";
-                        if (((ValueRefrence_ThingCount)selectedItem).storage.SlotGroup != null)
-                        {
-                            ZoneButtonStr = ((ValueRefrence_ThingCount)selectedItem).storage.SlotGroup.parent.SlotYielderLabel();
-                        }
-                        else
-                        {
-                            ZoneButtonStr = "Entire Map";
-                        }
+                        var ZoneButtonRect = new Rect(EiditRect.x + EiditRect.width + 20, currentY, 200, 25);
 
-                        
-                        FloatMenuOption floatMenu = new FloatMenuOption("Entire Map", () => ((ValueRefrence_ThingCount)selectedItem).storage.SlotGroup = null);
                         List<FloatMenuOption> floatMenuOptions = Find.CurrentMap.haulDestinationManager.AllGroups.ToList()
-                                .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => ((ValueRefrence_ThingCount)selectedItem).storage.SlotGroup = g))
+                                .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => { selectedItem_tc.storage.SlotGroup = g; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }))
                                 .ToList();
-                        floatMenuOptions.Insert(0,floatMenu);
+                        floatMenuOptions.Insert(0, new FloatMenuOption("Entire Map",  () => { selectedItem_tc.storage.SlotGroup = null; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }));
+                        floatMenuOptions.Insert(1, new FloatMenuOption("Dynamic - 1", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_1; selectedItem_tc.storage.SlotGroup = null; } ));
+                        floatMenuOptions.Insert(2, new FloatMenuOption("Dynamic - 2", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_2; selectedItem_tc.storage.SlotGroup = null; } ));
 
-                        if (Widgets.ButtonText(ZoneButtonRect, ZoneButtonStr))
+
+                        if (Widgets.ButtonText(ZoneButtonRect, selectedItem_tc.storage.GetLocationName()))
                         {
                             Find.WindowStack.Add(new FloatMenu( floatMenuOptions));
                         }
