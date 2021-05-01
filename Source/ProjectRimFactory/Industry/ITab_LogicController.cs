@@ -103,6 +103,34 @@ namespace ProjectRimFactory.Industry
         }
 
 
+        private int LogicSignalListItem(LogicSignal signal, Rect rect, int i, bool selected)
+        {
+
+
+            bool clicked = Widgets.ButtonInvisible(rect);
+            string vrString = "";
+
+            if (selected) vrString += "<color=red>";
+
+
+            vrString += signal.Name;
+            if (signal.dynamicSlot == EnumDynamicSlotGroupID.NA)
+            {
+                vrString += "   " + signal.GetValue();
+            }
+
+
+            if (selected) vrString += "</color>";
+
+            CommonGUIFunctions.Label(rect, vrString, richTextStyle);
+
+
+
+            return clicked ? i : -1;
+        }
+
+
+
 
         private string EnumCompareOperator_ToString(EnumCompareOperator enu)
         {
@@ -120,8 +148,24 @@ namespace ProjectRimFactory.Industry
         }
 
 
+        /// <summary>
+        /// This is the easier version for Users that are faliliar with Boolshe Algebra
+        /// And It's Also "easier" to implement 
+        /// </summary>
+        /// <param name="currentY"></param>
+        private void AlgebraGUI_Advanced(ref float currentY , Rect TabRect)
+        {
+
+
+
+
+
+        }
+
+
         int selsecteditem = -1;
         int selsecteditemleaf = -1;
+        int selsecteditemLogicSignal = -1;
 
 
         Vector2 dragPos = new Vector2(0,0);
@@ -153,7 +197,7 @@ namespace ProjectRimFactory.Industry
 
             if (currentTab == 0) //Is Algebra Tab
             {
-
+                /*
                 //if (Input.GetMouseButton(0)) Log.Message(" Input.GetMouseButton(0)");
 
 
@@ -170,7 +214,90 @@ namespace ProjectRimFactory.Industry
 
                     dragPos =  Event.current.mousePosition;
                 }
+                */
 
+
+
+
+
+
+
+
+                var ListBox_Outside = new Rect(innerFrame.x, currentY, listBoxWidth, 150);
+
+                var ListBox_Inside = ListBox_Outside;
+
+                ListBox_Inside.height *= 3;
+                ListBox_Inside.width -= 20;
+
+                //Left List Box
+
+                Widgets.BeginScrollView(ListBox_Outside, ref scrollPos_ValueList, ListBox_Inside);
+
+
+
+
+                float currY_Scroll = 60;
+                var ValueRefItemRect = new Rect(ListBox_Inside.x, currY_Scroll, ListBox_Inside.width, 30);
+                int selectTemp = -1;
+
+                foreach (LogicSignal logicSignal in this_Controller.LogicSignals)
+                {
+
+                    ValueRefItemRect.y = currY_Scroll;
+                    selectTemp = LogicSignalListItem(logicSignal, ValueRefItemRect, this_Controller.LogicSignals.IndexOf(logicSignal), selsecteditemleaf == this_Controller.LogicSignals.IndexOf(logicSignal));
+                    if (selectTemp != -1)
+                    {
+                        selsecteditemLogicSignal = selectTemp;
+                    }
+                    currY_Scroll += 30;
+                }
+                //Log.Message("selsecteditemleaf: " + selsecteditemleaf);
+
+
+                Widgets.EndScrollView();
+
+                //Right Hand Buttons
+
+
+                var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
+                if (Widgets.ButtonText(buttonrect, "Add Logic Signal"))
+                {
+                    this_Controller.LogicSignals.Add(new LogicSignal(new Tree(new List<Tree_node> { new Tree_node(EnumBinaryAlgebra.bNA, this_Controller.leaf_Logics[0]) }), "Logic Signal"));
+                }
+                currentY += 20;
+
+
+
+                currentY += 60;
+                buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
+                if (Widgets.ButtonText(buttonrect, "Remove Selected"))
+                {
+                    //TODO Maybe add a confirmation Box
+                    if (selsecteditemleaf != -1)
+                    {
+                        this_Controller.LogicSignals.RemoveAt(selsecteditemleaf);
+                        selsecteditemleaf = -1;
+                    }
+
+
+                }
+
+                currentY += 20;
+
+                currentY += 70; // For the ListBox
+
+                //Edit UI
+                Widgets.DrawLineHorizontal(0, currentY, size.y);
+                currentY += 20;
+
+
+
+
+
+
+
+                AlgebraGUI_Advanced(ref currentY, innerFrame);
 
 
 
@@ -211,7 +338,7 @@ namespace ProjectRimFactory.Industry
 
                 foreach (Leaf_Logic leaf in this_Controller.leaf_Logics)
                 {
-                    
+                    if (!leaf.Visible) continue; //Skipp Dummy
                     ValueRefItemRect.y = currY_Scroll;
                     selectTemp = LeafLogicListItem(leaf, ValueRefItemRect, this_Controller.leaf_Logics.IndexOf(leaf), selsecteditemleaf == this_Controller.leaf_Logics.IndexOf(leaf));
                     if (selectTemp != -1)

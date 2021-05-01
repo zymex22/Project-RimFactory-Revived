@@ -261,6 +261,9 @@ namespace ProjectRimFactory.Industry
         private ILogicObjeckt value2;
         private EnumCompareOperator op;
 
+        private bool visible = true;
+        public bool Visible => visible;
+
         public ILogicObjeckt Value1 { get => value1; set => value1 = value; }
         public ILogicObjeckt Value2 { get => value2; set => value2 = value; }
         public EnumCompareOperator Operator { get => op; set => op = value; }
@@ -298,12 +301,13 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        public Leaf_Logic(ILogicObjeckt obj1, ILogicObjeckt obj2, EnumCompareOperator eoperator, string initName = "Leaf_Logic")
+        public Leaf_Logic(ILogicObjeckt obj1, ILogicObjeckt obj2, EnumCompareOperator eoperator, string initName = "Leaf_Logic" , bool vis = true)
         {
             value1 = obj1;
             value2 = obj2;
             op = eoperator;
             name = initName;
+            visible = vis;
         }
 
 
@@ -357,9 +361,37 @@ namespace ProjectRimFactory.Industry
 
 
     //The entire Tree
-    class Tree
+    class Tree : IDynamicSlotGroup
     {
         Tree_node rootNode;
+
+        public bool UsesDynamicSlotGroup => throw new NotImplementedException();
+
+
+        private EnumDynamicSlotGroupID GetSlotGroupOfTree(Tree_node node)
+        {
+            if (node == null) return EnumDynamicSlotGroupID.NA;
+
+            EnumDynamicSlotGroupID enum_Right = GetSlotGroupOfTree(node.Right);
+            EnumDynamicSlotGroupID enum_Left = GetSlotGroupOfTree(node.Left);
+
+            if (enum_Right == EnumDynamicSlotGroupID.Both || enum_Left == EnumDynamicSlotGroupID.Both) return EnumDynamicSlotGroupID.Both;
+            else if (enum_Right == EnumDynamicSlotGroupID.NA && enum_Left == EnumDynamicSlotGroupID.NA) return EnumDynamicSlotGroupID.NA;
+            else if ((enum_Right == EnumDynamicSlotGroupID.Group_1 || enum_Right == EnumDynamicSlotGroupID.NA) && (enum_Left == EnumDynamicSlotGroupID.NA || enum_Left == EnumDynamicSlotGroupID.Group_1)) return EnumDynamicSlotGroupID.Group_1;
+            else if ((enum_Right == EnumDynamicSlotGroupID.Group_2 || enum_Right == EnumDynamicSlotGroupID.NA) && (enum_Left == EnumDynamicSlotGroupID.NA || enum_Left == EnumDynamicSlotGroupID.Group_2)) return EnumDynamicSlotGroupID.Group_2;
+            else return EnumDynamicSlotGroupID.Both;
+
+        }
+
+
+        public EnumDynamicSlotGroupID dynamicSlot 
+        { 
+            get 
+            {
+               return GetSlotGroupOfTree(rootNode);
+            }
+            set => throw new NotImplementedException(); 
+        }
 
         //Constructs a Tree from Postfix (RPN)
         private static Tree_node BuildTree(List<Tree_node> input)
@@ -521,9 +553,9 @@ namespace ProjectRimFactory.Industry
         }
 
         //TODO
-        public bool UsesDynamicSlotGroup => throw new NotImplementedException();
+        public bool UsesDynamicSlotGroup => dynamicSlot != EnumDynamicSlotGroupID.NA;
         //TODO
-        public EnumDynamicSlotGroupID dynamicSlot { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public EnumDynamicSlotGroupID dynamicSlot { get =>  logicTree.dynamicSlot   ; set => throw new NotImplementedException(); }
 
         public int GetValue(SlotGroup DynamicSlot_1 = null, SlotGroup DynamicSlot_2 = null)
         {
@@ -544,8 +576,9 @@ namespace ProjectRimFactory.Industry
 
         private Tree logicTree;
 
-        public LogicSignal(Tree tree)
+        public LogicSignal(Tree tree , string initialName = "Logic Signal")
         {
+            Name = initialName;
             logicTree = tree;
         }
 
@@ -608,7 +641,8 @@ namespace ProjectRimFactory.Industry
             {
                 leaf_Logics = new List<Leaf_Logic>();
             }
-            leaf_Logics.Add(new Leaf_Logic(valueRefrences[0], valueRefrences[1], EnumCompareOperator.Greater));
+            leaf_Logics.Add(new Leaf_Logic(valueRefrences[0], valueRefrences[1], EnumCompareOperator.Greater,"Dummy-1",false));
+            leaf_Logics.Add(new Leaf_Logic(valueRefrences[0], valueRefrences[1], EnumCompareOperator.Greater,"Spawn Test"));
 
 
             if (LogicSignals == null)
