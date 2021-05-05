@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using RimWorld;
@@ -36,6 +38,7 @@ namespace ProjectRimFactory.Industry
 
 
     //Base Class
+    [Serializable] //Needed for DeepCopy / Assign ByValue
     abstract class ValueRefrence : ILogicObjeckt , IDynamicSlotGroup
     {
         abstract public int Value { set; }
@@ -54,6 +57,7 @@ namespace ProjectRimFactory.Industry
     /// ValueRefrence_Fixed Is a Possible Object for the Leaf_Logic Constructor
     /// This one is Used for Fixed Values that the user can Enter
     /// </summary>
+    [Serializable] //Needed for DeepCopy / Assign ByValue
     class ValueRefrence_Fixed : ValueRefrence
     {
         private int pvalue;
@@ -84,6 +88,7 @@ namespace ProjectRimFactory.Industry
     /// ValueRefrence_Fixed Is a Possible Object for the Leaf_Logic Constructor
     /// This one is Used for Refrencing Logic Signals
     /// </summary>
+    [Serializable] //Needed for DeepCopy / Assign ByValue
     class ValueRefrence_Signal : ValueRefrence
     {
         /// <summary>
@@ -115,6 +120,7 @@ namespace ProjectRimFactory.Industry
     /// ValueRefrence_Fixed Is a Possible Object for the Leaf_Logic Constructor
     /// This one is Used for Comparing against Thing Counts within a predefind zone
     /// </summary>
+    [Serializable] //Needed for DeepCopy / Assign ByValue
     class ValueRefrence_ThingCount : ValueRefrence
     {
         public override int Value 
@@ -155,7 +161,7 @@ namespace ProjectRimFactory.Industry
             return storage.GetItemCount(filter, map, DynamicSlot_1, DynamicSlot_2);
         }
     }
-
+    [Serializable] //Needed for DeepCopy / Assign ByValue
     class StorageLocation : IDynamicSlotGroup
     {
         public SlotGroup SlotGroup = null;
@@ -247,11 +253,12 @@ namespace ProjectRimFactory.Industry
         GreaterEqual,
         SmallerEqual
     }
-    
+
     /// <summary>
     /// This is is What's behin 'A' and 'B' in: A AND B
     /// 
     /// </summary>
+    [Serializable] //Needed for DeepCopy / Assign ByValue
     class Leaf_Logic : IDynamicSlotGroup
     {
         private string name = "Leaf_Logic";
@@ -328,6 +335,7 @@ namespace ProjectRimFactory.Industry
     /// <summary>
     /// None of the Expression Tree
     /// </summary>
+    [Serializable] //Needed for DeepCopy / Assign ByValue
     class Tree_node
     {
         public bool IsLeaf
@@ -361,9 +369,40 @@ namespace ProjectRimFactory.Industry
 
 
     //The entire Tree
+    [Serializable] //Needed for DeepCopy / Assign ByValue
     class Tree : IDynamicSlotGroup
     {
         Tree_node rootNode;
+
+        /* This is the infix Expression as provided by the user
+         * This shall only be updated in one case: The user Edits the Expression vie the Graphical Box Interface
+         * In that case this Expression will be rewritten by the Computer
+         * 
+         * Generating this from Postfix / the Tree should be avoided unless the above conditions appaies.
+         * In all other cases this Expression will match the tree & Therefor Generating it from the Tree would only cause issues
+         * - Bracket Placement
+         * - Speed
+         */
+        public List<Tree_node> UserInfixExpr;
+        public bool CheckUserInfixExpr()
+        {
+            if (UserInfixExpr.Count == 0) return false;
+            //For evry Opened Bracket there needs to be a closed one
+            if ( UserInfixExpr.Where(e => e.Algebra == EnumBinaryAlgebra.bBracketOpen).Count() != UserInfixExpr.Where(e => e.Algebra == EnumBinaryAlgebra.bBracketClose).Count())
+            {
+                return false;
+            }
+            //Check that the last Value is not Algebra (closed backet is allowed in the Last Spot)
+            if (!( UserInfixExpr.Last().Algebra == EnumBinaryAlgebra.bNA || UserInfixExpr.Last().Algebra == EnumBinaryAlgebra.bBracketClose))
+            {
+                return false;
+            }
+
+            //All else should be fine
+            return true;
+
+        }
+
 
         public bool UsesDynamicSlotGroup => throw new NotImplementedException();
 
@@ -514,21 +553,36 @@ namespace ProjectRimFactory.Industry
                     }
                     else
                     {
-                        Log.Message("FATAL");
+                        Log.Message("FATAL 1");
                         return false;
                     }
                 default:
-                    Log.Message("FATAL");
+                    Log.Message("FATAL 2: " + node.Algebra);
+
+
                     return false;
             }
         }
+
+        public static T DeepCopy<T>(T item) //Needed for Assign ByValue
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            MemoryStream stream = new MemoryStream();
+            formatter.Serialize(stream, item);
+            stream.Seek(0, SeekOrigin.Begin);
+            T result = (T)formatter.Deserialize(stream);
+            stream.Close();
+            return result;
+        }
+
 
         /// <summary>
         /// Constructs the Tree
         /// </summary>
         /// <param name="input">Infix Expression</param>
-        public Tree(List<Tree_node> input)
+        public Tree( List<Tree_node> input)
         {
+            UserInfixExpr = DeepCopy<List<Tree_node>>(input); //Why C# Why....
             rootNode = BuildTree(ConvertToPostfix(input));
         }
 
@@ -572,7 +626,12 @@ namespace ProjectRimFactory.Industry
 
         }
 
+        public List<Tree_node> TreeUserInfixExp
+        {
+            get => logicTree.UserInfixExpr; set => logicTree.UserInfixExpr = value;
+        }
 
+        public bool UserInfixValid { get => logicTree.CheckUserInfixExpr(); }
 
         private Tree logicTree;
 
@@ -649,6 +708,12 @@ namespace ProjectRimFactory.Industry
             {
                 LogicSignals = new List<LogicSignal>();
             }
+
+
+            LogicSignals.Add(new LogicSignal(new Tree(new List<Tree_node> { new Tree_node(EnumBinaryAlgebra.bNA, leaf_Logics[0])  ,  new Tree_node(EnumBinaryAlgebra.bAND, null) , new Tree_node(EnumBinaryAlgebra.bNA, leaf_Logics[1]) }), "Logic Testing"));
+
+
+
         }
 
         public override void Tick()

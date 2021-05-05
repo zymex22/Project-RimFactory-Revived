@@ -132,6 +132,37 @@ namespace ProjectRimFactory.Common
 			Widgets.DrawTextureFitted(rect, resolvedIcon, GenUI.IconDrawScale(thingDef) * scale, texProportions, texCoords, resolvedIconAngle);
 		}
 
+		public static readonly Texture2D RedTex = SolidColorMaterials.NewSolidColorTexture(Color.red);
+		public static readonly Texture2D GreenTex = SolidColorMaterials.NewSolidColorTexture(Color.green);
+
+		//Adaption of Verse.Widgets public static void DrawBox(Rect rect, int thickness = 1)
+		//To enable passing the texture
+		public static void DrawBox(Rect rect, Texture texture, int thickness = 1 )
+		{
+			Vector2 val = default(Vector2);
+			val.x = rect.x;
+			val.y = rect.y;
+			Vector2 val2 = default(Vector2);
+			val2.x = rect.x + rect.width;
+			val2.y = rect.y + rect.height;
+			if (val.x > val2.x)
+			{
+				float x = val.x;
+				val.x = val2.x;
+				val2.x = x;
+			}
+			if (val.y > val2.y)
+			{
+				float y = val.y;
+				val.y = val2.y;
+				val2.y = y;
+			}
+			Vector3 val3 = val2 - val;
+			GUI.DrawTexture(new Rect(val.x, val.y, (float)thickness, val3.y), texture);
+			GUI.DrawTexture(new Rect(val2.x - (float)thickness, val.y, (float)thickness, val3.y), texture);
+			GUI.DrawTexture(new Rect(val.x + (float)thickness, val.y, val3.x - (float)(thickness * 2), (float)thickness), texture);
+			GUI.DrawTexture(new Rect(val.x + (float)thickness, val2.y - (float)thickness, val3.x - (float)(thickness * 2), (float)thickness), texture);
+		}
 
 
 	}

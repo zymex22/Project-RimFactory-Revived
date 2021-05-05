@@ -148,16 +148,164 @@ namespace ProjectRimFactory.Industry
         }
 
 
+
+        /*
+        ∧ ==> AND
+        ∨ ==> OR
+         
+         
+         */
+
+
+        private void LeafAlgebra_Advanced_Button(Rect EleRect, List<FloatMenuOption> floatMenuOptions , string text)
+        {
+            if (Widgets.ButtonText(EleRect, text))
+            {
+                Find.WindowStack.Add(new FloatMenu(floatMenuOptions));
+            }
+        }
+
+
+        private string EnumBinaryAlgebra_toString(EnumBinaryAlgebra algebra)
+        {
+            switch (algebra)
+            {
+                case EnumBinaryAlgebra.bAND: return "∧";
+                case EnumBinaryAlgebra.bBracketClose: return ")";
+                case EnumBinaryAlgebra.bBracketOpen: return "(";
+                case EnumBinaryAlgebra.bNA: return "N/A";
+                case EnumBinaryAlgebra.bNOT: return "Not";
+                case EnumBinaryAlgebra.bOR: return "∨";
+                default: return "ERROR";
+            }
+        }
+
+
         /// <summary>
         /// This is the easier version for Users that are faliliar with Boolshe Algebra
         /// And It's Also "easier" to implement 
         /// </summary>
         /// <param name="currentY"></param>
-        private void AlgebraGUI_Advanced(ref float currentY , Rect TabRect)
+        private void AlgebraGUI_Advanced(ref float currentY , Rect TabRect , LogicSignal logicSignal)
         {
 
+            var AlgebraGUI = new Rect(TabRect.x, currentY, TabRect.width - 50, 150);
+
+            if (logicSignal.UserInfixValid)
+            {
+                CommonGUIFunctions.DrawBox(AlgebraGUI, CommonGUIFunctions.GreenTex);
+
+            }
+            else
+            {
+                CommonGUIFunctions.DrawBox(AlgebraGUI, CommonGUIFunctions.RedTex);
+
+            }
+            currentY += 5;
+            float current_X = TabRect.x + 5;
+            float LeafWidth = 100;
+            float AlgebraWidth = 50;
+            float elementHight = 20;
 
 
+            var ButtonRect = new Rect(current_X, currentY, LeafWidth, elementHight);
+
+
+
+
+
+
+            foreach (Tree_node node in logicSignal.TreeUserInfixExp)
+            {
+                if (node.Algebra == EnumBinaryAlgebra.bNA)
+                {
+                    List<FloatMenuOption> floatMenuOptions_leaf_Logics = this_Controller.leaf_Logics
+                     .Where(l => l.Visible)
+                     .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp[logicSignal.TreeUserInfixExp.IndexOf(node)].Leaf_Logic_ref = g; }))
+                     .ToList();
+
+                    floatMenuOptions_leaf_Logics.Insert(0, new FloatMenuOption("[Remove]", () => 
+                    {
+                        int index = logicSignal.TreeUserInfixExp.IndexOf(node);
+                        if (logicSignal.TreeUserInfixExp.Count == index + 1)
+                        {
+                            //Is Last one
+                            logicSignal.TreeUserInfixExp.RemoveAt(logicSignal.TreeUserInfixExp.IndexOf(node));
+                        }
+                        else
+                        {
+                            //Not last --> Remove all after this one
+                            logicSignal.TreeUserInfixExp.RemoveRange(index, logicSignal.TreeUserInfixExp.Count - index);
+                        }
+                        
+                    
+                    
+                    }));
+                    ButtonRect.width = LeafWidth;
+                    LeafAlgebra_Advanced_Button(ButtonRect, floatMenuOptions_leaf_Logics, node.Leaf_Logic_ref.Name);
+                    ButtonRect.x += ButtonRect.width + 10;
+                }
+                else
+                {
+                    List<FloatMenuOption> floatMenuOptions_Operators = new List<FloatMenuOption>();
+                    floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { node.Algebra = EnumBinaryAlgebra.bAND; }));
+                    floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { node.Algebra = EnumBinaryAlgebra.bOR; }));
+                    floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => { node.Algebra = EnumBinaryAlgebra.bBracketOpen; }));
+                    floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => { node.Algebra = EnumBinaryAlgebra.bBracketClose; }));
+                    floatMenuOptions_Operators.Insert(0, new FloatMenuOption("[Remove]", () =>
+                    {
+                        int index = logicSignal.TreeUserInfixExp.IndexOf(node);
+                        if (logicSignal.TreeUserInfixExp.Count == index + 1)
+                        {
+                            //Is Last one
+                            logicSignal.TreeUserInfixExp.RemoveAt(logicSignal.TreeUserInfixExp.IndexOf(node));
+                        }
+                        else
+                        {
+                            //Not last --> Remove all after this one
+                            logicSignal.TreeUserInfixExp.RemoveRange(index, logicSignal.TreeUserInfixExp.Count - index);
+                        }
+
+
+
+                    }));
+                    ButtonRect.width = AlgebraWidth;
+                    LeafAlgebra_Advanced_Button(ButtonRect, floatMenuOptions_Operators, EnumBinaryAlgebra_toString(node.Algebra));
+                    ButtonRect.x += ButtonRect.width + 10;
+
+                }
+
+
+
+            }
+
+            //Add Option to Expand Expression
+            if (logicSignal.TreeUserInfixExp.Count > 0 &&(logicSignal.TreeUserInfixExp.Last().Algebra == EnumBinaryAlgebra.bNA || logicSignal.TreeUserInfixExp.Last().Algebra == EnumBinaryAlgebra.bBracketClose))
+            {
+                //Add Option for Algebra
+                List<FloatMenuOption> floatMenuOptions_Operators = new List<FloatMenuOption>();
+                floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bAND,null)); }));
+                floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bOR, null)); }));
+                floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketOpen, null)); }));
+                floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketClose, null)); }));
+                ButtonRect.width = AlgebraWidth;
+                LeafAlgebra_Advanced_Button(ButtonRect, floatMenuOptions_Operators, "[Add]");
+            }
+            else
+            {
+                //Add Option for Value
+                List<FloatMenuOption> floatMenuOptions_leaf_Logics = this_Controller.leaf_Logics
+                     .Where(l => l.Visible)
+                     .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bNA,  g)); }))
+                     .ToList();
+                ButtonRect.width = LeafWidth;
+                LeafAlgebra_Advanced_Button(ButtonRect, floatMenuOptions_leaf_Logics, "[Add]");
+
+            }
+
+
+
+           
 
 
         }
@@ -245,7 +393,7 @@ namespace ProjectRimFactory.Industry
                 {
 
                     ValueRefItemRect.y = currY_Scroll;
-                    selectTemp = LogicSignalListItem(logicSignal, ValueRefItemRect, this_Controller.LogicSignals.IndexOf(logicSignal), selsecteditemleaf == this_Controller.LogicSignals.IndexOf(logicSignal));
+                    selectTemp = LogicSignalListItem(logicSignal, ValueRefItemRect, this_Controller.LogicSignals.IndexOf(logicSignal), selsecteditemLogicSignal == this_Controller.LogicSignals.IndexOf(logicSignal));
                     if (selectTemp != -1)
                     {
                         selsecteditemLogicSignal = selectTemp;
@@ -274,10 +422,10 @@ namespace ProjectRimFactory.Industry
                 if (Widgets.ButtonText(buttonrect, "Remove Selected"))
                 {
                     //TODO Maybe add a confirmation Box
-                    if (selsecteditemleaf != -1)
+                    if (selsecteditemLogicSignal != -1)
                     {
-                        this_Controller.LogicSignals.RemoveAt(selsecteditemleaf);
-                        selsecteditemleaf = -1;
+                        this_Controller.LogicSignals.RemoveAt(selsecteditemLogicSignal);
+                        selsecteditemLogicSignal = -1;
                     }
 
 
@@ -295,9 +443,19 @@ namespace ProjectRimFactory.Industry
 
 
 
+                if (selsecteditemLogicSignal != -1)
+                {
+                    LogicSignal selectedSignal = this_Controller.LogicSignals[selsecteditemLogicSignal];
+
+                    var EiditRect = new Rect(innerFrame.x + 10 - 100, currentY, 300, 20);
 
 
-                AlgebraGUI_Advanced(ref currentY, innerFrame);
+                    selectedSignal.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedSignal.Name);
+                    currentY += 30;
+
+                    AlgebraGUI_Advanced(ref currentY, innerFrame, selectedSignal);
+
+                }
 
 
 
