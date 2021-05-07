@@ -28,6 +28,8 @@ namespace ProjectRimFactory.Industry
 
         Vector2 scrollPos_ValueList = new Vector2();
 
+        Vector2 scrollPos_AdvancedAlgebraEditor = new Vector2();
+
         private static GUIStyle richTextStyle
         {
             get
@@ -157,12 +159,13 @@ namespace ProjectRimFactory.Industry
          */
 
 
-        private void LeafAlgebra_Advanced_Button(Rect EleRect, List<FloatMenuOption> floatMenuOptions , string text)
+        private void LeafAlgebra_Advanced_Button(ref Rect EleRect, List<FloatMenuOption> floatMenuOptions , string text)
         {
             if (Widgets.ButtonText(EleRect, text))
             {
                 Find.WindowStack.Add(new FloatMenu(floatMenuOptions));
             }
+            EleRect.x += EleRect.width + 10;
         }
 
 
@@ -189,7 +192,7 @@ namespace ProjectRimFactory.Industry
         private void AlgebraGUI_Advanced(ref float currentY , Rect TabRect , LogicSignal logicSignal)
         {
 
-            var AlgebraGUI = new Rect(TabRect.x, currentY, TabRect.width - 50, 150);
+            var AlgebraGUI = new Rect(TabRect.x, currentY, TabRect.width - 50, 75);
 
             if (logicSignal.UserInfixValid)
             {
@@ -207,6 +210,18 @@ namespace ProjectRimFactory.Industry
             float AlgebraWidth = 50;
             float elementHight = 20;
 
+            AlgebraGUI.x += 2;
+            AlgebraGUI.y += 2;
+            AlgebraGUI.width -= 4;
+            AlgebraGUI.height -= 4;
+
+            var ScrollInternal = AlgebraGUI;
+            ScrollInternal.height -= 25;
+
+            ScrollInternal.width *= 2;
+            Widgets.BeginScrollView(AlgebraGUI, ref scrollPos_AdvancedAlgebraEditor, ScrollInternal);
+
+            currentY += 15;
 
             var ButtonRect = new Rect(current_X, currentY, LeafWidth, elementHight);
 
@@ -242,8 +257,7 @@ namespace ProjectRimFactory.Industry
                     
                     }));
                     ButtonRect.width = LeafWidth;
-                    LeafAlgebra_Advanced_Button(ButtonRect, floatMenuOptions_leaf_Logics, node.Leaf_Logic_ref.Name);
-                    ButtonRect.x += ButtonRect.width + 10;
+                    LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_leaf_Logics, node.Leaf_Logic_ref.Name);
                 }
                 else
                 {
@@ -270,8 +284,7 @@ namespace ProjectRimFactory.Industry
 
                     }));
                     ButtonRect.width = AlgebraWidth;
-                    LeafAlgebra_Advanced_Button(ButtonRect, floatMenuOptions_Operators, EnumBinaryAlgebra_toString(node.Algebra));
-                    ButtonRect.x += ButtonRect.width + 10;
+                    LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_Operators, EnumBinaryAlgebra_toString(node.Algebra));
 
                 }
 
@@ -289,7 +302,7 @@ namespace ProjectRimFactory.Industry
                 floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketOpen, null)); }));
                 floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketClose, null)); }));
                 ButtonRect.width = AlgebraWidth;
-                LeafAlgebra_Advanced_Button(ButtonRect, floatMenuOptions_Operators, "[Add]");
+                LeafAlgebra_Advanced_Button( ref ButtonRect, floatMenuOptions_Operators, "[Add]");
             }
             else
             {
@@ -299,14 +312,14 @@ namespace ProjectRimFactory.Industry
                      .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bNA,  g)); }))
                      .ToList();
                 ButtonRect.width = LeafWidth;
-                LeafAlgebra_Advanced_Button(ButtonRect, floatMenuOptions_leaf_Logics, "[Add]");
+                LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_leaf_Logics, "[Add]");
 
             }
 
 
 
-           
 
+            Widgets.EndScrollView();
 
         }
 
