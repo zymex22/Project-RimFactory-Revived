@@ -12,6 +12,68 @@ using ProjectRimFactory.Common;
 namespace ProjectRimFactory.Industry
 {
 
+
+
+
+
+
+
+    class Dragable_LogicBlock
+    {
+        private Texture2D image;
+
+        private Vector2 size;
+        public Vector2 Position;
+
+
+
+        public void Draw()
+        {
+
+            var test = new Rect(Position, size);
+            Widgets.ButtonImage(test, image);
+
+
+
+            if (Input.GetMouseButton(0) && Mouse.IsOver(test)) 
+            {
+                Position = Event.current.mousePosition;
+                Position.x -= size.x / 2;
+                Position.y -= size.y / 2;
+            }
+        }
+
+        public Dragable_LogicBlock(Texture2D texture, Vector2 pos, Vector2 size)
+        {
+            image = texture;
+            this.size = size;
+            Position = pos;
+        }
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     class ITab_LogicController : ITab 
     {
 
@@ -192,6 +254,8 @@ namespace ProjectRimFactory.Industry
         private void AlgebraGUI_Advanced(ref float currentY , Rect TabRect , LogicSignal logicSignal)
         {
 
+            
+
             var AlgebraGUI = new Rect(TabRect.x, currentY, TabRect.width - 50, 75);
 
             if (logicSignal.UserInfixValid)
@@ -218,7 +282,9 @@ namespace ProjectRimFactory.Industry
             var ScrollInternal = AlgebraGUI;
             ScrollInternal.height -= 25;
 
-            ScrollInternal.width *= 2;
+            ScrollInternal.width = logicSignal.TreeUserInfixExp.Count() * (AlgebraWidth + 10);
+
+
             Widgets.BeginScrollView(AlgebraGUI, ref scrollPos_AdvancedAlgebraEditor, ScrollInternal);
 
             currentY += 15;
@@ -264,8 +330,8 @@ namespace ProjectRimFactory.Industry
                     List<FloatMenuOption> floatMenuOptions_Operators = new List<FloatMenuOption>();
                     floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { node.Algebra = EnumBinaryAlgebra.bAND; }));
                     floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { node.Algebra = EnumBinaryAlgebra.bOR; }));
-                    floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => { node.Algebra = EnumBinaryAlgebra.bBracketOpen; }));
-                    floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => { node.Algebra = EnumBinaryAlgebra.bBracketClose; }));
+                 // floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => { node.Algebra = EnumBinaryAlgebra.bBracketOpen; }));
+                 // floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => { node.Algebra = EnumBinaryAlgebra.bBracketClose; }));
                     floatMenuOptions_Operators.Insert(0, new FloatMenuOption("[Remove]", () =>
                     {
                         int index = logicSignal.TreeUserInfixExp.IndexOf(node);
@@ -299,8 +365,8 @@ namespace ProjectRimFactory.Industry
                 List<FloatMenuOption> floatMenuOptions_Operators = new List<FloatMenuOption>();
                 floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bAND,null)); }));
                 floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bOR, null)); }));
-                floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketOpen, null)); }));
-                floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketClose, null)); }));
+              //  floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketOpen, null)); }));
+              //  floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketClose, null)); }));
                 ButtonRect.width = AlgebraWidth;
                 LeafAlgebra_Advanced_Button( ref ButtonRect, floatMenuOptions_Operators, "[Add]");
             }
@@ -322,6 +388,31 @@ namespace ProjectRimFactory.Industry
             Widgets.EndScrollView();
 
         }
+
+
+
+        Dragable_LogicBlock block = null;
+        Dragable_LogicBlock block2 = null;
+
+        private void DragShapeEditor(ref float currentY, Rect TabRect, LogicSignal logicSignal)
+        {
+            if (block == null) block = new Dragable_LogicBlock(RS.Algebra_And, new Vector2(TabRect.x, currentY), new Vector2(50, 50));
+            if (block2 == null) block2 = new Dragable_LogicBlock(RS.Algebra_Not, new Vector2(TabRect.x + 100, currentY), new Vector2(50, 50));
+
+
+            block2.Draw();
+            block.Draw();
+         //   var test = new Rect(TabRect.x, currentY, 50, 50);
+
+           // Widgets.ButtonImage(test, RS.Algebra_And);
+
+           // Widgets.ButtonImageDraggable(test, RS.Algebra_And);
+
+        }
+
+
+
+
 
 
         int selsecteditem = -1;
@@ -466,12 +557,15 @@ namespace ProjectRimFactory.Industry
                     selectedSignal.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedSignal.Name);
                     currentY += 30;
 
-                    AlgebraGUI_Advanced(ref currentY, innerFrame, selectedSignal);
+                    //Temp
+                   // AlgebraGUI_Advanced(ref currentY, innerFrame, selectedSignal);
+
+                    currentY += 30;
+
+                    DragShapeEditor(ref currentY, innerFrame, selectedSignal);
 
                 }
-
-
-
+                
 
 
 

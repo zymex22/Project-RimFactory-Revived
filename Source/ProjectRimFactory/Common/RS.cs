@@ -32,11 +32,23 @@ namespace ProjectRimFactory
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
 
             Arrow = ContentFinder<Texture2D>.Get("UI/Overlays/Arrow", true);
+
+
+            Algebra_And = ContentFinder<Texture2D>.Get("UI/And", true);
+            Algebra_Or = ContentFinder<Texture2D>.Get("UI/Or", true);
+            Algebra_Not = ContentFinder<Texture2D>.Get("UI/Not", true);
+
+
             // Initialize graphics for SpecialSculptures:
             foreach (var s in ProjectRimFactory.Common.
                      ProjectRimFactory_ModComponent.availableSpecialSculptures)
                 s.Init();
+
         }
+
+        public static readonly Texture2D Algebra_And;
+        public static readonly Texture2D Algebra_Or;
+        public static readonly Texture2D Algebra_Not;
 
         public static readonly Texture2D PregnantIcon;
         public static readonly Texture2D BondIcon;
