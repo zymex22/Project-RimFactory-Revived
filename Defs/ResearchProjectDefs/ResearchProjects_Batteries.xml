@@ -25,7 +25,7 @@
   <ResearchProjectDef ParentName="PRF_BatteriesResearch">
     <defName>PRF_LargeBatteries</defName>
     <label>large batteries</label>
-    <description>Build large batteries for efficient storage of electricity. Unlocks the 16k and 64k battery cell.</description>
+    <description>Build large batteries for efficient storage of electricity. Unlocks the 64k battery cell.</description>
     <baseCost>1200</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <requiredResearchFacilities>
@@ -41,7 +41,7 @@
   <ResearchProjectDef ParentName="PRF_BatteriesResearch">
     <defName>PRF_VeryLargeBatteries</defName>
     <label>very large batteries</label>
-    <description>Learn alternate methods of power storage, and create 256k battery cells for mass storage of power.</description>
+    <description>Learn alternate methods of power storage, and create 64K and 256k battery cells for mass storage of power.</description>
     <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
     <requiredResearchFacilities>
