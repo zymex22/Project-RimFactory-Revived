@@ -14,51 +14,288 @@ namespace ProjectRimFactory.Industry
 
 
 
-
-
-
-
-    class Dragable_LogicBlock
+    abstract class SnapPoint
     {
-        private Texture2D image;
+        private Vector2 position;
 
-        private Vector2 size;
-        public Vector2 Position;
+        /// <summary>
+        /// This Position is not absolute but relative to the Position of the Hitbox / Dragable_LogicBlock
+        /// </summary>
+        public Vector2 Position { get => position; set => position = value; }
 
-
-
-        public void Draw()
+        public virtual bool Accepts(SnapPoint block)
         {
-
-            var test = new Rect(Position, size);
-            Widgets.ButtonImage(test, image);
-
-
-
-            if (Input.GetMouseButton(0) && Mouse.IsOver(test)) 
-            {
-                Position = Event.current.mousePosition;
-                Position.x -= size.x / 2;
-                Position.y -= size.y / 2;
-            }
+            return false;
         }
 
-        public Dragable_LogicBlock(Texture2D texture, Vector2 pos, Vector2 size)
+    }
+
+    class SnapPoint_Input : SnapPoint
+    {
+        public override bool Accepts(SnapPoint block)
         {
-            image = texture;
-            this.size = size;
+            if (block is SnapPoint_Input) return false;
+            return true;
+        }
+        public SnapPoint_Input(Vector2 pos)
+        {
             Position = pos;
         }
+    }
+    class SnapPoint_Output : SnapPoint
+    {
+        public override bool Accepts(SnapPoint block)
+        {
+            if (block is SnapPoint_Output) return false;
+            return true;
+        }
+        public SnapPoint_Output(Vector2 pos)
+        {
+            Position = pos;
+        }
+    }
 
 
 
 
+
+
+
+    class LogicHitbox
+    {
+        public Vector2 Position;
+        public Vector2 Size;
+
+        public List<SnapPoint> SnapPoints;
+
+        public LogicHitbox(Vector2 position, Vector2 size, List<SnapPoint> snapPoints)
+        {
+            SnapPoints = snapPoints;
+            Size = size;
+            Position = position;
+        }
+    }
+
+
+
+    static class GUI_HitBox_Register
+    {
+        public static Dictionary<Dragable_LogicBlock, LogicHitbox> Hitboxes = new Dictionary<Dragable_LogicBlock, LogicHitbox>();
+
+        public static Rect Boundary;
+
+        public static LogicHitbox FindPotentialSnapPoint(SnapPoint point)
+        {
+
+
+
+            return null; // default
+        }
 
 
     }
 
 
+    abstract class Dragable_LogicBlock
+    {
+        protected virtual Texture2D image => null;
 
+        public Vector2 size;
+        public Vector2 Position;
+
+
+        public LogicHitbox Hitbox = null;
+
+
+        public abstract List<SnapPoint> GenerateSnapPonts();
+
+        public void UpdateHitBox()
+        {
+            if (Hitbox == null)
+            {
+                //Init
+                Hitbox = new LogicHitbox(Position, size, GenerateSnapPonts());
+                GUI_HitBox_Register.Hitboxes.Add(this, Hitbox);
+            }
+            else
+            {
+                Hitbox.Position = Position;
+            }
+
+        }
+
+        /// <summary>
+        /// Prevent this item from Sliding over another
+        /// Or escape from the relevant area
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckDragCollision()
+        {
+            Vector2 pos = Event.current.mousePosition;
+            pos.x -= size.x / 2;
+            pos.y -= size.y / 2;
+            //pos is at the Top Left
+            //The mouse is at the centre
+
+            //Check the Container
+            if (pos.y < GUI_HitBox_Register.Boundary.y || pos.x < GUI_HitBox_Register.Boundary.x || (pos.x + size.x) > GUI_HitBox_Register.Boundary.xMax || (pos.y + size.y) > GUI_HitBox_Register.Boundary.yMax)
+            {
+               // Log.Message("pos: " + pos + "   Boundary: " + GUI_HitBox_Register.Boundary);
+                return false;
+            }
+
+            var test = new Rect(pos, size);
+            var other = new Rect(pos, size);
+
+            //Check Other Hit Boxes
+            foreach (LogicHitbox logicHitbox in GUI_HitBox_Register.Hitboxes.Where(h => h.Key != this).ToList().Select(p => p.Value))
+            {
+                other.position = logicHitbox.Position;
+                other.size = logicHitbox.Size;
+
+                if (test.Overlaps(other))
+                {
+                    return false;
+                }
+
+            }
+
+
+            
+
+
+
+            return true;
+        }
+
+        public void HandleElement()
+        {
+            var test = new Rect(Position, size);
+            Draw(test);
+            if (Input.GetMouseButton(0) && Mouse.IsOver(test))
+            {
+                if (CheckDragCollision())
+                {
+                    Position = Event.current.mousePosition;
+                    Position.x -= size.x / 2;
+                    Position.y -= size.y / 2;
+                }
+                
+
+                SnapPoint snap_o = Hitbox.SnapPoints.Where(p => p is SnapPoint_Output).First();
+                if (snap_o != null)
+                {
+                    //Find any SnapPoints in snap range that accept this point
+
+                }
+
+
+                UpdateHitBox();
+            }
+        }
+
+
+        public virtual void Draw(Rect test)
+        {
+            Widgets.ButtonImage(test, image);
+        }
+
+        public Dragable_LogicBlock()
+        {
+           
+        }
+
+
+    }
+
+    class GUI_And_Block : Dragable_LogicBlock
+    {
+        protected override Texture2D image => RS.Algebra_And;
+
+        public GUI_And_Block(Vector2 pos, Vector2 size)
+        {
+            this.size = size;
+            Position = pos;
+            UpdateHitBox();
+        }
+
+        public override List<SnapPoint> GenerateSnapPonts()
+        {
+            return new List<SnapPoint> { new SnapPoint_Input(new Vector2(0, size.y / 3)), new SnapPoint_Input(new Vector2(0, (size.y / 3 )* 2)) , new SnapPoint_Output(new Vector2(size.x, size.y / 2)) };
+        }
+    }
+    class GUI_Or_Block : Dragable_LogicBlock
+    {
+        protected override Texture2D image => RS.Algebra_Or;
+
+        public GUI_Or_Block(Vector2 pos, Vector2 size)
+        {
+            this.size = size;
+            Position = pos;
+            UpdateHitBox();
+        }
+        public override List<SnapPoint> GenerateSnapPonts()
+        {
+            return new List<SnapPoint> { new SnapPoint_Input(new Vector2(0, size.y / 3)), new SnapPoint_Input(new Vector2(0, (size.y / 3) * 2)), new SnapPoint_Output(new Vector2(size.x, size.y / 2)) };
+        }
+    }
+    class GUI_Not_Block : Dragable_LogicBlock
+    {
+        protected override Texture2D image => RS.Algebra_Not;
+
+        public GUI_Not_Block(Vector2 pos, Vector2 size)
+        {
+            this.size = size;
+            Position = pos;
+            UpdateHitBox();
+        }
+        public override List<SnapPoint> GenerateSnapPonts()
+        {
+            return new List<SnapPoint> { new SnapPoint_Input(new Vector2(0, size.y / 2)), new SnapPoint_Output(new Vector2(size.x, size.y / 2)) };
+        }
+
+    }
+    class GUI_Input_Block : Dragable_LogicBlock
+    {
+        protected override Texture2D image => null;
+
+        public GUI_Input_Block(Vector2 pos, Vector2 size)
+        {
+            this.size = size;
+            Position = pos;
+            UpdateHitBox();
+        }
+
+        public override void Draw(Rect test)
+        {
+            base.Draw(test);
+        }
+        public override List<SnapPoint> GenerateSnapPonts()
+        {
+            return new List<SnapPoint> {  new SnapPoint_Output(new Vector2(size.x, size.y / 2)) };
+        }
+    }
+    class GUI_Output_Block : Dragable_LogicBlock
+    {
+        protected override Texture2D image => null;
+
+        public GUI_Output_Block(Vector2 pos, Vector2 size)
+        {
+            this.size = size;
+            Position = pos;
+            UpdateHitBox();
+        }
+
+        public override void Draw(Rect test)
+        {
+            base.Draw(test);
+        }
+        public override List<SnapPoint> GenerateSnapPonts()
+        {
+            return new List<SnapPoint> { new SnapPoint_Input(new Vector2(0, size.y / 2)) };
+        }
+
+    }
 
 
 
@@ -393,15 +630,21 @@ namespace ProjectRimFactory.Industry
 
         Dragable_LogicBlock block = null;
         Dragable_LogicBlock block2 = null;
+        Dragable_LogicBlock block3 = null;
+
 
         private void DragShapeEditor(ref float currentY, Rect TabRect, LogicSignal logicSignal)
         {
-            if (block == null) block = new Dragable_LogicBlock(RS.Algebra_And, new Vector2(TabRect.x, currentY), new Vector2(50, 50));
-            if (block2 == null) block2 = new Dragable_LogicBlock(RS.Algebra_Not, new Vector2(TabRect.x + 100, currentY), new Vector2(50, 50));
 
 
-            block2.Draw();
-            block.Draw();
+            if (GUI_HitBox_Register.Boundary.width == 0) GUI_HitBox_Register.Boundary = TabRect;
+            if (block == null) block = new GUI_And_Block (new Vector2(TabRect.x, currentY), new Vector2(50, 50));
+            if (block2 == null) block2 = new GUI_Or_Block( new Vector2(TabRect.x + 100, currentY), new Vector2(50, 50));
+            if (block3 == null) block3 = new GUI_Not_Block(new Vector2(TabRect.x + 200, currentY), new Vector2(50, 50));
+
+            block3.HandleElement();
+            block2.HandleElement();
+            block.HandleElement();
          //   var test = new Rect(TabRect.x, currentY, 50, 50);
 
            // Widgets.ButtonImage(test, RS.Algebra_And);
@@ -561,8 +804,8 @@ namespace ProjectRimFactory.Industry
                    // AlgebraGUI_Advanced(ref currentY, innerFrame, selectedSignal);
 
                     currentY += 30;
-
-                    DragShapeEditor(ref currentY, innerFrame, selectedSignal);
+                    var GUIRect = new Rect( innerFrame.x + 10, currentY, 600, 300);
+                    DragShapeEditor(ref currentY, GUIRect, selectedSignal);
 
                 }
                 
