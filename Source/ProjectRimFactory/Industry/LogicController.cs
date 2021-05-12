@@ -384,6 +384,7 @@ namespace ProjectRimFactory.Industry
          * - Speed
          */
         public List<Tree_node> UserInfixExpr;
+        private List<Tree_node> UserInfixExpr_old;
         public bool CheckUserInfixExpr()
         {
             if (UserInfixExpr.Count == 0) return false;
@@ -401,6 +402,17 @@ namespace ProjectRimFactory.Industry
             //All else should be fine
             return true;
 
+        }
+
+        public void ReloadUserInfix()
+        {
+            UserInfixExpr = DeepCopy<List<Tree_node>>(UserInfixExpr_old);
+        }
+        public void ApplyUserInfix()
+        {
+            UserInfixExpr_old = DeepCopy<List<Tree_node>>(UserInfixExpr);
+            rootNode = BuildTree(ConvertToPostfix(DeepCopy<List<Tree_node>>(UserInfixExpr)));
+            
         }
 
 
@@ -583,6 +595,7 @@ namespace ProjectRimFactory.Industry
         public Tree( List<Tree_node> input)
         {
             UserInfixExpr = DeepCopy<List<Tree_node>>(input); //Why C# Why....
+            UserInfixExpr_old = DeepCopy<List<Tree_node>>(UserInfixExpr);
             rootNode = BuildTree(ConvertToPostfix(input));
         }
 
@@ -610,6 +623,16 @@ namespace ProjectRimFactory.Industry
         public bool UsesDynamicSlotGroup => dynamicSlot != EnumDynamicSlotGroupID.NA;
         //TODO
         public EnumDynamicSlotGroupID dynamicSlot { get =>  logicTree.dynamicSlot   ; set => throw new NotImplementedException(); }
+
+        public void ResetUserInfix()
+        {
+            logicTree.ReloadUserInfix();
+        }
+        public void SaveUserInfix()
+        {
+            logicTree.ApplyUserInfix();
+        }
+
 
         public int GetValue(SlotGroup DynamicSlot_1 = null, SlotGroup DynamicSlot_2 = null)
         {
@@ -666,9 +689,9 @@ namespace ProjectRimFactory.Industry
         {
             base.ExposeData();
 
-            Scribe_Deep.Look(ref LogicSignals, "signals", new object[] { this });
-            Scribe_Deep.Look(ref leaf_Logics, "leaf_Logics", new object[] { this });
-            Scribe_Deep.Look(ref valueRefrences, "valueRefrences", new object[] { this });
+            Scribe_Deep.Look(ref LogicSignals, "signals", new List<LogicSignal>());
+            Scribe_Deep.Look(ref leaf_Logics, "leaf_Logics", new List<Leaf_Logic>());
+            Scribe_Deep.Look(ref valueRefrences, "valueRefrences", new List<ValueRefrence>());
         }
 
         public override IEnumerable<Gizmo> GetGizmos()

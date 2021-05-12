@@ -486,6 +486,7 @@ namespace ProjectRimFactory.Industry
         /// <summary>
         /// This is the easier version for Users that are faliliar with Boolshe Algebra
         /// And It's Also "easier" to implement 
+        /// TODO maybe add support for NOT & ()
         /// </summary>
         /// <param name="currentY"></param>
         private void AlgebraGUI_Advanced(ref float currentY , Rect TabRect , LogicSignal logicSignal)
@@ -519,7 +520,7 @@ namespace ProjectRimFactory.Industry
             var ScrollInternal = AlgebraGUI;
             ScrollInternal.height -= 25;
 
-            ScrollInternal.width = logicSignal.TreeUserInfixExp.Count() * (AlgebraWidth + 10);
+            ScrollInternal.width = logicSignal.TreeUserInfixExp.Count() * (LeafWidth + 10);
 
 
             Widgets.BeginScrollView(AlgebraGUI, ref scrollPos_AdvancedAlgebraEditor, ScrollInternal);
@@ -623,6 +624,21 @@ namespace ProjectRimFactory.Industry
 
 
             Widgets.EndScrollView();
+            currentY += 57;
+            var save_relod_Rect = new Rect(TabRect.x, currentY, 100, 25);
+            if (Widgets.ButtonText(save_relod_Rect, "Save", active: logicSignal.UserInfixValid)) 
+            {
+                logicSignal.SaveUserInfix();
+            }
+            save_relod_Rect.x += 400;
+            if (Widgets.ButtonText(save_relod_Rect, "Reload"))
+            {
+                logicSignal.ResetUserInfix();
+            }
+
+
+
+
 
         }
 
@@ -692,32 +708,6 @@ namespace ProjectRimFactory.Industry
 
             if (currentTab == 0) //Is Algebra Tab
             {
-                /*
-                //if (Input.GetMouseButton(0)) Log.Message(" Input.GetMouseButton(0)");
-
-
-                //Input.get_mousePosition()
-                if (dragPos.x == 0 && dragPos.y == 0) dragPos = new Vector2( innerFrame.x, currentY);
-
-                var DragBoxTest = new Rect(dragPos, dragboxSize);
-
-                Widgets.DrawBoxSolid(DragBoxTest, Color.red);
-
-                if (Input.GetMouseButton(0) && Mouse.IsOver(DragBoxTest))
-                {
-                    //Log.Message(dragPos + "  -  " + Event.current.mousePosition);
-
-                    dragPos =  Event.current.mousePosition;
-                }
-                */
-
-
-
-
-
-
-
-
                 var ListBox_Outside = new Rect(innerFrame.x, currentY, listBoxWidth, 150);
 
                 var ListBox_Inside = ListBox_Outside;
@@ -800,12 +790,13 @@ namespace ProjectRimFactory.Industry
                     selectedSignal.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedSignal.Name);
                     currentY += 30;
 
-                    //Temp
-                   // AlgebraGUI_Advanced(ref currentY, innerFrame, selectedSignal);
+                    
+                    AlgebraGUI_Advanced(ref currentY, innerFrame, selectedSignal);
 
-                    currentY += 30;
-                    var GUIRect = new Rect( innerFrame.x + 10, currentY, 600, 300);
-                    DragShapeEditor(ref currentY, GUIRect, selectedSignal);
+                    //TODO finish the GUI drag Interface and add it later
+                    //currentY += 30;
+                    //var GUIRect = new Rect( innerFrame.x + 10, currentY, 600, 300);
+                    //DragShapeEditor(ref currentY, GUIRect, selectedSignal);
 
                 }
                 
@@ -1007,9 +998,12 @@ namespace ProjectRimFactory.Industry
                 }
                 currentY += 20;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if(Widgets.ButtonText(buttonrect, "Add Signal"))
+                if(Widgets.ButtonText(buttonrect, "Add Signal",active: this_Controller.LogicSignals.Count > 0))
                 {
-                    //TODO Once i have Signals
+                    List<FloatMenuOption> AddSignalFloat = this_Controller.LogicSignals
+                     .Select(s => new FloatMenuOption(s.Name, () => { this_Controller.valueRefrences.Add(new ValueRefrence_Signal(s)); }))
+                     .ToList();
+                    Find.WindowStack.Add(new FloatMenu( AddSignalFloat ));
                 }
                 currentY += 20;
                 
