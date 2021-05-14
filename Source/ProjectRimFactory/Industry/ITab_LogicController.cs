@@ -620,9 +620,6 @@ namespace ProjectRimFactory.Industry
 
             }
 
-
-
-
             Widgets.EndScrollView();
             currentY += 57;
         }
@@ -974,7 +971,7 @@ namespace ProjectRimFactory.Industry
                 var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
                 if ( Widgets.ButtonText(buttonrect, "Add Fixed"))
                 {
-                    this_Controller.valueRefrences.Add(new ValueRefrence_Fixed());
+                    this_Controller.valueRefrences.Add(new ValueRefrence_Fixed(0));
 
                 }
                 currentY += 20;
