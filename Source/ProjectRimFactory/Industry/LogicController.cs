@@ -54,7 +54,6 @@ namespace ProjectRimFactory.Industry
 
 
     //Base Class
-    [Serializable] //Needed for DeepCopy / Assign ByValue
     abstract class ValueRefrence : ILogicObjeckt , IDynamicSlotGroup
     {
         abstract public int Value { set; }
@@ -73,7 +72,6 @@ namespace ProjectRimFactory.Industry
     /// ValueRefrence_Fixed Is a Possible Object for the Leaf_Logic Constructor
     /// This one is Used for Fixed Values that the user can Enter
     /// </summary>
-    [Serializable] //Needed for DeepCopy / Assign ByValue
     class ValueRefrence_Fixed : ValueRefrence
     {
         private int pvalue;
@@ -104,7 +102,6 @@ namespace ProjectRimFactory.Industry
     /// ValueRefrence_Fixed Is a Possible Object for the Leaf_Logic Constructor
     /// This one is Used for Refrencing Logic Signals
     /// </summary>
-    [Serializable] //Needed for DeepCopy / Assign ByValue
     class ValueRefrence_Signal : ValueRefrence
     {
         /// <summary>
@@ -136,7 +133,6 @@ namespace ProjectRimFactory.Industry
     /// ValueRefrence_Fixed Is a Possible Object for the Leaf_Logic Constructor
     /// This one is Used for Comparing against Thing Counts within a predefind zone
     /// </summary>
-    [Serializable] //Needed for DeepCopy / Assign ByValue
     class ValueRefrence_ThingCount : ValueRefrence
     {
         public override int Value 
@@ -152,12 +148,10 @@ namespace ProjectRimFactory.Industry
         public override string Name { get => name; set => name = value; }
 
         //Holds the filter
-        [NonSerialized]
         public ThingFilter filter;
 
         public StorageLocation storage;
 
-        [NonSerialized]
         private Map map;
 
         private bool visible = true;
@@ -178,10 +172,8 @@ namespace ProjectRimFactory.Industry
             return storage.GetItemCount(filter, map, DynamicSlot_1, DynamicSlot_2);
         }
     }
-    [Serializable] //Needed for DeepCopy / Assign ByValue
     class StorageLocation : IDynamicSlotGroup
     {
-        [NonSerialized]
         public SlotGroup SlotGroup = null;
 
         private EnumDynamicSlotGroupID privatedynamicSlot = EnumDynamicSlotGroupID.NA;
@@ -227,7 +219,7 @@ namespace ProjectRimFactory.Industry
                 {
                     if (SlotGroup != null)
                     {
-                        returnval = SlotGroup.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
+                        returnval = SlotGroup.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Sum();
                     }
                     else
                     {
@@ -244,17 +236,15 @@ namespace ProjectRimFactory.Industry
                         Log.Message("PRF - ERROR DynamicSlot_1 == null");
                         return -1;
                     }
-                    Log.Message("DynamicSlot_1.HeldThings " + DynamicSlot_1.HeldThings);
-                    Log.Message("filter " + filter);
-                    
-                    return DynamicSlot_1.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
+                    int count = DynamicSlot_1.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Sum();
+                    return count;
                 case EnumDynamicSlotGroupID.Group_2:
                     if (DynamicSlot_2 == null)
                     {
                         Log.Message("PRF - ERROR DynamicSlot_2 == null");
                         return -1;
                     }
-                    return DynamicSlot_2.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Count();
+                    return DynamicSlot_2.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Sum();
                 default:
                     {
                         Log.Error("PRF Logic-Controller Invalide DynamicSlot: " + dynamicSlot);
@@ -291,7 +281,6 @@ namespace ProjectRimFactory.Industry
     /// This is is What's behin 'A' and 'B' in: A AND B
     /// 
     /// </summary>
-    [Serializable] //Needed for DeepCopy / Assign ByValue
     public class Leaf_Logic : IDynamicSlotGroup
     {
         private string name = "Leaf_Logic";
@@ -368,7 +357,6 @@ namespace ProjectRimFactory.Industry
     /// <summary>
     /// None of the Expression Tree
     /// </summary>
-    [Serializable] //Needed for DeepCopy / Assign ByValue
     public class Tree_node
     {
         public bool IsLeaf
@@ -402,7 +390,6 @@ namespace ProjectRimFactory.Industry
 
 
     //The entire Tree
-    [Serializable] //Needed for DeepCopy / Assign ByValue
     public class Tree : IDynamicSlotGroup
     {
         Tree_node rootNode;
@@ -417,7 +404,6 @@ namespace ProjectRimFactory.Industry
          * - Speed
          */
         public List<Tree_node> UserInfixExpr;
-        private List<Tree_node> UserInfixExpr_old;
         public bool CheckUserInfixExpr()
         {
             if (UserInfixExpr.Count == 0) return false;
@@ -439,12 +425,11 @@ namespace ProjectRimFactory.Industry
 
         public void ReloadUserInfix()
         {
-            UserInfixExpr = DeepCopy<List<Tree_node>>(UserInfixExpr_old);
+          //  UserInfixExpr = DeepCopy<List<Tree_node>>(UserInfixExpr_old);
         }
         public void ApplyUserInfix()
         {
-            UserInfixExpr_old = DeepCopy<List<Tree_node>>(UserInfixExpr);
-            rootNode = BuildTree(ConvertToPostfix(DeepCopy<List<Tree_node>>(UserInfixExpr)));
+            rootNode = BuildTree(ConvertToPostfix(UserInfixExpr));
             
         }
 
@@ -621,26 +606,13 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        public static T DeepCopy<T>(T item) //Needed for Assign ByValue
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            MemoryStream stream = new MemoryStream();
-            formatter.Serialize(stream, item);
-            stream.Seek(0, SeekOrigin.Begin);
-            T result = (T)formatter.Deserialize(stream);
-            stream.Close();
-            return result;
-        }
-
-
         /// <summary>
         /// Constructs the Tree
         /// </summary>
         /// <param name="input">Infix Expression</param>
         public Tree( List<Tree_node> input)
         {
-            UserInfixExpr = DeepCopy<List<Tree_node>>(input); //Why C# Why....
-            UserInfixExpr_old = DeepCopy<List<Tree_node>>(UserInfixExpr);
+            UserInfixExpr =input; //Why C# Why....
             rootNode = BuildTree(ConvertToPostfix(input));
         }
 
