@@ -236,7 +236,7 @@ namespace ProjectRimFactory.Industry
                         Log.Message("PRF - ERROR DynamicSlot_1 == null");
                         return -1;
                     }
-                    int count = DynamicSlot_1.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Sum();
+                    int count = DynamicSlot_1.HeldThings.Where(t => t != null &&  filter.Allows(t)  ).Select(n => n.stackCount).Sum();
                     return count;
                 case EnumDynamicSlotGroupID.Group_2:
                     if (DynamicSlot_2 == null)
@@ -244,7 +244,7 @@ namespace ProjectRimFactory.Industry
                         Log.Message("PRF - ERROR DynamicSlot_2 == null");
                         return -1;
                     }
-                    return DynamicSlot_2.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Sum();
+                    return DynamicSlot_2.HeldThings.Where(t => t => t != null && filter.Allows(t)).Select(n => n.stackCount).Sum();
                 default:
                     {
                         Log.Error("PRF Logic-Controller Invalide DynamicSlot: " + dynamicSlot);
