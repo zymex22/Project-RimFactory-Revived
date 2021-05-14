@@ -12,6 +12,7 @@ using UnityEngine;
 using ProjectRimFactory.Common;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 using ProjectRimFactory.Common.HarmonyPatches;
+using ProjectRimFactory.Industry;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -46,7 +47,7 @@ namespace ProjectRimFactory.AutoMachineTool
 /// </designNotes>
     [StaticConstructorOnStartup]
     public class Building_BeltConveyor : Building_BaseMachine<Thing>, IBeltConveyorLinkable, 
-                     IThingHolder, IHideItem, IHideRightClickMenu
+                     IThingHolder, IHideItem, IHideRightClickMenu, ILogicSignalReciver
     {
         public Building_BeltConveyor()
         {
@@ -88,6 +89,34 @@ namespace ProjectRimFactory.AutoMachineTool
         // AutoMachineTool: Building_Base
         public override IntVec3 OutputCell() => this.Position + this.OutputDirection.FacingCell;
 
+        private LogicSignal refrerenceSignal = null;
+        public bool LogicSignalUsed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public LogicSignal RefrerenceSignal { get => refrerenceSignal; set => refrerenceSignal = value; }
+
+
+        private IEnumerable<Thing> heldthings(Thing thing)
+        {
+            yield return thing;
+        }
+
+        protected override bool IsActive()
+        {
+/*
+            if (RefrerenceSignal != null)
+            {
+                Thing thing = null;
+                if (products.Count > 0) thing = products[0];
+                return RefrerenceSignal.GetValue( new DynamicSlotGroup(heldthings(thing)  )) == 1;
+            } 
+
+            */
+
+
+            return base.IsActive();
+        }
+
+
+
         /**************** IPRF_Building ***************/
         public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null) {
             // TODO: underground?  Mod Setting?
@@ -106,7 +135,28 @@ namespace ProjectRimFactory.AutoMachineTool
         public bool IsStuck => this.stuck;
         public bool IsUnderground { get => this.Extension?.underground ?? false; }
         public virtual bool IsEndOfLine {
-            get { return isEndOfLine; }
+            get 
+            {
+
+                if (RefrerenceSignal != null)
+                {
+                    Thing thing = null;
+                    if (products.Count > 0) thing = products[0];
+                    if( RefrerenceSignal.GetValue(new DynamicSlotGroup(heldthings(thing))) == 1)
+                    {
+                        return isEndOfLine;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+
+
+
+                return isEndOfLine; 
+            
+            }
             set {
                 if (isEndOfLine && value == false) {
                     isEndOfLine = false;
@@ -453,6 +503,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 target.Position = this.Position;
             }
             if (target != null) thingOwnerInt.TryAdd(target);
+
             return target != null;
         }
         protected override void ForceStartWork(Thing working, float workAmount) {

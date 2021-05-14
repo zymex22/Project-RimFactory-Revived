@@ -79,6 +79,8 @@ namespace ProjectRimFactory.Common
 
         bool ShowAdditionalSettings => pRF_SettingsContent != null;
 
+        bool ShowLogicSignalReciverSettings => LogicSignalReciver != null;
+
         bool ShowAreaSelectButton => supplyMachineHolder != null;
 
         private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
@@ -90,6 +92,9 @@ namespace ProjectRimFactory.Common
 
 
         private IPRF_SettingsContentLink pRF_SettingsContent { get => this.SelThing as IPRF_SettingsContentLink; }
+
+        private ILogicSignalReciver LogicSignalReciver { get => this.SelThing as ILogicSignalReciver; }
+        
 
 
         private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
@@ -118,6 +123,9 @@ namespace ProjectRimFactory.Common
                 winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Minimum_x);
             }
             if(ShowRangeTypeSelectorButton) winSize.y += 100f;
+
+            if (ShowLogicSignalReciverSettings) winSize.y += 100f;
+
 
             float maxHeight = 900f;
             float minHeight = 50f; // if this starts too large, the window will be too high
@@ -263,7 +271,27 @@ namespace ProjectRimFactory.Common
                 list.Gap();
 
             }
+            if (ShowLogicSignalReciverSettings)
+            {
+                inRect = list.GetRect(30f);
+                Widgets.DrawLineHorizontal(inRect.x, inRect.y - 5, inRect.width);
+                
+                inRect = list.GetRect(30f);
+                
 
+                List<FloatMenuOption> floatMenuOptions = Current.Game.GetComponent<PRFGameComponent>().LoigSignalRegestry.Where(e => e.Value == this.SelThing.Map).Select(e => e.Key)
+                                .Select(g => new FloatMenuOption(g.Name , () => { LogicSignalReciver.RefrerenceSignal = g; }))
+                                .ToList();
+                floatMenuOptions.Insert(0, new FloatMenuOption("Unused", () => LogicSignalReciver.RefrerenceSignal = null));
+
+                if ( Widgets.ButtonText(inRect, LogicSignalReciver.RefrerenceSignal?.Name ?? "Unused"))
+                {
+                    Find.WindowStack.Add(new FloatMenu(floatMenuOptions));
+                }
+
+
+
+            }
             
             
             list.Gap();

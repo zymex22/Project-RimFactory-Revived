@@ -629,6 +629,7 @@ namespace ProjectRimFactory.Industry
             if (Widgets.ButtonText(save_relod_Rect, "Save", active: logicSignal.UserInfixValid)) 
             {
                 logicSignal.SaveUserInfix();
+                this_Controller.UpdateRegisteredSignals();
             }
             save_relod_Rect.x += 400;
             if (Widgets.ButtonText(save_relod_Rect, "Reload"))
@@ -749,6 +750,7 @@ namespace ProjectRimFactory.Industry
                 if (Widgets.ButtonText(buttonrect, "Add Logic Signal"))
                 {
                     this_Controller.LogicSignals.Add(new LogicSignal(new Tree(new List<Tree_node> { new Tree_node(EnumBinaryAlgebra.bNA, this_Controller.leaf_Logics[0]) }), "Logic Signal"));
+                    this_Controller.UpdateRegisteredSignals();
                 }
                 currentY += 20;
 
@@ -763,6 +765,7 @@ namespace ProjectRimFactory.Industry
                     {
                         this_Controller.LogicSignals.RemoveAt(selsecteditemLogicSignal);
                         selsecteditemLogicSignal = -1;
+                        this_Controller.UpdateRegisteredSignals();
                     }
 
 

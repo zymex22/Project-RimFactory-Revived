@@ -6,10 +6,12 @@ using Verse;
 using Verse.AI;
 using ProjectRimFactory.Common;
 using ProjectRimFactory.Common.HarmonyPatches;
+
 namespace ProjectRimFactory {
     public class PRFGameComponent : GameComponent {
         public List<SpecialSculpture> specialScupltures;  // currently in game
         public List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
+        public Dictionary<Industry.LogicSignal,Map> LoigSignalRegestry = new Dictionary< Industry.LogicSignal, Map>();
 
         public static Pawn PRF_StaticPawn = null;
         public static Job PRF_StaticJob = null;
