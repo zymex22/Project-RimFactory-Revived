@@ -408,12 +408,12 @@ namespace ProjectRimFactory.Industry
         {
             if (UserInfixExpr.Count == 0) return false;
             //For evry Opened Bracket there needs to be a closed one
-            if ( UserInfixExpr.Where(e => e.Algebra == EnumBinaryAlgebra.bBracketOpen).Count() != UserInfixExpr.Where(e => e.Algebra == EnumBinaryAlgebra.bBracketClose).Count())
+            if (UserInfixExpr.Where(e => e.Algebra == EnumBinaryAlgebra.bBracketOpen).Count() != UserInfixExpr.Where(e => e.Algebra == EnumBinaryAlgebra.bBracketClose).Count())
             {
                 return false;
             }
             //Check that the last Value is not Algebra (closed backet is allowed in the Last Spot)
-            if (!( UserInfixExpr.Last().Algebra == EnumBinaryAlgebra.bNA || UserInfixExpr.Last().Algebra == EnumBinaryAlgebra.bBracketClose))
+            if (!(UserInfixExpr.Last().Algebra == EnumBinaryAlgebra.bNA || UserInfixExpr.Last().Algebra == EnumBinaryAlgebra.bBracketClose))
             {
                 return false;
             }
@@ -422,17 +422,6 @@ namespace ProjectRimFactory.Industry
             return true;
 
         }
-
-        public void ReloadUserInfix()
-        {
-          //  UserInfixExpr = DeepCopy<List<Tree_node>>(UserInfixExpr_old);
-        }
-        public void ApplyUserInfix()
-        {
-            rootNode = BuildTree(ConvertToPostfix(UserInfixExpr));
-            
-        }
-
 
         public bool UsesDynamicSlotGroup => throw new NotImplementedException();
 
@@ -641,15 +630,6 @@ namespace ProjectRimFactory.Industry
         //TODO
         public EnumDynamicSlotGroupID dynamicSlot { get =>  logicTree.dynamicSlot   ; set => throw new NotImplementedException(); }
 
-        public void ResetUserInfix()
-        {
-            logicTree.ReloadUserInfix();
-        }
-        public void SaveUserInfix()
-        {
-            logicTree.ApplyUserInfix();
-        }
-
 
         public int GetValue(DynamicSlotGroup DynamicSlot_1 = null, DynamicSlotGroup DynamicSlot_2 = null)
         {
@@ -662,8 +642,6 @@ namespace ProjectRimFactory.Industry
             {
                 return 0;
             }
-
-
         }
 
         public List<Tree_node> TreeUserInfixExp

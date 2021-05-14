@@ -625,22 +625,6 @@ namespace ProjectRimFactory.Industry
 
             Widgets.EndScrollView();
             currentY += 57;
-            var save_relod_Rect = new Rect(TabRect.x, currentY, 100, 25);
-            if (Widgets.ButtonText(save_relod_Rect, "Save", active: logicSignal.UserInfixValid)) 
-            {
-                logicSignal.SaveUserInfix();
-                this_Controller.UpdateRegisteredSignals();
-            }
-            save_relod_Rect.x += 400;
-            if (Widgets.ButtonText(save_relod_Rect, "Reload"))
-            {
-                logicSignal.ResetUserInfix();
-            }
-
-
-
-
-
         }
 
 
