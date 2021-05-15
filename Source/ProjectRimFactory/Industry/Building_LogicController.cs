@@ -55,19 +55,44 @@ namespace ProjectRimFactory.Industry
             {
                 valueRefrences = new List<ValueRefrence>();
             }
-            //Not really visible to the User Used for Creating New LeafLogic
-            valueRefrences.Add(new ValueRefrence_Fixed(0, "Dummy-1", false));
-            valueRefrences.Add(new ValueRefrence_Fixed(0, "Dummy-2", false));
+            if (!valueRefrences.Any(i => i.Visible == false))
+            {
+                //Not really visible to the User Used for Creating New LeafLogic
+                valueRefrences.Add(new ValueRefrence_Fixed(0, "Dummy-1", false));
+                valueRefrences.Add(new ValueRefrence_Fixed(0, "Dummy-2", false));
+            }
 
             if (leaf_Logics == null)
             {
                 leaf_Logics = new List<Leaf_Logic>();
             }
-            leaf_Logics.Add(new Leaf_Logic(valueRefrences[0], valueRefrences[1], EnumCompareOperator.Greater, "Dummy-1", false));
-
+            if (!leaf_Logics.Any(i => i.Visible == false))
+            {
+                leaf_Logics.Add(new Leaf_Logic(valueRefrences[0], valueRefrences[1], EnumCompareOperator.Greater, "Dummy-1", false));
+            }
             if (LogicSignals == null)
             {
                 LogicSignals = new List<LogicSignal>();
+            }
+        }
+
+        /// <summary>
+        /// Automaticly adds a few values for Testing
+        /// Could also be used for some sort of QuickStart / Turorial
+        /// </summary>
+        /// <param name="force">Set to True to add regardless of if it already hase some</param>
+        private void AddSampleLogic(bool force = false)
+        {
+            //Automaticly add a few values for Testing
+            if (force || ( !valueRefrences.Any(e => e.Visible) && !leaf_Logics.Any(e => e.Visible) && !LogicSignals.Any()))
+            {
+
+                valueRefrences.Add(new ValueRefrence_Fixed(5, "SpawnTesting - 1"));
+                valueRefrences.Add(new ValueRefrence_Fixed(0, "SpawnTesting - 2"));
+
+                leaf_Logics.Add(new Leaf_Logic(valueRefrences[0], valueRefrences[1], EnumCompareOperator.Greater, "Spawn Test"));
+
+                LogicSignals.Add(new LogicSignal(new Tree(new List<Tree_node> { new Tree_node(EnumBinaryAlgebra.bNA, leaf_Logics[0]), new Tree_node(EnumBinaryAlgebra.bAND, null), new Tree_node(EnumBinaryAlgebra.bNA, leaf_Logics[1]) }), "Logic Testing"));
             }
         }
 
@@ -77,13 +102,8 @@ namespace ProjectRimFactory.Industry
 
             Initialize();
 
-            //Automaticly add a few values for Testing
-            valueRefrences.Add(new ValueRefrence_Fixed(5, "SpawnTesting - 1"));
-            valueRefrences.Add(new ValueRefrence_Fixed(0, "SpawnTesting - 2"));
+            AddSampleLogic();
 
-            leaf_Logics.Add(new Leaf_Logic(valueRefrences[0], valueRefrences[1], EnumCompareOperator.Greater, "Spawn Test"));
-
-            LogicSignals.Add(new LogicSignal(new Tree(new List<Tree_node> { new Tree_node(EnumBinaryAlgebra.bNA, leaf_Logics[0]), new Tree_node(EnumBinaryAlgebra.bAND, null), new Tree_node(EnumBinaryAlgebra.bNA, leaf_Logics[1]) }), "Logic Testing"));
 
             UpdateRegisteredSignals();
 

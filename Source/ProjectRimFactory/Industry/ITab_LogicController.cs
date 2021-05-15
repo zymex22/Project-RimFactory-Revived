@@ -12,6 +12,8 @@ using ProjectRimFactory.Common;
 namespace ProjectRimFactory.Industry
 {
 
+    #region Drag_Logic
+
 
 
     abstract class SnapPoint
@@ -140,7 +142,7 @@ namespace ProjectRimFactory.Industry
             //Check the Container
             if (pos.y < GUI_HitBox_Register.Boundary.y || pos.x < GUI_HitBox_Register.Boundary.x || (pos.x + size.x) > GUI_HitBox_Register.Boundary.xMax || (pos.y + size.y) > GUI_HitBox_Register.Boundary.yMax)
             {
-               // Log.Message("pos: " + pos + "   Boundary: " + GUI_HitBox_Register.Boundary);
+                // Log.Message("pos: " + pos + "   Boundary: " + GUI_HitBox_Register.Boundary);
                 return false;
             }
 
@@ -161,7 +163,7 @@ namespace ProjectRimFactory.Industry
             }
 
 
-            
+
 
 
 
@@ -180,7 +182,7 @@ namespace ProjectRimFactory.Industry
                     Position.x -= size.x / 2;
                     Position.y -= size.y / 2;
                 }
-                
+
 
                 SnapPoint snap_o = Hitbox.SnapPoints.Where(p => p is SnapPoint_Output).First();
                 if (snap_o != null)
@@ -202,7 +204,7 @@ namespace ProjectRimFactory.Industry
 
         public Dragable_LogicBlock()
         {
-           
+
         }
 
 
@@ -221,7 +223,7 @@ namespace ProjectRimFactory.Industry
 
         public override List<SnapPoint> GenerateSnapPonts()
         {
-            return new List<SnapPoint> { new SnapPoint_Input(new Vector2(0, size.y / 3)), new SnapPoint_Input(new Vector2(0, (size.y / 3 )* 2)) , new SnapPoint_Output(new Vector2(size.x, size.y / 2)) };
+            return new List<SnapPoint> { new SnapPoint_Input(new Vector2(0, size.y / 3)), new SnapPoint_Input(new Vector2(0, (size.y / 3) * 2)), new SnapPoint_Output(new Vector2(size.x, size.y / 2)) };
         }
     }
     class GUI_Or_Block : Dragable_LogicBlock
@@ -272,7 +274,7 @@ namespace ProjectRimFactory.Industry
         }
         public override List<SnapPoint> GenerateSnapPonts()
         {
-            return new List<SnapPoint> {  new SnapPoint_Output(new Vector2(size.x, size.y / 2)) };
+            return new List<SnapPoint> { new SnapPoint_Output(new Vector2(size.x, size.y / 2)) };
         }
     }
     class GUI_Output_Block : Dragable_LogicBlock
@@ -309,12 +311,12 @@ namespace ProjectRimFactory.Industry
 
 
 
+    #endregion
 
-
-    class ITab_LogicController : ITab 
+    class ITab_LogicController : ITab
     {
 
-        private LogicController this_Controller { get => this.SelThing as LogicController; }
+        private Building_LogicController this_Controller { get => this.SelThing as Building_LogicController; }
 
         public override bool IsVisible => base.IsVisible;
 
@@ -326,6 +328,8 @@ namespace ProjectRimFactory.Industry
         Vector2 scrollPos_itemFilter = new Vector2();
 
         Vector2 scrollPos_ValueList = new Vector2();
+        Vector2 scrollPos_LeafLogic = new Vector2();
+        Vector2 scrollPos_LogicSignal = new Vector2();
 
         Vector2 scrollPos_AdvancedAlgebraEditor = new Vector2();
 
@@ -340,9 +344,9 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        private int ValueRefListItem(ValueRefrence vr,Rect rect,int i , bool selected)
+        private int ValueRefListItem(ValueRefrence vr, Rect rect, int i, bool selected)
         {
-            
+
 
             bool clicked = Widgets.ButtonInvisible(rect);
             string vrString = "";
@@ -364,16 +368,16 @@ namespace ProjectRimFactory.Industry
             vrString += vr.Name;
             if (vr.dynamicSlot == EnumDynamicSlotGroupID.NA)
             {
-                vrString += "   " + vr.GetValue(null,null);
+                vrString += "   " + vr.GetValue(null, null);
             }
 
-            
+
             if (selected) vrString += "</color>";
 
             CommonGUIFunctions.Label(rect, vrString, richTextStyle);
 
 
-            
+
             return clicked ? i : -1;
         }
 
@@ -385,8 +389,8 @@ namespace ProjectRimFactory.Industry
             string vrString = "";
 
             if (selected) vrString += "<color=red>";
-  
-        
+
+
             vrString += leaf.Name;
             if (leaf.dynamicSlot == EnumDynamicSlotGroupID.NA)
             {
@@ -437,12 +441,12 @@ namespace ProjectRimFactory.Industry
         {
             switch (enu)
             {
-                case EnumCompareOperator.Equal:         return "==";
-                case  EnumCompareOperator.Greater:      return ">";
-                case  EnumCompareOperator.GreaterEqual: return ">=";
-                case  EnumCompareOperator.NotEqual:     return "!=";
-                case  EnumCompareOperator.Smaller:      return "<";
-                case EnumCompareOperator.SmallerEqual:  return "<=";
+                case EnumCompareOperator.Equal: return "==";
+                case EnumCompareOperator.Greater: return ">";
+                case EnumCompareOperator.GreaterEqual: return ">=";
+                case EnumCompareOperator.NotEqual: return "!=";
+                case EnumCompareOperator.Smaller: return "<";
+                case EnumCompareOperator.SmallerEqual: return "<=";
                 default: return "  ";
             }
 
@@ -458,7 +462,7 @@ namespace ProjectRimFactory.Industry
          */
 
 
-        private void LeafAlgebra_Advanced_Button(ref Rect EleRect, List<FloatMenuOption> floatMenuOptions , string text)
+        private void LeafAlgebra_Advanced_Button(ref Rect EleRect, List<FloatMenuOption> floatMenuOptions, string text)
         {
             if (Widgets.ButtonText(EleRect, text))
             {
@@ -489,10 +493,10 @@ namespace ProjectRimFactory.Industry
         /// TODO maybe add support for NOT & ()
         /// </summary>
         /// <param name="currentY"></param>
-        private void AlgebraGUI_Advanced(ref float currentY , Rect TabRect , LogicSignal logicSignal)
+        private void AlgebraGUI_Advanced(ref float currentY, Rect TabRect, LogicSignal logicSignal)
         {
 
-            
+
 
             var AlgebraGUI = new Rect(TabRect.x, currentY, TabRect.width - 50, 75);
 
@@ -543,7 +547,7 @@ namespace ProjectRimFactory.Industry
                      .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp[logicSignal.TreeUserInfixExp.IndexOf(node)].Leaf_Logic_ref = g; }))
                      .ToList();
 
-                    floatMenuOptions_leaf_Logics.Insert(0, new FloatMenuOption("[Remove]", () => 
+                    floatMenuOptions_leaf_Logics.Insert(0, new FloatMenuOption("[Remove]", () =>
                     {
                         int index = logicSignal.TreeUserInfixExp.IndexOf(node);
                         if (logicSignal.TreeUserInfixExp.Count == index + 1)
@@ -556,9 +560,9 @@ namespace ProjectRimFactory.Industry
                             //Not last --> Remove all after this one
                             logicSignal.TreeUserInfixExp.RemoveRange(index, logicSignal.TreeUserInfixExp.Count - index);
                         }
-                        
-                    
-                    
+
+
+
                     }));
                     ButtonRect.width = LeafWidth;
                     LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_leaf_Logics, node.Leaf_Logic_ref.Name);
@@ -568,8 +572,8 @@ namespace ProjectRimFactory.Industry
                     List<FloatMenuOption> floatMenuOptions_Operators = new List<FloatMenuOption>();
                     floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { node.Algebra = EnumBinaryAlgebra.bAND; }));
                     floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { node.Algebra = EnumBinaryAlgebra.bOR; }));
-                 // floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => { node.Algebra = EnumBinaryAlgebra.bBracketOpen; }));
-                 // floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => { node.Algebra = EnumBinaryAlgebra.bBracketClose; }));
+                    // floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => { node.Algebra = EnumBinaryAlgebra.bBracketOpen; }));
+                    // floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => { node.Algebra = EnumBinaryAlgebra.bBracketClose; }));
                     floatMenuOptions_Operators.Insert(0, new FloatMenuOption("[Remove]", () =>
                     {
                         int index = logicSignal.TreeUserInfixExp.IndexOf(node);
@@ -597,23 +601,23 @@ namespace ProjectRimFactory.Industry
             }
 
             //Add Option to Expand Expression
-            if (logicSignal.TreeUserInfixExp.Count > 0 &&(logicSignal.TreeUserInfixExp.Last().Algebra == EnumBinaryAlgebra.bNA || logicSignal.TreeUserInfixExp.Last().Algebra == EnumBinaryAlgebra.bBracketClose))
+            if (logicSignal.TreeUserInfixExp.Count > 0 && (logicSignal.TreeUserInfixExp.Last().Algebra == EnumBinaryAlgebra.bNA || logicSignal.TreeUserInfixExp.Last().Algebra == EnumBinaryAlgebra.bBracketClose))
             {
                 //Add Option for Algebra
                 List<FloatMenuOption> floatMenuOptions_Operators = new List<FloatMenuOption>();
-                floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bAND,null)); }));
+                floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bAND, null)); }));
                 floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bOR, null)); }));
-              //  floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketOpen, null)); }));
-              //  floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketClose, null)); }));
+                //  floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketOpen, null)); }));
+                //  floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketClose, null)); }));
                 ButtonRect.width = AlgebraWidth;
-                LeafAlgebra_Advanced_Button( ref ButtonRect, floatMenuOptions_Operators, "[Add]");
+                LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_Operators, "[Add]");
             }
             else
             {
                 //Add Option for Value
                 List<FloatMenuOption> floatMenuOptions_leaf_Logics = this_Controller.leaf_Logics
                      .Where(l => l.Visible)
-                     .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bNA,  g)); }))
+                     .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bNA, g)); }))
                      .ToList();
                 ButtonRect.width = LeafWidth;
                 LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_leaf_Logics, "[Add]");
@@ -636,23 +640,54 @@ namespace ProjectRimFactory.Industry
 
 
             if (GUI_HitBox_Register.Boundary.width == 0) GUI_HitBox_Register.Boundary = TabRect;
-            if (block == null) block = new GUI_And_Block (new Vector2(TabRect.x, currentY), new Vector2(50, 50));
-            if (block2 == null) block2 = new GUI_Or_Block( new Vector2(TabRect.x + 100, currentY), new Vector2(50, 50));
+            if (block == null) block = new GUI_And_Block(new Vector2(TabRect.x, currentY), new Vector2(50, 50));
+            if (block2 == null) block2 = new GUI_Or_Block(new Vector2(TabRect.x + 100, currentY), new Vector2(50, 50));
             if (block3 == null) block3 = new GUI_Not_Block(new Vector2(TabRect.x + 200, currentY), new Vector2(50, 50));
 
             block3.HandleElement();
             block2.HandleElement();
             block.HandleElement();
-         //   var test = new Rect(TabRect.x, currentY, 50, 50);
+            //   var test = new Rect(TabRect.x, currentY, 50, 50);
 
-           // Widgets.ButtonImage(test, RS.Algebra_And);
+            // Widgets.ButtonImage(test, RS.Algebra_And);
 
-           // Widgets.ButtonImageDraggable(test, RS.Algebra_And);
+            // Widgets.ButtonImageDraggable(test, RS.Algebra_And);
 
         }
 
 
+        //Maybe move this to a lib / Seperate Class
+        private void ListBox<T>(float posX, ref float currentY, ref Vector2 scrollPos, ref int SelectedIndex, int selectedRef, List<T> inputList, Func<T, Rect, int, bool, int> func)
+        {
+            float listBoxWidth = 250;
+            var ListBox_Outside = new Rect(posX, currentY, listBoxWidth, 150);
 
+            var ListBox_Inside = ListBox_Outside;
+            ListBox_Inside.width -= 20;
+
+            //TODO
+            ListBox_Inside.height *= 3;
+
+
+            Widgets.BeginScrollView(ListBox_Outside, ref scrollPos, ListBox_Inside);
+
+            float currY_Scroll = 60;
+            var ValueRefItemRect = new Rect(ListBox_Inside.x, currY_Scroll, ListBox_Inside.width, 30);
+            int selectTemp = -1;
+
+            for (int i = 0; i < inputList.Count(); i++)
+            {
+                ValueRefItemRect.y = currY_Scroll;
+                selectTemp = func(inputList[i], ValueRefItemRect, i, selectedRef == i);
+                if (selectTemp != -1)
+                {
+                    SelectedIndex = selectTemp;
+                }
+                currY_Scroll += 30;
+            }
+
+            Widgets.EndScrollView();
+        }
 
 
 
@@ -661,7 +696,7 @@ namespace ProjectRimFactory.Industry
         int selsecteditemLogicSignal = -1;
 
 
-        Vector2 dragPos = new Vector2(0,0);
+        Vector2 dragPos = new Vector2(0, 0);
         Vector2 dragboxSize = new Vector2(50, 50);
 
 
@@ -690,43 +725,10 @@ namespace ProjectRimFactory.Industry
 
             if (currentTab == 0) //Is Algebra Tab
             {
-                var ListBox_Outside = new Rect(innerFrame.x, currentY, listBoxWidth, 150);
+                ListBox(innerFrame.x, ref currentY, ref scrollPos_LogicSignal, ref selsecteditemLogicSignal, selsecteditemLogicSignal, this_Controller.LogicSignals, delegate (LogicSignal r, Rect c, int e, bool f) { return LogicSignalListItem(r, c, e, f); });
 
-                var ListBox_Inside = ListBox_Outside;
-
-                ListBox_Inside.height *= 3;
-                ListBox_Inside.width -= 20;
-
-                //Left List Box
-
-                Widgets.BeginScrollView(ListBox_Outside, ref scrollPos_ValueList, ListBox_Inside);
-
-
-
-
-                float currY_Scroll = 60;
-                var ValueRefItemRect = new Rect(ListBox_Inside.x, currY_Scroll, ListBox_Inside.width, 30);
-                int selectTemp = -1;
-
-                foreach (LogicSignal logicSignal in this_Controller.LogicSignals)
-                {
-
-                    ValueRefItemRect.y = currY_Scroll;
-                    selectTemp = LogicSignalListItem(logicSignal, ValueRefItemRect, this_Controller.LogicSignals.IndexOf(logicSignal), selsecteditemLogicSignal == this_Controller.LogicSignals.IndexOf(logicSignal));
-                    if (selectTemp != -1)
-                    {
-                        selsecteditemLogicSignal = selectTemp;
-                    }
-                    currY_Scroll += 30;
-                }
-                //Log.Message("selsecteditemleaf: " + selsecteditemleaf);
-
-
-                Widgets.EndScrollView();
 
                 //Right Hand Buttons
-
-
                 var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
                 if (Widgets.ButtonText(buttonrect, "Add Logic Signal"))
                 {
@@ -734,8 +736,6 @@ namespace ProjectRimFactory.Industry
                     this_Controller.UpdateRegisteredSignals();
                 }
                 currentY += 20;
-
-
 
                 currentY += 60;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
@@ -748,21 +748,14 @@ namespace ProjectRimFactory.Industry
                         selsecteditemLogicSignal = -1;
                         this_Controller.UpdateRegisteredSignals();
                     }
-
-
                 }
-
                 currentY += 20;
-
                 currentY += 70; // For the ListBox
+
 
                 //Edit UI
                 Widgets.DrawLineHorizontal(0, currentY, size.y);
                 currentY += 20;
-
-
-
-
 
                 if (selsecteditemLogicSignal != -1)
                 {
@@ -780,7 +773,7 @@ namespace ProjectRimFactory.Industry
 
                     currentY += 30;
 
-                    
+
                     AlgebraGUI_Advanced(ref currentY, innerFrame, selectedSignal);
 
                     //TODO finish the GUI drag Interface and add it later
@@ -789,61 +782,13 @@ namespace ProjectRimFactory.Industry
                     //DragShapeEditor(ref currentY, GUIRect, selectedSignal);
 
                 }
-                
-
-
-
-
-
-
-
             }
             else if (currentTab == 1) //Is Leaf Logic Tab
             {
+                ListBox(innerFrame.x, ref currentY, ref scrollPos_LeafLogic, ref selsecteditemleaf, selsecteditemleaf, this_Controller.leaf_Logics, delegate (Leaf_Logic r, Rect c, int e, bool f) { return LeafLogicListItem(r, c, e, f); });
 
-
-
-
-
-
-
-                var ListBox_Outside = new Rect(innerFrame.x, currentY, listBoxWidth, 150);
-
-                var ListBox_Inside = ListBox_Outside;
-
-                ListBox_Inside.height *= 3;
-                ListBox_Inside.width -= 20;
-
-                //Left List Box
-
-                Widgets.BeginScrollView(ListBox_Outside, ref scrollPos_ValueList, ListBox_Inside);
-
-
-
-
-                float currY_Scroll = 60;
-                var ValueRefItemRect = new Rect(ListBox_Inside.x, currY_Scroll, ListBox_Inside.width, 30);
-                int selectTemp = -1;
-
-                foreach (Leaf_Logic leaf in this_Controller.leaf_Logics)
-                {
-                    if (!leaf.Visible) continue; //Skipp Dummy
-                    ValueRefItemRect.y = currY_Scroll;
-                    selectTemp = LeafLogicListItem(leaf, ValueRefItemRect, this_Controller.leaf_Logics.IndexOf(leaf), selsecteditemleaf == this_Controller.leaf_Logics.IndexOf(leaf));
-                    if (selectTemp != -1)
-                    {
-                        selsecteditemleaf = selectTemp;
-                    }
-                    currY_Scroll += 30;
-                }
-                //Log.Message("selsecteditemleaf: " + selsecteditemleaf);
-
-
-                Widgets.EndScrollView();
 
                 //Right Hand Buttons
-
-
                 var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
                 if (Widgets.ButtonText(buttonrect, "Add Leaf Logic"))
                 {
@@ -852,8 +797,6 @@ namespace ProjectRimFactory.Industry
 
                 }
                 currentY += 20;
-                
-
 
                 currentY += 60;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
@@ -865,13 +808,10 @@ namespace ProjectRimFactory.Industry
                         this_Controller.leaf_Logics.RemoveAt(selsecteditemleaf);
                         selsecteditemleaf = -1;
                     }
-
-
                 }
-
                 currentY += 20;
-
                 currentY += 70; // For the ListBox
+
 
                 //Edit UI
                 Widgets.DrawLineHorizontal(0, currentY, size.y);
@@ -879,7 +819,6 @@ namespace ProjectRimFactory.Industry
 
                 if (selsecteditemleaf != -1)
                 {
-
                     Leaf_Logic selectedItem = this_Controller.leaf_Logics[selsecteditemleaf];
 
                     var EiditRect = new Rect(innerFrame.x + 10 - 100, currentY, 300, 20);
@@ -913,7 +852,7 @@ namespace ProjectRimFactory.Industry
                     }
 
                     List<FloatMenuOption> floatMenuOptions_ref2 = this_Controller.valueRefrences
-                        .Where(g => g.Visible )
+                        .Where(g => g.Visible)
                         .Select(g => new FloatMenuOption(g.Name, () => selectedItem.Value2 = g))
                         .ToList();
                     DropdownRect.x += DropdownRect.width + 30;
@@ -921,61 +860,16 @@ namespace ProjectRimFactory.Industry
                     {
                         Find.WindowStack.Add(new FloatMenu(floatMenuOptions_ref2));
                     }
-
                 }
-
-
-
-
-
-
             }
-                else if (currentTab == 2) //is Value Tab 
+            else if (currentTab == 2) //is Value Tab 
             {
+                ListBox(innerFrame.x, ref currentY, ref scrollPos_ValueList, ref selsecteditem, selsecteditem, this_Controller.valueRefrences, delegate (ValueRefrence r, Rect c, int e, bool f) { return ValueRefListItem(r, c, e, f); });
 
-               
-               
-
-
-                var ListBox_Outside = new Rect(innerFrame.x, currentY, listBoxWidth, 150);
-
-                var ListBox_Inside =  ListBox_Outside;
-
-                ListBox_Inside.height *= 3;
-                ListBox_Inside.width -= 20;
-
-                //Left List Box
-                
-                Widgets.BeginScrollView(ListBox_Outside, ref scrollPos_ValueList, ListBox_Inside);
-
-                
-
-
-                float currY_Scroll = 60 ;
-                var ValueRefItemRect = new Rect(ListBox_Inside.x, currY_Scroll, ListBox_Inside.width, 30);
-                int selectTemp = -1;
-
-                foreach (ValueRefrence vr in this_Controller.valueRefrences)
-                {
-                    if (!vr.Visible) continue; //Skip Dummy
-                    ValueRefItemRect.y = currY_Scroll;
-                    selectTemp = ValueRefListItem(vr, ValueRefItemRect, this_Controller.valueRefrences.IndexOf(vr), selsecteditem == this_Controller.valueRefrences.IndexOf(vr));
-                    if (selectTemp != -1)
-                    {
-                        selsecteditem = selectTemp;
-                    }
-                    currY_Scroll += 30;
-                }
-                //Log.Message("selsecteditem: " + selsecteditem);
-                
-
-                Widgets.EndScrollView();
 
                 //Right Hand Buttons
-
-
                 var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if ( Widgets.ButtonText(buttonrect, "Add Fixed"))
+                if (Widgets.ButtonText(buttonrect, "Add Fixed"))
                 {
                     this_Controller.valueRefrences.Add(new ValueRefrence_Fixed(0));
 
@@ -984,20 +878,19 @@ namespace ProjectRimFactory.Industry
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
                 if (Widgets.ButtonText(buttonrect, "Add Item Rrfrence"))
                 {
-                    this_Controller.valueRefrences.Add(new ValueRefrence_ThingCount(new ThingFilter(),new StorageLocation(),this_Controller.Map));
+                    this_Controller.valueRefrences.Add(new ValueRefrence_ThingCount(new ThingFilter(), new StorageLocation(), this_Controller.Map));
                 }
                 currentY += 20;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if(Widgets.ButtonText(buttonrect, "Add Signal",active: this_Controller.LogicSignals.Count > 0))
+                if (Widgets.ButtonText(buttonrect, "Add Signal", active: this_Controller.LogicSignals.Count > 0))
                 {
                     List<FloatMenuOption> AddSignalFloat = Current.Game.GetComponent<PRFGameComponent>().LoigSignalRegestry.Where(e => e.Key.AvailableCrossMap || e.Value == this.SelThing.Map).Select(e => e.Key)
                      .Select(s => new FloatMenuOption(s.Name, () => { this_Controller.valueRefrences.Add(new ValueRefrence_Signal(s)); }))
                      .ToList();
-                    Find.WindowStack.Add(new FloatMenu( AddSignalFloat ));
+                    Find.WindowStack.Add(new FloatMenu(AddSignalFloat));
                 }
                 currentY += 20;
-                
-                
+
                 currentY += 20;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
                 if (Widgets.ButtonText(buttonrect, "Remove Selected"))
@@ -1008,18 +901,16 @@ namespace ProjectRimFactory.Industry
                         this_Controller.valueRefrences.RemoveAt(selsecteditem);
                         selsecteditem = -1;
                     }
-                    
-
                 }
 
                 currentY += 20;
-
                 currentY += 70; // For the ListBox
+
 
                 //Edit UI
                 Widgets.DrawLineHorizontal(0, currentY, size.y);
                 currentY += 20;
-                
+
                 if (selsecteditem != -1)
                 {
 
@@ -1034,13 +925,13 @@ namespace ProjectRimFactory.Industry
                     {
                         selectedItem.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedItem.Name);
                     }
-                    
+
 
                     if (selectedItem is ValueRefrence_Fixed)
                     {
                         currentY += 20;
                         EiditRect = new Rect(innerFrame.x + 10, currentY, buttonWidth, 20);
-                        string bufferstr = "" + selectedItem.GetValue(null,null);
+                        string bufferstr = "" + selectedItem.GetValue(null, null);
                         int refval = selectedItem.GetValue(null, null);
                         //Can't pass getter by ref :(
                         Widgets.TextFieldNumericLabeled<int>(EiditRect, "Number", ref refval, ref bufferstr);
@@ -1065,29 +956,17 @@ namespace ProjectRimFactory.Industry
                         List<FloatMenuOption> floatMenuOptions = Find.CurrentMap.haulDestinationManager.AllGroups.ToList()
                                 .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => { selectedItem_tc.storage.SlotGroup = g; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }))
                                 .ToList();
-                        floatMenuOptions.Insert(0, new FloatMenuOption("Entire Map",  () => { selectedItem_tc.storage.SlotGroup = null; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }));
-                        floatMenuOptions.Insert(1, new FloatMenuOption("(Input Cell)", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_1; selectedItem_tc.storage.SlotGroup = null; } ));
-                        floatMenuOptions.Insert(2, new FloatMenuOption("(Output Cell)", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_2; selectedItem_tc.storage.SlotGroup = null; } ));
+                        floatMenuOptions.Insert(0, new FloatMenuOption("Entire Map", () => { selectedItem_tc.storage.SlotGroup = null; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }));
+                        floatMenuOptions.Insert(1, new FloatMenuOption("(Input Cell)", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_1; selectedItem_tc.storage.SlotGroup = null; }));
+                        floatMenuOptions.Insert(2, new FloatMenuOption("(Output Cell)", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_2; selectedItem_tc.storage.SlotGroup = null; }));
 
 
                         if (Widgets.ButtonText(ZoneButtonRect, selectedItem_tc.storage.GetLocationName()))
                         {
-                            Find.WindowStack.Add(new FloatMenu( floatMenuOptions));
+                            Find.WindowStack.Add(new FloatMenu(floatMenuOptions));
                         }
-
-
-
                     }
-
-
                 }
-
-
-
-
-
-
-
             }
             else
             {
@@ -1132,7 +1011,7 @@ namespace ProjectRimFactory.Industry
 
         }
 
-    
+
 
         public ITab_LogicController()
         {
