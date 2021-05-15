@@ -20,6 +20,13 @@ namespace ProjectRimFactory.Industry
         public void UpdateRegisteredSignals()
         {
             PRFGameComponent pRFGameComponent = Current.Game.GetComponent<PRFGameComponent>();
+            
+            //Seems to occurs 3 times during Loading
+            if (this.Map == null)
+            {
+                return;
+            }
+
             pRFGameComponent.LoigSignalRegestry.RemoveAll(i => i.Value == this.Map);
             foreach (LogicSignal valref in LogicSignals)
             {
