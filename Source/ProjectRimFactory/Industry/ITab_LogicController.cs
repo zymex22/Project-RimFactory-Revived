@@ -453,15 +453,6 @@ namespace ProjectRimFactory.Industry
         }
 
 
-
-        /*
-        ∧ ==> AND
-        ∨ ==> OR
-         
-         
-         */
-
-
         private void LeafAlgebra_Advanced_Button(ref Rect EleRect, List<FloatMenuOption> floatMenuOptions, string text)
         {
             if (Widgets.ButtonText(EleRect, text))
@@ -660,19 +651,23 @@ namespace ProjectRimFactory.Industry
         private void ListBox<T>(float posX, ref float currentY, ref Vector2 scrollPos, ref int SelectedIndex, int selectedRef, List<T> inputList, Func<T, Rect, int, bool, int> func)
         {
             float listBoxWidth = 250;
+            float itemHight = 30;
+            float itemSeperation = 0;
             var ListBox_Outside = new Rect(posX, currentY, listBoxWidth, 150);
+
+            Widgets.DrawMenuSection(ListBox_Outside);
 
             var ListBox_Inside = ListBox_Outside;
             ListBox_Inside.width -= 20;
 
             //TODO
-            ListBox_Inside.height *= 3;
+            ListBox_Inside.height = (itemHight + itemSeperation) * inputList.Count();
 
 
             Widgets.BeginScrollView(ListBox_Outside, ref scrollPos, ListBox_Inside);
 
             float currY_Scroll = 60;
-            var ValueRefItemRect = new Rect(ListBox_Inside.x, currY_Scroll, ListBox_Inside.width, 30);
+            var ValueRefItemRect = new Rect(ListBox_Inside.x + 5, currY_Scroll, ListBox_Inside.width, itemHight);
             int selectTemp = -1;
 
             for (int i = 0; i < inputList.Count(); i++)
@@ -683,7 +678,7 @@ namespace ProjectRimFactory.Industry
                 {
                     SelectedIndex = selectTemp;
                 }
-                currY_Scroll += 30;
+                currY_Scroll += itemHight + itemSeperation;
             }
 
             Widgets.EndScrollView();
@@ -702,11 +697,6 @@ namespace ProjectRimFactory.Industry
 
         protected override void FillTab()
         {
-            //this_Controller.LogicSignals
-
-
-            //Somhow need to add a Edit UI Here
-            //Welp
             var frame = new Rect(10f, 10f, size.x - 10f, size.y - 50f);
             frame.yMin += 32f;
             TabDrawer.DrawTabs(frame, tabs);
