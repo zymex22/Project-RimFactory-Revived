@@ -76,7 +76,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_LogicController</defName>
     <label>Logic Controller</label>
-    <thingClass>ProjectRimFactory.Industry.LogicController</thingClass>
+    <thingClass>ProjectRimFactory.Industry.Building_LogicController</thingClass>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <graphicData>
       <texPath>SAL3/DISK_HARDWARE4</texPath>
