@@ -772,6 +772,12 @@ namespace ProjectRimFactory.Industry
 
 
                     selectedSignal.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedSignal.Name);
+                    bool toggle = selectedSignal.AvailableCrossMap;
+                    EiditRect.x += EiditRect.width + 30;
+                    Widgets.CheckboxLabeled(EiditRect, "Availibale Cross Map", ref toggle);
+                    selectedSignal.AvailableCrossMap = toggle;
+
+
                     currentY += 30;
 
                     
@@ -984,7 +990,7 @@ namespace ProjectRimFactory.Industry
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
                 if(Widgets.ButtonText(buttonrect, "Add Signal",active: this_Controller.LogicSignals.Count > 0))
                 {
-                    List<FloatMenuOption> AddSignalFloat = this_Controller.LogicSignals
+                    List<FloatMenuOption> AddSignalFloat = Current.Game.GetComponent<PRFGameComponent>().LoigSignalRegestry.Where(e => e.Key.AvailableCrossMap || e.Value == this.SelThing.Map).Select(e => e.Key)
                      .Select(s => new FloatMenuOption(s.Name, () => { this_Controller.valueRefrences.Add(new ValueRefrence_Signal(s)); }))
                      .ToList();
                     Find.WindowStack.Add(new FloatMenu( AddSignalFloat ));
@@ -1060,8 +1066,8 @@ namespace ProjectRimFactory.Industry
                                 .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => { selectedItem_tc.storage.SlotGroup = g; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }))
                                 .ToList();
                         floatMenuOptions.Insert(0, new FloatMenuOption("Entire Map",  () => { selectedItem_tc.storage.SlotGroup = null; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }));
-                        floatMenuOptions.Insert(1, new FloatMenuOption("Dynamic - 1", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_1; selectedItem_tc.storage.SlotGroup = null; } ));
-                        floatMenuOptions.Insert(2, new FloatMenuOption("Dynamic - 2", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_2; selectedItem_tc.storage.SlotGroup = null; } ));
+                        floatMenuOptions.Insert(1, new FloatMenuOption("(Input Cell)", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_1; selectedItem_tc.storage.SlotGroup = null; } ));
+                        floatMenuOptions.Insert(2, new FloatMenuOption("(Output Cell)", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_2; selectedItem_tc.storage.SlotGroup = null; } ));
 
 
                         if (Widgets.ButtonText(ZoneButtonRect, selectedItem_tc.storage.GetLocationName()))

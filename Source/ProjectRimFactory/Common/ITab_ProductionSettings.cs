@@ -279,7 +279,7 @@ namespace ProjectRimFactory.Common
                 inRect = list.GetRect(30f);
                 
 
-                List<FloatMenuOption> floatMenuOptions = Current.Game.GetComponent<PRFGameComponent>().LoigSignalRegestry.Where(e => e.Value == this.SelThing.Map).Select(e => e.Key)
+                List<FloatMenuOption> floatMenuOptions = Current.Game.GetComponent<PRFGameComponent>().LoigSignalRegestry.Where(e => e.Key.AvailableCrossMap ||  e.Value == this.SelThing.Map).Select(e => e.Key)
                                 .Select(g => new FloatMenuOption(g.Name , () => { LogicSignalReciver.RefrerenceSignal = g; }))
                                 .ToList();
                 floatMenuOptions.Insert(0, new FloatMenuOption("Unused", () => LogicSignalReciver.RefrerenceSignal = null));

@@ -716,9 +716,13 @@ namespace ProjectRimFactory.Industry
             }
         }
 
+        private bool availableCrossMap = false;
+        public bool AvailableCrossMap { get => availableCrossMap; set => availableCrossMap = value; }
+
         public void ExposeData()
         {
             Scribe_Values.Look(ref Name, "Name");
+            Scribe_Values.Look(ref availableCrossMap, "availableCrossMap");
             Scribe_Deep.Look(ref logicTree, "logicTree");
         }
 
