@@ -130,4 +130,37 @@
   <PRF_Yellow>yellow</PRF_Yellow>
   <PRF_Magenta>magenta</PRF_Magenta>
   <PRF_None>none</PRF_None>
+  
+  
+  
+  
+  <!-- Logic Controller -->
+  <PRF_LogicController_DynamicStorage1>(Input Cell)</PRF_LogicController_DynamicStorage1>
+  <PRF_LogicController_DynamicStorage2>(Output Cell)</PRF_LogicController_DynamicStorage2>
+  <PRF_LogicController_EntireMap>Entire Map</PRF_LogicController_EntireMap>
+  <PRF_LogicController_Leaf_Logic_Default_Name>Leaf_Logic</PRF_LogicController_Leaf_Logic_Default_Name>
+  <PRF_LogicController_Logic_Signal_Default_Name>Logic Signal</PRF_LogicController_Logic_Signal_Default_Name>
+  <PRF_LogicController_VR_Signal>(Signal) </PRF_LogicController_VR_Signal>
+  <PRF_LogicController_VR_Fixed>(Fixed) </PRF_LogicController_VR_Fixed>
+  <PRF_LogicController_VR_Thing>(Thing) </PRF_LogicController_VR_Thing>
+  <PRF_LogicController_Remove>[Remove]</PRF_LogicController_Remove>
+  <PRF_LogicController_Add>[Add]</PRF_LogicController_Add>
+  <PRF_LogicController_AddLogicSignal>Add Logic Signal</PRF_LogicController_AddLogicSignal>
+  <PRF_LogicController_RemoveSelected>Remove Selected</PRF_LogicController_RemoveSelected>
+  <PRF_LogicController_Name>Name</PRF_LogicController_Name>
+  <PRF_LogicController_AvailableCrossMap>Available Cross Map</PRF_LogicController_AvailableCrossMap>
+  <PRF_LogicController_AddLeafLogic>Add Leaf Logic</PRF_LogicController_AddLeafLogic>
+  <PRF_LogicController_VR_AddFixed>Add Fixed</PRF_LogicController_VR_AddFixed>
+  <PRF_LogicController_VR_AddItemRrfrence>Add Item Rrfrence</PRF_LogicController_VR_AddItemRrfrence>
+  <PRF_LogicController_VR_AddSignal>Add Signal</PRF_LogicController_VR_AddSignal>
+  <PRF_LogicController_Number>Number</PRF_LogicController_Number>
+  <PRF_LogicController_Tab_Algebra>Algebra</PRF_LogicController_Tab_Algebra>
+  <PRF_LogicController_Tab_LeafLogic>Leaf Logic</PRF_LogicController_Tab_LeafLogic>
+  <PRF_LogicController_Tab_Values>Values</PRF_LogicController_Tab_Values>
+  <PRF_LogicController_ITabName>Logic_GUI</PRF_LogicController_ITabName>
+  <PRF_LogicController_Unused>Unused</PRF_LogicController_Unused>
+  <PRF_LogicController_VR_Fixed_DefaultName>ValueRefrence_Fixed</PRF_LogicController_VR_Fixed_DefaultName>
+  <PRF_LogicController_VR_Thing_DefaultName>ValueRefrence_ThingCount</PRF_LogicController_VR_Thing_DefaultName>
+  
+  
 </LanguageData>

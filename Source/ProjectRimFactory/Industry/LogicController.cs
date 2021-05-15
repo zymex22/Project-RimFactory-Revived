@@ -228,14 +228,14 @@ namespace ProjectRimFactory.Industry
             {
                 if (privatedynamicSlot == EnumDynamicSlotGroupID.Group_1)
                 {
-                    return "Dynamic 1";
+                    return "PRF_LogicController_DynamicStorage1".Translate();
                 }
                 else
                 {
-                    return "Dynamic 2";
+                    return "PRF_LogicController_DynamicStorage2".Translate();
                 }
             }
-            return "Entire Map";
+            return "PRF_LogicController_EntireMap".Translate();
         }
 
 
@@ -317,7 +317,7 @@ namespace ProjectRimFactory.Industry
     /// </summary>
     public class Leaf_Logic : IDynamicSlotGroup, IExposable
     {
-        private string name = "Leaf_Logic";
+        private string name = "PRF_LogicController_Leaf_Logic_Default_Name".Translate();
         public string Name { get => name; set => name = value; }
 
         private ILogicObjeckt value1;
@@ -685,7 +685,7 @@ namespace ProjectRimFactory.Industry
     public class LogicSignal : IDynamicSlotGroup, IExposable
     {
         //Name of the Logic Signal
-        public string Name = "Logic Signal";
+        public string Name = "PRF_LogicController_Logic_Signal_Default_Name".Translate();
 
         public bool UsesDynamicSlotGroup => dynamicSlot != EnumDynamicSlotGroupID.NA;
         public EnumDynamicSlotGroupID dynamicSlot { get => logicTree.dynamicSlot; set => throw new NotImplementedException(); }

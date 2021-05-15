@@ -350,33 +350,30 @@ namespace ProjectRimFactory.Industry
 
             bool clicked = Widgets.ButtonInvisible(rect);
             string vrString = "";
+            string str2 = ""; // Needed so that Translate() dos not break anything
 
             if (selected) vrString += "<color=red>";
             if (vr is ValueRefrence_Signal)
             {
-                vrString += "(Signal) ";
+                str2 =  "PRF_LogicController_VR_Signal".Translate();
             }
             else if (vr is ValueRefrence_Fixed)
             {
-                vrString += "(Fixed) ";
+                str2 = "PRF_LogicController_VR_Fixed".Translate();
             }
             else if (vr is ValueRefrence_ThingCount)
             {
-                vrString += "(Thing) ";
+                str2 = "PRF_LogicController_VR_Thing".Translate();
             }
-
+            vrString += str2;
             vrString += vr.Name;
             if (vr.dynamicSlot == EnumDynamicSlotGroupID.NA)
             {
                 vrString += "   " + vr.GetValue(null, null);
             }
-
-
             if (selected) vrString += "</color>";
 
-            CommonGUIFunctions.Label(rect, vrString, richTextStyle);
-
-
+                CommonGUIFunctions.Label(rect, vrString, richTextStyle);
 
             return clicked ? i : -1;
         }
@@ -428,8 +425,6 @@ namespace ProjectRimFactory.Industry
             if (selected) vrString += "</color>";
 
             CommonGUIFunctions.Label(rect, vrString, richTextStyle);
-
-
 
             return clicked ? i : -1;
         }
@@ -538,7 +533,7 @@ namespace ProjectRimFactory.Industry
                      .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp[logicSignal.TreeUserInfixExp.IndexOf(node)].Leaf_Logic_ref = g; }))
                      .ToList();
 
-                    floatMenuOptions_leaf_Logics.Insert(0, new FloatMenuOption("[Remove]", () =>
+                    floatMenuOptions_leaf_Logics.Insert(0, new FloatMenuOption("PRF_LogicController_Remove".Translate(), () =>
                     {
                         int index = logicSignal.TreeUserInfixExp.IndexOf(node);
                         if (logicSignal.TreeUserInfixExp.Count == index + 1)
@@ -565,7 +560,7 @@ namespace ProjectRimFactory.Industry
                     floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { node.Algebra = EnumBinaryAlgebra.bOR; }));
                     // floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => { node.Algebra = EnumBinaryAlgebra.bBracketOpen; }));
                     // floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => { node.Algebra = EnumBinaryAlgebra.bBracketClose; }));
-                    floatMenuOptions_Operators.Insert(0, new FloatMenuOption("[Remove]", () =>
+                    floatMenuOptions_Operators.Insert(0, new FloatMenuOption("PRF_LogicController_Remove".Translate(), () =>
                     {
                         int index = logicSignal.TreeUserInfixExp.IndexOf(node);
                         if (logicSignal.TreeUserInfixExp.Count == index + 1)
@@ -601,7 +596,7 @@ namespace ProjectRimFactory.Industry
                 //  floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketOpen, null)); }));
                 //  floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketClose, null)); }));
                 ButtonRect.width = AlgebraWidth;
-                LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_Operators, "[Add]");
+                LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_Operators, "PRF_LogicController_Add".Translate());
             }
             else
             {
@@ -611,7 +606,7 @@ namespace ProjectRimFactory.Industry
                      .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bNA, g)); }))
                      .ToList();
                 ButtonRect.width = LeafWidth;
-                LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_leaf_Logics, "[Add]");
+                LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_leaf_Logics, "PRF_LogicController_Add".Translate());
 
             }
 
@@ -720,7 +715,7 @@ namespace ProjectRimFactory.Industry
 
                 //Right Hand Buttons
                 var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if (Widgets.ButtonText(buttonrect, "Add Logic Signal"))
+                if (Widgets.ButtonText(buttonrect, "PRF_LogicController_AddLogicSignal".Translate()))
                 {
                     this_Controller.LogicSignals.Add(new LogicSignal(new Tree(new List<Tree_node> { new Tree_node(EnumBinaryAlgebra.bNA, this_Controller.leaf_Logics[0]) }), "Logic Signal"));
                     this_Controller.UpdateRegisteredSignals();
@@ -729,7 +724,7 @@ namespace ProjectRimFactory.Industry
 
                 currentY += 60;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if (Widgets.ButtonText(buttonrect, "Remove Selected"))
+                if (Widgets.ButtonText(buttonrect, "PRF_LogicController_RemoveSelected".Translate()))
                 {
                     //TODO Maybe add a confirmation Box
                     if (selsecteditemLogicSignal != -1)
@@ -754,10 +749,10 @@ namespace ProjectRimFactory.Industry
                     var EiditRect = new Rect(innerFrame.x + 10 - 100, currentY, 300, 20);
 
 
-                    selectedSignal.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedSignal.Name);
+                    selectedSignal.Name = Widgets.TextEntryLabeled(EiditRect, "PRF_LogicController_Name".Translate(), selectedSignal.Name);
                     bool toggle = selectedSignal.AvailableCrossMap;
                     EiditRect.x += EiditRect.width + 30;
-                    Widgets.CheckboxLabeled(EiditRect, "Availibale Cross Map", ref toggle);
+                    Widgets.CheckboxLabeled(EiditRect, "PRF_LogicController_AvailableCrossMap".Translate(), ref toggle);
                     selectedSignal.AvailableCrossMap = toggle;
 
 
@@ -780,7 +775,7 @@ namespace ProjectRimFactory.Industry
 
                 //Right Hand Buttons
                 var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if (Widgets.ButtonText(buttonrect, "Add Leaf Logic"))
+                if (Widgets.ButtonText(buttonrect, "PRF_LogicController_AddLeafLogic".Translate()))
                 {
                     List<ValueRefrence> dummys = this_Controller.valueRefrences.Where(vr => vr.Visible == false).ToList();
                     this_Controller.leaf_Logics.Add(new Leaf_Logic(dummys[0], dummys[1], EnumCompareOperator.Equal));
@@ -790,7 +785,7 @@ namespace ProjectRimFactory.Industry
 
                 currentY += 60;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if (Widgets.ButtonText(buttonrect, "Remove Selected"))
+                if (Widgets.ButtonText(buttonrect, "PRF_LogicController_RemoveSelected".Translate()))
                 {
                     //TODO Maybe add a confirmation Box
                     if (selsecteditemleaf != -1)
@@ -812,7 +807,7 @@ namespace ProjectRimFactory.Industry
                     Leaf_Logic selectedItem = this_Controller.leaf_Logics[selsecteditemleaf];
 
                     var EiditRect = new Rect(innerFrame.x + 10 - 100, currentY, 300, 20);
-                    selectedItem.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedItem.Name);
+                    selectedItem.Name = Widgets.TextEntryLabeled(EiditRect, "PRF_LogicController_Name".Translate(), selectedItem.Name);
 
                     currentY += 20;
                     currentY += 20;
@@ -859,20 +854,20 @@ namespace ProjectRimFactory.Industry
 
                 //Right Hand Buttons
                 var buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if (Widgets.ButtonText(buttonrect, "Add Fixed"))
+                if (Widgets.ButtonText(buttonrect, "PRF_LogicController_VR_AddFixed".Translate()))
                 {
-                    this_Controller.valueRefrences.Add(new ValueRefrence_Fixed(0));
+                    this_Controller.valueRefrences.Add(new ValueRefrence_Fixed(0, "PRF_LogicController_VR_Fixed_DefaultName".Translate()));
 
                 }
                 currentY += 20;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if (Widgets.ButtonText(buttonrect, "Add Item Rrfrence"))
+                if (Widgets.ButtonText(buttonrect, "PRF_LogicController_VR_AddItemRrfrence".Translate()))
                 {
-                    this_Controller.valueRefrences.Add(new ValueRefrence_ThingCount(new ThingFilter(), new StorageLocation(), this_Controller.Map));
+                    this_Controller.valueRefrences.Add(new ValueRefrence_ThingCount(new ThingFilter(), new StorageLocation(), this_Controller.Map, "PRF_LogicController_VR_Thing_DefaultName".Translate()));
                 }
                 currentY += 20;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if (Widgets.ButtonText(buttonrect, "Add Signal", active: this_Controller.LogicSignals.Count > 0))
+                if (Widgets.ButtonText(buttonrect, "PRF_LogicController_VR_AddSignal".Translate(), active: this_Controller.LogicSignals.Count > 0))
                 {
                     List<FloatMenuOption> AddSignalFloat = Current.Game.GetComponent<PRFGameComponent>().LoigSignalRegestry.Where(e => e.Key.AvailableCrossMap || e.Value == this.SelThing.Map).Select(e => e.Key)
                      .Select(s => new FloatMenuOption(s.Name, () => { this_Controller.valueRefrences.Add(new ValueRefrence_Signal(s)); }))
@@ -883,7 +878,7 @@ namespace ProjectRimFactory.Industry
 
                 currentY += 20;
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
-                if (Widgets.ButtonText(buttonrect, "Remove Selected"))
+                if (Widgets.ButtonText(buttonrect, "PRF_LogicController_RemoveSelected".Translate()))
                 {
                     //TODO Maybe add a confirmation Box
                     if (selsecteditem != -1)
@@ -909,11 +904,11 @@ namespace ProjectRimFactory.Industry
                     var EiditRect = new Rect(innerFrame.x + 10 - 100, currentY, 300, 20);
                     if (selectedItem is ValueRefrence_Signal)
                     {
-                        Widgets.TextEntryLabeled(EiditRect, "Name", selectedItem.Name);
+                        Widgets.TextEntryLabeled(EiditRect, "PRF_LogicController_Name".Translate(), selectedItem.Name);
                     }
                     else
                     {
-                        selectedItem.Name = Widgets.TextEntryLabeled(EiditRect, "Name", selectedItem.Name);
+                        selectedItem.Name = Widgets.TextEntryLabeled(EiditRect, "PRF_LogicController_Name".Translate(), selectedItem.Name);
                     }
 
 
@@ -924,7 +919,7 @@ namespace ProjectRimFactory.Industry
                         string bufferstr = "" + selectedItem.GetValue(null, null);
                         int refval = selectedItem.GetValue(null, null);
                         //Can't pass getter by ref :(
-                        Widgets.TextFieldNumericLabeled<int>(EiditRect, "Number", ref refval, ref bufferstr);
+                        Widgets.TextFieldNumericLabeled<int>(EiditRect, "PRF_LogicController_Number".Translate(), ref refval, ref bufferstr);
                         selectedItem.Value = refval;
                     }
 
@@ -946,9 +941,9 @@ namespace ProjectRimFactory.Industry
                         List<FloatMenuOption> floatMenuOptions = Find.CurrentMap.haulDestinationManager.AllGroups.ToList()
                                 .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => { selectedItem_tc.storage.SlotGroup = g; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }))
                                 .ToList();
-                        floatMenuOptions.Insert(0, new FloatMenuOption("Entire Map", () => { selectedItem_tc.storage.SlotGroup = null; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }));
-                        floatMenuOptions.Insert(1, new FloatMenuOption("(Input Cell)", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_1; selectedItem_tc.storage.SlotGroup = null; }));
-                        floatMenuOptions.Insert(2, new FloatMenuOption("(Output Cell)", () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_2; selectedItem_tc.storage.SlotGroup = null; }));
+                        floatMenuOptions.Insert(0, new FloatMenuOption("PRF_LogicController_EntireMap".Translate(), () => { selectedItem_tc.storage.SlotGroup = null; selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.NA; }));
+                        floatMenuOptions.Insert(1, new FloatMenuOption("PRF_LogicController_DynamicStorage1".Translate(), () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_1; selectedItem_tc.storage.SlotGroup = null; }));
+                        floatMenuOptions.Insert(2, new FloatMenuOption("PRF_LogicController_DynamicStorage2".Translate(), () => { selectedItem_tc.dynamicSlot = EnumDynamicSlotGroupID.Group_2; selectedItem_tc.storage.SlotGroup = null; }));
 
 
                         if (Widgets.ButtonText(ZoneButtonRect, selectedItem_tc.storage.GetLocationName()))
@@ -985,15 +980,15 @@ namespace ProjectRimFactory.Industry
         {
             base.OnOpen();
             tabs.Clear();
-            tabs.Add(new TabRecord("Algebra", delegate
+            tabs.Add(new TabRecord("PRF_LogicController_Tab_Algebra".Translate(), delegate
             {
                 currentTab = 0;
             }, () => currentTab == 0));
-            tabs.Add(new TabRecord("Leaf Logic", delegate
+            tabs.Add(new TabRecord("PRF_LogicController_Tab_LeafLogic".Translate(), delegate
             {
                 currentTab = 1;
             }, () => currentTab == 1));
-            tabs.Add(new TabRecord("Values", delegate
+            tabs.Add(new TabRecord("PRF_LogicController_Tab_Values".Translate(), delegate
             {
                 currentTab = 2;
             }, () => currentTab == 2));
@@ -1005,7 +1000,7 @@ namespace ProjectRimFactory.Industry
 
         public ITab_LogicController()
         {
-            this.labelKey = "Logic_GUI";
+            this.labelKey = "PRF_LogicController_ITabName";
         }
 
     }

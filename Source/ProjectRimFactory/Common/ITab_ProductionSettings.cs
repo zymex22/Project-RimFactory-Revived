@@ -282,9 +282,9 @@ namespace ProjectRimFactory.Common
                 List<FloatMenuOption> floatMenuOptions = Current.Game.GetComponent<PRFGameComponent>().LoigSignalRegestry.Where(e => e.Key.AvailableCrossMap ||  e.Value == this.SelThing.Map).Select(e => e.Key)
                                 .Select(g => new FloatMenuOption(g.Name , () => { LogicSignalReciver.RefrerenceSignal = g; }))
                                 .ToList();
-                floatMenuOptions.Insert(0, new FloatMenuOption("Unused", () => LogicSignalReciver.RefrerenceSignal = null));
+                floatMenuOptions.Insert(0, new FloatMenuOption("PRF_LogicController_Unused".Translate(), () => LogicSignalReciver.RefrerenceSignal = null));
 
-                if ( Widgets.ButtonText(inRect, LogicSignalReciver.RefrerenceSignal?.Name ?? "Unused"))
+                if ( Widgets.ButtonText(inRect, LogicSignalReciver.RefrerenceSignal?.Name ?? "PRF_LogicController_Unused".Translate()))
                 {
                     Find.WindowStack.Add(new FloatMenu(floatMenuOptions));
                 }
