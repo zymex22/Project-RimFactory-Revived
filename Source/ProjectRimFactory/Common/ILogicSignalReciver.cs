@@ -10,10 +10,9 @@ namespace ProjectRimFactory.Common
     interface ILogicSignalReciver
     {
         /// <summary>
-        /// True If The Logic Signal shall be Used
-        /// If False it shall be ignored
+        /// True If The Logic Signal is Active
         /// </summary>
-        bool LogicSignalUsed { get; set; }
+        bool LogicSignaStatus { get;}
         
         /// <summary>
         /// The Signal In Question

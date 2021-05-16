@@ -187,6 +187,12 @@ namespace ProjectRimFactory.Industry
             name = Name;
         }
 
+        public ValueRefrence_ThingCount()
+        {
+
+        }
+
+
         public override int GetValue(DynamicSlotGroup DynamicSlot_1, DynamicSlotGroup DynamicSlot_2)
         {
             return storage.GetItemCount(filter, map, DynamicSlot_1, DynamicSlot_2);

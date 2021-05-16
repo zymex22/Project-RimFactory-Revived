@@ -643,7 +643,7 @@ namespace ProjectRimFactory.Industry
 
 
         //Maybe move this to a lib / Seperate Class
-        private void ListBox<T>(float posX, ref float currentY, ref Vector2 scrollPos, ref int SelectedIndex, int selectedRef, List<T> inputList, Func<T, Rect, int, bool, int> func)
+        private void ListBox<T>(float posX, ref float currentY, ref Vector2 scrollPos, ref int SelectedIndex, int selectedRef, List<T> inputList, Func<T, Rect, int, bool, int> func ,Func< T,bool> SkippIf = null)
         {
             float listBoxWidth = 250;
             float itemHight = 30;
@@ -667,6 +667,7 @@ namespace ProjectRimFactory.Industry
 
             for (int i = 0; i < inputList.Count(); i++)
             {
+                if (SkippIf != null && SkippIf(inputList[i])) continue;
                 ValueRefItemRect.y = currY_Scroll;
                 selectTemp = func(inputList[i], ValueRefItemRect, i, selectedRef == i);
                 if (selectTemp != -1)
@@ -770,7 +771,7 @@ namespace ProjectRimFactory.Industry
             }
             else if (currentTab == 1) //Is Leaf Logic Tab
             {
-                ListBox(innerFrame.x, ref currentY, ref scrollPos_LeafLogic, ref selsecteditemleaf, selsecteditemleaf, this_Controller.leaf_Logics, delegate (Leaf_Logic r, Rect c, int e, bool f) { return LeafLogicListItem(r, c, e, f); });
+                ListBox(innerFrame.x, ref currentY, ref scrollPos_LeafLogic, ref selsecteditemleaf, selsecteditemleaf, this_Controller.leaf_Logics , delegate (Leaf_Logic r, Rect c, int e, bool f) { return LeafLogicListItem(r, c, e, f); }  , delegate (Leaf_Logic l) { return !l.Visible; } );
 
 
                 //Right Hand Buttons
@@ -849,7 +850,7 @@ namespace ProjectRimFactory.Industry
             }
             else if (currentTab == 2) //is Value Tab 
             {
-                ListBox(innerFrame.x, ref currentY, ref scrollPos_ValueList, ref selsecteditem, selsecteditem, this_Controller.valueRefrences, delegate (ValueRefrence r, Rect c, int e, bool f) { return ValueRefListItem(r, c, e, f); });
+                ListBox(innerFrame.x, ref currentY, ref scrollPos_ValueList, ref selsecteditem, selsecteditem, this_Controller.valueRefrences, delegate (ValueRefrence r, Rect c, int e, bool f) { return ValueRefListItem(r, c, e, f); }, delegate (ValueRefrence l) { return !l.Visible; });
 
 
                 //Right Hand Buttons

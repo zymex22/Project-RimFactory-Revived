@@ -90,14 +90,8 @@ namespace ProjectRimFactory.AutoMachineTool
         public override IntVec3 OutputCell() => this.Position + this.OutputDirection.FacingCell;
 
         private LogicSignal refrerenceSignal = null;
-        public bool LogicSignalUsed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        
         public LogicSignal RefrerenceSignal { get => refrerenceSignal; set => refrerenceSignal = value; }
-
-
-        private IEnumerable<Thing> heldthings(Thing thing)
-        {
-            yield return thing;
-        }
 
         protected override bool IsActive()
         {
@@ -131,32 +125,75 @@ namespace ProjectRimFactory.AutoMachineTool
             return null;
         }
 
+        public override IEnumerable<Thing> AvailableThings
+        {
+            get
+            {
+                if (products.Count == 0) yield return null;
+                yield return products[0];
+            }
+        }
+
         /************* Conveyors IBeltConveyor ***********/
         public bool IsStuck => this.stuck;
         public bool IsUnderground { get => this.Extension?.underground ?? false; }
-        public virtual bool IsEndOfLine {
-            get 
-            {
 
+        public bool LogicSignaStatus 
+        {
+            get
+            {
                 if (RefrerenceSignal != null)
                 {
                     Thing thing = null;
                     if (products.Count > 0) thing = products[0];
-                    if( RefrerenceSignal.GetValue(new DynamicSlotGroup(heldthings(thing))) == 1)
+
+                    DynamicSlotGroup input = null;
+                    DynamicSlotGroup output = null;
+                    
+
+                    if (RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.NA)
                     {
-                        return isEndOfLine;
+                        if (RefrerenceSignal.GetValue() == 0) return true;
                     }
-                    else
+                    else if (RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Both || RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Group_1)
                     {
-                        return true;
+                        input = new DynamicSlotGroup(this.AvailableThings);
                     }
+                    else if (RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Both || RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Group_2)
+                    {
+                        var outputBelt = this.OutputBeltAt(this.OutputCell());
+                        if (outputBelt != null)
+                        {
+                            output = new DynamicSlotGroup(outputBelt.AvailableThings);
+                        }
+                        else
+                        {
+                            if (this.CanSendToLevel(ConveyorLevel.Ground))
+                            {
+                                SlotGroup slotGroup = this.OutputCell().GetSlotGroup(this.Map);
+                                if (slotGroup != null)
+                                {
+                                    output = new DynamicSlotGroup(slotGroup);
+                                }
+                                else
+                                {
+                                    output = new DynamicSlotGroup(this.Map.thingGrid.ThingsListAt(this.OutputCell()));
+                                }
+                            }
+                        }
+                    }
+
+                    if (RefrerenceSignal.GetValue(input, output) == 0) return true;
                 }
+                return false;
+
+            } 
+        
+        }
 
 
-
-                return isEndOfLine; 
-            
-            }
+        public virtual bool IsEndOfLine {
+            get { return isEndOfLine; }
             set {
                 if (isEndOfLine && value == false) {
                     isEndOfLine = false;
@@ -291,6 +328,10 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look(ref supplyPower, "supplyPower", 10f);
             Scribe_Values.Look(ref isEndOfLine, "isEOL", false);
             Scribe_Deep.Look(ref thingOwnerInt, "thingOwner", new object[] { this });
+            //ILogicSignalReciver
+            Scribe_Deep.Look(ref refrerenceSignal, "RefrerenceSignal");
+
+
             if (Scribe.mode == LoadSaveMode.PostLoadInit) {
                 if (thingOwnerInt == null) {
                     thingOwnerInt = new ThingOwner_Conveyor(this);
@@ -393,7 +434,7 @@ namespace ProjectRimFactory.AutoMachineTool
             g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
         }
         protected Vector3 CarryPosition() {
-            if (IsEndOfLine) {
+            if (IsEndOfLine || LogicSignaStatus) {
                 return (this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0));
             }
             if (stuck) {
@@ -558,6 +599,9 @@ namespace ProjectRimFactory.AutoMachineTool
             // this will continue to get called every ~30 ticks; this is okay. In case something goes wrong,
             //   it might fix itself.
             if (IsEndOfLine) return false;
+            //ILogicSignalReciver
+            if (LogicSignaStatus) return false;
+
             usingThingOwnerInt = true;
             Thing thing = thingOwnerInt.Take(thingOwnerInt[0]);
             usingThingOwnerInt = false;
