@@ -16,6 +16,31 @@ namespace ProjectRimFactory {
         public static Pawn PRF_StaticPawn = null;
         public static Job PRF_StaticJob = null;
 
+        private int uniquePRF_ID = 0;
+
+        //Get a unique ID for Saving by Refrence
+        public int GetNextPRFID()
+        {
+            return GetNextID(ref uniquePRF_ID);
+        }
+
+        //Copy of RimWorld.UniqueIDsManager.GetNextID(ref int nextID)
+        private static int GetNextID(ref int nextID)
+        {
+            if (Scribe.mode == LoadSaveMode.Saving || Scribe.mode == LoadSaveMode.LoadingVars)
+            {
+                Log.Warning("Getting next unique ID during saving or loading. This may cause bugs.");
+            }
+            int result = nextID;
+            nextID++;
+            if (nextID == int.MaxValue)
+            {
+                Log.Warning("Next ID is at max value. Resetting to 0. This may cause bugs.");
+                nextID = 0;
+            }
+            return result;
+        }
+
 
         public static void GenStaticPawn()
         {
@@ -33,6 +58,8 @@ namespace ProjectRimFactory {
 
             Scribe_Deep.Look(ref PRF_StaticPawn, "PRF_StaticPawn");
             Scribe_Deep.Look(ref PRF_StaticJob, "PRF_StaticJob");
+            Scribe_Values.Look(ref uniquePRF_ID, "uniquePRF_ID");
+
 
             if (Scribe.mode != LoadSaveMode.Saving)
             {

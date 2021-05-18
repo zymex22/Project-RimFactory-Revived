@@ -28,15 +28,6 @@ namespace ProjectRimFactory.Industry
         }
     }
 
-    public interface ILogicObjeckt
-    {
-        public int GetValue(DynamicSlotGroup DynamicSlot_1, DynamicSlotGroup DynamicSlot_2);
-
-        public int Value { set; }
-
-        public string Name { get; set; }
-    }
-
     public enum EnumDynamicSlotGroupID
     {
         NA,
@@ -54,7 +45,7 @@ namespace ProjectRimFactory.Industry
 
 
     //Base Class
-    abstract class ValueRefrence : ILogicObjeckt, IDynamicSlotGroup, IExposable
+    public abstract class ValueRefrence : IDynamicSlotGroup, IExposable , ILoadReferenceable
     {
         abstract public int Value { set; }
 
@@ -66,7 +57,7 @@ namespace ProjectRimFactory.Industry
         public abstract EnumDynamicSlotGroupID dynamicSlot { get; set; }
 
         public abstract void ExposeData();
-
+        public abstract string GetUniqueLoadID();
         abstract public int GetValue(DynamicSlotGroup DynamicSlot_1, DynamicSlotGroup DynamicSlot_2);
     }
 
@@ -77,6 +68,9 @@ namespace ProjectRimFactory.Industry
     class ValueRefrence_Fixed : ValueRefrence
     {
         private int pvalue;
+
+        private int ID;
+
 
         private string name;
         public override int Value { set => pvalue = value; }
@@ -92,6 +86,7 @@ namespace ProjectRimFactory.Industry
             visible = vis;
             pvalue = initalVal;
             name = Name;
+            ID = Current.Game.GetComponent<PRFGameComponent>().GetNextPRFID();
         }
 
         public ValueRefrence_Fixed()
@@ -106,9 +101,15 @@ namespace ProjectRimFactory.Industry
 
         public override void ExposeData()
         {
+            Scribe_Values.Look(ref ID, "ID");
             Scribe_Values.Look(ref name, "name");
             Scribe_Values.Look(ref pvalue, "pvalue");
             Scribe_Values.Look(ref visible, "visible");
+        }
+
+        public override string GetUniqueLoadID()
+        {
+            return "ValueRefrence_Fixed" + ID;
         }
     }
 
@@ -118,6 +119,12 @@ namespace ProjectRimFactory.Industry
     /// </summary>
     class ValueRefrence_Signal : ValueRefrence
     {
+        public override string GetUniqueLoadID()
+        {
+            return "ValueRefrence_Signal" + ID;
+        }
+        private int ID;
+
         /// <summary>
         /// The Idea is that if this is public then i dont need a new objeck if the user wants to change the Signal
         /// </summary>
@@ -135,6 +142,7 @@ namespace ProjectRimFactory.Industry
         public ValueRefrence_Signal(LogicSignal signal)
         {
             logicSignal = signal;
+            ID = Current.Game.GetComponent<PRFGameComponent>().GetNextPRFID();
         }
 
         public override int GetValue(DynamicSlotGroup DynamicSlot_1, DynamicSlotGroup DynamicSlot_2)
@@ -144,6 +152,7 @@ namespace ProjectRimFactory.Industry
 
         public override void ExposeData()
         {
+            Scribe_Values.Look(ref ID, "ID");
             Scribe_Deep.Look(ref logicSignal, "logicSignal");
             Scribe_Values.Look(ref visible, "visible");
         }
@@ -155,6 +164,12 @@ namespace ProjectRimFactory.Industry
     /// </summary>
     class ValueRefrence_ThingCount : ValueRefrence
     {
+
+        public override string GetUniqueLoadID()
+        {
+            return "ValueRefrence_ThingCount" + ID;
+        }
+        private int ID;
         public override int Value
         {
             set
@@ -185,6 +200,7 @@ namespace ProjectRimFactory.Industry
             storage = storageLocation;
             map = thismap;
             name = Name;
+            ID = Current.Game.GetComponent<PRFGameComponent>().GetNextPRFID();
         }
 
         public ValueRefrence_ThingCount()
@@ -200,6 +216,7 @@ namespace ProjectRimFactory.Industry
 
         public override void ExposeData()
         {
+            Scribe_Values.Look(ref ID, "ID");
             Scribe_Values.Look(ref name, "name");
             Scribe_Values.Look(ref visible, "visible");
             Scribe_References.Look(ref map, "map");
@@ -321,20 +338,25 @@ namespace ProjectRimFactory.Industry
     /// This is is What's behin 'A' and 'B' in: A AND B
     /// 
     /// </summary>
-    public class Leaf_Logic : IDynamicSlotGroup, IExposable
+    public class Leaf_Logic : IDynamicSlotGroup, IExposable , ILoadReferenceable
     {
+        public string GetUniqueLoadID()
+        {
+            return "ValueRefrence_Signal" + ID;
+        }
+
         private string name = "PRF_LogicController_Leaf_Logic_Default_Name".Translate();
         public string Name { get => name; set => name = value; }
 
-        private ILogicObjeckt value1;
-        private ILogicObjeckt value2;
+        private ValueRefrence value1;
+        private ValueRefrence value2;
         private EnumCompareOperator op;
 
         private bool visible = true;
         public bool Visible => visible;
 
-        public ILogicObjeckt Value1 { get => value1; set => value1 = value; }
-        public ILogicObjeckt Value2 { get => value2; set => value2 = value; }
+        public ValueRefrence Value1 { get => value1; set => value1 = value; }
+        public ValueRefrence Value2 { get => value2; set => value2 = value; }
         public EnumCompareOperator Operator { get => op; set => op = value; }
 
         public bool UsesDynamicSlotGroup => ((IDynamicSlotGroup)value1).UsesDynamicSlotGroup || ((IDynamicSlotGroup)value2).UsesDynamicSlotGroup;
@@ -370,22 +392,26 @@ namespace ProjectRimFactory.Industry
             }
         }
 
+        private int ID;
+
         public void ExposeData()
         {
+            Scribe_Values.Look(ref ID, "ID");
             Scribe_Values.Look(ref name, "name");
             Scribe_Values.Look(ref visible, "visible");
             Scribe_Values.Look(ref op, "op");
-            Scribe_Deep.Look(ref value1, "value1");
-            Scribe_Deep.Look(ref value2, "value2");
+            Scribe_References.Look<ValueRefrence>(ref value1, "value1");
+            Scribe_References.Look<ValueRefrence>(ref value2, "value2");
         }
 
-        public Leaf_Logic(ILogicObjeckt obj1, ILogicObjeckt obj2, EnumCompareOperator eoperator, string initName = "Leaf_Logic", bool vis = true)
+        public Leaf_Logic(ValueRefrence obj1, ValueRefrence obj2, EnumCompareOperator eoperator, string initName = "Leaf_Logic", bool vis = true)
         {
             value1 = obj1;
             value2 = obj2;
             op = eoperator;
             name = initName;
             visible = vis;
+            ID = Current.Game.GetComponent<PRFGameComponent>().GetNextPRFID();
         }
 
         public Leaf_Logic()
@@ -411,7 +437,7 @@ namespace ProjectRimFactory.Industry
     /// <summary>
     /// None of the Expression Tree
     /// </summary>
-    public class Tree_node : IExposable
+    public class Tree_node : IExposable , ILoadReferenceable
     {
         public bool IsLeaf
         {
@@ -420,6 +446,12 @@ namespace ProjectRimFactory.Industry
                 if (Left == null && Right == null) return true;
                 return false;
             }
+        }
+
+        private int ID;
+        public string GetUniqueLoadID()
+        {
+            return "Tree_node" + ID;
         }
 
 
@@ -432,10 +464,11 @@ namespace ProjectRimFactory.Industry
 
         public void ExposeData()
         {
-            Scribe_Deep.Look(ref Left, "Left");
-            Scribe_Deep.Look(ref Right, "Right");
+            Scribe_Values.Look(ref ID, "ID");
+            Scribe_References.Look(ref Left, "Left");
+            Scribe_References.Look(ref Right, "Right");
             Scribe_Values.Look(ref Algebra, "Algebra");
-            Scribe_Deep.Look(ref Leaf_Logic_ref, "Leaf_Logic_ref");
+            Scribe_References.Look(ref Leaf_Logic_ref, "Leaf_Logic_ref");
         }
 
         public EnumBinaryAlgebra Algebra = EnumBinaryAlgebra.bNA;
@@ -447,6 +480,7 @@ namespace ProjectRimFactory.Industry
         {
             this.Algebra = algebra;
             Leaf_Logic_ref = Value;
+            ID = Current.Game.GetComponent<PRFGameComponent>().GetNextPRFID();
         }
 
         public Tree_node()
@@ -667,7 +701,12 @@ namespace ProjectRimFactory.Industry
         public void ExposeData()
         {
             Scribe_Collections.Look(ref UserInfixExpr, "UserInfixExpr", LookMode.Deep);
-            Scribe_Deep.Look(ref rootNode, "rootNode");
+            Scribe_References.Look(ref rootNode, "rootNode");
+        }
+
+        public void BuildTree()
+        {
+            rootNode = BuildTree(ConvertToPostfix(UserInfixExpr));
         }
 
         /// <summary>
@@ -677,7 +716,7 @@ namespace ProjectRimFactory.Industry
         public Tree(List<Tree_node> input)
         {
             UserInfixExpr = input; //Why C# Why....
-            rootNode = BuildTree(ConvertToPostfix(input));
+            BuildTree();
         }
 
         public Tree()
@@ -688,8 +727,14 @@ namespace ProjectRimFactory.Industry
 
 
 
-    public class LogicSignal : IDynamicSlotGroup, IExposable
+    public class LogicSignal : IDynamicSlotGroup, IExposable , ILoadReferenceable
     {
+
+        private int ID;
+        public string GetUniqueLoadID()
+        {
+            return "LogicSignal" + ID;
+        }
         //Name of the Logic Signal
         public string Name = "PRF_LogicController_Logic_Signal_Default_Name".Translate();
 
@@ -715,6 +760,7 @@ namespace ProjectRimFactory.Industry
 
         public void ExposeData()
         {
+            Scribe_Values.Look(ref ID, "ID");
             Scribe_Values.Look(ref Name, "Name");
             Scribe_Values.Look(ref availableCrossMap, "availableCrossMap");
             Scribe_Deep.Look(ref logicTree, "logicTree");
@@ -733,6 +779,15 @@ namespace ProjectRimFactory.Industry
         {
             Name = initialName;
             logicTree = tree;
+            ID = Current.Game.GetComponent<PRFGameComponent>().GetNextPRFID();
+        }
+
+        public void TryBuildTree()
+        {
+            if (logicTree.CheckUserInfixExpr())
+            {
+                logicTree.BuildTree();
+            }
         }
 
         public LogicSignal()

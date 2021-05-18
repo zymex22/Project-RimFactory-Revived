@@ -530,7 +530,7 @@ namespace ProjectRimFactory.Industry
                 {
                     List<FloatMenuOption> floatMenuOptions_leaf_Logics = this_Controller.leaf_Logics
                      .Where(l => l.Visible)
-                     .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp[logicSignal.TreeUserInfixExp.IndexOf(node)].Leaf_Logic_ref = g; }))
+                     .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp[logicSignal.TreeUserInfixExp.IndexOf(node)].Leaf_Logic_ref = g; logicSignal.TryBuildTree(); }))
                      .ToList();
 
                     floatMenuOptions_leaf_Logics.Insert(0, new FloatMenuOption("PRF_LogicController_Remove".Translate(), () =>
@@ -547,7 +547,7 @@ namespace ProjectRimFactory.Industry
                             logicSignal.TreeUserInfixExp.RemoveRange(index, logicSignal.TreeUserInfixExp.Count - index);
                         }
 
-
+                        logicSignal.TryBuildTree();
 
                     }));
                     ButtonRect.width = LeafWidth;
@@ -556,8 +556,8 @@ namespace ProjectRimFactory.Industry
                 else
                 {
                     List<FloatMenuOption> floatMenuOptions_Operators = new List<FloatMenuOption>();
-                    floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { node.Algebra = EnumBinaryAlgebra.bAND; }));
-                    floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { node.Algebra = EnumBinaryAlgebra.bOR; }));
+                    floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { node.Algebra = EnumBinaryAlgebra.bAND; logicSignal.TryBuildTree(); }));
+                    floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { node.Algebra = EnumBinaryAlgebra.bOR; logicSignal.TryBuildTree(); }));
                     // floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => { node.Algebra = EnumBinaryAlgebra.bBracketOpen; }));
                     // floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => { node.Algebra = EnumBinaryAlgebra.bBracketClose; }));
                     floatMenuOptions_Operators.Insert(0, new FloatMenuOption("PRF_LogicController_Remove".Translate(), () =>
@@ -573,7 +573,7 @@ namespace ProjectRimFactory.Industry
                             //Not last --> Remove all after this one
                             logicSignal.TreeUserInfixExp.RemoveRange(index, logicSignal.TreeUserInfixExp.Count - index);
                         }
-
+                        logicSignal.TryBuildTree();
 
 
                     }));
@@ -591,8 +591,8 @@ namespace ProjectRimFactory.Industry
             {
                 //Add Option for Algebra
                 List<FloatMenuOption> floatMenuOptions_Operators = new List<FloatMenuOption>();
-                floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bAND, null)); }));
-                floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bOR, null)); }));
+                floatMenuOptions_Operators.Add(new FloatMenuOption("∧", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bAND, null)); logicSignal.TryBuildTree(); }));
+                floatMenuOptions_Operators.Add(new FloatMenuOption("∨", () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bOR, null)); logicSignal.TryBuildTree(); }));
                 //  floatMenuOptions_Operators.Add(new FloatMenuOption("(", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketOpen, null)); }));
                 //  floatMenuOptions_Operators.Add(new FloatMenuOption(")", () => {  logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bBracketClose, null)); }));
                 ButtonRect.width = AlgebraWidth;
@@ -603,7 +603,7 @@ namespace ProjectRimFactory.Industry
                 //Add Option for Value
                 List<FloatMenuOption> floatMenuOptions_leaf_Logics = this_Controller.leaf_Logics
                      .Where(l => l.Visible)
-                     .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bNA, g)); }))
+                     .Select(g => new FloatMenuOption(g.Name, () => { logicSignal.TreeUserInfixExp.Add(new Tree_node(EnumBinaryAlgebra.bNA, g)); logicSignal.TryBuildTree(); }))
                      .ToList();
                 ButtonRect.width = LeafWidth;
                 LeafAlgebra_Advanced_Button(ref ButtonRect, floatMenuOptions_leaf_Logics, "PRF_LogicController_Add".Translate());

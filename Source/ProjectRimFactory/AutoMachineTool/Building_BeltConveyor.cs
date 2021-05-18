@@ -329,7 +329,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look(ref isEndOfLine, "isEOL", false);
             Scribe_Deep.Look(ref thingOwnerInt, "thingOwner", new object[] { this });
             //ILogicSignalReciver
-            Scribe_Deep.Look(ref refrerenceSignal, "RefrerenceSignal");
+            Scribe_References.Look(ref refrerenceSignal, "RefrerenceSignal");
 
 
             if (Scribe.mode == LoadSaveMode.PostLoadInit) {
