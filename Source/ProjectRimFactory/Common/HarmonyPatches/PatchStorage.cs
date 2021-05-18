@@ -35,7 +35,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static bool Prefix(Building_Storage __instance, Thing t, out bool __result)
         {
             __result = false;
-            if (PatchStorageUtil.Get<IForbidPawnInputItem>(__instance.Map, __instance.Position)?.ForbidPawnInput ?? false)
+            if ((__instance as IForbidPawnInputItem)?.ForbidPawnInput ?? false)
             {
                 if (!__instance.slotGroup.HeldThings.Contains(t))
                 {
