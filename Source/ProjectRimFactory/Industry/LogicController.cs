@@ -228,8 +228,8 @@ namespace ProjectRimFactory.Industry
     {
         public SlotGroup SlotGroup = null;
 
-        private IntVec3 posSlotGroup;
-        private Map map;
+        private Zone_Stockpile zone;
+        private Building_Storage building;
 
         private EnumDynamicSlotGroupID privatedynamicSlot = EnumDynamicSlotGroupID.NA;
 
@@ -324,37 +324,23 @@ namespace ProjectRimFactory.Industry
             {
                 if (SlotGroup == null)
                 {
-                    posSlotGroup = IntVec3.Invalid;
-                    map = null;
+                    zone = null;
+                    building = null;
                 }
                 else
                 {
-                    if ((SlotGroup.CellsList?.Count ?? -1) > 0)
-                    {
-                        posSlotGroup = SlotGroup.CellsList[0];
-                        map = SlotGroup.parent.Map;
-                    }
-                    else
-                    {
-                        posSlotGroup = IntVec3.Invalid;
-                        map = null;
-                    }
-                    
+                    zone = (SlotGroup.parent as Zone_Stockpile);
+                    building = (SlotGroup.parent as Building_Storage);
                 }
-                
             }
-
-            Scribe_References.Look(ref map, "map");
-            Scribe_Values.Look(ref posSlotGroup, "posSlotGroup");
-            if (Scribe.mode != LoadSaveMode.Saving)
+            Scribe_References.Look(ref zone, "zone");
+            Scribe_References.Look(ref building, "building");
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                if (posSlotGroup.IsValid && map != null)
-                {
-                    SlotGroup = posSlotGroup.GetSlotGroup(map);
-                }
+                if (zone != null) SlotGroup = zone.slotGroup;
+                if (building != null) SlotGroup = building.slotGroup;
             }
             Scribe_Values.Look(ref privatedynamicSlot, "privatedynamicSlot");
-            //Scribe_Deep.Look(ref SlotGroup, "SlotGroup");
         }
     }
 
