@@ -211,7 +211,14 @@ namespace ProjectRimFactory.Industry
 
         public override int GetValue(DynamicSlotGroup DynamicSlot_1, DynamicSlotGroup DynamicSlot_2)
         {
-            return storage.GetItemCount(filter, map, DynamicSlot_1, DynamicSlot_2);
+            int res = storage.GetItemCount(filter, map, DynamicSlot_1, DynamicSlot_2);
+            if (storage.StoragLocationReset)
+            {
+                Messages.Message("PRF_LogicController_MsgZoneDestoyed".Translate(Name), MessageTypeDefOf.CautionInput);
+                storage.StoragLocationReset = false;
+            }
+            
+            return res;
         }
 
         public override void ExposeData()
@@ -230,6 +237,8 @@ namespace ProjectRimFactory.Industry
 
         private Zone_Stockpile zone;
         private Building_Storage building;
+
+        public bool StoragLocationReset = false;
 
         private EnumDynamicSlotGroupID privatedynamicSlot = EnumDynamicSlotGroupID.NA;
 
@@ -274,6 +283,15 @@ namespace ProjectRimFactory.Industry
                     {
                         if (SlotGroup != null)
                         {
+                            Zone_Stockpile zone = (SlotGroup.parent as Zone_Stockpile);
+                            Building_Storage building = (SlotGroup.parent as Building_Storage);
+                            if ((zone != null && zone.Cells.Count == 0) || (building != null && !building.Spawned))
+                            {
+                                StoragLocationReset = true;
+                                SlotGroup = null;
+                                return GetItemCount(filter,map,null,null);
+                            }
+
                             returnval = SlotGroup.HeldThings.Where(t => filter.Allows(t)).Select(n => n.stackCount).Sum();
                         }
                         else
@@ -333,6 +351,7 @@ namespace ProjectRimFactory.Industry
                     building = (SlotGroup.parent as Building_Storage);
                 }
             }
+            Scribe_Values.Look(ref StoragLocationReset, "StoragLocationReset");
             Scribe_References.Look(ref zone, "zone");
             Scribe_References.Look(ref building, "building");
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
