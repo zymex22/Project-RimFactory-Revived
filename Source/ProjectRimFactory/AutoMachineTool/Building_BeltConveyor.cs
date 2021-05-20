@@ -144,8 +144,6 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 if (RefrerenceSignal != null)
                 {
-                    Thing thing = null;
-                    if (products.Count > 0) thing = products[0];
 
                     DynamicSlotGroup input = null;
                     DynamicSlotGroup output = null;
@@ -171,7 +169,7 @@ namespace ProjectRimFactory.AutoMachineTool
                             if (this.CanSendToLevel(ConveyorLevel.Ground))
                             {
                                 SlotGroup slotGroup = this.OutputCell().GetSlotGroup(this.Map);
-                                if (slotGroup != null)
+                                if (slotGroup != null && OutputToEntireStockpile)
                                 {
                                     output = new DynamicSlotGroup(slotGroup);
                                 }

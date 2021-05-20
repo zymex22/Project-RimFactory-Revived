@@ -228,6 +228,9 @@ namespace ProjectRimFactory.Industry
     {
         public SlotGroup SlotGroup = null;
 
+        private IntVec3 posSlotGroup;
+        private Map map;
+
         private EnumDynamicSlotGroupID privatedynamicSlot = EnumDynamicSlotGroupID.NA;
 
         public bool UsesDynamicSlotGroup
@@ -310,10 +313,48 @@ namespace ProjectRimFactory.Industry
 
         }
 
+        public StorageLocation()
+        {
+            
+        }
+
         public void ExposeData()
         {
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                if (SlotGroup == null)
+                {
+                    posSlotGroup = IntVec3.Invalid;
+                    map = null;
+                }
+                else
+                {
+                    if ((SlotGroup.CellsList?.Count ?? -1) > 0)
+                    {
+                        posSlotGroup = SlotGroup.CellsList[0];
+                        map = SlotGroup.parent.Map;
+                    }
+                    else
+                    {
+                        posSlotGroup = IntVec3.Invalid;
+                        map = null;
+                    }
+                    
+                }
+                
+            }
+
+            Scribe_References.Look(ref map, "map");
+            Scribe_Values.Look(ref posSlotGroup, "posSlotGroup");
+            if (Scribe.mode != LoadSaveMode.Saving)
+            {
+                if (posSlotGroup.IsValid && map != null)
+                {
+                    SlotGroup = posSlotGroup.GetSlotGroup(map);
+                }
+            }
             Scribe_Values.Look(ref privatedynamicSlot, "privatedynamicSlot");
-            Scribe_Deep.Look(ref SlotGroup, "SlotGroup");
+            //Scribe_Deep.Look(ref SlotGroup, "SlotGroup");
         }
     }
 

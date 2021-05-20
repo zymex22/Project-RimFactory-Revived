@@ -11,11 +11,12 @@ using Verse.Sound;
 using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 using ProjectRimFactory.Common;
+using ProjectRimFactory.Industry;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
     [StaticConstructorOnStartup] // for registering settings
-    public class Building_ItemPuller : Building_BaseLimitation<Thing>, IStorageSetting, IStoreSettingsParent
+    public class Building_ItemPuller : Building_BaseLimitation<Thing>, IStorageSetting, IStoreSettingsParent , ILogicSignalReciver
     {
         public Building_ItemPuller() {
             this.outputToEntireStockpile = true;
@@ -73,10 +74,62 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         public bool TakeSingleItems { get => takeSingleItems; set => takeSingleItems = value; }
 
+         public bool LogicSignaStatus 
+        {
+            get
+            {
+                if (RefrerenceSignal != null)
+                {
+                    DynamicSlotGroup input = null;
+                    DynamicSlotGroup output = null;
+                    
+
+                    if (RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.NA)
+                    {
+                        if (RefrerenceSignal.GetValue() == 0) return true;
+                    }
+                    else if (RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Both || RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Group_1)
+                    {
+                        SlotGroup slotGroup = (this.Position + this.Rotation.Opposite.FacingCell).GetSlotGroup(this.Map);
+                        if (slotGroup != null)
+                        {
+                            input = new DynamicSlotGroup(slotGroup);
+                        }
+                        else
+                        {
+                            input = new DynamicSlotGroup(this.Map.thingGrid.ThingsListAt((this.Position + this.Rotation.Opposite.FacingCell)));
+                        }
+
+                    }
+                    else if (RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Both || RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Group_2)
+                    {
+
+                        SlotGroup slotGroup = this.OutputCell().GetSlotGroup(this.Map);
+                        if (slotGroup != null && OutputToEntireStockpile)
+                        {
+                            output = new DynamicSlotGroup(slotGroup);
+                        }
+                        else
+                        {
+                            output = new DynamicSlotGroup(this.Map.thingGrid.ThingsListAt(this.OutputCell()));
+                        }
+                    }
+
+                    if (RefrerenceSignal.GetValue(input, output) == 0) return true;
+                }
+                return false;
+
+            } 
+        
+        }
+
+        private LogicSignal refrerenceSignal;
+        public LogicSignal RefrerenceSignal { get => refrerenceSignal; set => refrerenceSignal = value; }
+
         public override void ExposeData()
         {
             base.ExposeData();
-
+            Scribe_References.Look(ref refrerenceSignal, "refrerenceSignal");
             Scribe_Values.Look<bool>(ref this.active, "active", false);
             Scribe_Values.Look<bool>(ref this.right, "right", false);
             Scribe_Deep.Look(ref settings, "settings", new object[] { this });
@@ -177,6 +230,11 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
             workAmount = Building_ItemPuller.defaultWorkAmount; // 120
+            if (LogicSignaStatus)
+            {
+                target = null;
+                return false;
+            }
             target = TargetThing();
             if (target?.Spawned == true) target.DeSpawn();
             return target != null;
