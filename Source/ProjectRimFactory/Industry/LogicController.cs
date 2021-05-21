@@ -145,6 +145,10 @@ namespace ProjectRimFactory.Industry
             ID = Current.Game.GetComponent<PRFGameComponent>().GetNextPRFID();
         }
 
+        public ValueRefrence_Signal()
+        {
+
+        }
         public override int GetValue(DynamicSlotGroup DynamicSlot_1, DynamicSlotGroup DynamicSlot_2)
         {
             return logicSignal.GetValue(DynamicSlot_1, DynamicSlot_2);
@@ -153,7 +157,7 @@ namespace ProjectRimFactory.Industry
         public override void ExposeData()
         {
             Scribe_Values.Look(ref ID, "ID");
-            Scribe_Deep.Look(ref logicSignal, "logicSignal");
+            Scribe_References.Look(ref logicSignal, "logicSignal");
             Scribe_Values.Look(ref visible, "visible");
         }
     }

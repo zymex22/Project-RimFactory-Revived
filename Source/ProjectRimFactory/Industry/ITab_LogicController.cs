@@ -690,6 +690,228 @@ namespace ProjectRimFactory.Industry
         Vector2 dragPos = new Vector2(0, 0);
         Vector2 dragboxSize = new Vector2(50, 50);
 
+        private IEnumerable<Leaf_Logic> Get_valueRefrence_Parrents(List<ValueRefrence> refrences)
+        {
+            return this_Controller.leaf_Logics.Where(e => refrences.Contains(e.Value1) || refrences.Contains(e.Value2));
+        }
+
+        private IEnumerable<LogicSignal> Get_Leaf_Logic_Parrents(List<Leaf_Logic> leaf_Logics)
+        {
+            return this_Controller.LogicSignals.Where(s => s.TreeUserInfixExp.Where(e => leaf_Logics.Contains(e.Leaf_Logic_ref)).Any()); 
+        }
+
+        private IEnumerable<ValueRefrence> Get_LogicSignal_Parrents(List<LogicSignal> logicSignals)
+        {
+            return this_Controller.valueRefrences.Where(r => (r as ValueRefrence_Signal) != null && logicSignals.Contains((r as ValueRefrence_Signal).logicSignal));
+        }
+
+        private void GetAllParrents(ref List<ValueRefrence> refrences,ref List<Leaf_Logic> leaf_Logics, ref List<LogicSignal> logicSignals)
+        {
+
+            List<ValueRefrence> I_refrences = refrences;
+            List<Leaf_Logic> I_leaf_Logics = leaf_Logics;
+            List<LogicSignal> I_logicSignals = logicSignals;
+
+            List<ValueRefrence> O_refrences = new List<ValueRefrence>();
+            List<Leaf_Logic> O_leaf_Logics = new List<Leaf_Logic>();
+            List<LogicSignal> O_logicSignals = new List<LogicSignal>();
+
+            do
+            {
+                if (I_refrences.Count > 0)
+                {
+                    var res1 = Get_valueRefrence_Parrents(I_refrences);
+                   
+                    var res1_L = res1.ToList();
+                    O_leaf_Logics.AddRange(res1_L);
+                    I_leaf_Logics.AddRange(res1_L);
+                    I_refrences.Clear();
+                }
+                if (I_leaf_Logics.Count > 0)
+                {
+                    var res2 = Get_Leaf_Logic_Parrents(I_leaf_Logics);
+                    
+                    var res2_L = res2.ToList();
+                    O_logicSignals.AddRange(res2_L);
+                    I_logicSignals.AddRange(res2_L);
+                    I_leaf_Logics.Clear();
+                }
+                if (I_logicSignals.Count > 0)
+                {
+                    var res3 = Get_LogicSignal_Parrents(I_logicSignals);
+                   
+                    var res3_L = res3.ToList();
+                    I_refrences.AddRange(res3_L);
+                    O_refrences.AddRange(res3_L);
+                    I_logicSignals.Clear();
+                }
+
+
+            } while (I_refrences.Count > 0 || I_logicSignals.Count > 0 || I_leaf_Logics.Count > 0);
+            refrences = O_refrences;
+            leaf_Logics = O_leaf_Logics;
+            logicSignals = O_logicSignals;
+        }
+
+
+        abstract class Confirm_RemoveRefrence : Window_Confirm
+        {
+            public ITab_LogicController parrent;
+
+            public List<ValueRefrence> L_refrences = new List<ValueRefrence>();
+            public List<Leaf_Logic> L_leaf_Logics = new List<Leaf_Logic>();
+            public List<LogicSignal> L_logicSignals = new List<LogicSignal>();
+            public override void DoWindowContentsCall()
+            {
+                //No need for the Tab
+                if (L_refrences.Count == 0 && L_leaf_Logics.Count == 0 && L_logicSignals.Count == 0)
+                {
+                    ConfirmAction();
+                    Find.WindowStack.TryRemove(this);
+                    return;
+                }
+            }
+
+            public void GenLists()
+            {
+                parrent.GetAllParrents(ref L_refrences, ref L_leaf_Logics, ref L_logicSignals);
+
+                
+               
+
+                string Data = "Warning: Removing " + parrent.this_Controller.valueRefrences[parrent.selsecteditem].Name + " Will also remove: \n\n";
+                foreach (ValueRefrence l in L_refrences)
+                {
+                    Data += "(ValueRefrence) - " + l.Name + "\n";
+                }
+                foreach (Leaf_Logic l in L_leaf_Logics)
+                {
+                    Data += "(Leaf_Logic) - " + l.Name + "\n";
+                }
+                foreach (LogicSignal l in L_logicSignals)
+                {
+                    Data += "(LogicSignal) - " + l.Name + "\n";
+                }
+                Content_String = Data;
+            }
+
+            public void RemoveRest()
+            {
+                //Remove all other as Warned
+                if (L_refrences.Count > 0) parrent.selsecteditem = -1;
+                foreach (ValueRefrence l in L_refrences)
+                {
+                    parrent.this_Controller.valueRefrences.Remove(l);
+                }
+                if (L_leaf_Logics.Count > 0) parrent.selsecteditemleaf = -1;
+                foreach (Leaf_Logic l in L_leaf_Logics)
+                {
+                    parrent.this_Controller.leaf_Logics.Remove(l);
+                }
+                if (L_logicSignals.Count > 0) parrent.selsecteditemLogicSignal = -1;
+                foreach (LogicSignal l in L_logicSignals)
+                {
+                    parrent.this_Controller.LogicSignals.Remove(l);
+                }
+
+                if (L_logicSignals.Count > 0) parrent.this_Controller.UpdateRegisteredSignals();
+
+            }
+
+            public Confirm_RemoveRefrence(string content, ITab_LogicController parrent) : base(content)
+            {
+                this.parrent = parrent;
+            }
+
+            public override void AbortAction()
+            {
+                //NA
+            }
+
+            public override void ConfirmAction()
+            {
+
+            }
+            
+        }
+
+
+        class Confirm_RemoveValueRefrence : Confirm_RemoveRefrence
+        {
+            public Confirm_RemoveValueRefrence(string content, ITab_LogicController parrent) : base(content, parrent)
+            {
+                
+                L_refrences.Add(parrent.this_Controller.valueRefrences[parrent.selsecteditem]);
+
+                //Override Description
+                GenLists();
+            }
+
+            public override void AbortAction()
+            {
+                //NA
+            }
+
+            public override void ConfirmAction()
+            {
+                if (parrent.selsecteditem == -1) return;
+                parrent.this_Controller.valueRefrences.RemoveAt(parrent.selsecteditem);
+                parrent.selsecteditem = -1;
+
+                //Remove all other as Warned
+                RemoveRest();
+            }
+
+            
+        }
+        class Confirm_RemoveLeafLogic : Confirm_RemoveRefrence
+        {
+            public Confirm_RemoveLeafLogic(string content, ITab_LogicController parrent) : base(content, parrent)
+            {
+                L_leaf_Logics.Add(parrent.this_Controller.leaf_Logics[parrent.selsecteditemleaf]);
+
+                //Override Description
+                GenLists();
+            }
+            public override void AbortAction()
+            {
+                //NA
+            }
+
+            public override void ConfirmAction()
+            {
+                if (parrent.selsecteditemleaf == -1) return;
+                parrent.this_Controller.leaf_Logics.RemoveAt(parrent.selsecteditemleaf);
+                parrent.selsecteditemleaf = -1;
+
+                //Remove all other as Warned
+                RemoveRest();
+            }
+        }
+        class Confirm_RemoveLogicSignal : Confirm_RemoveRefrence
+        {
+            public Confirm_RemoveLogicSignal(string content, ITab_LogicController parrent) : base(content, parrent)
+            {
+                L_logicSignals.Add(parrent.this_Controller.LogicSignals[parrent.selsecteditemLogicSignal]);
+
+                //Override Description
+                GenLists();
+            }
+            public override void AbortAction()
+            {
+                //NA
+            }
+
+            public override void ConfirmAction()
+            {
+                if (parrent.selsecteditemLogicSignal == -1) return;
+                parrent.this_Controller.LogicSignals.RemoveAt(parrent.selsecteditemLogicSignal);
+                parrent.selsecteditemLogicSignal = -1;
+                parrent.this_Controller.UpdateRegisteredSignals();
+                //Remove all other as Warned
+                RemoveRest();
+            }
+        }
 
         protected override void FillTab()
         {
@@ -727,13 +949,7 @@ namespace ProjectRimFactory.Industry
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
                 if (Widgets.ButtonText(buttonrect, "PRF_LogicController_RemoveSelected".Translate()))
                 {
-                    //TODO Maybe add a confirmation Box
-                    if (selsecteditemLogicSignal != -1)
-                    {
-                        this_Controller.LogicSignals.RemoveAt(selsecteditemLogicSignal);
-                        selsecteditemLogicSignal = -1;
-                        this_Controller.UpdateRegisteredSignals();
-                    }
+                    Find.WindowStack.Add(new Confirm_RemoveLogicSignal("TEST Remove Confirm", this));
                 }
                 currentY += 20;
                 currentY += 70; // For the ListBox
@@ -788,12 +1004,7 @@ namespace ProjectRimFactory.Industry
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
                 if (Widgets.ButtonText(buttonrect, "PRF_LogicController_RemoveSelected".Translate()))
                 {
-                    //TODO Maybe add a confirmation Box
-                    if (selsecteditemleaf != -1)
-                    {
-                        this_Controller.leaf_Logics.RemoveAt(selsecteditemleaf);
-                        selsecteditemleaf = -1;
-                    }
+                    Find.WindowStack.Add(new Confirm_RemoveLeafLogic("TEST Remove Confirm", this));
                 }
                 currentY += 20;
                 currentY += 70; // For the ListBox
@@ -881,12 +1092,10 @@ namespace ProjectRimFactory.Industry
                 buttonrect = new Rect(LeftHalveX, currentY, buttonWidth, 20);
                 if (Widgets.ButtonText(buttonrect, "PRF_LogicController_RemoveSelected".Translate()))
                 {
-                    //TODO Maybe add a confirmation Box
-                    if (selsecteditem != -1)
-                    {
-                        this_Controller.valueRefrences.RemoveAt(selsecteditem);
-                        selsecteditem = -1;
-                    }
+                    Find.WindowStack.Add(new Confirm_RemoveValueRefrence("TEST Remove Confirm", this));
+
+
+                   // HandleRemove(selsecteditem, ref this_Controller.valueRefrences);
                 }
 
                 currentY += 20;
