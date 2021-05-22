@@ -138,10 +138,20 @@ namespace ProjectRimFactory.AutoMachineTool
         public bool IsStuck => this.stuck;
         public bool IsUnderground { get => this.Extension?.underground ?? false; }
 
+        private PRFGameComponent pRFGameComponent = null;
+
         public bool LogicSignaStatus 
         {
             get
             {
+                //Verify it still exists
+                if (pRFGameComponent == null) pRFGameComponent = Current.Game.GetComponent<PRFGameComponent>();
+                if (pRFGameComponent != null && refrerenceSignal != null && !pRFGameComponent.LoigSignalRegestry.ContainsKey(refrerenceSignal))
+                {
+                    //Refrence Signal got removed
+                    refrerenceSignal = null;
+                    Messages.Message("PRF_LogicController_MsgLogicSignalDestoyed".Translate(this.Label), this, MessageTypeDefOf.CautionInput);
+                }
                 if (RefrerenceSignal != null)
                 {
 

@@ -149,6 +149,7 @@
   <PRF_LogicController_RemoveSelected>Remove Selected</PRF_LogicController_RemoveSelected>
   <PRF_LogicController_Name>Name</PRF_LogicController_Name>
   <PRF_LogicController_MsgZoneDestoyed>PRF-LogicContoller: The Configured Storage Location of "{0}" got Destroyed.</PRF_LogicController_MsgZoneDestoyed>
+  <PRF_LogicController_MsgLogicSignalDestoyed>The Logic Signal used for {0} got deleated.</PRF_LogicController_MsgLogicSignalDestoyed>
   <PRF_LogicController_AvailableCrossMap>Available Cross Map</PRF_LogicController_AvailableCrossMap>
   <PRF_LogicController_AddLeafLogic>Add Leaf Logic</PRF_LogicController_AddLeafLogic>
   <PRF_LogicController_VR_AddFixed>Add Fixed</PRF_LogicController_VR_AddFixed>
