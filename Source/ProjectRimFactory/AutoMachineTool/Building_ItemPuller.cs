@@ -76,6 +76,48 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private PRFGameComponent pRFGameComponent = null;
         
+        private bool GetLogicSignalValue(LogicSignal signal)
+        {
+            DynamicSlotGroup input = null;
+            DynamicSlotGroup output = null;
+
+
+            if (signal.dynamicSlot == EnumDynamicSlotGroupID.NA)
+            {
+                if (signal.GetValue() == 0) return true;
+            }
+            else if (signal.dynamicSlot == EnumDynamicSlotGroupID.Both || signal.dynamicSlot == EnumDynamicSlotGroupID.Group_1)
+            {
+                SlotGroup slotGroup = (this.Position + this.Rotation.Opposite.FacingCell).GetSlotGroup(this.Map);
+                if (slotGroup != null)
+                {
+                    input = new DynamicSlotGroup(slotGroup);
+                }
+                else
+                {
+                    input = new DynamicSlotGroup(this.Map.thingGrid.ThingsListAt((this.Position + this.Rotation.Opposite.FacingCell)));
+                }
+
+            }
+            else if (signal.dynamicSlot == EnumDynamicSlotGroupID.Both || signal.dynamicSlot == EnumDynamicSlotGroupID.Group_2)
+            {
+
+                SlotGroup slotGroup = this.OutputCell().GetSlotGroup(this.Map);
+                if (slotGroup != null && OutputToEntireStockpile)
+                {
+                    output = new DynamicSlotGroup(slotGroup);
+                }
+                else
+                {
+                    output = new DynamicSlotGroup(this.Map.thingGrid.ThingsListAt(this.OutputCell()));
+                }
+            }
+
+            if (signal.GetValue(input, output) == 0) return true;
+            return false;
+        }
+
+
          public bool LogicSignaStatus 
         {
             get
@@ -91,42 +133,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
                 if (RefrerenceSignal != null)
                 {
-                    DynamicSlotGroup input = null;
-                    DynamicSlotGroup output = null;
-                    
-
-                    if (RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.NA)
-                    {
-                        if (RefrerenceSignal.GetValue() == 0) return true;
-                    }
-                    else if (RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Both || RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Group_1)
-                    {
-                        SlotGroup slotGroup = (this.Position + this.Rotation.Opposite.FacingCell).GetSlotGroup(this.Map);
-                        if (slotGroup != null)
-                        {
-                            input = new DynamicSlotGroup(slotGroup);
-                        }
-                        else
-                        {
-                            input = new DynamicSlotGroup(this.Map.thingGrid.ThingsListAt((this.Position + this.Rotation.Opposite.FacingCell)));
-                        }
-
-                    }
-                    else if (RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Both || RefrerenceSignal.dynamicSlot == EnumDynamicSlotGroupID.Group_2)
-                    {
-
-                        SlotGroup slotGroup = this.OutputCell().GetSlotGroup(this.Map);
-                        if (slotGroup != null && OutputToEntireStockpile)
-                        {
-                            output = new DynamicSlotGroup(slotGroup);
-                        }
-                        else
-                        {
-                            output = new DynamicSlotGroup(this.Map.thingGrid.ThingsListAt(this.OutputCell()));
-                        }
-                    }
-
-                    if (RefrerenceSignal.GetValue(input, output) == 0) return true;
+                    return GetLogicSignalValue(RefrerenceSignal);
                 }
                 return false;
 
@@ -137,10 +144,23 @@ namespace ProjectRimFactory.AutoMachineTool
         private LogicSignal refrerenceSignal;
         public LogicSignal RefrerenceSignal { get => refrerenceSignal; set => refrerenceSignal = value; }
 
+        public bool SupportsAdvancedReciverMode => true;
+
+        private bool usesAdvancedReciverMode = false;
+        public bool UsesAdvancedReciverMode { get => usesAdvancedReciverMode; set => usesAdvancedReciverMode = value; }
+
+        private List<LSR_Entry> lSR_Advanced = new List<LSR_Entry>();
+        public List<LSR_Entry> LSR_Advanced { get => lSR_Advanced; set => lSR_Advanced = value; }
+
+
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_References.Look(ref refrerenceSignal, "refrerenceSignal");
+            Scribe_Values.Look(ref usesAdvancedReciverMode, "usesAdvancedReciverMode");
+            Scribe_Collections.Look(ref lSR_Advanced, "lSR_Advanced", LookMode.Deep);
+
+
             Scribe_Values.Look<bool>(ref this.active, "active", false);
             Scribe_Values.Look<bool>(ref this.right, "right", false);
             Scribe_Deep.Look(ref settings, "settings", new object[] { this });
@@ -174,14 +194,18 @@ namespace ProjectRimFactory.AutoMachineTool
             return this;
         }
 
-        protected virtual Thing TargetThing()
+        protected virtual Thing TargetThing(Func<Thing, bool> condition = null , int maxcnt = -1)
         {
             Thing target;
-            target = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map)
+            var things = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map)
                         .Where(t => !t.IsForbidden(Faction.OfPlayer) || this.takeForbiddenItems)
-                        .Where(t => this.settings.AllowedToAccept(t))
-                        .FirstOrDefault(t => !this.IsLimit(t));
+                        .Where(t => this.settings.AllowedToAccept(t));
+            if (condition != null) things = things.Where(condition);
+
+            target = things.FirstOrDefault(t => !this.IsLimit(t));
+
             if (target == null) return target;
+            if (maxcnt > 0) return (target.SplitOff(Mathf.Min( maxcnt , target.stackCount)));
             if (this.takeSingleItems) return (target.SplitOff(1));
             // SplitOff ensures any item-removal effects happen:
             return (target.SplitOff(target.stackCount));
@@ -241,12 +265,55 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
             workAmount = Building_ItemPuller.defaultWorkAmount; // 120
-            if (LogicSignaStatus)
+            if (LogicSignaStatus && !UsesAdvancedReciverMode)
             {
                 target = null;
                 return false;
             }
+            if (UsesAdvancedReciverMode && LSR_Advanced.Count > 0)
+            {
+                if (pRFGameComponent == null) pRFGameComponent = Current.Game.GetComponent<PRFGameComponent>();
+                LSR_Advanced.Reverse();
+                for (int i = LSR_Advanced.Count-1 ; i >= 0; i-- )
+                {
+                    LSR_Entry entry = LSR_Advanced[i];
+                    //Verify it still exists
+                    if (pRFGameComponent != null && entry.RefrerenceSignal != null && !pRFGameComponent.LoigSignalRegestry.ContainsKey(entry.RefrerenceSignal))
+                    {
+                        //Refrence Signal got removed
+                        LSR_Advanced.RemoveAt(i);
+                        Messages.Message("PRF_LogicController_MsgLogicSignalDestoyed".Translate(this.Label), this, MessageTypeDefOf.CautionInput);
+                        continue;
+                    }
+                    if (!GetLogicSignalValue(entry.RefrerenceSignal))
+                    {
+                        if (!entry.TriggerValid()) continue;
+                        //Check if it can be fullfilled
+
+                        target = TargetThing((t) => entry.Filter.Allows(t), entry.RemainingItems);
+                        if (target == null) continue;
+
+
+                        entry.MoveItems(target.stackCount);
+                        return true;
+
+
+                    }
+
+
+                }
+                LSR_Advanced.Reverse();
+                target = null;
+                return false;
+
+
+            }
+
+
+
             target = TargetThing();
+
+
             if (target?.Spawned == true) target.DeSpawn();
             return target != null;
         }

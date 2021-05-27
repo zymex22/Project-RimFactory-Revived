@@ -273,23 +273,49 @@ namespace ProjectRimFactory.Common
             }
             if (ShowLogicSignalReciverSettings)
             {
+                //Seperator Line
                 inRect = list.GetRect(30f);
                 Widgets.DrawLineHorizontal(inRect.x, inRect.y - 5, inRect.width);
-                
                 inRect = list.GetRect(30f);
-                
 
-                List<FloatMenuOption> floatMenuOptions = Current.Game.GetComponent<PRFGameComponent>().LoigSignalRegestry.Where(e => e.Key.AvailableCrossMap ||  e.Value == this.SelThing.Map).Select(e => e.Key)
-                                .Select(g => new FloatMenuOption(g.Name , () => { LogicSignalReciver.RefrerenceSignal = g; }))
-                                .ToList();
-                floatMenuOptions.Insert(0, new FloatMenuOption("PRF_LogicController_Unused".Translate(), () => LogicSignalReciver.RefrerenceSignal = null));
-
-                if ( Widgets.ButtonText(inRect, LogicSignalReciver.RefrerenceSignal?.Name ?? "PRF_LogicController_Unused".Translate()))
+                if (LogicSignalReciver.SupportsAdvancedReciverMode)
                 {
-                    Find.WindowStack.Add(new FloatMenu(floatMenuOptions));
+                    //Add Option to Swapp bwtween 
+                    bool refbool = LogicSignalReciver.UsesAdvancedReciverMode;
+                    Widgets.CheckboxLabeled(inRect, "Use Advanced Settings", ref refbool);
+                    LogicSignalReciver.UsesAdvancedReciverMode = refbool;
+                    inRect = list.GetRect(30f);
                 }
 
+                PRFGameComponent pRFGame = Current.Game.GetComponent<PRFGameComponent>();
 
+
+                if (!LogicSignalReciver.SupportsAdvancedReciverMode || !LogicSignalReciver.UsesAdvancedReciverMode)
+                {
+                    List<FloatMenuOption> floatMenuOptions = pRFGame.LoigSignalRegestry.Where(e => e.Key.AvailableCrossMap || e.Value == this.SelThing.Map).Select(e => e.Key)
+                                                    .Select(g => new FloatMenuOption(g.Name, () => { LogicSignalReciver.RefrerenceSignal = g; }))
+                                                    .ToList();
+                    floatMenuOptions.Insert(0, new FloatMenuOption("PRF_LogicController_Unused".Translate(), () => LogicSignalReciver.RefrerenceSignal = null));
+
+                    if (Widgets.ButtonText(inRect, LogicSignalReciver.RefrerenceSignal?.Name ?? "PRF_LogicController_Unused".Translate()))
+                    {
+                        Find.WindowStack.Add(new FloatMenu(floatMenuOptions));
+                    }
+                }
+                else
+                {
+
+                    if (LogicSignalReciver.LSR_Advanced == null) LogicSignalReciver.LSR_Advanced = new List<LSR_Entry>();
+                    //Show The Advance Settings
+                    if (Widgets.ButtonText(inRect,"Show GUI"))
+                    {
+                        Find.WindowStack.Add(new Window_ConditionalLSREditor(LogicSignalReciver, this.SelThing.Map, pRFGame));
+                    }
+                    inRect = list.GetRect(30f);
+                    
+                    Widgets.Label(inRect, LogicSignalReciver.LSR_Advanced.Count+ " Conditional Actions Configured");
+
+                }
 
             }
             

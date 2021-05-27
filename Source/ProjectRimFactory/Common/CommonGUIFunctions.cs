@@ -165,5 +165,68 @@ namespace ProjectRimFactory.Common
 		}
 
 
-	}
+		public static void ListBox<T>(Rect ListBox_Outside, ref Vector2 scrollPos, ref int SelectedIndex, int selectedRef, List<T> inputList, Func<T, Rect, int, bool, int> func, Func<T, bool> SkippIf = null,float currY_Scroll_default = 60)
+		{
+			float itemHight = 30;
+			float itemSeperation = 0;
+
+			Widgets.DrawMenuSection(ListBox_Outside);
+
+			var ListBox_Inside = ListBox_Outside;
+			ListBox_Inside.width -= 20;
+
+			//TODO
+			ListBox_Inside.height = (itemHight + itemSeperation) * inputList.Count();
+
+
+			Widgets.BeginScrollView(ListBox_Outside, ref scrollPos, ListBox_Inside);
+
+			float currY_Scroll = ListBox_Outside.y + 5;
+			var ValueRefItemRect = new Rect(ListBox_Inside.x + 5, currY_Scroll, ListBox_Inside.width, itemHight);
+			int selectTemp = -1;
+
+			for (int i = 0; i < inputList.Count(); i++)
+			{
+				if (SkippIf != null && SkippIf(inputList[i])) continue;
+				ValueRefItemRect.y = currY_Scroll;
+				selectTemp = func(inputList[i], ValueRefItemRect, i, selectedRef == i);
+				if (selectTemp != -1)
+				{
+					SelectedIndex = selectTemp;
+				}
+				currY_Scroll += itemHight + itemSeperation;
+			}
+
+			Widgets.EndScrollView();
+		}
+
+		/// <summary>
+		/// Creates a Scrollable List Box
+		/// Design might need some improvements
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="posX">X Codinate of the ListBox</param>
+		/// <param name="currentY">Current Y Position as ref</param>
+		/// <param name="scrollPos">Scroll Positin inside</param>
+		/// <param name="SelectedIndex">Currently Selected Index. -1 == Nothing Selected</param>
+		/// <param name="selectedRef">Same as SelectedIndex but without ref (Why did i need that?)</param>
+		/// <param name="inputList">List of Items to Display</param>
+		/// <param name="func">Function that Draws each item in the List.  
+		///	Parameters: (T ListItem , Rect rect, int i, bool selected)
+		///	ListItem --> The Item to be displayed
+		///	rect --> The Rect to display within
+		/// i --> The Index of this Item
+		/// selected --> True if this item has been selected
+		/// </param>
+		/// <param name="SkippIf">If not null then each entry where this returns True wont be displayed </param>
+		public static void ListBox<T>(float posX, ref float currentY, ref Vector2 scrollPos, ref int SelectedIndex, int selectedRef, List<T> inputList, Func<T, Rect, int, bool, int> func, Func<T, bool> SkippIf = null)
+		{
+			float listBoxWidth = 250;
+			var ListBox_Outside = new Rect(posX, currentY, listBoxWidth, 150);
+			ListBox(ListBox_Outside, ref scrollPos, ref SelectedIndex, selectedRef, inputList, func, SkippIf);
+		}
+
+
+
+		}
 }

@@ -538,6 +538,11 @@ namespace ProjectRimFactory.AutoMachineTool
             get => base.SettingsOptions & ~PRFBSetting.optionObeysStorageFilters;
         }
 
+        bool ILogicSignalReciver.SupportsAdvancedReciverMode => false;
+
+        bool ILogicSignalReciver.UsesAdvancedReciverMode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        List<LSR_Entry> ILogicSignalReciver.LSR_Advanced { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         /******** AutoMachineTool logic *********/
         protected override bool TryStartWorking(out Thing target, out float workAmount) {
             CalculateCarriedItemDrawHeight();
