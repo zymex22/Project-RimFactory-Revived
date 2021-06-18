@@ -141,13 +141,13 @@ namespace ProjectRimFactory.Common
                                                     .Select(g => new FloatMenuOption(g.Name, () => { parrent.LSR_Advanced.Add(new LSR_Entry(g)); }))
                                                     .ToList();
 
-            if (Widgets.ButtonText(InteractButton_Rect, "Add"))
+            if (Widgets.ButtonText(InteractButton_Rect, "PRF_LogicController_reciverUI_Add".Translate()))
             {
                 Find.WindowStack.Add(new FloatMenu(floatMenuOptionsAdd));
             }
             InteractButton_Rect.y = margin + (listboxHight / 2) - (margin / 2);
             
-            if (Widgets.ButtonText(InteractButton_Rect, "Move Up"))
+            if (Widgets.ButtonText(InteractButton_Rect, "PRF_LogicController_reciverUI_ItemUp".Translate()))
             {
                 if (SelectedIndex > 0)
                 {
@@ -160,7 +160,7 @@ namespace ProjectRimFactory.Common
             }
 
             InteractButton_Rect.y = margin + (listboxHight / 2) + (margin / 2) + buttonHight;
-            if (Widgets.ButtonText(InteractButton_Rect, "Move Down"))
+            if (Widgets.ButtonText(InteractButton_Rect, "PRF_LogicController_reciverUI_ItemDown".Translate()))
             {
                 if (SelectedIndex != -1 && SelectedIndex < parrent.LSR_Advanced.Count - 1)
                 {
@@ -172,7 +172,7 @@ namespace ProjectRimFactory.Common
             }
 
             InteractButton_Rect.y = margin + listboxHight - buttonHight;
-            if (Widgets.ButtonText(InteractButton_Rect, "Remove"))
+            if (Widgets.ButtonText(InteractButton_Rect, "PRF_LogicController_reciverUI_ItemRemove".Translate()))
             {
                 if (SelectedIndex != -1)
                 {
@@ -206,10 +206,10 @@ namespace ProjectRimFactory.Common
 
                 InteractButtons_Rect.y += buttonHight + margin;
                 string strbuff = "" + selectedItem.RetriggerDelay;
-                Widgets.TextFieldNumericLabeled(InteractButtons_Rect, "Delay in s", ref selectedItem.RetriggerDelay, ref strbuff, 0, 1000);
+                Widgets.TextFieldNumericLabeled(InteractButtons_Rect, "PRF_LogicController_reciverUI_Delay".Translate(), ref selectedItem.RetriggerDelay, ref strbuff, 0, 1000);
                 InteractButtons_Rect.y += buttonHight + margin;
                 strbuff = "" + selectedItem.ThingCount;
-                Widgets.TextFieldNumericLabeled(InteractButtons_Rect, "Times", ref selectedItem.ThingCount, ref strbuff, 1);
+                Widgets.TextFieldNumericLabeled(InteractButtons_Rect, "PRF_LogicController_reciverUI_ActionCnt".Translate(), ref selectedItem.ThingCount, ref strbuff, 1);
 
 
             }

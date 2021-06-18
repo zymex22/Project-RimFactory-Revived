@@ -282,7 +282,7 @@ namespace ProjectRimFactory.Common
                 {
                     //Add Option to Swapp bwtween 
                     bool refbool = LogicSignalReciver.UsesAdvancedReciverMode;
-                    Widgets.CheckboxLabeled(inRect, "Use Advanced Settings", ref refbool);
+                    Widgets.CheckboxLabeled(inRect, "PRF_LogicController_reciverUI_UseAdvSettings".Translate(), ref refbool);
                     LogicSignalReciver.UsesAdvancedReciverMode = refbool;
                     inRect = list.GetRect(30f);
                 }
@@ -307,13 +307,13 @@ namespace ProjectRimFactory.Common
 
                     if (LogicSignalReciver.LSR_Advanced == null) LogicSignalReciver.LSR_Advanced = new List<LSR_Entry>();
                     //Show The Advance Settings
-                    if (Widgets.ButtonText(inRect,"Show GUI"))
+                    if (Widgets.ButtonText(inRect, "PRF_LogicController_reciverUI_ShowUI".Translate()))
                     {
                         Find.WindowStack.Add(new Window_ConditionalLSREditor(LogicSignalReciver, this.SelThing.Map, pRFGame));
                     }
                     inRect = list.GetRect(30f);
                     
-                    Widgets.Label(inRect, LogicSignalReciver.LSR_Advanced.Count+ " Conditional Actions Configured");
+                    Widgets.Label(inRect, "PRF_LogicController_reciverUI_AdvActions".Translate(LogicSignalReciver.LSR_Advanced.Count));
 
                 }
 

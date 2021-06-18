@@ -164,5 +164,22 @@
   <PRF_LogicController_VR_Fixed_DefaultName>ValueRefrence_Fixed</PRF_LogicController_VR_Fixed_DefaultName>
   <PRF_LogicController_VR_Thing_DefaultName>ValueRefrence_ThingCount</PRF_LogicController_VR_Thing_DefaultName>
   
+  <PRF_LogicController_reciverUI_Add>add</PRF_LogicController_reciverUI_Add>
+  <PRF_LogicController_reciverUI_ItemUp>Move Up</PRF_LogicController_reciverUI_ItemUp>
+  <PRF_LogicController_reciverUI_ItemDown>Move Down</PRF_LogicController_reciverUI_ItemDown>
+  <PRF_LogicController_reciverUI_ItemRemove>Remove</PRF_LogicController_reciverUI_ItemRemove>
+  <PRF_LogicController_reciverUI_Delay>Delay in Ticks</PRF_LogicController_reciverUI_Delay>
+  <PRF_LogicController_reciverUI_ActionCnt>Times</PRF_LogicController_reciverUI_ActionCnt>
+  <PRF_LogicController_reciverUI_UseAdvSettings>Use Advanced Settings</PRF_LogicController_reciverUI_UseAdvSettings>
+  <PRF_LogicController_reciverUI_></>
+  <PRF_LogicController_reciverUI_></>
+  <PRF_LogicController_reciverUI_></>
+  <PRF_LogicController_reciverUI_></>
+
+
+  
+
+  
+  
   
 </LanguageData>
