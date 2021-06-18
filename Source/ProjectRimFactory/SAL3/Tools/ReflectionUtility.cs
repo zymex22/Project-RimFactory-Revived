@@ -28,7 +28,8 @@ namespace ProjectRimFactory.SAL3
         public static readonly FieldInfo drill_lastUsedTick = typeof(CompDeepDrill).GetField("lastUsedTick", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly MethodInfo drill_TryProducePortion = typeof(CompDeepDrill).GetMethod("TryProducePortion", BindingFlags.NonPublic | BindingFlags.Instance);
 
-
+        //BackCompatibility
+        public static readonly FieldInfo BackCompatibility_conversionChain = typeof(BackCompatibility).GetField("conversionChain", BindingFlags.NonPublic | BindingFlags.Static);
 
         //reservations
         public static readonly FieldInfo sal_reservations = typeof(Verse.AI.ReservationManager).GetField("reservations", BindingFlags.NonPublic | BindingFlags.Instance);
