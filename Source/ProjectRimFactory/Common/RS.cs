@@ -24,6 +24,9 @@ namespace ProjectRimFactory
             YoungIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Young", true);
             AdultIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Adult", true);
 
+            ForbidOn = ContentFinder<Texture2D>.Get("UI/Designators/ForbidOn", true);
+            ForbidOff = ContentFinder<Texture2D>.Get("UI/Designators/ForbidOff", true);
+
 
             OutputDirectionIcon = ContentFinder<Texture2D>.Get("PRFUi/OutputDirection", true);
             ForbidIcon = ContentFinder<Texture2D>.Get("PRFUi/Forbid", true);
@@ -37,6 +40,9 @@ namespace ProjectRimFactory
                      ProjectRimFactory_ModComponent.availableSpecialSculptures)
                 s.Init();
         }
+
+        public static readonly Texture2D ForbidOn;
+        public static readonly Texture2D ForbidOff;
 
         public static readonly Texture2D PregnantIcon;
         public static readonly Texture2D BondIcon;

@@ -4,6 +4,8 @@
   <PRF_PlaceWorker_GrowZonePuller>Input Cell must touch a Growzone</PRF_PlaceWorker_GrowZonePuller>
   <PRF_PlaceWorker_ItemSlide_Denied>Can't place next to another Item chute</PRF_PlaceWorker_ItemSlide_Denied>
   
+  <PRF_Toggle_ForbidOnPlacement>Toggle Forbid on Placement</PRF_Toggle_ForbidOnPlacement>
+  <PRF_Toggle_ForbidOnPlacementDesc>Use this to Toggle betweem Forbidding items after they have been placed or not.</PRF_Toggle_ForbidOnPlacementDesc>
   <PRF_SettingsITab_TipSignal_RotInputRange>Rotate the Input Range Clockwise</PRF_SettingsITab_TipSignal_RotInputRange>
   <PRF_DropThing>Drop {0}</PRF_DropThing>
   <PRF_CouldNotPlaceThing>No valid place found to place {0}.</PRF_CouldNotPlaceThing>
