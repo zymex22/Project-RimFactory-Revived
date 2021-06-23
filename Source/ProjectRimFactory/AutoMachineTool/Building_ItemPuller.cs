@@ -116,6 +116,7 @@ namespace ProjectRimFactory.AutoMachineTool
             target = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map)
                         .Where(t => !t.IsForbidden(Faction.OfPlayer) || this.takeForbiddenItems)
                         .Where(t => this.settings.AllowedToAccept(t))
+                        .Where(t => !this.Map.reservationManager.AllReservedThings().Contains(t))
                         .FirstOrDefault(t => !this.IsLimit(t));
             if (target == null) return target;
             if (this.takeSingleItems) return (target.SplitOff(1));
