@@ -44,6 +44,10 @@ namespace ProjectRimFactory.Storage
         public override string LabelCap => uniqueName ?? base.LabelCap;
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
+        private bool forbidOnPlacement = false;
+        public virtual bool ForbidOnPlacement => forbidOnPlacement;
+
+
         public override Graphic Graphic => this.IOMode == StorageIOMode.Input ?
             base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().inColor, Color.white) :
             base.Graphic.GetColoredVersion(base.Graphic.Shader, this.def.GetModExtension<DefModExtension_StorageUnitIOPortColor>().outColor, Color.white);
@@ -119,6 +123,7 @@ namespace ProjectRimFactory.Storage
             Scribe_Deep.Look(ref outputStoreSettings, "outputStoreSettings", this);
             Scribe_Deep.Look(ref outputSettings, "outputSettings", "IOPort_Minimum_UseTooltip", "IOPort_Maximum_UseTooltip");
             Scribe_Values.Look(ref uniqueName, "uniqueName");
+            Scribe_Values.Look(ref forbidOnPlacement, "forbidOnPlacement");
         }
         public override string GetInspectString()
         {
@@ -306,6 +311,14 @@ namespace ProjectRimFactory.Storage
                             boundStorageUnit.RegisterNewItem(currentItem.SplitOff(splitCount));
                         }
                     }
+                    if (currentItem != null && ForbidOnPlacement)
+                    {
+                        currentItem.SetForbidden(true);
+                    }
+                    else if (currentItem != null)
+                    {
+                        currentItem.SetForbidden(false);
+                    }
                 }
             }
         }
@@ -347,6 +360,19 @@ namespace ProjectRimFactory.Storage
                     action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings, () => SelectedPorts().Where(p => p.IOMode == StorageIOMode.Output).ToList().ForEach(p => this.OutputSettings.Copy(p.OutputSettings))))
                 };
             }
+            yield return new Command_Toggle()
+            {
+                isActive = () => this.forbidOnPlacement,
+                toggleAction = () => this.forbidOnPlacement = !this.forbidOnPlacement,
+                defaultLabel = "PRF_Toggle_ForbidOnPlacement".Translate(),
+                defaultDesc = "PRF_Toggle_ForbidOnPlacementDesc".Translate(),
+                icon = forbidOnPlacement ? RS.ForbidOn : RS.ForbidOff
+
+            };
+
+
+
+
         }
 
         private IEnumerable<Building_StorageUnitIOBase> SelectedPorts()
@@ -499,6 +525,14 @@ namespace ProjectRimFactory.Storage
                         {
                             boundStorageUnit.RegisterNewItem(currentItem.SplitOff(splitCount));
                         }
+                    }
+                    if (currentItem != null && ForbidOnPlacement)
+                    {
+                        currentItem.SetForbidden(true);
+                    }
+                    else if (currentItem != null)
+                    {
+                        currentItem.SetForbidden(false);
                     }
                 }
             }
