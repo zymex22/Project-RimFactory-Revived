@@ -175,7 +175,7 @@ namespace ProjectRimFactory.SAL3.Things
                 var num = element.stackCount;
 
                 if (OutputSettings.useMax) num = Mathf.Min(element.stackCount, OutputSettings.max);
-                else if (num > 0)
+                if (num > 0)
                 {
                     // if this is the entire stack, we just get the stack. Important for belts to do it this way:
                     var t = element.SplitOff(num);
