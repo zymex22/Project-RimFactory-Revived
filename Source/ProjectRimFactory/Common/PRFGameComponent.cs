@@ -6,6 +6,7 @@ using Verse;
 using Verse.AI;
 using ProjectRimFactory.Common;
 using ProjectRimFactory.Common.HarmonyPatches;
+
 namespace ProjectRimFactory {
     public class PRFGameComponent : GameComponent {
         public List<SpecialSculpture> specialScupltures;  // currently in game
@@ -13,7 +14,6 @@ namespace ProjectRimFactory {
 
         public static Pawn PRF_StaticPawn = null;
         public static Job PRF_StaticJob = null;
-
 
         public static void GenStaticPawn()
         {
@@ -23,7 +23,14 @@ namespace ProjectRimFactory {
 
         public PRFGameComponent(Game game) {
             SpecialSculpture.PreStartGame();
-            
+
+            //Back Compatibility Setup
+    
+            List<BackCompatibilityConverter> data = (List<BackCompatibilityConverter>)SAL3.ReflectionUtility.BackCompatibility_conversionChain.GetValue(null);
+            data.Add(new Common.BackCompatibility.PRF_BackCompatibilityConverter());
+            SAL3.ReflectionUtility.BackCompatibility_conversionChain.SetValue(null, data);
+
+
         }
         public override void ExposeData() {
             base.ExposeData();
@@ -183,9 +190,11 @@ namespace ProjectRimFactory {
 #endif
             if (updatedThingDescriptions == false) UpdateThingDescriptions();
 
-           
+
 
         }
+
+
 
         public override void StartedNewGame()
         {
