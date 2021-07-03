@@ -226,7 +226,7 @@
     <Patch>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef/comps/li[compClass="ProjectRimFactory.Common.CompPRFHelp"]</xpath>
+        <xpath>/Defs/ThingDef/comps/li[Class="ProjectRimFactory.Common.CompPRFHelp"]</xpath>
       </Operation>
     </Patch>
   </Row>
@@ -288,7 +288,7 @@
     <Patch>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="PRF_FurnaceII"]/comps/li[@compClass="CompProperties_Refuelable"]</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_FurnaceII"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
       </Operation>
     </Patch>
   </Row>
@@ -301,11 +301,11 @@
     <Patch>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkI"]/comps/li[@compClass="CompProperties_CreatesInfestations"]</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkI"]/comps/li[@Class="CompProperties_CreatesInfestations"]</xpath>
       </Operation>
       <Operation Class="PatchOperationRemove">
         <success>Always</success>
-        <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkII"]/comps/li[@compClass="CompProperties_CreatesInfestations"]</xpath>
+        <xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkII"]/comps/li[@Class="CompProperties_CreatesInfestations"]</xpath>
       </Operation>
     </Patch>
   </Row>
