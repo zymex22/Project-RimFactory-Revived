@@ -360,16 +360,18 @@ namespace ProjectRimFactory.Storage
                     action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings, () => SelectedPorts().Where(p => p.IOMode == StorageIOMode.Output).ToList().ForEach(p => this.OutputSettings.Copy(p.OutputSettings))))
                 };
             }
-            yield return new Command_Toggle()
+            if (mode == StorageIOMode.Output)
             {
-                isActive = () => this.forbidOnPlacement,
-                toggleAction = () => this.forbidOnPlacement = !this.forbidOnPlacement,
-                defaultLabel = "PRF_Toggle_ForbidOnPlacement".Translate(),
-                defaultDesc = "PRF_Toggle_ForbidOnPlacementDesc".Translate(),
-                icon = forbidOnPlacement ? RS.ForbidOn : RS.ForbidOff
+                yield return new Command_Toggle()
+                {
+                    isActive = () => this.forbidOnPlacement,
+                    toggleAction = () => this.forbidOnPlacement = !this.forbidOnPlacement,
+                    defaultLabel = "PRF_Toggle_ForbidOnPlacement".Translate(),
+                    defaultDesc = "PRF_Toggle_ForbidOnPlacementDesc".Translate(),
+                    icon = forbidOnPlacement ? RS.ForbidOn : RS.ForbidOff
 
-            };
-
+                };
+            }
 
 
 
