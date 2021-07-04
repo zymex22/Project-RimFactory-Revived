@@ -785,6 +785,7 @@
     </comps>
     <statBases>
       <WorkToBuild Inherit="false">400</WorkToBuild>      <!--harder to dig tunnel-->
+      <Flammability Inherit="false">0</Flammability>
     </statBases>
     <modExtensions>
       <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_Conveyor">
