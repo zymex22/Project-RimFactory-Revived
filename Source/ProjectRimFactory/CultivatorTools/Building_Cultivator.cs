@@ -16,7 +16,6 @@ namespace ProjectRimFactory.CultivatorTools
 
         public CompOutputAdjustable compOutputAdjustable;
 
-
         public override void PostMake()
         {
             base.PostMake();
@@ -182,7 +181,8 @@ namespace ProjectRimFactory.CultivatorTools
             if (Utilities.SeedsPleaseActive && p.def.blueprintDef != null)
                 CreatePlantProductsSeedsPleaseActive(p);
 
-            p.PlantCollected();
+            //TODO 1.3 Maybe rename pawn?
+            p.PlantCollected(PRFGameComponent.PRF_StaticPawn);
         }
 
         public override string DescriptionDetailed => base.DescriptionDetailed + " " +

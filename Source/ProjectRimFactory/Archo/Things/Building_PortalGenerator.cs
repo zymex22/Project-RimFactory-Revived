@@ -52,7 +52,7 @@ namespace ProjectRimFactory.Archo.Things
         {
             int humanPawnCount = 0;
             Room room = Position.GetRoom(Map);
-            if (room != null && room.OpenRoofCountStopAt(1) == 0)
+            if (room != null && room.OpenRoofCount == 0)
             {
                 // Check floors
                 List<List<IntVec3>> floorPlan = PortalGeneratorUtility.FieldEdgeCells(Position);

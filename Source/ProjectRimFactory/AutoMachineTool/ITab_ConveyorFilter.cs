@@ -40,14 +40,13 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void OnOpen()
         {
             base.OnOpen();
-
             this.groups = this.Splitter.Map.haulDestinationManager.AllGroups.ToList();
             selectedDir = this.Splitter.OutputLinks.Keys.FirstOrDefault();
         }
 
         private List<SlotGroup> groups;
 
-        private ThingFilterUI.UIState uIState;
+        private ThingFilterUI.UIState uIState = new ThingFilterUI.UIState();
 
         protected override void FillTab() {
             if (selectedDir == null) selectedDir = // in case something kills it while ITab

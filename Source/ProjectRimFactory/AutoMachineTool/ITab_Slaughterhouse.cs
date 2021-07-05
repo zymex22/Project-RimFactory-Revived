@@ -212,7 +212,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var scrollViewRect = new Rect(scrollOutRect.x, 0, scrollOutRect.width - 30f, this.defs.Count() * 36f);
 
             var innerlist = new Listing_Standard();
-            innerlist.BeginScrollView(scrollOutRect, ref scrollPosition, ref scrollViewRect);
+            Widgets.BeginScrollView(scrollOutRect, ref scrollPosition, scrollViewRect);
             innerlist.Begin(scrollViewRect);
             
             this.defs.ForEach(d =>
@@ -289,7 +289,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
 
             });
-            innerlist.EndScrollView(ref scrollViewRect);
+            Widgets.EndScrollView();
             innerlist.End();
             //Update the static variable to keep the data
             sscrollPosition = scrollPosition;
