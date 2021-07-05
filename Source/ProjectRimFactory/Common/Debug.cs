@@ -43,17 +43,17 @@ namespace ProjectRimFactory {
 
         [System.Diagnostics.Conditional("DEBUG")]
         public static void Message(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
-            if ((activeFlags & flag) > 0) Log.Message(text, ignoreStopLoggingLimit);
+            if ((activeFlags & flag) > 0) Log.Message(text);
         }
 
         [System.Diagnostics.Conditional("DEBUG")]
         public static void Warning(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
-            if ((activeFlags & flag) > 0) Log.Warning(text, ignoreStopLoggingLimit);
+            if ((activeFlags & flag) > 0) Log.Warning(text);
         }
 
         [System.Diagnostics.Conditional("DEBUG")]
         public static void Error(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
-            if ((activeFlags & flag) > 0) Log.Error(text, ignoreStopLoggingLimit);
+            if ((activeFlags & flag) > 0) Log.Error(text);
         }
         // NOTE: Additional options are possible:
         // https://github.com/zymex22/Project-RimFactory-Revived/issues/95

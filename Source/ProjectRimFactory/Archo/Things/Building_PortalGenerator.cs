@@ -113,7 +113,7 @@ namespace ProjectRimFactory.Archo.Things
         }
         public void LiquidateRoom()
         {
-            Room room = Position.GetRoom(Map, RegionType.Set_All);
+            Room room = Position.GetRoom(Map);
             if (room != null && !room.PsychologicallyOutdoors)
             {
                 float wealth = room.GetStat(RoomStatDefOf.Wealth);

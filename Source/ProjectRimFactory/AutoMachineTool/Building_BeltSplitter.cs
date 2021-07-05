@@ -523,12 +523,12 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (this.filter == null) filter = new ThingFilter();
                 filter.CopyAllowancesFrom(o);
             }
-            public void DoThingFilterConfigWindow(Rect r, ref Vector2 sp) {
+            public void DoThingFilterConfigWindow(Rect r, ThingFilterUI.UIState uIState) {
                 if (filter == null) {
                     filter = new ThingFilter();
                     filter.SetAllowAll(null);
                 }
-                ThingFilterUI.DoThingFilterConfigWindow(r, ref sp, this.filter);
+                ThingFilterUI.DoThingFilterConfigWindow(r, uIState, this.filter);
             }
             public IBeltConveyorLinkable link;
             public DirectionPriority priority=DirectionPriority.Normal;

@@ -58,11 +58,12 @@ namespace ProjectRimFactory.AutoMachineTool {
                 return NS.MatSingleFor(thing);
             return EW.MatSingleFor(thing);
         }
-        public override void Print(SectionLayer layer, Thing thing) {
+        //TODO Changed in 1.3 --> extraRotation was added. any changes needed?
+        public override void Print(SectionLayer layer, Thing thing, float extraRotation) {
             if (thing.Rotation == Rot4.East || thing.Rotation == Rot4.West)
-                EW.Print(layer, thing);
+                EW.Print(layer, thing, extraRotation);
             else
-                NS.Print(layer, thing);
+                NS.Print(layer, thing, extraRotation);
         }
         // I have NOOOOO idea if these are actually useful/important:
         public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation) {

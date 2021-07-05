@@ -95,9 +95,9 @@ namespace ProjectRimFactory.AutoMachineTool {
                      preOffset.z);
             return offset;
         }
-
-        public override void Print(SectionLayer layer, Thing thing) {
-            base.Print(layer, thing);
+        //TODO Changed in 1.3 --> extraRotation was added. any changes needed?
+        public override void Print(SectionLayer layer, Thing thing,float extraRotation) {
+            base.Print(layer, thing, extraRotation);
             // Similar to Graphic_LinkedConveyor, we need to not print this
             //   if it's underground (unless something is selected, etc etc)
             if (thing is Building_BeltSplitter splitter) {

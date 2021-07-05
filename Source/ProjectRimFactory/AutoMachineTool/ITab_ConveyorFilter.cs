@@ -37,18 +37,17 @@ namespace ProjectRimFactory.AutoMachineTool
                                                 //currently, if no filters allow going in a 
                                                 //direction....??
 
-        private Vector2 scrollPosition;
-
         public override void OnOpen()
         {
             base.OnOpen();
 
             this.groups = this.Splitter.Map.haulDestinationManager.AllGroups.ToList();
             selectedDir = this.Splitter.OutputLinks.Keys.FirstOrDefault();
-
         }
 
         private List<SlotGroup> groups;
+
+        private ThingFilterUI.UIState uIState;
 
         protected override void FillTab() {
             if (selectedDir == null) selectedDir = // in case something kills it while ITab
@@ -154,8 +153,7 @@ namespace ProjectRimFactory.AutoMachineTool
             list.End();
             var height = list.CurHeight;
             Splitter.OutputLinks[selectedRot].DoThingFilterConfigWindow(
-                inRect.BottomPartPixels(inRect.height - height),
-                ref this.scrollPosition);
+                inRect.BottomPartPixels(inRect.height - height), uIState);
         }
     }
 }
