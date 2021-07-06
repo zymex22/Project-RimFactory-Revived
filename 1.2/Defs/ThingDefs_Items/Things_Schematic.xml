@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--==================================== data disk ==============================-->
+  <ThingDef>
+    <defName>PRF_DataDisk</defName>
+    <label>recipe data disk</label>
+    <thingClass>ThingWithComps</thingClass>
+    <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive... Its used to create Recipe DataBases(project rimfactory)</description>
+    <graphicData>
+      <texPath>SAL3/datadisk</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <onGroundRandomRotateAngle>120</onGroundRandomRotateAngle>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <stackLimit>1</stackLimit>
+    <useHitPoints>true</useHitPoints>
+    <statBases>
+      <MarketValue>630</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <Mass>2</Mass>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <drawGUIOverlay>false</drawGUIOverlay>
+    <colorGenerator Class="ProjectRimFactory.SAL3.Tools.ColorGenerator_RangeHSV">
+      <rangeH>0~1</rangeH>
+      <rangeS>1</rangeS>
+      <rangeV>1</rangeV>
+    </colorGenerator>
+    <selectable>true</selectable>
+    <!-- Inherited from ResourceBase -->
+    <category>Item</category>
+    <altitudeLayer>Item</altitudeLayer>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li>
+        <compClass>CompColorable</compClass>
+      </li>
+    </comps>
+    <alwaysHaulable>true</alwaysHaulable>
+    <rotatable>false</rotatable>
+    <pathCost>15</pathCost>
+    <techLevel>Industrial</techLevel>
+  </ThingDef>
+
+  <!--==================================== Small frame ===============================-->
+  <ThingDef ParentName="PRF_ResourceBase">
+    <defName>PRF_MachineFrame_I</defName>
+    <label>simple machine frame</label>
+    <description>The empty shell of a small automation building.</description>
+    <graphicData>
+      <texPath>Common/MachineFrameSmall</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>365</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>1800</WorkToMake>
+      <Mass>10</Mass>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <researchPrerequisites>
+      <li>PRF_CoreTierI</li>
+    </researchPrerequisites>
+    <stackLimit>5</stackLimit>
+    <techLevel>Industrial</techLevel>
+  </ThingDef>
+
+
+  <!--==================================== Medium frame ==============================-->
+  <ThingDef ParentName="PRF_ResourceBase">
+    <defName>PRF_MachineFrame_II</defName>
+    <label>machine frame</label>
+    <description>The empty shell of a medium-sized automation building.</description>
+    <graphicData>
+      <texPath>Common/MachineFrame</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>760</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>3000</WorkToMake>
+      <Mass>20</Mass>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <researchPrerequisites>
+      <li>PRF_CoreTierII</li>
+    </researchPrerequisites>
+    <stackLimit>5</stackLimit>
+    <techLevel>Industrial</techLevel>
+  </ThingDef>
+
+
+  <!--==================================== Large frame ===============================-->
+  <ThingDef ParentName="PRF_ResourceBase">
+    <defName>PRF_MachineFrame_III</defName>
+    <label>adv. machine frame</label>
+    <description>The empty shell of a advanced automation building.</description>
+    <graphicData>
+      <texPath>Common/MachineFrameLarge</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>1450</MarketValue>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToMake>4800</WorkToMake>
+      <Mass>40</Mass>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_CoreTierIII</li>
+    </researchPrerequisites>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <stackLimit>5</stackLimit>
+  </ThingDef>
+
+</Defs>

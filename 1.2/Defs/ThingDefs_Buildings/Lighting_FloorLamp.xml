@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_FloorIconGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!-- ================= Fix for docworld ================= -->
+  <ThingDef Name="PRF_FloorSign" ParentName="PRF_BuildingBase" Abstract="True">
+    <designationCategory>Industrial</designationCategory>
+  </ThingDef>
+
+
+  <!-- ================= Base ================= -->
+  <ThingDef Name="PRF_FloorIconBase" ParentName="PRF_FloorSign" Abstract="True">
+    <description>Weak florescent sign, can be placed on floor or on top of machines or other buildings to show guidance.</description>
+    <designatorDropdown>PRF_FloorIconGroup</designatorDropdown>
+    <rotatable>true</rotatable>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <clearBuildingArea>false</clearBuildingArea>
+    <passability>Standable</passability>
+    <canOverlapZones>true</canOverlapZones>
+    <costList>
+      <Steel>2</Steel>
+      <Silver>1</Silver>
+    </costList>
+    <statBases>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToBuild>110</WorkToBuild>
+      <MarketValue>15</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Beauty>2</Beauty>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(113,141,117,0)</glowColor>
+      </li>
+    </comps>
+    <building>
+      <isEdifice>false</isEdifice>
+    </building>
+    <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <placingDraggableDimensions>1</placingDraggableDimensions>
+    <size>(1,1)</size>
+    <researchPrerequisites>      <!-- Optional. The player will not be able to build the floor or terrain until completing one or more research projects -->
+      <li>Machining</li>
+    </researchPrerequisites>
+    <thingCategories Inherit="false">
+    </thingCategories>
+  </ThingDef>
+
+
+  <!-- ================= Yellow Arrow ================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_FloorLampArrow</defName>
+    <label>Yellow Floor Sign Arrow</label>
+    <graphicData>
+      <texPath>Misc/FloorLamp</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Red Arrow =================== -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_RedFloorLampArrow</defName>
+    <label>Red Floor Sign Arrow</label>
+    <graphicData>
+      <texPath>Misc/FloorLampR</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Green Arrow ================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_GreenFloorLampArrow</defName>
+    <label>Green Floor Sign Arrow</label>
+    <graphicData>
+      <texPath>Misc/FloorLampGR</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Red X ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_FloorLampX</defName>
+    <label>Red Floor Sign X</label>
+    <graphicData>
+      <texPath>Misc/FloorLampX</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Input ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_FloorInput</defName>
+    <label>Input Sign</label>
+    <graphicData>
+      <texPath>Misc/Input</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Output ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_FloorOutput</defName>
+    <label>Output Sign</label>
+    <graphicData>
+      <texPath>Misc/Output</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Shirt ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconClothes</defName>
+    <label>Clothes Sign</label>
+    <graphicData>
+      <texPath>Misc/Shirt</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Skull ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconSkull</defName>
+    <label>Skull Sign</label>
+    <graphicData>
+      <texPath>Misc/Skull</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= toxic ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconToxic</defName>
+    <label>Toxic Sign</label>
+    <graphicData>
+      <texPath>Misc/Toxic</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Power ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconPower</defName>
+    <label>Power Sign</label>
+    <graphicData>
+      <texPath>Misc/Power</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Gears ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconGears</defName>
+    <label>Gears Sign</label>
+    <graphicData>
+      <texPath>Misc/Gears</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Gun ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconGun</defName>
+    <label>Gun Sign</label>
+    <graphicData>
+      <texPath>Misc/Gun</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Gasmask ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconGasmask</defName>
+    <label>Gasmask Sign</label>
+    <graphicData>
+      <texPath>Misc/Gasmask</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= fire ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconFire</defName>
+    <label>Heat Sign</label>
+    <graphicData>
+      <texPath>Misc/fire</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= cold ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconCold</defName>
+    <label>Cold Sign</label>
+    <graphicData>
+      <texPath>Misc/cold</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= danger ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconDanger</defName>
+    <label>danger Sign</label>
+    <graphicData>
+      <texPath>Misc/danger</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= exit ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconExit</defName>
+    <label>exit Sign</label>
+    <graphicData>
+      <texPath>Misc/exit</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(113,141,117,0)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- ================= Prison ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconPrison</defName>
+    <label>Prison Sign</label>
+    <graphicData>
+      <texPath>Misc/Prison</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Research ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconResearch</defName>
+    <label>Research Sign</label>
+    <graphicData>
+      <texPath>Misc/Research</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Hospital ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconHospital</defName>
+    <label>Hospital Sign</label>
+    <graphicData>
+      <texPath>Misc/Hospital</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+  <!-- ================= Hospital ======================= -->
+  <ThingDef ParentName="PRF_FloorIconBase">
+    <defName>PRF_IconBarbedWire</defName>
+    <label>BarbedWire Sign</label>
+    <graphicData>
+      <texPath>Misc/BarbedWire</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+  </ThingDef>
+
+
+</Defs>

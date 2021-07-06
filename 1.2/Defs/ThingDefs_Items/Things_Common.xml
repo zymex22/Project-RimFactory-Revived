@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ================================== Robot arm ================================= -->
+  <ThingDef ParentName="PRF_ResourceBase">
+    <defName>PRF_RoboticArm</defName>
+    <label>robotic arm</label>
+    <description>A robotic arm powered by an electric motor. Used in the construction of some automation buildings.</description>
+    <graphicData>
+      <texPath>Common/RoboticArm</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>200</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>1000</WorkToMake>
+      <Mass>2</Mass>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_CoreTierI</li>
+    </researchPrerequisites>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <techLevel>Industrial</techLevel>
+  </ThingDef>
+
+  <!-- ================================== Weak AI Chip (Tier 2) ================================= -->
+  <ThingDef ParentName="PRF_ResourceBase">
+    <defName>PRF_ElectronicChip_I</defName>
+    <label>weak AI chip</label>
+    <description>A tensor processing unit containing the most rudimentary AI. Used for Early machines and robots.</description>
+    <graphicData>
+      <texPath>Common/WeakAICore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>350</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>2000</WorkToMake>
+      <Mass>1</Mass>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <techLevel>Industrial</techLevel>
+  </ThingDef>
+
+  <!-- ================================== Advanced AI Core (Tier 3) ================================= -->
+  <ThingDef ParentName="PRF_ResourceBase">
+    <defName>PRF_ElectronicChip_II</defName>
+    <label>Advanced AI core</label>
+    <description>A advanced processing unit containing hi-tech AI, which is used for advanced machines and robots.</description>
+    <graphicData>
+      <texPath>Common/AdvancedAICore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>1615</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <WorkToMake>4000</WorkToMake>
+      <Mass>1</Mass>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+  </ThingDef>
+
+  <!-- ================================== Qubit processor (Tier 4) ================================= -->
+  <ThingDef ParentName="PRF_ResourceBase">
+    <defName>PRF_ElectronicChip_III</defName>
+    <label>Qubit processor</label>
+    <description>In quantum computing, a qubit or quantum bit is the basic unit of quantum information—the quantum version of the classical binary bit physically realized with a two-state device. A qubit is a two-state quantum-mechanical system, one of the simplest quantum systems displaying the peculiarity of quantum mechanics.</description>
+    <graphicData>
+      <texPath>Common/UltraAiCore</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>12055</MarketValue>
+      <MaxHitPoints>75</MaxHitPoints>
+      <WorkToMake>10000</WorkToMake>
+      <Mass>1</Mass>
+    </statBases>
+    <techLevel>Ultra</techLevel>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+  </ThingDef>
+
+  <!-- ================================== Drone module ================================= -->
+  <ThingDef ParentName="PRF_ResourceBase">
+    <defName>PRF_DroneModule</defName>
+    <label>drone module</label>
+    <description>A dormant quadcopter frame capable of low-altitude flight.</description>
+    <graphicData>
+      <texPath>Common/DroneModule</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <soundInteract>Metal_Drop</soundInteract>
+    <soundDrop>Metal_Drop</soundDrop>
+    <statBases>
+      <MarketValue>475</MarketValue>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Mass>2</Mass>
+      <WorkToMake>2000</WorkToMake>
+    </statBases>
+    <thingCategories>
+      <li>Manufactured</li>
+    </thingCategories>
+    <stackLimit>75</stackLimit>
+    <techLevel>Industrial</techLevel>
+  </ThingDef>
+
+</Defs>

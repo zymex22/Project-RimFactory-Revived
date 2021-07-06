@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- ############################################# AI research bench ##################################################### -->
+  <!-- <ThingDef ParentName="ResearchBenchVanilla">
+    <defName>AIResearchBench</defName>
+    <label>AI research bench</label>
+    <description>A high-tech bench with an AI module installed. Required for tier 2 automation research and is not a replacement for the hi-tech research bench. Requires power.</description>
+    <thingClass>Building_ResearchBench</thingClass>
+    <category>Building</category>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+    <selectable>true</selectable>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <repairEffect>Repair</repairEffect> 
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>  
+    <filthLeaving>Filth_RubbleBuilding</filthLeaving>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight> 
+    <canOverlapZones>false</canOverlapZones>
+    <size>(3,1)</size>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>150</costStuffCount>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+    </costList>
+    <graphicData>
+      <texPath>Common/ResearchBenchAI</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(4,2)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>5000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <MarketValue>2080</MarketValue>
+      <ResearchSpeedFactor>1.0</ResearchSpeedFactor>
+      <SellPriceFactor>0.70</SellPriceFactor>
+      <Mass>50</Mass>
+    </statBases>
+    <comps>
+      <li>
+        <compClass>CompReportWorkSpeed</compClass>
+      </li>
+    </comps>
+    <thingCategories>
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <fillPercent>0.5</fillPercent>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Production</designationCategory>
+    <surfaceType>Item</surfaceType>
+    <designationHotKey />
+    <constructionSkillPrerequisite />
+    <placeWorkers Inherit="false">
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>PRF_CoreTierII</li>
+    </researchPrerequisites>
+  </ThingDef> -->
+
+
+  <!-- ############################################# New Research bench linkable ##################################################### -->
+  <ThingDef ParentName="BenchBase">
+    <defName>PRF_ResearchTerminal</defName>
+    <label>factory research terminal</label>
+    <thingClass>Building_ResearchBench</thingClass>
+    <description>This is a linkable like a multianalyzer but this one have have some special functions.\nIt work as a Simple research table and can research any research not require HitechResearchBench.\nIt will ofcourse also boost your research speed.\nThis is needed for Late tiers Factory research.</description>
+    <uiIconScale>0.85</uiIconScale>
+    <graphicData>
+      <texPath>Common/Terminal</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <!--<shaderType>CutoutComplex</shaderType>-->
+      <drawSize>(3.9,3.9)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <costList>
+      <Steel>50</Steel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+      <Plasteel>60</Plasteel>
+      <Gold>50</Gold>
+      <ComponentSpacer>4</ComponentSpacer>
+      <PRF_ElectronicChip_I>4</PRF_ElectronicChip_I>
+    </costList>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <altitudeLayer>Building</altitudeLayer>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>10000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <MarketValue>2080</MarketValue>
+      <ResearchSpeedFactor>0.65</ResearchSpeedFactor>
+      <Mass>60</Mass>
+    </statBases>
+    <size>(2,2)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <thingCategories>      <!-- Assign there in filters this should go when minified -->
+      <li>BuildingsAutomation</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+        <shortCircuitInRain>true</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>MultiAnalyzer</li>
+        </linkableFacilities>
+      </li>
+      <li Class="CompProperties_Facility">
+        <statOffsets>
+          <ResearchSpeedFactor>0.2</ResearchSpeedFactor>
+        </statOffsets>
+        <maxSimultaneous>2</maxSimultaneous>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <fillPercent>0.5</fillPercent>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <designationCategory>Misc</designationCategory>
+    <surfaceType>Item</surfaceType>
+    <designationHotKey>Misc4</designationHotKey>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <researchPrerequisites>
+      <li>PRF_CoreTierII</li>
+      <li>MultiAnalyzer</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ############################################# robotic machining table ##################################################### -->
+  <ThingDef ParentName="PRF_BenchBase">
+    <defName>TableRoboticMachining</defName>
+    <label>robotic machining table</label>
+    <thingClass>Building_WorkTable</thingClass>
+    <description>A work station for creating parts, frames and more for automation buildings.</description>
+    <graphicData>
+      <texPath>Common/TableRobotics</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(3.5,1.5)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <costList>
+      <Steel>200</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <altitudeLayer>Building</altitudeLayer>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToBuild>3500</WorkToBuild>
+      <MaxHitPoints>200</MaxHitPoints>
+      <MarketValue>1090</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Mass>50</Mass>
+    </statBases>
+    <size>(3,1)</size>
+    <designationCategory>Production</designationCategory>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <surfaceType>Item</surfaceType>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Glower">
+        <glowRadius>5</glowRadius>
+        <glowColor>(73,123,138,0)</glowColor>
+      </li>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>ToolCabinet</li>
+        </linkableFacilities>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+
+    <researchPrerequisites>
+      <li>PRF_CoreTierO</li>
+      <li>Electricity</li>
+    </researchPrerequisites>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+  </ThingDef>
+
+
+</Defs>
