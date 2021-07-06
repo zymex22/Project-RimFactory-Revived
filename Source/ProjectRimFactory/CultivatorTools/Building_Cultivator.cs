@@ -182,6 +182,7 @@ namespace ProjectRimFactory.CultivatorTools
                 CreatePlantProductsSeedsPleaseActive(p);
 
             //TODO 1.3 Maybe rename pawn?
+            if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
             p.PlantCollected(PRFGameComponent.PRF_StaticPawn);
         }
 
