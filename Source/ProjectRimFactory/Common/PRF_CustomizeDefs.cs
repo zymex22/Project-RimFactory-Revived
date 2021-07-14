@@ -116,12 +116,39 @@ namespace ProjectRimFactory.Common
                 def.prerequisites.RemoveAll(c => defNames.Contains(c.defName));
             }
             List<ResearchProjectDef> researchProjects = DefDatabase<ResearchProjectDef>.AllDefsListForReading.Where(d => defNames.Contains(d.defName)).ToList();
+
+
             foreach (ResearchProjectDef def in researchProjects)
             {
                 ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "res", def);
                 //PRF_ChangedDefTracker.OriginalResearchProjectDefs.Add(def);
+
+
                 RemoveDefFromUse(def);
             }
+            resetResearchManager_progress();
+        }
+
+        private static void resetResearchManager_progress()
+        {
+            Dictionary<ResearchProjectDef, float> progress = new Dictionary<ResearchProjectDef, float>();
+            if (Current.Game?.researchManager != null)
+            {
+                progress = (Dictionary<ResearchProjectDef, float>)SAL3.ReflectionUtility.ResearchManager_progress.GetValue(Current.Game.researchManager);
+            }
+            List<ResearchProjectDef> researchProjects =  ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ResearchProjectDef>("res").ToList();
+
+            foreach (ResearchProjectDef def in researchProjects)
+            {
+                ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "res", def);
+
+                if (Current.Game?.researchManager != null)
+                {
+                    progress.Remove(def);
+                }
+            }
+            if (Current.Game?.researchManager != null) SAL3.ReflectionUtility.ResearchManager_progress.SetValue(Current.Game.researchManager, progress);
+
         }
 
         /// <summary>
