@@ -41,7 +41,6 @@ namespace ProjectRimFactory.Common
 
             if (remove)
             {
-                Log.Message("Removing stuff");
                 List<string> toRemove = ExcludeList_Primary.ToList();
                 toRemove.AddRange(ExcludeList_Signs.ToList());
                 //Remove stuff to Build
@@ -56,9 +55,6 @@ namespace ProjectRimFactory.Common
             }
             else
             {
-                Log.Message("Adding Stuff");
-                //ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "def", def);
-                
                 foreach (ResearchProjectDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ResearchProjectDef>("res"))
                 {
                     DefDatabase<ResearchProjectDef>.AllDefsListForReading.Add(def);
@@ -80,11 +76,6 @@ namespace ProjectRimFactory.Common
                
                 foreach (ThingDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ThingDef>("alterdDef"))
                 {
-                    Log.Message("New CostList for " + def.defName + " is:");
-                    foreach (ThingDefCountClass data in ProjectRimFactory_ModSettings.defTracker.GetDefaultValue<List<ThingDefCountClass>>(def.defName, "costList"))
-                    {
-                        Log.Message("" + data.thingDef + " x" + data.count);
-                    }
                     DefDatabase<ThingDef>.AllDefsListForReading[DefDatabase<ThingDef>.AllDefsListForReading.FirstIndexOf(c => c.defName == def.defName)].costList = ProjectRimFactory_ModSettings.defTracker.GetDefaultValue<List<ThingDefCountClass>>(def.defName, "costList");
                     
                 }
@@ -194,18 +185,15 @@ namespace ProjectRimFactory.Common
 
             Dictionary<ThingDef, List<IngredientCount>> replacementDict = new Dictionary<ThingDef, List<IngredientCount>>();
 
-            // List<RecipeDef> recipeDefs2 = DefDatabase<RecipeDef>.AllDefsListForReading.Where(d => RemoveList_Components.Contains(d.products.Select(c => c.thingDef))).ToList();
             List<RecipeDef> recipeDefs2 = DefDatabase<RecipeDef>.AllDefsListForReading.Where(d => d.products.Select(s => s.thingDef).ToList().Where(c => defNames.Contains(c.defName)).Any()).ToList();
             foreach (RecipeDef def in recipeDefs2)
             {
                 replacementDict.Add(def.ProducedThingDef, def.ingredients);
             }
 
-            //Log.Message("Handle Recipes");
             List<ThingDef> thingDefsRecipes = DefDatabase<ThingDef>.AllDefsListForReading.Where(d => d?.costList?.Any(c => defNames.Contains(c.thingDef.defName)) ?? false).ToList();
             foreach (ThingDef def in thingDefsRecipes)
             {
-                // Log.Message("def: " + def);
                 ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "alterdDef", def);
                 ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "costList", CostListCopy(def.costList));
                 int safety = 10;
@@ -222,9 +210,6 @@ namespace ProjectRimFactory.Common
 
                     foreach (ThingDefCountClass thing in toRemove)
                     {
-                      //  Log.Message("replacing " + thing);
-
-                        //TODO Improve selection
                         List<IngredientCount> ingredients = replacementDict[thing.thingDef];
                         if (ingredients != null)
                         {
@@ -242,14 +227,8 @@ namespace ProjectRimFactory.Common
                             }
 
                         }
-                        else
-                        {
-                            Log.Message("No items found.");
-                        }
                     }
-                    //Log.Message("Removing old stuff " + toRemove);
                     def.costList.RemoveAll(d => toRemove.Contains(d));
-                    Log.Message("removed Stuff");
 
                 }
                 
@@ -282,6 +261,8 @@ namespace ProjectRimFactory.Common
             typeof(RimWorld.MainTabWindow_Architect).GetMethod("CacheDesPanels", System.Reflection.BindingFlags.NonPublic |
                                                                      System.Reflection.BindingFlags.Instance)
                 .Invoke(((MainTabWindow_Architect)MainButtonDefOf.Architect.TabWindow), null);
+
+            CostListCalculator.Reset();
         }
 
         /// <summary>

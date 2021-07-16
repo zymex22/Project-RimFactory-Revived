@@ -36,7 +36,6 @@ namespace ProjectRimFactory.Common
             if (PRF_LiteMode != PRF_LiteMode_last)
             {
                 PRF_CustomizeDefs.ToggleLiteMode(PRF_LiteMode);
-                Log.Message("Update Done");
             }
             PRF_LiteMode_last = PRF_LiteMode;
 
