@@ -96,7 +96,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public abstract bool ShouldLinkWith(Rot4 dir, Thing parent);
 
-        public override void Print(SectionLayer layer, Thing thing)
+        //TODO Changed in 1.3 --> extraRotation was added. any changes needed?
+        public override void Print(SectionLayer layer, Thing thing, float extraRotation)
         {
             Material mat = this.LinkedDrawMatFrom(thing, thing.Position);
             Printer_Plane.PrintPlane(layer, thing.TrueCenter(), this.drawSize, mat);

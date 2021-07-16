@@ -70,7 +70,8 @@ namespace ProjectRimFactory.Common
 					rect = rect.ScaledBy(1.8f);
 					rect.y += 3f;
 					rect = rect.Rounded();
-					return (Texture)(object)PortraitsCache.Get(pawn, new Vector2(((Rect)(rect)).width, ((Rect)(rect)).height));
+					//Unsure if Rot4.North is eqivalent to the past
+					return (Texture)(object)PortraitsCache.Get(pawn, new Vector2(((Rect)(rect)).width, ((Rect)(rect)).height),Rot4.North);
 				}
 			}
 			else

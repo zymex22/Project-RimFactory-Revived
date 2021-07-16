@@ -72,8 +72,8 @@ namespace ProjectRimFactory.AutoMachineTool {
                 this.arrow = MaterialPool.MatFrom(extraData.arrowTexPath1);
             }
         }
-
-        public override void Print(SectionLayer layer, Thing thing) {
+        //TODO Changed in 1.3 --> extraRotation was added. any changes needed?
+        public override void Print(SectionLayer layer, Thing thing, float extraRotation) {
             var conveyor = thing as IBeltConveyorLinkable;
             if (!(thing is Building_BeltConveyorUGConnector)
                 && conveyor != null && conveyor.IsUnderground
@@ -93,7 +93,7 @@ namespace ProjectRimFactory.AutoMachineTool {
                 // So....don't print underground belts?
                 return;
             }
-            base.Print(layer, thing);
+            base.Print(layer, thing, extraRotation);
             // Print the tiny yellow arrow showing direction:
             Printer_Plane.PrintPlane(layer, thing.TrueCenter()
                 + arrowOffsetsByRot4[thing.Rotation.AsInt], this.drawSize, arrow,
@@ -128,7 +128,7 @@ namespace ProjectRimFactory.AutoMachineTool {
                     .Any(other => other.CanLinkTo(belt) || (!belt.IsEndOfLine && belt.CanLinkTo(other)));
             }
             var def = (ThingDef)parent.def.entityDefToBuild;
-            Rot4 dir;
+            Rot4 dir = Rot4.North;
             foreach (var r in Enumerable.Range(0, 4).Select(n => new Rot4(n))) {
                 if ((parent.Position + r.FacingCell)==c) {
                     dir = r;
@@ -138,8 +138,7 @@ namespace ProjectRimFactory.AutoMachineTool {
             // Don't bother error checking. If an error shows up, we'll KNOW
             foreach (var l in (ConveyorLevel[])Enum
                                 .GetValues(typeof(ConveyorLevel))) {
-                if (canSendTos[def.thingClass](def, parent.Rotation,
-                           dir, l)) {
+                if (canSendTos[def.thingClass](def, parent.Rotation, dir, l)) {
                     foreach (var t in c.GetThingList(parent.Map)) {
                         if (t is Blueprint b) {
                             ThingDef tdef = b.def.entityDefToBuild as ThingDef;

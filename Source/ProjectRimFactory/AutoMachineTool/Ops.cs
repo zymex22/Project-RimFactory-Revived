@@ -266,7 +266,7 @@ namespace ProjectRimFactory.AutoMachineTool
             copy.limitToAllowedStuff = bill.limitToAllowedStuff;
             copy.paused = bill.paused;
             copy.pauseWhenSatisfied = bill.pauseWhenSatisfied;
-            copy.pawnRestriction = bill.pawnRestriction;
+            copy.SetPawnRestriction( bill.PawnRestriction);
             copy.qualityRange = bill.qualityRange;
             copy.recipe = bill.recipe;
             copy.repeatCount = bill.repeatCount;

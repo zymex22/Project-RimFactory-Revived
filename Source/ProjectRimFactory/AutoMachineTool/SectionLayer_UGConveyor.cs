@@ -37,7 +37,8 @@ namespace ProjectRimFactory.AutoMachineTool
             if (t is Building_BeltConveyor b && b.IsUnderground)
 //TODO:            if(Building_BeltConveyor.IsBeltConveyorDef(t.def) && Building_BeltConveyor.IsUndergroundDef(t.def))
             {
-                t.Graphic.Print(this, t);
+                //TODO 1.3 Added flaot ExtraRotation. i set it to 0 but unsure if this is correct
+                t.Graphic.Print(this, t , 0);
             }
         }
     }
