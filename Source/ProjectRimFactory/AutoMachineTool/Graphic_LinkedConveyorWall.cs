@@ -38,10 +38,11 @@ namespace ProjectRimFactory.AutoMachineTool {
                     (sameLinkDefs == null ? "null" : String.Join(", ", sameLinkDefs)));
             }
         }
-        public override void Print(SectionLayer layer, Thing thing) {
+        //TODO Changed in 1.3 --> extraRotation was added. any changes needed?
+        public override void Print(SectionLayer layer, Thing thing,float extraRotation) {
             showW = false; showS = false; showE = false;
             // This may set some of those flags:
-            base.Print(layer, thing);
+            base.Print(layer, thing, extraRotation);
             Debug.Message(Debug.Flag.ConveyorGraphics, "Printing transitions for " + thing + " S:" + showS + " W:" + showW + "E:" + showE);
             Material mat;
             if (showW) {

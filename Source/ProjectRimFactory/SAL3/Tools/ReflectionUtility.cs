@@ -31,6 +31,8 @@ namespace ProjectRimFactory.SAL3
         //BackCompatibility
         public static readonly FieldInfo BackCompatibility_conversionChain = typeof(BackCompatibility).GetField("conversionChain", BindingFlags.NonPublic | BindingFlags.Static);
 
+        public static readonly FieldInfo ResearchManager_progress = typeof(ResearchManager).GetField("progress", BindingFlags.Instance | BindingFlags.NonPublic);
+
         //reservations
         public static readonly FieldInfo sal_reservations = typeof(Verse.AI.ReservationManager).GetField("reservations", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly FieldInfo sal_reservations2 = typeof(Verse.AI.ReservationManager).GetField("reservations", BindingFlags.NonPublic | BindingFlags.Static);

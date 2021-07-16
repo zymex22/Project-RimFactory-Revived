@@ -678,7 +678,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     CompColorable compColorable = this.unfinished.TryGetComp<CompColorable>();
                     if (compColorable != null)
                     {
-                        compColorable.Color = this.dominant.DrawColor;
+                        compColorable.SetColor (this.dominant.DrawColor);
                     }
                 }
 

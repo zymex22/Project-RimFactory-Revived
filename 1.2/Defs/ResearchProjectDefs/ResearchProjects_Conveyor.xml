@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--============================================== Belts Research base ============================================-->
+  <ResearchProjectDef Name="PRF_BeltsResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>5</researchViewY>
+    <techLevel>Industrial</techLevel>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_BeltsResearch">
+    <defName>PRF_BeltsI</defName>
+    <label>Basic Conveyors</label>
+    <baseCost>300</baseCost>
+    <description>Hauling things within a factory can be dangerous and tedious. Conveyor belts take care of this.\nUnlocks: Belts and fueling machines.</description>
+    <prerequisites>
+      <li>Electricity</li>
+    </prerequisites>
+    <researchViewX>2</researchViewX>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_BeltsResearch">
+    <defName>PRF_BeltsII</defName>
+    <label>Basic Item Sorting</label>
+    <baseCost>400</baseCost>
+    <description>Directing things to the proper area of the factory will streamline and diversify the factory layout.\nUnlocks: Simple puller, Growzone puller and Belt splitter for normal belts.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>PRF_BeltsI</li>
+    </prerequisites>
+    <researchViewX>3</researchViewX>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_BeltsResearch">
+    <defName>PRF_BeltsIII</defName>
+    <label>Advanced Item Sorting</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>500</baseCost>
+    <description>Sophisticated logistical implementation allows for advanced item sorting.\nUnlocks: Wall and underground belts, splitters; Smart hoppers; MKII, angle, and wall pullers.</description>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <prerequisites>
+      <li>PRF_BeltsII</li>
+    </prerequisites>
+    <researchViewX>6</researchViewX>
+  </ResearchProjectDef>
+
+</Defs>

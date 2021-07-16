@@ -87,7 +87,8 @@ namespace ProjectRimFactory {
             gData.CopyFrom(req.graphicData);
             var gr = new GraphicRequest(gData.graphicClass, gData.texPath, req.shader,
                   req.drawSize, req.color, req.colorTwo, gData, req.renderQueue,
-                  req.shaderParameters);
+                  req.shaderParameters,
+                  req.maskPath);
             if (newTexPath != null) {
                 gr.path = newTexPath;
                 gr.graphicData.texPath = newTexPath;

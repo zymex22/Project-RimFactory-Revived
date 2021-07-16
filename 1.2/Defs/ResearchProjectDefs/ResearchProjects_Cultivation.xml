@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--============================================== Cultivator Research base ============================================-->
+  <ResearchProjectDef Name="PRF_CultivatorResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>0</researchViewY>
+    <techLevel>Industrial</techLevel>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+  </ResearchProjectDef>
+
+  <!-- Tier 1 -->
+  <ResearchProjectDef ParentName="PRF_CultivatorResearch">
+    <defName>PRF_AutomaticFarmingI</defName>
+    <label>Automated Farming Technique</label>
+    <baseCost>1500</baseCost>
+    <description>An agricultural drone is an unmanned aerial vehicle used to help optimize agriculture operations, increase crop production, and monitor crop growth. Sensors and digital imaging capabilities can give farmers a richer picture of their fields.</description>
+    <prerequisites>
+      <li>PRF_BasicDrones</li>
+    </prerequisites>
+    <researchViewX>4</researchViewX>
+  </ResearchProjectDef>
+
+  <!-- Tier 2 -->
+  <ResearchProjectDef ParentName="PRF_CultivatorResearch">
+    <defName>PRF_AutomaticFarmingII</defName>
+    <label>Improved Farming Techniques</label>
+    <baseCost>2250</baseCost>
+    <description>Further Improvements to agricultural drones have made them more efficient and they can now haul harvest to storage or belts. This also unlocks sprinklers which boost crop speed.</description>
+    <prerequisites>
+      <li>PRF_AutomaticFarmingI</li>
+      <li>PRF_CoreTierII</li>
+    </prerequisites>
+    <researchViewX>7</researchViewX>
+  </ResearchProjectDef>
+
+  <!-- Tier 3 -->
+  <ResearchProjectDef ParentName="PRF_CultivatorResearch">
+    <defName>PRF_AutomaticFarmingIII</defName>
+    <label>Advanced Farming Techniques</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>3000</baseCost>
+    <description>With advanced use of Mechanites and improved Ai control, Cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
+    <prerequisites>
+      <li>PRF_AutomaticFarmingII</li>
+      <li>PRF_CoreTierIII</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+    <researchViewX>9</researchViewX>
+  </ResearchProjectDef>
+</Defs>

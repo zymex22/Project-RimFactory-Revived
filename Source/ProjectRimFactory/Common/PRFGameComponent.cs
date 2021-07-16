@@ -189,7 +189,7 @@ namespace ProjectRimFactory {
             }
 #endif
             if (updatedThingDescriptions == false) UpdateThingDescriptions();
-
+            if (ProjectRimFactory_ModSettings.PRF_LiteMode) PRF_CustomizeDefs.ToggleLiteMode();
 
 
         }
@@ -200,6 +200,8 @@ namespace ProjectRimFactory {
         {
             base.StartedNewGame();
             if (updatedThingDescriptions == false) UpdateThingDescriptions();
+            if (ProjectRimFactory_ModSettings.PRF_LiteMode) PRF_CustomizeDefs.ToggleLiteMode();
+            
         }
 
         /*
@@ -211,5 +213,17 @@ if (!Current.Game.GetComponent<PRFGameComponent>().TryAddSpecialSculpture(t)) re
 Log.Warning("---------added test special scuplture: " + t + " at " + t.Position);
 }
 }*/
+
+       
+
+
+
+
+
     }
-}
+
+
+
+
+
+    }

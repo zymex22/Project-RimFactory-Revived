@@ -403,7 +403,8 @@ namespace ProjectRimFactory.Storage.UI
                     {
                         equipment.SetForbidden(false);
                         pawn.jobs.TryTakeOrderedJob(new Job(JobDefOf.Equip, equipment));
-                        MoteMaker.MakeStaticMote(equipment.DrawPos, equipment.Map, ThingDefOf.Mote_FeedbackEquip);
+                        //TODO 1.3 seems to have removed Mote_FeedbackEquip. mybe find replacement
+                        //MoteMaker.MakeStaticMote(equipment.DrawPos, equipment.Map, ThingDefOf.Mote_FeedbackEquip);
                         PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.EquippingWeapons,
                             KnowledgeAmount.Total);
                     }, MenuOptionPriority.High), pawn, equipment);

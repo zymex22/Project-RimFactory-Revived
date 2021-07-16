@@ -19,6 +19,8 @@ namespace ProjectRimFactory.Common
             root.Initialize();
         }
 
+        public static DefChangeTracker defTracker = new DefChangeTracker();
+
         private static ContainerRow root;
 
         // All C# based mod settings can go here.  If better organization
@@ -26,6 +28,16 @@ namespace ProjectRimFactory.Common
         //   organized by XML?  But that's a lot of work.
         private static void CSharpSettings(Listing_Standard list) {
             // Style: do your section of settings and then list.GapLine();
+            Rect rect = list.GetRect(20);
+            Widgets.CheckboxLabeled(rect, "PRF Lite Mode", ref PRF_LiteMode);
+
+            list.Gap();
+
+            if (PRF_LiteMode != PRF_LiteMode_last)
+            {
+                PRF_CustomizeDefs.ToggleLiteMode(PRF_LiteMode);
+            }
+            PRF_LiteMode_last = PRF_LiteMode;
 
         }
 
@@ -48,11 +60,16 @@ namespace ProjectRimFactory.Common
             return r;
         }
 
+        public static bool PRF_LiteMode = false;
+        private static bool PRF_LiteMode_last = false;
+
         public override void ExposeData()
         {
             base.ExposeData();
             root.ExposeData();
             Scribe_Values.Look<Debug.Flag>(ref Debug.activeFlags, "debugFlags", 0);
+            Scribe_Values.Look(ref PRF_LiteMode, "PRF_LiteMode", false);
+            PRF_LiteMode_last = PRF_LiteMode;
         }
 
         public void DoWindowContents(Rect inRect)

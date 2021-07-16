@@ -72,7 +72,6 @@
       <nameGeneratorFemale>NamerAnimalGenericFemale</nameGeneratorFemale>
       <manhunterOnDamageChance>0.0125</manhunterOnDamageChance>
       <manhunterOnTameFailChance>0.003</manhunterOnTameFailChance>
-      <nameOnNuzzleChance>0.5</nameOnNuzzleChance>
       <fleshType>Mechanoid</fleshType>
       <needsRest>false</needsRest>
       <hasGenders>false</hasGenders>
