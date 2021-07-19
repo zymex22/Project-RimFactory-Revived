@@ -34,6 +34,8 @@ namespace ProjectRimFactory.Common
             string[] ExcludeList_Signs = { "PRF_FloorLampArrow", "PRF_RedFloorLampArrow", "PRF_GreenFloorLampArrow", "PRF_FloorLampX", "PRF_FloorInput", "PRF_FloorOutput", "PRF_IconClothes", "PRF_IconSkull", "PRF_IconToxic", "PRF_IconPower", "PRF_IconGears", "PRF_IconGun", "PRF_IconGasmask", "PRF_IconFire", "PRF_IconCold", "PRF_IconDanger", "PRF_IconExit", "PRF_IconPrison", "PRF_IconResearch", "PRF_IconHospital", "PRF_IconBarbedWire" };
             string[] ExcludeList_Research = { "PRF_AutomaticFarmingI", "PRF_AutomaticFarmingII", "PRF_AutomaticFarmingIII", "PRF_BasicDrones", "PRF_ImprovedDrones", "PRF_AdvancedDrones", "PRF_AutonomousMining", "PRF_AutonomousMiningII", "PRF_AutonomousMiningIII", "PRF_SALResearchI", "PRF_SALResearchII", "PRF_SALResearchIII", "PRF_SALResearchIV", "PRF_SALResearchV", "PRF_SALResearchVII", "PRF_SALResearchVI", "PRF_SALResearchVIII", "PRF_SALGodlyCrafting", "PRF_EnhancedBatteries", "PRF_LargeBatteries", "PRF_VeryLargeBatteries", "PRF_UniversalAutocrafting", "PRF_SelfCorrectingAssemblers", "PRF_SelfCorrectingAssemblersII", "PRF_MetalRefining", "PRF_AnimalStations", "PRF_AnimalStationsII", "PRF_AnimalStationsIII" ,
             "PRF_SelfCooking","PRF_SelfCookingII","PRF_MachineLearning","PRF_MagneticTape","PRF_CoreTierO","PRF_CoreTierI","PRF_CoreTierII","PRF_CoreTierIII","PRF_CoreTierIV"};
+            string[] ExcludeListTrader = { "PRF_Factory_Supplier" };
+
 
             //Components are items that are used in the creation of other items
             string[] RemoveList_Components = { "PRF_RoboticArm", "PRF_ElectronicChip_I", "PRF_ElectronicChip_II", "PRF_ElectronicChip_III", "PRF_DroneModule", "PRF_DataDisk", "PRF_MachineFrame_I", "PRF_MachineFrame_II", "PRF_MachineFrame_III" };
@@ -51,6 +53,9 @@ namespace ProjectRimFactory.Common
 
                 //Remove Components used to build stuff
                 removeComponents(RemoveList_Components.ToList());
+
+                //remove the Trader
+                removeTrader(ExcludeListTrader.ToList());
 
             }
             else
@@ -80,7 +85,10 @@ namespace ProjectRimFactory.Common
                     
                 }
 
-                
+                foreach (TraderKindDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<TraderKindDef>("trader"))
+                {
+                    DefDatabase<TraderKindDef>.AllDefsListForReading.Add(def);
+                }
 
 
 
@@ -94,6 +102,15 @@ namespace ProjectRimFactory.Common
         }
 
 
+        private static void removeTrader(List<string> defNames)
+        {
+            List<TraderKindDef> traderKindDef = DefDatabase<TraderKindDef>.AllDefsListForReading.Where(d => defNames.Contains(d.defName)).ToList();
+            foreach (TraderKindDef traderKind in traderKindDef)
+            {
+                ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(traderKind.defName, "trader", traderKind);
+            }
+            DefDatabase<TraderKindDef>.AllDefsListForReading.RemoveAll(d => defNames.Contains(d.defName));
+        }
 
 
         private static void removeReserch(List<string> defNames)
@@ -248,9 +265,11 @@ namespace ProjectRimFactory.Common
         /// </summary>
         public static void ArchitectMenu_ClearCache()
         {
+            string[] panels = { "Industrial", "Power" };
+
             if ((MainTabWindow_Architect)MainButtonDefOf.Architect?.TabWindow == null) return;
 
-            foreach (DesignationCategoryDef designationCategoryDef in DefDatabase<DesignationCategoryDef>.AllDefs.Where(d => d != null && d.defName == "Industrial"))
+            foreach (DesignationCategoryDef designationCategoryDef in DefDatabase<DesignationCategoryDef>.AllDefs.Where(d => d != null && panels.Contains(d.defName)))
             {
                 designationCategoryDef.ResolveReferences();
             }
