@@ -28,9 +28,27 @@ namespace ProjectRimFactory.Common
         //   organized by XML?  But that's a lot of work.
         private static void CSharpSettings(Listing_Standard list) {
             // Style: do your section of settings and then list.GapLine();
-            Rect rect = list.GetRect(20);
-            Widgets.CheckboxLabeled(rect, "PRF Lite Mode", ref PRF_LiteMode);
+            Rect rect = list.GetRect(30);
 
+            Widgets.DrawRectFast(rect, Color.gray);
+            var tmp = Text.Font;
+            var tmpAnc = Text.Anchor;
+            Text.Font = GameFont.Medium;
+            Text.Anchor = TextAnchor.MiddleCenter;
+
+            Widgets.Label(rect, "PRF_Settings_C_Lite_Header".Translate());
+            Text.Font = tmp;
+            Text.Anchor = tmpAnc;
+
+            list.Gap();
+
+            rect = list.GetRect(20);
+            if (Mouse.IsOver(rect))
+            {
+                Widgets.DrawHighlight(rect);
+            }
+            TooltipHandler.TipRegion(rect, "PRF_Settings_C_Lite_ToolTip".Translate());
+            Widgets.CheckboxLabeled(rect, "PRF_Settings_C_Lite_Label".Translate(), ref PRF_LiteMode);
             list.Gap();
 
             if (PRF_LiteMode != PRF_LiteMode_last)
