@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!--RimFridge -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>[KV] RimFridge - 1.1</li>
+			<li>[KV] RimFridge</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<!-- ============== Adding I/O Fridge Port =============== -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<ThingDef ParentName="PRF_BuildingBase">
+							<defName>PRF_IOPort_IFridge</defName>
+							<label>Fridge I/O port</label>
+							<thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
+							<designatorDropdown>PRF_IoGroup</designatorDropdown>
+							<drawerType>RealtimeOnly</drawerType>
+							<uiIconScale>0.7</uiIconScale>
+							<graphicData>
+								<texPath>Storage/IO_Fridge</texPath>
+								<graphicClass>Graphic_Single</graphicClass>
+								<shaderType>CutoutComplex</shaderType>
+							</graphicData>
+							<altitudeLayer>Building</altitudeLayer>
+							<passability>PassThroughOnly</passability>
+							<tickerType>Normal</tickerType>
+							<fillPercent>0.5</fillPercent>
+							<pathCost>70</pathCost>
+							<building>
+								<preventDeteriorationInside>true</preventDeteriorationInside>
+								<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+								<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+								<fixedStorageSettings>
+									<priority>Normal</priority>
+									<filter>
+										<categories>
+											<li>AnimalProductRaw</li>
+											<li>Corpses</li>
+											<li>Drugs</li>
+											<li>EggsFertilized</li>
+											<li>EggsUnfertilized</li>
+											<li>Foods</li>
+											<li>Medicine</li>
+											<li>PlantMatter</li>
+											<li>PlantFoodRaw</li>
+											<li>BodyParts</li>
+										</categories>
+										<thingDefs>
+											<li>Wort</li>
+										</thingDefs>
+										<specialFiltersToDisallow>
+											<li>AllowRotten</li>
+										</specialFiltersToDisallow>
+									</filter>
+								</fixedStorageSettings>
+								<defaultStorageSettings>
+									<priority>Normal</priority>
+									<filter>
+										<categories>
+											<li>FoodMeals</li>
+										</categories>
+										<disallowedThingDefs>
+											<li>MealSurvivalPack</li>
+										</disallowedThingDefs>
+									</filter>
+								</defaultStorageSettings>
+							</building>
+							<inspectorTabs>
+								<li>ProjectRimFactory.Storage.UI.ITab_IOPortStorage</li>
+								<li>ProjectRimFactory.Storage.UI.ITab_Items</li>
+							</inspectorTabs>
+							<castEdgeShadows>true</castEdgeShadows>
+							<statBases>
+								<WorkToBuild>800</WorkToBuild>
+								<MaxHitPoints>100</MaxHitPoints>
+								<MarketValue>1900</MarketValue>
+								<Flammability>1.0</Flammability>
+								<Mass>30</Mass>
+							</statBases>
+							<description>An advanced connection port for the Deep Storage Unit. It can be set to input/output from any DSU remotely within the map. This version interfaces with RimFridge branded coolers.</description>
+							<costList>
+								<ComponentSpacer>1</ComponentSpacer>
+								<PRF_RoboticArm>1</PRF_RoboticArm>
+								<PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+								<PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+							</costList>
+							<comps>
+								<li Class="CompProperties_Power">
+									<compClass>CompPowerTrader</compClass>
+									<basePowerConsumption>375</basePowerConsumption>
+								</li>
+								<li Class="CompProperties_Flickable"/>
+								<li Class="CompProperties_Glower">
+									<glowRadius>2.5</glowRadius>
+									<glowColor>(89,188,255,0)</glowColor>
+								</li>
+								<li Class="RimFridge.CompProperties_Refrigerator">
+									<drinksBestCold>
+										<li>Beer</li>
+										<li>RC2_Ale</li>
+										<li>RC2_Cider</li>
+										<li>RC2_Grog</li>
+										<li>RC2_Stout</li>
+									</drinksBestCold>
+									<findAllRottableForFilters>true</findAllRottableForFilters>
+								</li>
+								<li>
+									<compClass>ProjectRimFactory.Common.CompPRFHelp</compClass>
+								</li>
+								<li>
+									<compClass>ProjectRimFactory.Common.CompCallTickRareFromTick</compClass>
+								</li>
+							</comps>
+							<rotatable>false</rotatable>
+							<staticSunShadowHeight>0.3</staticSunShadowHeight>
+							<surfaceType>Item</surfaceType>
+							<minifiedDef>MinifiedThing</minifiedDef>
+							<thingCategories>
+								<li>BuildingsFurniture</li>
+							</thingCategories>
+							<researchPrerequisites>
+								<li>PRF_StorageIO</li>
+								<li>AirConditioning</li>
+							</researchPrerequisites>
+							<modExtensions>
+								<li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">
+									<inColor>(144, 222, 255, 255)</inColor>
+									<outColor>(215, 169, 72, 255)</outColor>
+								</li>
+							</modExtensions>
+						</ThingDef>
+					</value>
+				</li>
+				<!-- ============== Adding Fridge Digital Storage Unit =============== -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<ThingDef ParentName="PRF_MassStorageBase">
+							<defName>PRFCoolDSU</defName>
+							<label>Refrigerated digital storage unit</label>
+							<designatorDropdown>PRF_IoGroup</designatorDropdown>
+							<uiIconScale>0.9</uiIconScale>
+							<thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
+							<graphicData>
+								<texPath>Storage/CoolDSU</texPath>
+								<drawSize>(3,3)</drawSize>
+								<damageData>
+									<cornerTL>Damage/Corner</cornerTL>
+									<cornerTR>Damage/Corner</cornerTR>
+								</damageData>
+							</graphicData>
+							<statBases>
+								<Mass>15</Mass>
+								<MaxHitPoints>450</MaxHitPoints>
+								<WorkToBuild>5000</WorkToBuild>
+								<MarketValue>10900</MarketValue>
+								<Flammability>0.05</Flammability>
+								<Beauty>0.5</Beauty>
+							</statBases>
+							<building>
+								<defaultStorageSettings>
+									<priority>Normal</priority>
+									<filter>
+										<categories>
+											<li>AnimalProductRaw</li>
+											<li>Corpses</li>
+											<li>Drugs</li>
+											<li>EggsFertilized</li>
+											<li>EggsUnfertilized</li>
+											<li>Foods</li>
+											<li>Medicine</li>
+											<li>PlantMatter</li>
+											<li>PlantFoodRaw</li>
+											<li>BodyParts</li>
+										</categories>
+										<thingDefs>
+											<li>Wort</li>
+										</thingDefs>
+										<specialFiltersToDisallow>
+											<li>AllowRotten</li>
+										</specialFiltersToDisallow>
+									</filter>
+								</defaultStorageSettings>
+							</building>
+							<description>A RimFridge branded, refrigerated version of the Digital Storage Unit that stores up to 512 stacks of food. Consumes 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.</description>
+							<size>(3,3)</size>
+							<pathCost>150</pathCost>
+							<costList>
+								<Steel>300</Steel>
+								<Gold>50</Gold>
+								<Uranium>20</Uranium>
+								<Silver>20</Silver>
+								<Plasteel>100</Plasteel>
+								<ComponentIndustrial>100</ComponentIndustrial>
+								<ComponentSpacer>15</ComponentSpacer>
+								<PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+								<PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+							</costList>
+							<tickerType>Normal</tickerType>
+							<researchPrerequisites>
+								<li>PRF_StorageIO</li>
+							</researchPrerequisites>
+							<comps>
+								<li Class="CompProperties_Glower">
+									<glowRadius>6</glowRadius>
+									<glowColor>(115,198,206,0)</glowColor>
+								</li>
+								<li Class="CompProperties_Power">
+									<compClass>CompPowerTrader</compClass>
+									<basePowerConsumption>500</basePowerConsumption>
+								</li>
+								<li Class="RimFridge.CompProperties_Refrigerator">
+									<drinksBestCold>
+										<li>Beer</li>
+										<li>RC2_Ale</li>
+										<li>RC2_Cider</li>
+										<li>RC2_Grog</li>
+										<li>RC2_Stout</li>
+									</drinksBestCold>
+									<findAllRottableForFilters>true</findAllRottableForFilters>
+								</li>
+								<li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
+								<li>
+									<compClass>ProjectRimFactory.Common.CompCallTickRareFromTick</compClass>
+								</li>
+							</comps>
+							<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+							<modExtensions>
+								<li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
+								<li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
+									<limit>512</limit>
+									<destroyContainsItems>true</destroyContainsItems>
+									<hideItems>true</hideItems>
+									<forbidPawnAccess>false</forbidPawnAccess>
+									<hideRightClickMenus>true</hideRightClickMenus>
+								</li>
+							</modExtensions>
+						</ThingDef>
+					</value>
+				</li>
+				<!-- ============== Adding fridge comp to Generic Animal Harvester =============== -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_GenericAnimalHarvester"]/comps</xpath>
+					<value>
+						<li Class="RimFridge.CompProperties_Refrigerator">
+							<drinksBestCold>
+								<li>Beer</li>
+								<li>RC2_Ale</li>
+								<li>RC2_Cider</li>
+								<li>RC2_Grog</li>
+								<li>RC2_Stout</li>
+							</drinksBestCold>
+							<findAllRottableForFilters>false</findAllRottableForFilters>
+						</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_GenericAnimalHarvester_II"]/comps</xpath>
+					<value>
+						<li Class="RimFridge.CompProperties_Refrigerator">
+							<drinksBestCold>
+								<li>Beer</li>
+								<li>RC2_Ale</li>
+								<li>RC2_Cider</li>
+								<li>RC2_Grog</li>
+								<li>RC2_Stout</li>
+							</drinksBestCold>
+							<findAllRottableForFilters>false</findAllRottableForFilters>
+						</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

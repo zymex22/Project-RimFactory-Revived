@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Brewing Expanded</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <RecipeDef>
+              <defName>Brew_VBE_AmbrandyNormal</defName>
+              <label>Brew Ambrandy x10</label>
+              <description>Brew Ambrandy x10</description>
+              <jobString>Brewing Ambrandy</jobString>
+              <effectWorking>Cook</effectWorking>
+              <workSkill>Cooking</workSkill>
+              <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+              <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+              <workAmount>900000</workAmount>
+              <ingredients>
+                <li>
+                  <filter>
+                    <thingDefs>
+                      <li>VBE_AmbrandyMush</li>
+                    </thingDefs>
+                  </filter>
+                  <count>10</count>
+                </li>
+              </ingredients>
+              <fixedIngredientFilter>
+                <thingDefs>
+                  <li>VBE_AmbrandyMush</li>
+                </thingDefs>
+              </fixedIngredientFilter>
+              <products>
+                <VBE_AmbrandyNormal>10</VBE_AmbrandyNormal>
+              </products>
+            </RecipeDef>
+
+            <RecipeDef>
+              <defName>Brew_VBE_Gin</defName>
+              <label>Brew Gin x10</label>
+              <description>Brew Gin x10</description>
+              <jobString>Brewing Gin</jobString>
+              <effectWorking>Cook</effectWorking>
+              <workSkill>Cooking</workSkill>
+              <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+              <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+              <workAmount>480000</workAmount>
+              <ingredients>
+                <li>
+                  <filter>
+                    <thingDefs>
+                      <li>VBE_GinMush</li>
+                    </thingDefs>
+                  </filter>
+                  <count>10</count>
+                </li>
+              </ingredients>
+              <fixedIngredientFilter>
+                <thingDefs>
+                  <li>VBE_GinMush</li>
+                </thingDefs>
+              </fixedIngredientFilter>
+              <products>
+                <VBE_Gin>10</VBE_Gin>
+              </products>
+            </RecipeDef>
+
+            <RecipeDef>
+              <defName>Brew_VBE_Tequila</defName>
+              <label>Brew Tequila x10</label>
+              <description>Brew Tequila x10</description>
+              <jobString>Brewing Tequila</jobString>
+              <effectWorking>Cook</effectWorking>
+              <workSkill>Cooking</workSkill>
+              <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+              <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+              <workAmount>180000</workAmount>
+              <ingredients>
+                <li>
+                  <filter>
+                    <thingDefs>
+                      <li>VBE_TequilaMust</li>
+                    </thingDefs>
+                  </filter>
+                  <count>10</count>
+                </li>
+              </ingredients>
+              <fixedIngredientFilter>
+                <thingDefs>
+                  <li>VBE_TequilaMust</li>
+                </thingDefs>
+              </fixedIngredientFilter>
+              <products>
+                <VBE_Tequila>10</VBE_Tequila>
+              </products>
+            </RecipeDef>
+
+            <RecipeDef>
+              <defName>Brew_VBE_Vodka</defName>
+              <label>Brew Vodka x10</label>
+              <description>Brew Vodka x10</description>
+              <jobString>Brewing Vodka</jobString>
+              <effectWorking>Cook</effectWorking>
+              <workSkill>Cooking</workSkill>
+              <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+              <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+              <workAmount>420000</workAmount>
+              <ingredients>
+                <li>
+                  <filter>
+                    <thingDefs>
+                      <li>VBE_VodkaMash</li>
+                    </thingDefs>
+                  </filter>
+                  <count>10</count>
+                </li>
+              </ingredients>
+              <fixedIngredientFilter>
+                <thingDefs>
+                  <li>VBE_VodkaMash</li>
+                </thingDefs>
+              </fixedIngredientFilter>
+              <products>
+                <VBE_Vodka>10</VBE_Vodka>
+              </products>
+            </RecipeDef>
+
+            <RecipeDef>
+              <defName>Brew_VBE_Whiskey</defName>
+              <label>Brew Whiskey x10</label>
+              <description>Brew Whiskey x10</description>
+              <jobString>Brewing Whiskey</jobString>
+              <effectWorking>Cook</effectWorking>
+              <workSkill>Cooking</workSkill>
+              <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+              <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+              <workAmount>420000</workAmount>
+              <ingredients>
+                <li>
+                  <filter>
+                    <thingDefs>
+                      <li>VBE_WhiskeyMash</li>
+                    </thingDefs>
+                  </filter>
+                  <count>10</count>
+                </li>
+              </ingredients>
+              <fixedIngredientFilter>
+                <thingDefs>
+                  <li>VBE_WhiskeyMash</li>
+                </thingDefs>
+              </fixedIngredientFilter>
+              <products>
+                <VBE_Whiskey>10</VBE_Whiskey>
+              </products>
+            </RecipeDef>
+
+            <RecipeDef>
+              <defName>Brew_VBE_Soda</defName>
+              <label>Brew Soda x10</label>
+              <description>Brew Soda x10</description>
+              <jobString>Brewing Soda</jobString>
+              <effectWorking>Cook</effectWorking>
+              <workSkill>Cooking</workSkill>
+              <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+              <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+              <workAmount>60000</workAmount>
+              <ingredients>
+                <li>
+                  <filter>
+                    <thingDefs>
+                      <li>VBE_SodaSyrup</li>
+                    </thingDefs>
+                  </filter>
+                  <count>10</count>
+                </li>
+              </ingredients>
+              <fixedIngredientFilter>
+                <thingDefs>
+                  <li>VBE_SodaSyrup</li>
+                </thingDefs>
+              </fixedIngredientFilter>
+              <products>
+                <VBE_Soda>10</VBE_Soda>
+              </products>
+            </RecipeDef>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Brewing Expanded</li>
+    </mods>
+    <match Class="PatchOperationFindMod">
+      <mods>
+        <li>Vanilla Plants Expanded</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+          <li Class="PatchOperationAdd">
+            <xpath>/Defs</xpath>
+            <value>
+              <RecipeDef>
+                <defName>Brew_VBE_Cider</defName>
+                <label>Brew Cider x10</label>
+                <description>Brew Cider x10</description>
+                <jobString>Brewing Cider</jobString>
+                <effectWorking>Cook</effectWorking>
+                <workSkill>Cooking</workSkill>
+                <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+                <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+                <workAmount>600000</workAmount>
+                <ingredients>
+                  <li>
+                    <filter>
+                      <thingDefs>
+                        <li>VBE_UnfermentedCider</li>
+                      </thingDefs>
+                    </filter>
+                    <count>10</count>
+                  </li>
+                </ingredients>
+                <fixedIngredientFilter>
+                  <thingDefs>
+                    <li>VBE_UnfermentedCider</li>
+                  </thingDefs>
+                </fixedIngredientFilter>
+                <products>
+                  <VBE_Cider>10</VBE_Cider>
+                </products>
+              </RecipeDef>
+            </value>
+          </li>
+        </operations>
+      </match>
+    </match>
+  </Operation>
+
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Factions Expanded - Medieval</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <RecipeDef>
+              <defName>Brew_VFEM_Wine</defName>
+              <label>Brew Wine x10</label>
+              <description>Brew Wine x10</description>
+              <jobString>Brewing Wine</jobString>
+              <effectWorking>Cook</effectWorking>
+              <workSkill>Cooking</workSkill>
+              <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+              <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+              <workAmount>900000</workAmount>
+              <ingredients>
+                <li>
+                  <filter>
+                    <thingDefs>
+                      <li>VFEM_Must</li>
+                    </thingDefs>
+                  </filter>
+                  <count>10</count>
+                </li>
+              </ingredients>
+              <fixedIngredientFilter>
+                <thingDefs>
+                  <li>VFEM_Must</li>
+                </thingDefs>
+              </fixedIngredientFilter>
+              <products>
+                <VFEM_Wine>10</VFEM_Wine>
+              </products>
+            </RecipeDef>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Factions Expanded - Vikings</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs</xpath>
+          <value>
+            <RecipeDef>
+              <defName>Brew_VFEV_Mead</defName>
+              <label>Brew Mead x10</label>
+              <description>Brew Mead x10</description>
+              <jobString>Brewing Mead</jobString>
+              <effectWorking>Cook</effectWorking>
+              <workSkill>Cooking</workSkill>
+              <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+              <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+              <workAmount>450000</workAmount>
+              <ingredients>
+                <li>
+                  <filter>
+                    <thingDefs>
+                      <li>VFEV_Honey</li>
+                    </thingDefs>
+                  </filter>
+                  <count>10</count>
+                </li>
+              </ingredients>
+              <fixedIngredientFilter>
+                <thingDefs>
+                  <li>VFEV_Honey</li>
+                </thingDefs>
+              </fixedIngredientFilter>
+              <products>
+                <VFEV_Mead>10</VFEV_Mead>
+              </products>
+            </RecipeDef>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+
+
+</Patch>
