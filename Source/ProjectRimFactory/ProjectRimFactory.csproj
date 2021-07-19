@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
@@ -39,7 +39,7 @@
          Update this either in the GUI (nuget system) or from the command line:
          nuget restore
          -->
-    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.3.3050-beta" />
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.3.3063-beta" />
     <PackageReference Include="Lib.Harmony" Version="2.1.0" PrivateAssets="All" />
   </ItemGroup>
 
