@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--==================== Dropdown Groups ====================-->
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_SALGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!-- base -->
+  <ThingDef Name="PRF_SAL_Base" ParentName="PRF_BuildingBase" Abstract="True">
+    <defName>Building_NR_AutoMachineTool_Base</defName>
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_AutoMachineTool</thingClass>
+    <designatorDropdown>PRF_SALGroup</designatorDropdown>
+    <altitudeLayer>Building</altitudeLayer>
+    <uiIconScale>0.7</uiIconScale>
+    <graphicData>
+      <texPath>SAL3/SAL</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <!-- <shaderType>CutoutComplex</shaderType> -->      <!-- for mask to change color when stuffed -->
+      <!-- <color>(133,97,67,256)</color> -->      <!--change color on maske manually -->
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>200</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <MarketValue>2780</MarketValue>
+      <Mass>70</Mass>
+    </statBases>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <fillPercent>1</fillPercent>
+    <comps>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    <pathCost>0</pathCost>
+    <rotatable>true</rotatable>
+    <blockWind>false</blockWind>
+    <castEdgeShadows>false</castEdgeShadows>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <placeWorkers>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_AutoMachineTool</li>
+      <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_SALTargetCellHilight</li>
+      <li>ProjectRimFactory.PlaceWorker_Arrow</li>
+    </placeWorkers>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <size>(1,1)</size>
+    <passability>Standable</passability>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
+    </inspectorTabs>
+    <building>
+      <ai_chillDestination>false</ai_chillDestination>
+    </building>
+  </ThingDef>
+
+  <!-- auto-assembler Mk-1 -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_AutoCrafterSimple</defName>
+    <label>auto-assembler Mk-1(S.A.L)</label>
+    <description>The first version of the auto-assembler, able to craft with the skill and speed of a level 5 crafter. Place this on a workbench's interaction spot with the arrow facing the workbench. The auto-crafter can also do art, but its database of art is very limited and will not be able to produce masterpieces.\n\nStats:\nBase: 1\n Crafting: 5\nCooking: 4\nArtistic: 0\nSpeed: 1</description>
+    <costList>
+      <Steel>75</Steel>
+      <Plasteel>45</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+    </costList>
+    <statBases>
+      <MarketValue>2780</MarketValue>
+    </statBases>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(102,102,105,256)</color>      <!--change color on maske manually -->
+    </graphicData>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>400</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>250</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>PRF_SALResearchI</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>1</BaseSkill>
+        <skills>
+          <li>
+            <def>Crafting</def>
+            <levelInt>5</levelInt>
+          </li>
+          <li>
+            <def>Cooking</def>
+            <levelInt>4</levelInt>
+          </li>
+          <li>
+            <def>Artistic</def>
+            <levelInt>0</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- auto-assembler Mk-2 -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_AutoCrafter</defName>
+    <label>auto-assembler Mk-2(S.A.L)</label>
+    <description>The auto-assembler is the backbone of Project S.A.L., a small but powerful building capable of autonomously crafting recipes.\n\nStats:\nBase: 5\n Crafting: 12\nCooking: 8\nArtistic: 0\nSpeed: 2</description>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <costList>
+      <Steel>100</Steel>
+      <Plasteel>75</Plasteel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+    </costList>
+    <statBases>
+      <MarketValue>3366</MarketValue>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_SALResearchII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1200</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.2~0.2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>3~6</floatrange_Range>
+        <powerPerStepRange>250</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>5</BaseSkill>
+        <skills>
+          <li>
+            <def>Crafting</def>
+            <levelInt>12</levelInt>
+          </li>
+          <li>
+            <def>Cooking</def>
+            <levelInt>8</levelInt>
+          </li>
+          <li>
+            <def>Artistic</def>
+            <levelInt>0</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- The Art Machine -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_TheArtMachine</defName>
+    <label>The Art Machine(S.A.L)</label>
+    <description>Pumps out art like a hose pumps out water.\n\nStats:\nBase: 3\n Crafting: 7\nArtistic: 8\nSpeed: 1</description>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(133,97,67,256)</color>      <!--change color on maske manually -->
+    </graphicData>
+    <costList>
+      <Steel>150</Steel>
+      <Plasteel>100</Plasteel>
+      <Silver>300</Silver>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>4</ComponentSpacer>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+    </costList>
+    <statBases>
+      <MarketValue>5108</MarketValue>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_SALResearchIV</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1200</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>3~6</floatrange_Range>
+        <powerPerStepRange>250</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>3</BaseSkill>
+        <skills>
+          <li>
+            <def>Crafting</def>
+            <levelInt>7</levelInt>
+          </li>
+          <li>
+            <def>Artistic</def>
+            <levelInt>8</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- The Art Master -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_TheArtMaster</defName>
+    <label>The Art Master(S.A.L)</label>
+    <description>Pumps out art like a violent volcanic eruption pumps out lava.\n\nStats:\nBase: 3\n Crafting: 9\nArtistic: 18\nSpeed: 1</description>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(180,60,60,256)</color>      <!--change color on maske manually -->
+    </graphicData>
+    <costList>
+      <Steel>150</Steel>
+      <Plasteel>200</Plasteel>
+      <Silver>800</Silver>
+      <ComponentIndustrial>30</ComponentIndustrial>
+      <ComponentSpacer>5</ComponentSpacer>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <PRF_RoboticArm>4</PRF_RoboticArm>
+    </costList>
+    <statBases>
+      <MarketValue>8500</MarketValue>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_SALResearchV</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1200</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>3</BaseSkill>
+        <skills>
+          <li>
+            <def>Crafting</def>
+            <levelInt>9</levelInt>
+          </li>
+          <li>
+            <def>Artistic</def>
+            <levelInt>18</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- overclocked auto-assembler -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_OverclockedAutoAssembler</defName>
+    <label>overclocked auto-assembler(S.A.L)</label>
+    <description>Produces work at the standard of a level 1 dunce, but works extremely quickly.\n\nStats:\nBase: 1\nSpeed: 5</description>
+    <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(15,100,130,256)</color>      <!--change color on maske manually -->
+    </graphicData>
+    <costList>
+      <Steel>500</Steel>
+      <Plasteel>300</Plasteel>
+      <Silver>1000</Silver>
+      <ComponentIndustrial>40</ComponentIndustrial>
+      <ComponentSpacer>8</ComponentSpacer>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+    </costList>
+    <statBases>
+      <MarketValue>10575</MarketValue>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_SALResearchVI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1700</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>0.5~0.5</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>1</BaseSkill>
+        <skills>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- overclocked auto-assembler mkII (Tier 3) -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_OverclockedAutoAssemblerII</defName>
+    <label>overclocked auto-assembler mkII(S.A.L)</label>
+    <description>Produces terrible quality items, though it does this so quickly it might not matter\n\nStats:\nBase: 1\nSpeed: 12</description>
+    <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(15,100,130,256)</color>      <!--change color on maske manually -->
+    </graphicData>
+    <costList>
+      <Steel>1000</Steel>
+      <Plasteel>600</Plasteel>
+      <Silver>2000</Silver>
+      <ComponentIndustrial>50</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+    </costList>
+    <statBases>
+      <MarketValue>16147</MarketValue>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_SALResearchVIII</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1900</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>1.2~1.2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>1</BaseSkill>
+        <skills>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- AutoCooker S.A.L -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_SALAutoCooker</defName>
+    <label>AutoCooker S.A.L</label>
+    <designatorDropdown>PRF_CookingGroup</designatorDropdown>
+    <description>Although the auto-assembler performs cooking to a decent level, the auto-cooker is both faster and more accurate in its food production.\n\nStats:\nBase: 5\n Crafting: 8\nCooking: 12\nArtistic: 0\nSpeed: 1</description>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <!-- <color>(15,100,130,256)</color> -->      <!--change color on maske manually -->
+    </graphicData>
+    <costList>
+      <Steel>50</Steel>
+      <Plasteel>175</Plasteel>
+      <Silver>100</Silver>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+    </costList>
+    <statBases>
+      <MarketValue>5110</MarketValue>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_SALResearchVI</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1200</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>0.1~0.1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~3</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>5</BaseSkill>
+        <skills>
+          <li>
+            <def>Cooking</def>
+            <levelInt>12</levelInt>
+          </li>
+          <li>
+            <def>Crafting</def>
+            <levelInt>8</levelInt>
+          </li>
+          <li>
+            <def>Artistic</def>
+            <levelInt>0</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- auto-miner S.A.L -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_SALAutoMinerI</defName>
+    <label>auto-miner S.A.L</label>
+    <description>Modified crafter which is capable of performing high level mining, most useful in front of a deep core miner</description>
+    <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <costList>
+      <Steel>50</Steel>
+      <Plasteel>75</Plasteel>
+      <Silver>100</Silver>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_RoboticArm>1</PRF_RoboticArm>
+    </costList>
+    <researchPrerequisites>
+      <li>PRF_SALResearchIII</li>
+      <li>PRF_AutonomousMining</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1200</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>0.3~0.3</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>1</BaseSkill>
+        <skills>
+          <li>
+            <def>Mining</def>
+            <levelInt>12</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+
+  <!-- Tier 4: Godlike -->
+  <ThingDef ParentName="PRF_SAL_Base">
+    <defName>PRF_GodlyCrafter</defName>
+    <label>Godly S.A.L Crafter</label>
+    <description>Works so quickly, it defies all expectation. Perfect for mass-producing high quality items. May or may not incinerate the universe\nThis might be first step into insanity?!#..\n\nStats:\nBase: 20\nArtistic: 18\nSpeed: 666</description>
+    <constructionSkillPrerequisite>18</constructionSkillPrerequisite>
+    <graphicData>
+      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
+      <color>(153,0,0,256)</color>      <!--change color on maske manually -->
+    </graphicData>
+    <costList>
+      <Steel>10000</Steel>
+      <Plasteel>7500</Plasteel>
+      <Silver>100000</Silver>
+      <ComponentIndustrial>450</ComponentIndustrial>
+      <ComponentSpacer>50</ComponentSpacer>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_ElectronicChip_III>5</PRF_ElectronicChip_III>
+      <PRF_RoboticArm>4</PRF_RoboticArm>
+      <AIPersonaCore>5</AIPersonaCore>
+    </costList>
+    <statBases>
+      <MarketValue>293000</MarketValue>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_SALGodlyCrafting</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(50,0,100,0)</glowColor>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>15</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>20000</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <floatrange_SpeedFactor>6.66~6.66</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <!-- Range Settings -->
+        <floatrange_Range>1~5</floatrange_Range>
+        <powerPerStepRange>100</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>18</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

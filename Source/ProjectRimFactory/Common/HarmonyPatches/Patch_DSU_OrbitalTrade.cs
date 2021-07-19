@@ -38,7 +38,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static MethodBase TargetMethod()//The target method is found using the custom logic defined here
         {
             predicateClass = typeof(PassingShip).GetNestedTypes(HarmonyLib.AccessTools.all)
-               .FirstOrDefault(t => t.FullName.Contains("c__DisplayClass24_0"));
+               .FirstOrDefault(t => t.FullName.Contains("c__DisplayClass23_0"));
             if (predicateClass == null)
             {
                 Log.Error("PRF Harmony Error - predicateClass == null for Patch_PassingShip_DSUisTradebeacon.TargetMethod()");
@@ -58,7 +58,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
 
             Type hiddenClass = typeof(PassingShip).GetNestedTypes(HarmonyLib.AccessTools.all)
-               .FirstOrDefault(t => t.FullName.Contains("c__DisplayClass24_0"));
+               .FirstOrDefault(t => t.FullName.Contains("c__DisplayClass23_0"));
 
             bool foundLocaterString = false;
             foreach (var instruction in instructions)

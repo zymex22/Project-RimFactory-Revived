@@ -204,7 +204,7 @@ namespace ProjectRimFactory.Drones
                                     {
                                         if (scanner.HasJobOnCell(pawn, intVec))
                                         {
-                                            if (!allowUnreachable && !pawn.CanReach(intVec, scanner.PathEndMode, maxDanger, false, TraverseMode.ByPawn))
+                                            if (!allowUnreachable && !pawn.CanReach(intVec, scanner.PathEndMode, maxDanger, false,false, TraverseMode.ByPawn))
                                             {
                                                 continue;
                                             }
@@ -217,7 +217,7 @@ namespace ProjectRimFactory.Drones
                                     }
                                     else if (num4 < num2 && scanner.HasJobOnCell(pawn, intVec))
                                     {
-                                        if (!allowUnreachable && !pawn.CanReach(intVec, scanner.PathEndMode, maxDanger, false, TraverseMode.ByPawn))
+                                        if (!allowUnreachable && !pawn.CanReach(intVec, scanner.PathEndMode, maxDanger, false,false, TraverseMode.ByPawn))
                                         {
                                             continue;
                                         }
