@@ -428,7 +428,7 @@
       <MarketValue>5110</MarketValue>
     </statBases>
     <researchPrerequisites>
-      <li>PRF_SALResearchVI</li>
+      <li>PRF_SALResearchVII</li>
     </researchPrerequisites>
     <comps>
       <li Class="CompProperties_Power">
