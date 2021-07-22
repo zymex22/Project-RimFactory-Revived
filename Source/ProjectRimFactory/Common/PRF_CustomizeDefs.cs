@@ -93,6 +93,11 @@ namespace ProjectRimFactory.Common
 
 
                 ArchitectMenu_ClearCache();
+
+                if (ProjectRimFactory_ModComponent.ModSupport_ReserchPal)
+                {
+                    ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
+                }
             }
 
 
@@ -156,6 +161,12 @@ namespace ProjectRimFactory.Common
                 }
             }
             if (Current.Game?.researchManager != null) SAL3.ReflectionUtility.ResearchManager_progress.SetValue(Current.Game.researchManager, progress);
+
+            if (ProjectRimFactory_ModComponent.ModSupport_ReserchPal)
+            {
+                ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
+            }
+
 
         }
 

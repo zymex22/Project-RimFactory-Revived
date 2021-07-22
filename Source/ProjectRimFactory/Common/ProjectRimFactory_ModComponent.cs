@@ -39,6 +39,9 @@ namespace ProjectRimFactory.Common
         public static System.Reflection.MethodInfo ModSupport_RrimFridge_HasFridgeAt = null;
         public static bool ModSupport_RrimFrige_Dispenser = false;
 
+        public static System.Reflection.MethodInfo ModSupport_ReserchPal_ResetLayout = null;
+        public static bool ModSupport_ReserchPal = false;
+        
         private void LoadModSupport()
         {
             if (ModLister.HasActiveModWithName("[KV] RimFridge"))
@@ -56,6 +59,23 @@ namespace ProjectRimFactory.Common
                 }
 
             }
+            if (ModLister.HasActiveModWithName("ResearchPal - Forked"))
+            {
+                ModSupport_ReserchPal_ResetLayout = AccessTools.Method("ResearchPal.Tree:ResetLayout");
+                if (ModSupport_ReserchPal_ResetLayout != null)
+                {
+                    Log.Message("Project Rimfactory - added Support for ResearchPal when using Lite Mode");
+                    ModSupport_ReserchPal = true;
+                }
+                else
+                {
+                    Log.Warning("Project Rimfactory - Failed to added Support for ResearchPal when using Lite Mode");
+                }
+
+
+            }
+
+
         }
 
 
