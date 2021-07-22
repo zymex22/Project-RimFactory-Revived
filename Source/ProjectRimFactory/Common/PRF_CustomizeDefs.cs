@@ -32,6 +32,10 @@ namespace ProjectRimFactory.Common
             "PRF_Sprinkler_I","PRF_Sprinkler_II","PRF_MineShaft","PRF_MiniHelper","PRF_MiniDroneColumn","PRF_TypeOneAssembler_I","PRF_TypeTwoAssembler_I","PRF_TypeTwoAssembler_II","PRF_TypeTwoAssembler_III","PRF_FurnaceI","PRF_FurnaceII","PRF_FurnaceIII","PRF_SelfPrepper",
             "PRF_Factory_Supplier", "PRF_ResearchTerminal" , "TableRoboticMachining", "PRF_4k_Battery","PRF_16k_Battery","PRF_64k_Battery","PRF_256k_Battery"};
             string[] ExcludeList_Signs = { "PRF_FloorLampArrow", "PRF_RedFloorLampArrow", "PRF_GreenFloorLampArrow", "PRF_FloorLampX", "PRF_FloorInput", "PRF_FloorOutput", "PRF_IconClothes", "PRF_IconSkull", "PRF_IconToxic", "PRF_IconPower", "PRF_IconGears", "PRF_IconGun", "PRF_IconGasmask", "PRF_IconFire", "PRF_IconCold", "PRF_IconDanger", "PRF_IconExit", "PRF_IconPrison", "PRF_IconResearch", "PRF_IconHospital", "PRF_IconBarbedWire" };
+            string[] ExcludeListPatches = { "PRF_MiniHelperAtomic", "PRF_MiniHelperFishing" , "PRF_T1_Aquaculture", "PRF_T2_Aquaculture", "PRF_FishFood" };
+
+            string[] ExcludeListRecipes = { "Make_PRF_FishFood", "PRF_FreshwaterFish", "PRF_OceanwaterFish" };
+
             string[] ExcludeList_Research = { "PRF_AutomaticFarmingI", "PRF_AutomaticFarmingII", "PRF_AutomaticFarmingIII", "PRF_BasicDrones", "PRF_ImprovedDrones", "PRF_AdvancedDrones", "PRF_AutonomousMining", "PRF_AutonomousMiningII", "PRF_AutonomousMiningIII", "PRF_SALResearchI", "PRF_SALResearchII", "PRF_SALResearchIII", "PRF_SALResearchIV", "PRF_SALResearchV", "PRF_SALResearchVII", "PRF_SALResearchVI", "PRF_SALResearchVIII", "PRF_SALGodlyCrafting", "PRF_EnhancedBatteries", "PRF_LargeBatteries", "PRF_VeryLargeBatteries", "PRF_UniversalAutocrafting", "PRF_SelfCorrectingAssemblers", "PRF_SelfCorrectingAssemblersII", "PRF_MetalRefining", "PRF_AnimalStations", "PRF_AnimalStationsII", "PRF_AnimalStationsIII" ,
             "PRF_SelfCooking","PRF_SelfCookingII","PRF_MachineLearning","PRF_MagneticTape","PRF_CoreTierO","PRF_CoreTierI","PRF_CoreTierII","PRF_CoreTierIII","PRF_CoreTierIV"};
             string[] ExcludeListTrader = { "PRF_Factory_Supplier" };
@@ -45,6 +49,7 @@ namespace ProjectRimFactory.Common
             {
                 List<string> toRemove = ExcludeList_Primary.ToList();
                 toRemove.AddRange(ExcludeList_Signs.ToList());
+                toRemove.AddRange(ExcludeListPatches.ToList());
                 //Remove stuff to Build
                 removeBuildableThingDefs(toRemove);
 
@@ -57,6 +62,7 @@ namespace ProjectRimFactory.Common
                 //remove the Trader
                 removeTrader(ExcludeListTrader.ToList());
 
+                removeRecipe(ExcludeListRecipes.ToList());
             }
             else
             {
@@ -90,6 +96,10 @@ namespace ProjectRimFactory.Common
                     DefDatabase<TraderKindDef>.AllDefsListForReading.Add(def);
                 }
 
+                foreach (RecipeDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<RecipeDef>("RecipeDef"))
+                {
+                    DefDatabase<RecipeDef>.AllDefsListForReading.Add(def);
+                }
 
 
                 ArchitectMenu_ClearCache();
@@ -106,6 +116,15 @@ namespace ProjectRimFactory.Common
 
         }
 
+        private static void removeRecipe(List<string> defNames)
+        {
+            List<RecipeDef> recipeDefs = DefDatabase<RecipeDef>.AllDefsListForReading.Where(d => defNames.Contains(d.defName)).ToList();
+            foreach (RecipeDef recipe in recipeDefs)
+            {
+                ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(recipe.defName, "RecipeDef", recipe);
+            }
+            DefDatabase<RecipeDef>.AllDefsListForReading.RemoveAll(d => defNames.Contains(d.defName));
+        }
 
         private static void removeTrader(List<string> defNames)
         {
