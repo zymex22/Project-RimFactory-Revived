@@ -18,7 +18,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         static bool Prefix(Pawn claimant, Job job, LocalTargetInfo target ,ref bool __result , Map ___map)
         {
-            if (target.HasThing == false)
+            if (target.HasThing == false && ___map != null && target.Cell.InBounds(___map))
             {
                 Building_StorageUnitIOBase building_target = (Building_StorageUnitIOBase)target.Cell.GetThingList(___map).Where(t => t is Building_StorageUnitIOBase).FirstOrDefault();
                 if (building_target != null && building_target.mode == StorageIOMode.Input)
