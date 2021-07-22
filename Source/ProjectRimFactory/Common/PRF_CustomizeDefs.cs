@@ -34,7 +34,7 @@ namespace ProjectRimFactory.Common
             string[] ExcludeList_Signs = { "PRF_FloorLampArrow", "PRF_RedFloorLampArrow", "PRF_GreenFloorLampArrow", "PRF_FloorLampX", "PRF_FloorInput", "PRF_FloorOutput", "PRF_IconClothes", "PRF_IconSkull", "PRF_IconToxic", "PRF_IconPower", "PRF_IconGears", "PRF_IconGun", "PRF_IconGasmask", "PRF_IconFire", "PRF_IconCold", "PRF_IconDanger", "PRF_IconExit", "PRF_IconPrison", "PRF_IconResearch", "PRF_IconHospital", "PRF_IconBarbedWire" };
             string[] ExcludeListPatches = { "PRF_MiniHelperAtomic", "PRF_MiniHelperFishing" , "PRF_T1_Aquaculture", "PRF_T2_Aquaculture", "PRF_FishFood" };
 
-            string[] ExcludeListRecipes = { "Make_PRF_FishFood", "PRF_FreshwaterFish", "PRF_OceanwaterFish" };
+            string[] ExcludeListRecipes = { "Make_PRF_FishFood"};
 
             string[] ExcludeList_Research = { "PRF_AutomaticFarmingI", "PRF_AutomaticFarmingII", "PRF_AutomaticFarmingIII", "PRF_BasicDrones", "PRF_ImprovedDrones", "PRF_AdvancedDrones", "PRF_AutonomousMining", "PRF_AutonomousMiningII", "PRF_AutonomousMiningIII", "PRF_SALResearchI", "PRF_SALResearchII", "PRF_SALResearchIII", "PRF_SALResearchIV", "PRF_SALResearchV", "PRF_SALResearchVII", "PRF_SALResearchVI", "PRF_SALResearchVIII", "PRF_SALGodlyCrafting", "PRF_EnhancedBatteries", "PRF_LargeBatteries", "PRF_VeryLargeBatteries", "PRF_UniversalAutocrafting", "PRF_SelfCorrectingAssemblers", "PRF_SelfCorrectingAssemblersII", "PRF_MetalRefining", "PRF_AnimalStations", "PRF_AnimalStationsII", "PRF_AnimalStationsIII" ,
             "PRF_SelfCooking","PRF_SelfCookingII","PRF_MachineLearning","PRF_MagneticTape","PRF_CoreTierO","PRF_CoreTierI","PRF_CoreTierII","PRF_CoreTierIII","PRF_CoreTierIV"};
@@ -100,6 +100,7 @@ namespace ProjectRimFactory.Common
                 {
                     DefDatabase<RecipeDef>.AllDefsListForReading.Add(def);
                 }
+                clearRecipesCache();
 
 
                 ArchitectMenu_ClearCache();
@@ -109,11 +110,20 @@ namespace ProjectRimFactory.Common
                     ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
                 }
             }
+            
 
 
 
 
+        }
 
+        private static void clearRecipesCache()
+        {
+            List<ThingDef> thingDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(d => d.IsWorkTable ).ToList();
+            foreach (ThingDef thingDef in thingDefs)
+            {
+                SAL3.ReflectionUtility.allRecipesCached.SetValue(thingDef, null);
+            }
         }
 
         private static void removeRecipe(List<string> defNames)
@@ -124,6 +134,7 @@ namespace ProjectRimFactory.Common
                 ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(recipe.defName, "RecipeDef", recipe);
             }
             DefDatabase<RecipeDef>.AllDefsListForReading.RemoveAll(d => defNames.Contains(d.defName));
+            clearRecipesCache();
         }
 
         private static void removeTrader(List<string> defNames)
