@@ -813,7 +813,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     foreach (var amount in things.consumable)
                     {
                         var thing = amount.thing;
-                        if (i.filter.Allows(thing) && (bill.ingredientFilter.Allows(thing) || i.IsFixedIngredient))
+                        if (i.filter.Allows(thing) && (bill.ingredientFilter.Allows(thing) || i.IsFixedIngredient) && !this.Map.reservationManager.AllReservedThings().Contains(thing))
                         {
                             remain = remain - bill.recipe.IngredientValueGetter.ValuePerUnitOf(thing.def) * amount.count;
                             int consumption = amount.count;
