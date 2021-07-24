@@ -17,8 +17,14 @@ namespace ProjectRimFactory.Common
         public virtual void EffectOnPlaceThing(Thing t) { }
         public virtual void EffectOnAcceptThing(Thing t) { }
 
-        //TODO: make this like the next two?
-        public virtual bool ForbidOnPlacing(Thing t) => false;
+        public virtual bool ForbidOnPlacing(Thing t) => ForbidOnPlacingDefault;
+
+        public virtual bool ForbidOnPlacingDefault
+        {
+            get => forbidOnPlacingDefault;
+            set => forbidOnPlacingDefault = value;
+        }
+
         public virtual bool ObeysStorageFilters {
             get => obeysStorageFilters;
             set => obeysStorageFilters = value;
@@ -35,10 +41,13 @@ namespace ProjectRimFactory.Common
         protected bool outputToEntireStockpile=false;
         protected bool obeysStorageFilters = true;
 
+        protected bool forbidOnPlacingDefault = false;
+
         public override void ExposeData() {
             base.ExposeData();
             Scribe_Values.Look(ref outputToEntireStockpile, "PRFOutputToEntireStockpile", false);
             Scribe_Values.Look(ref obeysStorageFilters, "PRFObeysStorageFilters", true);
+            Scribe_Values.Look(ref forbidOnPlacingDefault, "PRFForbidOnPlacingDefault", true);
         }
     }
     [Flags] // PRF Building Settinsg

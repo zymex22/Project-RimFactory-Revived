@@ -14,6 +14,14 @@ namespace ProjectRimFactory.Storage
     {
         public IEnumerable<Thing> AvailableThings => throw new NotImplementedException();
 
+        public virtual bool ForbidOnPlacingDefault
+        {
+            get => forbidOnPlacingDefault;
+            set => forbidOnPlacingDefault = value;
+        }
+
+        protected bool forbidOnPlacingDefault = false;
+
         public bool ObeysStorageFilters => false;
 
         public bool OutputToEntireStockpile => false;
@@ -46,7 +54,7 @@ namespace ProjectRimFactory.Storage
         {
             if (outputCell.GetThingList(Map).Where(type => type is IPRF_Building || type is Building_StorageUnitIOBase || type is Building_MassStorageUnit).Any<Thing>())
             {
-                return false;
+                return ForbidOnPlacingDefault;
             }
             else
             {
