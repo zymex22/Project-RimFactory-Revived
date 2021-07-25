@@ -48,6 +48,77 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private ThingFilterUI.UIState uIState = new ThingFilterUI.UIState();
 
+        private void directionUI(Rect rect , Rot4 rot,ref bool selected, ref bool disabeld, bool isInput)
+        {
+            Texture2D texture = RS.SplitterArrow_N; //Default
+            if (selected)
+            {
+                if (isInput)
+                {
+                    //TODO Selected Textues
+                    if (rot == Rot4.North) texture = RS.SplitterArrow_in_N;
+                    else if (rot == Rot4.South) texture = RS.SplitterArrow_in_S;
+                    else if (rot == Rot4.East) texture = RS.SplitterArrow_in_E;
+                    else if (rot == Rot4.West) texture = RS.SplitterArrow_in_W;
+                }
+                else
+                {
+                    if (rot == Rot4.North) texture = RS.SplitterArrowSel_N;
+                    else if (rot == Rot4.South) texture = RS.SplitterArrowSel_S;
+                    else if (rot == Rot4.East) texture = RS.SplitterArrowSel_E;
+                    else if (rot == Rot4.West) texture = RS.SplitterArrowSel_W;
+                } 
+            }
+            else
+            {
+                if (isInput)
+                {
+                    if (rot == Rot4.North) texture = RS.SplitterArrow_in_N;
+                    else if (rot == Rot4.South) texture = RS.SplitterArrow_in_S;
+                    else if (rot == Rot4.East) texture = RS.SplitterArrow_in_E;
+                    else if (rot == Rot4.West) texture = RS.SplitterArrow_in_W;
+                }
+                else
+                {
+                    if (rot == Rot4.North) texture = RS.SplitterArrow_N;
+                    else if (rot == Rot4.South) texture = RS.SplitterArrow_S;
+                    else if (rot == Rot4.East) texture = RS.SplitterArrow_E;
+                    else if (rot == Rot4.West) texture = RS.SplitterArrow_W;
+                }
+            }
+
+
+            GUI.DrawTexture(rect, texture);
+            if (!disabeld && !isInput) GUI.DrawTexture(rect, RS.SplitterDisabeld);
+            Event cur = Event.current;
+            if ( cur.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
+            {
+                //Left
+                if (Input.GetMouseButton(0))
+                {
+                    selected = true;
+                }
+                //Right
+                if (Input.GetMouseButton(1) && !isInput)
+                {
+                    disabeld = !disabeld;
+                }
+            }
+         
+
+
+        }
+
+        private Rot4 OppositeRot(Rot4 rot)
+        {
+            if (rot == Rot4.North) return Rot4.South;
+            if (rot == Rot4.South) return Rot4.North;
+            if (rot == Rot4.East) return Rot4.West;
+            if (rot == Rot4.West) return Rot4.East;
+            return Rot4.North; //This cant happen
+        }
+
+
         protected override void FillTab() {
             if (selectedDir == null) selectedDir = // in case something kills it while ITab
                   this.Splitter.OutputLinks.Keys.FirstOrDefault(null);  //  is already open
@@ -87,49 +158,70 @@ namespace ProjectRimFactory.AutoMachineTool
             #endregion
             #region ------ fill dir quadrants ------
             // note to self: Enumerable.Range(0, 4) starts at 0 and gives 4 elements.
-            foreach (var dir in Enumerable.Range(0, 4).Select(n => new Rot4(n))) {
-                var dirName = ("PRF.AutoMachineTool.OutputDirection." + RotStrings[dir]).Translate();
-                if (Widgets.RadioButtonLabeled(pos[dir].LeftHalf(), dirName, dir == selectedDir))
-                    //                    if (Widgets.RadioButton(pos[dir].RightHalf().position, dir == selectedDir))
-                    selectedDir = dir;
-                //              Text.Anchor = TextAnchor.MiddleRight;
-                //              Widgets.Label(pos[dir].LeftHalf(), dirName);
-                bool nowActive = false;
-                if (this.Splitter.OutputLinks.ContainsKey(dir)) {
-                    nowActive = Splitter.OutputLinks[dir].Active;
+
+            foreach (var dir in Enumerable.Range(0, 4).Select(n => new Rot4(n)))
+            {
+                bool enabeld = false;
+                if (this.Splitter.OutputLinks.ContainsKey(dir))
+                {
+                    enabeld = Splitter.OutputLinks[dir].Active;
                 }
-                bool origValue = nowActive;
-                //TODO: translate
-                Widgets.CheckboxLabeled(pos[dir].RightHalf(), "Active? ", ref nowActive);
-                if (nowActive != origValue) {
-                    if (this.Splitter.OutputLinks.ContainsKey(dir)) {
-                        Splitter.OutputLinks[dir].Active = nowActive;
-                    } else {
-                        if (nowActive) {
-                            Splitter.AddOutgoingLink(dir);
-                        } else {
-                            // should never reach here?
-                        }
+
+                bool selref = selectedDir == dir;
+
+                /* Log.Message(".....................................");
+                 //Testing Inputs
+                 foreach (IBeltConveyorLinkable linkable in Splitter.IncomingLinks)
+                 {
+                     Log.Message("---------------");
+                     Log.Message("linkable " + linkable.Rotation);
+
+
+                 }
+                */
+
+                //TODO Improve logic to corecctly support splitters next to splitters
+                bool isInput = false;
+                foreach (IBeltConveyorLinkable linkable in Splitter.IncomingLinks)
+                {
+                    if (OppositeRot(linkable.Rotation) == dir)
+                    {
+                        isInput = true;
+                        break;
                     }
-                    /*                } else {
-                                        bool nowActive = false;
-                                        Text.Anchor = TextAnchor.MiddleLeft;
-                                        GameFont tmp = Text.Font;
-                                        Text.Font = GameFont.Tiny;
-                                        //TODO: Change this to "No link"
-                                        Widgets.Label(pos[dir].RightHalf(), "PRF.AutoMachineTool.Conveyor.OutputItemFilter.NothingOutputDestination".Translate());
-                                        Text.Font = tmp;
-                                        */
+                }
+
+
+                directionUI(pos[dir], dir,ref selref,ref enabeld, isInput);
+                if (selref) selectedDir = dir;
+                if (this.Splitter.OutputLinks.ContainsKey(dir))
+                {
+                    Splitter.OutputLinks[dir].Active = enabeld;
+                }
+                else
+                {
+                    if (enabeld)
+                    {
+                        Splitter.AddOutgoingLink(dir);
+                    }
+                    else
+                    {
+                        // should never reach here?
+                    }
                 }
 
             }
             list.Gap();
             #endregion
+
+
             var selectedRot = (Rot4)selectedDir;
             if (selectedDir == null || !Splitter.OutputLinks.ContainsKey(selectedRot)) {
                 list.End();
                 return;
             }
+
+
             #region ------ Priority ------
             rect = list.GetRect(30f);
             Widgets.Label(rect.LeftHalf(), "PRF.AutoMachineTool.Priority".Translate());
