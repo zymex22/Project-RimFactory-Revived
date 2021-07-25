@@ -35,6 +35,7 @@ namespace ProjectRimFactory.Common {
         /// </summary>
         /// <returns><c>true</c>, if, on placing, thing should be forbidden, <c>false</c> otherwise.</returns>
         bool ForbidOnPlacing(Thing t);
+        bool ForbidOnPlacingDefault { get; set; }
         bool ObeysStorageFilters { get; }
         bool OutputToEntireStockpile { get; }
         void EffectOnPlaceThing(Thing t);

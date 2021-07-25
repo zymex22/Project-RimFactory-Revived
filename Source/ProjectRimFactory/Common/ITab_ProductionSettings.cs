@@ -63,7 +63,7 @@ namespace ProjectRimFactory.Common
 
         public override bool IsVisible {
             get {
-                return showITabTests.FirstOrDefault(t=>(t!=null && t(SelThing))) != null || ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton;
+                return showITabTests.FirstOrDefault(t=>(t!=null && t(SelThing))) != null || ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton || ShowForbidOnPlacingSetting;
             }
         }
         bool ShowProductLimt => Machine != null;
@@ -74,6 +74,8 @@ namespace ProjectRimFactory.Common
         bool ShowObeysStorageFilter => (PRFB != null &&
                 (PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
                 !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
+
+        bool ShowForbidOnPlacingSetting => pRF_Building != null;
 
         bool ShowRangeTypeSelectorButton => ShowAreaSelectButton && compPropertiesPowerWork != null && compPropertiesPowerWork.Props.allowManualRangeTypeChange;
 
@@ -91,6 +93,7 @@ namespace ProjectRimFactory.Common
 
         private IPRF_SettingsContentLink pRF_SettingsContent { get => this.SelThing as IPRF_SettingsContentLink; }
 
+        private IPRF_Building pRF_Building { get => this.SelThing as IPRF_Building; }
 
         private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
 
@@ -107,6 +110,7 @@ namespace ProjectRimFactory.Common
             if (ShowProductLimt) winSize.y += 270f;
             if (ShowOutputToEntireStockpile) winSize.y += 100f;
             if (ShowObeysStorageFilter) winSize.y += 70f;
+            if (ShowForbidOnPlacingSetting) winSize.y += 30f;
             for (int i = 0; i < showITabTests.Count; i++) {
                 if (showITabTests[i]?.Invoke(this.SelThing) == true) {
                     winSize.y += (extraHeightRequests[i]?.Invoke(this.SelThing) ?? 0);
@@ -120,7 +124,7 @@ namespace ProjectRimFactory.Common
             if(ShowRangeTypeSelectorButton) winSize.y += 100f;
 
             float maxHeight = 900f;
-            float minHeight = 50f; // if this starts too large, the window will be too high
+            float minHeight = 70f; // if this starts too large, the window will be too high
             float inspectWindowHeight = 268f; // Note: at least one mod makes this larger - this may not be enough.
             if (UI.screenHeight > minHeight - inspectWindowHeight) maxHeight = (float)UI.screenHeight - inspectWindowHeight;
             winSize.y = Mathf.Clamp(winSize.y, minHeight, maxHeight); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
@@ -176,6 +180,16 @@ namespace ProjectRimFactory.Common
                         doneSection = true;
                     }
                 }
+            }
+            if (ShowForbidOnPlacingSetting)
+            {
+                if (doneSection) list.GapLine();
+                doneSection = true;
+                bool tmpB = pRF_Building.ForbidOnPlacingDefault;
+                list.CheckboxLabeled("PRF.Common.ForbidOnPlacingDefault".Translate(), ref tmpB,
+                    "PRF.Common.ForbidOnPlacingDefaultDesc".Translate());
+                if (tmpB != pRF_Building.ForbidOnPlacingDefault)
+                    pRF_Building.ForbidOnPlacingDefault = tmpB;
             }
             if (Machine != null) {
                 if (doneSection) list.GapLine();
@@ -264,6 +278,7 @@ namespace ProjectRimFactory.Common
 
             }
 
+            
             
             
             list.Gap();
