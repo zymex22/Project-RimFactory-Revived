@@ -5,7 +5,7 @@
   <PRF_Settings_C_Lite_Label>PRF Lite Mode</PRF_Settings_C_Lite_Label>
   <PRF_Settings_C_Lite_ToolTip>Toggle between PRF Lite and PRF Core. \nUnchecked means PRF Core \nChecked means PRF Lite</PRF_Settings_C_Lite_ToolTip>
   
-  <PRF.Common.ForbidOnPlacingDefault>Forbit items on Placment</PRF.Common.ForbidOnPlacingDefault>
+  <PRF.Common.ForbidOnPlacingDefault>Forbid items on Placment</PRF.Common.ForbidOnPlacingDefault>
   <PRF.Common.ForbidOnPlacingDefaultDesc>Toggle this to forbid items on placement</PRF.Common.ForbidOnPlacingDefaultDesc>
   
   <PRF.Settings.RequireReboot>Changes require reboot to apply the setting.</PRF.Settings.RequireReboot>

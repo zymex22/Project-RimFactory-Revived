@@ -181,6 +181,16 @@ namespace ProjectRimFactory.Common
                     }
                 }
             }
+            if (ShowForbidOnPlacingSetting)
+            {
+                if (doneSection) list.GapLine();
+                doneSection = true;
+                bool tmpB = pRF_Building.ForbidOnPlacingDefault;
+                list.CheckboxLabeled("PRF.Common.ForbidOnPlacingDefault".Translate(), ref tmpB,
+                    "PRF.Common.ForbidOnPlacingDefaultDesc".Translate());
+                if (tmpB != pRF_Building.ForbidOnPlacingDefault)
+                    pRF_Building.ForbidOnPlacingDefault = tmpB;
+            }
             if (Machine != null) {
                 if (doneSection) list.GapLine();
                 doneSection = true;
@@ -268,16 +278,7 @@ namespace ProjectRimFactory.Common
 
             }
 
-            if (ShowForbidOnPlacingSetting)
-            {
-                if (doneSection) list.GapLine();
-                doneSection = true;
-                bool tmpB = pRF_Building.ForbidOnPlacingDefault;
-                list.CheckboxLabeled("PRF.Common.ForbidOnPlacingDefault".Translate(), ref tmpB,
-                    "PRF.Common.ForbidOnPlacingDefaultDesc".Translate());
-                if (tmpB != pRF_Building.ForbidOnPlacingDefault)
-                    pRF_Building.ForbidOnPlacingDefault = tmpB;
-            }
+            
             
             
             list.Gap();
