@@ -256,6 +256,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         protected IEnumerable<Thing> AllAccessibleThings => from t in AllThingsInArea
                                                             where (AllowForbidden || !t.IsForbidden(Faction))
+                                                            where (!this.Map.reservationManager.AllReservedThings().Contains(t))
                                                             select t;
 
         protected IEnumerable<Thing> AllThingsInArea {
