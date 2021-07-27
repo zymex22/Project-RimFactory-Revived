@@ -8,11 +8,10 @@
     <techLevel>Industrial</techLevel>
   </ResearchProjectDef>
 
-  <!-- Batteries Taken from SS bigger batteries-->
   <ResearchProjectDef ParentName="PRF_BatteriesResearch">
     <defName>PRF_EnhancedBatteries</defName>
-    <label>enhanced batteries</label>
-    <description>Build large batteries for efficient storage of electricity. Unlocks the 4k battery cell.</description>
+    <label>Electrical Batteries</label>
+    <description>Compact storage units used to store electricity produced by power generators. This breakthrough allows for the construction of small batteries.</description>
     <baseCost>750</baseCost>
     <prerequisites>
       <li>Batteries</li>
@@ -24,8 +23,8 @@
 
   <ResearchProjectDef ParentName="PRF_BatteriesResearch">
     <defName>PRF_LargeBatteries</defName>
-    <label>large batteries</label>
-    <description>Build large batteries for efficient storage of electricity. Unlocks the 64k battery cell.</description>
+    <label>Improved Batteries</label>
+    <description>The construction of larger batteries capable of greater electrical storage can prove very useful during periods of power shortages.</description>
     <baseCost>1200</baseCost>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <requiredResearchFacilities>
@@ -40,8 +39,8 @@
 
   <ResearchProjectDef ParentName="PRF_BatteriesResearch">
     <defName>PRF_VeryLargeBatteries</defName>
-    <label>very large batteries</label>
-    <description>Learn alternate methods of power storage, and create 64K and 256k battery cells for mass storage of power.</description>
+    <label>Advanced Batteries</label>
+    <description>Acquire the most powerful batteries in existence to quench your needs for mass-power storage.</description>
     <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
     <requiredResearchFacilities>

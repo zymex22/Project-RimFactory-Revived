@@ -10,21 +10,21 @@
   <!-- Tier 1 -->
   <ResearchProjectDef ParentName="PRF_MiningResearch">
     <defName>PRF_AutonomousMining</defName>
-    <label>Auger drill I</label>
+    <label>Automatic Quarries</label>
     <baseCost>1000</baseCost>
     <prerequisites>
       <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
-    <description>Make buildings that can extract random minerals and rocks from deep underground.(can cause infestation)</description>
-    <discoveredLetterTitle>About: Intro to autominers</discoveredLetterTitle>
+    <description>The construction of machines capable of extracting vital minerals from the ground towards the surface in a short amount of time is highly important to satisfy supply need from manufacturing machines.(can cause infestation)</description>
+    <discoveredLetterTitle>About: Intro to Automatic Quarries</discoveredLetterTitle>
     <discoveredLetterText>You have now Researched Auger drill I with this you have unlocked tier 1 auto miner.\nThis miner will mine up random items over time, it can start infestation like vanilla drills.\n\nTier 2 miner is same type of miner its just faster and will mine steel instead of slag.\n\nTier3 have 2 types of miners. 1. is a random miner like 2 previous, it will mine random rare ores up (no stone chunks)\ntype 2. is a new type of miner where you can set exactly what type of ore you want, it will mine mainly that one, but will have a chance to mine junk and rare ores too.\n\nif you want unbalanced mode for miner and ALL ores unlocked go to modsettings and turn it on.</discoveredLetterText>
   </ResearchProjectDef>
 
   <!-- Tier 2 -->
   <ResearchProjectDef ParentName="PRF_MiningResearch">
     <defName>PRF_AutonomousMiningII</defName>
-    <label>Pulse Drill II</label>
+    <label>Improved Automatic Quarries</label>
     <baseCost>3000</baseCost>
     <prerequisites>
       <li>DeepDrilling</li>
@@ -35,14 +35,14 @@
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
     <researchViewX>6</researchViewX>
-    <description>Make buildings that can extract random minerals and rocks from deep underground.(can cause infestation)</description>
+    <description>Applying more complex applications towards automatic drills will ensure that your automatic quarries will work at double the speed than their predecessors.(can cause infestation)</description>
   </ResearchProjectDef>
 
 
   <!-- Tier 3 -->
   <ResearchProjectDef ParentName="PRF_MiningResearch">
     <defName>PRF_AutonomousMiningIII</defName>
-    <label>Plasma Drill III</label>
+    <label>Deep Core Quarries</label>
     <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
     <prerequisites>
@@ -54,7 +54,7 @@
       <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>9</researchViewX>
-    <description>A advanced miner that can select a main ore to mine for and get secondaries as rare/junk bonus chance(no infestation)</description>
+    <description>Highly advanced mining drills that can extract numerous valuable minerals from the ground at far greater rates than traditional automated drills.(no infestation)</description>
   </ResearchProjectDef>
 
 </Defs>

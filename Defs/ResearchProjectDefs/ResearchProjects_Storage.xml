@@ -6,12 +6,12 @@
     <researchViewY>1.7</researchViewY>
   </ResearchProjectDef>
 
-
+  <!--============================================== Crates ============================================-->
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_Crates</defName>
+    <label>Wooden stockpile crates</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1000</baseCost>
-    <label>Wooden stockpile crates</label>
     <researchViewX>3</researchViewX>
     <description>Rudimentary storage boxes allow many stacks of items to stay organized and space efficient.</description>
     <prerequisites>
@@ -21,9 +21,9 @@
 
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_SteelCrates</defName>
+    <label>Steel stockpile crates</label>
     <techLevel>Industrial</techLevel>
     <baseCost>2000</baseCost>
-    <label>Steel stockpile crates</label>
     <researchViewX>6</researchViewX>
     <description>Stronger materials allows for improved storage space.</description>
     <prerequisites>
@@ -33,14 +33,15 @@
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
   </ResearchProjectDef>
 
+  <!--============================================== IO Storage ============================================-->
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_StorageIO</defName>
+    <label>Thornsworth Holography</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
-    <label>Thornsworth Holography</label>
     <researchViewX>9</researchViewX>
     <researchViewY>1.9</researchViewY>
-    <description>The holographam artist Thornsworth produced masterpieces for many years despite gradual blindness. When holographic data storage was perfected, he was instrumental in developing Holographic Item Storage.\nAllows items to be stored in a Digital Storage Unit, which can transmit and receive wirelessly to any I/O port on the map.\n\nYou will be missed, Thornsworth.</description>
+    <description>By eliminating the need for the physical stockpiles and unattractive demands for space, the word "storage" will take on a completely new meaning for any colony.</description>
     <prerequisites>
       <li>PRF_SteelCrates</li>
       <li>PRF_CoreTierIII</li>
@@ -53,9 +54,9 @@
 
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_StorageIO_II</defName>
+    <label>Improved Wireless Storage</label>
     <techLevel>Spacer</techLevel>
     <baseCost>1000</baseCost>
-    <label>Improved Wireless Storage</label>
     <researchViewX>9.5</researchViewX>
     <researchViewY>1.9</researchViewY>
     <description>Advancements in wireless storage.\nAllows you to build I/O pushers (and more, soon).</description>
