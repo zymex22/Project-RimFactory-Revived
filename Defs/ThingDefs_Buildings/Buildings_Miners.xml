@@ -132,8 +132,9 @@
   <!-- This is old type miner from original prf, it will mine random ores from any minable resource when powered -->
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_DeepQuarry_mkI</defName>
-    <label>Auger drill(T1)</label>
+    <label>Auger Drill</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <description>An early automated driller that continuously extracts resources from the ground, including rock chunks, minerals, and components. It will randomly extract a resource approximately every 8 hours. Beware though, it will disrupt dormant hives and may cause an infestation!</description>
     <graphicData>
       <texPath>Industry/Drill</texPath>
       <drawSize>(2,2)</drawSize>
@@ -148,7 +149,6 @@
       <Beauty>-25</Beauty>
       <Mass>35</Mass>
     </statBases>
-    <description>An early automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 8 hours.(can cause Infestation!)</description>
     <costList>
       <Steel>450</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -227,8 +227,9 @@
   <!--==================== Quarry T2 ====================-->
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_DeepQuarry_mkII</defName>
-    <label>Pulse Drill(T2)</label>
+    <label>Pulse Drill Mk.I</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <description>An automated driller that continuously extracts resources from the ground, including rock chunks, minerals, and components. It will produce a random resource approximately every 3 hours. Beware though, this drill will disrupt dormant hives and may cause an infestation!</description>
     <graphicData>
       <texPath>Industry/DeepQuarry</texPath>
       <drawSize>(2.4,2.4)</drawSize>
@@ -240,7 +241,6 @@
       <MarketValue>2940</MarketValue>
       <Flammability>0.5</Flammability>
     </statBases>
-    <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 3 hours.(can cause infestation)</description>
     <costList>
       <Steel>400</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
@@ -473,7 +473,8 @@
   <!--==================== Quarry T3.2  ====================-->
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_DeepQuarry_mkIII</defName>
-    <label>Random Pulse Drill(T3)</label>
+    <label>Pulse Drill Mk.2</label>
+    <description>A second-generation variant of the Pulse Drill Mk.1. Using complex mathematical applications and ground penetrating radar, this automated miner will only extract valuable minerals and eliminates the chances of receiving unwanted rock chunks. This machine will not cause infestations and will spare your colonists a lot of trouble!</description>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <graphicData>
       <texPath>Industry/DrillT32</texPath>
@@ -486,7 +487,6 @@
       <MarketValue>6893</MarketValue>
       <Flammability>0.2</Flammability>
     </statBases>
-    <description>This is last tier random ore mining quarry, this one will not create infestation and will only mine rare ores no stones.</description>
     <costList>
       <Steel>1000</Steel>
       <ComponentIndustrial>25</ComponentIndustrial>
@@ -555,9 +555,9 @@
   <!-- it behave more ore less like omnicore drill(mod), and such just this one is automatic (no pawn needed) -->
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_BillTypeMiner_I</defName>
-    <label>Plasma Drill(T3)</label>
+    <label>Plasma Drill</label>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
-    <description>With newest Spacer Technology auto mining have been more precise then ever, and can now adjust what ores to mine for and even balance power for speed. It will set primary ore type and get bonus in rare ores and junk</description>
+    <description>An automated drilling machine that operates using complex plasma technology. This driller can be overclocked to change mining speed at the cost of heavy power usage. Due to its precise plasma drill, this machine will not disturb any dormant hives! This plasma drill can also be overclocked if one wishes for faster mining speeds at the cost of some heavy power usage.\nYou just set primary target ore, and you will have a chance to get bonus rares or junk mined.</description>
     <tickerType>Never</tickerType>
     <graphicData>
       <texPath>Industry/DrillT3</texPath>

@@ -116,7 +116,8 @@ Mod extennsion for assemblers
   <!-- This machine can import recipes from any bench and afterwards being moved near a assembler for use. -->
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_RecipeDatabase</defName>
-    <label>recipe database</label>
+    <label>Portable Recipe Database</label>
+    <description>A portable storage device that can duplicated and transfer bills and recipes from worktables to assemblers. Uploaded bills will be automatically lost if the portable database is either moved or destroyed.\n\nWhite cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <graphicData>
@@ -140,7 +141,6 @@ Mod extennsion for assemblers
       <Mass>15</Mass>
     </statBases>
     <minifiedDef>MinifiedThing</minifiedDef>
-    <description>The Portable Recipe Database can import recipes from nearby worktables. Afterwards, when reinstalled near assembler(s), it will upload its recipes to them.\n\nWhite cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <Steel>20</Steel>
@@ -150,7 +150,7 @@ Mod extennsion for assemblers
     <tickerType>Normal</tickerType>
     <neverMultiSelect>true</neverMultiSelect>
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
-        <inspectorTabs>
+    <inspectorTabs>
       <li>ProjectRimFactory.SAL3.Things.ITab_RecipeHolder</li>
     </inspectorTabs>
     <comps>
@@ -334,7 +334,7 @@ Mod extennsion for assemblers
   <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_II</defName>
-    <label>adaptive assembler(Quality Joe)</label>
+    <label>Quantum Assembler (Prime)</label>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -353,7 +353,7 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>This Assembler is an upgraded version that works really slow, but it start at normal quality instead of awfull so will ramp up faster. It also have a HUGE db. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>This specialized quantum assembler can produce items of fascinating quality at the cost of some serious manufacturing speed. It also have a HUGE db. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
       <WorkToBuild>15000</WorkToBuild>
@@ -418,7 +418,8 @@ Mod extennsion for assemblers
   <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_III</defName>
-    <label>adaptive assembler(overclocked)</label>
+    <label>Quantum Assembler (Overclocked)</label>
+    <description>This specialized quantum assembler can produce items at incredible rates at the cost of quality. It can be overclocked to operate at much faster speeds if the user can maintain sufficient power levels for the machine to use. It also have a HUGE db. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -437,7 +438,6 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>This version work at a high rate and starts at a faster speed and can ramp higher than other assemblers. it cant produce any good quality though. It also have a HUGE db. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
       <WorkToBuild>10000</WorkToBuild>

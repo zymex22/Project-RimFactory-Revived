@@ -24,10 +24,10 @@
     <defName>PRF_WallBeltsGroup</defName>
   </DesignatorDropdownGroupDef>
 
-  <!--==================== Fueling Machine ====================-->
+  <!--==================== Fueling Dispenser ====================-->
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_FuelingMachine</defName>
-    <label>Fueling machine</label>
+    <label>Fueling Dispenser</label>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
     <graphicData>
       <texPath>Industry/FuelingMachine</texPath>
@@ -45,7 +45,7 @@
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
-    <description>A simple refueling machine capable of refueling all standard refuelable objects like generators, braziers, and mortars. Will attempt to fuel the output (yellow cell) with objects from the input (white cell)..\n\n(Works with "refuelable comp" buildings and some others eg, SoS, CE.)</description>
+    <description>An automatic fueling arm tasked with resupplying objects such as power generators, mortars, braziers, etc. The fueling dispenser eliminates the need for a human to manually refuel an object.\n\n(Works with "refuelable comp" buildings and some others eg, SoS, CE.)</description>
     <costList>
       <Steel>20</Steel>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
@@ -602,7 +602,7 @@
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>PRF_Conveyor_Simple_I</defName>
     <label>Conveyor belt</label>
-    <description>Conveyor belts transport items from one end to the other. It will dump into storage or stockpiles - or just leave stuff on the ground when the belts end. Because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by leading the belt into the side of another belt and it will seamlessly continue.</description>
+    <description>An industrial grade assembly belt used for the transportation of items in a specific direction to a specific location. Useful for automatically hauling products without having your colonists do it themselves.	It will dump into storage or stockpiles - or just leave stuff on the ground when the belts end. Because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by leading the belt into the side of another belt and it will seamlessly continue.</description>
     <clearBuildingArea>false</clearBuildingArea>
     <uiIconPath>Belts/v3/BeltConveyorIcon</uiIconPath>
     <graphicData>

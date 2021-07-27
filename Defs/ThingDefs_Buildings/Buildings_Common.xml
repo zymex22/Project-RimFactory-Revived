@@ -80,9 +80,9 @@
   <!-- ############################################# New Research bench linkable ##################################################### -->
   <ThingDef ParentName="BenchBase">
     <defName>PRF_ResearchTerminal</defName>
-    <label>factory research terminal</label>
+    <label>Factory Research Terminal</label>
     <thingClass>Building_ResearchBench</thingClass>
-    <description>This is a linkable like a multianalyzer but this one have have some special functions.\nIt work as a Simple research table and can research any research not require HitechResearchBench.\nIt will ofcourse also boost your research speed.\nThis is needed for Late tiers Factory research.</description>
+    <description>A probing terminal tasked with aiding in advancements in factory research. Must be placed near high-tech research tables to link up, granting linked tables the ability to achieve more advanced breakthroughs. Certain advancements cannot be completed if tables aren't linked with this research terminal.</description>
     <uiIconScale>0.85</uiIconScale>
     <graphicData>
       <texPath>Common/Terminal</texPath>
@@ -167,9 +167,9 @@
   <!-- ############################################# robotic machining table ##################################################### -->
   <ThingDef ParentName="PRF_BenchBase">
     <defName>TableRoboticMachining</defName>
-    <label>robotic machining table</label>
+    <label>Robotic Machining Table </label>
     <thingClass>Building_WorkTable</thingClass>
-    <description>A work station for creating parts, frames and more for automation buildings.</description>
+    <description>A sophisticated crafting table used to create vital mechanical components and frames which are needed to build more complex forms of machinery.</description>
     <graphicData>
       <texPath>Common/TableRobotics</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
