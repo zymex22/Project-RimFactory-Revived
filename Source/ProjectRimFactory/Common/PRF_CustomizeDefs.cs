@@ -76,7 +76,12 @@ namespace ProjectRimFactory.Common
                     DefDatabase<ResearchProjectDef>.AllDefsListForReading[DefDatabase<ResearchProjectDef>.AllDefsListForReading.FirstIndexOf(c => c.defName == def.defName)].prerequisites = ProjectRimFactory_ModSettings.defTracker.GetDefaultValue<List<ResearchProjectDef>>(def.defName, "prerequisites");
 
                 }
+                //requiredResearchFacilities
+                foreach (ResearchProjectDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ResearchProjectDef>("requiredResearchFacilitiesBase"))
+                {
+                    DefDatabase<ResearchProjectDef>.AllDefsListForReading[DefDatabase<ResearchProjectDef>.AllDefsListForReading.FirstIndexOf(c => c.defName == def.defName)].requiredResearchFacilities = ProjectRimFactory_ModSettings.defTracker.GetDefaultValue<List<ThingDef>>(def.defName, "requiredResearchFacilities");
 
+                }
 
 
                 foreach (ThingDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ThingDef>("def"))
@@ -158,9 +163,8 @@ namespace ProjectRimFactory.Common
                 //PRF_ChangedDefTracker.OriginalResearchProjectDefs.Add(def);
                 def.prerequisites.RemoveAll(c => defNames.Contains(c.defName));
             }
+            
             List<ResearchProjectDef> researchProjects = DefDatabase<ResearchProjectDef>.AllDefsListForReading.Where(d => defNames.Contains(d.defName)).ToList();
-
-
             foreach (ResearchProjectDef def in researchProjects)
             {
                 ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "res", def);
@@ -169,6 +173,19 @@ namespace ProjectRimFactory.Common
 
                 RemoveDefFromUse(def);
             }
+
+            //TODO remove the Hardcoded Def
+            List<ResearchProjectDef> researchProjectsFacilities = DefDatabase<ResearchProjectDef>.AllDefsListForReading.Where(d => d.requiredResearchFacilities?.Any(f => f.defName == "PRF_ResearchTerminal") ?? false  ).ToList();
+            foreach (ResearchProjectDef def in researchProjectsFacilities)
+            {
+                ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "requiredResearchFacilities", def.requiredResearchFacilities.ToList()) ;
+                ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "requiredResearchFacilitiesBase", def);
+
+
+                def.requiredResearchFacilities.RemoveAll(d => d.defName == "PRF_ResearchTerminal");
+            }
+
+
             resetResearchManager_progress();
         }
 
