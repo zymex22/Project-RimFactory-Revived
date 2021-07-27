@@ -185,6 +185,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeOneAssembler_I</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
     <label>assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
+    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>    <!-- Use Dropdown Group -->
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>    <!-- What C# class to call when doing anything with this thing. Unless you know what you're doing, it's suggested to use the same thingClass similar things use. -->
     <graphicData>
@@ -199,7 +200,6 @@ Mod extennsion for assemblers
       <PRF_ElectronicChip_I>2</PRF_ElectronicChip_I>
       <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
-    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <statBases>
       <MaxHitPoints>250</MaxHitPoints>
       <WorkToBuild>2500</WorkToBuild>
@@ -251,6 +251,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_I</defName>
     <label>adaptive assembler</label>
+    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\nStats\nMin. speed 100% - Max 500%\nMin Qual. Awfull - Max Masterwork\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 5 \n\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -269,7 +270,6 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\nStats\nMin. speed 100% - Max 500%\nMin Qual. Awfull - Max Masterwork\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 5 \n\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>350</MaxHitPoints>
       <WorkToBuild>3000</WorkToBuild>
@@ -335,6 +335,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_II</defName>
     <label>Quantum Assembler (Prime)</label>
+    <description>This specialized quantum assembler can produce items of fascinating quality at the cost of some serious manufacturing speed. It also have a HUGE db. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -353,7 +354,6 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>This specialized quantum assembler can produce items of fascinating quality at the cost of some serious manufacturing speed. It also have a HUGE db. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
       <WorkToBuild>15000</WorkToBuild>

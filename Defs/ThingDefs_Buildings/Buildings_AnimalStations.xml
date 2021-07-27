@@ -365,8 +365,8 @@
     <defName>PRF_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
     <label>Advanced Slaughterhouse</label>
-    <designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
     <description>A state of the art robotic slaughter house designed to harvest meat and other animal products from living animals. It will cut and collect with great precision and will deliver the final product after finishing its task.</description>
+    <designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>
     <tickerType>Never</tickerType>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>

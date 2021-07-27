@@ -319,6 +319,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_I</defName>
     <label>Nano Cultivator</label>
+    <description>A state of the art cultivator which operates using incredibly complex nanotechnology. Unlike other computerized cultivator, this variant requires no drones and will perform the same farming tasks at twice the speed. It can cut, grow, harvest, maintain hydroponics, and haul any items to a stockpile if available within range.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator2</texPath>
@@ -327,7 +328,6 @@
       <MaxHitPoints>350</MaxHitPoints>
       <MarketValue>2995</MarketValue>
     </statBases>
-    <description>A state of the art cultivator which operates using incredibly complex nanotechnology. Unlike other computerized cultivator, this variant requires no drones and will perform the same farming tasks at twice the speed. It can cut, grow, harvest, maintain hydroponics, and haul any items to a stockpile if available within range.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_RoboticArm>3</PRF_RoboticArm>
