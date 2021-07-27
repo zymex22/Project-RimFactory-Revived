@@ -134,7 +134,7 @@ namespace ProjectRimFactory.AutoMachineTool
             #endregion
             #region ------ directions quadrants ------
             Dictionary<Rot4, Rect> pos = new Dictionary<Rot4, Rect>();
-            float quadrants_size = 30f; //30 seems small but there is not much space
+            float quadrants_size = 40f; //30 seems small but there is not much space
             rect = list.GetRect(quadrants_size * 3 ); //Top , middle, Bottom
             float quadrants_middle = rect.x + rect.width / 2;
             pos[Rot4.North] = new Rect(quadrants_middle - quadrants_size / 2, rect.y, quadrants_size, quadrants_size);
@@ -209,22 +209,24 @@ namespace ProjectRimFactory.AutoMachineTool
             }
 
 
-            #region ------ Priority ------
-            rect = list.GetRect(30f);
-            Widgets.Label(rect.LeftHalf(), "PRF.AutoMachineTool.Priority".Translate());
-            if (Widgets.ButtonText(rect.RightHalf(), this.Splitter.OutputLinks[selectedRot]
-                .priority.ToText())) {
+            rect = list.GetRect(35-6);
+            float maxWidth = rect.width;
+            float prioritywidth = (maxWidth / 2) - 1; //145 - 160 vanilla
+            float selectCopywidth = (maxWidth / 2) - 1; //125
+            rect.width = prioritywidth; 
+            GameFont fontOld = Text.Font;
+            Text.Font = GameFont.Small;
+
+            if (Widgets.ButtonText(rect, "Priority".Translate() + ": " + this.Splitter.OutputLinks[selectedRot].priority.ToText())) {
                 Find.WindowStack.Add(new FloatMenu(GetEnumValues<DirectionPriority>()
                     .OrderByDescending(k => (int)k).Select(d => new FloatMenuOption(d.ToText(),
                     () => this.Splitter.OutputLinks[selectedRot].priority = d
                     )).ToList()));
             }
-            list.Gap();
-            #endregion
+            Text.Font = fontOld;
 
-            rect = list.GetRect(30f);
-            
-
+            rect.x = maxWidth - selectCopywidth;
+            rect.width = selectCopywidth;
             if (Widgets.ButtonText(rect, "PRF.AutoMachineTool.Conveyor.FilterCopyFrom".Translate())) {
                 List<FloatMenuOption> menuOpt = groups.Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(),
                     () => this.Splitter.OutputLinks[selectedRot].CopyAllowancesFrom(g.Settings.filter)
