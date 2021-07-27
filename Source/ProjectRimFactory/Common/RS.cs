@@ -32,21 +32,11 @@ namespace ProjectRimFactory
             ForbidIcon = ContentFinder<Texture2D>.Get("PRFUi/Forbid", true);
             PlayIcon = ContentFinder<Texture2D>.Get("PRFUi/Play", true);
 
-            SplitterDisabeld = ContentFinder<Texture2D>.Get("PRFUi/splitter/disabled", true);
-            SplitterArrow_N = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_N", true);
-            SplitterArrow_E = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_E", true);
-            SplitterArrow_W = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_W", true);
-            SplitterArrow_S = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_S", true);
-
-            SplitterArrow_in_N = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_in_N", true);
-            SplitterArrow_in_E = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_in_E", true);
-            SplitterArrow_in_W = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_in_W", true);
-            SplitterArrow_in_S = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_in_S", true);
-
-            SplitterArrowSel_N = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_selected_N", true);
-            SplitterArrowSel_E = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_selected_E", true);
-            SplitterArrowSel_W = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_selected_W", true);
-            SplitterArrowSel_S = ContentFinder<Texture2D>.Get("PRFUi/splitter/arrow_selected_S", true);
+            SplitterDisabeld = ContentFinder<Texture2D>.Get("PRFUi/ForbidIcon", true);
+            SplitterArrow_Up = ContentFinder<Texture2D>.Get("PRFUi/UpArrow", true);
+            SplitterArrow_Right = ContentFinder<Texture2D>.Get("PRFUi/RightArrow", true);
+            SplitterArrow_Left = ContentFinder<Texture2D>.Get("PRFUi/LeftArrow", true);
+            SplitterArrow_Down = ContentFinder<Texture2D>.Get("PRFUi/DownArrow", true);
 
 
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
@@ -58,20 +48,10 @@ namespace ProjectRimFactory
                 s.Init();
         }
 
-        public static readonly Texture2D SplitterArrow_N;
-        public static readonly Texture2D SplitterArrow_E;
-        public static readonly Texture2D SplitterArrow_W;
-        public static readonly Texture2D SplitterArrow_S;
-        
-        public static readonly Texture2D SplitterArrow_in_N;
-        public static readonly Texture2D SplitterArrow_in_E;
-        public static readonly Texture2D SplitterArrow_in_W;
-        public static readonly Texture2D SplitterArrow_in_S;
-
-        public static readonly Texture2D SplitterArrowSel_N;
-        public static readonly Texture2D SplitterArrowSel_E;
-        public static readonly Texture2D SplitterArrowSel_W;
-        public static readonly Texture2D SplitterArrowSel_S;
+        public static readonly Texture2D SplitterArrow_Up;
+        public static readonly Texture2D SplitterArrow_Right;
+        public static readonly Texture2D SplitterArrow_Left;
+        public static readonly Texture2D SplitterArrow_Down;
         public static readonly Texture2D SplitterDisabeld;
 
         public static readonly Texture2D ForbidOn;

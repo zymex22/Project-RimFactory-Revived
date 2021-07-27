@@ -50,46 +50,32 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private void directionUI(Rect rect , Rot4 rot,ref bool selected, ref bool disabeld, bool isInput)
         {
-            Texture2D texture = RS.SplitterArrow_N; //Default
-            if (selected)
-            {
+            Texture2D texture = RS.SplitterArrow_Up; //Default
+
                 if (isInput)
                 {
-                    //TODO Selected Textues
-                    if (rot == Rot4.North) texture = RS.SplitterArrow_in_N;
-                    else if (rot == Rot4.South) texture = RS.SplitterArrow_in_S;
-                    else if (rot == Rot4.East) texture = RS.SplitterArrow_in_E;
-                    else if (rot == Rot4.West) texture = RS.SplitterArrow_in_W;
+                    if (rot == Rot4.North) texture = RS.SplitterArrow_Down;
+                    else if (rot == Rot4.South) texture = RS.SplitterArrow_Up;
+                    else if (rot == Rot4.East) texture = RS.SplitterArrow_Left;
+                    else if (rot == Rot4.West) texture = RS.SplitterArrow_Right;
                 }
                 else
                 {
-                    if (rot == Rot4.North) texture = RS.SplitterArrowSel_N;
-                    else if (rot == Rot4.South) texture = RS.SplitterArrowSel_S;
-                    else if (rot == Rot4.East) texture = RS.SplitterArrowSel_E;
-                    else if (rot == Rot4.West) texture = RS.SplitterArrowSel_W;
-                } 
-            }
-            else
-            {
-                if (isInput)
-                {
-                    if (rot == Rot4.North) texture = RS.SplitterArrow_in_N;
-                    else if (rot == Rot4.South) texture = RS.SplitterArrow_in_S;
-                    else if (rot == Rot4.East) texture = RS.SplitterArrow_in_E;
-                    else if (rot == Rot4.West) texture = RS.SplitterArrow_in_W;
+                    if (rot == Rot4.North) texture = RS.SplitterArrow_Up;
+                    else if (rot == Rot4.South) texture = RS.SplitterArrow_Down;
+                    else if (rot == Rot4.East) texture = RS.SplitterArrow_Right;
+                    else if (rot == Rot4.West) texture = RS.SplitterArrow_Left;
                 }
-                else
-                {
-                    if (rot == Rot4.North) texture = RS.SplitterArrow_N;
-                    else if (rot == Rot4.South) texture = RS.SplitterArrow_S;
-                    else if (rot == Rot4.East) texture = RS.SplitterArrow_E;
-                    else if (rot == Rot4.West) texture = RS.SplitterArrow_W;
-                }
-            }
+            
 
 
             GUI.DrawTexture(rect, texture);
             if (!disabeld && !isInput) GUI.DrawTexture(rect, RS.SplitterDisabeld);
+            if (selected)
+            {
+                Widgets.DrawHighlight(rect);
+                Widgets.DrawBox(rect);
+            }
             Event cur = Event.current;
             if ( cur.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
             {
@@ -148,13 +134,14 @@ namespace ProjectRimFactory.AutoMachineTool
             #endregion
             #region ------ directions quadrants ------
             Dictionary<Rot4, Rect> pos = new Dictionary<Rot4, Rect>();
-            rect = list.GetRect(30f);
-            pos[Rot4.North] = new Rect(rect.x + rect.width / 4, rect.y, rect.width / 2, rect.height);
-            rect = list.GetRect(30f);
-            pos[Rot4.West] = rect.LeftHalf();
-            pos[Rot4.East] = rect.RightHalf();
-            rect = list.GetRect(30f);
-            pos[Rot4.South] = new Rect(rect.x + rect.width / 4, rect.y, rect.width / 2, rect.height);
+            float quadrants_size = 30f; //30 seems small but there is not much space
+            rect = list.GetRect(quadrants_size * 3 ); //Top , middle, Bottom
+            float quadrants_middle = rect.x + rect.width / 2;
+            pos[Rot4.North] = new Rect(quadrants_middle - quadrants_size / 2, rect.y, quadrants_size, quadrants_size);
+            pos[Rot4.West]  = new Rect(quadrants_middle - quadrants_size * 3 / 2 , rect.y + quadrants_size, quadrants_size, quadrants_size);
+            pos[Rot4.East]  = new Rect(quadrants_middle + quadrants_size / 2, rect.y + quadrants_size, quadrants_size, quadrants_size);
+            pos[Rot4.South] = new Rect(quadrants_middle - quadrants_size/2, rect.y + quadrants_size * 2, quadrants_size, quadrants_size);
+
             #endregion
             #region ------ fill dir quadrants ------
             // note to self: Enumerable.Range(0, 4) starts at 0 and gives 4 elements.
@@ -234,14 +221,20 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             list.Gap();
             #endregion
+
             rect = list.GetRect(30f);
+            
+
             if (Widgets.ButtonText(rect, "PRF.AutoMachineTool.Conveyor.FilterCopyFrom".Translate())) {
-                Find.WindowStack.Add(new FloatMenu(groups.Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(),
+                List<FloatMenuOption> menuOpt = groups.Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(),
                     () => this.Splitter.OutputLinks[selectedRot].CopyAllowancesFrom(g.Settings.filter)
-                    )).ToList()));
+                    )).ToList();
+                if (menuOpt.Count > 0) Find.WindowStack.Add(new FloatMenu(menuOpt));
             }
             list.Gap();
+
             list.End();
+
             var height = list.CurHeight;
             Splitter.OutputLinks[selectedRot].DoThingFilterConfigWindow(
                 inRect.BottomPartPixels(inRect.height - height), uIState);
