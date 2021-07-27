@@ -4,8 +4,8 @@
   <!-- ================================== Robot arm ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_RoboticArm</defName>
-    <label>robotic arm</label>
-    <description>A robotic arm powered by an electric motor. Used in the construction of some automation buildings.</description>
+    <label>Robotic Arm</label>
+    <description>An electrically powered robotic arm necessary for the construction of automated buildings. Can be crafted at the robotic machining table.</description>
     <graphicData>
       <texPath>Common/RoboticArm</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -31,8 +31,8 @@
   <!-- ================================== Weak AI Chip (Tier 2) ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_I</defName>
-    <label>weak AI chip</label>
-    <description>A tensor processing unit containing the most rudimentary AI. Used for Early machines and robots.</description>
+    <label>Basic AI Chip</label>
+    <description>A simple processing unit containing a low-grade AI. It is used for basic machinery and robotics.</description>
     <graphicData>
       <texPath>Common/WeakAICore</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -55,8 +55,8 @@
   <!-- ================================== Advanced AI Core (Tier 3) ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_II</defName>
-    <label>Advanced AI core</label>
-    <description>A advanced processing unit containing hi-tech AI, which is used for advanced machines and robots.</description>
+    <label>Advanced AI Chip</label>
+    <description>A highly advanced data chip housing a complex artificial intelligence inside. This piece of hardware is essential for the construction of superior machinery.</description>
     <graphicData>
       <texPath>Common/AdvancedAICore</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -102,8 +102,8 @@
   <!-- ================================== Drone module ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_DroneModule</defName>
-    <label>drone module</label>
-    <description>A dormant quadcopter frame capable of low-altitude flight.</description>
+    <label>UAV(packed)</label>
+    <description>An unmanned aerial vehicle capable of fulfilling simple tasks. Will need to be installed in a Dronestation in order to get the right programming installed.</description>
     <graphicData>
       <texPath>Common/DroneModule</texPath>
       <graphicClass>Graphic_Single</graphicClass>
