@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!-- ==================================== Battery base ===================================== -->
-  <!-- Batteries Taken from SS bigger batteries-->
   <ThingDef Name="BiggerBatteries_BuildingBase" ParentName="PRF_BuildingBase" Abstract="True">
     <designatorDropdown>PRF_BatteryGroup</designatorDropdown>
     <graphicData>
@@ -27,8 +26,6 @@
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <designationHotKey>Misc4</designationHotKey>
   </ThingDef>
-
-
   <DesignatorDropdownGroupDef>
     <defName>PRF_BatteryGroup</defName>
   </DesignatorDropdownGroupDef>

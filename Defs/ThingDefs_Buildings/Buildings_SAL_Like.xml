@@ -244,8 +244,13 @@
   <!-- The Art Master -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMaster</defName>
+<<<<<<< Updated upstream
     <label>The Art Master(S.A.L)</label>
     <description>Pumps out art like a violent volcanic eruption pumps out lava.\n\nStats:\nBase: 3\n Crafting: 9\nArtistic: 18\nSpeed: 1</description>
+=======
+    <label>S.A.L Art Machine Mk.II</label>
+    <description>An advanced automated art machine capable of producing art items of superior quality.\n\nStats:\nBase: 3\n Crafting: 9\nArtistic: 18\nSpeed: 1</description>
+>>>>>>> Stashed changes
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
       <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
