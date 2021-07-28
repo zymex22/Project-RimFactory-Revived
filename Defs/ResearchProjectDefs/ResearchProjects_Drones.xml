@@ -10,9 +10,9 @@
   <!-- Basic drone technology -->
   <ResearchProjectDef ParentName="PRF_DroneResearch">
     <defName>PRF_BasicDrones</defName>
-    <label>Basic Drone knowledge</label>
+    <label>Basic Drones</label>
     <baseCost>600</baseCost>
-    <description>The first pilotless vehicles were built during the First World War. These early models were launched by catapult or flown using radio control. Much have changed since then and drones are now used for more common tasks.\nThis sets drones basestats lv. 10</description>
+    <description>Understanding the operation of unmanned aerial vehicles (UAV) means walking in the path towards an increasingly automated and efficient workforce, further decreasing the need for human labor.\n\nThis research level will set drone's base stats to level 10.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
     </prerequisites>
@@ -25,9 +25,9 @@
   <!-- Improved drone technology -->
   <ResearchProjectDef ParentName="PRF_DroneResearch">
     <defName>PRF_ImprovedDrones</defName>
-    <label>Improved Drone engines</label>
+    <label>Improved Drones</label>
     <baseCost>2000</baseCost>
-    <description>Further improvements for drones have now enabled use of more drones and with a greater control over task it can perform.\nThis sets drones basestats lv. 15</description>
+    <description>Through continuous and methodical research on drone systems, current drone presets can be improved upon and be made much more efficient than their previous versions. These new upgrades include a greater layout of drone variants capable of performing even more complex tasks.\n\nThis research level will upgrade a drone's base stats to level 15.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
       <li>PRF_BasicDrones</li>
@@ -42,10 +42,10 @@
   <!-- Advanced drone technology -->
   <ResearchProjectDef ParentName="PRF_DroneResearch">
     <defName>PRF_AdvancedDrones</defName>
-    <label>Advanced Drone Ai</label>
+    <label>Spacer Drone</label>
     <techLevel>Spacer</techLevel>
     <baseCost>6000</baseCost>
-    <description>Perfectly aerodynamics higher power engines and Ai have created a perfectly balanced super drone that will perform tasks better than most pawns ever will.\nThis sets drones basestats lv. 20</description>
+    <description>As a result of perfecting aerodynamics, increase engine power, larger battery capacities, and vastly more complex artificial intelligence, drones can now operate at inconceivable levels of efficiency and will perform tasks quadruple the speed of its predecessors.\n\nThis research increases all drone base stats to level 20.</description>
     <prerequisites>
       <li>PRF_CoreTierIII</li>
       <li>PRF_ImprovedDrones</li>

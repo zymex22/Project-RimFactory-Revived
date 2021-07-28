@@ -126,11 +126,11 @@
   <!--=========================== Mini Workshop helper ==================================-->
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_MiniHelper</defName>
-    <label>Mini Workshop helper station</label>
+    <label>Workshop Drone Station</label>
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
     </graphicData>
-    <description>A mini workshop helper capable of haul, flick, firefight and clean your workshop within a range(can be expanded with powerslider)</description>
+    <description>A small machine stationing a drone specifically tasked to assist within a workshop. It can clean, flick switches, extinguish fires, and haul items. If the drone's task is within range, it will help however it can. You can use a power-slider to increase the range of the drone station.</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_DroneModule>2</PRF_DroneModule>
@@ -212,8 +212,8 @@
   <!--=========================== Drone Column (for thronerooms) ==================================-->
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_MiniDroneColumn</defName>
-    <label>drone column</label>
-    <description>A column filled with 2 handy drones that can clean your throneroom or eatinghall, kill fires, refuel your braziers and move your stuff away from the floor. It's also capable of holding a roof, and looks quite nice.</description>
+    <label>Drone Column</label>
+    <description>A powered column stationing two drones which are tasked to automatically clean a room, supply refuellable objects, extinguish fires and haul items from the floor. Not only is it very efficient, but also very stylish!</description>
     <graphicData>
       <drawSize>(1.5,1.5)</drawSize>
       <drawOffset>(0,0,0.2)</drawOffset>

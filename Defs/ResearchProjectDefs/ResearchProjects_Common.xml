@@ -9,28 +9,28 @@
   </ResearchProjectDef>
 
   <!-- Tier 0 -->
-  <!-- ==================== Main Tier 0 ============================= -->
+  <!-- ==================== Main Tier 0 - Clockwork Principle ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierO</defName>
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
     <baseCost>400</baseCost>
-    <description>Early industrialisation, this teaches you how to setup more advanced way of gathering resources and process them into more usefull things. Trash, raw material, or scrap metal goes in one side and useful products come out the other.\nCogs and chutes powered by wood and coal.</description>
+    <description>By developing an understanding of timed gears and springs, one can achieve the earliest form of industrialization. This includes the crafting of various mechanical components for the creation of basic and crude machinery which will serve as the first step towards efficient industrial automation.</description>
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>
     <researchViewX>1</researchViewX>
-    <discoveredLetterTitle>Early Automation huh?</discoveredLetterTitle>
+    <discoveredLetterTitle>Early Automation</discoveredLetterTitle>
     <discoveredLetterText>Welcome to Project RimFactory Beta!\n\nWe invite you on a trip through automation, starting with wood and coal fueled smelters and advancing through AI-controlled self-improving assemblers.\n\nGeneral Usage: Store materials in the white designation Input area for the machine to consume. After a bit of work, the machine will place the finished product on it's yellow Output tile.\n\nThe oldest known clockwork machine is the Antikythera mechanism, found in 1901 in a shipwreck dated at 50BC and Greek in origin. A series of 30 gears was used to predict eclipses and other astronomical phenomenon as well as the passage of years. Advanced clockwork mechanisms reached new heights in Europe during the 1800s, and even today automation without computers is used in industry.\n\nCode by:spdskatr, Nobo, Abnerchen, Little White Mouse, Madara Uchiha, Sn1p3rr3c0n.\nArt by: ShotgunFrenzy, Chicken Plucker, Xen, Scythe, totoBrother, "Unknown Alien", Argon, spdskatr, Thornsworth.\nTested by Malkav, Extrien, Daemon976, AerosAtar, and the mandatory Steam volunteers.\nTranslated by: Natsu_Zirok, 十里小飞, AbnerChen, Lucas559-noob\nSpecial thanks Thornsworth and Nobo, who are no longer with us.\nRest In Productivity.</discoveredLetterText>
   </ResearchProjectDef>
 
   <!-- Tier 1 -->
-  <!-- ==================== Main Tier 1 ============================= -->
+  <!-- ==================== Main Tier 1 - Euler's identity ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierI</defName>
-    <label>Euler's identity</label>
+    <label>Euler's Identity</label>
     <baseCost>750</baseCost>
-    <description>"π is pi, the ratio of the circumference of a circle to its diameter." Learn the basics of automation and mechanisms, the gateway to an industrialized colony.\nDevelop the mathematical models necessary to further automate simple processes with electricity such as stonecutting and cooking.</description>
+    <description>The pinnacle of mathematical beauty, this paradoxical equation introduces the user to the earliest form of automated machinery. This will also permit the crafting of basic machine frames for use in construction of automated machines.</description>
     <prerequisites>
       <li>Electricity</li>
       <li>Machining</li>
@@ -43,13 +43,12 @@
 
 
   <!-- Tier 2 -->
-  <!-- ==================== Main Tier 2 ============================= -->
+  <!-- ==================== Main Tier 2 - Machine Learning ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierII</defName>
-    <label>Moritz Machinery</label>
+    <label>Machine Learning</label>
     <baseCost>2000</baseCost>
-    <description>A machine that can predict outcomes will solve many of the design flaws we have been facing. Imagine a machine that could improve itself...
-    \nWe will need an factory research terminal linked to our hi-tech research bench to go further.</description>
+    <description>Although most machines are generally limited in capability, the creation of self-learning computers through the designing of complex programming algorithms will allow machines to learn on their own and automatically correct on flaws that present themselves within a program. This is a prime example of early artificial intelligence.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
       <li>MicroelectronicsBasics</li>
@@ -59,23 +58,19 @@
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
     <researchViewX>5</researchViewX>
-    <discoveredLetterTitle>About: Tier 2 Factory Unlocked</discoveredLetterTitle>
-    <discoveredLetterText>The mathematical models developed in the 1700s began an industrial revolution all of the world, series of gears and pressurization allowed the mass processing of basic materials with coal and electricity. 
-      \nMoritz von Jacobi managed to propel a boat with an electric motor in 1845, but it wasn't until 1837 when Thomas and Emily Dacenport patented the first motor in the US that the promise of electro-mechanical machinery was seen as the next big leap forward
-      \nRudimentary programming allows storing a bill on a Recipe Database and importing it into an assembler.
-      \n-The blue region around assemblers and recipe databases indicate the data transfer area
-    </discoveredLetterText>
+    <discoveredLetterTitle>Machine Learning</discoveredLetterTitle>
+    <discoveredLetterText>Although early forms of machinery operated based on the fixed movement of gears and pistons, the idea of a machine that could mimic the abstract reasoning of the human mind through complex mathematical algorithms was not new at all.\n\nThe term was coined by Arthur Samuel during the latter 1950's, but the idea was conceptualized by Alan Turing in 1950. To summarize this concept, a machine must first be given data models developed by humans to understand an objective and then use those given models to create possible future predictions.</discoveredLetterText>
   </ResearchProjectDef>
 
 
   <!-- Tier 3 -->
-  <!-- ==================== Main Tier 3 ============================= -->
+  <!-- ==================== Main Tier 3 - Binary System ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierIII</defName>
-    <label>Turing implementation</label>
+    <label>Binary System</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
-    <description>Anything can be described as a series of 1s and 0s as long as there enough 1s and 0s</description>
+    <description>A mathematical expression using only 1's and 0's. Standardizing computers by using this simple yet versatile language will exponentially expand computation performance and will allow one to create far more advanced forms of artificial intelligence.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
       <li>Fabrication</li>
@@ -85,14 +80,13 @@
       <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>8</researchViewX>
-    <discoveredLetterTitle>About: Tier 3 Factory Unlocked</discoveredLetterTitle>
-    <discoveredLetterText>Refinements to machinery allow sophisticated machines, such as those that self-correct (get faster the more time they complete a job), drills with object recognition to only mine what you want and the first mechanite swarm technologies.
-    \n-mechanite machines interact with a couple random tiles in the area every second.</discoveredLetterText>
+    <discoveredLetterTitle>Binary System</discoveredLetterTitle>
+    <discoveredLetterText>Like humans, machines must use language to communicate amongst programs and one another.\n\nSystems relating to binary can be traced back to the ancient world in places such as China, India, and Egypt. Although used in various ways, the modern binary system can be credited to Thomas Harriot, Juan Caramuel y Lobkowitz, and Gottfried Leibniz, who developed and formalized the system during the 16th and 17th centuries.</discoveredLetterText>
   </ResearchProjectDef>
 
 
   <!-- Tier 4 -->
-  <!-- ==================== Main Tier 4 ============================= -->
+  <!-- ==================== Main Tier 4 - Quantum Bit technology ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierIV</defName>
     <label>Quantum Bit technology</label>
@@ -108,10 +102,8 @@
       <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>11</researchViewX>
-    <discoveredLetterTitle>Quantum Computing: Tier 4 Factory Unlocked</discoveredLetterTitle>
-    <discoveredLetterText>Qubit technology is all about advanced computing, highend machines and technolegy, this might even be on the brinck of insanity? whats next?!¤%.
-      \nDrop us suggestions on our Workshop page. 
-      \n\nThanks for playing!</discoveredLetterText>
+    <discoveredLetterTitle>Quantum Bit Technology: Tier 4 Unlocked</discoveredLetterTitle>
+    <discoveredLetterText>The studying of microscopic systems including atoms and the process of computing information in the quantum system will allow one to access greater levels of precision in computer science and create more complex pieces of machinery. The founding of quantum hypothesis can be credited to Max Planck during the early 20th century, who first conceptualized his theory upon working on the black-body radiation problem by Gustav Kirchhoff.</discoveredLetterText>
   </ResearchProjectDef>
 
 </Defs>

@@ -56,7 +56,8 @@
   <!-- This is using Simple Assembler thingclass, thats more or less a normal assembler just with preset recipes -->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerI</defName>
-    <label>industrial cooker</label>
+    <label>Industrial Cooker</label>
+    <description>An industrial grade cooker capable of steadily cooking meals for your colonists. Requires electricity and raw ingredients to operate.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\nOnly cooks simple foods but with a cooking level of 8 at 1x speed \n\nWhite cell is input\nYellow are output cell</description>
     <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <texPath>SAL3/cooker1</texPath>
@@ -68,7 +69,6 @@
       <MarketValue>1380</MarketValue>
       <Cleanliness>0</Cleanliness>
     </statBases>
-    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\nOnly cooks simple foods but with a cooking level of 8 at 1x speed \n\nWhite cell is input\nYellow are output cell</description>
     <costList>
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
@@ -126,6 +126,7 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerII</defName>
     <label>modern autocooker</label>
+    <description>An improved assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n Copies Electric stove recipes\n 1.5x speed \n 5 cleanliness \n cook level 12</description>
     <graphicData>
       <texPath>SAL3/cooker2</texPath>
       <drawSize>(3.3,3.3)</drawSize>
@@ -137,7 +138,6 @@
       <MarketValue>1575</MarketValue>
       <Cleanliness>5</Cleanliness>
     </statBases>
-    <description>An improved assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n Copies Electric stove recipes\n 1.5x speed \n 5 cleanliness \n cook level 12</description>
     <costList>
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
@@ -192,6 +192,7 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerIII</defName>
     <label>spacer cooker</label>
+    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 2x speed \n 20cleanliness \n cook level 20</description>
     <graphicData>
       <texPath>SAL3/SpacerCooker</texPath>
     </graphicData>
@@ -202,7 +203,6 @@
       <MarketValue>3580</MarketValue>
       <Cleanliness>20</Cleanliness>
     </statBases>
-    <description>An assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n 2x speed \n 20cleanliness \n cook level 20</description>
     <costList>
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
@@ -220,12 +220,12 @@
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         <!-- Speed Settings -->
-<floatrange_SpeedFactor>1~3</floatrange_SpeedFactor>
-<powerPerStepSpeed>1500</powerPerStepSpeed>
-<powerStepFactor>1</powerStepFactor>
-<!-- Range Settings -->
-<floatrange_Range>1~4</floatrange_Range>
-<powerPerStepRange>500</powerPerStepRange>
+        <floatrange_SpeedFactor>1~3</floatrange_SpeedFactor>
+        <powerPerStepSpeed>1500</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~4</floatrange_Range>
+        <powerPerStepRange>500</powerPerStepRange>
 
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
@@ -287,6 +287,7 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_MeatGrinder</defName>
     <label>meat grinder</label>
+    <description>Precise grinder which processes corpses into piles of usable materials: meat, leather, etc.</description>
     <graphicData>
       <texPath>SAL3/smart_butcher</texPath>
       <drawSize>(2.1,2.1)</drawSize>
@@ -304,7 +305,6 @@
       <Beauty>-25</Beauty>      <!-- this is pretty gross -->
       <Cleanliness>0</Cleanliness>      <!-- INFO -->
     </statBases>
-    <description>Precise grinder which processes corpses into piles of usable materials: meat, leather, etc.</description>
     <costList>
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
@@ -419,6 +419,7 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfPrepper</defName>
     <label>industrial food processor</label>
+    <description>A machine designed to boil, grind, or mill raw food resources into ingredients more suitable for cooking and brewing.</description>
     <graphicData>
       <texPath>SAL3/smart_prepper</texPath>
       <drawSize>(2,2)</drawSize>
@@ -428,7 +429,6 @@
       <MarketValue>1380</MarketValue>
       <MaxHitPoints>200</MaxHitPoints>
     </statBases>
-    <description>A machine designed to boil, grind, or mill raw food resources into ingredients more suitable for cooking and brewing.</description>
     <costList>
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>

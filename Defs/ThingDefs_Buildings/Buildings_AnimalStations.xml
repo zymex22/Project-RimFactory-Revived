@@ -52,6 +52,7 @@
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_Shearer</defName>
     <label>shearer</label>
+    <description>A station with motion detecting industrial-size shearing clippers. Swiftly and automatically extracts wool from your colony's animals.\n\nKeep it stocked with food to lure the animals in for processing. Drops the produce where the sheared creature is standing.</description>    <!-- use \n for next line -->
     <thingClass>ProjectRimFactory.AnimalStation.Building_Shearer</thingClass>
     <graphicData>
       <texPath>Farm/Shearer</texPath>      <!-- path to texture -->
@@ -68,7 +69,6 @@
       <WorkToBuild>200</WorkToBuild>      <!-- time to build -->
     </statBases>
     <tickerType>Rare</tickerType>    <!-- Decides the tick type. Never, Normal(1 per 1 tick), Rare(1 per 250 tick), Long(x per xxx tick) -->
-    <description>A station with motion detecting industrial-size shearing clippers. Swiftly and automatically extracts wool from your colony's animals.\n\nKeep it stocked with food to lure the animals in for processing. Drops the produce where the sheared creature is standing.</description>    <!-- use \n for next line -->
     <size>(2,2)</size>
     <costList>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
@@ -130,6 +130,7 @@
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_Milker</defName>
     <label>milker</label>
+    <description>A station equipped with servo-motorized tubes, which seek out mammary glands to milk your farm animals.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the milked creature is standing.</description>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Milker</thingClass>
     <graphicData>
       <texPath>Farm/Milker</texPath>
@@ -146,7 +147,6 @@
       <WorkToBuild>200</WorkToBuild>
     </statBases>
     <tickerType>Rare</tickerType>
-    <description>A station equipped with servo-motorized tubes, which seek out mammary glands to milk your farm animals.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the milked creature is standing.</description>
     <size>(2,2)</size>
     <costList>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
@@ -208,7 +208,8 @@
   <!--===================================== Generic Harvester T2 =====================================-->
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_GenericAnimalHarvester</defName>
-    <label>generic animal harvester</label>
+    <label>Generic Animal Harvester</label>
+    <description>A sophisticated facility boasting a variety of tools to gently extract any kind of animal products, even from the more exotic species.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the animal is standing.</description>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
       <texPath>Farm/Harvester</texPath>
@@ -225,7 +226,6 @@
       <WorkToBuild>200</WorkToBuild>
     </statBases>
     <tickerType>Rare</tickerType>
-    <description>A sophisticated facility boasting a variety of tools to gently extract any kind of animal products, even from the more exotic species.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the animal is standing.</description>
     <size>(2,2)</size>
     <costList>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
@@ -279,7 +279,8 @@
   <!--===================================== Spacer Harvester T3 =====================================-->
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_GenericAnimalHarvester_II</defName>
-    <label>spacer animal harvester</label>
+    <label>Spacer Animal Harvester</label>
+    <description>A highly advanced animal processing machine capable of efficiently harvesting a wide selection of husbandry products. It is designed to have a frontal pull zone, which can be increased with a power-slider. If Rimfridge is available, it will prevent products from spoiling over time.</description>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
       <texPath>Farm/HarvesterT3</texPath>
@@ -294,7 +295,6 @@
       <WorkToBuild>500</WorkToBuild>
     </statBases>
     <tickerType>Rare</tickerType>
-    <description>This is a advanced animal harvester that can harvest a wide range of products from animals, it has a frontfacing pull zone that can be made larger with powerbooster. and if RimFridge is installed its cooled to keep food from spoiling over time.</description>
     <size>(2,2)</size>
     <costList>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
@@ -364,9 +364,9 @@
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
-    <label>Slaughter House</label>
+    <label>Advanced Slaughterhouse</label>
+    <description>A state of the art robotic slaughter house designed to harvest meat and other animal products from living animals. It will cut and collect with great precision and will deliver the final product after finishing its task.</description>
     <designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
-    <description>An automatic slaughterhouse. Uses cameras and a rudimentary computer to keep track of your animal population, and to keep it within your defined limits.</description>
     <altitudeLayer>Building</altitudeLayer>
     <tickerType>Never</tickerType>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>

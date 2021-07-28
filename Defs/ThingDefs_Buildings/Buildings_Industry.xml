@@ -46,7 +46,7 @@
   <!--==================== Stoneworks ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_StoneWorks</defName>
-    <label>Industrial Stoneworks</label>
+    <label>Industrial Automatic Mason</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
     <graphicData>
       <texPath>Industry/StoneCutter</texPath>
@@ -64,7 +64,7 @@
       <MarketValue>2184</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>A CNC router like automated machine that are capable of turning stone into bricks.</description>
+    <description>An automated machine specialized in stonework. Its primary function is to take in stone chunks and deliver stone bricks as a final product. Unlike traditional stonework, this machine eliminates the need for human labor and produces at a much more efficient rate!</description>
     <costList>
       <Steel>400</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -191,7 +191,7 @@
   <!--==================== Tribute To Tornsworth ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_MrTsArtMachine</defName>
-    <label>T's Art Machine</label>
+    <label>Thornsworth's Art Machine</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
     <graphicData>
       <texPath>Industry/ArtPrinter</texPath>
@@ -209,7 +209,7 @@
       <MarketValue>5000</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>Thornsworth's Art machine, capable of producing art with a art level of 14.\nThorny had a big passion for 3D printers and Producing art with hes large army of assemblers, he made this machine before he passed away, and now its finally added to produce a army of sculptures in future.\nRIP Thornsworth 2020</description>
+    <description>An automated artistic machine that can create pieces of art with an art level of 14.\nThis machine's design has been memorialized in Thorn's name before his real life passing in 2020. Rest in peace, Thornsworth.</description>
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
@@ -365,8 +365,8 @@
   <!--==================== Part Assembler ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_PartAssembler</defName>
-    <label>Part Assembler</label>
-    <description>This is a preset assembler that create parts for further production like components, prf parts and more.</description>
+    <label>Basic Assembler</label>
+    <description>An automated assembler which can manufacture and craft vital parts such as components and certain frames for other constructions.</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
     <graphicData>
       <texPath>Industry/part_assembler</texPath>
@@ -486,6 +486,7 @@
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceI</defName>
     <label>Blast Furnace</label>
+    <description>A large, sealed container which houses a burning flame able to smelt various kinds of items at extremely high temperatures in return for raw material. This crude smelter can also be used for the cremation of corpses to quickly assist in clearing piles of bodies from your recent battles. Requires wood as fuel.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)\n Use wood to smelt</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <altitudeLayer>Gas</altitudeLayer>
     <graphicData>
@@ -500,7 +501,6 @@
       <Beauty>-10</Beauty>
       <MarketValue>1340</MarketValue>
     </statBases>
-    <description>A simple early stage Furnace with minimal automation. Burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it dont clog up)\n Use wood to smelt</description>
     <stuffCategories>
       <li>Stony</li>
       <li>Metallic</li>
@@ -567,7 +567,8 @@
   <!--==================== T1 industrial Furnace ====================-->
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceII</defName>
-    <label>industrial Furnace</label>
+    <label>Industrial Furnace</label>
+    <description>An industrial furnace with the same functions as the blast furnace but uses electricity instead of wood as fuel. This machine is capable of smelting various kinds of items as well cremate human corpses. It is slightly smaller and more efficient!\nUses electricity to reduce wood amount for burning</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <designatorDropdown>PRF_FurnaceGroup</designatorDropdown>
     <graphicData>
@@ -581,7 +582,6 @@
       <Beauty>-1</Beauty>
       <MarketValue>2716</MarketValue>
     </statBases>
-    <description>This Second Furnace is an advanced industrial Furnace capable of burning items and smelting raw resources into useful materials\nUses electricity to reduce wood amount for burning</description>
     <costList>
       <Steel>500</Steel>
       <ComponentIndustrial>8</ComponentIndustrial>
@@ -649,7 +649,8 @@
   <!--==================== T2 Electric Furnace ====================-->
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceIII</defName>
-    <label>Electric Furnace</label>
+    <label>Advanced Furnace</label>
+    <description>A highly advanced furnace and the most efficient! It is tasked with smelting items back into raw resources at incredible rates.\n\nImports any recipe from the Electric Smelter and the Crematorium.</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <graphicData>
       <texPath>Industry/smelter_t2off</texPath>
@@ -663,7 +664,6 @@
       <Beauty>1</Beauty>
       <MarketValue>4934</MarketValue>
     </statBases>
-    <description>Advanced Furnace capable of burning stuff and smelting raw resources into useful materials, faster than previous iterations.\n\n(This furnace is the best and fastest in Project RimFactory.)\n\nImports any recipe from the Electric Smelter and the Crematorium.</description>
     <costList>
       <Steel>350</Steel>
       <Plasteel>200</Plasteel>

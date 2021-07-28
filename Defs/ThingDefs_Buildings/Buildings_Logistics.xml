@@ -24,10 +24,11 @@
     <defName>PRF_WallBeltsGroup</defName>
   </DesignatorDropdownGroupDef>
 
-  <!--==================== Fueling Machine ====================-->
+  <!--==================== Fueling Dispenser ====================-->
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_FuelingMachine</defName>
-    <label>Fueling machine</label>
+    <label>Fueling Dispenser</label>
+    <description>An automatic fueling arm tasked with resupplying objects such as power generators, mortars, braziers, etc. The fueling dispenser eliminates the need for a human to manually refuel an object.\n\n(Works with "refuelable comp" buildings and some others eg, SoS, CE.)</description>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
     <graphicData>
       <texPath>Industry/FuelingMachine</texPath>
@@ -45,7 +46,6 @@
       <Flammability>1.0</Flammability>
       <Mass>15</Mass>
     </statBases>
-    <description>A simple refueling machine capable of refueling all standard refuelable objects like generators, braziers, and mortars. Will attempt to fuel the output (yellow cell) with objects from the input (white cell)..\n\n(Works with "refuelable comp" buildings and some others eg, SoS, CE.)</description>
     <costList>
       <Steel>20</Steel>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
@@ -83,6 +83,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_SmartHopper</defName>
     <label>Smart hopper</label>
+    <description>An intelligent hopper which gathers objects within input range (white cells). Can be toggled to only gather items in stockpiles. Does not push objects elsewhere, only gathers them, and will also grab from nearby belts. Does not connect to a nutrient dispenser.</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
     <uiIconScale>0.7</uiIconScale>
     <graphicData>
@@ -127,7 +128,6 @@
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
-    <description>An intelligent hopper which gathers objects within input range (white cells). Can be toggled to only gather items in stockpiles. Does not push objects elsewhere, only gathers them, and will also grab from nearby belts. Does not connect to a nutrient dispenser.</description>
     <costList>
       <Steel>30</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
@@ -252,6 +252,7 @@
     <defName>PRF_GrowzonePuller_I</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_HarvestPuller</thingClass>
     <label>Growzone puller</label>
+    <description>A specialized puller that will pull from adjacent grow zones. Must be connected to the grow zone to function properly.</description>
     <placeWorkers>
       <li>ProjectRimFactory.Common.PlaceWorker_GrowZonePuller</li>
     </placeWorkers>
@@ -263,7 +264,6 @@
       <MarketValue>597</MarketValue>
     </statBases>
     <passability>Impassable</passability>
-    <description>A specialized puller that will pull from adjacent grow zones. Must be connected to the grow zone to function properly.</description>
     <altitudeLayer>Building</altitudeLayer>
     <graphicData>
       <texPath>Belts/Growzone</texPath>
@@ -317,6 +317,7 @@
   <ThingDef ParentName="PRF_Puller_Base">
     <defName>PRF_SimplePuller_I</defName>
     <label>Item puller MKI</label>
+    <description>Pulls items from input (white cell) and pushes them to output (yellow cell). Requires being turned on after selecting its filters.\nVery flexible in its connection: Stockpiles, storage, belts (all versions), I/O, and others.</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <costList>      <!-- Remove in Lite -->
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
@@ -325,7 +326,6 @@
       <MarketValue>597</MarketValue>
     </statBases>
     <passability>Impassable</passability>
-    <description>Pulls items from input (white cell) and pushes them to output (yellow cell). Requires being turned on after selecting its filters.\nVery flexible in its connection: Stockpiles, storage, belts (all versions), I/O, and others.</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
     <graphicData>
       <texPath>Belts/PullerI</texPath>
@@ -370,6 +370,7 @@
   <ThingDef ParentName="PRF_Puller_Base">
     <defName>PRF_SimplePuller_II</defName>
     <label>Item puller MKII</label>
+    <description>An optimized puller which runs at higher speeds. Pulls from input (white cell) to output (yellow cell). Very flexible in its connection.</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>2</PRF_RoboticArm>
@@ -386,7 +387,6 @@
       <MarketValue>959</MarketValue>
     </statBases>
     <passability>Impassable</passability>
-    <description>An optimized puller which runs at higher speeds. Pulls from input (white cell) to output (yellow cell). Very flexible in its connection.</description>   <!--todo: maybe make a message on spawn if not turned on-->
     <altitudeLayer>Building</altitudeLayer>
     <graphicData>
       <texPath>Belts/Puller</texPath>
@@ -415,6 +415,7 @@
   <ThingDef ParentName="PRF_Puller_Base">
     <defName>PRF_SimplePuller_II_Side</defName>
     <label>Item angle puller</label>
+    <description>An specialized puller designed to pull items from a 90 degree angle. Functionally similar to normal puller. Directions can be swapped after placing.</description>
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>2</PRF_RoboticArm>
@@ -430,7 +431,6 @@
       <MarketValue>959</MarketValue>
     </statBases>
     <passability>Impassable</passability>
-    <description>An specialized puller designed to pull items from a 90 degree angle. Functionally similar to normal puller. Directions can be swapped after placing.</description>
     <altitudeLayer>Building</altitudeLayer>
     <researchPrerequisites Inherit="false">
       <li>PRF_BeltsIII</li>
@@ -484,6 +484,7 @@
   <ThingDef ParentName="PRF_Puller_Base">
     <defName>PRF_SimplePuller_II_Wall</defName>
     <label>Wall item puller</label>
+    <description>A specialized item puller that functions as a wall, pushing items from input (white cell) to output (yellow cell). The wall puller is insulated enough for use in freezers and secure enough for prisons.</description>
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>2</PRF_RoboticArm>
@@ -498,7 +499,6 @@
     <statBases>
       <MarketValue>959</MarketValue>
     </statBases>
-    <description>A specialized item puller that functions as a wall, pushing items from input (white cell) to output (yellow cell). The wall puller is insulated enough for use in freezers and secure enough for prisons.</description>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <building>
       <isEdifice>false</isEdifice>
@@ -602,7 +602,7 @@
   <ThingDef ParentName="PRF_DraggableConveyorBelt_Base">
     <defName>PRF_Conveyor_Simple_I</defName>
     <label>Conveyor belt</label>
-    <description>Conveyor belts transport items from one end to the other. It will dump into storage or stockpiles - or just leave stuff on the ground when the belts end. Because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by leading the belt into the side of another belt and it will seamlessly continue.</description>
+    <description>An industrial grade assembly belt used for the transportation of items in a specific direction to a specific location. Useful for automatically hauling products without having your colonists do it themselves.	It will dump into storage or stockpiles - or just leave stuff on the ground when the belts end. Because they are rather unsophisticated, they will happily dump whatever they have off the end if there is room.\nA corner can be made by leading the belt into the side of another belt and it will seamlessly continue.</description>
     <clearBuildingArea>false</clearBuildingArea>
     <uiIconPath>Belts/v3/BeltConveyorIcon</uiIconPath>
     <graphicData>
