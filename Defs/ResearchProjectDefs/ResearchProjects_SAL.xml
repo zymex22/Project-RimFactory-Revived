@@ -12,10 +12,10 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchI</defName>
-    <label>S.A.L Autonomous crafting I</label>
+    <label>S.A.L Crafting I</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1000</baseCost>
-    <description>Start to learn how to program machines to be able to perform skilled labor.</description>
+    <description>Unlock the crafting power of first-generation assemblers! These wonderful machines are the first step towards autonomous precision crafters.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
     </prerequisites>
@@ -29,10 +29,10 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchII</defName>
-    <label>S.A.L autonomous crafting II</label>
+    <label>S.A.L Crafting II</label>
     <techLevel>Industrial</techLevel>
     <baseCost>3000</baseCost>
-    <description>Start to learn how to program more advanced machines to be able to craft faster, better, and more accurately.</description>
+    <description>Significant improvements on autonomous crafting machines will guarantee even better results through increased crafting precision and instructional accuracy.</description>
     <prerequisites>
       <li>PRF_SALResearchI</li>
     </prerequisites>
@@ -44,10 +44,10 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchIII</defName>
-    <label>S.A.L. Specialisation</label>
+    <label>S.A.L Specialization</label>
     <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
-    <description>Start to learn how to specialise and create different auto-assemblers with different roles.</description>
+    <description>Be able to access a limited yet specialized variant of S.A.L machines for your everyday industrial tasks.</description>
     <prerequisites>
       <li>PRF_SALResearchII</li>
     </prerequisites>
@@ -59,6 +59,7 @@
 
 
   <!--==============================================Specialised============================================-->
+  <!-- ==================== ART ============================= -->
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchIV</defName>
     <label>S.A.L Art I</label>
@@ -90,12 +91,13 @@
     <researchViewY>3.7</researchViewY>
   </ResearchProjectDef>
 
+  <!-- ==================== Cooking ============================= -->
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchVII</defName>
-    <label>S.A.L autonomous cooking</label>
+    <label>S.A.L Automated Cooking</label>
     <techLevel>Industrial</techLevel>
     <baseCost>2000</baseCost>
-    <description>Learn how to give auto-assemblers enough dexterity and precision for them to become cooks.</description>
+    <description>Created specialized S.A.L machines tasked with mastering culinary art. Your colony will never go hungry again, guaranteed!</description>
     <prerequisites>
       <li>PRF_SALResearchIII</li>
     </prerequisites>
@@ -106,12 +108,13 @@
     <researchViewY>5</researchViewY>
   </ResearchProjectDef>
 
+  <!-- ==================== Speedy ============================= -->
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchVI</defName>
-    <label>S.A.L Autonomous overclocking I</label>
+    <label>S.A.L Overclocking I</label>
     <techLevel>Spacer</techLevel>
     <baseCost>5000</baseCost>
-    <description>S.A.L. machines often work too slowly for repetitive tasks where quality doesn't matter. Learn how to speed them up at the cost of quality.</description>
+    <description>General S.A.L machines often work too slowly and can result in slow production. Upgrading them with the ability to overclock their operating systems, this will result in faster production speeds at the cost of some item quality.</description>
     <prerequisites>
       <li>PRF_SALResearchIV</li>
       <li>PRF_SALResearchVII</li>
@@ -126,10 +129,10 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchVIII</defName>
-    <label>S.A.L Autonomous overclocking II</label>
+    <label>S.A.L Overclocking II</label>
     <techLevel>Spacer</techLevel>
     <baseCost>10000</baseCost>
-    <description>Increases to servo speed and internal visualisation computers allow this S.A.L crafter to work even faster than before</description>
+    <description>Intensifying the modification of S.A.L assembler's operation systems will allow for even quicker manufacturing speeds at the severe cost of item quality.</description>
     <prerequisites>
       <li>PRF_SALResearchVI</li>
     </prerequisites>
@@ -142,12 +145,13 @@
   </ResearchProjectDef>
 
   <!-- Tier 4 -->
+  <!-- ==================== Godly Crafter ============================= -->
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALGodlyCrafting</defName>
-    <label>S.A.L Godly Crafting</label>
+    <label>S.A.L Prime Crafting</label>
     <techLevel>Ultra</techLevel>
     <baseCost>20000</baseCost>
-    <description>A godlike crafter made with insane amounts of materials, you may run out of resources before you can turn this crafter off, this might be on edge to insanity, is this even safe?!</description>
+    <description>After several rigorous hours of research, one can finally acquire the finest piece of machinery. Prime crafting introduces levels of manufacturing unknown to most of mankind. Only the most advanced societies in existence have achieved this miracle of engineering, but at what cost?</description>
     <prerequisites>
       <li>PRF_SALResearchVIII</li>
       <li>PRF_CoreTierIV</li>

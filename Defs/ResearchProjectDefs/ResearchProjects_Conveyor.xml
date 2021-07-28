@@ -10,9 +10,9 @@
 
   <ResearchProjectDef ParentName="PRF_BeltsResearch">
     <defName>PRF_BeltsI</defName>
-    <label>Basic Conveyors</label>
+    <label>Basic Conveyor Networks</label>
     <baseCost>300</baseCost>
-    <description>Hauling things within a factory can be dangerous and tedious. Conveyor belts take care of this.\nUnlocks: Belts and fueling machines.</description>
+    <description>The continual movement of raw resources and final products within a factory is tedious, but crucial. Understanding the fundamentals of conveyor networks is very important to fulfill manufacturing needs and to determine production rates.</description>
     <prerequisites>
       <li>Electricity</li>
     </prerequisites>
@@ -21,9 +21,9 @@
 
   <ResearchProjectDef ParentName="PRF_BeltsResearch">
     <defName>PRF_BeltsII</defName>
-    <label>Basic Item Sorting</label>
+    <label>Basic Sorting Systems</label>
     <baseCost>400</baseCost>
-    <description>Directing things to the proper area of the factory will streamline and diversify the factory layout.\nUnlocks: Simple puller, Growzone puller and Belt splitter for normal belts.</description>
+    <description>The sorting of products and raw resources can benefit a factory in many ways. The construction of basic sorting systems and integrating them along your machines will greatly improve general factory organization and efficiency, eliminating confusion which can present itself during mass production.</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_BeltsI</li>
@@ -33,10 +33,10 @@
 
   <ResearchProjectDef ParentName="PRF_BeltsResearch">
     <defName>PRF_BeltsIII</defName>
-    <label>Advanced Item Sorting</label>
+    <label>Advanced Sorting Systems</label>
     <techLevel>Industrial</techLevel>
     <baseCost>500</baseCost>
-    <description>Sophisticated logistical implementation allows for advanced item sorting.\nUnlocks: Wall and underground belts, splitters; Smart hoppers; MKII, angle, and wall pullers.</description>
+    <description>Improving on current sorting networks will further increase the organization of resources within your factory with the addition of more complex upgrades.</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_BeltsII</li>

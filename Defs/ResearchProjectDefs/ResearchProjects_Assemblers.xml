@@ -9,16 +9,17 @@
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
   </ResearchProjectDef>
 
-
+  <!--========================================== SIMPLE ASSEMBLERS =========================================-->
+  <!--========================================== Cooking Stuff =========================================-->
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCooking</defName>
-    <label>Self-cooking</label>
+    <label>Self-Cooking</label>
     <baseCost>1250</baseCost>
     <prerequisites>
       <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
-    <description>Make buildings that can cook meals themselves. Like your dedicated cook, but won't have mental breaks for silly reasons.\nThis one will unlock simple food stuff and dedicated machines, good entry into automation.</description>
+    <description>Complex machine variants tasked with preparing an assortment of meals for your colonists! With these automated cookers and mincers, human labor will no longer be needed to feed a colony, guaranteeing no one goes hungry.</description>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
@@ -33,11 +34,33 @@
     <description>Our researchers have discovered a way to produce even better quality foods from our cookers.</description>
   </ResearchProjectDef>
 
+  <!--========================================== Metal Refinery =========================================-->
+  <ResearchProjectDef ParentName="PRF_AssemblersResearch">
+    <defName>PRF_MetalRefining</defName>
+    <label>Metal Refining</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>4000</baseCost>
+    <description>The refining of rare metals though the use of polymer lamentation will grant any colony a steady domestic source of strong metals, such as plasteel.</description>
+    <prerequisites>
+      <li>PRF_CoreTierIII</li>
+      <li>AdvancedFabrication</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+    <researchViewX>9</researchViewX>
+    <researchViewY>2.4</researchViewY>
+  </ResearchProjectDef>
+
+
+
+  <!--========================================== ADV. ASSEMBLERS =========================================-->
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_MachineLearning</defName>
-    <label>Machine learning</label>
+    <label>Complex Machine Applications</label>
     <baseCost>2000</baseCost>
-    <description>Teach machines how to improve their abilities by themselves. this is usefull for smart assemblers which can learn any recipe.</description>
+    <description>Introducing complicated mathematical applications onto industrial machinery will vastly improve out variety in production, allowing us to construct many more versatile machines.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
     </prerequisites>
@@ -50,17 +73,16 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_MagneticTape</defName>
-    <label>Magnetic tape</label>
+    <label>Magnetic Tape</label>
     <baseCost>1000</baseCost>
     <prerequisites>
       <li>PRF_CoreTierII</li>
     </prerequisites>
     <researchViewX>6</researchViewX>
-    <description>Learn how to make and use old-school magnetic tape to store instructions. Make data disks at the machining table.</description>
+    <description>A specialized industrial tape used for recording audio, a useful method for archiving important instructions and general information.</description>
     <discoveredLetterTitle>About: Intro to recipe db.</discoveredLetterTitle>
     <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\n This is used to import recipes from any workbench into your recipe db.\n Your doing so by place it near a workbench and click import on those recipe you want it to store, afterwards you can move it to another workbench and copy more. Or you can move it to that Assembler you want to link to it.\n Recipes will be stored forever in your db. and you can safely move it around, please do know if you move it from your assemblers, they will loose their setup bills.</discoveredLetterText>
   </ResearchProjectDef>
-
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_UniversalAutocrafting</defName>
@@ -80,8 +102,8 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCorrectingAssemblers</defName>
-    <label>self-correcting assemblers</label>
-    <description>Learn how to make a new type of assembler that slowly improves its crafting speed.</description>
+    <label>Intelligent Assemblers</label>
+    <description>The construction of intelligent assemblers which possess interesting, automated correcting abilities will provide colonists with highly versatile machinery capable of more adaptive manufacturing.</description>
     <techLevel>Spacer</techLevel>
     <baseCost>2250</baseCost>
     <requiredResearchFacilities>
@@ -97,8 +119,8 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCorrectingAssemblersII</defName>
-    <label>Quantum self-correcting assemblers</label>
-    <description>Learn how to make 2 new Adaptive assemblers. One which are super fast but poor quality, other one is slow but starts at good quality.</description>
+    <label>Quantum Intelligent Assemblers</label>
+    <description>Superior assembling machines capable of manufacturing items using applications in quantum physics. They can either create superior items or engage in a mass-production blitz.</description>
     <techLevel>Ultra</techLevel>
     <baseCost>5000</baseCost>
     <requiredResearchFacilities>
@@ -110,23 +132,5 @@
       <li>PRF_SelfCorrectingAssemblers</li>
     </prerequisites>
     <researchViewX>10</researchViewX>
-  </ResearchProjectDef>
-
-  <ResearchProjectDef ParentName="PRF_AssemblersResearch">
-    <defName>PRF_MetalRefining</defName>
-    <label>Metal Refining</label>
-    <techLevel>Spacer</techLevel>
-    <baseCost>4000</baseCost>
-    <description>A metal refinery able to produce rare metals through polymer lamination, by combining Chemfuel with steel to greate Plasteel</description>
-    <prerequisites>
-      <li>PRF_CoreTierIII</li>
-      <li>AdvancedFabrication</li>
-    </prerequisites>
-    <requiredResearchFacilities>
-      <li>MultiAnalyzer</li>
-      <li>PRF_ResearchTerminal</li>
-    </requiredResearchFacilities>
-    <researchViewX>9</researchViewX>
-    <researchViewY>2.4</researchViewY>
   </ResearchProjectDef>
 </Defs>

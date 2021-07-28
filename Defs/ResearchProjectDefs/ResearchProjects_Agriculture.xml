@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--============================================== Agriculture Research ============================================-->
+  <!--======================================== This holds all research regards =======================================-->
+  <!--========================================== Animal and plant automation =========================================-->
+
+  <!--============================================== Cultivator Research base ========================================-->
+  <ResearchProjectDef Name="PRF_CultivatorResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>0</researchViewY>
+    <techLevel>Industrial</techLevel>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+  </ResearchProjectDef>
+  <!--=========================================== AnimalStation Research base ========================================-->
+  <ResearchProjectDef Name="PRF_AnimalStationResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>2.4</researchViewY>
+    <techLevel>Industrial</techLevel>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+  </ResearchProjectDef>
+  <!--============================================== End of base stuff ===============================================-->
+
+
+  <!-- Tier 1 -->
+  <!--========= Automated Agriculture =========-->
+  <ResearchProjectDef ParentName="PRF_CultivatorResearch">
+    <defName>PRF_AutomaticFarmingI</defName>
+    <label>Automated Agriculture</label>
+    <baseCost>1500</baseCost>
+    <description>An agricultural drone is an unmanned aerial vehicle used to help optimize agriculture operations, increase crop production, and monitor crop growth. Sensors and digital imaging capabilities can give farmers a richer picture of their fields.</description>
+    <prerequisites>
+      <li>PRF_BasicDrones</li>
+    </prerequisites>
+    <researchViewX>4</researchViewX>
+  </ResearchProjectDef>
+
+  <!--========= Animal Stations I =========-->
+  <ResearchProjectDef ParentName="PRF_AnimalStationResearch">
+    <defName>PRF_AnimalStations</defName>
+    <label>Animal Stations I</label>
+    <baseCost>1200</baseCost>
+    <description>First tier animal station technology allows animals with harvestable resources to be harvested automatically.</description>
+    <prerequisites>
+      <li>PRF_CoreTierI</li>
+    </prerequisites>
+    <researchViewX>3</researchViewX>
+  </ResearchProjectDef>
+
+  <!-- Tier 2 -->
+  <!--========= Improved Automated Agriculture =========-->
+  <ResearchProjectDef ParentName="PRF_CultivatorResearch">
+    <defName>PRF_AutomaticFarmingII</defName>
+    <label>Improved Automated Agriculture</label>
+    <baseCost>2250</baseCost>
+    <description>Additional improvements to automated agriculture now greatly increases crop production and a more careful tending to your farm by improved labor drones.</description>
+    <prerequisites>
+      <li>PRF_AutomaticFarmingI</li>
+      <li>PRF_CoreTierII</li>
+    </prerequisites>
+    <researchViewX>7</researchViewX>
+  </ResearchProjectDef>
+
+  <!--========= Animal Stations II =========-->
+  <ResearchProjectDef ParentName="PRF_AnimalStationResearch">
+    <defName>PRF_AnimalStationsII</defName>
+    <label>Animal Stations II</label>
+    <baseCost>1500</baseCost>
+    <description>Improved animal stations will allow for greater efficiency in animal husbandry and more automated precision slaughtering.</description>
+    <prerequisites>
+      <li>PRF_AnimalStations</li>
+      <li>PRF_CoreTierII</li>
+    </prerequisites>
+    <researchViewX>6</researchViewX>
+  </ResearchProjectDef>
+
+  <!-- Tier 3 -->
+  <!--========= Advanced Automated Agriculture =========-->
+  <ResearchProjectDef ParentName="PRF_CultivatorResearch">
+    <defName>PRF_AutomaticFarmingIII</defName>
+    <label>Advanced Automated Agriculture</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>3000</baseCost>
+    <description>With the introduction of more complex mathematical applications and polished AI programming, drone cultivators can now work at double the efficiency and double the speed without the risk of faulty systems.</description>
+    <prerequisites>
+      <li>PRF_AutomaticFarmingII</li>
+      <li>PRF_CoreTierIII</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+    <researchViewX>9</researchViewX>
+  </ResearchProjectDef>
+
+  <!--========= Animal Stations III =========-->
+  <ResearchProjectDef ParentName="PRF_AnimalStationResearch">
+    <defName>PRF_AnimalStationsIII</defName>
+    <label>Animal Stations III</label>
+    <baseCost>2000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <description>After numerous hours of research, colonists can now access some more advanced pieces of machinery dedicated towards husbandry and can perform their functions with pin-point precision and accuracy.</description>
+    <prerequisites>
+      <li>PRF_AnimalStationsII</li>
+    </prerequisites>
+    <researchViewX>8</researchViewX>
+  </ResearchProjectDef>
+</Defs>

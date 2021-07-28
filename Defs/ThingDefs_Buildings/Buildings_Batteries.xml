@@ -34,8 +34,9 @@
   <!-- ==================================== 4k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>PRF_4k_Battery</defName>
-    <label>4k battery</label>
+    <label>4k Battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
+    <description>A small battery capable of storing 4k watts of power, ideal for small-scale use.</description>
     <graphicData>
       <texPath>Industry/Battery/PRF_4k_Battery</texPath>
       <drawSize>(1,1)</drawSize>
@@ -51,7 +52,6 @@
       <Beauty>-40</Beauty>
       <MarketValue>490</MarketValue>
     </statBases>
-    <description>A battery capable of storing 4000 watt days of power. it has a efficiency of 50% which mean it will take 8k WD to charge it.</description>
     <size>(1,1)</size>
     <costList>
       <Steel>150</Steel>
@@ -80,8 +80,9 @@
   <!-- ==================================== 16k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>PRF_16k_Battery</defName>
-    <label>16k battery</label>
+    <label>16k Battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
+    <description>A medium scale electrical battery capable of storing up to 16k watts of power from electrical generators.</description>
     <graphicData>
       <texPath>Industry/Battery/PRF_16k_Battery</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -98,7 +99,6 @@
       <Flammability>1.0</Flammability>
       <Beauty>-80</Beauty>
     </statBases>
-    <description>A battery capable of storing 16000 watt days of power.</description>
     <size>(2,1)</size>
     <costList>
       <Steel>300</Steel>
@@ -127,8 +127,9 @@
   <!-- ==================================== 64k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>PRF_64k_Battery</defName>
-    <label>64k battery</label>
+    <label>64k Battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
+    <description>A powerful battery capable of storing 64,000 watts of power. It is carefully controlled by an artificial intelligence and is waterproof. Aside its practical use, it is also very stylish in design!</description>
     <graphicData>
       <texPath>Industry/Battery/PRF_64k_Battery</texPath>
       <drawSize>(2,2)</drawSize>
@@ -143,7 +144,6 @@
       <Mass>80</Mass>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>An efficient waterproof superposed-cell battery capable of storing 64000 watt days of power. Spdskatr Industries is not responsible for any damage caused by short circuits.</description>
     <size>(2,2)</size>
     <costList>
       <Steel>500</Steel>
@@ -176,8 +176,9 @@
   <!-- ==================================== 256k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>PRF_256k_Battery</defName>
-    <label>256k battery</label>
+    <label>256k Battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
+    <description>An extremely powerful battery capable of storing 256,000 watts of power. It is carefully controlled by an artificial intelligence and is waterproof. Aside its practical use, it is also very stylish in design!</description>
     <graphicData>
       <texPath>Industry/Battery/PRF_256k_Battery</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -194,7 +195,6 @@
       <Flammability>1.0</Flammability>
       <Beauty>50</Beauty>
     </statBases>
-    <description>A very efficient waterproof AI-based battery capable of storing 256000 watt days of power. Cannot break down. Also very beautiful. Spdskatr Industries is not responsible for any damage caused by short circuits.</description>
     <size>(4,2)</size>
     <costList>
       <Steel>1000</Steel>

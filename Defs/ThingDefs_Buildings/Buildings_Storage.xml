@@ -54,6 +54,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_WoodCrate_I</defName>
     <label>Small wooden crate</label>
+    <description>A simplistic small crate that stores 16 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Wood_Crate6</texPath>
       <drawSize>(2.8,1.3)</drawSize>
@@ -87,7 +88,6 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>A simplistic small crate that stores 16 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,1)</size>
     <rotatable>true</rotatable>
     <costList>
@@ -111,6 +111,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_WoodCrate_II</defName>
     <label>Wooden crate</label>
+    <description>A large crate that stores 32 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Wood_Crate6</texPath>
       <drawSize>(2.8,2.6)</drawSize>
@@ -143,7 +144,6 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>A large crate that stores 32 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,2)</size>
     <costList>
       <WoodLog>80</WoodLog>
@@ -166,6 +166,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_SteelCrate_I</defName>
     <label>Small steel crate</label>
+    <description>A small steel crate that can store 64 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Steel_Crate</texPath>
       <drawSize>(2.8,1.3)</drawSize>
@@ -199,7 +200,6 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>A small steel crate that can store 64 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,1)</size>
     <rotatable>true</rotatable>
     <costList>
@@ -222,6 +222,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_SteelCrate_II</defName>
     <label>Steel crate</label>
+    <description>A large crate that can store 128 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Steel_Crate</texPath>
       <drawSize>(2.8,2.6)</drawSize>
@@ -254,7 +255,6 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>A large crate that can store 128 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,2)</size>
     <costList>
       <Steel>120</Steel>
@@ -274,7 +274,8 @@
   <!--==================== Cargo Platform / Digital Storage Unit / DSU ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_DigitalStorageUnit_I</defName>
-    <label>Digital storage unit</label>
+    <label>Digital Storage Unit</label>
+    <description>A fascinating machine capable of transferring physical items into a digital database for extremely efficient storage. This computerized storage machine can hold up to 768 stacks, each stack taking up 10 watts of power. In the event of a power outage, items stored within this machine will remain safe, but cannot be access until power has been returned. This machine will need to stay dry else it will shortcurcuit in rain.\n\nin memory of Thornsworth who dedicated all hes time to tell this was best machine in PRF. RIP Thornsworth 2020.</description>
     <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
     <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
@@ -315,7 +316,6 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>Stores up to 768 stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.</description>
     <size>(3,3)</size>
     <pathCost>150</pathCost>
     <costList>
@@ -339,6 +339,7 @@
       </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>true</shortCircuitInRain>
         <basePowerConsumption>0</basePowerConsumption>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
@@ -361,6 +362,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_IOPort_I</defName>
     <label>I/O port</label>
+    <description>An advanced connection port for the Digital Storage Unit. It can be set to input/output from any platform remotely within the map.</description>
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>
@@ -410,7 +412,6 @@
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
-    <description>An advanced connection port for the Digital Storage Unit. It can be set to input/output from any platform remotely within the map.</description>
     <costList>
       <ComponentSpacer>1</ComponentSpacer>
       <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
@@ -447,6 +448,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_IOPPusher_I</defName>
     <label>I/O pusher</label>
+    <description>This modified I/O port allows you to push items directly into next cell, onto a belt, or anywhere else, saving space instead of using a puller.\n More of a output port than input/output.</description>
     <thingClass>ProjectRimFactory.Storage.Building_IOPusher</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>
@@ -499,7 +501,6 @@
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
-    <description>This modified I/O port allows you to push items directly into next cell, onto a belt, or anywhere else, saving space instead of using a puller.\n More of a output port than input/output.</description>
     <costList>
       <ComponentSpacer>1</ComponentSpacer>
       <PRF_RoboticArm>1</PRF_RoboticArm>
@@ -532,13 +533,14 @@
       </li>
     </modExtensions>
   </ThingDef>
-  
-  
-    <!--==================== Item Slide ====================-->
+
+
+  <!--==================== Item Slide ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_ItemSlide</defName>
     <thingClass>ProjectRimFactory.Storage.Building_ItemSlide</thingClass>
-    <label>Item chute</label>
+    <label>Item Chute</label>
+    <description>A small factory hopper which functions solely to automatically push items into a conveyor belt. The chute also behaves as a stockpile zone on its own.</description>
     <graphicData>
       <texPath>Storage/ItemSlide</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -572,12 +574,11 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>Belt Chute/hopper is used for pawns or drones to fill a facing belt without need for a stockpile and a puller. Basicly its a small stockpile that automaticly push onto a belt.</description>
     <size>(1,1)</size>
-     <tickerType>Normal</tickerType>
-     <placeWorkers>
-     <li>ProjectRimFactory.Storage.PlaceWorker_ItemSlide</li>
-     </placeWorkers>
+    <tickerType>Normal</tickerType>
+    <placeWorkers>
+      <li>ProjectRimFactory.Storage.PlaceWorker_ItemSlide</li>
+    </placeWorkers>
     <rotatable>true</rotatable>
     <costList>
       <WoodLog>40</WoodLog>
@@ -598,6 +599,6 @@
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
     </inspectorTabs>
   </ThingDef>
-  
+
 
 </Defs>
