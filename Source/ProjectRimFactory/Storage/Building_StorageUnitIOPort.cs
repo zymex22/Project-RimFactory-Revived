@@ -311,13 +311,9 @@ namespace ProjectRimFactory.Storage
                             boundStorageUnit.RegisterNewItem(currentItem.SplitOff(splitCount));
                         }
                     }
-                    if (currentItem != null && ForbidOnPlacement)
+                    if (currentItem != null)
                     {
-                        currentItem.SetForbidden(true);
-                    }
-                    else if (currentItem != null)
-                    {
-                        currentItem.SetForbidden(false);
+                        currentItem.SetForbidden(ForbidOnPlacement,false);
                     }
                 }
             }
@@ -528,13 +524,9 @@ namespace ProjectRimFactory.Storage
                             boundStorageUnit.RegisterNewItem(currentItem.SplitOff(splitCount));
                         }
                     }
-                    if (currentItem != null && ForbidOnPlacement)
+                    if (currentItem != null)
                     {
-                        currentItem.SetForbidden(true);
-                    }
-                    else if (currentItem != null)
-                    {
-                        currentItem.SetForbidden(false);
+                        currentItem.SetForbidden(ForbidOnPlacement, false);
                     }
                 }
             }
