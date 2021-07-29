@@ -51,25 +51,27 @@ namespace ProjectRimFactory.AutoMachineTool
         private void directionUI(Rect rect , Rot4 rot,ref bool selected, ref bool disabeld, bool isInput)
         {
             Texture2D texture = RS.SplitterArrow_Up; //Default
+            Common.CommonColors.CellPattern cellPattern = Common.CommonColors.CellPattern.InputCell;
 
-                if (isInput)
-                {
-                    if (rot == Rot4.North) texture = RS.SplitterArrow_Down;
-                    else if (rot == Rot4.South) texture = RS.SplitterArrow_Up;
-                    else if (rot == Rot4.East) texture = RS.SplitterArrow_Left;
-                    else if (rot == Rot4.West) texture = RS.SplitterArrow_Right;
-                }
-                else
-                {
-                    if (rot == Rot4.North) texture = RS.SplitterArrow_Up;
-                    else if (rot == Rot4.South) texture = RS.SplitterArrow_Down;
-                    else if (rot == Rot4.East) texture = RS.SplitterArrow_Right;
-                    else if (rot == Rot4.West) texture = RS.SplitterArrow_Left;
-                }
-            
+            if (isInput)
+            {
+                if (rot == Rot4.North) texture = RS.SplitterArrow_Down;
+                else if (rot == Rot4.South) texture = RS.SplitterArrow_Up;
+                else if (rot == Rot4.East) texture = RS.SplitterArrow_Left;
+                else if (rot == Rot4.West) texture = RS.SplitterArrow_Right;
+            }
+            else
+            {
+                if (rot == Rot4.North) texture = RS.SplitterArrow_Up;
+                else if (rot == Rot4.South) texture = RS.SplitterArrow_Down;
+                else if (rot == Rot4.East) texture = RS.SplitterArrow_Right;
+                else if (rot == Rot4.West) texture = RS.SplitterArrow_Left;
+                cellPattern = Common.CommonColors.CellPattern.OutputCell;
+            }
+
+            GUI.DrawTexture(rect, texture, ScaleMode.StretchToFill, alphaBlend: true, 0f, Common.CommonColors.GetCellPatternColor(cellPattern), 0f, 0f);
 
 
-            GUI.DrawTexture(rect, texture);
             if (!disabeld && !isInput) GUI.DrawTexture(rect, RS.SplitterDisabeld);
             if (selected)
             {
@@ -80,7 +82,7 @@ namespace ProjectRimFactory.AutoMachineTool
             if ( cur.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
             {
                 //Left
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0) && !isInput)
                 {
                     selected = true;
                 }
