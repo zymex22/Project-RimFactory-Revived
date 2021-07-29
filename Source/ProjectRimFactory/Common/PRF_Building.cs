@@ -47,7 +47,7 @@ namespace ProjectRimFactory.Common
             base.ExposeData();
             Scribe_Values.Look(ref outputToEntireStockpile, "PRFOutputToEntireStockpile", false);
             Scribe_Values.Look(ref obeysStorageFilters, "PRFObeysStorageFilters", true);
-            Scribe_Values.Look(ref forbidOnPlacingDefault, "PRFForbidOnPlacingDefault", true);
+            Scribe_Values.Look(ref forbidOnPlacingDefault, "PRFForbidOnPlacingDefault", false);
         }
     }
     [Flags] // PRF Building Settinsg

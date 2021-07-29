@@ -47,6 +47,7 @@
     <scatterableOnMapGen>false</scatterableOnMapGen>
     <minifiedDef>MinifiedThing</minifiedDef>
     <placeWorkers>
+  
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_AutoMachineTool</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_SALTargetCellHilight</li>
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
@@ -56,6 +57,7 @@
     <size>(1,1)</size>
     <passability>Standable</passability>
     <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
     </inspectorTabs>
     <building>
