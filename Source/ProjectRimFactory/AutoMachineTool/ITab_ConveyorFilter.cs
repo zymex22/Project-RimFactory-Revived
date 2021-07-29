@@ -158,26 +158,23 @@ namespace ProjectRimFactory.AutoMachineTool
 
                 bool selref = selectedDir == dir;
 
-                /* Log.Message(".....................................");
-                 //Testing Inputs
-                 foreach (IBeltConveyorLinkable linkable in Splitter.IncomingLinks)
-                 {
-                     Log.Message("---------------");
-                     Log.Message("linkable " + linkable.Rotation);
-
-
-                 }
-                */
-
-                //TODO Improve logic to corecctly support splitters next to splitters
                 bool isInput = false;
-                foreach (IBeltConveyorLinkable linkable in Splitter.IncomingLinks)
+                foreach (IBeltConveyorLinkable linkable in Splitter.IncomingLinks.Where(l => l.Position == (Splitter.Position + dir.FacingCell)))
                 {
-                    if (OppositeRot(linkable.Rotation) == dir)
+                    if ((linkable as Building_BeltConveyor) != null  || (linkable as Building_BeltConveyorUGConnector) != null)
                     {
-                        isInput = true;
-                        break;
+                        if (OppositeRot(linkable.Rotation) == dir)
+                        {
+                            isInput = true;
+                            break;
+                        }
+                    }else if ((linkable as Building_BeltSplitter) != null)
+                    {
+                        //Seperate Logic for splitters 
+                       if ((linkable as Building_BeltSplitter).OutputLinks.Keys.Contains(OppositeRot(dir)) && (linkable as Building_BeltSplitter).OutputLinks[OppositeRot(dir)].Active) isInput = true;
+
                     }
+                    
                 }
 
 
