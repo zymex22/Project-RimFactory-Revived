@@ -353,7 +353,7 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>This Assembler is an upgraded version that works really slow, but it start at normal quality instead of awfull so will ramp up faster. It also have a HUGE db. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>This Assembler is an upgraded version that works very slowly, but it starts at normal quality instead of awful and so will ramp up faster. It also has a huge database. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
       <WorkToBuild>15000</WorkToBuild>
@@ -437,7 +437,7 @@ Mod extennsion for assemblers
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
-    <description>This version work at a high rate and starts at a faster speed and can ramp higher than other assemblers. it cant produce any good quality though. It also have a HUGE db. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>A high-end assembler that works at a high rate, starts faster, and can ramp up higher than other assemblers.  The output isn't very good quality though.  The database is huge. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <statBases>
       <MaxHitPoints>500</MaxHitPoints>
       <WorkToBuild>10000</WorkToBuild>
