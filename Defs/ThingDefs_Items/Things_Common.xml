@@ -32,7 +32,7 @@
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_I</defName>
     <label>weak AI chip</label>
-    <description>A tensor processing unit containing the most rudimentary AI. Used for Early machines and robots.</description>
+    <description>A tensor processing unit containing the most rudimentary AI. Used for early machines and robots.</description>
     <graphicData>
       <texPath>Common/WeakAICore</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -56,7 +56,7 @@
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_II</defName>
     <label>Advanced AI core</label>
-    <description>A advanced processing unit containing hi-tech AI, which is used for advanced machines and robots.</description>
+    <description>An advanced processing unit containing hi-tech AI, which is used for advanced machines and robots.</description>
     <graphicData>
       <texPath>Common/AdvancedAICore</texPath>
       <graphicClass>Graphic_Single</graphicClass>
