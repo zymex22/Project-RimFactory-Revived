@@ -15,7 +15,7 @@
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
     <baseCost>400</baseCost>
-    <description>Early industrialisation, this teaches you how to setup more advanced way of gathering resources and process them into more usefull things. Trash, raw material, or scrap metal goes in one side and useful products come out the other.\nCogs and chutes powered by wood and coal.</description>
+    <description>Early industrialisation, this teaches you how to setup more advanced way of gathering resources and process them into more useful things. Trash, raw materials, or scrap metal goes in one side and useful products come out the other.\nThese very early devices are made with cogs and chutes and are powered by wood and coal.</description>
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>
@@ -38,7 +38,7 @@
     </prerequisites>
     <researchViewX>2</researchViewX>
     <discoveredLetterTitle>True Automation begins</discoveredLetterTitle>
-    <discoveredLetterText>Leonard Euler developed mathematical systems for intemacractions between physics, geometry and algebra.\nWith these formulas, automated production of basic materials such as stone bricks and simple art is possible.\nPlace items within the white designation for the bills to consume, they will be output to the adjustable green tile</discoveredLetterText>
+    <discoveredLetterText>Leonard Euler developed mathematical systems for intemacractions between physics, geometry and algebra.\nWith these formulas, automated production of basic materials such as stone bricks and simple art is possible.\nPlace items within the white designation for the bills to consume, they will be output to the adjustable green tile.</discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -48,8 +48,7 @@
     <defName>PRF_CoreTierII</defName>
     <label>Moritz Machinery</label>
     <baseCost>2000</baseCost>
-    <description>A machine that can predict outcomes will solve many of the design flaws we have been facing. Imagine a machine that could improve itself...
-    \nWe will need an factory research terminal linked to our hi-tech research bench to go further.</description>
+    <description>A machine that can predict outcomes will solve many of the design flaws we have been facing. Imagine a machine that could improve itself...\nWe will need an factory research terminal linked to our hi-tech research bench to go further.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
       <li>MicroelectronicsBasics</li>
@@ -60,11 +59,7 @@
     </requiredResearchFacilities>
     <researchViewX>5</researchViewX>
     <discoveredLetterTitle>About: Tier 2 Factory Unlocked</discoveredLetterTitle>
-    <discoveredLetterText>The mathematical models developed in the 1700s began an industrial revolution all of the world, series of gears and pressurization allowed the mass processing of basic materials with coal and electricity. 
-      \nMoritz von Jacobi managed to propel a boat with an electric motor in 1845, but it wasn't until 1837 when Thomas and Emily Dacenport patented the first motor in the US that the promise of electro-mechanical machinery was seen as the next big leap forward
-      \nRudimentary programming allows storing a bill on a Recipe Database and importing it into an assembler.
-      \n-The blue region around assemblers and recipe databases indicate the data transfer area
-    </discoveredLetterText>
+    <discoveredLetterText>The mathematical models developed in the 1700s began an industrial revolution all of the world, series of gears and pressurization allowed the mass processing of basic materials with coal and electricity.\nMoritz von Jacobi managed to propel a boat with an electric motor in 1845, but it wasn't until 1837 when Thomas and Emily Dacenport patented the first motor in the US that the promise of electro-mechanical machinery was seen as the next big leap forward.\nRudimentary programming allows storing a bill on a Recipe Database and importing it into an assembler.\n-The blue region around assemblers and recipe databases indicate the data transfer area.</discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -75,7 +70,7 @@
     <label>Turing implementation</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
-    <description>Anything can be described as a series of 1s and 0s as long as there enough 1s and 0s</description>
+    <description>Anything can be described as a series of 1s and 0s as long as there enough 1s and 0s.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
       <li>Fabrication</li>
@@ -86,8 +81,7 @@
     </requiredResearchFacilities>
     <researchViewX>8</researchViewX>
     <discoveredLetterTitle>About: Tier 3 Factory Unlocked</discoveredLetterTitle>
-    <discoveredLetterText>Refinements to machinery allow sophisticated machines, such as those that self-correct (get faster the more time they complete a job), drills with object recognition to only mine what you want and the first mechanite swarm technologies.
-    \n-mechanite machines interact with a couple random tiles in the area every second.</discoveredLetterText>
+    <discoveredLetterText>Refinements to machinery allow sophisticated machines, such as those that self-correct (get faster the more times they complete a job), drills with object recognition to only mine what you want and the first mechanite swarm technologies.\n-mechanite machines interact with a couple random tiles in the area every second.</discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -109,9 +103,7 @@
     </requiredResearchFacilities>
     <researchViewX>11</researchViewX>
     <discoveredLetterTitle>Quantum Computing: Tier 4 Factory Unlocked</discoveredLetterTitle>
-    <discoveredLetterText>Qubit technology is all about advanced computing, highend machines and technolegy, this might even be on the brinck of insanity? whats next?!¤%.
-      \nDrop us suggestions on our Workshop page. 
-      \n\nThanks for playing!</discoveredLetterText>
+    <discoveredLetterText>Qubit technology is all about advanced computing, highend machines and technolegy, this might even be on the brinck of insanity? whats next?!¤%.\nDrop us suggestions on our Workshop page or Discord.\n\nThanks for playing!</discoveredLetterText>
   </ResearchProjectDef>
 
 </Defs>
