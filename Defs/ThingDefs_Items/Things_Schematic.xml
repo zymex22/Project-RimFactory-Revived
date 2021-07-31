@@ -6,7 +6,7 @@
     <defName>PRF_DataDisk</defName>
     <label>recipe data disk</label>
     <thingClass>ThingWithComps</thingClass>
-    <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive... Its used to create Recipe DataBases(project rimfactory)</description>
+    <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive... It's used to create Recipe DataBases for PRF Machines.</description>
     <graphicData>
       <texPath>SAL3/datadisk</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -110,7 +110,7 @@
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_MachineFrame_III</defName>
     <label>adv. machine frame</label>
-    <description>The empty shell of a advanced automation building.</description>
+    <description>The empty shell of an advanced automation building.</description>
     <graphicData>
       <texPath>Common/MachineFrameLarge</texPath>
       <graphicClass>Graphic_Single</graphicClass>
