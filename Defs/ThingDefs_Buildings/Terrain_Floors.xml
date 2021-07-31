@@ -26,7 +26,7 @@
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <designatorDropdown>PRF_ConcreteFloorGroup</designatorDropdown>
     <designationCategory>Floors</designationCategory>
-    <description>Rough concrete. It is cheap and quick to build\n\nThis Colored version take slightly longer to build but also less ugly\n\nThis is added by Project RimFactory</description>
+    <description>Rough concrete which is cheap and quick to build.\n\nThis Colored version takes slightly longer to build but is also less ugly.</description>
     <texturePath>Terrain/Surfaces/Concrete</texturePath>
     <edgeType>Hard</edgeType>
     <renderPrecedence>70</renderPrecedence>
@@ -99,7 +99,7 @@
     <defName>PRF_StripedTileRight</defName>
     <label>striped tile Right</label>
     <renderPrecedence>240</renderPrecedence>
-    <description>A metal tile, painted with yellow stripes to indicate critical areas.\n\nThis is added by Project RimFactory</description>
+    <description>A metal tile painted with yellow stripes to indicate critical areas.</description>
     <texturePath>Misc/CautionTile</texturePath>
     <color>(255, 255, 255)</color>    <!-- Optional. Defines a custom colour that is applied to the terrain texture. Usually uses RGB with this structure -->
     <statBases>
@@ -121,7 +121,7 @@
     <defName>PRF_StripedTileLeft</defName>
     <label>striped tile Left</label>
     <renderPrecedence>240</renderPrecedence>
-    <description>A metal tile, painted with yellow stripes to indicate critical areas.\n\nThis is added by Project RimFactory</description>
+    <description>A metal tile painted with yellow stripes to indicate critical areas.</description>
     <texturePath>Misc/CautionTileLeft</texturePath>
     <color>(255, 255, 255)</color>
     <statBases>
