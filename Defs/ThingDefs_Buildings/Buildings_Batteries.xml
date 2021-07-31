@@ -28,11 +28,9 @@
     <designationHotKey>Misc4</designationHotKey>
   </ThingDef>
 
-
   <DesignatorDropdownGroupDef>
     <defName>PRF_BatteryGroup</defName>
   </DesignatorDropdownGroupDef>
-
 
   <!-- ==================================== 4k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
@@ -54,7 +52,7 @@
       <Beauty>-40</Beauty>
       <MarketValue>490</MarketValue>
     </statBases>
-    <description>A battery capable of storing 4000 watt days of power. it has a efficiency of 50% which mean it will take 8k WD to charge it.</description>
+    <description>A battery capable of storing 4,000 watt-days of power, equivalent to almost seven ordinary batteries.  This battery is 50% efficient, and will explode if exposed to rain.</description>
     <size>(1,1)</size>
     <costList>
       <Steel>150</Steel>
@@ -79,7 +77,6 @@
     </researchPrerequisites>
   </ThingDef>
 
-
   <!-- ==================================== 16k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>PRF_16k_Battery</defName>
@@ -101,7 +98,7 @@
       <Flammability>1.0</Flammability>
       <Beauty>-80</Beauty>
     </statBases>
-    <description>A battery capable of storing 16000 watt days of power.</description>
+    <description>A battery capable of storing 16,000 watt-days of power, equivalent to almost twenty-seven ordinary batteries.  This battery is 50% efficient, and will explode if exposed to rain.</description>
     <size>(2,1)</size>
     <costList>
       <Steel>300</Steel>
@@ -146,7 +143,7 @@
       <Mass>80</Mass>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>An efficient waterproof superposed-cell battery capable of storing 64000 watt days of power. Spdskatr Industries is not responsible for any damage caused by short circuits.</description>
+    <description>A superior battery capable of storing 64,000 watt-days of power. This ruggedized device is 90% efficient and water-resistant enough to be stored outside, although it's expensive enough that you may want to think twice.</description>
     <size>(2,2)</size>
     <costList>
       <Steel>500</Steel>
@@ -175,7 +172,6 @@
     </researchPrerequisites>
   </ThingDef>
 
-
   <!-- ==================================== 256k Battery ===================================== -->
   <ThingDef ParentName="BiggerBatteries_BuildingBase">
     <defName>PRF_256k_Battery</defName>
@@ -197,7 +193,7 @@
       <Flammability>1.0</Flammability>
       <Beauty>50</Beauty>
     </statBases>
-    <description>A very efficient waterproof AI-based battery capable of storing 256000 watt days of power. Cannot break down. Also very beautiful. Spdskatr Industries is not responsible for any damage caused by short circuits.</description>
+    <description>A tremendously powerful battery capable of storing 256,000 watt-days of power.  The integrated AI management system reduces inefficiency losses to effectively zero, and the device will not ever short-circuit in the rain or break down, and it's surprisingly beautiful to look at.  Watch out for a short-circuit though!</description>
     <size>(4,2)</size>
     <costList>
       <Steel>1000</Steel>
@@ -225,7 +221,4 @@
       <li>PRF_VeryLargeBatteries</li>
     </researchPrerequisites>
   </ThingDef>
-
-
-
 </Defs>
