@@ -12,10 +12,10 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchI</defName>
-    <label>S.A.L Autonomous crafting I</label>
+    <label>S.A.L Autonomous Crafting I</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1000</baseCost>
-    <description>Start to learn how to program machines to be able to perform skilled labor.</description>
+    <description>Learn how to program machines to be able to perform skilled labor.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
     </prerequisites>
@@ -24,15 +24,15 @@
     </requiredResearchFacilities>
     <researchViewX>6</researchViewX>
     <discoveredLetterTitle>About: S.A.L automation robots</discoveredLetterTitle>
-    <discoveredLetterText>With this Research you have unlocked S.A.L automation robots.\nTheese are a placeable robots you place on a workbench workercell, then they will start doing work on that bench.\n\nThis is added as a Tribute to S.A.L mod which where what Project RimFactory started as before it became assemblers as we know them today in PRF.\nSettings and most things are taken directly from S.A.L mod but might be changed/tweaked later. Also it does not include miner, be feel free to ask if you think we miss them.</discoveredLetterText>
+    <discoveredLetterText>With this Research you have unlocked S.A.L automation robots.\nThese are a placeable robots which you attach to a workbench where a human would stand, and then they will start doing work on that bench.\n\nThe name "S.A.L." is a tribute to the original SAL mod, from whence Project RimFactory is descended.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchII</defName>
-    <label>S.A.L autonomous crafting II</label>
+    <label>S.A.L Autonomous Crafting II</label>
     <techLevel>Industrial</techLevel>
     <baseCost>3000</baseCost>
-    <description>Start to learn how to program more advanced machines to be able to craft faster, better, and more accurately.</description>
+    <description>Advance your understanding of programming autonomous machines, allowing you to make them craft faster, better, and more accurately.</description>
     <prerequisites>
       <li>PRF_SALResearchI</li>
     </prerequisites>
@@ -47,7 +47,7 @@
     <label>S.A.L. Specialisation</label>
     <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
-    <description>Start to learn how to specialise and create different auto-assemblers with different roles.</description>
+    <description>Further advancements in machine programming will allow you to begin to specialize your S.A.L. machines into performing specific roles more efficiently.</description>
     <prerequisites>
       <li>PRF_SALResearchII</li>
     </prerequisites>
@@ -79,7 +79,7 @@
     <label>S.A.L Art II</label>
     <techLevel>Ultra</techLevel>
     <baseCost>3000</baseCost>
-    <description>Combined with overclocking, make your neural networks react much faster, improving quality of art.</description>
+    <description>Combined with overclocking, make your neural networks react much faster, drastically improving the quality of art produced by your machines.</description>
     <prerequisites>
       <li>PRF_SALResearchVI</li>
     </prerequisites>
@@ -92,10 +92,10 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchVII</defName>
-    <label>S.A.L autonomous cooking</label>
+    <label>S.A.L Autonomous Cooking</label>
     <techLevel>Industrial</techLevel>
     <baseCost>2000</baseCost>
-    <description>Learn how to give auto-assemblers enough dexterity and precision for them to become cooks.</description>
+    <description>Learn how to give auto-assemblers enough dexterity and precision for them to efficiently replace your chefs.</description>
     <prerequisites>
       <li>PRF_SALResearchIII</li>
     </prerequisites>
@@ -108,7 +108,7 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchVI</defName>
-    <label>S.A.L Autonomous overclocking I</label>
+    <label>S.A.L Autonomous Overclocking I</label>
     <techLevel>Spacer</techLevel>
     <baseCost>5000</baseCost>
     <description>S.A.L. machines often work too slowly for repetitive tasks where quality doesn't matter. Learn how to speed them up at the cost of quality.</description>
@@ -126,10 +126,10 @@
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchVIII</defName>
-    <label>S.A.L Autonomous overclocking II</label>
+    <label>S.A.L Autonomous Overclocking II</label>
     <techLevel>Spacer</techLevel>
     <baseCost>10000</baseCost>
-    <description>Increases to servo speed and internal visualisation computers allow this S.A.L crafter to work even faster than before</description>
+    <description>Increases to servo speed and internal visualisation computers allow this S.A.L crafter to work even faster than before.  Henry Ford would be proud.</description>
     <prerequisites>
       <li>PRF_SALResearchVI</li>
     </prerequisites>
