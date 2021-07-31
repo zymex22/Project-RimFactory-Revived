@@ -39,7 +39,7 @@
     <label>Advanced Farming Techniques</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3000</baseCost>
-    <description>With advanced use of Mechanites and improved Ai control, Cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
+    <description>With advanced use of Mechanites and improved AI control, Cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
     <prerequisites>
       <li>PRF_AutomaticFarmingII</li>
       <li>PRF_CoreTierIII</li>
