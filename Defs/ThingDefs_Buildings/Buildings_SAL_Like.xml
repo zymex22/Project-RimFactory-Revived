@@ -185,7 +185,7 @@
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMachine</defName>
     <label>The Art Machine(S.A.L)</label>
-    <description>A specially designed Auto Crafter which uses heuristic algorithms to produce moderately skilled art at a pace no human could ever match.\n\nStats:\nBase: 3\n Crafting: 7\nArtistic: 8\nSpeed: 1</description>
+    <description>A specially designed Auto Crafter which uses heuristic algorithms to produce moderately skilled art at a pace no human could ever match - it pumps out art like a firehose pumps out water.\n\nStats:\nBase: 3\n Crafting: 7\nArtistic: 8\nSpeed: 1</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
       <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
@@ -245,7 +245,7 @@
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMaster</defName>
     <label>The Art Master(S.A.L)</label>
-    <description>A highly advanced auto-crafter which uses a database of several thousand years of artistic expression to produce master quality art at an absurd pace.\n\nStats:\nBase: 3\n Crafting: 9\nArtistic: 18\nSpeed: 1</description>
+    <description>A highly advanced auto-crafter which uses a database of several thousand years of artistic expression to produce master quality art at an absurd pace - a volcanic explosion of art!\n\nStats:\nBase: 3\n Crafting: 9\nArtistic: 18\nSpeed: 1</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
       <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
