@@ -23,7 +23,7 @@
     <defName>PRF_BeltsII</defName>
     <label>Basic Item Sorting</label>
     <baseCost>400</baseCost>
-    <description>Directing things to the proper area of the factory will streamline and diversify the factory layout.\nUnlocks: Simple puller, Growzone puller and Belt splitter for normal belts.</description>
+    <description>Directing things to the proper area of the factory will streamline and diversify the factory layout.\nUnlocks: Simple puller, growzone puller and belt splitter for normal belts.</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_BeltsI</li>
@@ -36,7 +36,7 @@
     <label>Advanced Item Sorting</label>
     <techLevel>Industrial</techLevel>
     <baseCost>500</baseCost>
-    <description>Sophisticated logistical implementation allows for advanced item sorting.\nUnlocks: Wall and underground belts, splitters; Smart hoppers; MKII, angle, and wall pullers.</description>
+    <description>Sophisticated logistical implementation allows for advanced item sorting.\nUnlocks: Wall and underground belts, splitters, smart hoppers, as well as MKII, angle, and wall pullers.</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_BeltsII</li>
