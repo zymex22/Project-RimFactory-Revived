@@ -305,7 +305,7 @@
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_OverclockedAutoAssembler</defName>
     <label>overclocked auto-assembler(S.A.L)</label>
-    <description>An auto-assembler which has been modified to emphasize speed over quality.  Any random idiot in your colony could do it better, but this machine works at a ridiculous rate and never takes breaks.\n\nStats:\nBase: 1\nSpeed: 5</description>
+    <description>An auto-assembler which has been modified to emphasize speed over quality.  Any random idiot in your colony could do better, but this machine works at a ridiculous rate and never takes breaks.\n\nStats:\nBase: 1\nSpeed: 5</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
     <graphicData>
       <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
