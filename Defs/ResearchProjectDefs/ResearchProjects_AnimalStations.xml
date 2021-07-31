@@ -13,7 +13,7 @@
     <defName>PRF_AnimalStations</defName>
     <label>animal stations I</label>
     <baseCost>1200</baseCost>
-    <description>First tier animal station technology allows animals with harvestable resources to be harvested automatically.</description>
+    <description>The first tier of animal station technology allows animals with harvestable resources to be harvested automatically.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
     </prerequisites>
@@ -25,7 +25,7 @@
     <defName>PRF_AnimalStationsII</defName>
     <label>animal stations II</label>
     <baseCost>1500</baseCost>
-    <description>Second tier animal station allows for more animal gathering and also auto animal slaugtering and breeding control.</description>
+    <description>The second tier of animal station techonlogy allows for more animal gathering and also automated animal slaugtering and breeding control.</description>
     <prerequisites>
       <li>PRF_AnimalStations</li>
       <li>PRF_CoreTierII</li>
@@ -39,7 +39,7 @@
     <label>animal stations III</label>
     <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
-    <description>third tier animal station allows for more animal gathering and also auto animal slaugtering and breeding control.</description>
+    <description>The third tier of animal station techonlogy allows for more and better automated animal gathering and control.</description>
     <prerequisites>
       <li>PRF_AnimalStationsII</li>
     </prerequisites>
