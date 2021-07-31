@@ -87,7 +87,7 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>A simplistic small crate that stores 16 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>A small and simplistic crate that stores 16 stacks. Items stored in the crate do not deteriorate.</description>
     <size>(2,1)</size>
     <rotatable>true</rotatable>
     <costList>
@@ -315,7 +315,7 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>Stores up to 768 stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.</description>
+    <description>A matter-energy conversion based storage unit which can hold up to 768 stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.  Don't break it.</description>
     <size>(3,3)</size>
     <pathCost>150</pathCost>
     <costList>
@@ -499,7 +499,7 @@
       <Flammability>1.0</Flammability>
       <Mass>30</Mass>
     </statBases>
-    <description>This modified I/O port allows you to push items directly into next cell, onto a belt, or anywhere else, saving space instead of using a puller.\n More of a output port than input/output.</description>
+    <description>This modified I/O port allows you to push items directly into next cell, onto a belt, or anywhere else, saving space instead of using a puller.\n More of an output port than input/output.</description>
     <costList>
       <ComponentSpacer>1</ComponentSpacer>
       <PRF_RoboticArm>1</PRF_RoboticArm>
@@ -572,7 +572,7 @@
         </filter>
       </defaultStorageSettings>
     </building>
-    <description>Belt Chute/hopper is used for pawns or drones to fill a facing belt without need for a stockpile and a puller. Basicly its a small stockpile that automaticly push onto a belt.</description>
+    <description>This belt chute/hopper is used for pawns or drones to fill a facing belt without the need for a stockpile and a puller. Basically it's a small stockpile that automaticly pushes onto a belt.</description>
     <size>(1,1)</size>
      <tickerType>Normal</tickerType>
      <placeWorkers>
