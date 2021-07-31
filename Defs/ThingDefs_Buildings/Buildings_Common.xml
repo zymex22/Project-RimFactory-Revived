@@ -82,7 +82,7 @@
     <defName>PRF_ResearchTerminal</defName>
     <label>factory research terminal</label>
     <thingClass>Building_ResearchBench</thingClass>
-    <description>This is a linkable like a multianalyzer but this one have have some special functions.\nIt work as a Simple research table and can research any research not require HitechResearchBench.\nIt will ofcourse also boost your research speed.\nThis is needed for Late tiers Factory research.</description>
+    <description>Similar to a multi-analyzer, this device links to high-tech research benches, but with some additional capabilities.  \nIt works as a simple research table and can research any research that does not require a high-tech research bench itself.\nIn addition to boosting research speed, this terminal is required for certain high-end factory research.</description>
     <uiIconScale>0.85</uiIconScale>
     <graphicData>
       <texPath>Common/Terminal</texPath>
@@ -169,7 +169,7 @@
     <defName>TableRoboticMachining</defName>
     <label>robotic machining table</label>
     <thingClass>Building_WorkTable</thingClass>
-    <description>A work station for creating parts, frames and more for automation buildings.</description>
+    <description>A work station for creating parts, frames, and more for automation buildings.</description>
     <graphicData>
       <texPath>Common/TableRobotics</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
