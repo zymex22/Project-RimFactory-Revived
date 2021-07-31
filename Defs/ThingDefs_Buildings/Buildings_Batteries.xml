@@ -193,7 +193,7 @@
       <Flammability>1.0</Flammability>
       <Beauty>50</Beauty>
     </statBases>
-    <description>A tremendously powerful battery capable of storing 256,000 watt-days of power.  The integrated AI management system reduces inefficiency losses to effectively zero, and the device will not ever short-circuit in the rain or break down, and it's surprisingly beautiful to look at.  Watch out for a short-circuit though!</description>
+    <description>A tremendously powerful battery capable of storing 256,000 watt-days of power.  The integrated AI management system reduces inefficiency losses to effectively zero, and the device is waterproof and will never break down, and it's surprisingly beautiful to look at.  Watch out for short-circuits though!</description>
     <size>(4,2)</size>
     <costList>
       <Steel>1000</Steel>
