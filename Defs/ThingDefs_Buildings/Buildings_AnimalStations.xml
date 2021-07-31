@@ -294,7 +294,7 @@
       <WorkToBuild>500</WorkToBuild>
     </statBases>
     <tickerType>Rare</tickerType>
-    <description>This is a advanced animal harvester that can harvest a wide range of products from animals, it has a frontfacing pull zone that can be made larger with powerbooster. and if RimFridge is installed its cooled to keep food from spoiling over time.</description>
+    <description>This is a advanced animal harvester that can harvest a wide range of products from animals, it has a frontfacing pull zone that can be made larger with powerbooster.  If RimFridge is installed it will cool food to keep from spoiling over time.</description>
     <size>(2,2)</size>
     <costList>
       <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
