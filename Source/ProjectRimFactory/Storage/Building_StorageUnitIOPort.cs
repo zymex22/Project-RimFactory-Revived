@@ -300,6 +300,7 @@ namespace ProjectRimFactory.Storage
                     //Transfre a item back if it is either too few or disallowed
                     if (currentItem != null && (!settings.AllowedToAccept(currentItem) || !OutputSettings.SatisfiesMin(currentItem.stackCount)) && boundStorageUnit.settings.AllowedToAccept(currentItem))
                     {
+                        currentItem.SetForbidden(false, false);
                         boundStorageUnit.RegisterNewItem(currentItem);
                     }
                     //Transfer the diffrence back if it is too much
@@ -308,7 +309,9 @@ namespace ProjectRimFactory.Storage
                         int splitCount = -OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit);
                         if (splitCount > 0)
                         {
-                            boundStorageUnit.RegisterNewItem(currentItem.SplitOff(splitCount));
+                            Thing returnThing = currentItem.SplitOff(splitCount);
+                            returnThing.SetForbidden(false, false);
+                            boundStorageUnit.RegisterNewItem(returnThing);
                         }
                     }
                     if (currentItem != null)
@@ -513,6 +516,7 @@ namespace ProjectRimFactory.Storage
                     //Transfre a item back if it is either too few or disallowed
                     if (currentItem != null && (!settings.AllowedToAccept(currentItem) || !OutputSettings.SatisfiesMin(currentItem.stackCount)) && boundStorageUnit.settings.AllowedToAccept(currentItem))
                     {
+                        currentItem.SetForbidden(false, false);
                         boundStorageUnit.RegisterNewItem(currentItem);
                     }
                     //Transfer the diffrence back if it is too much
@@ -521,7 +525,9 @@ namespace ProjectRimFactory.Storage
                         int splitCount = -OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit);
                         if (splitCount > 0)
                         {
-                            boundStorageUnit.RegisterNewItem(currentItem.SplitOff(splitCount));
+                            Thing returnThing = currentItem.SplitOff(splitCount);
+                            returnThing.SetForbidden(false, false);
+                            boundStorageUnit.RegisterNewItem(returnThing);
                         }
                     }
                     if (currentItem != null)
