@@ -403,7 +403,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 ReflectionUtility.drill_lastUsedTick.SetValue(compDeepDrill, Find.TickManager.TicksGame);
                 if ((float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) > 10000f)
                 {
-                    ReflectionUtility.drill_TryProducePortion.Invoke(compDeepDrill, new object[] { ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) });
+                    ReflectionUtility.drill_TryProducePortion.Invoke(compDeepDrill, new object[] { ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill),null });
                     ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, 0);
                     ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, 0);
                 }
