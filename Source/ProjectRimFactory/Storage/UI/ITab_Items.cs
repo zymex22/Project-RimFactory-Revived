@@ -375,7 +375,7 @@ namespace ProjectRimFactory.Storage.UI
                     }
                 }
 
-                
+                string cantEquipReason = null;
                 FloatMenuOption item4;
                 if (equipment.def.IsWeapon && pawn.WorkTagIsDisabled(WorkTags.Violent))
                 {
@@ -392,6 +392,10 @@ namespace ProjectRimFactory.Storage.UI
                 {
                     item4 = new FloatMenuOption(
                         "CannotEquip".Translate(labelShort) + " (" + "Incapable".Translate() + ")", null);
+                }else if (!EquipmentUtility.CanEquip(thing,pawn, out cantEquipReason))
+                {
+                    item4 = new FloatMenuOption(
+                        "CannotEquip".Translate(labelShort) + " (" + cantEquipReason + ")", null);
                 }
                 else
                 {
