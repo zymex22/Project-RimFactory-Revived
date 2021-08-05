@@ -33,6 +33,7 @@
     </li>
   </modDependencies>
   <loadBefore>    <!-- Load this mod BEFORE: (packageId) -->
+    <li>aRandomKiwi.PowerPP</li>
   </loadBefore>
   <loadAfter>
     <li>brrainz.harmony</li>
