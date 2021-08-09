@@ -24,10 +24,13 @@ namespace ProjectRimFactory.Storage
         private string uniqueName;
         public Building Building => this;
 
+        //Initialized at spawn
+        public DefModExtension_Crate ModExtension_Crate = null; 
+
         public abstract bool CanStoreMoreItems { get; }
         // The maximum number of item stacks at this.Position:
         //   One item on each cell and the rest multi-stacked on Position?
-        public int MaxNumberItemsInternal => (def.GetModExtension<DefModExtension_Crate>()?.limit ?? int.MaxValue)
+        public int MaxNumberItemsInternal => (ModExtension_Crate?.limit ?? int.MaxValue)
                                               - def.Size.Area + 1;
         public List<Thing> StoredItems => items;
         public int StoredItemsCount => items.Count;
@@ -35,7 +38,7 @@ namespace ProjectRimFactory.Storage
         public override string LabelCap => uniqueName ?? base.LabelCap;
         public virtual bool CanReceiveIO => true;
 
-        public bool ForbidPawnAccess => def.GetModExtension<DefModExtension_Crate>()?.forbidPawnAccess ?? false;
+        public bool ForbidPawnAccess => ModExtension_Crate?.forbidPawnAccess ?? false;
 
         public virtual bool ForbidPawnInput => ForbidPawnAccess;
 
@@ -55,10 +58,10 @@ namespace ProjectRimFactory.Storage
 
         public virtual bool ForbidPawnOutput => ForbidPawnAccess;
 
-        public virtual bool HideItems => def.GetModExtension<DefModExtension_Crate>()?.hideItems ?? false;
+        public virtual bool HideItems => ModExtension_Crate?.hideItems ?? false;
 
         public virtual bool HideRightClickMenus =>
-            def.GetModExtension<DefModExtension_Crate>()?.hideRightClickMenus ?? false;
+            ModExtension_Crate?.hideRightClickMenus ?? false;
 
         public void DeregisterPort(Building_StorageUnitIOBase port)
         {
@@ -134,6 +137,7 @@ namespace ProjectRimFactory.Storage
             base.ExposeData();
             Scribe_Collections.Look(ref ports, "ports", LookMode.Reference);
             Scribe_Values.Look(ref uniqueName, "uniqueName");
+            ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
         }
 
         public override string GetInspectString()
@@ -162,7 +166,9 @@ namespace ProjectRimFactory.Storage
         {
             base.SpawnSetup(map, respawningAfterLoad);
             Map.GetComponent<PRFMapComponent>().AddIHideRightClickMenu(this);
+            ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
             RefreshStorage();
+
         }
 
         public override void DrawGUIOverlay()

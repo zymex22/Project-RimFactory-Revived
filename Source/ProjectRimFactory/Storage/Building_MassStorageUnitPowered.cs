@@ -14,9 +14,12 @@ namespace ProjectRimFactory.Storage
     {
         private static Texture2D StoragePawnAccessSwitchIcon = ContentFinder<Texture2D>.Get("PRFUi/dsu", true);
 
-        public override bool CanStoreMoreItems => GetComp<CompPowerTrader>().PowerOn && this.Spawned &&
-            (!def.HasModExtension<DefModExtension_Crate>() || Position.GetThingList(Map).Count(t => t.def.category == ThingCategory.Item) < MaxNumberItemsInternal);
-        public override bool CanReceiveIO => base.CanReceiveIO && GetComp<CompPowerTrader>().PowerOn && this.Spawned;
+        //Initialized on spawn
+        private CompPowerTrader compPowerTrader = null;
+
+        public override bool CanStoreMoreItems => compPowerTrader.PowerOn && this.Spawned &&
+            (ModExtension_Crate == null || StoredItemsCount < MaxNumberItemsInternal);
+        public override bool CanReceiveIO => base.CanReceiveIO && compPowerTrader.PowerOn && this.Spawned;
 
         public override bool ForbidPawnInput => this.ForbidPawnAccess || !this.pawnAccess || !this.CanStoreMoreItems;
 
@@ -36,13 +39,15 @@ namespace ProjectRimFactory.Storage
         }
         public void UpdatePowerConsumption()
         {
-            GetComp<CompPowerTrader>().PowerOutput = -10 * StoredItemsCount;
+            compPowerTrader ??= GetComp<CompPowerTrader>();
+            compPowerTrader.PowerOutput = -10 * StoredItemsCount;
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_Values.Look(ref pawnAccess, "pawnAccess", true);
+            compPowerTrader ??= GetComp<CompPowerTrader>();
         }
 
         protected override void ReceiveCompSignal(string signal)
@@ -70,6 +75,7 @@ namespace ProjectRimFactory.Storage
         public override void PostMapInit()
         {
             base.PostMapInit();
+            compPowerTrader ??= GetComp<CompPowerTrader>();
             this.RefreshStorage();
         }
 
