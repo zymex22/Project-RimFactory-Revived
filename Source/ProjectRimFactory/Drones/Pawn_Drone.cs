@@ -152,14 +152,14 @@ namespace ProjectRimFactory.Drones
 				{
 					caller.CallTrackerTick();
 				}
-				if (skills != null)
-				{
-					skills.SkillsTick();
-				}
-				if (abilities != null)
-				{
-					abilities.AbilitiesTick();
-				}
+				//if (skills != null)
+				//{
+				//	skills.SkillsTick();
+				//}
+				//if (abilities != null)
+				//{
+				//	abilities.AbilitiesTick();
+				//}
 				if (inventory != null)
 				{
 					inventory.InventoryTrackerTick();

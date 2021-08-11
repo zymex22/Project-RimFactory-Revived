@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text;
 using Verse;
 using Verse.AI;
-using System.Diagnostics;
 using ProjectRimFactory.Common;
 
 
@@ -75,8 +74,6 @@ namespace ProjectRimFactory.Drones
                         pawn.workSettings.SetPriority(def, 0);
                     }
                 }
-                //	sw1.Stop();
-                //	sw2.Start();
 
                 //Each call to TryIssueJobPackageDrone takes an Average of 1ms
                 result = TryIssueJobPackageDrone(pawn, true).Job;
@@ -84,8 +81,6 @@ namespace ProjectRimFactory.Drones
                 {
                     result = TryIssueJobPackageDrone(pawn, false).Job;
                 }
-                //sw2.Stop();
-                //Log.Message("Prep: " + sw1.ElapsedMilliseconds + "ms   | TryGetJob: " + sw2.ElapsedMilliseconds + "ms" );
 
                 pawn.Destroy();
                 Notify_DroneGained();
@@ -100,11 +95,6 @@ namespace ProjectRimFactory.Drones
 
         public ThinkResult TryIssueJobPackageDrone(Pawn pawn, bool emergency)
         {
-
-
-
-
-
             //You can't prioritize Drones to work a specific Cell
             //if (emergency && pawn.mindState.priorityWork.IsPrioritized)
             //{
@@ -212,9 +202,6 @@ namespace ProjectRimFactory.Drones
                             maxPathDanger = scanner.MaxPathDanger(pawn);
                             IEnumerable<IntVec3> enumerable4 = WorkScannerHelper.TryGetWorkCells(scanner, pawn); //scanner.PotentialWorkCellsGlobal(pawn);
                             IList<IntVec3> list2;
-
-                            //
-
 
                             cellcnt = 0;
                             cellcntnew = 0;
