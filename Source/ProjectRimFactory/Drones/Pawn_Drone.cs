@@ -8,6 +8,7 @@ using Verse.AI;
 using ProjectRimFactory.Common;
 using UnityEngine;
 using ProjectRimFactory.SAL3;
+using System.Diagnostics;
 
 namespace ProjectRimFactory.Drones
 {
@@ -64,6 +65,150 @@ namespace ProjectRimFactory.Drones
             playerSettings.AreaRestriction = this.station.droneAllowedArea;
         }
 
+
+
+        private void baseTick()
+        {
+            //if (DebugSettings.noAnimals && base.Spawned && RaceProps.Animal)
+            //{
+            //    Destroy();
+            //    return;
+            //}
+            //((ThingWithComps)this).Tick();
+            if (AllComps != null)
+            {
+                int i = 0;
+                for (int count = AllComps.Count; i < count; i++)
+                {
+                    AllComps[i].CompTick();
+                }
+            }
+            if (Find.TickManager.TicksGame % 250 == 0)
+			{
+				TickRare();
+			}
+            
+            //bool suspended = base.Suspended;
+            if (!false)
+			{
+                if (base.Spawned)
+                {
+                    pather.PatherTick();
+                }
+                if (base.Spawned)
+				{
+					stances.StanceTrackerTick();
+					verbTracker.VerbsTick();
+				}
+
+                if (base.Spawned)
+				{
+					roping.RopingTick();
+					natives.NativeVerbsTick();
+				}
+                
+                //This is requiered
+                if (base.Spawned)
+				{
+					jobs.JobTrackerTick();
+				}
+                
+
+
+
+                if (base.Spawned)
+				{
+					Drawer.DrawTrackerTick();
+					rotationTracker.RotationTrackerTick();
+				}
+                health.HealthTick();
+				if (!Dead)
+				{
+					mindState.MindStateTick();
+					carryTracker.CarryHandsTick();
+				}
+                
+			}
+            
+			//if (!Dead)
+			//{
+			//	needs.NeedsTrackerTick();
+			//}
+			if (!false)
+			{
+    //            if (equipment != null)
+    //            {
+    //                equipment.EquipmentTrackerTick();
+    //            }
+    //            if (apparel != null)
+    //            {
+    //                apparel.ApparelTrackerTick();
+    //            }
+    //            if (interactions != null && base.Spawned)
+				//{
+				//	interactions.InteractionsTrackerTick();
+				//}
+				if (caller != null)
+				{
+					caller.CallTrackerTick();
+				}
+				if (skills != null)
+				{
+					skills.SkillsTick();
+				}
+				if (abilities != null)
+				{
+					abilities.AbilitiesTick();
+				}
+				if (inventory != null)
+				{
+					inventory.InventoryTrackerTick();
+				}
+                //if (drafter != null)
+                //{
+                //    drafter.DraftControllerTick();
+                //}
+                //if (relations != null)
+                //{
+                //    relations.RelationsTrackerTick();
+                //}
+                //if (ModsConfig.RoyaltyActive && psychicEntropy != null)
+                //{
+                //    psychicEntropy.PsychicEntropyTrackerTick();
+                //}
+                //if (RaceProps.Humanlike)
+                //{
+                //    guest.GuestTrackerTick();
+                //}
+                //if (ideo != null)
+                //{
+                //    ideo.IdeoTrackerTick();
+                //}
+                //if (royalty != null && ModsConfig.RoyaltyActive)
+                //{
+                //    royalty.RoyaltyTrackerTick();
+                //}
+                //if (style != null && ModsConfig.IdeologyActive)
+                //{
+                //    style.StyleTrackerTick();
+                //}
+                //if (styleObserver != null && ModsConfig.IdeologyActive)
+                //{
+                //    styleObserver.StyleObserverTick();
+                //}
+                //if (surroundings != null && ModsConfig.IdeologyActive)
+                //{
+                //    surroundings.SurroundingsTrackerTick();
+                //}
+                //ageTracker.AgeTick();
+                //records.RecordsTick();
+            }
+            //guilt?.GuiltTrackerTick();
+
+
+
+        }
+
         public override void Tick()
         {
             //This is an issue
@@ -71,7 +216,11 @@ namespace ProjectRimFactory.Drones
             //This means that i am limited in what i can remove
 
             //JobTrackerTick is the biggest / only issue. its insanly high for some reason
-            base.Tick();
+            //base.Tick();
+            baseTick();
+
+
+
             if (Downed)
             {
                 Kill(null);
