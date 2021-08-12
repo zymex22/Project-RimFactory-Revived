@@ -65,6 +65,15 @@ namespace ProjectRimFactory.Drones
             playerSettings.AreaRestriction = this.station.droneAllowedArea;
         }
 
+#if DEBUG
+        Stopwatch sw_Comps = new Stopwatch();
+        Stopwatch sw_Rare = new Stopwatch();
+        Stopwatch sw_jobs = new Stopwatch();
+        Stopwatch sw_p1 = new Stopwatch();
+        Stopwatch sw_p2 = new Stopwatch();
+        Stopwatch sw_p3 = new Stopwatch();
+
+#endif
 
 
         private void baseTick()
@@ -75,6 +84,9 @@ namespace ProjectRimFactory.Drones
             //    return;
             //}
             //((ThingWithComps)this).Tick();
+#if DEBUG
+            sw_Comps.Restart();
+#endif
             if (AllComps != null)
             {
                 int i = 0;
@@ -83,11 +95,18 @@ namespace ProjectRimFactory.Drones
                     AllComps[i].CompTick();
                 }
             }
+#if DEBUG
+            sw_Comps.Stop();
+            sw_Rare.Restart();
+#endif
             if (Find.TickManager.TicksGame % 250 == 0)
 			{
 				TickRare();
 			}
-            
+#if DEBUG
+            sw_Rare.Stop();
+            sw_p1.Restart();
+#endif
             //bool suspended = base.Suspended;
             if (!false)
 			{
@@ -106,13 +125,21 @@ namespace ProjectRimFactory.Drones
 					roping.RopingTick();
 					natives.NativeVerbsTick();
 				}
-                
+
+#if DEBUG
+                sw_p1.Stop();
+                sw_jobs.Restart();
+#endif
                 //This is requiered
                 if (base.Spawned)
 				{
 					jobs.JobTrackerTick();
 				}
-                
+#if DEBUG
+                sw_jobs.Stop();
+                sw_p2.Restart();
+#endif
+
 
 
 
@@ -127,14 +154,18 @@ namespace ProjectRimFactory.Drones
 					mindState.MindStateTick();
 					carryTracker.CarryHandsTick();
 				}
-                
-			}
-            
-			//if (!Dead)
-			//{
-			//	needs.NeedsTrackerTick();
-			//}
-			if (!false)
+#if DEBUG
+                sw_p2.Stop();
+                sw_p3.Restart();
+#endif
+
+            }
+
+            //if (!Dead)
+            //{
+            //	needs.NeedsTrackerTick();
+            //}
+            if (!false)
 			{
     //            if (equipment != null)
     //            {
@@ -205,7 +236,18 @@ namespace ProjectRimFactory.Drones
             }
             //guilt?.GuiltTrackerTick();
 
+#if DEBUG
+            sw_p3.Stop();
+            
+            if (sw_p3.ElapsedMilliseconds > 2 || sw_p2.ElapsedMilliseconds > 2 || sw_p1.ElapsedMilliseconds > 2 || sw_jobs.ElapsedMilliseconds > 2 || sw_Rare.ElapsedMilliseconds > 2 || sw_Comps.ElapsedMilliseconds > 2)
+            {
+                Log.Message("sw_p1: " + sw_p1.Elapsed.TotalMilliseconds + " ms  | " + "sw_p2: " + sw_p2.Elapsed.TotalMilliseconds + " ms  | " + "sw_p3: " + sw_p3.Elapsed.TotalMilliseconds + " ms  | " +
+                    "sw_Comps: " + sw_Comps.Elapsed.TotalMilliseconds + " ms  | " +
+                    "sw_jobs: " + sw_jobs.Elapsed.TotalMilliseconds + " ms  | " +
+                    "sw_Rare: " + sw_Rare.Elapsed.TotalMilliseconds + " ms  | ");
+            }
 
+#endif
 
         }
 

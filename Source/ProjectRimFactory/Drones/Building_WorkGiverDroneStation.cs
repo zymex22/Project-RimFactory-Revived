@@ -7,12 +7,21 @@ using System.Text;
 using Verse;
 using Verse.AI;
 using ProjectRimFactory.Common;
+using System.Diagnostics;
 
 
 namespace ProjectRimFactory.Drones
 {
     public abstract class Building_WorkGiverDroneStation : Building_DroneStation
     {
+#if DEBUG
+        Stopwatch sw_Thing = new Stopwatch();
+        Stopwatch sw_Cell = new Stopwatch();
+        Stopwatch sw_Skip = new Stopwatch();
+        Stopwatch sw = new Stopwatch();
+
+#endif
+
         public virtual IEnumerable<WorkTypeDef> WorkTypes
         {
             get
@@ -95,6 +104,9 @@ namespace ProjectRimFactory.Drones
 
         public ThinkResult TryIssueJobPackageDrone(Pawn pawn, bool emergency)
         {
+#if DEBUG
+            sw.Restart();
+#endif
             //You can't prioritize Drones to work a specific Cell
             //if (emergency && pawn.mindState.priorityWork.IsPrioritized)
             //{
@@ -138,6 +150,29 @@ namespace ProjectRimFactory.Drones
                     break;
                 }
 
+#if DEBUG
+                sw_Skip.Restart();
+#endif
+                //This can "help" with poorly implemented Job Givers by preventing execution for the most pare
+                if (workGiver.ShouldSkip(pawn))
+                {
+#if DEBUG
+                    sw_Skip.Stop();
+                    if (sw_Skip.ElapsedMilliseconds > 5)
+                    {
+                        Log.Message( "ShouldSkip took: " + sw_Skip.Elapsed.TotalMilliseconds + " ms  | for: " + workGiver);
+                    }
+#endif
+                    continue;
+                }
+#if DEBUG
+                sw_Skip.Stop();
+                if (sw_Skip.ElapsedMilliseconds > 5)
+                {
+                    Log.Message("ShouldSkip took: " + sw_Skip.Elapsed.TotalMilliseconds + " ms  | for: " + workGiver);
+                }
+#endif
+
                 //This should be always true for drones
                 //if (!PawnCanUseWorkGiver(pawn, workGiver))
                 //{
@@ -161,6 +196,9 @@ namespace ProjectRimFactory.Drones
                     {
                         if (scanner.def.scanThings)
                         {
+#if DEBUG
+                            sw_Thing.Restart();
+#endif
                             Predicate<Thing> validator = (Thing t) => !t.IsForbidden(pawn) && scanner.HasJobOnThing(pawn, t);
                             IEnumerable<Thing> enumerable = scanner.PotentialWorkThingsGlobal(pawn);
                             Thing thing;
@@ -191,9 +229,15 @@ namespace ProjectRimFactory.Drones
                                 bestTargetOfLastPriority = thing;
                                 scannerWhoProvidedTarget = scanner;
                             }
+#if DEBUG
+                            sw_Thing.Stop();
+#endif
                         }
                         if (scanner.def.scanCells)
                         {
+#if DEBUG
+                            sw_Cell.Restart();
+#endif
                             pawnPosition = pawn.Position;
                             closestDistSquared = 99999f;
                             bestPriority = float.MinValue;
@@ -223,8 +267,17 @@ namespace ProjectRimFactory.Drones
                                 }
 
                             }
+#if DEBUG
+                            sw_Cell.Stop();
+#endif
 
                         }
+#if DEBUG
+                        if (sw_Cell.ElapsedMilliseconds > 5 || sw_Thing.ElapsedMilliseconds > 5)
+                        {
+                            Log.Message("Cell: " + sw_Cell.Elapsed.TotalMilliseconds + " ms  | Thing: " + sw_Thing.Elapsed.TotalMilliseconds + " ms  | for: " + workGiver);
+                        }
+#endif
                     }
                     void ProcessCell(IntVec3 c)
                     {
@@ -280,6 +333,13 @@ namespace ProjectRimFactory.Drones
                     {
                         job3.workGiverDef = scannerWhoProvidedTarget.def;
                         WorkScannerHelper.NotifyUsedCell(scannerWhoProvidedTarget, bestTargetOfLastPriority.Cell,pawn);
+#if DEBUG
+                        sw.Stop();
+                        if (sw.ElapsedMilliseconds > 5)
+                        {
+                            Log.Message("Total: " + sw.Elapsed.TotalMilliseconds + " ms for: " + job3 + "  provided by: " + scannerWhoProvidedTarget);
+                        }
+#endif
                         return new ThinkResult(job3, null, list[j].def.tagToGive);
                     }
                     Log.ErrorOnce(string.Concat(scannerWhoProvidedTarget, " provided target ", bestTargetOfLastPriority, " but yielded no actual job for pawn ", pawn, ". The CanGiveJob and JobOnX methods may not be synchronized."), 6112651);
@@ -289,6 +349,13 @@ namespace ProjectRimFactory.Drones
             //Thats it
             //Log.Message("NoJob");
             WorkScannerHelper.NotifyNoJob(list,pawn);
+#if DEBUG
+            sw.Stop();
+            if (sw.ElapsedMilliseconds > 5)
+            {
+                Log.Message("Total: " + sw.Elapsed.TotalMilliseconds + " ms for NoJob");
+            }
+#endif
             return ThinkResult.NoJob;
         }
 #pragma warning restore
