@@ -102,12 +102,14 @@ namespace ProjectRimFactory.Storage
         {
             get
             {
-
-                //maybe we should cache currentItem
-                Thing currentItem = WorkPosition.GetFirstItem(Map);
-                if (currentItem != null && IOMode == StorageIOMode.Output && outputSettings.useMax)
+                if (IOMode == StorageIOMode.Output && outputSettings.useMax)
                 {
-                    return OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit) <= 0;
+                    //Only get currentItem if needed
+                    Thing currentItem = WorkPosition.GetFirstItem(Map);
+                    if (currentItem != null)
+                    {
+                        return OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit) <= 0;
+                    }
                 }
                 return false;
             }
