@@ -160,7 +160,7 @@ namespace ProjectRimFactory.Drones
                     sw_Skip.Stop();
                     if (sw_Skip.ElapsedMilliseconds > 5)
                     {
-                        Log.Message( "ShouldSkip took: " + sw_Skip.Elapsed.TotalMilliseconds + " ms  | for: " + workGiver);
+                        Debug.Message(Debug.Flag.DroneJobTimes , "ShouldSkip took: " + sw_Skip.Elapsed.TotalMilliseconds + " ms  | for: " + workGiver);
                     }
 #endif
                     continue;
@@ -169,7 +169,7 @@ namespace ProjectRimFactory.Drones
                 sw_Skip.Stop();
                 if (sw_Skip.ElapsedMilliseconds > 5)
                 {
-                    Log.Message("ShouldSkip took: " + sw_Skip.Elapsed.TotalMilliseconds + " ms  | for: " + workGiver);
+                    Debug.Message(Debug.Flag.DroneJobTimes, "ShouldSkip took: " + sw_Skip.Elapsed.TotalMilliseconds + " ms  | for: " + workGiver);
                 }
 #endif
 
@@ -275,7 +275,7 @@ namespace ProjectRimFactory.Drones
 #if DEBUG
                         if (sw_Cell.ElapsedMilliseconds > 5 || sw_Thing.ElapsedMilliseconds > 5)
                         {
-                            Log.Message("Cell: " + sw_Cell.Elapsed.TotalMilliseconds + " ms  | Thing: " + sw_Thing.Elapsed.TotalMilliseconds + " ms  | for: " + workGiver);
+                            Debug.Message(Debug.Flag.DroneJobTimes, "Cell: " + sw_Cell.Elapsed.TotalMilliseconds + " ms  | Thing: " + sw_Thing.Elapsed.TotalMilliseconds + " ms  | for: " + workGiver);
                         }
 #endif
                     }
@@ -337,7 +337,7 @@ namespace ProjectRimFactory.Drones
                         sw.Stop();
                         if (sw.ElapsedMilliseconds > 5)
                         {
-                            Log.Message("Total: " + sw.Elapsed.TotalMilliseconds + " ms for: " + job3 + "  provided by: " + scannerWhoProvidedTarget);
+                            Debug.Message(Debug.Flag.DroneJobTimes, "Total: " + sw.Elapsed.TotalMilliseconds + " ms for: " + job3 + "  provided by: " + scannerWhoProvidedTarget);
                         }
 #endif
                         return new ThinkResult(job3, null, list[j].def.tagToGive);
@@ -353,7 +353,7 @@ namespace ProjectRimFactory.Drones
             sw.Stop();
             if (sw.ElapsedMilliseconds > 5)
             {
-                Log.Message("Total: " + sw.Elapsed.TotalMilliseconds + " ms for NoJob");
+                Debug.Message(Debug.Flag.DroneJobTimes, "Total: " + sw.Elapsed.TotalMilliseconds + " ms for NoJob");
             }
 #endif
             return ThinkResult.NoJob;

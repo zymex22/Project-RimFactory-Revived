@@ -241,7 +241,7 @@ namespace ProjectRimFactory.Drones
             
             if (sw_p3.ElapsedMilliseconds > 2 || sw_p2.ElapsedMilliseconds > 2 || sw_p1.ElapsedMilliseconds > 2 || sw_jobs.ElapsedMilliseconds > 2 || sw_Rare.ElapsedMilliseconds > 2 || sw_Comps.ElapsedMilliseconds > 2)
             {
-                Log.Message("sw_p1: " + sw_p1.Elapsed.TotalMilliseconds + " ms  | " + "sw_p2: " + sw_p2.Elapsed.TotalMilliseconds + " ms  | " + "sw_p3: " + sw_p3.Elapsed.TotalMilliseconds + " ms  | " +
+                Debug.Message(Debug.Flag.DroneJobTimes, "sw_p1: " + sw_p1.Elapsed.TotalMilliseconds + " ms  | " + "sw_p2: " + sw_p2.Elapsed.TotalMilliseconds + " ms  | " + "sw_p3: " + sw_p3.Elapsed.TotalMilliseconds + " ms  | " +
                     "sw_Comps: " + sw_Comps.Elapsed.TotalMilliseconds + " ms  | " +
                     "sw_jobs: " + sw_jobs.Elapsed.TotalMilliseconds + " ms  | " +
                     "sw_Rare: " + sw_Rare.Elapsed.TotalMilliseconds + " ms  | ");
