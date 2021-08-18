@@ -339,7 +339,24 @@ namespace ProjectRimFactory.Common
                                                                      System.Reflection.BindingFlags.Instance)
                 .Invoke(((MainTabWindow_Architect)MainButtonDefOf.Architect.TabWindow), null);
 
-            CostListCalculator.Reset();
+            //Architect Icons
+            if (ModLister.HasActiveModWithName("Architect Icons"))
+            {
+                Type tab = Type.GetType("ArchitectIcons.MainTabWindow_Architect, ArchitectIcons, Version=1.2.0.0, Culture=en, PublicKeyToken=null", false);
+                if (tab == null)
+                {
+                    Log.Warning("Could not get type ArchitectIcons.MainTabWindow_Architect");
+                }
+                else
+                {
+                    tab.GetMethod("CacheDesPanels", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                        .Invoke(DefDatabase<MainButtonDef>.AllDefs.Where(i => i.defName == "Architect" && i.order == 1).First().TabWindow, null);
+                }
+            }
+
+
+
+
         }
 
         /// <summary>
