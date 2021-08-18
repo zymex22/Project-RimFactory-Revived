@@ -33,6 +33,10 @@
           <categories>
             <li>Root</li>
           </categories>
+          <disallowedCategories>
+            <li>Animals</li>
+            <li>Plants</li>
+          </disallowedCategories>
         </filter>
       </fixedStorageSettings>
     </building>
