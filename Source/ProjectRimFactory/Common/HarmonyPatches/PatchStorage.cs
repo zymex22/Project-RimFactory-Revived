@@ -68,7 +68,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
                 {
                     return false;
                 }
@@ -84,7 +84,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
                 {
                     return false;
                 }
@@ -100,7 +100,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetWithTickCache<IHideItem>(__instance.Map, __instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
                 {
                     return false;
                 }
@@ -113,6 +113,18 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         private static Dictionary<Tuple<Map, IntVec3, Type>, object> cache = new Dictionary<Tuple<Map, IntVec3, Type>, object>();
         private static int lastTick = 0;
+        private static Dictionary<Map, PRFMapComponent> mapComps = new Dictionary<Map, PRFMapComponent>();
+
+        public static PRFMapComponent GetPRFMapComponent (Map map)
+        {
+            PRFMapComponent outval = null;
+            if (!mapComps.TryGetValue(map,out outval))
+            {
+                outval = map.GetComponent<PRFMapComponent>();
+                mapComps.Add(map, outval);
+            }
+            return outval;
+        }
 
         public static T Get<T>(Map map, IntVec3 pos) where T : class
         {

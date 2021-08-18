@@ -262,14 +262,17 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             // already set, but just in case:
             this.products = thingOwnerInt.InnerListForReading;
+            map.GetComponent<PRFMapComponent>().RegisterIHideItemPos(this.Position, this);
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             var targets = AllNearbyLinkables().ToList();
+            this.Map.GetComponent<PRFMapComponent>().DeRegisterIHideItemPos(this.Position);
             base.DeSpawn(mode);
 
             targets.ForEach(x => x.Unlink(this));
+            
         }
         // What does this even mean for a building, anyway?
         public override bool CanStackWith(Thing other) {

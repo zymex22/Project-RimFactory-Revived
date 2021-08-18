@@ -15,6 +15,24 @@ namespace ProjectRimFactory.Common
         // iHideRightMenus: see HarmonyPatches/PatchStorage.cs
         public HashSet<IntVec3> iHideRightMenus = new HashSet<IntVec3>();
 
+        private Dictionary<IntVec3, HarmonyPatches.IHideItem> hideItemLocations = new Dictionary<IntVec3, HarmonyPatches.IHideItem>();
+
+        public void RegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
+        {
+            hideItemLocations.Add(pos, hideItem);
+        }
+        public void DeRegisterIHideItemPos(IntVec3 pos)
+        {
+            hideItemLocations.Remove(pos);
+        }
+
+        public HarmonyPatches.IHideItem CheckIHideItemPos(IntVec3 pos)
+        {
+            if (hideItemLocations.ContainsKey(pos)) return hideItemLocations[pos];
+            return null;
+        }
+
+
         public PRFMapComponent(Map map) : base(map)
         {
         }
