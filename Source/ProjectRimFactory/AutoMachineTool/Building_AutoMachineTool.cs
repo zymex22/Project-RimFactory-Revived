@@ -663,7 +663,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.bill = nextbill;
 
-                this.ingredients = things?.Select(t => t.thing.SplitOff(t.count)).ToList() ?? new List<Thing>();
+                this.ingredients = things?.Where(t => t.count > 0).Select(t => t.thing.SplitOff(t.count))?.ToList() ?? new List<Thing>();
 
                 //Get dominant ingredient
                 this.dominant = this.DominantIngredient(this.ingredients);
