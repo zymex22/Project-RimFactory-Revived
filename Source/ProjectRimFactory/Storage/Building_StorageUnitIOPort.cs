@@ -102,7 +102,7 @@ namespace ProjectRimFactory.Storage
         {
             get
             {
-                if (IOMode == StorageIOMode.Output && outputSettings.useMax)
+                if (IOMode == StorageIOMode.Output && OutputSettings.useMax)
                 {
                     //Only get currentItem if needed
                     Thing currentItem = WorkPosition.GetFirstItem(Map);
