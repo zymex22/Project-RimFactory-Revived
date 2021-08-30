@@ -3,11 +3,10 @@
 
   <!-- common -->
   <PRF.AutoMachineTool.MustInWall>Must be installed in a wall.</PRF.AutoMachineTool.MustInWall>
-  <PRF.AutoMachineTool.SelectOutputDirectionDesc>Specify the output destination of the finished product. If the output destination is part of the stockpiling zone and the finished product can be stored, it is output in it.
-Even if the output destination is in the stockpiling zone, the finished product can not be placed, but it is placed in the cell specified as the output destination.</PRF.AutoMachineTool.SelectOutputDirectionDesc>
+  <PRF.AutoMachineTool.SelectOutputDirectionDesc>Specify the output destination of the finished product. The finished product will be placed into the output zone, or into the relevant stockpile if the output zone overlaps with a valid stockpile for the output product.</PRF.AutoMachineTool.SelectOutputDirectionDesc>
 
   <PRF.AutoMachineTool.ForbidOutputItemLabel>Forbid output items</PRF.AutoMachineTool.ForbidOutputItemLabel>
-  <PRF.AutoMachineTool.ForbidOutputItemDesc>Machine tools forbid items that are output as finished goods, so that colonists are not involved.</PRF.AutoMachineTool.ForbidOutputItemDesc>
+  <PRF.AutoMachineTool.ForbidOutputItemDesc>The machine will automatically forbid items it outputs so that colonists will not attempt to move them manually.</PRF.AutoMachineTool.ForbidOutputItemDesc>
 
   <PRF.AutoMachineTool.OutputDirectionN>North</PRF.AutoMachineTool.OutputDirectionN>
   <PRF.AutoMachineTool.OutputDirectionNE>Northeast</PRF.AutoMachineTool.OutputDirectionNE>
@@ -40,7 +39,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
 
   <!-- PowerTab -->
   <PRF.AutoMachineTool.SupplyPower.TabName>Overclock</PRF.AutoMachineTool.SupplyPower.TabName>
-  <PRF.AutoMachineTool.SupplyPower.Description>Overclock power usage to increase WorkSpeed</PRF.AutoMachineTool.SupplyPower.Description>
+  <PRF.AutoMachineTool.SupplyPower.Description>Overclock power usage to increase Work Speed</PRF.AutoMachineTool.SupplyPower.Description>
   <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Overclock power usage to increase Work Range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
   <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Overclock Power For Speed ({0} W)</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
   <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Overclock Power For Range ({0} W)</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
@@ -70,12 +69,12 @@ Even if the output destination is in the stockpiling zone, the finished product 
 
   <!-- Slaughterhouse SettingTab -->
   <PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>Setting</PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.Description>Setting for slaughter target</PRF.AutoMachineTool.Slaughterhouse.Setting.Description>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>slaughter animals if checked.</PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>slaughter bonded animals if checked.</PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>slaughter pregnancy animals if checked.</PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>slaughter trained animals if checked.</PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>
-  <PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>Specify the number of {0} {1} to keep without slaughter.</PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.Description>Specify the slaughter target of this machine.</PRF.AutoMachineTool.Slaughterhouse.Setting.Description>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>Should this machine slaughter animals?</PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>Should this machine slaughter bonded animals?</PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>Should this machine slaughter pregnant animals?</PRF.AutoMachineTool.Slaughterhouse.Setting.PregnancyTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>Should this machine slaughter trained animals?</PRF.AutoMachineTool.Slaughterhouse.Setting.TrainedTip>
+  <PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>Specify the number of {0} {1} to keep without slaughtering.</PRF.AutoMachineTool.Slaughterhouse.Setting.KeepCountTip>
   <PRF.AutoMachineTool.Male>Male</PRF.AutoMachineTool.Male>
   <PRF.AutoMachineTool.Female>Female</PRF.AutoMachineTool.Female>
   <PRF.AutoMachineTool.None>None</PRF.AutoMachineTool.None>
@@ -87,10 +86,10 @@ Even if the output destination is in the stockpiling zone, the finished product 
   <PRF.AutoMachineTool.Puller.SwitchActiveLabel>Toggle Pulling</PRF.AutoMachineTool.Puller.SwitchActiveLabel>
   <PRF.NeedToTurnOnPuller>Puller is inactive until toggled on.</PRF.NeedToTurnOnPuller>
   <PRF.AutoMachineTool.Puller.SwitchActiveDesc>Switch the operating status On/Off.</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
-  <PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>Switch output side,</PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>
+  <PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>Switch output side.</PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>
   <PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>Switch output side.</PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>
-  <PRF.Puller.TakeForbiddenItems>Pull forbidden</PRF.Puller.TakeForbiddenItems>
-  <PRF.Puller.TakeForbiddenItemsDesc>If set, this puller will also take forbidden items.  If they were forbidden, the puller will change them to "allowed."  This is a per-puller setting.</PRF.Puller.TakeForbiddenItemsDesc>
+  <PRF.Puller.TakeForbiddenItems>Pull Forbidden</PRF.Puller.TakeForbiddenItems>
+  <PRF.Puller.TakeForbiddenItemsDesc>If set, this puller will also take forbidden items.  This will automatically unforbid all items taken by the puller.  This is a per-puller setting.</PRF.Puller.TakeForbiddenItemsDesc>
   <PRF.Puller.takeSingleItemsHmm>Take Single items at a time</PRF.Puller.takeSingleItemsHmm>
   <PRF.Puller.takeSingleItemsDesc>If set, this puller will only take a single item at a time.  Otherwise, it pulls entire stacks of items at once!  This is a per-puller setting.</PRF.Puller.takeSingleItemsDesc>
   <!-- FilterTab(puller) -->
@@ -104,10 +103,7 @@ Even if the output destination is in the stockpiling zone, the finished product 
 
   <!-- BeltConveyor -->
   <PRF_DropFromConveyorDesc>Drop the item on the conveyor onto the ground - somewhere off a conveyor. Obviously, this doesn't make sense for underground conveyors, but it's a lot easier to let you do this than it is to script pawns getting weird things unstuck from tunnels.</PRF_DropFromConveyorDesc>
-  <PRF.Conveyor.IsEndOfLineSetting>End of Line?</PRF.Conveyor.IsEndOfLineSetting>
   <PRF.Conveyor.Splitter.MustHaveActiveOutput>Splitters must have an active output link!</PRF.Conveyor.Splitter.MustHaveActiveOutput>
-  <PRF.Conveyor.IsEndOfLineSetting.Desc>Is this belt the end of its line?  If checked, it will hold onto items until something takes them.  If unchecked, it will send items on to the next conveyor or dump them on the ground (if there is room).</PRF.Conveyor.IsEndOfLineSetting.Desc>
-  <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine>  <!-- 1 line for Inspect Window -->
   <PRF.Conveyor.IsEndOfLineSetting>Holding Belt</PRF.Conveyor.IsEndOfLineSetting>
   <PRF.Conveyor.IsEndOfLineSetting.Desc>Is this belt the end of its line or unloading into a assembler?  If checked, it will hold onto items until something takes them.  If unchecked, it will send items on to the next conveyor or dump them on the ground (if there is room).</PRF.Conveyor.IsEndOfLineSetting.Desc>
   <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine>  <!-- 1 line for Inspect Window -->
