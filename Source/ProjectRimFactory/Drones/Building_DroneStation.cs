@@ -268,7 +268,7 @@ namespace ProjectRimFactory.Drones
 
         public static readonly Texture2D Cancel = ContentFinder<Texture2D>.Get("UI/Designators/Cancel", true);
         protected bool lockdown;
-        private string droneAreaSelectorLable = "Unrestricted\nSelect Area";
+        private string droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate("PRFDroneStationUnrestricted".Translate());
         protected DefModExtension_DroneStation extension;
         protected List<Pawn_Drone> spawnedDrones = new List<Pawn_Drone>();
 
@@ -395,7 +395,7 @@ namespace ProjectRimFactory.Drones
         {
             if (a == null)
             {
-                droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate("Unrestricted".Translate());
+                droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate("PRFDroneStationUnrestricted".Translate());
             }
             else
             {
