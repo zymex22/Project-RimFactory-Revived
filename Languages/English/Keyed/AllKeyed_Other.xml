@@ -38,6 +38,9 @@
   <PRFBoundStorageBuilding>Item source</PRFBoundStorageBuilding>
   <IOPort_Minimum_UseTooltip>When this is enabled, the I/O port will return the outputted item to the cargo platform if the item has less than X stack size. It will also only take items if there are enough items in storage to exceed the minimum.</IOPort_Minimum_UseTooltip>
   <IOPort_Maximum_UseTooltip>When this is enabled, the I/O port will stop taking items if either the stack is full, or the stack size is greater than or equal to X.</IOPort_Maximum_UseTooltip>
+  <IOPort_Minimum>Current minimum: {0}</IOPort_Minimum>
+  <IOPort_Maximum>Current maximum: {0}</IOPort_Maximum>
+
 
   <PRFNoDesc>No description.</PRFNoDesc>
 
@@ -109,6 +112,7 @@
   <PRFDroneStationLiftLockdownAll>Reactivate all</PRFDroneStationLiftLockdownAll>
   <PRFDroneStationLiftLockdownAllDesc>Reactivate all drone stations on the map.</PRFDroneStationLiftLockdownAllDesc>
   <PRFDroneStationSelectArea>{0}\nSelect Area</PRFDroneStationSelectArea>
+  <PRFDroneStationUnrestricted>Unrestricted</PRFDroneStationUnrestricted>
 
   <ITab_DroneStation_labelKey>Settings</ITab_DroneStation_labelKey>
   <ITab_DroneStation_InfoLabel>Toggle Jobs for this Drone Station</ITab_DroneStation_InfoLabel>

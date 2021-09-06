@@ -77,6 +77,22 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
+    [HarmonyPatch(typeof(ThingWithComps), "DrawGUIOverlay")]
+    class Patch_ThingWithComps_DrawGUIOverlay
+    {
+        static bool Prefix(Thing __instance)
+        {
+            if (__instance.def.category == ThingCategory.Item)
+            {
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     [HarmonyPatch(typeof(ThingWithComps), "Draw")]
     class Patch_ThingWithComps_Draw
     {
@@ -95,6 +111,22 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     [HarmonyPatch(typeof(Thing), "Print")]
     class Patch_Thing_Print
+    {
+        static bool Prefix(Thing __instance, SectionLayer layer)
+        {
+            if (__instance.def.category == ThingCategory.Item)
+            {
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    [HarmonyPatch(typeof(MinifiedThing), "Print")]
+    class Patch_MinifiedThing_Print
     {
         static bool Prefix(Thing __instance, SectionLayer layer)
         {
