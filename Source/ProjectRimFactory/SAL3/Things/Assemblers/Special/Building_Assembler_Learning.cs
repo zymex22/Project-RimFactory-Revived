@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +24,14 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
                 return effectiveMaxSpeed - FactorOffset;
             }
         }
+
+        public float Progress => Mathf.Clamp01(manager.GetFactorFor(currentBillReport.bill.recipe) / MaxSpeed);
+
+        /// <summary>
+        /// Maps the 0..1 progress to -.1..1.1 scale
+        /// Slightly favors low quality at low progress, and high quality at high progress.
+        /// </summary>
+        public float NormalizedProgress => (Progress * 1.2f) - 0.1f;
         WorkSpeedFactorManager manager = new WorkSpeedFactorManager();
         protected override float ProductionSpeedFactor =>
             currentBillReport == null ? FactorOffset : manager.GetFactorFor(currentBillReport.bill.recipe) + FactorOffset;
@@ -33,17 +41,18 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
         //Calculate the Item Quality based on the ProductionSpeedFactor (Used by the Harmony Patch; see Patch_GenRecipe_MakeRecipeProducts.cs)
         QualityCategory ISetQualityDirectly.GetQuality(SkillDef relevantSkill)
         {
-            float centerX = ProductionSpeedFactor * 2f;
-            float num = Rand.Gaussian(centerX, 1.25f);
-            num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
-            
-            //TODO maybe modify the gaussian to be within the range
-            if (modExtension_LearningAssembler != null)
+            if (modExtension_LearningAssembler == null)
             {
-                num = Mathf.Clamp(num, (int)modExtension_LearningAssembler.MinQuality, (int)modExtension_LearningAssembler.MaxQuality);
+                Log.Error("Got a Building_Assembler_Learning without a modExtension_LearningAssembler, please report this error!");
+                return QualityCategory.Normal;
             }
-            
-            return (QualityCategory)((int)num);
+            float maxQualityFactor = (float)modExtension_LearningAssembler.MaxQuality;
+            float centerX = NormalizedProgress * maxQualityFactor;
+            float expectedQuality = Rand.Gaussian(centerX, 1.25f);
+
+            expectedQuality = Mathf.Clamp(expectedQuality, (int)modExtension_LearningAssembler.MinQuality, (int)modExtension_LearningAssembler.MaxQuality);
+
+            return (QualityCategory)((int)expectedQuality);
         }
 
         public override void Tick()
