@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
-    public class Building_Assembler_Learning : Building_SmartAssembler , ISetQualityDirectly
+    public class Building_Assembler_Learning : Building_SmartAssembler, ISetQualityDirectly
     {
         public float FactorOffset
         {
@@ -58,7 +58,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
                 }
 
 
-                    manager.IncreaseWeight(currentBillReport.bill.recipe, 0.001f * currentBillReport.bill.recipe.workSkillLearnFactor);
+                manager.IncreaseWeight(currentBillReport.bill.recipe, 0.001f * currentBillReport.bill.recipe.workSkillLearnFactor);
             }
         }
         public override string GetInspectString()
@@ -67,7 +67,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             stringBuilder.AppendLine(base.GetInspectString());
             if (currentBillReport != null)
             {
-                stringBuilder.AppendLine("SALCurrentProductionSpeed".Translate(currentBillReport.bill.recipe.label,ProductionSpeedFactor.ToStringPercent()));
+                stringBuilder.AppendLine("SALCurrentProductionSpeed".Translate(currentBillReport.bill.recipe.label, ProductionSpeedFactor.ToStringPercent()));
             }
             return stringBuilder.ToString().TrimEndNewlines();
         }
@@ -82,7 +82,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             {
                 yield return option;
             }
-            yield return new FloatMenuOption("View active skills", () => {
+            yield return new FloatMenuOption("View active skills", () =>
+            {
                 manager.TrimUnnecessaryFactors();
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.AppendLine("Active skills ranked descending:");
