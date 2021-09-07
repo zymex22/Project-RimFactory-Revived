@@ -15,10 +15,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
     {
         public float FactorOffset => modExtension_LearningAssembler?.MinSpeed ?? 0.5f;
 
+        public float MaxSpeed
         {
             get
             {
-                return modExtension_LearningAssembler?.MinSpeed ?? 0.5f;
+                var effectiveMaxSpeed = modExtension_LearningAssembler?.MaxSpeed ?? float.PositiveInfinity;
+
+                return effectiveMaxSpeed - FactorOffset;
             }
         }
         WorkSpeedFactorManager manager = new WorkSpeedFactorManager();
@@ -48,7 +51,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             base.Tick();
             if (currentBillReport != null && this.IsHashIntervalTick(60) && this.Active)
             {
-                if (modExtension_LearningAssembler != null && modExtension_LearningAssembler?.MaxSpeed <= manager.GetFactorFor(currentBillReport.bill.recipe))
+                if (modExtension_LearningAssembler != null && MaxSpeed <= manager.GetFactorFor(currentBillReport.bill.recipe))
                 {
                     return;
                 }
