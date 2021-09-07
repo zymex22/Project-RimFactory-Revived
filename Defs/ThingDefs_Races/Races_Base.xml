@@ -44,6 +44,7 @@
       <ComfyTemperatureMax>250</ComfyTemperatureMax>
       <LeatherAmount>25</LeatherAmount>
       <Mass>20</Mass>
+      <FilthRate>0</FilthRate>
     </statBases>
     <inspectorTabs>
       <!-- 
