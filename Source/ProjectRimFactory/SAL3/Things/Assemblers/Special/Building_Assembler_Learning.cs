@@ -13,7 +13,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
     public class Building_Assembler_Learning : Building_SmartAssembler, ISetQualityDirectly
     {
-        public float FactorOffset
+        public float FactorOffset => modExtension_LearningAssembler?.MinSpeed ?? 0.5f;
+
         {
             get
             {
@@ -21,13 +22,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             }
         }
         WorkSpeedFactorManager manager = new WorkSpeedFactorManager();
-        protected override float ProductionSpeedFactor
-        {
-            get
-            {
-                return currentBillReport == null ? FactorOffset : manager.GetFactorFor(currentBillReport.bill.recipe) + FactorOffset;
-            }
-        }
+        protected override float ProductionSpeedFactor =>
+            currentBillReport == null ? FactorOffset : manager.GetFactorFor(currentBillReport.bill.recipe) + FactorOffset;
 
         private ModExtension_LearningAssembler modExtension_LearningAssembler => this.def.GetModExtension<ModExtension_LearningAssembler>();
 
