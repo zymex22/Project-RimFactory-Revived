@@ -11,40 +11,48 @@ using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
-    public class Building_Assembler_Learning : Building_SmartAssembler , ISetQualityDirectly
+    public class Building_Assembler_Learning : Building_SmartAssembler, ISetQualityDirectly
     {
-        public float FactorOffset
+        public float FactorOffset => modExtension_LearningAssembler?.MinSpeed ?? 0.5f;
+
+        public float MaxSpeed
         {
             get
             {
-                return modExtension_LearningAssembler?.MinSpeed ?? 0.5f;
+                var effectiveMaxSpeed = modExtension_LearningAssembler?.MaxSpeed ?? float.PositiveInfinity;
+
+                return effectiveMaxSpeed - FactorOffset;
             }
         }
+
+        public float Progress => Mathf.Clamp01(manager.GetFactorFor(currentBillReport.bill.recipe) / MaxSpeed);
+
+        /// <summary>
+        /// Maps the 0..1 progress to -.1..1.1 scale
+        /// Slightly favors low quality at low progress, and high quality at high progress.
+        /// </summary>
+        public float NormalizedProgress => (Progress * 1.2f) - 0.1f;
         WorkSpeedFactorManager manager = new WorkSpeedFactorManager();
-        protected override float ProductionSpeedFactor
-        {
-            get
-            {
-                return currentBillReport == null ? FactorOffset : manager.GetFactorFor(currentBillReport.bill.recipe) + FactorOffset;
-            }
-        }
+        protected override float ProductionSpeedFactor =>
+            currentBillReport == null ? FactorOffset : manager.GetFactorFor(currentBillReport.bill.recipe) + FactorOffset;
 
         private ModExtension_LearningAssembler modExtension_LearningAssembler => this.def.GetModExtension<ModExtension_LearningAssembler>();
 
         //Calculate the Item Quality based on the ProductionSpeedFactor (Used by the Harmony Patch; see Patch_GenRecipe_MakeRecipeProducts.cs)
         QualityCategory ISetQualityDirectly.GetQuality(SkillDef relevantSkill)
         {
-            float centerX = ProductionSpeedFactor * 2f;
-            float num = Rand.Gaussian(centerX, 1.25f);
-            num = Mathf.Clamp(num, 0f, QualityUtility.AllQualityCategories.Count - 0.5f);
-            
-            //TODO maybe modify the gaussian to be within the range
-            if (modExtension_LearningAssembler != null)
+            if (modExtension_LearningAssembler == null)
             {
-                num = Mathf.Clamp(num, (int)modExtension_LearningAssembler.MinQuality, (int)modExtension_LearningAssembler.MaxQuality);
+                Log.Error("Got a Building_Assembler_Learning without a modExtension_LearningAssembler, please report this error!");
+                return QualityCategory.Normal;
             }
-            
-            return (QualityCategory)((int)num);
+            float maxQualityFactor = (float)modExtension_LearningAssembler.MaxQuality;
+            float centerX = NormalizedProgress * maxQualityFactor;
+            float expectedQuality = Rand.Gaussian(centerX, 1.25f);
+
+            expectedQuality = Mathf.Clamp(expectedQuality, (int)modExtension_LearningAssembler.MinQuality, (int)modExtension_LearningAssembler.MaxQuality);
+
+            return (QualityCategory)((int)expectedQuality);
         }
 
         public override void Tick()
@@ -52,13 +60,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             base.Tick();
             if (currentBillReport != null && this.IsHashIntervalTick(60) && this.Active)
             {
-                if (modExtension_LearningAssembler != null && modExtension_LearningAssembler?.MaxSpeed <= manager.GetFactorFor(currentBillReport.bill.recipe))
+                if (modExtension_LearningAssembler != null && MaxSpeed <= manager.GetFactorFor(currentBillReport.bill.recipe))
                 {
                     return;
                 }
 
 
-                    manager.IncreaseWeight(currentBillReport.bill.recipe, 0.001f * currentBillReport.bill.recipe.workSkillLearnFactor);
+                manager.IncreaseWeight(currentBillReport.bill.recipe, 0.001f * currentBillReport.bill.recipe.workSkillLearnFactor);
             }
         }
         public override string GetInspectString()
@@ -67,7 +75,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             stringBuilder.AppendLine(base.GetInspectString());
             if (currentBillReport != null)
             {
-                stringBuilder.AppendLine("SALCurrentProductionSpeed".Translate(currentBillReport.bill.recipe.label,ProductionSpeedFactor.ToStringPercent()));
+                stringBuilder.AppendLine("SALCurrentProductionSpeed".Translate(currentBillReport.bill.recipe.label, ProductionSpeedFactor.ToStringPercent()));
             }
             return stringBuilder.ToString().TrimEndNewlines();
         }
@@ -82,7 +90,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             {
                 yield return option;
             }
-            yield return new FloatMenuOption("View active skills", () => {
+            yield return new FloatMenuOption("View active skills", () =>
+            {
                 manager.TrimUnnecessaryFactors();
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.AppendLine("Active skills ranked descending:");
