@@ -72,7 +72,7 @@ namespace ProjectRimFactory.Storage.UI
             }
             if (outputSettings.max < outputSettings.min)
             {
-                maxBufferString = outputSettings.min.ToString();
+                maxBufferString = minBufferString;
             }
             list.Gap();
             list.CheckboxLabeled("SmartHopper_Maximum_Label".Translate(), ref outputSettings.useMax, outputSettings.maxTooltip.Translate());
@@ -90,7 +90,7 @@ namespace ProjectRimFactory.Storage.UI
             }
             if (outputSettings.min > outputSettings.max)
             { 
-                minBufferString = outputSettings.max.ToString();
+                minBufferString = maxBufferString;
             }
             list.End();
         }
