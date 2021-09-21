@@ -70,6 +70,10 @@ namespace ProjectRimFactory.Storage.UI
                 Text.Anchor = anchorBuffer;
                 Widgets.TextFieldNumeric(rectRight, ref outputSettings.min, ref minBufferString, 0);
             }
+            if (outputSettings.max < outputSettings.min)
+            {
+                maxBufferString = minBufferString;
+            }
             list.Gap();
             list.CheckboxLabeled("SmartHopper_Maximum_Label".Translate(), ref outputSettings.useMax, outputSettings.maxTooltip.Translate());
             list.Gap();
@@ -83,6 +87,10 @@ namespace ProjectRimFactory.Storage.UI
                 Widgets.Label(rectLeft, "SmartHopper_MaximumKeyword".Translate());
                 Text.Anchor = anchorBuffer;
                 Widgets.TextFieldNumeric(rectRight, ref outputSettings.max, ref maxBufferString, 0);
+            }
+            if (outputSettings.min > outputSettings.max)
+            { 
+                minBufferString = maxBufferString;
             }
             list.End();
         }
