@@ -16,6 +16,11 @@ namespace ProjectRimFactory.AutoMachineTool {
         public Graphic_Two() : base() {
         }
 
+        public override Graphic GetColoredVersion(Shader newShader, Color newColor, Color newColorTwo)
+        {
+            return this.NS;
+        }
+
         public override void Init(GraphicRequest req) {
             GraphicRequest newReq;
             var extraData = GraphicExtraData.Extract(req, out newReq);
