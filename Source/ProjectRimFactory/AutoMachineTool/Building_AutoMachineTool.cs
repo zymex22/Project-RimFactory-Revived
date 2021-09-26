@@ -710,7 +710,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
            
 
-            products = GenRecipe2.MakeRecipeProducts(this.bill.recipe, this, this.ingredients, this.dominant, my_workTable).ToList();
+            products = GenRecipe2.MakeRecipeProducts(this.bill.recipe, this, this.ingredients, this.dominant, my_workTable,this.bill.precept).ToList();
 
             this.ingredients.ForEach(i => bill.recipe.Worker.ConsumeIngredient(i, bill.recipe, Map));
             Option(this.unfinished).ForEach(u => u.Destroy(DestroyMode.Vanish));

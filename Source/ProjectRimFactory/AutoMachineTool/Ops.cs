@@ -275,6 +275,7 @@ namespace ProjectRimFactory.AutoMachineTool
             copy.suspended = bill.suspended;
             copy.targetCount = bill.targetCount;
             copy.unpauseWhenYouHave = bill.unpauseWhenYouHave;
+            copy.precept = bill.precept;
 
             return copy;
         }
