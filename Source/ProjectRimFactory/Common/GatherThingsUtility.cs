@@ -38,7 +38,7 @@ namespace ProjectRimFactory
             for (int i = thingList.Count - 1; i >= 0; i--)
             {
                 Thing t = thingList[i];
-                if (t is Building && t is IThingHolder holder)
+                if (t is Building && t is IThingHolder holder &&  !(t is Frame))
                 {
                     if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner)
                     {
