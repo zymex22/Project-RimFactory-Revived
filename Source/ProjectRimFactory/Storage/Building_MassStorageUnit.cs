@@ -159,7 +159,7 @@ namespace ProjectRimFactory.Storage
                     GenPlace.TryPlaceThing(thingsToSplurge[i], Position, Map, ThingPlaceMode.Near);
                 }
             Map.GetComponent<PRFMapComponent>().RemoveIHideRightClickMenu(this);
-            Map.GetComponent<PRFMapComponent>().DeRegisterIHideItemPos(this.Position);
+            Map.GetComponent<PRFMapComponent>().DeRegisterIHideItemPos(this.Position, this);
             base.DeSpawn(mode);
         }
 

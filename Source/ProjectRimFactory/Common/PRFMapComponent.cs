@@ -15,21 +15,41 @@ namespace ProjectRimFactory.Common
         // iHideRightMenus: see HarmonyPatches/PatchStorage.cs
         public HashSet<IntVec3> iHideRightMenus = new HashSet<IntVec3>();
 
-        private Dictionary<IntVec3, HarmonyPatches.IHideItem> hideItemLocations = new Dictionary<IntVec3, HarmonyPatches.IHideItem>();
+        private Dictionary<IntVec3,List< HarmonyPatches.IHideItem>> hideItemLocations = new Dictionary<IntVec3,List< HarmonyPatches.IHideItem>>();
 
         public void RegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
         {
-            hideItemLocations.Add(pos, hideItem);
+            if(hideItemLocations.ContainsKey(pos))
+            {
+                hideItemLocations[pos].Add(hideItem);
+            }
+            else
+            {
+                hideItemLocations.Add(pos,new List<HarmonyPatches.IHideItem>() { hideItem});
+            }
         }
-        public void DeRegisterIHideItemPos(IntVec3 pos)
+        public void DeRegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
         {
-            hideItemLocations.Remove(pos);
+            if (hideItemLocations[pos].Count <= 1)
+            {
+                hideItemLocations.Remove(pos);
+            }
+            else
+            {
+                hideItemLocations[pos].Remove(hideItem);
+            }
+            
         }
 
-        public HarmonyPatches.IHideItem CheckIHideItemPos(IntVec3 pos)
+        public List<HarmonyPatches.IHideItem> CheckIHideItemPos(IntVec3 pos)
         {
             if (hideItemLocations.ContainsKey(pos)) return hideItemLocations[pos];
             return null;
+        }
+
+        public bool ShouldHideItemsAtPos(IntVec3 pos)
+        {
+            return CheckIHideItemPos(pos)?.Any(t => t.HideItems) ?? false;
         }
 
 
