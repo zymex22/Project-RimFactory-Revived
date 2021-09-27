@@ -68,7 +68,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.ShouldHideItemsAtPos(__instance.Position) ?? false)
                 {
                     return false;
                 }
@@ -84,7 +84,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.ShouldHideItemsAtPos(__instance.Position) ?? false)
                 {
                     return false;
                 }
@@ -100,7 +100,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.ShouldHideItemsAtPos(__instance.Position) ?? false)
                 {
                     return false;
                 }
@@ -116,7 +116,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.ShouldHideItemsAtPos(__instance.Position) ?? false)
                 {
                     return false;
                 }
@@ -132,7 +132,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (__instance.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.CheckIHideItemPos(__instance.Position)?.HideItems ?? false)
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.ShouldHideItemsAtPos(__instance.Position) ?? false)
                 {
                     return false;
                 }
