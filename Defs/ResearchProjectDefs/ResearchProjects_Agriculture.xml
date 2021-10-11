@@ -39,7 +39,7 @@
     <defName>PRF_AnimalStations</defName>
     <label>Animal Stations I</label>
     <baseCost>1200</baseCost>
-    <description>First tier animal station technology allows animals with harvestable resources to be harvested automatically.</description>
+    <description>The first tier of animal station technology allows animals with harvestable resources to be harvested automatically.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
     </prerequisites>
@@ -65,7 +65,7 @@
     <defName>PRF_AnimalStationsII</defName>
     <label>Animal Stations II</label>
     <baseCost>1500</baseCost>
-    <description>Improved animal stations will allow for greater efficiency in animal husbandry and more automated precision slaughtering.</description>
+    <description>The second tier of animal station techonlogy allows for more animal gathering and also automated animal slaugtering and breeding control.</description>
     <prerequisites>
       <li>PRF_AnimalStations</li>
       <li>PRF_CoreTierII</li>
@@ -80,7 +80,7 @@
     <label>Advanced Automated Agriculture</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3000</baseCost>
-    <description>With the introduction of more complex mathematical applications and polished AI programming, drone cultivators can now work at double the efficiency and double the speed without the risk of faulty systems.</description>
+    <description>With advanced use of Mechanites and improved AI control, Cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
     <prerequisites>
       <li>PRF_AutomaticFarmingII</li>
       <li>PRF_CoreTierIII</li>
@@ -98,7 +98,7 @@
     <label>Animal Stations III</label>
     <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
-    <description>After numerous hours of research, colonists can now access some more advanced pieces of machinery dedicated towards husbandry and can perform their functions with pin-point precision and accuracy.</description>
+    <description>The third tier of animal station techonlogy allows for more and better automated animal gathering and control.</description>
     <prerequisites>
       <li>PRF_AnimalStationsII</li>
     </prerequisites>

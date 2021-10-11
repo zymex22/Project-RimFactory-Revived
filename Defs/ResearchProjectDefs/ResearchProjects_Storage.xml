@@ -36,12 +36,12 @@
   <!--============================================== IO Storage ============================================-->
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_StorageIO</defName>
-    <label>Thornsworth Holography</label>
+    <label>Thornsworth Holographic Storage</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
     <researchViewX>9</researchViewX>
     <researchViewY>1.9</researchViewY>
-    <description>By eliminating the need for the physical stockpiles and unattractive demands for space, the word "storage" will take on a completely new meaning for any colony.</description>
+    <description>The holographam artist Thornsworth produced masterpieces for many years despite gradually developing blindness. When holographic data storage was perfected, he was instrumental in developing Holographic Item Storage.\nAllows items to be stored in a Digital Storage Unit, which can transmit and receive wirelessly to any I/O port on the map.\n\nYou will be missed, Thornsworth.</description>
     <prerequisites>
       <li>PRF_SteelCrates</li>
       <li>PRF_CoreTierIII</li>

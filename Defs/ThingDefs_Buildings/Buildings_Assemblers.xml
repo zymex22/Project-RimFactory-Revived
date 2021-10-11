@@ -335,7 +335,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_II</defName>
     <label>Quantum Assembler (Prime)</label>
-    <description>This specialized quantum assembler can produce items of fascinating quality at the cost of some serious manufacturing speed. It also have a HUGE db. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>This Assembler is an upgraded version that works very slowly, but it starts at normal quality instead of awful and so will ramp up faster. It also has a huge database. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -419,7 +419,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_III</defName>
     <label>Quantum Assembler (Overclocked)</label>
-    <description>This specialized quantum assembler can produce items at incredible rates at the cost of quality. It can be overclocked to operate at much faster speeds if the user can maintain sufficient power levels for the machine to use. It also have a HUGE db. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>A high-end assembler that works at a high rate, starts faster, and can ramp up higher than other assemblers.  The output isn't very good quality though.  The database is huge. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>

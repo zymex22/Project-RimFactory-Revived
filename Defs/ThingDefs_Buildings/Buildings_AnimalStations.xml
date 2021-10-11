@@ -280,7 +280,7 @@
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_GenericAnimalHarvester_II</defName>
     <label>Spacer Animal Harvester</label>
-    <description>A highly advanced animal processing machine capable of efficiently harvesting a wide selection of husbandry products. It is designed to have a frontal pull zone, which can be increased with a power-slider. If Rimfridge is available, it will prevent products from spoiling over time.</description>
+    <description>This is a advanced animal harvester that can harvest a wide range of products from animals, it has a frontfacing pull zone that can be made larger with powerbooster.  If RimFridge is installed it will cool food to keep from spoiling over time.</description>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
       <texPath>Farm/HarvesterT3</texPath>
