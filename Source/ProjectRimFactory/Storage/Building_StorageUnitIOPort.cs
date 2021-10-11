@@ -147,6 +147,8 @@ namespace ProjectRimFactory.Storage
         {
             base.SpawnSetup(map, respawningAfterLoad);
             powerComp = GetComp<CompPowerTrader>();
+
+            if (boundStorageUnit?.Map != map) BoundStorageUnit = null;
         }
 
         protected override void ReceiveCompSignal(string signal)
