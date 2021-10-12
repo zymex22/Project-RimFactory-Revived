@@ -6,7 +6,7 @@
     <defName>PRF_DataDisk</defName>
     <label>Audio Tape Reel</label>
     <thingClass>ThingWithComps</thingClass>
-    <description>An either small or large reel used to roll up and physically store magnetic tapes. They are required to craft Portable Databases</description>
+    <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive... It's used to create Recipe DataBases for PRF Machines.</description>
     <graphicData>
       <texPath>SAL3/datadisk</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -110,7 +110,7 @@
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_MachineFrame_III</defName>
     <label>Advanced Machine Frame</label>
-    <description>An empty shell used for the construction of advanced machinery.</description>
+    <description>The empty shell of an advanced automation building.</description>
     <graphicData>
       <texPath>Common/MachineFrameLarge</texPath>
       <graphicClass>Graphic_Single</graphicClass>

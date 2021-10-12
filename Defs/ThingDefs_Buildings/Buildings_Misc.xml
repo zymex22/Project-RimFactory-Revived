@@ -35,7 +35,7 @@
     <defName>PRF_WallLight</defName>
     <label>Wall Lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
-    <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\n Good for small rooms or other tight packed rooms\nAlso capable of changeing color when placed if colored light are researched\n\nThis is added by Project RimFactory</description>
+    <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\n Good for small rooms or other tightly packed spaces.\nYou may change the color if you've researched Colored Lights.</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
     <graphicData>
       <texPath>Misc/WallLight</texPath>
@@ -124,7 +124,7 @@
     <defName>PRF_SunWallLight</defName>
     <label>Sun Wall Lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
-    <description>An industrial wall lamp which lights an area brightly enough to grow crops, but consumes a huge amount of power. Automatically turns itself off at night.\n\nThis is added by Project RimFactory</description>
+    <description>An industrial wall lamp which lights an area brightly enough to grow crops, but consumes a huge amount of power. Automatically turns itself off at night.</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
     <graphicData>
       <texPath>Misc/WallLight</texPath>
@@ -200,7 +200,7 @@
     <defName>PRF_IndustrialLamp</defName>
     <label>Industrial Lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
-    <description>An electrical lamp that lights an area.\nThis lamp are capable to light up a huge aread both indoor and outdoor to light up your factory hall.\nAlso capable of changeing color when placed if colored light are researched\n\nThis is added by Project RimFactory</description>
+    <description>A powerful electric lamp that lights a wide area.\nThis lamp lights up a huge aread both indoor and outdoor to light up your factory hall.\nYou may change the color if you've researched Colored Lights.</description>
     <fillPercent>0.50</fillPercent>
     <graphicData>
       <texPath>Misc/IndustrialLamp</texPath>
@@ -279,7 +279,7 @@
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_Floorspotlight</defName>
     <label>Floor Spotlight</label>
-    <description>An electrical lamp that lights an area.\nThis lamp are capable to be used in and outdoor.\nAlso capable of changeing color when placed if colored light are researched\n\nThis is added by Project RimFactory</description>
+    <description>An electrical lamp that lights an area.\nThis lamp works both inside and outside.\nComes in colored variants if you've researched Colored Lights.</description>
     <altitudeLayer>Floor</altitudeLayer>
     <passability>Standable</passability>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
