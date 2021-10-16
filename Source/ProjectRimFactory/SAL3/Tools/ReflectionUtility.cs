@@ -39,6 +39,9 @@ namespace ProjectRimFactory.SAL3
         public static readonly FieldInfo sal_reservations = typeof(Verse.AI.ReservationManager).GetField("reservations", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly FieldInfo sal_reservations2 = typeof(Verse.AI.ReservationManager).GetField("reservations", BindingFlags.NonPublic | BindingFlags.Static);
 
+        //Pod Launcher
+        public static readonly FieldInfo LandInSpecificCellGetCell = typeof(RimWorld.Planet.TransportPodsArrivalAction_LandInSpecificCell).GetField("cell", BindingFlags.NonPublic | BindingFlags.Instance);
+
 
     }
 }

@@ -38,6 +38,7 @@ namespace ProjectRimFactory
             SplitterArrow_Left = ContentFinder<Texture2D>.Get("PRFUi/LeftArrow", true);
             SplitterArrow_Down = ContentFinder<Texture2D>.Get("PRFUi/DownArrow", true);
 
+            LaunchCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/LaunchShip");
 
             DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
 
@@ -74,5 +75,7 @@ namespace ProjectRimFactory
         public static readonly Texture2D DeleteX;
 
         public static readonly Texture2D Arrow;
+
+        public static readonly Texture2D LaunchCommandTex;
     }
 }

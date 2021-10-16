@@ -1115,5 +1115,65 @@
       </blueprintGraphicData>-->
     </building>
   </ThingDef>
+  
+    <!--==================== PodLoader ====================-->
+  <ThingDef ParentName="PRF_BuildingBase">
+    <defName>PRF_PodLoader</defName>
+    <thingClass>ProjectRimFactory.Industry.Building_DropPodLoader</thingClass>
+    <label>PodLoader</label>
+    <description>A device to load a Drop Pod</description>
+    <graphicData>
+      <texPath>Storage/IO_Pusher</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>10</Mass>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>1000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <Beauty>-0.5</Beauty>
+      <MarketValue>170</MarketValue>
+    </statBases>
+    <size>(1,1)</size>
+    <tickerType>Normal</tickerType>
+    <placeWorkers>
+      <!-- <li>ProjectRimFactory.Storage.PlaceWorker_ItemSlide</li> -->
+    </placeWorkers>
+    <rotatable>true</rotatable>
+    <costList>
+      <WoodLog>40</WoodLog>
+      <Steel>10</Steel>
+    </costList>
+	<minifiedDef>MinifiedThing</minifiedDef>
+    <constructEffect>ConstructWood</constructEffect>
+    <researchPrerequisites>
+      <li>PRF_BeltsI</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>2</constructionSkillPrerequisite>
+    <modExtensions>
+    </modExtensions>
+    <inspectorTabs>
+	  <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+	  <li>ProjectRimFactory.Industry.UI.ITab_DropPodLoader</li>
+    </inspectorTabs>
+	<comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>100</powerPerStepSpeed>
+        <powerStepFactor>2</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>5~10</floatrange_Range>
+        <powerPerStepRange>300</powerPerStepRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+  </ThingDef>
+  
 
 </Defs>

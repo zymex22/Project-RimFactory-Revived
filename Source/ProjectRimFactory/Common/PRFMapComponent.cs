@@ -17,6 +17,22 @@ namespace ProjectRimFactory.Common
 
         private Dictionary<IntVec3,List< HarmonyPatches.IHideItem>> hideItemLocations = new Dictionary<IntVec3,List< HarmonyPatches.IHideItem>>();
 
+        private (IntVec3, ProjectRimFactory.Industry.Building_DropPodLoader) compLaunchableSelectTarget = (IntVec3.Invalid, null);
+
+        public void RegisterCompLaunchableSelectTarget(IntVec3 target, ProjectRimFactory.Industry.Building_DropPodLoader building)
+        {
+            compLaunchableSelectTarget = (target, building);
+        }
+        public void DeRegisterCompLaunchableSelectTarget()
+        {
+            compLaunchableSelectTarget = (IntVec3.Invalid, null);
+        }
+        public bool CompLaunchableSelectTargetAtCell(IntVec3 target , out ProjectRimFactory.Industry.Building_DropPodLoader building)
+        {
+            building = compLaunchableSelectTarget.Item2;
+            return compLaunchableSelectTarget.Item1 == target;
+        }
+
         public void RegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
         {
             if(hideItemLocations.ContainsKey(pos))
