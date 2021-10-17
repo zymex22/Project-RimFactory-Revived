@@ -19,6 +19,9 @@ namespace ProjectRimFactory.Industry
     public class Building_DropPodLoader : Building
     {
 
+
+
+
         public virtual IEnumerable<IntVec3> IngredientStackCells => this.GetComp<CompPowerWorkSetting>()?.GetRangeCells().Where(c => c.InBounds(this.Map)) ?? GenAdj.CellsAdjacent8Way(this).Where(c => c.InBounds(this.Map));
         protected IEnumerable<Thing> AllThingsInArea
         {
@@ -51,12 +54,23 @@ namespace ProjectRimFactory.Industry
         public IntVec3 FuelingPortPos => this.Position + this.Rotation.RighthandCell;
         public IntVec3 TransportPodPos => this.Position + this.Rotation.FacingCell;
 
+        //Vanilly only. SRTS & SOS2 use diffrent comps
         private CompLaunchable transportPod;
+        //MethodInfo to be used instead of CompLaunchable for modded content
+        private System.Reflection.MethodInfo methodInfo_TryLaunch;
+        private ThingComp instance_TryLaunch;
+
+        //Seems to be universal in use
+        private CompTransporter transporterComp;
+
 
         private int destinationTile;
         private IntVec3 destinationCell;
 
         DropPodLoaderMode loaderMode = DropPodLoaderMode.Manual;
+
+        DropPodType podType;
+
 
 
         public int DestinationTile { get => destinationTile; set  => destinationTile = value; }
@@ -70,10 +84,20 @@ namespace ProjectRimFactory.Industry
             Logic
         }
 
+        public enum DropPodType
+        {
+            Core,
+            SRTS,
+            SOS2
+        }
+
         private bool autoLaunch = false;
 
      
 
+        /// <summary>
+        /// TODO: Update for SRTS & SOS2 Support
+        /// </summary>
         public void ChoosingDestination()
         {
             transportPod.StartChoosingDestination();    
@@ -85,16 +109,32 @@ namespace ProjectRimFactory.Industry
         public void LaunchPod()
         {
             MapParent mapParent = Find.WorldObjects.MapParentAt(destinationTile);
-            transportPod.TryLaunch(destinationTile, new TransportPodsArrivalAction_LandInSpecificCell(mapParent, destinationCell, landInShuttle: false));
+            if (transportPod != null)
+            {
+                transportPod.TryLaunch(destinationTile, new TransportPodsArrivalAction_LandInSpecificCell(mapParent, destinationCell, landInShuttle: false));
+            }
+            else
+            {
+                if (methodInfo_TryLaunch is null)
+                {
+                    Log.Error("PRF - Building_DropPodLoader Fatal error methodInfo_TryLaunch && transportPod is null");
+                    return;
+                }
+                methodInfo_TryLaunch.Invoke(instance_TryLaunch, new object[] { destinationTile, new TransportPodsArrivalAction_LandInSpecificCell(mapParent, destinationCell, landInShuttle: false)});
+                var a = podType == 0;
+
+
+            }
+            
         }
 
         private void LoadPodManual()
         {
-            if (transportPod.AnythingLeftToLoad)
+            if (transporterComp.AnythingLeftToLoad)
             {
                 //TODO Fix that horrible Code
                 Thing targetThing = null;
-                foreach (TransferableOneWay transferableOneWay in transportPod.Transporter.leftToLoad)
+                foreach (TransferableOneWay transferableOneWay in transporterComp.leftToLoad)
                 {
                     foreach(Thing thing in transferableOneWay.things)
                     {
@@ -109,7 +149,7 @@ namespace ProjectRimFactory.Industry
 
                 if (targetThing != null)
                 {
-                    transportPod.Transporter.innerContainer.TryAdd(targetThing.SplitOff(1));
+                    transporterComp.innerContainer.TryAdd(targetThing.SplitOff(1));
                 }
             }
         }
@@ -174,13 +214,61 @@ namespace ProjectRimFactory.Industry
         }
 
         
+        private void findTransportPod()
+        {
+            
+            foreach (ThingWithComps thing in this.Map.thingGrid.ThingsAt(TransportPodPos))
+            {
+                //Find Vanilla Transport Port
+                CompLaunchable comp = thing.TryGetComp<CompLaunchable>();
+                if (comp != null)
+                {
+                    transportPod = comp;
+                    transporterComp = comp.Transporter;
+                    podType = DropPodType.Core;
+                    break;
+                }
+
+                //Find Comps for Modded Content
+                CompTransporter compT = thing.TryGetComp<CompTransporter>();
+                if (compT != null)
+                {
+                    transporterComp = compT;
+
+                    //Now find the Corrosponding Comp used for Launching
+                    instance_TryLaunch = thing.AllComps.Where(c => c.GetType().ToString() == "SRTS.CompLaunchableSRTS" || c.GetType().ToString() == "RimWorld.CompShuttleLaunchable").FirstOrDefault();
+                    
+                    
+                    if (instance_TryLaunch is null)
+                    {
+                        Log.Error("PRF - Building_DropPodLoader Fatal Error instance_TryLaunch is null");
+                        return;
+                    }else if (instance_TryLaunch.GetType().ToString() == "SRTS.CompLaunchableSRTS")
+                    {
+                        podType = DropPodType.SRTS;
+                        methodInfo_TryLaunch = ProjectRimFactory.SAL3.ReflectionUtility.SRTS_TryLaunch;
+                    }
+                    else
+                    {
+                        podType = DropPodType.SOS2;
+                        methodInfo_TryLaunch = ProjectRimFactory.SAL3.ReflectionUtility.SOS2_TryLaunch;
+
+                    }
+                }
+
+
+            }
+
+            //Find CompTransporter for Modded Content 
+            
+        }
 
         public override void Tick()
         {
             base.Tick();
-            if (this.IsHashIntervalTick(10) && transportPod != null)
+            if (this.IsHashIntervalTick(10) && transporterComp != null)
             {
-                if (! transportPod.Transporter.AnythingLeftToLoad)
+                if (! transporterComp.AnythingLeftToLoad)
                 {
                     //Ready to launch;
                     if (autoLaunch) LaunchPod();
@@ -191,20 +279,10 @@ namespace ProjectRimFactory.Industry
                     LoadPod();
                 }
             }
-            else if (this.IsHashIntervalTick(20) && transportPod == null)
+            else if (this.IsHashIntervalTick(20) && transporterComp == null)
             {
                 //Check for transportPod
-                foreach (ThingWithComps thing in this.Map.thingGrid.ThingsAt(TransportPodPos))
-                {
-                    CompLaunchable comp = thing.TryGetComp<CompLaunchable>();
-                    if (comp != null)
-                    {
-                        transportPod = comp;
-                        break;
-                    }
-                }
-                
-
+                findTransportPod();
             }
 
 

@@ -42,6 +42,10 @@ namespace ProjectRimFactory.SAL3
         //Pod Launcher
         public static readonly FieldInfo LandInSpecificCellGetCell = typeof(RimWorld.Planet.TransportPodsArrivalAction_LandInSpecificCell).GetField("cell", BindingFlags.NonPublic | BindingFlags.Instance);
 
+        public static readonly MethodInfo SRTS_TryLaunch = Type.GetType("SRTS.CompLaunchableSRTS.CompLaunchableSRTS, SRTS", false)?.GetMethod("TryLaunch", BindingFlags.Public | BindingFlags.Instance);
+
+        public static readonly MethodInfo SOS2_TryLaunch = Type.GetType("RimWorld.CompShuttleLaunchable.CompShuttleLaunchable, ShipsHaveInsides", false)?.GetMethod("TryLaunch", BindingFlags.Public | BindingFlags.Instance);
+
 
     }
 }
