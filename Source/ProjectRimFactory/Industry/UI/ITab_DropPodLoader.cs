@@ -36,7 +36,7 @@ namespace ProjectRimFactory.Industry.UI
 
             if (list.ButtonText("configure Target"))
             {
-                Machine.Map.GetComponent<PRFMapComponent>().RegisterCompLaunchableSelectTarget(Machine.TransportPodPos,Machine);
+                Machine.Map.GetComponent<PRFMapComponent>().RegisterCompLaunchableSelectTarget(Machine.TransportPodPosActual, Machine);
                 Machine.ChoosingDestination();
                 
             }

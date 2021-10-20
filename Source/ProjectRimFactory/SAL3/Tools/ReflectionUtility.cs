@@ -42,9 +42,13 @@ namespace ProjectRimFactory.SAL3
         //Pod Launcher
         public static readonly FieldInfo LandInSpecificCellGetCell = typeof(RimWorld.Planet.TransportPodsArrivalAction_LandInSpecificCell).GetField("cell", BindingFlags.NonPublic | BindingFlags.Instance);
 
-        public static readonly MethodInfo SRTS_TryLaunch = Type.GetType("SRTS.CompLaunchableSRTS.CompLaunchableSRTS, SRTS", false)?.GetMethod("TryLaunch", BindingFlags.Public | BindingFlags.Instance);
 
-        public static readonly MethodInfo SOS2_TryLaunch = Type.GetType("RimWorld.CompShuttleLaunchable.CompShuttleLaunchable, ShipsHaveInsides", false)?.GetMethod("TryLaunch", BindingFlags.Public | BindingFlags.Instance);
+
+        public static readonly MethodInfo SRTS_TryLaunch = HarmonyLib.AccessTools.Method("SRTS.CompLaunchableSRTS:TryLaunch");
+        public static readonly MethodInfo SOS2_TryLaunch = HarmonyLib.AccessTools.Method("RimWorld.CompShuttleLaunchable:TryLaunch");
+        public static readonly MethodInfo SRTS_StartChoosingDestination = HarmonyLib.AccessTools.Method("SRTS.CompLaunchableSRTS:StartChoosingDestination");
+        public static readonly MethodInfo SOS2_StartChoosingDestination = HarmonyLib.AccessTools.Method("RimWorld.CompShuttleLaunchable:StartChoosingDestination");
+
 
 
     }

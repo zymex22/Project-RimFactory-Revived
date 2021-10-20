@@ -53,11 +53,11 @@ namespace ProjectRimFactory.Industry
 
         public IntVec3 FuelingPortPos => this.Position + this.Rotation.RighthandCell;
         public IntVec3 TransportPodPos => this.Position + this.Rotation.FacingCell;
+        public IntVec3 TransportPodPosActual => transporterComp?.parent.Position ?? IntVec3.Invalid;
 
         //Vanilly only. SRTS & SOS2 use diffrent comps
         private CompLaunchable transportPod;
-        //MethodInfo to be used instead of CompLaunchable for modded content
-        private System.Reflection.MethodInfo methodInfo_TryLaunch;
+
         private ThingComp instance_TryLaunch;
 
         //Seems to be universal in use
@@ -100,7 +100,34 @@ namespace ProjectRimFactory.Industry
         /// </summary>
         public void ChoosingDestination()
         {
-            transportPod.StartChoosingDestination();    
+            if (transportPod is not null)
+            {
+                transportPod.StartChoosingDestination();
+            }
+            else
+            {
+                switch (podType)
+                {
+                    case DropPodType.Core:
+                        break;
+                    case DropPodType.SRTS:
+                        
+                        ProjectRimFactory.SAL3.ReflectionUtility.SRTS_StartChoosingDestination.Invoke(instance_TryLaunch, new object[] { });
+                        break;
+                    case DropPodType.SOS2:
+                        if (ProjectRimFactory.SAL3.ReflectionUtility.SOS2_StartChoosingDestination is null)
+                        {
+                            HarmonyLib.AccessTools.Method ("RimWorld.CompShuttleLaunchable:StartChoosingDestination").Invoke(instance_TryLaunch, new object[] { });
+                        }
+                        ProjectRimFactory.SAL3.ReflectionUtility.SOS2_StartChoosingDestination.Invoke(instance_TryLaunch, new object[] { });
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+
+            
         }
  
 
@@ -115,13 +142,24 @@ namespace ProjectRimFactory.Industry
             }
             else
             {
-                if (methodInfo_TryLaunch is null)
+                switch (podType)
                 {
-                    Log.Error("PRF - Building_DropPodLoader Fatal error methodInfo_TryLaunch && transportPod is null");
-                    return;
+                    case DropPodType.Core:
+                        break;
+                    case DropPodType.SRTS:
+                        ProjectRimFactory.SAL3.ReflectionUtility.SRTS_TryLaunch.Invoke(instance_TryLaunch, new object[] { destinationTile, new TransportPodsArrivalAction_LandInSpecificCell(mapParent, destinationCell, landInShuttle: false) ,null});
+
+                        break;
+                    case DropPodType.SOS2:
+                        ProjectRimFactory.SAL3.ReflectionUtility.SOS2_TryLaunch.Invoke(instance_TryLaunch, new object[] { new GlobalTargetInfo( destinationTile), new TransportPodsArrivalAction_LandInSpecificCell(mapParent, destinationCell, landInShuttle: false) });
+
+                        break;
+                    default:
+                        break;
                 }
-                methodInfo_TryLaunch.Invoke(instance_TryLaunch, new object[] { destinationTile, new TransportPodsArrivalAction_LandInSpecificCell(mapParent, destinationCell, landInShuttle: false)});
-                var a = podType == 0;
+
+
+                
 
 
             }
@@ -246,12 +284,10 @@ namespace ProjectRimFactory.Industry
                     }else if (instance_TryLaunch.GetType().ToString() == "SRTS.CompLaunchableSRTS")
                     {
                         podType = DropPodType.SRTS;
-                        methodInfo_TryLaunch = ProjectRimFactory.SAL3.ReflectionUtility.SRTS_TryLaunch;
                     }
                     else
                     {
                         podType = DropPodType.SOS2;
-                        methodInfo_TryLaunch = ProjectRimFactory.SAL3.ReflectionUtility.SOS2_TryLaunch;
 
                     }
                 }
