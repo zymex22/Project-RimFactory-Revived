@@ -430,16 +430,30 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             }
             for (int i = 0; i < currentBillReport.selected.Count; i++)
             {
-                if (currentBillReport.selected[i] is Corpse c && c.InnerPawn?.apparel != null)
+                if (currentBillReport.selected[i] is Corpse c)
                 {
-                    List<Apparel> apparel = new List<Apparel>(c.InnerPawn.apparel.WornApparel);
-                    for (int j = 0; j < apparel.Count; j++)
+                    if (c.InnerPawn?.apparel != null)
                     {
-                        thingQueue.Add(apparel[j]);
-                        c.InnerPawn.apparel.Remove(apparel[j]);
+                        List<Apparel> apparel = new List<Apparel>(c.InnerPawn.apparel.WornApparel);
+                        for (int j = 0; j < apparel.Count; j++)
+                        {
+                            thingQueue.Add(apparel[j]);
+                            c.InnerPawn.apparel.Remove(apparel[j]);
+                        }
                     }
+                    if (c.InnerPawn.inventory?.innerContainer != null)
+                    {
+                        List<Thing> things = c.InnerPawn.inventory.innerContainer.ToList();
+                        for (int j = 0; j < things.Count; j++)
+                        {
+                            thingQueue.Add(things[j]);
+                            c.InnerPawn.inventory.innerContainer.Remove(things[j]);
+                        }
+                    }
+
                 }
                 currentBillReport.bill.recipe.Worker.ConsumeIngredient(currentBillReport.selected[i], currentBillReport.bill.recipe, Map);
+
             }
 
             thingQueue.AddRange(from Thing t in currentBillReport.selected where t.Spawned select t);
