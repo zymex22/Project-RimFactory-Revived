@@ -16,6 +16,7 @@ namespace ProjectRimFactory.Drones.AI
             {
                 initAction = () =>
                 {
+                    pawn.inventory.DropAllNearPawn(pawn.Position);
                     pawn.Destroy();
                     ((Pawn_Drone)pawn).station.Notify_DroneGained();
                 },
