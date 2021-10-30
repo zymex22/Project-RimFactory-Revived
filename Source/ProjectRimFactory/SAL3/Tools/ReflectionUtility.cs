@@ -16,12 +16,9 @@ namespace ProjectRimFactory.SAL3
         public static readonly FieldInfo cachedDisabledWorkTypesPermanent = typeof(Pawn).GetField("cachedDisabledWorkTypesPermanent", BindingFlags.NonPublic | BindingFlags.Instance);
 
         public static readonly FieldInfo cachedTotallyDisabled = typeof(SkillRecord).GetField("cachedTotallyDisabled", BindingFlags.NonPublic | BindingFlags.Instance);
-        public static readonly FieldInfo ingredientsOrdered = typeof(WorkGiver_DoBill).GetField("ingredientsOrdered", BindingFlags.NonPublic | BindingFlags.Static);
         // RimWorld.WorkGier_DoBill's static TryFindBestBillIngredientsInSet: expects a list of (valid) available ingredients for a bill, 
         //   fills a list of chosen ingredients for that bill if it returns true
         public static readonly MethodInfo TryFindBestBillIngredientsInSet = typeof(WorkGiver_DoBill).GetMethod("TryFindBestBillIngredientsInSet", BindingFlags.NonPublic | BindingFlags.Static);
-        public static readonly MethodInfo MakeIngredientsListInProcessingOrder = typeof(WorkGiver_DoBill).GetMethod("MakeIngredientsListInProcessingOrder", BindingFlags.NonPublic | BindingFlags.Static);
-
         //For SAL Deep Drill Support
         public static readonly FieldInfo drill_portionProgress = typeof(CompDeepDrill).GetField("portionProgress", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly FieldInfo drill_portionYieldPct = typeof(CompDeepDrill).GetField("portionYieldPct", BindingFlags.NonPublic | BindingFlags.Instance);
