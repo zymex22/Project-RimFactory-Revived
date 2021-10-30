@@ -20,21 +20,27 @@ namespace ProjectRimFactory.Common
         {
             get
             {
+                if (possibleOutputs.Count == 0) initPossibleOutputs(); //This is impossible, but there is one report (one-off) of it.
                 return possibleOutputs[index %= possibleOutputs.Count];
             }
         }
-        public override void PostSpawnSetup(bool respawningAfterLoad)
+
+        private void initPossibleOutputs()
         {
-            base.PostSpawnSetup(respawningAfterLoad);
             if (Props.SupportDiagonal)
             {
-                possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacent8Way(parent));
+                possibleOutputs = GenAdj.CellsAdjacent8Way(parent).ToList();
             }
             else
             {
-                possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacentCardinal(parent));
+                possibleOutputs = GenAdj.CellsAdjacentCardinal(parent).ToList();
             }
-            
+        }
+
+        public override void PostSpawnSetup(bool respawningAfterLoad)
+        {
+            base.PostSpawnSetup(respawningAfterLoad);
+            initPossibleOutputs();
         }
         public override void PostDrawExtraSelectionOverlays()
         {
