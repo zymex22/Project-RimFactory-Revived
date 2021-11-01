@@ -51,6 +51,10 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.mySAL.compOutputAdjustable.Visible = false;
                 this.mySAL.powerWorkSetting.RangeSettingHide = true;
+            }else if (verdict)
+            {
+                this.mySAL.compOutputAdjustable.Visible = true;
+                this.mySAL.powerWorkSetting.RangeSettingHide = false;
             }
 
 
