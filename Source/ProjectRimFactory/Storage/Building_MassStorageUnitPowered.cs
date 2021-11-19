@@ -17,7 +17,7 @@ namespace ProjectRimFactory.Storage
         //Initialized on spawn
         private CompPowerTrader compPowerTrader = null;
 
-        public override bool CanStoreMoreItems => compPowerTrader.PowerOn && this.Spawned &&
+        public override bool CanStoreMoreItems => compPowerTrader?.PowerOn ?? false && this.Spawned &&
             (ModExtension_Crate == null || StoredItemsCount < MaxNumberItemsInternal);
         public override bool CanReceiveIO => base.CanReceiveIO && compPowerTrader.PowerOn && this.Spawned;
 
