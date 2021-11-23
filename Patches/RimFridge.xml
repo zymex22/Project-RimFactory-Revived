@@ -3,6 +3,10 @@
 
 	<!--RimFridge -->
 	<Operation Class="PatchOperationFindMod">
+    <mods>
+        <li>Simple Utilities: Fridge</li>
+    </mods>
+    <nomatch Class="PatchOperationFindMod">
 		<mods>
 			<li>[KV] RimFridge - 1.1</li>
 			<li>[KV] RimFridge</li>
@@ -276,6 +280,6 @@
 				</li>
 			</operations>
 		</match>
-	</Operation>
-
+    </nomatch>
+</Operation>
 </Patch>
