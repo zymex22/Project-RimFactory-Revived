@@ -150,7 +150,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         public static PRFMapComponent GetPRFMapComponent (Map map)
         {
             PRFMapComponent outval = null;
-            if (!mapComps.TryGetValue(map,out outval))
+            if (map is not null && !mapComps.TryGetValue(map,out outval))
             {
                 outval = map.GetComponent<PRFMapComponent>();
                 mapComps.Add(map, outval);
