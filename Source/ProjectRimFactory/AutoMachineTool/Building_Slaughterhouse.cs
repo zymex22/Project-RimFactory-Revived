@@ -13,13 +13,10 @@ using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public class Building_Slaughterhouse : Building_BaseRange<Pawn>, IPRF_SettingsContentLink, ISlaughterhouse
+    public class Building_Slaughterhouse : Building_BaseRange<Pawn>, ISlaughterhouse
     {
-        IPRF_SettingsContent IPRF_SettingsContentLink.PRF_SettingsContentOb => new ITab_Slaughterhouse_Def(this);
 
         public Dictionary<ThingDef, SlaughterSettings> Settings { get => this.slaughterSettings; }
-
-    
 
         private Dictionary<ThingDef, SlaughterSettings> slaughterSettings = new Dictionary<ThingDef, SlaughterSettings>();
 

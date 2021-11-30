@@ -40,7 +40,7 @@
   <IOPort_Maximum_UseTooltip>When this is enabled, the I/O port will stop taking items if either the stack is full, or the stack size is greater than or equal to X.</IOPort_Maximum_UseTooltip>
   <IOPort_Minimum>Current minimum: {0}</IOPort_Minimum>
   <IOPort_Maximum>Current maximum: {0}</IOPort_Maximum>
-
+  <PRFSlaughterhouseTab>Slaughter</PRFSlaughterhouseTab>
 
   <PRFNoDesc>No description.</PRFNoDesc>
 

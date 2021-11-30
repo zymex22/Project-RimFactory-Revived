@@ -93,17 +93,16 @@ namespace ProjectRimFactory.AutoMachineTool
         Dictionary<ThingDef, SlaughterSettings> Settings { get; }
     }
 
-    public class ITab_Slaughterhouse_Def : IPRF_SettingsContent
+    public class ITab_Slaughterhouse : ITab
     {
-        object caller = null;
 
-        ISlaughterhouse slaughterhouse => caller as ISlaughterhouse;
+        ISlaughterhouse slaughterhouse => this.SelThing as ISlaughterhouse;
 
         public Dictionary<ThingDef, SlaughterSettings> Settings { get => slaughterhouse.Settings; }
 
-        public ITab_Slaughterhouse_Def(object callero)
+        public ITab_Slaughterhouse()
         {
-            caller = callero;
+            this.labelKey = "PRFSlaughterhouseTab";
         }
 
 
@@ -119,13 +118,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 return r;
             };
         }
-
-
-        public float ITab_Settings_Minimum_x => 800f;
-
-        //This has some unexpected impact
-        public float ITab_Settings_Additional_y => 400f;//Thats more then needed
-
 
         private static TipSignal slaughterTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip".Translate());
         private static TipSignal hasBondsTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip".Translate());
@@ -145,8 +137,21 @@ namespace ProjectRimFactory.AutoMachineTool
         private string description = "PRF.AutoMachineTool.Slaughterhouse.Setting.Description".Translate();
 
         private List<ThingDef> defs;
-        public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect)
+
+        private Vector2 winSize = new Vector2(800f, 400f);
+
+        protected override void UpdateSize()
         {
+            this.size = winSize;
+            base.UpdateSize();
+        }
+
+        protected override void FillTab()
+        {
+            var list = new Listing_Standard();
+            Rect inRect = new Rect(0f, 0f, winSize.x, winSize.y).ContractedBy(10f);
+            list.Begin(inRect);
+
             //Get the Variable from the Static - This is needed as you cant pass a static by ref (& by ref is requere in this case)
             scrollPosition = sscrollPosition;
             defs = Find.CurrentMap.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).Where(p => p.RaceProps.Animal && p.RaceProps.IsFlesh && p.SpawnedOrAnyParentSpawned).Select(p => p.def).Distinct().ToList();
@@ -156,11 +161,11 @@ namespace ProjectRimFactory.AutoMachineTool
             Widgets.Label(rect, this.description);
 
             //Need to fix that as step one
-            float maxPossibleY = (ITab_Settings_Additional_y + (int)list.CurHeight) + 20;
-            maxPossibleY = Mathf.Min(maxPossibleY, parrent_rect.height);
+            float maxPossibleY = (winSize.y + (int)list.CurHeight) + 20;
+            maxPossibleY = Mathf.Min(maxPossibleY, inRect.height);
 
-            Rect outRect = new Rect(0f, list.CurHeight, ITab_Settings_Minimum_x, maxPossibleY).ContractedBy(10f);
-           // Log.Message("ITab_Settings_Additional_y + (int)list.CurHeight: " + (ITab_Settings_Additional_y + (int)list.CurHeight) + " - parrent_rect.height: " + parrent_rect.height + " - list.CurHeight" + list.CurHeight);
+            Rect outRect = new Rect(0f, list.CurHeight, winSize.x, maxPossibleY).ContractedBy(10f);
+            // Log.Message("ITab_Settings_Additional_y + (int)list.CurHeight: " + (ITab_Settings_Additional_y + (int)list.CurHeight) + " - parrent_rect.height: " + parrent_rect.height + " - list.CurHeight" + list.CurHeight);
 
             var headerRect = list.GetRect(24f);
             headerRect.width -= 30f;
@@ -214,7 +219,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var innerlist = new Listing_Standard();
             Widgets.BeginScrollView(scrollOutRect, ref scrollPosition, scrollViewRect);
             innerlist.Begin(scrollViewRect);
-            
+
             this.defs.ForEach(d =>
             {
                 innerlist.GapLine();
@@ -293,10 +298,8 @@ namespace ProjectRimFactory.AutoMachineTool
             innerlist.End();
             //Update the static variable to keep the data
             sscrollPosition = scrollPosition;
-            return list;
-
+            list.End();
 
         }
-
     }
 }
