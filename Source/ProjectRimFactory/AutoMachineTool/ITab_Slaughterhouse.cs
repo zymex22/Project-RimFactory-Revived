@@ -105,8 +105,10 @@ namespace ProjectRimFactory.AutoMachineTool
             this.labelKey = "PRFSlaughterhouseTab";
         }
 
-
-        private static readonly float[] ColumnWidth = new float[] { 0.2f, 0.05f, 0.05f, 0.05f, 0.05f, 0.15f, 0.15f, 0.15f, 0.15f };
+        //Needs to be in sync with winSize.x
+        private static readonly float[] ColumnWidth = new float[] { 0.28f , 
+            0.07f , 0.07f, 0.07f, 0.07f,
+            0.11f, 0.11f, 0.11f, 0.11f };
 
         private Func<float, Rect> CutLeftFunc(Rect rect)
         {
@@ -136,12 +138,18 @@ namespace ProjectRimFactory.AutoMachineTool
         private static Vector2 sscrollPosition;
         private string description = "PRF.AutoMachineTool.Slaughterhouse.Setting.Description".Translate();
 
-        private List<ThingDef> defs;
+        private List<ThingDef> defs => Find.CurrentMap.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).Where(p => p.RaceProps.Animal && p.RaceProps.IsFlesh && p.SpawnedOrAnyParentSpawned).Select(p => p.def).Distinct().ToList();
 
-        private Vector2 winSize = new Vector2(800f, 400f);
+
+        private Vector2 winSize = new Vector2(560, 400f);
 
         protected override void UpdateSize()
         {
+            winSize.y = 20 + 40 + 20 + 20 + 24 + defs.Count() * 36;
+
+            //Limit max hight to 400
+            winSize.y = Mathf.Min(winSize.y, 400f);
+
             this.size = winSize;
             base.UpdateSize();
         }
@@ -154,8 +162,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
             //Get the Variable from the Static - This is needed as you cant pass a static by ref (& by ref is requere in this case)
             scrollPosition = sscrollPosition;
-            defs = Find.CurrentMap.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).Where(p => p.RaceProps.Animal && p.RaceProps.IsFlesh && p.SpawnedOrAnyParentSpawned).Select(p => p.def).Distinct().ToList();
-
+            
             //Add header Discription for this settings Section
             var rect = list.GetRect(40f);
             Widgets.Label(rect, this.description);
