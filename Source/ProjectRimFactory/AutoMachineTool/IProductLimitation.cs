@@ -8,5 +8,7 @@ namespace ProjectRimFactory.AutoMachineTool {
         bool ProductLimitation { get; set; }
         bool CountStacks { get; set; }
         Option<SlotGroup> TargetSlotGroup { get; set; }
+
+        bool ProductLimitationDisable { get;}
     }
 }

@@ -20,6 +20,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private Dictionary<ThingDef, SlaughterSettings> slaughterSettings = new Dictionary<ThingDef, SlaughterSettings>();
 
+        public override bool ProductLimitationDisable => true;
+
         public override IntVec3 OutputCell()
         {
             return compOutputAdjustable.CurrentCell;

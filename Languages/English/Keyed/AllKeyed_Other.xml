@@ -41,6 +41,9 @@
   <IOPort_Minimum>Current minimum: {0}</IOPort_Minimum>
   <IOPort_Maximum>Current maximum: {0}</IOPort_Maximum>
   <PRFSlaughterhouseTab>Slaughter</PRFSlaughterhouseTab>
+  <PRF_ITab_ProductionSettings_OutputSettings_Header>&lt;b&gt;Output Settings:&lt;/b&gt;</PRF_ITab_ProductionSettings_OutputSettings_Header>
+  <PRF_ITab_ProductionSettings_ProductLimitation_Header>&lt;b&gt;Processing Limit:&lt;/b&gt;</PRF_ITab_ProductionSettings_ProductLimitation_Header>
+
 
   <PRFNoDesc>No description.</PRFNoDesc>
 

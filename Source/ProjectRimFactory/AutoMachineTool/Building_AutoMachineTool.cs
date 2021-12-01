@@ -473,7 +473,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
     public class Building_AutoMachineTool : Building_BaseRange<Building_AutoMachineTool>, IRecipeProductWorker
     {
-  
+
+        public override bool ProductLimitationDisable => true;
+
         public Building_AutoMachineTool()
         {
             this.forcePlace = false;
