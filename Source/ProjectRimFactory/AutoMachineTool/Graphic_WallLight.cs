@@ -41,7 +41,6 @@ namespace ProjectRimFactory.AutoMachineTool
             return !pos.GetThingList(map)
                 .Where(t => t.def.category == ThingCategory.Building)
                 .Where(t => t.def.building != null)
-                .Where(t => !t.def.building.isNaturalRock)
                 .Any(t => t.def.passability == Traversability.Impassable);
         }
 
