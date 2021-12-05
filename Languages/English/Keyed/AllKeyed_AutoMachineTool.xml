@@ -62,12 +62,14 @@
   <!-- LimitationTab -->
   <!--<PRF.AutoMachineTool.ProductLimitation.TabName>Settings</PRF.AutoMachineTool.ProductLimitation.TabName>-->
   <PRF.AutoMachineTool.ProductLimitation.ValueLabel>Limit Value</PRF.AutoMachineTool.ProductLimitation.ValueLabel>
+  <PRF.AutoMachineTool.ProductLimitation.ValueLabelTip>Set the Maximum number of Items / Stacks</PRF.AutoMachineTool.ProductLimitation.ValueLabelTip>
   <PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>Activate limit</PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>
   <PRF.AutoMachineTool.ProductLimitation.CheckBoxLabelTip>Processing stops when the number of products and items exceeds the limit value. You can specify the zone. please check if it can be placed in that zone.</PRF.AutoMachineTool.ProductLimitation.CheckBoxLabelTip>
   <PRF.AutoMachineTool.ProductLimitation.CountStacks>Count stacks</PRF.AutoMachineTool.ProductLimitation.CountStacks>
   <PRF.AutoMachineTool.ProductLimitation.CountStacksTip>Count item stacks instead of the total ammount of the given item</PRF.AutoMachineTool.ProductLimitation.CountStacksTip>
   <PRF.AutoMachineTool.EntierMap>No zone - DO FOREVER</PRF.AutoMachineTool.EntierMap>
   <PRF.AutoMachineTool.CountZone>For what zone?</PRF.AutoMachineTool.CountZone>
+  <PRF.AutoMachineTool.ProductLimitation.SelectAreaTip>Select the Area in which to count. Selecting No Zone will count all items</PRF.AutoMachineTool.ProductLimitation.SelectAreaTip>
 
   <!-- Slaughterhouse SettingTab -->
   <PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>Setting</PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>

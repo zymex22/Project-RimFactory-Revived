@@ -211,10 +211,12 @@ namespace ProjectRimFactory.Common
                 if (doneSection) list.GapLine();
                 doneSection = true;
                 var label = "PRF.AutoMachineTool.ProductLimitation.ValueLabel".Translate();
+                var labelTip = "PRF.AutoMachineTool.ProductLimitation.ValueLabelTip".Translate();
                 var checkBoxLabel = "PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel".Translate();
                 var checkBoxLabelTip = "PRF.AutoMachineTool.ProductLimitation.CheckBoxLabelTip".Translate();
                 var stackCountLabel = "PRF.AutoMachineTool.ProductLimitation.CountStacks".Translate();
                 var stackCountLabelTip = "PRF.AutoMachineTool.ProductLimitation.CountStacksTip".Translate();
+                var selectAreaTip = "PRF.AutoMachineTool.ProductLimitation.SelectAreaTip".Translate();
 
                 list.Label("PRF_ITab_ProductionSettings_ProductLimitation_Header".Translate());
                 list.Gap();
@@ -227,9 +229,19 @@ namespace ProjectRimFactory.Common
                 this.Machine.ProductLimitation = limitation;
                 list.Gap();
 
+
+
                 var rect = list.GetRect(30f);
                 string buf = this.Machine.ProductLimitCount.ToString();
                 int limit = this.Machine.ProductLimitCount;
+                if (!labelTip.NullOrEmpty())
+                {
+                    if (Mouse.IsOver(rect))
+                    {
+                        Widgets.DrawHighlight(rect);
+                    }
+                    TooltipHandler.TipRegion(rect, labelTip);
+                }
                 Widgets.Label(rect.LeftHalf(), label);
                 Widgets.TextFieldNumeric<int>(rect.RightHalf(), ref limit, ref buf, 1, 1000000);
                 list.Gap();
@@ -240,6 +252,14 @@ namespace ProjectRimFactory.Common
                 list.Gap();
 
                 rect = list.GetRect(30f);
+                if (!selectAreaTip.NullOrEmpty())
+                {
+                    if (Mouse.IsOver(rect))
+                    {
+                        Widgets.DrawHighlight(rect);
+                    }
+                    TooltipHandler.TipRegion(rect, selectAreaTip);
+                }
                 Widgets.Label(rect.LeftHalf(), "PRF.AutoMachineTool.CountZone".Translate());
                 if (Widgets.ButtonText(rect.RightHalf(), this.Machine.TargetSlotGroup.Fold("PRF.AutoMachineTool.EntierMap".Translate())(s => s.parent.SlotYielderLabel()))) {
                     Find.WindowStack.Add(new FloatMenu(groups
