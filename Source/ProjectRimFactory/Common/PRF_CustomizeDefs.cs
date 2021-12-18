@@ -22,7 +22,7 @@ namespace ProjectRimFactory.Common
     class PRF_CustomizeDefs
     {
 
-
+        public static string[] ExcludeScenario = { "PRF_FactoryEntrepreneur" };
         public static void ToggleLiteMode(bool remove = true)
         {
 
@@ -39,6 +39,7 @@ namespace ProjectRimFactory.Common
             string[] ExcludeList_Research = { "PRF_AutomaticFarmingI", "PRF_AutomaticFarmingII", "PRF_AutomaticFarmingIII", "PRF_BasicDrones", "PRF_ImprovedDrones", "PRF_AdvancedDrones", "PRF_AutonomousMining", "PRF_AutonomousMiningII", "PRF_AutonomousMiningIII", "PRF_SALResearchI", "PRF_SALResearchII", "PRF_SALResearchIII", "PRF_SALResearchIV", "PRF_SALResearchV", "PRF_SALResearchVII", "PRF_SALResearchVI", "PRF_SALResearchVIII", "PRF_SALGodlyCrafting", "PRF_EnhancedBatteries", "PRF_LargeBatteries", "PRF_VeryLargeBatteries", "PRF_UniversalAutocrafting", "PRF_SelfCorrectingAssemblers", "PRF_SelfCorrectingAssemblersII", "PRF_MetalRefining", "PRF_AnimalStations", "PRF_AnimalStationsII", "PRF_AnimalStationsIII" ,
             "PRF_SelfCooking","PRF_SelfCookingII","PRF_MachineLearning","PRF_MagneticTape","PRF_CoreTierO","PRF_CoreTierI","PRF_CoreTierII","PRF_CoreTierIII","PRF_CoreTierIV"};
             string[] ExcludeListTrader = { "PRF_Factory_Supplier" };
+            
 
 
             //Components are items that are used in the creation of other items
@@ -61,6 +62,9 @@ namespace ProjectRimFactory.Common
 
                 //remove the Trader
                 removeTrader(ExcludeListTrader.ToList());
+
+                //Remove Scenario
+                RemoveScenario(ExcludeScenario.ToList());
 
                 removeRecipe(ExcludeListRecipes.ToList());
             }
@@ -101,6 +105,11 @@ namespace ProjectRimFactory.Common
                     DefDatabase<TraderKindDef>.AllDefsListForReading.Add(def);
                 }
 
+                foreach (ScenarioDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ScenarioDef>("scenario"))
+                {
+                    DefDatabase<ScenarioDef>.AllDefsListForReading.Add(def);
+                }
+
                 foreach (RecipeDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<RecipeDef>("RecipeDef"))
                 {
                     DefDatabase<RecipeDef>.AllDefsListForReading.Add(def);
@@ -115,7 +124,6 @@ namespace ProjectRimFactory.Common
                     ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
                 }
             }
-            
 
 
 
@@ -152,7 +160,15 @@ namespace ProjectRimFactory.Common
             DefDatabase<TraderKindDef>.AllDefsListForReading.RemoveAll(d => defNames.Contains(d.defName));
         }
 
-
+        public static void RemoveScenario(List<string> defNames)
+        {
+            List<ScenarioDef> scenarioDef = DefDatabase<ScenarioDef>.AllDefsListForReading.Where(d => defNames.Contains(d.defName)).ToList();
+            foreach (ScenarioDef scenario in scenarioDef)
+            {
+                ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(scenario.defName, "scenario", scenario);
+            }
+            DefDatabase<ScenarioDef>.AllDefsListForReading.RemoveAll(d => defNames.Contains(d.defName));
+        }
         private static void removeReserch(List<string> defNames)
         {
             List<ResearchProjectDef> researchProjectsPre = DefDatabase<ResearchProjectDef>.AllDefsListForReading.Where(d => d?.prerequisites?.Where(c => defNames.Contains(c.defName)).Any() ?? false).ToList();
