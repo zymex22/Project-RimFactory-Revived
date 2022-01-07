@@ -19,7 +19,7 @@
       <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
-    <description>Complex machine variants tasked with preparing an assortment of meals for your colonists! With these automated cookers and mincers, human labor will no longer be needed to feed a colony, guaranteeing no one goes hungry.</description>
+    <description>The first tier of automated cooking research allows you to make buildings that can cook meals themselves. It's just like your dedicated cook, but these devices won't have mental breaks for silly reasons.\nThis one will unlock simple food stuff and dedicated machines, good entry into automation.</description>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
@@ -31,7 +31,7 @@
       <li>PRF_CoreTierII</li>
     </prerequisites>
     <researchViewX>7</researchViewX>
-    <description>Our researchers have discovered a way to produce even better quality foods from our cookers.</description>
+    <description>The second tier of automated cooking allows us to produce even better quality foods from our cookers.</description>
   </ResearchProjectDef>
 
   <!--========================================== Metal Refinery =========================================-->
@@ -40,7 +40,7 @@
     <label>Metal Refining</label>
     <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
-    <description>The refining of rare metals though the use of polymer lamentation will grant any colony a steady domestic source of strong metals, such as plasteel.</description>
+    <description>A metal refinery able to produce rare metals through polymer lamination by combining Chemfuel with steel to create Plasteel.</description>
     <prerequisites>
       <li>PRF_CoreTierIII</li>
       <li>AdvancedFabrication</li>
@@ -60,7 +60,7 @@
     <defName>PRF_MachineLearning</defName>
     <label>Complex Machine Applications</label>
     <baseCost>2000</baseCost>
-    <description>Introducing complicated mathematical applications onto industrial machinery will vastly improve out variety in production, allowing us to construct many more versatile machines.</description>
+    <description>Teach machines how to improve their abilities by themselves. This is required for smart assemblers which can learn any recipe.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
     </prerequisites>
@@ -81,13 +81,13 @@
     <researchViewX>6</researchViewX>
     <description>A specialized industrial tape used for recording audio, a useful method for archiving important instructions and general information.</description>
     <discoveredLetterTitle>About: Intro to recipe db.</discoveredLetterTitle>
-    <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\n This is used to import recipes from any workbench into your recipe db.\n Your doing so by place it near a workbench and click import on those recipe you want it to store, afterwards you can move it to another workbench and copy more. Or you can move it to that Assembler you want to link to it.\n Recipes will be stored forever in your db. and you can safely move it around, please do know if you move it from your assemblers, they will loose their setup bills.</discoveredLetterText>
+    <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\n This is used to import recipes from any workbench into your recipe db.\n You do so by placing it near a workbench and clicking import on those recipes you want it to store.  Afterwards, you can move it to another workbench and copy more. Or you can move it to the Assembler you want to link to it.\n Recipes will be stored forever in your database, and you can safely move it around.  Please note that if you remove it from your assemblers, they will loose their configured bills.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_UniversalAutocrafting</defName>
     <label>universal auto-crafting</label>
-    <description>Make buildings that can craft recipes given to them via a recipe database. Like your dedicated crafter, but won't have mental breaks for silly reasons.</description>
+    <description>Make buildings that can craft recipes given to them via a recipe database. Like your dedicated crafters, but they don't sleep or die of flake overdose.</description>
     <baseCost>3000</baseCost>
     <requiredResearchFacilities>
       <li>MultiAnalyzer</li>
@@ -97,13 +97,13 @@
     </prerequisites>
     <researchViewX>7</researchViewX>
     <discoveredLetterTitle>About: Intro to assemblers</discoveredLetterTitle>
-    <discoveredLetterText>You have unlocked your first real type assembler, this is basicly a universal machine, that can produce anything your workbenches can do, you just copy bills with a recipe DB, and place it near your assembler to show recipes.\n Please note that it CAN'T return same item again so mods like Mend and Recycle will not work on assemblers, as it destroy products it takes in.\n\n This assembler have stats set to 10 this mean it can ONLY see recipes with lv 10 or less in DB., if you upgrade to next tier it will be smarter and have higher skill level.\n This Assembler have a fixed speed set and will not get better over time like next tier will.</discoveredLetterText>
+    <discoveredLetterText>You have unlocked your first real type assembler, this is basically a universal machine that can produce anything your workbenches can do.  You just copy bills with a recipe database and place it near your assembler to show recipes.\n Please note that it CAN'T return the same item again so mods like Mend and Recycle will not work on assemblers, as it destroys products it takes in.\n\n This assembler has stats set to 10 this mean it can ONLY see recipes with a required level of 10 or less in the database. If you upgrade to the next tier it will be smarter and have a higher skill level.\n This Assembler has a fixed speed and will not get better over time like next tier will.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCorrectingAssemblers</defName>
     <label>Intelligent Assemblers</label>
-    <description>The construction of intelligent assemblers which possess interesting, automated correcting abilities will provide colonists with highly versatile machinery capable of more adaptive manufacturing.</description>
+    <description>Learn how to make a new type of assembler that slowly improves its crafting speed over time.</description>
     <techLevel>Spacer</techLevel>
     <baseCost>2250</baseCost>
     <requiredResearchFacilities>
@@ -120,7 +120,7 @@
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCorrectingAssemblersII</defName>
     <label>Quantum Intelligent Assemblers</label>
-    <description>Superior assembling machines capable of manufacturing items using applications in quantum physics. They can either create superior items or engage in a mass-production blitz.</description>
+    <description>Learn how to make two new types of adaptive assemblers. One is super fast but produces very poor quality products, the other one is slow but starts at a good quality.</description>
     <techLevel>Ultra</techLevel>
     <baseCost>5000</baseCost>
     <requiredResearchFacilities>

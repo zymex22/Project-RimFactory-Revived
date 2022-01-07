@@ -23,7 +23,7 @@
     <defName>PRF_BeltsII</defName>
     <label>Basic Sorting Systems</label>
     <baseCost>400</baseCost>
-    <description>The sorting of products and raw resources can benefit a factory in many ways. The construction of basic sorting systems and integrating them along your machines will greatly improve general factory organization and efficiency, eliminating confusion which can present itself during mass production.</description>
+    <description>Directing things to the proper area of the factory will streamline and diversify the factory layout.\nUnlocks: Simple puller, growzone puller and belt splitter for normal belts.</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_BeltsI</li>
@@ -36,7 +36,7 @@
     <label>Advanced Sorting Systems</label>
     <techLevel>Industrial</techLevel>
     <baseCost>500</baseCost>
-    <description>Improving on current sorting networks will further increase the organization of resources within your factory with the addition of more complex upgrades.</description>
+    <description>Sophisticated logistical implementation allows for advanced item sorting.\nUnlocks: Wall and underground belts, splitters, smart hoppers, as well as MKII, angle, and wall pullers.</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
     <prerequisites>
       <li>PRF_BeltsII</li>

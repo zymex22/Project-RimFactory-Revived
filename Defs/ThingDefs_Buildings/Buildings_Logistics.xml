@@ -28,7 +28,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_FuelingMachine</defName>
     <label>Fueling Dispenser</label>
-    <description>An automatic fueling arm tasked with resupplying objects such as power generators, mortars, braziers, etc. The fueling dispenser eliminates the need for a human to manually refuel an object.\n\n(Works with "refuelable comp" buildings and some others eg, SoS, CE.)</description>
+    <description>A simple refueling machine capable of refueling all standard refuelable objects like generators, braziers, and mortars. It will attempt to fuel the output (yellow cell) with objects from the input (white cell).\n\n(Works with "refuelable comp" buildings and some others eg, SoS, CE.)</description>
     <thingClass>ProjectRimFactory.Industry.Building_FuelingMachine</thingClass>
     <graphicData>
       <texPath>Industry/FuelingMachine</texPath>
@@ -83,7 +83,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_SmartHopper</defName>
     <label>Smart hopper</label>
-    <description>An intelligent hopper which gathers objects within input range (white cells). Can be toggled to only gather items in stockpiles. Does not push objects elsewhere, only gathers them, and will also grab from nearby belts. Does not connect to a nutrient dispenser.</description>
+    <description>An intelligent hopper which gathers objects within its input range (white cells). It can be toggled to only gather items in stockpiles. Does not push objects elsewhere, only gathers them, and will also grab from nearby belts. This device is unrelated to a nutrient dispenser hopper, and does not interface with a nutrient dispenser.</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_SmartHopper</thingClass>
     <uiIconScale>0.7</uiIconScale>
     <graphicData>
@@ -252,7 +252,7 @@
     <defName>PRF_GrowzonePuller_I</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_HarvestPuller</thingClass>
     <label>Growzone puller</label>
-    <description>A specialized puller that will pull from adjacent grow zones. Must be connected to the grow zone to function properly.</description>
+    <description>A specialized puller that will pull from adjacent grow zones. It must be connected to the grow zone to function properly.</description>
     <placeWorkers>
       <li>ProjectRimFactory.Common.PlaceWorker_GrowZonePuller</li>
     </placeWorkers>
@@ -317,7 +317,7 @@
   <ThingDef ParentName="PRF_Puller_Base">
     <defName>PRF_SimplePuller_I</defName>
     <label>Item puller MKI</label>
-    <description>Pulls items from input (white cell) and pushes them to output (yellow cell). Requires being turned on after selecting its filters.\nVery flexible in its connection: Stockpiles, storage, belts (all versions), I/O, and others.</description>    <!--todo: maybe make a message on spawn if not turned on-->
+    <description>A device that pulls items from the input (white cell) and pushes them to the output (yellow cell). Turn it on after setting the filters.\nThis device is very flexible in its connections and works with Stockpiles, Storage, Belts (all versions), I/O, and others.</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <costList>      <!-- Remove in Lite -->
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
@@ -370,7 +370,7 @@
   <ThingDef ParentName="PRF_Puller_Base">
     <defName>PRF_SimplePuller_II</defName>
     <label>Item puller MKII</label>
-    <description>An optimized puller which runs at higher speeds. Pulls from input (white cell) to output (yellow cell). Very flexible in its connection.</description>    <!--todo: maybe make a message on spawn if not turned on-->
+    <description>An optimized puller which runs at higher speeds. Pulls from input (white cell) to output (yellow cell). Very flexible in its connections.</description>    <!--todo: maybe make a message on spawn if not turned on-->
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>2</PRF_RoboticArm>
@@ -415,7 +415,7 @@
   <ThingDef ParentName="PRF_Puller_Base">
     <defName>PRF_SimplePuller_II_Side</defName>
     <label>Item angle puller</label>
-    <description>An specialized puller designed to pull items from a 90 degree angle. Functionally similar to normal puller. Directions can be swapped after placing.</description>
+    <description>A specialized puller designed to pull items at a 90 degree angle. Functionally similar to normal puller. Directions can be swapped after placing.</description>
     <costList>
       <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>2</PRF_RoboticArm>

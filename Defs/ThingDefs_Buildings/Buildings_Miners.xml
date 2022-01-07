@@ -43,7 +43,7 @@
   <ThingDef ParentName="BenchBase">
     <defName>PRF_MineShaft</defName>
     <label>Mine Shaft</label>
-    <description>Early mine shaft entrance, which let you set a target mine operation where pawn will go into the mountain and mine out what you desire, it also have a slim chance of finding rare/junk bonus items while operating.\nShould be placed in a mountain wall to operate.(may conflict with replace stuff mod)</description>
+    <description>An early mine shaft entrance, which let you set a target mine operation where a pawn will go into the mountain and mine out what you desire.  It also has a slim chance of finding rare/junk bonus items while operating.\nShould be placed in a mountain wall to operate.(may conflict with replace stuff mod)</description>
     <thingClass>Building_WorkTable</thingClass>
     <designationCategory>Production</designationCategory>    <!--architect menu location-->
     <clearBuildingArea>false</clearBuildingArea>
@@ -134,7 +134,7 @@
     <defName>PRF_DeepQuarry_mkI</defName>
     <label>Auger Drill</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
-    <description>An early automated driller that continuously extracts resources from the ground, including rock chunks, minerals, and components. It will randomly extract a resource approximately every 8 hours. Beware though, it will disrupt dormant hives and may cause an infestation!</description>
+    <description>An early automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 8 hours.\n\nWARNING: Automated mining operations can draw insectoid infestations to your location!</description>
     <graphicData>
       <texPath>Industry/Drill</texPath>
       <drawSize>(2,2)</drawSize>
@@ -229,7 +229,7 @@
     <defName>PRF_DeepQuarry_mkII</defName>
     <label>Pulse Drill Mk.I</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
-    <description>An automated driller that continuously extracts resources from the ground, including rock chunks, minerals, and components. It will produce a random resource approximately every 3 hours. Beware though, this drill will disrupt dormant hives and may cause an infestation!</description>
+    <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 3 hours.\n\nWARNING: Automated mining operations can draw insectoid infestations to your location!</description>
     <graphicData>
       <texPath>Industry/DeepQuarry</texPath>
       <drawSize>(2.4,2.4)</drawSize>
@@ -474,7 +474,7 @@
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_DeepQuarry_mkIII</defName>
     <label>Pulse Drill Mk.2</label>
-    <description>A second-generation variant of the Pulse Drill Mk.1. Using complex mathematical applications and ground penetrating radar, this automated miner will only extract valuable minerals and eliminates the chances of receiving unwanted rock chunks. This machine will not cause infestations and will spare your colonists a lot of trouble!</description>
+    <description>The most advanced form of the automated quarry, this device uses advanced techniques to safely mine without drawing the attention of insectoids.  It will also only produce valuble minerals, never stone.</description>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <graphicData>
       <texPath>Industry/DrillT32</texPath>
@@ -557,7 +557,7 @@
     <defName>PRF_BillTypeMiner_I</defName>
     <label>Plasma Drill</label>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
-    <description>An automated drilling machine that operates using complex plasma technology. This driller can be overclocked to change mining speed at the cost of heavy power usage. Due to its precise plasma drill, this machine will not disturb any dormant hives! This plasma drill can also be overclocked if one wishes for faster mining speeds at the cost of some heavy power usage.\nYou just set primary target ore, and you will have a chance to get bonus rares or junk mined.</description>
+    <description>With highly advanced Spacer Technology auto mining have been made more precise then ever, and you can now adjust what ores to mine for and even balance power for speed. It will set primary ore type and receive occasional bonuses in the form of rare ores and junk.</description>
     <tickerType>Never</tickerType>
     <graphicData>
       <texPath>Industry/DrillT3</texPath>

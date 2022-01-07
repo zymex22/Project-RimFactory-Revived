@@ -52,7 +52,7 @@
   <RecipeDef>
     <defName>MakePRF_RoboticArm</defName>
     <label>make robotic arm</label>
-    <description>Make robotic arm</description>
+    <description>Make a robotic arm</description>
     <jobString>Making robotic arm</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
@@ -147,7 +147,7 @@
   <RecipeDef>
     <defName>MakePRF_ElectronicChip_II</defName>
     <label>make Adv. AI core</label>
-    <description>Make Adv. AI core</description>
+    <description>Make an advanced AI core</description>
     <jobString>Making Adv. AI core</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
@@ -212,7 +212,7 @@
   <RecipeDef>
     <defName>MakePRF_ElectronicChip_III</defName>
     <label>make qubit processor</label>
-    <description>Make qubit processor</description>
+    <description>Make a qubit processor</description>
     <jobString>Making qubit processor</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
@@ -277,7 +277,7 @@
   <RecipeDef>
     <defName>MakePRF_DroneModule</defName>
     <label>make drone module</label>
-    <description>Make drone module</description>
+    <description>Make a drone module</description>
     <jobString>Making drone module</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
@@ -332,8 +332,8 @@
   <!--==================================== Simple frame ==============================-->
   <RecipeDef>
     <defName>MakeSmallFrame</defName>
-    <label>make simple machine frame</label>
-    <description>Make a small machine frames for factory buildings</description>
+    <label>make machine frame (small)</label>
+    <description>Make a small machine frame for use in factory buildings</description>
     <jobString>Making frame</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
@@ -378,8 +378,8 @@
   <!--==================================== Medium frame ==============================-->
   <RecipeDef>
     <defName>MakeMediumFrame</defName>
-    <label>make machine frame</label>
-    <description>Make a machine frame for factory buildings</description>
+    <label>make machine frame (medium)</label>
+    <description>Make a medium machine frame for factory building</description>
     <jobString>Making frame</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
@@ -433,8 +433,8 @@
   <!--==================================== adv. frame ==============================-->
   <RecipeDef>
     <defName>MakeLargeFrame</defName>
-    <label>make adv. machine frame</label>
-    <description>Make a advanced machine frames for factory buildings</description>
+    <label>make machine frame (advanced)</label>
+    <description>Make an advanced machine frame for factory buildings</description>
     <jobString>Making frame</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>

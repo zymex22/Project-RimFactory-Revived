@@ -15,7 +15,7 @@
     <label>Clockwork Principle</label>
     <techLevel>Medieval</techLevel>
     <baseCost>400</baseCost>
-    <description>By developing an understanding of timed gears and springs, one can achieve the earliest form of industrialization. This includes the crafting of various mechanical components for the creation of basic and crude machinery which will serve as the first step towards efficient industrial automation.</description>
+    <description>Early industrialisation, this teaches you how to setup more advanced way of gathering resources and process them into more useful things. Trash, raw materials, or scrap metal goes in one side and useful products come out the other.\nThese very early devices are made with cogs and chutes and are powered by wood and coal.</description>
     <prerequisites>
       <li>Smithing</li>
     </prerequisites>
@@ -30,7 +30,7 @@
     <defName>PRF_CoreTierI</defName>
     <label>Euler's Identity</label>
     <baseCost>750</baseCost>
-    <description>The pinnacle of mathematical beauty, this paradoxical equation introduces the user to the earliest form of automated machinery. This will also permit the crafting of basic machine frames for use in construction of automated machines.</description>
+    <description>Leonard Euler developed mathematical systems for intemacractions between physics, geometry and algebra.\nWith these formulas, automated production of basic materials such as stone bricks and simple art is possible.\nPlace items within the white designation for the bills to consume, they will be output to the adjustable green tile.</description>
     <prerequisites>
       <li>Electricity</li>
       <li>Machining</li>
@@ -48,7 +48,7 @@
     <defName>PRF_CoreTierII</defName>
     <label>Machine Learning</label>
     <baseCost>2000</baseCost>
-    <description>Although most machines are generally limited in capability, the creation of self-learning computers through the designing of complex programming algorithms will allow machines to learn on their own and automatically correct on flaws that present themselves within a program. This is a prime example of early artificial intelligence.</description>
+    <description>A machine that can predict outcomes will solve many of the design flaws we have been facing. Imagine a machine that could improve itself...\nWe will need an factory research terminal linked to our hi-tech research bench to go further.</description>
     <prerequisites>
       <li>PRF_CoreTierI</li>
       <li>MicroelectronicsBasics</li>
@@ -59,7 +59,7 @@
     </requiredResearchFacilities>
     <researchViewX>5</researchViewX>
     <discoveredLetterTitle>Machine Learning</discoveredLetterTitle>
-    <discoveredLetterText>Although early forms of machinery operated based on the fixed movement of gears and pistons, the idea of a machine that could mimic the abstract reasoning of the human mind through complex mathematical algorithms was not new at all.\n\nThe term was coined by Arthur Samuel during the latter 1950's, but the idea was conceptualized by Alan Turing in 1950. To summarize this concept, a machine must first be given data models developed by humans to understand an objective and then use those given models to create possible future predictions.</discoveredLetterText>
+    <discoveredLetterText>The mathematical models developed in the 1700s began an industrial revolution all of the world, series of gears and pressurization allowed the mass processing of basic materials with coal and electricity.\nMoritz von Jacobi managed to propel a boat with an electric motor in 1845, but it wasn't until 1837 when Thomas and Emily Dacenport patented the first motor in the US that the promise of electro-mechanical machinery was seen as the next big leap forward.\nRudimentary programming allows storing a bill on a Recipe Database and importing it into an assembler.\n-The blue region around assemblers and recipe databases indicate the data transfer area.</discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -70,7 +70,7 @@
     <label>Binary System</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
-    <description>A mathematical expression using only 1's and 0's. Standardizing computers by using this simple yet versatile language will exponentially expand computation performance and will allow one to create far more advanced forms of artificial intelligence.</description>
+    <description>Anything can be described as a series of 1s and 0s as long as there enough 1s and 0s.</description>
     <prerequisites>
       <li>PRF_CoreTierII</li>
       <li>Fabrication</li>
@@ -81,7 +81,7 @@
     </requiredResearchFacilities>
     <researchViewX>8</researchViewX>
     <discoveredLetterTitle>Binary System</discoveredLetterTitle>
-    <discoveredLetterText>Like humans, machines must use language to communicate amongst programs and one another.\n\nSystems relating to binary can be traced back to the ancient world in places such as China, India, and Egypt. Although used in various ways, the modern binary system can be credited to Thomas Harriot, Juan Caramuel y Lobkowitz, and Gottfried Leibniz, who developed and formalized the system during the 16th and 17th centuries.</discoveredLetterText>
+    <discoveredLetterText>Refinements to machinery allow sophisticated machines, such as those that self-correct (get faster the more times they complete a job), drills with object recognition to only mine what you want and the first mechanite swarm technologies.\n-mechanite machines interact with a couple random tiles in the area every second.</discoveredLetterText>
   </ResearchProjectDef>
 
 
@@ -103,7 +103,7 @@
     </requiredResearchFacilities>
     <researchViewX>11</researchViewX>
     <discoveredLetterTitle>Quantum Bit Technology: Tier 4 Unlocked</discoveredLetterTitle>
-    <discoveredLetterText>The studying of microscopic systems including atoms and the process of computing information in the quantum system will allow one to access greater levels of precision in computer science and create more complex pieces of machinery. The founding of quantum hypothesis can be credited to Max Planck during the early 20th century, who first conceptualized his theory upon working on the black-body radiation problem by Gustav Kirchhoff.</discoveredLetterText>
+    <discoveredLetterText>Qubit technology is all about advanced computing, highend machines and technolegy, this might even be on the brinck of insanity? whats next?!¤%.\nDrop us suggestions on our Workshop page or Discord.\n\nThanks for playing!</discoveredLetterText>
   </ResearchProjectDef>
 
 </Defs>

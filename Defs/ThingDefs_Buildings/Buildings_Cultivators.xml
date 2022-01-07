@@ -72,7 +72,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_I</defName>
     <label>Drone Cultivator</label>
-    <description>A first generation agricultural drone specifically tasked to tend to plants. It will not haul the final product.\n\nBase Stats:\nDrones: 1\nWorkArea: 11x11\nJobtypes: Growing\nWorktime: 1hour shifts\nSkill lv.: 10</description>
+    <description>The first automated cultivator, this device utilises simple drones to sow, water, and harvest your crops. It is slow but still represents a good first step into automated farming.\n\nBase Stats:\nDrones: 1\nWorkArea: 11x11\nJobtypes: Growing\nWorktime: 1hour shifts\nSkill lv.: 10</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator</texPath>
@@ -127,7 +127,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_II</defName>
     <label>Drone Cultivator mk.II</label>
-    <description>An improved version of the initial drone cultivator variant. This second-generation drone cultivator is capable of faster tending of crops, hauling, and cutting.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + hauling\nWorktime: fulltime\nSkill lv.: 15</description>
+    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + Hauling\nWorktime: Fulltime\nSkill lv.: 15</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorII</texPath>
@@ -180,7 +180,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_II_sun</defName>
     <label>Drone Cultivator Mk.II(sun lamp)</label>
-    <description>An improved version of the first-generation drone cultivator. This specific Mk.2 drone cultivator includes a sun lamp, perfect for indoor hydroponics.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + hauling\nWorktime: fulltime\nSkill lv.: 15</description>
+    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.  This version includes an integrated sunlamp, and with specialized research can upgrade the included drones to level 20.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + Hauling\nWorktime: Fulltime\nSkill lv.: 15</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorWithSunLamp</texPath>
@@ -250,7 +250,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_III</defName>
     <label>Drone Cultivator Mk.III</label>
-    <description>A third-generation drone cultivator and of the latest design. It will work with superior agricultural skills and stations additional drones compared to its predecessor. It will cut, grow, harvest, and haul any items to a stockpile if available within range.\n\nBase Stats:\nDrones: 5\nWorkArea: 11x11 - 33x33\nJobtypes: Growing + hauling\nWorktime: fulltime\nSkill lv.: 20</description>
+    <description>The Mark III Automated cultivator. With the use of extremely advanced automated drones this device can take your farming operations to the next level. The included drones will haul to a stockpile, I/O, crate if its within range.\n\nBase Stats:\nDrones: 5\nWorkArea: 11x11 - 33x33\nJobtypes: Growing + hauling\nWorktime: Fulltime\nSkill lv.: 20</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorIII</texPath>
@@ -319,7 +319,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_I</defName>
     <label>Nano Cultivator</label>
-    <description>A state of the art cultivator which operates using incredibly complex nanotechnology. Unlike other computerized cultivator, this variant requires no drones and will perform the same farming tasks at twice the speed. It can cut, grow, harvest, maintain hydroponics, and haul any items to a stockpile if available within range.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
+    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.\n\nBase Stats:\nDrones: None, 1 working cell\nWorkArea: 11x11\nWorktime: Fulltime\nSpeed: 50\nSkill lv.: 20</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator2</texPath>
@@ -363,7 +363,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_Sun</defName>
     <label>Nano Cultivator (Sunlamp)</label>
-    <description>A state of the art cultivator which operates using incredibly complex nanotechnology. Unlike other computerized cultivator, this variant requires no drones and will perform the same farming tasks at twice the speed. It can cut, grow, harvest, maintain hydroponics, and haul any items to a stockpile if available within range.\nThis specific variant features a fully operational sunlamp for your plants.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
+    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.  This model has an integrated sunlamp.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorB18</texPath>
@@ -421,7 +421,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_Xl</defName>
     <label>Nano Cultivator Mk.II</label>
-    <description>An advanced version of the first-generation nano cultivator. This variant has been upgraded to operate at five times the speed compared to its predecessors.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 22x22\nWorktime: fulltime\nSpeed: 12 (5x faster)\nSkill lv.: 20</description>
+    <description>A highly advanced XL Cultivator that houses worker mechanites instead of drones.  The included mechanites will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 22x22\nWorktime: fulltime\nSpeed: 12 (5x faster)\nSkill lv.: 20</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorXL</texPath>
@@ -527,7 +527,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_Sprinkler_II</defName>
     <label>Sprinkler Mk.II</label>
-    <description>An advanced version of the first-generation sprinkler. This variant will water your plants and increases their growth speed by two hours per round. Effects are stackable!</description>
+    <description>An upgraded sprinkler using advanced AI to calculate and distribute the fertilizer needs of each plant in each sprinkle, optimizing the growth rate of every plant.  Affected plants have their growth increased by two hours per round. Effects are stackable</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
     <designatorDropdown>PRF_CultivatorGroup</designatorDropdown>
     <minifiedDef>MinifiedThing</minifiedDef>
