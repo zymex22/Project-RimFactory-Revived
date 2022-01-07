@@ -16,6 +16,8 @@ namespace ProjectRimFactory.Common
         public HashSet<IntVec3> iHideRightMenus = new HashSet<IntVec3>();
 
         private Dictionary<IntVec3,List< HarmonyPatches.IHideItem>> hideItemLocations = new Dictionary<IntVec3,List< HarmonyPatches.IHideItem>>();
+        
+        private Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>> ForbidPawnOutputItemLocations = new Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>>();
 
         public void RegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
         {
@@ -40,6 +42,29 @@ namespace ProjectRimFactory.Common
             }
             
         }
+        public void RegisterIForbidPawnOutputItem(IntVec3 pos, HarmonyPatches.IForbidPawnOutputItem ForbidPawnOutput)
+        {
+            if (ForbidPawnOutputItemLocations.ContainsKey(pos))
+            {
+                ForbidPawnOutputItemLocations[pos].Add(ForbidPawnOutput);
+            }
+            else
+            {
+                ForbidPawnOutputItemLocations.Add(pos, new List<HarmonyPatches.IForbidPawnOutputItem>() { ForbidPawnOutput });
+            }
+        }
+        public void DeRegisterIForbidPawnOutputItem(IntVec3 pos, HarmonyPatches.IForbidPawnOutputItem ForbidPawnOutput)
+        {
+            if (ForbidPawnOutputItemLocations[pos].Count <= 1)
+            {
+                ForbidPawnOutputItemLocations.Remove(pos);
+            }
+            else
+            {
+                ForbidPawnOutputItemLocations[pos].Remove(ForbidPawnOutput);
+            }
+
+        }
 
         public List<HarmonyPatches.IHideItem> CheckIHideItemPos(IntVec3 pos)
         {
@@ -50,6 +75,17 @@ namespace ProjectRimFactory.Common
         public bool ShouldHideItemsAtPos(IntVec3 pos)
         {
             return CheckIHideItemPos(pos)?.Any(t => t.HideItems) ?? false;
+        }
+
+        public List<HarmonyPatches.IForbidPawnOutputItem> CheckIForbidPawnOutputItem(IntVec3 pos)
+        {
+            if (ForbidPawnOutputItemLocations.ContainsKey(pos)) return ForbidPawnOutputItemLocations[pos];
+            return null;
+        }
+
+        public bool ShouldForbidPawnOutputAtPos(IntVec3 pos)
+        {
+            return CheckIForbidPawnOutputItem(pos)?.Any(t => t.ForbidPawnOutput) ?? false;
         }
 
 

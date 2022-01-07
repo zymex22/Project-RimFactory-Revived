@@ -20,7 +20,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             __result = true;
             if (t != null && t.Map != null && t.def.category == ThingCategory.Item)
             {
-                if (PatchStorageUtil.Get<IForbidPawnOutputItem>(t.Map, t.Position)?.ForbidPawnOutput ?? false)
+                if (PatchStorageUtil.GetPRFMapComponent(t.Map)?.ShouldForbidPawnOutputAtPos(t.Position) ?? false)
                 {
                     return false;
                 }

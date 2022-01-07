@@ -160,6 +160,7 @@ namespace ProjectRimFactory.Storage
                 }
             Map.GetComponent<PRFMapComponent>().RemoveIHideRightClickMenu(this);
             Map.GetComponent<PRFMapComponent>().DeRegisterIHideItemPos(this.Position, this);
+            Map.GetComponent<PRFMapComponent>().DeRegisterIForbidPawnOutputItem(this.Position, this);
             base.DeSpawn(mode);
         }
 
@@ -168,6 +169,7 @@ namespace ProjectRimFactory.Storage
             base.SpawnSetup(map, respawningAfterLoad);
             Map.GetComponent<PRFMapComponent>().AddIHideRightClickMenu(this);
             map.GetComponent<PRFMapComponent>().RegisterIHideItemPos(this.Position, this);
+            map.GetComponent<PRFMapComponent>().RegisterIForbidPawnOutputItem(this.Position, this);
             ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
             RefreshStorage();
 
