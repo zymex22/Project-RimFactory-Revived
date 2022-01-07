@@ -41,8 +41,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return !pos.GetThingList(map)
                 .Where(t => t.def.category == ThingCategory.Building)
                 .Where(t => t.def.building != null)
-                .Where(t => !t.def.building.isNaturalRock)
-                .Any(t => t.def.passability == Traversability.Impassable);
+                .Any(t => t.def.passability == Traversability.Impassable || (t is Building_Door));
         }
 
         public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation)

@@ -96,12 +96,12 @@
     <researchPrerequisite>PRF_CoreTierI</researchPrerequisite>
   </RecipeDef>
 
-  <!--==================================== Weak Chip ==============================-->
+  <!--==================================== Basic Chip (Chip Tier 1) ==============================-->
   <RecipeDef>
     <defName>MakePRF_ElectronicChip_I</defName>
-    <label>make weak AI chip</label>
-    <description>Make a weak AI chip</description>
-    <jobString>Making weak AI chip</jobString>
+    <label>make basic AI chip</label>
+    <description>Make basic AI chip</description>
+    <jobString>Making basic AI chip</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -143,7 +143,7 @@
     <researchPrerequisite>PRF_CoreTierII</researchPrerequisite>
   </RecipeDef>
 
-  <!--==================================== Advanced AI Core ==============================-->
+  <!--==================================== Advanced AI Core (Chip Tier 2) ==============================-->
   <RecipeDef>
     <defName>MakePRF_ElectronicChip_II</defName>
     <label>make Adv. AI core</label>
@@ -208,7 +208,7 @@
     <researchPrerequisite>PRF_CoreTierIII</researchPrerequisite>
   </RecipeDef>
 
-  <!--==================================== qubit processor ==============================-->
+  <!--==================================== qubit processor (Chip Tier 3) ==============================-->
   <RecipeDef>
     <defName>MakePRF_ElectronicChip_III</defName>
     <label>make qubit processor</label>

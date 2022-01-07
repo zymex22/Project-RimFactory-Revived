@@ -51,6 +51,10 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.mySAL.compOutputAdjustable.Visible = false;
                 this.mySAL.powerWorkSetting.RangeSettingHide = true;
+            }else if (verdict)
+            {
+                this.mySAL.compOutputAdjustable.Visible = true;
+                this.mySAL.powerWorkSetting.RangeSettingHide = false;
             }
 
 
@@ -469,7 +473,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
     public class Building_AutoMachineTool : Building_BaseRange<Building_AutoMachineTool>, IRecipeProductWorker
     {
-  
+
+        public override bool ProductLimitationDisable => true;
+
         public Building_AutoMachineTool()
         {
             this.forcePlace = false;

@@ -428,6 +428,7 @@
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power option tab -->
       <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+	  <li>ProjectRimFactory.AutoMachineTool.ITab_Slaughterhouse</li>
     </inspectorTabs>
     <modExtensions>
     </modExtensions>

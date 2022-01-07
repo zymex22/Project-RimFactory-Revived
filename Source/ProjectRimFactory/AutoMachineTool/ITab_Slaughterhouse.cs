@@ -93,21 +93,22 @@ namespace ProjectRimFactory.AutoMachineTool
         Dictionary<ThingDef, SlaughterSettings> Settings { get; }
     }
 
-    public class ITab_Slaughterhouse_Def : IPRF_SettingsContent
+    public class ITab_Slaughterhouse : ITab
     {
-        object caller = null;
 
-        ISlaughterhouse slaughterhouse => caller as ISlaughterhouse;
+        ISlaughterhouse slaughterhouse => this.SelThing as ISlaughterhouse;
 
         public Dictionary<ThingDef, SlaughterSettings> Settings { get => slaughterhouse.Settings; }
 
-        public ITab_Slaughterhouse_Def(object callero)
+        public ITab_Slaughterhouse()
         {
-            caller = callero;
+            this.labelKey = "PRFSlaughterhouseTab";
         }
 
-
-        private static readonly float[] ColumnWidth = new float[] { 0.2f, 0.05f, 0.05f, 0.05f, 0.05f, 0.15f, 0.15f, 0.15f, 0.15f };
+        //Needs to be in sync with winSize.x
+        private static readonly float[] ColumnWidth = new float[] { 0.28f , 
+            0.07f , 0.07f, 0.07f, 0.07f,
+            0.11f, 0.11f, 0.11f, 0.11f };
 
         private Func<float, Rect> CutLeftFunc(Rect rect)
         {
@@ -119,13 +120,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 return r;
             };
         }
-
-
-        public float ITab_Settings_Minimum_x => 800f;
-
-        //This has some unexpected impact
-        public float ITab_Settings_Additional_y => 400f;//Thats more then needed
-
 
         private static TipSignal slaughterTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.DoSlaughterTip".Translate());
         private static TipSignal hasBondsTip = new TipSignal("PRF.AutoMachineTool.Slaughterhouse.Setting.BondsTip".Translate());
@@ -144,23 +138,41 @@ namespace ProjectRimFactory.AutoMachineTool
         private static Vector2 sscrollPosition;
         private string description = "PRF.AutoMachineTool.Slaughterhouse.Setting.Description".Translate();
 
-        private List<ThingDef> defs;
-        public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect)
+        private List<ThingDef> defs => Find.CurrentMap.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).Where(p => p.RaceProps.Animal && p.RaceProps.IsFlesh && p.SpawnedOrAnyParentSpawned).Select(p => p.def).Distinct().ToList();
+
+
+        private Vector2 winSize = new Vector2(560, 400f);
+
+        protected override void UpdateSize()
         {
+            winSize.y = 20 + 40 + 20 + 20 + 24 + defs.Count() * 36;
+
+            //Limit max hight to 400
+            winSize.y = Mathf.Min(winSize.y, 400f);
+
+            this.size = winSize;
+            base.UpdateSize();
+        }
+
+        protected override void FillTab()
+        {
+            var list = new Listing_Standard();
+            Rect inRect = new Rect(0f, 0f, winSize.x, winSize.y).ContractedBy(10f);
+            list.Begin(inRect);
+
             //Get the Variable from the Static - This is needed as you cant pass a static by ref (& by ref is requere in this case)
             scrollPosition = sscrollPosition;
-            defs = Find.CurrentMap.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).Where(p => p.RaceProps.Animal && p.RaceProps.IsFlesh && p.SpawnedOrAnyParentSpawned).Select(p => p.def).Distinct().ToList();
-
+            
             //Add header Discription for this settings Section
             var rect = list.GetRect(40f);
             Widgets.Label(rect, this.description);
 
             //Need to fix that as step one
-            float maxPossibleY = (ITab_Settings_Additional_y + (int)list.CurHeight) + 20;
-            maxPossibleY = Mathf.Min(maxPossibleY, parrent_rect.height);
+            float maxPossibleY = (winSize.y + (int)list.CurHeight) + 20;
+            maxPossibleY = Mathf.Min(maxPossibleY, inRect.height);
 
-            Rect outRect = new Rect(0f, list.CurHeight, ITab_Settings_Minimum_x, maxPossibleY).ContractedBy(10f);
-           // Log.Message("ITab_Settings_Additional_y + (int)list.CurHeight: " + (ITab_Settings_Additional_y + (int)list.CurHeight) + " - parrent_rect.height: " + parrent_rect.height + " - list.CurHeight" + list.CurHeight);
+            Rect outRect = new Rect(0f, list.CurHeight, winSize.x, maxPossibleY).ContractedBy(10f);
+            // Log.Message("ITab_Settings_Additional_y + (int)list.CurHeight: " + (ITab_Settings_Additional_y + (int)list.CurHeight) + " - parrent_rect.height: " + parrent_rect.height + " - list.CurHeight" + list.CurHeight);
 
             var headerRect = list.GetRect(24f);
             headerRect.width -= 30f;
@@ -214,7 +226,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var innerlist = new Listing_Standard();
             Widgets.BeginScrollView(scrollOutRect, ref scrollPosition, scrollViewRect);
             innerlist.Begin(scrollViewRect);
-            
+
             this.defs.ForEach(d =>
             {
                 innerlist.GapLine();
@@ -293,10 +305,8 @@ namespace ProjectRimFactory.AutoMachineTool
             innerlist.End();
             //Update the static variable to keep the data
             sscrollPosition = scrollPosition;
-            return list;
-
+            list.End();
 
         }
-
     }
 }

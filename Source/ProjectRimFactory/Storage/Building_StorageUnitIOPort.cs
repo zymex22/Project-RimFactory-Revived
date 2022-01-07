@@ -147,6 +147,8 @@ namespace ProjectRimFactory.Storage
         {
             base.SpawnSetup(map, respawningAfterLoad);
             powerComp = GetComp<CompPowerTrader>();
+
+            if (boundStorageUnit?.Map != map) BoundStorageUnit = null;
         }
 
         protected override void ReceiveCompSignal(string signal)
@@ -211,8 +213,9 @@ namespace ProjectRimFactory.Storage
             if (mode == StorageIOMode.Output)
             {
                 settings = outputStoreSettings;
-                if (boundStorageUnit != null)
+                if (boundStorageUnit != null && settings.Priority != boundStorageUnit.settings.Priority)
                 {
+                    //the setter of settings.Priority is expensive
                     settings.Priority = boundStorageUnit.settings.Priority;
                 }
             }
@@ -245,17 +248,26 @@ namespace ProjectRimFactory.Storage
             }
         }
 
-        protected IEnumerable<Thing> ItemsThatSatisfyMin(List<Thing> itemCandidates, Thing currentItem)
+        protected bool ItemsThatSatisfyMin(ref List<Thing> itemCandidates, Thing currentItem)
         {
             if (currentItem != null)
             {
-                IEnumerable<Thing> stackableCandidates = itemCandidates.Where(t => currentItem.CanStackWith(t));
-                return OutputSettings.SatisfiesMin(stackableCandidates.Sum(t => t.stackCount) + currentItem.stackCount) ? stackableCandidates : Enumerable.Empty<Thing>();
+                itemCandidates = itemCandidates.Where(t => currentItem.CanStackWith(t)).ToList();
+                int minReqierd = OutputSettings.useMin ? outputSettings.min : 0;
+                int count = currentItem.stackCount;
+                int i = 0;
+                while (i < itemCandidates.Count && count < minReqierd)
+                {
+                    count += itemCandidates[i].stackCount;
+                    i++;
+                }
+                return OutputSettings.SatisfiesMin(count);
             }
-            return itemCandidates
-                .GroupBy(t => t.def)
-                .FirstOrDefault(g => OutputSettings.SatisfiesMin(g.Sum(t => t.stackCount))) ?? Enumerable.Empty<Thing>();
+            //I wonder if GroupBy is benifficial or not
+            return itemCandidates.GroupBy(t => t.def)
+                .FirstOrDefault(g => OutputSettings.SatisfiesMin(g.Sum(t => t.stackCount)))?.Any() ?? false;
         }
+
 
         protected virtual void RefreshOutput() //
         {
@@ -269,7 +281,7 @@ namespace ProjectRimFactory.Storage
                     if (storageSlotAvailable)
                     {
                         List<Thing> itemCandidates = new List<Thing>(from Thing t in boundStorageUnit.StoredItems where settings.AllowedToAccept(t) select t); // ToList very important - evaluates enumerable
-                        if (ItemsThatSatisfyMin(itemCandidates, currentItem).Any())
+                        if (ItemsThatSatisfyMin(ref itemCandidates, currentItem))
                         {
                             foreach (Thing item in itemCandidates)
                             {
@@ -473,6 +485,53 @@ namespace ProjectRimFactory.Storage
             }
         }
 
+        /// <summary>
+        /// Modified version of Verse.Thing.TryAbsorbStack (based on 1.3.7964.22648)
+        /// Might Cause unexpected things as 
+        /// DS Has a patch for Thing.TryAbsorbStack
+        /// Thing.SplitOff has a CommonSense Transpiler
+        /// </summary>
+        /// <param name="baseThing"></param>
+        /// <param name="toBeAbsorbed"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        private static bool AbsorbAmmount( ref Thing baseThing, ref Thing toBeAbsorbed,int count)
+        {
+
+            if (!baseThing.CanStackWith(toBeAbsorbed))
+            {
+                return false;
+            }
+            int num = count;
+
+
+            if (baseThing.def.useHitPoints)
+            {
+                baseThing.HitPoints = Mathf.CeilToInt((float)(baseThing.HitPoints * baseThing.stackCount + toBeAbsorbed.HitPoints * num) / (float)(baseThing.stackCount + num));
+            }
+
+
+            baseThing.stackCount += num;
+            toBeAbsorbed.stackCount -= num;
+            if (baseThing.Map != null)
+            {
+                baseThing.DirtyMapMesh(baseThing.Map);
+            }
+            StealAIDebugDrawer.Notify_ThingChanged(baseThing);
+            if (baseThing.Spawned)
+            {
+                baseThing.Map.listerMergeables.Notify_ThingStackChanged(baseThing);
+            }
+            if (toBeAbsorbed.stackCount <= 0)
+            {
+                toBeAbsorbed.Destroy();
+                return true;
+            }
+            return false;
+
+
+        } 
+
         protected override void RefreshOutput()
         {
             if (powerComp.PowerOn)
@@ -485,7 +544,8 @@ namespace ProjectRimFactory.Storage
                     if (storageSlotAvailable)
                     {
                         List<Thing> itemCandidates = new List<Thing>(from Thing t in boundStorageUnit.StoredItems where settings.AllowedToAccept(t) select t); // ToList very important - evaluates enumerable
-                        if (ItemsThatSatisfyMin(itemCandidates, currentItem).Any())
+                        //ItemsThatSatisfyMin somtimes spikes to 0.1 but it is mostly an none issue
+                        if (ItemsThatSatisfyMin(ref itemCandidates, currentItem))
                         {
                             foreach (Thing item in itemCandidates)
                             {
@@ -496,7 +556,11 @@ namespace ProjectRimFactory.Storage
                                         int count = Math.Min(item.stackCount, OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit));
                                         if (count > 0)
                                         {
-                                            currentItem.TryAbsorbStack(item.SplitOff(count), true);
+                                            Thing Mything = item;
+                                            //Merge Stacks - Gab count required to fulfill settings and merge them to the stuff on the IO Port
+                                            //For SplitOff "MakeThing" is expensive
+                                            //For TryAbsorbStack "Destroy" is expensive
+                                            AbsorbAmmount(ref currentItem, ref Mything, count);
                                         }
                                     }
                                 }
@@ -505,6 +569,8 @@ namespace ProjectRimFactory.Storage
                                     int count = OutputSettings.CountNeededToReachMax(0, item.stackCount);
                                     if (count > 0)
                                     {
+                                        //Nothing on the IO Port - grab thing from storage and place it on the port
+                                        //For SplitOff "MakeThing" is expensive
                                         currentItem = GenSpawn.Spawn(item.SplitOff(count), Position, Map);
                                     }
                                 }

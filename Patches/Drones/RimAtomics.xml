@@ -5,6 +5,7 @@
 	<Operation Class="PatchOperationFindMod">
 		<mods>
 			<li>Dubs Rimatomics</li>
+			<li>Rimatomics</li>
 		</mods>
 		<match Class="PatchOperationSequence">
 			<success>Always</success>

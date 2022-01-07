@@ -55,7 +55,7 @@ namespace ProjectRimFactory.Drones
         {
             get
             {
-                float additionalHeight = (30 * droneStation.GetWorkSettings.Count) + 70 + 30;
+                float additionalHeight = (30 * droneStation.GetWorkSettings.Count) + 60 + 12;
                 if (droneStation.GetSleepTimeList[0] != "")
                 {
                     additionalHeight += 70;
@@ -111,31 +111,22 @@ namespace ProjectRimFactory.Drones
 
             var rect = new Rect();
 
-            rect = list.GetRect(30f);
-
-            Rect rect3 = rect;
-            rect3.y -= 17;
-            Widgets.Label(rect3, "ITab_DroneStation_HeaderLabel".Translate());
-
-            //Add Lable Explayning the pannel
-            Widgets.Label(rect, "ITab_DroneStation_InfoLabel".Translate());
-            rect = list.GetRect(30f);
-            Widgets.DrawLineHorizontal(rect.x, rect.y, 400);
+            list.Label("ITab_DroneStation_HeaderLabel".Translate());
+            list.Label("ITab_DroneStation_InfoLabel".Translate());
+            list.GapLine();
 
             foreach (WorkTypeDef def in droneStation.GetWorkSettings.Keys.ToList())
             {
                 droneStation.GetWorkSettings[def] = CheckboxHelper(rect, list, droneStation.GetWorkSettings[def], def);
             }
 
-
             //Add The Sleep Times Overview
             //If There are Sleep Times configured
             if (droneStation.GetSleepTimeList[0] != "")
             {
-                rect = list.GetRect(30f);
-                Widgets.DrawLineHorizontal(rect.x, rect.y, 400);
+                list.GapLine();
+                list.Label("ITab_DroneStation_Sleeptimes".Translate());
 
-                CommonGUIFunctions.Label(rect, "ITab_DroneStation_Sleeptimes".Translate(), richTextStyle);
                 rect = list.GetRect(30f);
                 // droneInterface.GetSleepTimeList
                 string txt = "";
@@ -159,10 +150,9 @@ namespace ProjectRimFactory.Drones
             //Add the fule display if existing
             if (droneStation.compRefuelable != null)
             {
-                rect = list.GetRect(30f);
-                Widgets.DrawLineHorizontal(rect.x, rect.y, 400);
+                list.GapLine();
+                list.Label("ITab_DroneStation_SetTargetFuel".Translate());
 
-                CommonGUIFunctions.Label(rect, "ITab_DroneStation_SetTargetFuel".Translate(), richTextStyle);
                 rect = list.GetRect(30f);
                 list.Gap();
                 droneStation.compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider(rect, droneStation.compRefuelable.TargetFuelLevel, 0, droneStation.compRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(droneStation.compRefuelable.TargetFuelLevel), "0", droneStation.compRefuelable.Props.fuelCapacity.ToString(), 1);
