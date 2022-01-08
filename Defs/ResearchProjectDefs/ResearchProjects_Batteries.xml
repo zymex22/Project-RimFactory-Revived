@@ -11,7 +11,7 @@
   <ResearchProjectDef ParentName="PRF_BatteriesResearch">
     <defName>PRF_EnhancedBatteries</defName>
     <label>Electrical Batteries</label>
-    <description>Build large batteries for the efficient storage of electricity. This first tier unlocks the 4k battery cell.<description>
+    <description>Build large batteries for the efficient storage of electricity. This first tier unlocks the 4k battery cell.</description>
     <baseCost>750</baseCost>
     <prerequisites>
       <li>Batteries</li>
