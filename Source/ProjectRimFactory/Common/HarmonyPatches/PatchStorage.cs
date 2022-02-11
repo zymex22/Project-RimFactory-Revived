@@ -18,11 +18,15 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static bool Prefix(Thing t, Pawn pawn, out bool __result)
         {
             __result = true;
-            if (t != null && t.Map != null && t.def.category == ThingCategory.Item)
+            if (t != null)
             {
-                if (PatchStorageUtil.GetPRFMapComponent(t.Map)?.ShouldForbidPawnOutputAtPos(t.Position) ?? false)
+                Map thingmap = t.Map;
+                if (thingmap != null && t.def.category == ThingCategory.Item)
                 {
-                    return false;
+                    if (PatchStorageUtil.GetPRFMapComponent(thingmap)?.ShouldForbidPawnOutputAtPos(t.Position) ?? false)
+                    {
+                        return false;
+                    }
                 }
             }
             return true;
