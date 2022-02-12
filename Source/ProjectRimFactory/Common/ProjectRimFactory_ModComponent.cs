@@ -74,6 +74,29 @@ namespace ProjectRimFactory.Common
 
 
             }
+            if (ModLister.HasActiveModWithName("Locks 2: Lock Them Out!"))
+            {
+                MethodBase methodBase = null;
+                Type ConfigRuleRace = Type.GetType("Locks2.Core.LockConfig, Locks2", false).GetNestedType("ConfigRuleRace");
+
+                if (ConfigRuleRace != null)
+                {
+                    methodBase = AccessTools.Method(ConfigRuleRace, "Allows");
+                }
+
+                if (methodBase != null)
+                {
+                    var prefix = typeof(HarmonyPatches.Patch_Locks2_ConfigRuleRace_Allows).GetMethod("Prefix");
+                    var postfix = typeof(HarmonyPatches.Patch_Locks2_ConfigRuleRace_Allows).GetMethod("Postfix");
+                    this.HarmonyInstance.Patch(methodBase, new HarmonyMethod(prefix), new HarmonyMethod(postfix));
+
+                    Log.Message("Project Rimfactory - added Support for Locks 2: Lock Them Out!");
+                }
+                else
+                {
+                    Log.Warning("Project Rimfactory - Failed to added Support for Locks 2: Lock Them Out!");
+                }
+            }
 
 
         }
