@@ -16,7 +16,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore Source/Source.sln
     - name: Build
-      run: dotnet build Source/Source.sln --no-restore
+      run: dotnet build Source/Source.sln --no-restore --configuration Release
     - name: Check for modified files
       id: git-check
       run: echo ::set-output name=modified::$(if [ -n "$(git status --porcelain)" ]; then echo "true"; else echo "false"; fi)
