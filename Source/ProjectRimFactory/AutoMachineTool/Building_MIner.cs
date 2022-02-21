@@ -233,6 +233,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 var acceptableRecipeDefs=recipeDefs
                     .FindAll(r => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(r.products[0].thingDef) ?? true);
                 minerDef.recipes = acceptableRecipeDefs;
+                SAL3.ReflectionUtility.allRecipesCached.SetValue(minerDef, null);
+
                 //change those three lines to this when all recipes are done:
                 //minerDef.recipes = recipeDefs;
             }
