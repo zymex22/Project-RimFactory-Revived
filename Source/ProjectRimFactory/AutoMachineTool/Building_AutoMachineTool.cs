@@ -103,7 +103,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
             if ((my_workTable != null && (!my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow) ) ||
                 (researchBench != null && (Find.ResearchManager.currentProj == null || !Find.ResearchManager.currentProj.CanBeResearchedAt(researchBench,false) )) ||
-                (drilltypeBuilding != null && drilltypeBuilding.TryGetComp<CompDeepDrill>().CanDrillNow() == false ) 
+                (drilltypeBuilding != null && drilltypeBuilding.TryGetComp<CompDeepDrill>().CanDrillNow() == false || (drilltypeBuilding.GetComp<CompForbiddable>()?.Forbidden ?? false)) 
                 )
             {
                 return false;
