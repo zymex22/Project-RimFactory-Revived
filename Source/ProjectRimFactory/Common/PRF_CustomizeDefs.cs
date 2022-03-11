@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using RimWorld;
@@ -273,12 +273,14 @@ namespace ProjectRimFactory.Common
         /// <param name="defNames"></param>
         private static void removeComponents(List<string> defNames)
         {
+            Regex checkRecipeLable = new Regex(@"^.+? x\d+$", RegexOptions.Compiled);
 
             Dictionary<ThingDef, List<IngredientCount>> replacementDict = new Dictionary<ThingDef, List<IngredientCount>>();
 
             List<RecipeDef> recipeDefs2 = DefDatabase<RecipeDef>.AllDefsListForReading.Where(d => d.products.Select(s => s.thingDef).ToList().Where(c => defNames.Contains(c.defName)).Any()).ToList();
             foreach (RecipeDef def in recipeDefs2)
             {
+                if (checkRecipeLable.IsMatch(def.label)) continue;
                 replacementDict.Add(def.ProducedThingDef, def.ingredients);
             }
 
