@@ -103,7 +103,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
             if ((my_workTable != null && (!my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow) ) ||
                 (researchBench != null && (Find.ResearchManager.currentProj == null || !Find.ResearchManager.currentProj.CanBeResearchedAt(researchBench,false) )) ||
-                (drilltypeBuilding != null && drilltypeBuilding.TryGetComp<CompDeepDrill>().CanDrillNow() == false || (drilltypeBuilding.GetComp<CompForbiddable>()?.Forbidden ?? false)) 
+                (drilltypeBuilding != null && (drilltypeBuilding.TryGetComp<CompDeepDrill>().CanDrillNow() == false || (drilltypeBuilding.GetComp<CompForbiddable>()?.Forbidden ?? false))) 
                 )
             {
                 return false;
@@ -234,11 +234,11 @@ namespace ProjectRimFactory.AutoMachineTool
                     {
                         if (b is Bill_ProductionWithUft)
                         {
-                            unforbbided = ((Bill_ProductionWithUft)b).CopyTo((Bill_ProductionWithUft)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_ProductionWithUft), b.recipe));
+                            unforbbided = ((Bill_ProductionWithUft)b).CopyTo((Bill_ProductionWithUft)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_ProductionWithUft), b.recipe,b.precept));
                         }
                         else if (b is Bill_Production)
                         {
-                            unforbbided = ((Bill_Production)b).CopyTo((Bill_Production)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_Production), b.recipe));
+                            unforbbided = ((Bill_Production)b).CopyTo((Bill_Production)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_Production), b.recipe, b.precept));
                         }
                     }
                     return Option(unforbbided);
