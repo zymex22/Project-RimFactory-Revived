@@ -60,53 +60,73 @@ namespace ProjectRimFactory.AutoMachineTool
             if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
             if (PRFGameComponent.PRF_StaticJob == null) PRFGameComponent.PRF_StaticJob = new Job(PRFDefOf.PRFStaticJob);
 
+            //bool added = false;
+
             List<ReservationManager.Reservation> reservations;
             reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(map.reservationManager);
             var res = new ReservationManager.Reservation(PRFGameComponent.PRF_StaticPawn, PRFGameComponent.PRF_StaticJob, 1, -1, tb, null);
 
-            if (!reservations.Where(r => r.Claimant == PRFGameComponent.PRF_StaticPawn && r.Job == PRFGameComponent.PRF_StaticJob && r.Target == tb).Any()) reservations.Add(res);
-            ReflectionUtility.sal_reservations.SetValue(map.reservationManager, reservations);
-
-            //Spammy Debug
-            /*
-            reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(Map.reservationManager);
-            reservations = reservations.Where(r => r.Faction != null && r.Faction.IsPlayer).ToList();
-           foreach (ReservationManager.Reservation res in reservations)
+            if (!reservations.Where(r => r.Claimant == PRFGameComponent.PRF_StaticPawn && r.Job == PRFGameComponent.PRF_StaticJob && r.Target == tb).Any())
             {
-                Log.Message("Reservation for " + res.Claimant + " at " + res.Target);
-
+                //Log.Message("pre adding:");
+                //debugListReservations();
+                //Log.Message($"added res for {res.Target}");
+                reservations.Add(res);
+                //added = true;
             }
-            */
-        }
-        public void generalRelease(Building tb)
-        {
-            if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
-            if (PRFGameComponent.PRF_StaticJob == null) PRFGameComponent.PRF_StaticJob = new Job(PRFDefOf.PRFStaticJob);
 
-            /*
-            Log.Message("----------------------------------");
+            //Log.Message("pre reserve");
+            //debugListReservations();
+            ReflectionUtility.sal_reservations.SetValue(map.reservationManager, reservations);
+            //Log.Message("post reserve");
+            //debugListReservations();
+            //if (added)
+            //{
+            //    Log.Message("post adding:");
+            //    debugListReservations();
+            //}
+           
+        }
+
+        public void debugListReservations()
+        {
             List<ReservationManager.Reservation> reservations;
-            reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(Map.reservationManager);
+            reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(map.reservationManager);
             reservations = reservations.Where(r => r.Faction != null && r.Faction.IsPlayer).ToList();
             foreach (ReservationManager.Reservation res in reservations)
             {
-                Log.Message("Reservation for " + res.Claimant + " at " + res.Target);
+                Log.Message($"Reservation for {res.Claimant } at {res.Target}");
 
             }
-            */
 
+        }
+
+        public void generalRelease(Building tb)
+        {
+            if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
+            PRFGameComponent.PRF_StaticJob ??= new Job(PRFDefOf.PRFStaticJob);
+
+            if (tb is null)
+            {
+                Log.Warning("PRF generalRelease null target");
+                return;
+            }
+
+            /*Log.Message("pre release");
+            debugListReservations();
+            */
             map.reservationManager.Release(tb, PRFGameComponent.PRF_StaticPawn, PRFGameComponent.PRF_StaticJob);
             //Log.Message("generalRelease for " + (Position + Rotation.FacingCell) );
+            //Log.Message("post release");
+            //debugListReservations();
         }
 
         public virtual void ExposeData()
         {
-            if (Scribe.mode == LoadSaveMode.Saving)
-            {
-                this.Free();
-            }
             Scribe_References.Look<Map>(ref map, "map");
-
+            Scribe_References.Look<Building_AutoMachineTool>(ref mySAL, "mySAL");
+            Scribe_Values.Look<IntVec3>(ref Position, "Position");
+            Scribe_Values.Look<Rot4>(ref Rotation, "Rotation");
         }
     }
 
@@ -688,6 +708,29 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return researchBench;
         }
+
+        public override void ExposeData()
+        {
+            //Log.Message($"SAL_TargetResearch: {Scribe.mode}");
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                
+                //Log.Message("call Free");
+                //debugListReservations();
+                this.Free();
+                //Log.Message("Free done");
+                //debugListReservations();
+            }
+
+            base.ExposeData();
+            //if (Scribe.mode != LoadSaveMode.Saving)
+            //{
+            //    Log.Message("----------");
+            //    debugListReservations();
+            //    Log.Message("----------");
+            //}
+
+        }
     }
     public class SAL_TargetDeepDrill : SAL_TargetBench
     {
@@ -762,6 +805,27 @@ namespace ProjectRimFactory.AutoMachineTool
         public override TargetInfo TargetInfo()
         {
             return drilltypeBuilding;
+        }
+        public override void ExposeData()
+        {
+
+            //Log.Message($"SAL_TargetDeepDrill: {Scribe.mode}");
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                //Log.Message("call Free");
+                //debugListReservations();
+                this.Free();
+                //Log.Message("Free done");
+                //debugListReservations();
+            }
+
+            base.ExposeData();
+            //if (Scribe.mode != LoadSaveMode.Saving)
+            //{
+            //    Log.Message("----------");
+            //    debugListReservations();
+            //    Log.Message("----------");
+            //}
         }
     }
 }

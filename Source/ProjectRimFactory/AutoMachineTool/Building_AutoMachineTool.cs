@@ -38,9 +38,10 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void ExposeData()
         {
+            Scribe_Deep.Look<SAL_TargetBench>(ref this.salTarget, "salTarget");
             base.ExposeData();
             Scribe_Values.Look<bool>(ref this.forbidItem, "forbidItem");
-            Scribe_Deep.Look<SAL_TargetBench>(ref this.salTarget, "salTarget");
+            
         }
 
         public bool GetTarget()
@@ -82,6 +83,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 if((salTarget is SAL_TargetWorktable && new_my_workTable == null) || (salTarget is SAL_TargetResearch && new_researchBench == null) || (salTarget is SAL_TargetDeepDrill && new_drilltypeBuilding == null))
                 {
+                    //Log.Message($"new_my_workTable == null: {new_my_workTable == null}|| new_researchBench == null: {new_researchBench == null}|| new_drilltypeBuilding == null: {new_drilltypeBuilding == null} ");
                     salTarget.Free();
                 }
             }
