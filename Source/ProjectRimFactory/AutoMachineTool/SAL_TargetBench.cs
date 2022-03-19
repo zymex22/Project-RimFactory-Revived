@@ -176,7 +176,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_References.Look<Bill>(ref this.bill, "bill");
             Scribe_References.Look<Thing>(ref this.dominant, "dominant");
             Scribe_References.Look<Building_WorkTable>(ref this.my_workTable, "my_workTable");
-            Scribe_Collections.Look<Thing>(ref this.ingredients, "ingredients", LookMode.Deep);
+            Scribe_Collections.Look<Thing>(ref this.ingredients, "ingredients",LookMode.Reference  /*, LookMode.Deep*/);
         }
 
         public interface IBill_PawnForbidded
@@ -278,7 +278,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void CreateWorkingEffect(MapTickManager mapTickManager)
         {
-
             workingEffect = this.bill.recipe.effectWorking?.Spawn();
 
             workingSound = this.bill.recipe.soundWorking?.TrySpawnSustainer(my_workTable);
@@ -448,7 +447,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void WorkDone(out List<Thing> products)
         {
-
             products = GenRecipe2.MakeRecipeProducts(this.bill.recipe, mySAL, this.ingredients, this.dominant, my_workTable, this.bill.precept).ToList();
 
             this.ingredients.ForEach(i => bill.recipe.Worker.ConsumeIngredient(i, bill.recipe, map));
@@ -461,7 +459,6 @@ namespace ProjectRimFactory.AutoMachineTool
             this.ingredients = null;
             // Because we use custom GenRecipe2, we have to handle bonus items and product modifications directly:
             mySAL.ModifyProductExt?.ProcessProducts(products, this as IBillGiver, mySAL, this.bill.recipe); // this as IBillGiver is probably null
-
         }
 
         public override bool TryStartWork(out float workAmount)
@@ -502,8 +499,10 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
                 workAmount = this.bill.recipe.WorkAmountTotal(thingDef);
 
-                return true;
+                float speedfact = my_workTable.GetStatValue(StatDefOf.WorkTableWorkSpeedFactor);
 
+                workAmount /= speedfact;
+                return true;
             }
             else
             {

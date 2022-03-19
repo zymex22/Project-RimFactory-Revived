@@ -112,7 +112,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            GetTarget();
+            if (salTarget == null)  GetTarget();
             extension_Skills = def.GetModExtension<ModExtension_Skills>();
 
         }
@@ -140,12 +140,12 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override void CleanupWorkingEffect()
         {
             base.CleanupWorkingEffect();
-            salTarget.CleanupWorkingEffect(this.MapManager);
+            salTarget?.CleanupWorkingEffect(this.MapManager);
         }
 
         protected override void CreateWorkingEffect()
         {
-            salTarget.CreateWorkingEffect(this.MapManager);
+            salTarget?.CreateWorkingEffect(this.MapManager);
         }
 
         
@@ -160,7 +160,7 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         private void WorkTableSetting()
         {
-            GetTarget();
+            if (salTarget == null) GetTarget();
         }
 
         protected override void Ready()
