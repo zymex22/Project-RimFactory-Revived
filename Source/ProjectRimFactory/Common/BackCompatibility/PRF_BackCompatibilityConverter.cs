@@ -83,6 +83,14 @@ namespace ProjectRimFactory.Common.BackCompatibility
 
         public override Type GetBackCompatibleType(Type baseType, string providedClassName, XmlNode node)
         {
+            switch (providedClassName)
+            {
+                case "ProjectRimFactory.AutoMachineTool.PRF_SAL_Trarget+Bill_ProductionWithUftPawnForbidded":
+                    return typeof(ProjectRimFactory.AutoMachineTool.SAL_TargetWorktable.Bill_ProductionWithUftPawnForbidded);
+                case "ProjectRimFactory.AutoMachineTool.PRF_SAL_Trarget+Bill_ProductionPawnForbidded":
+                    return typeof(ProjectRimFactory.AutoMachineTool.SAL_TargetWorktable.Bill_ProductionPawnForbidded);
+            }
+
             return null;
         }
 
