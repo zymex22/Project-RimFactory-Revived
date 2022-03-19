@@ -120,8 +120,8 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             salTarget.Free();
-
             base.DeSpawn();
+            salTarget = null;
         }
 
         public override void PostMapInit()
