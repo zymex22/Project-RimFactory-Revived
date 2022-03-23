@@ -21,7 +21,7 @@ namespace ProjectRimFactory.AutoMachineTool
         
         private bool forbidItem = false;
 
-        private SAL_TargetBench salTarget;
+        private SAL_TargetBench salTarget = null;
 
         ModExtension_Skills extension_Skills;
 
@@ -59,7 +59,6 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.powerWorkSetting.RangeSettingHide = false;
             }
 
-
             return verdict;
         }
         public bool GetTarget(IntVec3 pos, Rot4 rot , Map map , bool spawned = false)
@@ -78,7 +77,6 @@ namespace ProjectRimFactory.AutoMachineTool
             Building_ResearchBench new_researchBench = (Building_ResearchBench)buildings
                 .Where(t => t is Building_ResearchBench)
                 .FirstOrDefault();
-            
             if (spawned)
             {
                 if((salTarget is SAL_TargetWorktable && new_my_workTable == null) || (salTarget is SAL_TargetResearch && new_researchBench == null) || (salTarget is SAL_TargetDeepDrill && new_drilltypeBuilding == null))
@@ -111,10 +109,14 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
+            if (salTarget == null && this.State != WorkingState.Ready) this.State = WorkingState.Ready;
             base.SpawnSetup(map, respawningAfterLoad);
-            if (salTarget == null)  GetTarget();
-            extension_Skills = def.GetModExtension<ModExtension_Skills>();
 
+            if (salTarget == null)
+            {
+                GetTarget();
+            }
+            extension_Skills = def.GetModExtension<ModExtension_Skills>();
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
@@ -145,6 +147,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override void CreateWorkingEffect()
         {
+            base.CreateWorkingEffect();
             salTarget?.CreateWorkingEffect(this.MapManager);
         }
 
@@ -160,7 +163,11 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         private void WorkTableSetting()
         {
-            if (salTarget == null) GetTarget();
+            if (salTarget == null)
+            {
+                GetTarget();
+                this.Reset();
+            }
         }
 
         protected override void Ready()
@@ -187,6 +194,8 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             target = this;
             workAmount = 0;
+            if (salTarget == null) GetTarget();
+
             //Return if not ready
             if (!salTarget.Ready()) return false;
             var res = salTarget.TryStartWork(out workAmount);
