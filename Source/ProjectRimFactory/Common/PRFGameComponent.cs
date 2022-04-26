@@ -39,12 +39,7 @@ namespace ProjectRimFactory {
             Scribe_Deep.Look(ref PRF_StaticPawn, "PRF_StaticPawn");
             Scribe_Deep.Look(ref PRF_StaticJob, "PRF_StaticJob");
 
-            if (Scribe.mode != LoadSaveMode.Saving)
-            {
-                PRF_StaticPawn = null;
-                PRF_StaticJob = null;
-
-            }
+          
           
 
         }
