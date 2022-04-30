@@ -51,7 +51,7 @@
   <!--==================================== Small frame ===============================-->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_MachineFrame_I</defName>
-    <label>Simple Machine Frame</label>
+    <label>Small Machine Frame</label>
     <description>A small but simple machine frame used in the construction of automated buildings.</description>
     <graphicData>
       <texPath>Common/MachineFrameSmall</texPath>
@@ -80,7 +80,7 @@
   <!--==================================== Medium frame ==============================-->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_MachineFrame_II</defName>
-    <label>Machine Frame</label>
+    <label>Medium Machine Frame</label>
     <description>A medium-sized machine frame used for the construction of more complex and larger machines.</description>
     <graphicData>
       <texPath>Common/MachineFrame</texPath>
