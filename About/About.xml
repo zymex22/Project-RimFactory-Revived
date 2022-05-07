@@ -41,6 +41,7 @@
     <li>historic.IndustrialRollers</li>
     <li>essecoisa.Floored</li>
     <li>vanillaexpanded.achievements</li>
+	<li>oskarpotocki.vanillafactionsexpanded.core</li>
   </loadAfter>
   <incompatibleWith>
   </incompatibleWith>

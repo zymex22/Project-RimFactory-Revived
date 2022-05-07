@@ -16,6 +16,7 @@
     <li>UnlimitedHugs.HugsLib</li>
     <li>historic.IndustrialRollers</li>
     <li>essecoisa.Floored</li>
+	<li>oskarpotocki.vanillafactionsexpanded.core</li>
   </loadAfter>
   <suggests>
     <li>Spdskatr.ssBatteryFuse</li>
