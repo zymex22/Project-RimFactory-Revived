@@ -83,7 +83,6 @@
       <MarketValue>2780</MarketValue>
     </statBases>
     <graphicData>
-      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
       <color>(102,102,105,256)</color>      <!--change color on maske manually -->
     </graphicData>
     <comps>
@@ -195,7 +194,6 @@
     <description>A specially designed Auto Crafter which uses heuristic algorithms to produce moderately skilled art at a pace no human could ever match - it pumps out art like a firehose pumps out water.\n\nStats:\nBase: 3\n Crafting: 7\nArtistic: 8\nSpeed: 1</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
-      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
       <color>(133,97,67,256)</color>      <!--change color on maske manually -->
     </graphicData>
     <costList>
@@ -255,7 +253,6 @@
     <description>A highly advanced auto-crafter which uses a database of several thousand years of artistic expression to produce master quality art at an absurd pace - a volcanic explosion of art!\n\nStats:\nBase: 3\n Crafting: 9\nArtistic: 18\nSpeed: 1</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
-      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
       <color>(180,60,60,256)</color>      <!--change color on maske manually -->
     </graphicData>
     <costList>
@@ -315,7 +312,6 @@
     <description>An auto-assembler which has been modified to emphasize speed over quality.  Any random idiot in your colony could do better, but this machine works at a ridiculous rate and never takes breaks.\n\nStats:\nBase: 1\nSpeed: 5</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
     <graphicData>
-      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
       <color>(15,100,130,256)</color>      <!--change color on maske manually -->
     </graphicData>
     <costList>
@@ -366,7 +362,6 @@
     <description>An advanced overclocked auto-assembler which puts Henry Ford's production lines to shame.  The quality is a joke, but it can do the work of an entire team of morons.\n"So it makes you smarter?" "No, it makes you stupid faster."\n\nStats:\nBase: 1\nSpeed: 12</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
     <graphicData>
-      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
       <color>(15,100,130,256)</color>      <!--change color on maske manually -->
     </graphicData>
     <costList>
@@ -533,7 +528,6 @@
     <description>A device to make even the Archotechs sit up and blink, the Godly S.A.L. crafter works so quickly it defies all rationality. Perfect for mass-producing high quality items, this device is probably as valuable as the rest of your colony combined. May or may not incinerate the universe\nThis might be first step into insanity?!#..\n\nStats:\nBase: 20\nArtistic: 18\nSpeed: 666</description>
     <constructionSkillPrerequisite>18</constructionSkillPrerequisite>
     <graphicData>
-      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
       <color>(153,0,0,256)</color>      <!--change color on maske manually -->
     </graphicData>
     <costList>
