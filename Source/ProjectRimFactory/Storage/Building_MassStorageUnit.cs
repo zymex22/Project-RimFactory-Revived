@@ -159,8 +159,11 @@ namespace ProjectRimFactory.Storage
                     GenPlace.TryPlaceThing(thingsToSplurge[i], Position, Map, ThingPlaceMode.Near);
                 }
             Map.GetComponent<PRFMapComponent>().RemoveIHideRightClickMenu(this);
-            Map.GetComponent<PRFMapComponent>().DeRegisterIHideItemPos(this.Position, this);
-            Map.GetComponent<PRFMapComponent>().DeRegisterIForbidPawnOutputItem(this.Position, this);
+            foreach (var cell in this.OccupiedRect().Cells)
+            {
+                Map.GetComponent<PRFMapComponent>().DeRegisterIHideItemPos(cell, this);
+                Map.GetComponent<PRFMapComponent>().DeRegisterIForbidPawnOutputItem(cell, this);
+            }
             base.DeSpawn(mode);
         }
 
@@ -168,8 +171,11 @@ namespace ProjectRimFactory.Storage
         {
             base.SpawnSetup(map, respawningAfterLoad);
             Map.GetComponent<PRFMapComponent>().AddIHideRightClickMenu(this);
-            map.GetComponent<PRFMapComponent>().RegisterIHideItemPos(this.Position, this);
-            map.GetComponent<PRFMapComponent>().RegisterIForbidPawnOutputItem(this.Position, this);
+            foreach (var cell in this.OccupiedRect().Cells)
+            {
+                map.GetComponent<PRFMapComponent>().RegisterIHideItemPos(cell, this);
+                map.GetComponent<PRFMapComponent>().RegisterIForbidPawnOutputItem(cell, this);
+            }
             ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
             RefreshStorage();
 
