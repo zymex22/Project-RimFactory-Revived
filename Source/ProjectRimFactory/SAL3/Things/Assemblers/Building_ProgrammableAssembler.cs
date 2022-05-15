@@ -178,8 +178,16 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         private void MakeMatchingStockpileZone()
         {
-            Designator_ZoneAddStockpile_Resources stockpileZone = new Designator_ZoneAddStockpile_Resources();
-            stockpileZone.DesignateMultiCell(IngredientStackCells.Where(c => c != OutputComp.CurrentCell));
+            var stockpileCells = IngredientStackCells.Where(c => c != OutputComp.CurrentCell && !this.Map.thingGrid.ThingsListAt(c).Any(t => !t.def.CanOverlapZones));
+            if (stockpileCells.Count() > 0)
+            {
+                Designator_ZoneAddStockpile_Resources stockpileZone = new Designator_ZoneAddStockpile_Resources();
+                stockpileZone.DesignateMultiCell(stockpileCells);
+            }
+            else
+            {
+                Messages.Message("PRF_CantCreateStockpile".Translate(), this, MessageTypeDefOf.CautionInput);
+            }
         }
 
 
