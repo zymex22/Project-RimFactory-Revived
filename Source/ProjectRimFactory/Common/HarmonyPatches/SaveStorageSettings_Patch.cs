@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEngine;
 
 using System.Reflection.Emit;
+using ProjectRimFactory.SAL3.Things.Assemblers;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -78,7 +79,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 		public static bool IsValidBuilding(Building building)
         {
 			var isworktable = (building as Building_WorkTable) != null;
-			var isRimfactory = (building as ProjectRimFactory.AutoMachineTool.ITabBillTable) != null;
+			var isRimfactory = ((building as ProjectRimFactory.AutoMachineTool.ITabBillTable) != null) || building is Building_DynamicBillGiver;
 
 			return isworktable || isRimfactory;
 		}
@@ -89,6 +90,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 			if (building_WorkTable != null) return building_WorkTable.billStack;
 			ProjectRimFactory.AutoMachineTool.ITabBillTable tabBillTable = building as ProjectRimFactory.AutoMachineTool.ITabBillTable;
 			if (tabBillTable != null) return tabBillTable.billStack;
+			Building_DynamicBillGiver building_DynamicBillGiver = building as Building_DynamicBillGiver;
+			if (building_DynamicBillGiver != null) return building_DynamicBillGiver.BillStack;
 
 			//This should never happen
 			Log.Error($"PRF Error GetBillstack returns null - {building}");
