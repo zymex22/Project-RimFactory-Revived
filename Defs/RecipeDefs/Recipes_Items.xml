@@ -3,7 +3,7 @@
   <!--==================================== DataDisk ==============================-->
   <RecipeDef>
     <defName>MakeDataDisk</defName>
-    <label>make data disk</label>
+    <label>make Audio Tape Reel</label>
     <description>Make a roll of magnetic data tape.</description>
     <jobString>Making data disk.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -146,7 +146,7 @@
   <!--==================================== Advanced AI Core (Chip Tier 2) ==============================-->
   <RecipeDef>
     <defName>MakePRF_ElectronicChip_II</defName>
-    <label>make Adv. AI core</label>
+    <label>make advanced AI core</label>
     <description>Make an advanced AI core</description>
     <jobString>Making Adv. AI core</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -276,7 +276,7 @@
   <!--==================================== Drone module ==============================-->
   <RecipeDef>
     <defName>MakePRF_DroneModule</defName>
-    <label>make drone module</label>
+    <label>make UAV(packed)</label>
     <description>Make a drone module</description>
     <jobString>Making drone module</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -332,7 +332,7 @@
   <!--==================================== Simple frame ==============================-->
   <RecipeDef>
     <defName>MakeSmallFrame</defName>
-    <label>make machine frame (small)</label>
+    <label>make small machine frame</label>
     <description>Make a small machine frame for use in factory buildings</description>
     <jobString>Making frame</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -378,7 +378,7 @@
   <!--==================================== Medium frame ==============================-->
   <RecipeDef>
     <defName>MakeMediumFrame</defName>
-    <label>make machine frame (medium)</label>
+    <label>make medium machine frame</label>
     <description>Make a medium machine frame for factory building</description>
     <jobString>Making frame</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -433,7 +433,7 @@
   <!--==================================== adv. frame ==============================-->
   <RecipeDef>
     <defName>MakeLargeFrame</defName>
-    <label>make machine frame (advanced)</label>
+    <label>make advanced machine frame</label>
     <description>Make an advanced machine frame for factory buildings</description>
     <jobString>Making frame</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>

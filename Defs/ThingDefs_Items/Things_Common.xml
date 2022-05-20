@@ -55,7 +55,7 @@
   <!-- ================================== Advanced AI Core (Tier 3) ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_II</defName>
-    <label>Advanced AI Chip</label>
+    <label>Advanced AI Core</label>
     <description>An advanced processing unit containing hi-tech AI, which is used for advanced machines and robots..</description>
     <graphicData>
       <texPath>Common/AdvancedAICore</texPath>
