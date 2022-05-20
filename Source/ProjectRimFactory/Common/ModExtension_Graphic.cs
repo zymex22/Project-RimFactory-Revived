@@ -20,9 +20,20 @@ namespace ProjectRimFactory.Common
 
         public Graphic FirstGraphic => this.Graphics.FirstOrDefault();
 
+        private Dictionary<string, int> getByNameCache = new Dictionary<string, int>();
+
         public Graphic GetByName(string name)
         {
-            return this.graphicDataList.Where(g => g.name == name).Select(i => i.Graphic).FirstOrDefault();
+            int index;
+            if (name is null) return null;
+            if(!getByNameCache.TryGetValue(name, out index))
+            {
+                var value = this.graphicDataList.Where(g => g.name == name).FirstOrDefault();
+                index = graphicDataList.IndexOf(value);
+                getByNameCache.Add(name, index);
+            }
+
+            return graphicDataList[index].Graphic;
         }
     }
 
