@@ -68,14 +68,14 @@ namespace ProjectRimFactory.AutoMachineTool
         public IEnumerable<IntVec3> GetAllTargetCells()
         {
             this.CacheTargetCells();
-            return powerWorkSetting.GetRangeCells().ToHashSet();
+            return powerWorkSetting.GetRangeCells()?.ToHashSet() ?? new HashSet<IntVec3>(); ;
         }
 
         private void CacheTargetCells()
         {
             if (this.allTargetCellsCache == null)
             {
-                this.allTargetCellsCache = powerWorkSetting.GetRangeCells().ToHashSet();
+                this.allTargetCellsCache = powerWorkSetting.GetRangeCells()?.ToHashSet() ?? new HashSet<IntVec3>();
                 if (this.targetEnumrationCount > 0)
                 {
                     this.splittedTargetCells = this.allTargetCellsCache.ToList().Grouped(this.targetEnumrationCount);
