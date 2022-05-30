@@ -21,7 +21,7 @@
       <texPath>SAL3/SAL</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <drawSize>(1,1)</drawSize>
-      <!-- <shaderType>CutoutComplex</shaderType> -->      <!-- for mask to change color when stuffed -->
+      <shaderType>CutoutComplex</shaderType>    <!-- for mask to change color when stuffed -->
       <!-- <color>(133,97,67,256)</color> -->      <!--change color on maske manually -->
     </graphicData>
     <statBases>
@@ -47,7 +47,6 @@
     <scatterableOnMapGen>false</scatterableOnMapGen>
     <minifiedDef>MinifiedThing</minifiedDef>
     <placeWorkers>
-  
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_AutoMachineTool</li>
       <li>ProjectRimFactory.AutoMachineTool.PlaceWorker_SALTargetCellHilight</li>
       <li>ProjectRimFactory.PlaceWorker_Arrow</li>
@@ -413,7 +412,6 @@
     <description>Although the auto-assembler performs cooking to a decent level, this specialized auto-cooker is both faster and more accurate in its food production.\n\nStats:\nBase: 5\n Crafting: 8\nCooking: 12\nArtistic: 0\nSpeed: 1</description>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
     <graphicData>
-      <shaderType>CutoutComplex</shaderType>      <!-- for mask to change color when stuffed -->
       <!-- <color>(15,100,130,256)</color> -->      <!--change color on maske manually -->
     </graphicData>
     <costList>
@@ -475,9 +473,6 @@
     <label>S.A.L Automated Miner</label>
     <description>A modified crafter which is capable of performing high level mining operations, most useful in front of a deep core miner</description>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
-    <graphicData>
-      <shaderType>CutoutComplex</shaderType>
-    </graphicData>
     <costList>
       <Steel>50</Steel>
       <Plasteel>75</Plasteel>
