@@ -266,7 +266,7 @@ namespace ProjectRimFactory.Common
 
     }
 
-    public class CompProperties_PowerWorkSetting : CompProperties
+    public class CompProperties_PowerWorkSetting : CompProperties , IXMLThingDescription
     {
         //speed
         public FloatRange floatrange_SpeedFactor;
@@ -307,7 +307,58 @@ namespace ProjectRimFactory.Common
                 map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null && c.RangeSetting)
                     .ToList().ForEach(c => c.DrawRangeCells(CommonColors.otherInstance));
             }
-        } 
+        }
+
+        //https://stackoverflow.com/a/457708
+        static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
+        {
+            while (toCheck != null && toCheck != typeof(object))
+            {
+                var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+                if (generic == cur)
+                {
+                    return true;
+                }
+                toCheck = toCheck.BaseType;
+            }
+            return false;
+        }
+
+        public string GetDescription(ThingDef def)
+        {
+            string helptext = "";
+            string tempstr;
+
+
+            bool isOfTypeBuilding_BaseMachine = IsSubclassOfRawGeneric(typeof(AutoMachineTool.Building_Base<>), def.thingClass);
+            int factor = isOfTypeBuilding_BaseMachine ? 10 : 1;
+
+
+            if (floatrange_SpeedFactor.Span > 0)
+            {
+                tempstr = $"{floatrange_SpeedFactor.min * factor} - {floatrange_SpeedFactor.max * factor}";
+            }
+            else
+            {
+                tempstr = $"{floatrange_SpeedFactor.min * factor}";
+            }
+            helptext += "PRF_UTD_CompProperties_PowerWorkSetting_Speed".Translate(tempstr);
+            helptext += "\r\n";
+            if (floatrange_Range.Span > 0)
+            {
+                tempstr = $"{floatrange_Range.min} - {floatrange_Range.max}";
+            }
+            else
+            {
+                tempstr = $"{floatrange_Range.min}";
+            }
+            helptext += "PRF_UTD_CompProperties_PowerWorkSetting_Range".Translate(tempstr);
+            helptext += "\r\n";
+            helptext += "PRF_UTD_CompProperties_PowerWorkSetting_RangeType".Translate(propsRangeType.ToText());
+            helptext += "\r\n";
+            if (allowManualRangeTypeChange) helptext += "PRF_UTD_CompProperties_PowerWorkSetting_RangeTypeChange".Translate() + "\r\n"; 
+            return helptext; 
+        }
     }
 
     public interface IRangeCells

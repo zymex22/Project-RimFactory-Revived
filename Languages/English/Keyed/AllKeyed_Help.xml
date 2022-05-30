@@ -132,5 +132,25 @@ Section 1.1 - Physical properties
   <PRF_MiniDroneColumn_HelpText></PRF_MiniDroneColumn_HelpText>
 
   <!--   <xxx_HelpText></xxx_HelpText>   -->
-
+  
+  <PRF_UTD_ModExtension_Skills_ThisOverrides>Fix Skilllevel:</PRF_UTD_ModExtension_Skills_ThisOverrides>
+  <PRF_UTD_ModExtension_Skills_ReserchIsCapping>Skilllevel (Capped by Research):</PRF_UTD_ModExtension_Skills_ReserchIsCapping>
+  <PRF_UTD_ModExtension_Skills_ThisIsCapping>maximum Skilllevel (depended on Research):</PRF_UTD_ModExtension_Skills_ThisIsCapping>
+  <PRF_UTD_ModExtension_Skills_ReserchOverrides>Skill Depends on Research</PRF_UTD_ModExtension_Skills_ReserchOverrides>
+  <PRF_UTD_ModExtension_Skills_Base> {0}</PRF_UTD_ModExtension_Skills_Base>
+  <PRF_UTD_CompProperties_PowerWorkSetting_Speed>Speed: {0}</PRF_UTD_CompProperties_PowerWorkSetting_Speed>
+  <PRF_UTD_CompProperties_PowerWorkSetting_Range>Range: {0}</PRF_UTD_CompProperties_PowerWorkSetting_Range>
+  <PRF_UTD_CompProperties_PowerWorkSetting_RangeType>RangeType: {0}</PRF_UTD_CompProperties_PowerWorkSetting_RangeType>
+  <PRF_UTD_CompProperties_PowerWorkSetting_RangeTypeChange>The Range Type may be changed manually</PRF_UTD_CompProperties_PowerWorkSetting_RangeTypeChange>
+  <PRF_UTD_ModExtension_LearningAssembler_Speed>Speedfactor: {0}%</PRF_UTD_ModExtension_LearningAssembler_Speed>
+  <PRF_UTD_ModExtension_LearningAssembler_PositiveInfinity>∞</PRF_UTD_ModExtension_LearningAssembler_PositiveInfinity>
+  <PRF_UTD_ModExtension_LearningAssembler_Quality>Quality: {0}</PRF_UTD_ModExtension_LearningAssembler_Quality>
+  <PRF_UTD_CompProperties_RecipeImportRange_Range>Recipe Import Range: {0}</PRF_UTD_CompProperties_RecipeImportRange_Range>
+  <PRF_UTD_DefModExtension_DroneStation_MaxDrones>Max. Drones: {0}</PRF_UTD_DefModExtension_DroneStation_MaxDrones>
+  <PRF_UTD_DefModExtension_DroneStation_IncludedDrones>Spawns with {0} Drones</PRF_UTD_DefModExtension_DroneStation_IncludedDrones>
+  <PRF_UTD_DefModExtension_DroneStation_SleepTimes>Sleeps at: {0}</PRF_UTD_DefModExtension_DroneStation_SleepTimes>
+  <PRF_UTD_DefModExtension_DroneStation_Range>Range: {0}</PRF_UTD_DefModExtension_DroneStation_Range>
+  <PRF_UTD_DefModExtension_DroneStation_UnlimitedRange>∞</PRF_UTD_DefModExtension_DroneStation_UnlimitedRange>
+  <PRF_UTD_DefModExtension_DroneStation_WorkTypes>Work Types:</PRF_UTD_DefModExtension_DroneStation_WorkTypes>
+  
 </LanguageData>

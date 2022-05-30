@@ -20,7 +20,7 @@ namespace ProjectRimFactory.Industry
     /// TODO: Set this up as an abstract parent "produce something
     ///       every unit of time" thing?
     /// </summary>
-    public class Building_DeepQuarry : Building
+    public class Building_DeepQuarry : Building , IXMLThingDescription
     {
         public float GetProduceMtbHours { get { return def.GetModExtension<DeepQuarryDefModExtension>().TickCount; } }
         static IEnumerable<ThingDef> cachedPossibleRockDefCandidates;
@@ -49,6 +49,11 @@ namespace ProjectRimFactory.Industry
                                                          where def.building != null && def.building.isNaturalRock && def.building.mineableThing != null
                                                          select def;
             }
+        }
+        public IEnumerable<ThingDef> GetPossibleRockDefCandidatesFilterd(ThingDef thingDef)
+        {
+            return PossibleRockDefCandidates
+                  .Where(d => !thingDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.building.mineableThing) ?? true);
         }
 
         /// <summary>
@@ -171,11 +176,12 @@ namespace ProjectRimFactory.Industry
             ProducedChunksTotal++;
         }
 
+        private ThingDef getRock => GetPossibleRockDefCandidatesFilterd(this.def)
+                .RandomElementByWeight(d => d.building.isResourceRock? d.building.mineableScatterCommonality* d.building.mineableScatterLumpSizeRange.Average* d.building.mineableDropChance : 3f);
+
         protected virtual Thing GetChunkThingToPlace()
         {
-            ThingDef rock = PossibleRockDefCandidates
-                .Where(d => !this.def.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.building.mineableThing) ?? true)
-                .RandomElementByWeight(d => d.building.isResourceRock ? d.building.mineableScatterCommonality * d.building.mineableScatterLumpSizeRange.Average * d.building.mineableDropChance : 3f);
+            ThingDef rock = getRock;
             // Because we make our rocks ourselves, we have to handle bonus items and product modifications (bonuses) directly:
             var tmpList = new List<Thing>();
             this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList,
@@ -196,6 +202,21 @@ namespace ProjectRimFactory.Industry
             }
             stringBuilder.Append("DeepQuarry_TotalSoFar".Translate(ProducedChunksTotal));
             return stringBuilder.ToString().TrimEndNewlines();
+        }
+
+        public string GetDescription(ThingDef def)
+        {
+            string HelpText = "\r\n\r\n";
+            //Get Items that Building_DeepQuarry can Produce
+            List<ThingDef> rocks = GetPossibleRockDefCandidatesFilterd(def).ToList();
+            HelpText += "PRF_DescriptionUpdate_CanMine".Translate();
+            foreach (ThingDef rock in rocks)
+            {
+                HelpText += String.Format("    - {0} x{1}\r\n", rock.LabelCap, rock.building.mineableYield);
+            }
+            HelpText += "\r\n\r\n";
+
+            return HelpText;
         }
 
 #if DEBUG

@@ -5,11 +5,17 @@ using System;
 using UnityEngine;
 namespace ProjectRimFactory.CultivatorTools
 {
-    public class CultivatorDefModExtension : DefModExtension
+    public class CultivatorDefModExtension : DefModExtension , ProjectRimFactory.Common.IXMLThingDescription
     {
         public int TickFrequencyDivisor = 200;
         public int squareAreaRadius;
         public int GrowRate = 2500;
+
+        public string GetDescription(ThingDef def)
+        {
+            string text = "TODO CultivatorDefModExtension";
+            return text;
+        }
     }
     public static class Utilities
     {

@@ -11,8 +11,8 @@ using UnityEngine;
 
 namespace ProjectRimFactory.Common
 {
-    class ModExtension_Skills : DefModExtension
-    {
+    class ModExtension_Skills : DefModExtension , IXMLThingDescription
+	{
         public enum enum_ModExtension_SkillsskillUsage
 		{
 			ThisOverrides = 0,
@@ -102,7 +102,7 @@ namespace ProjectRimFactory.Common
 						returnval = Mathf.Clamp(ReserchSkillModifier.GetResechSkillLevel(type), 0, GetSkillLevel(skillDef));
 						break;
 					}
-				case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchOverrides:
+				case enum_ModExtension_SkillsskillUsage.ReserchOverrides:
 					{
 						returnval = ReserchSkillModifier.GetResechSkillLevel(type);
 						break;
@@ -116,15 +116,44 @@ namespace ProjectRimFactory.Common
 			return returnval;
 		}
 
+        public string GetDescription(ThingDef def)
+        {
+
+			string text = "";
 
 
+            switch (this.SkillUsage)
+            {
+                case enum_ModExtension_SkillsskillUsage.ThisOverrides:
+					text += "PRF_UTD_ModExtension_Skills_ThisOverrides".Translate();
+					break;
+                case enum_ModExtension_SkillsskillUsage.ReserchIsCapping:
+					text += "PRF_UTD_ModExtension_Skills_ReserchIsCapping".Translate();
+					break;
+                case enum_ModExtension_SkillsskillUsage.ThisIsCapping:
+					text += "PRF_UTD_ModExtension_Skills_ThisIsCapping".Translate();
+					break;
+                case enum_ModExtension_SkillsskillUsage.ReserchOverrides:
+					//Return early as it is entirely defined by Reserch
+					text += "PRF_UTD_ModExtension_Skills_ReserchOverrides".Translate();
+					return text;
+            }
 
+			text += "PRF_UTD_ModExtension_Skills_Base".Translate(BaseSkill);
+			
+			if (skills != null)
+            {
+				text += "\r\n";
+				foreach (SkillRecord skillRecord in skills)
+				{
+					text += $"{skillRecord.def.LabelCap}: {skillRecord.levelInt}";
+					text += "\r\n";
+				}
+			}
 
-
-
-
-
-	}
+			return text;
+        }
+    }
 
 
 }
