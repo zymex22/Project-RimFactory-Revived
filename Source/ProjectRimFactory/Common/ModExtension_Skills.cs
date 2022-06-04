@@ -146,7 +146,7 @@ namespace ProjectRimFactory.Common
 				text += "\r\n";
 				foreach (SkillRecord skillRecord in skills)
 				{
-					text += $"{skillRecord.def.LabelCap}: {skillRecord.levelInt}";
+					text += $"  - {skillRecord.def.LabelCap}: {skillRecord.levelInt}";
 					text += "\r\n";
 				}
 			}

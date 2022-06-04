@@ -152,5 +152,6 @@ Section 1.1 - Physical properties
   <PRF_UTD_DefModExtension_DroneStation_Range>Range: {0}</PRF_UTD_DefModExtension_DroneStation_Range>
   <PRF_UTD_DefModExtension_DroneStation_UnlimitedRange>∞</PRF_UTD_DefModExtension_DroneStation_UnlimitedRange>
   <PRF_UTD_DefModExtension_DroneStation_WorkTypes>Work Types:</PRF_UTD_DefModExtension_DroneStation_WorkTypes>
-  
+  <PRF_UTD_CultivatorDefModExtension_Range>Range: {0}</PRF_UTD_CultivatorDefModExtension_Range>
+  <PRF_UTD_CultivatorDefModExtension_Tickdev>Works every {0} ticks</PRF_UTD_CultivatorDefModExtension_Tickdev>
 </LanguageData>

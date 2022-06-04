@@ -342,8 +342,12 @@ namespace ProjectRimFactory.Common
             {
                 tempstr = $"{floatrange_SpeedFactor.min * factor}";
             }
-            helptext += "PRF_UTD_CompProperties_PowerWorkSetting_Speed".Translate(tempstr);
-            helptext += "\r\n";
+            //Single speed of 1 is not intersting
+            if (tempstr != "1")
+            {
+                helptext += "PRF_UTD_CompProperties_PowerWorkSetting_Speed".Translate(tempstr);
+                helptext += "\r\n";
+            }
             if (floatrange_Range.Span > 0)
             {
                 tempstr = $"{floatrange_Range.min} - {floatrange_Range.max}";
@@ -352,10 +356,16 @@ namespace ProjectRimFactory.Common
             {
                 tempstr = $"{floatrange_Range.min}";
             }
-            helptext += "PRF_UTD_CompProperties_PowerWorkSetting_Range".Translate(tempstr);
-            helptext += "\r\n";
-            helptext += "PRF_UTD_CompProperties_PowerWorkSetting_RangeType".Translate(propsRangeType.ToText());
-            helptext += "\r\n";
+            //static range of 1 or 0 is not relevant for display
+            if (tempstr != "0" && tempstr != "1")
+            {
+                helptext += "PRF_UTD_CompProperties_PowerWorkSetting_Range".Translate(tempstr);
+                helptext += "\r\n";
+
+                helptext += "PRF_UTD_CompProperties_PowerWorkSetting_RangeType".Translate(propsRangeType.ToText());
+                helptext += "\r\n";
+            }
+
             if (allowManualRangeTypeChange) helptext += "PRF_UTD_CompProperties_PowerWorkSetting_RangeTypeChange".Translate() + "\r\n"; 
             return helptext; 
         }

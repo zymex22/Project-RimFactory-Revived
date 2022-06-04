@@ -22,9 +22,15 @@ namespace ProjectRimFactory.Drones
         public string GetDescription(ThingDef def)
         {
             string text = "";
+            CompProperties_Refuelable refule = (CompProperties_Refuelable)def.comps.Where(c => ( c.compClass == typeof(CompRefuelable))).FirstOrDefault();
+            int maxdrones = maxNumDrones;
+            if (refule != null)
+            {
+                maxdrones = (int)refule.fuelCapacity;
+            }
 
-            text += "PRF_UTD_DefModExtension_DroneStation_MaxDrones".Translate(maxNumDrones) + "\r\n";
-            text += "PRF_UTD_DefModExtension_DroneStation_IncludedDrones".Translate(GetDronesOnSpawn( null )) + "\r\n";
+            text += "PRF_UTD_DefModExtension_DroneStation_MaxDrones".Translate(maxdrones) + "\r\n";
+            text += "PRF_UTD_DefModExtension_DroneStation_IncludedDrones".Translate(GetDronesOnSpawn( null, refule)) + "\r\n";
             if (Sleeptimes != "")
             {
                 text += "PRF_UTD_DefModExtension_DroneStation_SleepTimes".Translate(Sleeptimes) + "\r\n";
@@ -41,7 +47,7 @@ namespace ProjectRimFactory.Drones
             text += "PRF_UTD_DefModExtension_DroneStation_WorkTypes".Translate() + "\r\n";
             foreach (var wt in workTypes)
             {
-                text += wt.defName + "\r\n";
+                text += "  - " + wt.defName + "\r\n";
             }
 
 
@@ -51,14 +57,14 @@ namespace ProjectRimFactory.Drones
         /// <summary>
         /// Returns the number of Drones that should be availibale on Spawn.
         /// </summary>
-        public int GetDronesOnSpawn(CompRefuelable fuelcomp = null)
+        public int GetDronesOnSpawn(CompRefuelable fuelcomp = null , CompProperties_Refuelable fuelcompp = null)
         {
-
+            CompProperties_Refuelable props = fuelcomp?.Props ?? fuelcompp;
             if (spawnWithFullDrones)
             {
-                return (int)(fuelcomp?.Props.fuelCapacity ?? maxNumDrones);
+                return (int)(props?.fuelCapacity ?? maxNumDrones);
             }
-            return Mathf.Clamp(spawnWithDrones, 0, (int)(fuelcomp?.Props.fuelCapacity ?? maxNumDrones));
+            return Mathf.Clamp(spawnWithDrones, 0, (int)(props?.fuelCapacity ?? maxNumDrones));
         }
 
 

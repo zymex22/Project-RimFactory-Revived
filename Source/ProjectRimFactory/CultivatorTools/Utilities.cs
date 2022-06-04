@@ -13,7 +13,20 @@ namespace ProjectRimFactory.CultivatorTools
 
         public string GetDescription(ThingDef def)
         {
-            string text = "TODO CultivatorDefModExtension";
+            string text = "";
+            int range = 0;
+            if (squareAreaRadius > 0)
+            {
+                range = squareAreaRadius;
+            }
+            else if(def.specialDisplayRadius > 0)
+            {
+                range = (int)def.specialDisplayRadius;
+            }
+            text += "PRF_UTD_CultivatorDefModExtension_Range".Translate(range) + "\r\n";
+
+            text += "PRF_UTD_CultivatorDefModExtension_Tickdev".Translate(TickFrequencyDivisor) + "\r\n";
+
             return text;
         }
     }
