@@ -64,7 +64,7 @@
       <MarketValue>2184</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>An automated device akin to an automatic CNC router which is capable of processing stone into bricks, or even some reasonable looking art. \nArt level: 10</description>
+    <description>An automated device akin to an automatic CNC router which is capable of processing stone into bricks, or even some reasonable looking art.</description>
     <costList>
       <Steel>400</Steel>
       <ComponentIndustrial>5</ComponentIndustrial>
