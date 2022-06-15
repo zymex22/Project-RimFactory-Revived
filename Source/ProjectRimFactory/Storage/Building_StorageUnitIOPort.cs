@@ -36,6 +36,8 @@ namespace ProjectRimFactory.Storage
 
         protected CompPowerTrader powerComp;
 
+        public virtual bool ShowLimitGizmo => true;
+
 
         public string UniqueName { get => uniqueName; set => uniqueName = value; }
         private string uniqueName;
@@ -98,7 +100,7 @@ namespace ProjectRimFactory.Storage
         }
 
         //
-        public bool ForbidPawnInput
+        public virtual bool ForbidPawnInput
         {
             get
             {
@@ -364,7 +366,7 @@ namespace ProjectRimFactory.Storage
                 defaultLabel = "PRFRenameMassStorageUnitLabel".Translate(),
                 defaultDesc = "PRFRenameMassStorageUnitDesc".Translate()
             };
-            if (IOMode == StorageIOMode.Output)
+            if (IOMode == StorageIOMode.Output && ShowLimitGizmo)
             {
                 yield return new Command_Action()
                 {
