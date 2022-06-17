@@ -13,6 +13,13 @@ namespace ProjectRimFactory.Storage
 
         public override bool ShowLimitGizmo => false;
 
+        private List<Thing> placementQueue = new List<Thing>();
+
+        public void AddItemToQueue(Thing thing)
+        {
+            placementQueue.Add(thing);
+        }
+
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             base.DeSpawn(mode);
@@ -49,18 +56,21 @@ namespace ProjectRimFactory.Storage
 
         public override void Tick()
         {
+
+            if (CanGetNewItem && placementQueue.Count > 0)
+            {
+                placementQueue[0].Position = this.Position;
+                placementQueue.RemoveAt(0);
+            }
             if (this.IsHashIntervalTick(10))
             {
-                //Do check
                 if (!this.Map.reservationManager.AllReservedThings().Contains(storedItem))
                 {
                     RefreshInput();
                 }
-
-                //
-                //
-
             }
+
         }
+
     }
 }

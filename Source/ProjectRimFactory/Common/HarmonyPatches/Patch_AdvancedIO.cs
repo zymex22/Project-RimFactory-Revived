@@ -7,6 +7,7 @@ using Verse;
 using RimWorld;
 using HarmonyLib;
 using Verse.AI;
+using ProjectRimFactory.Storage;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -200,5 +201,39 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
 	}
 
+
+    [HarmonyPatch(typeof(Verse.AI.Pawn_JobTracker), "StartJob")]
+
+    public class Patch_AdvancedIO_StartJob
+	{
+        public static bool Prefix(Job newJob, ref Pawn ___pawn , JobCondition lastJobEndCondition = JobCondition.None, ThinkNode jobGiver = null, bool resumeCurJobAfterwards = false, bool cancelBusyStances = true
+			, ThinkTreeDef thinkTree = null, JobTag? tag = null, bool fromQueue = false, bool canReturnCurJobToPool = false)
+		{
+
+			var prfmapcomp = ___pawn.Map.GetComponent<PRFMapComponent>();
+			var dict = prfmapcomp.GetadvancedIOLocations;
+			if (dict == null || dict.Count() == 0) return true;
+
+			var targetPos = newJob.targetA.Thing?.Position ?? newJob.targetA.Cell;
+
+			//Maybe later make it work with multible port connecting to multibel dsu s
+			var closesetPort = dict.OrderBy(i => i.Key.DistanceTo(targetPos)).FirstOrDefault();
+			var closesetPortDistance = closesetPort.Key.DistanceTo(targetPos);
+			if (newJob.targetQueueB == null || newJob.targetQueueB.Count == 0) return true;
+
+			foreach (var target in newJob.targetQueueB)
+            {
+				if (closesetPortDistance < target.Cell.DistanceTo(targetPos))
+                {
+					if (prfmapcomp.ShouldHideItemsAtPos(target.Cell))
+                    {
+						closesetPort.Value.AddItemToQueue(target.Thing);
+					}
+                }
+            }
+
+			return true;
+		}
+	}
 
 }
