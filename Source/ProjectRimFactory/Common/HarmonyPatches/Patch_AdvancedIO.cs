@@ -216,18 +216,26 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
 			var targetPos = newJob.targetA.Thing?.Position ?? newJob.targetA.Cell;
 
-			//Maybe later make it work with multible port connecting to multibel dsu s
-			var closesetPort = dict.OrderBy(i => i.Key.DistanceTo(targetPos)).FirstOrDefault();
-			var closesetPortDistance = closesetPort.Key.DistanceTo(targetPos);
+			List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> Ports = new List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>>();
+            foreach (var pair in dict)
+            {
+				Ports.Add(new KeyValuePair<float, Building_AdvancedStorageUnitIOPort>( pair.Key.DistanceTo(targetPos), pair.Value));
+			}
+			Ports.OrderBy(i => i.Key);
+
 			if (newJob.targetQueueB == null || newJob.targetQueueB.Count == 0) return true;
 
 			foreach (var target in newJob.targetQueueB)
             {
-				if (closesetPortDistance < target.Cell.DistanceTo(targetPos))
+				if (prfmapcomp.ShouldHideItemsAtPos(target.Cell))
                 {
-					if (prfmapcomp.ShouldHideItemsAtPos(target.Cell))
+					foreach(var port in Ports)
                     {
-						closesetPort.Value.AddItemToQueue(target.Thing);
+						if (port.Key < target.Cell.DistanceTo(targetPos) && port.Value.boundStorageUnit.Position == target.Cell)
+                        {
+							port.Value.AddItemToQueue(target.Thing);
+							break;
+						}
 					}
                 }
             }
