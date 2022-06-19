@@ -713,7 +713,6 @@ namespace ProjectRimFactory.AutoMachineTool
             //Log.Message($"SAL_TargetResearch: {Scribe.mode}");
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                
                 //Log.Message("call Free");
                 //debugListReservations();
                 this.Free();
@@ -722,12 +721,15 @@ namespace ProjectRimFactory.AutoMachineTool
             }
 
             base.ExposeData();
-            //if (Scribe.mode != LoadSaveMode.Saving)
-            //{
-            //    Log.Message("----------");
-            //    debugListReservations();
-            //    Log.Message("----------");
-            //}
+            Scribe_References.Look<Building_ResearchBench>(ref this.researchBench, "researchBench");
+
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                //Log.Message("----------");
+                //debugListReservations();
+                //Log.Message("----------");
+                this.Reserve();
+            }
 
         }
     }
@@ -819,12 +821,14 @@ namespace ProjectRimFactory.AutoMachineTool
             }
 
             base.ExposeData();
-            //if (Scribe.mode != LoadSaveMode.Saving)
-            //{
+            Scribe_References.Look<Building>(ref this.drilltypeBuilding, "drilltypeBuilding");
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                this.Reserve();
             //    Log.Message("----------");
             //    debugListReservations();
             //    Log.Message("----------");
-            //}
+            }
         }
     }
 }
