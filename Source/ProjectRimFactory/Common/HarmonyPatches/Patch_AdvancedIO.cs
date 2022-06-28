@@ -21,6 +21,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             , float maxDistance = 9999f, Predicate<Thing> validator = null, IEnumerable<Thing> customGlobalSearchSet = null, int searchRegionsMin = 0
             , int searchRegionsMax = -1, bool forceAllowGlobalSearch = false, RegionType traversableRegionTypes = RegionType.Set_Passable, bool ignoreEntirelyForbiddenRegions = false)
         {
+			if (map == null) return true;
             var dict = map.GetComponent<PRFMapComponent>().GetadvancedIOLocations.Where(l => l.Value.CanGetNewItem);
 			if (dict == null ||  dict.Count() == 0) return true;
 
@@ -45,9 +46,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
 			//Add Check with Advanced_IO Here
 			//-----------------------------------------------------------
-
 			var possiblePorts = dict.Where(e => e.Value.boundStorageUnit?.StoredItems.Any(i => thingReq.Accepts(i)) ?? false).Select(e => e.Value);
-
 
 
 
@@ -87,19 +86,21 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 				//
 				thing = GenClosest.ClosestThing_Global(root, searchSet, maxDistance, validator2);
 			}
-
 			var myPort = thing as ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort;
 			if (myPort != null)
             {
 				//Get the actual thing to the port
 				var item = myPort.boundStorageUnit.StoredItems.FirstOrDefault(i => thingReq.Accepts(i));
+				if (item == null) {
+					//
+					return true;
+				}
 				item.Position = myPort.Position;
 				thing = item;
 			}
 
 				__result = thing;
 			//Copy pasta end
-
 			return false;
         }
 
