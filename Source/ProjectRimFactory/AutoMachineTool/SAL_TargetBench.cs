@@ -682,8 +682,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 statValue *= researchBench.GetStatValue(StatDefOf.ResearchSpeedFactor);
 
                 statValue /= Find.ResearchManager.currentProj.CostFactor(Faction.OfPlayer.def.techLevel);
-                //Multiplier set to 100 instead of 1000 as the speedf factor is so powerfull (would be way too fast)
-                statValue *= 100;
+                //Tuned the factor to 1000 from 100
+                statValue *= 1000;
 
                 Find.ResearchManager.ResearchPerformed(statValue, null);
             }
@@ -713,7 +713,6 @@ namespace ProjectRimFactory.AutoMachineTool
             //Log.Message($"SAL_TargetResearch: {Scribe.mode}");
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                
                 //Log.Message("call Free");
                 //debugListReservations();
                 this.Free();
@@ -722,12 +721,15 @@ namespace ProjectRimFactory.AutoMachineTool
             }
 
             base.ExposeData();
-            //if (Scribe.mode != LoadSaveMode.Saving)
-            //{
-            //    Log.Message("----------");
-            //    debugListReservations();
-            //    Log.Message("----------");
-            //}
+            Scribe_References.Look<Building_ResearchBench>(ref this.researchBench, "researchBench");
+
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                //Log.Message("----------");
+                //debugListReservations();
+                //Log.Message("----------");
+                this.Reserve();
+            }
 
         }
     }
@@ -819,12 +821,14 @@ namespace ProjectRimFactory.AutoMachineTool
             }
 
             base.ExposeData();
-            //if (Scribe.mode != LoadSaveMode.Saving)
-            //{
+            Scribe_References.Look<Building>(ref this.drilltypeBuilding, "drilltypeBuilding");
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
+                this.Reserve();
             //    Log.Message("----------");
             //    debugListReservations();
             //    Log.Message("----------");
-            //}
+            }
         }
     }
 }
