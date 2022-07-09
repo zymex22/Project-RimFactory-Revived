@@ -17,13 +17,47 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     [HarmonyPatch(typeof(GenClosest), "ClosestThingReachable")]
     class Patch_AdvancedIO_ClosestThingReachable
 	{
-        public static bool Prefix(IntVec3 root, Map map, ThingRequest thingReq, PathEndMode peMode, TraverseParms traverseParams, ref Thing __result
+
+		static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+		{
+
+			foreach (var instruction in instructions)
+			{
+				//Search for:
+				// IEnumerable<Thing> searchSet = customGlobalSearchSet ?? map.listerThings.ThingsMatching(thingReq);
+				//After that add
+				//AppendsearchSet(ref searchSet, map, thingReq);
+
+
+				//TODO Validator
+				//Replace
+				//
+				//With
+				//AdvancedIOValidator(validator , t);
+
+
+
+				//Search for:
+				//thing = ClosestThing_Global(root, searchSet, maxDistance, validator2);
+				//After that, just before the reurn add:
+				//thing = GetThing(thing,thingReq);
+
+
+
+
+				yield return instruction;
+			}
+
+		}
+
+
+
+
+
+			public static bool Prefix(IntVec3 root, Map map, ThingRequest thingReq, PathEndMode peMode, TraverseParms traverseParams, ref Thing __result
             , float maxDistance = 9999f, Predicate<Thing> validator = null, IEnumerable<Thing> customGlobalSearchSet = null, int searchRegionsMin = 0
             , int searchRegionsMax = -1, bool forceAllowGlobalSearch = false, RegionType traversableRegionTypes = RegionType.Set_Passable, bool ignoreEntirelyForbiddenRegions = false)
         {
-			if (map == null) return true;
-            var dict = map.GetComponent<PRFMapComponent>().GetadvancedIOLocations.Where(l => l.Value.CanGetNewItem);
-			if (dict == null ||  dict.Count() == 0) return true;
 
 			//Copy and paste for now (while not Transpiler)
 			bool flag = searchRegionsMax < 0 || forceAllowGlobalSearch;
@@ -43,15 +77,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 				return false;
 			}
 			Thing thing = null;
-
-			//Add Check with Advanced_IO Here
-			//-----------------------------------------------------------
-			var possiblePorts = dict.Where(e => e.Value.boundStorageUnit?.StoredItems.Any(i => thingReq.Accepts(i)) ?? false).Select(e => e.Value);
-
-
-
-			//-----------------------------------------------------------
-			//normal Code Continue
 
 
 			bool flag2 = false;
@@ -73,36 +98,89 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 					{
 						return false;
 					}
-					return (validator == null || (validator(t) || t is  ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort)) ? true : false;
+					return (AdvancedIOValidator(validator,t)) ? true : false;
 				};
 				IEnumerable<Thing> searchSet = customGlobalSearchSet ?? map.listerThings.ThingsMatching(thingReq);
-				//
-				foreach (var t in possiblePorts)
-                {
-					searchSet = searchSet.Append(t);
-				}
+
+				AppendsearchSet(ref searchSet, map, thingReq);
 
 
 				//
 				thing = GenClosest.ClosestThing_Global(root, searchSet, maxDistance, validator2);
 			}
-			var myPort = thing as ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort;
-			if (myPort != null)
-            {
-				//Get the actual thing to the port
-				var item = myPort.boundStorageUnit.StoredItems.FirstOrDefault(i => thingReq.Accepts(i));
-				if (item == null) {
-					//
-					return true;
-				}
-				item.Position = myPort.Position;
-				thing = item;
-			}
 
-				__result = thing;
+			thing = GetThing(thing,thingReq);
+
+			__result = thing;
 			//Copy pasta end
 			return false;
         }
+
+
+
+
+		public static Dictionary<Building_AdvancedStorageUnitIOPort, Thing> ItemsReachableByIOMap = new Dictionary<Building_AdvancedStorageUnitIOPort, Thing>();
+
+
+		public static bool AdvancedIOValidator(Predicate<Thing> validator, Thing t)
+        {
+			if (validator == null) return true;
+			if (t is Building_AdvancedStorageUnitIOPort myPort)
+			{
+				return (validator(ItemsReachableByIOMap[myPort]));
+			}
+
+			return (validator(t));
+		}
+
+		public static void AppendsearchSet(ref IEnumerable<Thing> searchSet,Map map, ThingRequest thingReq)
+        {
+			if (map is null) return;
+			var dict = map.GetComponent<PRFMapComponent>().GetadvancedIOLocations.Where(l => l.Value.CanGetNewItem);
+			if (dict is null || dict.Count() == 0) return;
+			ItemsReachableByIOMap.Clear();
+			//Remove IO Ports from the search set. Only specific ones can be used.
+			var serachlist = searchSet.ToList();
+			serachlist.RemoveAll(i => i is Building_AdvancedStorageUnitIOPort);
+
+			
+			
+			foreach (var e in dict)
+            {
+				var bound = e.Value.boundStorageUnit;
+				if (bound is null) continue;
+				Thing thing = bound.StoredItems.Where(i => thingReq.Accepts(i)).FirstOrDefault();
+				if (thing is not null)
+                {
+					ItemsReachableByIOMap.Add(e.Value, thing);
+					serachlist.Add(e.Value);
+				}
+
+			}
+			searchSet = serachlist;
+		}
+
+		public static Thing GetThing(Thing thing, ThingRequest thingReq)
+        {
+			var myPort = thing as ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort;
+			if (myPort is null)
+            {
+				return thing;
+            }
+			else
+			{
+				var item = ItemsReachableByIOMap[myPort];
+				//Get the actual thing to the port
+				//var item = myPort.boundStorageUnit.StoredItems.FirstOrDefault(i => thingReq.Accepts(i));
+				if (item == null)
+				{
+					Log.Error($"PRF Advanced IO assumd {myPort} had an item matching a thingReq but now can't clocate it");
+					return null;
+				}
+				item.Position = myPort.Position;
+				return item;
+			}
+		}
 
 
 		//Temp
