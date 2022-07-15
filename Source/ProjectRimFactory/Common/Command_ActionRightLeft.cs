@@ -22,7 +22,6 @@ namespace ProjectRimFactory.Common
 
 		public override void ProcessInput(Event ev)
 		{
-			//Log.Message($"{ev} -  {ev.keyCode} - {ev.isMouse}");
 			base.ProcessInput(ev);
             if(wasRightClick)
             {
