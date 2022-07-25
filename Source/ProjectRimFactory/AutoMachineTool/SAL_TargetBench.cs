@@ -176,7 +176,15 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_References.Look<Bill>(ref this.bill, "bill");
             Scribe_References.Look<Thing>(ref this.dominant, "dominant");
             Scribe_References.Look<Building_WorkTable>(ref this.my_workTable, "my_workTable");
-            Scribe_Collections.Look<Thing>(ref this.ingredients, "ingredients",LookMode.Reference  /*, LookMode.Deep*/);
+            if (unfinished == null)
+            {
+                Scribe_Collections.Look<Thing>(ref this.ingredients, "ingredients", LookMode.Deep);
+            }
+            else
+            {
+                Scribe_Collections.Look<Thing>(ref this.ingredients, "ingredients", LookMode.Reference);
+            }
+            
         }
 
         public interface IBill_PawnForbidded
