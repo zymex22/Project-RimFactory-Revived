@@ -24,9 +24,10 @@ namespace ProjectRimFactory.SAL3.Things
             base.PostDrawExtraSelectionOverlays();
             GenDraw.DrawFieldEdges(this.Props.CellsWithinRange(this.parent.Position).ToList() , this.Props.ghostColor);
         }
+
     }
 
-    public class CompProperties_RecipeImportRange : CompProperties
+    public class CompProperties_RecipeImportRange : CompProperties, ProjectRimFactory.Common.IXMLThingDescription
     {
         public CompProperties_RecipeImportRange()
         {
@@ -47,6 +48,13 @@ namespace ProjectRimFactory.SAL3.Things
         public IEnumerable<IntVec3> CellsWithinRange(IntVec3 center)
         {
             return GenRadial.RadialCellsAround(center, this.range, true);
+        }
+
+        public string GetDescription(ThingDef def)
+        {
+            string text = "PRF_UTD_CompProperties_RecipeImportRange_Range".Translate(range) +"\r\n";
+
+            return text;
         }
     }
 }
