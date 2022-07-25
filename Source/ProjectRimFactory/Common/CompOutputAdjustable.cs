@@ -50,10 +50,20 @@ namespace ProjectRimFactory.Common
             foreach (Gizmo g in base.CompGetGizmosExtra()) yield return g;
             if (Visible)
             {
-                yield return new Command_Action()
+                yield return new Command_ActionRightLeft()
                 {
                     defaultLabel = "AdjustDirection_Output".Translate(),
-                    action = () => index++,
+                    actionL = () => index++,
+                    actionR = () => {
+                        if(index == 0)
+                        {
+                            index = possibleOutputs.Count - 1;
+                        }
+                        else
+                        {
+                            index--;
+                        }
+                        },
                     icon = TexUI.RotRightTex,
                     defaultIconColor = Color.green
                 };
