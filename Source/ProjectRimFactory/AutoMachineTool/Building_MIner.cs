@@ -182,7 +182,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public string GetDescription(ThingDef def)
         {
-            string HelpText = "\r\n\r\n";
+            string HelpText = "";
 
             HelpText += "PRF_DescriptionUpdate_CanMine".Translate();
             foreach (RecipeDef recipeDef in def.recipes)
@@ -190,7 +190,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 ThingDefCountClass prouct = recipeDef.products?[0];
                 HelpText += String.Format("    - {0}\r\n", prouct?.Label);
             }
-            HelpText += "\r\n\r\n";
+            HelpText += "\r\n";
             return HelpText;
         }
     }

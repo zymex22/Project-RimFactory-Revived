@@ -206,7 +206,7 @@ namespace ProjectRimFactory.Industry
 
         public string GetDescription(ThingDef def)
         {
-            string HelpText = "\r\n\r\n";
+            string HelpText = "";
             //Get Items that Building_DeepQuarry can Produce
             List<ThingDef> rocks = GetPossibleRockDefCandidatesFilterd(def).ToList();
             HelpText += "PRF_DescriptionUpdate_CanMine".Translate();
@@ -214,7 +214,7 @@ namespace ProjectRimFactory.Industry
             {
                 HelpText += String.Format("    - {0} x{1}\r\n", rock.LabelCap, rock.building.mineableYield);
             }
-            HelpText += "\r\n\r\n";
+            HelpText += "\r\n";
 
             return HelpText;
         }
