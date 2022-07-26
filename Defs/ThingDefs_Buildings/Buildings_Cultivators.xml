@@ -72,7 +72,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_I</defName>
     <label>Drone Cultivator</label>
-    <description>The first automated cultivator, this device utilises simple drones to sow, water, and harvest your crops. It is slow but still represents a good first step into automated farming.\n\nBase Stats:\nDrones: 1\nWorkArea: 11x11\nJobtypes: Growing\nWorktime: 1hour shifts\nSkill lv.: 10</description>
+    <description>The first automated cultivator, this device utilises simple drones to sow, water, and harvest your crops. It is slow but still represents a good first step into automated farming.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator</texPath>
@@ -127,7 +127,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_II</defName>
     <label>Drone Cultivator mk.II</label>
-    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + Hauling\nWorktime: Fulltime\nSkill lv.: 15</description>
+    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorII</texPath>
@@ -180,7 +180,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_II_sun</defName>
     <label>Drone Cultivator Mk.II(sun lamp)</label>
-    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.  This version includes an integrated sunlamp, and with specialized research can upgrade the included drones to level 20.\n\nBase Stats:\nDrones: 2\nWorkArea: 11x11\nJobtypes: Growing + Hauling\nWorktime: Fulltime\nSkill lv.: 15</description>
+    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.  This version includes an integrated sunlamp, and with specialized research can upgrade the included drones to level 20.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorWithSunLamp</texPath>
@@ -250,7 +250,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_III</defName>
     <label>Drone Cultivator Mk.III</label>
-    <description>The Mark III Automated cultivator. With the use of extremely advanced automated drones this device can take your farming operations to the next level. The included drones will haul to a stockpile, I/O, crate if its within range.\n\nBase Stats:\nDrones: 5\nWorkArea: 11x11 - 33x33\nJobtypes: Growing + hauling\nWorktime: Fulltime\nSkill lv.: 20</description>
+    <description>The Mark III Automated cultivator. With the use of extremely advanced automated drones this device can take your farming operations to the next level. The included drones will haul to a stockpile, I/O, crate if its within range.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorIII</texPath>
@@ -319,7 +319,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_I</defName>
     <label>Nano Cultivator</label>
-    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.\n\nBase Stats:\nDrones: None, 1 working cell\nWorkArea: 11x11\nWorktime: Fulltime\nSpeed: 50\nSkill lv.: 20</description>
+    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator2</texPath>
@@ -363,7 +363,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_Sun</defName>
     <label>Nano Cultivator (Sunlamp)</label>
-    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.  This model has an integrated sunlamp.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 11x11\nWorktime: fulltime\nSpeed: 50\nSkill lv.: 20</description>
+    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.  This model has an integrated sunlamp.</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorB18</texPath>
@@ -421,7 +421,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_Xl</defName>
     <label>Nano Cultivator Mk.II</label>
-    <description>A highly advanced XL Cultivator that houses worker mechanites instead of drones.  The included mechanites will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.\n\nBase Stats:\nDrones: none, 1 working cell\nWorkArea: 22x22\nWorktime: fulltime\nSpeed: 12 (5x faster)\nSkill lv.: 20</description>
+    <description>A highly advanced XL Cultivator that houses worker mechanites instead of drones.  The included mechanites will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorXL</texPath>

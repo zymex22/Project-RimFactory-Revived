@@ -24,8 +24,6 @@ namespace ProjectRimFactory.SAL3.Things
 
         public Thing StoredThing => Position.GetFirstItem(Map);
 
-        protected bool PickupFromGround => (this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false) && pickupFromGround;
-
         private bool pickupFromGround;
 
         public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
@@ -43,7 +41,7 @@ namespace ProjectRimFactory.SAL3.Things
 
                 var resultCache = from IntVec3 c
                                   in this.CellsToTarget
-                                  where this.PickupFromGround || c.HasSlotGroupParent(Map)
+                                  where this.pickupFromGround || c.HasSlotGroupParent(Map)
                                   select c;
                 cachedDetectorCells = resultCache;
                 return resultCache;
@@ -94,7 +92,7 @@ namespace ProjectRimFactory.SAL3.Things
             }
             if (!respawningAfterLoad)
             {
-                this.pickupFromGround = this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false;
+                this.pickupFromGround = true;
             }
         }
 
@@ -187,7 +185,7 @@ namespace ProjectRimFactory.SAL3.Things
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            if (!this.PickupFromGround)
+            if (!this.pickupFromGround)
                 GenDraw.DrawFieldEdges(CellsToSelect.ToList(), Color.green);
         }
 
@@ -203,16 +201,13 @@ namespace ProjectRimFactory.SAL3.Things
                 defaultLabel = "SmartHopper_SetTargetAmount".Translate(),
                 action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings)),
             };
-            if (this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false)
+            yield return new Command_Toggle
             {
-                yield return new Command_Toggle
-                {
-                    icon = ContentFinder<Texture2D>.Get("PRFUi/PickupFromGround"),
-                    defaultLabel = "SmartHopper_PickupFromGround".Translate(),
-                    toggleAction = () => this.pickupFromGround = !this.pickupFromGround,
-                    isActive = () => this.pickupFromGround
-                };
-            }
+                icon = ContentFinder<Texture2D>.Get("PRFUi/PickupFromGround"),
+                defaultLabel = "SmartHopper_PickupFromGround".Translate(),
+                toggleAction = () => this.pickupFromGround = !this.pickupFromGround,
+                isActive = () => this.pickupFromGround
+            };
         }
 
         public StorageSettings GetStoreSettings()

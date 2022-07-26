@@ -13,7 +13,7 @@ using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public class Building_Miner : Building_BaseMachine<Building_Miner>, IBillGiver, IRecipeProductWorker, ITabBillTable
+    public class Building_Miner : Building_BaseMachine<Building_Miner>, IBillGiver, IRecipeProductWorker, ITabBillTable, IXMLThingDescription
     {
 
         public BillStack BillStack => this.billStack;
@@ -178,6 +178,20 @@ namespace ProjectRimFactory.AutoMachineTool
         public Bill MakeNewBill(RecipeDef recipe)
         {
             return recipe.MakeNewBill();
+        }
+
+        public string GetDescription(ThingDef def)
+        {
+            string HelpText = "";
+
+            HelpText += "PRF_DescriptionUpdate_CanMine".Translate();
+            foreach (RecipeDef recipeDef in def.recipes)
+            {
+                ThingDefCountClass prouct = recipeDef.products?[0];
+                HelpText += String.Format("    - {0}\r\n", prouct?.Label);
+            }
+            HelpText += "\r\n";
+            return HelpText;
         }
     }
 

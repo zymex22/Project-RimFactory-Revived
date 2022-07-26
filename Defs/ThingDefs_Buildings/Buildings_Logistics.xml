@@ -168,13 +168,6 @@
     <researchPrerequisites>
       <li>PRF_BeltsIII</li>
     </researchPrerequisites>
-    <modExtensions>
-      <li Class="ProjectRimFactory.Common.ModExtension_Settings">
-        <settings>
-          <pickupFromGround>true</pickupFromGround>
-        </settings>
-      </li>
-    </modExtensions>
   </ThingDef>
 
 
