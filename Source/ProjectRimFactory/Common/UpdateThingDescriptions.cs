@@ -48,10 +48,12 @@ namespace ProjectRimFactory.Common
             foreach (ThingDef thing in thingDefs)
             {
                 if (thing is null) continue;
+                if (thing.description is null) continue;
+
                 var comps = thing.comps?.Where(c => (c as IXMLThingDescription) != null).ToList();
                 var modext = thing.modExtensions?.Where(m => (m as IXMLThingDescription) != null).ToList();
 
-                var inter = thing.thingClass.GetInterface(nameof(IXMLThingDescription));
+                var inter = thing.thingClass?.GetInterface(nameof(IXMLThingDescription));
 
                 string HelpText = "\r\n\r\n";
                 if (inter != null)
@@ -59,9 +61,7 @@ namespace ProjectRimFactory.Common
                     HelpText += ((IXMLThingDescription)Activator.CreateInstance(thing.thingClass)).GetDescription(thing);
                 }
 
-               // HelpText += thingdesc?.GetDescription() ?? "";
                 //May need to change the order later
-
                 if (comps is not null)
                 {
                     foreach (var comp in comps)
@@ -79,7 +79,6 @@ namespace ProjectRimFactory.Common
                 if (HelpText != "\r\n\r\n") thing.description += HelpText;
             }
         }
-
 
 
         //It needs to run after all [StaticConstructorOnStartup] have been called 
