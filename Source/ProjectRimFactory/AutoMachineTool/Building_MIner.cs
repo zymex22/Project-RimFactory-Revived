@@ -198,6 +198,21 @@ namespace ProjectRimFactory.AutoMachineTool
     [StaticConstructorOnStartup]
     public static class RecipeRegister
     {
+        private static readonly float maxValuePerBill = 23f;
+        /// <summary>
+        /// Retuns a appropriate yield for a minable Thing
+        /// based on a "maxValuePerBill" Variable and the default yield
+        /// </summary>
+        /// <param name="def">Minable Building</param>
+        /// <returns>yield ammount</returns>
+        private static int GetMinableYieldForMinerBill(ThingDef def)
+        {
+            var yield = def.building.mineableYield;
+            var valuePerUnit = def.building.mineableThing.BaseMarketValue;
+            int count = Mathf.CeilToInt(maxValuePerBill / valuePerUnit);
+            return Mathf.Min(yield, count);
+        }
+
         static RecipeRegister()
         {
             var minerDef = DefDatabase<ThingDef>.GetNamedSilentFail("PRF_BillTypeMiner_I");
@@ -207,7 +222,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 var mineables = DefDatabase<ThingDef>.AllDefs
                     .Where(d => d.mineable && d.building != null && d.building.mineableThing != null && d.building.mineableYield > 0)
                     .Where(d => d.building.isResourceRock || d.building.isNaturalRock)
-                    .Select(d => new ThingDefCountClass(d.building.mineableThing, d.building.mineableYield))
+                    .Select(d => new ThingDefCountClass(d.building.mineableThing, GetMinableYieldForMinerBill(d)))
                     // Create recipes for exluded items - for now - so players who had those recipes
                     // don't get errors are save game load.
                     // Once people have had this change for a while (Nov 2020?), can uncomment this line
