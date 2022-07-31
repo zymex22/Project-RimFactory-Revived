@@ -22,8 +22,8 @@ namespace ProjectRimFactory.Storage
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            base.DeSpawn(mode);
             this.Map.GetComponent<PRFMapComponent>().DeRegisteradvancedIOLocations(this.Position);
+            base.DeSpawn(mode);
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -52,7 +52,7 @@ namespace ProjectRimFactory.Storage
         }
 
         private Thing storedItem => WorkPosition.GetFirstItem(Map);
-        public bool CanGetNewItem => storedItem == null;
+        public bool CanGetNewItem => storedItem == null && powerComp.PowerOn;
 
         public override void Tick()
         {
