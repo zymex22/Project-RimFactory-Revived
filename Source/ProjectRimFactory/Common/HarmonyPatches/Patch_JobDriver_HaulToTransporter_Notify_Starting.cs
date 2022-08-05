@@ -10,7 +10,7 @@ using RimWorld;
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
     [HarmonyPatch(typeof(JobDriver_HaulToTransporter), "Notify_Starting")]
-    class PatchJobDriver_HaulToTransporter_Notify_Starting
+    class Patch_JobDriver_HaulToTransporter_Notify_Starting
     {
 
         public static void Postfix(JobDriver_HaulToTransporter __instance)
@@ -23,14 +23,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 			var mindist = ThingDist;
 			foreach (var port in dict)
 			{
-				var mydust = (pawnpos - port.Key).LengthManhattan;
+				var currentDist = (pawnpos - port.Key).LengthManhattan;
 				
-
-				if (mydust < mindist)
+				if (currentDist < mindist)
 				{
-					mindist = mydust;
+					mindist = currentDist;
 					closestPort = port.Value;
-
 				}
 			}
 

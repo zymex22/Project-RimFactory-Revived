@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
+using ProjectRimFactory.Storage;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -26,31 +27,20 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
 		}
 
-		public static bool Prefix(Pawn eater, IntVec3 root, List<Thing> searchSet, PathEndMode peMode, TraverseParms traverseParams, ref Thing __result, float maxDistance = 9999f, Predicate<Thing> validator = null)
-		{
-			if (searchSet == null)
-			{
-				__result = null;
-				return false;
-			}
+		private static float mindist = float.MaxValue;
+		private static Building_AdvancedStorageUnitIOPort closestPort = null;
 
-			Pawn pawn = traverseParams.pawn ?? eater;
+		private static void findClosestPort(Pawn pawn, IntVec3 root)
+        {
+			//Init vals
+			mindist = float.MaxValue;
+			closestPort = null;
 
-			bool flagresult = false;
-			Thing result = null;
-			float FoodScore = 0f;
-			float BestFoodScore = float.MinValue;
+			//Maybe Moths don't use that
+			if (pawn.Faction == null || !pawn.Faction.IsPlayer) return;
 
-			/******************/
-
-			//Add Variables
-			var mindist = float.MaxValue;
-			ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort closestPort = null;
-
-			//Init Variables
-
-			var dict = pawn.Map.GetComponent<PRFMapComponent>().GetadvancedIOLocations.Where(l => l.Value.CanGetNewItem);
-			if (dict == null || dict.Count() == 0) return true;
+			var dict = pawn?.Map?.GetComponent<PRFMapComponent>()?.GetadvancedIOLocations?.Where(l => l.Value.CanGetNewItem);
+			if (dict == null || dict.Count() == 0) return;
 
 			foreach (var port in dict)
 			{
@@ -62,46 +52,80 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
 				}
 			}
+		}
 
-			/******************/
+		private static bool ioPortSelected = false;
+
+		private static void isCanIOPortGetItem(ref float Distance,Thing thing)
+        {
+			ioPortSelected = false;
+			if (mindist < Distance && closestPort != null && (closestPort.boundStorageUnit?.StoredItems?.Contains(thing) ?? false))
+			{
+				Distance = mindist;
+				ioPortSelected = true;
+			}
+		}
+
+		private static void moveItemIfNeeded(Thing thing)
+        {
+			if (ioPortSelected)
+			{
+				ioPortSelected = false;
+                try
+                {
+					thing.Position = closestPort.Position;
+				}
+                catch (NullReferenceException)
+                {
+					Log.Message($"moveItemIfNeeded NullReferenceException - {thing} - {closestPort}");
+                }
+				
+			}
+		}
+
+		public static bool Prefix(Pawn eater, IntVec3 root, List<Thing> searchSet, PathEndMode peMode, TraverseParms traverseParams, ref Thing __result, float maxDistance = 9999f, Predicate<Thing> validator = null)
+		{
+			if (searchSet == null)
+			{
+				__result = null;
+				return false;
+			}
+
+			Pawn pawn = traverseParams.pawn ?? eater;
+
+			Thing result = null;
+			float FoodScore = 0f;
+			float BestFoodScore = float.MinValue;
+
+
+			findClosestPort(pawn, root);
+
 			for (int i = 0; i < searchSet.Count; i++)
 			{
 				
 				Thing thing = searchSet[i];
 				float Distance = (root - thing.Position).LengthManhattan;
-				/******************/
-				bool flag = false;
-				if (mindist < Distance && closestPort.boundStorageUnit.StoredItems.Contains(thing))
-				{
-					Distance = mindist;
-					flag = true;
-				}
-				/******************/
+
+				isCanIOPortGetItem(ref Distance, thing);
+
 
 				if (!(Distance > maxDistance))
 				{
 					FoodScore = FoodUtility.FoodOptimality(eater, thing, FoodUtility.GetFinalIngestibleDef(thing), Distance);
 					if (!(FoodScore < BestFoodScore) && pawn.Map.reachability.CanReach(root, thing, peMode, traverseParams) && thing.Spawned && (validator == null || validator(thing)))
 					{
-						/******************/
-						flagresult = flag;
-						/******************/
 						result = thing;
 						BestFoodScore = FoodScore;
 					}
 				}
 			}
-			/******************/
-			if (flagresult)
-			{
-				result.Position = closestPort.Position;
 
-			}
-			/******************/
+			moveItemIfNeeded(result);
+
 			__result = result;
 			return false;
 		}
 
-
+	
 	}
 }
