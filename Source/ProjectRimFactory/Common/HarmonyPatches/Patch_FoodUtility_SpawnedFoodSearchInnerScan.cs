@@ -22,7 +22,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 		{
 			foreach (var instruction in instructions)
 			{
-				Log.Message($"{instruction.opcode} - {instruction.operand}");
 				if (instruction.opcode == OpCodes.Ldc_R4 && instruction.operand.ToString() == "-3.402823E+38")
 				{
 					yield return instruction;

@@ -19,68 +19,76 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 	[HarmonyPatch(typeof(Verse.AI.Pawn_JobTracker), "StartJob")]
     class Patch_Pawn_JobTracker_StartJob
     {
-		public static bool Prefix(Job newJob, ref Pawn ___pawn, JobCondition lastJobEndCondition = JobCondition.None, ThinkNode jobGiver = null, bool resumeCurJobAfterwards = false, bool cancelBusyStances = true
-		, ThinkTreeDef thinkTree = null, JobTag? tag = null, bool fromQueue = false, bool canReturnCurJobToPool = false)
-		{
-			//No random moths eating my cloths
-			if (___pawn.Faction == null || !___pawn.Faction.IsPlayer) return true;
 
-			var prfmapcomp = ___pawn.Map.GetComponent<PRFMapComponent>();
-			var dict = prfmapcomp.GetadvancedIOLocations;
-			if (dict == null || dict.Count() == 0) return true;
-
-			//This is the Position where we need the Item to be at
-			IntVec3 targetPos = IntVec3.Invalid;
-			var usHaulJobType = newJob.targetA.Thing?.def?.category == ThingCategory.Item;
-			//var debugmsg = $"{___pawn} -> {newJob} - usHaulJobType: {usHaulJobType} ";
-			if (usHaulJobType)
-            {
-				//Haul Type Job
-				targetPos = newJob.targetB.Thing?.Position ?? newJob.targetB.Cell;
-				if (targetPos == IntVec3.Invalid) targetPos = ___pawn.Position;
-				if (newJob.targetA == null) return true;
-
-			}
-            else
-            {
-				//Bill Type Jon
-				targetPos = newJob.targetA.Thing?.Position ?? newJob.targetA.Cell;
-				if (newJob.targetB == IntVec3.Invalid && (newJob.targetQueueB == null || newJob.targetQueueB.Count == 0)) return true;
-			}
-			//debugmsg += $" targetPos:{targetPos} ";
-
-
+		private static List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> GetPorts(Dictionary<IntVec3, Building_AdvancedStorageUnitIOPort> dict_IOports, IntVec3 targetPos)
+        {
 			List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> Ports = new List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>>();
-			foreach (var pair in dict)
+			foreach (var pair in dict_IOports)
 			{
 				Ports.Add(new KeyValuePair<float, Building_AdvancedStorageUnitIOPort>(pair.Key.DistanceTo(targetPos), pair.Value));
 			}
 			Ports.OrderBy(i => i.Key);
+			return Ports;
+
+		}
+
+		private static bool TryGetTargetPos(ref IntVec3 targetPos,bool isHaulJobType, Job newJob, IntVec3 pawnPosition)
+        {
+			if (isHaulJobType)
+			{
+				//Haul Type Job
+				targetPos = newJob.targetB.Thing?.Position ?? newJob.targetB.Cell;
+				if (targetPos == IntVec3.Invalid) targetPos = pawnPosition;
+				if (newJob.targetA == null) return false;
+
+			}
+			else
+			{
+				//Bill Type Jon
+				targetPos = newJob.targetA.Thing?.Position ?? newJob.targetA.Cell;
+				if (newJob.targetB == IntVec3.Invalid && (newJob.targetQueueB == null || newJob.targetQueueB.Count == 0)) return false;
+			}
+			return true;
+		}
+
+		private static void GetTargetItems(ref List<LocalTargetInfo> TargetItems, bool isHaulJobType, Job newJob)
+        {
+			if (isHaulJobType)
+			{
+				TargetItems = new List<LocalTargetInfo>() { newJob.targetA };
+			}
+			else
+			{
+				if (newJob.targetQueueB == null || newJob.targetQueueB.Count == 0)
+				{
+					TargetItems = new List<LocalTargetInfo>() { newJob.targetB };
+				}
+				else
+				{
+					TargetItems = newJob.targetQueueB;
+				}
+			}
+		}
+
+
+		public static bool Prefix(Job newJob, ref Pawn ___pawn, JobCondition lastJobEndCondition = JobCondition.None, ThinkNode jobGiver = null, bool resumeCurJobAfterwards = false, bool cancelBusyStances = true
+		, ThinkTreeDef thinkTree = null, JobTag? tag = null, bool fromQueue = false, bool canReturnCurJobToPool = false)
+		{
+			//No random moths eating my cloths
+			if (___pawn?.Faction == null || !___pawn.Faction.IsPlayer) return true;
+			var prfmapcomp = ___pawn.Map.GetComponent<PRFMapComponent>();
+            Dictionary<IntVec3, Building_AdvancedStorageUnitIOPort> dict = prfmapcomp.GetadvancedIOLocations;
+			if (dict == null || dict.Count() == 0) return true;
+			//This is the Position where we need the Item to be at
+			IntVec3 targetPos = IntVec3.Invalid;
+			var usHaulJobType = newJob.targetA.Thing?.def?.category == ThingCategory.Item;
+			if (!TryGetTargetPos(ref targetPos, usHaulJobType, newJob,___pawn.Position)) return true;
+
+
+			List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> Ports = GetPorts(dict, targetPos);
 
 			List<LocalTargetInfo> TargetItems = null;
-
-			if (usHaulJobType)
-            {
-				TargetItems = new List<LocalTargetInfo>() { newJob.targetA };
-				//debugmsg += $" newJob.targetA ";
-			}
-            else
-            {
-
-				
-				if (newJob.targetQueueB == null || newJob.targetQueueB.Count == 0)
-                {
-					TargetItems = new List<LocalTargetInfo>() { newJob.targetB };
-					//debugmsg += $" newJob.targetB ";
-				}
-                else
-                {
-					TargetItems = newJob.targetQueueB;
-					//debugmsg += $" newJob.targetQueueB ";
-				}
-			}
-
-
+			GetTargetItems(ref TargetItems, usHaulJobType, newJob);
 			foreach (var target in TargetItems)
 			{
 				//Why did i put that check there? This seems odd
@@ -88,16 +96,14 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 				{
 					foreach (var port in Ports)
 					{
-						if (port.Key < target.Cell.DistanceTo(targetPos) && port.Value.boundStorageUnit.Position == target.Cell)
+						if (port.Key < target.Cell.DistanceTo(targetPos) && port.Value.boundStorageUnit?.Position == target.Cell)
 						{
-							//debugmsg += $" \r\n  {port.Key}@{port.Value.Position} direct dist: {target.Cell.DistanceTo(targetPos)}@{target.Cell} isInDSU: {port.Value.boundStorageUnit.Position == target.Cell}";
 							port.Value.AddItemToQueue(target.Thing);
 							break;
 						}
 					}
 				}
 			}
-			//Log.Message(debugmsg);
 			return true;
 		}
 	}
