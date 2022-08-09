@@ -8,19 +8,69 @@ using System.Threading.Tasks;
 using Verse;
 using Verse.AI;
 using ProjectRimFactory.Storage;
+using System.Reflection.Emit;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
 	//This should probably be a Transpiler
 	[HarmonyPatch(typeof(FoodUtility), "SpawnedFoodSearchInnerScan")]
-    class Patch_FoodUtility_SpawnedFoodSearchInnerScan
-    {
-
+	class Patch_FoodUtility_SpawnedFoodSearchInnerScan
+	{
+		static object Thingarg = null;
+		static bool afterflaotMin = false;
 		static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
 			foreach (var instruction in instructions)
 			{
-				
+				Log.Message($"{instruction.opcode} - {instruction.operand}");
+				if (instruction.opcode == OpCodes.Ldc_R4 && instruction.operand.ToString() == "-3.402823E+38")
+				{
+					yield return instruction;
+					afterflaotMin = true;
+					continue;
+				}
+				if (afterflaotMin && instruction.opcode == OpCodes.Stloc_S)
+				{
+					afterflaotMin = false;
+					yield return instruction;
+					yield return new CodeInstruction(OpCodes.Ldarg_0);
+					yield return new CodeInstruction(OpCodes.Ldarg_1);
+					yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
+						typeof(Patch_FoodUtility_SpawnedFoodSearchInnerScan),
+						nameof(Patch_FoodUtility_SpawnedFoodSearchInnerScan.findClosestPort), new[] { typeof(Pawn), typeof(IntVec3) }));
+
+
+					continue;
+				}
+
+				if (instruction.opcode == OpCodes.Stloc_S && instruction.operand.ToString() == "Verse.Thing (7)" && Thingarg == null) Thingarg = instruction.operand;
+
+
+				//Issue here
+				if (instruction.opcode == OpCodes.Stloc_S && instruction.operand.ToString() == "System.Single (8)")
+				{
+					yield return instruction;
+
+					yield return new CodeInstruction(OpCodes.Ldloca_S, instruction.operand);
+					yield return new CodeInstruction(OpCodes.Ldloc_S, Thingarg);
+
+					yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
+						typeof(Patch_FoodUtility_SpawnedFoodSearchInnerScan),
+						nameof(Patch_FoodUtility_SpawnedFoodSearchInnerScan.isCanIOPortGetItem), new[] { typeof(float).MakeByRefType(), typeof(Thing) }));
+					continue;
+				}
+
+
+				if (instruction.opcode == OpCodes.Ret && Thingarg != null)
+				{
+					yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
+						typeof(Patch_FoodUtility_SpawnedFoodSearchInnerScan),
+						nameof(Patch_FoodUtility_SpawnedFoodSearchInnerScan.moveItemIfNeeded), new[] { typeof(Thing) }));
+					yield return new CodeInstruction(OpCodes.Ldloc_3);
+				}
+
+
+
 				yield return instruction;
 
 			}
@@ -30,8 +80,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 		private static float mindist = float.MaxValue;
 		private static Building_AdvancedStorageUnitIOPort closestPort = null;
 
-		private static void findClosestPort(Pawn pawn, IntVec3 root)
-        {
+		public static void findClosestPort(Pawn pawn, IntVec3 root)
+		{
 			//Init vals
 			mindist = float.MaxValue;
 			closestPort = null;
@@ -56,8 +106,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
 		private static bool ioPortSelected = false;
 
-		private static void isCanIOPortGetItem(ref float Distance,Thing thing)
-        {
+		public static void isCanIOPortGetItem(ref float Distance, Thing thing)
+		{
 			ioPortSelected = false;
 			if (mindist < Distance && closestPort != null && (closestPort.boundStorageUnit?.StoredItems?.Contains(thing) ?? false))
 			{
@@ -66,66 +116,21 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 			}
 		}
 
-		private static void moveItemIfNeeded(Thing thing)
-        {
+		public static void moveItemIfNeeded(Thing thing)
+		{
 			if (ioPortSelected)
 			{
 				ioPortSelected = false;
-                try
-                {
+				try
+				{
 					thing.Position = closestPort.Position;
 				}
-                catch (NullReferenceException)
-                {
-					Log.Message($"moveItemIfNeeded NullReferenceException - {thing} - {closestPort}");
-                }
-				
-			}
-		}
-
-		public static bool Prefix(Pawn eater, IntVec3 root, List<Thing> searchSet, PathEndMode peMode, TraverseParms traverseParams, ref Thing __result, float maxDistance = 9999f, Predicate<Thing> validator = null)
-		{
-			if (searchSet == null)
-			{
-				__result = null;
-				return false;
-			}
-
-			Pawn pawn = traverseParams.pawn ?? eater;
-
-			Thing result = null;
-			float FoodScore = 0f;
-			float BestFoodScore = float.MinValue;
-
-
-			findClosestPort(pawn, root);
-
-			for (int i = 0; i < searchSet.Count; i++)
-			{
-				
-				Thing thing = searchSet[i];
-				float Distance = (root - thing.Position).LengthManhattan;
-
-				isCanIOPortGetItem(ref Distance, thing);
-
-
-				if (!(Distance > maxDistance))
+				catch (NullReferenceException)
 				{
-					FoodScore = FoodUtility.FoodOptimality(eater, thing, FoodUtility.GetFinalIngestibleDef(thing), Distance);
-					if (!(FoodScore < BestFoodScore) && pawn.Map.reachability.CanReach(root, thing, peMode, traverseParams) && thing.Spawned && (validator == null || validator(thing)))
-					{
-						result = thing;
-						BestFoodScore = FoodScore;
-					}
+					Log.Message($"moveItemIfNeeded NullReferenceException - {thing} - {closestPort}");
 				}
+
 			}
-
-			moveItemIfNeeded(result);
-
-			__result = result;
-			return false;
 		}
-
-	
 	}
 }
