@@ -610,7 +610,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_IOPort_II</defName>
     <label>Adv. I/O port</label>
-    <description>An advanced connection port for the Digital Storage Unit. It can be set to input/output from any platform remotely within the map.</description>
+    <description>An interactive connection port for the Digital Storage Unit. Pawns may request any item from the conneted Digital Storage Unit.</description>
     <thingClass>ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>
@@ -663,7 +663,7 @@
     <costList>
       <ComponentSpacer>1</ComponentSpacer>
       <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
-      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
     <comps>
       <li Class="CompProperties_Power">
@@ -682,7 +682,7 @@
     <surfaceType>Item</surfaceType>
     <minifiedDef>MinifiedThing</minifiedDef>
     <researchPrerequisites>
-      <li>PRF_StorageIO</li>
+      <li>PRF_StorageIO_II</li>
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">
