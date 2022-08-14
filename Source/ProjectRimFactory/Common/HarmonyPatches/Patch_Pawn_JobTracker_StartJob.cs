@@ -20,18 +20,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_Pawn_JobTracker_StartJob
     {
 
-		private static List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> GetPorts(Dictionary<IntVec3, Building_AdvancedStorageUnitIOPort> dict_IOports, IntVec3 targetPos)
-        {
-			List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> Ports = new List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>>();
-			foreach (var pair in dict_IOports)
-			{
-				Ports.Add(new KeyValuePair<float, Building_AdvancedStorageUnitIOPort>(pair.Key.DistanceTo(targetPos), pair.Value));
-			}
-			Ports.OrderBy(i => i.Key);
-			return Ports;
-
-		}
-
 		private static bool TryGetTargetPos(ref IntVec3 targetPos,bool isHaulJobType, Job newJob, IntVec3 pawnPosition)
         {
 			if (isHaulJobType)
@@ -76,31 +64,44 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 		{
 			//No random moths eating my cloths
 			if (___pawn?.Faction == null || !___pawn.Faction.IsPlayer) return true;
-			var prfmapcomp = ___pawn.Map.GetComponent<PRFMapComponent>();
-            Dictionary<IntVec3, Building_AdvancedStorageUnitIOPort> dict = prfmapcomp.GetadvancedIOLocations;
-			if (dict == null || dict.Count() == 0) return true;
+			var prfmapcomp = PatchStorageUtil.GetPRFMapComponent(___pawn.Map);
+
 			//This is the Position where we need the Item to be at
 			IntVec3 targetPos = IntVec3.Invalid;
 			var usHaulJobType = newJob.targetA.Thing?.def?.category == ThingCategory.Item;
 			if (!TryGetTargetPos(ref targetPos, usHaulJobType, newJob,___pawn.Position)) return true;
 
 
-			List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> Ports = GetPorts(dict, targetPos);
-
+			List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> Ports =  AdvancedIO_PatchHelper.GetOrderdAdvancedIOPorts(___pawn.Map, ___pawn.Position, targetPos);
 			List<LocalTargetInfo> TargetItems = null;
 			GetTargetItems(ref TargetItems, usHaulJobType, newJob);
 			foreach (var target in TargetItems)
 			{
-				//Why did i put that check there? This seems odd
+				var DistanceToTarget = AdvancedIO_PatchHelper.CalculatePath(___pawn.Position, target.Cell, targetPos);
+
+				//Quick check if the Item could be in a DSU
+				//Might have false Positives They are then filterd by AdvancedIO_PatchHelper.CanMoveItem
+				//But should not have false Negatives
 				if (prfmapcomp.ShouldHideItemsAtPos(target.Cell))
 				{
 					foreach (var port in Ports)
 					{
-						if (port.Key < target.Cell.DistanceTo(targetPos) && port.Value.boundStorageUnit?.Position == target.Cell)
+
+						var PortIsCloser = port.Key < DistanceToTarget;
+						if (PortIsCloser)
 						{
-							port.Value.AddItemToQueue(target.Thing);
+							if (AdvancedIO_PatchHelper.CanMoveItem(port.Value, target.Cell))
+                            {
+								port.Value.AddItemToQueue(target.Thing);
+								break;
+							}
+                        }
+                        else
+                        {
+							//Since we use a orderd List we know
+							//if one ins further, the same is true for the rest
 							break;
-						}
+                        }
 					}
 				}
 			}

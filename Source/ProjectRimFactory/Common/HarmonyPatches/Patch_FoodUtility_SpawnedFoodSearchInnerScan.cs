@@ -2,7 +2,6 @@
 using RimWorld;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Verse;
@@ -12,8 +11,7 @@ using System.Reflection.Emit;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-	//This should probably be a Transpiler
-	[HarmonyPatch(typeof(FoodUtility), "SpawnedFoodSearchInnerScan")]
+    [HarmonyPatch(typeof(FoodUtility), "SpawnedFoodSearchInnerScan")]
 	class Patch_FoodUtility_SpawnedFoodSearchInnerScan
 	{
 		static object Thingarg = null;
@@ -85,22 +83,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 			mindist = float.MaxValue;
 			closestPort = null;
 
-			//Maybe Moths don't use that
 			if (pawn.Faction == null || !pawn.Faction.IsPlayer) return;
 
-			var dict = pawn?.Map?.GetComponent<PRFMapComponent>()?.GetadvancedIOLocations?.Where(l => l.Value.CanGetNewItem);
-			if (dict == null || dict.Count() == 0) return;
-
-			foreach (var port in dict)
-			{
-				var mydust = (root - port.Key).LengthManhattan;
-				if (mydust < mindist)
-				{
-					mindist = mydust;
-					closestPort = port.Value;
-
-				}
-			}
+			//Not Optimal for the search. might need update
+			var closest = AdvancedIO_PatchHelper.GetClosestPort(pawn.Map, pawn.Position);
+			mindist = closest.Key;
+			closestPort = closest.Value;
 		}
 
 		private static bool ioPortSelected = false;
@@ -108,7 +96,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 		public static void isCanIOPortGetItem(ref float Distance, Thing thing)
 		{
 			ioPortSelected = false;
-			if (mindist < Distance && closestPort != null && (closestPort.boundStorageUnit?.StoredItems?.Contains(thing) ?? false))
+			if (mindist < Distance && closestPort != null && ((AdvancedIO_PatchHelper.CanMoveItem(closestPort,thing))))
 			{
 				Distance = mindist;
 				ioPortSelected = true;

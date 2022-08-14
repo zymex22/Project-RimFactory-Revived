@@ -16,7 +16,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             __result = false;
             if (dest.Thing == null || dest.Thing.def.category != ThingCategory.Item) return true;
-            var mapcomp = ___map.GetComponent<PRFMapComponent>();
+            var mapcomp = PatchStorageUtil.GetPRFMapComponent(___map);
             if(mapcomp == null) return true;
             //Not optimal lets correct that later
             var ThingPos = dest.Thing.Position;
