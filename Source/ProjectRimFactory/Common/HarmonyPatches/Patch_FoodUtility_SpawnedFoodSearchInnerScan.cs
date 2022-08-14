@@ -105,7 +105,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
 		public static void moveItemIfNeeded(Thing thing)
 		{
-			if (ioPortSelected)
+			if (ioPortSelected && thing != null)
 			{
 				ioPortSelected = false;
 				try

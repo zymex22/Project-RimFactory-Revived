@@ -66,11 +66,13 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 			if (___pawn?.Faction == null || !___pawn.Faction.IsPlayer) return true;
 			var prfmapcomp = PatchStorageUtil.GetPRFMapComponent(___pawn.Map);
 
+			//PickUpAndHaul "Compatibility" (by not messing with it)
+			if (newJob.def.defName == "HaulToInventory") return true;
+
 			//This is the Position where we need the Item to be at
 			IntVec3 targetPos = IntVec3.Invalid;
 			var usHaulJobType = newJob.targetA.Thing?.def?.category == ThingCategory.Item;
 			if (!TryGetTargetPos(ref targetPos, usHaulJobType, newJob,___pawn.Position)) return true;
-
 
 			List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> Ports =  AdvancedIO_PatchHelper.GetOrderdAdvancedIOPorts(___pawn.Map, ___pawn.Position, targetPos);
 			List<LocalTargetInfo> TargetItems = null;
@@ -92,7 +94,15 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 						{
 							if (AdvancedIO_PatchHelper.CanMoveItem(port.Value, target.Cell))
                             {
-								port.Value.AddItemToQueue(target.Thing);
+								if (target.Thing != null)
+                                {
+									port.Value.AddItemToQueue(target.Thing);
+                                }
+								else
+                                {
+									Log.Error($"ProjectRimfactory - Patch_Pawn_JobTracker_StartJob - Null Thing as Target: {target} - pawn:{___pawn} - Job:{newJob}");
+                                }
+								
 								break;
 							}
                         }
