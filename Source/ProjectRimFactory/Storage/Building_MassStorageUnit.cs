@@ -37,6 +37,7 @@ namespace ProjectRimFactory.Storage
         public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
         public override string LabelCap => uniqueName ?? base.LabelCap;
         public virtual bool CanReceiveIO => true;
+        public virtual bool Powered => true;
 
         public bool ForbidPawnAccess => ModExtension_Crate?.forbidPawnAccess ?? false;
 

@@ -19,6 +19,26 @@ namespace ProjectRimFactory.Common
         
         private Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>> ForbidPawnOutputItemLocations = new Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>>();
 
+        private Dictionary<IntVec3, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort> advancedIOLocations = new Dictionary<IntVec3, Storage.Building_AdvancedStorageUnitIOPort>();
+
+        public Dictionary<IntVec3, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort> GetadvancedIOLocations => advancedIOLocations;
+
+        public void RegisteradvancedIOLocations(IntVec3 pos, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort port)
+        {
+            if (!advancedIOLocations.ContainsKey(pos))
+            {
+                advancedIOLocations.Add(pos, port);
+            }
+        }
+        public void DeRegisteradvancedIOLocations(IntVec3 pos)
+        {
+            if (advancedIOLocations.ContainsKey(pos))
+            {
+                advancedIOLocations.Remove(pos);
+            }
+
+        }
+
         public void RegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
         {
             if(hideItemLocations.ContainsKey(pos))

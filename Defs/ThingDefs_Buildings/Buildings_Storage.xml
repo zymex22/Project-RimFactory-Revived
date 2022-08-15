@@ -605,4 +605,91 @@
   </ThingDef>
 
 
+
+  <!--============================== Advanced I/O Port ==============================-->
+  <ThingDef ParentName="PRF_BuildingBase">
+    <defName>PRF_IOPort_II</defName>
+    <label>Adv. I/O port</label>
+    <description>An interactive connection port for the Digital Storage Unit. Pawns may request any item from the conneted Digital Storage Unit.</description>
+    <thingClass>ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+    <uiIconScale>0.7</uiIconScale>
+    <designatorDropdown>PRF_IoGroup</designatorDropdown>
+    <graphicData>
+      <texPath>Storage/IO_Port</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+          </categories>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Storage.UI.ITab_IOPortStorage</li>
+      <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
+    </inspectorTabs>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>750</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>1729</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Mass>30</Mass>
+    </statBases>
+    <costList>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <rotatable>false</rotatable>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <researchPrerequisites>
+      <li>PRF_StorageIO_II</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">
+        <inColor>(144, 222, 255, 255)</inColor>
+        <outColor>(215, 169, 72, 255)</outColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
 </Defs>
