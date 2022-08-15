@@ -391,11 +391,14 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         // TryGetNextBill returns a new BillReport to start if one is available
         protected BillReport TryGetNextBill()
         {
-            foreach (Bill b in AllBillsShouldDoNow)
+            var allThings = AllAccessibleThings;
+            IEnumerable<Bill> allBills = AllBillsShouldDoNow;
+
+            foreach (Bill b in allBills)
             {
                 List<ThingCount> chosen = new List<ThingCount>();
 
-                List<Thing> allAccessibleAllowedThings = AllAccessibleThings.Where(x=>b.IsFixedOrAllowedIngredient(x)).ToList();
+                List<Thing> allAccessibleAllowedThings = allThings.Where(x=>b.IsFixedOrAllowedIngredient(x)).ToList();
 
                 if (allAccessibleAllowedThings.Count > 0 || b.ingredientFilter.AllowedThingDefs.Count() == 0)
                 {
