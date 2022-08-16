@@ -210,6 +210,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var yield = def.building.mineableYield;
             var valuePerUnit = def.building.mineableThing.BaseMarketValue;
             int count = Mathf.CeilToInt(maxValuePerBill / valuePerUnit);
+            if (def.defName == "MineableSilver") count = 5;
             return Mathf.Min(yield, count);
         }
 
@@ -268,6 +269,19 @@ namespace ProjectRimFactory.AutoMachineTool
                 //minerDef.recipes = recipeDefs;
             }
         }
+        private static float calculateWorkAmmount(ThingDefCountClass defCount)
+        {
+            var isRare = defCount.thingDef.BaseMarketValue >= 6;
+            var work = Mathf.Max(10000f, StatDefOf.MarketValue.Worker.GetValue(StatRequest.For(defCount.thingDef, null)) * defCount.count * 1000);
+            //Maybe make this a fuction at a later point
+            //As in factor per maket value
+            if (isRare)
+            {
+                work *= 5;
+            }
+            if (defCount.thingDef.defName == "MineableSilver") work *= 8;
+            return work;
+        }
 
         private static RecipeDef CreateMiningRecipe(ThingDefCountClass defCount, EffecterDef effecter)
         {
@@ -276,7 +290,7 @@ namespace ProjectRimFactory.AutoMachineTool
             r.label = "PRF.AutoMachineTool.AutoMiner.MineOre".Translate(defCount.thingDef.label);
             r.jobString = "PRF.AutoMachineTool.AutoMiner.MineOre".Translate(defCount.thingDef.label);
 
-            r.workAmount = Mathf.Max(10000f, StatDefOf.MarketValue.Worker.GetValue(StatRequest.For(defCount.thingDef, null)) * defCount.count * 1000);
+            r.workAmount = calculateWorkAmmount(defCount);
             r.workSpeedStat = StatDefOf.WorkToMake;
             r.efficiencyStat = StatDefOf.WorkToMake;
 
