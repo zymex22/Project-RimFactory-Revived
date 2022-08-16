@@ -9,7 +9,7 @@ using Verse.AI;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    [HarmonyPatch(typeof(Verse.Reachability), "CanReach", new[] { typeof(IntVec3), typeof(LocalTargetInfo), typeof(PathEndMode), typeof(TraverseParms) })]
+    //Managed by ConditionalPatchHelper.Update_Patch_Reachability_CanReach
     class Patch_Reachability_CanReach
     {
         public static bool Prefix(IntVec3 start, LocalTargetInfo dest, PathEndMode peMode, TraverseParms traverseParams ,out bool __result,Map ___map, Reachability __instance)

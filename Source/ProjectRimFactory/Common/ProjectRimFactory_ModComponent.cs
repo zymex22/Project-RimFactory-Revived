@@ -25,6 +25,8 @@ namespace ProjectRimFactory.Common
                 NoMessySpawns.Instance.Add(ShouldSuppressDisplace, (Building_MassStorageUnit b, Map map) => true);
                 availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
                 LoadModSupport();
+                ConditionalPatchHelper.InitHarmony(this.HarmonyInstance);
+                ConditionalPatchHelper.Update_Patch_Reachability_CanReach();
 
             }
             catch (Exception ex)

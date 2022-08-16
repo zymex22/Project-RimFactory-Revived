@@ -23,11 +23,8 @@ namespace ProjectRimFactory.Common
 
         private static ContainerRow root;
 
-        // All C# based mod settings can go here.  If better organization
-        //   is desired, we can set up some ContainerRow classes that are
-        //   organized by XML?  But that's a lot of work.
-        private static void CSharpSettings(Listing_Standard list) {
-            // Style: do your section of settings and then list.GapLine();
+        private static void AddHeader(Listing_Standard list,string header)
+        {
             Rect rect = list.GetRect(30);
 
             Widgets.DrawRectFast(rect, Color.gray);
@@ -36,13 +33,22 @@ namespace ProjectRimFactory.Common
             Text.Font = GameFont.Medium;
             Text.Anchor = TextAnchor.MiddleCenter;
 
-            Widgets.Label(rect, "PRF_Settings_C_Lite_Header".Translate());
+            Widgets.Label(rect, header);
             Text.Font = tmp;
             Text.Anchor = tmpAnc;
 
             list.Gap();
+        }
 
-            rect = list.GetRect(20);
+        // All C# based mod settings can go here.  If better organization
+        //   is desired, we can set up some ContainerRow classes that are
+        //   organized by XML?  But that's a lot of work.
+        private static void CSharpSettings(Listing_Standard list) {
+            // Style: do your section of settings and then list.GapLine();
+            AddHeader(list, "PRF_Settings_C_Lite_Header".Translate());
+
+
+            Rect rect = list.GetRect(20);
             if (Mouse.IsOver(rect))
             {
                 Widgets.DrawHighlight(rect);
@@ -56,6 +62,23 @@ namespace ProjectRimFactory.Common
                 PRF_CustomizeDefs.ToggleLiteMode(PRF_LiteMode);
             }
             PRF_LiteMode_last = PRF_LiteMode;
+
+            
+            AddHeader(list, "PRF_Settings_C_Patches_Header".Translate());
+            
+            rect = list.GetRect(20);
+            if (Mouse.IsOver(rect))
+            {
+                Widgets.DrawHighlight(rect);
+            }
+            TooltipHandler.TipRegion(rect, "PRF_Settings_C_Patches_Reachability_CanReach_ToolTip".Translate());
+            Widgets.CheckboxLabeled(rect, "PRF_Settings_C_Patches_Reachability_CanReach".Translate(), ref PRF_Patch_Reachability_CanReach);
+            list.Gap();
+            if (PRF_Patch_Reachability_CanReach != PRF_Patch_Reachability_CanReach_last)
+            {
+                ConditionalPatchHelper.Update_Patch_Reachability_CanReach();
+            }
+            PRF_Patch_Reachability_CanReach_last = PRF_Patch_Reachability_CanReach;
 
         }
 
@@ -80,6 +103,8 @@ namespace ProjectRimFactory.Common
 
         public static bool PRF_LiteMode = false;
         private static bool PRF_LiteMode_last = false;
+        public static bool PRF_Patch_Reachability_CanReach = false;
+        private static bool PRF_Patch_Reachability_CanReach_last = false;
 
         public override void ExposeData()
         {
@@ -87,7 +112,9 @@ namespace ProjectRimFactory.Common
             root.ExposeData();
             Scribe_Values.Look<Debug.Flag>(ref Debug.activeFlags, "debugFlags", 0);
             Scribe_Values.Look(ref PRF_LiteMode, "PRF_LiteMode", false);
+            Scribe_Values.Look(ref PRF_Patch_Reachability_CanReach, "PRF_Patch_Reachability_CanReach", false);
             PRF_LiteMode_last = PRF_LiteMode;
+            PRF_Patch_Reachability_CanReach_last = PRF_Patch_Reachability_CanReach;
         }
 
         public void DoWindowContents(Rect inRect)
