@@ -198,6 +198,22 @@ namespace ProjectRimFactory.AutoMachineTool
     [StaticConstructorOnStartup]
     public static class RecipeRegister
     {
+        private static readonly float maxValuePerBill = 23f;
+        /// <summary>
+        /// Retuns a appropriate yield for a minable Thing
+        /// based on a "maxValuePerBill" Variable and the default yield
+        /// </summary>
+        /// <param name="def">Minable Building</param>
+        /// <returns>yield ammount</returns>
+        private static int GetMinableYieldForMinerBill(ThingDef def)
+        {
+            var yield = def.building.mineableYield;
+            var valuePerUnit = def.building.mineableThing.BaseMarketValue;
+            int count = Mathf.CeilToInt(maxValuePerBill / valuePerUnit);
+            if (def.defName == "MineableSilver") count = 5;
+            return Mathf.Min(yield, count);
+        }
+
         static RecipeRegister()
         {
             var minerDef = DefDatabase<ThingDef>.GetNamedSilentFail("PRF_BillTypeMiner_I");
@@ -207,7 +223,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 var mineables = DefDatabase<ThingDef>.AllDefs
                     .Where(d => d.mineable && d.building != null && d.building.mineableThing != null && d.building.mineableYield > 0)
                     .Where(d => d.building.isResourceRock || d.building.isNaturalRock)
-                    .Select(d => new ThingDefCountClass(d.building.mineableThing, d.building.mineableYield))
+                    .Select(d => new ThingDefCountClass(d.building.mineableThing, GetMinableYieldForMinerBill(d)))
                     // Create recipes for exluded items - for now - so players who had those recipes
                     // don't get errors are save game load.
                     // Once people have had this change for a while (Nov 2020?), can uncomment this line
@@ -253,6 +269,19 @@ namespace ProjectRimFactory.AutoMachineTool
                 //minerDef.recipes = recipeDefs;
             }
         }
+        private static float calculateWorkAmmount(ThingDefCountClass defCount)
+        {
+            var isRare = defCount.thingDef.BaseMarketValue >= 6;
+            var work = Mathf.Max(10000f, StatDefOf.MarketValue.Worker.GetValue(StatRequest.For(defCount.thingDef, null)) * defCount.count * 1000);
+            //Maybe make this a fuction at a later point
+            //As in factor per maket value
+            if (isRare)
+            {
+                work *= 5;
+            }
+            if (defCount.thingDef.defName == "MineableSilver") work *= 8;
+            return work;
+        }
 
         private static RecipeDef CreateMiningRecipe(ThingDefCountClass defCount, EffecterDef effecter)
         {
@@ -261,7 +290,7 @@ namespace ProjectRimFactory.AutoMachineTool
             r.label = "PRF.AutoMachineTool.AutoMiner.MineOre".Translate(defCount.thingDef.label);
             r.jobString = "PRF.AutoMachineTool.AutoMiner.MineOre".Translate(defCount.thingDef.label);
 
-            r.workAmount = Mathf.Max(10000f, StatDefOf.MarketValue.Worker.GetValue(StatRequest.For(defCount.thingDef, null)) * defCount.count * 1000);
+            r.workAmount = calculateWorkAmmount(defCount);
             r.workSpeedStat = StatDefOf.WorkToMake;
             r.efficiencyStat = StatDefOf.WorkToMake;
 
