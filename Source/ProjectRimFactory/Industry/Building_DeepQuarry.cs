@@ -29,12 +29,14 @@ namespace ProjectRimFactory.Industry
         public CompPowerTrader power;
         public CompRefuelable fuel;
         public int ProducedChunksTotal = 0;
+        private bool inSpace = false;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad) {
             base.SpawnSetup(map, respawningAfterLoad);
             flick = GetComp<CompFlickable>();
             power = GetComp<CompPowerTrader>();
             fuel = GetComp<CompRefuelable>();
+            inSpace = Common.HarmonyPatches.PatchStorageUtil.GetPRFMapComponent(map).IsSpace;
         }
 
         public static IEnumerable<ThingDef> PossibleRockDefCandidates
@@ -78,7 +80,7 @@ namespace ProjectRimFactory.Industry
                 !fuel.Props.consumeFuelOnlyWhenUsed) {
                 fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
             }*/
-
+            if (inSpace) return;
             if (flick == null || flick.SwitchIsOn) // Either no switch or turned on
             {
                 if (power == null || power.PowerOn) // Either does not use power or has power

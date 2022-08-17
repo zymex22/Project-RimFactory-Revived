@@ -41,7 +41,10 @@ namespace ProjectRimFactory.Common
 
         public static System.Reflection.MethodInfo ModSupport_ReserchPal_ResetLayout = null;
         public static bool ModSupport_ReserchPal = false;
-        
+
+        public static System.Reflection.MethodInfo ModSupport_SOS2_IsSpace = null;
+        public static bool ModSupport_SOS2 = false;
+
         private void LoadModSupport()
         {
             if (ModLister.HasActiveModWithName("[KV] RimFridge"))
@@ -151,7 +154,11 @@ namespace ProjectRimFactory.Common
                     Log.Error("PRF Could not find savestoragesettings.kv.rw assembly");
                 }
             }
-
+            if (ModLister.HasActiveModWithName("Save Our Ship 2"))
+            {
+                ModSupport_SOS2 = true;
+                ModSupport_SOS2_IsSpace = AccessTools.Method("RimworldMod.AccessExtensions:IsSpace");
+            }
 
         }
 

@@ -19,6 +19,9 @@ namespace ProjectRimFactory.Common
         
         private Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>> ForbidPawnOutputItemLocations = new Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>>();
 
+        private bool spaceTested = false;
+        public bool IsSpace = false;
+
         public void RegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
         {
             if(hideItemLocations.ContainsKey(pos))
@@ -97,6 +100,12 @@ namespace ProjectRimFactory.Common
         {
             base.MapComponentTick();
             this.tickers.ForEach(t => t.Tick());
+
+            if(!spaceTested && ProjectRimFactory_ModComponent.ModSupport_SOS2)
+            {
+                spaceTested = true;
+                IsSpace = (bool)ProjectRimFactory_ModComponent.ModSupport_SOS2_IsSpace.Invoke(null, new object[] { this.map });
+            }
         }
 
         public void AddTicker(ITicker ticker)

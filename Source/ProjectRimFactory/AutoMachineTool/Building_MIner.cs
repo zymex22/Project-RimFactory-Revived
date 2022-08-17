@@ -26,6 +26,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public IEnumerable<RecipeDef> AllRecipes => this.def.AllRecipes;
 
+        private bool inSpace = false;
+
         public IEnumerable<RecipeDef> GetAllRecipes()
         {
             return this.AllRecipes;
@@ -153,7 +155,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-
+            inSpace = Common.HarmonyPatches.PatchStorageUtil.GetPRFMapComponent(map).IsSpace;
             if (this.GetComp<CompGlowerPulse>() != null)
             {
                 this.GetComp<CompGlowerPulse>().Glows = false;
@@ -192,6 +194,11 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             HelpText += "\r\n";
             return HelpText;
+        }
+
+        protected override bool IsActive()
+        {
+            return base.IsActive() && !inSpace;
         }
     }
 
