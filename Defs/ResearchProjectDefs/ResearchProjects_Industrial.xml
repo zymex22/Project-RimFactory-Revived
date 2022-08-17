@@ -55,6 +55,14 @@
     </requiredResearchFacilities>
     <researchViewX>9</researchViewX>
     <description>Build two more advanced forms of miners.  One will only produce resources with no stone, and one allows you to target-mine specific resources.  Neither of the tier 3 miners will draw infestations thanks to the advanced technology they use to dampen vibrations.</description>
+  	
+	<techprintCount MayRequire="ludeon.rimworld.royalty">1</techprintCount>
+   	<techprintCommonality MayRequire="ludeon.rimworld.royalty">1</techprintCommonality>
+    <techprintMarketValue MayRequire="ludeon.rimworld.royalty">3000</techprintMarketValue>
+	<heldByFactionCategoryTags MayRequire="ludeon.rimworld.royalty">
+	  <li MayRequire="ludeon.rimworld.royalty">Outlander</li>
+      <li MayRequire="ludeon.rimworld.royalty">Empire</li>
+	</heldByFactionCategoryTags>
   </ResearchProjectDef>
 
 </Defs>

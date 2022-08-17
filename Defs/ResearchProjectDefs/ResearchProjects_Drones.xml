@@ -57,6 +57,14 @@
     <researchViewX>10</researchViewX>
     <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
     <discoveredLetterText>You have upgraded your drones with advanced AI cores, this will let them do their tasks better than most humans will do. \n This will set any drones base level to 20. \n Unless other settings for specific dronestation is specified.</discoveredLetterText>
+  	
+	<techprintCount MayRequire="ludeon.rimworld.royalty">1</techprintCount>
+   	<techprintCommonality MayRequire="ludeon.rimworld.royalty">1</techprintCommonality>
+    <techprintMarketValue MayRequire="ludeon.rimworld.royalty">3000</techprintMarketValue>
+	<heldByFactionCategoryTags MayRequire="ludeon.rimworld.royalty">
+	  <li MayRequire="ludeon.rimworld.royalty">Outlander</li>
+      <li MayRequire="ludeon.rimworld.royalty">Empire</li>
+	</heldByFactionCategoryTags>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 20 unless manually overwritten -->
 

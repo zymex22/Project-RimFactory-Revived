@@ -162,6 +162,14 @@
     </requiredResearchFacilities>
     <researchViewX>12</researchViewX>
     <researchViewY>4.3</researchViewY>
+		
+	<techprintCount MayRequire="ludeon.rimworld.royalty">2</techprintCount>
+   	<techprintCommonality MayRequire="ludeon.rimworld.royalty">1</techprintCommonality>
+    <techprintMarketValue MayRequire="ludeon.rimworld.royalty">6000</techprintMarketValue>
+	<heldByFactionCategoryTags MayRequire="ludeon.rimworld.royalty">
+	  <li MayRequire="ludeon.rimworld.royalty">Outlander</li>
+      <li MayRequire="ludeon.rimworld.royalty">Empire</li>
+	</heldByFactionCategoryTags>
   </ResearchProjectDef>
 
 </Defs>
