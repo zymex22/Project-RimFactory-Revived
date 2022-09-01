@@ -54,6 +54,7 @@ namespace ProjectRimFactory.Storage
             {
                 UpdatePowerConsumption();
             }
+            thingOwner.ThingOwnerTick();
         }
 
         public override void PostMapInit()

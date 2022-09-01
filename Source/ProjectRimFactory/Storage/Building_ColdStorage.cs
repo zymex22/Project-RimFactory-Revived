@@ -57,7 +57,7 @@ namespace ProjectRimFactory.Storage
     {
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
-        private ThingOwner<Thing> thingOwner = new ThingOwner<Thing>();
+        protected ThingOwner<Thing> thingOwner = new ThingOwner<Thing>();
 
         private List<Thing> items => thingOwner.InnerListForReading;
 
@@ -147,17 +147,19 @@ namespace ProjectRimFactory.Storage
 
         public virtual void RegisterNewItem(Thing newItem)
         {
-
-            Log.Message($"RegisterNewItem: {newItem}");
             if (items.Contains(newItem))
             {
                 Log.Message($"dup: {newItem}");
                 return;
             }
-            for (var i = 0; i < items.Count; i++)
+
+            var items_arr = items.ToArray();
+            for (var i = 0; i < items_arr.Length; i++)
             {
-                var item = items[i];
-                if (item.def.category == ThingCategory.Item && item.CanStackWith(newItem))
+                var item = items_arr[i];
+                //CanStackWith is already called by TryAbsorbStack...
+                //Is the Item Check really needed?
+                if (item.def.category == ThingCategory.Item)
                     item.TryAbsorbStack(newItem, true);
                 if (newItem.Destroyed) break;
             }

@@ -460,19 +460,11 @@ namespace ProjectRimFactory.Storage
         public override void Notify_ReceivedThing(Thing newItem)
         {
             base.Notify_ReceivedThing(newItem);
-            if (mode == StorageIOMode.Input)
-            {
-                RefreshInput();
-            }
         }
 
         public override void Notify_LostThing(Thing newItem)
         {
             base.Notify_LostThing(newItem);
-            if (mode == StorageIOMode.Output)
-            {
-                RefreshOutput();
-            }
         }
 
         public override void RefreshInput()
