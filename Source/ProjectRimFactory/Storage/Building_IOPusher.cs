@@ -25,6 +25,8 @@ namespace ProjectRimFactory.Storage
 
         public override StorageIOMode IOMode { get => StorageIOMode.Output; set => _ = value; }
 
+        public override bool IsAdvancedPort => false;
+
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);

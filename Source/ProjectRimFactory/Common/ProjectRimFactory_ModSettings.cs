@@ -76,7 +76,7 @@ namespace ProjectRimFactory.Common
             list.Gap();
             if (PRF_Patch_Reachability_CanReach != PRF_Patch_Reachability_CanReach_last)
             {
-                ConditionalPatchHelper.Update_Patch_Reachability_CanReach();
+                ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
             }
             PRF_Patch_Reachability_CanReach_last = PRF_Patch_Reachability_CanReach;
 

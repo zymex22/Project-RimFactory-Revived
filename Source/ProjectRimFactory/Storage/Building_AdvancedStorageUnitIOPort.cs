@@ -64,6 +64,8 @@ namespace ProjectRimFactory.Storage
 
         public bool CanGetNewItem => GetstoredItem() == null && (powerComp?.PowerOn ?? false);
 
+        public override bool IsAdvancedPort => true;
+
         private void updateQueue()
         {
             if (CanGetNewItem && placementQueue.Count > 0)

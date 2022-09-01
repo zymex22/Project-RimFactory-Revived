@@ -12,7 +12,6 @@ using ProjectRimFactory.Storage;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    [HarmonyPatch(typeof(ForbidUtility), "IsForbidden", new Type[] { typeof(Thing), typeof(Pawn) })]
     class Patch_ForbidUtility_IsForbidden
     {
         static bool Prefix(Thing t, Pawn pawn, out bool __result)
@@ -33,7 +32,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(Building_Storage), "Accepts")]
     class Patch_Building_Storage_Accepts
     {
         static bool Prefix(Building_Storage __instance, Thing t, out bool __result)
@@ -50,7 +48,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(FloatMenuMakerMap), "ChoicesAtFor")]
     class Patch_FloatMenuMakerMap_ChoicesAtFor
     {
         static bool Prefix(Vector3 clickPos, Pawn pawn, out List<FloatMenuOption> __result)
@@ -65,7 +62,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(Thing), "DrawGUIOverlay")]
     class Patch_Thing_DrawGUIOverlay
     {
         static bool Prefix(Thing __instance)
@@ -81,7 +77,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(ThingWithComps), "DrawGUIOverlay")]
     class Patch_ThingWithComps_DrawGUIOverlay
     {
         static bool Prefix(Thing __instance)
@@ -97,7 +92,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(ThingWithComps), "Draw")]
     class Patch_ThingWithComps_Draw
     {
         static bool Prefix(Thing __instance)
@@ -113,7 +107,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(Thing), "Print")]
     class Patch_Thing_Print
     {
         static bool Prefix(Thing __instance, SectionLayer layer)
@@ -129,7 +122,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    [HarmonyPatch(typeof(MinifiedThing), "Print")]
     class Patch_MinifiedThing_Print
     {
         static bool Prefix(Thing __instance, SectionLayer layer)

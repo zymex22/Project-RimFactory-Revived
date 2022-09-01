@@ -23,7 +23,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             if (mapcomp.ShouldHideItemsAtPos(ThingPos))
             {
                 //Is in a DSU
-                var pathToIO = mapcomp.GetadvancedIOLocations.Where(p => p.Value.boundStorageUnit?.Position == ThingPos && __instance.CanReach(start, p.Key, PathEndMode.Touch, traverseParams)).Any();
+                var pathToIO = mapcomp.GetadvancedIOLocations.Where(p => p.Value.boundStorageUnit?.GetPosition == ThingPos && __instance.CanReach(start, p.Key, PathEndMode.Touch, traverseParams)).Any();
                 if (pathToIO)
                 {
                     __result = true;

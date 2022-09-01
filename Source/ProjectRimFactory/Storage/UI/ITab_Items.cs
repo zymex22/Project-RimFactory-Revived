@@ -40,10 +40,10 @@ namespace ProjectRimFactory.Storage.UI
             labelKey = "PRFItemsTab";
         }
 
-        private static Building_MassStorageUnit oldSelectedMassStorageUnit = null;
+        private static ILinkableStorageParent oldSelectedMassStorageUnit = null;
 
-        public Building_MassStorageUnit SelectedMassStorageUnit =>
-            IOPortSelected ? SelectedIOPort.BoundStorageUnit : (Building_MassStorageUnit) SelThing;
+        public ILinkableStorageParent SelectedMassStorageUnit =>
+            IOPortSelected ? SelectedIOPort.BoundStorageUnit : (ILinkableStorageParent) SelThing;
 
         public override bool IsVisible =>
             IOPortSelected ? SelectedIOPort.BoundStorageUnit?.CanReceiveIO ?? false : true;
@@ -144,8 +144,8 @@ namespace ProjectRimFactory.Storage.UI
 
             //Do it once as they are all on the same spot in the DSU
             //Even if is where to have multible sport's that way should work I think 
-            pawnCanReach_Touch_Deadly = pawns.Where(p => p.CanReach(SelectedMassStorageUnit, PathEndMode.ClosestTouch, Danger.Deadly)).ToList();
-            pawnCanReach_Oncell_Deadly = pawns.Where(p => p.CanReach(SelectedMassStorageUnit, PathEndMode.OnCell, Danger.Deadly)).ToList();
+            pawnCanReach_Touch_Deadly = pawns.Where(p => p.CanReach(SelectedMassStorageUnit.GetTargetInfo, PathEndMode.ClosestTouch, Danger.Deadly)).ToList();
+            pawnCanReach_Oncell_Deadly = pawns.Where(p => p.CanReach(SelectedMassStorageUnit.GetTargetInfo, PathEndMode.OnCell, Danger.Deadly)).ToList();
 
 
 
@@ -191,7 +191,7 @@ namespace ProjectRimFactory.Storage.UI
         // Credits to LWM Deep Storage :)
         private void DrawThingRow(ref float y, float width, Thing thing, List<Pawn> colonists)
         {
-            if (thing == null || !thing.Spawned) return; // not here, whatever happened...
+            //if (thing == null || !thing.Spawned) return; // not here, whatever happened...
 
 
             //each call to LabelCap also accesses MaxHitPoints therefor it is read here slightly diffrently;
@@ -307,9 +307,13 @@ namespace ProjectRimFactory.Storage.UI
             var item = SelectedMassStorageUnit
                 .StoredItems.Where(i => i == thing).ToList();
             if (IOPortSelected && SelectedIOPort.OutputItem(item[0]))
+            {
                 itemsToShow.Remove(thing);
+            }
             else if (SelectedMassStorageUnit.OutputItem(item[0]))
+            {
                 itemsToShow.Remove(thing);
+            }
         }
 
 
