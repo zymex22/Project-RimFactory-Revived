@@ -7,6 +7,8 @@
   <PRF_Settings_C_Patches_Header>Patches</PRF_Settings_C_Patches_Header>
   <PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>Toggels the Advanced IO CanReach Patch\nWhen checked the Patch is active and allowes Pawns to reach DSU contents using Advanced IO Ports even if the Path to the DSU is blocked\nPatch is not active by default as it may cause spikes and is only usefull in some cases.\n(ProjectRimFactory.Common.HarmonyPatches.Patch_Reachability_CanReach:Prefix)</PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>
   <PRF_Settings_C_Patches_Reachability_CanReach>Advanced IO CanReach</PRF_Settings_C_Patches_Reachability_CanReach>
+  <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>Toggels the Cold Storage WealthWatcher Patch\nWhen checked the Patch is active and items in Coldstorage contribute to Colony Wealth.\nFor most Players we reccomend this to be on.\nPeformence load on this is ~1ms per 1k Things stored. This runs every 5k Ticks\n(ProjectRimFactory.Common.HarmonyPatches.Patch_WealthWatcher_CalculateWealthItems:Postfix)</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>
+  <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>Cold Storage WealthWatcher</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>
   
   <PRF.Common.ForbidOnPlacingDefault>Forbid items on Placment</PRF.Common.ForbidOnPlacingDefault>
   <PRF.Common.ForbidOnPlacingDefaultDesc>Toggle this to forbid items on placement</PRF.Common.ForbidOnPlacingDefaultDesc>

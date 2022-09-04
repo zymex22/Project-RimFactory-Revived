@@ -11,53 +11,12 @@ using Verse;
 
 namespace ProjectRimFactory.Storage
 {
-    public interface ILinkableStorageParent
-    {
-        public List<Thing> StoredItems { get; }
-
-        public bool AdvancedIOAllowed { get; }
-
-        public void HandleNewItem(Thing item);
-
-        public void HandleMoveItem(Thing item);
-
-        public bool CanReciveThing(Thing item);
-
-        public bool HoldsPos(IntVec3 pos);
-
-        //What is that even for ??
-        public void DeregisterPort(Building_StorageUnitIOBase port);
-        public void RegisterPort(Building_StorageUnitIOBase port);
-
-        public StorageSettings GetSettings { get; }
-
-        public IntVec3 GetPosition { get; }
-
-        public string LabelCap { get; }
-        public bool CanReceiveIO { get; }
-        public Map Map { get; }
-
-        public int StoredItemsCount { get; }
-
-        public string GetITabString(int itemsSelected);
-
-        public LocalTargetInfo GetTargetInfo { get; }
-
-        public bool OutputItem(Thing item);
-
-        public bool Powered { get; }
-
-        public bool CanUseIOPort { get; }
-
-    }
-
-
     [StaticConstructorOnStartup]
     public abstract class Building_ColdStorage : Building, IRenameBuilding, IHaulDestination, IStoreSettingsParent, ILinkableStorageParent, IThingHolder
     {
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
-        protected ThingOwner<Thing> thingOwner = new ThingOwner<Thing>();
+        protected ThingOwner<Thing> thingOwner;
 
         private List<Thing> items => thingOwner.InnerListForReading;
 
@@ -199,25 +158,22 @@ namespace ProjectRimFactory.Storage
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            var thingsToSplurge = new List<Thing>(Position.GetThingList(Map));
+            var thingsToSplurge = items;
             for (var i = 0; i < thingsToSplurge.Count; i++)
                 if (thingsToSplurge[i].def.category == ThingCategory.Item)
                 {
-                    thingsToSplurge[i].DeSpawn();
+                    //thingsToSplurge[i].DeSpawn();
                     GenPlace.TryPlaceThing(thingsToSplurge[i], Position, Map, ThingPlaceMode.Near);
                 }
+            PatchStorageUtil.GetPRFMapComponent(Map).DeRegisterColdStorageBuilding(this);
             base.DeSpawn(mode);
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            PatchStorageUtil.GetPRFMapComponent(Map).RegisterColdStorageBuilding(this);
             ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
-            /*Log.Message("----------------");
-            foreach (var item in this.StoredItems)
-            {
-                Log.Message(item.ToString());
-            }*/
             foreach (var port in ports)
             {
                 if (port?.Spawned ?? false)
@@ -229,6 +185,19 @@ namespace ProjectRimFactory.Storage
                 }
             }
 
+        }
+
+        public float GetItemWealth()
+        {
+            float output = 0;
+            var itemsc = items.Count;
+            for (int i = 0;i< itemsc; i++)
+            {
+                var item = items[i];
+                output += item.MarketValue * item.stackCount;
+            }
+
+            return output;
         }
 
         public override void DrawGUIOverlay()

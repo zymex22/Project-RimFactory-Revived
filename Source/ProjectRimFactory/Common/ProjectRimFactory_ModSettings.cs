@@ -74,11 +74,17 @@ namespace ProjectRimFactory.Common
             TooltipHandler.TipRegion(rect, "PRF_Settings_C_Patches_Reachability_CanReach_ToolTip".Translate());
             Widgets.CheckboxLabeled(rect, "PRF_Settings_C_Patches_Reachability_CanReach".Translate(), ref PRF_Patch_Reachability_CanReach);
             list.Gap();
-            if (PRF_Patch_Reachability_CanReach != PRF_Patch_Reachability_CanReach_last)
+            ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
+
+            rect = list.GetRect(20);
+            if (Mouse.IsOver(rect))
             {
-                ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
+                Widgets.DrawHighlight(rect);
             }
-            PRF_Patch_Reachability_CanReach_last = PRF_Patch_Reachability_CanReach;
+            TooltipHandler.TipRegion(rect, "PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip".Translate());
+            Widgets.CheckboxLabeled(rect, "PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems".Translate(), ref PRF_Patch_WealthWatcher_CalculateWealthItems);
+            list.Gap();
+            ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_WealthWatcher_CalculateWealthItems);
 
         }
 
@@ -104,7 +110,7 @@ namespace ProjectRimFactory.Common
         public static bool PRF_LiteMode = false;
         private static bool PRF_LiteMode_last = false;
         public static bool PRF_Patch_Reachability_CanReach = false;
-        private static bool PRF_Patch_Reachability_CanReach_last = false;
+        public static bool PRF_Patch_WealthWatcher_CalculateWealthItems = true;
 
         public override void ExposeData()
         {
@@ -113,8 +119,8 @@ namespace ProjectRimFactory.Common
             Scribe_Values.Look<Debug.Flag>(ref Debug.activeFlags, "debugFlags", 0);
             Scribe_Values.Look(ref PRF_LiteMode, "PRF_LiteMode", false);
             Scribe_Values.Look(ref PRF_Patch_Reachability_CanReach, "PRF_Patch_Reachability_CanReach", false);
+            Scribe_Values.Look(ref PRF_Patch_WealthWatcher_CalculateWealthItems, "PRF_Patch_WealthWatcher_CalculateWealthItems", true);
             PRF_LiteMode_last = PRF_LiteMode;
-            PRF_Patch_Reachability_CanReach_last = PRF_Patch_Reachability_CanReach;
         }
 
         public void DoWindowContents(Rect inRect)

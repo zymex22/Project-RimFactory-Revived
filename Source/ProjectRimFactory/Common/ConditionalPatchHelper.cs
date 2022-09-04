@@ -62,6 +62,12 @@ namespace ProjectRimFactory.Common
             AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Reachability_CanReach), "Prefix")
             );
 
+        public static TogglePatch Patch_WealthWatcher_CalculateWealthItems = new TogglePatch(
+           AccessTools.Method(typeof(RimWorld.WealthWatcher), "CalculateWealthItems"),
+           null,
+           AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_WealthWatcher_CalculateWealthItems), "Postfix")
+           );
+
         //Storage Patches
         public static TogglePatch Patch_MinifiedThing_Print = new TogglePatch(
             AccessTools.Method(typeof(RimWorld.MinifiedThing), "Print", new Type[] { typeof(SectionLayer)}),
@@ -72,7 +78,7 @@ namespace ProjectRimFactory.Common
             AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Thing_Print), "Prefix")
             );
         public static TogglePatch Patch_ThingWithComps_Draw = new TogglePatch(
-           AccessTools.Method(typeof(Verse.ThingWithComps), "Print", new Type[] { typeof(SectionLayer) }),
+           AccessTools.Method(typeof(Verse.ThingWithComps), "Draw"),
            AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_ThingWithComps_Draw), "Prefix")
            );
         public static TogglePatch Patch_ThingWithComps_DrawGUIOverlay = new TogglePatch(
@@ -80,7 +86,7 @@ namespace ProjectRimFactory.Common
            AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_ThingWithComps_DrawGUIOverlay), "Prefix")
            );
         public static TogglePatch Patch_Thing_DrawGUIOverlay = new TogglePatch(
-           AccessTools.Method(typeof(Verse.ThingWithComps), "DrawGUIOverlay"),
+           AccessTools.Method(typeof(Verse.Thing), "DrawGUIOverlay"),
            AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Thing_DrawGUIOverlay), "Prefix")
            );
         public static TogglePatch Patch_FloatMenuMakerMap_ChoicesAtFor = new TogglePatch(

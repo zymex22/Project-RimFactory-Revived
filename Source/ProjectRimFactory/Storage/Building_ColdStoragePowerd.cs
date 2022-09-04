@@ -152,5 +152,15 @@ namespace ProjectRimFactory.Storage
             }
         }
 
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+        }
+
+        public override void PostMake()
+        {
+            base.PostMake();
+            thingOwner ??= new ThingOwner<Thing>(this);
+        }
     }
 }
