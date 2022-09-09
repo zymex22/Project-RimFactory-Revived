@@ -366,7 +366,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <thingClass>ProjectRimFactory.Storage.Building_ColdStoragePowered</thingClass>
 	<defName>PRF_ColdStorageUnit_I</defName>
-    <label>Digital Cold Storage Unit</label>
+    <label>Cold Storage Unit</label>
     <description>A matter-energy conversion based storage unit which can hold up to 10k stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.  Don't break it.</description>
     <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
@@ -391,12 +391,20 @@
     </inspectorTabs>
     <graphicData>
 	  <graphicClass>Graphic_Single</graphicClass>
-      <texPath>Storage/CargoPlatform</texPath>
+      <texPath>Storage/ColdStorageUnit</texPath>
       <drawSize>(3,3)</drawSize>
       <damageData>
+	  <scratches>
+	  </scratches>
+	  <!-- <rect>(0.1,0,3,2.5)</rect> -->
+		<rect>(0.1,0,2.8,2.8)</rect>
+		
         <cornerTL>Damage/Corner</cornerTL>
-        <cornerTR>Damage/Corner</cornerTR>
+		<cornerBR>Damage/Corner</cornerBR>
+		<cornerBL>Damage/Corner</cornerBL>
+        <!-- <edgeBot>Damage/Edge</edgeBot> -->
       </damageData>
+
     </graphicData>
     <statBases>
       <Mass>50</Mass>
