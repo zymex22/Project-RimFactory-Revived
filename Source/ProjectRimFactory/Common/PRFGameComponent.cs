@@ -15,8 +15,6 @@ namespace ProjectRimFactory {
         public static Pawn PRF_StaticPawn = null;
         public static Job PRF_StaticJob = null;
 
-        
-
         public static void GenStaticPawn()
         {
             PRF_StaticPawn = PawnGenerator.GeneratePawn(PRFDefOf.PRFSlavePawn, Faction.OfPlayer);
