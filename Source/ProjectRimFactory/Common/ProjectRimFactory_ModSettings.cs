@@ -84,7 +84,7 @@ namespace ProjectRimFactory.Common
             TooltipHandler.TipRegion(rect, "PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip".Translate());
             Widgets.CheckboxLabeled(rect, "PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems".Translate(), ref PRF_Patch_WealthWatcher_CalculateWealthItems);
             list.Gap();
-            ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_WealthWatcher_CalculateWealthItems);
+            ConditionalPatchHelper.Patch_WealthWatcher_CalculateWealthItems.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_WealthWatcher_CalculateWealthItems);
 
         }
 
