@@ -442,14 +442,14 @@
       <Gold>50</Gold>
       <Uranium>20</Uranium>
       <Plasteel>100</Plasteel>
-      <ComponentIndustrial>100</ComponentIndustrial>
-      <ComponentSpacer>15</ComponentSpacer>
+      <ComponentIndustrial>90</ComponentIndustrial>
+      <ComponentSpacer>20</ComponentSpacer>
       <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
       <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
     </costList>
     <tickerType>Normal</tickerType>
     <researchPrerequisites>
-      <li>PRF_StorageIO</li>
+      <li>PRF_StorageIO_II</li>
     </researchPrerequisites>
     <comps>
       <li Class="CompProperties_Glower">
