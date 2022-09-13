@@ -141,7 +141,7 @@ namespace ProjectRimFactory.Storage
         {
             base.ExposeData();
             Scribe_Collections.Look(ref ports, "ports", LookMode.Reference);
-            Scribe_Deep.Look(ref this.thingOwner, "thingowner");
+            Scribe_Deep.Look(ref this.thingOwner, "thingowner",this);
             Scribe_Values.Look(ref uniqueName, "uniqueName");
             Scribe_Deep.Look(ref settings, "settings", this);
             ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
