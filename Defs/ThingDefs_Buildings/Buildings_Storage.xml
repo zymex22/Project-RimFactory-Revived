@@ -58,7 +58,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_WoodCrate_I</defName>
     <label>Small wooden crate</label>
-    <description>A small and simplistic crate that stores 16 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>A small and simplistic crate that stores 8 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Wood_Crate6</texPath>
       <drawSize>(2.8,1.3)</drawSize>
@@ -105,7 +105,7 @@
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
-        <limit>16</limit>
+        <limit>8</limit>
         <hideItems>true</hideItems>
       </li>
     </modExtensions>
@@ -115,7 +115,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_WoodCrate_II</defName>
     <label>Wooden crate</label>
-    <description>A large crate that stores 32 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>A large crate that stores 16 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Wood_Crate6</texPath>
       <drawSize>(2.8,2.6)</drawSize>
@@ -160,7 +160,7 @@
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
-        <limit>32</limit>
+        <limit>16</limit>
         <hideItems>true</hideItems>
       </li>
     </modExtensions>
@@ -170,7 +170,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_SteelCrate_I</defName>
     <label>Small steel crate</label>
-    <description>A small steel crate that can store 64 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>A small steel crate that can store 32 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Steel_Crate</texPath>
       <drawSize>(2.8,1.3)</drawSize>
@@ -215,7 +215,7 @@
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
-        <limit>64</limit>
+        <limit>32</limit>
         <hideItems>true</hideItems>
       </li>
     </modExtensions>
@@ -226,7 +226,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_SteelCrate_II</defName>
     <label>Steel crate</label>
-    <description>A large crate that can store 128 stacks. Items stored in the crate do not deteriorate.</description>
+    <description>A large crate that can store 64 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Steel_Crate</texPath>
       <drawSize>(2.8,2.6)</drawSize>
@@ -269,7 +269,7 @@
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
-        <limit>128</limit>
+        <limit>64</limit>
         <hideItems>true</hideItems>
       </li>
     </modExtensions>

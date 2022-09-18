@@ -11,11 +11,11 @@
     <defName>PRF_Crates</defName>
     <label>Wooden stockpile crates</label>
     <techLevel>Industrial</techLevel>
-    <baseCost>1000</baseCost>
+    <baseCost>750</baseCost>
     <researchViewX>3</researchViewX>
     <description>Rudimentary storage boxes allow many stacks of items to stay organized and space efficient.</description>
     <prerequisites>
-      <li>PRF_CoreTierI</li>
+      <li>Smithing</li>
     </prerequisites>
   </ResearchProjectDef>
 
@@ -23,11 +23,10 @@
     <defName>PRF_SteelCrates</defName>
     <label>Steel stockpile crates</label>
     <techLevel>Industrial</techLevel>
-    <baseCost>2000</baseCost>
+    <baseCost>1500</baseCost>
     <researchViewX>6</researchViewX>
     <description>Stronger materials allows for improved storage space.</description>
     <prerequisites>
-      <li>PRF_CoreTierII</li>
       <li>PRF_Crates</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
@@ -38,7 +37,7 @@
     <defName>PRF_StorageIO</defName>
     <label>Thornsworth Holographic Storage</label>
     <techLevel>Spacer</techLevel>
-    <baseCost>3500</baseCost>
+    <baseCost>4000</baseCost>
     <researchViewX>9</researchViewX>
     <researchViewY>1.9</researchViewY>
     <description>The holographam artist Thornsworth produced masterpieces for many years despite gradually developing blindness. When holographic data storage was perfected, he was instrumental in developing Holographic Item Storage.\nAllows items to be stored in a Digital Storage Unit, which can transmit and receive wirelessly to any I/O port on the map.\n\nYou will be missed, Thornsworth.</description>
