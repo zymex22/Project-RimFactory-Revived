@@ -308,7 +308,7 @@ namespace ProjectRimFactory.Storage
 
         public void HandleNewItem(Thing item)
         {
-            //throw new System.NotImplementedException();
+            RegisterNewItem(item);
         }
 
         public void HandleMoveItem(Thing item)
