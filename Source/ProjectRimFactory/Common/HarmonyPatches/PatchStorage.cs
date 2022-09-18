@@ -9,6 +9,7 @@ using Verse;
 using UnityEngine;
 using HarmonyLib;
 using ProjectRimFactory.Storage;
+using Verse.AI;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -55,6 +56,26 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             if (pawn.Map.GetComponent<PRFMapComponent>().iHideRightMenus.Contains(clickPos.ToIntVec3()))
             {
                 __result = new List<FloatMenuOption>();
+                if (pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation) && !pawn.skills.GetSkill(SkillDefOf.Construction).TotallyDisabled)
+                {
+                    foreach (LocalTargetInfo item13 in GenUI.TargetsAt(clickPos, TargetingParameters.ForRepair(pawn), thingsOnly: true))
+                    {
+                        Thing repairTarget = item13.Thing;
+                        if (!pawn.CanReach(repairTarget, PathEndMode.Touch, Danger.Deadly))
+                        {
+                            __result.Add(new FloatMenuOption("CannotRepair".Translate(repairTarget) + ": " + "NoPath".Translate().CapitalizeFirst(), null));
+                        }
+                        else if (RepairUtility.PawnCanRepairNow(pawn, repairTarget))
+                        {
+                            FloatMenuOption item5 = FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption("RepairThing".Translate(repairTarget), delegate
+                            {
+                                Job job = JobMaker.MakeJob(JobDefOf.Repair, repairTarget);
+                                pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                            }), pawn, repairTarget);
+                            __result.Add(item5);
+                        }
+                    }
+                }
                 return false;
             }
             __result = null;
