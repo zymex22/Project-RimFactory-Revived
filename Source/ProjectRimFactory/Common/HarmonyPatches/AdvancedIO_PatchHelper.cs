@@ -112,7 +112,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 		/// <returns></returns>
 		public static bool CanMoveItem(Building_AdvancedStorageUnitIOPort port, IntVec3 thingPos)
 		{
-			return port.boundStorageUnit?.AllSlotCells()?.Contains(thingPos) ?? false;
+			return port.boundStorageUnit?.HoldsPos(thingPos) ?? false;
 		}
 
 

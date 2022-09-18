@@ -15,6 +15,8 @@ namespace ProjectRimFactory.Common
         // iHideRightMenus: see HarmonyPatches/PatchStorage.cs
         public HashSet<IntVec3> iHideRightMenus = new HashSet<IntVec3>();
 
+        public List<Storage.Building_ColdStorage> ColdStorageBuildings = new List<Storage.Building_ColdStorage>();
+
         private Dictionary<IntVec3,List< HarmonyPatches.IHideItem>> hideItemLocations = new Dictionary<IntVec3,List< HarmonyPatches.IHideItem>>();
         
         private Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>> ForbidPawnOutputItemLocations = new Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>>();
@@ -22,6 +24,24 @@ namespace ProjectRimFactory.Common
         private Dictionary<IntVec3, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort> advancedIOLocations = new Dictionary<IntVec3, Storage.Building_AdvancedStorageUnitIOPort>();
 
         public Dictionary<IntVec3, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort> GetadvancedIOLocations => advancedIOLocations;
+
+        public void RegisterColdStorageBuilding(ProjectRimFactory.Storage.Building_ColdStorage port)
+        {
+            if (!ColdStorageBuildings.Contains(port))
+            {
+                ColdStorageBuildings.Add(port);
+            }
+        }
+        public void DeRegisterColdStorageBuilding(ProjectRimFactory.Storage.Building_ColdStorage port)
+        {
+            if (ColdStorageBuildings.Contains(port))
+            {
+                ColdStorageBuildings.Remove(port);
+            }
+
+        }
+
+
 
         public void RegisteradvancedIOLocations(IntVec3 pos, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort port)
         {
