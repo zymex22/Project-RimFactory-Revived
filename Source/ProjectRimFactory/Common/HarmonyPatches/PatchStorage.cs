@@ -92,21 +92,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    class Patch_ThingWithComps_Draw
-    {
-        static bool Prefix(Thing __instance)
-        {
-            if (__instance.def.category == ThingCategory.Item)
-            {
-                if (PatchStorageUtil.GetPRFMapComponent(__instance.Map)?.ShouldHideItemsAtPos(__instance.Position) ?? false)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
-
     class Patch_Thing_Print
     {
         static bool Prefix(Thing __instance, SectionLayer layer)

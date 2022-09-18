@@ -77,10 +77,6 @@ namespace ProjectRimFactory.Common
             AccessTools.Method(typeof(Verse.Thing), "Print", new Type[] { typeof(SectionLayer) }),
             AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Thing_Print), "Prefix")
             );
-        public static TogglePatch Patch_ThingWithComps_Draw = new TogglePatch(
-           AccessTools.Method(typeof(Verse.ThingWithComps), "Draw"),
-           AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_ThingWithComps_Draw), "Prefix")
-           );
         public static TogglePatch Patch_ThingWithComps_DrawGUIOverlay = new TogglePatch(
            AccessTools.Method(typeof(Verse.ThingWithComps), "DrawGUIOverlay"),
            AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_ThingWithComps_DrawGUIOverlay), "Prefix")
@@ -119,7 +115,6 @@ namespace ProjectRimFactory.Common
 
             Patch_MinifiedThing_Print.PatchHandler(state);
             Patch_Thing_Print.PatchHandler(state);
-            Patch_ThingWithComps_Draw.PatchHandler(state);
             Patch_ThingWithComps_DrawGUIOverlay.PatchHandler(state);
             Patch_Thing_DrawGUIOverlay.PatchHandler(state);
             Patch_FloatMenuMakerMap_ChoicesAtFor.PatchHandler(state);
