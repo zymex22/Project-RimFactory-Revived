@@ -287,7 +287,8 @@
       <texPath>Storage/CargoPlatform</texPath>
       <drawSize>(3,3)</drawSize>
       <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
+		<rect>(0.0,0,2.9,2.9)</rect>
+        <cornerBL>Damage/Corner</cornerBL>
         <cornerTR>Damage/Corner</cornerTR>
       </damageData>
     </graphicData>
