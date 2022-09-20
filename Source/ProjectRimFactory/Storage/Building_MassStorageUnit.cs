@@ -52,7 +52,7 @@ namespace ProjectRimFactory.Storage
         public override void Notify_ReceivedThing(Thing newItem)
         {
             base.Notify_ReceivedThing(newItem);
-            if (newItem.Position != Position) RegisterNewItem(newItem);
+            if (newItem.Position != Position) HandleNewItem(newItem);
             RefreshStorage();
         }
 
@@ -229,7 +229,7 @@ namespace ProjectRimFactory.Storage
                     {
                         if (cell != Position)
                         {
-                            RegisterNewItem(item);
+                            HandleNewItem(item);
                         }
                         else
                         {
@@ -309,6 +309,7 @@ namespace ProjectRimFactory.Storage
         public void HandleNewItem(Thing item)
         {
             RegisterNewItem(item);
+            Map.dynamicDrawManager.DeRegisterDrawable(item);
         }
 
         public void HandleMoveItem(Thing item)
