@@ -1,176 +1,183 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-	<ScenarioDef>
-		<defName>PRF_FactoryEntrepreneur</defName>
-		<label>Factory Entrepreneur</label>
-		<description>A small group of scientist were sent to aid a newly founded factory.
+    <ScenarioDef>
+        <defName>PRF_FactoryEntrepreneur</defName>
+        <label>Factory Entrepreneur</label>
+        <description>A small group of scientist were sent to aid a newly founded factory.
 with cargo full of new equipment and supplies to that factory.
 On its way their ship hit a meteor shower and crashed into a naked planet far from original destination and from home.
 Now they will have to build up a temporary factory here and gather resources to go back home.
 
+
 After 10 days a raid will happen, it turns out it was the raiders who shot their ship down.
 You should quickly prepare for the raid.
-</description>
-		<scenario>
-			<summary>4 crashlanded scientists - Project RimFactory experiance</summary>
-			<playerFaction>
-				<def>PlayerFaction</def>
-				<factionDef>PlayerColony</factionDef>
-			</playerFaction>
-			<parts>
-				<li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
-					<def>ConfigPage_ConfigureStartingPawns</def>
-					<pawnCount>4</pawnCount>
-					<pawnChoiceCount>8</pawnChoiceCount>
-				</li>
-				<li Class="ScenPart_PlayerPawnsArriveMethod">
-					<def>PlayerPawnsArriveMethod</def>
-					<method>DropPods</method>
-				</li>
-				<li Class="ScenPart_ForcedHediff">
-					<def>ForcedHediff</def>
-					<chance>0.5</chance>
-					<context>PlayerStarter</context>
-					<hideOffMap>True</hideOffMap>
-					<hediff>CryptosleepSickness</hediff>
-					<severityRange>1~1</severityRange>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>Silver</thingDef>
-					<count>550</count>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>MealSurvivalPack</thingDef>
-					<count>50</count>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>MedicineIndustrial</thingDef>
-					<count>30</count>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>ComponentIndustrial</thingDef>
-					<count>34</count>
-				</li>
-				<li Class="ScenPart_ScatterThingsNearPlayerStart">
-					<def>ScatterThingsNearPlayerStart</def>
-					<thingDef>Steel</thingDef>
-					<count>700</count>
-				</li>
-				<li Class="ScenPart_ScatterThingsNearPlayerStart">
-					<def>ScatterThingsNearPlayerStart</def>
-					<thingDef>Plasteel</thingDef>
-					<count>20</count>
-				</li>
-				<li Class="ScenPart_ScatterThingsAnywhere">
-					<def>ScatterThingsAnywhere</def>
-					<thingDef>ShipChunk</thingDef>
-					<count>5</count>
-				</li>
-				<li Class="ScenPart_ScatterThingsAnywhere">
-					<def>ScatterThingsAnywhere</def>
-					<thingDef>ChunkSlagSteel</thingDef>
-					<count>100</count>
-				</li>
-				<li Class="ScenPart_GameStartDialog">
-					<def>GameStartDialog</def>
-					<text>A small group of scientist were sent to aid a newly founded factory.
+(BETA please post any error or suggestions)</description>
+        <scenario>
+            <summary>4 crashlanded scientists - Project RimFactory experiance</summary>
+            <playerFaction>
+                <def>PlayerFaction</def>
+                <factionDef>PlayerColony</factionDef>
+            </playerFaction>
+            <parts>
+                <li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
+                    <def>ConfigPage_ConfigureStartingPawns</def>
+                    <pawnCount>4</pawnCount>
+                    <pawnChoiceCount>8</pawnChoiceCount>
+                </li>
+                <li Class="ScenPart_PlayerPawnsArriveMethod">
+                    <def>PlayerPawnsArriveMethod</def>
+                    <method>DropPods</method>
+                </li>
+                <li Class="ScenPart_ForcedHediff">
+                    <def>ForcedHediff</def>
+                    <chance>0.5</chance>
+                    <context>PlayerStarter</context>
+                    <hideOffMap>True</hideOffMap>
+                    <hediff>CryptosleepSickness</hediff>
+                    <severityRange>1~1</severityRange>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>Silver</thingDef>
+                    <count>550</count>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>MealSurvivalPack</thingDef>
+                    <count>50</count>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>MedicineIndustrial</thingDef>
+                    <count>30</count>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>ComponentIndustrial</thingDef>
+                    <count>30</count>
+                </li>
+                <li Class="ScenPart_ScatterThingsNearPlayerStart">
+                    <def>ScatterThingsNearPlayerStart</def>
+                    <thingDef>Steel</thingDef>
+                    <count>500</count>
+                </li>
+                <li Class="ScenPart_ScatterThingsNearPlayerStart">
+                    <def>ScatterThingsNearPlayerStart</def>
+                    <thingDef>Plasteel</thingDef>
+                    <count>20</count>
+                </li>
+                <li Class="ScenPart_ScatterThingsAnywhere">
+                    <def>ScatterThingsAnywhere</def>
+                    <thingDef>ShipChunk</thingDef>
+                    <count>5</count>
+                </li>
+                <li Class="ScenPart_ScatterThingsAnywhere">
+                    <def>ScatterThingsAnywhere</def>
+                    <thingDef>ChunkSlagSteel</thingDef>
+                    <count>100</count>
+                </li>
+                <li Class="ScenPart_GameStartDialog">
+                    <def>GameStartDialog</def>
+                    <text>A small group of scientist were sent to aid a newly founded factory.
 with cargo full of new equipment and supplies to that factory.
 On its way they hit a meteor shower and crashed into a naked planet.
 now they will have to build up a temporary factory here and gather resources to go back home.
 
 After 10 days a raid will happen, it turns out it was the raiders who shot our ship down.
 You should quickly prepare for the raid.</text>
-					<textKey>GameStartDialog</textKey>
-					<closeSound>GameStartSting</closeSound>
-				</li>
-				<li Class="ScenPart_StartingResearch">
-					<def>StartingResearch</def>
-					<project>PRF_Crates</project>
-				</li>
-				<li Class="ScenPart_StartingResearch">
-					<def>StartingResearch</def>
-					<project>PRF_BeltsI</project>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_SelfCookerI</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_FurnaceII</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_DeepQuarry_mkI</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_MeatGrinder</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_4k_Battery</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>Telescope</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_Shearer</thingDef>
-				</li>
-				<li Class="ScenPart_StartingAnimal">
-					<def>StartingAnimal</def>
-					<animalKind>Sheep</animalKind>
-					<count>2</count>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_SimplePuller_II</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_GrowzonePuller_I</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_StoneWorks</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_DroneCultivator_I</thingDef>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>PRF_FuelingMachine</thingDef>
-				</li>
-				<li Class="ScenPart_StartingResearch">
-					<def>StartingResearch</def>
-					<project>Devilstrand</project>
-				</li>
-				<li Class="ScenPart_StartingResearch">
-					<def>StartingResearch</def>
-					<project>Pemmican</project>
-				</li>
-				<li Class="ScenPart_StartingResearch">
-					<def>StartingResearch</def>
-					<project>TreeSowing</project>
-				</li>
-				<li Class="ScenPart_CreateIncident">
-					<def>CreateIncident</def>
-					<incident>RaidEnemy</incident>
-					<intervalDays>10</intervalDays>
-				</li>
-				<li Class="ScenPart_StartingThing_Defined">
-					<def>StartingThing_Defined</def>
-					<thingDef>WoodLog</thingDef>
-					<count>100</count>
-				</li>
-			</parts>
-		</scenario>
-	</ScenarioDef>
+                    <textKey>GameStartDialog</textKey>
+                    <closeSound>GameStartSting</closeSound>
+                </li>
+                <li Class="ScenPart_StartingResearch">
+                    <def>StartingResearch</def>
+                    <project>PRF_Crates</project>
+                </li>
+                <li Class="ScenPart_StartingResearch">
+                    <def>StartingResearch</def>
+                    <project>PRF_BeltsI</project>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_SelfCookerI</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_FurnaceII</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_DeepQuarry_mkI</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_MeatGrinder</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_4k_Battery</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>Telescope</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_Shearer</thingDef>
+                </li>
+                <li Class="ScenPart_StartingAnimal">
+                    <def>StartingAnimal</def>
+                    <animalKind>Sheep</animalKind>
+                    <count>2</count>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_SimplePuller_II</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_GrowzonePuller_I</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_StoneWorks</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>WoodFiredGenerator</thingDef>
+                    <count>2</count>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_DroneCultivator_I</thingDef>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>PRF_FuelingMachine</thingDef>
+                </li>
+                <li Class="ScenPart_StartingResearch">
+                    <def>StartingResearch</def>
+                    <project>Devilstrand</project>
+                </li>
+                <li Class="ScenPart_StartingResearch">
+                    <def>StartingResearch</def>
+                    <project>Pemmican</project>
+                </li>
+                <li Class="ScenPart_StartingResearch">
+                    <def>StartingResearch</def>
+                    <project>TreeSowing</project>
+                </li>
+                <li Class="ScenPart_CreateIncident">
+                    <def>CreateIncident</def>
+                    <incident>RaidEnemy</incident>
+                    <intervalDays>10</intervalDays>
+                </li>
+                <li Class="ScenPart_StartingThing_Defined">
+                    <def>StartingThing_Defined</def>
+                    <thingDef>WoodLog</thingDef>
+                    <count>100</count>
+                </li>
+            </parts>
+        </scenario>
+    </ScenarioDef>
+
 </Defs>
