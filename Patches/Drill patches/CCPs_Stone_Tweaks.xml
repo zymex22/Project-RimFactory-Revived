@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>CCP's Stone Tweaks</li>
+		</mods>
+		<!-- Remove/Exclude CCP's Stone Tweaks from Mark III -->
+		<match Class="PatchOperationSequence">
+			<operations>
+				<!-- Remove/Exclude Extra Stones from Mark III -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkIII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<value>
+						<li>ChunkPinkMarble</li>
+						<li>ChunkBlueGranite</li>
+						<li>ChunkGreenMarble</li>
+					</value>
+				</li>
+				<!-- Define new recipes for excavating rocks from the mod -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Pink_Marble</defName>
+							<label>mine pink marble</label>
+							<description>mining pink marble.</description>
+							<jobString>Mining pink marble</jobString>
+							<workAmount>655</workAmount>
+							<products>
+								<ChunkPinkMarble>1</ChunkPinkMarble>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Blue_Granite</defName>
+							<label>mine blue granite</label>
+							<description>mining blue granite.</description>
+							<jobString>Mining blue granite</jobString>
+							<workAmount>655</workAmount>
+							<products>
+								<ChunkBlueGranite>1</ChunkBlueGranite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Green_Marble</defName>
+							<label>mine green marble</label>
+							<description>mining green marble.</description>
+							<jobString>Mining green marble</jobString>
+							<workAmount>655</workAmount>
+							<products>
+								<ChunkGreenMarble>1</ChunkGreenMarble>
+							</products>
+						</RecipeDef>
+					</value>
+				</li>
+				<!-- Add the new recipes to the Mine Shaft for manual acquisition -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_MineShaft"]/recipes</xpath>
+					<value>
+						<li>PRF_Excavate_Pink_Marble</li>
+						<li>PRF_Excavate_Blue_Granite</li>
+						<li>PRF_Excavate_Green_Marble</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+</Patch>
