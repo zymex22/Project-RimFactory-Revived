@@ -4,7 +4,7 @@
 
 	<RecipeDef Name="PRF_MiningWork" Abstract="True">
 		<workSkill>Mining</workSkill>
-		<workAmount>500</workAmount>
+		<workAmount>655</workAmount>
 		<effectWorking>Smith</effectWorking>
 		<efficiencyStat>MiningSpeed</efficiencyStat>
 		<workSkillLearnFactor>0.25</workSkillLearnFactor>
@@ -16,7 +16,6 @@
 		<label>mine granite</label>
 		<description>mining granite.</description>
 		<jobString>Mining granite</jobString>
-		<workAmount>655</workAmount>
 		<products>
 			<ChunkGranite>1</ChunkGranite>
 		</products>
@@ -27,7 +26,6 @@
 		<label>mine sandstone</label>
 		<description>mining sandstone.</description>
 		<jobString>Mining sandstone</jobString>
-		<workAmount>655</workAmount>
 		<products>
 			<ChunkSandstone>1</ChunkSandstone>
 		</products>
@@ -38,7 +36,6 @@
 		<label>mine limestone</label>
 		<description>mining limestone.</description>
 		<jobString>Mining limestone</jobString>
-		<workAmount>655</workAmount>
 		<products>
 			<ChunkLimestone>1</ChunkLimestone>
 		</products>
@@ -49,7 +46,6 @@
 		<label>mine slate</label>
 		<description>mining slate.</description>
 		<jobString>Mining slate</jobString>
-		<workAmount>655</workAmount>
 		<products>
 			<ChunkSlate>1</ChunkSlate>
 		</products>
@@ -60,7 +56,6 @@
 		<label>mine marble</label>
 		<description>mining marble.</description>
 		<jobString>Mining marble</jobString>
-		<workAmount>655</workAmount>
 		<products>
 			<ChunkMarble>1</ChunkMarble>
 		</products>
