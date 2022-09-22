@@ -8,6 +8,7 @@ using UnityEngine;
 using Verse;
 using SimpleFixes;
 using ProjectRimFactory.Storage;
+using System.Runtime.InteropServices;
 
 namespace ProjectRimFactory.Common
 {
@@ -44,7 +45,9 @@ namespace ProjectRimFactory.Common
 
         public static System.Reflection.MethodInfo ModSupport_ReserchPal_ResetLayout = null;
         public static bool ModSupport_ReserchPal = false;
-        
+
+        public static System.Reflection.FieldInfo ModSupport_SimpleFridge_fridgeCache = null;
+
         private void LoadModSupport()
         {
             if (ModLister.HasActiveModWithName("[KV] RimFridge"))
@@ -61,6 +64,47 @@ namespace ProjectRimFactory.Common
                     Log.Warning("Project Rimfactory - Failed to add Support for shared Nutrient Dispenser with [KV] RimFridge");
                 }
 
+                // if "Simple Utilities: Fridge" and "[KV] RimFridge" are loaded we use "Simple Utilities: Fridge" as it is faster
+                if (!ModLister.HasActiveModWithName("Simple Utilities: Fridge")){
+                    MethodBase RrimFridge_CompRefrigerator_CompTickRare = AccessTools.Method("RimFridge.CompRefrigerator:CompTickRare");
+                    
+                    if (RrimFridge_CompRefrigerator_CompTickRare != null)
+                    {
+                        var postfix = typeof(HarmonyPatches.Patch_CompRefrigerator_CompTickRare).GetMethod("Postfix");
+                        this.HarmonyInstance.Patch(RrimFridge_CompRefrigerator_CompTickRare, null, new HarmonyMethod(postfix));
+
+                        Log.Message("Project Rimfactory - added Support for Fridge DSU Power using [KV] RimFridge");
+                    }
+                    else
+                    {
+                        Log.Warning("Project Rimfactory - Failed to add Support for Fridge DSU Power using [KV] RimFridge");
+                    }
+                }
+                
+
+
+            }
+            if (ModLister.HasActiveModWithName("Simple Utilities: Fridge"))
+            {
+                ModSupport_SimpleFridge_fridgeCache = AccessTools.Field("SimpleFridge.Mod_SimpleFridge:fridgeCache");
+                
+                MethodBase SimpleFridge_Patch_GameComponentTick_Postfix = null;
+                Type Patch_GameComponentTick = Type.GetType("SimpleFridge.Patch_GameComponentTick, SimpleFridge", false);
+                if (Patch_GameComponentTick != null)
+                {
+                    SimpleFridge_Patch_GameComponentTick_Postfix = AccessTools.Method(Patch_GameComponentTick, "Postfix");
+                }
+                if (SimpleFridge_Patch_GameComponentTick_Postfix != null)
+                {
+                    var postfix = typeof(HarmonyPatches.Patch_Patch_GameComponentTick_Postfix).GetMethod("Postfix");
+                    this.HarmonyInstance.Patch(SimpleFridge_Patch_GameComponentTick_Postfix, null, new HarmonyMethod(postfix));
+
+                    Log.Message("Project Rimfactory - added Support for Fridge DSU Power using Simple Utilities: Fridge");
+                }
+                else
+                {
+                    Log.Warning("Project Rimfactory - Failed to add Support for Fridge DSU Power using Simple Utilities: Fridge");
+                }
             }
             if (ModLister.HasActiveModWithName("ResearchPal - Forked"))
             {

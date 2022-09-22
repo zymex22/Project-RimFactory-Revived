@@ -6,6 +6,7 @@ using System.Text;
 using Verse;
 using ProjectRimFactory.Storage.Editables;
 using UnityEngine;
+using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.Storage
 {
@@ -27,6 +28,8 @@ namespace ProjectRimFactory.Storage
 
         public override bool ForbidPawnOutput => this.ForbidPawnAccess || !this.pawnAccess;
 
+        public float ExtraPowerDraw => StoredItems.Count * 10f;
+
         private bool pawnAccess = true;
 
         public override void Notify_ReceivedThing(Thing newItem)
@@ -42,7 +45,7 @@ namespace ProjectRimFactory.Storage
         public void UpdatePowerConsumption()
         {
             compPowerTrader ??= GetComp<CompPowerTrader>();
-            compPowerTrader.PowerOutput = -10 * StoredItemsCount;
+            FridgePowerPatchUtil.UpdatePowerDraw(this, compPowerTrader);
         }
 
         public override void ExposeData()
