@@ -78,6 +78,65 @@ namespace ProjectRimFactory.Common.BackCompatibility
 
                 }
 			}
+            else if(defType == typeof(RecipeDef))
+            {
+                switch (defName)
+                {
+                    case "K_DarkAndesite":
+                        return "PRF_Excavate_DarkAndesite";
+                    case "K_Anorthosite":
+                        return "PRF_Excavate_Anorthosite";
+                    case "K_Basalt":
+                        return "PRF_Excavate_Basalt";
+                    case "K_Blueschist":
+                        return "PRF_Excavate_Blueschist";
+                    case "K_Chalk":
+                        return "PRF_Excavate_Chalk";
+                    case "K_Charnockite":
+                        return "PRF_Excavate_Charnockite";
+                    case "K_CreoleMarble":
+                        return "PRF_Excavate_CreoleMarble";
+                    case "K_Dacite":
+                        return "PRF_Excavate_Dacite";
+                    case "K_VibrantDunite":
+                        return "PRF_Excavate_VibrantDunite";
+                    case "K_Emperadordark":
+                        return "PRF_Excavate_Emperadordark";
+                    case "K_EtowahMarble":
+                        return "PRF_Excavate_EtowahMarble";
+                    case "K_GreenGabbro":
+                        return "PRF_Excavate_GreenGabbro";
+                    case "K_GreenSchist":
+                        return "PRF_Excavate_GreenSchist";
+                    case "K_Jaspillite":
+                        return "PRF_Excavate_Jaspillite";
+                    case "K_Lepidolite":
+                        return "PRF_Excavate_Lepidolite";
+                    case "K_Lherzolite":
+                        return "PRF_Excavate_Lherzolite";
+                    case "K_Lignite":
+                        return "PRF_Excavate_Lignite";
+                    case "K_Migmatite":
+                        return "PRF_Excavate_Migmatite";
+                    case "K_Monzonite":
+                        return "PRF_Excavate_Monzonite";
+                    case "K_Obsidian":
+                        return "PRF_Excavate_Obsidian";
+                    case "K_Rhyolite":
+                        return "PRF_Excavate_Rhyolite";
+                    case "K_Scoria":
+                        return "PRF_Excavate_Scoria";
+                    case "K_Serpentinite":
+                        return "PRF_Excavate_Serpentinite";
+                    case "K_Siltstone":
+                        return "PRF_Excavate_Siltstone";
+                    case "K_Sovite":
+                        return "PRF_Excavate_Sovite";
+                    case "K_Thometzekite":
+                        return "PRF_Excavate_Thometzekite";
+                }
+            }
+
             return null;
 		}
 
