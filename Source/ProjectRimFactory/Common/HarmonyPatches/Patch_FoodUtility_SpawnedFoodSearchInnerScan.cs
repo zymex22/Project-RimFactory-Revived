@@ -18,7 +18,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 		static bool afterflaotMin = false;
 		static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
 		{
-			foreach (var instruction in instructions)
+            Thingarg = null;
+            afterflaotMin = false;
+
+            foreach (var instruction in instructions)
 			{
 				if (instruction.opcode == OpCodes.Ldc_R4 && instruction.operand.ToString() == "-3.402823E+38")
 				{
