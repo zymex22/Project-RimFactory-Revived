@@ -12,6 +12,7 @@
     <li>aRandomKiwi.PowerPP</li>
   </loadBefore>
   <loadAfter>
+    <li>sumghai.replimat</li>
     <li>brrainz.harmony</li>
     <li>UnlimitedHugs.HugsLib</li>
     <li>historic.IndustrialRollers</li>
