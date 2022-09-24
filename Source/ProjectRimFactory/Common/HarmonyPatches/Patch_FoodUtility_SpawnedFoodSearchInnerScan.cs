@@ -43,7 +43,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 				if (instruction.opcode == OpCodes.Stloc_S && instruction.operand.ToString() == "Verse.Thing (7)" && Thingarg == null) Thingarg = instruction.operand;
 
 
-				//Issue here
 				if (instruction.opcode == OpCodes.Stloc_S && instruction.operand.ToString() == "System.Single (8)")
 				{
 					yield return instruction;
@@ -92,25 +91,34 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 		}
 
 		private static bool ioPortSelected = false;
+		private static Thing ioPortSelectedFor = null;
 
-		public static void isCanIOPortGetItem(ref float Distance, Thing thing)
+
+        public static void isCanIOPortGetItem(ref float Distance, Thing thing)
 		{
 			ioPortSelected = false;
 			if (mindist < Distance && closestPort != null && ((AdvancedIO_PatchHelper.CanMoveItem(closestPort,thing))))
 			{
 				Distance = mindist;
 				ioPortSelected = true;
-			}
+				ioPortSelectedFor = thing;
+
+            }
 		}
 
 		public static void moveItemIfNeeded(Thing thing)
 		{
+            //When using replimat it might replace thing  
+            if (thing != ioPortSelectedFor)
+			{
+                return;
+            }
 			if (ioPortSelected && thing != null)
 			{
 				ioPortSelected = false;
 				try
 				{
-					thing.Position = closestPort.Position;
+                    thing.Position = closestPort.Position;
 				}
 				catch (NullReferenceException)
 				{
