@@ -234,7 +234,10 @@ namespace ProjectRimFactory.Storage
                         else
                         {
                             if (!items.Contains(item))
+                            {
                                 items.Add(item);
+                                deregisterDrawItem(item);
+                            }
                         }
                     }
                 }
@@ -309,6 +312,11 @@ namespace ProjectRimFactory.Storage
         public void HandleNewItem(Thing item)
         {
             RegisterNewItem(item);
+            deregisterDrawItem(item);
+        }
+
+        private void deregisterDrawItem(Thing item)
+        {
             Map.dynamicDrawManager.DeRegisterDrawable(item);
         }
 
