@@ -16,7 +16,7 @@
             quickly prepare.
         </description>
         <scenario>
-            <summary>4 crashlanded scientists - Project RimFactory experiance</summary>
+            <summary>4 crash landed scientists - Project RimFactory experience</summary>
             <playerFaction>
                 <def>PlayerFaction</def>
                 <factionDef>PlayerColony</factionDef>
