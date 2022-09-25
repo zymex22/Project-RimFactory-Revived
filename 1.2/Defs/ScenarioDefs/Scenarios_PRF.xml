@@ -3,15 +3,9 @@
     <ScenarioDef>
         <defName>PRF_FactoryEntrepreneur</defName>
         <label>Factory Entrepreneur</label>
-        <description>A small group of scientist were sent to aid a newly founded factory.
-with cargo full of new equipment and supplies to that factory.
-On its way their ship hit a meteor shower and crashed into a naked planet far from original destination and from home.
-Now they will have to build up a temporary factory here and gather resources to go back home.
+        <description>A small group of engineers are sent to aid a newly founded factory with cargo full of new equipment and supplies. On the way, they are attacked by pirates and crash land on a nearby planet. They must now survive and build a new factory.
 
-
-After 10 days a raid will happen, it turns out it was the raiders who shot their ship down.
-You should quickly prepare for the raid.
-(BETA please post any error or suggestions)</description>
+        There will be a raid in ten days, by the very pirates who shot their ship down. You should quickly prepare.</description>
         <scenario>
             <summary>4 crashlanded scientists - Project RimFactory experiance</summary>
             <playerFaction>
@@ -78,13 +72,11 @@ You should quickly prepare for the raid.
                 </li>
                 <li Class="ScenPart_GameStartDialog">
                     <def>GameStartDialog</def>
-                    <text>A small group of scientist were sent to aid a newly founded factory.
-with cargo full of new equipment and supplies to that factory.
-On its way they hit a meteor shower and crashed into a naked planet.
-now they will have to build up a temporary factory here and gather resources to go back home.
+                    <text>
+                        A small group of engineers are sent to aid a newly founded factory with cargo full of new equipment and supplies. On the way, they are attacked by pirates and crash land on a nearby planet. They must now survive and build a new factory.
 
-After 10 days a raid will happen, it turns out it was the raiders who shot our ship down.
-You should quickly prepare for the raid.</text>
+                        There will be a raid in ten days, by the very pirates who shot their ship down. You should quickly prepare.
+                    </text>
                     <textKey>GameStartDialog</textKey>
                     <closeSound>GameStartSting</closeSound>
                 </li>
