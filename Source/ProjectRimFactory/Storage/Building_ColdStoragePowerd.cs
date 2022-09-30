@@ -21,7 +21,7 @@ namespace ProjectRimFactory.Storage
 
         public override bool CanStoreMoreItems => (Powered) && this.Spawned &&
             (ModExtension_Crate == null || StoredItemsCount < MaxNumberItemsInternal);
-        public override bool CanReceiveIO => base.CanReceiveIO && compPowerTrader.PowerOn && this.Spawned;
+        public override bool CanReceiveIO => base.CanReceiveIO && (compPowerTrader?.PowerOn ?? false) && this.Spawned;
 
         public override bool ForbidPawnInput => this.ForbidPawnAccess || !this.pawnAccess || !this.CanStoreMoreItems;
 
