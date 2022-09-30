@@ -177,7 +177,7 @@
 									</filter>
 								</defaultStorageSettings>
 							</building>
-							<description>A RimFridge branded, refrigerated version of the Digital Storage Unit that stores up to 512 stacks of food. Consumes 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.</description>
+							<description>An Owlchemist branded, refrigerated version of the Digital Storage Unit that stores up to 512 stacks of food. Consumes 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.</description>
 							<size>(3,3)</size>
 							<pathCost>150</pathCost>
 							<costList>
