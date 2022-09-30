@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         public static bool Prefix(Thing t, out string reason, ref bool __result)
         {
-            if (!t.Spawned)
+            if (!t.Spawned && t.MapHeld != null)
             {
                 var buildings = PatchStorageUtil.GetPRFMapComponent(t.MapHeld).ColdStorageBuildings;
                 foreach(var building in buildings)
@@ -31,7 +31,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     }
                 }
             }
-            
+            else if (t.MapHeld is null)
+            {
+                Log.Warning($"Report to Rimfactory with HugsLog(CTRL & F12) - TradeDeal InSellablePosition {t}.MapHeld is Null");
+            }
+
+
             reason = null;
             return true;
         }

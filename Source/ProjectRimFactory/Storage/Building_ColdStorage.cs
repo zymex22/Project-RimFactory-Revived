@@ -8,6 +8,7 @@ using ProjectRimFactory.Storage.UI;
 using RimWorld;
 using UnityEngine;
 using Verse;
+using HarmonyLib;
 
 namespace ProjectRimFactory.Storage
 {
@@ -126,7 +127,15 @@ namespace ProjectRimFactory.Storage
             //Add a new stack of a thing
             if (!newItem.Destroyed)
             {
-                items.Add(newItem);
+                //Remove current holdingOwner before adding the Item to the Storage
+                if (newItem.holdingOwner != null) 
+                {
+                    newItem.holdingOwner.Remove(newItem);
+                }
+                //TryAdd Could also handle Merging this is disabled for the following reasons
+                //We already handle that above
+                //Our option should be faster
+                thingOwner.TryAdd(newItem,false);
 
                 //What appens if its full?
                 if (CanStoreMoreItems)
