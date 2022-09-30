@@ -5,7 +5,14 @@ using ProjectRimFactory.Storage;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    //Art & maybe other things too need a separate patch
+    /// <summary>
+    /// This Patch Counts additional Items for the Do until X Type Bills
+    /// Currently adds Items from:
+    /// - AssemblerQueue
+    /// - Cold STorage
+    /// 
+    /// Old Note: Art & maybe other things too need a separate patch
+    /// </summary>
     [HarmonyPatch(typeof(RecipeWorkerCounter), "CountProducts")]
     class Patch_RecipeWorkerCounter_CountProducts
     {
@@ -15,8 +22,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             if (bill.includeFromZone == null) {
                 int i = 0;
                 ThingDef targetDef = __instance.recipe.products[0].thingDef;
-
-
 
                 //Add Items form AssemblerQueue
                 PRFGameComponent gamecomp = Current.Game.GetComponent<PRFGameComponent>();
