@@ -1,9 +1,7 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
 using Verse;
 
 namespace ProjectRimFactory.Common
@@ -27,7 +25,7 @@ namespace ProjectRimFactory.Common
             foreach (ThingDef thing in thingDefs)
             {
                 if (thing is null || thing.recipes is null) continue;
-                
+
                 string HelpText = "\r\n\r\n";
 
                 HelpText += "PRF_DescriptionUpdate_CanMine".Translate();
@@ -35,9 +33,9 @@ namespace ProjectRimFactory.Common
                 {
                     ThingDefCountClass prouct = recipeDef.products?[0];
                     HelpText += String.Format("    - {0}\r\n", prouct?.Label);
-                }      
+                }
 
-                thing.description += HelpText;            
+                thing.description += HelpText;
             }
         }
 

@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ProjectRimFactory.AutoMachineTool;
+﻿using ProjectRimFactory.AutoMachineTool;
 using ProjectRimFactory.Common;
 using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.SAL3.Exposables;
 using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
 
-namespace ProjectRimFactory.SAL3.Things.Assemblers {
-    public abstract class Building_ProgrammableAssembler : Building_DynamicBillGiver, IPowerSupplyMachineHolder , IAssemblerQueue
+namespace ProjectRimFactory.SAL3.Things.Assemblers
+{
+    public abstract class Building_ProgrammableAssembler : Building_DynamicBillGiver, IPowerSupplyMachineHolder, IAssemblerQueue
     {
         protected class BillReport : IExposable
         {
@@ -40,9 +41,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
         public override Graphic Graphic => (this.Active)
             ? (this.currentBillReport == null
-               // powered on but idle:
+                // powered on but idle:
                 ? base.Graphic
-               // powered on and working:
+                // powered on and working:
                 : this.def.GetModExtension<AssemblerDefModExtension>()?.WorkingGrahic ?? base.Graphic)
             // not powered on:
             : this.def.GetModExtension<AssemblerDefModExtension>()?.PowerOffGrahic ?? base.Graphic;
@@ -88,8 +89,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 }
                 buildingPawn = p;
             }
-            catch (Exception ex) {
-            Log.Error("ERROR=: "+ex.ToString());
+            catch (Exception ex)
+            {
+                Log.Error("ERROR=: " + ex.ToString());
             }
         }
 
@@ -204,7 +206,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             {
                 return t.GetUniqueLoadID();
             }
-            yield return new FloatMenuOption("View selected things", () => {
+            yield return new FloatMenuOption("View selected things", () =>
+            {
                 if (currentBillReport != null)
                 {
                     Log.Message("Selected things: " + string.Join(", ", currentBillReport.selected.Select(StringConverter).ToArray()));
@@ -236,8 +239,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             });
 
             this.compPowerTrader = GetComp<CompPowerTrader>();
-            this.compRefuelable  = GetComp<CompRefuelable>();
-            this.compFlick       = GetComp<CompFlickable>();
+            this.compRefuelable = GetComp<CompRefuelable>();
+            this.compFlick = GetComp<CompFlickable>();
             this.prf_gamecomp = Current.Game.GetComponent<PRFGameComponent>();
 
             //Assign Pawn's mapIndexOrState to building's mapIndexOrState
@@ -248,7 +251,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             //Need this type of call to set the Powerconsumption on load
             //A normal call will not work
             var rangePowerSupplyMachine = this.RangePowerSupplyMachine;
-            if (rangePowerSupplyMachine != null) {
+            if (rangePowerSupplyMachine != null)
+            {
                 this.MapManager.NextAction(rangePowerSupplyMachine.RefreshPowerStatus);
                 this.MapManager.AfterAction(5, rangePowerSupplyMachine.RefreshPowerStatus);
             }
@@ -259,7 +263,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         }
 
         protected virtual bool Active => compPowerTrader?.PowerOn != false
-                                       && compRefuelable?.HasFuel != false 
+                                       && compRefuelable?.HasFuel != false
                                        && compFlick?.SwitchIsOn != false;
 
         protected IEnumerable<Thing> AllAccessibleThings => from t in AllThingsInArea
@@ -267,15 +271,23 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                                                             where (!this.Map.reservationManager.AllReservedThings().Contains(t))
                                                             select t;
 
-        protected IEnumerable<Thing> AllThingsInArea {
-            get {
-                foreach (var c in IngredientStackCells) {
-                    foreach (var t in Map.thingGrid.ThingsListAt(c)) {
-                        if (t is Building && t is IThingHolder holder) {
-                            if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner) {
+        protected IEnumerable<Thing> AllThingsInArea
+        {
+            get
+            {
+                foreach (var c in IngredientStackCells)
+                {
+                    foreach (var t in Map.thingGrid.ThingsListAt(c))
+                    {
+                        if (t is Building && t is IThingHolder holder)
+                        {
+                            if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner)
+                            {
                                 foreach (var moreT in owner.InnerListForReading) yield return moreT;
                             }
-                        } else if (t.def.category == ThingCategory.Item) {
+                        }
+                        else if (t.def.category == ThingCategory.Item)
+                        {
                             yield return t;
                         }
                     }
@@ -292,10 +304,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         protected IEnumerable<Bill> AllBillsShouldDoNow => from b in billStack.Bills
                                                            where b.ShouldDoNow()
                                                            select b;
-        public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null) {
-            foreach (var t in thingQueue) {
+        public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null)
+        {
+            foreach (var t in thingQueue)
+            {
                 if (optionalValidator == null ||
-                    optionalValidator(t)) {
+                    optionalValidator(t))
+                {
                     thingQueue.Remove(t);
                     return t;
                 }
@@ -354,7 +369,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 {
                     this.effecter = (ext == null ? currentBillReport.bill.recipe?.effectWorking : ext.GetEffecter(this.currentBillReport.bill.recipe))?.Spawn();
                 }
-                if(this.sound == null)
+                if (this.sound == null)
                 {
                     this.sound = (ext == null ? currentBillReport.bill.recipe?.soundWorking : ext.GetSound(this.currentBillReport.bill.recipe))?.TrySpawnSustainer(this);
                 }
@@ -372,7 +387,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                     this.effecter.Cleanup();
                     this.effecter = null;
                 }
-                if(this.sound != null)
+                if (this.sound != null)
                 {
                     this.sound.End();
                     this.sound = null;
@@ -383,7 +398,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 }
             }
             //Fuel
-            if (compRefuelable != null && Active && currentBillReport != null) {
+            if (compRefuelable != null && Active && currentBillReport != null)
+            {
                 compRefuelable.Notify_UsedThisTick();
             }
 
@@ -398,7 +414,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             {
                 List<ThingCount> chosen = new List<ThingCount>();
 
-                List<Thing> allAccessibleAllowedThings = allThings.Where(x=>b.IsFixedOrAllowedIngredient(x)).ToList();
+                List<Thing> allAccessibleAllowedThings = allThings.Where(x => b.IsFixedOrAllowedIngredient(x)).ToList();
 
                 if (allAccessibleAllowedThings.Count > 0 || b.ingredientFilter.AllowedThingDefs.Count() == 0)
                 {
@@ -412,7 +428,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             return null;
         }
 
-        private ModExtension_Skills extension_Skills  => this.def.GetModExtension<ModExtension_Skills>();
+        private ModExtension_Skills extension_Skills => this.def.GetModExtension<ModExtension_Skills>();
 
         bool TryFindBestBillIngredientsInSet(List<Thing> accessibleThings, Bill b, List<ThingCount> chosen)
         {
@@ -469,13 +485,17 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(base.GetInspectString());
-            if (this.Active) {
+            if (this.Active)
+            {
                 if (currentBillReport == null)
                 { // assembler is not working despite power:
                     // show why it is not working:
-                    if (this.BillStack.AnyShouldDoNow) { // it DOES have bills
+                    if (this.BillStack.AnyShouldDoNow)
+                    { // it DOES have bills
                         stringBuilder.AppendLine("SearchingForIngredients".Translate());
-                    } else { // it DOESN'T have bills:
+                    }
+                    else
+                    { // it DOESN'T have bills:
                         stringBuilder.AppendLine("AssemblerNoBills".Translate());
                     }
                 }
@@ -487,7 +507,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
             // even if it's not active, show any products ready to place:
             //   (we always show this: even if 0 products, it lets new players
             //    know it will hold products until it CAN place them)
-            stringBuilder.AppendLine("SAL3_Products".Translate(thingQueue.Count,max_thingQueue_Count));
+            stringBuilder.AppendLine("SAL3_Products".Translate(thingQueue.Count, max_thingQueue_Count));
             return stringBuilder.ToString().TrimEndNewlines();
         }
 
@@ -526,8 +546,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                 string label = "";
                 string label2 = "";
                 // only show overlay status text if has power:
-                if (this.Active) {
-                    
+                if (this.Active)
+                {
+
                     if (currentBillReport != null) // the assembler is actively working
                     { // set the status text to the bill's label:
                         label = currentBillReport.bill.LabelCap;
@@ -535,14 +556,17 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
                     else // the assembler is NOT working
                     {
                         // show why it is not working:
-                        if (this.BillStack.AnyShouldDoNow) { // it DOES have bills
+                        if (this.BillStack.AnyShouldDoNow)
+                        { // it DOES have bills
                             label = "SearchingForIngredients".Translate();
-                        } else { // it DOESN'T have bills:
+                        }
+                        else
+                        { // it DOESN'T have bills:
                             label = "AssemblerNoBills".Translate();
                         }
                     }
                     // draw the label on the screen:
-                   
+
                 }
                 else if (compFlick?.SwitchIsOn == false)
                 {
@@ -551,20 +575,20 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
 
                 if (!AllowProduction_thingQueue)
                 {
-                    label2 = "PRF_OutputBufferWarning".Translate(); 
+                    label2 = "PRF_OutputBufferWarning".Translate();
                 }
-                else if(thingQueue.Count > 1) 
+                else if (thingQueue.Count > 1)
                 {
                     label2 = "SAL3_Products".Translate(thingQueue.Count, max_thingQueue_Count);
                 }
                 Vector2 vectorpos = GenMapUI.LabelDrawPosFor(this, 0f);
-                
+
                 //Don't show an Empty Line
                 if (label != "")
                 {
                     GenMapUI.DrawThingLabel(vectorpos, label, Color.white);
                 }
-                
+
                 vectorpos.y += Verse.Text.CalcSize(label).y;
 
                 //Don't show an Empty Line
@@ -643,7 +667,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers {
         [Unsaved]
         private Sustainer sound = null;
         protected CompPowerTrader compPowerTrader = null;
-        protected CompRefuelable  compRefuelable  = null;
-        protected CompFlickable   compFlick = null;
+        protected CompRefuelable compRefuelable = null;
+        protected CompFlickable compFlick = null;
     }
 }

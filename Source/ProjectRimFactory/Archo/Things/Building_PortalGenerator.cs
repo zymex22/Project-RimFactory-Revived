@@ -1,10 +1,8 @@
 ﻿using ProjectRimFactory.Common;
 using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Verse;
 
 namespace ProjectRimFactory.Archo.Things

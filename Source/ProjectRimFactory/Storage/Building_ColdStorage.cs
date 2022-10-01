@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using ProjectRimFactory.Common;
+﻿using ProjectRimFactory.Common;
 using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.Storage.Editables;
 using ProjectRimFactory.Storage.UI;
 using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 using Verse;
-using HarmonyLib;
 
 namespace ProjectRimFactory.Storage
 {
@@ -128,14 +127,14 @@ namespace ProjectRimFactory.Storage
             if (!newItem.Destroyed)
             {
                 //Remove current holdingOwner before adding the Item to the Storage
-                if (newItem.holdingOwner != null) 
+                if (newItem.holdingOwner != null)
                 {
                     newItem.holdingOwner.Remove(newItem);
                 }
                 //TryAdd Could also handle Merging this is disabled for the following reasons
                 //We already handle that above
                 //Our option should be faster
-                thingOwner.TryAdd(newItem,false);
+                thingOwner.TryAdd(newItem, false);
 
                 //What appens if its full?
                 if (CanStoreMoreItems)
@@ -150,7 +149,7 @@ namespace ProjectRimFactory.Storage
         {
             base.ExposeData();
             Scribe_Collections.Look(ref ports, "ports", LookMode.Reference);
-            Scribe_Deep.Look(ref this.thingOwner, "thingowner",this);
+            Scribe_Deep.Look(ref this.thingOwner, "thingowner", this);
             Scribe_Values.Look(ref uniqueName, "uniqueName");
             Scribe_Deep.Look(ref settings, "settings", this);
             ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
@@ -200,7 +199,7 @@ namespace ProjectRimFactory.Storage
         {
             float output = 0;
             var itemsc = items.Count;
-            for (int i = 0;i< itemsc; i++)
+            for (int i = 0; i < itemsc; i++)
             {
                 var item = items[i];
                 output += item.MarketValue * item.stackCount;
@@ -341,11 +340,11 @@ namespace ProjectRimFactory.Storage
             return thingOwner;
         }
 
-        
+
         //Only used for Advanced IO
         public bool HoldsPos(IntVec3 pos)
         {
-            return false;   
+            return false;
         }
     }
 }

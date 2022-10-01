@@ -1,9 +1,6 @@
 ﻿using ProjectRimFactory.Common;
 using RimWorld;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Verse;
 using Verse.AI;
 
@@ -27,7 +24,7 @@ namespace ProjectRimFactory.Drones.AI
                             pawn.workSettings = new Pawn_WorkSettings(pawn);
                             pawn.workSettings.EnableAndInitialize();
                             pawn.workSettings.DisableAll();
-                            
+
                             foreach (WorkTypeDef def in b.WorkSettings_dict.Keys)
                             {
                                 if (b.WorkSettings_dict[def])

@@ -1,13 +1,9 @@
-﻿using ProjectRimFactory.Common;
-using ProjectRimFactory.Common.HarmonyPatches;
-using ProjectRimFactory.SAL3.UI;
-using ProjectRimFactory.Storage.Editables;
+﻿using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.Storage.UI;
 using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -16,13 +12,13 @@ namespace ProjectRimFactory.Storage
 
     public interface IRenameBuilding
     {
-        public string UniqueName { set;  get; }
+        public string UniqueName { set; get; }
         public Building Building { get; }
     }
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem , IRenameBuilding , INutrientPasteDispenserInput
+    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem, IRenameBuilding, INutrientPasteDispenserInput
     {
         public static readonly Texture2D CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
         public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("PRFUi/IoIcon");
@@ -336,7 +332,7 @@ namespace ProjectRimFactory.Storage
                     }
                     if (currentItem != null)
                     {
-                        currentItem.SetForbidden(ForbidOnPlacement,false);
+                        currentItem.SetForbidden(ForbidOnPlacement, false);
                     }
                 }
             }
@@ -354,7 +350,7 @@ namespace ProjectRimFactory.Storage
                     if (IsAdvancedPort) mylist.RemoveAll(b => !(b as ILinkableStorageParent).AdvancedIOAllowed);
                     List<FloatMenuOption> list = new List<FloatMenuOption>(
                         mylist.Select(b => new FloatMenuOption(b.LabelCap, () => SelectedPorts().ToList().ForEach(p => p.BoundStorageUnit = (b as ILinkableStorageParent))))
-                    ) ;
+                    );
                     if (list.Count == 0)
                     {
                         list.Add(new FloatMenuOption("NoneBrackets".Translate(), null));
@@ -489,7 +485,7 @@ namespace ProjectRimFactory.Storage
         /// <param name="toBeAbsorbed"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        private static bool AbsorbAmmount( ref Thing baseThing, ref Thing toBeAbsorbed,int count)
+        private static bool AbsorbAmmount(ref Thing baseThing, ref Thing toBeAbsorbed, int count)
         {
 
             if (!baseThing.CanStackWith(toBeAbsorbed))
@@ -524,7 +520,7 @@ namespace ProjectRimFactory.Storage
             return false;
 
 
-        } 
+        }
 
         protected override void RefreshOutput()
         {

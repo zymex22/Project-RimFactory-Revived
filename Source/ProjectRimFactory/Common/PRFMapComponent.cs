@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Verse;
-using RimWorld;
 
 namespace ProjectRimFactory.Common
 {
@@ -17,8 +12,8 @@ namespace ProjectRimFactory.Common
 
         public List<Storage.Building_ColdStorage> ColdStorageBuildings = new List<Storage.Building_ColdStorage>();
 
-        private Dictionary<IntVec3,List< HarmonyPatches.IHideItem>> hideItemLocations = new Dictionary<IntVec3,List< HarmonyPatches.IHideItem>>();
-        
+        private Dictionary<IntVec3, List<HarmonyPatches.IHideItem>> hideItemLocations = new Dictionary<IntVec3, List<HarmonyPatches.IHideItem>>();
+
         private Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>> ForbidPawnOutputItemLocations = new Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>>();
 
         private Dictionary<IntVec3, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort> advancedIOLocations = new Dictionary<IntVec3, Storage.Building_AdvancedStorageUnitIOPort>();
@@ -61,13 +56,13 @@ namespace ProjectRimFactory.Common
 
         public void RegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
         {
-            if(hideItemLocations.ContainsKey(pos))
+            if (hideItemLocations.ContainsKey(pos))
             {
                 hideItemLocations[pos].Add(hideItem);
             }
             else
             {
-                hideItemLocations.Add(pos,new List<HarmonyPatches.IHideItem>() { hideItem});
+                hideItemLocations.Add(pos, new List<HarmonyPatches.IHideItem>() { hideItem });
             }
         }
         public void DeRegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
@@ -80,7 +75,7 @@ namespace ProjectRimFactory.Common
             {
                 hideItemLocations[pos].Remove(hideItem);
             }
-            
+
         }
         public void RegisterIForbidPawnOutputItem(IntVec3 pos, HarmonyPatches.IForbidPawnOutputItem ForbidPawnOutput)
         {
@@ -150,15 +145,18 @@ namespace ProjectRimFactory.Common
         }
         public void AddIHideRightClickMenu(Building b)
         {
-            foreach (var v in b.OccupiedRect()) {
+            foreach (var v in b.OccupiedRect())
+            {
                 iHideRightMenus.Add(v);
             }
         }
         public void RemoveIHideRightClickMenu(Building b)
         {
-            foreach (var v in b.OccupiedRect()) {
+            foreach (var v in b.OccupiedRect())
+            {
                 iHideRightMenus.Remove(v);
-                foreach (var t in map.thingGrid.ThingsListAt(v)) {
+                foreach (var t in map.thingGrid.ThingsListAt(v))
+                {
                     if (t != b && t is IHideRightClickMenu) iHideRightMenus.Add(v);
                 }
             }

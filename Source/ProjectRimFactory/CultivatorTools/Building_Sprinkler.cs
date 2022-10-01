@@ -1,5 +1,5 @@
-﻿using Verse;
-using RimWorld;
+﻿using RimWorld;
+using Verse;
 
 namespace ProjectRimFactory.CultivatorTools
 {

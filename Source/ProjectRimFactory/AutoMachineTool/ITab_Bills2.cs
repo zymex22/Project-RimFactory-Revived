@@ -1,16 +1,13 @@
-﻿using System;
+﻿using HarmonyLib;
+using ProjectRimFactory.Common;
+using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.Sound;
-using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
-using System.Reflection;
-using HarmonyLib;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -129,7 +126,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Func<List<FloatMenuOption>> recipeOptionsMaker = delegate
             {
                 List<FloatMenuOption> list = new List<FloatMenuOption>();
-                foreach(var recipe in this.SelTable.AllRecipes)
+                foreach (var recipe in this.SelTable.AllRecipes)
                 {
                     if (recipe.AvailableNow)
                     {

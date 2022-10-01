@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Verse;
-using RimWorld;
-using HarmonyLib;
+﻿using HarmonyLib;
 using ProjectRimFactory.SAL3.Things.Assemblers;
+using RimWorld;
+using System.Linq;
+using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {

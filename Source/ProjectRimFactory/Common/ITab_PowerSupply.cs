@@ -1,13 +1,7 @@
-﻿using System;
+﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
 using UnityEngine;
-using static ProjectRimFactory.AutoMachineTool.Ops;
+using Verse;
 
 namespace ProjectRimFactory.Common
 {
@@ -27,7 +21,7 @@ namespace ProjectRimFactory.Common
         int CurrentPowerConsumption { get; }
 
         //Strig will be formated for the overview and the value will hold the additional consumption
-        Dictionary<string,int> AdditionalPowerConsumption { get; }
+        Dictionary<string, int> AdditionalPowerConsumption { get; }
 
         int MaxPowerForSpeed { get; }
         int MaxPowerForRange { get; }
@@ -70,7 +64,7 @@ namespace ProjectRimFactory.Common
             this.descriptionForSpeed = "PRF.AutoMachineTool.SupplyPower.Description".Translate();
             this.descriptionForRange = "PRF.AutoMachineTool.SupplyPower.DescriptionForRange".Translate();
         }
-        
+
         private string descriptionForSpeed;
 
         private string descriptionForRange;
@@ -110,21 +104,21 @@ namespace ProjectRimFactory.Common
             rect = list.GetRect(50f);
             //TODO Use string builder
             string powerUsageBreackdown;
-            powerUsageBreackdown = "PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start".Translate( this.Machine.BasePowerConsumption, this.Machine.SupplyPowerForSpeed, this.Machine.SupplyPowerForRange);
+            powerUsageBreackdown = "PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start".Translate(this.Machine.BasePowerConsumption, this.Machine.SupplyPowerForSpeed, this.Machine.SupplyPowerForRange);
             //Add breackdown for additional Power usage if any
             if (this.Machine.AdditionalPowerConsumption != null && this.Machine.AdditionalPowerConsumption.Count > 0)
             {
-                foreach(KeyValuePair<string,int> pair in this.Machine.AdditionalPowerConsumption)
+                foreach (KeyValuePair<string, int> pair in this.Machine.AdditionalPowerConsumption)
                 {
-                    powerUsageBreackdown += "PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append".Translate( pair.Key,pair.Value);
+                    powerUsageBreackdown += "PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append".Translate(pair.Key, pair.Value);
                 }
             }
             //Display the Sum
-            powerUsageBreackdown += "PRF.AutoMachineTool.SupplyPower.BreakDownLine_End".Translate( -1 * this.Machine.CurrentPowerConsumption);
+            powerUsageBreackdown += "PRF.AutoMachineTool.SupplyPower.BreakDownLine_End".Translate(-1 * this.Machine.CurrentPowerConsumption);
             Widgets.Label(rect, powerUsageBreackdown);
             rect = list.GetRect(10f);
             Widgets.DrawLineHorizontal(rect.x, rect.y, WinSize.x);
-            
+
             //----------------------------
 
             if (this.Machine.SpeedSetting)
@@ -181,7 +175,7 @@ namespace ProjectRimFactory.Common
                 list.Gap();
 
                 rect = list.GetRect(20f);
-                var range = Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForRange, (float)minPowerRange, (float)maxPowerRange, true, valueLabelForRange, 
+                var range = Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForRange, (float)minPowerRange, (float)maxPowerRange, true, valueLabelForRange,
                     "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(minPowerRange), "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(maxPowerRange), this.Machine.PowerPerStepRange);
                 this.Machine.SupplyPowerForRange = range;
                 //Add info Labels below

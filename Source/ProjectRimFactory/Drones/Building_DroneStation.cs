@@ -1,4 +1,5 @@
-﻿using ProjectRimFactory.Common;
+﻿using ProjectRimFactory.AutoMachineTool;
+using ProjectRimFactory.Common;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,6 @@ using System.Text;
 using UnityEngine;
 using Verse;
 using Verse.AI;
-using ProjectRimFactory.AutoMachineTool;
 
 namespace ProjectRimFactory.Drones
 {
@@ -105,7 +105,7 @@ namespace ProjectRimFactory.Drones
         }
         public override void SelectedUpdate()
         {
-        //    Log.Message("SelectedUpdate");
+            //    Log.Message("SelectedUpdate");
         }
 
         public override void ProcessInput(Event ev)
@@ -119,7 +119,7 @@ namespace ProjectRimFactory.Drones
                 AreaUtility.MakeAllowedAreaListFloatMenu(delegate (Area a)
                 {
                     selectedArea = a;
-                   // base.ProcessInput(ev);
+                    // base.ProcessInput(ev);
 
                     /*
                     selectedArea == null --> Unrestricted
@@ -144,7 +144,7 @@ namespace ProjectRimFactory.Drones
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_DroneStation : Building , IPowerSupplyMachineHolder , IDroneSeetingsITab, IPRF_SettingsContentLink
+    public abstract class Building_DroneStation : Building, IPowerSupplyMachineHolder, IDroneSeetingsITab, IPRF_SettingsContentLink
     {
         //Sleep Time List (Loaded on Spawn)
         public string[] cachedSleepTimeList;
@@ -180,17 +180,19 @@ namespace ProjectRimFactory.Drones
         {
             get
             {
-                if (compPowerWorkSetting != null) {
+                if (compPowerWorkSetting != null)
+                {
                     return (int)Math.Ceiling(compPowerWorkSetting.GetRange());
                 }
-                else {
+                else
+                {
                     return def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius;
                 }
             }
 
         }
 
-        
+
 
         private CompPowerWorkSetting compPowerWorkSetting;
 
@@ -230,14 +232,14 @@ namespace ProjectRimFactory.Drones
 
                     foreach (IntVec3 cell in StationRangecells)
                     {
-                        if(cell.InBounds(this.Map)) droneArea[cell] = true;
+                        if (cell.InBounds(this.Map)) droneArea[cell] = true;
                     }
 
                     //Not shure if i need that but just to be shure
                     droneArea[Position] = true;
                     this.Map.areaManager.AllAreas.Add(droneArea);
                 }
-                
+
 
                 return droneArea;
 
@@ -255,7 +257,7 @@ namespace ProjectRimFactory.Drones
             {
                 ((DroneArea)droneAllowedArea).SetMutable(true);
                 droneAllowedArea.Delete();
-                
+
                 droneAllowedArea = (Area)GetDroneAllowedArea;
                 StationRangecells_old = StationRangecells;
             }
@@ -296,7 +298,7 @@ namespace ProjectRimFactory.Drones
 
         public CompRefuelable compRefuelable => GetComp<CompRefuelable>();
 
-        public void UpdateDronePrioritys() 
+        public void UpdateDronePrioritys()
         {
 
             if (spawnedDrones.Count > 0)
@@ -349,7 +351,8 @@ namespace ProjectRimFactory.Drones
             StationRangecells_old = StationRangecells;
             //Setup Allowd Area
             //Enssuring that Update_droneAllowedArea_forDrones() is run resolves #224 (May need to add a diffrent check)
-            if (droneAllowedArea == null) {
+            if (droneAllowedArea == null)
+            {
                 //Log.Message("droneAllowedArea was null");
                 Update_droneAllowedArea_forDrones(droneAllowedArea);
             }
@@ -426,7 +429,7 @@ namespace ProjectRimFactory.Drones
                 ((DroneArea)droneAllowedArea).SetMutable(true);
                 droneAllowedArea.Delete();
             }
-            
+
             droneAllowedArea = null;
 
 
@@ -536,10 +539,11 @@ namespace ProjectRimFactory.Drones
         {
             base.DrawExtraSelectionOverlays();
             //Dont Draw if infinite
-            if (def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius > 0) { 
+            if (def.GetModExtension<DefModExtension_DroneStation>().SquareJobRadius > 0)
+            {
                 GenDraw.DrawFieldEdges(cashed_GetCoverageCells);
             }
-            
+
         }
 
         public override string GetInspectString()
@@ -617,7 +621,7 @@ namespace ProjectRimFactory.Drones
                 action = () =>
                 {
                     List<Building_DroneStation> buildings = Map.listerThings.AllThings.OfType<Building_DroneStation>().ToList();
-                    for (int i = 0; i< buildings.Count;i++)
+                    for (int i = 0; i < buildings.Count; i++)
                     {
                         buildings[i].lockdown = true;
                         foreach (Pawn_Drone drone in buildings[i].spawnedDrones.ToList())
@@ -672,7 +676,7 @@ namespace ProjectRimFactory.Drones
                     defaultDesc = "Respawns all Drones",
                     action = () =>
                     {
-                       for (int i = spawnedDrones.Count - 1; i >= 0; i--)
+                        for (int i = spawnedDrones.Count - 1; i >= 0; i--)
                         {
                             spawnedDrones[i].Destroy();
                             Notify_DroneGained();
@@ -686,7 +690,7 @@ namespace ProjectRimFactory.Drones
         }
 
 
-      
+
 
 
 

@@ -1,12 +1,9 @@
-﻿using System;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Reflection;
-using Verse;
 using UnityEngine;
-using RimWorld;
-using ProjectRimFactory.Common;
+using Verse;
 
 namespace ProjectRimFactory.CultivatorTools
 {

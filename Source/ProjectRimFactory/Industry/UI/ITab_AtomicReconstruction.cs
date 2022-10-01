@@ -1,13 +1,11 @@
-﻿using RimWorld;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Verse;
 using UnityEngine;
-using ProjectRimFactory.Storage.UI;
+using Verse;
 using Verse.Sound;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.Industry.UI
 {
@@ -22,7 +20,7 @@ namespace ProjectRimFactory.Industry.UI
         public Comparer<ThingDef> ThingDefComparer = Comparer<ThingDef>.Create((first, second) => first.LabelCap.RawText.CompareTo(second.LabelCap.RawText));
         protected override void FillTab()
         {
-           
+
             Rect rect = new Rect(0f, 0f, size.x, size.y).ContractedBy(10f);
             Listing_Standard listing = new Listing_Standard(GameFont.Small);
             listing.Begin(rect);
@@ -51,7 +49,7 @@ namespace ProjectRimFactory.Industry.UI
                 SoundDefOf.Click.PlayOneShot(SoundInfo.OnCamera());
             }
             curY += 28f;
-            foreach (ThingDef tDef in AllAllowedThingDefsColonyCanProduce().OrderBy(d=>d, ThingDefComparer))
+            foreach (ThingDef tDef in AllAllowedThingDefsColonyCanProduce().OrderBy(d => d, ThingDefComparer))
             {
                 if (searchQuery == null || tDef.label.ToLower().Contains(searchQuery))
                 {

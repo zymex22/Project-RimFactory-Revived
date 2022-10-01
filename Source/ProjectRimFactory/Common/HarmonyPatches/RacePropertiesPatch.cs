@@ -1,11 +1,7 @@
 ﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Verse;
-using RimWorld;
 using ProjectRimFactory.Drones;
+using RimWorld;
+using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RimWorld;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
 using Verse;
-using Verse.AI;
-using Verse.Sound;
-using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
@@ -35,7 +28,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look<int>(ref this.productLimitCount, "productLimitCount", 100);
             Scribe_Values.Look<bool>(ref this.productLimitation, "productLimitation", false);
             Scribe_Values.Look<bool>(ref this.countStacks, "countStacks", false);
-            
+
             if (Scribe.mode == LoadSaveMode.Saving)
             {
                 this.slotGroupParentLabel = this.targetSlotGroup.Select(s => s.parent.SlotYielderLabel()).GetOrDefault(null);
@@ -80,7 +73,7 @@ namespace ProjectRimFactory.AutoMachineTool
             this.targetSlotGroup = this.targetSlotGroup.Where(
                          s => this.Map.haulDestinationManager.AllGroups.Contains(s));
             return this.targetSlotGroup.Fold(() => this.CountFromMap(thing.def) >= this.ProductLimitCount) // no slotGroup
-                (s => this.CountFromSlot(s, thing.def) >= this.ProductLimitCount 
+                (s => this.CountFromSlot(s, thing.def) >= this.ProductLimitCount
                 || !s.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
         }
 

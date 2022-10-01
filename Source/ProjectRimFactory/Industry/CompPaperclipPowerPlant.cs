@@ -1,11 +1,9 @@
-﻿using RimWorld;
-using Verse;
-using System;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using ProjectRimFactory.Common;
 using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.Industry
 {

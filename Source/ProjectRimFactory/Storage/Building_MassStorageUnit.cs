@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using ProjectRimFactory.Common;
+﻿using ProjectRimFactory.Common;
 using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.Storage.Editables;
 using ProjectRimFactory.Storage.UI;
 using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using UnityEngine;
 using Verse;
 
@@ -13,7 +13,7 @@ namespace ProjectRimFactory.Storage
 {
     [StaticConstructorOnStartup]
     public abstract class Building_MassStorageUnit : Building_Storage, IHideItem, IHideRightClickMenu,
-        IForbidPawnOutputItem, IForbidPawnInputItem ,IRenameBuilding, ILinkableStorageParent
+        IForbidPawnOutputItem, IForbidPawnInputItem, IRenameBuilding, ILinkableStorageParent
     {
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
@@ -31,7 +31,7 @@ namespace ProjectRimFactory.Storage
         public LocalTargetInfo GetTargetInfo => this;
 
         //Initialized at spawn
-        public DefModExtension_Crate ModExtension_Crate = null; 
+        public DefModExtension_Crate ModExtension_Crate = null;
 
         public abstract bool CanStoreMoreItems { get; }
         // The maximum number of item stacks at this.Position:
@@ -189,7 +189,7 @@ namespace ProjectRimFactory.Storage
             }
             ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
             RefreshStorage();
-            foreach(var port in ports)
+            foreach (var port in ports)
             {
                 if (port?.Spawned ?? false)
                 {
@@ -264,14 +264,16 @@ namespace ProjectRimFactory.Storage
         {
             //Some Sanity Checks
             capacity = 0;
-            if (thing == null || map == null || map != this.Map || cell == null || !this.Spawned) {
+            if (thing == null || map == null || map != this.Map || cell == null || !this.Spawned)
+            {
                 Log.Error("PRF DSU CapacityAt Sanity Check Error");
                 return false;
             }
             thing = thing.GetInnerIfMinified();
 
             //Check if thing can be stored based upon the storgae settings
-            if (!this.Accepts(thing)) {
+            if (!this.Accepts(thing))
+            {
                 return false;
             }
 
@@ -285,7 +287,8 @@ namespace ProjectRimFactory.Storage
             int maxstacksize = thing.def.stackLimit;
             //Get capacity of partial Stacks
             //  So 45 Steel and 75 Steel and 11 Steel give 30+64 more capacity for steel
-            foreach (Thing partialStack in storedItems.Where(t => t.def == thing.def && t.stackCount < maxstacksize)) {
+            foreach (Thing partialStack in storedItems.Where(t => t.def == thing.def && t.stackCount < maxstacksize))
+            {
                 capacity += maxstacksize - partialStack.stackCount;
             }
 
@@ -293,11 +296,15 @@ namespace ProjectRimFactory.Storage
             capacity += (MaxNumberItemsInternal - storedItems.Count()) * maxstacksize;
 
             //Access point:
-            if (cell != Position) {
+            if (cell != Position)
+            {
                 var maybeThing = Map.thingGrid.ThingAt(cell, ThingCategory.Item);
-                if (maybeThing != null) {
+                if (maybeThing != null)
+                {
                     if (maybeThing.def == thing.def) capacity += (thing.def.stackLimit - maybeThing.stackCount);
-                } else {
+                }
+                else
+                {
                     capacity += thing.def.stackLimit;
                 }
             }

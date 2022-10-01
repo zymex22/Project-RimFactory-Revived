@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using Verse;
 
@@ -20,13 +16,13 @@ namespace ProjectRimFactory.Common.BackCompatibility
         public override string BackCompatibleDefName(Type defType, string defName, bool forDefInjections = false, XmlNode node = null)
         {
 
-			if (defType == typeof(ResearchProjectDef))
-			{
-				switch (defName)
-				{
+            if (defType == typeof(ResearchProjectDef))
+            {
+                switch (defName)
+                {
                     //PRF Materials Rename
-					case "PRF_StainlessSteelAlloying":
-						return "PRF_Research_StainlessSteelAlloying";
+                    case "PRF_StainlessSteelAlloying":
+                        return "PRF_Research_StainlessSteelAlloying";
 
                     case "PRF_Carbon":
                         return "PRF_Research_Carbon";
@@ -77,8 +73,8 @@ namespace ProjectRimFactory.Common.BackCompatibility
 
 
                 }
-			}
-            else if(defType == typeof(RecipeDef))
+            }
+            else if (defType == typeof(RecipeDef))
             {
                 switch (defName)
                 {
@@ -138,7 +134,7 @@ namespace ProjectRimFactory.Common.BackCompatibility
             }
 
             return null;
-		}
+        }
 
         public override Type GetBackCompatibleType(Type baseType, string providedClassName, XmlNode node)
         {
@@ -155,7 +151,7 @@ namespace ProjectRimFactory.Common.BackCompatibility
 
         public override void PostExposeData(object obj)
         {
-            
+
         }
     }
 }

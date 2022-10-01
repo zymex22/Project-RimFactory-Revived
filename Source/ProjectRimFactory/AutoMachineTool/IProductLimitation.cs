@@ -1,14 +1,15 @@
-﻿using System;
-using RimWorld;
-namespace ProjectRimFactory.AutoMachineTool {
+﻿using RimWorld;
+namespace ProjectRimFactory.AutoMachineTool
+{
     // used in settings ITab and AutoMachineTool buildings that 
     //   do something until a limit is reached.
-    interface IProductLimitation {
+    interface IProductLimitation
+    {
         int ProductLimitCount { get; set; }
         bool ProductLimitation { get; set; }
         bool CountStacks { get; set; }
         Option<SlotGroup> TargetSlotGroup { get; set; }
 
-        bool ProductLimitationDisable { get;}
+        bool ProductLimitationDisable { get; }
     }
 }

@@ -1,10 +1,9 @@
-﻿using RimWorld;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Verse;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers
 {

@@ -1,8 +1,4 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -17,7 +13,7 @@ namespace ProjectRimFactory.Industry
             base.ExposeData();
             Scribe_Values.Look(ref ticksToExplode, "ticksToExplode", 0, false);
         }
-        
+
         public override void Draw()
         {
             base.Draw();
@@ -36,7 +32,7 @@ namespace ProjectRimFactory.Industry
                 Map.overlayDrawer.DrawOverlay(this, OverlayTypes.BurningWick);
             }
         }
-        
+
         public override void Tick()
         {
             base.Tick();
@@ -60,7 +56,7 @@ namespace ProjectRimFactory.Industry
                 }
             }
         }
-        
+
         public override void PostApplyDamage(DamageInfo dinfo, float totalDamageDealt)
         {
             base.PostApplyDamage(dinfo, totalDamageDealt);
@@ -70,21 +66,21 @@ namespace ProjectRimFactory.Industry
                 StartWickSustainer();
             }
         }
-        
+
         private void StartWickSustainer()
         {
             SoundInfo info = SoundInfo.InMap(this, MaintenanceType.PerTick);
             wickSustainer = SoundDefOf.HissSmall.TrySpawnSustainer(info);
         }
-        
+
         private int ticksToExplode;
-        
+
         private Sustainer wickSustainer;
-        
+
         private static readonly Vector2 BarSize = new Vector2(1.25f, 0.35f);
-        
+
         private static readonly Material BatteryBarFilledMat = SolidColorMaterials.SimpleSolidColorMaterial(new Color(1f, 1f, 1f), false);
-        
+
         private static readonly Material BatteryBarUnfilledMat = SolidColorMaterials.SimpleSolidColorMaterial(new Color(0f, 0f, 0f, 0f), false);
     }
 }

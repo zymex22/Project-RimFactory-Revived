@@ -1,14 +1,9 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using RimWorld;
-using Verse;
 using UnityEngine;
-using HarmonyLib;
-using ProjectRimFactory.Storage;
+using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -128,10 +123,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         private static int lastTick = 0;
         private static Dictionary<Map, PRFMapComponent> mapComps = new Dictionary<Map, PRFMapComponent>();
 
-        public static PRFMapComponent GetPRFMapComponent (Map map)
+        public static PRFMapComponent GetPRFMapComponent(Map map)
         {
             PRFMapComponent outval = null;
-            if (map is not null && !mapComps.TryGetValue(map,out outval))
+            if (map is not null && !mapComps.TryGetValue(map, out outval))
             {
                 outval = map.GetComponent<PRFMapComponent>();
                 mapComps.Add(map, outval);

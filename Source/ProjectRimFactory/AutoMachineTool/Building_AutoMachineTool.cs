@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using RimWorld;
 using Verse;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -18,7 +18,7 @@ namespace ProjectRimFactory.AutoMachineTool
             this.forcePlace = false;
             this.targetEnumrationCount = 0;
         }
-        
+
         private bool forbidItem = false;
 
         private SAL_TargetBench salTarget = null;
@@ -29,7 +29,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public int GetSkillLevel(SkillDef def)
         {
-            return extension_Skills?.GetExtendedSkillLevel(def,typeof(Building_AutoMachineTool)) ?? this.SkillLevel ?? 0;
+            return extension_Skills?.GetExtendedSkillLevel(def, typeof(Building_AutoMachineTool)) ?? this.SkillLevel ?? 0;
         }
 
         protected override int? SkillLevel { get { return this.def.GetModExtension<ModExtension_Tier>()?.skillLevel; } }
@@ -41,12 +41,12 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Deep.Look<SAL_TargetBench>(ref this.salTarget, "salTarget");
             base.ExposeData();
             Scribe_Values.Look<bool>(ref this.forbidItem, "forbidItem");
-            
+
         }
 
         public bool GetTarget()
         {
-            bool verdict = GetTarget(this.Position, this.Rotation, this.Map ,true);
+            bool verdict = GetTarget(this.Position, this.Rotation, this.Map, true);
             //Alter visuals based on the target
             if (verdict && !(salTarget is SAL_TargetWorktable))
             {
@@ -61,7 +61,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
             return verdict;
         }
-        public bool GetTarget(IntVec3 pos, Rot4 rot , Map map , bool spawned = false)
+        public bool GetTarget(IntVec3 pos, Rot4 rot, Map map, bool spawned = false)
         {
 
             var buildings = (pos + rot.FacingCell).GetThingList(map)
@@ -79,13 +79,13 @@ namespace ProjectRimFactory.AutoMachineTool
                 .FirstOrDefault();
             if (spawned)
             {
-                if((salTarget is SAL_TargetWorktable && new_my_workTable == null) || (salTarget is SAL_TargetResearch && new_researchBench == null) || (salTarget is SAL_TargetDeepDrill && new_drilltypeBuilding == null))
+                if ((salTarget is SAL_TargetWorktable && new_my_workTable == null) || (salTarget is SAL_TargetResearch && new_researchBench == null) || (salTarget is SAL_TargetDeepDrill && new_drilltypeBuilding == null))
                 {
                     //Log.Message($"new_my_workTable == null: {new_my_workTable == null}|| new_researchBench == null: {new_researchBench == null}|| new_drilltypeBuilding == null: {new_drilltypeBuilding == null} ");
                     salTarget.Free();
                 }
             }
-            if(new_my_workTable != null)
+            if (new_my_workTable != null)
             {
                 salTarget = new SAL_TargetWorktable(this, this.Position, this.Map, this.Rotation, new_my_workTable);
             }
@@ -101,7 +101,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 salTarget = null;
             }
-            
+
             if (spawned && salTarget != null) salTarget.Reserve();
 
             return salTarget != null;
@@ -135,7 +135,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override void Reset()
         {
             salTarget.Reset(this.State);
-           
+
             base.Reset();
         }
 
@@ -151,7 +151,7 @@ namespace ProjectRimFactory.AutoMachineTool
             salTarget?.CreateWorkingEffect(this.MapManager);
         }
 
-        
+
 
         protected override TargetInfo ProgressBarTarget()
         {
@@ -212,7 +212,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return this.OutputCell().SlotGroupCells(Map);
         }
-        
+
         public override IntVec3 OutputCell()
         {
             return compOutputAdjustable.CurrentCell;
@@ -223,7 +223,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return base.GetInspectTabs();
         }
 
-       
+
 
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -262,7 +262,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             //Interrupt if worktable is not ready for work
             //if (my_workTable != null) return !my_workTable.CurrentlyUsableForBills();
-            
+
             var notready = !salTarget.Ready();
             return notready;
         }

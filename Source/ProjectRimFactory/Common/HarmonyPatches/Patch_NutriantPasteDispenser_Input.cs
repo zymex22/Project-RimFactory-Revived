@@ -1,10 +1,7 @@
-﻿using System;
+﻿using HarmonyLib;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HarmonyLib;
-using RimWorld;
 using Verse;
 
 
@@ -26,7 +23,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             {
                 //loop over Inputs
                 for (int i = 0; i < __instance.AdjCellsCardinalInBounds.Count; i++)
-				{
+                {
                     //Get list of Items
                     INutrientPasteDispenserInput input = (INutrientPasteDispenserInput)__instance.AdjCellsCardinalInBounds[i].GetThingList(__instance.Map).Where(thing => thing is INutrientPasteDispenserInput).FirstOrDefault();
                     if (input == null || input.NPDI_Item == null) continue;
@@ -35,8 +32,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                         __result = input.NPDI_Item;
                     }
                     if (__result != null) break;
-				}
-			}
+                }
+            }
         }
 
 
@@ -47,7 +44,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     [HarmonyPatch(typeof(Building_NutrientPasteDispenser), "HasEnoughFeedstockInHoppers")]
     class Patch_HasEnoughFeedstockInHoppers
     {
-        static void Postfix(Building_NutrientPasteDispenser __instance, ref bool __result) 
+        static void Postfix(Building_NutrientPasteDispenser __instance, ref bool __result)
         {
             //Sadly witth the current valilla implementation adding support between mods is difficult.
             //Each mod needs to patch this but cant build on the progress of the other one.
@@ -74,8 +71,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     {
                         num += (float)input.NPDI_Item.stackCount * input.NPDI_Item.GetStatValue(StatDefOf.Nutrition);
                     }
-                    else 
-                    { 
+                    else
+                    {
                         Thing thing = null;
                         Thing thing2 = null;
                         List<Thing> thingList = c.GetThingList(__instance.Map);
@@ -108,7 +105,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                         }
 
                     }
-                    
+
                     if (num >= __instance.def.building.nutritionCostPerDispense)
                     {
                         __result = true;
@@ -118,7 +115,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
             }
 
-        
+
         }
     }
 

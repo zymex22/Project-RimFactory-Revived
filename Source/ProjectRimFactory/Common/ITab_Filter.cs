@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using UnityEngine;
-using static ProjectRimFactory.AutoMachineTool.Ops;
+﻿using RimWorld;
 
 namespace ProjectRimFactory.Common
 {
     // Have an ITab_Storage that says "Filter" instead of "Storage"
-    class ITab_Filter : ITab_Storage {
-        public ITab_Filter() : base() {
+    class ITab_Filter : ITab_Storage
+    {
+        public ITab_Filter() : base()
+        {
             this.labelKey = "Filter";
         }
         // Everything else is vanilla, so any changes anyone makes to ITab_Storage

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HarmonyLib;
+﻿using HarmonyLib;
 using ProjectRimFactory.Storage;
 using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
@@ -14,7 +10,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_Pawn_TraderTracker_ColonyThingsWillingToBuy
     {
         static void Postfix(Pawn playerNegotiator, ref IEnumerable<Thing> __result)
-        { 
+        {
             var map = playerNegotiator.Map;
             if (map is null) return;
 

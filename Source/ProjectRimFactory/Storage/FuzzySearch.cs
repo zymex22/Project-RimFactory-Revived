@@ -32,7 +32,7 @@ namespace ProjectRimFactory.Storage.UI
             }
             else { return 99999; }
         }
-        
+
         /// <summary>
         /// Calculate the minimum number of single-character edits needed to change the source into the target,
         /// allowing insertions, deletions, and substitutions.
@@ -128,13 +128,13 @@ namespace ProjectRimFactory.Storage.UI
             return Convert.ToDouble(source.NormalizedLevenshteinDistance(target)) / Convert.ToDouble(
                 Math.Max(source.Length, target.Length) - source.LevenshteinDistanceLowerBounds(target));
         }
-        
+
         public static double FuzzyStrength(this string source, string target)
         {
             return Convert.ToDouble(source.LevenshteinDistance(target)) /
                            Convert.ToDouble(source.LevenshteinDistanceUpperBounds(target));
             // Log.Warning($"Current strength: {strength.ToString(CultureInfo.InvariantCulture)}", true);;
         }
-        
+
     }
 }

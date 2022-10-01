@@ -1,14 +1,12 @@
-﻿using System;
+﻿using HarmonyLib;
+using ProjectRimFactory.Storage;
+using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
-using HarmonyLib;
-using Verse;
-using ProjectRimFactory.Storage;
-using System.Reflection.Emit;
 using System.Reflection;
+using System.Reflection.Emit;
+using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -32,7 +30,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     //This Patch Allows the player to start an orvital Trade without a Trade beacon but with a DSU.
     //Without this patch a player would need a dummy beacon to use Patch_DSU_OrbitalTrade
     [HarmonyPatch]
-     public static class Patch_PassingShip_c__DisplayClass24_0
+    public static class Patch_PassingShip_c__DisplayClass24_0
     {
         public static Type predicateClass;
         static MethodBase TargetMethod()//The target method is found using the custom logic defined here
@@ -89,7 +87,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.PropertyGetter(typeof(PassingShip), "Map"));
                     //Call --> Building_MassStorageUnitPowered.AnyPowerd with the above as an argument
                     yield return new CodeInstruction(OpCodes.Call, HarmonyLib.AccessTools
-                        .Method(typeof(TradePatchHelper) ,nameof(TradePatchHelper.AnyPowerd), new[] { typeof(Map)} ));
+                        .Method(typeof(TradePatchHelper), nameof(TradePatchHelper.AnyPowerd), new[] { typeof(Map) }));
                     yield return new CodeInstruction(OpCodes.Brtrue_S, instruction.operand);
                     continue;
 
@@ -107,7 +105,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         public static bool AnyPowerd(Map map)
         {
-            return AllPowered(map,true).Any();
+            return AllPowered(map, true).Any();
         }
 
         public static IEnumerable<ILinkableStorageParent> AllPowered(Map map, bool any = false)
