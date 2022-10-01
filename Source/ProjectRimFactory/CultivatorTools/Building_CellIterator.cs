@@ -1,19 +1,14 @@
-﻿using System;
+﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Verse;
 using UnityEngine;
-using RimWorld;
-using ProjectRimFactory.Common;
+using Verse;
 
 
 namespace ProjectRimFactory.CultivatorTools
 {
     public abstract class Building_CellIterator : Building
     {
-        
+
         public int currentPosition;
 
         public bool Fueled => GetComp<CompRefuelable>()?.HasFuel ?? true;
@@ -62,7 +57,7 @@ namespace ProjectRimFactory.CultivatorTools
                 DoTickerWork();
         }
 
-        protected  void MoveNextInternal()
+        protected void MoveNextInternal()
         {
             for (int i = 0; i < 10; i++)
             {

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Verse;
-using HarmonyLib;
-using Verse.AI;
+﻿using HarmonyLib;
 using ProjectRimFactory.Storage;
+using System;
+using System.Collections.Generic;
 using System.Reflection;
+using Verse;
+using Verse.AI;
 
 namespace ProjectRimFactory.Common
 {
@@ -28,7 +25,7 @@ namespace ProjectRimFactory.Common
             public TogglePatch(MethodInfo base_method, MethodInfo prefix = null, MethodInfo postfix = null, MethodInfo Transpiler = null)
             {
                 base_m = base_method;
-                if (Transpiler != null)  trans_hm = new HarmonyMethod(Transpiler);
+                if (Transpiler != null) trans_hm = new HarmonyMethod(Transpiler);
                 if (prefix != null) pre_hm = new HarmonyMethod(prefix);
                 if (postfix != null) post_hm = new HarmonyMethod(postfix);
                 trans_m = Transpiler;
@@ -40,7 +37,7 @@ namespace ProjectRimFactory.Common
             {
                 if (patch && !Patched)
                 {
-                    harmony_instance.Patch(base_m,pre_hm,post_hm,trans_hm);
+                    harmony_instance.Patch(base_m, pre_hm, post_hm, trans_hm);
                     Patched = true;
                 }
                 else if (Patched && !patch)
@@ -70,7 +67,7 @@ namespace ProjectRimFactory.Common
 
         //Storage Patches
         public static TogglePatch Patch_MinifiedThing_Print = new TogglePatch(
-            AccessTools.Method(typeof(RimWorld.MinifiedThing), "Print", new Type[] { typeof(SectionLayer)}),
+            AccessTools.Method(typeof(RimWorld.MinifiedThing), "Print", new Type[] { typeof(SectionLayer) }),
             AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_MinifiedThing_Print), "Prefix")
             );
         public static TogglePatch Patch_Thing_Print = new TogglePatch(
@@ -90,7 +87,7 @@ namespace ProjectRimFactory.Common
           AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_FloatMenuMakerMap_ChoicesAtFor), "Prefix")
           );
         public static TogglePatch Patch_Building_Storage_Accepts = new TogglePatch(
-         AccessTools.Method(typeof(RimWorld.Building_Storage), "Accepts", new Type[] { typeof(Verse.Thing)}),
+         AccessTools.Method(typeof(RimWorld.Building_Storage), "Accepts", new Type[] { typeof(Verse.Thing) }),
          AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Building_Storage_Accepts), "Prefix")
          );
         public static TogglePatch Patch_ForbidUtility_IsForbidden = new TogglePatch(

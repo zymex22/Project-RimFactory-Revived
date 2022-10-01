@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using HarmonyLib;
 using RimWorld;
+using System.Collections.Generic;
 using Verse;
-using UnityEngine;
-using HarmonyLib;
-using System.Threading.Tasks;
-using Verse.Noise;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -24,7 +18,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_UpdateResourceCounts_AssemblerQueue
     {
 
-        static void Postfix(ResourceCounter __instance, Dictionary<ThingDef, int> ___countedAmounts, Map ___map )
+        static void Postfix(ResourceCounter __instance, Dictionary<ThingDef, int> ___countedAmounts, Map ___map)
         {
             int i = 0;
             PRFGameComponent gamecomp = Current.Game.GetComponent<PRFGameComponent>();
@@ -42,11 +36,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     if (innerIfMinified.def.EverStorable(false) && !innerIfMinified.IsNotFresh())
                     {
                         //Causes an error otherwise #345 (seems to be clothing that causes it)
-                        if (___countedAmounts.ContainsKey(innerIfMinified.def)){
+                        if (___countedAmounts.ContainsKey(innerIfMinified.def))
+                        {
                             ___countedAmounts[innerIfMinified.def] += innerIfMinified.stackCount;
                         }
                     }
-                    
+
                 }
             }
         }

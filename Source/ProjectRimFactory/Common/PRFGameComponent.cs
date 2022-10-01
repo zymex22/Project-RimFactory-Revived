@@ -1,14 +1,15 @@
-﻿using System;
+﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.Common.HarmonyPatches;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using RimWorld;
 using Verse;
 using Verse.AI;
-using ProjectRimFactory.Common;
-using ProjectRimFactory.Common.HarmonyPatches;
 
-namespace ProjectRimFactory {
-    public class PRFGameComponent : GameComponent {
+namespace ProjectRimFactory
+{
+    public class PRFGameComponent : GameComponent
+    {
         public List<SpecialSculpture> specialScupltures;  // currently in game
         public List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
 
@@ -21,33 +22,35 @@ namespace ProjectRimFactory {
             PRF_StaticPawn.Name = new NameTriple("...", "PRF_Static", "...");
         }
 
-        public PRFGameComponent(Game game) {
+        public PRFGameComponent(Game game)
+        {
             SpecialSculpture.PreStartGame();
 
             //Back Compatibility Setup
-    
+
             List<BackCompatibilityConverter> data = (List<BackCompatibilityConverter>)SAL3.ReflectionUtility.BackCompatibility_conversionChain.GetValue(null);
             data.Add(new Common.BackCompatibility.PRF_BackCompatibilityConverter());
             SAL3.ReflectionUtility.BackCompatibility_conversionChain.SetValue(null, data);
 
 
         }
-        public override void ExposeData() {
+        public override void ExposeData()
+        {
             base.ExposeData();
             Scribe_Collections.Look(ref specialScupltures, "specialSculptures");
 
             Scribe_Deep.Look(ref PRF_StaticPawn, "PRF_StaticPawn");
             Scribe_Deep.Look(ref PRF_StaticJob, "PRF_StaticJob");
 
-          
-          
+
+
 
         }
         public void RegisterAssemblerQueue(IAssemblerQueue queue)
         {
             //enshure that there are no duplicates
             //im shure there is a better way
-           // AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
+            // AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
 
             AssemblerQueue.Add(queue);
 #if DEBUG
@@ -61,26 +64,32 @@ namespace ProjectRimFactory {
 
 
 
-            /// <summary>
-            /// Make a sculpture Special!
-            /// Use: Current.Game.GetComponent&lt;PRFGameComponent&gt;().TryAddSpecialSculpture(...)
-            /// </summary>
-            /// <returns><c>true</c>, if the sculpture is now Special.</returns>
-            /// <param name="item">Art item to make Special.</param>
-            /// <param name="specialSculpture">Specific special sculpture; otherwise random</param>
-            public bool TryAddSpecialSculpture(Thing item, SpecialSculpture specialSculpture=null, bool verifyProvidedSculpture = true) {
-            if (specialSculpture != null) {
+        /// <summary>
+        /// Make a sculpture Special!
+        /// Use: Current.Game.GetComponent&lt;PRFGameComponent&gt;().TryAddSpecialSculpture(...)
+        /// </summary>
+        /// <returns><c>true</c>, if the sculpture is now Special.</returns>
+        /// <param name="item">Art item to make Special.</param>
+        /// <param name="specialSculpture">Specific special sculpture; otherwise random</param>
+        public bool TryAddSpecialSculpture(Thing item, SpecialSculpture specialSculpture = null, bool verifyProvidedSculpture = true)
+        {
+            if (specialSculpture != null)
+            {
                 if (verifyProvidedSculpture && (specialSculpture.limitToDefs?.Contains(item.def) == false)) return false;
-            } else {  // find an acceptable special sculpture
-            foreach (var ss in ProjectRimFactory_ModComponent.availableSpecialSculptures
-                                .Where(s => (s.limitToDefs?.Contains(item.def) != false))
-                                .InRandomOrder()) {
+            }
+            else
+            {  // find an acceptable special sculpture
+                foreach (var ss in ProjectRimFactory_ModComponent.availableSpecialSculptures
+                                    .Where(s => (s.limitToDefs?.Contains(item.def) != false))
+                                    .InRandomOrder())
+                {
                     if (this.specialScupltures == null) { specialSculpture = ss; break; }
                     var inGameWithSameId = specialScupltures.FirstOrDefault(s => s.id == ss.id);
-                    if (inGameWithSameId == null) { specialSculpture = ss;  break; }
+                    if (inGameWithSameId == null) { specialSculpture = ss; break; }
                     if (inGameWithSameId.currentInstances == null ||
-                        inGameWithSameId.currentInstances.Count(a => a!=item) 
-                           < inGameWithSameId.maxNumberCopies) {
+                        inGameWithSameId.currentInstances.Count(a => a != item)
+                           < inGameWithSameId.maxNumberCopies)
+                    {
                         specialSculpture = ss;
                         break;
                     }
@@ -94,13 +103,15 @@ namespace ProjectRimFactory {
             if (this.specialScupltures == null) specialScupltures = new List<SpecialSculpture>();
             var alreadyRecordedSpecialSculpture = this.specialScupltures
                              .FirstOrDefault(s => s.id == specialSculpture.id);
-            if (alreadyRecordedSpecialSculpture == null) {
+            if (alreadyRecordedSpecialSculpture == null)
+            {
                 this.specialScupltures.Add(specialSculpture);
                 alreadyRecordedSpecialSculpture = specialSculpture;
             } // alreadyRSS has been added to list one way or another now
             if (alreadyRecordedSpecialSculpture.currentInstances == null)
                 alreadyRecordedSpecialSculpture.currentInstances = new List<Thing>();
-            if (!alreadyRecordedSpecialSculpture.currentInstances.Contains(item)) {
+            if (!alreadyRecordedSpecialSculpture.currentInstances.Contains(item))
+            {
                 alreadyRecordedSpecialSculpture.currentInstances.Add(item);
             }
             // Note: autocompletion was essential for all that.
@@ -113,8 +124,10 @@ namespace ProjectRimFactory {
                                           Thing dominantIngredient)
         {
             //TODO: allow extraData to specify which special sculpture?
-            foreach (Thing p in products) {
-                if (Current.Game.GetComponent<PRFGameComponent>().TryAddSpecialSculpture(p)) {
+            foreach (Thing p in products)
+            {
+                if (Current.Game.GetComponent<PRFGameComponent>().TryAddSpecialSculpture(p))
+                {
                     return true;
                 }
             }
@@ -150,7 +163,7 @@ namespace ProjectRimFactory {
             base.StartedNewGame();
             UpdateThingDescriptions.Update();
             if (ProjectRimFactory_ModSettings.PRF_LiteMode) PRF_CustomizeDefs.ToggleLiteMode();
-            
+
         }
 
         /*
@@ -163,16 +176,16 @@ Log.Warning("---------added test special scuplture: " + t + " at " + t.Position)
 }
 }*/
 
-       
 
-
-
-
-
-    }
 
 
 
 
 
     }
+
+
+
+
+
+}

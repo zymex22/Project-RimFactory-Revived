@@ -1,11 +1,4 @@
-﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectRimFactory.Common.HarmonyPatches
+﻿namespace ProjectRimFactory.Common.HarmonyPatches
 {
     /// <summary>
     /// Patch to ensure Items in Cold Storage Contribute to Wealth
@@ -18,7 +11,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             var buildings = PatchStorageUtil.GetPRFMapComponent(___map).ColdStorageBuildings;
             var cnt = buildings.Count;
-            for(int i = 0; i < cnt; i++)
+            for (int i = 0; i < cnt; i++)
             {
                 var building = buildings[i];
                 __result += building.GetItemWealth();

@@ -1,14 +1,12 @@
 ﻿using HarmonyLib;
+using ProjectRimFactory.Storage;
+using SimpleFixes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using UnityEngine;
 using Verse;
-using SimpleFixes;
-using ProjectRimFactory.Storage;
-using System.Runtime.InteropServices;
 
 namespace ProjectRimFactory.Common
 {
@@ -65,9 +63,10 @@ namespace ProjectRimFactory.Common
                 }
 
                 // if "Simple Utilities: Fridge" and "[KV] RimFridge" are loaded we use "Simple Utilities: Fridge" as it is faster
-                if (!ModLister.HasActiveModWithName("Simple Utilities: Fridge")){
+                if (!ModLister.HasActiveModWithName("Simple Utilities: Fridge"))
+                {
                     MethodBase RrimFridge_CompRefrigerator_CompTickRare = AccessTools.Method("RimFridge.CompRefrigerator:CompTickRare");
-                    
+
                     if (RrimFridge_CompRefrigerator_CompTickRare != null)
                     {
                         var postfix = typeof(HarmonyPatches.Patch_CompRefrigerator_CompTickRare).GetMethod("Postfix");
@@ -80,14 +79,14 @@ namespace ProjectRimFactory.Common
                         Log.Warning("Project Rimfactory - Failed to add Support for Fridge DSU Power using [KV] RimFridge");
                     }
                 }
-                
+
 
 
             }
             if (ModLister.HasActiveModWithName("Simple Utilities: Fridge"))
             {
                 ModSupport_SimpleFridge_fridgeCache = AccessTools.Field("SimpleFridge.Mod_SimpleFridge:fridgeCache");
-                
+
                 MethodBase SimpleFridge_Patch_GameComponentTick_Postfix = null;
                 Type Patch_GameComponentTick = Type.GetType("SimpleFridge.Patch_GameComponentTick, SimpleFridge", false);
                 if (Patch_GameComponentTick != null)
@@ -204,7 +203,7 @@ namespace ProjectRimFactory.Common
 
 
         public Harmony HarmonyInstance { get; private set; }
- 
+
         public ProjectRimFactory_ModSettings Settings { get; private set; }
 
         public override void DoSettingsWindowContents(Rect inRect)

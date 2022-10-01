@@ -1,14 +1,10 @@
-﻿using System;
+﻿using HarmonyLib;
+using ProjectRimFactory.Drones;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
 using Verse;
-using UnityEngine;
-using HarmonyLib;
 using Verse.AI;
-using ProjectRimFactory.Drones;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -20,7 +16,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
 
             //Only run the Prefix if its a Drone and the Expected Error Condition did occur
-            if (Traverse.Create(__instance).Field<Pawn>("pawn").Value.kindDef == PRFDefOf.PRFDroneKind && (condition == JobCondition.ErroredPather || condition == JobCondition.Errored) )
+            if (Traverse.Create(__instance).Field<Pawn>("pawn").Value.kindDef == PRFDefOf.PRFDroneKind && (condition == JobCondition.ErroredPather || condition == JobCondition.Errored))
             {
                 //Display Warning & Affected Cell info
                 Log.Warning("Pathing Failed Drone Returning to Station - (This is a Rimwold Pathing Bug)");
@@ -48,7 +44,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_PotentialWorkThingsGlobal_DronesRenoveOwnBase
     {
 
-        static void Postfix(Pawn pawn , ref IEnumerable<Thing> __result)
+        static void Postfix(Pawn pawn, ref IEnumerable<Thing> __result)
         {
             if (pawn.kindDef == PRFDefOf.PRFDroneKind)
             {

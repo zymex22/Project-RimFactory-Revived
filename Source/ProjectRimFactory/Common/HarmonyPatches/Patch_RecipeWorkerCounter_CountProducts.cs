@@ -1,7 +1,7 @@
-﻿using RimWorld;
-using Verse;
-using HarmonyLib;
+﻿using HarmonyLib;
 using ProjectRimFactory.Storage;
+using RimWorld;
+using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -16,10 +16,11 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     [HarmonyPatch(typeof(RecipeWorkerCounter), "CountProducts")]
     class Patch_RecipeWorkerCounter_CountProducts
     {
-        static void Postfix(RecipeWorkerCounter __instance,ref int __result, Bill_Production bill)
+        static void Postfix(RecipeWorkerCounter __instance, ref int __result, Bill_Production bill)
         {
             //Only run if Check everywhere is set
-            if (bill.includeFromZone == null) {
+            if (bill.includeFromZone == null)
+            {
                 int i = 0;
                 ThingDef targetDef = __instance.recipe.products[0].thingDef;
 
@@ -40,7 +41,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 {
                     //Only for Cold Storage
                     if (dsu.AdvancedIOAllowed) continue;
-                    foreach(var thing in dsu.StoredItems)
+                    foreach (var thing in dsu.StoredItems)
                     {
                         TryUpdateResult(ref __result, targetDef, thing);
                     }

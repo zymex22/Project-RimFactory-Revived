@@ -1,17 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using Verse.Sound;
 using UnityEngine;
-using ProjectRimFactory.Common;
+using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
-using ProjectRimFactory.Common.HarmonyPatches;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -36,32 +30,40 @@ namespace ProjectRimFactory.AutoMachineTool
         [Unsaved]
         private HashSet<IBeltConveyorLinkable> incomingLinks = new HashSet<IBeltConveyorLinkable>();
 
-        public Building_BeltSplitter() : base() {
+        public Building_BeltSplitter() : base()
+        {
             // Conveyors are dumb. They just dump their stuff onto the ground when they end!
             //   But splitters are smart, they can figure stuff out:
             this.obeysStorageFilters = true;
         }
-        public override PRFBSetting SettingsOptions { // allow player to change this at playtime:
+        public override PRFBSetting SettingsOptions
+        { // allow player to change this at playtime:
             get => base.SettingsOptions | PRFBSetting.optionObeysStorageFilters;
         }
 
         protected override Rot4 OutputDirection => dest;
-        public override IEnumerable<Rot4> ActiveOutputDirections {
-            get {
-                foreach (var kvp in outputLinks.Where(kvp=>kvp.Value.Active)) {
+        public override IEnumerable<Rot4> ActiveOutputDirections
+        {
+            get
+            {
+                foreach (var kvp in outputLinks.Where(kvp => kvp.Value.Active))
+                {
                     yield return kvp.Key;
                 }
             }
         }
         public override bool IsEndOfLine
         {
-            get {
-                Debug.Message(Debug.Flag.Benchmark, "Is end of line? "+ 
-                    this.outputLinks.Any(kvp => kvp.Value.Active)+"/"+base.IsEndOfLine);
+            get
+            {
+                Debug.Message(Debug.Flag.Benchmark, "Is end of line? " +
+                    this.outputLinks.Any(kvp => kvp.Value.Active) + "/" + base.IsEndOfLine);
                 return this.outputLinks.Any(kvp => kvp.Value.Active) && base.IsEndOfLine;
             }
-            set {
-                if (value == true && !this.outputLinks.Any(kvp=>kvp.Value.Active)) {
+            set
+            {
+                if (value == true && !this.outputLinks.Any(kvp => kvp.Value.Active))
+                {
                     Messages.Message("PRF.Conveyor.Splitter.MustHaveActiveOutput".Translate(), this,
                         MessageTypeDefOf.CautionInput);
                     return;
@@ -96,7 +98,8 @@ namespace ProjectRimFactory.AutoMachineTool
             incomingLinks.Clear();
 
             var links = AllNearbyLinks().ToList();
-            foreach (var c in AllNearbyLinks()) {
+            foreach (var c in AllNearbyLinks())
+            {
                 c.Link(this);
                 this.Link(c);
             }
@@ -104,7 +107,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            foreach (var c in this.AllNearbyLinkables()) {
+            foreach (var c in this.AllNearbyLinkables())
+            {
                 c.Unlink(this);
             }
             base.DeSpawn(mode);
@@ -117,7 +121,8 @@ namespace ProjectRimFactory.AutoMachineTool
         ///    we probably need to refresh the graphic.  So, call this from Link,
         ///    Unlink, and anything that changes whether links are active.
         /// </summary>
-        protected void UpdateGraphic() {
+        protected void UpdateGraphic()
+        {
             if (Spawned) this.Map.mapDrawer.MapMeshDirty(this.Position,
                 MapMeshFlag.Buildings | MapMeshFlag.Things);
         }
@@ -128,12 +133,14 @@ namespace ProjectRimFactory.AutoMachineTool
             return base.CanStackWith(other) && this.State == WorkingState.Ready;
         }
 
-        public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null) {
+        public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null)
+        {
             var origState = this.State;
             var accepts = base.AcceptsThing(newThing, giver);
-            if (accepts && origState == WorkingState.Ready) {
+            if (accepts && origState == WorkingState.Ready)
+            {
                 NextDirection(newThing, out dest);
-                Debug.Message(Debug.Flag.Conveyors, "  Spitter " + this 
+                Debug.Message(Debug.Flag.Conveyors, "  Spitter " + this
                               + " decided " + newThing + " should go " + dest.ToStringHuman());
                 return true;
             }
@@ -143,11 +150,15 @@ namespace ProjectRimFactory.AutoMachineTool
         /// <summary>
         /// Try to find a conveyor/location to pass on the next item to.
         /// </summary>
-        private bool NextDirection(Thing t, out Rot4 newDir) {
-            foreach (var dir in NextDirectionByPriority(t)) {
+        private bool NextDirection(Thing t, out Rot4 newDir)
+        {
+            foreach (var dir in NextDirectionByPriority(t))
+            {
                 var olink = outputLinks.TryGetValue(dir, null);
-                if (olink != null) {
-                    if (olink.IsValidOutputLinkFor(t)) {
+                if (olink != null)
+                {
+                    if (olink.IsValidOutputLinkFor(t))
+                    {
                         newDir = dir;
                         return true;
                     }
@@ -164,7 +175,8 @@ namespace ProjectRimFactory.AutoMachineTool
         /// valid directions given filters
         /// </summary>
         /// <returns>The highest priority direction to try sending something.</returns>
-        private IEnumerable<Rot4> NextDirectionByPriority(Thing t) {
+        private IEnumerable<Rot4> NextDirectionByPriority(Thing t)
+        {
             // We need to try each direction in decreasing priority, and for each 
             //   priority, we need to check each direction that matches it.
             //   I'm sure there is a more elegant solution to this that doesn't
@@ -173,10 +185,12 @@ namespace ProjectRimFactory.AutoMachineTool
             var previousDir = new Rot4(dest.AsInt);
             var prevPriority = this.outputLinks.TryGetValue(previousDir, null)?.priority;
             foreach (var priority in ((DirectionPriority[])Enum
-                     .GetValues(typeof(DirectionPriority))).Reverse()) {
+                     .GetValues(typeof(DirectionPriority))).Reverse())
+            {
                 // I will rotate counterclockwise because that is the "positive" direction
                 Rot4 nextDir = previousDir.RotateAsNew(RotationDirection.Counterclockwise);
-                for (int i = 0; i < 4; i++, nextDir.Rotate(RotationDirection.Counterclockwise)) {
+                for (int i = 0; i < 4; i++, nextDir.Rotate(RotationDirection.Counterclockwise))
+                {
                     if ( // we look for an appropriate next direction:
                                 nextDir != previousDir &&
                                 this.outputLinks.ContainsKey(nextDir) &&
@@ -191,9 +205,12 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (priority == prevPriority) yield return previousDir;
             }
         }
-        protected override IBeltConveyorLinkable OutputBeltAt(IntVec3 location) {
-            foreach (var kvp in this.outputLinks) {
-                if (kvp.Key.FacingCell + this.Position == location) {
+        protected override IBeltConveyorLinkable OutputBeltAt(IntVec3 location)
+        {
+            foreach (var kvp in this.outputLinks)
+            {
+                if (kvp.Key.FacingCell + this.Position == location)
+                {
                     if (!kvp.Value.Active) return null;
                     return kvp.Value.link;
                 }
@@ -209,10 +226,11 @@ namespace ProjectRimFactory.AutoMachineTool
             //   checking this only when the item has returned
             //   to neutral would allow better graphics.  But.
             //   That's more than I want to deal with right now.
-                // Check other options:
-                Debug.Message(Debug.Flag.Conveyors, "      " + this + " checked, cannot place " + dest.ToStringHuman() +
-                                  "; may unstick in another direction?");
-            if (NextDirection(t, out Rot4 tmp)) {
+            // Check other options:
+            Debug.Message(Debug.Flag.Conveyors, "      " + this + " checked, cannot place " + dest.ToStringHuman() +
+                              "; may unstick in another direction?");
+            if (NextDirection(t, out Rot4 tmp))
+            {
                 Debug.Message(Debug.Flag.Conveyors, "        checked, going to try new direction " + tmp.ToStringHuman());
                 if (this.thingOwnerInt.Contains(t))
                     thingOwnerInt.Take(t);
@@ -223,9 +241,11 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return false; // we tried
         }
-        protected override bool CanOutput(Thing t) {
+        protected override bool CanOutput(Thing t)
+        {
             if (t == null) return true;
-            if (!outputLinks.ContainsKey(dest)) {
+            if (!outputLinks.ContainsKey(dest))
+            {
                 Debug.Message(Debug.Flag.Conveyors,
                               "  CanOutput: No output link to the " + dest.ToStringHuman());
                 return false;
@@ -237,8 +257,10 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             Debug.Warning(Debug.Flag.Conveyors, "Splitter " + this + " is about to try placing " + thing);
             var output = outputLinks.TryGetValue(dest, null);
-            if (output != null && output.Allows(thing)) {
-                if (output.TryPlace(thing)) {
+            if (output != null && output.Allows(thing))
+            {
+                if (output.TryPlace(thing))
+                {
                     NotifyAroundSender();
                     this.stuck = false;
                     return true;
@@ -264,30 +286,41 @@ namespace ProjectRimFactory.AutoMachineTool
         /***************** Outgoing/Incoming Links ********************/
         public override void Link(IBeltConveyorLinkable link)
         {
-            if (this.CanLinkTo(link) && link.CanLinkFrom(this)) {
-                if (PositionToRot4(link, out Rot4 r)) {
+            if (this.CanLinkTo(link) && link.CanLinkFrom(this))
+            {
+                if (PositionToRot4(link, out Rot4 r))
+                {
                     UpdateGraphic();
-                    if (outputLinks.ContainsKey(r)) {
+                    if (outputLinks.ContainsKey(r))
+                    {
                         outputLinks[r].link = link;
-                    } else {
+                    }
+                    else
+                    {
                         this.outputLinks[r] = new OutputLink(this, link);
                     }
                 }
             }
-            if (this.CanLinkFrom(link) && link.CanLinkTo(this)) {
+            if (this.CanLinkFrom(link) && link.CanLinkTo(this))
+            {
                 UpdateGraphic();
                 incomingLinks.Add(link);
-                if (PositionToRot4(link, out Rot4 r)) {
-                    if (outputLinks.TryGetValue(r, out OutputLink output)) {
+                if (PositionToRot4(link, out Rot4 r))
+                {
+                    if (outputLinks.TryGetValue(r, out OutputLink output))
+                    {
                         output.Active = false;
                     }
                 }
             }
         }
         // Utility fn for linking to belt link
-        private bool PositionToRot4(IBeltConveyorLinkable link, out Rot4 r) {
-            foreach (var d in Enumerable.Range(0,4).Select(i=>new Rot4(i))) {
-                if (this.Position+d.FacingCell == link.Position) {
+        private bool PositionToRot4(IBeltConveyorLinkable link, out Rot4 r)
+        {
+            foreach (var d in Enumerable.Range(0, 4).Select(i => new Rot4(i)))
+            {
+                if (this.Position + d.FacingCell == link.Position)
+                {
                     r = d;
                     return true;
                 }
@@ -300,15 +333,18 @@ namespace ProjectRimFactory.AutoMachineTool
             incomingLinks.Remove(unlink);
             var tmpl = outputLinks.Where(kvp => kvp.Value.link == unlink)
                 .Select(kvp => kvp.Key).ToList();
-            foreach (var k in tmpl) {
+            foreach (var k in tmpl)
+            {
                 outputLinks.Remove(k);
             }
             UpdateGraphic();
         }
-        public void AddOutgoingLink(Rot4 dir) {
+        public void AddOutgoingLink(Rot4 dir)
+        {
             // Assume that if it had a linked belt, the link would have formed via
             //   the Link() method. So this is activating a link to a direction. I hope.
-            if (outputLinks.ContainsKey(dir)) {
+            if (outputLinks.ContainsKey(dir))
+            {
                 outputLinks[dir].Active = true;
                 return;
             }
@@ -317,7 +353,8 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
 
-        protected IEnumerable<IBeltConveyorLinkable> AllNearbyLinks() {
+        protected IEnumerable<IBeltConveyorLinkable> AllNearbyLinks()
+        {
             return AllNearbyLinkables()
                 .Where(b => (this.CanLinkTo(b) && b.CanLinkFrom(this))
                          || (this.CanLinkFrom(b) && b.CanLinkTo(this)));
@@ -356,7 +393,7 @@ namespace ProjectRimFactory.AutoMachineTool
             target = null;
             workAmount = 0f;
             return false;
-            #if false
+#if false
             workAmount = 1f;
             if (this.IsUnderground)
             {
@@ -373,16 +410,19 @@ namespace ProjectRimFactory.AutoMachineTool
                 target.Position = this.Position;
             }
             return target != null;
-            #endif
+#endif
         }
 
-        public override bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
+        public override bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition = true)
+        {
             // First test: level (e.g., Ground vs Underground):
             bool flag = false;
             // Loop through enum:
             //   (Seriously, C#, this is stupid syntax)
-            foreach (var level in (ConveyorLevel [])Enum.GetValues(typeof(ConveyorLevel))) {
-                if (this.CanSendToLevel(level) && otherBeltLinkable.CanReceiveFromLevel(level)) {
+            foreach (var level in (ConveyorLevel[])Enum.GetValues(typeof(ConveyorLevel)))
+            {
+                if (this.CanSendToLevel(level) && otherBeltLinkable.CanReceiveFromLevel(level))
+                {
                     flag = true;
                     break;
                 }
@@ -392,13 +432,16 @@ namespace ProjectRimFactory.AutoMachineTool
             // Allow to link in any direction (including backwards, yes - who knows what direction will be appropriate?):
             return this.Position.IsNextTo(otherBeltLinkable.Position);
         }
-        public override bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true) {
+        public override bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition = true)
+        {
             // First test: level (e.g., Ground vs Underground):
             bool flag = false;
             // Loop through enum:
             //   (Seriously, C#, this is stupid syntax)
-            foreach (var level in (ConveyorLevel[])Enum.GetValues(typeof(ConveyorLevel))) {
-                if (this.CanReceiveFromLevel(level) && otherBeltLinkable.CanSendToLevel(level)) {
+            foreach (var level in (ConveyorLevel[])Enum.GetValues(typeof(ConveyorLevel)))
+            {
+                if (this.CanReceiveFromLevel(level) && otherBeltLinkable.CanSendToLevel(level))
+                {
                     flag = true;
                     break;
                 }
@@ -408,20 +451,25 @@ namespace ProjectRimFactory.AutoMachineTool
             // Allow links from any direction (including backwards, yes)
             return Position.IsNextTo(otherBeltLinkable.Position);
         }
-        public override bool HasLinkWith(IBeltConveyorLinkable otherBelt) {
+        public override bool HasLinkWith(IBeltConveyorLinkable otherBelt)
+        {
             return incomingLinks.Contains(otherBelt) ||
                 outputLinks.Any(kvp => kvp.Value.link == otherBelt);
         }
 
         //TODO: this is all probably wrong?
         new public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
-                     Rot4 queryRotation, ConveyorLevel queryLevel) {
+                     Rot4 queryRotation, ConveyorLevel queryLevel)
+        {
             // Not going to error check here: if there's a config error, there will be prominent
             //   red error messages in the log.
-            if (queryLevel == ConveyorLevel.Underground) {
+            if (queryLevel == ConveyorLevel.Underground)
+            {
                 if (def.GetModExtension<ModExtension_Conveyor>()?.underground != true)
                     return false;
-            } else { // Ground
+            }
+            else
+            { // Ground
                 if (def.GetModExtension<ModExtension_Conveyor>()?.underground == true)
                     return false;
             }
@@ -434,7 +482,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 yield return new Rot4(defRotation.AsInt);
         }*/
         new public static bool CanDefReceiveFromRot4AtLevel(ThingDef def, Rot4 defRotation,
-                      Rot4 queryRotation, ConveyorLevel queryLevel) {
+                      Rot4 queryRotation, ConveyorLevel queryLevel)
+        {
             if ((queryLevel == ConveyorLevel.Ground &&
                  def.GetModExtension<ModExtension_Conveyor>()?.underground != true)
                 || (queryLevel == ConveyorLevel.Underground &&
@@ -445,12 +494,15 @@ namespace ProjectRimFactory.AutoMachineTool
         /// <summary> /////////////////////////////////////////////////////////////////
         /// A class to handle each output link, with filters, knowing belts, etc.
         /// </summary>
-        public class OutputLink : IExposable {
-            public OutputLink(Building_BeltSplitter parent, IBeltConveyorLinkable link) 
-                  : this(parent,link.Position) {
+        public class OutputLink : IExposable
+        {
+            public OutputLink(Building_BeltSplitter parent, IBeltConveyorLinkable link)
+                  : this(parent, link.Position)
+            {
                 this.link = link;
             }
-            public OutputLink(Building_BeltSplitter parent, IntVec3 pos) {
+            public OutputLink(Building_BeltSplitter parent, IntVec3 pos)
+            {
                 this.parent = parent;
                 link = null;
                 this.position = pos;
@@ -459,12 +511,14 @@ namespace ProjectRimFactory.AutoMachineTool
                 filter = new ThingFilter();
                 filter.SetAllowAll(null);
             }
-            public OutputLink() {
+            public OutputLink()
+            {
                 // This is used purely so ExposeData can create these things
                 //   when loading a saved game.
                 // Do not actually use this constructor.
             }
-            public void ExposeData() {
+            public void ExposeData()
+            {
                 Scribe_Values.Look(ref priority, "PRFB_priority", DirectionPriority.Normal);
                 //TODO: only write filter if it's actually interesting?
                 Scribe_Deep.Look(ref filter, "PRFBSL_filter", Array.Empty<object>());
@@ -473,19 +527,24 @@ namespace ProjectRimFactory.AutoMachineTool
                 Scribe_Values.Look(ref position, "PRFBSL_position");
                 Scribe_References.Look(ref parent, "PRFBSL_parent", false);
             }
-            public bool Active {
+            public bool Active
+            {
                 get => active;
-                set {
+                set
+                {
                     if (active == value) return;
                     active = value;
                     parent.UpdateGraphic();
                 }
             }
-            public bool Allows(Thing t) {
+            public bool Allows(Thing t)
+            {
                 return Active && (filter == null || filter.Allows(t));
             }
-            public bool IsValidOutputLinkFor(Thing t) {
-                if (!Allows(t)) {
+            public bool IsValidOutputLinkFor(Thing t)
+            {
+                if (!Allows(t))
+                {
                     Debug.Message(Debug.Flag.Conveyors,
                           "        IsValidOutputLinkFor: " + t + " is not allowed at " + this.position);
                     return false;
@@ -495,43 +554,52 @@ namespace ProjectRimFactory.AutoMachineTool
                       ("        IsValidOutputLinkFor: Testing if link " + link + " can accept " + t) :
                       ("        IsValidOutputLinkFor: Testing for storage blockers for " + t + " at " + position));
                 if (link != null) return link.CanAcceptNow(t);
-                return PlaceThingUtility.CallNoStorageBlockersIn(position, 
+                return PlaceThingUtility.CallNoStorageBlockersIn(position,
                                             parent.Map, t);
             }
-            public bool TryPlace(Thing thing) {
+            public bool TryPlace(Thing thing)
+            {
                 // Try to send to another conveyor first:
                 // コンベアある場合、そっちに流す.
-                if (link != null) {
+                if (link != null)
+                {
                     Debug.Message(Debug.Flag.Conveyors, "" + this + ": found " + link +
                                                         "; going to try passing it along");
-                    if ((link as IPRF_Building).AcceptsThing(thing, parent)) {
+                    if ((link as IPRF_Building).AcceptsThing(thing, parent))
+                    {
                         Debug.Message(Debug.Flag.Conveyors, "" + this +
                                       ": and successfully passed it to " + link);
                         return true;
                     }
-                } else {// if no conveyor, place if can
+                }
+                else
+                {// if no conveyor, place if can
                     Debug.Message(Debug.Flag.Conveyors, "" + this + ": trying to place directly:");
                     if (!parent.IsUnderground && parent.PRFTryPlaceThing(thing,
-                        position, parent.Map)) {
+                        position, parent.Map))
+                    {
                         Debug.Message(Debug.Flag.Conveyors, "" + this + "Successfully placed!");
                         return true;
                     }
                 }
                 return false;
             }
-            public void CopyAllowancesFrom(ThingFilter o) {
+            public void CopyAllowancesFrom(ThingFilter o)
+            {
                 if (this.filter == null) filter = new ThingFilter();
                 filter.CopyAllowancesFrom(o);
             }
-            public void DoThingFilterConfigWindow(Rect r, ThingFilterUI.UIState uIState) {
-                if (filter == null) {
+            public void DoThingFilterConfigWindow(Rect r, ThingFilterUI.UIState uIState)
+            {
+                if (filter == null)
+                {
                     filter = new ThingFilter();
                     filter.SetAllowAll(null);
                 }
                 ThingFilterUI.DoThingFilterConfigWindow(r, uIState, this.filter);
             }
             public IBeltConveyorLinkable link;
-            public DirectionPriority priority=DirectionPriority.Normal;
+            public DirectionPriority priority = DirectionPriority.Normal;
             private ThingFilter filter = null;
             private bool active = true;
             private IntVec3 position = IntVec3.Invalid;
@@ -543,11 +611,13 @@ namespace ProjectRimFactory.AutoMachineTool
         public static bool IsNextTo(this IntVec3 one, IntVec3 two)
         {
             int t;
-            if (one.x == two.x) {
+            if (one.x == two.x)
+            {
                 t = one.z - two.z;
                 return t == 1 || t == -1;
             }
-            if (one.z == two.z) {
+            if (one.z == two.z)
+            {
                 t = one.x - two.x;
                 return t == 1 || t == -1;
             }

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using UnityEngine;
 using System.Xml;
+using Verse;
 
 namespace ProjectRimFactory.Common
 {
@@ -26,7 +20,7 @@ namespace ProjectRimFactory.Common
         {
             int index;
             if (name is null) return null;
-            if(!getByNameCache.TryGetValue(name, out index))
+            if (!getByNameCache.TryGetValue(name, out index))
             {
                 var value = this.graphicDataList.Where(g => g.name == name).FirstOrDefault();
                 index = graphicDataList.IndexOf(value);

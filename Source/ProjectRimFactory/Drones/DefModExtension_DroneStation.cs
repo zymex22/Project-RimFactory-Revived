@@ -1,14 +1,12 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Verse;
 using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.Drones
 {
-    public class DefModExtension_DroneStation : DefModExtension , ProjectRimFactory.Common.IXMLThingDescription
+    public class DefModExtension_DroneStation : DefModExtension, ProjectRimFactory.Common.IXMLThingDescription
     {
         public int maxNumDrones;
         public bool displayDormantDrones;
@@ -22,7 +20,7 @@ namespace ProjectRimFactory.Drones
         public string GetDescription(ThingDef def)
         {
             string text = "";
-            CompProperties_Refuelable refule = (CompProperties_Refuelable)def.comps.Where(c => ( c.compClass == typeof(CompRefuelable))).FirstOrDefault();
+            CompProperties_Refuelable refule = (CompProperties_Refuelable)def.comps.Where(c => (c.compClass == typeof(CompRefuelable))).FirstOrDefault();
             int maxdrones = maxNumDrones;
             if (refule != null)
             {
@@ -30,7 +28,7 @@ namespace ProjectRimFactory.Drones
             }
 
             text += "PRF_UTD_DefModExtension_DroneStation_MaxDrones".Translate(maxdrones) + "\r\n";
-            text += "PRF_UTD_DefModExtension_DroneStation_IncludedDrones".Translate(GetDronesOnSpawn( null, refule)) + "\r\n";
+            text += "PRF_UTD_DefModExtension_DroneStation_IncludedDrones".Translate(GetDronesOnSpawn(null, refule)) + "\r\n";
             if (Sleeptimes != "")
             {
                 text += "PRF_UTD_DefModExtension_DroneStation_SleepTimes".Translate(Sleeptimes) + "\r\n";
@@ -57,7 +55,7 @@ namespace ProjectRimFactory.Drones
         /// <summary>
         /// Returns the number of Drones that should be availibale on Spawn.
         /// </summary>
-        public int GetDronesOnSpawn(CompRefuelable fuelcomp = null , CompProperties_Refuelable fuelcompp = null)
+        public int GetDronesOnSpawn(CompRefuelable fuelcomp = null, CompProperties_Refuelable fuelcompp = null)
         {
             CompProperties_Refuelable props = fuelcomp?.Props ?? fuelcompp;
             if (spawnWithFullDrones)

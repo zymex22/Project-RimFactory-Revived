@@ -1,13 +1,12 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using UnityEngine;
 using Verse;
-using RimWorld;
 
-namespace ProjectRimFactory.AutoMachineTool {
+namespace ProjectRimFactory.AutoMachineTool
+{
     /// <summary>
     /// A Graphic that handles custom Link logic - this can be adapted
     ///   to all sorts of other linked classes if needed.
@@ -15,7 +14,8 @@ namespace ProjectRimFactory.AutoMachineTool {
     ///   weird edge artifacts)
     /// </summary>
     [StaticConstructorOnStartup]
-    public class Graphic_LinkedConveyorV2 : Verse.Graphic_Linked, IHaveGraphicExtraData {
+    public class Graphic_LinkedConveyorV2 : Verse.Graphic_Linked, IHaveGraphicExtraData
+    {
         // Little yellow arrow that points the direction of conveyor travel:
         // HARDCODED DEFAULT:
         public static Material arrow00; // default arrow, initialized in the static constructor
@@ -28,25 +28,30 @@ namespace ProjectRimFactory.AutoMachineTool {
                     new Vector3(0f, 0.1f, 0f)
             };
 
-        public Graphic_LinkedConveyorV2() : base() {
+        public Graphic_LinkedConveyorV2() : base()
+        {
         }
-        public Graphic_LinkedConveyorV2(Graphic subGraphic) : base(subGraphic) {
+        public Graphic_LinkedConveyorV2(Graphic subGraphic) : base(subGraphic)
+        {
         }
 
-        public override void Init(GraphicRequest req) {
+        public override void Init(GraphicRequest req)
+        {
             // I'm sure "req ... out req" is perfectly safe?
             // Move all initialization to ExtraInit
             var extraData = GraphicExtraData.Extract(req, out req);
             ExtraInit(req, extraData);
         }
-        public virtual void ExtraInit(GraphicRequest req, GraphicExtraData extraData) {
+        public virtual void ExtraInit(GraphicRequest req, GraphicExtraData extraData)
+        {
             arrow = arrow00;
             this.data = req.graphicData;
             this.color = req.color;
             this.colorTwo = req.colorTwo;
             this.drawSize = req.drawSize;
             this.subGraphic = new Graphic_Single();
-            if (extraData == null) {
+            if (extraData == null)
+            {
                 this.subGraphic.Init(req);
                 this.path = req.path;
                 return;
@@ -54,9 +59,11 @@ namespace ProjectRimFactory.AutoMachineTool {
             var req2 = GraphicExtraData.CopyGraphicRequest(req, extraData.texPath);
             this.path = extraData.texPath;
             this.subGraphic.Init(req2);
-            if (extraData.arrowDrawOffset != null) {
+            if (extraData.arrowDrawOffset != null)
+            {
                 var v = extraData.arrowDrawOffset.Value;
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 4; i++)
+                {
                     arrowOffsetsByRot4[i] = new Vector3(v.x, v.y, v.z);
                 }
             }
@@ -68,16 +75,19 @@ namespace ProjectRimFactory.AutoMachineTool {
                 arrowOffsetsByRot4[0] = extraData.arrowNorthDrawOffset.Value;
             if (extraData.arrowSouthDrawOffset != null)
                 arrowOffsetsByRot4[2] = extraData.arrowSouthDrawOffset.Value;
-            if (extraData.arrowTexPath1 != null) {
+            if (extraData.arrowTexPath1 != null)
+            {
                 this.arrow = MaterialPool.MatFrom(extraData.arrowTexPath1);
             }
         }
         //TODO Changed in 1.3 --> extraRotation was added. any changes needed?
-        public override void Print(SectionLayer layer, Thing thing, float extraRotation) {
+        public override void Print(SectionLayer layer, Thing thing, float extraRotation)
+        {
             var conveyor = thing as IBeltConveyorLinkable;
             if (!(thing is Building_BeltConveyorUGConnector)
                 && conveyor != null && conveyor.IsUnderground
-                && !(layer is SectionLayer_UGConveyor)) {
+                && !(layer is SectionLayer_UGConveyor))
+            {
                 // Original Logic (notation by LWM)
                 // if it IS NOT an underground connector
                 // and it IS an IBeltLinkable
@@ -100,9 +110,11 @@ namespace ProjectRimFactory.AutoMachineTool {
                 thing.Rotation.AsAngle);
         }
 
-        public override bool ShouldLinkWith(IntVec3 c, Thing parent) {
+        public override bool ShouldLinkWith(IntVec3 c, Thing parent)
+        {
             // maybe we should probably cache this in the conveyor, for speed?
-            if (!c.InBounds(parent.Map)) {
+            if (!c.InBounds(parent.Map))
+            {
                 return false;
             }
             //TODO: Still need a good set of logic for this
@@ -121,7 +133,8 @@ namespace ProjectRimFactory.AutoMachineTool {
             */
 
             var blueprint = parent as Blueprint;
-            if (blueprint == null) {
+            if (blueprint == null)
+            {
                 var belt = parent as IBeltConveyorLinkable;
                 return c.GetThingList(parent.Map)
                     .OfType<IBeltConveyorLinkable>()
@@ -129,37 +142,52 @@ namespace ProjectRimFactory.AutoMachineTool {
             }
             var def = (ThingDef)parent.def.entityDefToBuild;
             Rot4 dir = Rot4.North;
-            foreach (var r in Enumerable.Range(0, 4).Select(n => new Rot4(n))) {
-                if ((parent.Position + r.FacingCell)==c) {
+            foreach (var r in Enumerable.Range(0, 4).Select(n => new Rot4(n)))
+            {
+                if ((parent.Position + r.FacingCell) == c)
+                {
                     dir = r;
                     break;
                 }
             }
             // Don't bother error checking. If an error shows up, we'll KNOW
             foreach (var l in (ConveyorLevel[])Enum
-                                .GetValues(typeof(ConveyorLevel))) {
-                if (canSendTos[def.thingClass](def, parent.Rotation, dir, l)) {
-                    foreach (var t in c.GetThingList(parent.Map)) {
-                        if (t is Blueprint b) {
+                                .GetValues(typeof(ConveyorLevel)))
+            {
+                if (canSendTos[def.thingClass](def, parent.Rotation, dir, l))
+                {
+                    foreach (var t in c.GetThingList(parent.Map))
+                    {
+                        if (t is Blueprint b)
+                        {
                             ThingDef tdef = b.def.entityDefToBuild as ThingDef;
                             Type tc = tdef?.thingClass;
-                            if (typeof(Building_BeltConveyor).IsAssignableFrom(tc)) {
+                            if (typeof(Building_BeltConveyor).IsAssignableFrom(tc))
+                            {
                                 if (canGetFroms[tc](tdef, b.Rotation, dir.Opposite, l)) return true;
                             }
-                        } else if (t is IBeltConveyorLinkable) {
+                        }
+                        else if (t is IBeltConveyorLinkable)
+                        {
                             if (canGetFroms[t.GetType()](t.def, t.Rotation, dir.Opposite, l)) return true;
                         }
                     }
                 }
-                if (canGetFroms[def.thingClass](def, parent.Rotation, dir, l)) {
-                    foreach (var t in c.GetThingList(parent.Map)) {
-                        if (t is Blueprint b) {
+                if (canGetFroms[def.thingClass](def, parent.Rotation, dir, l))
+                {
+                    foreach (var t in c.GetThingList(parent.Map))
+                    {
+                        if (t is Blueprint b)
+                        {
                             ThingDef tdef = b.def.entityDefToBuild as ThingDef;
                             Type tc = tdef?.thingClass;
-                            if (typeof(Building_BeltConveyor).IsAssignableFrom(tc)) {
+                            if (typeof(Building_BeltConveyor).IsAssignableFrom(tc))
+                            {
                                 if (canSendTos[tc](tdef, b.Rotation, dir.Opposite, l)) return true;
                             }
-                        } else if (t is IBeltConveyorLinkable) {
+                        }
+                        else if (t is IBeltConveyorLinkable)
+                        {
                             if (canSendTos[t.GetType()](t.def, t.Rotation, dir.Opposite, l)) return true;
                         }
                     }
@@ -168,7 +196,8 @@ namespace ProjectRimFactory.AutoMachineTool {
             return false;
         }
 
-        static Graphic_LinkedConveyorV2() { // this runs after graphics are loaded
+        static Graphic_LinkedConveyorV2()
+        { // this runs after graphics are loaded
             arrow00 = MaterialPool.MatFrom("Belts/SmallArrow00");
             canSendTos[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefSendToRot4AtLevel;
             canGetFroms[typeof(Building_BeltConveyor)] = Building_BeltConveyor.CanDefReceiveFromRot4AtLevel;

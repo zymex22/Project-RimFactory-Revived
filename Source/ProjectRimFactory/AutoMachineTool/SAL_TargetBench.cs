@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.SAL3;
+using RimWorld;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 using Verse.AI;
-using RimWorld;
-using ProjectRimFactory.Common;
-using ProjectRimFactory.SAL3;
-using static ProjectRimFactory.AutoMachineTool.Ops;
 using Verse.Sound;
-using UnityEngine;
-using System;
+using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -85,7 +85,7 @@ namespace ProjectRimFactory.AutoMachineTool
             //    Log.Message("post adding:");
             //    debugListReservations();
             //}
-           
+
         }
 
         public void debugListReservations()
@@ -95,7 +95,7 @@ namespace ProjectRimFactory.AutoMachineTool
             reservations = reservations.Where(r => r.Faction != null && r.Faction.IsPlayer).ToList();
             foreach (ReservationManager.Reservation res in reservations)
             {
-                Log.Message($"Reservation for {res.Claimant } at {res.Target}");
+                Log.Message($"Reservation for {res.Claimant} at {res.Target}");
 
             }
 
@@ -184,7 +184,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 Scribe_Collections.Look<Thing>(ref this.ingredients, "ingredients", LookMode.Reference);
             }
-            
+
         }
 
         public interface IBill_PawnForbidded
@@ -833,9 +833,9 @@ namespace ProjectRimFactory.AutoMachineTool
             if (Scribe.mode == LoadSaveMode.Saving)
             {
                 this.Reserve();
-            //    Log.Message("----------");
-            //    debugListReservations();
-            //    Log.Message("----------");
+                //    Log.Message("----------");
+                //    debugListReservations();
+                //    Log.Message("----------");
             }
         }
     }

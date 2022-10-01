@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RimWorld;
 using System.Linq;
-using System.Text;
-
 using UnityEngine;
 using Verse;
-using RimWorld;
-
-using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {

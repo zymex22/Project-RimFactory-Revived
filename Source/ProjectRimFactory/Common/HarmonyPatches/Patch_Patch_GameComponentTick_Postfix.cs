@@ -11,7 +11,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     /// </summary>
     public static class Patch_Patch_GameComponentTick_Postfix
     {
-        public static void Postfix( int ___tick)
+        public static void Postfix(int ___tick)
         {
             if (___tick != 0) return;
             Dictionary<ThingWithComps, CompPowerTrader> fc = (Dictionary<ThingWithComps, CompPowerTrader>)ProjectRimFactory_ModComponent.ModSupport_SimpleFridge_fridgeCache.GetValue(null);

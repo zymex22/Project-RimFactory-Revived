@@ -1,11 +1,9 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Verse;
-using RimWorld;
 
 namespace ProjectRimFactory.Common
 {
@@ -13,9 +11,9 @@ namespace ProjectRimFactory.Common
     {
         public CompProperties_PowerWorkSetting Props => (CompProperties_PowerWorkSetting)this.props;
 
-        public int MaxPowerForSpeed =>  (int)(this.Props.floatrange_SpeedFactor.Span * this.Props.powerPerStepSpeed);
+        public int MaxPowerForSpeed => (int)(this.Props.floatrange_SpeedFactor.Span * this.Props.powerPerStepSpeed);
 
-        public int MaxPowerForRange =>  (int)(this.Props.floatrange_Range.Span * this.Props.powerPerStepRange);
+        public int MaxPowerForRange => (int)(this.Props.floatrange_Range.Span * this.Props.powerPerStepRange);
 
         public IRangeCells rangeCells = null;
 
@@ -58,14 +56,14 @@ namespace ProjectRimFactory.Common
 
         public bool RangeSettingHide = false;
 
-        public bool RangeSetting 
+        public bool RangeSetting
         {
             get
             {
                 if (RangeSettingHide) return false;
                 return this.Props.floatrange_Range.Span > 0;
-            }   
-              
+            }
+
         }
 
         private float powerForSpeed = 0;
@@ -75,7 +73,8 @@ namespace ProjectRimFactory.Common
 
         private float powerForRange = 0;
 
-        private enum rangeTypeClassEnum{
+        private enum rangeTypeClassEnum
+        {
             CircleRange,
             FacingRectRange,
             RectRange
@@ -151,16 +150,17 @@ namespace ProjectRimFactory.Common
 
             Scribe_Values.Look<float>(ref this.powerForSpeed, "powerForSpeed");
             Scribe_Values.Look<float>(ref this.powerForRange, "powerForRange");
-            Scribe_Values.Look(ref rangeTypeSeletion, "rangeType",-1);
-            Scribe_Values.Look(ref RangeTypeRot, "RangeTypeRot",Rot4.North);
+            Scribe_Values.Look(ref rangeTypeSeletion, "rangeType", -1);
+            Scribe_Values.Look(ref RangeTypeRot, "RangeTypeRot", Rot4.North);
 
             //Set the Loaded rangeCells Value
             if (Scribe.mode != LoadSaveMode.Saving)
             {
-                if (rangeTypeSeletion == -1) {
+                if (rangeTypeSeletion == -1)
+                {
                     rangeCells = null;
                     rangeTypeSeletion = rangeTypeSelection;
-                } 
+                }
 
                 rangeTypeSelection = rangeTypeSeletion;
             }
@@ -194,7 +194,7 @@ namespace ProjectRimFactory.Common
 
         public void RefreshPowerStatus()
         {
-            if(this.powerComp != null)
+            if (this.powerComp != null)
             {
                 this.powerComp.PowerOutput = -this.powerComp.Props.basePowerConsumption - this.SupplyPowerForSpeed - this.SupplyPowerForRange - AdditionalPowerDrain;
             }
@@ -248,7 +248,7 @@ namespace ProjectRimFactory.Common
         }
 
 
-        
+
 
         public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
         {
@@ -262,11 +262,11 @@ namespace ProjectRimFactory.Common
 
 
 
-        public IRangeCells[] rangeTypes = new IRangeCells[] { new  CircleRange() , new FacingRectRange() , new RectRange() }; 
+        public IRangeCells[] rangeTypes = new IRangeCells[] { new CircleRange(), new FacingRectRange(), new RectRange() };
 
     }
 
-    public class CompProperties_PowerWorkSetting : CompProperties , IXMLThingDescription
+    public class CompProperties_PowerWorkSetting : CompProperties, IXMLThingDescription
     {
         //speed
         public FloatRange floatrange_SpeedFactor;
@@ -366,8 +366,8 @@ namespace ProjectRimFactory.Common
                 helptext += "\r\n";
             }
 
-            if (allowManualRangeTypeChange) helptext += "PRF_UTD_CompProperties_PowerWorkSetting_RangeTypeChange".Translate() + "\r\n"; 
-            return helptext; 
+            if (allowManualRangeTypeChange) helptext += "PRF_UTD_CompProperties_PowerWorkSetting_RangeTypeChange".Translate() + "\r\n";
+            return helptext;
         }
     }
 
@@ -416,7 +416,7 @@ namespace ProjectRimFactory.Common
         public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
         {
             IntVec2 size = thingDef.size;
-            Util.CounterAdjustForRotation(ref center,ref size, rot);
+            Util.CounterAdjustForRotation(ref center, ref size, rot);
 
 
             var under = GenAdj.CellsOccupiedBy(center, rot, size).ToHashSet();

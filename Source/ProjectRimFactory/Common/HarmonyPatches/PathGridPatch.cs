@@ -1,15 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HarmonyLib;
-using Verse;
-using RimWorld;
-using System.Reflection;
-using ProjectRimFactory.Storage;
-using Verse.AI;
-using System.Reflection.Emit;
-
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
     // Removed at LWM's suggestion - see

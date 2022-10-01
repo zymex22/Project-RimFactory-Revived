@@ -1,15 +1,10 @@
-﻿using System;
+﻿using ProjectRimFactory.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using Verse.Sound;
 using UnityEngine;
+using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -54,10 +49,13 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         private MapTickManager mapManager;
-        public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null) {
-            foreach (Thing p in products) {
+        public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null)
+        {
+            foreach (Thing p in products)
+            {
                 if (optionalValidator == null
-                     || optionalValidator(p)) {
+                     || optionalValidator(p))
+                {
                     products.Remove(p);
                     return p;
                 }
@@ -101,10 +99,12 @@ namespace ProjectRimFactory.AutoMachineTool
         ///   other source also saves the item - a spawned item is saved
         ///   by the map.
         /// </summary>
-        protected virtual LookMode WorkingLookMode {
+        protected virtual LookMode WorkingLookMode
+        {
             get => LookMode.Reference;
         }
-        protected virtual LookMode ProductsLookMode {
+        protected virtual LookMode ProductsLookMode
+        {
             get => LookMode.Deep;
         }
 
@@ -116,9 +116,12 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look(ref this.totalWorkAmount, "totalWorkAmount", 0f);
             Scribe_Values.Look(ref this.workStartTick, "workStartTick", 0);
             Scribe_Collections.Look<Thing>(ref this.products, "products", ProductsLookMode);
-            if (WorkingLookMode == LookMode.Deep) {
+            if (WorkingLookMode == LookMode.Deep)
+            {
                 Scribe_Deep.Look<T>(ref this.working, "working");
-            } else if (WorkingLookMode == LookMode.Reference) {
+            }
+            else if (WorkingLookMode == LookMode.Reference)
+            {
                 Scribe_References.Look<T>(ref this.working, "working");
             }
         }
@@ -192,7 +195,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 this.products.ForEach(t =>
                 {
-                    if (t!=null && !t.Destroyed)
+                    if (t != null && !t.Destroyed)
                     {
                         if (t.Spawned)
                         {
@@ -240,7 +243,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected virtual TargetInfo ProgressBarTarget()
         {
-            if (this.working.Spawned) {
+            if (this.working.Spawned)
+            {
                 return this.working;
             }
             return this;
@@ -367,7 +371,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.State = WorkingState.Placing;
                 this.CleanupWorkingEffect();
                 this.working = null;
-                if(this.products == null || this.products.Count == 0)
+                if (this.products == null || this.products.Count == 0)
                 {
                     this.Reset();
                     MapManager.NextAction(this.Ready);
@@ -426,7 +430,8 @@ namespace ProjectRimFactory.AutoMachineTool
             //   and stay in products.
             // Is there any reason this uses `ref List<Thing> products`
             //   instead of `this.products`?
-            products = products.Aggregate(new List<Thing>(), (total, target) => {
+            products = products.Aggregate(new List<Thing>(), (total, target) =>
+            {
                 if (target.Spawned) target.DeSpawn();
                 if (this.PRFTryPlaceThing(target, OutputCell(), this.Map, this.forcePlace))
                 {

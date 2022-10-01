@@ -1,11 +1,8 @@
 ﻿using ProjectRimFactory.SAL3.Things.Assemblers;
-using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEngine;
 using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
@@ -27,12 +24,15 @@ namespace ProjectRimFactory.SAL3.Things
 
         private List<RecipeDef> quered_recipes;
 
-        public List<RecipeDef> Quered_Recipes {
-            get {
+        public List<RecipeDef> Quered_Recipes
+        {
+            get
+            {
 
                 return quered_recipes;
-            } 
-            set {
+            }
+            set
+            {
                 quered_recipes = value;
             }
         }
@@ -116,8 +116,10 @@ namespace ProjectRimFactory.SAL3.Things
             for (int i = 0; i < cells.Count; i++)
             {
                 List<Thing> things = mapBefore.thingGrid.ThingsListAt(cells[i]);
-                for (int j=things.Count-1; j>=0; j--) {
-                    if (things[j] is Building_SmartAssembler) {
+                for (int j = things.Count - 1; j >= 0; j--)
+                {
+                    if (things[j] is Building_SmartAssembler)
+                    {
                         (things[j] as Building_SmartAssembler).Notify_RecipeHolderRemoved();
                         // break; // We can afford to be silly and check everything in this one cell.
                         // despawning does not happen often, right?
@@ -149,8 +151,8 @@ namespace ProjectRimFactory.SAL3.Things
                     workAmount = GetLearnRecipeWorkAmount(workingRecipe);
                     Quered_Recipes.RemoveAt(0);
                 }
-                
-                
+
+
             }
             base.Tick();
         }
@@ -164,7 +166,7 @@ namespace ProjectRimFactory.SAL3.Things
 
             Scribe_Collections.Look(ref quered_recipes, "quered_recipes");
 
-            quered_recipes ??= new List<RecipeDef>(); 
+            quered_recipes ??= new List<RecipeDef>();
         }
         public override string GetInspectString()
         {

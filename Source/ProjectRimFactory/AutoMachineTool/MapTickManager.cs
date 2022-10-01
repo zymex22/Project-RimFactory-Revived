@@ -1,13 +1,8 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
 using Verse;
-using Verse.AI;
-using Verse.Sound;
-using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
@@ -16,7 +11,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public MapTickManager(Map map) : base(map)
         {
-//            this.thingsList = new ThingLister(map);
+            //            this.thingsList = new ThingLister(map);
         }
 
         public override void MapComponentTick()
@@ -65,7 +60,7 @@ namespace ProjectRimFactory.AutoMachineTool
             this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
 #endif
             this.tickActionsDict.Remove(Find.TickManager.TicksGame);
-            }
+        }
 
         private static void Exec(Action act)
         {
@@ -98,16 +93,17 @@ namespace ProjectRimFactory.AutoMachineTool
 
             // ここでいいのか・・・？
             if ((Find.MainTabsRoot.OpenTab?.TabWindow as MainTabWindow_Architect)
-                ?.selectedDesPanel?.def.defName == "Industrial") {
+                ?.selectedDesPanel?.def.defName == "Industrial")
+            {
                 OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
             }
-/*            Option(Find.MainTabsRoot.OpenTab)
-                .Select(r => r.TabWindow)
-                .SelectMany(w => Option(w as MainTabWindow_Architect))
-                .SelectMany(a => Option(a.selectedDesPanel))
-                .Where(p => p.def.defName == "Industrial")
-                .ForEach(p => OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame());
-*/
+            /*            Option(Find.MainTabsRoot.OpenTab)
+                            .Select(r => r.TabWindow)
+                            .SelectMany(w => Option(w as MainTabWindow_Architect))
+                            .SelectMany(a => Option(a.selectedDesPanel))
+                            .Where(p => p.def.defName == "Industrial")
+                            .ForEach(p => OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame());
+            */
             if (Find.Selector.FirstSelectedObject is IBeltConveyorLinkable)
             {
                 OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
@@ -158,9 +154,9 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.tickActionsDict.GetOption(Find.TickManager.TicksGame).Select(l => l.Contains(act)).GetOrDefault(false);
         }
 
-  //      private ThingLister thingsList;
+        //      private ThingLister thingsList;
 
-//        public ThingLister ThingsList => thingsList;
+        //        public ThingLister ThingsList => thingsList;
 
 #if DEBUG
         public override void MapComponentOnGUI()

@@ -1,12 +1,8 @@
-﻿using System;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
 using UnityEngine;
+using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
@@ -30,7 +26,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private string description;
 
-        private Building_BeltSplitter Splitter { get => (Building_BeltSplitter)this.SelThing;}
+        private Building_BeltSplitter Splitter { get => (Building_BeltSplitter)this.SelThing; }
         private Rot4? selectedDir;
 
         public override bool IsVisible => true; //TODO: do this.Conveyor.Filters.Count > 1;?
@@ -48,7 +44,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private ThingFilterUI.UIState uIState = new ThingFilterUI.UIState();
 
-        private void directionUI(Rect rect , Rot4 rot,ref bool selected, ref bool disabeld, bool isInput)
+        private void directionUI(Rect rect, Rot4 rot, ref bool selected, ref bool disabeld, bool isInput)
         {
             Texture2D texture = RS.SplitterArrow_Up; //Default
             Common.CommonColors.CellPattern cellPattern = Common.CommonColors.CellPattern.InputCell;
@@ -79,7 +75,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 Widgets.DrawBox(rect);
             }
             Event cur = Event.current;
-            if ( cur.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
+            if (cur.type == EventType.MouseDown && rect.Contains(Event.current.mousePosition))
             {
                 //Left
                 if (Input.GetMouseButton(0) && !isInput)
@@ -92,7 +88,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     disabeld = !disabeld;
                 }
             }
-         
+
 
 
         }
@@ -107,7 +103,8 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
 
-        protected override void FillTab() {
+        protected override void FillTab()
+        {
             if (selectedDir == null) selectedDir = // in case something kills it while ITab
                   this.Splitter.OutputLinks.Keys.FirstOrDefault(null);  //  is already open
 
@@ -137,12 +134,12 @@ namespace ProjectRimFactory.AutoMachineTool
             #region ------ directions quadrants ------
             Dictionary<Rot4, Rect> pos = new Dictionary<Rot4, Rect>();
             float quadrants_size = 40f; //30 seems small but there is not much space
-            rect = list.GetRect(quadrants_size * 3 ); //Top , middle, Bottom
+            rect = list.GetRect(quadrants_size * 3); //Top , middle, Bottom
             float quadrants_middle = rect.x + rect.width / 2;
             pos[Rot4.North] = new Rect(quadrants_middle - quadrants_size / 2, rect.y, quadrants_size, quadrants_size);
-            pos[Rot4.West]  = new Rect(quadrants_middle - quadrants_size * 3 / 2 , rect.y + quadrants_size, quadrants_size, quadrants_size);
-            pos[Rot4.East]  = new Rect(quadrants_middle + quadrants_size / 2, rect.y + quadrants_size, quadrants_size, quadrants_size);
-            pos[Rot4.South] = new Rect(quadrants_middle - quadrants_size/2, rect.y + quadrants_size * 2, quadrants_size, quadrants_size);
+            pos[Rot4.West] = new Rect(quadrants_middle - quadrants_size * 3 / 2, rect.y + quadrants_size, quadrants_size, quadrants_size);
+            pos[Rot4.East] = new Rect(quadrants_middle + quadrants_size / 2, rect.y + quadrants_size, quadrants_size, quadrants_size);
+            pos[Rot4.South] = new Rect(quadrants_middle - quadrants_size / 2, rect.y + quadrants_size * 2, quadrants_size, quadrants_size);
 
             #endregion
             #region ------ fill dir quadrants ------
@@ -161,24 +158,25 @@ namespace ProjectRimFactory.AutoMachineTool
                 bool isInput = false;
                 foreach (IBeltConveyorLinkable linkable in Splitter.IncomingLinks.Where(l => l.Position == (Splitter.Position + dir.FacingCell)))
                 {
-                    if ((linkable as Building_BeltConveyor) != null  || (linkable as Building_BeltConveyorUGConnector) != null)
+                    if ((linkable as Building_BeltConveyor) != null || (linkable as Building_BeltConveyorUGConnector) != null)
                     {
                         if (OppositeRot(linkable.Rotation) == dir)
                         {
                             isInput = true;
                             break;
                         }
-                    }else if ((linkable as Building_BeltSplitter) != null)
+                    }
+                    else if ((linkable as Building_BeltSplitter) != null)
                     {
                         //Seperate Logic for splitters 
-                       if ((linkable as Building_BeltSplitter).OutputLinks.Keys.Contains(OppositeRot(dir)) && (linkable as Building_BeltSplitter).OutputLinks[OppositeRot(dir)].Active) isInput = true;
+                        if ((linkable as Building_BeltSplitter).OutputLinks.Keys.Contains(OppositeRot(dir)) && (linkable as Building_BeltSplitter).OutputLinks[OppositeRot(dir)].Active) isInput = true;
 
                     }
-                    
+
                 }
 
 
-                directionUI(pos[dir], dir,ref selref,ref enabeld, isInput);
+                directionUI(pos[dir], dir, ref selref, ref enabeld, isInput);
                 if (selref) selectedDir = dir;
                 if (this.Splitter.OutputLinks.ContainsKey(dir))
                 {
@@ -202,21 +200,23 @@ namespace ProjectRimFactory.AutoMachineTool
 
 
             var selectedRot = (Rot4)selectedDir;
-            if (selectedDir == null || !Splitter.OutputLinks.ContainsKey(selectedRot)) {
+            if (selectedDir == null || !Splitter.OutputLinks.ContainsKey(selectedRot))
+            {
                 list.End();
                 return;
             }
 
 
-            rect = list.GetRect(35-6);
+            rect = list.GetRect(35 - 6);
             float maxWidth = rect.width;
             float prioritywidth = (maxWidth / 2) - 1; //145 - 160 vanilla
             float selectCopywidth = (maxWidth / 2) - 1; //125
-            rect.width = prioritywidth; 
+            rect.width = prioritywidth;
             GameFont fontOld = Text.Font;
             Text.Font = GameFont.Small;
 
-            if (Widgets.ButtonText(rect, "Priority".Translate() + ": " + this.Splitter.OutputLinks[selectedRot].priority.ToText())) {
+            if (Widgets.ButtonText(rect, "Priority".Translate() + ": " + this.Splitter.OutputLinks[selectedRot].priority.ToText()))
+            {
                 Find.WindowStack.Add(new FloatMenu(GetEnumValues<DirectionPriority>()
                     .OrderByDescending(k => (int)k).Select(d => new FloatMenuOption(d.ToText(),
                     () => this.Splitter.OutputLinks[selectedRot].priority = d
@@ -226,7 +226,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
             rect.x = maxWidth - selectCopywidth;
             rect.width = selectCopywidth;
-            if (Widgets.ButtonText(rect, "PRF.AutoMachineTool.Conveyor.FilterCopyFrom".Translate())) {
+            if (Widgets.ButtonText(rect, "PRF.AutoMachineTool.Conveyor.FilterCopyFrom".Translate()))
+            {
                 List<FloatMenuOption> menuOpt = groups.Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(),
                     () => this.Splitter.OutputLinks[selectedRot].CopyAllowancesFrom(g.Settings.filter)
                     )).ToList();

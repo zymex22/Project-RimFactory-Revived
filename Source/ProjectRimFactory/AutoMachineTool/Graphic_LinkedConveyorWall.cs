@@ -1,32 +1,35 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using UnityEngine;
 using Verse;
-using RimWorld;
-namespace ProjectRimFactory.AutoMachineTool {
+namespace ProjectRimFactory.AutoMachineTool
+{
     /// <summary>
     /// The wall graphic is special as it needs transition graphics from wall->non-wall.
     /// The transition graphics are on the W, S, and E (can't see the north side of walls,
     /// so there's no extra graphic in that direction)
     /// Note: This copies vanilla's base LinkedDrawMatFrom for faster execution
     /// </summary>
-    public class Graphic_LinkedConveyorWall : Graphic_LinkedConveyorV2, IHaveGraphicExtraData {
-        public Graphic_LinkedConveyorWall() : base() {
+    public class Graphic_LinkedConveyorWall : Graphic_LinkedConveyorV2, IHaveGraphicExtraData
+    {
+        public Graphic_LinkedConveyorWall() : base()
+        {
         }
         bool showW;
         bool showS;
         bool showE;
         GraphicData transitionGData; // Graphic_Multi, one assumes.
         List<ThingDef> sameLinkDefs;
-        public override void ExtraInit(GraphicRequest req, GraphicExtraData extraData) {
+        public override void ExtraInit(GraphicRequest req, GraphicExtraData extraData)
+        {
             Debug.Warning(Debug.Flag.ConveyorGraphics, "Graphics ExtraInit for Graphic_LinkedConveyorWall: (" + req.graphicData.texPath + ")");
             base.ExtraInit(req, extraData);
             if (extraData == null) Log.Error("PRF's Wall Conveyor graphic requires GraphicExtraData");
             else if (extraData.graphicData1 == null) Log.Error("PRF's Wall Conveyor grahpic requires GraphicExtraData's graphicData1");
-            else {
+            else
+            {
                 transitionGData = new GraphicData();
                 transitionGData.CopyFrom(extraData.graphicData1);
                 // If this throws errors, that's okay - it's a config error that needs to be fixed:
@@ -39,32 +42,37 @@ namespace ProjectRimFactory.AutoMachineTool {
             }
         }
         //TODO Changed in 1.3 --> extraRotation was added. any changes needed?
-        public override void Print(SectionLayer layer, Thing thing,float extraRotation) {
+        public override void Print(SectionLayer layer, Thing thing, float extraRotation)
+        {
             showW = false; showS = false; showE = false;
             // This may set some of those flags:
             base.Print(layer, thing, extraRotation);
             Debug.Message(Debug.Flag.ConveyorGraphics, "Printing transitions for " + thing + " S:" + showS + " W:" + showW + "E:" + showE);
             Material mat;
-            if (showW) {
+            if (showW)
+            {
                 mat = transitionGData.Graphic.MatWest;
-//                mat = transitionWest.Graphic.MatSingleFor(thing);
+                //                mat = transitionWest.Graphic.MatSingleFor(thing);
                 Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0),
                     Vector2.one, mat);
             }
-            if (showS) {
+            if (showS)
+            {
                 mat = transitionGData.Graphic.MatSouth;
-//                mat = transitionSouth.Graphic.MatSingleFor(thing);
+                //                mat = transitionSouth.Graphic.MatSingleFor(thing);
                 Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0),
                     Vector2.one, mat);
             }
-            if (showE) {
+            if (showE)
+            {
                 mat = transitionGData.Graphic.MatEast;
-//                mat = transitionEast.Graphic.MatSingleFor(thing);
+                //                mat = transitionEast.Graphic.MatSingleFor(thing);
                 Printer_Plane.PrintPlane(layer, thing.TrueCenter() + new Vector3(0, 0.1f, 0),
                     Vector2.one, mat);
             }
         }
-        public override bool ShouldLinkWith(IntVec3 c, Thing parent) {
+        public override bool ShouldLinkWith(IntVec3 c, Thing parent)
+        {
             // Tag which directions link walls to non-walls, so can draw transition buildings
             if (parent is Blueprint) return base.ShouldLinkWith(c, parent);
             var x = (c - parent.Position);
@@ -76,7 +84,8 @@ namespace ProjectRimFactory.AutoMachineTool {
                     .FirstOrDefault(belt.HasLinkWith);
             if (otherBelt == null) return false;
             Debug.Message(Debug.Flag.ConveyorGraphics, "WallBelt graphic testing links vs sameLinkDefs for " + parent + ": " + (sameLinkDefs == null ? "null" : String.Join(", ", sameLinkDefs)));
-            if (!sameLinkDefs.Contains((otherBelt as Thing).def)) {
+            if (!sameLinkDefs.Contains((otherBelt as Thing).def))
+            {
                 Debug.Message(Debug.Flag.ConveyorGraphics, " found link with " + otherBelt + " (" + (otherBelt as Thing).def.defName + ")");
                 if (x == IntVec3.East) showE = true;
                 else if (x == IntVec3.South) showS = true;

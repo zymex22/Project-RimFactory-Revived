@@ -1,10 +1,5 @@
 ﻿using ProjectRimFactory.Common;
-using RimWorld;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
 using Verse;
 
 namespace ProjectRimFactory.CultivatorTools
@@ -14,7 +9,7 @@ namespace ProjectRimFactory.CultivatorTools
         public SquareCellIterator iter;
 
         public override IntVec3 Current => iter.cellPattern[currentPosition] + Position;
-        
+
         Cache<List<IntVec3>> selectedCellsCache;
         List<IntVec3> UpdateCellsCache()
         {
@@ -41,8 +36,8 @@ namespace ProjectRimFactory.CultivatorTools
             base.DrawExtraSelectionOverlays();
             GenDraw.DrawFieldEdges(CellsInRange);
         }
-        
-       
+
+
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
@@ -51,6 +46,6 @@ namespace ProjectRimFactory.CultivatorTools
         }
 
         protected override int cellCount => iter.cellPattern.Length;
-        
+
     }
 }

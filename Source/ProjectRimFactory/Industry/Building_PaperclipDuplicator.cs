@@ -100,7 +100,7 @@ namespace ProjectRimFactory.Industry
                 yield return new Command_Action()
                 {
                     defaultLabel = "DEBUG: Double paperclip amount",
-                    action = () =>  
+                    action = () =>
                     {
                         try
                         {

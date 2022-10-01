@@ -1,15 +1,11 @@
-﻿using System;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using Verse.Sound;
 using UnityEngine;
+using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -84,7 +80,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             products = GenRecipe2.MakeRecipeProducts(this.workingBill.recipe, this, new List<Thing>(), null, this).ToList();
             // Because we use custom GenRecipe2, we have to handle bonus items and product modifications (bonuses) directly:
-            this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(products, 
+            this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(products,
                                                         this as IBillGiver, this, this.workingBill.recipe);
             this.workingBill.Notify_IterationCompleted(null, new List<Thing>());
             this.workingBill = null;
@@ -223,8 +219,8 @@ namespace ProjectRimFactory.AutoMachineTool
                         .Where(d => d.deepCommonality > 0f && d.deepCountPerPortion > 0)
                         .Where(d => !mineablesSet.Contains(d))
                         .Select(d => new ThingDefCountClass(d, d.deepCountPerPortion))
-                        // this line can be uncommented when the above line is
-                        //.Where(d => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.thingDef) ?? true)
+                // this line can be uncommented when the above line is
+                //.Where(d => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.thingDef) ?? true)
                 );
 
                 var recipeDefs_all = mineables.Select(m => CreateMiningRecipe(m, effecter)).ToList();
@@ -232,19 +228,19 @@ namespace ProjectRimFactory.AutoMachineTool
                 //Check for duplicates
                 List<RecipeDef> recipeDefs = new List<RecipeDef>();
                 List<String> recipeDefsnames = new List<string>();
-                for (int i = 0; i< recipeDefs_all.Count; i++)
+                for (int i = 0; i < recipeDefs_all.Count; i++)
                 {
                     if (!recipeDefsnames.Contains(recipeDefs_all[i].defName))
                     {
                         recipeDefs.Add(recipeDefs_all[i]);
                         recipeDefsnames.Add(recipeDefs_all[i].defName);
-                    } 
+                    }
                 }
 
 
                 DefDatabase<RecipeDef>.Add(recipeDefs);
                 // These 3 lines remove exluded recipes from available bills:
-                var acceptableRecipeDefs=recipeDefs
+                var acceptableRecipeDefs = recipeDefs
                     .FindAll(r => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(r.products[0].thingDef) ?? true);
                 minerDef.recipes = acceptableRecipeDefs;
                 SAL3.ReflectionUtility.allRecipesCached.SetValue(minerDef, null);

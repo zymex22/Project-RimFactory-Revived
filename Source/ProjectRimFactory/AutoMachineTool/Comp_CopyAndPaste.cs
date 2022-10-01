@@ -1,12 +1,7 @@
-﻿using System;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
 using Verse;
-using Verse.AI;
-using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
@@ -20,7 +15,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     .Select(s => s.StorageSettings)
                     .Select(x => StorageSettingsClipboard.CopyPasteGizmosFor(x))
                     .GetOrDefault(Enumerable.Empty<Gizmo>()));
-		}
+        }
     }
 
     public interface IStorageSetting

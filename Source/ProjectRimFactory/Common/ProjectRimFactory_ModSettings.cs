@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
-using System.Text;
 using System.Xml;
 using UnityEngine;
 using Verse;
@@ -12,7 +11,7 @@ namespace ProjectRimFactory.Common
     public class ProjectRimFactory_ModSettings : ModSettings
     {
         public static bool allowAllMultipleSpecialSculptures;
-        public static Dictionary<string, int> maxNumbersSpecialSculptures; 
+        public static Dictionary<string, int> maxNumbersSpecialSculptures;
         public static void LoadXml(ModContentPack content)
         {
             root = ParseSettingRows(content);
@@ -23,7 +22,7 @@ namespace ProjectRimFactory.Common
 
         private static ContainerRow root;
 
-        private static void AddHeader(Listing_Standard list,string header)
+        private static void AddHeader(Listing_Standard list, string header)
         {
             Rect rect = list.GetRect(30);
 
@@ -43,7 +42,8 @@ namespace ProjectRimFactory.Common
         // All C# based mod settings can go here.  If better organization
         //   is desired, we can set up some ContainerRow classes that are
         //   organized by XML?  But that's a lot of work.
-        private static void CSharpSettings(Listing_Standard list) {
+        private static void CSharpSettings(Listing_Standard list)
+        {
             // Style: do your section of settings and then list.GapLine();
             AddHeader(list, "PRF_Settings_C_Lite_Header".Translate());
 
@@ -63,9 +63,9 @@ namespace ProjectRimFactory.Common
             }
             PRF_LiteMode_last = PRF_LiteMode;
 
-            
+
             AddHeader(list, "PRF_Settings_C_Patches_Header".Translate());
-            
+
             rect = list.GetRect(20);
             if (Mouse.IsOver(rect))
             {
@@ -136,7 +136,7 @@ namespace ProjectRimFactory.Common
             Widgets.BeginScrollView(outRect, ref this.scrollPosition, viewRect);
             var list = new Listing_Standard();
             list.Begin(viewRect);
-            #if DEBUG
+#if DEBUG
             list.Label("Debug Symbols:");
             foreach (var f in (Debug.Flag [])Enum.GetValues(typeof(Debug.Flag))) {
                 bool ischecked = (f & Debug.activeFlags) > 0;
@@ -146,7 +146,7 @@ namespace ProjectRimFactory.Common
                 }
             }
             list.GapLine();
-            #endif
+#endif
             CSharpSettings(list);
             root.Draw(list);
             list.End();
@@ -335,7 +335,7 @@ namespace ProjectRimFactory.Common
 
         public override bool Initialize()
         {
-            if(this.Rows == null || this.Rows.rows == null)
+            if (this.Rows == null || this.Rows.rows == null)
             {
                 return false;
             }
@@ -443,7 +443,7 @@ namespace ProjectRimFactory.Common
         {
             var tex = ContentFinder<Texture2D>.Get(this.texPath, true);
             float h = this.height;
-            if(h == 0)
+            if (h == 0)
             {
                 h = tex.height;
             }
@@ -467,7 +467,7 @@ namespace ProjectRimFactory.Common
             Color tmp = GUI.color;
             try
             {
-                if(this.color != Color.clear)
+                if (this.color != Color.clear)
                 {
                     GUI.color = this.color;
                 }
@@ -508,7 +508,7 @@ namespace ProjectRimFactory.Common
 
         public override void Apply()
         {
-            if(this.currentCheckOn != this.checkOn)
+            if (this.currentCheckOn != this.checkOn)
             {
                 this.RequireReboot = true;
                 this.checkOn = this.currentCheckOn;
@@ -713,7 +713,7 @@ namespace ProjectRimFactory.Common
         {
             if (!base.Initialize())
                 return false;
-            if (enumType == null || this.enumType.GetEnumValues().Cast<object>().Count() ==  0)
+            if (enumType == null || this.enumType.GetEnumValues().Cast<object>().Count() == 0)
             {
                 Log.Error("invalid enumType on Settings.xml");
                 return false;

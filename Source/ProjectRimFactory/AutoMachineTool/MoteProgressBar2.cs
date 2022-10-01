@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using Verse.Sound;
+﻿using RimWorld;
+using System;
 using UnityEngine;
 
 namespace ProjectRimFactory.AutoMachineTool

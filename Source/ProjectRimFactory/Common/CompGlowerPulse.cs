@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using RimWorld;
+using System;
 using UnityEngine;
 using Verse;
-using RimWorld;
-using System.Diagnostics.Eventing.Reader;
-using HarmonyLib;
-using System.IO;
 
 namespace ProjectRimFactory.Common
 {
@@ -213,12 +207,12 @@ namespace ProjectRimFactory.Common
     {
         public float GetValue(float t)
         {
-            return t == 0 
-                ? 0 
-                : t == 1 
-                ? 1 
-                : t < 0.5f 
-                ? Mathf.Pow(2, 20 * t - 10) / 2 
+            return t == 0
+                ? 0
+                : t == 1
+                ? 1
+                : t < 0.5f
+                ? Mathf.Pow(2, 20 * t - 10) / 2
                 : (2 - Mathf.Pow(2, -20 * t + 10)) / 2;
         }
     }

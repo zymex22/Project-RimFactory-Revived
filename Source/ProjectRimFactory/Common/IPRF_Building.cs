@@ -1,14 +1,16 @@
 ﻿using System;
-using Verse;
 using System.Collections.Generic;
+using Verse;
 
-namespace ProjectRimFactory.Common {
+namespace ProjectRimFactory.Common
+{
     // ProjectRimFactory is all about producing things, moving things, 
     //   holding things, recycling things, things things things.
     // This interface provides a unified way to move things from one
     //   PRF building to another.
     // Current status: WIP
-    public interface IPRF_Building {
+    public interface IPRF_Building
+    {
         // Thanks to Thornsworth for names
 
         /// <summary>

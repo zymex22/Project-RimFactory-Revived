@@ -1,6 +1,7 @@
 ﻿using System;
 using Verse;
-namespace ProjectRimFactory {
+namespace ProjectRimFactory
+{
     /// <summary>
     /// A set of Debug trace functions for help in tracking weird problems.
     /// NOTE: These are only compiled in the Debug build.  As far as a Release
@@ -24,15 +25,17 @@ namespace ProjectRimFactory {
     /// <onlyAppliesTo>
     /// The Log messages only appear in the debug build.
     /// </onlyAppliesTo>
-    public static class Debug {
+    public static class Debug
+    {
         [Flags]
-        public enum Flag {
-            PlaceThing=0x1,
-            Conveyors=0x2,
-            ConveyorGraphics=0x4,
-            Benchmark=0x8, // performance measurement
-            ExtModifyProduct=0x10,
-            AssemblerQueue=0x20,
+        public enum Flag
+        {
+            PlaceThing = 0x1,
+            Conveyors = 0x2,
+            ConveyorGraphics = 0x4,
+            Benchmark = 0x8, // performance measurement
+            ExtModifyProduct = 0x10,
+            AssemblerQueue = 0x20,
             // NextFlag=0x4,
             // 0x8
             // 0x10
@@ -42,17 +45,20 @@ namespace ProjectRimFactory {
         public static Flag activeFlags = (Flag)0; //Flag.PlaceThing | Flag.Conveyors...
 
         [System.Diagnostics.Conditional("DEBUG")]
-        public static void Message(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
+        public static void Message(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false)
+        {
             if ((activeFlags & flag) > 0) Log.Message(text);
         }
 
         [System.Diagnostics.Conditional("DEBUG")]
-        public static void Warning(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
+        public static void Warning(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false)
+        {
             if ((activeFlags & flag) > 0) Log.Warning(text);
         }
 
         [System.Diagnostics.Conditional("DEBUG")]
-        public static void Error(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false) {
+        public static void Error(Debug.Flag flag, string text, bool ignoreStopLoggingLimit = false)
+        {
             if ((activeFlags & flag) > 0) Log.Error(text);
         }
         // NOTE: Additional options are possible:

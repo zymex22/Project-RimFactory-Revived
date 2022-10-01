@@ -1,10 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using Verse;
-using RimWorld;
-using Verse.Sound;
-using ProjectRimFactory.SAL3.Things;
-using ProjectRimFactory.Storage;
 
 namespace ProjectRimFactory.Storage.UI
 {
@@ -30,7 +26,7 @@ namespace ProjectRimFactory.Storage.UI
                 parrent = par;
             }
 
-            public static void Update(bool dir,string buff)
+            public static void Update(bool dir, string buff)
             {
                 if (gracePeriod == -1 || buff != lastval)
                 {
@@ -119,7 +115,7 @@ namespace ProjectRimFactory.Storage.UI
         }
 
         private Action postClose;
-        
+
         public override Vector2 InitialSize
         {
             get { return new Vector2(500f, 250f); }
@@ -194,7 +190,7 @@ namespace ProjectRimFactory.Storage.UI
             }
             if (outputSettings.max < outputSettings.min && GUI.GetNameOfFocusedControl() == controlIdMinInput)
             {
-                LimitUpdateRequest.Update(false,minBufferString);
+                LimitUpdateRequest.Update(false, minBufferString);
                 //maxBufferString = minBufferString;
             }
             list.Gap();
@@ -214,14 +210,14 @@ namespace ProjectRimFactory.Storage.UI
             }
             if (outputSettings.min > outputSettings.max && GUI.GetNameOfFocusedControl() == controlIdMaxInput)
             {
-                LimitUpdateRequest.Update(true,maxBufferString);
+                LimitUpdateRequest.Update(true, maxBufferString);
                 //minBufferString = maxBufferString;
             }
             LimitUpdateRequest.Tick();
 
-            
 
-               
+
+
             list.End();
         }
 

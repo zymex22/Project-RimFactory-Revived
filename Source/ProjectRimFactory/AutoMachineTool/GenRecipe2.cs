@@ -1,14 +1,7 @@
-﻿using System;
+﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using Verse.Sound;
 using UnityEngine;
-using static ProjectRimFactory.AutoMachineTool.Ops;
+using Verse;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -24,7 +17,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public static float GetStatValue(this IRecipeProductWorker maker, StatDef stat, bool applyPostProcess = true)
         {
-            if(stat == StatDefOf.FoodPoisonChance)
+            if (stat == StatDefOf.FoodPoisonChance)
             {
                 return 0.0005f;
             }
@@ -37,7 +30,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public static IEnumerable<Thing> MakeRecipeProducts(RecipeDef recipeDef, IRecipeProductWorker worker, List<Thing> ingredients, Thing dominantIngredient, IBillGiver billGiver, Precept_ThingStyle precept = null)
         {
-            var result = MakeRecipeProductsInt(recipeDef, worker, ingredients, dominantIngredient, billGiver,precept);
+            var result = MakeRecipeProductsInt(recipeDef, worker, ingredients, dominantIngredient, billGiver, precept);
             return result;
         }
 

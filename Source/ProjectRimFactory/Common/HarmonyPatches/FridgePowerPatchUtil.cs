@@ -11,12 +11,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     /// </summary>
     public static class FridgePowerPatchUtil
     {
-        public static Dictionary<Building_MassStorageUnitPowered,float> FridgePowerDrawPerUnit = new Dictionary<Building_MassStorageUnitPowered,float>();
+        public static Dictionary<Building_MassStorageUnitPowered, float> FridgePowerDrawPerUnit = new Dictionary<Building_MassStorageUnitPowered, float>();
 
-        public static void UpdatePowerDraw(Building_MassStorageUnitPowered dsu , CompPowerTrader powertrader)
+        public static void UpdatePowerDraw(Building_MassStorageUnitPowered dsu, CompPowerTrader powertrader)
         {
-            float powerDraw = 0; 
-            if (!FridgePowerDrawPerUnit.TryGetValue(dsu,out powerDraw)) powerDraw = -1 * powertrader.Props.basePowerConsumption;
+            float powerDraw = 0;
+            if (!FridgePowerDrawPerUnit.TryGetValue(dsu, out powerDraw)) powerDraw = -1 * powertrader.Props.basePowerConsumption;
             powertrader.powerOutputInt = powerDraw - dsu.ExtraPowerDraw;
         }
 

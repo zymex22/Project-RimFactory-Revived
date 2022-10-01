@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Verse;
-using System.Linq;
-
 
 namespace ProjectRimFactory.Drones
 {

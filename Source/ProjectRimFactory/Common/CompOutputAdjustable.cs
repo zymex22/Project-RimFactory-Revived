@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -34,7 +31,7 @@ namespace ProjectRimFactory.Common
             {
                 possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacentCardinal(parent));
             }
-            
+
         }
         public override void PostDrawExtraSelectionOverlays()
         {
@@ -43,7 +40,7 @@ namespace ProjectRimFactory.Common
             {
                 GenDraw.DrawFieldEdges(new List<IntVec3> { CurrentCell }, Color.yellow);
             }
-            
+
         }
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
@@ -54,8 +51,9 @@ namespace ProjectRimFactory.Common
                 {
                     defaultLabel = "AdjustDirection_Output".Translate(),
                     actionL = () => index++,
-                    actionR = () => {
-                        if(index == 0)
+                    actionR = () =>
+                    {
+                        if (index == 0)
                         {
                             index = possibleOutputs.Count - 1;
                         }
@@ -63,7 +61,7 @@ namespace ProjectRimFactory.Common
                         {
                             index--;
                         }
-                        },
+                    },
                     icon = TexUI.RotRightTex,
                     defaultIconColor = Color.green
                 };

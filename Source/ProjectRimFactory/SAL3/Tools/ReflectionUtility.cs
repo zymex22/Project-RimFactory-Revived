@@ -1,9 +1,5 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using Verse;
 
 
@@ -29,7 +25,7 @@ namespace ProjectRimFactory.SAL3
         public static readonly FieldInfo BackCompatibility_conversionChain = typeof(BackCompatibility).GetField("conversionChain", BindingFlags.NonPublic | BindingFlags.Static);
 
         public static readonly FieldInfo ResearchManager_progress = typeof(ResearchManager).GetField("progress", BindingFlags.Instance | BindingFlags.NonPublic);
-        
+
         public static readonly FieldInfo allRecipesCached = typeof(ThingDef).GetField("allRecipesCached", BindingFlags.Instance | BindingFlags.NonPublic);
 
         //reservations

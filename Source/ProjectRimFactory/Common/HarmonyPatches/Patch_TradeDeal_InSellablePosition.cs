@@ -1,14 +1,6 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HarmonyLib;
 using RimWorld;
-using HarmonyLib;
 using Verse;
-using ProjectRimFactory.Storage;
-using System.Reflection.Emit;
-using System.Reflection;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -21,7 +13,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             if (!t.Spawned && t.MapHeld != null)
             {
                 var buildings = PatchStorageUtil.GetPRFMapComponent(t.MapHeld).ColdStorageBuildings;
-                foreach(var building in buildings)
+                foreach (var building in buildings)
                 {
                     if (building.StoredItems.Contains(t))
                     {

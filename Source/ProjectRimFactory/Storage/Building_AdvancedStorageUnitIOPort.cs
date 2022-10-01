@@ -1,10 +1,7 @@
-﻿using System;
+﻿using ProjectRimFactory.Common;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.Storage
 {
@@ -54,7 +51,7 @@ namespace ProjectRimFactory.Storage
         private Thing GetstoredItem()
         {
             var map = Map;
-            if(map is null)
+            if (map is null)
             {
                 Log.Error($"PRF GetstoredItem @{this.Position} map is null");
                 return null;

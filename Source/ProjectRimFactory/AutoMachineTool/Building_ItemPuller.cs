@@ -1,27 +1,20 @@
-﻿using System;
-using System.IO;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
 using Verse;
-using Verse.AI;
-using Verse.Sound;
-using UnityEngine;
-using static ProjectRimFactory.AutoMachineTool.Ops;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
     [StaticConstructorOnStartup] // for registering settings
     public class Building_ItemPuller : Building_BaseLimitation<Thing>, IStorageSetting, IStoreSettingsParent
     {
-        public Building_ItemPuller() {
+        public Building_ItemPuller()
+        {
             this.outputToEntireStockpile = true;
         }
         protected bool active = false;
-        protected bool takeForbiddenItems=true;
+        protected bool takeForbiddenItems = true;
         protected bool takeSingleItems = false;
         public override Graphic Graphic => this.def.GetModExtension<ModExtension_Graphic>()?.GetByName(GetGraphicName()) ?? base.Graphic;
         protected const float defaultWorkAmount = 120f;
@@ -50,7 +43,8 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 settings = new StorageSettings();
                 //To "Prevent" a null Refrence as GetParentStoreSettings() seems to be null on first Placing the Building
-                if (GetParentStoreSettings() != null) { 
+                if (GetParentStoreSettings() != null)
+                {
                     settings.CopyFrom(GetParentStoreSettings());
                 }
             }
@@ -91,14 +85,16 @@ namespace ProjectRimFactory.AutoMachineTool
             this.settings = GetStoreSettings(); // force init
             this.forcePlace = false;
 
-            if (!respawningAfterLoad) Messages.Message("PRF.NeedToTurnOnPuller".Translate(), 
+            if (!respawningAfterLoad) Messages.Message("PRF.NeedToTurnOnPuller".Translate(),
                      this, MessageTypeDefOf.CautionInput);
         }
 
         protected override void Reset()
         {
-            if (this.working != null) {
-                if (!working.Spawned) {
+            if (this.working != null)
+            {
+                if (!working.Spawned)
+                {
                     GenPlace.TryPlaceThing(working, Position, Map, ThingPlaceMode.Near, null, p => p != Position);
                 }
             }
@@ -150,7 +146,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 isActive = () => this.takeForbiddenItems,
                 toggleAction = () => this.takeForbiddenItems = !this.takeForbiddenItems,
                 defaultLabel = "PRF.Puller.TakeForbiddenItems".Translate(),
-                defaultDesc  = "PRF.Puller.TakeForbiddenItemsDesc".Translate(),
+                defaultDesc = "PRF.Puller.TakeForbiddenItemsDesc".Translate(),
                 icon = TexCommand.ForbidOff
             };
             if (this.OutputSides)
@@ -194,9 +190,11 @@ namespace ProjectRimFactory.AutoMachineTool
             products = this.products;
             return true;
         }
-        protected override void Placing() {
+        protected override void Placing()
+        {
             // unforbid any items picked up before they are put down:
-            if (!products.NullOrEmpty()) {
+            if (!products.NullOrEmpty())
+            {
                 foreach (Thing t in products)
                     if (t.IsForbidden(Faction.OfPlayer))
                         t.SetForbidden(false);
@@ -205,7 +203,8 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver)
         {
-            if (this.State == WorkingState.Ready) {
+            if (this.State == WorkingState.Ready)
+            {
                 this.ClearActions();
                 if (newThing.Spawned) newThing.DeSpawn();
                 this.ForceStartWork(newThing, defaultWorkAmount);
@@ -229,7 +228,8 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public static void DoSettingsWindowContents(Thing t, Listing_Standard ls)
         {
-            if (t is Building_ItemPuller puller) {
+            if (t is Building_ItemPuller puller)
+            {
                 bool tmp = puller.takeSingleItems;
                 ls.CheckboxLabeled("PRF.Puller.takeSingleItemsHmm".Translate(), ref tmp, "PRF.Puller.takeSingleItemsDesc".Translate());
                 if (tmp != puller.takeSingleItems) puller.TakeSingleItems = tmp;

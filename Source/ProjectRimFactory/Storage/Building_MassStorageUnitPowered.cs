@@ -1,12 +1,10 @@
-﻿using RimWorld;
-using System;
+﻿using ProjectRimFactory.Common.HarmonyPatches;
+using ProjectRimFactory.Storage.Editables;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Verse;
-using ProjectRimFactory.Storage.Editables;
 using UnityEngine;
-using ProjectRimFactory.Common.HarmonyPatches;
+using Verse;
 
 namespace ProjectRimFactory.Storage
 {
