@@ -8,8 +8,12 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         protected override Thing TargetThing()
         {
-            Zone_Growing z = (this.Position + this.Rotation.Opposite.FacingCell)
-                .GetZone(this.Map) as Zone_Growing;
+
+            Zone z = (this.Position + this.Rotation.Opposite.FacingCell)
+                .GetZone(this.Map);
+            //Only allow Zones that are for growing
+            if (z is not IPlantToGrowSettable) z = null;
+
             Thing target;
             if (z == null) return null;
             target = z.AllContainedThings
