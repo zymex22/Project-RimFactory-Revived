@@ -17,6 +17,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         public abstract IEnumerable<RecipeDef> GetAllRecipes();
 
+        public void Notify_BillDeleted(Bill bill)
+        {
+        }
+
         public bool UsableForBillsAfterFueling()
         {
             throw new NotImplementedException();

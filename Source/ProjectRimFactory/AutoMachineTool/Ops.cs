@@ -249,6 +249,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public static TO CopyTo<FROM, TO>(this FROM bill, TO copy) where FROM : Bill_Production where TO : Bill_Production
         {
+            //Todo: Check if we are not missing things
             copy.allowedSkillRange = bill.allowedSkillRange;
             copy.billStack = bill.billStack;
             copy.deleted = bill.deleted;
@@ -258,7 +259,6 @@ namespace ProjectRimFactory.AutoMachineTool
             copy.includeTainted = bill.includeTainted;
             copy.ingredientFilter = bill.ingredientFilter;
             copy.ingredientSearchRadius = bill.ingredientSearchRadius;
-            copy.lastIngredientSearchFailTicks = bill.lastIngredientSearchFailTicks;
             copy.limitToAllowedStuff = bill.limitToAllowedStuff;
             copy.paused = bill.paused;
             copy.pauseWhenSatisfied = bill.pauseWhenSatisfied;

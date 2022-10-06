@@ -48,9 +48,8 @@ namespace ProjectRimFactory.Drones
             story = new Pawn_StoryTracker(this)
             {
                 bodyType = BodyTypeDefOf.Thin,
-                crownType = CrownType.Average,
-                childhood = DroneBackstories.childhood,
-                adulthood = DroneBackstories.adulthood
+                Childhood = DroneBackstories.childhood,
+                Adulthood = DroneBackstories.adulthood
             };
             drafter = new Pawn_DraftController(this);
             relations = new Pawn_RelationsTracker(this);

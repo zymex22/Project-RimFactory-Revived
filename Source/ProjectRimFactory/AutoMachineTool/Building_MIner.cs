@@ -189,6 +189,10 @@ namespace ProjectRimFactory.AutoMachineTool
             HelpText += "\r\n";
             return HelpText;
         }
+
+        public void Notify_BillDeleted(Bill bill)
+        {
+        }
     }
 
     [StaticConstructorOnStartup]

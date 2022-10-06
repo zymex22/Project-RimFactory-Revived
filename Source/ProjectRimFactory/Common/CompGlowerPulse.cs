@@ -99,7 +99,7 @@ namespace ProjectRimFactory.Common
             {
                 if (!pulse)
                 {
-                    this.glowColor = Color32.Lerp(minGlowColor.ToColor32, maxGlowColor.ToColor32, 0.5f).AsColorInt();
+                    this.glowColor = Color32.Lerp(minGlowColor.ProjectToColor32, maxGlowColor.ProjectToColor32, 0.5f).AsColorInt();
                     this.glowRadius = Mathf.Lerp(minGlowRadius, maxGlowRadius, 0.5f);
                     return;
                 }
@@ -121,7 +121,7 @@ namespace ProjectRimFactory.Common
                 }
                 var factor = this.easing.GetValue(time);
 
-                this.glowColor = Color32.Lerp(minGlowColor.ToColor32, maxGlowColor.ToColor32, factor).AsColorInt();
+                this.glowColor = Color32.Lerp(minGlowColor.ProjectToColor32, maxGlowColor.ProjectToColor32, factor).AsColorInt();
                 this.glowRadius = Mathf.Lerp(minGlowRadius, maxGlowRadius, factor);
             }
             else

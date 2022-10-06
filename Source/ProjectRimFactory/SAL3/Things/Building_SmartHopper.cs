@@ -221,5 +221,11 @@ namespace ProjectRimFactory.SAL3.Things
         }
 
         public StorageSettings GetParentStoreSettings() => def.building.fixedStorageSettings;
+
+        public void Notify_SettingsChanged()
+        {
+            // Might allow us to cache StorageSettings
+            // unsure about the potential gains / current load
+        }
     }
 }

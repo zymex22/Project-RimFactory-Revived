@@ -180,7 +180,7 @@ namespace ProjectRimFactory.CultivatorTools
 
             //TODO 1.3 Maybe rename pawn?
             if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
-            p.PlantCollected(PRFGameComponent.PRF_StaticPawn);
+            p.PlantCollected(PRFGameComponent.PRF_StaticPawn,PlantDestructionMode.Chop);
         }
 
         public override string DescriptionDetailed => base.DescriptionDetailed + " " +

@@ -97,26 +97,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         private static void SetBackstoryAndSkills(Pawn p)
         {
-            if (BackstoryDatabase.TryGetWithIdentifier("ChildSpy47", out Backstory bs))
-            {
-                p.story.childhood = bs;
-            }
-            else
-            {
-                Log.Error("Tried to assign child backstory ChildSpy47, but not found");
-            }
-            if (BackstoryDatabase.TryGetWithIdentifier("ColonySettler53", out Backstory bstory))
-            {
 
-                p.story.adulthood = bstory;
-            }
-            else
-            {
-
-                Log.Error("Tried to assign child backstory ColonySettler53, but not found");
-            }
+            p.story.Childhood = PRFDefOf.ChildSpy47;
+            p.story.Adulthood = PRFDefOf.ColonySettler53;
+            
             //Clear traits
-
             p.story.traits.allTraits = new List<Trait>();
             //Reset cache
 

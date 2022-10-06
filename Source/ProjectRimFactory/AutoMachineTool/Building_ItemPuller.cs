@@ -235,5 +235,11 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (tmp != puller.takeSingleItems) puller.TakeSingleItems = tmp;
             }
         }
+
+        public void Notify_SettingsChanged()
+        {
+            // Might allow us to cache StorageSettings
+            // unsure about the potential gains / current load
+        }
     }
 }
