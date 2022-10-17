@@ -1,6 +1,5 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using Verse;
 
 namespace ProjectRimFactory.Drones
@@ -10,9 +9,9 @@ namespace ProjectRimFactory.Drones
     {
         public static BackstoryDef childhood;
         public static BackstoryDef adulthood;
-        
 
-        
+
+
         static DroneBackstories()
         {
             LongEventHandler.ExecuteWhenFinished(() =>
@@ -26,7 +25,7 @@ namespace ProjectRimFactory.Drones
                     slot = BackstorySlot.Childhood,
                     baseDesc = "NoneBrackets".Translate()
                 };
-                
+
                 adulthood = new BackstoryDef()
                 {
                     title = "PRFDroneName".Translate(),

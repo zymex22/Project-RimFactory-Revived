@@ -100,7 +100,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
             p.story.Childhood = PRFDefOf.ChildSpy47;
             p.story.Adulthood = PRFDefOf.ColonySettler53;
-            
+
             //Clear traits
             p.story.traits.allTraits = new List<Trait>();
             //Reset cache
