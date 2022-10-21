@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Fishing Expanded</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName = "PRF_T1_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+					<value>
+						<VCEF_RawAnchovy Weight="0.2" Count="6" />
+						<VCEF_RawAngelfish Weight="0.1" Count="6" />
+						<VCEF_RawBass Weight="0.1" Count="6" />
+						<VCEF_RawCatfish Weight="0.1" Count="6" />
+						<VCEF_RawGoldfish Weight="0.1" Count="6" />
+						<VCEF_RawGuppy Weight="0.1" Count="6" />
+						<VCEF_RawKoi Weight="0.1" Count="6" />
+						<VCEF_RawMinnow Weight="0.2" Count="6" />
+						<VCEF_RawPerch Weight="0.1" Count="6" />
+						<VCEF_RawPiranha Weight="0.1" Count="6" />
+						<VCEF_RawSalmon Weight="0.1" Count="6" />
+						<VCEF_RawTrout Weight="0.1" Count="6" />
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName = "PRF_T2_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+					<value>
+						<VCEF_RawAnchovy Weight="0.2" Count="6" />
+						<VCEF_RawAngelfish Weight="0.1" Count="6" />
+						<VCEF_RawAnglerfish Weight="0.1" Count="6" />
+						<VCEF_RawBass Weight="0.1" Count="6" />
+						<VCEF_RawClownfish Weight="0.1" Count="6" />
+						<VCEF_RawCod Weight="0.1" Count="6" />
+						<VCEF_RawEel Weight="0.1" Count="6" />
+						<VCEF_RawHaddock Weight="0.1" Count="6" />
+						<VCEF_RawHalibut Weight="0.1" Count="6" />
+						<VCEF_RawHerring Weight="0.2" Count="6" />
+						<VCEF_RawLobster Weight="0.1" Count="6" />
+						<VCEF_RawMackerel Weight="0.1" Count="6" />
+						<VCEF_RawPufferfish Weight="0.1" Count="6" />
+						<VCEF_RawSalmon Weight="0.1" Count="6" />
+						<VCEF_RawSprat Weight="0.2" Count="6" />
+						<VCEF_RawSwordfish Weight="0.1" Count="6" />
+						<VCEF_RawTrout Weight="0.1" Count="6" />
+						<VCEF_RawTuna Weight="0.1" Count="6" />
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

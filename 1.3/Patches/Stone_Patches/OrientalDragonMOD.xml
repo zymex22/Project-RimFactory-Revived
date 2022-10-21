@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<!-- [Syulipia]OrientalDragonMOD -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>[Syulipia]OrientalDragonMOD</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<!-- Remove/Exclude ores from standard chances and Bills on miners -->
+				<li Class="PatchOperationAdd">					<!-- T1 miner Remove from standard chance -->
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkI"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<value>
+						<li>Syulipia_Gate_Dragon</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">					<!-- T2 miner Remove from standard chance -->
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<value>
+						<li>Syulipia_Gate_Dragon</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">					<!-- T3 miner Remove from Bill list -->
+					<xpath>/Defs/ThingDef[defName="PRF_BillTypeMiner_I"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<value>
+						<li>Syulipia_Gate_Dragon</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

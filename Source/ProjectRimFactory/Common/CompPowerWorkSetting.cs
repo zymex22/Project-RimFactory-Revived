@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using ProjectRimFactory.SAL3;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,7 +101,7 @@ namespace ProjectRimFactory.Common
 
         }
 
-        public int BasePowerConsumption => (int)this.powerComp.Props.basePowerConsumption;
+        public int BasePowerConsumption => (int)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(this.powerComp.Props);
 
         public int CurrentPowerConsumption => (int)this.powerComp.PowerOutput;
 
@@ -196,7 +197,7 @@ namespace ProjectRimFactory.Common
         {
             if (this.powerComp != null)
             {
-                this.powerComp.PowerOutput = -this.powerComp.Props.basePowerConsumption - this.SupplyPowerForSpeed - this.SupplyPowerForRange - AdditionalPowerDrain;
+                this.powerComp.PowerOutput = -(float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(this.powerComp.Props) - this.SupplyPowerForSpeed - this.SupplyPowerForRange - AdditionalPowerDrain;
             }
         }
 

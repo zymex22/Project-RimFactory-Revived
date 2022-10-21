@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--=========================== Drones drop down category ==================================-->
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_DroneStationGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_MiniDroneStationGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!--=========================== Bases for Dronestation types ==================================-->
+  <!--=========================== =========================== ===================================-->
+  <!--=========================== Mini drone station Base 1x1 ===================================-->
+  <ThingDef Name="PRF_MiniDroneStation" ParentName="PRF_BuildingBase" Abstract="True">
+    <thingClass>ProjectRimFactory.Drones.Building_DroneStationRefuelable</thingClass>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>      <!-- structure HP -->
+      <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
+      <Mass>70</Mass>      <!-- mass in kg -->
+      <WorkToBuild>1500</WorkToBuild>
+    </statBases>
+    <uiIconScale>0.7</uiIconScale>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <canOverlapZones>false</canOverlapZones>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
+      <shaderType>Transparent</shaderType>      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+      <shadowData>
+        <volume>(0.3, 0.5, 0.3)</volume>
+        <offset>(0,0,-0.23)</offset>
+      </shadowData>
+    </graphicData>
+    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+    <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
+    <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
+    <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
+    <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
+    <castEdgeShadows>true</castEdgeShadows>
+    <size>(1,1)</size>    <!-- Ingame cell/ground size (x,y) -->
+    <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
+    <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
+    <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
+    <!--architect menu location-->
+    <placeWorkers>
+      <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
+    </placeWorkers>
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li Class="CompProperties_Flickable" />
+    </comps>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
+  </ThingDef>
+
+  <!--================================== ========================= ======================================-->
+  <!--================================== Drone Station Base 10+ drones ==================================-->
+  <ThingDef ParentName="PRF_BuildingBase" Name="PRF_DroneStationBase" Abstract="True">
+    <thingClass>ProjectRimFactory.Drones.Building_DroneStationRefuelable</thingClass>
+    <graphicData>
+      <texPath>Drones/DroneBase_2x2</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <size>(2,2)</size>
+    <canOverlapZones>false</canOverlapZones>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <castEdgeShadows>false</castEdgeShadows>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <WorkToBuild>3000</WorkToBuild>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0</fuelConsumptionRate>
+        <fuelCapacity>20</fuelCapacity>        <!-- Max Drone Amounts -->
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelFilter>
+          <thingDefs>
+            <li>PRF_DroneModule</li>
+          </thingDefs>
+        </fuelFilter>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>3</initialConfigurableTargetFuelLevel>
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <allowManualRangeTypeChange>false</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <rotatable>false</rotatable>
+    <placeWorkers>
+      <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
+    </placeWorkers>
+    <designatorDropdown>PRF_DroneStationGroup</designatorDropdown>
+  </ThingDef>
+
+
+  <!--=========================== Mini Workshop helper ==================================-->
+  <ThingDef ParentName="PRF_MiniDroneStation">
+    <defName>PRF_MiniHelper</defName>
+    <label>Workshop Drone Station</label>
+    <graphicData>
+      <texPath>Drones/MiniDroneStation</texPath>
+    </graphicData>
+    <description>A mini workshop helper capable of hauling, flicking, firefighting, and cleaning your workshop within a configurable range.  Longer ranges will require more power.</description>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>2</PRF_DroneModule>
+      <Steel>30</Steel>
+      <Plasteel>20</Plasteel>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <statBases>
+      <MarketValue>2345</MarketValue>
+    </statBases>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0</fuelConsumptionRate>
+        <fuelCapacity>2</fuelCapacity>
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelFilter>
+          <thingDefs>
+            <li>PRF_DroneModule</li>
+          </thingDefs>
+        </fuelFilter>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>1</initialConfigurableTargetFuelLevel>
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>3~10</floatrange_Range>
+        <powerPerStepRange>150</powerPerStepRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <displayDormantDrones>false</displayDormantDrones>        <!-- Drones will sit on top while not working -->
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <!-- <Sleeptimes></Sleeptimes> -->        <!-- Setting off times use 22,23,24,0,1,2 -->
+        <!-- <SquareJobRadius>5</SquareJobRadius> -->        <!-- This is used if it has a Fixed Range -->
+        <workTypes>
+          <li>BasicWorker</li>
+          <li>Hauling</li>
+          <li>Cleaning</li>
+          <li>Firefighter</li>
+        </workTypes>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ReserchOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
+        <skills>
+          <!--<li>
+            <def>Intellectual</def>
+            <levelInt>11</levelInt>
+          </li>-->
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_ImprovedDrones</li>
+    </researchPrerequisites>
+    <designatorDropdown>PRF_MiniDroneStationGroup</designatorDropdown>
+  </ThingDef>
+
+  <!--=========================== Drone Column (for thronerooms) ==================================-->
+  <ThingDef ParentName="PRF_MiniDroneStation">
+    <defName>PRF_MiniDroneColumn</defName>
+    <label>Drone Column</label>
+    <description>>A column filled with 2 handy drones that can clean your throneroom or eating hall, put out fires, refuel your braziers, and move your stuff away from the floor. It's also capable of holding up a roof, and looks quite nice.</description>
+    <graphicData>
+      <drawSize>(1.5,1.5)</drawSize>
+      <drawOffset>(0,0,0.2)</drawOffset>
+      <texPath>Drones/DroneColumn</texPath>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- <graphicClass>Graphic_Random</graphicClass> -->
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <constructEffect></constructEffect>
+    <!-- <designationCategory>Structure</designationCategory> -->
+    <uiIconScale>0.70</uiIconScale>
+    <fillPercent>0.75</fillPercent>
+    <pathCost>0</pathCost>
+    <!-- <specialDisplayRadius>6.9</specialDisplayRadius> -->    <!-- Show radius for hold roof -->
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Mass>25</Mass>
+      <MarketValue>2172</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Beauty>10</Beauty>
+    </statBases>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>20</costStuffCount>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>2</PRF_DroneModule>
+      <Steel>10</Steel>
+      <Plasteel>5</Plasteel>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <holdsRoof>true</holdsRoof>
+    <fertility>0</fertility>
+    <building>
+      <isInert>true</isInert>
+      <ai_chillDestination>false</ai_chillDestination>
+    </building>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0</fuelConsumptionRate>
+        <fuelCapacity>2</fuelCapacity>
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelFilter>
+          <thingDefs>
+            <li>PRF_DroneModule</li>
+          </thingDefs>
+        </fuelFilter>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>2</initialConfigurableTargetFuelLevel>
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>2~5</floatrange_Range>
+        <powerPerStepRange>150</powerPerStepRange>
+
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
+        <glowRadius>7</glowRadius>
+        <glowColor>(252,199,139,0)</glowColor>
+        <key>PRF_Warm_White</key>
+        <moreColors>
+          <li>
+            <key>PRF_Cool_White</key>
+            <color>(140,200,250,0)</color>
+          </li>
+          <li>
+            <key>PRF_Red</key>
+            <color>(217,80,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Green</key>
+            <color>(80,217,80,0)</color>
+          </li>
+          <li>
+            <key>PRF_Blue</key>
+            <color>(80,80,217,0)</color>
+          </li>
+          <li>
+            <key>PRF_Cyan</key>
+            <color>(10,245,245,0)</color>
+          </li>
+          <li>
+            <key>PRF_Yellow</key>
+            <color>(240,240,20,0)</color>
+          </li>
+          <li>
+            <key>PRF_Magenta</key>
+            <color>(245,10,245,0)</color>
+          </li>
+          <li>
+            <key>PRF_None</key>
+            <color>(0,0,0,0)</color>
+          </li>
+        </moreColors>
+        <!-- <prerequisites>
+          <li>ColoredLights</li>
+        </prerequisites> -->
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <displayDormantDrones>false</displayDormantDrones>        <!-- Drones will sit on top while not working -->
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <!-- <Sleeptimes>22,23,24,0,1,2</Sleeptimes> -->        <!-- SLEEEEEEP -->
+        <workTypes>
+          <li>Hauling</li>
+          <li>Cleaning</li>
+          <li>Firefighter</li>
+        </workTypes>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ReserchOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
+        <skills>
+          <!--<li>
+            <def>Intellectual</def>
+            <levelInt>11</levelInt>
+          </li>-->
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_ImprovedDrones</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=========================== Fire Drone Station ==================================-->
+  <!-- <ThingDef ParentName="PRF_DroneStationBase">
+    <defName>PRF_FireDroneStation</defName>
+    <label>fire drone Station</label>
+    <description>A station that holds up to 10 drones which are capable of fighting fires. Consumes considerable power. Typically your colony only needs 1 of these.</description>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneStationSpecialGraphics</thingClass>
+    <graphicData>
+      <texPath>Drones/DroneStationCaretaker</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentSpacer>5</ComponentSpacer>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRF_ElectronicChip_I>12</PRF_ElectronicChip_I>
+    </costList>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <displayDormantDrones>false</displayDormantDrones>
+        <workTypes>
+          <li>Firefighter</li>
+        </workTypes>
+      </li>
+    </modExtensions>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0</fuelConsumptionRate>
+        <fuelCapacity>10</fuelCapacity>
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelFilter>
+          <thingDefs>
+            <li>PRF_DroneModule</li>
+          </thingDefs>
+        </fuelFilter>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>5</initialConfigurableTargetFuelLevel>
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+      </li>
+    </comps>
+  </ThingDef> -->
+
+</Defs>

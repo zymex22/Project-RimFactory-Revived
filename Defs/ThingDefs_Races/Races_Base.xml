@@ -38,7 +38,6 @@
   <ThingDef Name="PRFDroneBase" Abstract="True">
     <statBases>
       <PsychicSensitivity>0</PsychicSensitivity>
-      <ToxicSensitivity>0</ToxicSensitivity>
       <Flammability>0</Flammability>
       <ComfyTemperatureMin>-100</ComfyTemperatureMin>
       <ComfyTemperatureMax>250</ComfyTemperatureMax>

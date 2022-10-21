@@ -1,4 +1,5 @@
 ﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.SAL3;
 using RimWorld;
 using System.Collections.Generic;
 using System.Text;
@@ -28,7 +29,7 @@ namespace ProjectRimFactory.Industry
         {
             get
             {
-                return -Props.basePowerConsumption * PowerProductionModifier;
+                return -(float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(Props) * PowerProductionModifier;
             }
         }
 

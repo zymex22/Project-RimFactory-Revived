@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Reflection;
 using Verse;
 
@@ -45,6 +46,9 @@ namespace ProjectRimFactory.Common
         public static ThingDef PRF_DroneModule;
         public static ThingDef Column;
         public static ThingDef PRF_MiniDroneColumn;
+
+        public static BackstoryDef ChildSpy47;
+        public static BackstoryDef ColonySettler53;
 
 
         //Reserch Projeckts

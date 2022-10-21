@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_CultivatorGroup</defName>
+  </DesignatorDropdownGroupDef>
+  <!--=========================== Cultivator Base ==================================-->
+  <ThingDef Name="PRF_CultivatorBaseBase" ParentName="PRF_BuildingBase" Abstract="True">
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>      <!-- structure HP -->
+      <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
+      <Mass>70</Mass>      <!-- mass in kg -->
+      <WorkToBuild>450</WorkToBuild>
+    </statBases>
+    <uiIconScale>0.7</uiIconScale>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
+      <shaderType>Transparent</shaderType>      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <canOverlapZones>false</canOverlapZones>
+    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
+    <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
+    <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
+    <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
+    <castEdgeShadows>true</castEdgeShadows>
+    <size>(1,1)</size>    <!-- Ingame cell/ground size (x,y) -->
+    <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
+    <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
+    <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
+    <designatorDropdown>PRF_CultivatorGroup</designatorDropdown>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
+
+
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li Class="CompProperties_Flickable" />
+    </comps>
+  </ThingDef>
+
+  <!--=========================== Sub base for drones ==================================-->
+  <ThingDef Name="PRF_CultivatorBaseDrone" ParentName="PRF_CultivatorBaseBase" Abstract="True">
+    <placeWorkers>
+      <li>ProjectRimFactory.Drones.PlaceWorker_DroneStation</li>
+    </placeWorkers>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <inspectorTabs>
+      <!-- <li>ProjectRimFactory.Drones.ITab_DroneStation</li> -->
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
+  </ThingDef>
+
+  <!--=========================== sub base for oldschool type ==================================-->
+  <ThingDef Name="PRF_CultivatorBase" ParentName="PRF_CultivatorBaseBase" Abstract="True">
+    <placeWorkers>
+      <li>ProjectRimFactory.CultivatorTools.PlaceWorker_HighlightPlaceableCells</li>
+    </placeWorkers>
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+    </comps>
+  </ThingDef>
+
+
+  <!--=========================== Basic Cultivator MKI ==================================-->
+  <ThingDef ParentName="PRF_CultivatorBaseDrone">
+    <defName>PRF_DroneCultivator_I</defName>
+    <label>Drone Cultivator</label>
+    <description>The first automated cultivator, this device utilises simple drones to sow, water, and harvest your crops. It is slow but still represents a good first step into automated farming.</description>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/Cultivator</texPath>
+    </graphicData>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>1</PRF_DroneModule>
+      <Steel>30</Steel>
+      <Plasteel>10</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <MarketValue>1475</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>400</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <maxNumDrones>1</maxNumDrones>        <!-- How many drones should be used? -->
+        <Sleeptimes>19,20,21,22,23,0,1,2,3,4,5</Sleeptimes>        <!-- Sleeping when plants are resting -->
+        <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
+        <SquareJobRadius>5</SquareJobRadius>
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <workTypes>
+          <li>Growing</li>
+          <li>PlantCutting</li>
+        </workTypes>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <!--<li>
+            <def>Plants</def>
+            <levelInt>11</levelInt>
+          </li>-->
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingI</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=========================== Cultivator MKII ==================================-->
+  <ThingDef ParentName="PRF_CultivatorBaseDrone">
+    <defName>PRF_DroneCultivator_II</defName>
+    <label>Drone Cultivator mk.II</label>
+    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.</description>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/CultivatorII</texPath>
+    </graphicData>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>2</PRF_DroneModule>
+      <Steel>30</Steel>
+      <Plasteel>20</Plasteel>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <ComponentSpacer>2</ComponentSpacer>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <MarketValue>3095</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>600</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <maxNumDrones>2</maxNumDrones>        <!-- How many drones should be used? -->
+        <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
+        <SquareJobRadius>5</SquareJobRadius>
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <workTypes>
+          <li>Growing</li>
+          <li>PlantCutting</li>
+          <li>Hauling</li>
+        </workTypes>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>15</BaseSkill>
+        <skills>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=========================== Sun Cultivator MKII ==================================-->
+  <ThingDef ParentName="PRF_CultivatorBaseDrone">
+    <defName>PRF_DroneCultivator_II_sun</defName>
+    <label>Drone Cultivator Mk.II(sun lamp)</label>
+    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.  This version includes an integrated sunlamp, and with specialized research can upgrade the included drones to level 20.</description>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/CultivatorWithSunLamp</texPath>
+      <drawSize>(1.1,1.1)</drawSize>
+    </graphicData>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>2</PRF_DroneModule>
+      <Steel>65</Steel>
+      <Plasteel>20</Plasteel>
+      <Silver>30</Silver>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <MarketValue>2137</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
+        <glowRadius>14</glowRadius>
+        <overlightRadius>9</overlightRadius>
+        <glowColor>(370,370,370,0)</glowColor>
+        <key>PRF_Warm_White</key>
+        <moreColors>
+          <li>
+            <key>PRF_Magenta</key>
+            <color>(245,10,245,0)</color>
+          </li>
+        </moreColors>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>2</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <maxNumDrones>2</maxNumDrones>
+        <displayDormantDrones>true</displayDormantDrones>
+        <SquareJobRadius>5</SquareJobRadius>
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <workTypes>
+          <li>Growing</li>
+          <li>PlantCutting</li>
+          <li>Hauling</li>
+        </workTypes>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ReserchOverrides</SkillUsage>
+        <BaseSkill>15</BaseSkill>
+        <skills>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=========================== Cultivator MKIII ==================================-->
+  <ThingDef ParentName="PRF_CultivatorBaseDrone">
+    <defName>PRF_DroneCultivator_III</defName>
+    <label>Drone Cultivator Mk.III</label>
+    <description>The Mark III Automated cultivator. With the use of extremely advanced automated drones this device can take your farming operations to the next level. The included drones will haul to a stockpile, I/O, crate if its within range.</description>
+    <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/CultivatorIII</texPath>
+    </graphicData>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_DroneModule>5</PRF_DroneModule>
+      <Steel>50</Steel>
+      <Plasteel>50</Plasteel>
+      <ComponentSpacer>4</ComponentSpacer>
+      <ComponentIndustrial>15</ComponentIndustrial>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <statBases>
+      <MarketValue>6428</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>750</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>5~15</floatrange_Range>
+        <powerPerStepRange>150</powerPerStepRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <maxNumDrones>5</maxNumDrones>        <!-- How many drones should be used? -->
+        <displayDormantDrones>true</displayDormantDrones>        <!-- Drones will sit on top while not working -->
+        <!-- <SquareJobRadius>5</SquareJobRadius> -->
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <workTypes>
+          <li>Growing</li>
+          <li>PlantCutting</li>
+          <li>Hauling</li>
+        </workTypes>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>
+        <skills>
+        </skills>
+      </li>
+    </modExtensions>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingIII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!--=========================== Spacer Cultivator ==================================-->
+  <!-- This is actually old style cultivator from b18 and before drone one was implemented. -->
+  <!-- This works with a invisable worker, that is shown when hover over it, it has a output cell -->
+  <ThingDef ParentName="PRF_CultivatorBase">
+    <defName>PRF_OldTypeCultivator_I</defName>
+    <label>Nano Cultivator</label>
+    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/Cultivator2</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>2995</MarketValue>
+    </statBases>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_RoboticArm>3</PRF_RoboticArm>
+      <Steel>100</Steel>
+      <Plasteel>30</Plasteel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>600</basePowerConsumption>
+      </li>
+      <!--       <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>1</heatPerSecond>
+      </li> -->
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <squareAreaRadius>5</squareAreaRadius>
+        <TickFrequencyDivisor>50</TickFrequencyDivisor>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingIII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=========================== Spacer Cultivator Sun ==================================-->
+  <ThingDef ParentName="PRF_CultivatorBase">
+    <defName>PRF_OldTypeCultivator_Sun</defName>
+    <label>Nano Cultivator (Sunlamp)</label>
+    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.  This model has an integrated sunlamp.</description>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/CultivatorB18</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>3631</MarketValue>
+    </statBases>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_RoboticArm>3</PRF_RoboticArm>
+      <Steel>100</Steel>
+      <Plasteel>30</Plasteel>
+      <Silver>30</Silver>
+      <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
+        <glowRadius>14</glowRadius>
+        <overlightRadius>9</overlightRadius>
+        <glowColor>(370,370,370,0)</glowColor>
+        <key>PRF_Warm_White</key>
+        <moreColors>
+          <li>
+            <key>PRF_Magenta</key>
+            <color>(245,10,245,0)</color>
+          </li>
+        </moreColors>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <!--       <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>2</heatPerSecond>
+      </li> -->
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <squareAreaRadius>5</squareAreaRadius>
+        <TickFrequencyDivisor>50</TickFrequencyDivisor>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingIII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=========================== Spacer Cultivator XL ==================================-->
+  <ThingDef ParentName="PRF_CultivatorBase">
+    <defName>PRF_OldTypeCultivator_Xl</defName>
+    <label>Nano Cultivator Mk.II</label>
+    <description>A highly advanced XL Cultivator that houses worker mechanites instead of drones.  The included mechanites will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
+    <graphicData>
+      <texPath>Farm/CultivatorXL</texPath>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <MarketValue>10646</MarketValue>
+    </statBases>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <PRF_RoboticArm>9</PRF_RoboticArm>
+      <Steel>800</Steel>
+      <Plasteel>200</Plasteel>
+      <ComponentIndustrial>20</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <holdsRoof>true</holdsRoof>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <basePowerConsumption>2400</basePowerConsumption>
+      </li>
+      <!--       <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>1</heatPerSecond>
+      </li> -->
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <squareAreaRadius>11</squareAreaRadius>
+        <TickFrequencyDivisor>12</TickFrequencyDivisor>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingIII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+
+  <!--=========================== Sprinkler ==================================-->
+  <ThingDef ParentName="PRF_BuildingBase">
+    <defName>PRF_Sprinkler_I</defName>
+    <label>Sprinkler</label>
+    <description>A small sprinkler that waters your plants and increases their growth by one hour per round. Effects are also stackable!</description>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
+    <designatorDropdown>PRF_CultivatorGroup</designatorDropdown>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <graphicData>
+      <texPath>Farm/CultivatorTools_Sprinkler</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.8,0.8)</drawSize>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>450</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <MarketValue>360</MarketValue>
+      <Mass>5</Mass>
+    </statBases>
+    <costList>
+      <Steel>50</Steel>
+      <Plasteel>10</Plasteel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <specialDisplayRadius>12</specialDisplayRadius>    <!-- Radius -->
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <TickFrequencyDivisor>50</TickFrequencyDivisor>        <!--  Do every X ticks (original prf 50) -->
+        <GrowRate>2000</GrowRate>        <!-- How much time add per run (original prf 2500/1h per round) -->
+      </li>
+    </modExtensions>
+    <tickerType>Normal</tickerType>
+    <rotatable>false</rotatable>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=========================== Spacer Sprinkler ==================================-->
+  <ThingDef ParentName="PRF_BuildingBase">
+    <defName>PRF_Sprinkler_II</defName>
+    <label>Sprinkler Mk.II</label>
+    <description>An upgraded sprinkler using advanced AI to calculate and distribute the fertilizer needs of each plant in each sprinkle, optimizing the growth rate of every plant.  Affected plants have their growth increased by two hours per round. Effects are stackable</description>
+    <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
+    <designatorDropdown>PRF_CultivatorGroup</designatorDropdown>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <graphicData>
+      <texPath>Farm/CultivatorTools_SprinklerSpacer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(0.8,0.8)</drawSize>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>1000</WorkToBuild>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+      <MarketValue>1896</MarketValue>
+      <Mass>5</Mass>
+    </statBases>
+    <costList>
+      <Steel>50</Steel>
+      <Plasteel>10</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>350</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_Flickable" />
+    </comps>
+    <specialDisplayRadius>12</specialDisplayRadius>    <!-- Radius -->
+    <modExtensions>
+      <li Class="ProjectRimFactory.CultivatorTools.CultivatorDefModExtension">
+        <TickFrequencyDivisor>25</TickFrequencyDivisor>        <!--  Do every X ticks (original prf 50) -->
+        <GrowRate>2500</GrowRate>        <!-- How much time add per run (original prf 2500/1h per round) -->
+      </li>
+    </modExtensions>
+    <tickerType>Normal</tickerType>
+    <rotatable>false</rotatable>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRF_AutomaticFarmingIII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+</Defs>

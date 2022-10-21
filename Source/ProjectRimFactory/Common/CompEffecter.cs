@@ -108,8 +108,10 @@ namespace ProjectRimFactory.Common
                 {
                     return false;
                 }
-                CompSendSignalOnPawnProximity compSendSignalOnPawnProximity = this.parent.TryGetComp<CompSendSignalOnPawnProximity>();
-                return compSendSignalOnPawnProximity == null || !compSendSignalOnPawnProximity.Sent;
+                //Todo: Check if we need a replacement (I'm a bit lost here)
+                //CompSendSignalOnPawnProximity compSendSignalOnPawnProximity = this.parent.TryGetComp<CompSendSignalOnPawnProximity>();
+                //return compSendSignalOnPawnProximity == null || !compSendSignalOnPawnProximity.Sent;
+                return true;
             }
         }
 

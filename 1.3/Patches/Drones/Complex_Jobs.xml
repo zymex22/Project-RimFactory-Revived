@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>[FSF] Complex Jobs</li>
+			<li>[FSF] Complex Jobs (Legacy Version)</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<order>Append</order>
+					<xpath> /Defs/ThingDef[defName = "PRF_DroneCultivator_I"]/modExtensions/li[contains(@Class,'ProjectRimFactory.Drones.DefModExtension_DroneStation')]/workTypes |
+					/Defs/ThingDef[defName = "PRF_DroneCultivator_II_sun"]/modExtensions/li[contains(@Class,'ProjectRimFactory.Drones.DefModExtension_DroneStation')]/workTypes | /Defs/ThingDef[defName = "PRF_DroneCultivator_II"]/modExtensions/li[contains(@Class,'ProjectRimFactory.Drones.DefModExtension_DroneStation')]/workTypes | /Defs/ThingDef[defName = "PRF_DroneCultivator_III"]/modExtensions/li[contains(@Class,'ProjectRimFactory.Drones.DefModExtension_DroneStation')]/workTypes					</xpath>
+					<value>
+						<li>FSFHarvesting</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

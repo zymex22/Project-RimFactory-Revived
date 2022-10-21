@@ -346,5 +346,11 @@ namespace ProjectRimFactory.Storage
         {
             return false;
         }
+
+        public void Notify_SettingsChanged()
+        {
+            // Might allow us to cache StorageSettings
+            // unsure about the potential gains / current load
+        }
     }
 }
