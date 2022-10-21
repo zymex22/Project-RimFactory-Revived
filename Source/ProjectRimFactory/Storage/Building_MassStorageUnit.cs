@@ -49,6 +49,8 @@ namespace ProjectRimFactory.Storage
 
         public virtual bool ForbidPawnInput => ForbidPawnAccess;
 
+        private StorageOutputUtil outputUtil = null;
+
         public override void Notify_ReceivedThing(Thing newItem)
         {
             base.Notify_ReceivedThing(newItem);
@@ -182,6 +184,7 @@ namespace ProjectRimFactory.Storage
             ConditionalPatchHelper.Register(this);
             base.SpawnSetup(map, respawningAfterLoad);
             Map.GetComponent<PRFMapComponent>().AddIHideRightClickMenu(this);
+            outputUtil = new StorageOutputUtil(this);
             foreach (var cell in this.OccupiedRect().Cells)
             {
                 map.GetComponent<PRFMapComponent>().RegisterIHideItemPos(cell, this);
@@ -211,8 +214,7 @@ namespace ProjectRimFactory.Storage
 
         public bool OutputItem(Thing item)
         {
-            var outputCell = GetComp<CompOutputAdjustable>()?.CurrentCell ?? Position + new IntVec3(0, 0, -2);
-            return GenPlace.TryPlaceThing(item.SplitOff(item.stackCount), outputCell, Map, ThingPlaceMode.Near);
+            return outputUtil.OutputItem(item);
         }
 
         public virtual void RefreshStorage()
