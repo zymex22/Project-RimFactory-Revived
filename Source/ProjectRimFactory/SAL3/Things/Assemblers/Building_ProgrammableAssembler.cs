@@ -418,7 +418,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         bool TryFindBestBillIngredientsInSet(List<Thing> accessibleThings, Bill b, List<ThingCount> chosen)
         {
             //TryFindBestBillIngredientsInSet Expects a List of Both Avilibale & Allowed Things as "accessibleThings"
-            return (bool)ReflectionUtility.TryFindBestBillIngredientsInSet.Invoke(null, new object[] { accessibleThings, b, chosen, new IntVec3(), false });
+            List<IngredientCount> missing = new List<IngredientCount>(); // Needed for 1.4
+            return (bool)ReflectionUtility.TryFindBestBillIngredientsInSet.Invoke(null, new object[] { accessibleThings, b, chosen, new IntVec3(), false, missing });
         }
 
         protected virtual void ProduceItems()
