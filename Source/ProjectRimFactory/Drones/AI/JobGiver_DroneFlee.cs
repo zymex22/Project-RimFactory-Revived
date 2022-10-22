@@ -20,6 +20,10 @@ namespace ProjectRimFactory.Drones.AI
             {
                 result = null;
             }
+            else if (pawn.Map is null) //needed for 1.4
+            {
+                result = null;
+            }
             else
             {
                 if (pawn.Faction == null)
