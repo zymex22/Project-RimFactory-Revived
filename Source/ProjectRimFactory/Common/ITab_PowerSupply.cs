@@ -17,7 +17,7 @@ namespace ProjectRimFactory.Common
 
     public interface IPowerSupplyMachine
     {
-        int BasePowerConsumption { get; }
+        float BasePowerConsumption { get; }
         int CurrentPowerConsumption { get; }
 
         //Strig will be formated for the overview and the value will hold the additional consumption

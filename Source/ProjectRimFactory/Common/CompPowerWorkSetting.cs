@@ -101,7 +101,7 @@ namespace ProjectRimFactory.Common
 
         }
 
-        public int BasePowerConsumption => (int)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(this.powerComp.Props);
+        public float BasePowerConsumption => (float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(this.powerComp.Props);
 
         public int CurrentPowerConsumption => (int)this.powerComp.PowerOutput;
 
