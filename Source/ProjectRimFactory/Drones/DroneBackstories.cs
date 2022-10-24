@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
 using System.Collections.Generic;
 using Verse;
 
@@ -23,7 +24,8 @@ namespace ProjectRimFactory.Drones
                     identifier = "PRFNoneBracketsC",
                     workDisables = WorkTags.Social,
                     slot = BackstorySlot.Childhood,
-                    baseDesc = "NoneBrackets".Translate()
+                    baseDesc = "NoneBrackets".Translate(),
+                    modContentPack = LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().Content
                 };
 
                 adulthood = new BackstoryDef()
@@ -33,7 +35,8 @@ namespace ProjectRimFactory.Drones
                     identifier = "PRFNoneBracketsA",
                     workDisables = WorkTags.Social,
                     slot = BackstorySlot.Adulthood,
-                    baseDesc = "NoneBrackets".Translate()
+                    baseDesc = "NoneBrackets".Translate(),
+                    modContentPack = LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().Content
                 };
 
                 var BackstoryDefs = DefDatabase<BackstoryDef>.AllDefsListForReading;
