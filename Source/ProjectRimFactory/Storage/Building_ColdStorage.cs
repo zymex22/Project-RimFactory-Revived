@@ -70,6 +70,8 @@ namespace ProjectRimFactory.Storage
 
         public bool CanUseIOPort => true;
 
+        private StorageOutputUtil outputUtil = null;
+
         public void DeregisterPort(Building_StorageUnitIOBase port)
         {
             ports.Remove(port);
@@ -182,6 +184,7 @@ namespace ProjectRimFactory.Storage
             base.SpawnSetup(map, respawningAfterLoad);
             PatchStorageUtil.GetPRFMapComponent(Map).RegisterColdStorageBuilding(this);
             ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
+            outputUtil = new StorageOutputUtil(this);
             foreach (var port in ports)
             {
                 if (port?.Spawned ?? false)
@@ -217,8 +220,7 @@ namespace ProjectRimFactory.Storage
 
         public bool OutputItem(Thing item)
         {
-            var outputCell = GetComp<CompOutputAdjustable>()?.CurrentCell ?? Position + new IntVec3(0, 0, -2);
-            return GenPlace.TryPlaceThing(item.SplitOff(item.stackCount), outputCell, Map, ThingPlaceMode.Near);
+            return outputUtil.OutputItem(item);
         }
 
         //-----------    For compatibility with Pick Up And Haul:    -----------
