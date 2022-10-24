@@ -88,7 +88,7 @@ namespace ProjectRimFactory.Common
                 ModSupport_SimpleFridge_fridgeCache = AccessTools.Field("SimpleFridge.Mod_SimpleFridge:fridgeCache");
 
                 MethodBase SimpleFridge_Patch_GameComponentTick_Postfix = null;
-                Type Patch_GameComponentTick = Type.GetType("SimpleFridge.Patch_GameComponentTick, SimpleFridge", false);
+                Type Patch_GameComponentTick = Type.GetType("SimpleFridge.Patch_GameComponentTick, SimpleUtilitiesFridge", false);
                 if (Patch_GameComponentTick != null)
                 {
                     SimpleFridge_Patch_GameComponentTick_Postfix = AccessTools.Method(Patch_GameComponentTick, "Postfix");
