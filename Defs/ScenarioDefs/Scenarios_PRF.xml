@@ -8,10 +8,9 @@ with cargo full of new equipment and supplies to that factory.
 On its way their ship hit a meteor shower and crashed into a naked planet far from original destination and from home.
 Now they will have to build up a temporary factory here and gather resources to go back home.
 
-
 After 10 days a raid will happen, it turns out it was the raiders who shot their ship down.
 You should quickly prepare for the raid.
-(BETA please post any error or suggestions)</description>
+</description>
         <scenario>
             <summary>4 crashlanded scientists - Project RimFactory experiance</summary>
             <playerFaction>
@@ -54,12 +53,12 @@ You should quickly prepare for the raid.
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
                     <thingDef>ComponentIndustrial</thingDef>
-                    <count>30</count>
+                    <count>34</count>
                 </li>
                 <li Class="ScenPart_ScatterThingsNearPlayerStart">
                     <def>ScatterThingsNearPlayerStart</def>
                     <thingDef>Steel</thingDef>
-                    <count>500</count>
+                    <count>700</count>
                 </li>
                 <li Class="ScenPart_ScatterThingsNearPlayerStart">
                     <def>ScatterThingsNearPlayerStart</def>
@@ -140,11 +139,6 @@ You should quickly prepare for the raid.</text>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
                     <thingDef>PRF_StoneWorks</thingDef>
-                </li>
-                <li Class="ScenPart_StartingThing_Defined">
-                    <def>StartingThing_Defined</def>
-                    <thingDef>WoodFiredGenerator</thingDef>
-                    <count>2</count>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
