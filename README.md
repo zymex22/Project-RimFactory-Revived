@@ -8,7 +8,6 @@ Over the past month that I have been working on this mod, many great ppl have jo
 I truly appreciate what this has become, not just some modding experience, but a great little community of modders, helping on PRF and sharing skills across their own mods.
 
 This is still a work in progress project, and it probably always will be.
-However, we are very close to a stable release with version 2.5.0 which overhauled MANY mechanics.
 
 
 If you have any ideas, bugs or other things, feel free to share them with us with an issue, steam comment, or on our discord.
