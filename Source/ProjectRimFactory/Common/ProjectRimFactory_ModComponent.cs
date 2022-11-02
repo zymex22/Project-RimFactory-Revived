@@ -48,18 +48,18 @@ namespace ProjectRimFactory.Common
 
         private void LoadModSupport()
         {
-            if (ModLister.HasActiveModWithName("[KV] RimFridge"))
+            if (ModLister.HasActiveModWithName("[KV] RimFridge") || ModLister.HasActiveModWithName("RimFridge Updated"))
             {
                 ModSupport_RrimFridge_GetFridgeCache = AccessTools.Method("RimFridge.FridgeCache:GetFridgeCache");
                 ModSupport_RrimFridge_HasFridgeAt = AccessTools.Method("RimFridge.FridgeCache:HasFridgeAt");
                 if (ModSupport_RrimFridge_GetFridgeCache != null && ModSupport_RrimFridge_HasFridgeAt != null)
                 {
-                    Log.Message("Project Rimfactory - added Support for shared Nutrient Dispenser with [KV] RimFridge");
+                    Log.Message("Project Rimfactory - added Support for shared Nutrient Dispenser with [KV] RimFridge or RimFridge Updated");
                     ModSupport_RrimFrige_Dispenser = true;
                 }
                 else
                 {
-                    Log.Warning("Project Rimfactory - Failed to add Support for shared Nutrient Dispenser with [KV] RimFridge");
+                    Log.Warning("Project Rimfactory - Failed to add Support for shared Nutrient Dispenser with [KV] RimFridge or RimFridge Updated");
                 }
 
                 // if "Simple Utilities: Fridge" and "[KV] RimFridge" are loaded we use "Simple Utilities: Fridge" as it is faster
@@ -72,11 +72,11 @@ namespace ProjectRimFactory.Common
                         var postfix = typeof(HarmonyPatches.Patch_CompRefrigerator_CompTickRare).GetMethod("Postfix");
                         this.HarmonyInstance.Patch(RrimFridge_CompRefrigerator_CompTickRare, null, new HarmonyMethod(postfix));
 
-                        Log.Message("Project Rimfactory - added Support for Fridge DSU Power using [KV] RimFridge");
+                        Log.Message("Project Rimfactory - added Support for Fridge DSU Power using RimFridge");
                     }
                     else
                     {
-                        Log.Warning("Project Rimfactory - Failed to add Support for Fridge DSU Power using [KV] RimFridge");
+                        Log.Warning("Project Rimfactory - Failed to add Support for Fridge DSU Power using RimFridge");
                     }
                 }
 
@@ -105,17 +105,17 @@ namespace ProjectRimFactory.Common
                     Log.Warning("Project Rimfactory - Failed to add Support for Fridge DSU Power using Simple Utilities: Fridge");
                 }
             }
-            if (ModLister.HasActiveModWithName("ResearchPal - Forked"))
+            if (ModLister.HasActiveModWithName("ResearchPal - Forked") || ModLister.HasActiveModWithName("ResearchPowl"))
             {
                 ModSupport_ReserchPal_ResetLayout = AccessTools.Method("ResearchPal.Tree:ResetLayout");
                 if (ModSupport_ReserchPal_ResetLayout != null)
                 {
-                    Log.Message("Project Rimfactory - added Support for ResearchPal when using Lite Mode");
+                    Log.Message("Project Rimfactory - added Support for ResearchPal or ResearchPowl when using Lite Mode");
                     ModSupport_ReserchPal = true;
                 }
                 else
                 {
-                    Log.Warning("Project Rimfactory - Failed to added Support for ResearchPal when using Lite Mode");
+                    Log.Warning("Project Rimfactory - Failed to added Support for ResearchPal or Research Powl when using Lite Mode");
                 }
 
 
@@ -143,7 +143,7 @@ namespace ProjectRimFactory.Common
                     Log.Warning("Project Rimfactory - Failed to added Support for Locks 2: Lock Them Out!");
                 }
             }
-            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings"))
+            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings") || ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings [1.4]"))
             {
                 var Transpiler_Billstack = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_Billstack");
                 var Transpiler_IsWorkTable = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_IsWorkTable");
