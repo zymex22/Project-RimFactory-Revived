@@ -41,8 +41,14 @@ namespace ProjectRimFactory.Common
         public static System.Reflection.MethodInfo ModSupport_RrimFridge_HasFridgeAt = null;
         public static bool ModSupport_RrimFrige_Dispenser = false;
 
+        // Typo...
         public static System.Reflection.MethodInfo ModSupport_ReserchPal_ResetLayout = null;
+        // Matching Typo...
+        public static System.Reflection.MethodInfo ModSupport_ReserchPowl_ResetLayout = null;
+        // Typo..
         public static bool ModSupport_ReserchPal = false;
+        // Matching Typo..
+        public static bool ModSupport_ReserchPowl = false;
 
         public static System.Reflection.FieldInfo ModSupport_SimpleFridge_fridgeCache = null;
 
@@ -105,20 +111,33 @@ namespace ProjectRimFactory.Common
                     Log.Warning("Project Rimfactory - Failed to add Support for Fridge DSU Power using Simple Utilities: Fridge");
                 }
             }
-            if (ModLister.HasActiveModWithName("ResearchPal - Forked") || ModLister.HasActiveModWithName("ResearchPowl"))
+            if (ModLister.HasActiveModWithName("ResearchPal - Forked"))
             {
+                // typo...
                 ModSupport_ReserchPal_ResetLayout = AccessTools.Method("ResearchPal.Tree:ResetLayout");
                 if (ModSupport_ReserchPal_ResetLayout != null)
                 {
-                    Log.Message("Project Rimfactory - added Support for ResearchPal or ResearchPowl when using Lite Mode");
+                    Log.Message("Project Rimfactory - added Support for ResearchPal when using Lite Mode");
                     ModSupport_ReserchPal = true;
                 }
                 else
                 {
-                    Log.Warning("Project Rimfactory - Failed to added Support for ResearchPal or Research Powl when using Lite Mode");
+                    Log.Warning("Project Rimfactory - Failed to added Support for ResearchPal when using Lite Mode");
                 }
-
-
+            }
+            else if (ModLister.HasActiveModWithName("ResearchPowl"))
+            {
+                // Matching Typo...
+                ModSupport_ReserchPowl_ResetLayout = AccessTools.Method("ResearchPowl.Tree:ResetLayout");
+                if (ModSupport_ReserchPowl_ResetLayout != null)
+                {
+                    Log.Message("Project Rimfactory - added Support for ResearchPowl when using Lite Mode");
+                    ModSupport_ReserchPowl = true;
+                }
+                else
+                {
+                    Log.Warning("Project Rimfactory - Failed to added Support for ResearchPowl when using Lite Mode");
+                }
             }
             if (ModLister.HasActiveModWithName("Locks 2: Lock Them Out!"))
             {
