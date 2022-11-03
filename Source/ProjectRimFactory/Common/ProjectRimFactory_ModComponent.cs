@@ -54,18 +54,18 @@ namespace ProjectRimFactory.Common
 
         private void LoadModSupport()
         {
-            if (ModLister.HasActiveModWithName("[KV] RimFridge") || ModLister.HasActiveModWithName("RimFridge Updated"))
+            if (ModLister.HasActiveModWithName("RimFridge Updated"))
             {
                 ModSupport_RrimFridge_GetFridgeCache = AccessTools.Method("RimFridge.FridgeCache:GetFridgeCache");
                 ModSupport_RrimFridge_HasFridgeAt = AccessTools.Method("RimFridge.FridgeCache:HasFridgeAt");
                 if (ModSupport_RrimFridge_GetFridgeCache != null && ModSupport_RrimFridge_HasFridgeAt != null)
                 {
-                    Log.Message("Project Rimfactory - added Support for shared Nutrient Dispenser with [KV] RimFridge or RimFridge Updated");
+                    Log.Message("Project Rimfactory - added Support for shared Nutrient Dispenser with RimFridge Updated");
                     ModSupport_RrimFrige_Dispenser = true;
                 }
                 else
                 {
-                    Log.Warning("Project Rimfactory - Failed to add Support for shared Nutrient Dispenser with [KV] RimFridge or RimFridge Updated");
+                    Log.Warning("Project Rimfactory - Failed to add Support for shared Nutrient Dispenser with RimFridge Updated");
                 }
 
                 // if "Simple Utilities: Fridge" and "[KV] RimFridge" are loaded we use "Simple Utilities: Fridge" as it is faster
@@ -162,7 +162,7 @@ namespace ProjectRimFactory.Common
                     Log.Warning("Project Rimfactory - Failed to added Support for Locks 2: Lock Them Out!");
                 }
             }
-            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings") || ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings [1.4]"))
+            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings [1.4]"))
             {
                 var Transpiler_Billstack = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_Billstack");
                 var Transpiler_IsWorkTable = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_IsWorkTable");
