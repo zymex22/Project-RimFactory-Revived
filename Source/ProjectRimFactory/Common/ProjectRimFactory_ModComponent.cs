@@ -41,13 +41,9 @@ namespace ProjectRimFactory.Common
         public static System.Reflection.MethodInfo ModSupport_RrimFridge_HasFridgeAt = null;
         public static bool ModSupport_RrimFrige_Dispenser = false;
 
-        // Typo...
         public static System.Reflection.MethodInfo ModSupport_ReserchPal_ResetLayout = null;
-        // Matching Typo...
         public static System.Reflection.MethodInfo ModSupport_ReserchPowl_ResetLayout = null;
-        // Typo..
         public static bool ModSupport_ReserchPal = false;
-        // Matching Typo..
         public static bool ModSupport_ReserchPowl = false;
 
         public static System.Reflection.FieldInfo ModSupport_SimpleFridge_fridgeCache = null;
@@ -113,7 +109,6 @@ namespace ProjectRimFactory.Common
             }
             if (ModLister.HasActiveModWithName("ResearchPal - Forked"))
             {
-                // typo...
                 ModSupport_ReserchPal_ResetLayout = AccessTools.Method("ResearchPal.Tree:ResetLayout");
                 if (ModSupport_ReserchPal_ResetLayout != null)
                 {
@@ -127,7 +122,6 @@ namespace ProjectRimFactory.Common
             }
             else if (ModLister.HasActiveModWithName("ResearchPowl"))
             {
-                // Matching Typo...
                 ModSupport_ReserchPowl_ResetLayout = AccessTools.Method("ResearchPowl.Tree:ResetLayout");
                 if (ModSupport_ReserchPowl_ResetLayout != null)
                 {
