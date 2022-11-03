@@ -42,24 +42,26 @@ namespace ProjectRimFactory.Common
         public static bool ModSupport_RrimFrige_Dispenser = false;
 
         public static System.Reflection.MethodInfo ModSupport_ReserchPal_ResetLayout = null;
+        public static System.Reflection.MethodInfo ModSupport_ReserchPowl_ResetLayout = null;
         public static bool ModSupport_ReserchPal = false;
+        public static bool ModSupport_ReserchPowl = false;
 
         public static System.Reflection.FieldInfo ModSupport_SimpleFridge_fridgeCache = null;
 
         private void LoadModSupport()
         {
-            if (ModLister.HasActiveModWithName("[KV] RimFridge"))
+            if (ModLister.HasActiveModWithName("RimFridge Updated"))
             {
                 ModSupport_RrimFridge_GetFridgeCache = AccessTools.Method("RimFridge.FridgeCache:GetFridgeCache");
                 ModSupport_RrimFridge_HasFridgeAt = AccessTools.Method("RimFridge.FridgeCache:HasFridgeAt");
                 if (ModSupport_RrimFridge_GetFridgeCache != null && ModSupport_RrimFridge_HasFridgeAt != null)
                 {
-                    Log.Message("Project Rimfactory - added Support for shared Nutrient Dispenser with [KV] RimFridge");
+                    Log.Message("Project Rimfactory - added Support for shared Nutrient Dispenser with RimFridge Updated");
                     ModSupport_RrimFrige_Dispenser = true;
                 }
                 else
                 {
-                    Log.Warning("Project Rimfactory - Failed to add Support for shared Nutrient Dispenser with [KV] RimFridge");
+                    Log.Warning("Project Rimfactory - Failed to add Support for shared Nutrient Dispenser with RimFridge Updated");
                 }
 
                 // if "Simple Utilities: Fridge" and "[KV] RimFridge" are loaded we use "Simple Utilities: Fridge" as it is faster
@@ -72,11 +74,11 @@ namespace ProjectRimFactory.Common
                         var postfix = typeof(HarmonyPatches.Patch_CompRefrigerator_CompTickRare).GetMethod("Postfix");
                         this.HarmonyInstance.Patch(RrimFridge_CompRefrigerator_CompTickRare, null, new HarmonyMethod(postfix));
 
-                        Log.Message("Project Rimfactory - added Support for Fridge DSU Power using [KV] RimFridge");
+                        Log.Message("Project Rimfactory - added Support for Fridge DSU Power using RimFridge");
                     }
                     else
                     {
-                        Log.Warning("Project Rimfactory - Failed to add Support for Fridge DSU Power using [KV] RimFridge");
+                        Log.Warning("Project Rimfactory - Failed to add Support for Fridge DSU Power using RimFridge");
                     }
                 }
 
@@ -117,8 +119,19 @@ namespace ProjectRimFactory.Common
                 {
                     Log.Warning("Project Rimfactory - Failed to added Support for ResearchPal when using Lite Mode");
                 }
-
-
+            }
+            else if (ModLister.HasActiveModWithName("ResearchPowl"))
+            {
+                ModSupport_ReserchPowl_ResetLayout = AccessTools.Method("ResearchPowl.Tree:ResetLayout");
+                if (ModSupport_ReserchPowl_ResetLayout != null)
+                {
+                    Log.Message("Project Rimfactory - added Support for ResearchPowl when using Lite Mode");
+                    ModSupport_ReserchPowl = true;
+                }
+                else
+                {
+                    Log.Warning("Project Rimfactory - Failed to added Support for ResearchPowl when using Lite Mode");
+                }
             }
             if (ModLister.HasActiveModWithName("Locks 2: Lock Them Out!"))
             {

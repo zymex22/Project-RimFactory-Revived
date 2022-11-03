@@ -10,6 +10,7 @@
 		<mods>
 			<li>[KV] RimFridge - 1.1</li>
 			<li>[KV] RimFridge</li>
+			<li>RimFridge Updated</li>
 		</mods>
 		<match Class="PatchOperationSequence">
 			<success>Always</success>

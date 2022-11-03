@@ -120,6 +120,10 @@ namespace ProjectRimFactory.Common
                 {
                     ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
                 }
+                else if (ProjectRimFactory_ModComponent.ModSupport_ReserchPowl)
+                {
+                    ProjectRimFactory_ModComponent.ModSupport_ReserchPowl_ResetLayout.Invoke(null, null);
+                }
             }
 
 
@@ -226,7 +230,10 @@ namespace ProjectRimFactory.Common
             {
                 ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
             }
-
+            else if (ProjectRimFactory_ModComponent.ModSupport_ReserchPowl)
+            {
+                ProjectRimFactory_ModComponent.ModSupport_ReserchPowl_ResetLayout.Invoke(null, null);
+            }
 
         }
 
