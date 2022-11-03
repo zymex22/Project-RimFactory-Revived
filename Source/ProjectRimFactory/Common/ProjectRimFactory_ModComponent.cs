@@ -156,7 +156,7 @@ namespace ProjectRimFactory.Common
                     Log.Warning("Project Rimfactory - Failed to added Support for Locks 2: Lock Them Out!");
                 }
             }
-            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings [1.4]"))
+            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings"))
             {
                 var Transpiler_Billstack = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_Billstack");
                 var Transpiler_IsWorkTable = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_IsWorkTable");
