@@ -34,7 +34,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     ldfld_cnt++;
                 }
 
-                if (ldfld_cnt == 3 && instruction.opcode == OpCodes.Ldfld)
+                if (ldfld_cnt == 4 && instruction.opcode == OpCodes.Ldfld)
                 {
                     Found_WindowStackCall = false;
                     ldfld_cnt = 0;

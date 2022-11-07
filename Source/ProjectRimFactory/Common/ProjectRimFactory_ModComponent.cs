@@ -154,7 +154,7 @@ namespace ProjectRimFactory.Common
                     Log.Warning("Project Rimfactory - Failed to added Support for Locks 2: Lock Them Out!");
                 }
             }
-            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings"))
+            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings [1.4]"))
             {
                 var Transpiler_Billstack = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_Billstack");
                 var Transpiler_IsWorkTable = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_IsWorkTable");
@@ -176,7 +176,7 @@ namespace ProjectRimFactory.Common
                         {
                             this.HarmonyInstance.Patch(BaseMethod_IsWorkTable, null, null, new HarmonyMethod(Transpiler_IsWorkTable));
 
-                            var BaseMethods_Billstack = AllNestedTpyes.FirstOrDefault(t => t.FullName.Contains("c__DisplayClass0_0"))
+                            var BaseMethods_Billstack = AllNestedTpyes.FirstOrDefault(t => t.FullName.Contains("c__DisplayClass0_1"))
                                 .GetMethods(HarmonyLib.AccessTools.all).Where(m => m.Name.Contains("b__"));
 
                             if (BaseMethods_Billstack is not null)
@@ -190,7 +190,7 @@ namespace ProjectRimFactory.Common
                             }
                             else
                             {
-                                Log.Error("PRF Could not find savestoragesettings.kv.rw Patch_Building_Gizmos nested c__DisplayClass0_0 Class");
+                                Log.Error("PRF Could not find savestoragesettings.kv.rw Patch_Building_Gizmos nested c__DisplayClass0_1 Class");
                             }
                         }
                         else
