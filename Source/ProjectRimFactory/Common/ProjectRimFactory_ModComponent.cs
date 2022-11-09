@@ -159,8 +159,8 @@ namespace ProjectRimFactory.Common
                 //Get the Local Transpilers
                 //Billstack makes it function
                 //IsWorkTable makes the Gizmos Visible
-                var Transpiler_Billstack = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_Billstack");
-                var Transpiler_IsWorkTable = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_IsWorkTable");
+                var Transpiler_Billstack = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.Patch_SaveStorageSettings_Patch_Building_GetGizmos:Transpiler_Billstack");
+                var Transpiler_IsWorkTable = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.Patch_SaveStorageSettings_Patch_Building_GetGizmos:Transpiler_IsWorkTable");
 
                 //Get the Patch that is adding the Save Storage Gizmos
                 var sss_Assembly = LoadedModManager.RunningMods.Where(c => c.PackageId.ToLower() == "savestoragesettings.kv.rw".ToLower())
