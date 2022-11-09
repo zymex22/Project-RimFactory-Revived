@@ -154,33 +154,44 @@ namespace ProjectRimFactory.Common
                     Log.Warning("Project Rimfactory - Failed to added Support for Locks 2: Lock Them Out!");
                 }
             }
-            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings"))
+            if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings [1.4]"))
             {
+                //Get the Local Transpilers
+                //Billstack makes it function
+                //IsWorkTable makes the Gizmos Visible
                 var Transpiler_Billstack = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_Billstack");
                 var Transpiler_IsWorkTable = AccessTools.Method("ProjectRimFactory.Common.HarmonyPatches.SaveStorageSettings_Patch:Transpiler_IsWorkTable");
 
+                //Get the Patch that is adding the Save Storage Gizmos
                 var sss_Assembly = LoadedModManager.RunningMods.Where(c => c.PackageId.ToLower() == "savestoragesettings.kv.rw".ToLower())
                     .First().assemblies.loadedAssemblies.Where(a => a.GetType("SaveStorageSettings.Patch_Building_GetGizmos") != null).First();
                 if (sss_Assembly is not null)
                 {
-
+                    //In the Compiled IL the code adding those Gizmos is hidden away in "new" Types
                     var toplevel_Class = sss_Assembly.GetType("SaveStorageSettings.Patch_Building_GetGizmos");
                     var AllNestedTpyes = toplevel_Class?.GetNestedTypes(HarmonyLib.AccessTools.all);
                     if (toplevel_Class is not null && AllNestedTpyes is not null)
                     {
-                        HarmonyPatches.SaveStorageSettings_Patch.Patch_Building_Gizmos = AllNestedTpyes.FirstOrDefault(t => t.FullName.Contains("d__0"));
+                        //Get the Method BaseMethod_IsWorkTable
+                        HarmonyPatches.Patch_SaveStorageSettings_Patch_Building_GetGizmos.Patch_Building_Gizmos = AllNestedTpyes.FirstOrDefault(t => t.FullName.Contains("d__0"));
 
-                        var BaseMethod_IsWorkTable = HarmonyPatches.SaveStorageSettings_Patch.Patch_Building_Gizmos?.GetMethod("MoveNext", BindingFlags.NonPublic | BindingFlags.Instance);
+                        var BaseMethod_IsWorkTable = HarmonyPatches.Patch_SaveStorageSettings_Patch_Building_GetGizmos.Patch_Building_Gizmos?.GetMethod("MoveNext", BindingFlags.NonPublic | BindingFlags.Instance);
 
-                        if (HarmonyPatches.SaveStorageSettings_Patch.Patch_Building_Gizmos is not null && BaseMethod_IsWorkTable is not null)
+                        //Check if we have found Patch_Building_Gizmos
+                        if (HarmonyPatches.Patch_SaveStorageSettings_Patch_Building_GetGizmos.Patch_Building_Gizmos is not null && BaseMethod_IsWorkTable is not null)
                         {
+                            //Patch Patch_Building_Gizmos
                             this.HarmonyInstance.Patch(BaseMethod_IsWorkTable, null, null, new HarmonyMethod(Transpiler_IsWorkTable));
 
-                            var BaseMethods_Billstack = AllNestedTpyes.FirstOrDefault(t => t.FullName.Contains("c__DisplayClass0_0"))
+                            //The Code adding the different Gizmos is hidden in another Display Class
+                            //That Class Contains the relevant Code in Methods with a Simelar naming
+                            var BaseMethods_Billstack = AllNestedTpyes.FirstOrDefault(t => t.FullName.Contains("c__DisplayClass0_1"))
                                 .GetMethods(HarmonyLib.AccessTools.all).Where(m => m.Name.Contains("b__"));
 
                             if (BaseMethods_Billstack is not null)
                             {
+                                //For each of them we want to alter how the Billstack (2. Parameter) is retrieved.
+                                //Luckily we can use the Same Transpiler for this.
                                 foreach (MethodBase BaseMethod_Billstack in BaseMethods_Billstack)
                                 {
                                     if (BaseMethod_Billstack == null) continue;
@@ -190,7 +201,7 @@ namespace ProjectRimFactory.Common
                             }
                             else
                             {
-                                Log.Error("PRF Could not find savestoragesettings.kv.rw Patch_Building_Gizmos nested c__DisplayClass0_0 Class");
+                                Log.Error("PRF Could not find savestoragesettings.kv.rw Patch_Building_Gizmos nested c__DisplayClass0_1 Class");
                             }
                         }
                         else
