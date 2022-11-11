@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
-
 	<!--VGP Gourmet Food Prepper -->
 	<Operation Class="PatchOperationFindMod">
 		<mods>
@@ -9,20 +8,17 @@
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
 			<operations>
-				<li Class="PatchOperationAdd">					<!-- adding recipes to food prepper -->
+				<li Class="PatchOperationAdd">
+					<!-- adding recipes to food prepper -->
 					<xpath>/Defs/ThingDef[defName="PRF_SelfPrepper"]/recipes</xpath>
 					<value>
 						<li>Maketofu</li>
 						<li>Makebulktofu</li>
-						<li>MakePolenta</li>
-						<li>MakebulkPolenta</li>
 						<li>Make_PsychiteTea</li>
 						<li>CraftFlour</li>
-						<li>GroundSugar</li>
-						<li>CraftCornmeal</li>
 						<li>CraftBulkFlour</li>
-						<li>CraftBulkSugar</li>
-						<li>CraftBulkCornMeal</li>
+						<li>CraftBulkFlour100</li>
+						<li>CraftBulkFlour200</li>
 						<li>Makesoycheese</li>
 						<li>MakeBulksoycheese</li>
 						<li>Makesoymilk</li>
@@ -33,36 +29,37 @@
 						<li>VG_VeganEgg</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">					<!-- adding new food types to self cooker -->
+				<li Class="PatchOperationAdd">
+					<!-- adding new food types to self cooker -->
 					<xpath>/Defs/ThingDef[defName="PRF_SelfCookerII"]/recipes</xpath>
 					<value>
 						<li>BakeBread</li>
+						<li>Bakepolenta</li>
 						<li>Bakesweetroll</li>
 						<li>Bakepizza</li>
 						<li>BakeCookies</li>
-						<li>Bakepolenta</li>
-						<li>BakeCornbread</li>
+						<li>BakeBlueberryPie</li>
+						<li>DryFruit</li>
 						<li>Bakemuffin</li>
 						<li>BakeMeatPie</li>
-						<li>DryFruit</li>
 					</value>
 				</li>
-				<li Class="PatchOperationAdd">					<!-- adding new food types to self cooker -->
+				<li Class="PatchOperationAdd">
+					<!-- adding new food types to self cooker -->
 					<xpath>/Defs/ThingDef[defName="PRF_SelfCookerIII"]/recipes</xpath>
 					<value>
 						<li>BakeBread</li>
+						<li>Bakepolenta</li>
 						<li>Bakesweetroll</li>
 						<li>Bakepizza</li>
 						<li>BakeCookies</li>
-						<li>Bakepolenta</li>
-						<li>BakeCornbread</li>
+						<li>BakeBlueberryPie</li>
+						<li>DryFruit</li>
 						<li>Bakemuffin</li>
 						<li>BakeMeatPie</li>
-						<li>DryFruit</li>
 					</value>
 				</li>
 			</operations>
 		</match>
 	</Operation>
-
 </Patch>
