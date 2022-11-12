@@ -66,9 +66,12 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     s.Level = extension_Skills.GetExtendedSkillLevel(s.def, typeof(Building_ProgrammableAssembler));
                 }
 
-                // This ensures that pawns do not end up with disabled work types - see Issue#54
-                ReflectionUtility.cachedDisabledWorkTypesPermanent.SetValue(p, new List<WorkTypeDef>());
-
+                //disable stuff thats not needed
+                //also prevents some instances of disabled skills
+                p.ideo = null;
+                p.genes = null;
+                p.royalty = null;
+                p.guest = null;
 
                 //Assign Pawn's mapIndexOrState to building's mapIndexOrState
                 ReflectionUtility.mapIndexOrState.SetValue(p, ReflectionUtility.mapIndexOrState.GetValue(this));
@@ -81,6 +84,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
                 //Set backstories
                 SetBackstoryAndSkills(p);
+
+                //#54 Moved to the end based on testing - now using a function instead of reflection
+                p.Notify_DisabledWorkTypesChanged();
 
                 //Pawn work-related stuffs
                 for (int i = 0; i < 24; i++)
