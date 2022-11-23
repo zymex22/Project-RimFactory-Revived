@@ -85,7 +85,7 @@ namespace ProjectRimFactory.Common
             }
             if (ModLister.HasActiveModWithName("Simple Utilities: Fridge"))
             {
-                ModSupport_SimpleFridge_fridgeCache = AccessTools.Field("SimpleFridge.Mod_SimpleFridge:fridgeCache");
+                ModSupport_SimpleFridge_fridgeCache = AccessTools.Field("SimpleFridge.FridgeUtility:fridgeCache");
 
                 MethodBase SimpleFridge_Patch_GameComponentTick_Postfix = null;
                 Type Patch_GameComponentTick = Type.GetType("SimpleFridge.Patch_GameComponentTick, SimpleUtilitiesFridge", false);
