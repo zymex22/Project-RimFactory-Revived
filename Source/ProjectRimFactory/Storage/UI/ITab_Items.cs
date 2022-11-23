@@ -44,8 +44,17 @@ namespace ProjectRimFactory.Storage.UI
         public ILinkableStorageParent SelectedMassStorageUnit =>
             IOPortSelected ? SelectedIOPort.BoundStorageUnit : (ILinkableStorageParent)SelThing;
 
-        public override bool IsVisible =>
-            IOPortSelected ? SelectedIOPort.BoundStorageUnit?.CanReceiveIO ?? false : true;
+        public override bool IsVisible
+        {
+            get
+            {
+                if (IOPortSelected)
+                {
+                    return SelectedIOPort.BoundStorageUnit?.CanReceiveIO ?? false;
+                }
+                return SelThing is ILinkableStorageParent;
+            }
+        }
 
         protected bool IOPortSelected => SelThing is Building_StorageUnitIOBase;
 
