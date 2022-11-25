@@ -44,8 +44,6 @@ namespace ProjectRimFactory.Common
         public static bool ModSupport_ReserchPal = false;
         public static bool ModSupport_ReserchPowl = false;
 
-        public static System.Reflection.FieldInfo ModSupport_SimpleFridge_fridgeCache = null;
-
         private void LoadModSupport()
         {
             if (ModLister.HasActiveModWithName("RimFridge Updated"))
@@ -85,18 +83,17 @@ namespace ProjectRimFactory.Common
             }
             if (ModLister.HasActiveModWithName("Simple Utilities: Fridge"))
             {
-                ModSupport_SimpleFridge_fridgeCache = AccessTools.Field("SimpleFridge.FridgeUtility:fridgeCache");
 
-                MethodBase SimpleFridge_Patch_GameComponentTick_Postfix = null;
-                Type Patch_GameComponentTick = Type.GetType("SimpleFridge.Patch_GameComponentTick, SimpleUtilitiesFridge", false);
-                if (Patch_GameComponentTick != null)
+                MethodBase SimpleFridge_FridgeUtility_Tick = null;
+                Type FridgeUtility = Type.GetType("SimpleFridge.FridgeUtility, SimpleUtilitiesFridge", false);
+                if (FridgeUtility != null)
                 {
-                    SimpleFridge_Patch_GameComponentTick_Postfix = AccessTools.Method(Patch_GameComponentTick, "Postfix");
+                    SimpleFridge_FridgeUtility_Tick = AccessTools.Method(FridgeUtility, "Tick");
                 }
-                if (SimpleFridge_Patch_GameComponentTick_Postfix != null)
+                if (SimpleFridge_FridgeUtility_Tick != null)
                 {
-                    var postfix = typeof(HarmonyPatches.Patch_Patch_GameComponentTick_Postfix).GetMethod("Postfix");
-                    this.HarmonyInstance.Patch(SimpleFridge_Patch_GameComponentTick_Postfix, null, new HarmonyMethod(postfix));
+                    var postfix = typeof(HarmonyPatches.Patch_FridgeUtility_Tick).GetMethod("Postfix");
+                    this.HarmonyInstance.Patch(SimpleFridge_FridgeUtility_Tick, null, new HarmonyMethod(postfix));
 
                     Log.Message("Project Rimfactory - added Support for Fridge DSU Power using Simple Utilities: Fridge");
                 }
