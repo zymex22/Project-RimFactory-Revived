@@ -12,21 +12,35 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_EndCurrentJob_DroneJobs
     {
 
-        static bool Prefix(Pawn_JobTracker __instance, JobCondition condition, bool startNewJob = true, bool canReturnToPool = true)
+        static bool Prefix(Pawn_JobTracker __instance,Pawn ___pawn, JobCondition condition, bool startNewJob = true, bool canReturnToPool = true)
         {
 
             //Only run the Prefix if its a Drone and the Expected Error Condition did occur
-            if (Traverse.Create(__instance).Field<Pawn>("pawn").Value.kindDef == PRFDefOf.PRFDroneKind && (condition == JobCondition.ErroredPather || condition == JobCondition.Errored))
+            if (___pawn.kindDef == PRFDefOf.PRFDroneKind && (condition == JobCondition.ErroredPather || condition == JobCondition.Errored))
             {
+                //Check for a error during PRFDrone_ReturnToStation
+                if (__instance.curJob.def == PRFDefOf.PRFDrone_ReturnToStation)
+                {
+                    IntVec3 pos = ___pawn.Position;
+                    Map map = ___pawn.Map;
+                    //no path home -> Power down
+                    ___pawn.Destroy();
+                    
+                    //Spawn a drone Module where the drone was
+                    GenSpawn.Spawn(PRFDefOf.PRF_DroneModule, pos, map);
+
+                    Log.Warning($"PRF - Drone could not return home from {pos} - Powering down");
+                    return false;
+                }
+
                 //Display Warning & Affected Cell info
-                Log.Warning("Pathing Failed Drone Returning to Station - (This is a Rimwold Pathing Bug)");
-                Log.Message("Target is " + __instance.curJob.GetTarget(TargetIndex.A).Cell);
+                Log.Warning($"Vanilla Pathing Failed - Drone Returning to Station - {___pawn.Position}->{__instance.curJob.GetTarget(TargetIndex.A).Cell}");
 
                 //Run default Code (may need to update that in the Future (if RW Updates This Method))
                 JobDef jobDef = (__instance.curJob != null) ? __instance.curJob.def : null;
                 Traverse.Create(__instance).Method("CleanupCurrentJob", condition, true, true, canReturnToPool).GetValue();
                 //Send the Drone Home
-                Pawn_Drone drone = Traverse.Create(__instance).Field<Pawn_Drone>("pawn").Value;
+                Pawn_Drone drone = (Pawn_Drone)___pawn;
                 __instance.StartJob(new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.station));
 
 
