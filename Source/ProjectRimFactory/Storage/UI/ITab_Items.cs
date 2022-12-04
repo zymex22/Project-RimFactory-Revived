@@ -116,7 +116,7 @@ namespace ProjectRimFactory.Storage.UI
             if (itemsToShow == null || searchQuery != oldSearchQuery || SelectedMassStorageUnit.StoredItemsCount != itemsToShow.Count || oldSelectedMassStorageUnit == null || oldSelectedMassStorageUnit != SelectedMassStorageUnit)
             {
                 itemsToShow = new List<Thing>(from Thing t in SelectedMassStorageUnit.StoredItems
-                                              where string.IsNullOrEmpty(searchQuery) || t.Label.ToLower().NormalizedFuzzyStrength(searchQuery.ToLower()) <
+                                              where string.IsNullOrEmpty(searchQuery) || t.GetInnerIfMinified().Label.ToLower().NormalizedFuzzyStrength(searchQuery.ToLower()) <
                                                   FuzzySearch.Strength.Strong
                                               orderby t.Label descending
                                               select t);
@@ -210,7 +210,7 @@ namespace ProjectRimFactory.Storage.UI
             }
             else
             {
-                labelMoCount = GenLabel.ThingLabel(thing, thing.stackCount, false);
+                labelMoCount = GenLabel.ThingLabel(thing.GetInnerIfMinified(), thing.stackCount, false);
             }
 
 
