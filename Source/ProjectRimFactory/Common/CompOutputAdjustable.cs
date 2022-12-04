@@ -71,6 +71,7 @@ namespace ProjectRimFactory.Common
         {
             base.PostExposeData();
             Scribe_Values.Look(ref index, "outputSlotIndex");
+            Scribe_Values.Look(ref Visible, "Visible");
         }
     }
 
