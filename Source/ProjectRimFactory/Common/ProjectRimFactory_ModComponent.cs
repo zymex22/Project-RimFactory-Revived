@@ -21,16 +21,25 @@ namespace ProjectRimFactory.Common
                 this.HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
                 Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");
                 availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
-                LoadModSupport();
+                
                 ConditionalPatchHelper.InitHarmony(this.HarmonyInstance);
                 ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
                 ConditionalPatchHelper.Patch_WealthWatcher_CalculateWealthItems.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_WealthWatcher_CalculateWealthItems);
-
             }
             catch (Exception ex)
             {
                 Log.Error("Project RimFactory Core :: Caught exception: " + ex);
             }
+
+            try
+            {
+                LoadModSupport();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Project RimFactory Core :: LoadModSupport Caught exception: " + ex);
+            }
+
         }
 
         //Mod Support
