@@ -149,6 +149,7 @@ namespace ProjectRimFactory.Common
                 rangeTypeSeletion = rangeTypeSelection;
             }
 
+            Scribe_Values.Look<bool>(ref this.RangeSettingHide, "RangeSettingHide",false);
             Scribe_Values.Look<float>(ref this.powerForSpeed, "powerForSpeed");
             Scribe_Values.Look<float>(ref this.powerForRange, "powerForRange");
             Scribe_Values.Look(ref rangeTypeSeletion, "rangeType", -1);
