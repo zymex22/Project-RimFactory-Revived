@@ -1,4 +1,5 @@
 ﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.SAL3;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,72 +69,14 @@ namespace ProjectRimFactory.CultivatorTools
 
         public void TryPlantNew(IntVec3 c, ThingDef plantDef)
         {
-            if (plantDef.blueprintDef != null && Utilities.SeedsPleaseActive && plantDef.blueprintDef.category == ThingCategory.Item)
+            if (plantDef.blueprintDef != null && (ProjectRimFactory_ModComponent.ModSupport_SeedsPlease || ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite) && plantDef.blueprintDef.category == ThingCategory.Item)
             {
-                if (!TryPlantNewSeedsPleaseActive(plantDef))
-                    return;
+                //Only Plant if seed is available
+                if (!SeedsPleaseSupport.TryPlantNew(plantDef, this.OccupiedRect().ExpandedBy(1),Map)) return;
             }
             if (plantDef.CanEverPlantAt(c, Map) && PlantUtility.AdjacentSowBlocker(plantDef, c, Map) == null)
                 GenPlace.TryPlaceThing(ThingMaker.MakeThing(plantDef), c, Map, ThingPlaceMode.Direct);
         }
-
-        #region SeedsPlease activated stuff
-        /// <summary>
-        /// SeedsPlease activated code for trying to take seeds, credit to notfood for original mod
-        /// </summary>
-        private bool TryPlantNewSeedsPleaseActive(ThingDef plantDef)
-        {
-            var detectorCells = this.OccupiedRect().ExpandedBy(1);
-            Thing seed = null;
-            foreach (var cell in detectorCells)
-            {
-                var temp = cell.GetThingList(Map).Find(t => t.def == plantDef.blueprintDef);
-                if (temp != null)
-                {
-                    seed = temp;
-                    break;
-                }
-            }
-            if (seed == null)
-            {
-                return false;
-            }
-            seed.stackCount--;
-            if (seed.stackCount <= 0)
-            {
-                seed.Destroy();
-            }
-            return true;
-        }
-
-        /// <summary>
-        /// SeedsPlease activated code for creating plant products, credit to notfood for original mod
-        /// </summary>
-        protected void CreatePlantProductsSeedsPleaseActive(Plant p)
-        {
-            var seed = p.def.blueprintDef;
-            var type = seed.GetType();
-            var props = type.GetField("seed").GetValue(seed);
-            var propType = props.GetType();
-            int count = 0;
-            //This section of code adapted of notfood's original source
-            float parameter = Mathf.Max(Mathf.InverseLerp(p.def.plant.harvestMinGrowth, 1.2f, p.Growth), 1f);
-            if ((float)propType.GetField("seedFactor").GetValue(props) > 0f && Rand.Value < (float)propType.GetField("baseChance").GetValue(props) * parameter)
-            {
-                if (Rand.Value < (float)propType.GetField("extraChance").GetValue(props))
-                {
-                    count = 2;
-                }
-                else
-                {
-                    count = 1;
-                }
-                var thing = ThingMaker.MakeThing(seed);
-                thing.stackCount = count;
-                GenSpawn.Spawn(thing, compOutputAdjustable.CurrentCell, Map);
-            }
-        }
-        #endregion
 
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -175,19 +118,43 @@ namespace ProjectRimFactory.CultivatorTools
                 thing.stackCount = num2;
                 GenPlace.TryPlaceThing(thing, compOutputAdjustable.CurrentCell, Map, ThingPlaceMode.Near, null, ForbiddenCells);
             }
-            if (Utilities.SeedsPleaseActive && p.def.blueprintDef != null)
-                CreatePlantProductsSeedsPleaseActive(p);
+            if ((ProjectRimFactory_ModComponent.ModSupport_SeedsPlease || ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite) && p.def.blueprintDef != null)
+            {
+                SeedsPleaseSupport.CreatePlantSeeds(p, compOutputAdjustable.CurrentCell,Map);
+            }
 
             //TODO 1.3 Maybe rename pawn?
             if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
+
+            //Cache for PRF_StaticPawn Position & mapIndexOrState
+            object PRF_StaticPawnState = null;
+            IntVec3 PRF_StaticPawnPos = IntVec3.Invalid;
+
+            if (ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite)
+            {
+                //Cache PRF_StaticPawn Position & mapIndexOrState
+                PRF_StaticPawnState = ReflectionUtility.mapIndexOrState.GetValue(PRFGameComponent.PRF_StaticPawn);
+                PRF_StaticPawnPos = PRFGameComponent.PRF_StaticPawn.Position;
+
+                //Set PRF_StaticPawn.Position to the Output Cell -> Sets the placement position for the Seed
+                PRFGameComponent.PRF_StaticPawn.Position = compOutputAdjustable.CurrentCell;
+                //Set PRF_StaticPawn.mapIndexOrState to this.mapIndexOrState -> needed that PRF_StaticPawn.Map != null
+                ReflectionUtility.mapIndexOrState.SetValue(PRFGameComponent.PRF_StaticPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
+            }
             p.PlantCollected(PRFGameComponent.PRF_StaticPawn, PlantDestructionMode.Chop);
+            if (ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite)
+            {
+                //Reset PRF_StaticPawn Position & mapIndexOrState
+                ReflectionUtility.mapIndexOrState.SetValue(PRFGameComponent.PRF_StaticPawn, PRF_StaticPawnState);
+                PRFGameComponent.PRF_StaticPawn.Position= PRF_StaticPawnPos;
+            }
         }
 
         public override string DescriptionDetailed => base.DescriptionDetailed + " " +
-            ((Utilities.SeedsPleaseActive) ? "CultivatorTools_SeedsPleaseActiveDesc".Translate() : "CultivatorTools_SeedsPleaseInactiveDesc".Translate());
+            ((ProjectRimFactory_ModComponent.ModSupport_SeedsPlease || ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite) ? "CultivatorTools_SeedsPleaseActiveDesc".Translate() : "CultivatorTools_SeedsPleaseInactiveDesc".Translate());
 
         public override string DescriptionFlavor => base.DescriptionFlavor + " " +
-            ((Utilities.SeedsPleaseActive) ? "CultivatorTools_SeedsPleaseActiveDesc".Translate() : "CultivatorTools_SeedsPleaseInactiveDesc".Translate());
+            ((ProjectRimFactory_ModComponent.ModSupport_SeedsPlease || ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite) ? "CultivatorTools_SeedsPleaseActiveDesc".Translate() : "CultivatorTools_SeedsPleaseInactiveDesc".Translate());
     }
 
     public class DefModExtension_DoneBehavior : DefModExtension

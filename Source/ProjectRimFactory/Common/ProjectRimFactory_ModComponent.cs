@@ -53,6 +53,9 @@ namespace ProjectRimFactory.Common
         public static bool ModSupport_ReserchPal = false;
         public static bool ModSupport_ReserchPowl = false;
 
+        public static bool ModSupport_SeedsPlease = false;
+        public static bool ModSupport_SeedsPleaseLite = false;
+
         private void LoadModSupport()
         {
             if (ModLister.HasActiveModWithName("RimFridge Updated"))
@@ -225,7 +228,15 @@ namespace ProjectRimFactory.Common
                     Log.Error("PRF Could not find savestoragesettings.kv.rw assembly");
                 }
             }
-
+            if (ModLister.HasActiveModWithName("SeedsPlease"))
+            {
+                Log.Warning("PRF - SeedsPlease Detected - Compatibility probably requires an Update. Please Notify the PRF Team");
+                ModSupport_SeedsPlease = true;
+            }
+            if (ModLister.HasActiveModWithName("SeedsPlease: Lite"))
+            {
+                ModSupport_SeedsPleaseLite = true;
+            }
 
         }
 
