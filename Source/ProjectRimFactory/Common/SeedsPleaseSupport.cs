@@ -12,6 +12,11 @@ namespace ProjectRimFactory.Common
     internal static class SeedsPleaseSupport
     {
 
+        public static CellRect InputArea(Building building)
+        {
+            return building.OccupiedRect().ExpandedBy(1);
+        }
+
         public static bool TryPlantNew(ThingDef plantDef, CellRect SeedInputArea, Map map)
         {
             if (ProjectRimFactory_ModComponent.ModSupport_SeedsPlease)

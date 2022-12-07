@@ -67,12 +67,23 @@ namespace ProjectRimFactory.CultivatorTools
         }
         #endregion
 
+        public override void DrawExtraSelectionOverlays()
+        {
+            base.DrawExtraSelectionOverlays();
+            if((ProjectRimFactory_ModComponent.ModSupport_SeedsPlease || ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite))
+            {
+                //CommonColors.SeedsInputZone
+                GenDraw.DrawFieldEdges(SeedsPleaseSupport.InputArea(this).Cells.ToList(),CommonColors.SeedsInputZone);
+            }
+            
+        }
+
         public void TryPlantNew(IntVec3 c, ThingDef plantDef)
         {
             if (plantDef.blueprintDef != null && (ProjectRimFactory_ModComponent.ModSupport_SeedsPlease || ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite) && plantDef.blueprintDef.category == ThingCategory.Item)
             {
                 //Only Plant if seed is available
-                if (!SeedsPleaseSupport.TryPlantNew(plantDef, this.OccupiedRect().ExpandedBy(1),Map)) return;
+                if (!SeedsPleaseSupport.TryPlantNew(plantDef, SeedsPleaseSupport.InputArea(this), Map)) return;
             }
             if (plantDef.CanEverPlantAt(c, Map) && PlantUtility.AdjacentSowBlocker(plantDef, c, Map) == null)
                 GenPlace.TryPlaceThing(ThingMaker.MakeThing(plantDef), c, Map, ThingPlaceMode.Direct);
