@@ -157,16 +157,19 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override bool Ready()
         {
+            if(my_workTable is null) return false; 
+
             return !(!my_workTable.CurrentlyUsableForBills() || !my_workTable.billStack.AnyShouldDoNow);
         }
 
         public override void Free()
         {
             AllowBills();
+            base.generalRelease(my_workTable);
         }
         public override void Reserve()
         {
-            ForbidBills();
+            base.generalReserve(my_workTable);
         }
 
         public override void ExposeData()
@@ -193,42 +196,12 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         /// <summary>
-        /// Forbid bills to normal Pawns by converting them to a new bill type
-        /// While saving the Original for restoration later
-        /// </summary>
-        private void ForbidBills()
-        {
-            if (my_workTable.BillStack.Bills.Any(b => !(b is IBill_PawnForbidded)))
-            {
-                var tmp = my_workTable.BillStack.Bills.ToList();
-                my_workTable.BillStack.Clear();
-                my_workTable.BillStack.Bills.AddRange(tmp.SelectMany(b =>
-                {
-                    var forbidded = b as IBill_PawnForbidded;
-                    if (forbidded == null)
-                    {
-                        if (b is Bill_ProductionWithUft)
-                        {
-                            forbidded = ((Bill_ProductionWithUft)b).CopyTo((Bill_ProductionWithUftPawnForbidded)Activator.CreateInstance(typeof(Bill_ProductionWithUftPawnForbidded), b.recipe));
-                            ((Bill_Production)b).repeatMode = BillRepeatModeDefOf.Forever;
-                            forbidded.Original = b;
-                        }
-                        else if (b is Bill_Production)
-                        {
-                            forbidded = ((Bill_Production)b).CopyTo((Bill_ProductionPawnForbidded)Activator.CreateInstance(typeof(Bill_ProductionPawnForbidded), b.recipe));
-                            ((Bill_Production)b).repeatMode = BillRepeatModeDefOf.Forever;
-                            forbidded.Original = b;
-                        }
-                    }
-                    return Option((Bill)forbidded);
-                }));
-            }
-        }
-        /// <summary>
         /// Unforbid Bills by restoring them to the correct class Called after ForbidBills
+        /// //May be removed once we think all/most old Saves have been converted 
         /// </summary>
         private void AllowBills()
         {
+            if(my_workTable is null) return;
             if (my_workTable.BillStack.Bills.Any(b => b is IBill_PawnForbidded))
             {
                 var tmp = my_workTable.BillStack.Bills.ToList();
