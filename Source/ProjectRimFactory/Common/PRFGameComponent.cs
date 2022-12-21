@@ -32,6 +32,7 @@ namespace ProjectRimFactory
             data.Add(new Common.BackCompatibility.PRF_BackCompatibilityConverter());
             SAL3.ReflectionUtility.BackCompatibility_conversionChain.SetValue(null, data);
 
+            PRFDefOf.PRFDrone.race.mechEnabledWorkTypes.AddRange(DefDatabase<WorkTypeDef>.AllDefs);
 
         }
         public override void ExposeData()
