@@ -141,7 +141,7 @@ namespace ProjectRimFactory.CultivatorTools
             object PRF_StaticPawnState = null;
             IntVec3 PRF_StaticPawnPos = IntVec3.Invalid;
 
-            if (ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite)
+            if (ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite || ProjectRimFactory_ModComponent.ModSupport_VEF_DualCropExtension)
             {
                 //Cache PRF_StaticPawn Position & mapIndexOrState
                 PRF_StaticPawnState = ReflectionUtility.mapIndexOrState.GetValue(PRFGameComponent.PRF_StaticPawn);
@@ -153,7 +153,7 @@ namespace ProjectRimFactory.CultivatorTools
                 ReflectionUtility.mapIndexOrState.SetValue(PRFGameComponent.PRF_StaticPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
             }
             p.PlantCollected(PRFGameComponent.PRF_StaticPawn, PlantDestructionMode.Chop);
-            if (ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite)
+            if (ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite || ProjectRimFactory_ModComponent.ModSupport_VEF_DualCropExtension)
             {
                 //Reset PRF_StaticPawn Position & mapIndexOrState
                 ReflectionUtility.mapIndexOrState.SetValue(PRFGameComponent.PRF_StaticPawn, PRF_StaticPawnState);

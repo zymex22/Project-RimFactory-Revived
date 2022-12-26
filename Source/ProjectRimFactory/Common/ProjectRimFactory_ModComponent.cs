@@ -56,6 +56,8 @@ namespace ProjectRimFactory.Common
         public static bool ModSupport_SeedsPlease = false;
         public static bool ModSupport_SeedsPleaseLite = false;
 
+        public static bool ModSupport_VEF_DualCropExtension = false;
+
         private void LoadModSupport()
         {
             if (ModLister.HasActiveModWithName("RimFridge Updated"))
@@ -236,6 +238,10 @@ namespace ProjectRimFactory.Common
             if (ModLister.HasActiveModWithName("SeedsPlease: Lite"))
             {
                 ModSupport_SeedsPleaseLite = true;
+            }
+            if (ModLister.HasActiveModWithName("Vanilla Expanded Framework"))
+            {
+                ModSupport_VEF_DualCropExtension = true;
             }
 
         }
