@@ -138,9 +138,9 @@ Section 1.1 - Physical properties
 
   <!--   <xxx_HelpText></xxx_HelpText>   -->
   
-  <PRF_UTD_ModExtension_Skills_ThisOverrides>Fix Skilllevel:</PRF_UTD_ModExtension_Skills_ThisOverrides>
-  <PRF_UTD_ModExtension_Skills_ReserchIsCapping>Skilllevel (Capped by Research):</PRF_UTD_ModExtension_Skills_ReserchIsCapping>
-  <PRF_UTD_ModExtension_Skills_ThisIsCapping>maximum Skilllevel (depended on Research):</PRF_UTD_ModExtension_Skills_ThisIsCapping>
+  <PRF_UTD_ModExtension_Skills_ThisOverrides>Base Skill:</PRF_UTD_ModExtension_Skills_ThisOverrides>
+  <PRF_UTD_ModExtension_Skills_ReserchIsCapping>Skill Level (Capped by Research):</PRF_UTD_ModExtension_Skills_ReserchIsCapping>
+  <PRF_UTD_ModExtension_Skills_ThisIsCapping>Maximum Skill level (Based on Research):</PRF_UTD_ModExtension_Skills_ThisIsCapping>
   <PRF_UTD_ModExtension_Skills_ReserchOverrides>Skill Depends on Research</PRF_UTD_ModExtension_Skills_ReserchOverrides>
   <PRF_UTD_ModExtension_Skills_Base> {0}</PRF_UTD_ModExtension_Skills_Base>
   <PRF_UTD_CompProperties_PowerWorkSetting_Speed>Speed: {0}</PRF_UTD_CompProperties_PowerWorkSetting_Speed>
