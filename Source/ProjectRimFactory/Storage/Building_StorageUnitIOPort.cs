@@ -18,7 +18,7 @@ namespace ProjectRimFactory.Storage
 
 
     [StaticConstructorOnStartup]
-    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem, IRenameBuilding, INutrientPasteDispenserInput
+    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem, IRenameBuilding
     {
         public static readonly Texture2D CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
         public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("PRFUi/IoIcon");

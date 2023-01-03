@@ -100,6 +100,7 @@
     <fillPercent>0.5</fillPercent>
     <pathCost>70</pathCost>
     <building>
+	  <isHopper>true</isHopper>
       <fixedStorageSettings>
         <priority>Preferred</priority>
         <filter>

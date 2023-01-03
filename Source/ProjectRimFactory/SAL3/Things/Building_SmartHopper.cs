@@ -11,7 +11,7 @@ using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
 {
-    public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder, INutrientPasteDispenserInput
+    public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder
     {
         private OutputSettings outputSettings;
 
