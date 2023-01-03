@@ -150,7 +150,7 @@ namespace ProjectRimFactory.Drones
 
                 rect = list.GetRect(30f);
                 list.Gap();
-                droneStation.compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider(rect, droneStation.compRefuelable.TargetFuelLevel, 0, droneStation.compRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(droneStation.compRefuelable.TargetFuelLevel), "0", droneStation.compRefuelable.Props.fuelCapacity.ToString(), 1);
+                droneStation.compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider_NewTemp(rect, droneStation.compRefuelable.TargetFuelLevel, 0, droneStation.compRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(droneStation.compRefuelable.TargetFuelLevel), "0", droneStation.compRefuelable.Props.fuelCapacity.ToString(), 1);
             }
 
 
