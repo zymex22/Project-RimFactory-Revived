@@ -1,6 +1,8 @@
 ﻿using HarmonyLib;
 using ProjectRimFactory.Storage;
 using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
 using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
@@ -21,6 +23,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             //Only run if Check everywhere is set
             if (bill.includeFromZone == null)
             {
+                Map billmap = bill.Map;
                 int i = 0;
                 ThingDef targetDef = __instance.recipe.products[0].thingDef;
 
@@ -29,7 +32,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 for (i = 0; i < gamecomp.AssemblerQueue.Count; i++)
                 {
                     //Don't count Resources of other maps
-                    if (bill.Map != gamecomp.AssemblerQueue[i].Map) continue;
+                    if (billmap != gamecomp.AssemblerQueue[i].Map) continue;
                     foreach (Thing heldThing in gamecomp.AssemblerQueue[i].GetThingQueue())
                     {
                         TryUpdateResult(ref __result, targetDef, heldThing);
@@ -37,10 +40,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 }
 
                 //Add Items stored in ColdStorage
-                foreach (ILinkableStorageParent dsu in TradePatchHelper.AllPowered(bill.Map))
+                List<ILinkableStorageParent> units = PatchStorageUtil.GetPRFMapComponent(billmap).ColdStorageBuildings.Select(b => b as ILinkableStorageParent).ToList();
+
+                foreach (ILinkableStorageParent dsu in units)
                 {
-                    //Only for Cold Storage
-                    if (dsu.AdvancedIOAllowed) continue;
                     foreach (var thing in dsu.StoredItems)
                     {
                         TryUpdateResult(ref __result, targetDef, thing);
