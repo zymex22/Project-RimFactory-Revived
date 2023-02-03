@@ -363,12 +363,12 @@
     </modExtensions>
   </ThingDef>
   
-  <!--==================== Cold Storage ====================-->
+  <!--==================== Archival Storage Unit ====================-->
   <ThingDef ParentName="PRF_BuildingBase">
     <thingClass>ProjectRimFactory.Storage.Building_ColdStoragePowered</thingClass>
 	<defName>PRF_ColdStorageUnit_I</defName>
-    <label>Cold Storage Unit</label>
-    <description>A matter-energy conversion based storage unit which can hold up to 10k stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the Cold Storage Unit will not be able to store more. Don't break it.\n\nItems stored in this Device are not spawned and therefore won't be automatically accessible by your pawns. Use I/O Ports to interact with it.</description>
+    <label>Archival Storage Unit</label>
+    <description>A matter-energy conversion based storage unit which can hold up to 10k stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the Archival Storage Unit will not be able to store more. Don't break it.\n\nItems stored in this Device are not spawned and therefore won't be automatically accessible by your pawns. Use I/O Ports to interact with it.</description>
     <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
     <tradeTags>
