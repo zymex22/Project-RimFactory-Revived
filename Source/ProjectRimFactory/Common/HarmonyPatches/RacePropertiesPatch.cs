@@ -5,28 +5,6 @@ using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    static class Patch_Locks2_ConfigRuleRace_Allows
-    {
-
-        static public void Prefix(Pawn pawn)
-        {
-            if (pawn is Pawn_Drone)
-            {
-                Patch_Pawn_IsColonist.overrideIsColonist = true;
-            }
-        }
-
-        static public void Postfix(Pawn pawn)
-        {
-            if (pawn is Pawn_Drone)
-            {
-                Patch_Pawn_IsColonist.overrideIsColonist = false;
-            }
-        }
-    }
-
-
-
     // A patch to the problem of forbidding what drones have mined.
     // When mineable yields, if pawn is Drone, Drone will be Colonist.
     [HarmonyPatch(typeof(Mineable), "TrySpawnYield")]
