@@ -35,7 +35,7 @@
          Update this either in the GUI (nuget system) or from the command line:
          nuget restore
          -->
-    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.4.3580" />
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.4.3613" />
     <PackageReference Include="Lib.Harmony" Version="2.2.2" PrivateAssets="All" />
   </ItemGroup>
 
