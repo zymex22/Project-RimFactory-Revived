@@ -290,6 +290,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             // already set, but just in case:
             this.products = thingOwnerInt.InnerListForReading;
+            PatchStorageUtil.GetPRFMapComponent(this.Map).NextBeltCache.Clear();
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
@@ -298,7 +299,7 @@ namespace ProjectRimFactory.AutoMachineTool
             base.DeSpawn(mode);
 
             targets.ForEach(x => x.Unlink(this));
-
+            PatchStorageUtil.GetPRFMapComponent(this.Map).NextBeltCache.Clear();
         }
         // What does this even mean for a building, anyway?
         public override bool CanStackWith(Thing other)
@@ -396,7 +397,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         protected void CalculateCarriedItemDrawHeight()
         {
-            var nextBelt = this.OutputBeltAt(this.OutputCell());
+            var nextBelt = this.OutputBelt();
             if (nextBelt != null)
             {
                 var theirs = nextBelt.CarriedItemDrawHeight;
@@ -601,7 +602,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             // Try to send to another conveyor first:
             // コンベアある場合、そっちに流す.
-            var outputBelt = this.OutputBeltAt(this.OutputCell());
+            var outputBelt = this.OutputBelt();
             if (outputBelt != null)
             {
                 if ((outputBelt as IPRF_Building).AcceptsThing(thing, this))
@@ -643,18 +644,25 @@ namespace ProjectRimFactory.AutoMachineTool
             return null;
         }
 
+
         /// <summary>
-        /// Return the first belt at <paramref name="location"/> that this can send to
+        /// Return the first belt, that this can send to
         /// </summary>
         /// <returns>The belt, or null if none found</returns>
-        /// <param name="location">Valid IntVec3 this conveyor can send to</param>
-        protected virtual IBeltConveyorLinkable OutputBeltAt(IntVec3 location)
+        protected virtual IBeltConveyorLinkable OutputBelt()
         {
-            return location.GetThingList(this.Map)
+            var cache = PatchStorageUtil.GetPRFMapComponent(this.Map).NextBeltCache;
+            IBeltConveyorLinkable nextBelt = null; ;
+            if (!cache.TryGetValue(this,out nextBelt))
+            {
+                nextBelt = this.OutputCell().GetThingList(this.Map)
                 .OfType<IBeltConveyorLinkable>()
                 .Where(b => this.CanLinkTo(b, false))
                 .Where(b => b.CanLinkFrom(this))
                 .FirstOrDefault();
+                cache.Add(this, nextBelt);
+            }
+            return nextBelt;
         }
 
         protected IEnumerable<IBeltConveyorLinkable> AllNearbyLinkables()
@@ -733,7 +741,7 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 return true; // Sure? Nothing to place, so can place it trivially.
             }
-            var belt = this.OutputBeltAt(this.OutputCell());
+            var belt = this.OutputBelt();
             if (belt != null)
             {
                 Debug.Message(Debug.Flag.Conveyors,
