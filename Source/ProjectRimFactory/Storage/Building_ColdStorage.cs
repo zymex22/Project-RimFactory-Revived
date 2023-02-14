@@ -86,6 +86,10 @@ namespace ProjectRimFactory.Storage
         {
             foreach (var g in base.GetGizmos())
                 yield return g;
+            foreach (Gizmo item in StorageSettingsClipboard.CopyPasteGizmosFor(settings))
+            {
+                yield return item;
+            }
             yield return new Command_Action
             {
                 icon = RenameTex,
