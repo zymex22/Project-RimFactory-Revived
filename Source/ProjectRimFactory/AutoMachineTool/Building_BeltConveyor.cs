@@ -296,10 +296,11 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             var targets = AllNearbyLinkables().ToList();
+            PatchStorageUtil.GetPRFMapComponent(this.Map).NextBeltCache.Clear();
             base.DeSpawn(mode);
 
             targets.ForEach(x => x.Unlink(this));
-            PatchStorageUtil.GetPRFMapComponent(this.Map).NextBeltCache.Clear();
+            
         }
         // What does this even mean for a building, anyway?
         public override bool CanStackWith(Thing other)
