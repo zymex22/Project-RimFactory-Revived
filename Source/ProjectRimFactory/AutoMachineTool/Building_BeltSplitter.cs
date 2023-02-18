@@ -205,11 +205,11 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (priority == prevPriority) yield return previousDir;
             }
         }
-        protected override IBeltConveyorLinkable OutputBeltAt(IntVec3 location)
+        protected override IBeltConveyorLinkable OutputBelt()
         {
             foreach (var kvp in this.outputLinks)
             {
-                if (kvp.Key.FacingCell + this.Position == location)
+                if (kvp.Key.FacingCell + this.Position == this.OutputCell())
                 {
                     if (!kvp.Value.Active) return null;
                     return kvp.Value.link;

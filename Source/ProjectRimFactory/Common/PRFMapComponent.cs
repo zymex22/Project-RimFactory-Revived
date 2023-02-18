@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ProjectRimFactory.AutoMachineTool;
+using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -19,6 +20,9 @@ namespace ProjectRimFactory.Common
         private Dictionary<IntVec3, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort> advancedIOLocations = new Dictionary<IntVec3, Storage.Building_AdvancedStorageUnitIOPort>();
 
         public Dictionary<IntVec3, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort> GetadvancedIOLocations => advancedIOLocations;
+
+        public Dictionary<Building_BeltConveyor, IBeltConveyorLinkable> NextBeltCache = new Dictionary<Building_BeltConveyor, IBeltConveyorLinkable>();
+
 
         public void RegisterColdStorageBuilding(ProjectRimFactory.Storage.Building_ColdStorage port)
         {
