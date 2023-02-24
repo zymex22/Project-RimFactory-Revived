@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.Storage;
 using System;
 using System.Collections.Generic;
@@ -220,6 +221,26 @@ namespace ProjectRimFactory.Common
             {
                 ModSupport_VEF_DualCropExtension = true;
             }
+            if (ModLister.HasActiveModWithName("QualityBuilder"))
+            {
+                MethodBase QualityBuilder_pawnCanConstruct = AccessTools.Method("QualityBuilder.QualityBuilder:pawnCanConstruct");
+                MethodBase QualityBuilder_getPawnConstructionSkill = AccessTools.Method("QualityBuilder.QualityBuilder:getPawnConstructionSkill");
+
+                if (QualityBuilder_pawnCanConstruct != null && QualityBuilder_getPawnConstructionSkill != null)
+                {
+                    var postfix_pawnCanConstruct = typeof(HarmonyPatches.Patch_QualityBuilder_pawnCanConstruct).GetMethod("Postfix");
+                    var prefix_getPawnConstructionSkill = typeof(HarmonyPatches.Patch_QualityBuilder_getPawnConstructionSkill).GetMethod("Prefix");
+                    this.HarmonyInstance.Patch(QualityBuilder_pawnCanConstruct, null, new HarmonyMethod(postfix_pawnCanConstruct));
+                    this.HarmonyInstance.Patch(QualityBuilder_getPawnConstructionSkill, new HarmonyMethod(prefix_getPawnConstructionSkill));
+                    Log.Message("Project Rimfactory - Added Support for QualityBuilder");
+                }   
+                else
+                {
+                    Log.Warning("Project Rimfactory - Failed to add Support for QualityBuilder");
+                }
+                
+            }
+
 
         }
 
