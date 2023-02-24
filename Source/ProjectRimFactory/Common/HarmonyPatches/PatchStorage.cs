@@ -32,12 +32,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static bool Prefix(Building_Storage __instance, Thing t, out bool __result)
         {
             __result = false;
+            //Check if pawn input is forbidden
             if ((__instance as IForbidPawnInputItem)?.ForbidPawnInput ?? false)
             {
-                if (!__instance.slotGroup.HeldThings.Contains(t))
-                {
-                    return false;
-                }
+                return false;
             }
             return true;
         }
