@@ -1,7 +1,9 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
+
 namespace ProjectRimFactory.Common
 {
     public abstract class PRF_Building : Building, IPRF_Building
@@ -20,6 +22,11 @@ namespace ProjectRimFactory.Common
         public virtual void EffectOnAcceptThing(Thing t) { }
 
         public virtual bool ForbidOnPlacing(Thing t) => ForbidOnPlacingDefault;
+
+        public virtual IntVec3 OutputCell()
+        {
+            return IntVec3.Invalid;
+        }
 
         public virtual bool ForbidOnPlacingDefault
         {
@@ -54,6 +61,21 @@ namespace ProjectRimFactory.Common
             Scribe_Values.Look(ref outputToEntireStockpile, "PRFOutputToEntireStockpile", false);
             Scribe_Values.Look(ref obeysStorageFilters, "PRFObeysStorageFilters", true);
             Scribe_Values.Look(ref forbidOnPlacingDefault, "PRFForbidOnPlacingDefault", false);
+        }
+
+        public override void DrawExtraSelectionOverlays()
+        {
+            base.DrawExtraSelectionOverlays();
+
+            //Try highlight Output Area
+            if (OutputToEntireStockpile && OutputCell() != IntVec3.Invalid)
+            { 
+                var slotGroup = OutputCell().GetSlotGroup(this.Map);
+                if (slotGroup != null)
+                {
+                    GenDraw.DrawFieldEdges(slotGroup.CellsList, CommonColors.outputZone);
+                }
+            }
         }
     }
     [Flags] // PRF Building Settinsg
