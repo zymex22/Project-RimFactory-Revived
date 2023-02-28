@@ -76,7 +76,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected float carriedItemDrawHeight = defaultCarriedItemDrawHeight;
 
         // Generally useful methods:
-        protected ModExtension_Conveyor Extension => this.def.GetModExtension<ModExtension_Conveyor>();
+        protected ModExtension_Conveyor modExtension_Conveyor = null;
 
         // Generally important methods:
         protected virtual Rot4 OutputDirection => this.Rotation;
@@ -101,7 +101,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         /************* Conveyors IBeltConveyor ***********/
         public bool IsStuck => this.stuck;
-        public bool IsUnderground { get => this.Extension?.underground ?? false; }
+        public bool IsUnderground { get => this.modExtension_Conveyor?.underground ?? false; }
         public virtual bool IsEndOfLine
         {
             get { return isEndOfLine; }
@@ -282,6 +282,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            modExtension_Conveyor = this.def.GetModExtension<ModExtension_Conveyor>();
             this.showProgressBar = false;
             foreach (var c in AllNearbyLinkables())
             {
@@ -349,6 +350,11 @@ namespace ProjectRimFactory.AutoMachineTool
                 DrawCarried();
             }
         }
+        
+        //Cache results of expensive calls
+        Graphic drawCarried_GraphicBase = null;
+        Graphic drawCarried_GraphicDB = null;
+
         /// <summary>
         /// Draw the carried item (there should be one). This allows
         ///   derived classes to decide when/how to draw their items.
@@ -357,25 +363,25 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             Thing t = CarryingThing();
             if (t == null) return;
-            float scale = this.def.GetModExtension<ModExtension_Conveyor>()?.
+            float scale = modExtension_Conveyor?.
                           carriedItemScale ?? defaultCarriedItemScale;
             // Took this line from MinifiedThing; don't know if it's needed:
             //   However, it's insuffient to use Graphic's GetCopy() :(
-            var g = t.Graphic.ExtractInnerGraphicFor(t);
+            drawCarried_GraphicBase ??= t.Graphic.ExtractInnerGraphicFor(t);
             // Graphic's GetCopy() fails on any Graphic_RandomRotated
             //   And on minified things.  And who knows what else?
             //   There is no easy way to get around this, but this seems
             //   to work the best so far:
             GraphicData gd = t.def.graphicData;
-            if (gd == null) gd = g.data;
+            if (gd == null) gd = drawCarried_GraphicBase.data;
             if (gd == null)
             {
                 t.DrawAt(CarryPosition());
                 return;
             }
-            g = GraphicDatabase.Get(gd.graphicClass, gd.texPath, g.Shader,
-                      new Vector2(scale, scale), g.color, g.colorTwo);
-            g.Draw(this.CarryPosition(), CarryingThing().Rotation, CarryingThing(), 0f);
+            drawCarried_GraphicDB ??= GraphicDatabase.Get(gd.graphicClass, gd.texPath, drawCarried_GraphicBase.Shader,
+                      new Vector2(scale, scale), drawCarried_GraphicBase.color, drawCarried_GraphicBase.colorTwo);
+            drawCarried_GraphicDB.Draw(this.CarryPosition(), t.Rotation,t, 0f);
         }
         protected Vector3 CarryPosition()
         {
@@ -556,6 +562,8 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         protected sealed override bool PlaceProduct(ref List<Thing> products)
         {
+            drawCarried_GraphicBase = null;
+            drawCarried_GraphicDB = null;
             if (thingOwnerInt.Count == 0)
             {
                 // (this can happen if the belt is in Placing mode and something takes it from belt)
