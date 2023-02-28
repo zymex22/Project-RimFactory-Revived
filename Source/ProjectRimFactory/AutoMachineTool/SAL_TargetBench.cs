@@ -1,5 +1,6 @@
 ﻿using ProjectRimFactory.Common;
 using ProjectRimFactory.SAL3;
+using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -409,23 +410,6 @@ namespace ProjectRimFactory.AutoMachineTool
 
         }
 
-        private Thing DominantIngredient(List<Thing> ingredients)
-        {
-            if (ingredients.Count == 0)
-            {
-                return null;
-            }
-            if (this.bill.recipe.productHasIngredientStuff)
-            {
-                return ingredients[0];
-            }
-            if (this.bill.recipe.products.Any(x => x.thingDef.MadeFromStuff))
-            {
-                return ingredients.Where(x => x.def.IsStuff).RandomElementByWeight((Thing x) => (float)x.stackCount);
-            }
-            return ingredients.RandomElementByWeight((Thing x) => (float)x.stackCount);
-        }
-
         public override void WorkDone(out List<Thing> products)
         {
             products = GenRecipe2.MakeRecipeProducts(this.bill.recipe, mySAL, this.ingredients, this.dominant, my_workTable, this.bill.precept).ToList();
@@ -457,7 +441,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.ingredients = things?.Where(t => t.count > 0).Select(t => t.thing.SplitOff(t.count))?.ToList() ?? new List<Thing>();
 
                 //Get dominant ingredient
-                this.dominant = this.DominantIngredient(this.ingredients);
+                this.dominant = ProjectSAL_Utilities.CalculateDominantIngredient(this.bill.recipe,this.ingredients);
 
 
                 if (this.bill.recipe.UsesUnfinishedThing)
