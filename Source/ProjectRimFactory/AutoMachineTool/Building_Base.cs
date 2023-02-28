@@ -443,7 +443,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return !this.products.Any();
         }
 
-        public virtual IntVec3 OutputCell()
+        public override IntVec3 OutputCell()
         {
             return FacingCell(this.Position, this.def.Size, this.Rotation.Opposite);
         }

@@ -171,7 +171,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         private void MakeMatchingStockpileZone()
         {
-            var stockpileCells = IngredientStackCells.Where(c => c != OutputComp.CurrentCell && !this.Map.thingGrid.ThingsListAt(c).Any(t => !t.def.CanOverlapZones));
+            var stockpileCells = IngredientStackCells.Where(c => c != compOutputAdjustable.CurrentCell && !this.Map.thingGrid.ThingsListAt(c).Any(t => !t.def.CanOverlapZones));
             if (stockpileCells.Count() > 0)
             {
                 Designator_ZoneAddStockpile_Resources stockpileZone = new Designator_ZoneAddStockpile_Resources();
@@ -183,14 +183,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
         }
 
-
-        public CompOutputAdjustable OutputComp
-        {
-            get
-            {
-                return GetComp<CompOutputAdjustable>();
-            }
-        }
+        
         protected virtual IEnumerable<FloatMenuOption> GetDebugOptions()
         {
             string StringConverter(Thing t)
@@ -215,10 +208,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         protected MapTickManager MapManager => this.mapManager;
 
         private PRFGameComponent prf_gamecomp = Current.Game.GetComponent<PRFGameComponent>();
+        
+        private CompOutputAdjustable compOutputAdjustable;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            compOutputAdjustable = GetComp<CompOutputAdjustable>();
             this.mapManager = map.GetComponent<MapTickManager>();
             if (buildingPawn == null)
                 DoPawn();
@@ -316,7 +312,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             {
                 if (thingQueue.Count > 0 &&
                     PlaceThingUtility.PRFTryPlaceThing(this, thingQueue[0],
-                        OutputComp.CurrentCell, Map))
+                        compOutputAdjustable.CurrentCell, Map))
                 {
                     thingQueue.RemoveAt(0);
                 }
@@ -638,6 +634,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             base.Destroy(mode);
 
             prf_gamecomp.DeRegisterAssemblerQueue(this);
+        }
+
+        public override IntVec3 OutputCell()
+        {
+            return compOutputAdjustable.CurrentCell;
         }
 
         // (Some) Internal variables:

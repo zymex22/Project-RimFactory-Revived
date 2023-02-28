@@ -133,7 +133,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (pawn.kindDef == PRFDefOf.PRFSlavePawn && billGiver is Building_SimpleAssembler assembler)
             {
-                return RegionAndRoomQuery.RoomAt(assembler.OutputComp.CurrentCell, billGiver.Map, RegionType.Set_Passable);
+                return RegionAndRoomQuery.RoomAt(assembler.OutputCell(), billGiver.Map, RegionType.Set_Passable);
             }
             return pawn.GetRoom(allowedRegionTypes);
         }
