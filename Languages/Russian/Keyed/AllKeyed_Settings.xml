@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <PRF_Settings_C_Lite_Header>Включить ограниченный режим</PRF_Settings_C_Lite_Header>
+  <PRF_Settings_C_Lite_Label>Ограниченный режим</PRF_Settings_C_Lite_Label>
+  <PRF_Settings_C_Lite_ToolTip>Отметьте эту опцию, чтобы включить ограниченный режим PRF, в котором отключены все устройства, кроме логистических и складов.\n\nЭтот режим предназначен главным образом для тех, кто хотел бы использовать склады и конвееры в сочетании с каким-либо другим модом, например VEF: Mechanoids.</PRF_Settings_C_Lite_ToolTip>
+  <PRF_Settings_C_Patches_Header>Патчи</PRF_Settings_C_Patches_Header>
+  <PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>Включить патч Advanced IO CanReach\n\nЕсли флажок установлен, патч позволяет колонистам достигать содержимого DSU (складских юнитов, ящиков, в просторечии) с помощью расширенных портов ввода-вывода (чего?), даже если путь к ящику заблокирован.\n\nЭтот патч по умолчанию выключен, так как может вызвать проблемы с производительностью (?) и полезен только в некоторых случаях.\n\n(ProjectRimFactory.Common.HarmonyPatches.Patch_Reachability_CanReach:Prefix)</PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>
+  <PRF_Settings_C_Patches_Reachability_CanReach>Включить патч Advanced IO CanReach</PRF_Settings_C_Patches_Reachability_CanReach>
+  <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>Включить патч Cold Storage WealthWatcher\n\nКогда патч активен, предметы в Cold Storage учитываются при подсчете общего богатства колонии (?).\n\nМы рекомендуем включать его для большинства игроков.\nПотери производительности составляют ~1ms на 1,000 хранимых предметов. Подсчет запускается каждые 5,000 тиков (игровых циклов)\n\n(ProjectRimFactory.Common.HarmonyPatches.Patch_WealthWatcher_CalculateWealthItems:Postfix)</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>
+  <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>Включить патч Cold Storage WealthWatcher</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>
+  
+  <PRF.Common.ForbidOnPlacingDefault>Запретить предметы после размещения</PRF.Common.ForbidOnPlacingDefault>
+  <PRF.Common.ForbidOnPlacingDefaultDesc>При включении этого параметра продукты автоматических фабрик автоматически получат метку запрещения для использования при размещении (на складе?).</PRF.Common.ForbidOnPlacingDefaultDesc>
+  
+  <PRF.Settings.RequireReboot>Изменения потребуют перезапуска игры для применения новых настроек.</PRF.Settings.RequireReboot>
+  <PRF.Settings.Select>Выбор</PRF.Settings.Select>
+  <PRF.Settings.TopMessage><![CDATA[<size=20>Любые изменения <b><i><color=red>потребуют перезапуска игры</color></i></b></size>]]></PRF.Settings.TopMessage>
+  <PRF.Settings.restartMessage>Любые изменения автоматически перезапустят RimWorld после закрытия этого меню.</PRF.Settings.restartMessage>
+  <PRF.Settings.AssemblerMessage>Настройки сборки</PRF.Settings.AssemblerMessage>
+  <PRF.Settings.OtherMessage>Прочие настройки</PRF.Settings.OtherMessage>
+  <PRF.Settings.StorageMessage>Настройки склада</PRF.Settings.StorageMessage>
+
+  <PRF.Settings.TurnOffHelpButton.Label>Отключить кнопку "Помощь"</PRF.Settings.TurnOffHelpButton.Label>
+  <PRF.Settings.TurnOffHelpButton.Desc>Отключение этого параметра удаляет кнопку "Помощь", которая появляется внизу, когда выбрана PRF машина.</PRF.Settings.TurnOffHelpButton.Desc>
+
+  <PRF.Settings.TurnOffPulseGlowerEffect.Label>Включение эффекта замедления импульса</PRF.Settings.TurnOffPulseGlowerEffect.Label>
+  <PRF.Settings.TurnOffPulseGlowerEffect.Desc>Включение эффекта замедления импульса</PRF.Settings.TurnOffPulseGlowerEffect.Desc>
+
+  <PRF.Settings.TurnOffSwapTexture.Label>Отключить эффект смены текстур</PRF.Settings.TurnOffSwapTexture.Label>
+  <PRF.Settings.TurnOffSwapTexture.Desc>Отключает динамическую смену текстур зданий в "рабочем" режиме, когда они используются.</PRF.Settings.TurnOffSwapTexture.Desc>
+
+  <PRF.Settings.TurnOffDrawStatus.Label>Отключение метки рабочего состояния</PRF.Settings.TurnOffDrawStatus.Label>
+  <PRF.Settings.TurnOffDrawStatus.Desc>Отключает надписи, сообщающие о состоянии машины.</PRF.Settings.TurnOffDrawStatus.Desc>
+
+  <PRF.Settings.TurnOffDoEffect.Label>Отключить аудиовизуальные эффекты для рецептов</PRF.Settings.TurnOffDoEffect.Label>
+  <PRF.Settings.TurnOffDoEffect.Desc>Отключает звуки и анимацию над машинами во время работы.</PRF.Settings.TurnOffDoEffect.Desc>
+
+  <PRF.Settings.TurnOffStorageDefault.Label>Отключить настройки склада по умолчанию</PRF.Settings.TurnOffStorageDefault.Label>
+  <PRF.Settings.TurnOffStorageDefault.Desc>Если отключено, для ящиков и другого складского оборудования по умолчанию разрешено хранение любых предметов.</PRF.Settings.TurnOffStorageDefault.Desc>
+
+  <PRF.Settings.TurnOffDsuDestroy.Label>Отключить потери предметов при демонтаже складского юнита</PRF.Settings.TurnOffDsuDestroy.Label>
+  <PRF.Settings.TurnOffDsuDestroy.Desc>При ручном демонтаже складского оборудования все содержавшиеся в нем предметы пропадают.  Выключение этой настройки приведет к тому, что они будут сохраняться.</PRF.Settings.TurnOffDsuDestroy.Desc>
+
+  <PRF.Settings.DsuLimit.Label>Переопределить лимит хранения складского юнита</PRF.Settings.DsuLimit.Label>
+  <PRF.Settings.DsuLimit.Desc>Установите этот флажок, чтобы включить ползунок переопределения справа.</PRF.Settings.DsuLimit.Desc>
+
+  <PRF.Settings.recipeDB.Label>Переопределить радиус действия базы данных рецептов</PRF.Settings.recipeDB.Label>
+  <PRF.Settings.recipeDB.Desc>Установите этот флажок, чтобы включить ползунок переопределения справа.</PRF.Settings.recipeDB.Desc>
+
+  <PRF.Settings.TurnOffInfestation.Label>Отключить появление насекомых для T1/T2 горнодобывающих модулей</PRF.Settings.TurnOffInfestation.Label>
+  <PRF.Settings.TurnOffInfestation.Desc>Отключить вызов события "Слишком глубоко: насекомые!" для автоматических горнодобывающих модулей первого и второго уровней.\n\nМожет нарушить баланс, поскольку это единственное реальное ограничение вашей возможности управлять пятьюдесятью модулями одновременно.</PRF.Settings.TurnOffInfestation.Desc>
+
+  <PRF.Settings.TurnOffMinerNerf.Label>Горнодобывающие модули добывают руду всех типов</PRF.Settings.TurnOffMinerNerf.Label>
+  <PRF.Settings.TurnOffMinerNerf.Desc>Все уровни горных модулей теперь могут добывать любую руду, игнорируя любые установленные для них ограничения.\n\nМожет нарушить баланс, так как дает вам возможность накопать бесконечное количество всего, что хотите, если оно определено как руда.</PRF.Settings.TurnOffMinerNerf.Desc>
+
+  <PRF.Settings.TurnOffGrouping.Label>Отключение некоторых группировок меню / выпадающих элементов</PRF.Settings.TurnOffGrouping.Label>
+  <PRF.Settings.TurnOffGrouping.Desc>Сейчас эффект ограничен, но эта опция разгруппировывает в отдельные записи несколько сгруппированных пунктов меню архитектора.</PRF.Settings.TurnOffGrouping.Desc>
+
+  <PRF.Settings.TurnOffFurnacefuel.Label>Отключить использование топлива для печей первого уровня</PRF.Settings.TurnOffFurnacefuel.Label>
+  <PRF.Settings.TurnOffFurnacefuel.Desc>Делает использование печи первого уровня свободным.</PRF.Settings.TurnOffFurnacefuel.Desc>
+
+  <PRF.Settings.TurnOffCoalGen.Label>Отключить производство природного угля</PRF.Settings.TurnOffCoalGen.Label>
+  <PRF.Settings.TurnOffCoalGen.Desc>Отключить производство природного угля</PRF.Settings.TurnOffCoalGen.Desc>
+
+</LanguageData>
