@@ -16,19 +16,23 @@ namespace ProjectRimFactory.SAL3.Tools
         /// <returns></returns>
         public static Thing CalculateDominantIngredient(RecipeDef RecipeDef, List<Thing> ingredients)
         {
-            if (!ingredients.NullOrEmpty())
+            //Get Things that are Stuff
+            var stuffs = ingredients.Where(t => t.def.IsStuff).ToList();
+
+            if (!ingredients.NullOrEmpty() && stuffs.Any())
             {
                 if (RecipeDef.productHasIngredientStuff)
                 {
-                    return ingredients[0];
+                    return stuffs[0];
                 }
                 if (RecipeDef.products.Any((ThingDefCountClass x) => x.thingDef.MadeFromStuff))
                 {
-                    return ingredients.Where((Thing x) => x.def.IsStuff).RandomElementByWeight((Thing x) => x.stackCount);
+                    return stuffs.Where((Thing x) => x.def.IsStuff).RandomElementByWeight((Thing x) => x.stackCount);
                 }
-                return ingredients.RandomElementByWeight((Thing x) => x.stackCount);
+                return stuffs.RandomElementByWeight((Thing x) => x.stackCount); ;
             }
-            return null;
+            //Return steel instead of Null to prevent null ref in some cases
+            return ThingMaker.MakeThing(ThingDefOf.Steel);
         }
     }
 }
