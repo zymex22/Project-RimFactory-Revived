@@ -1,4 +1,5 @@
 ﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.SAL3.UI;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using Verse;
 namespace ProjectRimFactory.SAL3.Things.Assemblers
 {
     [StaticConstructorOnStartup]
-    public abstract class Building_DynamicBillGiver : PRF_Building, IBillGiver
+    public abstract class Building_DynamicBillGiver : PRF_Building, IBillGiver, IBillTab
     {
         public abstract BillStack BillStack { get; }
 

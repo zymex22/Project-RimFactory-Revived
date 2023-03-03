@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using ProjectRimFactory.SAL3.Things.Assemblers;
+using ProjectRimFactory.SAL3.UI;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -112,10 +113,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         /// <returns></returns>
         public static bool IsValidBuilding(Building building)
         {
-            var isworktable = (building as Building_WorkTable) != null;
-            var isRimfactory = ((building as ProjectRimFactory.AutoMachineTool.ITabBillTable) != null) || building is Building_DynamicBillGiver;
-
-            return isworktable || isRimfactory;
+            return (building as IBillTab) != null;
         }
 
         /// <summary>
@@ -127,10 +125,9 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             Building_WorkTable building_WorkTable = building as Building_WorkTable;
             if (building_WorkTable != null) return building_WorkTable.billStack;
-            ProjectRimFactory.AutoMachineTool.ITabBillTable tabBillTable = building as ProjectRimFactory.AutoMachineTool.ITabBillTable;
-            if (tabBillTable != null) return tabBillTable.billStack;
-            Building_DynamicBillGiver building_DynamicBillGiver = building as Building_DynamicBillGiver;
-            if (building_DynamicBillGiver != null) return building_DynamicBillGiver.BillStack;
+
+            IBillTab building_IBillTab = building as IBillTab;
+            if (building_IBillTab != null) return building_IBillTab.BillStack;
 
             //This should never happen
             Log.Error($"PRF Error GetBillstack returns null - {building}");

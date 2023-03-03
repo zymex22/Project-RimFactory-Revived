@@ -612,7 +612,7 @@
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
-      <li>ProjectRimFactory.AutoMachineTool.ITab_Bills2</li>      <!-- AutomachineTool ITab not PRF -->
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>      <!-- ITab -->
     </inspectorTabs>
     <modExtensions>
       <!--  <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
