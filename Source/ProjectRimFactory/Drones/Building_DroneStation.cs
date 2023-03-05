@@ -558,9 +558,17 @@ namespace ProjectRimFactory.Drones
             return builder.ToString();
         }
 
-        public virtual Pawn_Drone MakeDrone()
+        public Pawn_Drone MakeDrone()
         {
-            Pawn_Drone drone = (Pawn_Drone)PawnGenerator.GeneratePawn(PRFDefOf.PRFDroneKind, Faction);
+            Pawn_Drone drone = (Pawn_Drone)ThingMaker.MakeThing(PRFDefOf.PRFDroneKind.race);
+            drone.kindDef = PRFDefOf.PRFDroneKind;
+            drone.SetFactionDirect(Faction);
+            PawnComponentsUtility.CreateInitialComponents(drone);
+            drone.gender = Gender.None;
+            drone.ageTracker.AgeBiologicalTicks = 0;
+            drone.ageTracker.AgeChronologicalTicks = 0;
+            drone.Faction.Notify_PawnJoined(drone);
+
             drone.station = this;
             spawnedDrones.Add(drone);
             return drone;
