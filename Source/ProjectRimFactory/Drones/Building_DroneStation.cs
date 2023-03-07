@@ -565,8 +565,9 @@ namespace ProjectRimFactory.Drones
             drone.SetFactionDirect(Faction);
             PawnComponentsUtility.CreateInitialComponents(drone);
             drone.gender = Gender.None;
-            drone.ageTracker.AgeBiologicalTicks = 4467291159;
-            drone.ageTracker.AgeChronologicalTicks = -4466674537;
+            drone.ageTracker.AgeBiologicalTicks = 0;
+            drone.ageTracker.AgeChronologicalTicks = 0;
+            PawnTechHediffsGenerator.GenerateTechHediffsFor(drone);
             drone.Faction.Notify_PawnJoined(drone);
 
             drone.station = this;
