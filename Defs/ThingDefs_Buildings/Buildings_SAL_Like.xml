@@ -248,7 +248,7 @@
   <!-- The Art Master -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMaster</defName>
-    <label> S.A.L Art Machine Mk.II</label>
+    <label>S.A.L Art Machine Mk.II</label>
     <description>A highly advanced auto-crafter which uses a database of several thousand years of artistic expression to produce master quality art at an absurd pace - a volcanic explosion of art!</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
