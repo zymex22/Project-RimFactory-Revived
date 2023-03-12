@@ -49,10 +49,11 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
                     yield return new CodeInstruction(OpCodes.Ldloca_S, instruction.operand);
                     yield return new CodeInstruction(OpCodes.Ldloc_S, Thingarg);
-
+                    yield return new CodeInstruction(OpCodes.Ldarg_0);
+                    yield return new CodeInstruction(OpCodes.Ldarg_1);
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
                         typeof(Patch_FoodUtility_SpawnedFoodSearchInnerScan),
-                        nameof(Patch_FoodUtility_SpawnedFoodSearchInnerScan.isCanIOPortGetItem), new[] { typeof(float).MakeByRefType(), typeof(Thing) }));
+                        nameof(Patch_FoodUtility_SpawnedFoodSearchInnerScan.isIOPortBetter), new[] { typeof(float).MakeByRefType(), typeof(Thing), typeof(Pawn), typeof(IntVec3) }));
                     continue;
                 }
 
@@ -84,7 +85,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
             if (pawn.Faction == null || !pawn.Faction.IsPlayer) return;
 
-            //Not Optimal for the search. might need update
+            //TODO: Not Optimal for the search. might need update
             var closest = AdvancedIO_PatchHelper.GetClosestPort(pawn.Map, pawn.Position);
             mindist = closest.Key;
             closestPort = closest.Value;
@@ -94,38 +95,37 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         private static Thing ioPortSelectedFor = null;
 
 
-        public static void isCanIOPortGetItem(ref float Distance, Thing thing)
+        /// <summary>
+        /// Checks if the IO Port is a better or the only Option
+        /// </summary>
+        /// <param name="Distance"></param>
+        /// <param name="thing"></param>
+        public static void isIOPortBetter(ref float Distance, Thing thing, Pawn pawn, IntVec3 start)
         {
             ioPortSelected = false;
-            if (mindist < Distance && closestPort != null && ((AdvancedIO_PatchHelper.CanMoveItem(closestPort, thing))))
-            {
-                Distance = mindist;
-                ioPortSelected = true;
-                ioPortSelectedFor = thing;
 
+            //If the Port is Closer then it is a better choice
+            //#691 If the Port is the only Option it must be used
+            if ( mindist < Distance || (ConditionalPatchHelper.Patch_Reachability_CanReach.Status && pawn.Map.reachability.CanReach(start,thing,Verse.AI.PathEndMode.Touch, TraverseParms.For(pawn)) && Patch_Reachability_CanReach.CanReachThing(thing) ))
+            {
+                //Check if the Port can be used
+                //TODO: Check TODO in Line 88
+                if (closestPort != null && AdvancedIO_PatchHelper.CanMoveItem(closestPort, thing))
+                {
+                    Distance = mindist;
+                    ioPortSelected = true;
+                    ioPortSelectedFor = thing;
+                }
             }
         }
 
         public static void moveItemIfNeeded(Thing thing)
         {
             //When using replimat it might replace thing  
-            if (thing != ioPortSelectedFor)
-            {
-                return;
-            }
-            if (ioPortSelected && thing != null)
-            {
-                ioPortSelected = false;
-                try
-                {
-                    thing.Position = closestPort.Position;
-                }
-                catch (NullReferenceException)
-                {
-                    Log.Message($"moveItemIfNeeded NullReferenceException - {thing} - {closestPort}");
-                }
-
-            }
+            if (thing != ioPortSelectedFor || !ioPortSelected || thing == null)  return;
+            
+            ioPortSelected = false;
+            closestPort.PlaceThingNow(thing);
         }
     }
 }
