@@ -77,7 +77,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             {
                 if (target.Thing == null)
                 {
-                    Log.Error($"ProjectRimfactory - Patch_Pawn_JobTracker_StartJob - Null Thing as Target: {target} - pawn:{___pawn} - Job:{newJob}");
+                    //Log.Error($"ProjectRimfactory - Patch_Pawn_JobTracker_StartJob - Null Thing as Target: {target} - pawn:{___pawn} - Job:{newJob}");
                     continue;
                 }
 
