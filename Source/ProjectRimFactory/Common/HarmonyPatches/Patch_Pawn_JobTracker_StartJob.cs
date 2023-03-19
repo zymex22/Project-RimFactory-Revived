@@ -93,6 +93,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                                 if (target.Thing != null)
                                 {
                                     port.Value.AddItemToQueue(target.Thing);
+                                    port.Value.updateQueue();
                                 }
                                 else
                                 {

@@ -63,7 +63,7 @@ namespace ProjectRimFactory.Storage
 
         public override bool IsAdvancedPort => true;
 
-        private void updateQueue()
+        public void updateQueue()
         {
             if (CanGetNewItem && placementQueue.Count > 0)
             {
