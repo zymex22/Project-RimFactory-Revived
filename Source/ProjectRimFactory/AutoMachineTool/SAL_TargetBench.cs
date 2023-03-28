@@ -230,7 +230,7 @@ namespace ProjectRimFactory.AutoMachineTool
         private List<Thing> Consumable()
         {
             return mySAL.GetAllTargetCells()
-                .SelectMany(c => c.AllThingsInCellForUse(this.map)) // Use GatherThingsUtility to also grab from belts
+                .SelectMany(c => c.AllThingsInCellForUse(this.map,false)) // Use GatherThingsUtility to also grab from belts
                 .Distinct<Thing>().ToList();
         }
 

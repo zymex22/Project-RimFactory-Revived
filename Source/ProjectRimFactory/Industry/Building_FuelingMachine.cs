@@ -100,7 +100,7 @@ namespace ProjectRimFactory.Industry
             {
                 foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this))
                 {
-                    foreach (Thing item in GatherThingsUtility.AllThingsInCellForUse(cell, Map))
+                    foreach (Thing item in GatherThingsUtility.AllThingsInCellForUse(cell, Map,false))
                     {
                         yield return item;
                     }
