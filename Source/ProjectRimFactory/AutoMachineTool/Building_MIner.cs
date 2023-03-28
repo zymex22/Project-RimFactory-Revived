@@ -1,4 +1,5 @@
 ﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.SAL3.UI;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,12 @@ using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
-    public class Building_Miner : Building_BaseMachine<Building_Miner>, IBillGiver, IRecipeProductWorker, ITabBillTable, IXMLThingDescription
+    public class Building_Miner : Building_BaseMachine<Building_Miner>, IBillGiver, IRecipeProductWorker, IXMLThingDescription, IBillTab
     {
 
         public BillStack BillStack => this.billStack;
 
         public IEnumerable<IntVec3> IngredientStackCells => Enumerable.Empty<IntVec3>();
-
-        ThingDef ITabBillTable.def => this.def;
-
-        BillStack ITabBillTable.billStack => this.BillStack;
 
         public IEnumerable<RecipeDef> AllRecipes => this.def.AllRecipes;
 
