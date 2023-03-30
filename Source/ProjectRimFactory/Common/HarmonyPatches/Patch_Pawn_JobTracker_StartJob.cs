@@ -75,6 +75,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             GetTargetItems(ref TargetItems, usHaulJobType, newJob);
             foreach (var target in TargetItems)
             {
+                if (target.Thing == null)
+                {
+                    //Log.Error($"ProjectRimfactory - Patch_Pawn_JobTracker_StartJob - Null Thing as Target: {target} - pawn:{___pawn} - Job:{newJob}");
+                    continue;
+                }
+
                 var DistanceToTarget = AdvancedIO_PatchHelper.CalculatePath(___pawn.Position, target.Cell, targetPos);
 
                 //Quick check if the Item could be in a DSU
@@ -84,21 +90,14 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 {
                     foreach (var port in Ports)
                     {
-
                         var PortIsCloser = port.Key < DistanceToTarget;
-                        if (PortIsCloser)
+                        if (PortIsCloser || (ConditionalPatchHelper.Patch_Reachability_CanReach.Status && ___pawn.Map.reachability.CanReach(___pawn.Position, target.Thing, Verse.AI.PathEndMode.Touch, TraverseParms.For(___pawn)) && Patch_Reachability_CanReach.CanReachThing(target.Thing)))
                         {
                             if (AdvancedIO_PatchHelper.CanMoveItem(port.Value, target.Cell))
                             {
-                                if (target.Thing != null)
-                                {
-                                    port.Value.AddItemToQueue(target.Thing);
-                                }
-                                else
-                                {
-                                    Log.Error($"ProjectRimfactory - Patch_Pawn_JobTracker_StartJob - Null Thing as Target: {target} - pawn:{___pawn} - Job:{newJob}");
-                                }
-
+                                port.Value.AddItemToQueue(target.Thing);
+                                port.Value.updateQueue();
+                                
                                 break;
                             }
                         }

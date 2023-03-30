@@ -12,7 +12,8 @@ namespace ProjectRimFactory.Common
     {
         public class TogglePatch
         {
-            private bool Patched = false;
+            private bool patched = false;
+            public bool Status => patched;
 
             private readonly MethodInfo base_m;
             private readonly HarmonyMethod trans_hm = null;
@@ -35,17 +36,17 @@ namespace ProjectRimFactory.Common
 
             public void PatchHandler(bool patch)
             {
-                if (patch && !Patched)
+                if (patch && !patched)
                 {
                     harmony_instance.Patch(base_m, pre_hm, post_hm, trans_hm);
-                    Patched = true;
+                    patched = true;
                 }
-                else if (Patched && !patch)
+                else if (patched && !patch)
                 {
                     if (trans_m != null) harmony_instance.Unpatch(base_m, trans_m);
                     if (pre_m != null) harmony_instance.Unpatch(base_m, pre_m);
                     if (post_m != null) harmony_instance.Unpatch(base_m, post_m);
-                    Patched = false;
+                    patched = false;
                 }
             }
 
@@ -56,7 +57,8 @@ namespace ProjectRimFactory.Common
 
         public static TogglePatch Patch_Reachability_CanReach = new TogglePatch(
             AccessTools.Method(typeof(Verse.Reachability), "CanReach", new Type[] { typeof(IntVec3), typeof(LocalTargetInfo), typeof(PathEndMode), typeof(TraverseParms) }),
-            AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Reachability_CanReach), "Prefix")
+            null,
+            AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Reachability_CanReach), "Postfix")
             );
 
         public static TogglePatch Patch_WealthWatcher_CalculateWealthItems = new TogglePatch(

@@ -63,16 +63,21 @@ namespace ProjectRimFactory.Storage
 
         public override bool IsAdvancedPort => true;
 
-        private void updateQueue()
+        public void updateQueue()
         {
             if (CanGetNewItem && placementQueue.Count > 0)
             {
                 var nextItemInQueue = placementQueue[0];
-                if (nextItemInQueue != null)
-                {
-                    placementQueue[0].Position = this.Position;
-                }
+                PlaceThingNow(nextItemInQueue);
                 placementQueue.RemoveAt(0);
+            }
+        }
+
+        public void PlaceThingNow(Thing thing)
+        {
+            if (thing != null)
+            {
+                thing.Position = this.Position;
             }
         }
 
