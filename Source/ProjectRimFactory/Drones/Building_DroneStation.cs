@@ -569,6 +569,9 @@ namespace ProjectRimFactory.Drones
             drone.ageTracker.AgeChronologicalTicks = 0;
             PawnTechHediffsGenerator.GenerateTechHediffsFor(drone);
             drone.Faction.Notify_PawnJoined(drone);
+            //Set Ido for Style Support
+            drone.ideo = new Pawn_IdeoTracker(drone);
+            drone.ideo.SetIdeo(Faction.ideos.PrimaryIdeo);
 
             drone.station = this;
             spawnedDrones.Add(drone);
