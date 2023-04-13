@@ -35,7 +35,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             //Check if pawn input is forbidden
             if ((__instance as IForbidPawnInputItem)?.ForbidPawnInput ?? false)
             {
-                return false;
+                //#699 #678
+                //This check is needed to support the use of the Limit function for the IO Ports
+                if (!__instance.slotGroup.HeldThings.Contains(t))
+                {
+                    return false;
+                }
             }
             return true;
         }
