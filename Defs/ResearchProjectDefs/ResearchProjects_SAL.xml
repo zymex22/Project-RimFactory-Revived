@@ -95,7 +95,7 @@
   <ResearchProjectDef ParentName="PRF_SALResearch">
     <defName>PRF_SALResearchVII</defName>
     <label>S.A.L Autonomous Cooking</label>
-    <techLevel>Industrial</techLevel>
+    <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
     <description>Learn how to give auto-assemblers enough dexterity and precision for them to efficiently replace your chefs.</description>
     <prerequisites>
