@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using ProjectRimFactory.Storage;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             {
                 //#699 #678
                 //This check is needed to support the use of the Limit function for the IO Ports
-                if (!__instance.slotGroup.HeldThings.Contains(t))
+                if (__instance.Position != t.Position) 
                 {
                     return false;
                 }
