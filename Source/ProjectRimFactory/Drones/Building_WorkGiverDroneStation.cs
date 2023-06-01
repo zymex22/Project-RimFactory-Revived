@@ -27,18 +27,13 @@ namespace ProjectRimFactory.Drones
 
         Pawn_WorkSettings workSettings = null;
 
-        //TODO Finding a good way to Cache pawn.workSettings may increase performence
-        public override Job TryGiveJob()
+
+        //Try give Job to Spawned drone
+        public override Job TryGiveJob(Pawn pawn)
         {
             Job result = null;
             if (!(cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(this).ToString())))
             {
-                //Only plausibel enhancment would be to cache the pawn
-                //MakeDrone Average time of 1ms 
-                Pawn pawn = MakeDrone();
-
-                //Spawn is cheap
-                GenSpawn.Spawn(pawn, Position, Map);
 
                 if (workSettings == null)
                 {
@@ -73,13 +68,10 @@ namespace ProjectRimFactory.Drones
                 {
                     result = TryIssueJobPackageDrone(pawn, false).Job;
                 }
-
-                pawn.Destroy();
-                Notify_DroneGained();
             }
             return result;
         }
-
+        
         // Method from RimWorld.JobGiver_Work.TryIssueJobPackage(Pawn pawn, JobIssueParams jobParams)
         // I modified the line if (!workGiver.ShouldSkip(pawn))
 #pragma warning disable

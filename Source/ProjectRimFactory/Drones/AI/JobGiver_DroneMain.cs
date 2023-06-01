@@ -50,7 +50,7 @@ namespace ProjectRimFactory.Drones.AI
                     }
                     else
                     {
-                        result = drone.station.TryGiveJob();
+                        result = drone.station.TryGiveJob(drone);
                     }
                     if (result == null)
                     {
