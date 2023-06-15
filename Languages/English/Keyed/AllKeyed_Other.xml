@@ -74,7 +74,7 @@
 <PRF_RecipeTab_TabName>DB</PRF_RecipeTab_TabName>
 <PRF_RecipeTab_FilterSaved>Show Saved</PRF_RecipeTab_FilterSaved>
 <PRF_RecipeTab_FilterLearnable>Show Learnable</PRF_RecipeTab_FilterLearnable>
-<PRF_RecipeTab_FilterQueue>Show Quered</PRF_RecipeTab_FilterQueue>
+<PRF_RecipeTab_FilterQueue>Show Queued</PRF_RecipeTab_FilterQueue>
 <PRF_RecipeTab_Button_Learn>Learn</PRF_RecipeTab_Button_Learn>
 <PRF_RecipeTab_Button_Cancel>Cancel</PRF_RecipeTab_Button_Cancel>
 <PRF_RecipeTab_Button_Forget>Forget</PRF_RecipeTab_Button_Forget>
