@@ -583,6 +583,7 @@ namespace ProjectRimFactory.Drones
             else
             {
                 drone.health.hediffSet = droneDiffs;
+                drone.health.hediffSet.pawn = drone;
             }
 
 
