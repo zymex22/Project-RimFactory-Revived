@@ -452,7 +452,7 @@ namespace ProjectRimFactory.Drones
             }
         }
 
-        public abstract Job TryGiveJob();
+        public abstract Job TryGiveJob(Pawn pawn);
 
 
         protected CompPowerTrader compPowerTrader;
@@ -495,7 +495,10 @@ namespace ProjectRimFactory.Drones
             if (this.IsHashIntervalTick(60 + additionJobSearchTickDelay) && DronesLeft > 0 && !lockdown && compPowerTrader?.PowerOn != false)
             {
                 //The issue appears to be 100% with TryGiveJob
-                Job job = TryGiveJob();
+                Pawn_Drone drone = MakeDrone();
+                GenSpawn.Spawn(drone, Position, Map);
+
+                Job job = TryGiveJob(drone);
 
                 if (job != null)
                 {
@@ -503,12 +506,13 @@ namespace ProjectRimFactory.Drones
                     job.playerForced = true;
                     job.expiryInterval = -1;
                     //MakeDrone takes about 1ms
-                    Pawn_Drone drone = MakeDrone();
-                    GenSpawn.Spawn(drone, Position, Map);
+                    
                     drone.jobs.StartJob(job);
                 }
                 else
                 {
+                    drone.Destroy();
+                    Notify_DroneGained();
                     //Experimental Delay
                     //Add delay (limit to 300) i am well aware that this can be higher that 300 with the current code
                     if (additionJobSearchTickDelay < 300)
@@ -558,6 +562,9 @@ namespace ProjectRimFactory.Drones
             return builder.ToString();
         }
 
+
+        private static HediffSet droneDiffs = null;
+
         public Pawn_Drone MakeDrone()
         {
             Pawn_Drone drone = (Pawn_Drone)ThingMaker.MakeThing(PRFDefOf.PRFDroneKind.race);
@@ -567,7 +574,19 @@ namespace ProjectRimFactory.Drones
             drone.gender = Gender.None;
             drone.ageTracker.AgeBiologicalTicks = 0;
             drone.ageTracker.AgeChronologicalTicks = 0;
-            PawnTechHediffsGenerator.GenerateTechHediffsFor(drone);
+
+            if (droneDiffs == null)
+            {
+                PawnTechHediffsGenerator.GenerateTechHediffsFor(drone);
+                droneDiffs = drone.health.hediffSet;
+            }
+            else
+            {
+                drone.health.hediffSet = droneDiffs;
+                drone.health.hediffSet.pawn = drone;
+            }
+
+
             drone.Faction.Notify_PawnJoined(drone);
             drone.relations = new Pawn_RelationsTracker(drone);
 
