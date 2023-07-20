@@ -150,7 +150,6 @@ namespace ProjectRimFactory.Common
             if (Machine != null)
             {
                 this.groups = Find.CurrentMap.haulDestinationManager.AllGroups.ToList();
-                this.Machine.TargetSlotGroup = this.Machine.TargetSlotGroup.Where(s => this.groups.Contains(s));
             }
         }
 
@@ -270,12 +269,13 @@ namespace ProjectRimFactory.Common
                     TooltipHandler.TipRegion(rect, selectAreaTip);
                 }
                 Widgets.Label(rect.LeftHalf(), "PRF.AutoMachineTool.CountZone".Translate());
-                if (Widgets.ButtonText(rect.RightHalf(), this.Machine.TargetSlotGroup.Fold("PRF.AutoMachineTool.EntierMap".Translate())(s => s.parent.SlotYielderLabel())))
+                
+                if (Widgets.ButtonText(rect.RightHalf(), this.Machine.TargetSlotGroup?.parent?.SlotYielderLabel() ?? "PRF.AutoMachineTool.EntierMap".Translate()))
                 {
                     Find.WindowStack.Add(new FloatMenu(groups
-                        .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => this.Machine.TargetSlotGroup = Option(g)))
+                        .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => this.Machine.TargetSlotGroup =g))
                         .ToList()
-                        .Head(new FloatMenuOption("PRF.AutoMachineTool.EntierMap".Translate(), () => this.Machine.TargetSlotGroup = Nothing<SlotGroup>()))));
+                        .Head(new FloatMenuOption("PRF.AutoMachineTool.EntierMap".Translate(), () => this.Machine.TargetSlotGroup = null))));
                 }
                 this.Machine.ProductLimitCount = limit;
             }

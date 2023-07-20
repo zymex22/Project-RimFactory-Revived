@@ -13,7 +13,7 @@ namespace ProjectRimFactory.Storage
 {
     [StaticConstructorOnStartup]
     public abstract class Building_MassStorageUnit : Building_Storage, IHideItem, IHideRightClickMenu,
-        IForbidPawnOutputItem, IForbidPawnInputItem, IRenameBuilding, ILinkableStorageParent
+        IForbidPawnOutputItem, IForbidPawnInputItem, IRenameBuilding, ILinkableStorageParent, ILimitWatcher
     {
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
@@ -62,6 +62,7 @@ namespace ProjectRimFactory.Storage
         {
             base.Notify_LostThing(newItem);
             items.Remove(newItem);
+            ItemCountsRemoved(newItem.def, newItem.stackCount);
             RefreshStorage();
         }
 
@@ -135,7 +136,10 @@ namespace ProjectRimFactory.Storage
             if (!newItem.Destroyed)
             {
                 if (!items.Contains(newItem))
+                {
                     items.Add(newItem);
+                    ItemCountsAdded(newItem.def, newItem.stackCount);
+                }
 
                 //What appens if its full?
                 if (CanStoreMoreItems) newItem.Position = Position;
@@ -217,9 +221,13 @@ namespace ProjectRimFactory.Storage
             return outputUtil.OutputItem(item);
         }
 
+
+        //TODO Why do we need to clear Items here?
         public virtual void RefreshStorage()
         {
             items.Clear();
+            ItemCounts.Clear();
+
             if (!Spawned) return; // don't want to try getting lists of things when not on a map (see 155)
             foreach (var cell in AllSlotCells())
             {
@@ -238,6 +246,7 @@ namespace ProjectRimFactory.Storage
                             if (!items.Contains(item))
                             {
                                 items.Add(item);
+                                ItemCountsAdded(item.def, item.stackCount);
                                 deregisterDrawItem(item);
                             }
                         }
@@ -342,6 +351,51 @@ namespace ProjectRimFactory.Storage
         public bool HoldsPos(IntVec3 pos)
         {
             return AllSlotCells()?.Contains(pos) ?? false;
+        }
+
+        void ItemCountsRemoved(ThingDef def , int cnt)
+        {
+            if(ItemCounts.TryGetValue(def, out var count))
+            {
+                if (cnt > count)
+                {
+                    Log.Error($"ItemCountsRemoved attempted to remove {cnt}/{count} Items of {def}");
+                    ItemCounts[def] = 0;
+                }
+                ItemCounts[def] -= cnt;
+
+            }
+            else
+            {
+                Log.Error($"ItemCountsRemoved attempted to remove nonexistent def {def}");
+            }
+
+        }
+        void ItemCountsAdded(ThingDef def , int cnt)
+        {
+            if (!ItemCounts.TryAdd(def, cnt))
+            {
+                ItemCounts[def] += cnt;
+            }
+        }
+
+        readonly Dictionary<ThingDef, int> ItemCounts = new();
+
+        public bool ItemIsLimit(ThingDef thing,bool CntStacks, int limit)
+        {
+            if (limit < 0)
+            {
+                return true;
+            }
+
+            int cnt = 0;
+            ItemCounts.TryGetValue(thing, out cnt);
+            if (CntStacks)
+            {
+                cnt = Mathf.CeilToInt(((float)cnt) / thing.stackLimit);
+            }
+            
+            return cnt >= limit;
         }
     }
 }

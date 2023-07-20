@@ -19,8 +19,9 @@ namespace ProjectRimFactory.AutoMachineTool
             base.MapComponentTick();
 
             var removeSet = this.eachTickActions.ToList().Where(Exec).ToHashSet();
-            removeSet.ForEach(r => this.eachTickActions.Remove(r));
 
+            
+            removeSet.ForEach(r => this.eachTickActions.Remove(r));
 #if DEBUG
             if ((Debug.activeFlags & Debug.Flag.Benchmark) > 0) {
                 System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
@@ -56,8 +57,10 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
             }
 #else
+
             // Need ToList() b/c the list of tickActions can change
             this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
+
 #endif
             this.tickActionsDict.Remove(Find.TickManager.TicksGame);
         }

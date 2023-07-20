@@ -106,14 +106,29 @@ namespace ProjectRimFactory.AutoMachineTool
             return this;
         }
 
+
         protected virtual Thing TargetThing()
         {
-            Thing target;
-            target = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map)
-                        .Where(t => !t.IsForbidden(Faction.OfPlayer) || this.takeForbiddenItems)
-                        .Where(t => this.settings.AllowedToAccept(t))
-                        .Where(t => !this.Map.reservationManager.AllReservedThings().Contains(t))
-                        .FirstOrDefault(t => !this.IsLimit(t));
+            Thing target = null;
+            var allThings = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map).ToArray();
+
+            var AllReserved = this.Map.reservationManager.AllReservedThings().ToHashSet();
+
+ 
+            for (int i = 0; i < allThings.Length; i++)
+            {
+                var thing = allThings[i];
+                if (!this.takeForbiddenItems && thing.IsForbidden(Faction.OfPlayer)) continue;
+                if (!this.settings.AllowedToAccept(thing)) continue;
+                if (AllReserved.Contains(thing)) continue;
+
+                if (!this.IsLimit(thing))
+                {
+                    target = thing;
+                    break;
+                }
+            }
+
             if (target == null) return target;
             if (this.takeSingleItems) return (target.SplitOff(1));
             // SplitOff ensures any item-removal effects happen:
