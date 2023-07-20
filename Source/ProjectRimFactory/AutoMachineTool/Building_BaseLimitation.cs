@@ -32,8 +32,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                this.slotGroupParentLabel = this.targetSlotGroup.parent.SlotYielderLabel();
-                this.slotGroupParent = this.targetSlotGroup.parent as ILoadReferenceable;
+                this.slotGroupParentLabel = this.targetSlotGroup?.parent?.SlotYielderLabel();
+                this.slotGroupParent = this.targetSlotGroup?.parent as ILoadReferenceable;
             }
             Scribe_References.Look<ILoadReferenceable>(ref this.slotGroupParent, "slotGroupParent");
             Scribe_Values.Look<string>(ref this.slotGroupParentLabel, "slotGroupParentLabel", null);
