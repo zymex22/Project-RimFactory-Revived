@@ -113,7 +113,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         /// <returns></returns>
         public static bool IsValidBuilding(Building building)
         {
-            return (building as IBillTab) != null;
+            return building.def.IsWorkTable || (building as IBillTab) != null;
         }
 
         /// <summary>
