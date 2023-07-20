@@ -25,7 +25,6 @@ namespace ProjectRimFactory.Common
                 
                 ConditionalPatchHelper.InitHarmony(this.HarmonyInstance);
                 ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
-                ConditionalPatchHelper.Patch_WealthWatcher_CalculateWealthItems.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_WealthWatcher_CalculateWealthItems);
             }
             catch (Exception ex)
             {

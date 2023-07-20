@@ -61,12 +61,6 @@ namespace ProjectRimFactory.Common
             AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Reachability_CanReach), "Postfix")
             );
 
-        public static TogglePatch Patch_WealthWatcher_CalculateWealthItems = new TogglePatch(
-           AccessTools.Method(typeof(RimWorld.WealthWatcher), "CalculateWealthItems"),
-           null,
-           AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_WealthWatcher_CalculateWealthItems), "Postfix")
-           );
-
         //Storage Patches
         public static TogglePatch Patch_MinifiedThing_Print = new TogglePatch(
             AccessTools.Method(typeof(RimWorld.MinifiedThing), "Print", new Type[] { typeof(SectionLayer) }),
