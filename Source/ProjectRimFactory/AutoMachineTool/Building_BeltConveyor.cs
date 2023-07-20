@@ -463,7 +463,23 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             else
             {
-                var target = this.State == WorkingState.Working ? this.Working : this.products[0];
+                //Product must be empty for that error
+
+                Thing target;
+                if (this.State == WorkingState.Working)
+                {
+                    target = this.Working;
+                }
+                else
+                {
+                    if(this.products.Count == 0)
+                    {
+                        Log.Error("PRF Belt - products List is Empty");
+                        this.Reset();
+                    }
+                    target = this.products[0];
+                }
+
                 Debug.Message(Debug.Flag.Conveyors, "  but busy with " + target +
                                    ". Will try to absorb");
                 return target.TryAbsorbStack(newThing, true);
@@ -491,8 +507,16 @@ namespace ProjectRimFactory.AutoMachineTool
                     return false;
             }
         }
-        protected bool ThisCanAcceptThat(Thing t1, Thing t2) =>
-                       t1.CanStackWith(t2) && t1.stackCount < t1.def.stackLimit;
+        protected bool ThisCanAcceptThat(Thing t1, Thing t2)
+        {
+            if(t1 == null || t2 == null)
+            {
+                Log.Error($"PRF ThisCanAcceptThat On thing is Null! t1: {t1} t2: {t2}");
+                return false;
+            }
+            return t1.CanStackWith(t2) && t1.stackCount < t1.def.stackLimit;
+        }
+
         // We (LWM) are mean and don't allow conveyors to change the "Obey Storage Filters"
         //   setting.  Maybe if zymex is really nice we can change this....
         public override PRFBSetting SettingsOptions
@@ -702,6 +726,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Thing working)
         {
+            if (working == null)
+            {
+                Log.Error("PRF - WorkInterruption Null Thing");
+                return true;
+            }
             return working.holdingOwner != thingOwnerInt;
         }
 
