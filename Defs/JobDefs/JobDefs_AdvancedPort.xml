@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <JobDef>
+    <defName>PRF_GotoAdvanced</defName>
+    <driverClass>ProjectRimFactory.Common.JobDriver_GetItemFromAdvancedPort</driverClass>
+    <reportString>moving.</reportString>
+    <allowOpportunisticPrefix>false</allowOpportunisticPrefix>
+    <carryThingAfterJob>true</carryThingAfterJob>
+    <dropThingBeforeJob>false</dropThingBeforeJob>
+  </JobDef>
+</Defs>

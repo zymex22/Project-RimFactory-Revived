@@ -32,5 +32,8 @@ namespace ProjectRimFactory.SAL3
 
         //basePowerConsumption
         public static readonly FieldInfo CompProperties_Power_basePowerConsumption = typeof(CompProperties_Power).GetField("basePowerConsumption", BindingFlags.Instance | BindingFlags.NonPublic);
+
+        //Toils Advanced port
+        public static readonly FieldInfo JobDriver_toils = typeof(Verse.AI.JobDriver).GetField("toils", BindingFlags.NonPublic | BindingFlags.Instance);
     }
 }

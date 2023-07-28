@@ -347,7 +347,6 @@ namespace ProjectRimFactory.Storage
                 {
                     //ILinkableStorageParent
                     List<Building> mylist = Map.listerBuildings.allBuildingsColonist.Where(b => (b as ILinkableStorageParent) != null && (b as ILinkableStorageParent).CanUseIOPort).ToList();
-                    if (IsAdvancedPort) mylist.RemoveAll(b => !(b as ILinkableStorageParent).AdvancedIOAllowed);
                     List<FloatMenuOption> list = new List<FloatMenuOption>(
                         mylist.Select(b => new FloatMenuOption(b.LabelCap, () => SelectedPorts().ToList().ForEach(p => p.BoundStorageUnit = (b as ILinkableStorageParent))))
                     );

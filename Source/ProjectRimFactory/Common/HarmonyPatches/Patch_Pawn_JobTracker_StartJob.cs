@@ -1,6 +1,9 @@
 ﻿using HarmonyLib;
 using ProjectRimFactory.Storage;
+using RimWorld;
 using System.Collections.Generic;
+using System.ComponentModel;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -55,9 +58,17 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
 
 
+        private static bool ShouldGetItem = false;
+        private static Thing Port = null;
+        private static LocalTargetInfo _target = null;
+
         public static bool Prefix(Job newJob, ref Pawn ___pawn, JobCondition lastJobEndCondition = JobCondition.None, ThinkNode jobGiver = null, bool resumeCurJobAfterwards = false, bool cancelBusyStances = true
         , ThinkTreeDef thinkTree = null, JobTag? tag = null, bool fromQueue = false, bool canReturnCurJobToPool = false)
         {
+
+           // Log.Message($"{newJob} - {jobGiver} - {___pawn}");
+            ShouldGetItem = false;
+            if (newJob.def == PRFDefOf.PRF_GotoAdvanced) return true;
             //No random moths eating my cloths
             if (___pawn?.Faction == null || !___pawn.Faction.IsPlayer) return true;
             var prfmapcomp = PatchStorageUtil.GetPRFMapComponent(___pawn.Map);
@@ -95,9 +106,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                         {
                             if (AdvancedIO_PatchHelper.CanMoveItem(port.Value, target.Cell))
                             {
-                                port.Value.AddItemToQueue(target.Thing);
-                                port.Value.updateQueue();
-                                
+                                // port.Value.AddItemToQueue(target.Thing);
+                                // port.Value.updateQueue();
+                                _target = target;
+                                Log.Message($"Should have moved {target} x{target.Thing.stackCount} ...");
+                                ShouldGetItem = true;
+                                Port = port.Value;
                                 break;
                             }
                         }
@@ -111,6 +125,36 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 }
             }
             return true;
+        }
+
+        static bool temp = true;
+        public static void Postfix(Job newJob, Pawn_JobTracker __instance, ref Pawn ___pawn, JobCondition lastJobEndCondition = JobCondition.None, ThinkNode jobGiver = null, bool resumeCurJobAfterwards = false, bool cancelBusyStances = true
+        , ThinkTreeDef thinkTree = null, JobTag? tag = null, bool fromQueue = false, bool canReturnCurJobToPool = false)
+        {
+
+            if (ShouldGetItem && temp)
+            {
+                ShouldGetItem = false;
+                //temp= false;
+                Log.Message($"Job: {__instance.curJob} Driver: {__instance.curDriver}  Targets: {__instance.curJob.targetA}-{__instance.curJob.targetB}-{__instance.curJob.targetC}");
+
+
+
+
+                __instance.jobQueue.EnqueueFirst(__instance.curJob);
+                Job job = JobMaker.MakeJob(PRFDefOf.PRF_GotoAdvanced, Port, _target);
+                job.count = _target.Thing.stackCount; // Mathf.Min(t.stackCount, thingOwner.GetCountCanAccept(t));
+
+                __instance.StartJob(job);
+
+
+
+
+                
+
+            }
+
+
         }
     }
 }

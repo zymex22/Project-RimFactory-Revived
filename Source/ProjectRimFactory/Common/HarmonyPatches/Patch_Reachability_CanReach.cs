@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using ProjectRimFactory.Storage;
+using System.Linq;
+using System.Security.Cryptography;
 using Verse;
 using Verse.AI;
 
@@ -57,9 +59,14 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             var ThingPos = thing.Position;
 
+            var ParrentHolder = thing.ParentHolder;
+
+            var IsDSU_Link = mapComp.ShouldHideItemsAtPos(ThingPos);
+            var IsColdLink = ParrentHolder is Building_ColdStorage;
+
             //Quickly Check if the Item is in a Storage Unit
             //TODO: Rework that -> This includes items in PRF Crates & Excludes items from Cold Storage(Note they currently have bigger issues)
-            if (!mapComp.ShouldHideItemsAtPos(ThingPos)) return false;
+            if (! (IsDSU_Link || IsColdLink)) return false;
 
             var AdvancedIOLocations = mapComp.GetadvancedIOLocations;
             var cnt = AdvancedIOLocations.Count;
@@ -70,12 +77,14 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
                 //Check if that Port has access to the Item
                 //TODO: Rework that -> Is the Use of the Position really best?
-                if (current.Value.boundStorageUnit?.GetPosition == ThingPos)
+                var boundStorageUnit = current.Value.boundStorageUnit;
+                if ( (IsDSU_Link && boundStorageUnit?.GetPosition == ThingPos) || (IsColdLink &&  ParrentHolder == boundStorageUnit))
                 {
                     //The Port has access to the Item
                     //Now check if we can reach that Port
                     if (reachability.CanReach(start, current.Key, PathEndMode.Touch, traverseParams)) return true;
                 }
+
             }
 
             return false;

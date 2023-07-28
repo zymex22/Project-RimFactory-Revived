@@ -26,6 +26,8 @@ namespace ProjectRimFactory.Common
         public static JobDef PRFDrone_ReturnToStation;
         public static JobDef PRFDrone_SelfTerminate;
 
+        public static JobDef PRF_GotoAdvanced;
+
         public static PawnKindDef PRFDroneKind;
         public static PawnKindDef PRFSlavePawn;
 
@@ -46,6 +48,7 @@ namespace ProjectRimFactory.Common
         public static ThingDef PRF_DroneModule;
         public static ThingDef Column;
         public static ThingDef PRF_MiniDroneColumn;
+        public static ThingDef PRF_IOPort_II;
 
         public static BackstoryDef ChildSpy47;
         public static BackstoryDef ColonySettler53;
