@@ -66,8 +66,9 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         , ThinkTreeDef thinkTree = null, JobTag? tag = null, bool fromQueue = false, bool canReturnCurJobToPool = false)
         {
 
-           // Log.Message($"{newJob} - {jobGiver} - {___pawn}");
-            ShouldGetItem = false;
+          //  Log.Message($"{newJob} - {jobGiver} - {___pawn}");
+            // TODO Enable that again
+        //    ShouldGetItem = false;
             if (newJob.def == PRFDefOf.PRF_GotoAdvanced) return true;
             //No random moths eating my cloths
             if (___pawn?.Faction == null || !___pawn.Faction.IsPlayer) return true;
@@ -88,7 +89,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             {
                 if (target.Thing == null)
                 {
-                    //Log.Error($"ProjectRimfactory - Patch_Pawn_JobTracker_StartJob - Null Thing as Target: {target} - pawn:{___pawn} - Job:{newJob}");
+                   //Log.Error($"ProjectRimfactory - Patch_Pawn_JobTracker_StartJob - Null Thing as Target: {target} - pawn:{___pawn} - Job:{newJob}");
                     continue;
                 }
 
@@ -97,14 +98,15 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 //Quick check if the Item could be in a DSU
                 //Might have false Positives They are then filterd by AdvancedIO_PatchHelper.CanMoveItem
                 //But should not have false Negatives
-                if (prfmapcomp.ShouldHideItemsAtPos(target.Cell))
+                if (prfmapcomp.ShouldHideItemsAtPos(target.Cell) || target.Thing.ParentHolder is Building_ColdStorage)
                 {
+                    Log.Message($"Maybe cold storage {target} - {target.Thing}");
                     foreach (var port in Ports)
                     {
                         var PortIsCloser = port.Key < DistanceToTarget;
                         if (PortIsCloser || (ConditionalPatchHelper.Patch_Reachability_CanReach.Status && ___pawn.Map.reachability.CanReach(___pawn.Position, target.Thing, Verse.AI.PathEndMode.Touch, TraverseParms.For(___pawn)) && Patch_Reachability_CanReach.CanReachThing(target.Thing)))
                         {
-                            if (AdvancedIO_PatchHelper.CanMoveItem(port.Value, target.Cell))
+                            if (AdvancedIO_PatchHelper.CanMoveItem(port.Value, target.Cell) || port.Value.boundStorageUnit == target.Thing.ParentHolder)
                             {
                                 // port.Value.AddItemToQueue(target.Thing);
                                 // port.Value.updateQueue();
@@ -122,6 +124,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                             break;
                         }
                     }
+                }
+                else
+                {
+                   Log.Message($"Checking {target} - {target.Thing} - {target.Thing?.Position}");
                 }
             }
             return true;

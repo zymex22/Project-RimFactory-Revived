@@ -150,7 +150,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         public static void Postfix(Thing __result, ThingRequest thingReq)
         {
-            Log.Message($"ClosestThingReachable returns {__result} for {thingReq} --  region: {thingReq.CanBeFoundInRegion}");
+         //   Log.Message($"ClosestThingReachable returns {__result} for {thingReq} --  region: {thingReq.CanBeFoundInRegion}");
         }
 
 
@@ -187,7 +187,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             foreach(var b in storage)
             {
                 things.AddRange((b as Building_ColdStorage).StoredItems);
-                Log.Message($"added  items form {b}");
+              //  Log.Message($"added  items form {b}");
             }
 
             return things;
@@ -255,7 +255,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     "//Note that could also enhance the Logic for DSU Access and vs stuff on the floor"
      
      */
-    [HarmonyPatch(typeof(RegionProcessorClosestThingReachable), "RegionProcessor")]
+  /*  [HarmonyPatch(typeof(RegionProcessorClosestThingReachable), "RegionProcessor")]
     public class Patch_RegionProcessorClosestThingReachable_RegionProcessor
     {
 
@@ -462,9 +462,11 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     /*
      
-     Katia started 10 jobs in one tick. newJob=HaulToContainer (Job_61312) A=Thing_Steel66075 B=Thing_Blueprint_Wall68430 C=Thing_Blueprint_Wall68429 jobGiver=RimWorld.JobGiver_Work jobList=(Wait_Combat (Job_60887) A=(169, 0, 159))
- (BuildRoof (Job_61106) A=(172, 0, 156) B=(172, 0, 156)) (HaulToContainer (Job_61296) A=Thing_Steel66075 B=Thing_Blueprint_Wall68430
- C=Thing_Blueprint_Wall68429) (HaulToContainer (Job_61298) A=Thing_Steel66075 B=Thing_Blueprint_Wall68430 C=Thing_Blueprint_Wall68429) 
+     Katia started 10 jobs in one tick. newJob=HaulToContainer (Job_61312) A=Thing_Steel66075 B=Thing_Blueprint_Wall68430 C=Thing_Blueprint_Wall68429 jobGiver=RimWorld.JobGiver_Work jobList=
+ (Wait_Combat (Job_60887) A=(169, 0, 159))
+ (BuildRoof (Job_61106) A=(172, 0, 156) B=(172, 0, 156)) 
+ (HaulToContainer (Job_61296) A=Thing_Steel66075 B=Thing_Blueprint_Wall68430 C=Thing_Blueprint_Wall68429) 
+ (HaulToContainer (Job_61298) A=Thing_Steel66075 B=Thing_Blueprint_Wall68430 C=Thing_Blueprint_Wall68429) 
  (HaulToContainer (Job_61300) A=Thing_Steel66075 B=Thing_Blueprint_Wall68430 C=Thing_Blueprint_Wall68429) 
  (HaulToContainer (Job_61302) A=Thing_Steel66075 B=Thing_Blueprint_Wall68430 C=Thing_Blueprint_Wall68429) 
  (HaulToContainer (Job_61304) A=Thing_Steel66075 B=Thing_Blueprint_Wall68430 C=Thing_Blueprint_Wall68429) 
@@ -476,4 +478,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     Maybe a job interruption is the issue
      
      */
+
+
 }

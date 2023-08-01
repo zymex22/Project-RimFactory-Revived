@@ -75,24 +75,28 @@ namespace ProjectRimFactory.Storage
 
         public void PlaceThingNow(Thing thing)
         {
-            if (thing != null)
-            {
-                thing.Position = this.Position;
-            }
+            Log.Message($"PlaceThingNow {thing}");
+            if (thing.stackCount <= 0) boundStorageUnit.HandleMoveItem(thing);
+            
+            GenSpawn.Spawn(thing, WorkPosition, Map);
+            Log.Message($"Should have placed {thing}@{thing.Position} to {WorkPosition} - Spawned: {thing.Spawned}");
+
         }
 
         public override void Tick()
         {
             updateQueue();
 
+            /*
             if (this.IsHashIntervalTick(10))
             {
                 var thing = GetstoredItem();
                 if (thing != null && !this.Map.reservationManager.AllReservedThings().Contains(thing))
                 {
-                    RefreshInput();
+                   RefreshInput();
                 }
             }
+            */
 
         }
 
