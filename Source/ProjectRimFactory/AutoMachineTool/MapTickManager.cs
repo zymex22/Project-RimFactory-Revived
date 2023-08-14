@@ -57,9 +57,26 @@ namespace ProjectRimFactory.AutoMachineTool
             }
 #else
             // Need ToList() b/c the list of tickActions can change
+            //Execute the Action Associated with the Current Tick
             this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
 #endif
             this.tickActionsDict.Remove(Find.TickManager.TicksGame);
+        }
+
+        public void HandleTimeSkip(int NewCurrentTick)
+        {
+            //Update Keys in tickActionsDict To be in line with the current Tick
+            var currentTick = Find.TickManager.TicksGame;
+            var offset = NewCurrentTick - currentTick;
+
+            var old_tickActionsDict = tickActionsDict.ToDictionary(entry => entry.Key,
+                                                   entry => entry.Value);
+
+            tickActionsDict.Clear();
+            foreach (var old in old_tickActionsDict)
+            {
+                tickActionsDict[old.Key + offset] = old.Value;
+            }
         }
 
         private static void Exec(Action act)
@@ -117,18 +134,24 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public void AfterAction(int ticks, Action act)
         {
+            //Enforce a Minimum of 1 "ticks"
             if (ticks < 1)
+            {
                 ticks = 1;
+            }
 
-            if (!this.tickActionsDict.TryGetValue(Find.TickManager.TicksGame + ticks, out HashSet<Action> set))
+            //Register a Given Action to an Expected Completion Tick
+            var ExecutionTick = Find.TickManager.TicksGame + ticks;
+            if (!this.tickActionsDict.TryGetValue(ExecutionTick, out HashSet<Action> set))
             {
                 set = new HashSet<Action>();
-                this.tickActionsDict[Find.TickManager.TicksGame + ticks] = set;
+                this.tickActionsDict[ExecutionTick] = set;
             }
 
             set.Add(act);
         }
 
+        //Register an Action for the Next Tick
         public void NextAction(Action act)
         {
             this.AfterAction(1, act);
