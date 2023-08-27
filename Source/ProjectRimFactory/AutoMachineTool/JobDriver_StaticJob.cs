@@ -14,7 +14,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
-            return null;
+            yield break;
         }
     }
 }
