@@ -261,9 +261,18 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void CreateWorkingEffect(MapTickManager mapTickManager)
         {
             workingEffect = this.bill.recipe.effectWorking?.Spawn();
+            var sound = this.bill.recipe.soundWorking;
 
-            workingSound = this.bill.recipe.soundWorking?.TrySpawnSustainer(my_workTable);
-            workingSound?.Maintain();
+            if (sound?.sustain ?? false)
+            {
+                workingSound = sound?.TrySpawnSustainer(my_workTable);
+                workingSound?.Maintain();
+            }
+            else if (sound != null)
+            {
+                sound.PlayOneShot(my_workTable);
+            }
+            
 
             mapTickManager.EachTickAction(EffectTick);
 
