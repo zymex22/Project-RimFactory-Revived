@@ -4,9 +4,8 @@
 
 	<RecipeDef Name="PRF_MiningWork" Abstract="True">
 		<workSkill>Mining</workSkill>
-		<workAmount>655</workAmount>
+		<workAmount>1000</workAmount>
 		<effectWorking>Smith</effectWorking>
-		<efficiencyStat>MiningSpeed</efficiencyStat>
 		<workSkillLearnFactor>0.25</workSkillLearnFactor>
 	</RecipeDef>
 
