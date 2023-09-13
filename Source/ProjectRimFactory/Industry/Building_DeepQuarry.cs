@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 using Verse;
+
 namespace ProjectRimFactory.Industry
 {
     /// <summary>
@@ -183,6 +185,15 @@ namespace ProjectRimFactory.Industry
         private ThingDef getRock => GetPossibleRockDefCandidatesFilterd(this.def)
                 .RandomElementByWeight(d => d.building.isResourceRock ? d.building.mineableScatterCommonality * d.building.mineableScatterLumpSizeRange.Average * d.building.mineableDropChance : 3f);
 
+        private int GetThingAmmount(ThingDef thing)
+        {
+
+            var ammount = thing.building.mineableYield / 4;
+            ammount = Mathf.Clamp(ammount, 1, 20);
+
+            return ammount;
+        }
+
         protected virtual Thing GetChunkThingToPlace()
         {
             ThingDef rock = getRock;
@@ -192,7 +203,7 @@ namespace ProjectRimFactory.Industry
                                                         this as IBillGiver, this);
             if (tmpList.Count > 0) return tmpList[0]; // code framework enforces placing only a single thing
             Thing t = ThingMaker.MakeThing(rock.building.mineableThing);
-            t.stackCount = rock.building.mineableYield;
+            t.stackCount = GetThingAmmount(rock);
             return t;
         }
 
@@ -216,7 +227,7 @@ namespace ProjectRimFactory.Industry
             HelpText += "PRF_DescriptionUpdate_CanMine".Translate();
             foreach (ThingDef rock in rocks)
             {
-                HelpText += String.Format("    - {0} x{1}\r\n", rock.LabelCap, rock.building.mineableYield);
+                HelpText += String.Format("    - {0} x{1}\r\n", rock.LabelCap, GetThingAmmount(rock));
             }
             HelpText += "\r\n";
 
