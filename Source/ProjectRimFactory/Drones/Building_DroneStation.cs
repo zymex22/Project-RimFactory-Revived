@@ -563,7 +563,7 @@ namespace ProjectRimFactory.Drones
         }
 
 
-        private static HediffSet droneDiffs = null;
+        private static List<Hediff> droneDiffs = null;
 
         public Pawn_Drone MakeDrone()
         {
@@ -578,12 +578,11 @@ namespace ProjectRimFactory.Drones
             if (droneDiffs == null)
             {
                 PawnTechHediffsGenerator.GenerateTechHediffsFor(drone);
-                droneDiffs = drone.health.hediffSet;
+                droneDiffs = new List<Hediff>(drone.health.hediffSet.hediffs);
             }
             else
             {
-                drone.health.hediffSet = droneDiffs;
-                drone.health.hediffSet.pawn = drone;
+                drone.health.hediffSet.hediffs = droneDiffs.ToList();
             }
 
 
