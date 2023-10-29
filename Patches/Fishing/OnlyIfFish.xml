@@ -180,7 +180,7 @@
 						<ThingDef ParentName="OrganicProductBase">
 							<defName>PRF_FishFood</defName>
 							<label>fish food</label>
-							<description>Animal feed made from mixed meat and plant sources, used for feeding fish in tanks.  Humanoids should not eat this.</description>
+							<description>Animal feed made from mixed meat and plant sources, used for feeding fish in tanks. Humanoids should not eat this.</description>
 							<thingCategories>
 								<li>Foods</li>
 							</thingCategories>

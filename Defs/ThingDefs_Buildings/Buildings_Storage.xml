@@ -279,7 +279,7 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_DigitalStorageUnit_I</defName>
     <label>Digital Storage Unit</label>
-    <description>A matter-energy conversion based storage unit which can hold up to 768 stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.  Don't break it.</description>
+    <description>A matter-energy conversion based storage unit which can hold up to 768 stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more. Don't break it.</description>
     <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
     <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
@@ -362,7 +362,7 @@
       </li>
     </modExtensions>
   </ThingDef>
-  
+
   <!--==================== Archival Storage Unit ====================-->
   <ThingDef ParentName="PRF_BuildingBase">
     <thingClass>ProjectRimFactory.Storage.Building_ColdStoragePowered</thingClass>
@@ -399,7 +399,7 @@
 	  </scratches>
 	  <!-- <rect>(0.1,0,3,2.5)</rect> -->
 		<rect>(0.1,0,2.8,2.8)</rect>
-		
+
         <cornerTL>Damage/Corner</cornerTL>
 		<cornerBR>Damage/Corner</cornerBR>
 		<cornerBL>Damage/Corner</cornerBL>
@@ -569,7 +569,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_IOPPusher_I</defName>
     <label>I/O pusher</label>
-    <description>This modified I/O port allows you to push items directly into next cell, onto a belt, or anywhere else, saving space instead of using a puller.\n More of an output port than input/output.</description>
+    <description>This modified I/O port allows you to push items directly into next cell, onto a belt, or anywhere else, saving space instead of using a puller.\nMore of an output port than input/output.</description>
     <thingClass>ProjectRimFactory.Storage.Building_IOPusher</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>

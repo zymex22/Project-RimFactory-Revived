@@ -180,7 +180,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_II_sun</defName>
     <label>Drone Cultivator Mk.II(sun lamp)</label>
-    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.  This version includes an integrated sunlamp, and with specialized research can upgrade the included drones to level 20.</description>
+    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range. This version includes an integrated sunlamp, and with specialized research can upgrade the included drones to level 20.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorWithSunLamp</texPath>
@@ -319,7 +319,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_I</defName>
     <label>Nano Cultivator</label>
-    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
+    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones. The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator2</texPath>
@@ -363,7 +363,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_Sun</defName>
     <label>Nano Cultivator (Sunlamp)</label>
-    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones.  The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.  This model has an integrated sunlamp.</description>
+    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones. The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing. This model has an integrated sunlamp.</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorB18</texPath>
@@ -421,7 +421,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_Xl</defName>
     <label>Nano Cultivator Mk.II</label>
-    <description>A highly advanced XL Cultivator that houses worker mechanites instead of drones.  The included mechanites will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
+    <description>A highly advanced XL Cultivator that houses worker mechanites instead of drones. The included mechanites will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorXL</texPath>
@@ -527,7 +527,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_Sprinkler_II</defName>
     <label>Sprinkler Mk.II</label>
-    <description>An upgraded sprinkler using advanced AI to calculate and distribute the fertilizer needs of each plant in each sprinkle, optimizing the growth rate of every plant.  Affected plants have their growth increased by two hours per round. Effects are stackable</description>
+    <description>An upgraded sprinkler using advanced AI to calculate and distribute the fertilizer needs of each plant in each sprinkle, optimizing the growth rate of every plant. Affected plants have their growth increased by two hours per round. Effects are stackable</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Sprinkler</thingClass>
     <designatorDropdown>PRF_CultivatorGroup</designatorDropdown>
     <minifiedDef>MinifiedThing</minifiedDef>

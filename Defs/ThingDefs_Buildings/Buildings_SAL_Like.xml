@@ -6,7 +6,7 @@
   </DesignatorDropdownGroupDef>
 
   <!--======================================== S.A.L Base ========================================-->
-  <!-- S.A.L is what was originally became PRF later, it was a mod before prf came, this is a remake found in 
+  <!-- S.A.L is what was originally became PRF later, it was a mod before prf came, this is a remake found in
       Nobo's AutoMachineTool with a few changes to our needs.
       It was originally removed from PRF and replaced with "assemblers" as a new system, this system is slighhtly more mod compatible
       and give some other options, so we thought it would be nice to bring back as a addition to assemblers.-->
@@ -130,7 +130,7 @@
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_AutoCrafter</defName>
     <label>S.A.L Assembler Mk.II</label>
-    <description>The Mark II auto-assembler is the backbone of Project S.A.L., a small but powerful building capable of autonomously crafting recipes.  Although more advanced than the basic model with a crafting skill of 12, any art produced by this device is still very basic.</description>
+    <description>The Mark II auto-assembler is the backbone of Project S.A.L., a small but powerful building capable of autonomously crafting recipes. Although more advanced than the basic model with a crafting skill of 12, any art produced by this device is still very basic.</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <costList>
       <Steel>100</Steel>
@@ -308,7 +308,7 @@
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_OverclockedAutoAssembler</defName>
     <label>S.A.L Overclocked Assembler</label>
-    <description>An auto-assembler which has been modified to emphasize speed over quality.  Any random idiot in your colony could do better, but this machine works at a ridiculous rate and never takes breaks.</description>
+    <description>An auto-assembler which has been modified to emphasize speed over quality. Any random idiot in your colony could do better, but this machine works at a ridiculous rate and never takes breaks.</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
     <graphicData>
       <color>(15,100,130,256)</color>      <!--change color on maske manually -->
@@ -358,7 +358,7 @@
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_OverclockedAutoAssemblerII</defName>
     <label>S.A.L Overclocked Assembler Mk.II</label>
-    <description>An advanced overclocked auto-assembler which puts Henry Ford's production lines to shame.  The quality is a joke, but it can do the work of an entire team of morons.\n"So it makes you smarter?" "No, it makes you stupid faster."</description>
+    <description>An advanced overclocked auto-assembler which puts Henry Ford's production lines to shame. The quality is a joke, but it can do the work of an entire team of morons.\n"So it makes you smarter?" "No, it makes you stupid faster."</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
     <graphicData>
       <color>(15,100,130,256)</color>      <!--change color on maske manually -->

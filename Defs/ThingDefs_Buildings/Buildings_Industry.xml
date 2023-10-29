@@ -209,7 +209,7 @@
       <MarketValue>5000</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>Thornsworth's Art machine, capable of producing art with an art level of 14.\nThorny had a big passion for 3D printers and producing art with his large army of assemblers.  He made this machine before he passed away, and now it's finally here to produce an army of sculptures well into the future.\nRIP Thornsworth 2020</description>
+    <description>Thornsworth's Art machine, capable of producing art with an art level of 14.\nThorny had a big passion for 3D printers and producing art with his large army of assemblers. He made this machine before he passed away, and now it's finally here to produce an army of sculptures well into the future.\nRIP Thornsworth 2020</description>
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
@@ -486,7 +486,7 @@
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceI</defName>
     <label>Blast Furnace</label>
-    <description>A simple early stage Furnace with minimal automation. It burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it doesn't clog up)\n Uses wood as fuel to smelt</description>
+    <description>A simple early stage Furnace with minimal automation. It burns unwanted apparel and smelts raw rescourses into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs(yellow cell) any finished metals into a cell you may specify.\n(remember to remove quicly so it doesn't clog up)\nUses wood as fuel to smelt</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <altitudeLayer>Gas</altitudeLayer>
     <graphicData>

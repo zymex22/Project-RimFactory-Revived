@@ -43,7 +43,7 @@
   <ThingDef ParentName="BenchBase">
     <defName>PRF_MineShaft</defName>
     <label>Mine Shaft</label>
-    <description>An early mine shaft entrance, which let you set a target mine operation where a pawn will go into the mountain and mine out what you desire.  It also has a slim chance of finding rare/junk bonus items while operating.\nShould be placed in a mountain wall to operate.</description>
+    <description>An early mine shaft entrance, which let you set a target mine operation where a pawn will go into the mountain and mine out what you desire. It also has a slim chance of finding rare/junk bonus items while operating.\nShould be placed in a mountain wall to operate.</description>
     <thingClass>Building_WorkTable</thingClass>
     <designationCategory>Production</designationCategory>    <!--architect menu location-->
     <clearBuildingArea>false</clearBuildingArea>
@@ -206,7 +206,7 @@
              <Steel Weight="1" Count="10" />
              <Plasteel Weight="2" Count="15" />
            </bonusYields>
-           <replaceOrigProduct>true</replaceOrigProduct> - whether to replace product or add bonus in addition; defaults to false (add)  
+           <replaceOrigProduct>true</replaceOrigProduct> - whether to replace product or add bonus in addition; defaults to false (add)
       -->
       <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
         <replaceOrigProduct>true</replaceOrigProduct>
@@ -312,7 +312,7 @@
       <drawRotated>false</drawRotated>
     </graphicData>
     <rotatable>true</rotatable>
-    <description>This is a Portable Drone miner mkI. It works in much same way as a Cultivator, and can be picked carried when your traveling around the rim for your remote mining operations. It is also excellent for excavating for your new base.\n It has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat, and only work 1 hour shifts.</description>
+    <description>This is a Portable Drone miner mkI. It works in much same way as a Cultivator, and can be picked carried when your traveling around the rim for your remote mining operations. It is also excellent for excavating for your new base.\nIt has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat, and only work 1 hour shifts.</description>
     <costList>
       <PRF_DroneModule>2</PRF_DroneModule>
       <Steel>30</Steel>
@@ -346,8 +346,8 @@
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        
-        
+
+
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
         <minPowerForRange>850</minPowerForRange>
         <minRange>6</minRange>
@@ -394,7 +394,7 @@
     </graphicData>
     <size>(2,2)</size>
     <rotatable>true</rotatable>
-    <description>This is a Portable Drone miner mkI. It works in much same way as a Cultivator, and can be picked carried when your traveling around the rim for your remote mining operations. It is also excellent for excavating for your new base.\n It has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat, and only work 1 hour shifts.</description>
+    <description>This is a Portable Drone miner mkI. It works in much same way as a Cultivator, and can be picked carried when your traveling around the rim for your remote mining operations. It is also excellent for excavating for your new base.\nIt has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat, and only work 1 hour shifts.</description>
     <costList>
       <PRF_DroneModule>4</PRF_DroneModule>
       <Steel>10</Steel>
@@ -433,10 +433,10 @@
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
-        
-        
+
+
         <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
-        
+
         <minRange>8</minRange>
         <maxPowerForRange>1700</maxPowerForRange>
         <maxRange>20</maxRange>
@@ -474,7 +474,7 @@
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_DeepQuarry_mkIII</defName>
     <label>Pulse Drill Mk.2</label>
-    <description>The most advanced form of the automated quarry, this device uses advanced techniques to safely mine without drawing the attention of insectoids.  It will also only produce valuble minerals, never stone.</description>
+    <description>The most advanced form of the automated quarry, this device uses advanced techniques to safely mine without drawing the attention of insectoids. It will also only produce valuble minerals, never stone.</description>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <graphicData>
       <texPath>Industry/DrillT32</texPath>

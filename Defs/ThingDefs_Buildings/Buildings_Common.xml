@@ -10,11 +10,11 @@
     <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
     <selectable>true</selectable>
     <drawerType>MapMeshAndRealTime</drawerType>
-    <repairEffect>Repair</repairEffect> 
-    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>  
+    <repairEffect>Repair</repairEffect>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
     <filthLeaving>Filth_RubbleBuilding</filthLeaving>
     <castEdgeShadows>true</castEdgeShadows>
-    <staticSunShadowHeight>0.20</staticSunShadowHeight> 
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
     <canOverlapZones>false</canOverlapZones>
     <size>(3,1)</size>
     <stuffCategories>
@@ -82,7 +82,7 @@
     <defName>PRF_ResearchTerminal</defName>
     <label>Factory Research Terminal</label>
     <thingClass>Building_ResearchBench</thingClass>
-    <description>Similar to a multi-analyzer, this device links to high-tech research benches, but with some additional capabilities.  \nIt works as a simple research table and can research any research that does not require a high-tech research bench itself.\nIn addition to boosting research speed, this terminal is required for certain high-end factory research.</description>
+    <description>Similar to a multi-analyzer, this device links to high-tech research benches, but with some additional capabilities.\nIt works as a simple research table and can research any research that does not require a high-tech research bench itself.\nIn addition to boosting research speed, this terminal is required for certain high-end factory research.</description>
     <uiIconScale>0.85</uiIconScale>
     <graphicData>
       <texPath>Common/Terminal</texPath>

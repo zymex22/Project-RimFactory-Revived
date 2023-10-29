@@ -36,7 +36,7 @@
     <defName>PRF_4k_Battery</defName>
     <label>4k Battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
-    <description>A battery capable of storing 4,000 watt-days of power, equivalent to almost seven ordinary batteries.  This battery is 50% efficient, and will explode if exposed to rain.</description>
+    <description>A battery capable of storing 4,000 watt-days of power, equivalent to almost seven ordinary batteries. This battery is 50% efficient, and will explode if exposed to rain.</description>
     <graphicData>
       <texPath>Industry/Battery/PRF_4k_Battery</texPath>
       <drawSize>(1,1)</drawSize>
@@ -82,7 +82,7 @@
     <defName>PRF_16k_Battery</defName>
     <label>16k Battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
-    <description>A battery capable of storing 16,000 watt-days of power, equivalent to almost twenty-seven ordinary batteries.  This battery is 50% efficient, and will explode if exposed to rain.</description>
+    <description>A battery capable of storing 16,000 watt-days of power, equivalent to almost twenty-seven ordinary batteries. This battery is 50% efficient, and will explode if exposed to rain.</description>
     <graphicData>
       <texPath>Industry/Battery/PRF_16k_Battery</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -178,7 +178,7 @@
     <defName>PRF_256k_Battery</defName>
     <label>256k Battery</label>
     <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
-    <description>A tremendously powerful battery capable of storing 256,000 watt-days of power.  The integrated AI management system reduces inefficiency losses to effectively zero, and the device is waterproof and will never break down, and it's surprisingly beautiful to look at.  Watch out for short-circuits though!</description>
+    <description>A tremendously powerful battery capable of storing 256,000 watt-days of power. The integrated AI management system reduces inefficiency losses to effectively zero, and the device is waterproof and will never break down, and it's surprisingly beautiful to look at. Watch out for short-circuits though!</description>
     <graphicData>
       <texPath>Industry/Battery/PRF_256k_Battery</texPath>
       <graphicClass>Graphic_Multi</graphicClass>

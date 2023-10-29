@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  <!-- 
+  <!--
 Mod extennsion for assemblers
   <modExtensions>
       <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
@@ -27,11 +27,11 @@ Mod extennsion for assemblers
         <CookMealSimpleBulk Effecter="ButcherFlesh" Sound="Recipe_ButcherCorpseFlesh" />   example
         </overrideRecipeEffecter>
 
-        <defaultEffecter>Drill</defaultEffecter>        
+        <defaultEffecter>Drill</defaultEffecter>
         Effect that is used when RecipeDef.effectWorking and RecipeDef.soundWorking does not exist or is not defined in overrideRecipeEffecter.
         <defaultSound></defaultSound>
       </li>
-  </modExtensions> 
+  </modExtensions>
   <comps>
       <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">    Comp for pulseglow when working
         <minGlowRadius>1</minGlowRadius>                                  smallest size
@@ -44,14 +44,14 @@ Mod extennsion for assemblers
       </li>
       <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
         speed settings
-        
-        
+
+
         <minSpeedFactor>1</minSpeedFactor>
         <maxPowerForSpeed>3000</maxPowerForSpeed>
         <maxSpeedFactor>2</maxSpeedFactor>
         range settings
-        
-        
+
+
         <minRange>1</minRange>
         <maxPowerForRange>1000</maxPowerForRange>
         <maxRange>3</maxRange>
@@ -251,7 +251,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_I</defName>
     <label>adaptive assembler</label>
-    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\nStats\nMin. speed 100% - Max 500%\nMin Qual. Awfull - Max Masterwork\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 5 \n\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\nStats\nMin. speed 100% - Max 500%\nMin Qual. Awfull - Max Masterwork\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 5\n\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -419,7 +419,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_III</defName>
     <label>Quantum Assembler (Overclocked)</label>
-    <description>A high-end assembler that works at a high rate, starts faster, and can ramp up higher than other assemblers.  The output isn't very good quality though.  The database is huge. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200% \n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>A high-end assembler that works at a high rate, starts faster, and can ramp up higher than other assemblers. The output isn't very good quality though. The database is huge. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200%\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>

@@ -131,7 +131,7 @@
   <RecipeDef>
     <defName>PRF_Destroy_Anything</defName>
     <label>Destroy Anything</label>
-    <description>Destroy anything.  This will remove any unwanted stuff quickly.\nSet filters before running this bill or your pawns will melt all your expensive stuff.</description>
+    <description>Destroy anything. This will remove any unwanted stuff quickly.\nSet filters before running this bill or your pawns will melt all your expensive stuff.</description>
     <jobString>Pulverizing stuff..</jobString>
     <workAmount>75</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>

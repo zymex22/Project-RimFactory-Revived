@@ -130,7 +130,7 @@
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
     </graphicData>
-    <description>A mini workshop helper capable of hauling, flicking, firefighting, and cleaning your workshop within a configurable range.  Longer ranges will require more power.</description>
+    <description>A mini workshop helper capable of hauling, flicking, firefighting, and cleaning your workshop within a configurable range. Longer ranges will require more power.</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_DroneModule>2</PRF_DroneModule>

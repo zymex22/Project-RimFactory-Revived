@@ -132,7 +132,7 @@
     <label>S.A.L Autonomous Overclocking II</label>
     <techLevel>Spacer</techLevel>
     <baseCost>10000</baseCost>
-    <description>Increases to servo speed and internal visualisation computers allow this S.A.L crafter to work even faster than before.  Henry Ford would be proud.</description>
+    <description>Increases to servo speed and internal visualisation computers allow this S.A.L crafter to work even faster than before. Henry Ford would be proud.</description>
     <prerequisites>
       <li>PRF_SALResearchVI</li>
     </prerequisites>

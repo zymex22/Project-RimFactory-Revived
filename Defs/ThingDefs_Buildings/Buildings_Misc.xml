@@ -35,7 +35,7 @@
     <defName>PRF_WallLight</defName>
     <label>Wall Lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
-    <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\n Good for small rooms or other tightly packed spaces.\nYou may change the color if you've researched Colored Lights.</description>
+    <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls\nGood for small rooms or other tightly packed spaces.\nYou may change the color if you've researched Colored Lights.</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
     <graphicData>
       <texPath>Misc/WallLight</texPath>

@@ -9,10 +9,10 @@
   <PRF_Settings_C_Patches_Reachability_CanReach>Toggle the Advanced IO CanReach Patch</PRF_Settings_C_Patches_Reachability_CanReach>
   <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>Toggles the Cold Storage WealthWatcher Patch\n\nWhen checked the Patch is active and items in Cold Storage contribute to Colony Wealth.\n\nFor most Players we reccomend this to be on.\nPerformance load on this is ~1ms per 1,000 stored items. This runs every 5,000 Ticks\n\n(ProjectRimFactory.Common.HarmonyPatches.Patch_WealthWatcher_CalculateWealthItems:Postfix)</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>
   <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>Toggle the Cold Storage WealthWatcher Patch</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>
-  
+
   <PRF.Common.ForbidOnPlacingDefault>Forbid items on placement</PRF.Common.ForbidOnPlacingDefault>
   <PRF.Common.ForbidOnPlacingDefaultDesc>When enabled machine products will be automatically forbidden on placement.</PRF.Common.ForbidOnPlacingDefaultDesc>
-  
+
   <PRF.Settings.RequireReboot>Changes will require a reboot to apply the setting.</PRF.Settings.RequireReboot>
   <PRF.Settings.Select>Select</PRF.Settings.Select>
   <PRF.Settings.TopMessage><![CDATA[<size=20>Any setting changes will <b><i><color=red>require a restart</color></i></b></size>]]></PRF.Settings.TopMessage>
@@ -40,7 +40,7 @@
   <PRF.Settings.TurnOffStorageDefault.Desc>If disabled, crates and other storage items will allow any item by default.</PRF.Settings.TurnOffStorageDefault.Desc>
 
   <PRF.Settings.TurnOffDsuDestroy.Label>Disable loss of items on DSU Deconstruction</PRF.Settings.TurnOffDsuDestroy.Label>
-  <PRF.Settings.TurnOffDsuDestroy.Desc>When deconstructed manually, any items in the DSU are lost.  Turning off this setting will cause them to be returned normally.</PRF.Settings.TurnOffDsuDestroy.Desc>
+  <PRF.Settings.TurnOffDsuDestroy.Desc>When deconstructed manually, any items in the DSU are lost. Turning off this setting will cause them to be returned normally.</PRF.Settings.TurnOffDsuDestroy.Desc>
 
   <PRF.Settings.DsuLimit.Label>Override DSU storage limit</PRF.Settings.DsuLimit.Label>
   <PRF.Settings.DsuLimit.Desc>Check this to enable the override slider on the right.</PRF.Settings.DsuLimit.Desc>

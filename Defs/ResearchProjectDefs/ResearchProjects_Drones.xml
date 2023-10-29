@@ -18,7 +18,7 @@
     </prerequisites>
     <researchViewX>3</researchViewX>
     <discoveredLetterTitle>About: Drone are now lv 10</discoveredLetterTitle>
-    <discoveredLetterText>You now have basic knowledge about drones and can now start to utilize them for different tasks. This also unlocks Drone Cultivator research which lets you Automate your agriculture needs. \n This will set any drones base level to 10. \n Unless other settings for specific dronestation is specified.</discoveredLetterText>
+    <discoveredLetterText>You now have basic knowledge about drones and can now start to utilize them for different tasks. This also unlocks Drone Cultivator research which lets you Automate your agriculture needs.\nThis will set any drones base level to 10.\nUnless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 10 unless manually overwritten -->
 
@@ -34,7 +34,7 @@
     </prerequisites>
     <researchViewX>6</researchViewX>
     <discoveredLetterTitle>About: Drone are now lv 15</discoveredLetterTitle>
-    <discoveredLetterText>You have upgraded your drones with better engines and batteries and as such they now do jobs even more efficiently. \n This will set any drones base level to 15. \n Unless other settings for specific dronestation is specified.</discoveredLetterText>
+    <discoveredLetterText>You have upgraded your drones with better engines and batteries and as such they now do jobs even more efficiently.\nThis will set any drones base level to 15.\nUnless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 15 unless manually overwritten -->
 
@@ -56,7 +56,7 @@
     </requiredResearchFacilities>
     <researchViewX>10</researchViewX>
     <discoveredLetterTitle>About: Drone are now lv 20</discoveredLetterTitle>
-    <discoveredLetterText>You have upgraded your drones with advanced AI cores, this will let them do their tasks better than most humans will do. \n This will set any drones base level to 20. \n Unless other settings for specific dronestation is specified.</discoveredLetterText>
+    <discoveredLetterText>You have upgraded your drones with advanced AI cores, this will let them do their tasks better than most humans will do.\nThis will set any drones base level to 20.\nUnless other settings for specific dronestation is specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 20 unless manually overwritten -->
 

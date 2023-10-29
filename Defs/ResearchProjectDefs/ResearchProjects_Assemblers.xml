@@ -81,7 +81,7 @@
     <researchViewX>6</researchViewX>
     <description>A specialized industrial tape used for recording audio, a useful method for archiving important instructions and general information.</description>
     <discoveredLetterTitle>About: Intro to recipe db.</discoveredLetterTitle>
-    <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\n This is used to import recipes from any workbench into your recipe db.\n You do so by placing it near a workbench and clicking import on those recipes you want it to store.  Afterwards, you can move it to another workbench and copy more. Or you can move it to the Assembler you want to link to it.\n Recipes will be stored forever in your database, and you can safely move it around.  Please note that if you remove it from your assemblers, they will loose their configured bills.</discoveredLetterText>
+    <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\nThis is used to import recipes from any workbench into your recipe db.\nYou do so by placing it near a workbench and clicking import on those recipes you want it to store. Afterwards, you can move it to another workbench and copy more. Or you can move it to the Assembler you want to link to it.\nRecipes will be stored forever in your database, and you can safely move it around. Please note that if you remove it from your assemblers, they will loose their configured bills.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
@@ -97,7 +97,7 @@
     </prerequisites>
     <researchViewX>7</researchViewX>
     <discoveredLetterTitle>About: Intro to assemblers</discoveredLetterTitle>
-    <discoveredLetterText>You have unlocked your first real type assembler, this is basically a universal machine that can produce anything your workbenches can do.  You just copy bills with a recipe database and place it near your assembler to show recipes.\n Please note that it CAN'T return the same item again so mods like Mend and Recycle will not work on assemblers, as it destroys products it takes in.\n\n This assembler has stats set to 10 this mean it can ONLY see recipes with a required level of 10 or less in the database. If you upgrade to the next tier it will be smarter and have a higher skill level.\n This Assembler has a fixed speed and will not get better over time like next tier will.</discoveredLetterText>
+    <discoveredLetterText>You have unlocked your first real type assembler, this is basically a universal machine that can produce anything your workbenches can do. You just copy bills with a recipe database and place it near your assembler to show recipes.\nPlease note that it CAN'T return the same item again so mods like Mend and Recycle will not work on assemblers, as it destroys products it takes in.\n\nThis assembler has stats set to 10 this mean it can ONLY see recipes with a required level of 10 or less in the database. If you upgrade to the next tier it will be smarter and have a higher skill level.\nThis Assembler has a fixed speed and will not get better over time like next tier will.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
