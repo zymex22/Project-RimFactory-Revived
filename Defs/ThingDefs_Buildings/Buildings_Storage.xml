@@ -278,8 +278,8 @@
   <!--==================== Cargo Platform / Digital Storage Unit / DSU ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_DigitalStorageUnit_I</defName>
-    <label>Digital Storage Unit</label>
-    <description>A matter-energy conversion based storage unit which can hold up to 768 stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more. Don't break it.</description>
+    <label>Digital storage unit</label>
+    <description>A matter-energy conversion-based storage unit that can hold up to 768 stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more. Don't break it.</description>
     <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
     <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
@@ -367,8 +367,8 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <thingClass>ProjectRimFactory.Storage.Building_ColdStoragePowered</thingClass>
 	<defName>PRF_ColdStorageUnit_I</defName>
-    <label>Archival Storage Unit</label>
-    <description>A matter-energy conversion based storage unit which can hold up to 10k stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the Archival Storage Unit will not be able to store more. Don't break it.\n\nItems stored in this Device are not spawned and therefore won't be automatically accessible by your pawns. Use I/O Ports to interact with it.</description>
+    <label>Archival storage unit</label>
+    <description>A matter-energy conversion-based storage unit that can hold up to 10k stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the archival storage unit will not be able to store more. Don't break it.\n\nItems stored in this Device are not spawned and therefore won't be automatically accessible by your pawns. Use I/O Ports to interact with it.</description>
     <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
     <tradeTags>
@@ -482,7 +482,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_IOPort_I</defName>
     <label>I/O port</label>
-    <description>An advanced connection port for the Digital Storage Unit. It can be set to input/output from any platform remotely within the map.</description>
+    <description>An advanced connection port for the digital storage unit. It can be set to input/output from any platform remotely within the map.</description>
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>
@@ -569,7 +569,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_IOPPusher_I</defName>
     <label>I/O pusher</label>
-    <description>This modified I/O port allows you to push items directly into next cell, onto a belt, or anywhere else, saving space instead of using a puller.\nMore of an output port than input/output.</description>
+    <description>This modified I/O port allows you to push items directly into the next cell, onto a belt, or anywhere else, saving space instead of using a puller.\nMore of an output port than input/output.</description>
     <thingClass>ProjectRimFactory.Storage.Building_IOPusher</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>
@@ -661,8 +661,8 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_ItemSlide</defName>
     <thingClass>ProjectRimFactory.Storage.Building_ItemSlide</thingClass>
-    <label>Item Chute</label>
-    <description>This belt chute/hopper is used for pawns or drones to fill a facing belt without the need for a stockpile and a puller. Basically it's a small stockpile that automaticly pushes onto a belt.</description>
+    <label>Item chute</label>
+    <description>This belt chute/hopper is used for pawns or drones to fill a facing belt without the need for a stockpile and a puller. Basically, it's a small stockpile that automatically pushes onto a belt.</description>
     <graphicData>
       <texPath>Storage/ItemSlide</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -728,7 +728,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_IOPort_II</defName>
     <label>Adv. I/O port</label>
-    <description>An interactive connection port for the Digital Storage Unit. Pawns may request any item from the conneted Digital Storage Unit.</description>
+    <description>An interactive connection port for the digital storage unit. Pawns may request any item from the connected digital storage unit.</description>
     <thingClass>ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>

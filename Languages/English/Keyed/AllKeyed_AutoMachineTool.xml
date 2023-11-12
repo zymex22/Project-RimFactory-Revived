@@ -18,7 +18,7 @@
   <PRF.AutoMachineTool.OutputDirectionW>West</PRF.AutoMachineTool.OutputDirectionW>
   <PRF.AutoMachineTool.OutputDirectionNW>Northwest</PRF.AutoMachineTool.OutputDirectionNW>
 
-  <PRF.AutoMachineTool.PlaceNotAllowed>AutoMachineTool must face work table and be placed in working position.</PRF.AutoMachineTool.PlaceNotAllowed>
+  <PRF.AutoMachineTool.PlaceNotAllowed>AutoMachineTool must face the work table and be placed in a working position.</PRF.AutoMachineTool.PlaceNotAllowed>
 
   <PRF.AutoMachineTool.StatWorking>Working. [{0} / {1} ({2} %)]</PRF.AutoMachineTool.StatWorking>
   <PRF.AutoMachineTool.StatWorkingNotParam>Working.</PRF.AutoMachineTool.StatWorkingNotParam>
@@ -66,7 +66,7 @@
   <PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>Activate limit</PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>
   <PRF.AutoMachineTool.ProductLimitation.CheckBoxLabelTip>Processing stops when the number of products and items exceeds the limit value. You can specify the zone. please check if it can be placed in that zone.</PRF.AutoMachineTool.ProductLimitation.CheckBoxLabelTip>
   <PRF.AutoMachineTool.ProductLimitation.CountStacks>Count stacks</PRF.AutoMachineTool.ProductLimitation.CountStacks>
-  <PRF.AutoMachineTool.ProductLimitation.CountStacksTip>Count item stacks instead of the total ammount of the given item</PRF.AutoMachineTool.ProductLimitation.CountStacksTip>
+  <PRF.AutoMachineTool.ProductLimitation.CountStacksTip>Count item stacks instead of the total amount of the given item</PRF.AutoMachineTool.ProductLimitation.CountStacksTip>
   <PRF.AutoMachineTool.EntierMap>No zone - DO FOREVER</PRF.AutoMachineTool.EntierMap>
   <PRF.AutoMachineTool.CountZone>For what zone?</PRF.AutoMachineTool.CountZone>
   <PRF.AutoMachineTool.ProductLimitation.SelectAreaTip>Select the Area in which to count. Selecting No Zone will count all items</PRF.AutoMachineTool.ProductLimitation.SelectAreaTip>
@@ -112,7 +112,7 @@
 
 
   <PRF.Conveyor.IsEndOfLineSetting>Holding Belt</PRF.Conveyor.IsEndOfLineSetting>
-  <PRF.Conveyor.IsEndOfLineSetting.Desc>Is this belt the end of its line or unloading into a assembler? If checked, it will hold onto items until something takes them. If unchecked, it will send items on to the next conveyor or dump them on the ground (if there is room).</PRF.Conveyor.IsEndOfLineSetting.Desc>
+  <PRF.Conveyor.IsEndOfLineSetting.Desc>Is this belt the end of its line or unloading into an assembler? If checked, it will hold onto items until something takes them. If unchecked, it will send items on to the next conveyor or dump them on the ground (if there is room).</PRF.Conveyor.IsEndOfLineSetting.Desc>
   <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine>  <!-- 1 line for Inspect Window -->
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>very high</PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.High>high</PRF.AutoMachineTool.Conveyor.DirectionPriority.High>

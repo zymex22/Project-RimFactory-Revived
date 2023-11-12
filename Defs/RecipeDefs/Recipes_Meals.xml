@@ -12,7 +12,7 @@
     <!--<recipeUsers>
       <li>BiofuelRefinery</li>
       <li>DrugLab</li>
-      <li>ElectricStove</li> 
+      <li>ElectricStove</li>
     </recipeUsers>-->
     <fixedIngredientFilter>
       <categories>
@@ -40,7 +40,7 @@
 
   <RecipeDef ParentName="MakeNutrientPasteBase">
     <defName>MakeNutrientPaste</defName>
-    <label>cook Nutrient paste meal</label>
+    <label>cook nutrient paste meal</label>
     <description>Make a nutrient paste meal by extracting nutrients from raw food.</description>
     <jobString>Cooking nutrient paste meal.</jobString>
     <workAmount>200</workAmount>
@@ -63,7 +63,7 @@
 
   <RecipeDef ParentName="MakeNutrientPasteBase">
     <defName>MakeNutrientPasteBulk</defName>
-    <label>cook Nutrient paste meal x10</label>
+    <label>cook nutrient paste meal x10</label>
     <description>Make a batch of 10 nutrient paste meals by extracting nutrients from raw food.</description>
     <jobString>Cooking nutrient paste meals in bulk.</jobString>
     <workAmount>2000</workAmount>

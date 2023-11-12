@@ -126,7 +126,7 @@
   <!--=========================== Mini Workshop helper ==================================-->
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_MiniHelper</defName>
-    <label>Workshop Drone Station</label>
+    <label>Workshop drone station</label>
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
     </graphicData>
@@ -212,8 +212,8 @@
   <!--=========================== Drone Column (for thronerooms) ==================================-->
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_MiniDroneColumn</defName>
-    <label>Drone Column</label>
-    <description>>A column filled with 2 handy drones that can clean your throneroom or eating hall, put out fires, refuel your braziers, and move your stuff away from the floor. It's also capable of holding up a roof, and looks quite nice.</description>
+    <label>Drone column</label>
+    <description>A column filled with 2 handy drones that can clean your throneroom or eating hall, put out fires, refuel your braziers, and move your stuff away from the floor. It's also capable of holding up a roof and looks quite nice.</description>
     <graphicData>
       <drawSize>(1.5,1.5)</drawSize>
       <drawOffset>(0,0,0.2)</drawOffset>
@@ -364,8 +364,8 @@
   <!--=========================== Fire Drone Station ==================================-->
   <!-- <ThingDef ParentName="PRF_DroneStationBase">
     <defName>PRF_FireDroneStation</defName>
-    <label>fire drone Station</label>
-    <description>A station that holds up to 10 drones which are capable of fighting fires. Consumes considerable power. Typically your colony only needs 1 of these.</description>
+    <label>fire drone station</label>
+    <description>A station that holds up to 10 drones that are capable of fighting fires. Consumes considerable power. Typically your colony only needs 1 of these.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneStationSpecialGraphics</thingClass>
     <graphicData>
       <texPath>Drones/DroneStationCaretaker</texPath>

@@ -13,18 +13,18 @@
   <!--========================================== Cooking Stuff =========================================-->
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCooking</defName>
-    <label>Self-Cooking</label>
+    <label>Self-cooking</label>
     <baseCost>1250</baseCost>
     <prerequisites>
       <li>PRF_CoreTierI</li>
     </prerequisites>
     <researchViewX>3</researchViewX>
-    <description>The first tier of automated cooking research allows you to make buildings that can cook meals themselves. It's just like your dedicated cook, but these devices won't have mental breaks for silly reasons.\nThis one will unlock simple food stuff and dedicated machines, good entry into automation.</description>
+    <description>The first tier of automated cooking research allows you to make buildings that can cook meals themselves. It's just like your dedicated cook, but these devices won't have mental breaks for silly reasons.\nThis one will unlock simple foodstuff and dedicated machines, a good entry into automation.</description>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCookingII</defName>
-    <label>Improved Self-cooking</label>
+    <label>Improved self-cooking</label>
     <baseCost>1500</baseCost>
     <prerequisites>
       <li>PRF_SelfCooking</li>
@@ -37,10 +37,10 @@
   <!--========================================== Metal Refinery =========================================-->
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_MetalRefining</defName>
-    <label>Metal Refining</label>
+    <label>Metal refining</label>
     <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
-    <description>A metal refinery able to produce rare metals through polymer lamination by combining Chemfuel with steel to create Plasteel.</description>
+    <description>A metal refinery able to produce rare metals through polymer lamination by combining chemfuel with steel to create plasteel.</description>
     <prerequisites>
       <li>PRF_CoreTierIII</li>
       <li>AdvancedFabrication</li>
@@ -58,7 +58,7 @@
   <!--========================================== ADV. ASSEMBLERS =========================================-->
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_MachineLearning</defName>
-    <label>Complex Machine Applications</label>
+    <label>Complex machine applications</label>
     <baseCost>2000</baseCost>
     <description>Teach machines how to improve their abilities by themselves. This is required for smart assemblers which can learn any recipe.</description>
     <prerequisites>
@@ -73,7 +73,7 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_MagneticTape</defName>
-    <label>Magnetic Tape</label>
+    <label>Magnetic tape</label>
     <baseCost>1000</baseCost>
     <prerequisites>
       <li>PRF_CoreTierII</li>
@@ -81,12 +81,12 @@
     <researchViewX>6</researchViewX>
     <description>A specialized industrial tape used for recording audio, a useful method for archiving important instructions and general information.</description>
     <discoveredLetterTitle>About: Intro to recipe db.</discoveredLetterTitle>
-    <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\nThis is used to import recipes from any workbench into your recipe db.\nYou do so by placing it near a workbench and clicking import on those recipes you want it to store. Afterwards, you can move it to another workbench and copy more. Or you can move it to the Assembler you want to link to it.\nRecipes will be stored forever in your database, and you can safely move it around. Please note that if you remove it from your assemblers, they will loose their configured bills.</discoveredLetterText>
+    <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\nThis is used to import recipes from any workbench into your recipe db.\nYou do so by placing it near a workbench and clicking import on those recipes you want it to store. Afterward, you can move it to another workbench and copy more. Or you can move it to the Assembler you want to link to it.\nRecipes will be stored forever in your database, and you can safely move it around. Please note that if you remove it from your assemblers, they will lose their configured bills.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_UniversalAutocrafting</defName>
-    <label>universal auto-crafting</label>
+    <label>Universal auto-crafting</label>
     <description>Make buildings that can craft recipes given to them via a recipe database. Like your dedicated crafters, but they don't sleep or die of flake overdose.</description>
     <baseCost>3000</baseCost>
     <requiredResearchFacilities>
@@ -97,12 +97,12 @@
     </prerequisites>
     <researchViewX>7</researchViewX>
     <discoveredLetterTitle>About: Intro to assemblers</discoveredLetterTitle>
-    <discoveredLetterText>You have unlocked your first real type assembler, this is basically a universal machine that can produce anything your workbenches can do. You just copy bills with a recipe database and place it near your assembler to show recipes.\nPlease note that it CAN'T return the same item again so mods like Mend and Recycle will not work on assemblers, as it destroys products it takes in.\n\nThis assembler has stats set to 10 this mean it can ONLY see recipes with a required level of 10 or less in the database. If you upgrade to the next tier it will be smarter and have a higher skill level.\nThis Assembler has a fixed speed and will not get better over time like next tier will.</discoveredLetterText>
+    <discoveredLetterText>You have unlocked your first real type assembler, this is basically a universal machine that can produce anything your workbenches can do. You just copy bills with a recipe database and place it near your assembler to show recipes.\nPlease note that it CAN'T return the same item again so mods like Mend and Recycle will not work on assembler, as it destroys products it takes in.\n\nThis assembler has stats set to 10 which means it can ONLY see recipes with a required level of 10 or less in the database. If you upgrade to the next tier it will be smarter and have a higher skill level.\nThis Assembler has a fixed speed and will not get better over time as the next tier will.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCorrectingAssemblers</defName>
-    <label>Intelligent Assemblers</label>
+    <label>Intelligent assemblers</label>
     <description>Learn how to make a new type of assembler that slowly improves its crafting speed over time.</description>
     <techLevel>Spacer</techLevel>
     <baseCost>2250</baseCost>
@@ -119,7 +119,7 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCorrectingAssemblersII</defName>
-    <label>Quantum Intelligent Assemblers</label>
+    <label>Quantum intelligent assemblers</label>
     <description>Learn how to make two new types of adaptive assemblers. One is super fast but produces very poor quality products, the other one is slow but starts at a good quality.</description>
     <techLevel>Ultra</techLevel>
     <baseCost>5000</baseCost>

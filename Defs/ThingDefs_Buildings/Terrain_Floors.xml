@@ -26,7 +26,7 @@
     <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <designatorDropdown>PRF_ConcreteFloorGroup</designatorDropdown>
     <designationCategory>Floors</designationCategory>
-    <description>Rough concrete which is cheap and quick to build.\n\nThis Colored version takes slightly longer to build but is also less ugly.</description>
+    <description>Rough concrete which is cheap and quick to build.\n\nThis colored version takes slightly longer to build but is also less ugly.</description>
     <texturePath>Terrain/Surfaces/Concrete</texturePath>
     <edgeType>Hard</edgeType>
     <renderPrecedence>70</renderPrecedence>
@@ -97,7 +97,7 @@
   <!-- ================= From Floored - Credit to EsseCoisa and Curundir ================= -->
   <TerrainDef ParentName="PRF_FloorBase">
     <defName>PRF_StripedTileRight</defName>
-    <label>striped tile Right</label>
+    <label>striped tile right</label>
     <renderPrecedence>240</renderPrecedence>
     <description>A metal tile painted with yellow stripes to indicate critical areas.</description>
     <texturePath>Misc/CautionTile</texturePath>
@@ -119,7 +119,7 @@
 
   <TerrainDef ParentName="PRF_FloorBase">
     <defName>PRF_StripedTileLeft</defName>
-    <label>striped tile Left</label>
+    <label>striped tile left</label>
     <renderPrecedence>240</renderPrecedence>
     <description>A metal tile painted with yellow stripes to indicate critical areas.</description>
     <texturePath>Misc/CautionTileLeft</texturePath>

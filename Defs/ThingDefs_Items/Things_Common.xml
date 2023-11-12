@@ -4,7 +4,7 @@
   <!-- ================================== Robot arm ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_RoboticArm</defName>
-    <label>Robotic Arm</label>
+    <label>Robotic arm</label>
     <description>An electrically powered robotic arm necessary for the construction of automated buildings. Can be crafted at the robotic machining table.</description>
     <graphicData>
       <texPath>Common/RoboticArm</texPath>
@@ -31,7 +31,7 @@
   <!-- ================================== Weak AI Chip (Tier 2) ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_I</defName>
-    <label>Basic AI Chip</label>
+    <label>Basic AI chip</label>
     <description>A tensor processing unit containing the most rudimentary AI. Used for early machines and robots.</description>
     <graphicData>
       <texPath>Common/WeakAICore</texPath>
@@ -55,7 +55,7 @@
   <!-- ================================== Advanced AI Core (Tier 3) ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_II</defName>
-    <label>Advanced AI Core</label>
+    <label>Advanced AI core</label>
     <description>An advanced processing unit containing hi-tech AI, which is used for advanced machines and robots..</description>
     <graphicData>
       <texPath>Common/AdvancedAICore</texPath>
@@ -103,7 +103,7 @@
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_DroneModule</defName>
     <label>UAV(packed)</label>
-    <description>An unmanned aerial vehicle capable of fulfilling simple tasks. Will need to be installed in a Dronestation in order to get the right programming installed.</description>
+    <description>An unmanned aerial vehicle capable of fulfilling simple tasks. Will need to be installed in a drone station in order to get the right programming installed.</description>
     <graphicData>
       <texPath>Common/DroneModule</texPath>
       <graphicClass>Graphic_Single</graphicClass>

@@ -25,7 +25,7 @@
   <!--========= Automated Agriculture =========-->
   <ResearchProjectDef ParentName="PRF_CultivatorResearch">
     <defName>PRF_AutomaticFarmingI</defName>
-    <label>Automated Agriculture</label>
+    <label>Automated agriculture</label>
     <baseCost>1500</baseCost>
     <description>An agricultural drone is an unmanned aerial vehicle used to help optimize agriculture operations, increase crop production, and monitor crop growth. Sensors and digital imaging capabilities can give farmers a richer picture of their fields.</description>
     <prerequisites>
@@ -37,7 +37,7 @@
   <!--========= Animal Stations I =========-->
   <ResearchProjectDef ParentName="PRF_AnimalStationResearch">
     <defName>PRF_AnimalStations</defName>
-    <label>Animal Stations I</label>
+    <label>Animal stations I</label>
     <baseCost>1200</baseCost>
     <description>The first tier of animal station technology allows animals with harvestable resources to be harvested automatically.</description>
     <prerequisites>
@@ -50,9 +50,9 @@
   <!--========= Improved Automated Agriculture =========-->
   <ResearchProjectDef ParentName="PRF_CultivatorResearch">
     <defName>PRF_AutomaticFarmingII</defName>
-    <label>Improved Automated Agriculture</label>
+    <label>Improved automated agriculture</label>
     <baseCost>2250</baseCost>
-    <description>Additional improvements to automated agriculture now greatly increases crop production and a more careful tending to your farm by improved labor drones.</description>
+    <description>Additional improvements to automated agriculture now greatly increase crop production and a more careful tending to your farm by improved labor drones.</description>
     <prerequisites>
       <li>PRF_AutomaticFarmingI</li>
       <li>PRF_CoreTierII</li>
@@ -63,9 +63,9 @@
   <!--========= Animal Stations II =========-->
   <ResearchProjectDef ParentName="PRF_AnimalStationResearch">
     <defName>PRF_AnimalStationsII</defName>
-    <label>Animal Stations II</label>
+    <label>Animal stations II</label>
     <baseCost>1500</baseCost>
-    <description>The second tier of animal station techonlogy allows for more animal gathering and also automated animal slaugtering and breeding control.</description>
+    <description>The second tier of animal station technology allows for more animal gathering and automated animal slaughtering and breeding control.</description>
     <prerequisites>
       <li>PRF_AnimalStations</li>
       <li>PRF_CoreTierII</li>
@@ -77,10 +77,10 @@
   <!--========= Advanced Automated Agriculture =========-->
   <ResearchProjectDef ParentName="PRF_CultivatorResearch">
     <defName>PRF_AutomaticFarmingIII</defName>
-    <label>Advanced Automated Agriculture</label>
+    <label>Advanced automated agriculture</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3000</baseCost>
-    <description>With advanced use of Mechanites and improved AI control, Cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
+    <description>With advanced use of mechanites and improved AI control, cultivators can now work even without drones or with a buffed drone version. Sprinklers also work faster now.</description>
     <prerequisites>
       <li>PRF_AutomaticFarmingII</li>
       <li>PRF_CoreTierIII</li>
@@ -95,10 +95,10 @@
   <!--========= Animal Stations III =========-->
   <ResearchProjectDef ParentName="PRF_AnimalStationResearch">
     <defName>PRF_AnimalStationsIII</defName>
-    <label>Animal Stations III</label>
+    <label>Animal stations III</label>
     <baseCost>2000</baseCost>
     <techLevel>Spacer</techLevel>
-    <description>The third tier of animal station techonlogy allows for more and better automated animal gathering and control.</description>
+    <description>The third tier of animal station technology allows for more and better automated animal gathering and control.</description>
     <prerequisites>
       <li>PRF_AnimalStationsII</li>
     </prerequisites>

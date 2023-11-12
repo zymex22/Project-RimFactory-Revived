@@ -28,8 +28,8 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
   <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_GettingStarted</defName>
     <tab>PRF_Achievement</tab>
-    <label>Getting Started</label>
-    <description>Get your Factory Research going</description>
+    <label>Getting started</label>
+    <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
       <def>PRF_CoreTierO</def>
@@ -43,12 +43,12 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
   <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierI</defName>
     <tab>PRF_Achievement</tab>
-    <label>Early Automation</label>
-    <description>Get your Factory Research going</description>
+    <label>Early automation</label>
+    <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
       <def>PRF_CoreTierI</def>
-    </tracker> 
+    </tracker>
 
     <texPath>Achievements/OutOfTheDarkAge</texPath>
     <points>10</points>
@@ -58,8 +58,8 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
   <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierII</defName>
     <tab>PRF_Achievement</tab>
-    <label>Getting Advanced</label>
-    <description>Get your Factory Research going</description>
+    <label>Getting advanced</label>
+    <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
       <def>PRF_CoreTierII</def>
@@ -74,7 +74,7 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
     <defName>PRF_A_TierIII</defName>
     <tab>PRF_Achievement</tab>
     <label>Self learning</label>
-    <description>Get your Factory Research going</description>
+    <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
       <def>PRF_CoreTierIII</def>
@@ -89,7 +89,7 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
     <defName>PRF_A_TierIV</defName>
     <tab>PRF_Achievement</tab>
     <label>Now its getting crazy</label>
-    <description>Get your Factory Research going</description>
+    <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
       <def>PRF_CoreTierIV</def>

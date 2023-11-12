@@ -33,7 +33,7 @@
   <SmartHopper_Maximum_UseTooltip>When this is enabled, the smart hopper will stop taking items if either the stack is full, or the stack size exceeds or is equal to X.</SmartHopper_Maximum_UseTooltip>
   <SmartHopper_PickupFromGround>Pickup from ground</SmartHopper_PickupFromGround>
   <PRF_CantCreateStockpile>Can't create Stockpile (No free Cells).</PRF_CantCreateStockpile>
-  
+
   <!--Mod settings-->
   <ProjectRimFactoryModName>Project RimFactory</ProjectRimFactoryModName>
 </LanguageData>

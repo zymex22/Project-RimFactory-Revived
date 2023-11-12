@@ -116,8 +116,8 @@ Mod extennsion for assemblers
   <!-- This machine can import recipes from any bench and afterwards being moved near a assembler for use. -->
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_RecipeDatabase</defName>
-    <label>Portable Recipe Database</label>
-    <description>A portable storage device that can duplicated and transfer bills and recipes from worktables to assemblers. Uploaded bills will be automatically lost if the portable database is either moved or destroyed.\n\nWhite cells are import range for the database.\n\nUploaded recipes and bills will be lost if the database is moved or destroyed.\n\nI wonder what all these other buttons do...</description>
+    <label>Portable recipe database</label>
+    <description>A portable storage device that can duplicate and transfer bills and recipes from worktables to assemblers. Uploaded recipes and bills will be automatically lost if the portable database is either moved or destroyed.\n\nWhite cells are the import range for the database.\n\nI wonder what all these other buttons do...</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <graphicData>
@@ -185,7 +185,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeOneAssembler_I</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
     <label>assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
-    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
+    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cells are the input range, Blue cells are the database range, and Yellow cell is the output.</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>    <!-- Use Dropdown Group -->
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>    <!-- What C# class to call when doing anything with this thing. Unless you know what you're doing, it's suggested to use the same thingClass similar things use. -->
     <graphicData>
@@ -251,7 +251,7 @@ Mod extennsion for assemblers
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_I</defName>
     <label>adaptive assembler</label>
-    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn; to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\nStats\nMin. speed 100% - Max 500%\nMin Qual. Awfull - Max Masterwork\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 5\n\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn and to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cells are the input range, Blue cells are the database range, and Yellow cell is the output.</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -334,8 +334,8 @@ Mod extennsion for assemblers
   <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_II</defName>
-    <label>Quantum Assembler (Prime)</label>
-    <description>This Assembler is an upgraded version that works very slowly, but it starts at normal quality instead of awful and so will ramp up faster. It also has a huge database. input range\nStats\nMin. speed 10% - Max 100%\nMin Qual. Normal - Max Legendary\nSkill lv. for recipes 20\nskill lv. for Art 12\ndb. input range 24\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <label>Quantum assembler (prime)</label>
+    <description>This Assembler is an upgraded version that works very slowly, but it starts at normal quality instead of awful and so will ramp up faster. It also has a huge database input range.\n\nWhite cells are the input range, Blue cells are the database range, and Yellow cell is the output.</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>
@@ -418,8 +418,8 @@ Mod extennsion for assemblers
   <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_III</defName>
-    <label>Quantum Assembler (Overclocked)</label>
-    <description>A high-end assembler that works at a high rate, starts faster, and can ramp up higher than other assemblers. The output isn't very good quality though. The database is huge. input range\nStats\nMin. speed 300% - Max 1000%\nMin Qual. Awfull - Max Normal\nSkill lv. for recipes 10\nskill lv. for Art 1\ndb. input range 24\nSpeedbonus multiplier 100-200%\n\nWhite cell is input range, Blue cell are db range, Yellow cell is output</description>
+    <label>Quantum assembler (overclocked)</label>
+    <description>A high-end assembler that works at a high rate starts faster and can ramp up higher than other assemblers. The output isn't very good quality though. The database is huge.\n\nWhite cells are the input range, Blue cells are the database range, and Yellow cell is the output.</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
     <graphicData>

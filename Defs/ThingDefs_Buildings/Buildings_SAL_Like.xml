@@ -67,7 +67,7 @@
   <!-- auto-assembler Mk-1 -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_AutoCrafterSimple</defName>
-    <label>S.A.L Assembler Mk.I</label>
+    <label>S.A.L assembler Mk.I</label>
     <description>A first-generation S.A.L automatic assembler capable of crafting various bills at a base skill level of 5. This machine can also create pieces of art but is extremely limited in skill.\nTo use this machine, simply place the assembler's arrow facing a workbench's interaction spot.</description>
     <costList>
       <Steel>75</Steel>
@@ -129,7 +129,7 @@
   <!-- auto-assembler Mk-2 -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_AutoCrafter</defName>
-    <label>S.A.L Assembler Mk.II</label>
+    <label>S.A.L assembler Mk.II</label>
     <description>The Mark II auto-assembler is the backbone of Project S.A.L., a small but powerful building capable of autonomously crafting recipes. Although more advanced than the basic model with a crafting skill of 12, any art produced by this device is still very basic.</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <costList>
@@ -189,8 +189,8 @@
   <!-- The Art Machine -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMachine</defName>
-    <label>S.A.L Art Machine Mk.I</label>
-    <description>A specially designed Auto Crafter which uses heuristic algorithms to produce moderately skilled art at a pace no human could ever match - it pumps out art like a firehose pumps out water.</description>
+    <label>S.A.L art machine Mk.I</label>
+    <description>A specially designed auto crafter that uses heuristic algorithms to produce moderately skilled art at a pace no human could ever match - it pumps out art like a firehose pumps out water.</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
       <color>(133,97,67,256)</color>      <!--change color on maske manually -->
@@ -248,8 +248,8 @@
   <!-- The Art Master -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_TheArtMaster</defName>
-    <label>S.A.L Art Machine Mk.II</label>
-    <description>A highly advanced auto-crafter which uses a database of several thousand years of artistic expression to produce master quality art at an absurd pace - a volcanic explosion of art!</description>
+    <label>S.A.L art machine Mk.II</label>
+    <description>A highly advanced auto-crafter that uses a database of several thousand years of artistic expression to produce master quality art at an absurd pace - a volcanic explosion of art!</description>
     <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
     <graphicData>
       <color>(180,60,60,256)</color>      <!--change color on maske manually -->
@@ -307,7 +307,7 @@
   <!-- overclocked auto-assembler -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_OverclockedAutoAssembler</defName>
-    <label>S.A.L Overclocked Assembler</label>
+    <label>S.A.L overclocked assembler</label>
     <description>An auto-assembler which has been modified to emphasize speed over quality. Any random idiot in your colony could do better, but this machine works at a ridiculous rate and never takes breaks.</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
     <graphicData>
@@ -357,8 +357,8 @@
   <!-- overclocked auto-assembler mkII (Tier 3) -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_OverclockedAutoAssemblerII</defName>
-    <label>S.A.L Overclocked Assembler Mk.II</label>
-    <description>An advanced overclocked auto-assembler which puts Henry Ford's production lines to shame. The quality is a joke, but it can do the work of an entire team of morons.\n"So it makes you smarter?" "No, it makes you stupid faster."</description>
+    <label>S.A.L overclocked assembler Mk.II</label>
+    <description>An advanced overclocked auto-assembler that puts Henry Ford's production lines to shame. The quality is a joke, but it can do the work of an entire team of morons.\n"So it makes you smarter?" "No, it makes you stupid faster."</description>
     <constructionSkillPrerequisite>15</constructionSkillPrerequisite>
     <graphicData>
       <color>(15,100,130,256)</color>      <!--change color on maske manually -->
@@ -407,7 +407,7 @@
   <!-- AutoCooker S.A.L -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_SALAutoCooker</defName>
-    <label>S.A.L Automated Cooker</label>
+    <label>S.A.L automated cooker</label>
     <designatorDropdown>PRF_CookingGroup</designatorDropdown>
     <description>Although the auto-assembler performs cooking to a decent level, this specialized auto-cooker is both faster and more accurate in its food production.</description>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
@@ -470,8 +470,8 @@
   <!-- auto-miner S.A.L -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_SALAutoMinerI</defName>
-    <label>S.A.L Automated Miner</label>
-    <description>A modified crafter which is capable of performing high level mining operations, most useful in front of a deep core miner</description>
+    <label>S.A.L automated miner</label>
+    <description>A modified crafter that is capable of performing high-level mining operations, most useful in front of a deep-core miner.</description>
     <constructionSkillPrerequisite>12</constructionSkillPrerequisite>
     <costList>
       <Steel>50</Steel>
@@ -519,8 +519,8 @@
   <!-- Tier 4: Godlike -->
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_GodlyCrafter</defName>
-    <label>S.A.L Prime Crafter</label>
-    <description>A device to make even the Archotechs sit up and blink, the Godly S.A.L. crafter works so quickly it defies all rationality. Perfect for mass-producing high quality items, this device is probably as valuable as the rest of your colony combined. May or may not incinerate the universe\nThis might be first step into insanity?!#..</description>
+    <label>S.A.L prime crafter</label>
+    <description>A device to make even the Archotechs sit up and blink, the Godly S.A.L. crafter works so quickly it defies all rationality. Perfect for mass-producing high-quality items, this device is probably as valuable as the rest of your colony combined. May or may not incinerate the universe.\nThis might be the first step into insanity?!#..</description>
     <constructionSkillPrerequisite>18</constructionSkillPrerequisite>
     <graphicData>
       <color>(153,0,0,256)</color>      <!--change color on maske manually -->

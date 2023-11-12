@@ -39,7 +39,7 @@
   <RecipeDef>
     <defName>PRF_Recycle_Weapon</defName>
     <label>Recycle weapon</label>
-    <description>Recycle Weapons back into raw resources.</description>
+    <description>Recycle weapons back into raw resources.</description>
     <jobString>Smelting weapon.</jobString>
     <workAmount>1600</workAmount>
     <workSpeedStat>SmeltingSpeed</workSpeedStat>
@@ -71,7 +71,7 @@
   <!--  Destroy Stone Chunks  -->
   <RecipeDef>
     <defName>PRF_Destroy_Chunks</defName>
-    <label>Destroy Stone Chunks</label>
+    <label>Destroy stone chunks</label>
     <description>Crush unwanted stone chunks to dust in order to completely destroy them.</description>
     <jobString>Chrushing</jobString>
     <workAmount>600</workAmount>
@@ -99,8 +99,8 @@
   <!--  Destroy Art  -->
   <!-- <RecipeDef>
     <defName>PRF_Destroy_Art</defName>
-    <label>Destroy Art</label>
-    <description>Destroy Art!</description>
+    <label>Destroy art</label>
+    <description>Destroy art!</description>
     <jobString>Breaking art</jobString>
     <workAmount>600</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -130,7 +130,7 @@
   <!--  Destroy ANYTHING -->
   <RecipeDef>
     <defName>PRF_Destroy_Anything</defName>
-    <label>Destroy Anything</label>
+    <label>Destroy anything</label>
     <description>Destroy anything. This will remove any unwanted stuff quickly.\nSet filters before running this bill or your pawns will melt all your expensive stuff.</description>
     <jobString>Pulverizing stuff..</jobString>
     <workAmount>75</workAmount>
