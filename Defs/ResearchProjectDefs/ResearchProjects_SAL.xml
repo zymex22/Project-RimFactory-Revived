@@ -24,7 +24,7 @@
     </requiredResearchFacilities>
     <researchViewX>6</researchViewX>
     <discoveredLetterTitle>About: S.A.L automation robots</discoveredLetterTitle>
-    <discoveredLetterText>With this Research you have unlocked S.A.L automation robots.\nThese are placeable robots that you attach to a workbench where a human would stand, and then they will start doing work on that bench.\n\nThe name "S.A.L." is a tribute to the original SAL mod, from whence Project RimFactory is descended.</discoveredLetterText>
+    <discoveredLetterText>With this Research you have unlocked S.A.L automation robots.\nThese are placeable robots that you attach to a workbench where a human would stand, and then they will start doing work on that bench.\n\nThe name "S.A.L" is a tribute to the original SAL mod, from whence Project RimFactory is descended.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">
@@ -47,7 +47,7 @@
     <label>S.A.L specialization</label>
     <techLevel>Spacer</techLevel>
     <baseCost>2000</baseCost>
-    <description>Further advancements in machine programming will allow you to begin to specialize your S.A.L. machines into performing specific roles more efficiently.</description>
+    <description>Further advancements in machine programming will allow you to begin to specialize your S.A.L machines into performing specific roles more efficiently.</description>
     <prerequisites>
       <li>PRF_SALResearchII</li>
     </prerequisites>
@@ -132,7 +132,7 @@
     <label>S.A.L autonomous overclocking II</label>
     <techLevel>Spacer</techLevel>
     <baseCost>10000</baseCost>
-    <description>Increases to servo speed and internal visualization computers allow this S.A.L. crafter to work even faster than before. Henry Ford would be proud.</description>
+    <description>Increases to servo speed and internal visualization computers allow this S.A.L crafter to work even faster than before. Henry Ford would be proud.</description>
     <prerequisites>
       <li>PRF_SALResearchVI</li>
     </prerequisites>

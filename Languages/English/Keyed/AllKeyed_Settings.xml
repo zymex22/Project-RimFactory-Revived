@@ -54,7 +54,7 @@
   <PRF.Settings.TurnOffMinerNerf.Label>Miners can mine all ore types</PRF.Settings.TurnOffMinerNerf.Label>
   <PRF.Settings.TurnOffMinerNerf.Desc>All tiers of miners can now mine any ore, ignoring any limits defined for them.\n\nCould be unbalanced, since you can dig up an infinite amount of whatever you want so long as it's defined as an ore.</PRF.Settings.TurnOffMinerNerf.Desc>
 
-  <PRF.Settings.TurnOffGrouping.Label>Disable some of the menu grouping/dropdown </PRF.Settings.TurnOffGrouping.Label>
+  <PRF.Settings.TurnOffGrouping.Label>Disable some of the menu grouping/dropdown</PRF.Settings.TurnOffGrouping.Label>
   <PRF.Settings.TurnOffGrouping.Desc>Limited effects right now, but it makes a few of the grouped-up architect menu items unstack into separate entries.</PRF.Settings.TurnOffGrouping.Desc>
 
   <PRF.Settings.TurnOffFurnacefuel.Label>Disable fuel use on T1 furnace</PRF.Settings.TurnOffFurnacefuel.Label>
