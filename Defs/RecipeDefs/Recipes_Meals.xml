@@ -64,8 +64,8 @@
   <RecipeDef ParentName="MakeNutrientPasteBase">
     <defName>MakeNutrientPasteBulk</defName>
     <label>Cook nutrient paste meal x10</label>
-    <description>Make a batch of 10 nutrient-paste meals by extracting nutrients from raw food.</description>
-    <jobString>Cooking nutrient-paste meals in bulk.</jobString>
+    <description>Make a batch of 10 nutrient paste meals by extracting nutrients from raw food.</description>
+    <jobString>Cooking nutrient paste meals in bulk.</jobString>
     <workAmount>2000</workAmount>
     <workSpeedStat>CookSpeed</workSpeedStat>
     <requiredGiverWorkType>Cooking</requiredGiverWorkType>
