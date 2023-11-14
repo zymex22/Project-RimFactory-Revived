@@ -2,7 +2,7 @@
 <Defs>
   <DesignationCategoryDef>
     <defName>Industrial</defName>
-    <label>industrial</label>
+    <label>Industrial</label>
     <description>Industrial rollers structures and machines.</description>
     <specialDesignatorClasses>
       <li>Designator_Cancel</li>

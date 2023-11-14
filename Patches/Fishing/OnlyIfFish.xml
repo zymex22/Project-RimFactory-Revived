@@ -179,7 +179,7 @@
 					<value>
 						<ThingDef ParentName="OrganicProductBase">
 							<defName>PRF_FishFood</defName>
-							<label>fish food</label>
+							<label>Fish food</label>
 							<description>Animal feed made from mixed meat and plant sources, used for feeding fish in tanks. Humanoids should not eat this.</description>
 							<thingCategories>
 								<li>Foods</li>
@@ -215,7 +215,7 @@
 					<value>
 						<RecipeDef>
 							<defName>Make_PRF_FishFood</defName>
-							<label>make fish food</label>
+							<label>Make fish food</label>
 							<description>Make fish food by combining raw meat and plants.</description>
 							<jobString>Making fish food.</jobString>
 							<workAmount>250</workAmount>
@@ -265,7 +265,7 @@
 					<value>
 						<RecipeDef>
 							<defName>PRF_FreshwaterFish</defName>
-							<label>grow freshwater fish</label>
+							<label>Grow freshwater fish</label>
 							<description>Start the process of farming freshwater fish.</description>
 							<jobString>farming fish.</jobString>
 							<effectWorking>Cook</effectWorking>
@@ -294,7 +294,7 @@
 					<value>
 						<RecipeDef>
 							<defName>PRF_OceanwaterFish</defName>
-							<label>grow oceanwater fish</label>
+							<label>Grow oceanwater fish</label>
 							<description>Start the process of farming oceanwater fish.</description>
 							<jobString>farming fish.</jobString>
 							<effectWorking>Cook</effectWorking>

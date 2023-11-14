@@ -3,7 +3,7 @@
 
   <BodyPartDef>
     <defName>PRFPropeller</defName>
-    <label>propeller</label>
+    <label>Propeller</label>
     <hitPoints>30</hitPoints>
     <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>
     <skinCovered>false</skinCovered>
@@ -17,7 +17,7 @@
 
   <BodyPartDef>
     <defName>PRFPropellerBlade</defName>
-    <label>propeller blade</label>
+    <label>Propeller blade</label>
     <hitPoints>20</hitPoints>
     <frostbiteVulnerability>2</frostbiteVulnerability>
     <permanentInjuryChanceFactor>0</permanentInjuryChanceFactor>

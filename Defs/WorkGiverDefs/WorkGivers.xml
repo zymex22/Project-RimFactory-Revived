@@ -3,7 +3,7 @@
 
   <WorkGiverDef>
     <defName>DoBillsRoboticMachiningTable</defName>
-    <label>do bills at robotic machining table</label>
+    <label>Do bills at robotic machining table</label>
     <giverClass>WorkGiver_DoBill</giverClass>
     <workType>Smithing</workType>
     <priorityInType>75</priorityInType>
@@ -17,10 +17,10 @@
     </requiredCapacities>
     <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
-  
+
   <WorkGiverDef>
     <defName>DoBillsPRF_MineShaft</defName>
-    <label>do bills at mine shaft</label>
+    <label>Do bills at mine shaft</label>
     <giverClass>WorkGiver_DoBill</giverClass>
     <workType>Mining</workType>
     <priorityInType>75</priorityInType>
@@ -34,5 +34,5 @@
     </requiredCapacities>
     <prioritizeSustains>true</prioritizeSustains>
   </WorkGiverDef>
-  
+
 </Defs>

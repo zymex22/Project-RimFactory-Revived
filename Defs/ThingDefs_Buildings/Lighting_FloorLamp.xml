@@ -204,7 +204,7 @@
   <!-- ================= danger ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconDanger</defName>
-    <label>danger sign</label>
+    <label>Danger sign</label>
     <graphicData>
       <texPath>Misc/danger</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -214,7 +214,7 @@
   <!-- ================= exit ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconExit</defName>
-    <label>exit sign</label>
+    <label>Exit sign</label>
     <graphicData>
       <texPath>Misc/exit</texPath>
       <graphicClass>Graphic_Single</graphicClass>

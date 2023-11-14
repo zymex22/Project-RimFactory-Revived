@@ -2,7 +2,7 @@
 <Defs>
   <RecipeDef>
     <defName>ButcherCorpseDrone</defName>
-    <label>salvage drone corpse</label>
+    <label>Salvage drone corpse</label>
     <description>Salvage the materials from a broken drone.</description>
     <jobString>Salvaging drone corpse.</jobString>
     <workAmount>300</workAmount>
