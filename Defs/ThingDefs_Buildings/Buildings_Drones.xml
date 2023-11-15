@@ -364,7 +364,7 @@
   <!--=========================== Fire Drone Station ==================================-->
   <!-- <ThingDef ParentName="PRF_DroneStationBase">
     <defName>PRF_FireDroneStation</defName>
-    <label>Fire drone station</label>
+    <label>fire drone station</label>
     <description>A station that holds up to 10 drones that are capable of fighting fires. Consumes considerable power. Typically your colony only needs 1 of these.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneStationSpecialGraphics</thingClass>
     <graphicData>

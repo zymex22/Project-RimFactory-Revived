@@ -5,7 +5,7 @@
 
   <TraderKindDef>
     <defName>PRF_Factory_Supplier</defName>
-    <label>Industrial supply company</label>
+    <label>industrial supply company</label>
     <commonality>2</commonality>
     <orbital>true</orbital>
     <stockGenerators>

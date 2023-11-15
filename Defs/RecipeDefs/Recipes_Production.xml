@@ -3,7 +3,7 @@
 
   <RecipeDef>
     <defName>PRF_MetalFromSlagBulk</defName>
-    <label>Smelt metal from slag in bulk</label>
+    <label>smelt metal from slag in bulk</label>
     <description>Use heat and strong electromagnets to extract useful metal from slag chunks in bulk.</description>
     <jobString>Smelting metal from slag.</jobString>
     <workAmount>1000</workAmount>
@@ -41,7 +41,7 @@
 
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_StoneBlocksAnyBulk</defName>
-    <label>Make any stone blocks in bulk</label>
+    <label>make any stone blocks in bulk</label>
     <description>Cut rock chunks into usable stone blocks in bulk.</description>
     <workerCounterClass>RecipeWorkerCounter_MakeStoneBlocks</workerCounterClass>
     <workAmount>3600</workAmount>
@@ -73,7 +73,7 @@
 
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_SandstoneBlocksBulk</defName>
-    <label>Make sandstone blocks in bulk</label>
+    <label>make sandstone blocks in bulk</label>
     <description>Cut sandstone chunks into usable sandstone blocks in bulk.</description>
     <workAmount>3600</workAmount>
     <ingredients>
@@ -104,7 +104,7 @@
 
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_GraniteBlocksBulk</defName>
-    <label>Make granite blocks in bulk</label>
+    <label>make granite blocks in bulk</label>
     <description>Cut granite chunks into usable granite blocks in bulk.</description>
     <workAmount>3600</workAmount>
     <ingredients>
@@ -135,7 +135,7 @@
 
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_LimestoneBlocksBulk</defName>
-    <label>Make limestone blocks in bulk</label>
+    <label>make limestone blocks in bulk</label>
     <description>Cut limestone chunks into usable limestone blocks in bulk.</description>
     <workAmount>3600</workAmount>
     <ingredients>
@@ -166,7 +166,7 @@
 
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_SlateBlocksBulk</defName>
-    <label>Make slate blocks in bulk</label>
+    <label>make slate blocks in bulk</label>
     <description>Cut slate chunks into usable slate blocks in bulk.</description>
     <workAmount>3600</workAmount>
     <ingredients>
@@ -197,7 +197,7 @@
 
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_MarbleBlocksBulk</defName>
-    <label>Make marble blocks in bulk</label>
+    <label>make marble blocks in bulk</label>
     <description>Cut marble chunks into usable marble blocks in bulk.</description>
     <workAmount>3600</workAmount>
     <ingredients>

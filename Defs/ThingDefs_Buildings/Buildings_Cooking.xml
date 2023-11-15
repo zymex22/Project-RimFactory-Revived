@@ -125,7 +125,7 @@
   <!--==================== T2 modern AutoCooker ====================-->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerII</defName>
-    <label>Modern auto-cooker</label>
+    <label>modern auto-cooker</label>
     <description>An improved assortment of food processing modules that can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go!\n\nCopies Electric stove recipes at 1.5x speed, with a cooking level of 12.</description>
     <graphicData>
       <texPath>SAL3/cooker2</texPath>
@@ -191,7 +191,7 @@
   <!--==================== T3 Spacer Cooker ====================-->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerIII</defName>
-    <label>Spacer cooker</label>
+    <label>spacer cooker</label>
     <description>An advanced assortment of food processing modules that can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! Cooks at 2x speed with a cooking skill of 20.</description>
     <graphicData>
       <texPath>SAL3/SpacerCooker</texPath>
@@ -286,7 +286,7 @@
   <!--====================Meat Grinder====================-->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_MeatGrinder</defName>
-    <label>Meat grinder</label>
+    <label>meat grinder</label>
     <description>A precise grinder which processes corpses into piles of usable materials: meat, leather, etc.</description>
     <graphicData>
       <texPath>SAL3/smart_butcher</texPath>
@@ -358,7 +358,7 @@
   <!--====================Fermenting Barrel====================-->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_FermentingBarrel</defName>
-    <label>Fermenting tank</label>
+    <label>fermenting tank</label>
     <description>A fully automated tank for fermenting alcoholic beverages. It self-regulates temperature to maintain the best quality.</description>
     <graphicData>
       <texPath>SAL3/brewer</texPath>
@@ -418,7 +418,7 @@
   <!--==================== Food Prepper ====================-->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfPrepper</defName>
-    <label>Industrial food processor</label>
+    <label>industrial food processor</label>
     <description>A machine designed to boil, grind, or mill raw food resources into ingredients more suitable for cooking and brewing.</description>
     <graphicData>
       <texPath>SAL3/smart_prepper</texPath>

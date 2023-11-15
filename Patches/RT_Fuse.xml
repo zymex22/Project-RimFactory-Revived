@@ -14,7 +14,7 @@
 
 						<ThingDef>
 							<defName>Building_RTCircuitBreaker_30k</defName>
-							<label>Circuit breaker (30k)</label>
+							<label>circuit breaker (30k)</label>
 							<description>A set of automatic circuit breakers. Handles up to 30000 Wd discharge, will flick off if tripped.</description>
 							<designationCategory>Power</designationCategory>
 
@@ -84,7 +84,7 @@
 
 						<ThingDef>
 							<defName>Building_RTCircuitBreaker_300k</defName>
-							<label>Circuit breaker (300k)</label>
+							<label>circuit breaker (300k)</label>
 							<description>A set of automatic circuit breakers. Handles up to 300000 Wd discharge, will flick off if tripped.</description>
 							<designationCategory>Power</designationCategory>
 

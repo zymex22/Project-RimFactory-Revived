@@ -2,7 +2,7 @@
 <Defs>
   <PawnKindDef>
     <defName>PRFSlavePawn</defName>
-    <label>Slave</label>
+    <label>slave</label>
     <combatPower>30</combatPower>
     <race>Human</race>
     <backstoryFiltersOverride>

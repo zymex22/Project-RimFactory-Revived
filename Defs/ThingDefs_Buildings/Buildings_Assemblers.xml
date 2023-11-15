@@ -184,7 +184,7 @@ Mod extennsion for assemblers
   <!-- This is a fixed type of assembler that always will work at same speed and can import recipes from DB. -->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeOneAssembler_I</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
-    <label>Assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
+    <label>assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
     <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cells are the input range, Blue cells are the database range, and Yellow cell is the output.</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>    <!-- Use Dropdown Group -->
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>    <!-- What C# class to call when doing anything with this thing. Unless you know what you're doing, it's suggested to use the same thingClass similar things use. -->
@@ -250,7 +250,7 @@ Mod extennsion for assemblers
   <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_I</defName>
-    <label>Adaptive assembler</label>
+    <label>adaptive assembler</label>
     <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn and to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\n\nWhite cells are the input range, Blue cells are the database range, and Yellow cell is the output.</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>

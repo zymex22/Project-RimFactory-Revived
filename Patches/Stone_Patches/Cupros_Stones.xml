@@ -28,8 +28,8 @@
 					<value>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Claystone</defName>
-							<label>Mine claystone</label>
-							<description>Mining claystone.</description>
+							<label>mine claystone</label>
+							<description>mining claystone.</description>
 							<jobString>Mining claystone</jobString>
 							<products>
 								<ChunkClaystone>1</ChunkClaystone>
@@ -37,8 +37,8 @@
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Andesite</defName>
-							<label>Mine andesite</label>
-							<description>Mining andesite.</description>
+							<label>mine andesite</label>
+							<description>mining andesite.</description>
 							<jobString>Mining andesite</jobString>
 							<products>
 								<ChunkAndesite>1</ChunkAndesite>
@@ -46,8 +46,8 @@
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Syenite</defName>
-							<label>Mine syenite</label>
-							<description>Mining syenite.</description>
+							<label>mine syenite</label>
+							<description>mining syenite.</description>
 							<jobString>Mining syenite</jobString>
 							<products>
 								<ChunkSyenite>1</ChunkSyenite>
@@ -55,8 +55,8 @@
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Gneiss</defName>
-							<label>Mine gneiss</label>
-							<description>Mining gneiss.</description>
+							<label>mine gneiss</label>
+							<description>mining gneiss.</description>
 							<jobString>Mining gneiss</jobString>
 							<products>
 								<ChunkGneiss>1</ChunkGneiss>
@@ -64,8 +64,8 @@
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Quartzite</defName>
-							<label>Mine quartzite</label>
-							<description>Mining quartzite.</description>
+							<label>mine quartzite</label>
+							<description>mining quartzite.</description>
 							<jobString>Mining quartzite</jobString>
 							<products>
 								<ChunkQuartzite>1</ChunkQuartzite>
@@ -73,8 +73,8 @@
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Schist</defName>
-							<label>Mine schist</label>
-							<description>Mining schist.</description>
+							<label>mine schist</label>
+							<description>mining schist.</description>
 							<jobString>Mining schist</jobString>
 							<products>
 								<ChunkSchist>1</ChunkSchist>
@@ -82,8 +82,8 @@
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Gabbro</defName>
-							<label>Mine gabbro</label>
-							<description>Mining gabbro.</description>
+							<label>mine gabbro</label>
+							<description>mining gabbro.</description>
 							<jobString>Mining gabbro</jobString>
 							<products>
 								<ChunkGabbro>1</ChunkGabbro>
@@ -91,8 +91,8 @@
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Diorite</defName>
-							<label>Mine diorite</label>
-							<description>Mining diorite.</description>
+							<label>mine diorite</label>
+							<description>mining diorite.</description>
 							<jobString>Mining diorite</jobString>
 							<products>
 								<ChunkDiorite>1</ChunkDiorite>
@@ -100,8 +100,8 @@
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Dunite</defName>
-							<label>Mine dunite</label>
-							<description>Mining dunite.</description>
+							<label>mine dunite</label>
+							<description>mining dunite.</description>
 							<jobString>Mining dunite</jobString>
 							<products>
 								<ChunkDunite>1</ChunkDunite>
@@ -109,8 +109,8 @@
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Pegmatite</defName>
-							<label>Mine pegmatite</label>
-							<description>Mining pegmatite.</description>
+							<label>mine pegmatite</label>
+							<description>mining pegmatite.</description>
 							<jobString>Mining pegmatite</jobString>
 							<products>
 								<ChunkPegmatite>1</ChunkPegmatite>

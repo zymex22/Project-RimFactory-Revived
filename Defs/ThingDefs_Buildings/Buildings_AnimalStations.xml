@@ -51,7 +51,7 @@
   <!--===================================== Shearer T1 =====================================-->
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_Shearer</defName>
-    <label>Shearer</label>
+    <label>shearer</label>
     <description>A station with motion-detecting industrial-size shearing clippers. Swiftly and automatically extracts wool from your colony's animals.\n\nKeep it stocked with food to lure the animals in for processing. Drops the produce where the sheared creature is standing.</description>    <!-- use \n for next line -->
     <thingClass>ProjectRimFactory.AnimalStation.Building_Shearer</thingClass>
     <graphicData>
@@ -129,7 +129,7 @@
   <!--===================================== Milker T1 =====================================-->
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_Milker</defName>
-    <label>Milker</label>
+    <label>milker</label>
     <description>A station equipped with servo-motorized tubes, which seek out mammary glands to milk your farm animals.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the milked creature is standing.</description>
     <thingClass>ProjectRimFactory.AnimalStation.Building_Milker</thingClass>
     <graphicData>

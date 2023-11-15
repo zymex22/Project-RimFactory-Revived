@@ -3,7 +3,7 @@
 
   <BodyDef>
     <defName>PRFDrone</defName>
-    <label>Drone</label>
+    <label>drone</label>
     <corePart>
       <def>MechanicalThorax</def>
       <height>Middle</height>
@@ -137,5 +137,5 @@
       </parts>
     </corePart>
   </BodyDef>
-
+  
 </Defs>

@@ -45,26 +45,26 @@
 
   <TerrainDef ParentName="PRF_ConcreteFloorBase">
     <defName>PRF_ConcreteYellow</defName>
-    <label>Concrete yellow</label>
+    <label>concrete yellow</label>
     <color>(155, 120, 27)</color>
     <texturePath>Misc/Concrete</texturePath>
   </TerrainDef>
 
   <TerrainDef ParentName="PRF_ConcreteFloorBase">
     <defName>PRF_ConcreteBlack</defName>
-    <label>Concrete black</label>
+    <label>concrete black</label>
     <color>(42, 42, 42)</color>
   </TerrainDef>
 
   <TerrainDef ParentName="PRF_ConcreteFloorBase">
     <defName>PRF_ConcreteDarkGrey</defName>
-    <label>Concrete dark grey</label>
+    <label>concrete dark grey</label>
     <color>(90, 90, 87)</color>
   </TerrainDef>
 
   <TerrainDef ParentName="PRF_ConcreteFloorBase">
     <defName>PRF_ConcreteWhite</defName>
-    <label>Concrete white</label>
+    <label>concrete white</label>
     <color>(250, 250, 250)</color>
     <texturePath>Misc/Concrete</texturePath>
   </TerrainDef>
@@ -97,7 +97,7 @@
   <!-- ================= From Floored - Credit to EsseCoisa and Curundir ================= -->
   <TerrainDef ParentName="PRF_FloorBase">
     <defName>PRF_StripedTileRight</defName>
-    <label>Striped tile right</label>
+    <label>striped tile right</label>
     <renderPrecedence>240</renderPrecedence>
     <description>A metal tile painted with yellow stripes to indicate critical areas.</description>
     <texturePath>Misc/CautionTile</texturePath>
@@ -119,7 +119,7 @@
 
   <TerrainDef ParentName="PRF_FloorBase">
     <defName>PRF_StripedTileLeft</defName>
-    <label>Striped tile left</label>
+    <label>striped tile left</label>
     <renderPrecedence>240</renderPrecedence>
     <description>A metal tile painted with yellow stripes to indicate critical areas.</description>
     <texturePath>Misc/CautionTileLeft</texturePath>

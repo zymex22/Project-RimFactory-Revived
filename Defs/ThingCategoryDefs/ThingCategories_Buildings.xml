@@ -2,13 +2,13 @@
 <Defs>
   <ThingCategoryDef>
     <defName>BuildingsAutomation</defName>
-    <label>Automation</label>
+    <label>automation</label>
     <parent>Buildings</parent>
   </ThingCategoryDef>
 
   <ThingCategoryDef>
     <defName>CorpsesDrone</defName>
-    <label>Drone corpses</label>
+    <label>drone corpses</label>
     <parent>Corpses</parent>
   </ThingCategoryDef>
 </Defs>

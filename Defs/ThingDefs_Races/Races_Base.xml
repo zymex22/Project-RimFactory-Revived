@@ -46,15 +46,15 @@
       <FilthRate>0</FilthRate>
     </statBases>
     <inspectorTabs>
-      <!--
+      <!-- 
       <li>ITab_Pawn_Health</li>
-      <li>ITab_Pawn_Needs</li>
+      <li>ITab_Pawn_Needs</li> 
       <li>ITab_Pawn_Gear</li>
 	  <li>ITab_Pawn_Character</li>
 	  <li>ITab_Pawn_Training</li>
 	  <li>ITab_Pawn_Guest</li>
 	  <li>ITab_Pawn_Prisoner</li>
-	  <li>ITab_Pawn_Social</li>
+	  <li>ITab_Pawn_Social</li> 
       <li>ITab_Pawn_FormingCaravan</li>
       <li>ITab_Pawn_Log</li>
 	  -->
@@ -92,7 +92,7 @@
 <!-- ================================= Drone =================================== -->
   <ThingDef ParentName="PRFDroneBase">
     <defName>PRFDrone</defName>
-    <label>Drone</label>
+    <label>drone</label>
     <description>A small, low-flying drone.</description>
     <thingClass>ProjectRimFactory.Drones.Pawn_Drone</thingClass>
     <graphicData>
@@ -112,7 +112,7 @@
     </statBases>
     <tools>
       <li>
-        <label>Head</label>
+        <label>head</label>
         <capacities>
           <li>Blunt</li>
         </capacities>
@@ -156,7 +156,7 @@
 <!-- ================================= Drone PawnKindDef =================================== -->
   <PawnKindDef>
     <defName>PRFDroneKind</defName>
-    <label>Drone</label>
+    <label>drone</label>
     <race>PRFDrone</race>
     <combatPower>160</combatPower>
     <defaultFactionType>PlayerColony</defaultFactionType>
