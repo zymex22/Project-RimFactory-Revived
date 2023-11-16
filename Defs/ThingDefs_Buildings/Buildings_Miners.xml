@@ -42,7 +42,7 @@
   <!-- This one functions like a vanilla bench and just uses normal recipes, but mod extension make random outputs -->
   <ThingDef ParentName="BenchBase">
     <defName>PRF_MineShaft</defName>
-    <label>Mine shaft</label>
+    <label>mine shaft</label>
     <description>An early mine shaft entrance, which lets you set a target mine operation where a pawn will go into the mountain and mine out what you desire. It also has a slim chance of finding rare/junk bonus items while operating.\nShould be placed in a mountain wall to operate.</description>
     <thingClass>Building_WorkTable</thingClass>
     <designationCategory>Production</designationCategory>    <!--architect menu location-->
@@ -132,7 +132,7 @@
   <!-- This is old type miner from original prf, it will mine random ores from any minable resource when powered -->
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_DeepQuarry_mkI</defName>
-    <label>Auger drill</label>
+    <label>auger drill</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <description>An early automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 8 hours.\n\nWARNING: Automated mining operations can draw insectoid infestations to your location!</description>
     <graphicData>
@@ -227,7 +227,7 @@
   <!--==================== Quarry T2 ====================-->
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_DeepQuarry_mkII</defName>
-    <label>Pulse drill Mk.I</label>
+    <label>pulse drill Mk.I</label>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 3 hours.\n\nWARNING: Automated mining operations can draw insectoid infestations to your location!</description>
     <graphicData>
@@ -305,7 +305,7 @@
   <!-- This is a drone/cultivator type miner that can mine in a selected area. -->
   <!-- <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_PortableMinerMkI</defName>
-    <label>Portable miner Mk.I</label>
+    <label>portable miner Mk.I</label>
     <designatorDropdown>PRF_MinersGroup</designatorDropdown>
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
@@ -385,7 +385,7 @@
   <!--=========================== Portable Miner MkII ==================================-->
   <!-- <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_PortableMinerMkII</defName>
-    <label>Portable miner Mk.II</label>
+    <label>portable miner Mk.II</label>
     <designatorDropdown>PRF_MinersGroup</designatorDropdown>
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
@@ -473,7 +473,7 @@
   <!--==================== Quarry T3.2  ====================-->
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_DeepQuarry_mkIII</defName>
-    <label>Pulse drill Mk.II</label>
+    <label>pulse drill Mk.II</label>
     <description>The most advanced form of the automated quarry, this device uses advanced techniques to safely mine without drawing the attention of insectoids. It will also only produce valuable minerals, never stone.</description>
     <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
     <graphicData>
@@ -555,7 +555,7 @@
   <!-- it behave more ore less like omnicore drill(mod), and such just this one is automatic (no pawn needed) -->
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_BillTypeMiner_I</defName>
-    <label>Plasma drill</label>
+    <label>plasma drill</label>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
     <description>With highly advanced spacer technology auto mining has been made more precise than ever, and you can now adjust what ores to mine for and even balance power for speed. It will set the primary ore type and receive occasional bonuses in the form of rare ores and junk.</description>
     <tickerType>Never</tickerType>

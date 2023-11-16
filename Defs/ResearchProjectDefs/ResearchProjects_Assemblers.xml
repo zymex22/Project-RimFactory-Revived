@@ -13,7 +13,7 @@
   <!--========================================== Cooking Stuff =========================================-->
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCooking</defName>
-    <label>Self-cooking</label>
+    <label>self-cooking</label>
     <baseCost>1250</baseCost>
     <prerequisites>
       <li>PRF_CoreTierI</li>
@@ -24,7 +24,7 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCookingII</defName>
-    <label>Improved self-cooking</label>
+    <label>improved self-cooking</label>
     <baseCost>1500</baseCost>
     <prerequisites>
       <li>PRF_SelfCooking</li>
@@ -37,7 +37,7 @@
   <!--========================================== Metal Refinery =========================================-->
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_MetalRefining</defName>
-    <label>Metal refining</label>
+    <label>metal refining</label>
     <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
     <description>A metal refinery able to produce rare metals through polymer lamination by combining chemfuel with steel to create plasteel.</description>
@@ -58,7 +58,7 @@
   <!--========================================== ADV. ASSEMBLERS =========================================-->
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_MachineLearning</defName>
-    <label>Complex machine applications</label>
+    <label>complex machine applications</label>
     <baseCost>2000</baseCost>
     <description>Teach machines how to improve their abilities by themselves. This is required for smart assemblers which can learn any recipe.</description>
     <prerequisites>
@@ -73,7 +73,7 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_MagneticTape</defName>
-    <label>Magnetic tape</label>
+    <label>magnetic tape</label>
     <baseCost>1000</baseCost>
     <prerequisites>
       <li>PRF_CoreTierII</li>
@@ -86,7 +86,7 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_UniversalAutocrafting</defName>
-    <label>Universal auto-crafting</label>
+    <label>universal auto-crafting</label>
     <description>Make buildings that can craft recipes given to them via a recipe database. Like your dedicated crafters, but they don't sleep or die of flake overdose.</description>
     <baseCost>3000</baseCost>
     <requiredResearchFacilities>
@@ -102,7 +102,7 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCorrectingAssemblers</defName>
-    <label>Intelligent assemblers</label>
+    <label>intelligent assemblers</label>
     <description>Learn how to make a new type of assembler that slowly improves its crafting speed over time.</description>
     <techLevel>Spacer</techLevel>
     <baseCost>2250</baseCost>
@@ -119,7 +119,7 @@
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">
     <defName>PRF_SelfCorrectingAssemblersII</defName>
-    <label>Quantum intelligent assemblers</label>
+    <label>quantum intelligent assemblers</label>
     <description>Learn how to make two new types of adaptive assemblers. One is super fast but produces very poor quality products, the other one is slow but starts at a good quality.</description>
     <techLevel>Ultra</techLevel>
     <baseCost>5000</baseCost>

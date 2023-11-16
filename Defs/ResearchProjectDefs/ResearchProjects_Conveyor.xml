@@ -10,7 +10,7 @@
 
   <ResearchProjectDef ParentName="PRF_BeltsResearch">
     <defName>PRF_BeltsI</defName>
-    <label>Basic conveyor networks</label>
+    <label>basic conveyor networks</label>
     <baseCost>300</baseCost>
     <description>The continual movement of raw resources and final products within a factory is tedious but crucial. Understanding the fundamentals of conveyor networks is very important to fulfill manufacturing needs and determine production rates.</description>
     <prerequisites>
@@ -21,7 +21,7 @@
 
   <ResearchProjectDef ParentName="PRF_BeltsResearch">
     <defName>PRF_BeltsII</defName>
-    <label>Basic sorting systems</label>
+    <label>basic sorting systems</label>
     <baseCost>400</baseCost>
     <description>Directing things to the proper area of the factory will streamline and diversify the factory layout.\nUnlocks: Simple puller, growzone puller and belt splitter for normal belts.</description>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
@@ -33,7 +33,7 @@
 
   <ResearchProjectDef ParentName="PRF_BeltsResearch">
     <defName>PRF_BeltsIII</defName>
-    <label>Advanced sorting systems</label>
+    <label>advanced sorting systems</label>
     <techLevel>Industrial</techLevel>
     <baseCost>500</baseCost>
     <description>Sophisticated logistical implementation allows for advanced item sorting.\nUnlocks: Wall and underground belts, splitters, smart hoppers, as well as Mk.II, angle, and wall pullers.</description>

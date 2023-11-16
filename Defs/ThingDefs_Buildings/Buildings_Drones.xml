@@ -126,7 +126,7 @@
   <!--=========================== Mini Workshop helper ==================================-->
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_MiniHelper</defName>
-    <label>Workshop drone station</label>
+    <label>workshop drone station</label>
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
     </graphicData>
@@ -212,7 +212,7 @@
   <!--=========================== Drone Column (for thronerooms) ==================================-->
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_MiniDroneColumn</defName>
-    <label>Drone column</label>
+    <label>drone column</label>
     <description>A column filled with 2 handy drones that can clean your throneroom or eating hall, put out fires, refuel your braziers, and move your stuff away from the floor. It's also capable of holding up a roof and looks quite nice.</description>
     <graphicData>
       <drawSize>(1.5,1.5)</drawSize>

@@ -4,7 +4,7 @@
   <!--================ Beer 6-pack =====================-->
   <RecipeDef>
     <defName>BrewBeer_sixpack</defName>
-    <label>Brew beer x10</label>
+    <label>brew beer x10</label>
     <description>Brew beer in a batch lot of 10 units at once.</description>
     <jobString>Brewing Beer</jobString>
     <effectWorking>Cook</effectWorking>
@@ -35,7 +35,7 @@
   <!--================ Brew beer x24 (case) =====================-->
   <RecipeDef>
     <defName>BrewBeer_case</defName>
-    <label>Brew beer x25</label>
+    <label>brew beer x25</label>
     <description>Brew beer in a batch lot of 25 units at once.</description>
     <jobString>Brewing Beer</jobString>
     <effectWorking>Cook</effectWorking>
@@ -67,7 +67,7 @@
   <!--================ Brew beer x80 (pony keg) =====================-->
   <RecipeDef>
     <defName>BrewBeer_keg</defName>
-    <label>Brew beer x50</label>
+    <label>brew beer x50</label>
     <description>Brew beer in a batch lot of 50 units at once.</description>
     <jobString>Brewing Beer</jobString>
     <effectWorking>Cook</effectWorking>

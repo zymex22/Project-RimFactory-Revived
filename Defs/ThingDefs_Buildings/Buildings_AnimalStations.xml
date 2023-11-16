@@ -208,7 +208,7 @@
   <!--===================================== Generic Harvester T2 =====================================-->
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_GenericAnimalHarvester</defName>
-    <label>Generic animal harvester</label>
+    <label>generic animal harvester</label>
     <description>A sophisticated facility boasting a variety of tools to gently extract any kind of animal products, even from the more exotic species.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the animal is standing.</description>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
@@ -279,7 +279,7 @@
   <!--===================================== Spacer Harvester T3 =====================================-->
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_GenericAnimalHarvester_II</defName>
-    <label>Spacer animal harvester</label>
+    <label>spacer animal harvester</label>
     <description>This is an advanced animal harvester that can harvest a wide range of products from animals, it has a front-facing pull zone that can be made larger with a power booster. If RimFridge is installed it will cool food to keep it from spoiling over time.</description>
     <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
     <graphicData>
@@ -364,7 +364,7 @@
   <ThingDef ParentName="PRF_AnimalBase">
     <defName>PRF_Slaughterhouse</defName>
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
-    <label>Advanced slaughterhouse</label>
+    <label>advanced slaughterhouse</label>
     <description>A state-of-the-art robotic slaughterhouse designed to harvest meat and other animal products from living animals. It will cut and collect with great precision and will deliver the final product after finishing its task.</description>
     <designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
     <altitudeLayer>Building</altitudeLayer>

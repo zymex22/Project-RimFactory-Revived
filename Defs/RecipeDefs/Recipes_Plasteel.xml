@@ -4,7 +4,7 @@
   <!-- Plasteel refining 20pcs -->
   <RecipeDef>
     <defName>PRF_RefinePlasteel</defName>
-    <label>Refine plasteel</label>
+    <label>refine plasteel</label>
     <description>Refine plasteel from chemfuel and steel.</description>
     <jobString>Refining plasteel</jobString>
     <researchPrerequisite>PRF_MetalRefining</researchPrerequisite>

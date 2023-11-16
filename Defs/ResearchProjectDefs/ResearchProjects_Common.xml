@@ -12,7 +12,7 @@
   <!-- ==================== Main Tier 0 - Clockwork Principle ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierO</defName>
-    <label>Clockwork principle</label>
+    <label>clockwork principle</label>
     <techLevel>Medieval</techLevel>
     <baseCost>400</baseCost>
     <description>Early industrialization, teaches you how to set up a more advanced way of gathering resources and process them into more useful things. Trash, raw materials, or scrap metal goes in one side and useful products come out the other.\nThese very early devices are made with cogs and chutes and are powered by wood and coal.</description>
@@ -46,7 +46,7 @@
   <!-- ==================== Main Tier 2 - Machine Learning ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierII</defName>
-    <label>Machine learning</label>
+    <label>machine learning</label>
     <baseCost>2000</baseCost>
     <description>A machine that can predict outcomes will solve many of the design flaws we have been facing. Imagine a machine that could improve itself...\nWe will need a factory research terminal linked to our hi-tech research bench to go further.</description>
     <prerequisites>
@@ -67,7 +67,7 @@
   <!-- ==================== Main Tier 3 - Binary System ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierIII</defName>
-    <label>Binary system</label>
+    <label>binary system</label>
     <techLevel>Spacer</techLevel>
     <baseCost>3500</baseCost>
     <description>Anything can be described as a series of 1s and 0s as long as there enough 1s and 0s.</description>
@@ -89,7 +89,7 @@
   <!-- ==================== Main Tier 4 - Quantum Bit technology ============================= -->
   <ResearchProjectDef ParentName="PRF_CommonResearch">
     <defName>PRF_CoreTierIV</defName>
-    <label>Quantum bit technology</label>
+    <label>quantum bit technology</label>
     <techLevel>Ultra</techLevel>
     <baseCost>5000</baseCost>
     <description>Leveraging the quantum nature of reality itself to solve exponentially more demanding computational problems.</description>

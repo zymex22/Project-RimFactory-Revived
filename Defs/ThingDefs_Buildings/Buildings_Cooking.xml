@@ -56,7 +56,7 @@
   <!-- This is using Simple Assembler thingclass, thats more or less a normal assembler just with preset recipes -->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerI</defName>
-    <label>Industrial cooker</label>
+    <label>industrial cooker</label>
     <description>An industrial-grade cooker capable of steadily cooking meals for your colonists. Requires electricity and raw ingredients to operate.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go!\n\nOnly cooks simple foods but with a cooking level of 8 at 1x speed.\n\nWhite cells are the input range.\nYellow is the output cell.</description>
     <uiIconScale>0.7</uiIconScale>
     <graphicData>

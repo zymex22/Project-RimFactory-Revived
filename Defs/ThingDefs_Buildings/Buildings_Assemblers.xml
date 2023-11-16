@@ -116,7 +116,7 @@ Mod extennsion for assemblers
   <!-- This machine can import recipes from any bench and afterwards being moved near a assembler for use. -->
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_RecipeDatabase</defName>
-    <label>Portable recipe database</label>
+    <label>portable recipe database</label>
     <description>A portable storage device that can duplicate and transfer bills and recipes from worktables to assemblers. Uploaded recipes and bills will be automatically lost if the portable database is either moved or destroyed.\n\nWhite cells are the import range for the database.\n\nI wonder what all these other buttons do...</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
@@ -334,7 +334,7 @@ Mod extennsion for assemblers
   <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_II</defName>
-    <label>Quantum assembler (prime)</label>
+    <label>quantum assembler (prime)</label>
     <description>This Assembler is an upgraded version that works very slowly, but it starts at normal quality instead of awful and so will ramp up faster. It also has a huge database input range.\n\nWhite cells are the input range, Blue cells are the database range, and Yellow cell is the output.</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
@@ -418,7 +418,7 @@ Mod extennsion for assemblers
   <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
   <ThingDef ParentName="PRF_AssemblerBase">
     <defName>PRF_TypeTwoAssembler_III</defName>
-    <label>Quantum assembler (overclocked)</label>
+    <label>quantum assembler (overclocked)</label>
     <description>A high-end assembler that works at a high rate starts faster and can ramp up higher than other assemblers. The output isn't very good quality though. The database is huge.\n\nWhite cells are the input range, Blue cells are the database range, and Yellow cell is the output.</description>
     <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>

@@ -10,7 +10,7 @@
   <!-- Basic drone technology -->
   <ResearchProjectDef ParentName="PRF_DroneResearch">
     <defName>PRF_BasicDrones</defName>
-    <label>Basic drone knowledge</label>
+    <label>basic drone knowledge</label>
     <baseCost>600</baseCost>
     <description>The first pilotless vehicles were built during the First World War. These early models were launched by catapult or flown using radio control. Much has changed since then and drones are now used for more common tasks.\nThis sets the base stats of drones to lv. 10.</description>
     <prerequisites>
@@ -25,7 +25,7 @@
   <!-- Improved drone technology -->
   <ResearchProjectDef ParentName="PRF_DroneResearch">
     <defName>PRF_ImprovedDrones</defName>
-    <label>Improved drone engines</label>
+    <label>improved drone engines</label>
     <baseCost>2000</baseCost>
     <description>Further improvements for drones have now enabled the use of more drones and with greater control over tasks they can perform.\nThis sets the base stats of drones to lv. 15.</description>
     <prerequisites>
@@ -42,7 +42,7 @@
   <!-- Advanced drone technology -->
   <ResearchProjectDef ParentName="PRF_DroneResearch">
     <defName>PRF_AdvancedDrones</defName>
-    <label>Advanced drone AI</label>
+    <label>advanced drone AI</label>
     <techLevel>Spacer</techLevel>
     <baseCost>6000</baseCost>
     <description>Perfectly aerodynamics higher power engines and AI have created a perfectly balanced super drone that will perform tasks better than most pawns ever will.\nThis sets the base stats of your drones to lv. 20.</description>

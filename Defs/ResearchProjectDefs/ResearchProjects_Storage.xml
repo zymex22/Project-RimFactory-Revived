@@ -9,7 +9,7 @@
   <!--============================================== Crates ============================================-->
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_Crates</defName>
-    <label>Wooden stockpile crates</label>
+    <label>wooden stockpile crates</label>
     <techLevel>Industrial</techLevel>
     <baseCost>750</baseCost>
     <researchViewX>3</researchViewX>
@@ -21,7 +21,7 @@
 
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_SteelCrates</defName>
-    <label>Steel stockpile crates</label>
+    <label>steel stockpile crates</label>
     <techLevel>Industrial</techLevel>
     <baseCost>1500</baseCost>
     <researchViewX>6</researchViewX>
@@ -35,7 +35,7 @@
   <!--============================================== IO Storage ============================================-->
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_StorageIO</defName>
-    <label>Thornsworth holographic storage</label>
+    <label>Thornsworth's holographic storage</label>
     <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
     <researchViewX>9</researchViewX>
@@ -53,7 +53,7 @@
 
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_StorageIO_II</defName>
-    <label>Improved wireless storage</label>
+    <label>improved wireless storage</label>
     <techLevel>Spacer</techLevel>
     <baseCost>1000</baseCost>
     <researchViewX>9.5</researchViewX>

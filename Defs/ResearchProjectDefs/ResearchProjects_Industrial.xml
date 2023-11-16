@@ -10,7 +10,7 @@
   <!-- Tier 1 -->
   <ResearchProjectDef ParentName="PRF_MiningResearch">
     <defName>PRF_AutonomousMining</defName>
-    <label>Automatic quarries</label>
+    <label>automatic quarries</label>
     <baseCost>1000</baseCost>
     <prerequisites>
       <li>PRF_CoreTierI</li>
@@ -24,7 +24,7 @@
   <!-- Tier 2 -->
   <ResearchProjectDef ParentName="PRF_MiningResearch">
     <defName>PRF_AutonomousMiningII</defName>
-    <label>Improved automatic quarries</label>
+    <label>improved automatic quarries</label>
     <baseCost>3000</baseCost>
     <prerequisites>
       <li>DeepDrilling</li>
@@ -42,7 +42,7 @@
   <!-- Tier 3 -->
   <ResearchProjectDef ParentName="PRF_MiningResearch">
     <defName>PRF_AutonomousMiningIII</defName>
-    <label>Deep core quarries</label>
+    <label>deep core quarries</label>
     <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
     <prerequisites>

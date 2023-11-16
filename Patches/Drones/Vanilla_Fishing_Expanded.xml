@@ -15,7 +15,7 @@
 					<value>
 						<ThingDef ParentName="PRF_MiniDroneStation">
 							<defName>PRF_MiniHelperFishing</defName>
-							<label>Mini fishing station</label>
+							<label>mini fishing station</label>
 							<graphicData>
 								<texPath>Drones/MiniDroneStation</texPath>
 							</graphicData>

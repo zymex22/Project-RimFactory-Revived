@@ -13,7 +13,7 @@
           <value>
             <RecipeDef>
               <defName>Brew_VBE_AmbrandyNormal</defName>
-              <label>Brew ambrandy x10</label>
+              <label>brew ambrandy x10</label>
               <description>Brew ambrandy x10.</description>
               <jobString>Brewing ambrandy</jobString>
               <effectWorking>Cook</effectWorking>
@@ -43,7 +43,7 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Gin</defName>
-              <label>Brew gin x10</label>
+              <label>brew gin x10</label>
               <description>Brew gin x10.</description>
               <jobString>Brewing gin</jobString>
               <effectWorking>Cook</effectWorking>
@@ -73,7 +73,7 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Tequila</defName>
-              <label>Brew tequila x10</label>
+              <label>brew tequila x10</label>
               <description>Brew tequila x10.</description>
               <jobString>Brewing tequila</jobString>
               <effectWorking>Cook</effectWorking>
@@ -103,7 +103,7 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Vodka</defName>
-              <label>Brew vodka x10</label>
+              <label>brew vodka x10</label>
               <description>Brew vodka x10.</description>
               <jobString>Brewing vodka</jobString>
               <effectWorking>Cook</effectWorking>
@@ -133,7 +133,7 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Whiskey</defName>
-              <label>Brew whiskey x10</label>
+              <label>brew whiskey x10</label>
               <description>Brew whiskey x10.</description>
               <jobString>Brewing whiskey</jobString>
               <effectWorking>Cook</effectWorking>
@@ -163,7 +163,7 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Soda</defName>
-              <label>Brew soda x10</label>
+              <label>brew soda x10</label>
               <description>Brew soda x10.</description>
               <jobString>Brewing soda</jobString>
               <effectWorking>Cook</effectWorking>
@@ -212,7 +212,7 @@
             <value>
               <RecipeDef>
                 <defName>Brew_VBE_Cider</defName>
-                <label>Brew cider x10</label>
+                <label>brew cider x10</label>
                 <description>Brew cider x10.</description>
                 <jobString>Brewing cider</jobString>
                 <effectWorking>Cook</effectWorking>
@@ -259,7 +259,7 @@
           <value>
             <RecipeDef>
               <defName>Brew_VFEM_Wine</defName>
-              <label>Brew wine x10</label>
+              <label>brew wine x10</label>
               <description>Brew wine x10.</description>
               <jobString>Brewing wine</jobString>
               <effectWorking>Cook</effectWorking>
@@ -305,7 +305,7 @@
           <value>
             <RecipeDef>
               <defName>Brew_VFEV_Mead</defName>
-              <label>Brew mead x10</label>
+              <label>brew mead x10</label>
               <description>Brew mead x10.</description>
               <jobString>Brewing mead</jobString>
               <effectWorking>Cook</effectWorking>

@@ -28,7 +28,7 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
   <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_GettingStarted</defName>
     <tab>PRF_Achievement</tab>
-    <label>Getting started</label>
+    <label>Getting Started</label>
     <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
@@ -43,7 +43,7 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
   <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierI</defName>
     <tab>PRF_Achievement</tab>
-    <label>Early automation</label>
+    <label>Early Automation</label>
     <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
@@ -58,7 +58,7 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
   <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierII</defName>
     <tab>PRF_Achievement</tab>
-    <label>Getting advanced</label>
+    <label>Getting Advanced</label>
     <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
@@ -73,7 +73,7 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
   <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierIII</defName>
     <tab>PRF_Achievement</tab>
-    <label>Self learning</label>
+    <label>Self Learning</label>
     <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">
@@ -88,7 +88,7 @@ https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trac
   <!--<AchievementsExpanded.AchievementDef>
     <defName>PRF_A_TierIV</defName>
     <tab>PRF_Achievement</tab>
-    <label>Now its getting crazy</label>
+    <label>Now Its Getting Crazy</label>
     <description>Get your factory research going.</description>
 
     <tracker Class="AchievementsExpanded.ResearchTracker">

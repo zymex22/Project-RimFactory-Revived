@@ -33,7 +33,7 @@
   <!--======================================= NR Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_WallLight</defName>
-    <label>Wall lamp</label>
+    <label>wall lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
     <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls.\nGood for small rooms or other tightly packed spaces.\nYou may change the color if you've researched colored lights.</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
@@ -122,7 +122,7 @@
   <!--======================================= NR Sun Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_SunWallLight</defName>
-    <label>Sun wall lamp</label>
+    <label>sun wall lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
     <description>An industrial wall lamp which lights an area brightly enough to grow crops, but consumes a huge amount of power. Automatically turns itself off at night.</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
@@ -198,7 +198,7 @@
   <!-- ======================================= Industrial Lamp (comp by LWM) =============================================== -->
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_IndustrialLamp</defName>
-    <label>Industrial lamp</label>
+    <label>industrial lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
     <description>A powerful electric lamp that lights a wide area.\nThis lamp lights up a huge area both indoors and outdoors to light up your factory hall.\nYou may change the color if you've researched colored lights.</description>
     <fillPercent>0.50</fillPercent>
@@ -278,7 +278,7 @@
   <!-- ======================================= Floor spotlight =============================================== -->
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_Floorspotlight</defName>
-    <label>Floor spotlight</label>
+    <label>floor spotlight</label>
     <description>An electrical lamp that lights an area.\nThis lamp works both inside and outside.\nComes in colored variants if you've researched colored lights.</description>
     <altitudeLayer>Floor</altitudeLayer>
     <passability>Standable</passability>
