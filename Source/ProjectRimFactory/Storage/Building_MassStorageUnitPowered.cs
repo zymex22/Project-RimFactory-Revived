@@ -18,6 +18,8 @@ namespace ProjectRimFactory.Storage
 
         public override bool Powered => compPowerTrader?.PowerOn ?? false;
 
+        public override int MaxNumberItemsInternal => (ModExtension_Crate?.limit ?? int.MaxValue);
+
         public override bool CanStoreMoreItems => (Powered) && this.Spawned &&
             (ModExtension_Crate == null || StoredItemsCount < MaxNumberItemsInternal);
         public override bool CanReceiveIO => base.CanReceiveIO && Powered && this.Spawned;
