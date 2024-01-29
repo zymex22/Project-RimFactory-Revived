@@ -36,7 +36,7 @@ namespace ProjectRimFactory.Storage
         public abstract bool CanStoreMoreItems { get; }
         // The maximum number of item stacks at this.Position:
         //   One item on each cell and the rest multi-stacked on Position?
-        public int MaxNumberItemsInternal => (ModExtension_Crate?.limit ?? int.MaxValue)
+        public virtual int MaxNumberItemsInternal => (ModExtension_Crate?.limit ?? int.MaxValue)
                                               - def.Size.Area + 1;
         public List<Thing> StoredItems => items;
         public int StoredItemsCount => items.Count;
