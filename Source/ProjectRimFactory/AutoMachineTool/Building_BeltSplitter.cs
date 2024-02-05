@@ -307,13 +307,35 @@ namespace ProjectRimFactory.AutoMachineTool
                 incomingLinks.Add(link);
                 if (PositionToRot4(link, out Rot4 r))
                 {
-                    if (outputLinks.TryGetValue(r, out OutputLink output))
+                    if (outputLinks.TryGetValue(r, out OutputLink output) && IsInputtingIntoThis(link, r))
                     {
                         output.Active = false;
                     }
                 }
             }
         }
+
+
+        /// <summary>
+        /// Helper Function use to Check if a IBeltConveyorLinkable is acting as an Input for this building
+        /// </summary>
+        /// <param name="link">IBeltConveyorLinkable</param>
+        /// <param name="r">Direction of the IBeltConveyorLinkable</param>
+        /// <returns>True if link acts as an Input</returns>
+        public bool IsInputtingIntoThis(IBeltConveyorLinkable link, Rot4 r)
+        {
+            if (link is Building_BeltSplitter building_Belt)
+            {
+                building_Belt.outputLinks.TryGetValue(r.Opposite, out OutputLink output);
+                return output is not null && output.Active;
+            }
+            else
+            {
+                return link.Rotation.Opposite == r;
+            }
+        }
+
+
         // Utility fn for linking to belt link
         private bool PositionToRot4(IBeltConveyorLinkable link, out Rot4 r)
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
@@ -154,25 +155,13 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
 
                 bool selref = selectedDir == dir;
-
                 bool isInput = false;
+                
                 foreach (IBeltConveyorLinkable linkable in Splitter.IncomingLinks.Where(l => l.Position == (Splitter.Position + dir.FacingCell)))
                 {
-                    if ((linkable as Building_BeltConveyor) != null || (linkable as Building_BeltConveyorUGConnector) != null)
-                    {
-                        if (OppositeRot(linkable.Rotation) == dir)
-                        {
-                            isInput = true;
-                            break;
-                        }
-                    }
-                    else if ((linkable as Building_BeltSplitter) != null)
-                    {
-                        //Seperate Logic for splitters 
-                        if ((linkable as Building_BeltSplitter).OutputLinks.Keys.Contains(OppositeRot(dir)) && (linkable as Building_BeltSplitter).OutputLinks[OppositeRot(dir)].Active) isInput = true;
 
-                    }
-
+                    isInput = Splitter.IsInputtingIntoThis(linkable, dir);
+                    if (isInput) break;
                 }
 
 
