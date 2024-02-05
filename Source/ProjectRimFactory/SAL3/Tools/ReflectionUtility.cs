@@ -32,5 +32,7 @@ namespace ProjectRimFactory.SAL3
 
         //basePowerConsumption
         public static readonly FieldInfo CompProperties_Power_basePowerConsumption = typeof(CompProperties_Power).GetField("basePowerConsumption", BindingFlags.Instance | BindingFlags.NonPublic);
+        
+        public static readonly FieldInfo StockGenerator_SingleDef_thingDef = typeof(StockGenerator_SingleDef).GetField("thingDef", BindingFlags.Instance | BindingFlags.NonPublic);
     }
 }
