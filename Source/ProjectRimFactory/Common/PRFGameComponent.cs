@@ -153,7 +153,7 @@ namespace ProjectRimFactory
 #endif
             UpdateThingDescriptions.Update();
             if (ProjectRimFactory_ModSettings.PRF_LiteMode) PRF_CustomizeDefs.ToggleLiteMode();
-
+            TraderMinifyCheck();
 
         }
 
@@ -164,7 +164,7 @@ namespace ProjectRimFactory
             base.StartedNewGame();
             UpdateThingDescriptions.Update();
             if (ProjectRimFactory_ModSettings.PRF_LiteMode) PRF_CustomizeDefs.ToggleLiteMode();
-
+            TraderMinifyCheck();
         }
 
         /*
@@ -178,8 +178,22 @@ Log.Warning("---------added test special scuplture: " + t + " at " + t.Position)
 }*/
 
 
+        /// <summary>
+        /// Removes ThingDef's that can't be minified from the PRF_Factory_Supplier
+        /// </summary>
+        private void TraderMinifyCheck()
+        {
+            var stockGenerators = PRFDefOf.PRF_Factory_Supplier.stockGenerators;
 
-
+            for (int i = stockGenerators.Count - 1; i >= 0; i--)
+            {
+                if (stockGenerators[i] is StockGenerator_SingleDef stockDev)
+                {
+                    ThingDef thingDef = (ThingDef)SAL3.ReflectionUtility.StockGenerator_SingleDef_thingDef.GetValue(stockDev);
+                    if (!thingDef.mineable) stockGenerators.RemoveAt(i);
+                }
+            }
+        }
 
 
 

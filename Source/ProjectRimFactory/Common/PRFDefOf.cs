@@ -57,5 +57,7 @@ namespace ProjectRimFactory.Common
         public static ResearchProjectDef PRF_AdvancedDrones; //For Level 20
 
 
+        public static TraderKindDef PRF_Factory_Supplier;
+
     }
 }
