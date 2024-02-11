@@ -121,7 +121,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            salTarget.Free();
+            salTarget?.Free();
             base.DeSpawn();
             salTarget = null;
         }
@@ -134,7 +134,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override void Reset()
         {
-            salTarget.Reset(this.State);
+            salTarget?.Reset(this.State);
 
             base.Reset();
         }
