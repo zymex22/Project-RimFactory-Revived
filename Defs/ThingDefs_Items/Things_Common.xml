@@ -56,7 +56,7 @@
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_II</defName>
     <label>advanced AI core</label>
-    <description>An advanced processing unit containing hi-tech AI, which is used for advanced machines and robots..</description>
+    <description>An advanced processing unit containing hi-tech AI, which is used for advanced machines and robots.</description>
     <graphicData>
       <texPath>Common/AdvancedAICore</texPath>
       <graphicClass>Graphic_Single</graphicClass>

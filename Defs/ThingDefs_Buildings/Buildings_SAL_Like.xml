@@ -520,7 +520,7 @@
   <ThingDef ParentName="PRF_SAL_Base">
     <defName>PRF_GodlyCrafter</defName>
     <label>S.A.L prime crafter</label>
-    <description>A device to make even the Archotechs sit up and blink, the Godly S.A.L crafter works so quickly it defies all rationality. Perfect for mass-producing high-quality items, this device is probably as valuable as the rest of your colony combined. May or may not incinerate the universe.\nThis might be the first step into insanity?!#..</description>
+    <description>A device to make even the Archotechs sit up and blink, the Godly S.A.L crafter works so quickly it defies all rationality. Perfect for mass-producing high-quality items, this device is probably as valuable as the rest of your colony combined. May or may not incinerate the universe.\nThis might be the first step into insanity?!#...</description>
     <constructionSkillPrerequisite>18</constructionSkillPrerequisite>
     <graphicData>
       <color>(153,0,0,256)</color>      <!--change color on maske manually -->

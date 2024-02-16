@@ -114,7 +114,7 @@
     <label>S.A.L autonomous overclocking I</label>
     <techLevel>Spacer</techLevel>
     <baseCost>5000</baseCost>
-    <description>General S.A.L machines often work too slowly and can result in slow production. Upgrading them with the ability to overclock their operating systems, will result in faster production speeds at the cost of some item quality.</description>
+    <description>General S.A.L machines often work too slowly and can result in slow production. Upgrading them with the ability to overclock their operating systems will result in faster production speeds at the cost of some item quality.</description>
     <prerequisites>
       <li>PRF_SALResearchIV</li>
       <li>PRF_SALResearchVII</li>
