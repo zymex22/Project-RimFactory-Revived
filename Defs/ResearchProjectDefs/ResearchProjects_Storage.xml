@@ -35,7 +35,7 @@
   <!--============================================== IO Storage ============================================-->
   <ResearchProjectDef ParentName="PRF_StorageResearch">
     <defName>PRF_StorageIO</defName>
-    <label>Thornsworth's holographic storage</label>
+    <label>Thornsworth holographic storage</label>
     <techLevel>Spacer</techLevel>
     <baseCost>4000</baseCost>
     <researchViewX>9</researchViewX>
