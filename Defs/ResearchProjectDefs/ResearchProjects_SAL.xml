@@ -24,7 +24,7 @@
     </requiredResearchFacilities>
     <researchViewX>6</researchViewX>
     <discoveredLetterTitle>About: S.A.L automation robots</discoveredLetterTitle>
-    <discoveredLetterText>With this Research you have unlocked S.A.L automation robots.\nThese are placeable robots that you attach to a workbench where a human would stand, and then they will start doing work on that bench.\n\nThe name "S.A.L" is a tribute to the original SAL mod, from whence Project RimFactory is descended.</discoveredLetterText>
+    <discoveredLetterText>With this research you have unlocked S.A.L automation robots.\nThese are placeable robots that you attach to a workbench where a human would stand, and then they will start doing work on that bench.\n\nThe name "S.A.L" is a tribute to the original SAL mod, from whence Project RimFactory is descended.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_SALResearch">

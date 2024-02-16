@@ -40,19 +40,19 @@
 
   <!-- PowerTab -->
   <PRF.AutoMachineTool.SupplyPower.TabName>Overclock</PRF.AutoMachineTool.SupplyPower.TabName>
-  <PRF.AutoMachineTool.SupplyPower.Description>Overclock power usage to increase Work Speed</PRF.AutoMachineTool.SupplyPower.Description>
-  <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Overclock power usage to increase Work Range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
-  <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Overclock Power For Speed ({0} W)</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
-  <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Overclock Power For Range ({0} W)</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
-  <PRF.AutoMachineTool.SupplyPower.SunLampText>Sun Lamp(power:2000)</PRF.AutoMachineTool.SupplyPower.SunLampText>
-  <PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start>Total Power Usage:\nBase [{0}] + Work Speed [{1}] + Range [{2}]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start>
+  <PRF.AutoMachineTool.SupplyPower.Description>Overclock power usage to increase work speed</PRF.AutoMachineTool.SupplyPower.Description>
+  <PRF.AutoMachineTool.SupplyPower.DescriptionForRange>Overclock power usage to increase work range</PRF.AutoMachineTool.SupplyPower.DescriptionForRange>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>Overclock power for speed ({0} W)</PRF.AutoMachineTool.SupplyPower.ValueLabelForSpeed>
+  <PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>Overclock power for range ({0} W)</PRF.AutoMachineTool.SupplyPower.ValueLabelForRange>
+  <PRF.AutoMachineTool.SupplyPower.SunLampText>Sun lamp (power: 2000)</PRF.AutoMachineTool.SupplyPower.SunLampText>
+  <PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start>Total power usage:\nBase [{0}] + Work Speed [{1}] + Range [{2}]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_Start>
   <PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append> + {0} [{1}]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_Append>
   <PRF.AutoMachineTool.SupplyPower.BreakDownLine_End> = [{0} W]</PRF.AutoMachineTool.SupplyPower.BreakDownLine_End>
   <PRF.AutoMachineTool.SupplyPower.wdLabel>{0} W</PRF.AutoMachineTool.SupplyPower.wdLabel>
   <PRF.AutoMachineTool.SupplyPower.PercentLabel>{0}%</PRF.AutoMachineTool.SupplyPower.PercentLabel>
   <PRF.AutoMachineTool.SupplyPower.CurrentPercent>Current work speed {0}%</PRF.AutoMachineTool.SupplyPower.CurrentPercent>
   <PRF.AutoMachineTool.SupplyPower.CellsLabel>{0} cells</PRF.AutoMachineTool.SupplyPower.CellsLabel>
-  <PRF.AutoMachineTool.SupplyPower.CurrentCellRadius>Current Range Radius {0} Cells</PRF.AutoMachineTool.SupplyPower.CurrentCellRadius>
+  <PRF.AutoMachineTool.SupplyPower.CurrentCellRadius>Current range radius {0} cells</PRF.AutoMachineTool.SupplyPower.CurrentCellRadius>
 
 
 
@@ -61,15 +61,15 @@
 
   <!-- LimitationTab -->
   <!--<PRF.AutoMachineTool.ProductLimitation.TabName>Settings</PRF.AutoMachineTool.ProductLimitation.TabName>-->
-  <PRF.AutoMachineTool.ProductLimitation.ValueLabel>Limit Value</PRF.AutoMachineTool.ProductLimitation.ValueLabel>
-  <PRF.AutoMachineTool.ProductLimitation.ValueLabelTip>Set the Maximum number of Items / Stacks</PRF.AutoMachineTool.ProductLimitation.ValueLabelTip>
+  <PRF.AutoMachineTool.ProductLimitation.ValueLabel>Limit value</PRF.AutoMachineTool.ProductLimitation.ValueLabel>
+  <PRF.AutoMachineTool.ProductLimitation.ValueLabelTip>Set the maximum number of items/stacks </PRF.AutoMachineTool.ProductLimitation.ValueLabelTip>
   <PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>Activate limit</PRF.AutoMachineTool.ProductLimitation.CheckBoxLabel>
   <PRF.AutoMachineTool.ProductLimitation.CheckBoxLabelTip>Processing stops when the number of products and items exceeds the limit value. You can specify the zone. please check if it can be placed in that zone.</PRF.AutoMachineTool.ProductLimitation.CheckBoxLabelTip>
   <PRF.AutoMachineTool.ProductLimitation.CountStacks>Count stacks</PRF.AutoMachineTool.ProductLimitation.CountStacks>
   <PRF.AutoMachineTool.ProductLimitation.CountStacksTip>Count item stacks instead of the total amount of the given item</PRF.AutoMachineTool.ProductLimitation.CountStacksTip>
   <PRF.AutoMachineTool.EntierMap>No zone - DO FOREVER</PRF.AutoMachineTool.EntierMap>
   <PRF.AutoMachineTool.CountZone>For what zone?</PRF.AutoMachineTool.CountZone>
-  <PRF.AutoMachineTool.ProductLimitation.SelectAreaTip>Select the Area in which to count. Selecting No Zone will count all items</PRF.AutoMachineTool.ProductLimitation.SelectAreaTip>
+  <PRF.AutoMachineTool.ProductLimitation.SelectAreaTip>Select the area in which to count. Selecting "No zone" will count all items</PRF.AutoMachineTool.ProductLimitation.SelectAreaTip>
 
   <!-- Slaughterhouse SettingTab -->
   <PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>Setting</PRF.AutoMachineTool.Slaughterhouse.Setting.TabName>
@@ -87,14 +87,14 @@
   <PRF.AutoMachineTool.RaceName>Race name</PRF.AutoMachineTool.RaceName>
 
   <!-- ItemPuller -->
-  <PRF.AutoMachineTool.Puller.SwitchActiveLabel>Toggle Pulling</PRF.AutoMachineTool.Puller.SwitchActiveLabel>
+  <PRF.AutoMachineTool.Puller.SwitchActiveLabel>Toggle pulling</PRF.AutoMachineTool.Puller.SwitchActiveLabel>
   <PRF.NeedToTurnOnPuller>Puller is inactive until toggled on.</PRF.NeedToTurnOnPuller>
-  <PRF.AutoMachineTool.Puller.SwitchActiveDesc>Switch the operating status On/Off.</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
+  <PRF.AutoMachineTool.Puller.SwitchActiveDesc>Switch the operating status on/off.</PRF.AutoMachineTool.Puller.SwitchActiveDesc>
   <PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>Switch output side.</PRF.AutoMachineTool.Puller.SwitchOutputSideLabel>
   <PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>Switch output side.</PRF.AutoMachineTool.Puller.SwitchOutputSideDesc>
-  <PRF.Puller.TakeForbiddenItems>Pull Forbidden</PRF.Puller.TakeForbiddenItems>
+  <PRF.Puller.TakeForbiddenItems>Pull forbidden</PRF.Puller.TakeForbiddenItems>
   <PRF.Puller.TakeForbiddenItemsDesc>If set, this puller will also take forbidden items. This will automatically unforbid all items taken by the puller. This is a per-puller setting.</PRF.Puller.TakeForbiddenItemsDesc>
-  <PRF.Puller.takeSingleItemsHmm>Take Single items at a time</PRF.Puller.takeSingleItemsHmm>
+  <PRF.Puller.takeSingleItemsHmm>Take single item at a time</PRF.Puller.takeSingleItemsHmm>
   <PRF.Puller.takeSingleItemsDesc>If set, this puller will only take a single item at a time. Otherwise, it pulls entire stacks of items at once! This is a per-puller setting.</PRF.Puller.takeSingleItemsDesc>
   <!-- FilterTab(puller) -->
   <PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>Storage</PRF.AutoMachineTool.Puller.OutputItemFilter.TabName>
@@ -111,9 +111,9 @@
   <PRF.Conveyor.Splitter.MustHaveActiveOutput>Splitters must have an active output link!</PRF.Conveyor.Splitter.MustHaveActiveOutput>
 
 
-  <PRF.Conveyor.IsEndOfLineSetting>Holding Belt</PRF.Conveyor.IsEndOfLineSetting>
+  <PRF.Conveyor.IsEndOfLineSetting>Holding belt</PRF.Conveyor.IsEndOfLineSetting>
   <PRF.Conveyor.IsEndOfLineSetting.Desc>Is this belt the end of its line or unloading into an assembler? If checked, it will hold onto items until something takes them. If unchecked, it will send items on to the next conveyor or dump them on the ground (if there is room).</PRF.Conveyor.IsEndOfLineSetting.Desc>
-  <PRF.Conveyor.IsAtEndOfLine>End of Conveyor Line</PRF.Conveyor.IsAtEndOfLine>  <!-- 1 line for Inspect Window -->
+  <PRF.Conveyor.IsAtEndOfLine>End of conveyor line</PRF.Conveyor.IsAtEndOfLine>  <!-- 1 line for Inspect Window -->
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>very high</PRF.AutoMachineTool.Conveyor.DirectionPriority.VeryHigh>
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.High>high</PRF.AutoMachineTool.Conveyor.DirectionPriority.High>
   <PRF.AutoMachineTool.Conveyor.DirectionPriority.Normal>normal</PRF.AutoMachineTool.Conveyor.DirectionPriority.Normal>

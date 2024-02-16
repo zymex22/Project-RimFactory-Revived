@@ -486,7 +486,7 @@
   <ThingDef ParentName="PRF_FurnaceBase">
     <defName>PRF_FurnaceI</defName>
     <label>blast furnace</label>
-    <description>A simple early-stage Furnace with minimal automation. It burns unwanted apparel and smelts raw resources into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs (yellow cell) any finished metals into a cell you may specify.\n(Remember to remove quickly so it doesn't clog up.)\nUses wood as fuel to smelt.</description>
+    <description>A simple early-stage furnace with minimal automation. It burns unwanted apparel and smelts raw resources into useful materials.\n\nAutomatically takes input materials (or trash) within the white cells surrounding the furnace - it has an input range of one cell - and outputs (yellow cell) any finished metals into a cell you may specify.\n(Remember to remove quickly so it doesn't clog up.)\nUses wood as fuel to smelt.</description>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
     <altitudeLayer>Gas</altitudeLayer>
     <graphicData>

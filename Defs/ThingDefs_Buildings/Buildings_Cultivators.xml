@@ -127,7 +127,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_II</defName>
     <label>drone cultivator Mk.II</label>
-    <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.</description>
+    <description>The Mark II automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorII</texPath>
@@ -250,7 +250,7 @@
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_III</defName>
     <label>drone cultivator Mk.III</label>
-    <description>The Mark III Automated cultivator. With the use of extremely advanced automated drones, this device can take your farming operations to the next level. The included drones will haul to a stockpile, I/O, or crate if it is within range.</description>
+    <description>The Mark III automated cultivator. With the use of extremely advanced automated drones, this device can take your farming operations to the next level. The included drones will haul to a stockpile, I/O, or crate if it is within range.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorIII</texPath>
@@ -319,7 +319,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_I</defName>
     <label>nano cultivator</label>
-    <description>An alternative form of high-tech Cultivator that houses worker mechanites instead of drones. The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
+    <description>An alternative form of high-tech cultivator that houses worker mechanites instead of drones. The mechanites can sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/Cultivator2</texPath>
@@ -421,7 +421,7 @@
   <ThingDef ParentName="PRF_CultivatorBase">
     <defName>PRF_OldTypeCultivator_Xl</defName>
     <label>nano cultivator Mk.II</label>
-    <description>A highly advanced XL Cultivator that houses worker mechanites instead of drones. The included mechanites will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
+    <description>A highly advanced XL cultivator that houses worker mechanites instead of drones. The included mechanites will sow, harvest and maintain a growzone or hydroponics setup. It will also output onto a cell for further processing.</description>
     <thingClass>ProjectRimFactory.CultivatorTools.Building_Cultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorXL</texPath>

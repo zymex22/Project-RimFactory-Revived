@@ -126,7 +126,7 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerII</defName>
     <label>modern auto-cooker</label>
-    <description>An improved assortment of food processing modules that can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go!\n\nCopies Electric stove recipes at 1.5x speed, with a cooking level of 12.</description>
+    <description>An improved assortment of food processing modules that can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go!\n\nCopies electric stove recipes at 1.5x speed, with a cooking level of 12.</description>
     <graphicData>
       <texPath>SAL3/cooker2</texPath>
       <drawSize>(3.3,3.3)</drawSize>

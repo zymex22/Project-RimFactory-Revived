@@ -368,7 +368,7 @@
     <thingClass>ProjectRimFactory.Storage.Building_ColdStoragePowered</thingClass>
 	<defName>PRF_ColdStorageUnit_I</defName>
     <label>archival storage unit</label>
-    <description>A matter-energy conversion-based storage unit that can hold up to 10k stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the archival storage unit will not be able to store more. Don't break it.\n\nItems stored in this Device are not spawned and therefore won't be automatically accessible by your pawns. Use I/O Ports to interact with it.</description>
+    <description>A matter-energy conversion-based storage unit that can hold up to 10k stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the archival storage unit will not be able to store more. Don't break it.\n\nItems stored in this device are not spawned and therefore won't be automatically accessible by your pawns. Use I/O ports to interact with it.</description>
     <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
     <tradeTags>

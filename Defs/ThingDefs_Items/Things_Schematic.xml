@@ -6,7 +6,7 @@
     <defName>PRF_DataDisk</defName>
     <label>audio tape reel</label>
     <thingClass>ThingWithComps</thingClass>
-    <description>A roll of magnetic tape. Apparently, it can hold 64 megabytes. How primitive... It's used to create Recipe DataBases for PRF Machines.</description>
+    <description>A roll of magnetic tape. Apparently, it can hold 64 megabytes. How primitive... It's used to create recipe databases for PRF machines.</description>
     <graphicData>
       <texPath>SAL3/datadisk</texPath>
       <graphicClass>Graphic_Single</graphicClass>

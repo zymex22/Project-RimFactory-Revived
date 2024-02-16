@@ -22,7 +22,7 @@
   <PRF.Settings.StorageMessage>Storage Settings</PRF.Settings.StorageMessage>
 
   <PRF.Settings.TurnOffHelpButton.Label>Disable "Help" button</PRF.Settings.TurnOffHelpButton.Label>
-  <PRF.Settings.TurnOffHelpButton.Desc>Disabling this will remove the "Help" button that appears along the bottom when you have a PRF Machine selected.</PRF.Settings.TurnOffHelpButton.Desc>
+  <PRF.Settings.TurnOffHelpButton.Desc>Disabling this will remove the "Help" button that appears along the bottom when you have a PRF machine selected.</PRF.Settings.TurnOffHelpButton.Desc>
 
   <PRF.Settings.TurnOffPulseGlowerEffect.Label>Enable pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Label>
   <PRF.Settings.TurnOffPulseGlowerEffect.Desc>Enable pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Desc>
@@ -45,7 +45,7 @@
   <PRF.Settings.DsuLimit.Label>Override DSU storage limit</PRF.Settings.DsuLimit.Label>
   <PRF.Settings.DsuLimit.Desc>Check this to enable the override slider on the right.</PRF.Settings.DsuLimit.Desc>
 
-  <PRF.Settings.recipeDB.Label>Override range for Recipe DB</PRF.Settings.recipeDB.Label>
+  <PRF.Settings.recipeDB.Label>Override range for recipe database</PRF.Settings.recipeDB.Label>
   <PRF.Settings.recipeDB.Desc>Check this to enable the override slider on the right.</PRF.Settings.recipeDB.Desc>
 
   <PRF.Settings.TurnOffInfestation.Label>Disable infestation for T1/T2 miners</PRF.Settings.TurnOffInfestation.Label>
