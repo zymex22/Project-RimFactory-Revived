@@ -191,7 +191,7 @@
   <!--==================== Tribute To Tornsworth ====================-->
   <ThingDef ParentName="PRF_IndustrialBase">
     <defName>PRF_MrTsArtMachine</defName>
-    <label>Thornsworth's art machine</label>
+    <label>Thornsworth art machine</label>
     <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>    <!-- Using assembler type -->
     <graphicData>
       <texPath>Industry/ArtPrinter</texPath>
@@ -209,7 +209,7 @@
       <MarketValue>5000</MarketValue>
       <Flammability>1.0</Flammability>
     </statBases>
-    <description>Thornsworth's Art machine, capable of producing art with an art level of 14.\nThorny had a big passion for 3D printers and producing art with his large army of assemblers. He made this machine before he passed away, and now it's finally here to produce an army of sculptures well into the future.\nRIP Thornsworth 2020.</description>
+    <description>Thornsworth art machine, capable of producing art with an art level of 14.\nThorny had a big passion for 3D printers and producing art with his large army of assemblers. He made this machine before he passed away, and now it's finally here to produce an army of sculptures well into the future.\nRIP Thornsworth 2020.</description>
     <costList>
       <Steel>250</Steel>
       <ComponentIndustrial>10</ComponentIndustrial>
