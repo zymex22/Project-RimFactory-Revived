@@ -18,7 +18,7 @@
   <PRF.AutoMachineTool.OutputDirectionW>West</PRF.AutoMachineTool.OutputDirectionW>
   <PRF.AutoMachineTool.OutputDirectionNW>Northwest</PRF.AutoMachineTool.OutputDirectionNW>
 
-  <PRF.AutoMachineTool.PlaceNotAllowed>AutoMachineTool must face the work table and be placed in a working position.</PRF.AutoMachineTool.PlaceNotAllowed>
+  <PRF.AutoMachineTool.PlaceNotAllowed>AutoMachineTool must face the work table and be placed in the working position.</PRF.AutoMachineTool.PlaceNotAllowed>
 
   <PRF.AutoMachineTool.StatWorking>Working. [{0} / {1} ({2} %)]</PRF.AutoMachineTool.StatWorking>
   <PRF.AutoMachineTool.StatWorkingNotParam>Working.</PRF.AutoMachineTool.StatWorkingNotParam>
