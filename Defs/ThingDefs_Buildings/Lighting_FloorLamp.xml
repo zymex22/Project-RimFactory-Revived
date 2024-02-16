@@ -13,7 +13,7 @@
 
   <!-- ================= Base ================= -->
   <ThingDef Name="PRF_FloorIconBase" ParentName="PRF_FloorSign" Abstract="True">
-    <description>A weak fluorescent sign that can be placed on floors or top of machines or other buildings.</description>
+    <description>A weak fluorescent sign that can be placed on floors or on top of machines or other buildings.</description>
     <designatorDropdown>PRF_FloorIconGroup</designatorDropdown>
     <rotatable>true</rotatable>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
