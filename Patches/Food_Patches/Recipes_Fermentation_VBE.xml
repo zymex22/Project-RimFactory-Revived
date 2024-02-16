@@ -15,7 +15,7 @@
               <defName>Brew_VBE_AmbrandyNormal</defName>
               <label>brew ambrandy x10</label>
               <description>Brew ambrandy x10.</description>
-              <jobString>Brewing ambrandy</jobString>
+              <jobString>Brewing ambrandy.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -45,7 +45,7 @@
               <defName>Brew_VBE_Gin</defName>
               <label>brew gin x10</label>
               <description>Brew gin x10.</description>
-              <jobString>Brewing gin</jobString>
+              <jobString>Brewing gin.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -75,7 +75,7 @@
               <defName>Brew_VBE_Tequila</defName>
               <label>brew tequila x10</label>
               <description>Brew tequila x10.</description>
-              <jobString>Brewing tequila</jobString>
+              <jobString>Brewing tequila.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -105,7 +105,7 @@
               <defName>Brew_VBE_Vodka</defName>
               <label>brew vodka x10</label>
               <description>Brew vodka x10.</description>
-              <jobString>Brewing vodka</jobString>
+              <jobString>Brewing vodka.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -135,7 +135,7 @@
               <defName>Brew_VBE_Whiskey</defName>
               <label>brew whiskey x10</label>
               <description>Brew whiskey x10.</description>
-              <jobString>Brewing whiskey</jobString>
+              <jobString>Brewing whiskey.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -165,7 +165,7 @@
               <defName>Brew_VBE_Soda</defName>
               <label>brew soda x10</label>
               <description>Brew soda x10.</description>
-              <jobString>Brewing soda</jobString>
+              <jobString>Brewing soda.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -214,7 +214,7 @@
                 <defName>Brew_VBE_Cider</defName>
                 <label>brew cider x10</label>
                 <description>Brew cider x10.</description>
-                <jobString>Brewing cider</jobString>
+                <jobString>Brewing cider.</jobString>
                 <effectWorking>Cook</effectWorking>
                 <workSkill>Cooking</workSkill>
                 <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -261,7 +261,7 @@
               <defName>Brew_VFEM_Wine</defName>
               <label>brew wine x10</label>
               <description>Brew wine x10.</description>
-              <jobString>Brewing wine</jobString>
+              <jobString>Brewing wine.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -307,7 +307,7 @@
               <defName>Brew_VFEV_Mead</defName>
               <label>brew mead x10</label>
               <description>Brew mead x10.</description>
-              <jobString>Brewing mead</jobString>
+              <jobString>Brewing mead.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>

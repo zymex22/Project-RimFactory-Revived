@@ -15,7 +15,7 @@
 		<defName>PRF_Excavate_Granite</defName>
 		<label>mine granite</label>
 		<description>Mining granite.</description>
-		<jobString>Mining granite</jobString>
+		<jobString>Mining granite.</jobString>
 		<products>
 			<ChunkGranite>1</ChunkGranite>
 		</products>
@@ -25,7 +25,7 @@
 		<defName>PRF_Excavate_Sandstone</defName>
 		<label>mine sandstone</label>
 		<description>Mining sandstone.</description>
-		<jobString>Mining sandstone</jobString>
+		<jobString>Mining sandstone.</jobString>
 		<products>
 			<ChunkSandstone>1</ChunkSandstone>
 		</products>
@@ -35,7 +35,7 @@
 		<defName>PRF_Excavate_Limestone</defName>
 		<label>mine limestone</label>
 		<description>Mining limestone.</description>
-		<jobString>Mining limestone</jobString>
+		<jobString>Mining limestone.</jobString>
 		<products>
 			<ChunkLimestone>1</ChunkLimestone>
 		</products>
@@ -45,7 +45,7 @@
 		<defName>PRF_Excavate_Slate</defName>
 		<label>mine slate</label>
 		<description>Mining slate.</description>
-		<jobString>Mining slate</jobString>
+		<jobString>Mining slate.</jobString>
 		<products>
 			<ChunkSlate>1</ChunkSlate>
 		</products>
@@ -55,7 +55,7 @@
 		<defName>PRF_Excavate_Marble</defName>
 		<label>mine marble</label>
 		<description>Mining marble.</description>
-		<jobString>Mining marble</jobString>
+		<jobString>Mining marble.</jobString>
 		<products>
 			<ChunkMarble>1</ChunkMarble>
 		</products>

@@ -48,7 +48,7 @@
 							<defName>PRF_Excavate_DarkAndesite</defName>
 							<label>mine dark andesite</label>
 							<description>Mining dark andesite.</description>
-							<jobString>Mining dark andesite</jobString>
+							<jobString>Mining dark andesite.</jobString>
 							<products>
 								<ChunkDarkAndesite>1</ChunkDarkAndesite>
 							</products>
@@ -57,7 +57,7 @@
 							<defName>PRF_Excavate_Anorthosite</defName>
 							<label>mine anorthosite</label>
 							<description>Mining anorthosite.</description>
-							<jobString>Mining anorthosite</jobString>
+							<jobString>Mining anorthosite.</jobString>
 							<products>
 								<ChunkAnorthosite>1</ChunkAnorthosite>
 							</products>
@@ -66,7 +66,7 @@
 							<defName>PRF_Excavate_Basalt</defName>
 							<label>mine basalt</label>
 							<description>Mining basalt.</description>
-							<jobString>Mining basalt</jobString>
+							<jobString>Mining basalt.</jobString>
 							<products>
 								<ChunkBasalt>1</ChunkBasalt>
 							</products>
@@ -75,7 +75,7 @@
 							<defName>PRF_Excavate_Blueschist</defName>
 							<label>mine blueschist</label>
 							<description>Mining blueschist.</description>
-							<jobString>Mining blueschist</jobString>
+							<jobString>Mining blueschist.</jobString>
 							<products>
 								<ChunkBlueschist>1</ChunkBlueschist>
 							</products>
@@ -84,7 +84,7 @@
 							<defName>PRF_Excavate_Chalk</defName>
 							<label>mine chalk</label>
 							<description>Mining chalk.</description>
-							<jobString>Mining chalk</jobString>
+							<jobString>Mining chalk.</jobString>
 							<products>
 								<ChunkChalk>1</ChunkChalk>
 							</products>
@@ -93,7 +93,7 @@
 							<defName>PRF_Excavate_Charnockite</defName>
 							<label>mine charnockite</label>
 							<description>Mining charnockite.</description>
-							<jobString>Mining charnockite</jobString>
+							<jobString>Mining charnockite.</jobString>
 							<products>
 								<ChunkCharnockite>1</ChunkCharnockite>
 							</products>
@@ -102,7 +102,7 @@
 							<defName>PRF_Excavate_CreoleMarble</defName>
 							<label>mine creole marble</label>
 							<description>Mining creole marble.</description>
-							<jobString>Mining creole marble</jobString>
+							<jobString>Mining creole marble.</jobString>
 							<products>
 								<ChunkCreoleMarble>1</ChunkCreoleMarble>
 							</products>
@@ -111,7 +111,7 @@
 							<defName>PRF_Excavate_Dacite</defName>
 							<label>mine dacite</label>
 							<description>Mining dacite.</description>
-							<jobString>Mining dacite</jobString>
+							<jobString>Mining dacite.</jobString>
 							<products>
 								<ChunkDacite>1</ChunkDacite>
 							</products>
@@ -120,7 +120,7 @@
 							<defName>PRF_Excavate_VibrantDunite</defName>
 							<label>mine vibrant dunite</label>
 							<description>Mining vibrant dunite.</description>
-							<jobString>Mining vibrant dunite</jobString>
+							<jobString>Mining vibrant dunite.</jobString>
 							<products>
 								<ChunkVibrantDunite>1</ChunkVibrantDunite>
 							</products>
@@ -129,7 +129,7 @@
 							<defName>PRF_Excavate_Emperadordark</defName>
 							<label>mine emperadordark</label>
 							<description>Mining emperadordark.</description>
-							<jobString>Mining emperadordark</jobString>
+							<jobString>Mining emperadordark.</jobString>
 							<products>
 								<ChunkEmperadordark>1</ChunkEmperadordark>
 							</products>
@@ -138,7 +138,7 @@
 							<defName>PRF_Excavate_EtowahMarble</defName>
 							<label>mine etowah marble</label>
 							<description>Mining etowah marble.</description>
-							<jobString>Mining etowah marble</jobString>
+							<jobString>Mining etowah marble.</jobString>
 							<products>
 								<ChunkEtowahMarble>1</ChunkEtowahMarble>
 							</products>
@@ -147,7 +147,7 @@
 							<defName>PRF_Excavate_GreenGabbro</defName>
 							<label>mine green gabbro</label>
 							<description>Mining green gabbro.</description>
-							<jobString>Mining green gabbro</jobString>
+							<jobString>Mining green gabbro.</jobString>
 							<products>
 								<ChunkGreenGabbro>1</ChunkGreenGabbro>
 							</products>
@@ -156,7 +156,7 @@
 							<defName>PRF_Excavate_GreenSchist</defName>
 							<label>mine green schist</label>
 							<description>Mining green schist.</description>
-							<jobString>Mining green schist</jobString>
+							<jobString>Mining green schist.</jobString>
 							<products>
 								<ChunkGreenSchist>1</ChunkGreenSchist>
 							</products>
@@ -165,7 +165,7 @@
 							<defName>PRF_Excavate_Jaspillite</defName>
 							<label>mine jaspillite</label>
 							<description>Mining jaspillite.</description>
-							<jobString>Mining jaspillite</jobString>
+							<jobString>Mining jaspillite.</jobString>
 							<products>
 								<ChunkJaspillite>1</ChunkJaspillite>
 							</products>
@@ -174,7 +174,7 @@
 							<defName>PRF_Excavate_Lepidolite</defName>
 							<label>mine lepidolite</label>
 							<description>Mining lepidolite.</description>
-							<jobString>Mining lepidolite</jobString>
+							<jobString>Mining lepidolite.</jobString>
 							<products>
 								<ChunkLepidolite>1</ChunkLepidolite>
 							</products>
@@ -183,7 +183,7 @@
 							<defName>PRF_Excavate_Lherzolite</defName>
 							<label>mine lherzolite</label>
 							<description>Mining lherzolite.</description>
-							<jobString>Mining lherzolite</jobString>
+							<jobString>Mining lherzolite.</jobString>
 							<products>
 								<ChunkLherzolite>1</ChunkLherzolite>
 							</products>
@@ -192,7 +192,7 @@
 							<defName>PRF_Excavate_Lignite</defName>
 							<label>mine lignite</label>
 							<description>Mining lignite.</description>
-							<jobString>Mining lignite</jobString>
+							<jobString>Mining lignite.</jobString>
 							<products>
 								<ChunkLignite>1</ChunkLignite>
 							</products>
@@ -201,7 +201,7 @@
 							<defName>PRF_Excavate_Migmatite</defName>
 							<label>mine migmatite</label>
 							<description>Mining migmatite.</description>
-							<jobString>Mining migmatite</jobString>
+							<jobString>Mining migmatite.</jobString>
 							<products>
 								<ChunkMigmatite>1</ChunkMigmatite>
 							</products>
@@ -210,7 +210,7 @@
 							<defName>PRF_Excavate_Monzonite</defName>
 							<label>mine monzonite</label>
 							<description>Mining monzonite.</description>
-							<jobString>Mining monzonite</jobString>
+							<jobString>Mining monzonite.</jobString>
 							<products>
 								<ChunkMonzonite>1</ChunkMonzonite>
 							</products>
@@ -219,7 +219,7 @@
 							<defName>PRF_Excavate_Obsidian</defName>
 							<label>mine obsidian</label>
 							<description>Mining obsidian.</description>
-							<jobString>Mining obsidian</jobString>
+							<jobString>Mining obsidian.</jobString>
 							<products>
 								<ChunkObsidian>1</ChunkObsidian>
 							</products>
@@ -228,7 +228,7 @@
 							<defName>PRF_Excavate_Rhyolite</defName>
 							<label>mine rhyolite</label>
 							<description>Mining rhyolite.</description>
-							<jobString>Mining rhyolite</jobString>
+							<jobString>Mining rhyolite.</jobString>
 							<products>
 								<ChunkRhyolite>1</ChunkRhyolite>
 							</products>
@@ -237,7 +237,7 @@
 							<defName>PRF_Excavate_Scoria</defName>
 							<label>mine scoria</label>
 							<description>Mining scoria.</description>
-							<jobString>Mining scoria</jobString>
+							<jobString>Mining scoria.</jobString>
 							<products>
 								<ChunkScoria>1</ChunkScoria>
 							</products>
@@ -246,7 +246,7 @@
 							<defName>PRF_Excavate_Serpentinite</defName>
 							<label>mine serpentinite</label>
 							<description>Mining serpentinite.</description>
-							<jobString>Mining serpentinite</jobString>
+							<jobString>Mining serpentinite.</jobString>
 							<products>
 								<ChunkSerpentinite>1</ChunkSerpentinite>
 							</products>
@@ -255,7 +255,7 @@
 							<defName>PRF_Excavate_Siltstone</defName>
 							<label>mine siltstone</label>
 							<description>Mining siltstone.</description>
-							<jobString>Mining siltstone</jobString>
+							<jobString>Mining siltstone.</jobString>
 							<products>
 								<ChunkSiltstone>1</ChunkSiltstone>
 							</products>
@@ -264,7 +264,7 @@
 							<defName>PRF_Excavate_Sovite</defName>
 							<label>mine sovite</label>
 							<description>Mining sovite.</description>
-							<jobString>Mining sovite</jobString>
+							<jobString>Mining sovite.</jobString>
 							<products>
 								<ChunkSovite>1</ChunkSovite>
 							</products>
@@ -273,7 +273,7 @@
 							<defName>PRF_Excavate_Thometzekite</defName>
 							<label>mine thometzekite</label>
 							<description>Mining thometzekite.</description>
-							<jobString>Mining thometzekite</jobString>
+							<jobString>Mining thometzekite.</jobString>
 							<products>
 								<ChunkThometzekite>1</ChunkThometzekite>
 							</products>

@@ -73,7 +73,7 @@
     <defName>PRF_Destroy_Chunks</defName>
     <label>destroy stone chunks</label>
     <description>Crush unwanted stone chunks to dust in order to completely destroy them.</description>
-    <jobString>Chrushing</jobString>
+    <jobString>Chrushing.</jobString>
     <workAmount>600</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <requiredGiverWorkType>Hauling</requiredGiverWorkType>
@@ -101,7 +101,7 @@
     <defName>PRF_Destroy_Art</defName>
     <label>destroy art</label>
     <description>Destroy art!</description>
-    <jobString>Breaking art</jobString>
+    <jobString>Breaking art.</jobString>
     <workAmount>600</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <requiredGiverWorkType>Hauling</requiredGiverWorkType>
@@ -132,7 +132,7 @@
     <defName>PRF_Destroy_Anything</defName>
     <label>destroy anything</label>
     <description>Destroy anything. This will remove any unwanted stuff quickly.\nSet filters before running this bill or your pawns will melt all your expensive stuff.</description>
-    <jobString>Pulverizing stuff...</jobString>
+    <jobString>Pulverizing stuff.</jobString>
     <workAmount>75</workAmount>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cremate</effectWorking>

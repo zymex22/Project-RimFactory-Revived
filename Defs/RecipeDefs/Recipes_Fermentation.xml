@@ -6,7 +6,7 @@
     <defName>BrewBeer_sixpack</defName>
     <label>brew beer x10</label>
     <description>Brew beer in a batch lot of 10 units at once.</description>
-    <jobString>Brewing Beer</jobString>
+    <jobString>Brewing beer.</jobString>
     <effectWorking>Cook</effectWorking>
     <workSkill>Cooking</workSkill>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -37,7 +37,7 @@
     <defName>BrewBeer_case</defName>
     <label>brew beer x25</label>
     <description>Brew beer in a batch lot of 25 units at once.</description>
-    <jobString>Brewing Beer</jobString>
+    <jobString>Brewing beer.</jobString>
     <effectWorking>Cook</effectWorking>
     <workSkill>Cooking</workSkill>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -69,7 +69,7 @@
     <defName>BrewBeer_keg</defName>
     <label>brew beer x50</label>
     <description>Brew beer in a batch lot of 50 units at once.</description>
-    <jobString>Brewing Beer</jobString>
+    <jobString>Brewing beer.</jobString>
     <effectWorking>Cook</effectWorking>
     <workSkill>Cooking</workSkill>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>

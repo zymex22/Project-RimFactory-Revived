@@ -267,7 +267,7 @@
 							<defName>PRF_FreshwaterFish</defName>
 							<label>grow freshwater fish</label>
 							<description>Start the process of farming freshwater fish.</description>
-							<jobString>farming fish.</jobString>
+							<jobString>Farming fish.</jobString>
 							<effectWorking>Cook</effectWorking>
 							<workSkill>Cooking</workSkill>
 							<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -296,7 +296,7 @@
 							<defName>PRF_OceanwaterFish</defName>
 							<label>grow oceanwater fish</label>
 							<description>Start the process of farming oceanwater fish.</description>
-							<jobString>farming fish.</jobString>
+							<jobString>Farming fish.</jobString>
 							<effectWorking>Cook</effectWorking>
 							<workSkill>Cooking</workSkill>
 							<workSpeedStat>GeneralLaborSpeed</workSpeedStat>

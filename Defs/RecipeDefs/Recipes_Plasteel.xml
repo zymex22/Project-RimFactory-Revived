@@ -6,7 +6,7 @@
     <defName>PRF_RefinePlasteel</defName>
     <label>refine plasteel</label>
     <description>Refine plasteel from chemfuel and steel.</description>
-    <jobString>Refining plasteel</jobString>
+    <jobString>Refining plasteel.</jobString>
     <researchPrerequisite>PRF_MetalRefining</researchPrerequisite>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Smelt</effectWorking>
