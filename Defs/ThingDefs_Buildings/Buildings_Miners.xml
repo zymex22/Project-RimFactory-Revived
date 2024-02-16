@@ -312,7 +312,7 @@
       <drawRotated>false</drawRotated>
     </graphicData>
     <rotatable>true</rotatable>
-    <description>This is a portable drone miner mkI. It works in much the same way as a cultivator and can be picked and carried when you are traveling around the rim for your remote mining operations. It is also excellent for excavating your new base.\nIt has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat and only work 1-hour shifts.</description>
+    <description>This is a portable drone miner Mk.I. It works in much the same way as a cultivator and can be picked and carried when you are traveling around the rim for your remote mining operations. It is also excellent for excavating your new base.\nIt has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat and only work 1-hour shifts.</description>
     <costList>
       <PRF_DroneModule>2</PRF_DroneModule>
       <Steel>30</Steel>
@@ -394,7 +394,7 @@
     </graphicData>
     <size>(2,2)</size>
     <rotatable>true</rotatable>
-    <description>This is a portable drone miner mkI. It works in much the same way as a cultivator and can be picked and carried when you are traveling around the rim for your remote mining operations. It is also excellent for excavating your new base.\nIt has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat and only work 1-hour shifts.</description>
+    <description>This is a portable drone miner Mk.II. It works in much the same way as a cultivator and can be picked and carried when you are traveling around the rim for your remote mining operations. It is also excellent for excavating your new base.\nIt has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat and only work 1-hour shifts.</description>
     <costList>
       <PRF_DroneModule>4</PRF_DroneModule>
       <Steel>10</Steel>
