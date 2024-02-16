@@ -276,7 +276,7 @@
   <!--==================================== Drone module ==============================-->
   <RecipeDef>
     <defName>MakePRF_DroneModule</defName>
-    <label>make UAV(packed)</label>
+    <label>make UAV (packed)</label>
     <description>Make a drone module.</description>
     <jobString>Making drone module</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>

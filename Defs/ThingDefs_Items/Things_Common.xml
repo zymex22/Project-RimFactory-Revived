@@ -102,7 +102,7 @@
   <!-- ================================== Drone module ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_DroneModule</defName>
-    <label>UAV(packed)</label>
+    <label>UAV (packed)</label>
     <description>An unmanned aerial vehicle capable of fulfilling simple tasks. Will need to be installed in a drone station in order to get the right programming installed.</description>
     <graphicData>
       <texPath>Common/DroneModule</texPath>

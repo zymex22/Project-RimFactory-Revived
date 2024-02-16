@@ -179,8 +179,8 @@
   <!--=========================== Sun Cultivator MKII ==================================-->
   <ThingDef ParentName="PRF_CultivatorBaseDrone">
     <defName>PRF_DroneCultivator_II_sun</defName>
-    <label>drone cultivator Mk.II(sun lamp)</label>
     <description>The Mark II Automated cultivator. By using improved drones to do your agriculture jobs, the functionality of automated farming operations is greatly improved. The drones will haul to a stockpile, I/O, or crate if it's within range. This version includes an integrated sunlamp, and with specialized research can upgrade the included drones to level 20.</description>
+    <label>drone cultivator Mk.II (sun lamp)</label>
     <thingClass>ProjectRimFactory.Drones.Building_DroneCultivator</thingClass>
     <graphicData>
       <texPath>Farm/CultivatorWithSunLamp</texPath>
