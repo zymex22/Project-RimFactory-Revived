@@ -17,7 +17,7 @@
     </prerequisites>
     <researchViewX>3</researchViewX>
     <description>Make buildings that can extract random minerals and rocks from deep underground. Most forms of automated mining can attract the attention of insectoids, so keep an eye out for that.</description>
-    <discoveredLetterTitle>About: Intro to Autominers</discoveredLetterTitle>
+    <discoveredLetterTitle>About: Intro to autominers</discoveredLetterTitle>
     <discoveredLetterText>You have now researched the auger drill. With this, you have unlocked the tier 1 auto miner.\nThis miner will mine up random items over time, it can start infestations just like vanilla drills.\n\nThe tier 2 miner is the same type of device, it's just faster and will mine steel instead of slag.\n\nTier 3 has two types of miners.\nType one is a random miner like the previous generations, it will mine random rare ores with no stone chunks.\nType two is a new type of miner where you can set exactly what type of ore you want. It will mine mainly that one, but will have a chance to mine junk and rare ores too.\n\nIf you want to enable un-balanced mode for miner and unlock all mod-added ores you can change it in mod settings.</discoveredLetterText>
   </ResearchProjectDef>
 

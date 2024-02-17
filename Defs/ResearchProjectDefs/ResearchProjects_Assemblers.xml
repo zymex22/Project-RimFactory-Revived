@@ -80,8 +80,8 @@
     </prerequisites>
     <researchViewX>6</researchViewX>
     <description>A specialized industrial tape used for recording audio, a useful method for archiving important instructions and general information.</description>
-    <discoveredLetterTitle>About: Intro to recipe db.</discoveredLetterTitle>
-    <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\nThis is used to import recipes from any workbench into your recipe db.\nYou do so by placing it near a workbench and clicking import on those recipes you want it to store. Afterward, you can move it to another workbench and copy more. Or you can move it to the assembler you want to link to it.\nRecipes will be stored forever in your database, and you can safely move it around. Please note that if you remove it from your assemblers, they will lose their configured bills.</discoveredLetterText>
+    <discoveredLetterTitle>About: Intro to recipe database</discoveredLetterTitle>
+    <discoveredLetterText>You have learned how to make and use old-school magnetic tape to store instructions.\nMake data disks at the machining table.\nThis is used to import recipes from any workbench into your recipe database.\nYou do so by placing it near a workbench and clicking import on those recipes you want it to store. Afterward, you can move it to another workbench and copy more. Or you can move it to the assembler you want to link to it.\nRecipes will be stored forever in your database, and you can safely move it around. Please note that if you remove it from your assemblers, they will lose their configured bills.</discoveredLetterText>
   </ResearchProjectDef>
 
   <ResearchProjectDef ParentName="PRF_AssemblersResearch">

@@ -20,7 +20,7 @@
       <li>Smithing</li>
     </prerequisites>
     <researchViewX>1</researchViewX>
-    <discoveredLetterTitle>Early Automation</discoveredLetterTitle>
+    <discoveredLetterTitle>Early automation</discoveredLetterTitle>
     <discoveredLetterText>Welcome to Project RimFactory Beta!\n\nWe invite you on a trip through automation, starting with wood and coal-fueled smelters and advancing through AI-controlled self-improving assemblers.\n\nGeneral Usage: Store materials in the white designation input area for the machine to consume. After a bit of work, the machine will place the finished product on its yellow output tile.\n\nThe oldest known clockwork machine is the Antikythera mechanism, found in 1901 in a shipwreck dated 50 BC and Greek in origin. A series of 30 gears was used to predict eclipses and other astronomical phenomena as well as the passage of years. Advanced clockwork mechanisms reached new heights in Europe during the 1800s, and even today automation without computers is used in industry.\n\nCode by:spdskatr, Nobo, Abnerchen, Little White Mouse, Madara Uchiha, Sn1p3rr3c0n.\nArt by: ShotgunFrenzy, Chicken Plucker, Xen, Scythe, totoBrother, "Unknown Alien", Argon, spdskatr, Thornsworth.\nTested by Malkav, Extrien, Daemon976, AerosAtar, and the mandatory Steam volunteers.\nTranslated by: Natsu_Zirok, 十里小飞, AbnerChen, Lucas559-noob.\nSpecial thanks Thornsworth and Nobo, who are no longer with us.\nRest In Productivity.</discoveredLetterText>
   </ResearchProjectDef>
 
@@ -37,7 +37,7 @@
       <li>PRF_CoreTierO</li>
     </prerequisites>
     <researchViewX>2</researchViewX>
-    <discoveredLetterTitle>True Automation Begins</discoveredLetterTitle>
+    <discoveredLetterTitle>True automation begins</discoveredLetterTitle>
     <discoveredLetterText>Leonard Euler developed mathematical systems for interactions between physics, geometry and algebra.\nWith these formulas, automated production of basic materials such as stone bricks and simple art is possible.\nPlace items within the white designation for the bills to consume, they will be output to the adjustable green tile</discoveredLetterText>
   </ResearchProjectDef>
 
@@ -58,7 +58,7 @@
       <li>MultiAnalyzer</li>
     </requiredResearchFacilities>
     <researchViewX>5</researchViewX>
-    <discoveredLetterTitle>Machine Learning</discoveredLetterTitle>
+    <discoveredLetterTitle>Machine learning</discoveredLetterTitle>
     <discoveredLetterText>The mathematical models developed in the 1700s began an industrial revolution all over the world, a series of gears and pressurization allowed the mass processing of basic materials with coal and electricity.\nMoritz von Jacobi managed to propel a boat with an electric motor in 1845, but it wasn't until 1837 when Thomas and Emily Davenport patented the first motor in the US that the promise of electro-mechanical machinery was seen as the next big leap forward.\nRudimentary programming allows storing a bill on a recipe database and importing it into an assembler.\nThe blue region around assemblers and recipe databases indicates the data transfer area.</discoveredLetterText>
   </ResearchProjectDef>
 
@@ -80,7 +80,7 @@
       <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>8</researchViewX>
-    <discoveredLetterTitle>Binary System</discoveredLetterTitle>
+    <discoveredLetterTitle>Binary system</discoveredLetterTitle>
     <discoveredLetterText>Refinements to machinery allow sophisticated machines, such as those that self-correct (get faster the more times they complete a job), drills with object recognition to only mine what you want and the first mechanite swarm technologies.\nMechanite machines interact with a couple of random tiles in the area every second.</discoveredLetterText>
   </ResearchProjectDef>
 
@@ -102,7 +102,7 @@
       <li>PRF_ResearchTerminal</li>
     </requiredResearchFacilities>
     <researchViewX>11</researchViewX>
-    <discoveredLetterTitle>Quantum Bit Technology: Tier 4 Unlocked</discoveredLetterTitle>
+    <discoveredLetterTitle>Quantum bit technology: Tier 4 unlocked</discoveredLetterTitle>
     <discoveredLetterText>Qubit technology is all about advanced computing, high-end machines and technology, this might even be on the brink of insanity? whats next?!¤%.\nDrop us suggestions on our Workshop page or Discord.\n\nThanks for playing!</discoveredLetterText>
   </ResearchProjectDef>
 
