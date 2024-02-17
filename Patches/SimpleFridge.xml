@@ -81,7 +81,7 @@
 								<Flammability>1.0</Flammability>
 								<Mass>30</Mass>
 							</statBases>
-							<description>An advanced connection port for the deep storage unit. It can be set to input/output from any DSU remotely within the map. This version interfaces with Simple Utilities: Fridge branded coolers.</description>
+							<description>An advanced connection port for the digital storage unit. It can be set to input/output from any DSU remotely within the map. This version interfaces with Simple Utilities: Fridge branded coolers.</description>
 							<costList>
 								<ComponentSpacer>1</ComponentSpacer>
 								<PRF_RoboticArm>1</PRF_RoboticArm>
