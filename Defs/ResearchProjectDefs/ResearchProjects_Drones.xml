@@ -18,7 +18,7 @@
     </prerequisites>
     <researchViewX>3</researchViewX>
     <discoveredLetterTitle>About: Drones are now level 10</discoveredLetterTitle>
-    <discoveredLetterText>You now have basic knowledge about drones and can now start to utilize them for different tasks. This also unlocks drone cultivator research which lets you automate your agriculture needs.\nThis will set any drone's base level to 10.\nUnless other settings for a specific drone station are specified.</discoveredLetterText>
+    <discoveredLetterText>You now have basic knowledge about drones and can now start to utilize them for different tasks.\nThis will set any drone's base level to 10.\nUnless other settings for a specific drone station are specified.</discoveredLetterText>
   </ResearchProjectDef>
   <!-- this should set all drone base stats to 10 unless manually overwritten -->
 
