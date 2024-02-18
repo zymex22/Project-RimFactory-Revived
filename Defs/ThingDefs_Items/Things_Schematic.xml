@@ -4,9 +4,9 @@
   <!--==================================== data disk ==============================-->
   <ThingDef>
     <defName>PRF_DataDisk</defName>
-    <label>Audio Tape Reel</label>
+    <label>audio tape reel</label>
     <thingClass>ThingWithComps</thingClass>
-    <description>A roll of magnetic tape. Apparently it can hold 64 megabytes. How primitive... It's used to create Recipe DataBases for PRF Machines.</description>
+    <description>A roll of magnetic tape. Apparently, it can hold 64 megabytes. How primitive... It's used to create recipe databases for PRF machines.</description>
     <graphicData>
       <texPath>SAL3/datadisk</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -51,7 +51,7 @@
   <!--==================================== Small frame ===============================-->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_MachineFrame_I</defName>
-    <label>Small Machine Frame</label>
+    <label>small machine frame</label>
     <description>A small but simple machine frame used in the construction of automated buildings.</description>
     <graphicData>
       <texPath>Common/MachineFrameSmall</texPath>
@@ -80,7 +80,7 @@
   <!--==================================== Medium frame ==============================-->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_MachineFrame_II</defName>
-    <label>Medium Machine Frame</label>
+    <label>medium machine frame</label>
     <description>A medium-sized machine frame used for the construction of more complex and larger machines.</description>
     <graphicData>
       <texPath>Common/MachineFrame</texPath>
@@ -109,7 +109,7 @@
   <!--==================================== Large frame ===============================-->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_MachineFrame_III</defName>
-    <label>Advanced Machine Frame</label>
+    <label>advanced machine frame</label>
     <description>The empty shell of an advanced automation building.</description>
     <graphicData>
       <texPath>Common/MachineFrameLarge</texPath>

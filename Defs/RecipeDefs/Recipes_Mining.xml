@@ -14,8 +14,8 @@
 	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Granite</defName>
 		<label>mine granite</label>
-		<description>mining granite.</description>
-		<jobString>Mining granite</jobString>
+		<description>Mining granite.</description>
+		<jobString>Mining granite.</jobString>
 		<products>
 			<ChunkGranite>1</ChunkGranite>
 		</products>
@@ -24,8 +24,8 @@
 	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Sandstone</defName>
 		<label>mine sandstone</label>
-		<description>mining sandstone.</description>
-		<jobString>Mining sandstone</jobString>
+		<description>Mining sandstone.</description>
+		<jobString>Mining sandstone.</jobString>
 		<products>
 			<ChunkSandstone>1</ChunkSandstone>
 		</products>
@@ -34,8 +34,8 @@
 	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Limestone</defName>
 		<label>mine limestone</label>
-		<description>mining limestone.</description>
-		<jobString>Mining limestone</jobString>
+		<description>Mining limestone.</description>
+		<jobString>Mining limestone.</jobString>
 		<products>
 			<ChunkLimestone>1</ChunkLimestone>
 		</products>
@@ -44,8 +44,8 @@
 	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Slate</defName>
 		<label>mine slate</label>
-		<description>mining slate.</description>
-		<jobString>Mining slate</jobString>
+		<description>Mining slate.</description>
+		<jobString>Mining slate.</jobString>
 		<products>
 			<ChunkSlate>1</ChunkSlate>
 		</products>
@@ -54,8 +54,8 @@
 	<RecipeDef ParentName="PRF_MiningWork">
 		<defName>PRF_Excavate_Marble</defName>
 		<label>mine marble</label>
-		<description>mining marble.</description>
-		<jobString>Mining marble</jobString>
+		<description>Mining marble.</description>
+		<jobString>Mining marble.</jobString>
 		<products>
 			<ChunkMarble>1</ChunkMarble>
 		</products>

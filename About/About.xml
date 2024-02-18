@@ -10,20 +10,19 @@
   </supportedVersions>
   <packageId>spdskatr.projectrimfactory</packageId>
   <url>https://ludeon.com/forums/index.php?topic=30813.0</url>
-  <description> &lt;size=24&gt;Incompatible mods:&lt;/size&gt;
-  - Mend and Recycle (only on assemblers)
-  - Technology Blueprints &amp; Reverse Engineering (t3 miner bill option)
+  <description>&lt;size=24&gt;Incompatible mods:&lt;/size&gt;
+- Mend and Recycle (only on assemblers)
+- Technology Blueprints &amp; Reverse Engineering (t3 miner bill option)
 
-  This is our remake of Project RimFactory, its a overhauled version of great old mod by spdskatr.
-  We have expanded on original ideas and tried adding some more story to it.
+This is our remake of Project RimFactory, it's an overhauled version of a great old mod by spdskatr.
+We have expanded on original ideas and tried adding some more story to it.
 
-  Also try balance and stay in line with vanilla and other mods on workshop, without going too OP.
-  Or too far.
-  (we have sub mods for that.... :p)
+Also, try balance and stay in line with vanilla and other mods on the workshop, without going too OP.
+Or too far.
+(we have sub-mods for that.... :p)
 
-  We hope you enjoy this mod, if you need more info checkout our steam page, github page or join our discord.
-  We also working on a wiki on our discord for more info on how stuff work.
-
+We hope you enjoy this mod, if you need more info check out our steam page, github page or join our discord.
+We are also working on a wiki on our discord for more info on how stuff works.
   </description>
   <modDependencies>
     <li>

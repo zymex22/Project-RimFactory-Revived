@@ -3,16 +3,16 @@
 
   <PRF_Settings_C_Lite_Header>Toggle PRF Lite Mode</PRF_Settings_C_Lite_Header>
   <PRF_Settings_C_Lite_Label>PRF Lite Mode</PRF_Settings_C_Lite_Label>
-  <PRF_Settings_C_Lite_ToolTip>Checking this item will enable PRF Lite Mode, which will disable all machines while leaving the logistics and storages devices intact.\n\nThis is primarily for those who only want to use the logistics items with another automation mod such as VEF: Mechanoids.</PRF_Settings_C_Lite_ToolTip>
+  <PRF_Settings_C_Lite_ToolTip>Checking this item will enable PRF Lite Mode, which will disable all machines while leaving the logistics and storage devices intact.\n\nThis is primarily for those who only want to use the logistics items with another automation mod such as VEF: Mechanoids.</PRF_Settings_C_Lite_ToolTip>
   <PRF_Settings_C_Patches_Header>Patches</PRF_Settings_C_Patches_Header>
-  <PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>Toggles the Advanced IO CanReach Patch\n\nWhen checked the Patch is active and allows Pawns to reach the DSU contents using Advanced IO Ports even if the Path to the DSU is blocked\n\nThis patch is not active by default as it may cause spikes and is only useful in some cases.\n\n(ProjectRimFactory.Common.HarmonyPatches.Patch_Reachability_CanReach:Postfix)</PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>
+  <PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>Toggles the Advanced IO CanReach Patch.\n\nWhen checked, the patch is active and allows pawns to reach the DSU contents using advanced IO ports even if the path to the DSU is blocked.\n\nThis patch is not active by default as it may cause spikes and is only useful in some cases.\n\n(ProjectRimFactory.Common.HarmonyPatches.Patch_Reachability_CanReach:Postfix)</PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>
   <PRF_Settings_C_Patches_Reachability_CanReach>Toggle the Advanced IO CanReach Patch</PRF_Settings_C_Patches_Reachability_CanReach>
-  <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>Toggles the Cold Storage WealthWatcher Patch\n\nWhen checked the Patch is active and items in Cold Storage contribute to Colony Wealth.\n\nFor most Players we reccomend this to be on.\nPerformance load on this is ~1ms per 1,000 stored items. This runs every 5,000 Ticks\n\n(ProjectRimFactory.Common.HarmonyPatches.Patch_WealthWatcher_CalculateWealthItems:Postfix)</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>
+  <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>Toggles the Cold Storage WealthWatcher Patch.\n\nWhen checked, the patch is active and items in Cold Storage contribute to colony wealth.\n\nFor most players, we recommend this to be on.\nPerformance load on this is ~1ms per 1,000 stored items. This runs every 5,000 ticks.\n\n(ProjectRimFactory.Common.HarmonyPatches.Patch_WealthWatcher_CalculateWealthItems:Postfix)</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>
   <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>Toggle the Cold Storage WealthWatcher Patch</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>
-  
+
   <PRF.Common.ForbidOnPlacingDefault>Forbid items on placement</PRF.Common.ForbidOnPlacingDefault>
   <PRF.Common.ForbidOnPlacingDefaultDesc>When enabled machine products will be automatically forbidden on placement.</PRF.Common.ForbidOnPlacingDefaultDesc>
-  
+
   <PRF.Settings.RequireReboot>Changes will require a reboot to apply the setting.</PRF.Settings.RequireReboot>
   <PRF.Settings.Select>Select</PRF.Settings.Select>
   <PRF.Settings.TopMessage><![CDATA[<size=20>Any setting changes will <b><i><color=red>require a restart</color></i></b></size>]]></PRF.Settings.TopMessage>
@@ -22,7 +22,7 @@
   <PRF.Settings.StorageMessage>Storage Settings</PRF.Settings.StorageMessage>
 
   <PRF.Settings.TurnOffHelpButton.Label>Disable "Help" button</PRF.Settings.TurnOffHelpButton.Label>
-  <PRF.Settings.TurnOffHelpButton.Desc>Disabling this will remove the "Help" button that appears along the bottom when you have a PRF Machine selected.</PRF.Settings.TurnOffHelpButton.Desc>
+  <PRF.Settings.TurnOffHelpButton.Desc>Disabling this will remove the "Help" button that appears along the bottom when you have a PRF machine selected.</PRF.Settings.TurnOffHelpButton.Desc>
 
   <PRF.Settings.TurnOffPulseGlowerEffect.Label>Enable pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Label>
   <PRF.Settings.TurnOffPulseGlowerEffect.Desc>Enable pulse glower effect</PRF.Settings.TurnOffPulseGlowerEffect.Desc>
@@ -31,36 +31,36 @@
   <PRF.Settings.TurnOffSwapTexture.Desc>Disables dynamic switching of building textures to a "working" state when they're in use.</PRF.Settings.TurnOffSwapTexture.Desc>
 
   <PRF.Settings.TurnOffDrawStatus.Label>Disable working status label</PRF.Settings.TurnOffDrawStatus.Label>
-  <PRF.Settings.TurnOffDrawStatus.Desc>Disables the written labels that appear over a machine announcing its status</PRF.Settings.TurnOffDrawStatus.Desc>
+  <PRF.Settings.TurnOffDrawStatus.Desc>Disables the written labels that appear over a machine announcing its status.</PRF.Settings.TurnOffDrawStatus.Desc>
 
   <PRF.Settings.TurnOffDoEffect.Label>Disable audiovisual effects for recipes</PRF.Settings.TurnOffDoEffect.Label>
-  <PRF.Settings.TurnOffDoEffect.Desc>Disables sounds and drawing of things like animated food particles over machines while working.</PRF.Settings.TurnOffDoEffect.Desc>
+  <PRF.Settings.TurnOffDoEffect.Desc>Disables sounds and drawings of things like animated food particles over machines while working.</PRF.Settings.TurnOffDoEffect.Desc>
 
   <PRF.Settings.TurnOffStorageDefault.Label>Disable default storage settings</PRF.Settings.TurnOffStorageDefault.Label>
   <PRF.Settings.TurnOffStorageDefault.Desc>If disabled, crates and other storage items will allow any item by default.</PRF.Settings.TurnOffStorageDefault.Desc>
 
-  <PRF.Settings.TurnOffDsuDestroy.Label>Disable loss of items on DSU Deconstruction</PRF.Settings.TurnOffDsuDestroy.Label>
-  <PRF.Settings.TurnOffDsuDestroy.Desc>When deconstructed manually, any items in the DSU are lost.  Turning off this setting will cause them to be returned normally.</PRF.Settings.TurnOffDsuDestroy.Desc>
+  <PRF.Settings.TurnOffDsuDestroy.Label>Disable loss of items on DSU deconstruction</PRF.Settings.TurnOffDsuDestroy.Label>
+  <PRF.Settings.TurnOffDsuDestroy.Desc>When deconstructed manually, any items in the DSU are lost. Turning off this setting will cause them to be returned normally.</PRF.Settings.TurnOffDsuDestroy.Desc>
 
   <PRF.Settings.DsuLimit.Label>Override DSU storage limit</PRF.Settings.DsuLimit.Label>
   <PRF.Settings.DsuLimit.Desc>Check this to enable the override slider on the right.</PRF.Settings.DsuLimit.Desc>
 
-  <PRF.Settings.recipeDB.Label>Override range for Recipe DB</PRF.Settings.recipeDB.Label>
+  <PRF.Settings.recipeDB.Label>Override range for recipe database</PRF.Settings.recipeDB.Label>
   <PRF.Settings.recipeDB.Desc>Check this to enable the override slider on the right.</PRF.Settings.recipeDB.Desc>
 
   <PRF.Settings.TurnOffInfestation.Label>Disable infestation for T1/T2 miners</PRF.Settings.TurnOffInfestation.Label>
-  <PRF.Settings.TurnOffInfestation.Desc>Stops Tier 1 and 2 automated miners from drawing insectoid infestations.\n\nCould be unbalanced, since those are the only real limit on your ability to run fifty of them at a time.</PRF.Settings.TurnOffInfestation.Desc>
+  <PRF.Settings.TurnOffInfestation.Desc>Stops tier 1 and 2 automated miners from drawing insectoid infestations.\n\nCould be unbalanced, since this is the only real limit on your ability to run fifty of them at a time.</PRF.Settings.TurnOffInfestation.Desc>
 
   <PRF.Settings.TurnOffMinerNerf.Label>Miners can mine all ore types</PRF.Settings.TurnOffMinerNerf.Label>
   <PRF.Settings.TurnOffMinerNerf.Desc>All tiers of miners can now mine any ore, ignoring any limits defined for them.\n\nCould be unbalanced, since you can dig up an infinite amount of whatever you want so long as it's defined as an ore.</PRF.Settings.TurnOffMinerNerf.Desc>
 
-  <PRF.Settings.TurnOffGrouping.Label>Disable some of the menu grouping / dropdown</PRF.Settings.TurnOffGrouping.Label>
-  <PRF.Settings.TurnOffGrouping.Desc>Limited effects right now, but it makes a few of the grouped up architect menu items unstack into separate entries.</PRF.Settings.TurnOffGrouping.Desc>
+  <PRF.Settings.TurnOffGrouping.Label>Disable some of the menu grouping/dropdown</PRF.Settings.TurnOffGrouping.Label>
+  <PRF.Settings.TurnOffGrouping.Desc>Limited effects right now, but it makes a few of the grouped-up architect menu items unstack into separate entries.</PRF.Settings.TurnOffGrouping.Desc>
 
-  <PRF.Settings.TurnOffFurnacefuel.Label>Disable fuel use on T1 Furnace</PRF.Settings.TurnOffFurnacefuel.Label>
-  <PRF.Settings.TurnOffFurnacefuel.Desc>Makes the Tier 1 Furnace free to use.</PRF.Settings.TurnOffFurnacefuel.Desc>
+  <PRF.Settings.TurnOffFurnacefuel.Label>Disable fuel use on T1 furnace</PRF.Settings.TurnOffFurnacefuel.Label>
+  <PRF.Settings.TurnOffFurnacefuel.Desc>Makes the tier 1 furnace free to use.</PRF.Settings.TurnOffFurnacefuel.Desc>
 
   <PRF.Settings.TurnOffCoalGen.Label>Disable natural coal generation</PRF.Settings.TurnOffCoalGen.Label>
-  <PRF.Settings.TurnOffCoalGen.Desc>Disable natural coal generation</PRF.Settings.TurnOffCoalGen.Desc>
+  <PRF.Settings.TurnOffCoalGen.Desc>Disable natural coal generation.</PRF.Settings.TurnOffCoalGen.Desc>
 
 </LanguageData>

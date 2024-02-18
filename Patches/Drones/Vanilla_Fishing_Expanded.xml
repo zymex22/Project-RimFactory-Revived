@@ -15,11 +15,11 @@
 					<value>
 						<ThingDef ParentName="PRF_MiniDroneStation">
 							<defName>PRF_MiniHelperFishing</defName>
-							<label>Mini Fishing station</label>
+							<label>mini fishing station</label>
 							<graphicData>
 								<texPath>Drones/MiniDroneStation</texPath>
 							</graphicData>
-							<description>A mini Fishing Station capable of helping you with catching fish. it will take breaks to prevent curcuits getting too wet.</description>
+							<description>A mini fishing station capable of helping you with catching fish. It will take breaks to prevent circuits from getting too wet.</description>
 							<costList>
 								<PRF_MachineFrame_I>1</PRF_MachineFrame_I>
 								<PRF_DroneModule>1</PRF_DroneModule>

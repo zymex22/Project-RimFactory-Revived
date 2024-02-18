@@ -56,8 +56,8 @@
   <!-- This is using Simple Assembler thingclass, thats more or less a normal assembler just with preset recipes -->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerI</defName>
-    <label>Industrial Cooker</label>
-    <description>An industrial grade cooker capable of steadily cooking meals for your colonists. Requires electricity and raw ingredients to operate.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\nOnly cooks simple foods but with a cooking level of 8 at 1x speed \n\nWhite cell is input\nYellow are output cell</description>
+    <label>industrial cooker</label>
+    <description>An industrial-grade cooker capable of steadily cooking meals for your colonists. Requires electricity and raw ingredients to operate.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go!\n\nOnly cooks simple foods but with a cooking level of 8 at 1x speed.\n\nThe white cells represent the input range, and the yellow cell represents the output.</description>
     <uiIconScale>0.7</uiIconScale>
     <graphicData>
       <texPath>SAL3/cooker1</texPath>
@@ -125,8 +125,8 @@
   <!--==================== T2 modern AutoCooker ====================-->
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerII</defName>
-    <label>modern autocooker</label>
-    <description>An improved assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! \n\n Copies Electric stove recipes at 1.5x speed, with a cooking level of 12.</description>
+    <label>modern auto-cooker</label>
+    <description>An improved assortment of food processing modules that can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go!\n\nCopies electric stove recipes at 1.5x speed, with a cooking level of 12.</description>
     <graphicData>
       <texPath>SAL3/cooker2</texPath>
       <drawSize>(3.3,3.3)</drawSize>
@@ -192,7 +192,7 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_SelfCookerIII</defName>
     <label>spacer cooker</label>
-    <description>An advanced assortment of food processing modules which can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! Cooks at 2x speed with a cooking skill of 20.</description>
+    <description>An advanced assortment of food processing modules that can peel, mince, chop, mix, cook, steam, grill, and bake ingredients into more or less delicious meals and other edible products.\n\nNever ruin a meal again with your one-stop solution to satisfy all your colony's sustenance needs. Just look at it go! Cooks at 2x speed with a cooking skill of 20.</description>
     <graphicData>
       <texPath>SAL3/SpacerCooker</texPath>
     </graphicData>
@@ -359,7 +359,7 @@
   <ThingDef ParentName="PRF_CookingBase">
     <defName>PRF_FermentingBarrel</defName>
     <label>fermenting tank</label>
-    <description>A fully automated tank for fermenting alcoholic beverages.  It self-regulates temperature to maintain the best quality.</description>
+    <description>A fully automated tank for fermenting alcoholic beverages. It self-regulates temperature to maintain the best quality.</description>
     <graphicData>
       <texPath>SAL3/brewer</texPath>
       <drawSize>(1.8,1.8)</drawSize>

@@ -4,7 +4,7 @@
   <!-- ================================== Robot arm ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_RoboticArm</defName>
-    <label>Robotic Arm</label>
+    <label>robotic arm</label>
     <description>An electrically powered robotic arm necessary for the construction of automated buildings. Can be crafted at the robotic machining table.</description>
     <graphicData>
       <texPath>Common/RoboticArm</texPath>
@@ -31,7 +31,7 @@
   <!-- ================================== Weak AI Chip (Tier 2) ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_I</defName>
-    <label>Basic AI Chip</label>
+    <label>basic AI chip</label>
     <description>A tensor processing unit containing the most rudimentary AI. Used for early machines and robots.</description>
     <graphicData>
       <texPath>Common/WeakAICore</texPath>
@@ -55,8 +55,8 @@
   <!-- ================================== Advanced AI Core (Tier 3) ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_II</defName>
-    <label>Advanced AI Core</label>
-    <description>An advanced processing unit containing hi-tech AI, which is used for advanced machines and robots..</description>
+    <label>advanced AI core</label>
+    <description>An advanced processing unit containing hi-tech AI, which is used for advanced machines and robots.</description>
     <graphicData>
       <texPath>Common/AdvancedAICore</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -78,7 +78,7 @@
   <!-- ================================== Qubit processor (Tier 4) ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_ElectronicChip_III</defName>
-    <label>Qubit processor</label>
+    <label>qubit processor</label>
     <description>In quantum computing, a qubit or quantum bit is the basic unit of quantum information—the quantum version of the classical binary bit physically realized with a two-state device. A qubit is a two-state quantum-mechanical system, one of the simplest quantum systems displaying the peculiarity of quantum mechanics.</description>
     <graphicData>
       <texPath>Common/UltraAiCore</texPath>
@@ -102,8 +102,8 @@
   <!-- ================================== Drone module ================================= -->
   <ThingDef ParentName="PRF_ResourceBase">
     <defName>PRF_DroneModule</defName>
-    <label>UAV(packed)</label>
-    <description>An unmanned aerial vehicle capable of fulfilling simple tasks. Will need to be installed in a Dronestation in order to get the right programming installed.</description>
+    <label>UAV (packed)</label>
+    <description>An unmanned aerial vehicle capable of fulfilling simple tasks. Will need to be installed in a drone station in order to get the right programming installed.</description>
     <graphicData>
       <texPath>Common/DroneModule</texPath>
       <graphicClass>Graphic_Single</graphicClass>

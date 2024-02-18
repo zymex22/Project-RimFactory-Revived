@@ -13,9 +13,9 @@
           <value>
             <RecipeDef>
               <defName>Brew_VBE_AmbrandyNormal</defName>
-              <label>Brew Ambrandy x10</label>
-              <description>Brew Ambrandy x10</description>
-              <jobString>Brewing Ambrandy</jobString>
+              <label>brew ambrandy x10</label>
+              <description>Brew ambrandy x10.</description>
+              <jobString>Brewing ambrandy.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -43,9 +43,9 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Gin</defName>
-              <label>Brew Gin x10</label>
-              <description>Brew Gin x10</description>
-              <jobString>Brewing Gin</jobString>
+              <label>brew gin x10</label>
+              <description>Brew gin x10.</description>
+              <jobString>Brewing gin.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -73,9 +73,9 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Tequila</defName>
-              <label>Brew Tequila x10</label>
-              <description>Brew Tequila x10</description>
-              <jobString>Brewing Tequila</jobString>
+              <label>brew tequila x10</label>
+              <description>Brew tequila x10.</description>
+              <jobString>Brewing tequila.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -103,9 +103,9 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Vodka</defName>
-              <label>Brew Vodka x10</label>
-              <description>Brew Vodka x10</description>
-              <jobString>Brewing Vodka</jobString>
+              <label>brew vodka x10</label>
+              <description>Brew vodka x10.</description>
+              <jobString>Brewing vodka.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -133,9 +133,9 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Whiskey</defName>
-              <label>Brew Whiskey x10</label>
-              <description>Brew Whiskey x10</description>
-              <jobString>Brewing Whiskey</jobString>
+              <label>brew whiskey x10</label>
+              <description>Brew whiskey x10.</description>
+              <jobString>Brewing whiskey.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -163,9 +163,9 @@
 
             <RecipeDef>
               <defName>Brew_VBE_Soda</defName>
-              <label>Brew Soda x10</label>
-              <description>Brew Soda x10</description>
-              <jobString>Brewing Soda</jobString>
+              <label>brew soda x10</label>
+              <description>Brew soda x10.</description>
+              <jobString>Brewing soda.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -212,9 +212,9 @@
             <value>
               <RecipeDef>
                 <defName>Brew_VBE_Cider</defName>
-                <label>Brew Cider x10</label>
-                <description>Brew Cider x10</description>
-                <jobString>Brewing Cider</jobString>
+                <label>brew cider x10</label>
+                <description>Brew cider x10.</description>
+                <jobString>Brewing cider.</jobString>
                 <effectWorking>Cook</effectWorking>
                 <workSkill>Cooking</workSkill>
                 <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -259,9 +259,9 @@
           <value>
             <RecipeDef>
               <defName>Brew_VFEM_Wine</defName>
-              <label>Brew Wine x10</label>
-              <description>Brew Wine x10</description>
-              <jobString>Brewing Wine</jobString>
+              <label>brew wine x10</label>
+              <description>Brew wine x10.</description>
+              <jobString>Brewing wine.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -305,9 +305,9 @@
           <value>
             <RecipeDef>
               <defName>Brew_VFEV_Mead</defName>
-              <label>Brew Mead x10</label>
-              <description>Brew Mead x10</description>
-              <jobString>Brewing Mead</jobString>
+              <label>brew mead x10</label>
+              <description>Brew mead x10.</description>
+              <jobString>Brewing mead.</jobString>
               <effectWorking>Cook</effectWorking>
               <workSkill>Cooking</workSkill>
               <workSpeedStat>GeneralLaborSpeed</workSpeedStat>

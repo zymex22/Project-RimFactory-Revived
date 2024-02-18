@@ -23,8 +23,8 @@
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Pink_Marble</defName>
 							<label>mine pink marble</label>
-							<description>mining pink marble.</description>
-							<jobString>Mining pink marble</jobString>
+							<description>Mining pink marble.</description>
+							<jobString>Mining pink marble.</jobString>
 							<workAmount>655</workAmount>
 							<products>
 								<ChunkPinkMarble>1</ChunkPinkMarble>
@@ -33,8 +33,8 @@
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Blue_Granite</defName>
 							<label>mine blue granite</label>
-							<description>mining blue granite.</description>
-							<jobString>Mining blue granite</jobString>
+							<description>Mining blue granite.</description>
+							<jobString>Mining blue granite.</jobString>
 							<workAmount>655</workAmount>
 							<products>
 								<ChunkBlueGranite>1</ChunkBlueGranite>
@@ -43,8 +43,8 @@
 						<RecipeDef ParentName="PRF_MiningWork">
 							<defName>PRF_Excavate_Green_Marble</defName>
 							<label>mine green marble</label>
-							<description>mining green marble.</description>
-							<jobString>Mining green marble</jobString>
+							<description>Mining green marble.</description>
+							<jobString>Mining green marble.</jobString>
 							<workAmount>655</workAmount>
 							<products>
 								<ChunkGreenMarble>1</ChunkGreenMarble>

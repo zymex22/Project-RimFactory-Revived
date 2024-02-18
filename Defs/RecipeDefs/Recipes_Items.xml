@@ -3,7 +3,7 @@
   <!--==================================== DataDisk ==============================-->
   <RecipeDef>
     <defName>MakeDataDisk</defName>
-    <label>make Audio Tape Reel</label>
+    <label>make audio tape reel</label>
     <description>Make a roll of magnetic data tape.</description>
     <jobString>Making data disk.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -52,8 +52,8 @@
   <RecipeDef>
     <defName>MakePRF_RoboticArm</defName>
     <label>make robotic arm</label>
-    <description>Make a robotic arm</description>
-    <jobString>Making robotic arm</jobString>
+    <description>Make a robotic arm.</description>
+    <jobString>Making robotic arm.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -100,8 +100,8 @@
   <RecipeDef>
     <defName>MakePRF_ElectronicChip_I</defName>
     <label>make basic AI chip</label>
-    <description>Make basic AI chip</description>
-    <jobString>Making basic AI chip</jobString>
+    <description>Make a basic AI chip.</description>
+    <jobString>Making basic AI chip.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -147,8 +147,8 @@
   <RecipeDef>
     <defName>MakePRF_ElectronicChip_II</defName>
     <label>make advanced AI core</label>
-    <description>Make an advanced AI core</description>
-    <jobString>Making Adv. AI core</jobString>
+    <description>Make an advanced AI core.</description>
+    <jobString>Making advanced AI core.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -212,8 +212,8 @@
   <RecipeDef>
     <defName>MakePRF_ElectronicChip_III</defName>
     <label>make qubit processor</label>
-    <description>Make a qubit processor</description>
-    <jobString>Making qubit processor</jobString>
+    <description>Make a qubit processor.</description>
+    <jobString>Making qubit processor.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -276,9 +276,9 @@
   <!--==================================== Drone module ==============================-->
   <RecipeDef>
     <defName>MakePRF_DroneModule</defName>
-    <label>make UAV(packed)</label>
-    <description>Make a drone module</description>
-    <jobString>Making drone module</jobString>
+    <label>make UAV (packed)</label>
+    <description>Make a drone module.</description>
+    <jobString>Making drone module.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -333,8 +333,8 @@
   <RecipeDef>
     <defName>MakeSmallFrame</defName>
     <label>make small machine frame</label>
-    <description>Make a small machine frame for use in factory buildings</description>
-    <jobString>Making frame</jobString>
+    <description>Make a small machine frame for use in factory buildings.</description>
+    <jobString>Making frame.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -379,8 +379,8 @@
   <RecipeDef>
     <defName>MakeMediumFrame</defName>
     <label>make medium machine frame</label>
-    <description>Make a medium machine frame for factory building</description>
-    <jobString>Making frame</jobString>
+    <description>Make a medium machine frame for a factory building.</description>
+    <jobString>Making frame.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
@@ -434,8 +434,8 @@
   <RecipeDef>
     <defName>MakeLargeFrame</defName>
     <label>make advanced machine frame</label>
-    <description>Make an advanced machine frame for factory buildings</description>
-    <jobString>Making frame</jobString>
+    <description>Make an advanced machine frame for factory buildings.</description>
+    <jobString>Making frame.</jobString>
     <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
     <effectWorking>Cook</effectWorking>
     <soundWorking>Recipe_Machining</soundWorking>
