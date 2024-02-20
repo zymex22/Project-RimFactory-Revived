@@ -245,7 +245,12 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
             prf_gamecomp.RegisterAssemblerQueue(this);
 
-
+            //Check if the Current Bill still Exists
+            if (currentBillReport.bill is null)
+            {
+                //Remove Bill
+                currentBillReport = null;
+            }
 
         }
 
