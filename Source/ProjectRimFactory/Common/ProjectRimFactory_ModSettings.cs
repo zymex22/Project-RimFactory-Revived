@@ -76,6 +76,18 @@ namespace ProjectRimFactory.Common
             list.Gap();
             ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
 
+            AddHeader(list, "PRF_Settings_GeneralOptions_Header".Translate());
+
+            rect = list.GetRect(20);
+            if (Mouse.IsOver(rect))
+            {
+                Widgets.DrawHighlight(rect);
+            }
+            TooltipHandler.TipRegion(rect, "PRF_Settings_GeneralOptions_DSU_UseFuzzySearch_ToolTip".Translate());
+            Widgets.CheckboxLabeled(rect, "PRF_Settings_GeneralOptions_DSU_UseFuzzySearch".Translate(), ref PRF_UseFuzzySearch);
+            list.Gap();
+
+
         }
 
         private static ContainerRow ParseSettingRows(ModContentPack content)
@@ -100,7 +112,7 @@ namespace ProjectRimFactory.Common
         public static bool PRF_LiteMode = false;
         private static bool PRF_LiteMode_last = false;
         public static bool PRF_Patch_Reachability_CanReach = false;
-        public static bool PRF_Patch_WealthWatcher_CalculateWealthItems = true;
+        public static bool PRF_UseFuzzySearch = true;
 
         public override void ExposeData()
         {
@@ -109,7 +121,7 @@ namespace ProjectRimFactory.Common
             Scribe_Values.Look<Debug.Flag>(ref Debug.activeFlags, "debugFlags", 0);
             Scribe_Values.Look(ref PRF_LiteMode, "PRF_LiteMode", false);
             Scribe_Values.Look(ref PRF_Patch_Reachability_CanReach, "PRF_Patch_Reachability_CanReach", false);
-            Scribe_Values.Look(ref PRF_Patch_WealthWatcher_CalculateWealthItems, "PRF_Patch_WealthWatcher_CalculateWealthItems", true);
+            Scribe_Values.Look(ref PRF_UseFuzzySearch, "PRF_UseFuzzySearch", true);
             PRF_LiteMode_last = PRF_LiteMode;
         }
 

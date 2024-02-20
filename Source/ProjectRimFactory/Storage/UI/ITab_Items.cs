@@ -100,6 +100,17 @@ namespace ProjectRimFactory.Storage.UI
             return false;
         }
 
+        private bool Search(string source, string target)
+        {
+            if (ProjectRimFactory.Common.ProjectRimFactory_ModSettings.PRF_UseFuzzySearch)
+            {
+                return source.NormalizedFuzzyStrength(target) < FuzzySearch.Strength.Strong;
+            }
+            else
+            {
+                return source.Contains(target);
+            }
+        }
 
         protected override void FillTab()
         {
@@ -116,8 +127,7 @@ namespace ProjectRimFactory.Storage.UI
             if (itemsToShow == null || searchQuery != oldSearchQuery || SelectedMassStorageUnit.StoredItemsCount != itemsToShow.Count || oldSelectedMassStorageUnit == null || oldSelectedMassStorageUnit != SelectedMassStorageUnit)
             {
                 itemsToShow = new List<Thing>(from Thing t in SelectedMassStorageUnit.StoredItems
-                                              where string.IsNullOrEmpty(searchQuery) || t.GetInnerIfMinified().Label.ToLower().NormalizedFuzzyStrength(searchQuery.ToLower()) <
-                                                  FuzzySearch.Strength.Strong
+                                              where string.IsNullOrEmpty(searchQuery) || Search(t.GetInnerIfMinified().Label.ToLower(), searchQuery.ToLower())
                                               orderby t.Label descending
                                               select t);
                 oldSearchQuery = searchQuery;

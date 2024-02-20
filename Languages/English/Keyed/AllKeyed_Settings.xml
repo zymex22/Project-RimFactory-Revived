@@ -7,8 +7,10 @@
   <PRF_Settings_C_Patches_Header>Patches</PRF_Settings_C_Patches_Header>
   <PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>Toggles the Advanced IO CanReach Patch.\n\nWhen checked, the patch is active and allows pawns to reach the DSU contents using advanced IO ports even if the path to the DSU is blocked.\n\nThis patch is not active by default as it may cause spikes and is only useful in some cases.\n\n(ProjectRimFactory.Common.HarmonyPatches.Patch_Reachability_CanReach:Postfix)</PRF_Settings_C_Patches_Reachability_CanReach_ToolTip>
   <PRF_Settings_C_Patches_Reachability_CanReach>Toggle the Advanced IO CanReach Patch</PRF_Settings_C_Patches_Reachability_CanReach>
-  <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>Toggles the Cold Storage WealthWatcher Patch.\n\nWhen checked, the patch is active and items in Cold Storage contribute to colony wealth.\n\nFor most players, we recommend this to be on.\nPerformance load on this is ~1ms per 1,000 stored items. This runs every 5,000 ticks.\n\n(ProjectRimFactory.Common.HarmonyPatches.Patch_WealthWatcher_CalculateWealthItems:Postfix)</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems_ToolTip>
-  <PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>Toggle the Cold Storage WealthWatcher Patch</PRF_Settings_C_Patches_WealthWatcher_CalculateWealthItems>
+  
+  <PRF_Settings_GeneralOptions_Header>General Options</PRF_Settings_GeneralOptions_Header>
+  <PRF_Settings_GeneralOptions_DSU_UseFuzzySearch_ToolTip>Toggle the use of the Fuzzy Search algorithm for the storage item view\nIf Active Fuzzy Search will be used, otherwise it will use exact matches.</PRF_Settings_GeneralOptions_DSU_UseFuzzySearch_ToolTip>
+  <PRF_Settings_GeneralOptions_DSU_UseFuzzySearch>Use Fuzzy-Search for the storage item view</PRF_Settings_GeneralOptions_DSU_UseFuzzySearch>
 
   <PRF.Common.ForbidOnPlacingDefault>Forbid items on placement</PRF.Common.ForbidOnPlacingDefault>
   <PRF.Common.ForbidOnPlacingDefaultDesc>When enabled machine products will be automatically forbidden on placement.</PRF.Common.ForbidOnPlacingDefaultDesc>
