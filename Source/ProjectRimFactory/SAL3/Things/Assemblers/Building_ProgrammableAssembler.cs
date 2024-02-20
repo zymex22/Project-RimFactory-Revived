@@ -252,15 +252,6 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             //Check if the Current Bill still Exists
             if (currentBillReport.bill is null)
             {
-                //Refund materials
-                foreach (var thing in currentBillReport.selected)
-                {
-                    if (thing != null)
-                    {
-                        thing.SpawnSetup(this.Map, false);
-                    }
-                }
-
                 //Remove Bill
                 currentBillReport = null;
             }
