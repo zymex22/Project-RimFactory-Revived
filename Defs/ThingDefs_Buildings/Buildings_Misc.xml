@@ -111,6 +111,7 @@
         <prerequisites>
           <li>ColoredLights</li>
         </prerequisites>
+        <darklightToggle>true</darklightToggle>
       </li>
     </comps>
     <researchPrerequisites>
