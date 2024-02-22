@@ -8,12 +8,6 @@
       <success>Always</success>
       <operations>
       <li Class="PatchOperationAdd">
-		<xpath>/Defs/ThingDef[defName = "PRF_Recycler"]/recipes</xpath>
-		<value>
-		  <li>PRF_Destroy_Wastepack</li>
-		</value>
-      </li>
-      <li Class="PatchOperationAdd">
         <xpath>/Defs</xpath>
         <value>
           <RecipeDef>
@@ -45,6 +39,12 @@
               </li>
             </ingredients>
           </RecipeDef>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "PRF_Recycler"]/recipes</xpath>
+        <value>
+          <li>PRF_Destroy_Wastepack</li>
         </value>
       </li>
       </operations>
