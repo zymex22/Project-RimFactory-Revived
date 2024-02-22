@@ -172,6 +172,9 @@
         <li>BodyParts</li>
         <li>Buildings</li>
       </categories>
+      <disallowedThingDefs MayRequire="Ludeon.RimWorld.Biotech">
+        <li MayRequire="Ludeon.RimWorld.Biotech">Wastepack</li>
+      </disallowedThingDefs>
     </fixedIngredientFilter>
   </RecipeDef>
 
