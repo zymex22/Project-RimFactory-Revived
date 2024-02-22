@@ -141,6 +141,7 @@
       <isEdifice>false</isEdifice>
     </building>
     <clearBuildingArea>false</clearBuildingArea>
+    <tickerType>Rare</tickerType> <!-- Required for CompProperties_Schedule -->
     <costList>
       <Silver>2</Silver>
       <Steel>40</Steel>
