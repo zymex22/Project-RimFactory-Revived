@@ -44,6 +44,13 @@ namespace ProjectRimFactory.SAL3.Things
         RecipeDef IRecipeHolderInterface.Recipe_Learning { get => workingRecipe; set => workingRecipe = value; }
         List<RecipeDef> IRecipeHolderInterface.Saved_Recipes { get => recipes; set => recipes = value; }
 
+        // Used To detect if this is of type Bill_Mech
+        // This is the same Logic as in RimWorld.BillUtility:MakeNewBill()
+        private bool IsBill_Mech(RecipeDef def)
+        {
+            return def.mechResurrection || def.gestationCycles > 0;
+        }
+
         public virtual IEnumerable<RecipeDef> GetAllProvidedRecipeDefs()
         {
             HashSet<RecipeDef> result = new HashSet<RecipeDef>();
@@ -51,7 +58,7 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 foreach (RecipeDef recipe in table.def.AllRecipes)
                 {
-                    if (recipe.AvailableNow && !recipes.Contains(recipe) && !result.Contains(recipe))
+                    if (recipe.AvailableNow && !recipes.Contains(recipe) && !result.Contains(recipe) && !IsBill_Mech(recipe))
                         result.Add(recipe);
                 }
             }
@@ -188,6 +195,15 @@ namespace ProjectRimFactory.SAL3.Things
         {
             base.PostMake();
             quered_recipes ??= new List<RecipeDef>();
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+
+            // Remove existing Mech Bills as the don't work
+            // This code can be removed in the future once we are reasonably certain that this was executed on each affected Save
+            recipes.RemoveAll(r => IsBill_Mech(r));
         }
     }
 }
