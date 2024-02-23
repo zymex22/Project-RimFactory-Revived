@@ -503,8 +503,7 @@ namespace ProjectRimFactory.Drones
                 if (job != null)
                 {
                     additionJobSearchTickDelay = 0; //Reset to 0 - found a job -> may find more
-                    job.playerForced = true;
-                    job.expiryInterval = -1;
+                    job.playerForced = true; // Why is that here? (included since the very beginning)
                     //MakeDrone takes about 1ms
                     
                     drone.jobs.StartJob(job);
