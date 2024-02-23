@@ -74,43 +74,10 @@
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
       <li Class="CompProperties_Flickable"/>
-      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
+      <li Class="CompProperties_Glower">
         <glowRadius>15</glowRadius>
         <glowColor>(252,199,139,0)</glowColor>
-        <key>PRF_Warm_White</key>
-        <moreColors>
-          <li>
-            <key>PRF_Cool_White</key>
-            <color>(140,200,250,0)</color>
-          </li>
-          <li>
-            <key>PRF_Red</key>
-            <color>(217,80,80,0)</color>
-          </li>
-          <li>
-            <key>PRF_Green</key>
-            <color>(80,217,80,0)</color>
-          </li>
-          <li>
-            <key>PRF_Blue</key>
-            <color>(80,80,217,0)</color>
-          </li>
-          <li>
-            <key>PRF_Cyan</key>
-            <color>(10,245,245,0)</color>
-          </li>
-          <li>
-            <key>PRF_Yellow</key>
-            <color>(240,240,20,0)</color>
-          </li>
-          <li>
-            <key>PRF_Magenta</key>
-            <color>(245,10,245,0)</color>
-          </li>
-        </moreColors>
-        <prerequisites>
-          <li>ColoredLights</li>
-        </prerequisites>
+        <colorPickerEnabled>true</colorPickerEnabled>
         <darklightToggle>true</darklightToggle>
       </li>
     </comps>
@@ -231,43 +198,11 @@
         <compClass>CompHeatPusherPowered</compClass>
         <heatPerSecond>1</heatPerSecond>
       </li>
-      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
+      <li Class="CompProperties_Glower">
         <glowRadius>20</glowRadius>
         <glowColor>(252,199,139,0)</glowColor>
-        <key>PRF_Warm_White</key>
-        <moreColors>
-          <li>
-            <key>PRF_Cool_White</key>
-            <color>(140,200,250,0)</color>
-          </li>
-          <li>
-            <key>PRF_Red</key>
-            <color>(217,80,80,0)</color>
-          </li>
-          <li>
-            <key>PRF_Green</key>
-            <color>(80,217,80,0)</color>
-          </li>
-          <li>
-            <key>PRF_Blue</key>
-            <color>(80,80,217,0)</color>
-          </li>
-          <li>
-            <key>PRF_Cyan</key>
-            <color>(10,245,245,0)</color>
-          </li>
-          <li>
-            <key>PRF_Yellow</key>
-            <color>(240,240,20,0)</color>
-          </li>
-          <li>
-            <key>PRF_Magenta</key>
-            <color>(245,10,245,0)</color>
-          </li>
-        </moreColors>
-        <prerequisites>
-          <li>ColoredLights</li>
-        </prerequisites>
+        <colorPickerEnabled>true</colorPickerEnabled>
+        <darklightToggle>true</darklightToggle>
       </li>
     </comps>
     <researchPrerequisites>
@@ -308,43 +243,11 @@
         <basePowerConsumption>25</basePowerConsumption>
         <shortCircuitInRain>false</shortCircuitInRain>
       </li>
-      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
+      <li Class="CompProperties_Glower">
         <glowRadius>12</glowRadius>
         <glowColor>(140,200,250,0)</glowColor>
-        <key>PRF_Cool_White</key>
-        <moreColors>
-          <li>
-            <key>PRF_Warm_White</key>
-            <color>(252,199,139,0)</color>
-          </li>
-          <li>
-            <key>PRF_Red</key>
-            <color>(217,80,80,0)</color>
-          </li>
-          <li>
-            <key>PRF_Green</key>
-            <color>(80,217,80,0)</color>
-          </li>
-          <li>
-            <key>PRF_Blue</key>
-            <color>(80,80,217,0)</color>
-          </li>
-          <li>
-            <key>PRF_Cyan</key>
-            <color>(10,245,245,0)</color>
-          </li>
-          <li>
-            <key>PRF_Yellow</key>
-            <color>(240,240,20,0)</color>
-          </li>
-          <li>
-            <key>PRF_Magenta</key>
-            <color>(245,10,245,0)</color>
-          </li>
-        </moreColors>
-        <prerequisites>
-          <li>ColoredLights</li>
-        </prerequisites>
+        <colorPickerEnabled>true</colorPickerEnabled>
+        <darklightToggle>true</darklightToggle>
       </li>
     </comps>
     <researchPrerequisites>
