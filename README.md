@@ -54,7 +54,7 @@ It has grown to a huge collection of talented people that have contributed to ma
 **Nobo / Nullre** - For porting thing from NR_AutoMachineTools to prf and general C#  
 
 **Coders:** Spdskatr, Nobo, abnerchen, LWM, Sn1p3rr3c0n  
-**Artists:** Shotgunfrenzy, Chicken Plucker, Xen, Scythe, totobrother, "unknown alien", Argon, Thornsworth  
+**Artists:** Shotgunfrenzy, Chicken Plucker, Xen, Scythe, totobrother, "unknown alien", Argon, Thornsworth, Madman666  
 **Translators:**
 Russian: Natsu_Zirok, Chinese Simplified: 十里小飞, Chinese Traditional: AbnerChen
 **Resources:** Freepik, Flaticon  
