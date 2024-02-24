@@ -1,5 +1,4 @@
 ﻿using ProjectRimFactory.Common;
-using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.SAL3.Tools;
 using ProjectRimFactory.Storage;
 using ProjectRimFactory.Storage.UI;
@@ -11,11 +10,12 @@ using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
 {
-    public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder
+    public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder, IPickupSettings
     {
         private OutputSettings outputSettings;
 
-        public IEnumerable<IntVec3> cachedDetectorCells;
+        public List<IntVec3> cachedDetectorCells = new List<IntVec3>();
+        private bool cachedDetectorCellsDirty = false;
 
         protected virtual bool ShouldRespectStackLimit => true;
 
@@ -23,27 +23,40 @@ namespace ProjectRimFactory.SAL3.Things
 
         public Thing StoredThing => Position.GetFirstItem(Map);
 
-        private bool pickupFromGround;
+        private CompPowerWorkSetting compPowerWorkSetting;
 
-        public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
+        public IPowerSupplyMachine RangePowerSupplyMachine => compPowerWorkSetting ?? this.GetComp<CompPowerWorkSetting>();
 
-        private IEnumerable<IntVec3> CellsToTarget => (this.GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenRadial.RadialCellsAround(Position, this.def.specialDisplayRadius, false)).Where(c => c.GetFirst<Building_SmartHopper>(this.Map) == null);
-
-        public IEnumerable<IntVec3> CellsToSelect
+        private IEnumerable<IntVec3> CellsToTarget
         {
             get
             {
-                if (Find.TickManager.TicksGame % 50 != 0 && cachedDetectorCells != null)
+                IEnumerable<IntVec3> cells = compPowerWorkSetting?.GetRangeCells() ?? GenRadial.RadialCellsAround(Position, this.def.specialDisplayRadius, false);
+                return cells.Where(c => c.GetFirst<Building_SmartHopper>(this.Map) == null); //Exclude other Smart Hoppers
+            }
+        }
+
+        public List<IntVec3> CellsToSelect
+        {
+            get
+            {
+                if (Find.TickManager.TicksGame % 50 != 0 || cachedDetectorCellsDirty)
                 {
                     return cachedDetectorCells;
                 }
 
-                var resultCache = from IntVec3 c
-                                  in this.CellsToTarget
-                                  where this.pickupFromGround || c.HasSlotGroupParent(Map)
-                                  select c;
-                cachedDetectorCells = resultCache;
-                return resultCache;
+                cachedDetectorCellsDirty = false;
+                cachedDetectorCells.Clear();
+                foreach (IntVec3 c in CellsToTarget)
+                {
+                    if (!c.InBounds(this.Map)) continue;
+                    if (this.allowGroundPickup || (/*allowStockpilePickup &&  */c.HasSlotGroupParent(Map)))
+                    {
+                        cachedDetectorCells.Add(c);
+                    }
+                }
+
+                return cachedDetectorCells;
             }
         }
 
@@ -53,10 +66,13 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 foreach (var c in CellsToSelect)
                 {
-                    if (!c.InBounds(this.Map)) continue;
-                    foreach (Thing t in GatherThingsUtility.AllThingsInCellForUse(c, Map,false))
+                    foreach (Thing t in GatherThingsUtility.AllThingsInCellForUse(c, Map,AllowStockpilePickup))
                     {
-                        yield return t;
+                        if ((allowForbiddenPickup || !t.IsForbidden(Faction.OfPlayer)))
+                        {
+
+                            yield return t;
+                        }
                     }
                 }
             }
@@ -80,11 +96,31 @@ namespace ProjectRimFactory.SAL3.Things
             }
         }
 
-        public Thing NPDI_Item => StoredThing;
+
+
+        private bool allowGroundPickup = false;
+        private bool allowStockpilePickup = false;
+        private bool allowStoragePickup = false;
+        private bool allowForbiddenPickup = false;
+
+        public bool AllowGroundPickup
+        {
+            get => allowGroundPickup; 
+            
+            set
+            {
+                if (value != allowGroundPickup) cachedDetectorCellsDirty = true;
+                allowGroundPickup = value;
+            }
+        }
+        public bool AllowStockpilePickup { get => allowStockpilePickup; set => allowStockpilePickup = value; }
+        public bool AllowStoragePickup { get => allowStoragePickup; set => allowStoragePickup = value; }
+        public bool AllowForbiddenPickup { get => allowForbiddenPickup; set => allowForbiddenPickup = value; }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            compPowerWorkSetting = this.GetComp<CompPowerWorkSetting>();
             if (settings == null)
             {
                 settings = new StorageSettings();
@@ -92,7 +128,7 @@ namespace ProjectRimFactory.SAL3.Things
             }
             if (!respawningAfterLoad)
             {
-                this.pickupFromGround = true;
+                this.allowGroundPickup = true;
             }
         }
 
@@ -101,7 +137,10 @@ namespace ProjectRimFactory.SAL3.Things
             base.ExposeData();
             Scribe_Deep.Look(ref outputSettings, "outputSettings", "SmartHopper_Minimum_UseTooltip", "SmartHopper_Maximum_UseTooltip");
             Scribe_Deep.Look(ref settings, "settings", this);
-            Scribe_Values.Look(ref this.pickupFromGround, "pickupFromGround");
+            Scribe_Values.Look(ref this.allowGroundPickup, "allowGroundPickup", false);
+            Scribe_Values.Look(ref this.allowStockpilePickup, "allowStockpilePickup", false);
+            Scribe_Values.Look(ref this.allowStoragePickup, "allowStoragePickup", false);
+            Scribe_Values.Look(ref this.allowForbiddenPickup, "allowForbiddenPickup", false);
         }
 
         public override string GetInspectString()
@@ -185,8 +224,8 @@ namespace ProjectRimFactory.SAL3.Things
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            if (!this.pickupFromGround)
-                GenDraw.DrawFieldEdges(CellsToSelect.ToList(), Color.green);
+            if (!this.allowGroundPickup)
+                GenDraw.DrawFieldEdges(CellsToSelect, Color.green);
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -200,13 +239,6 @@ namespace ProjectRimFactory.SAL3.Things
                 icon = ContentFinder<Texture2D>.Get("UI/Commands/SetTargetFuelLevel"),
                 defaultLabel = "SmartHopper_SetTargetAmount".Translate(),
                 action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings)),
-            };
-            yield return new Command_Toggle
-            {
-                icon = ContentFinder<Texture2D>.Get("PRFUi/PickupFromGround"),
-                defaultLabel = "SmartHopper_PickupFromGround".Translate(),
-                toggleAction = () => this.pickupFromGround = !this.pickupFromGround,
-                isActive = () => this.pickupFromGround
             };
         }
 

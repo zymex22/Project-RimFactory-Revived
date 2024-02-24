@@ -120,6 +120,7 @@
     <inspectorTabs>
       <li>ITab_Storage</li>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+      <li>ProjectRimFactory.SAL3.Things.ITab_SmartHopper</li>
     </inspectorTabs>
     <castEdgeShadows>true</castEdgeShadows>
     <statBases>

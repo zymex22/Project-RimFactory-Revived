@@ -31,8 +31,13 @@
   <SmartHopper_Maximum>Current item max limit: {0}</SmartHopper_Maximum>
   <SmartHopper_Minimum_UseTooltip>When this is enabled, the smart hopper will unforbid its items if the stored item has less than X stack size. It will also only take items if there are enough items around to exceed the minimum.</SmartHopper_Minimum_UseTooltip>
   <SmartHopper_Maximum_UseTooltip>When this is enabled, the smart hopper will stop taking items if either the stack is full, or the stack size exceeds or is equal to X.</SmartHopper_Maximum_UseTooltip>
-  <SmartHopper_PickupFromGround>Pickup from ground</SmartHopper_PickupFromGround>
   <PRF_CantCreateStockpile>Can't create Stockpile (No free Cells).</PRF_CantCreateStockpile>
+  <PRF.SmartHopper.ITab.Name>Pickup</PRF.SmartHopper.ITab.Name>
+  <PRF.SmartHopper.ITab.Description>Pickup Settings:</PRF.SmartHopper.ITab.Description>
+  <PRF.SmartHopper.ITab.AllowGround>Ground</PRF.SmartHopper.ITab.AllowGround>
+  <PRF.SmartHopper.ITab.AllowStockpile>Stockpile</PRF.SmartHopper.ITab.AllowStockpile>
+  <PRF.SmartHopper.ITab.AllowStorage>Storage Building</PRF.SmartHopper.ITab.AllowStorage>
+  <PRF.SmartHopper.ITab.AllowForbidden>Allow forbidden</PRF.SmartHopper.ITab.AllowForbidden>
 
   <!--Mod settings-->
   <ProjectRimFactoryModName>Project RimFactory</ProjectRimFactoryModName>
