@@ -15,7 +15,7 @@ namespace ProjectRimFactory.SAL3.Things
         private OutputSettings outputSettings;
 
         public List<IntVec3> cachedDetectorCells = new List<IntVec3>();
-        private bool cachedDetectorCellsDirty = false;
+        private bool cachedDetectorCellsDirty = true;
 
         protected virtual bool ShouldRespectStackLimit => true;
 
@@ -40,7 +40,7 @@ namespace ProjectRimFactory.SAL3.Things
         {
             get
             {
-                if (Find.TickManager.TicksGame % 50 != 0 || cachedDetectorCellsDirty)
+                if (Find.TickManager.TicksGame % 50 != 0 && !cachedDetectorCellsDirty)
                 {
                     return cachedDetectorCells;
                 }
@@ -50,7 +50,7 @@ namespace ProjectRimFactory.SAL3.Things
                 foreach (IntVec3 c in CellsToTarget)
                 {
                     if (!c.InBounds(this.Map)) continue;
-                    if (this.allowGroundPickup || (/*allowStockpilePickup &&  */c.HasSlotGroupParent(Map)))
+                    if (this.allowGroundPickup || c.HasSlotGroupParent(Map))
                     {
                         cachedDetectorCells.Add(c);
                     }
@@ -68,10 +68,16 @@ namespace ProjectRimFactory.SAL3.Things
                 {
                     foreach (Thing t in GatherThingsUtility.AllThingsInCellForUse(c, Map,AllowStockpilePickup))
                     {
-                        if ((allowForbiddenPickup || !t.IsForbidden(Faction.OfPlayer)))
+                        var SlotGroupParrent = t.GetSlotGroup()?.parent;
+                        if ((SlotGroupParrent is Zone_Stockpile && allowStockpilePickup) ||
+                            (SlotGroupParrent is Building_Storage && allowStoragePickup) ||
+                            (SlotGroupParrent == null && allowGroundPickup))
                         {
+                            if ((allowForbiddenPickup || !t.IsForbidden(Faction.OfPlayer)))
+                            {
 
-                            yield return t;
+                                yield return t;
+                            }
                         }
                     }
                 }
