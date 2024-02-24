@@ -25,9 +25,8 @@ namespace ProjectRimFactory.Storage
 
         public bool AcceptsThing(Thing newThing, IPRF_Building giver = null)
         {
-
-            if (base.Accepts(newThing))
-            {
+            
+            if (base.Accepts(newThing) && CanStoreMoreItems){
                 Notify_ReceivedThing(newThing);
                 return true;
             }
