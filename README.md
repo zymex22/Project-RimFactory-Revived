@@ -34,13 +34,13 @@ We have worked towards more balance and lore, so it now has more in game content
 
 
 ## PRF Series
-Project RimFactory - Core (This one)
-Project RimFactory - Lite (Cut down version made as a replacement for Industrial roller)
-Project RimFactory - Drones (Some drone stations, this will get an update later)
-Project RimFactory - Insanity (Equivalent Exchange, Alchemy, and crazy scientist?)
-Project RimFactory - Materials (A lite Material mod focused around factorio/satisfactory genre)
-Project RimFactory - Extras (Random stuff, coming later...)
-ATS - Framework (will be a future framework where much universal stuff will go)
+* **Project RimFactory** - Core (This one)
+* **Project RimFactory** - Lite (Cut down version made as a replacement for Industrial roller)
+* **Project RimFactory** - Drones (Some drone stations, this will get an update later)
+* **Project RimFactory** - Insanity (Equivalent Exchange, Alchemy, and crazy scientist?)
+* **Project RimFactory** - Materials (A lite Material mod focused around factorio/satisfactory genre)
+* ~~Project RimFactory~~ - Extras (on hold, Random stuff, coming later...)
+* ~~ATS - Framework~~ (on hold, idea was to include tools from this mod for others.)
 
 
 
@@ -48,17 +48,16 @@ ATS - Framework (will be a future framework where much universal stuff will go)
 This mod is created, maintained and updated by many great people.
 It has grown to a huge collection of talented people that have contributed to make this mod great.
 
-Zymex - updater of this revived version
-Spdskatr - Rimfactory original! [see here](https://github.com/spdskatr/ProjectRimFactory)
-Nobo / Nullre - For porting thing from NR_AutoMachineTools to prf and general C#
+**Sn1p3rr3c0n** - Current maintainer of the mod.  
+**Zymex** - earlier maintainer of the mod, currently just updating steam.  
+**Spdskatr** - Rimfactory original! [see here](https://github.com/spdskatr/ProjectRimFactory)  
+**Nobo / Nullre** - For porting thing from NR_AutoMachineTools to prf and general C#  
 
-Coders: Spdskatr, Nobo, abnerchen, LWM, Sn1p3rr3c0n
-Artists: Shotgunfrenzy, Chicken Plucker, Xen, Scythe, totobrother, "unknown alien", Argon, Thornsworth
-
-Translators:
+**Coders:** Spdskatr, Nobo, abnerchen, LWM, Sn1p3rr3c0n  
+**Artists:** Shotgunfrenzy, Chicken Plucker, Xen, Scythe, totobrother, "unknown alien", Argon, Thornsworth  
+**Translators:**
 Russian: Natsu_Zirok, Chinese Simplified: 十里小飞, Chinese Traditional: AbnerChen
-
-Resources: Freepik, Flaticon
+**Resources:** Freepik, Flaticon  
 Other worth mentioning: Malkav, and whole test squad
 
 
