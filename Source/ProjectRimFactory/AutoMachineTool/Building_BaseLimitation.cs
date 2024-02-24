@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using ProjectRimFactory.Common;
 using RimWorld;
+using System.Linq;
 using Verse;
-using Verse.AI;
-using Verse.Sound;
-using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
@@ -16,8 +10,8 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public int ProductLimitCount { get => this.productLimitCount; set => this.productLimitCount = value; }
         public bool ProductLimitation { get => this.productLimitation; set => this.productLimitation = value; }
-        private Option<SlotGroup> targetSlotGroup = Nothing<SlotGroup>();
-        public Option<SlotGroup> TargetSlotGroup { get => targetSlotGroup; set => targetSlotGroup = value; }
+        private SlotGroup targetSlotGroup = null;
+        public SlotGroup TargetSlotGroup { get => targetSlotGroup; set => targetSlotGroup = value; }
         public bool CountStacks { get => this.countStacks; set => this.countStacks = value; }
         public virtual bool ProductLimitationDisable { get => false; }
 
@@ -35,11 +29,11 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Values.Look<int>(ref this.productLimitCount, "productLimitCount", 100);
             Scribe_Values.Look<bool>(ref this.productLimitation, "productLimitation", false);
             Scribe_Values.Look<bool>(ref this.countStacks, "countStacks", false);
-            
+
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                this.slotGroupParentLabel = this.targetSlotGroup.Select(s => s.parent.SlotYielderLabel()).GetOrDefault(null);
-                this.slotGroupParent = this.targetSlotGroup.Select(s => s.parent).Select(p => p as ILoadReferenceable).GetOrDefault(null);
+                this.slotGroupParentLabel = this.targetSlotGroup?.parent?.SlotYielderLabel();
+                this.slotGroupParent = this.targetSlotGroup?.parent as ILoadReferenceable;
             }
             Scribe_References.Look<ILoadReferenceable>(ref this.slotGroupParent, "slotGroupParent");
             Scribe_Values.Look<string>(ref this.slotGroupParentLabel, "slotGroupParentLabel", null);
@@ -47,7 +41,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void PostMapInit()
         {
-            this.targetSlotGroup = this.Map.haulDestinationManager.AllGroups.Where(g => g.parent.SlotYielderLabel() == this.slotGroupParentLabel).Where(g => Option(slotGroupParent).Fold(true)(p => p == g.parent)).FirstOption();
+            //Maybe rewrite that
+            //From my understanding this gets that saved slot group
+            this.targetSlotGroup = this.Map.haulDestinationManager.AllGroups
+                .Where(g => g.parent.SlotYielderLabel() == this.slotGroupParentLabel)
+                .Where(g => Option(slotGroupParent).Fold(true)(p => p == g.parent)).FirstOption().Value;
             base.PostMapInit();
         }
 
@@ -72,16 +70,28 @@ namespace ProjectRimFactory.AutoMachineTool
         // returns true if there IS something that limits adding this thing to storage.
         public bool IsLimit(Thing thing)
         {
-            if (!this.ProductLimitation)
+            if (!productLimitation) return false;
+
+            var targetSG = targetSlotGroup;
+
+            if (targetSG == null)
             {
-                return false;
+                return this.CountFromMap(thing.def) >= productLimitCount;
             }
-            //IsGoodStoreCell also checks for fire.  Let's use IsValidStorageFor instead!
-            this.targetSlotGroup = this.targetSlotGroup.Where(
-                         s => this.Map.haulDestinationManager.AllGroups.Contains(s));
-            return this.targetSlotGroup.Fold(() => this.CountFromMap(thing.def) >= this.ProductLimitCount) // no slotGroup
-                (s => this.CountFromSlot(s, thing.def) >= this.ProductLimitCount 
-                || !s.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
+            else
+            {
+                if (targetSG.parent is ILimitWatcher limitWatcher)
+                {
+                    return (limitWatcher.ItemIsLimit(thing.def,this.countStacks, productLimitCount) || !targetSG.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
+                }
+                else
+                {
+                    return (this.CheckSlotGroup(targetSG, thing.def, productLimitCount) || !targetSG.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
+                }
+
+                
+            }
+
         }
 
         private int CountFromMap(ThingDef def)
@@ -89,9 +99,27 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.countStacks ? this.Map.listerThings.ThingsOfDef(def).Count : this.Map.resourceCounter.GetCount(def);
         }
 
-        private int CountFromSlot(SlotGroup s, ThingDef def)
+        private bool CheckSlotGroup(SlotGroup s, ThingDef def,int Limit = int.MaxValue)
         {
-            return this.countStacks ? s.HeldThings.Where(t => t.def == def).Count() : s.HeldThings.Where(t => t.def == def).Select(t => t.stackCount).Sum();
+            int count = 0;
+            var Held = s.HeldThings;
+    
+            foreach (var t in Held)
+            {    
+                if (t.def == def)
+                {
+                    if (this.countStacks)
+                    {
+                        count++;
+                    }
+                    else
+                    {
+                        count += t.stackCount;
+                    }
+                    if (count >= Limit) return true;
+                }
+            }
+            return false;
         }
     }
 }

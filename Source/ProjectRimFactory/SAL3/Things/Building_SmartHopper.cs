@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using Verse;
-using RimWorld;
-using ProjectRimFactory.SAL3.UI;
+﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.SAL3.Tools;
 using ProjectRimFactory.Storage;
 using ProjectRimFactory.Storage.UI;
-using ProjectRimFactory.Common;
-using ProjectRimFactory.Common.HarmonyPatches;
+using RimWorld;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
 {
-    public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder , INutrientPasteDispenserInput
+    public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder
     {
         private OutputSettings outputSettings;
 
@@ -23,8 +22,6 @@ namespace ProjectRimFactory.SAL3.Things
         public StorageSettings settings;
 
         public Thing StoredThing => Position.GetFirstItem(Map);
-
-        protected bool PickupFromGround => (this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false) && pickupFromGround;
 
         private bool pickupFromGround;
 
@@ -43,7 +40,7 @@ namespace ProjectRimFactory.SAL3.Things
 
                 var resultCache = from IntVec3 c
                                   in this.CellsToTarget
-                                  where this.PickupFromGround || c.HasSlotGroupParent(Map)
+                                  where this.pickupFromGround || c.HasSlotGroupParent(Map)
                                   select c;
                 cachedDetectorCells = resultCache;
                 return resultCache;
@@ -57,7 +54,8 @@ namespace ProjectRimFactory.SAL3.Things
                 foreach (var c in CellsToSelect)
                 {
                     if (!c.InBounds(this.Map)) continue;
-                    foreach (Thing t in GatherThingsUtility.AllThingsInCellForUse(c, Map)) {
+                    foreach (Thing t in GatherThingsUtility.AllThingsInCellForUse(c, Map,false))
+                    {
                         yield return t;
                     }
                 }
@@ -82,7 +80,7 @@ namespace ProjectRimFactory.SAL3.Things
             }
         }
 
-        public Thing NPDI_Item =>  StoredThing;
+        public Thing NPDI_Item => StoredThing;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -94,7 +92,7 @@ namespace ProjectRimFactory.SAL3.Things
             }
             if (!respawningAfterLoad)
             {
-                this.pickupFromGround = this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false;
+                this.pickupFromGround = true;
             }
         }
 
@@ -123,7 +121,7 @@ namespace ProjectRimFactory.SAL3.Things
                 {
                     bool withinLimits = true;
                     if (OutputSettings.useMin) withinLimits = (element.stackCount >= OutputSettings.min);
-                    
+
                     if (element.def.category == ThingCategory.Item && settings.AllowedToAccept(element) && withinLimits)
                     {
                         TryStoreThing(element);
@@ -131,7 +129,7 @@ namespace ProjectRimFactory.SAL3.Things
                     }
                 }
                 if (StoredThing != null)
-                {                    
+                {
                     if (settings.AllowedToAccept(StoredThing))
                     {
                         bool forbidItem = true;
@@ -139,16 +137,16 @@ namespace ProjectRimFactory.SAL3.Things
                         if (OutputSettings.useMin || OutputSettings.useMax)
                         {
                             if (OutputSettings.useMin && StoredThing.stackCount < OutputSettings.min)
-                                forbidItem = false; 
+                                forbidItem = false;
                             else if (OutputSettings.useMax && StoredThing.stackCount > OutputSettings.max)
                                 forbidItem = false;
-                        }                        
+                        }
                         if (forbidItem)
                         {
                             StoredThing.SetForbidden(true, false);
                             return;
                         }
-                    }                       
+                    }
                     StoredThing.SetForbidden(false, false);
                 }
             }
@@ -160,9 +158,9 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 if (StoredThing.CanStackWith(element))
                 {
-                    var num = Mathf.Min(element.stackCount, (StoredThing.def.stackLimit - StoredThing.stackCount));                    
-                    if (OutputSettings.useMax) num = Mathf.Min(element.stackCount, Mathf.Min((StoredThing.def.stackLimit - StoredThing.stackCount),(OutputSettings.max - StoredThing.stackCount)));
-                    
+                    var num = Mathf.Min(element.stackCount, (StoredThing.def.stackLimit - StoredThing.stackCount));
+                    if (OutputSettings.useMax) num = Mathf.Min(element.stackCount, Mathf.Min((StoredThing.def.stackLimit - StoredThing.stackCount), (OutputSettings.max - StoredThing.stackCount)));
+
                     if (num > 0)
                     {
                         var t = element.SplitOff(num);
@@ -187,7 +185,7 @@ namespace ProjectRimFactory.SAL3.Things
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            if (!this.PickupFromGround)
+            if (!this.pickupFromGround)
                 GenDraw.DrawFieldEdges(CellsToSelect.ToList(), Color.green);
         }
 
@@ -203,16 +201,13 @@ namespace ProjectRimFactory.SAL3.Things
                 defaultLabel = "SmartHopper_SetTargetAmount".Translate(),
                 action = () => Find.WindowStack.Add(new Dialog_OutputMinMax(OutputSettings)),
             };
-            if (this.def.GetModExtension<ModExtension_Settings>()?.GetByName<bool>("pickupFromGround") ?? false)
+            yield return new Command_Toggle
             {
-                yield return new Command_Toggle
-                {
-                    icon = ContentFinder<Texture2D>.Get("PRFUi/PickupFromGround"),
-                    defaultLabel = "SmartHopper_PickupFromGround".Translate(),
-                    toggleAction = () => this.pickupFromGround = !this.pickupFromGround,
-                    isActive = () => this.pickupFromGround
-                };
-            }
+                icon = ContentFinder<Texture2D>.Get("PRFUi/PickupFromGround"),
+                defaultLabel = "SmartHopper_PickupFromGround".Translate(),
+                toggleAction = () => this.pickupFromGround = !this.pickupFromGround,
+                isActive = () => this.pickupFromGround
+            };
         }
 
         public StorageSettings GetStoreSettings()
@@ -226,5 +221,11 @@ namespace ProjectRimFactory.SAL3.Things
         }
 
         public StorageSettings GetParentStoreSettings() => def.building.fixedStorageSettings;
+
+        public void Notify_SettingsChanged()
+        {
+            // Might allow us to cache StorageSettings
+            // unsure about the potential gains / current load
+        }
     }
 }

@@ -1,14 +1,9 @@
-﻿using System;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
-using Verse;
 using UnityEngine;
-using ProjectRimFactory.AutoMachineTool;
-using RimWorld.Planet;
-using ProjectRimFactory.Common;
+using Verse;
 
 namespace ProjectRimFactory.Drones
 {
@@ -155,16 +150,16 @@ namespace ProjectRimFactory.Drones
 
                 rect = list.GetRect(30f);
                 list.Gap();
-                droneStation.compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider(rect, droneStation.compRefuelable.TargetFuelLevel, 0, droneStation.compRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(droneStation.compRefuelable.TargetFuelLevel), "0", droneStation.compRefuelable.Props.fuelCapacity.ToString(), 1);
+                droneStation.compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider_NewTemp(rect, droneStation.compRefuelable.TargetFuelLevel, 0, droneStation.compRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(droneStation.compRefuelable.TargetFuelLevel), "0", droneStation.compRefuelable.Props.fuelCapacity.ToString(), 1);
             }
 
 
             return list;
         }
-    
-    
-    
-    
+
+
+
+
     }
 
 }

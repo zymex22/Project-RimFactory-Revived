@@ -1,9 +1,4 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
 
 namespace ProjectRimFactory.Common
@@ -15,7 +10,7 @@ namespace ProjectRimFactory.Common
             IntVec3 inputCell;
             inputCell = loc + rot.Opposite.FacingCell;
 
-            if (inputCell.InBounds(map) && inputCell.GetZone(map) is Zone_Growing)
+            if (inputCell.InBounds(map) && inputCell.GetZone(map) is IPlantToGrowSettable)
             {
                 return AcceptanceReport.WasAccepted;
             }

@@ -1,9 +1,4 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
 using Verse;
 using Verse.Sound;
 
@@ -113,8 +108,10 @@ namespace ProjectRimFactory.Common
                 {
                     return false;
                 }
-                CompSendSignalOnPawnProximity compSendSignalOnPawnProximity = this.parent.TryGetComp<CompSendSignalOnPawnProximity>();
-                return compSendSignalOnPawnProximity == null || !compSendSignalOnPawnProximity.Sent;
+                //Todo: Check if we need a replacement (I'm a bit lost here)
+                //CompSendSignalOnPawnProximity compSendSignalOnPawnProximity = this.parent.TryGetComp<CompSendSignalOnPawnProximity>();
+                //return compSendSignalOnPawnProximity == null || !compSendSignalOnPawnProximity.Sent;
+                return true;
             }
         }
 
@@ -148,7 +145,7 @@ namespace ProjectRimFactory.Common
                 signal == CompRefuelable.RanOutOfFuelSignal ||
                 signal == CompSchedule.ScheduledOnSignal ||
                 signal == CompSchedule.ScheduledOffSignal)
-//                signal == MechClusterUtility.DefeatedSignal)
+            //                signal == MechClusterUtility.DefeatedSignal)
             {
                 this.UpdateEffecter();
             }

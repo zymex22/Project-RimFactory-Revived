@@ -1,11 +1,10 @@
-﻿using RimWorld;
-using System;
+﻿using ProjectRimFactory.Common.HarmonyPatches;
+using ProjectRimFactory.Storage.Editables;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Verse;
-using ProjectRimFactory.Storage.Editables;
 using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.Storage
 {
@@ -17,13 +16,19 @@ namespace ProjectRimFactory.Storage
         //Initialized on spawn
         private CompPowerTrader compPowerTrader = null;
 
-        public override bool CanStoreMoreItems => (compPowerTrader?.PowerOn ?? false) && this.Spawned &&
+        public override bool Powered => compPowerTrader?.PowerOn ?? false;
+
+        public override int MaxNumberItemsInternal => (ModExtension_Crate?.limit ?? int.MaxValue);
+
+        public override bool CanStoreMoreItems => (Powered) && this.Spawned &&
             (ModExtension_Crate == null || StoredItemsCount < MaxNumberItemsInternal);
-        public override bool CanReceiveIO => base.CanReceiveIO && compPowerTrader.PowerOn && this.Spawned;
+        public override bool CanReceiveIO => base.CanReceiveIO && Powered && this.Spawned;
 
         public override bool ForbidPawnInput => this.ForbidPawnAccess || !this.pawnAccess || !this.CanStoreMoreItems;
 
         public override bool ForbidPawnOutput => this.ForbidPawnAccess || !this.pawnAccess;
+
+        public float ExtraPowerDraw => StoredItems.Count * 10f;
 
         private bool pawnAccess = true;
 
@@ -40,7 +45,7 @@ namespace ProjectRimFactory.Storage
         public void UpdatePowerConsumption()
         {
             compPowerTrader ??= GetComp<CompPowerTrader>();
-            compPowerTrader.PowerOutput = -10 * StoredItemsCount;
+            FridgePowerPatchUtil.UpdatePowerDraw(this, compPowerTrader);
         }
 
         public override void ExposeData()
@@ -148,25 +153,5 @@ namespace ProjectRimFactory.Storage
                 return base.GetITabString(itemsSelected);
             }
         }
-
-        //This Exists as I don't know how to call .Any() with CodeInstruction
-        //Can be removed if the Transpiler is Updated to inclued that
-        public static bool AnyPowerd(Map map)
-        {
-            return AllPowered(map).Any();
-        }
-
-        public static IEnumerable<Building_MassStorageUnitPowered> AllPowered(Map map)
-        {
-            foreach (Building_MassStorageUnitPowered item in map.listerBuildings.AllBuildingsColonistOfClass<Building_MassStorageUnitPowered>())
-            {
-                CompPowerTrader comp = item.GetComp<CompPowerTrader>();
-                if (comp == null || comp.PowerOn)
-                {
-                    yield return item;
-                }
-            }
-        }
-
     }
 }

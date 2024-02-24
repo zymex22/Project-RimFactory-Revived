@@ -1,0 +1,43 @@
+name: build_release
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore Source/Source.sln
+    - name: Build
+      run: dotnet build Source/Source.sln --no-restore --configuration Release
+    - name: Check for modified files
+      id: git-check
+      run: echo ::set-output name=modified::$(if [ -n "$(git status --porcelain)" ]; then echo "true"; else echo "false"; fi)
+    - name: Upload Build
+      if: steps.git-check.outputs.modified == 'true'
+      run: |
+          git config --global user.name 'Sn1p3rr3c0n'
+          git config --global user.email 'Sn1p3rr3c0n@users.noreply.github.com'
+          git commit -am "Updated dll"
+          git push
+    - name: Get XML Version
+      id: get_mv
+      uses: mavrosxristoforos/get-xml-info@1.0
+      with:
+        xml-file: 'About/Manifest.xml'
+        xpath: '//version'
+    - uses: ncipollo/release-action@v1
+      with:
+        #bodyFile: "body.md"
+        #body: "some manual content"
+        draft: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        generateReleaseNotes: true
+        tag: v${{ steps.get_mv.outputs.info }}

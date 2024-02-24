@@ -19,7 +19,7 @@
 					<value>
 						<ThingDef ParentName="PRF_IndustrialBase">
 							<defName>PRF_T1_Aquaculture</defName>
-							<label>Automated Fish Farm (freshwater)</label>
+							<label>automated fish farm (freshwater)</label>
 							<description>An automated fishing machine tasked with fishing in freshwater. To use this machine, simply insert a bill and the machine will perform its task.</description>
 							<thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
 							<graphicData>
@@ -99,7 +99,7 @@
 					<value>
 						<ThingDef ParentName="PRF_IndustrialBase">
 							<defName>PRF_T2_Aquaculture</defName>
-							<label>Automated Fish Farm (Saltwater)</label>
+							<label>automated fish farm (saltwater)</label>
 							<description>An automated fishing machine tasked with fishing in saltwater. To use this machine, simply insert a bill and the machine will perform its task.</description>
 							<thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SimpleAssembler</thingClass>
 							<graphicData>
@@ -180,7 +180,7 @@
 						<ThingDef ParentName="OrganicProductBase">
 							<defName>PRF_FishFood</defName>
 							<label>fish food</label>
-							<description>Animal feed made from mixed meat and plant sources, used for feeding fish in tanks.  Humanoids should not eat this.</description>
+							<description>Animal feed made from mixed meat and plant sources, used for feeding fish in tanks. Humanoids should not eat this.</description>
 							<thingCategories>
 								<li>Foods</li>
 							</thingCategories>
@@ -266,8 +266,8 @@
 						<RecipeDef>
 							<defName>PRF_FreshwaterFish</defName>
 							<label>grow freshwater fish</label>
-							<description>Start process of farming freshwater fish.</description>
-							<jobString>farming fish.</jobString>
+							<description>Start the process of farming freshwater fish.</description>
+							<jobString>Farming fish.</jobString>
 							<effectWorking>Cook</effectWorking>
 							<workSkill>Cooking</workSkill>
 							<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -295,8 +295,8 @@
 						<RecipeDef>
 							<defName>PRF_OceanwaterFish</defName>
 							<label>grow oceanwater fish</label>
-							<description>Start process of farming oceanwater fish.</description>
-							<jobString>farming fish.</jobString>
+							<description>Start the process of farming oceanwater fish.</description>
+							<jobString>Farming fish.</jobString>
 							<effectWorking>Cook</effectWorking>
 							<workSkill>Cooking</workSkill>
 							<workSpeedStat>GeneralLaborSpeed</workSpeedStat>

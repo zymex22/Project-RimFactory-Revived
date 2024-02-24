@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using RimWorld;
+using System;
 using UnityEngine;
 using Verse;
-using RimWorld;
-using System.Diagnostics.Eventing.Reader;
-using HarmonyLib;
-using System.IO;
 
 namespace ProjectRimFactory.Common
 {
@@ -105,7 +99,7 @@ namespace ProjectRimFactory.Common
             {
                 if (!pulse)
                 {
-                    this.glowColor = Color32.Lerp(minGlowColor.ToColor32, maxGlowColor.ToColor32, 0.5f).AsColorInt();
+                    this.glowColor = Color32.Lerp(minGlowColor.ProjectToColor32, maxGlowColor.ProjectToColor32, 0.5f).AsColorInt();
                     this.glowRadius = Mathf.Lerp(minGlowRadius, maxGlowRadius, 0.5f);
                     return;
                 }
@@ -127,7 +121,7 @@ namespace ProjectRimFactory.Common
                 }
                 var factor = this.easing.GetValue(time);
 
-                this.glowColor = Color32.Lerp(minGlowColor.ToColor32, maxGlowColor.ToColor32, factor).AsColorInt();
+                this.glowColor = Color32.Lerp(minGlowColor.ProjectToColor32, maxGlowColor.ProjectToColor32, factor).AsColorInt();
                 this.glowRadius = Mathf.Lerp(minGlowRadius, maxGlowRadius, factor);
             }
             else
@@ -213,12 +207,12 @@ namespace ProjectRimFactory.Common
     {
         public float GetValue(float t)
         {
-            return t == 0 
-                ? 0 
-                : t == 1 
-                ? 1 
-                : t < 0.5f 
-                ? Mathf.Pow(2, 20 * t - 10) / 2 
+            return t == 0
+                ? 0
+                : t == 1
+                ? 1
+                : t < 0.5f
+                ? Mathf.Pow(2, 20 * t - 10) / 2
                 : (2 - Mathf.Pow(2, -20 * t + 10)) / 2;
         }
     }

@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Verse;
-using System.Linq;
+﻿using HarmonyLib;
 using RimWorld;
-using HarmonyLib;
-namespace ProjectRimFactory {
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Verse;
+
+namespace ProjectRimFactory
+{
     // Note: Other places that touch SpecialSculputre:
     //   ProjectRimFactor_ModComponent has the list of all of them
     //   RS.cs initializes the resources (graphics)
@@ -28,8 +30,10 @@ namespace ProjectRimFactory {
     //    master list.
     //    To be fair, I wrote this v quickly while grieving, so it's understandable
     //    if there are questionable choices.
-    public class SpecialSculpture : IExposable {
-        public SpecialSculpture() {
+    public class SpecialSculpture : IExposable
+    {
+        public SpecialSculpture()
+        {
         }
         public string id;
         public int maxNumberCopies = 1;
@@ -41,12 +45,16 @@ namespace ProjectRimFactory {
         public Graphic graphic; // setup in game
         public List<Thing> currentInstances = null; // item in game
 
-        public void ExposeData() {
-            if (Scribe.mode == LoadSaveMode.Saving) {
+        public void ExposeData()
+        {
+            if (Scribe.mode == LoadSaveMode.Saving)
+            {
                 // make sure we should bother saving:
                 bool shouldSave = false;
-                foreach (var t in currentInstances) {
-                    if (!t.Destroyed) {
+                foreach (var t in currentInstances)
+                {
+                    if (!t.Destroyed)
+                    {
                         shouldSave = true;
                         break;
                     }
@@ -59,12 +67,15 @@ namespace ProjectRimFactory {
             Scribe_Values.Look(ref authorKey, "author");
             Scribe_Collections.Look(ref currentInstances, "item", LookMode.Reference);
             // At end of loading, go through update description and graphics of art objects
-            if (Scribe.mode == LoadSaveMode.PostLoadInit) {
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
                 //Log.Message("PRF Loading Sculpture " + titleKey);
                 var all = Common.ProjectRimFactory_ModComponent.availableSpecialSculptures;
-                if (all != null) {
+                if (all != null)
+                {
                     var s = all.FirstOrDefault(x => x.id == this.id);
-                    if (s!=null) {
+                    if (s != null)
+                    {
                         // Update graphic from master XML
                         this.graphicData = s.graphicData;
                         this.graphic = s.graphic;
@@ -76,14 +87,16 @@ namespace ProjectRimFactory {
             }
         }
         // called on system load; prepares graphics (main thread only)
-        public void Init() {
+        public void Init()
+        {
             if (graphicData != null)
                 this.graphic = graphicData.Graphic;
         }
         // Handle magic of making art item into this special sculpture
         // Note: Description is handled by harmony patch checking against
         //       GameComponent list
-        public void MakeItemSpecial(Thing art) {
+        public void MakeItemSpecial(Thing art)
+        {
             var artComp = art.TryGetComp<CompArt>();
             if (artComp == null) { Log.Error("PRF could not make special sculpture from " + art); return; }
             // Use HarmonyLib to set internal string values for title and author:
@@ -93,31 +106,39 @@ namespace ProjectRimFactory {
                 AccessTools.Field(typeof(Thing), "graphicInt").SetValue(artComp.parent, graphicData.Graphic);
         }
         // Pre-load game init:
-        static public void PreStartGame() {
+        static public void PreStartGame()
+        {
             var all = Common.ProjectRimFactory_ModComponent.availableSpecialSculptures;
-            if (all != null) {
-                foreach (var s in all) {
+            if (all != null)
+            {
+                foreach (var s in all)
+                {
                     s.currentInstances = null;
                 }
             }
         }
         // Load from XML file Settings/SpecialSculpture.xml; called from ModComponent
-        static public List<SpecialSculpture> LoadAvailableSpecialSculptures(ModContentPack content) {
-            try {
+        static public List<SpecialSculpture> LoadAvailableSpecialSculptures(ModContentPack content)
+        {
+            try
+            {
                 var xml = DirectXmlLoader.XmlAssetsInModFolder(content, "Settings")?.
                                   Where(x => x.name == "SpecialSculpture.xml")?.FirstOrDefault();
-                if (xml == null || xml.xmlDoc == null) {
+                if (xml == null || xml.xmlDoc == null)
+                {
                     Log.Warning("PRF could not load special sculpture data");
                     return null;
                 }
                 List<SpecialSculpture> list = DirectXmlToObject
                      .ObjectFromXml<List<SpecialSculpture>>(xml.xmlDoc.DocumentElement, false);
-                #if DEBUG
+#if DEBUG
                 Log.Message("PRF: loaded " + ((list == null) ? "zero" : (list.Count.ToString())) +
                                 " special Sculptures");
-                #endif
+#endif
                 return list;
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Log.Error("PRF was unable to extract Special Sculpture data from XML; \n" +
                     "  Exception: " + e);
                 return null;

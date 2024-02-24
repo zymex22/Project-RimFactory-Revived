@@ -57,8 +57,8 @@
   <!--==================== small Wood Crate ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_WoodCrate_I</defName>
-    <label>Small wooden crate</label>
-    <description>A small and simplistic crate that stores 16 stacks. Items stored in the crate do not deteriorate.</description>
+    <label>small wooden crate</label>
+    <description>A small and simplistic crate that stores 8 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Wood_Crate6</texPath>
       <drawSize>(2.8,1.3)</drawSize>
@@ -105,7 +105,7 @@
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
-        <limit>16</limit>
+        <limit>8</limit>
         <hideItems>true</hideItems>
       </li>
     </modExtensions>
@@ -114,8 +114,8 @@
   <!--==================== Wood Crate ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_WoodCrate_II</defName>
-    <label>Wooden crate</label>
-    <description>A large crate that stores 32 stacks. Items stored in the crate do not deteriorate.</description>
+    <label>wooden crate</label>
+    <description>A large crate that stores 16 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Wood_Crate6</texPath>
       <drawSize>(2.8,2.6)</drawSize>
@@ -160,7 +160,7 @@
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
-        <limit>32</limit>
+        <limit>16</limit>
         <hideItems>true</hideItems>
       </li>
     </modExtensions>
@@ -169,8 +169,8 @@
   <!--==================== small Steel Crate ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_SteelCrate_I</defName>
-    <label>Small steel crate</label>
-    <description>A small steel crate that can store 64 stacks. Items stored in the crate do not deteriorate.</description>
+    <label>small steel crate</label>
+    <description>A small steel crate that can store 32 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Steel_Crate</texPath>
       <drawSize>(2.8,1.3)</drawSize>
@@ -215,7 +215,7 @@
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
-        <limit>64</limit>
+        <limit>32</limit>
         <hideItems>true</hideItems>
       </li>
     </modExtensions>
@@ -225,8 +225,8 @@
   <!--==================== Steel Crate ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_SteelCrate_II</defName>
-    <label>Steel crate</label>
-    <description>A large crate that can store 128 stacks. Items stored in the crate do not deteriorate.</description>
+    <label>steel crate</label>
+    <description>A large crate that can store 64 stacks. Items stored in the crate do not deteriorate.</description>
     <graphicData>
       <texPath>Storage/Steel_Crate</texPath>
       <drawSize>(2.8,2.6)</drawSize>
@@ -269,7 +269,7 @@
     </researchPrerequisites>
     <modExtensions>
       <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
-        <limit>128</limit>
+        <limit>64</limit>
         <hideItems>true</hideItems>
       </li>
     </modExtensions>
@@ -278,8 +278,8 @@
   <!--==================== Cargo Platform / Digital Storage Unit / DSU ====================-->
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_DigitalStorageUnit_I</defName>
-    <label>Digital Storage Unit</label>
-    <description>A matter-energy conversion based storage unit which can hold up to 768 stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more.  Don't break it.</description>
+    <label>digital storage unit</label>
+    <description>A matter-energy conversion-based storage unit that can hold up to 768 stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the DSU will not be able to store more. Don't break it.</description>
     <designatorDropdown>PRF_IoGroup</designatorDropdown>
     <uiIconScale>0.9</uiIconScale>
     <thingClass>ProjectRimFactory.Storage.Building_MassStorageUnitPowered</thingClass>
@@ -287,7 +287,8 @@
       <texPath>Storage/CargoPlatform</texPath>
       <drawSize>(3,3)</drawSize>
       <damageData>
-        <cornerTL>Damage/Corner</cornerTL>
+		<rect>(0.0,0,2.9,2.9)</rect>
+        <cornerBL>Damage/Corner</cornerBL>
         <cornerTR>Damage/Corner</cornerTR>
       </damageData>
     </graphicData>
@@ -362,11 +363,126 @@
     </modExtensions>
   </ThingDef>
 
+  <!--==================== Archival Storage Unit ====================-->
+  <ThingDef ParentName="PRF_BuildingBase">
+    <thingClass>ProjectRimFactory.Storage.Building_ColdStoragePowered</thingClass>
+	<defName>PRF_ColdStorageUnit_I</defName>
+    <label>archival storage unit</label>
+    <description>A matter-energy conversion-based storage unit that can hold up to 10k stacks, consuming 10 W of power per stack of items. In the event of a power outage, items already inside will be safe, but the archival storage unit will not be able to store more. Don't break it.\n\nItems stored in this device are not spawned and therefore won't be automatically accessible by your pawns. Use I/O ports to interact with it.</description>
+    <designatorDropdown>PRF_IoGroup</designatorDropdown>
+    <uiIconScale>0.9</uiIconScale>
+    <tradeTags>
+      <li>Furniture</li>
+    </tradeTags>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <blockWind>true</blockWind>
+    <fillPercent>1.0</fillPercent>
+    <castEdgeShadows>true</castEdgeShadows>
+    <rotatable>false</rotatable>
+    <canOverlapZones>false</canOverlapZones>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+      <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
+    </inspectorTabs>
+    <graphicData>
+	  <graphicClass>Graphic_Single</graphicClass>
+      <texPath>Storage/ColdStorageUnit</texPath>
+      <drawSize>(3,3)</drawSize>
+      <damageData>
+	  <scratches>
+	  </scratches>
+	  <!-- <rect>(0.1,0,3,2.5)</rect> -->
+		<rect>(0.1,0,2.8,2.8)</rect>
+
+        <cornerTL>Damage/Corner</cornerTL>
+		<cornerBR>Damage/Corner</cornerBR>
+		<cornerBL>Damage/Corner</cornerBL>
+        <!-- <edgeBot>Damage/Edge</edgeBot> -->
+      </damageData>
+
+    </graphicData>
+    <statBases>
+      <Mass>50</Mass>
+      <MaxHitPoints>450</MaxHitPoints>
+      <WorkToBuild>5000</WorkToBuild>
+      <MarketValue>10880</MarketValue>
+      <Flammability>0.05</Flammability>
+      <Beauty>0.5</Beauty>
+    </statBases>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Manufactured</li>
+            <li>ResourcesRaw</li>
+            <li>Items</li>
+            <li>BuildingsArt</li>
+            <li>Weapons</li>
+            <li>Apparel</li>
+            <li>BodyParts</li>
+          </categories>
+          <specialFiltersToDisallow>
+            <li>AllowRotten</li>            <!-- Disallow rotten by default -->
+          </specialFiltersToDisallow>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <size>(3,3)</size>
+    <pathCost>150</pathCost>
+    <costList>
+      <Steel>300</Steel>
+      <Gold>50</Gold>
+      <Uranium>20</Uranium>
+      <Plasteel>100</Plasteel>
+      <ComponentIndustrial>90</ComponentIndustrial>
+      <ComponentSpacer>20</ComponentSpacer>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <researchPrerequisites>
+      <li>PRF_StorageIO_II</li>
+    </researchPrerequisites>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <shortCircuitInRain>true</shortCircuitInRain>
+        <basePowerConsumption>0</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable"/>
+      <li Class="CompProperties_Flickable"/>
+    </comps>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_CanUseStorageIOPorts" />
+      <li Class="ProjectRimFactory.Storage.Editables.DefModExtension_Crate">
+        <limit>10000</limit>
+        <destroyContainsItems>true</destroyContainsItems>
+        <hideItems>true</hideItems>
+        <forbidPawnAccess>false</forbidPawnAccess>
+        <hideRightClickMenus>true</hideRightClickMenus>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
   <!--============================== I/O Port ==============================-->
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_IOPort_I</defName>
     <label>I/O port</label>
-    <description>An advanced connection port for the Digital Storage Unit. It can be set to input/output from any platform remotely within the map.</description>
+    <description>An advanced connection port for the digital storage unit. It can be set to input/output from any platform remotely within the map.</description>
     <thingClass>ProjectRimFactory.Storage.Building_StorageUnitIOPort</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>
@@ -386,6 +502,7 @@
     <fillPercent>0.5</fillPercent>
     <pathCost>70</pathCost>
     <building>
+	  <isHopper>true</isHopper>
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
       <fixedStorageSettings>
@@ -452,7 +569,7 @@
   <ThingDef ParentName="PRF_BuildingBase">
     <defName>PRF_IOPPusher_I</defName>
     <label>I/O pusher</label>
-    <description>This modified I/O port allows you to push items directly into next cell, onto a belt, or anywhere else, saving space instead of using a puller.\n More of an output port than input/output.</description>
+    <description>This modified I/O port allows you to push items directly into the next cell, onto a belt, or anywhere else, saving space instead of using a puller.\nMore of an output port than input/output.</description>
     <thingClass>ProjectRimFactory.Storage.Building_IOPusher</thingClass>
     <drawerType>RealtimeOnly</drawerType>
     <uiIconScale>0.7</uiIconScale>
@@ -473,6 +590,7 @@
     <fillPercent>0.5</fillPercent>
     <pathCost>70</pathCost>
     <building>
+	  <isHopper>true</isHopper>
       <fixedStorageSettings>
         <priority>Normal</priority>
         <filter>
@@ -543,8 +661,8 @@
   <ThingDef ParentName="PRF_MassStorageBase">
     <defName>PRF_ItemSlide</defName>
     <thingClass>ProjectRimFactory.Storage.Building_ItemSlide</thingClass>
-    <label>Item Chute</label>
-    <description>This belt chute/hopper is used for pawns or drones to fill a facing belt without the need for a stockpile and a puller. Basically it's a small stockpile that automaticly pushes onto a belt.</description>
+    <label>item chute</label>
+    <description>This belt chute/hopper is used for pawns or drones to fill a facing belt without the need for a stockpile and a puller. Basically, it's a small stockpile that automatically pushes onto a belt.</description>
     <graphicData>
       <texPath>Storage/ItemSlide</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -604,5 +722,93 @@
     </inspectorTabs>
   </ThingDef>
 
+
+
+  <!--============================== Advanced I/O Port ==============================-->
+  <ThingDef ParentName="PRF_BuildingBase">
+    <defName>PRF_IOPort_II</defName>
+    <label>advanced I/O port</label>
+    <description>An interactive connection port for the digital storage unit. Pawns may request any item from the connected digital storage unit.</description>
+    <thingClass>ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort</thingClass>
+    <drawerType>RealtimeOnly</drawerType>
+    <uiIconScale>0.7</uiIconScale>
+    <designatorDropdown>PRF_IoGroup</designatorDropdown>
+    <graphicData>
+      <texPath>Storage/IO_Port</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <damageData>
+        <rect>(0.05,0.1,0.9,0.9)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <building>
+	  <isHopper>true</isHopper>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <fixedStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+            <li>Root</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Normal</priority>
+        <filter>
+          <categories>
+          </categories>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Storage.UI.ITab_IOPortStorage</li>
+      <li>ProjectRimFactory.Storage.UI.ITab_Items</li>
+    </inspectorTabs>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>750</WorkToBuild>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>1729</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Mass>30</Mass>
+    </statBases>
+    <costList>
+      <ComponentSpacer>1</ComponentSpacer>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <tickerType>Normal</tickerType>
+    <rotatable>false</rotatable>
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>
+    <surfaceType>Item</surfaceType>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <researchPrerequisites>
+      <li>PRF_StorageIO_II</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Storage.DefModExtension_StorageUnitIOPortColor">
+        <inColor>(144, 222, 255, 255)</inColor>
+        <outColor>(215, 169, 72, 255)</outColor>
+      </li>
+    </modExtensions>
+  </ThingDef>
 
 </Defs>

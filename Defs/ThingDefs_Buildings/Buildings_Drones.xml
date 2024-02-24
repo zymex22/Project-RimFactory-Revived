@@ -126,11 +126,11 @@
   <!--=========================== Mini Workshop helper ==================================-->
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_MiniHelper</defName>
-    <label>Workshop Drone Station</label>
+    <label>workshop drone station</label>
     <graphicData>
       <texPath>Drones/MiniDroneStation</texPath>
     </graphicData>
-    <description>A mini workshop helper capable of hauling, flicking, firefighting, and cleaning your workshop within a configurable range.  Longer ranges will require more power.</description>
+    <description>A mini workshop helper capable of hauling, flicking, firefighting, and cleaning your workshop within a configurable range. Longer ranges will require more power.</description>
     <costList>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
       <PRF_DroneModule>2</PRF_DroneModule>
@@ -212,8 +212,8 @@
   <!--=========================== Drone Column (for thronerooms) ==================================-->
   <ThingDef ParentName="PRF_MiniDroneStation">
     <defName>PRF_MiniDroneColumn</defName>
-    <label>Drone Column</label>
-    <description>>A column filled with 2 handy drones that can clean your throneroom or eating hall, put out fires, refuel your braziers, and move your stuff away from the floor. It's also capable of holding up a roof, and looks quite nice.</description>
+    <label>drone column</label>
+    <description>A column filled with 2 handy drones that can clean your throneroom or eating hall, put out fires, refuel your braziers, and move your stuff away from the floor. It's also capable of holding up a roof and looks quite nice.</description>
     <graphicData>
       <drawSize>(1.5,1.5)</drawSize>
       <drawOffset>(0,0,0.2)</drawOffset>
@@ -291,47 +291,11 @@
 
         <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
       </li>
-      <li Class="ProjectRimFactory.Misc.CompProperties_Glower_ColorPick">
+      <li Class="CompProperties_Glower">
         <glowRadius>7</glowRadius>
         <glowColor>(252,199,139,0)</glowColor>
-        <key>PRF_Warm_White</key>
-        <moreColors>
-          <li>
-            <key>PRF_Cool_White</key>
-            <color>(140,200,250,0)</color>
-          </li>
-          <li>
-            <key>PRF_Red</key>
-            <color>(217,80,80,0)</color>
-          </li>
-          <li>
-            <key>PRF_Green</key>
-            <color>(80,217,80,0)</color>
-          </li>
-          <li>
-            <key>PRF_Blue</key>
-            <color>(80,80,217,0)</color>
-          </li>
-          <li>
-            <key>PRF_Cyan</key>
-            <color>(10,245,245,0)</color>
-          </li>
-          <li>
-            <key>PRF_Yellow</key>
-            <color>(240,240,20,0)</color>
-          </li>
-          <li>
-            <key>PRF_Magenta</key>
-            <color>(245,10,245,0)</color>
-          </li>
-          <li>
-            <key>PRF_None</key>
-            <color>(0,0,0,0)</color>
-          </li>
-        </moreColors>
-        <!-- <prerequisites>
-          <li>ColoredLights</li>
-        </prerequisites> -->
+        <colorPickerEnabled>true</colorPickerEnabled>
+        <darklightToggle>true</darklightToggle>
       </li>
     </comps>
     <modExtensions>
@@ -364,8 +328,8 @@
   <!--=========================== Fire Drone Station ==================================-->
   <!-- <ThingDef ParentName="PRF_DroneStationBase">
     <defName>PRF_FireDroneStation</defName>
-    <label>fire drone Station</label>
-    <description>A station that holds up to 10 drones which are capable of fighting fires. Consumes considerable power. Typically your colony only needs 1 of these.</description>
+    <label>fire drone station</label>
+    <description>A station that holds up to 10 drones that are capable of fighting fires. Consumes considerable power. Typically your colony only needs 1 of these.</description>
     <thingClass>ProjectRimFactory.Drones.Building_DroneStationSpecialGraphics</thingClass>
     <graphicData>
       <texPath>Drones/DroneStationCaretaker</texPath>

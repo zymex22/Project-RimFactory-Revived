@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
-using Verse;
+﻿using HarmonyLib;
 using ProjectRimFactory.Storage;
-using HarmonyLib;
+using System.Linq;
+using Verse;
 using Verse.AI;
 
 
@@ -16,7 +11,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     [HarmonyPatch(typeof(Verse.AI.ReservationManager), "Reserve")]
     class Patch_Reservation_Reservation_IO
     {
-        static bool Prefix(Pawn claimant, Job job, LocalTargetInfo target ,ref bool __result , Map ___map)
+        static bool Prefix(Pawn claimant, Job job, LocalTargetInfo target, ref bool __result, Map ___map)
         {
             if (target.HasThing == false && ___map != null && target.Cell.InBounds(___map))
             {
@@ -28,7 +23,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 }
 
 
-               
+
             }
 
             return true;

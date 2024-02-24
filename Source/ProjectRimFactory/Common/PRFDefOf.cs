@@ -1,7 +1,7 @@
 ﻿using RimWorld;
-using Verse;
 using System;
 using System.Reflection;
+using Verse;
 
 namespace ProjectRimFactory.Common
 {
@@ -47,12 +47,17 @@ namespace ProjectRimFactory.Common
         public static ThingDef Column;
         public static ThingDef PRF_MiniDroneColumn;
 
+        public static BackstoryDef ChildSpy47;
+        public static BackstoryDef ColonySettler53;
+
 
         //Reserch Projeckts
         public static ResearchProjectDef PRF_BasicDrones;
         public static ResearchProjectDef PRF_ImprovedDrones; //For Level 15
         public static ResearchProjectDef PRF_AdvancedDrones; //For Level 20
 
+
+        public static TraderKindDef PRF_Factory_Supplier;
 
     }
 }

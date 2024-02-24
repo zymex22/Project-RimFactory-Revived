@@ -1,9 +1,6 @@
-﻿using RimWorld;
-using System;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using Verse;
 
 namespace ProjectRimFactory.Drones
@@ -11,41 +8,50 @@ namespace ProjectRimFactory.Drones
     [StaticConstructorOnStartup]
     public static class DroneBackstories
     {
-        public static Backstory childhood;
-        public static Backstory adulthood;
+        public static BackstoryDef childhood;
+        public static BackstoryDef adulthood;
+
+
+
         static DroneBackstories()
         {
             LongEventHandler.ExecuteWhenFinished(() =>
             {
-                childhood = new Backstory()
+                childhood = new BackstoryDef()
                 {
                     title = "PRFDroneName".Translate(),
                     titleShort = "PRFDroneName".Translate(),
                     identifier = "PRFNoneBracketsC",
                     workDisables = WorkTags.Social,
                     slot = BackstorySlot.Childhood,
-                    baseDesc = "NoneBrackets".Translate()
+                    baseDesc = "NoneBrackets".Translate(),
+                    modContentPack = LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().Content
                 };
-                //this check is required to avoid an issue with "BetterLoading" as it calls "LongEventHandler.ExecuteWhenFinished" twice 
-                if (!BackstoryDatabase.allBackstories.ContainsKey(childhood.identifier))
-                {
-                    BackstoryDatabase.AddBackstory(childhood);
-                }
-                adulthood = new Backstory()
+
+                adulthood = new BackstoryDef()
                 {
                     title = "PRFDroneName".Translate(),
                     titleShort = "PRFDroneName".Translate(),
                     identifier = "PRFNoneBracketsA",
                     workDisables = WorkTags.Social,
                     slot = BackstorySlot.Adulthood,
-                    baseDesc = "NoneBrackets".Translate()
+                    baseDesc = "NoneBrackets".Translate(),
+                    modContentPack = LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().Content
                 };
-                //this check is required to avoid an issue with "BetterLoading" as it calls "LongEventHandler.ExecuteWhenFinished" twice 
-                if (!BackstoryDatabase.allBackstories.ContainsKey(adulthood.identifier))
-                {
-                    BackstoryDatabase.AddBackstory(adulthood);
-                }
+
+                var BackstoryDefs = DefDatabase<BackstoryDef>.AllDefsListForReading;
+                TryAddBacksoryDef(BackstoryDefs, childhood);
+                TryAddBacksoryDef(BackstoryDefs, adulthood);
             });
+        }
+
+        private static void TryAddBacksoryDef(List<BackstoryDef> BackstoryDefs, BackstoryDef backstoryDef)
+        {
+            //this check is required to avoid an issue with "BetterLoading" as it calls "LongEventHandler.ExecuteWhenFinished" twice 
+            if (!BackstoryDefs.Contains(backstoryDef))
+            {
+                BackstoryDefs.Add(backstoryDef);
+            }
         }
     }
 }

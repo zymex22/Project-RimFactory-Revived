@@ -1,16 +1,10 @@
-﻿using Verse;
-using RimWorld;
-using System.Linq;
+﻿using RimWorld;
 using System;
+using System.Linq;
 using UnityEngine;
+using Verse;
 namespace ProjectRimFactory.CultivatorTools
 {
-    public class CultivatorDefModExtension : DefModExtension
-    {
-        public int TickFrequencyDivisor = 200;
-        public int squareAreaRadius;
-        public int GrowRate = 2500;
-    }
     public static class Utilities
     {
         /// <summary>
@@ -33,12 +27,6 @@ namespace ProjectRimFactory.CultivatorTools
             }
         }
 
-        /// <summary>
-        /// Finds if SeedsPlease is active by seeing if the seeds texture exists
-        /// </summary>
-        public static bool SeedsPleaseActive => 
-            ContentFinder<Texture2D>.Get("Things/Item/Seeds/Seeds/Seeds_b", false) != null;
-
         public static IPlantToGrowSettable GetIPlantToGrowSettable(IntVec3 c, Map map)
         {
             var zone = c.GetZone(map);
@@ -47,12 +35,12 @@ namespace ProjectRimFactory.CultivatorTools
             if (zone is IPlantToGrowSettable z) return z;
             return null;
         }
-        
+
         public static bool CanPlantRightNow(this IPlantToGrowSettable planter)
         {
-            return (!planter.CanAcceptSowNow()) ? false : 
-                (planter is Zone_Growing z) ? z.allowSow : 
-                (planter is Thing t) ? !t.IsForbidden(Faction.OfPlayer) : 
+            return (!planter.CanAcceptSowNow()) ? false :
+                (planter is Zone_Growing z) ? z.allowSow :
+                (planter is Thing t) ? !t.IsForbidden(Faction.OfPlayer) :
                 true;
         }
     }

@@ -1,15 +1,10 @@
 ﻿using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Verse;
-using RimWorld;
 using ProjectRimFactory.Drones;
+using RimWorld;
+using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-
     // A patch to the problem of forbidding what drones have mined.
     // When mineable yields, if pawn is Drone, Drone will be Colonist.
     [HarmonyPatch(typeof(Mineable), "TrySpawnYield")]

@@ -5,13 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
 
 namespace ProjectRimFactory.SAL3.UI
 {
+    public interface IBillTab
+    {
+        BillStack BillStack { get; }
+        Map Map { get; } 
+        IEnumerable<RecipeDef> GetAllRecipes();
+        IntVec3 Position { get; }
+    }
+
+
     [StaticConstructorOnStartup]
     public class ITab_SAL3Bills : ITab
     {
@@ -29,11 +37,11 @@ namespace ProjectRimFactory.SAL3.UI
 
         public static readonly FieldInfo PasteSizeField = typeof(ITab_Bills).GetField("PasteSize", BindingFlags.NonPublic | BindingFlags.Static);
 
-        protected Building_DynamicBillGiver SelAssembler
+        protected IBillTab SelBuilding
         {
             get
             {
-                return (Building_DynamicBillGiver)SelThing;
+                return (IBillTab)SelThing;
             }
         }
 
@@ -43,7 +51,7 @@ namespace ProjectRimFactory.SAL3.UI
             labelKey = "SAL3_BillsTabLabel";
         }
 
-        public override bool IsVisible => SelThing is Building_DynamicBillGiver;
+        public override bool IsVisible => SelThing is IBillTab;
 
         protected override void FillTab()
         {
@@ -59,14 +67,14 @@ namespace ProjectRimFactory.SAL3.UI
                 GUI.color = Color.white;
                 TooltipHandler.TipRegion(rect, "PasteBillTip".Translate());
             }
-            else if (!SelAssembler.GetAllRecipes().Contains(BillUtility.Clipboard.recipe) || !BillUtility.Clipboard.recipe.AvailableNow)
+            else if (!SelBuilding.GetAllRecipes().Contains(BillUtility.Clipboard.recipe) || !BillUtility.Clipboard.recipe.AvailableNow)
             {
                 GUI.color = Color.gray;
                 Widgets.DrawTextureFitted(rect, Textures.Paste, 1f);
                 GUI.color = Color.white;
                 TooltipHandler.TipRegion(rect, "ClipboardBillNotAvailableHere".Translate());
             }
-            else if (SelAssembler.BillStack.Count >= 15)
+            else if (SelBuilding.BillStack.Count >= 15)
             {
                 GUI.color = Color.gray;
                 Widgets.DrawTextureFitted(rect, Textures.Paste, 1f);
@@ -79,7 +87,7 @@ namespace ProjectRimFactory.SAL3.UI
                 {
                     Bill bill = BillUtility.Clipboard.Clone();
                     bill.InitializeAfterClone();
-                    SelAssembler.BillStack.AddBill(bill);
+                    SelBuilding.BillStack.AddBill(bill);
                     SoundDefOf.Tick_Low.PlayOneShotOnCamera(null);
                 }
                 TooltipHandler.TipRegion(rect, "PasteBillTip".Translate());
@@ -88,18 +96,18 @@ namespace ProjectRimFactory.SAL3.UI
             Func<List<FloatMenuOption>> recipeOptionsMaker = delegate ()
             {
                 List<FloatMenuOption> list = new List<FloatMenuOption>();
-                foreach (RecipeDef recipe in SelAssembler.GetAllRecipes())
+                foreach (RecipeDef recipe in SelBuilding.GetAllRecipes())
                 {
                     if (recipe.AvailableNow)
                     {
                         list.Add(new FloatMenuOption(recipe.LabelCap, delegate ()
                         {
-                            if (!SelAssembler.Map.mapPawns.FreeColonists.Any((Pawn col) => recipe.PawnSatisfiesSkillRequirements(col)))
+                            if (!SelBuilding.Map.mapPawns.FreeColonists.Any((Pawn col) => recipe.PawnSatisfiesSkillRequirements(col)))
                             {
                                 Bill.CreateNoPawnsWithSkillDialog(recipe);
                             }
                             Bill bill2 = recipe.MakeNewBill();
-                            SelAssembler.BillStack.AddBill(bill2);
+                            SelBuilding.BillStack.AddBill(bill2);
                             if (recipe.conceptLearned != null)
                             {
                                 PlayerKnowledgeDatabase.KnowledgeDemonstrated(recipe.conceptLearned, KnowledgeAmount.Total);
@@ -113,7 +121,7 @@ namespace ProjectRimFactory.SAL3.UI
                 }
                 return list;
             };
-            mouseoverBill = SelAssembler.BillStack.DoListing(rect2, recipeOptionsMaker, ref scrollPosition, ref viewHeight);
+            mouseoverBill = SelBuilding.BillStack.DoListing(rect2, recipeOptionsMaker, ref scrollPosition, ref viewHeight);
             //
             //Rect rect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
             //Func<List<FloatMenuOption>> recipeOptionsMaker = delegate
@@ -143,7 +151,7 @@ namespace ProjectRimFactory.SAL3.UI
         {
             if (mouseoverBill != null)
             {
-                mouseoverBill.TryDrawIngredientSearchRadiusOnMap(SelAssembler.Position);
+                mouseoverBill.TryDrawIngredientSearchRadiusOnMap(SelBuilding.Position);
                 mouseoverBill = null;
             }
         }

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--============================================== S.A.L Research base ============================================-->
+  <ResearchProjectDef Name="PRF_SALResearch" Abstract="True">
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <tab>Automation</tab>
+    <researchViewY>4</researchViewY>
+  </ResearchProjectDef>
+
+  <!--==============================================General============================================-->
+
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchI</defName>
+    <label>S.A.L Autonomous Crafting I</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>1000</baseCost>
+    <description>Learn how to program machines to be able to perform skilled labor.</description>
+    <prerequisites>
+      <li>PRF_CoreTierII</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>6</researchViewX>
+    <discoveredLetterTitle>About: S.A.L automation robots</discoveredLetterTitle>
+    <discoveredLetterText>With this Research you have unlocked S.A.L automation robots.\nThese are a placeable robots which you attach to a workbench where a human would stand, and then they will start doing work on that bench.\n\nThe name "S.A.L." is a tribute to the original SAL mod, from whence Project RimFactory is descended.</discoveredLetterText>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchII</defName>
+    <label>S.A.L Autonomous Crafting II</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>3000</baseCost>
+    <description>Advance your understanding of programming autonomous machines, allowing you to make them craft faster, better, and more accurately.</description>
+    <prerequisites>
+      <li>PRF_SALResearchI</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>7</researchViewX>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchIII</defName>
+    <label>S.A.L Specialization</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>2000</baseCost>
+    <description>Further advancements in machine programming will allow you to begin to specialize your S.A.L. machines into performing specific roles more efficiently.</description>
+    <prerequisites>
+      <li>PRF_SALResearchII</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>8</researchViewX>
+  </ResearchProjectDef>
+
+
+  <!--==============================================Specialised============================================-->
+  <!-- ==================== ART ============================= -->
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchIV</defName>
+    <label>S.A.L Art I</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>2000</baseCost>
+    <description>Learn the ways of hypercomputing and neural networks, allowing machines to create proper semi-decent art.</description>
+    <prerequisites>
+      <li>PRF_SALResearchIII</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>9</researchViewX>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchV</defName>
+    <label>S.A.L Art II</label>
+    <techLevel>Ultra</techLevel>
+    <baseCost>3000</baseCost>
+    <description>Combined with overclocking, make your neural networks react much faster, drastically improving the quality of art produced by your machines.</description>
+    <prerequisites>
+      <li>PRF_SALResearchVI</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>10</researchViewX>
+    <researchViewY>3.7</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ==================== Cooking ============================= -->
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchVII</defName>
+    <label>S.A.L Autonomous Cooking</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>2000</baseCost>
+    <description>Learn how to give auto-assemblers enough dexterity and precision for them to efficiently replace your chefs.</description>
+    <prerequisites>
+      <li>PRF_SALResearchIII</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>9</researchViewX>
+    <researchViewY>5</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- ==================== Speedy ============================= -->
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchVI</defName>
+    <label>S.A.L Autonomous Overclocking I</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>5000</baseCost>
+    <description>General S.A.L machines often work too slowly and can result in slow production. Upgrading them with the ability to overclock their operating systems, this will result in faster production speeds at the cost of some item quality.</description>
+    <prerequisites>
+      <li>PRF_SALResearchIV</li>
+      <li>PRF_SALResearchVII</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+    <researchViewX>10</researchViewX>
+    <researchViewY>4.3</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALResearchVIII</defName>
+    <label>S.A.L Autonomous Overclocking II</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>10000</baseCost>
+    <description>Increases to servo speed and internal visualisation computers allow this S.A.L crafter to work even faster than before.  Henry Ford would be proud.</description>
+    <prerequisites>
+      <li>PRF_SALResearchVI</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+    <researchViewX>11</researchViewX>
+    <researchViewY>4.3</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- Tier 4 -->
+  <!-- ==================== Godly Crafter ============================= -->
+  <ResearchProjectDef ParentName="PRF_SALResearch">
+    <defName>PRF_SALGodlyCrafting</defName>
+    <label>S.A.L Prime Crafting</label>
+    <techLevel>Ultra</techLevel>
+    <baseCost>20000</baseCost>
+    <description>After several rigorous hours of research, one can finally acquire the finest piece of machinery. Prime crafting introduces levels of manufacturing unknown to most of mankind. Only the most advanced societies in existence have achieved this miracle of engineering, but at what cost?</description>
+    <prerequisites>
+      <li>PRF_SALResearchVIII</li>
+      <li>PRF_CoreTierIV</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+    <researchViewX>12</researchViewX>
+    <researchViewY>4.3</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

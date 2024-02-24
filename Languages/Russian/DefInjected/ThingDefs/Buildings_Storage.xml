@@ -2,10 +2,10 @@
 <LanguageData>
 
   <PRF_WoodCrate_II.label>Cкладской ящик</PRF_WoodCrate_II.label>
-  <PRF_WoodCrate_II.description>Гигантский ящик, который может хранить 25 стаков. Предметы, хранящиеся в ящике, не ухудшаются.</PRF_WoodCrate_II.description>
+  <PRF_WoodCrate_II.description>Гигантский ящик, который может хранить 16 стаков. Предметы, хранящиеся в ящике, не ухудшаются.</PRF_WoodCrate_II.description>
 
   <PRF_SteelCrate_II.label>Уплотненный складской ящик</PRF_SteelCrate_II.label>
-  <PRF_SteelCrate_II.description>Гигантский ящик, который может хранить 100 стаков. Предметы, хранящиеся в ящике, не ухудшаются.</PRF_SteelCrate_II.description>
+  <PRF_SteelCrate_II.description>Гигантский ящик, который может хранить 64 стаков. Предметы, хранящиеся в ящике, не ухудшаются.</PRF_SteelCrate_II.description>
   
   <IndustrialStorageUnit.label>Промышленное хранилище (устаревшее)</IndustrialStorageUnit.label>
   <IndustrialStorageUnit.description>Это здание будет устаревшим в релизе. Пожалуйста, используйте грузовую платформу.</IndustrialStorageUnit.description>

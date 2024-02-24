@@ -1,11 +1,10 @@
-﻿using System;
+﻿using ProjectRimFactory.SAL3;
+using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Verse;
-using RimWorld;
 
 namespace ProjectRimFactory.Common
 {
@@ -13,9 +12,9 @@ namespace ProjectRimFactory.Common
     {
         public CompProperties_PowerWorkSetting Props => (CompProperties_PowerWorkSetting)this.props;
 
-        public int MaxPowerForSpeed =>  (int)(this.Props.floatrange_SpeedFactor.Span * this.Props.powerPerStepSpeed);
+        public int MaxPowerForSpeed => (int)(this.Props.floatrange_SpeedFactor.Span * this.Props.powerPerStepSpeed);
 
-        public int MaxPowerForRange =>  (int)(this.Props.floatrange_Range.Span * this.Props.powerPerStepRange);
+        public int MaxPowerForRange => (int)(this.Props.floatrange_Range.Span * this.Props.powerPerStepRange);
 
         public IRangeCells rangeCells = null;
 
@@ -58,14 +57,14 @@ namespace ProjectRimFactory.Common
 
         public bool RangeSettingHide = false;
 
-        public bool RangeSetting 
+        public bool RangeSetting
         {
             get
             {
                 if (RangeSettingHide) return false;
                 return this.Props.floatrange_Range.Span > 0;
-            }   
-              
+            }
+
         }
 
         private float powerForSpeed = 0;
@@ -75,7 +74,8 @@ namespace ProjectRimFactory.Common
 
         private float powerForRange = 0;
 
-        private enum rangeTypeClassEnum{
+        private enum rangeTypeClassEnum
+        {
             CircleRange,
             FacingRectRange,
             RectRange
@@ -101,7 +101,7 @@ namespace ProjectRimFactory.Common
 
         }
 
-        public int BasePowerConsumption => (int)this.powerComp.Props.basePowerConsumption;
+        public float BasePowerConsumption => (float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(this.powerComp.Props);
 
         public int CurrentPowerConsumption => (int)this.powerComp.PowerOutput;
 
@@ -149,18 +149,20 @@ namespace ProjectRimFactory.Common
                 rangeTypeSeletion = rangeTypeSelection;
             }
 
+            Scribe_Values.Look<bool>(ref this.RangeSettingHide, "RangeSettingHide",false);
             Scribe_Values.Look<float>(ref this.powerForSpeed, "powerForSpeed");
             Scribe_Values.Look<float>(ref this.powerForRange, "powerForRange");
-            Scribe_Values.Look(ref rangeTypeSeletion, "rangeType",-1);
-            Scribe_Values.Look(ref RangeTypeRot, "RangeTypeRot",Rot4.North);
+            Scribe_Values.Look(ref rangeTypeSeletion, "rangeType", -1);
+            Scribe_Values.Look(ref RangeTypeRot, "RangeTypeRot", Rot4.North);
 
             //Set the Loaded rangeCells Value
             if (Scribe.mode != LoadSaveMode.Saving)
             {
-                if (rangeTypeSeletion == -1) {
+                if (rangeTypeSeletion == -1)
+                {
                     rangeCells = null;
                     rangeTypeSeletion = rangeTypeSelection;
-                } 
+                }
 
                 rangeTypeSelection = rangeTypeSeletion;
             }
@@ -194,9 +196,9 @@ namespace ProjectRimFactory.Common
 
         public void RefreshPowerStatus()
         {
-            if(this.powerComp != null)
+            if (this.powerComp != null)
             {
-                this.powerComp.PowerOutput = -this.powerComp.Props.basePowerConsumption - this.SupplyPowerForSpeed - this.SupplyPowerForRange - AdditionalPowerDrain;
+                this.powerComp.PowerOutput = -(float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(this.powerComp.Props) - this.SupplyPowerForSpeed - this.SupplyPowerForRange - AdditionalPowerDrain;
             }
         }
 
@@ -248,7 +250,7 @@ namespace ProjectRimFactory.Common
         }
 
 
-        
+
 
         public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
         {
@@ -262,11 +264,11 @@ namespace ProjectRimFactory.Common
 
 
 
-        public IRangeCells[] rangeTypes = new IRangeCells[] { new  CircleRange() , new FacingRectRange() , new RectRange() }; 
+        public IRangeCells[] rangeTypes = new IRangeCells[] { new CircleRange(), new FacingRectRange(), new RectRange() };
 
     }
 
-    public class CompProperties_PowerWorkSetting : CompProperties
+    public class CompProperties_PowerWorkSetting : CompProperties, IXMLThingDescription
     {
         //speed
         public FloatRange floatrange_SpeedFactor;
@@ -307,7 +309,68 @@ namespace ProjectRimFactory.Common
                 map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>()).Where(c => c != null && c.RangeSetting)
                     .ToList().ForEach(c => c.DrawRangeCells(CommonColors.otherInstance));
             }
-        } 
+        }
+
+        //https://stackoverflow.com/a/457708
+        static bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
+        {
+            while (toCheck != null && toCheck != typeof(object))
+            {
+                var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+                if (generic == cur)
+                {
+                    return true;
+                }
+                toCheck = toCheck.BaseType;
+            }
+            return false;
+        }
+
+        public string GetDescription(ThingDef def)
+        {
+            string helptext = "";
+            string tempstr;
+
+
+            bool isOfTypeBuilding_BaseMachine = IsSubclassOfRawGeneric(typeof(AutoMachineTool.Building_Base<>), def.thingClass);
+            int factor = isOfTypeBuilding_BaseMachine ? 10 : 1;
+
+
+            if (floatrange_SpeedFactor.Span > 0)
+            {
+                tempstr = $"{floatrange_SpeedFactor.min * factor} - {floatrange_SpeedFactor.max * factor}";
+            }
+            else
+            {
+                tempstr = $"{floatrange_SpeedFactor.min * factor}";
+            }
+            //Single speed of 1 is not intersting
+            if (tempstr != "1")
+            {
+                helptext += "PRF_UTD_CompProperties_PowerWorkSetting_Speed".Translate(tempstr);
+                helptext += "\r\n";
+            }
+            if (floatrange_Range.Span > 0)
+            {
+                tempstr = $"{floatrange_Range.min} - {floatrange_Range.max}";
+            }
+            else
+            {
+                tempstr = $"{floatrange_Range.min}";
+            }
+            //static range of 1 or 0 is not relevant for display
+            if (tempstr != "0" && tempstr != "1")
+            {
+                helptext += "PRF_UTD_CompProperties_PowerWorkSetting_Range".Translate(tempstr);
+                helptext += "\r\n";
+
+                helptext += "PRF_UTD_CompProperties_PowerWorkSetting_RangeType".Translate(propsRangeType.ToText());
+                helptext += "\r\n";
+            }
+
+            if (allowManualRangeTypeChange) helptext += "PRF_UTD_CompProperties_PowerWorkSetting_RangeTypeChange".Translate() + "\r\n";
+            return helptext;
+        }
     }
 
     public interface IRangeCells
@@ -355,7 +418,7 @@ namespace ProjectRimFactory.Common
         public IEnumerable<IntVec3> RangeCells(IntVec3 center, Rot4 rot, ThingDef thingDef, float range)
         {
             IntVec2 size = thingDef.size;
-            Util.CounterAdjustForRotation(ref center,ref size, rot);
+            Util.CounterAdjustForRotation(ref center, ref size, rot);
 
 
             var under = GenAdj.CellsOccupiedBy(center, rot, size).ToHashSet();

@@ -1,11 +1,7 @@
-﻿using System;
+﻿using ProjectRimFactory.AutoMachineTool;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Verse;
-using RimWorld;
 
 namespace ProjectRimFactory.Common
 {
@@ -15,19 +11,62 @@ namespace ProjectRimFactory.Common
         // iHideRightMenus: see HarmonyPatches/PatchStorage.cs
         public HashSet<IntVec3> iHideRightMenus = new HashSet<IntVec3>();
 
-        private Dictionary<IntVec3,List< HarmonyPatches.IHideItem>> hideItemLocations = new Dictionary<IntVec3,List< HarmonyPatches.IHideItem>>();
-        
+        public List<Storage.Building_ColdStorage> ColdStorageBuildings = new List<Storage.Building_ColdStorage>();
+
+        private Dictionary<IntVec3, List<HarmonyPatches.IHideItem>> hideItemLocations = new Dictionary<IntVec3, List<HarmonyPatches.IHideItem>>();
+
         private Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>> ForbidPawnOutputItemLocations = new Dictionary<IntVec3, List<HarmonyPatches.IForbidPawnOutputItem>>();
+
+        private Dictionary<IntVec3, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort> advancedIOLocations = new Dictionary<IntVec3, Storage.Building_AdvancedStorageUnitIOPort>();
+
+        public Dictionary<IntVec3, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort> GetadvancedIOLocations => advancedIOLocations;
+
+        public Dictionary<Building_BeltConveyor, IBeltConveyorLinkable> NextBeltCache = new Dictionary<Building_BeltConveyor, IBeltConveyorLinkable>();
+
+
+        public void RegisterColdStorageBuilding(ProjectRimFactory.Storage.Building_ColdStorage port)
+        {
+            if (!ColdStorageBuildings.Contains(port))
+            {
+                ColdStorageBuildings.Add(port);
+            }
+        }
+        public void DeRegisterColdStorageBuilding(ProjectRimFactory.Storage.Building_ColdStorage port)
+        {
+            if (ColdStorageBuildings.Contains(port))
+            {
+                ColdStorageBuildings.Remove(port);
+            }
+
+        }
+
+
+
+        public void RegisteradvancedIOLocations(IntVec3 pos, ProjectRimFactory.Storage.Building_AdvancedStorageUnitIOPort port)
+        {
+            if (!advancedIOLocations.ContainsKey(pos))
+            {
+                advancedIOLocations.Add(pos, port);
+            }
+        }
+        public void DeRegisteradvancedIOLocations(IntVec3 pos)
+        {
+            if (advancedIOLocations.ContainsKey(pos))
+            {
+                advancedIOLocations.Remove(pos);
+            }
+
+        }
 
         public void RegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
         {
-            if(hideItemLocations.ContainsKey(pos))
+            if (hideItemLocations.ContainsKey(pos))
             {
                 hideItemLocations[pos].Add(hideItem);
             }
             else
             {
-                hideItemLocations.Add(pos,new List<HarmonyPatches.IHideItem>() { hideItem});
+                hideItemLocations.Add(pos, new List<HarmonyPatches.IHideItem>() { hideItem });
             }
         }
         public void DeRegisterIHideItemPos(IntVec3 pos, HarmonyPatches.IHideItem hideItem)
@@ -40,7 +79,7 @@ namespace ProjectRimFactory.Common
             {
                 hideItemLocations[pos].Remove(hideItem);
             }
-            
+
         }
         public void RegisterIForbidPawnOutputItem(IntVec3 pos, HarmonyPatches.IForbidPawnOutputItem ForbidPawnOutput)
         {
@@ -110,15 +149,18 @@ namespace ProjectRimFactory.Common
         }
         public void AddIHideRightClickMenu(Building b)
         {
-            foreach (var v in b.OccupiedRect()) {
+            foreach (var v in b.OccupiedRect())
+            {
                 iHideRightMenus.Add(v);
             }
         }
         public void RemoveIHideRightClickMenu(Building b)
         {
-            foreach (var v in b.OccupiedRect()) {
+            foreach (var v in b.OccupiedRect())
+            {
                 iHideRightMenus.Remove(v);
-                foreach (var t in map.thingGrid.ThingsListAt(v)) {
+                foreach (var t in map.thingGrid.ThingsListAt(v))
+                {
                     if (t != b && t is IHideRightClickMenu) iHideRightMenus.Add(v);
                 }
             }

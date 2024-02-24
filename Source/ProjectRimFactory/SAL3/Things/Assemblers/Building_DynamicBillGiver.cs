@@ -1,15 +1,15 @@
-﻿using RimWorld;
+﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.SAL3.UI;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Verse;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers
 {
     [StaticConstructorOnStartup]
-    public abstract class Building_DynamicBillGiver : PRF_Building, IBillGiver
+    public abstract class Building_DynamicBillGiver : PRF_Building, IBillGiver, IBillTab
     {
         public abstract BillStack BillStack { get; }
 
@@ -17,6 +17,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         public bool CurrentlyUsableForBills() => false;
 
         public abstract IEnumerable<RecipeDef> GetAllRecipes();
+
+        public void Notify_BillDeleted(Bill bill)
+        {
+        }
 
         public bool UsableForBillsAfterFueling()
         {

@@ -1,11 +1,8 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using RimWorld;
+using System.Text.RegularExpressions;
 using Verse;
 
 namespace ProjectRimFactory.Common
@@ -14,7 +11,7 @@ namespace ProjectRimFactory.Common
     {
         public static List<ThingDef> OriginalThingDefs = new List<ThingDef>();
         public static List<ResearchProjectDef> OriginalResearchProjectDefs = new List<ResearchProjectDef>();
-        
+
 
     }
 
@@ -32,14 +29,14 @@ namespace ProjectRimFactory.Common
             "PRF_Sprinkler_I","PRF_Sprinkler_II","PRF_MineShaft","PRF_MiniHelper","PRF_MiniDroneColumn","PRF_TypeOneAssembler_I","PRF_TypeTwoAssembler_I","PRF_TypeTwoAssembler_II","PRF_TypeTwoAssembler_III","PRF_FurnaceI","PRF_FurnaceII","PRF_FurnaceIII","PRF_SelfPrepper",
             "PRF_Factory_Supplier", "PRF_ResearchTerminal" , "TableRoboticMachining", "PRF_4k_Battery","PRF_16k_Battery","PRF_64k_Battery","PRF_256k_Battery"};
             string[] ExcludeList_Signs = { "PRF_FloorLampArrow", "PRF_RedFloorLampArrow", "PRF_GreenFloorLampArrow", "PRF_FloorLampX", "PRF_FloorInput", "PRF_FloorOutput", "PRF_IconClothes", "PRF_IconSkull", "PRF_IconToxic", "PRF_IconPower", "PRF_IconGears", "PRF_IconGun", "PRF_IconGasmask", "PRF_IconFire", "PRF_IconCold", "PRF_IconDanger", "PRF_IconExit", "PRF_IconPrison", "PRF_IconResearch", "PRF_IconHospital", "PRF_IconBarbedWire" };
-            string[] ExcludeListPatches = { "PRF_MiniHelperAtomic", "PRF_MiniHelperFishing" , "PRF_T1_Aquaculture", "PRF_T2_Aquaculture", "PRF_FishFood" };
+            string[] ExcludeListPatches = { "PRF_MiniHelperAtomic", "PRF_MiniHelperFishing", "PRF_T1_Aquaculture", "PRF_T2_Aquaculture", "PRF_FishFood" };
 
-            string[] ExcludeListRecipes = { "Make_PRF_FishFood"};
+            string[] ExcludeListRecipes = { "Make_PRF_FishFood" };
 
             string[] ExcludeList_Research = { "PRF_AutomaticFarmingI", "PRF_AutomaticFarmingII", "PRF_AutomaticFarmingIII", "PRF_BasicDrones", "PRF_ImprovedDrones", "PRF_AdvancedDrones", "PRF_AutonomousMining", "PRF_AutonomousMiningII", "PRF_AutonomousMiningIII", "PRF_SALResearchI", "PRF_SALResearchII", "PRF_SALResearchIII", "PRF_SALResearchIV", "PRF_SALResearchV", "PRF_SALResearchVII", "PRF_SALResearchVI", "PRF_SALResearchVIII", "PRF_SALGodlyCrafting", "PRF_EnhancedBatteries", "PRF_LargeBatteries", "PRF_VeryLargeBatteries", "PRF_UniversalAutocrafting", "PRF_SelfCorrectingAssemblers", "PRF_SelfCorrectingAssemblersII", "PRF_MetalRefining", "PRF_AnimalStations", "PRF_AnimalStationsII", "PRF_AnimalStationsIII" ,
             "PRF_SelfCooking","PRF_SelfCookingII","PRF_MachineLearning","PRF_MagneticTape","PRF_CoreTierO","PRF_CoreTierI","PRF_CoreTierII","PRF_CoreTierIII","PRF_CoreTierIV"};
             string[] ExcludeListTrader = { "PRF_Factory_Supplier" };
-            
+
 
 
             //Components are items that are used in the creation of other items
@@ -93,11 +90,11 @@ namespace ProjectRimFactory.Common
                     DefDatabase<ThingDef>.AllDefsListForReading.Add(def);
                 }
 
-               
+
                 foreach (ThingDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ThingDef>("alterdDef"))
                 {
                     DefDatabase<ThingDef>.AllDefsListForReading[DefDatabase<ThingDef>.AllDefsListForReading.FirstIndexOf(c => c.defName == def.defName)].costList = ProjectRimFactory_ModSettings.defTracker.GetDefaultValue<List<ThingDefCountClass>>(def.defName, "costList");
-                    
+
                 }
 
                 foreach (TraderKindDef def in ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<TraderKindDef>("trader"))
@@ -123,6 +120,10 @@ namespace ProjectRimFactory.Common
                 {
                     ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
                 }
+                else if (ProjectRimFactory_ModComponent.ModSupport_ReserchPowl)
+                {
+                    ProjectRimFactory_ModComponent.ModSupport_ReserchPowl_ResetLayout.Invoke(null, null);
+                }
             }
 
 
@@ -132,7 +133,7 @@ namespace ProjectRimFactory.Common
 
         private static void clearRecipesCache()
         {
-            List<ThingDef> thingDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(d => d.IsWorkTable ).ToList();
+            List<ThingDef> thingDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(d => d.IsWorkTable).ToList();
             foreach (ThingDef thingDef in thingDefs)
             {
                 SAL3.ReflectionUtility.allRecipesCached.SetValue(thingDef, null);
@@ -179,7 +180,7 @@ namespace ProjectRimFactory.Common
                 //PRF_ChangedDefTracker.OriginalResearchProjectDefs.Add(def);
                 def.prerequisites.RemoveAll(c => defNames.Contains(c.defName));
             }
-            
+
             List<ResearchProjectDef> researchProjects = DefDatabase<ResearchProjectDef>.AllDefsListForReading.Where(d => defNames.Contains(d.defName)).ToList();
             foreach (ResearchProjectDef def in researchProjects)
             {
@@ -191,10 +192,10 @@ namespace ProjectRimFactory.Common
             }
 
             //TODO remove the Hardcoded Def
-            List<ResearchProjectDef> researchProjectsFacilities = DefDatabase<ResearchProjectDef>.AllDefsListForReading.Where(d => d.requiredResearchFacilities?.Any(f => f.defName == "PRF_ResearchTerminal") ?? false  ).ToList();
+            List<ResearchProjectDef> researchProjectsFacilities = DefDatabase<ResearchProjectDef>.AllDefsListForReading.Where(d => d.requiredResearchFacilities?.Any(f => f.defName == "PRF_ResearchTerminal") ?? false).ToList();
             foreach (ResearchProjectDef def in researchProjectsFacilities)
             {
-                ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "requiredResearchFacilities", def.requiredResearchFacilities.ToList()) ;
+                ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "requiredResearchFacilities", def.requiredResearchFacilities.ToList());
                 ProjectRimFactory_ModSettings.defTracker.AddDefaultValue(def.defName, "requiredResearchFacilitiesBase", def);
 
 
@@ -212,7 +213,7 @@ namespace ProjectRimFactory.Common
             {
                 progress = (Dictionary<ResearchProjectDef, float>)SAL3.ReflectionUtility.ResearchManager_progress.GetValue(Current.Game.researchManager);
             }
-            List<ResearchProjectDef> researchProjects =  ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ResearchProjectDef>("res").ToList();
+            List<ResearchProjectDef> researchProjects = ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ResearchProjectDef>("res").ToList();
 
             foreach (ResearchProjectDef def in researchProjects)
             {
@@ -229,7 +230,10 @@ namespace ProjectRimFactory.Common
             {
                 ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
             }
-
+            else if (ProjectRimFactory_ModComponent.ModSupport_ReserchPowl)
+            {
+                ProjectRimFactory_ModComponent.ModSupport_ReserchPowl_ResetLayout.Invoke(null, null);
+            }
 
         }
 
@@ -257,7 +261,7 @@ namespace ProjectRimFactory.Common
         private static List<ThingDefCountClass> CostListCopy(List<ThingDefCountClass> datain)
         {
             List<ThingDefCountClass> dataOut = new List<ThingDefCountClass>();
-            for(int i = 0; i < datain.Count; i++)
+            for (int i = 0; i < datain.Count; i++)
             {
                 dataOut.Add(new ThingDefCountClass(datain[i].thingDef, datain[i].count));
             }
@@ -273,12 +277,14 @@ namespace ProjectRimFactory.Common
         /// <param name="defNames"></param>
         private static void removeComponents(List<string> defNames)
         {
+            Regex checkRecipeLable = new Regex(@"^.+? x\d+$", RegexOptions.Compiled);
 
             Dictionary<ThingDef, List<IngredientCount>> replacementDict = new Dictionary<ThingDef, List<IngredientCount>>();
 
             List<RecipeDef> recipeDefs2 = DefDatabase<RecipeDef>.AllDefsListForReading.Where(d => d.products.Select(s => s.thingDef).ToList().Where(c => defNames.Contains(c.defName)).Any()).ToList();
             foreach (RecipeDef def in recipeDefs2)
             {
+                if (checkRecipeLable.IsMatch(def.label)) continue;
                 replacementDict.Add(def.ProducedThingDef, def.ingredients);
             }
 
@@ -322,7 +328,7 @@ namespace ProjectRimFactory.Common
                     def.costList.RemoveAll(d => toRemove.Contains(d));
 
                 }
-                
+
 
             }
             ArchitectMenu_ClearCache();
@@ -350,7 +356,7 @@ namespace ProjectRimFactory.Common
 
             // Clear the architect menu cache:
             //   Run the main Architect.TabWindow.CacheDesPanels()
-            
+
             typeof(RimWorld.MainTabWindow_Architect).GetMethod("CacheDesPanels", System.Reflection.BindingFlags.NonPublic |
                                                                      System.Reflection.BindingFlags.Instance)
                 .Invoke(((MainTabWindow_Architect)MainButtonDefOf.Architect.TabWindow), null);

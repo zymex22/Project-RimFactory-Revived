@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 using Verse;
 
@@ -37,7 +34,7 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         /// <param name="checkPosition">If set to <c>false</c>, assume position is valid, 
         /// and only check other considerations - probably only used internally.</param>
-        bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition=true);
+        bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition = true);
         /// <summary>
         /// Can the BeltConveyorLinkable link FROM another (independent of whether
         ///   the other can actually link to this one)
@@ -83,8 +80,9 @@ namespace ProjectRimFactory.AutoMachineTool
         IntVec3 Position { get; }
         bool Spawned { get; }
     }
-    public enum ConveyorLevel {
-        Underground=-1,
-        Ground=0,
+    public enum ConveyorLevel
+    {
+        Underground = -1,
+        Ground = 0,
     }
 }

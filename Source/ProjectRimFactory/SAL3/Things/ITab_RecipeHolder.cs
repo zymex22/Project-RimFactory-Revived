@@ -1,12 +1,8 @@
-﻿using System;
+﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
-using Verse;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.UIElements;
+using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
 {
@@ -77,7 +73,7 @@ namespace ProjectRimFactory.SAL3.Things
 
 
 
-        
+
 
 
         public ITab_RecipeHolder()
@@ -90,12 +86,14 @@ namespace ProjectRimFactory.SAL3.Things
         private bool showSaved = true;
         private bool showLearnable = true;
         private bool showQuered = true;
-        
-        private bool ShouldDrawRow(RecipeDef recipe, ref float curY, float ViewRecthight, float scrollY)
+        private string searchText = "";
+
+        private bool ShouldDrawRow(RecipeDef recipe, ref float curY, float ViewRecthight, float scrollY, string search)
         {
             if (!showLearnable && Recipes[recipe] == enum_RecipeStatus.Learnable) return false;
             if (!showQuered && Recipes[recipe] == enum_RecipeStatus.Quered) return false;
             if (!showSaved && Recipes[recipe] == enum_RecipeStatus.Saved) return false;
+            if (search != "" && !recipe.label.ToLower().Contains(search.ToLower())) return false;
 
             //The item is above the view (including a safty margin of one item)
             if ((curY + ROW_HIGHT - scrollY) < 0)
@@ -116,7 +114,7 @@ namespace ProjectRimFactory.SAL3.Things
             return false;
         }
 
-
+        
         protected override void FillTab()
         {
             RefreshRecipeList();
@@ -124,13 +122,13 @@ namespace ProjectRimFactory.SAL3.Things
             Listing_Standard list = new Listing_Standard();
             Rect inRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
             Rect rect;
-            
 
-            
+
+
             float currY = 0;
             list.Begin(inRect);
             list.Gap();
- 
+
 
             rect = list.GetRect(30);
 
@@ -145,20 +143,28 @@ namespace ProjectRimFactory.SAL3.Things
             rect = list.GetRect(10);
             currY += 10;
             Widgets.DrawLineHorizontal(0, rect.y, rect.width);
+            rect = list.GetRect(20);
+            currY += 20;
+            rect.width -= 30 + 16 + 20 + 100;
+            rect.x += 20;
+            searchText = Widgets.TextField(rect, searchText);
+            rect.x -= 20;
+            rect.width = 20;
+            GUI.DrawTexture(rect, TexButton.Search);
 
-     
+
             var outRect = new Rect(5f, currY + 5, WinSize.x - 30, WinSize.y - currY - 30);
             var viewRect = new Rect(0f, 0, outRect.width - 16f, scrollViewHeight);
-            Widgets.BeginScrollView(outRect, ref scrollPos, viewRect,true);
+            Widgets.BeginScrollView(outRect, ref scrollPos, viewRect, true);
 
             currY = 0;
 
 
             foreach (RecipeDef recipe in Recipes.Keys)
             {
-                if (!ShouldDrawRow(recipe, ref currY, outRect.height, scrollPos.y)) continue;
+                if (!ShouldDrawRow(recipe, ref currY, outRect.height, scrollPos.y, searchText)) continue;
 
-                DrawRecipeRow(recipe,ref currY, viewRect.width);
+                DrawRecipeRow(recipe, ref currY, viewRect.width);
 
             }
             if (Event.current.type == EventType.Layout) scrollViewHeight = currY + 30f;
@@ -170,7 +176,7 @@ namespace ProjectRimFactory.SAL3.Things
         }
 
 
-        private void DrawRecipeRow(RecipeDef recipe, ref float currY,float viewRect_width)
+        private void DrawRecipeRow(RecipeDef recipe, ref float currY, float viewRect_width)
         {
             Rect rect2;
             Rect rect;

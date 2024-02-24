@@ -1,36 +1,37 @@
-﻿using System;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using RimWorld;
 using Verse;
-using UnityEngine;
-using RimWorld.Planet;
-using System.Reflection;
+using Verse.AI;
 
 namespace ProjectRimFactory.SAL3.Tools
 {
     static class ProjectSAL_Utilities
     {
-        public static Thing CalculateDominantIngredient(RecipeDef currentRecipe, IEnumerable<Thing> thingRecord)
+        /// <summary>
+        /// Modified Version of Verse.AI.Toils_Recipe:CalculateDominantIngredient to work without a Job
+        /// </summary>
+        /// <param name="RecipeDef"></param>
+        /// <param name="ingredients"></param>
+        /// <returns></returns>
+        public static Thing CalculateDominantIngredient(RecipeDef RecipeDef, List<Thing> ingredients)
         {
-            var stuffs = thingRecord.Where(t => t.def.IsStuff);
-            if (!thingRecord.Any())
+            //Get Things that are Stuff
+            var stuffs = ingredients.Where(t => t.def.IsStuff).ToList();
+
+            if (!ingredients.NullOrEmpty() && stuffs.Any())
             {
-                if (currentRecipe.ingredients.Count > 0) Log.Warning("S.A.L.: Had no thingRecord of items being accepted, but crafting recipe has ingredients. Did you reload a save?");
-                return ThingMaker.MakeThing(ThingDefOf.Steel);
-            }
-            if (stuffs.Any())
-            {
-                if (currentRecipe.productHasIngredientStuff)
+                if (RecipeDef.productHasIngredientStuff)
                 {
-                    return stuffs.OrderByDescending(x => x.stackCount).First();
+                    return stuffs[0];
                 }
-                if (currentRecipe.products.Any(x => x.thingDef.MadeFromStuff))
+                if (RecipeDef.products.Any((ThingDefCountClass x) => x.thingDef.MadeFromStuff))
                 {
-                    return stuffs.RandomElementByWeight(x => x.stackCount);
+                    return stuffs.Where((Thing x) => x.def.IsStuff).RandomElementByWeight((Thing x) => x.stackCount);
                 }
+                return stuffs.RandomElementByWeight((Thing x) => x.stackCount); ;
             }
+            //Return steel instead of Null to prevent null ref in some cases
             return ThingMaker.MakeThing(ThingDefOf.Steel);
         }
     }

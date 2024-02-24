@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -21,8 +17,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
             //Not shure how i should sopport the angeled one
             bool isRight = false;
-            
-            if (thing != null && !thing.def.IsBlueprint) {
+
+            if (thing != null && !thing.def.IsBlueprint)
+            {
                 isRight = (thing as Building_ItemPuller)?.Getright ?? false;
             }
             if (def.IsBlueprint || def.IsFrame)
@@ -33,8 +30,8 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 outputCell = def.GetModExtension<ModExtension_Puller>().GetOutputCell(center, rot, isRight);
             }
-            
-            GenDraw.DrawFieldEdges(new List<IntVec3> { inputCell },Common.CommonColors.inputCell);
+
+            GenDraw.DrawFieldEdges(new List<IntVec3> { inputCell }, Common.CommonColors.inputCell);
             GenDraw.DrawFieldEdges(new List<IntVec3> { outputCell }, Common.CommonColors.outputCell);
         }
     }

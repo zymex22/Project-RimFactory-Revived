@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using UnityEngine;
-using static ProjectRimFactory.AutoMachineTool.Ops;
+﻿using Verse;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -16,7 +7,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public bool outputSides = false;
 
 
-        public IntVec3 GetOutputCell(IntVec3 pos ,Rot4 rot , bool is_right = false)
+        public IntVec3 GetOutputCell(IntVec3 pos, Rot4 rot, bool is_right = false)
         {
             if (outputSides)
             {

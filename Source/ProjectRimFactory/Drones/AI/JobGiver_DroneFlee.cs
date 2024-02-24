@@ -1,9 +1,6 @@
 ﻿using ProjectRimFactory.Common;
 using RimWorld;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Verse;
 using Verse.AI;
 using Verse.AI.Group;
@@ -20,6 +17,10 @@ namespace ProjectRimFactory.Drones.AI
                 result = null;
             }
             else if (ThinkNode_ConditionalShouldFollowMaster.ShouldFollowMaster(pawn))
+            {
+                result = null;
+            }
+            else if (pawn.Map is null) //needed for 1.4
             {
                 result = null;
             }

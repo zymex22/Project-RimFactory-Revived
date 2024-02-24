@@ -38,7 +38,7 @@
       <Crafting>6</Crafting>
     </skillRequirements>
   </RecipeDef>
-  
+
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_StoneBlocksAnyBulk</defName>
     <label>make any stone blocks in bulk</label>
@@ -70,7 +70,7 @@
       <li>PRF_StoneWorks</li>
     </recipeUsers>
   </RecipeDef>
-  
+
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_SandstoneBlocksBulk</defName>
     <label>make sandstone blocks in bulk</label>
@@ -101,7 +101,7 @@
       <li>PRF_StoneWorks</li>
     </recipeUsers>
   </RecipeDef>
-  
+
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_GraniteBlocksBulk</defName>
     <label>make granite blocks in bulk</label>
@@ -132,7 +132,7 @@
       <li>PRF_StoneWorks</li>
     </recipeUsers>
   </RecipeDef>
-  
+
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_LimestoneBlocksBulk</defName>
     <label>make limestone blocks in bulk</label>
@@ -163,7 +163,7 @@
       <li>PRF_StoneWorks</li>
     </recipeUsers>
   </RecipeDef>
-  
+
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_SlateBlocksBulk</defName>
     <label>make slate blocks in bulk</label>
@@ -194,7 +194,7 @@
       <li>PRF_StoneWorks</li>
     </recipeUsers>
   </RecipeDef>
-  
+
   <RecipeDef ParentName="MakeStoneBlocksBase">
     <defName>PRF_MarbleBlocksBulk</defName>
     <label>make marble blocks in bulk</label>
@@ -225,5 +225,5 @@
       <li>PRF_StoneWorks</li>
     </recipeUsers>
   </RecipeDef>
-  
+
 </Defs>

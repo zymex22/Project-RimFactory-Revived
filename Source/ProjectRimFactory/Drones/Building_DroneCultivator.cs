@@ -1,13 +1,8 @@
-﻿using ProjectRimFactory.Common;
-using ProjectRimFactory.Drones;
-using RimWorld;
-using System;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace ProjectRimFactory.Drones
 {
@@ -41,7 +36,7 @@ namespace ProjectRimFactory.Drones
                 dronesLeft = extension.GetDronesOnSpawn();
             }
         }
- 
+
 
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -75,5 +70,5 @@ namespace ProjectRimFactory.Drones
         }
     }
 
-    
+
 }

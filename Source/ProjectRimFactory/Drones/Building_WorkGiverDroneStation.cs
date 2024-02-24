@@ -2,12 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using Verse;
 using Verse.AI;
-using System.Diagnostics;
-using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.Drones
 {
@@ -20,7 +16,7 @@ namespace ProjectRimFactory.Drones
                 return extension.workTypes;
             }
         }
-        public virtual Dictionary<WorkTypeDef,bool> WorkSettings_dict
+        public virtual Dictionary<WorkTypeDef, bool> WorkSettings_dict
         {
             get
             {
@@ -31,18 +27,13 @@ namespace ProjectRimFactory.Drones
 
         Pawn_WorkSettings workSettings = null;
 
-        //TODO Finding a good way to Cache pawn.workSettings may increase performence
-        public override Job TryGiveJob()
+
+        //Try give Job to Spawned drone
+        public override Job TryGiveJob(Pawn pawn)
         {
             Job result = null;
-            if (!(cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(this).ToString()))) 
+            if (!(cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(this).ToString())))
             {
-                //Only plausibel enhancment would be to cache the pawn
-                //MakeDrone Average time of 1ms 
-                Pawn pawn = MakeDrone();
-
-                //Spawn is cheap
-                GenSpawn.Spawn(pawn, Position, Map);
 
                 if (workSettings == null)
                 {
@@ -77,13 +68,10 @@ namespace ProjectRimFactory.Drones
                 {
                     result = TryIssueJobPackageDrone(pawn, false).Job;
                 }
-
-                pawn.Destroy();
-                Notify_DroneGained();
             }
             return result;
         }
-
+        
         // Method from RimWorld.JobGiver_Work.TryIssueJobPackage(Pawn pawn, JobIssueParams jobParams)
         // I modified the line if (!workGiver.ShouldSkip(pawn))
 #pragma warning disable
@@ -167,7 +155,8 @@ namespace ProjectRimFactory.Drones
                                     if (scanner is WorkGiver_ConstructDeliverResourcesToBlueprints)
                                     {
                                         //Preforme further checks too see if this is a reinstall attempt of its own station
-                                        if (thing is Blueprint_Install) {
+                                        if (thing is Blueprint_Install)
+                                        {
                                             Blueprint_Install bpthing = (Blueprint_Install)thing;
                                             Pawn_Drone pd = (Pawn_Drone)pawn;
                                             if (bpthing.MiniToInstallOrBuildingToReinstall == pd.station)
@@ -204,7 +193,7 @@ namespace ProjectRimFactory.Drones
                                     {
                                         if (scanner.HasJobOnCell(pawn, intVec))
                                         {
-                                            if (!allowUnreachable && !pawn.CanReach(intVec, scanner.PathEndMode, maxDanger, false,false, TraverseMode.ByPawn))
+                                            if (!allowUnreachable && !pawn.CanReach(intVec, scanner.PathEndMode, maxDanger, false, false, TraverseMode.ByPawn))
                                             {
                                                 continue;
                                             }
@@ -217,7 +206,7 @@ namespace ProjectRimFactory.Drones
                                     }
                                     else if (num4 < num2 && scanner.HasJobOnCell(pawn, intVec))
                                     {
-                                        if (!allowUnreachable && !pawn.CanReach(intVec, scanner.PathEndMode, maxDanger, false,false, TraverseMode.ByPawn))
+                                        if (!allowUnreachable && !pawn.CanReach(intVec, scanner.PathEndMode, maxDanger, false, false, TraverseMode.ByPawn))
                                         {
                                             continue;
                                         }

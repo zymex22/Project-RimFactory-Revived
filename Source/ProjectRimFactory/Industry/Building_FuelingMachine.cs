@@ -1,11 +1,8 @@
 ﻿using RimWorld;
-using Verse;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using ProjectRimFactory.Common;
+using Verse;
 
 namespace ProjectRimFactory.Industry
 {
@@ -103,7 +100,7 @@ namespace ProjectRimFactory.Industry
             {
                 foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(this))
                 {
-                    foreach (Thing item in GatherThingsUtility.AllThingsInCellForUse(cell, Map))
+                    foreach (Thing item in GatherThingsUtility.AllThingsInCellForUse(cell, Map,false))
                     {
                         yield return item;
                     }

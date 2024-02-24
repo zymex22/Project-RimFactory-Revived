@@ -31,16 +31,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="0NoMessySpawns">
-      <HintPath>..\packages\0NoMessySpawns.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <!-- This package includes all Unity packages as well as Assembly-CSharp
          Update this either in the GUI (nuget system) or from the command line:
          nuget restore
          -->
-    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.3.3200" />
-    <PackageReference Include="Lib.Harmony" Version="2.1.1" PrivateAssets="All" />
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.4.3613" />
+    <PackageReference Include="Lib.Harmony" Version="2.2.2" PrivateAssets="All" />
   </ItemGroup>
 
   <ProjectExtensions>

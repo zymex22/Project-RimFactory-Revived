@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
-using System.Text;
 using System.Xml;
 using UnityEngine;
 using Verse;
@@ -12,7 +11,7 @@ namespace ProjectRimFactory.Common
     public class ProjectRimFactory_ModSettings : ModSettings
     {
         public static bool allowAllMultipleSpecialSculptures;
-        public static Dictionary<string, int> maxNumbersSpecialSculptures; 
+        public static Dictionary<string, int> maxNumbersSpecialSculptures;
         public static void LoadXml(ModContentPack content)
         {
             root = ParseSettingRows(content);
@@ -23,11 +22,8 @@ namespace ProjectRimFactory.Common
 
         private static ContainerRow root;
 
-        // All C# based mod settings can go here.  If better organization
-        //   is desired, we can set up some ContainerRow classes that are
-        //   organized by XML?  But that's a lot of work.
-        private static void CSharpSettings(Listing_Standard list) {
-            // Style: do your section of settings and then list.GapLine();
+        private static void AddHeader(Listing_Standard list, string header)
+        {
             Rect rect = list.GetRect(30);
 
             Widgets.DrawRectFast(rect, Color.gray);
@@ -36,13 +32,23 @@ namespace ProjectRimFactory.Common
             Text.Font = GameFont.Medium;
             Text.Anchor = TextAnchor.MiddleCenter;
 
-            Widgets.Label(rect, "PRF_Settings_C_Lite_Header".Translate());
+            Widgets.Label(rect, header);
             Text.Font = tmp;
             Text.Anchor = tmpAnc;
 
             list.Gap();
+        }
 
-            rect = list.GetRect(20);
+        // All C# based mod settings can go here.  If better organization
+        //   is desired, we can set up some ContainerRow classes that are
+        //   organized by XML?  But that's a lot of work.
+        private static void CSharpSettings(Listing_Standard list)
+        {
+            // Style: do your section of settings and then list.GapLine();
+            AddHeader(list, "PRF_Settings_C_Lite_Header".Translate());
+
+
+            Rect rect = list.GetRect(20);
             if (Mouse.IsOver(rect))
             {
                 Widgets.DrawHighlight(rect);
@@ -56,6 +62,31 @@ namespace ProjectRimFactory.Common
                 PRF_CustomizeDefs.ToggleLiteMode(PRF_LiteMode);
             }
             PRF_LiteMode_last = PRF_LiteMode;
+
+
+            AddHeader(list, "PRF_Settings_C_Patches_Header".Translate());
+
+            rect = list.GetRect(20);
+            if (Mouse.IsOver(rect))
+            {
+                Widgets.DrawHighlight(rect);
+            }
+            TooltipHandler.TipRegion(rect, "PRF_Settings_C_Patches_Reachability_CanReach_ToolTip".Translate());
+            Widgets.CheckboxLabeled(rect, "PRF_Settings_C_Patches_Reachability_CanReach".Translate(), ref PRF_Patch_Reachability_CanReach);
+            list.Gap();
+            ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
+
+            AddHeader(list, "PRF_Settings_GeneralOptions_Header".Translate());
+
+            rect = list.GetRect(20);
+            if (Mouse.IsOver(rect))
+            {
+                Widgets.DrawHighlight(rect);
+            }
+            TooltipHandler.TipRegion(rect, "PRF_Settings_GeneralOptions_DSU_UseFuzzySearch_ToolTip".Translate());
+            Widgets.CheckboxLabeled(rect, "PRF_Settings_GeneralOptions_DSU_UseFuzzySearch".Translate(), ref PRF_UseFuzzySearch);
+            list.Gap();
+
 
         }
 
@@ -80,6 +111,8 @@ namespace ProjectRimFactory.Common
 
         public static bool PRF_LiteMode = false;
         private static bool PRF_LiteMode_last = false;
+        public static bool PRF_Patch_Reachability_CanReach = false;
+        public static bool PRF_UseFuzzySearch = true;
 
         public override void ExposeData()
         {
@@ -87,6 +120,8 @@ namespace ProjectRimFactory.Common
             root.ExposeData();
             Scribe_Values.Look<Debug.Flag>(ref Debug.activeFlags, "debugFlags", 0);
             Scribe_Values.Look(ref PRF_LiteMode, "PRF_LiteMode", false);
+            Scribe_Values.Look(ref PRF_Patch_Reachability_CanReach, "PRF_Patch_Reachability_CanReach", false);
+            Scribe_Values.Look(ref PRF_UseFuzzySearch, "PRF_UseFuzzySearch", true);
             PRF_LiteMode_last = PRF_LiteMode;
         }
 
@@ -103,7 +138,7 @@ namespace ProjectRimFactory.Common
             Widgets.BeginScrollView(outRect, ref this.scrollPosition, viewRect);
             var list = new Listing_Standard();
             list.Begin(viewRect);
-            #if DEBUG
+#if DEBUG
             list.Label("Debug Symbols:");
             foreach (var f in (Debug.Flag [])Enum.GetValues(typeof(Debug.Flag))) {
                 bool ischecked = (f & Debug.activeFlags) > 0;
@@ -113,7 +148,7 @@ namespace ProjectRimFactory.Common
                 }
             }
             list.GapLine();
-            #endif
+#endif
             CSharpSettings(list);
             root.Draw(list);
             list.End();
@@ -302,7 +337,7 @@ namespace ProjectRimFactory.Common
 
         public override bool Initialize()
         {
-            if(this.Rows == null || this.Rows.rows == null)
+            if (this.Rows == null || this.Rows.rows == null)
             {
                 return false;
             }
@@ -410,7 +445,7 @@ namespace ProjectRimFactory.Common
         {
             var tex = ContentFinder<Texture2D>.Get(this.texPath, true);
             float h = this.height;
-            if(h == 0)
+            if (h == 0)
             {
                 h = tex.height;
             }
@@ -434,7 +469,7 @@ namespace ProjectRimFactory.Common
             Color tmp = GUI.color;
             try
             {
-                if(this.color != Color.clear)
+                if (this.color != Color.clear)
                 {
                     GUI.color = this.color;
                 }
@@ -475,7 +510,7 @@ namespace ProjectRimFactory.Common
 
         public override void Apply()
         {
-            if(this.currentCheckOn != this.checkOn)
+            if (this.currentCheckOn != this.checkOn)
             {
                 this.RequireReboot = true;
                 this.checkOn = this.currentCheckOn;
@@ -612,7 +647,7 @@ namespace ProjectRimFactory.Common
             var rectSlider = rect.RightHalf();
             rectSlider.xMin += 20;
             rectSlider.xMax -= 20;
-            this.currentValue = Widgets.HorizontalSlider(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
+            this.currentValue = Widgets.HorizontalSlider_NewTemp(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
             list.Gap(list.verticalSpacing);
         }
     }
@@ -635,7 +670,7 @@ namespace ProjectRimFactory.Common
             var rectSlider = rect.RightHalf();
             rectSlider.xMin += 20;
             rectSlider.xMax -= 20;
-            this.currentValue = (int)Widgets.HorizontalSlider(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
+            this.currentValue = (int)Widgets.HorizontalSlider_NewTemp(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
             list.Gap(list.verticalSpacing);
         }
     }
@@ -680,7 +715,7 @@ namespace ProjectRimFactory.Common
         {
             if (!base.Initialize())
                 return false;
-            if (enumType == null || this.enumType.GetEnumValues().Cast<object>().Count() ==  0)
+            if (enumType == null || this.enumType.GetEnumValues().Cast<object>().Count() == 0)
             {
                 Log.Error("invalid enumType on Settings.xml");
                 return false;

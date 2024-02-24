@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using UnityEngine;
 using Verse;
-using RimWorld;
-namespace ProjectRimFactory {
+namespace ProjectRimFactory
+{
     /****************************************************************
      * Modders can extend defs by use of DefModExtensions. But there
      * are no such option extensions for GraphicData in the XML, and
@@ -34,7 +32,8 @@ namespace ProjectRimFactory {
      * Final note: I still don't fully understand everything I
      * am doing, so ...good luck, god speed, etc?
      ***************************************************************/
-    public class GraphicExtraData {
+    public class GraphicExtraData
+    {
         // If you add something here, consider adding ToString() for it below
         public Vector3? arrowDrawOffset;     // Vector3? so we can
         public Vector3? arrowEastDrawOffset; // test against `null`
@@ -49,53 +48,61 @@ namespace ProjectRimFactory {
         public List<string> specialLinkDefs;
         public string inputString = null;
 
-        public static GraphicExtraData Extract(GraphicRequest req, 
+        public static GraphicExtraData Extract(GraphicRequest req,
                                            out GraphicRequest outReq,
-                                           bool removeExtraFromReq=false) {
+                                           bool removeExtraFromReq = false)
+        {
             outReq = CopyGraphicRequest(req);
-            if (req.graphicData.texPath[0] == '[') {
+            if (req.graphicData.texPath[0] == '[')
+            {
                 GraphicExtraData extraData = null;
-                try {
+                try
+                {
                     var helperDoc = new System.Xml.XmlDocument();
                     helperDoc.LoadXml(req.graphicData.texPath.Replace('[', '<').Replace(']', '>'));
                     extraData = DirectXmlToObject.ObjectFromXml<GraphicExtraData>(
                                                    helperDoc.DocumentElement, false);
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     Log.Error("GraphicExtraData was unable to extract XML from \"" + req.graphicData.texPath +
                     "\"; Exception: " + e);
                     return null;
                 }
                 extraData.inputString = req.graphicData.texPath;
-                if (removeExtraFromReq) {
+                if (removeExtraFromReq)
+                {
                     outReq.graphicData.texPath = extraData.texPath;
                     outReq.path = extraData.texPath;
                 }
                 Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data extracted: " + extraData);
                 return extraData;
             }
-            #if DEBUG
+#if DEBUG
             else {
                 Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data empty: " + req.graphicData.texPath);
             }
-            #endif
+#endif
             return null;
         }
         //no idea if this is necessary, but *it works* 
         //  - "it works" is a general theme here
-        public static GraphicRequest CopyGraphicRequest(GraphicRequest req, string newTexPath = null) {
+        public static GraphicRequest CopyGraphicRequest(GraphicRequest req, string newTexPath = null)
+        {
             GraphicData gData = new GraphicData();
             gData.CopyFrom(req.graphicData);
             var gr = new GraphicRequest(gData.graphicClass, gData.texPath, req.shader,
                   req.drawSize, req.color, req.colorTwo, gData, req.renderQueue,
                   req.shaderParameters,
                   req.maskPath);
-            if (newTexPath != null) {
+            if (newTexPath != null)
+            {
                 gr.path = newTexPath;
                 gr.graphicData.texPath = newTexPath;
             }
             return gr;
         }
-        #if DEBUG
+#if DEBUG
         // This is only used in graphics debugging:
         public override string ToString() {
             StringBuilder s = new StringBuilder("[ExtraGraphicRequest for \"" + this.inputString + "\": ");
@@ -124,9 +131,10 @@ namespace ProjectRimFactory {
             s.Append("]");
             return s.ToString();
         }
-        #endif
+#endif
     }
-    public interface IHaveGraphicExtraData {
+    public interface IHaveGraphicExtraData
+    {
         void ExtraInit(GraphicRequest req, GraphicExtraData extraData);
     }
 }

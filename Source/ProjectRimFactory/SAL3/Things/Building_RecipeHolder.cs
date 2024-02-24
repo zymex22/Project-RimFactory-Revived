@@ -1,11 +1,8 @@
 ﻿using ProjectRimFactory.SAL3.Things.Assemblers;
-using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEngine;
 using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
@@ -27,12 +24,15 @@ namespace ProjectRimFactory.SAL3.Things
 
         private List<RecipeDef> quered_recipes;
 
-        public List<RecipeDef> Quered_Recipes {
-            get {
+        public List<RecipeDef> Quered_Recipes
+        {
+            get
+            {
 
                 return quered_recipes;
-            } 
-            set {
+            }
+            set
+            {
                 quered_recipes = value;
             }
         }
@@ -44,6 +44,13 @@ namespace ProjectRimFactory.SAL3.Things
         RecipeDef IRecipeHolderInterface.Recipe_Learning { get => workingRecipe; set => workingRecipe = value; }
         List<RecipeDef> IRecipeHolderInterface.Saved_Recipes { get => recipes; set => recipes = value; }
 
+        // Used To detect if this is of type Bill_Mech
+        // This is the same Logic as in RimWorld.BillUtility:MakeNewBill()
+        private bool IsBill_Mech(RecipeDef def)
+        {
+            return def.mechResurrection || def.gestationCycles > 0;
+        }
+
         public virtual IEnumerable<RecipeDef> GetAllProvidedRecipeDefs()
         {
             HashSet<RecipeDef> result = new HashSet<RecipeDef>();
@@ -51,7 +58,7 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 foreach (RecipeDef recipe in table.def.AllRecipes)
                 {
-                    if (recipe.AvailableNow && !recipes.Contains(recipe) && !result.Contains(recipe))
+                    if (recipe.AvailableNow && !recipes.Contains(recipe) && !result.Contains(recipe) && !IsBill_Mech(recipe))
                         result.Add(recipe);
                 }
             }
@@ -116,8 +123,10 @@ namespace ProjectRimFactory.SAL3.Things
             for (int i = 0; i < cells.Count; i++)
             {
                 List<Thing> things = mapBefore.thingGrid.ThingsListAt(cells[i]);
-                for (int j=things.Count-1; j>=0; j--) {
-                    if (things[j] is Building_SmartAssembler) {
+                for (int j = things.Count - 1; j >= 0; j--)
+                {
+                    if (things[j] is Building_SmartAssembler)
+                    {
                         (things[j] as Building_SmartAssembler).Notify_RecipeHolderRemoved();
                         // break; // We can afford to be silly and check everything in this one cell.
                         // despawning does not happen often, right?
@@ -149,8 +158,8 @@ namespace ProjectRimFactory.SAL3.Things
                     workAmount = GetLearnRecipeWorkAmount(workingRecipe);
                     Quered_Recipes.RemoveAt(0);
                 }
-                
-                
+
+
             }
             base.Tick();
         }
@@ -164,7 +173,7 @@ namespace ProjectRimFactory.SAL3.Things
 
             Scribe_Collections.Look(ref quered_recipes, "quered_recipes");
 
-            quered_recipes ??= new List<RecipeDef>(); 
+            quered_recipes ??= new List<RecipeDef>();
         }
         public override string GetInspectString()
         {
@@ -186,6 +195,15 @@ namespace ProjectRimFactory.SAL3.Things
         {
             base.PostMake();
             quered_recipes ??= new List<RecipeDef>();
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+
+            // Remove existing Mech Bills as the don't work
+            // This code can be removed in the future once we are reasonably certain that this was executed on each affected Save
+            recipes.RemoveAll(r => IsBill_Mech(r));
         }
     }
 }

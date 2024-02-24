@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Verse;
-using RimWorld;
-using Verse.AI;
-using ProjectRimFactory.Common;
-using UnityEngine;
+﻿using ProjectRimFactory.Common;
 using ProjectRimFactory.SAL3;
+using RimWorld;
+using Verse;
 
 namespace ProjectRimFactory.Drones
 {
@@ -20,14 +14,16 @@ namespace ProjectRimFactory.Drones
         // don't do anythin exciting when killed - just disappear:
         //   (this keeps weird side effects from happening, such as
         //    forever increasing the list of dead drones)
-        public override void Kill(DamageInfo? dinfo, Hediff exactCulprit = null) {
-          // don't call base.Kill
-          this.Destroy();
+        public override void Kill(DamageInfo? dinfo, Hediff exactCulprit = null)
+        {
+            // don't call base.Kill
+            this.Destroy();
         }
 
         // or destroyed
-        public override void Destroy(DestroyMode mode = DestroyMode.Vanish) {
-        if (this.Spawned) this.DeSpawn();
+        public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
+        {
+            if (this.Spawned) this.DeSpawn();
             // don't call base.Destroy();
             // DO set mapIndexOrState to -2 to make "thing.Destroyed" true (needed for Work Tab Compatibility)
             ReflectionUtility.mapIndexOrState.SetValue(this, (sbyte)-2);
@@ -46,15 +42,14 @@ namespace ProjectRimFactory.Drones
 
             base.SpawnSetup(map, respawningAfterLoad);
             skills = new Pawn_SkillTracker(this);
-            skillSettings =  station.def.GetModExtension<ModExtension_Skills>();
-            station.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills,station.GetDroneSkillsRecord,skillSettings,true);
+            skillSettings = station.def.GetModExtension<ModExtension_Skills>();
+            station.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings, true);
 
             story = new Pawn_StoryTracker(this)
             {
                 bodyType = BodyTypeDefOf.Thin,
-                crownType = CrownType.Average,
-                childhood = DroneBackstories.childhood,
-                adulthood = DroneBackstories.adulthood
+                Childhood = DroneBackstories.childhood,
+                Adulthood = DroneBackstories.adulthood
             };
             drafter = new Pawn_DraftController(this);
             relations = new Pawn_RelationsTracker(this);

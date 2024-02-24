@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--================ Beer 6-pack =====================-->
+  <RecipeDef>
+    <defName>BrewBeer_sixpack</defName>
+    <label>Brew beer x10</label>
+    <description>Brew beer in a batch lot of 10 units at once</description>
+    <jobString>Brewing Beer</jobString>
+    <effectWorking>Cook</effectWorking>
+    <workSkill>Cooking</workSkill>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <workAmount>180000</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Wort</li>
+          </thingDefs>
+        </filter>
+        <count>10</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Wort</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Beer>10</Beer>
+    </products>
+  </RecipeDef>
+
+  <!--================ Brew beer x24 (case) =====================-->
+  <RecipeDef>
+    <defName>BrewBeer_case</defName>
+    <label>Brew beer x25</label>
+    <description>Brew beer in a batch lot of 25 units at once</description>
+    <jobString>Brewing Beer</jobString>
+    <effectWorking>Cook</effectWorking>
+    <workSkill>Cooking</workSkill>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <workAmount>180000</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Wort</li>
+          </thingDefs>
+        </filter>
+        <count>25</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Wort</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Beer>25</Beer>
+    </products>
+  </RecipeDef>
+
+
+  <!--================ Brew beer x80 (pony keg) =====================-->
+  <RecipeDef>
+    <defName>BrewBeer_keg</defName>
+    <label>Brew beer x50</label>
+    <description>Brew beer in a batch lot of 50 units at once</description>
+    <jobString>Brewing Beer</jobString>
+    <effectWorking>Cook</effectWorking>
+    <workSkill>Cooking</workSkill>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <requiredGiverWorkType>Cooking</requiredGiverWorkType>
+    <workAmount>180000</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>Wort</li>
+          </thingDefs>
+        </filter>
+        <count>50</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>Wort</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <Beer>50</Beer>
+    </products>
+  </RecipeDef>
+
+
+</Defs>

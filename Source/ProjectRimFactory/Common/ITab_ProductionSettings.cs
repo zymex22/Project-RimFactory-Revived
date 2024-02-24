@@ -1,15 +1,11 @@
-﻿using System;
+﻿using ProjectRimFactory.AutoMachineTool;
+using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
 using UnityEngine;
-using ProjectRimFactory.AutoMachineTool;
+using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
-using ProjectRimFactory.Drones;
 
 
 namespace ProjectRimFactory.Common
@@ -39,7 +35,8 @@ namespace ProjectRimFactory.Common
     ///  * whether can output produced things to entire stockpile, or only one cell
     ///  * whether to obey IProductLimitation limits on production/storing
     /// </summary>
-    class ITab_ProductionSettings : ITab {
+    class ITab_ProductionSettings : ITab
+    {
         static List<Func<Thing, bool>> showITabTests = new List<Func<Thing, bool>>();
         static List<Func<Thing, float>> extraHeightRequests = new List<Func<Thing, float>>();
         static List<Action<Thing, Listing_Standard>> windowContentDrawers = new List<Action<Thing, Listing_Standard>>();
@@ -57,17 +54,20 @@ namespace ProjectRimFactory.Common
         private Vector2 winSize = new Vector2(400f, 0f);
         private List<SlotGroup> groups;
 
-        public ITab_ProductionSettings() {
+        public ITab_ProductionSettings()
+        {
             this.labelKey = "PRFSettingsTab";
         }
 
-        public override bool IsVisible {
-            get {
-                return showITabTests.FirstOrDefault(t=>(t!=null && t(SelThing))) != null || ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton || ShowForbidOnPlacingSetting;
+        public override bool IsVisible
+        {
+            get
+            {
+                return showITabTests.FirstOrDefault(t => (t != null && t(SelThing))) != null || ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton || ShowForbidOnPlacingSetting;
             }
         }
         bool ShowProductLimt => Machine != null && !Machine.ProductLimitationDisable;
-        bool ShowOutputToEntireStockpile => ( PRFB != null && 
+        bool ShowOutputToEntireStockpile => (PRFB != null &&
                 ((PRFB.SettingsOptions & PRFBSetting.optionOutputToEntireStockpie) > 0) &&
                 // Only output to stockpile option if belt is above ground!
                 !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground)));
@@ -104,11 +104,12 @@ namespace ProjectRimFactory.Common
         private static TipSignal rotInputRangeTip = new TipSignal("PRF_SettingsITab_TipSignal_RotInputRange".Translate());
 
 
-        protected override void UpdateSize() {
+        protected override void UpdateSize()
+        {
             winSize.y = 10 + 24;
             winSize.x = 400f;
 
-            if (ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowForbidOnPlacingSetting) winSize.y += 24f +12f;
+            if (ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowForbidOnPlacingSetting) winSize.y += 24f + 12f;
             if (ShowOutputToEntireStockpile) winSize.y += 24f;
             if (ShowObeysStorageFilter) winSize.y += 24f;
             if (ShowForbidOnPlacingSetting) winSize.y += 24f;
@@ -122,13 +123,14 @@ namespace ProjectRimFactory.Common
             }
 
             if (ShowProductLimt) winSize.y += 200f; //270
-            
-            if (pRF_SettingsContent != null) {
-                
+
+            if (pRF_SettingsContent != null)
+            {
+
                 winSize.y += pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Additional_y;
                 winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Minimum_x);
             }
-            if(ShowRangeTypeSelectorButton) winSize.y += 30f;
+            if (ShowRangeTypeSelectorButton) winSize.y += 30f;
 
             float maxHeight = 900f;
             float minHeight = 70f; // if this starts too large, the window will be too high
@@ -145,9 +147,9 @@ namespace ProjectRimFactory.Common
         {
             base.OnOpen();
 
-            if (Machine != null) {
+            if (Machine != null)
+            {
                 this.groups = Find.CurrentMap.haulDestinationManager.AllGroups.ToList();
-                this.Machine.TargetSlotGroup = this.Machine.TargetSlotGroup.Where(s => this.groups.Contains(s));
             }
         }
 
@@ -159,18 +161,19 @@ namespace ProjectRimFactory.Common
             bool doneSection = false;
 
             list.Begin(inRect);
-            
+
             if (ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowForbidOnPlacingSetting)
             {
                 doneSection = true;
                 list.Label("PRF_ITab_ProductionSettings_OutputSettings_Header".Translate());
-               
+
                 list.Gap(12);
             }
 
 
 
-            if (ShowOutputToEntireStockpile) {
+            if (ShowOutputToEntireStockpile)
+            {
                 var description = "PRF.Common.OutputToStockpileDesc".Translate();
                 var label = "PRF.Common.OutputToStockpile".Translate();
                 bool tmpB = PRFB.OutputToEntireStockpile;
@@ -178,7 +181,8 @@ namespace ProjectRimFactory.Common
                 if (tmpB != PRFB.OutputToEntireStockpile)
                     PRFB.OutputToEntireStockpile = tmpB;
             }
-            if (ShowObeysStorageFilter) {
+            if (ShowObeysStorageFilter)
+            {
                 bool tmpB = PRFB.ObeysStorageFilters;
                 list.CheckboxLabeled("PRF.Common.ObeysStorageFilters".Translate(), ref tmpB,
                     "PRF.Common.ObeysStorageFiltersDesc".Translate());
@@ -196,9 +200,12 @@ namespace ProjectRimFactory.Common
 
             //Registerd Settings
             //Whats that?
-            for (int i = 0; i < showITabTests.Count; i++) {
-                if (showITabTests[i]?.Invoke(this.SelThing) == true) {
-                    if (windowContentDrawers[i] != null) {
+            for (int i = 0; i < showITabTests.Count; i++)
+            {
+                if (showITabTests[i]?.Invoke(this.SelThing) == true)
+                {
+                    if (windowContentDrawers[i] != null)
+                    {
                         if (doneSection) list.GapLine();
                         windowContentDrawers[i](this.SelThing, list);
                         doneSection = true;
@@ -207,7 +214,8 @@ namespace ProjectRimFactory.Common
             }
 
             //ProductLimitation
-            if (Machine != null && !Machine.ProductLimitationDisable) {
+            if (Machine != null && !Machine.ProductLimitationDisable)
+            {
                 if (doneSection) list.GapLine();
                 doneSection = true;
                 var label = "PRF.AutoMachineTool.ProductLimitation.ValueLabel".Translate();
@@ -225,7 +233,7 @@ namespace ProjectRimFactory.Common
                 //   If a language ever makes this too long for 70f, use list.Label() instead and make
                 //   everything in a scrollview, eh?
                 bool limitation = this.Machine.ProductLimitation;
-                list.CheckboxLabeled(checkBoxLabel,ref limitation, checkBoxLabelTip);
+                list.CheckboxLabeled(checkBoxLabel, ref limitation, checkBoxLabelTip);
                 this.Machine.ProductLimitation = limitation;
                 list.Gap();
 
@@ -261,21 +269,23 @@ namespace ProjectRimFactory.Common
                     TooltipHandler.TipRegion(rect, selectAreaTip);
                 }
                 Widgets.Label(rect.LeftHalf(), "PRF.AutoMachineTool.CountZone".Translate());
-                if (Widgets.ButtonText(rect.RightHalf(), this.Machine.TargetSlotGroup.Fold("PRF.AutoMachineTool.EntierMap".Translate())(s => s.parent.SlotYielderLabel()))) {
+                
+                if (Widgets.ButtonText(rect.RightHalf(), this.Machine.TargetSlotGroup?.parent?.SlotYielderLabel() ?? "PRF.AutoMachineTool.EntierMap".Translate()))
+                {
                     Find.WindowStack.Add(new FloatMenu(groups
-                        .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => this.Machine.TargetSlotGroup = Option(g)))
+                        .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => this.Machine.TargetSlotGroup =g))
                         .ToList()
-                        .Head(new FloatMenuOption("PRF.AutoMachineTool.EntierMap".Translate(), () => this.Machine.TargetSlotGroup = Nothing<SlotGroup>()))));
+                        .Head(new FloatMenuOption("PRF.AutoMachineTool.EntierMap".Translate(), () => this.Machine.TargetSlotGroup = null))));
                 }
                 this.Machine.ProductLimitCount = limit;
             }
-            
+
             //Other Registerd settings (Drone Station)
             if (pRF_SettingsContent != null)
             {
                 list = pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list, inRect);
             }
-            
+
             //Range Type
             if (ShowRangeTypeSelectorButton)
             {
@@ -284,7 +294,7 @@ namespace ProjectRimFactory.Common
                 inRect = list.GetRect(30f);
 
                 Widgets.Label(inRect.LeftHalf(), "PRF_SettingsTab_RangeType_Label".Translate());
-                if (Widgets.ButtonText(inRect.RightHalf(), ( compPropertiesPowerWork.rangeCells as IRangeCells).ToText() ))
+                if (Widgets.ButtonText(inRect.RightHalf(), (compPropertiesPowerWork.rangeCells as IRangeCells).ToText()))
                 {
                     Find.WindowStack.Add(new FloatMenu(compPropertiesPowerWork.rangeTypes
                       .Select(d => new FloatMenuOption(d.ToText(),

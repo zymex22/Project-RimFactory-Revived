@@ -13,7 +13,7 @@
 
   <!-- ================= Base ================= -->
   <ThingDef Name="PRF_FloorIconBase" ParentName="PRF_FloorSign" Abstract="True">
-    <description>A weak fluorescent sign which can be placed on floors or on top of machines or other buildings.</description>
+    <description>A weak fluorescent sign that can be placed on floors or on top of machines or other buildings.</description>
     <designatorDropdown>PRF_FloorIconGroup</designatorDropdown>
     <rotatable>true</rotatable>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
@@ -54,7 +54,7 @@
   <!-- ================= Yellow Arrow ================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_FloorLampArrow</defName>
-    <label>Yellow Floor Sign Arrow</label>
+    <label>yellow floor sign arrow</label>
     <graphicData>
       <texPath>Misc/FloorLamp</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -64,7 +64,7 @@
   <!-- ================= Red Arrow =================== -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_RedFloorLampArrow</defName>
-    <label>Red Floor Sign Arrow</label>
+    <label>red floor sign arrow</label>
     <graphicData>
       <texPath>Misc/FloorLampR</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -74,7 +74,7 @@
   <!-- ================= Green Arrow ================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_GreenFloorLampArrow</defName>
-    <label>Green Floor Sign Arrow</label>
+    <label>green floor sign arrow</label>
     <graphicData>
       <texPath>Misc/FloorLampGR</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -84,7 +84,7 @@
   <!-- ================= Red X ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_FloorLampX</defName>
-    <label>Red Floor Sign X</label>
+    <label>red floor sign X</label>
     <graphicData>
       <texPath>Misc/FloorLampX</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -94,7 +94,7 @@
   <!-- ================= Input ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_FloorInput</defName>
-    <label>Input Sign</label>
+    <label>input sign</label>
     <graphicData>
       <texPath>Misc/Input</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -104,7 +104,7 @@
   <!-- ================= Output ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_FloorOutput</defName>
-    <label>Output Sign</label>
+    <label>output sign</label>
     <graphicData>
       <texPath>Misc/Output</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -114,7 +114,7 @@
   <!-- ================= Shirt ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconClothes</defName>
-    <label>Clothes Sign</label>
+    <label>clothes sign</label>
     <graphicData>
       <texPath>Misc/Shirt</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -124,7 +124,7 @@
   <!-- ================= Skull ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconSkull</defName>
-    <label>Skull Sign</label>
+    <label>skull sign</label>
     <graphicData>
       <texPath>Misc/Skull</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -134,7 +134,7 @@
   <!-- ================= toxic ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconToxic</defName>
-    <label>Toxic Sign</label>
+    <label>toxic sign</label>
     <graphicData>
       <texPath>Misc/Toxic</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -144,7 +144,7 @@
   <!-- ================= Power ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconPower</defName>
-    <label>Power Sign</label>
+    <label>power sign</label>
     <graphicData>
       <texPath>Misc/Power</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -154,7 +154,7 @@
   <!-- ================= Gears ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconGears</defName>
-    <label>Gears Sign</label>
+    <label>gears sign</label>
     <graphicData>
       <texPath>Misc/Gears</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -164,7 +164,7 @@
   <!-- ================= Gun ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconGun</defName>
-    <label>Gun Sign</label>
+    <label>gun sign</label>
     <graphicData>
       <texPath>Misc/Gun</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -174,7 +174,7 @@
   <!-- ================= Gasmask ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconGasmask</defName>
-    <label>Gasmask Sign</label>
+    <label>gasmask sign</label>
     <graphicData>
       <texPath>Misc/Gasmask</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -184,7 +184,7 @@
   <!-- ================= fire ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconFire</defName>
-    <label>Heat Sign</label>
+    <label>heat sign</label>
     <graphicData>
       <texPath>Misc/fire</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -194,7 +194,7 @@
   <!-- ================= cold ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconCold</defName>
-    <label>Cold Sign</label>
+    <label>cold sign</label>
     <graphicData>
       <texPath>Misc/cold</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -204,7 +204,7 @@
   <!-- ================= danger ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconDanger</defName>
-    <label>danger Sign</label>
+    <label>danger sign</label>
     <graphicData>
       <texPath>Misc/danger</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -214,7 +214,7 @@
   <!-- ================= exit ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconExit</defName>
-    <label>exit Sign</label>
+    <label>exit sign</label>
     <graphicData>
       <texPath>Misc/exit</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -230,7 +230,7 @@
   <!-- ================= Prison ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconPrison</defName>
-    <label>Prison Sign</label>
+    <label>prison sign</label>
     <graphicData>
       <texPath>Misc/Prison</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -240,7 +240,7 @@
   <!-- ================= Research ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconResearch</defName>
-    <label>Research Sign</label>
+    <label>research sign</label>
     <graphicData>
       <texPath>Misc/Research</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -250,7 +250,7 @@
   <!-- ================= Hospital ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconHospital</defName>
-    <label>Hospital Sign</label>
+    <label>hospital sign</label>
     <graphicData>
       <texPath>Misc/Hospital</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -260,7 +260,7 @@
   <!-- ================= Hospital ======================= -->
   <ThingDef ParentName="PRF_FloorIconBase">
     <defName>PRF_IconBarbedWire</defName>
-    <label>BarbedWire Sign</label>
+    <label>barbed wire sign</label>
     <graphicData>
       <texPath>Misc/BarbedWire</texPath>
       <graphicClass>Graphic_Single</graphicClass>

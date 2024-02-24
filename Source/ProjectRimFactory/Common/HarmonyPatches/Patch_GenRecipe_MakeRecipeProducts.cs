@@ -1,14 +1,13 @@
+using HarmonyLib;
+using ProjectRimFactory.Drones;
+using ProjectRimFactory.SAL3.Things.Assemblers;
+using RimWorld;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using HarmonyLib;
-using RimWorld;
-using Verse;
 using System.Reflection.Emit; // for OpCodes in Harmony Transpiler
-using ProjectRimFactory.SAL3.Things.Assemblers;
 using System.Runtime.CompilerServices;
-using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -29,25 +28,29 @@ namespace ProjectRimFactory.Common.HarmonyPatches
      * use Transpiler to modify the code.
      */
     [HarmonyPatch]
-    public static class Patch_GenRecipe_foodPoisoning {
+    public static class Patch_GenRecipe_foodPoisoning
+    {
         /// <summary>
         /// Doing this should find the inner iterator class no matter how the compiler calls it.
         /// </summary>
         private static readonly Type hiddenClass = AccessTools.FirstInner(
-            typeof(GenRecipe), 
+            typeof(GenRecipe),
             type => type.HasAttribute<CompilerGeneratedAttribute>() && type.Name.Contains(nameof(GenRecipe.MakeRecipeProducts)));
-        public static MethodBase TargetMethod() {
+        public static MethodBase TargetMethod()
+        {
             // Decompiler showed the hidden inner class is "<MakeRecipeProducts>d__0"
-            if (hiddenClass==null) {
+            if (hiddenClass == null)
+            {
                 Log.Error("Couldn't find iterator class -- This should never be reached.");
                 return null;
             }
             // and we want the iterator's MoveNext:
-            MethodBase iteratorMethod=HarmonyLib.AccessTools.Method(hiddenClass, "MoveNext");
-            if (iteratorMethod==null) Log.Error("Couldn't find MoveNext");
+            MethodBase iteratorMethod = HarmonyLib.AccessTools.Method(hiddenClass, "MoveNext");
+            if (iteratorMethod == null) Log.Error("Couldn't find MoveNext");
             return iteratorMethod;
         }
-        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions) {
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
             var codeHasStoredCompPoisonable = false;
             foreach (var instruction in instructions)
             {
@@ -102,13 +105,15 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 yield return instruction;
             }
         }
-        public static bool UsingSpaceCooker(IBillGiver billGiver) {
+        public static bool UsingSpaceCooker(IBillGiver billGiver)
+        {
             // NOTE: This could be made more efficient by having a Def already loaded
             //   either a static Def loaded from defdatabase directly, or loaded via
             //   [DefOf] notation.
             // However, string comparison in C# is already super fast, so it's
             //   probably all fine.
-            if ((billGiver as Building)?.def.defName=="PRF_SelfCookerIII") {
+            if ((billGiver as Building)?.def.defName == "PRF_SelfCookerIII")
+            {
                 // Log.Message("Using Spacer Cooker - skipping poison test");
                 return true;
             }
@@ -128,24 +133,79 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (pawn.kindDef == PRFDefOf.PRFSlavePawn && billGiver is Building_SimpleAssembler assembler)
             {
-                return RegionAndRoomQuery.RoomAt(assembler.OutputComp.CurrentCell, billGiver.Map, RegionType.Set_Passable);
+                return RegionAndRoomQuery.RoomAt(assembler.OutputCell(), billGiver.Map, RegionType.Set_Passable);
             }
             return pawn.GetRoom(allowedRegionTypes);
         }
     }
 
-    [HarmonyPatch(typeof(QualityUtility),"GenerateQualityCreatedByPawn",new Type[] { typeof(Pawn), typeof(SkillDef)})]
+    [HarmonyPatch(typeof(QualityUtility), "GenerateQualityCreatedByPawn", new Type[] { typeof(Pawn), typeof(SkillDef) })]
     class Patch_GenRecipe_GenerateQualityCreatedByPawn
     {
-        static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill )
+        static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill)
         {
             ISetQualityDirectly isqd = PatchStorageUtil.Get<ISetQualityDirectly>(pawn.Map, pawn.Position);
-            if (isqd != null) {
+            if (isqd != null)
+            {
                 __result = isqd.GetQuality(relevantSkill);
                 return false;
             }
             return true;
         }
+
+        //Prevent Biotech(Mech Changes) from interfering with Drone Skills
+        static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+
+            bool foundReplaceMarker = false;
+            bool repacedCheck = false;
+            int cnt = 0;
+            foreach (var instruction in instructions)
+            {
+                cnt++;
+                //Search for IL_0000: ldarg.0 -> Loading the Pawn
+                if (instruction.opcode == OpCodes.Ldarg_0 && !repacedCheck)
+                {
+                    repacedCheck = true;
+                    foundReplaceMarker = true;
+                    cnt = 0;
+                }
+                //remove IL_0001: callvirt instance class Verse.RaceProperties Verse.Pawn::get_RaceProps()
+                if (instruction.opcode == OpCodes.Callvirt && foundReplaceMarker && cnt == 1)
+                {
+                    continue;
+                }
+                if (instruction.opcode == OpCodes.Callvirt && foundReplaceMarker && cnt == 2)
+                {
+                    //Replace IL_0006: callvirt instance bool Verse.RaceProperties::get_IsMechanoid()
+                    //with a call to Patch_GenRecipe_GenerateQualityCreatedByPawn:IsMechanoid(Pawn pawn)
+                    instruction.operand = AccessTools.Method(
+                        typeof(Patch_GenRecipe_GenerateQualityCreatedByPawn),
+                        nameof(Patch_GenRecipe_GenerateQualityCreatedByPawn.IsMechanoid), new[] { typeof(Pawn)});
+                    foundReplaceMarker = false;
+                }
+
+
+                yield return instruction;
+            }
+
+        }
+
+        /// <summary>
+        /// if a Pawn is a Mechanoid then it's skills will be ignored by QualityUtility:GenerateQualityCreatedByPawn
+        /// This prevents Drones from being detected as Mechanoid
+        /// </summary>
+        /// <param name="pawn"></param>
+        /// <returns></returns>
+        public static bool IsMechanoid(Pawn pawn)
+        {
+            if (pawn is Pawn_Drone)
+            {
+                return false;
+            }
+            return pawn.RaceProps.IsMechanoid;
+        }
+
     }
 
     interface ISetQualityDirectly

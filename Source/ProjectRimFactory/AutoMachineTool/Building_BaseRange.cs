@@ -1,15 +1,9 @@
-﻿using System;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
-using Verse;
-using Verse.AI;
-using Verse.Sound;
 using UnityEngine;
-using System.Collections;
-using ProjectRimFactory.Common;
+using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
@@ -25,8 +19,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
     public abstract class Building_BaseRange<T> : Building_BaseLimitation<T>, IRange, IPowerSupplyMachineHolder where T : Thing
     {
-       // public override int MinPowerForRange => this.RangeExtension.minPower;
-       // public override int MaxPowerForRange => this.RangeExtension.maxPower;
+        // public override int MinPowerForRange => this.RangeExtension.minPower;
+        // public override int MaxPowerForRange => this.RangeExtension.maxPower;
 
         public override bool Glowable { get => false; }
 
@@ -68,14 +62,14 @@ namespace ProjectRimFactory.AutoMachineTool
         public IEnumerable<IntVec3> GetAllTargetCells()
         {
             this.CacheTargetCells();
-            return powerWorkSetting.GetRangeCells().ToHashSet();
+            return powerWorkSetting.GetRangeCells()?.ToHashSet() ?? new HashSet<IntVec3>(); ;
         }
 
         private void CacheTargetCells()
         {
             if (this.allTargetCellsCache == null)
             {
-                this.allTargetCellsCache = powerWorkSetting.GetRangeCells().ToHashSet();
+                this.allTargetCellsCache = powerWorkSetting.GetRangeCells()?.ToHashSet() ?? new HashSet<IntVec3>();
                 if (this.targetEnumrationCount > 0)
                 {
                     this.splittedTargetCells = this.allTargetCellsCache.ToList().Grouped(this.targetEnumrationCount);
@@ -195,7 +189,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.Ready();
             if (this.State == WorkingState.Ready && SplitTargetCells && this.nextTargetCells)
-            { 
+            {
                 this.NextSplittedTargetCells();
                 this.nextTargetCells = false;
             }

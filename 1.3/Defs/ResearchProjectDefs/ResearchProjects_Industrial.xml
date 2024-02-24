@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--============================================== Mining Research base ============================================-->
+  <ResearchProjectDef Name="PRF_MiningResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>0.7</researchViewY>
+    <techLevel>Industrial</techLevel>
+  </ResearchProjectDef>
+
+  <!-- Tier 1 -->
+  <ResearchProjectDef ParentName="PRF_MiningResearch">
+    <defName>PRF_AutonomousMining</defName>
+    <label>Automatic Quarries</label>
+    <baseCost>1000</baseCost>
+    <prerequisites>
+      <li>PRF_CoreTierI</li>
+    </prerequisites>
+    <researchViewX>3</researchViewX>
+    <description>Make buildings that can extract random minerals and rocks from deep underground.  Most forms of automated mining can attract the attention of insectoids, so keep an eye out for that.</description>
+    <discoveredLetterTitle>About: Intro to Autominers</discoveredLetterTitle>
+    <discoveredLetterText>You have now Researched Auger drill I. With this you have unlocked the tier 1 auto miner.\nThis miner will mine up random items over time, it can start infestations just like vanilla drills.\n\nThe Tier 2 miner is the same type of device, it's just faster and will mine steel instead of slag.\n\nTier 3 has two types of miners.\nType one is a random miner like the previous generations, it will mine random rare ores with no stone chunks.\nType 2. is a new type of miner where you can set exactly what type of ore you want. It will mine mainly that one, but will have a chance to mine junk and rare ores too.\n\nif you want to enable un-balanced mode for miner and unlock all mod-added ores you can change it in mod settings.</discoveredLetterText>
+  </ResearchProjectDef>
+
+  <!-- Tier 2 -->
+  <ResearchProjectDef ParentName="PRF_MiningResearch">
+    <defName>PRF_AutonomousMiningII</defName>
+    <label>Improved Automatic Quarries</label>
+    <baseCost>3000</baseCost>
+    <prerequisites>
+      <li>DeepDrilling</li>
+      <li>PRF_CoreTierII</li>
+      <li>PRF_AutonomousMining</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>6</researchViewX>
+    <description>Build more advanced auto-miners which work more quickly, though they'll still attract infestations at the same rate.</description>
+  </ResearchProjectDef>
+
+
+  <!-- Tier 3 -->
+  <ResearchProjectDef ParentName="PRF_MiningResearch">
+    <defName>PRF_AutonomousMiningIII</defName>
+    <label>Deep Core Quarries</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>4000</baseCost>
+    <prerequisites>
+      <li>PRF_AutonomousMiningII</li>
+      <li>PRF_CoreTierIII</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+    <researchViewX>9</researchViewX>
+    <description>Build two more advanced forms of miners.  One will only produce resources with no stone, and one allows you to target-mine specific resources.  Neither of the tier 3 miners will draw infestations thanks to the advanced technology they use to dampen vibrations.</description>
+  </ResearchProjectDef>
+
+</Defs>

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HarmonyLib;
 using RimWorld;
-using Verse;
-using UnityEngine;
-using HarmonyLib;
+using System.Linq;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {

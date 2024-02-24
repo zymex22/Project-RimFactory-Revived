@@ -1,13 +1,9 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using RimWorld;
-using Verse;
-using Verse.AI;
 using UnityEngine;
-using static ProjectRimFactory.AutoMachineTool.Ops;
-using ProjectRimFactory.Common;
+using Verse;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -84,7 +80,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     return keepNoneAdultCount;
                 else
                     return keepNoneYoungCount;
-            }            
+            }
         }
     }
 
@@ -106,7 +102,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
         //Needs to be in sync with winSize.x
-        private static readonly float[] ColumnWidth = new float[] { 0.28f , 
+        private static readonly float[] ColumnWidth = new float[] { 0.28f ,
             0.07f , 0.07f, 0.07f, 0.07f,
             0.11f, 0.11f, 0.11f, 0.11f };
 
@@ -162,7 +158,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
             //Get the Variable from the Static - This is needed as you cant pass a static by ref (& by ref is requere in this case)
             scrollPosition = sscrollPosition;
-            
+
             //Add header Discription for this settings Section
             var rect = list.GetRect(40f);
             Widgets.Label(rect, this.description);

@@ -1,11 +1,10 @@
-﻿using RimWorld;
-using Verse;
-using System;
+﻿using ProjectRimFactory.Common;
+using ProjectRimFactory.SAL3;
+using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using ProjectRimFactory.Common;
 using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.Industry
 {
@@ -30,7 +29,7 @@ namespace ProjectRimFactory.Industry
         {
             get
             {
-                return -Props.basePowerConsumption * PowerProductionModifier;
+                return -(float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(Props) * PowerProductionModifier;
             }
         }
 

@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using Verse;
+﻿using ProjectRimFactory.Common;
 using RimWorld;
-using UnityEngine;
-using System.Reflection;
+using System.Collections.Generic;
 using System.Linq;
-using ProjectRimFactory.Common;
+using System.Reflection;
+using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.AnimalStation
 {
-    public abstract class Building_CompHarvester : Building_Storage , IPowerSupplyMachineHolder
+    public abstract class Building_CompHarvester : Building_Storage, IPowerSupplyMachineHolder
     {
         public static readonly PropertyInfo ResourceAmount = typeof(CompHasGatherableBodyResource).GetProperty("ResourceAmount", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly PropertyInfo ResourceDef = typeof(CompHasGatherableBodyResource).GetProperty("ResourceDef", BindingFlags.NonPublic | BindingFlags.Instance);

@@ -1,13 +1,8 @@
-﻿using System;
+﻿using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-using RimWorld;
 using Verse;
-using Verse.AI;
-using Verse.Sound;
-using UnityEngine;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory.AutoMachineTool
@@ -16,7 +11,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public MapTickManager(Map map) : base(map)
         {
-//            this.thingsList = new ThingLister(map);
+            //            this.thingsList = new ThingLister(map);
         }
 
         public override void MapComponentTick()
@@ -24,8 +19,9 @@ namespace ProjectRimFactory.AutoMachineTool
             base.MapComponentTick();
 
             var removeSet = this.eachTickActions.ToList().Where(Exec).ToHashSet();
-            removeSet.ForEach(r => this.eachTickActions.Remove(r));
 
+            
+            removeSet.ForEach(r => this.eachTickActions.Remove(r));
 #if DEBUG
             if ((Debug.activeFlags & Debug.Flag.Benchmark) > 0) {
                 System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
@@ -61,11 +57,30 @@ namespace ProjectRimFactory.AutoMachineTool
                 this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
             }
 #else
+
             // Need ToList() b/c the list of tickActions can change
+            //Execute the Action Associated with the Current Tick
             this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
+
 #endif
             this.tickActionsDict.Remove(Find.TickManager.TicksGame);
+        }
+
+        public void HandleTimeSkip(int NewCurrentTick)
+        {
+            //Update Keys in tickActionsDict To be in line with the current Tick
+            var currentTick = Find.TickManager.TicksGame;
+            var offset = NewCurrentTick - currentTick;
+
+            var old_tickActionsDict = tickActionsDict.ToDictionary(entry => entry.Key,
+                                                   entry => entry.Value);
+
+            tickActionsDict.Clear();
+            foreach (var old in old_tickActionsDict)
+            {
+                tickActionsDict[old.Key + offset] = old.Value;
             }
+        }
 
         private static void Exec(Action act)
         {
@@ -98,16 +113,17 @@ namespace ProjectRimFactory.AutoMachineTool
 
             // ここでいいのか・・・？
             if ((Find.MainTabsRoot.OpenTab?.TabWindow as MainTabWindow_Architect)
-                ?.selectedDesPanel?.def.defName == "Industrial") {
+                ?.selectedDesPanel?.def.defName == "Industrial")
+            {
                 OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
             }
-/*            Option(Find.MainTabsRoot.OpenTab)
-                .Select(r => r.TabWindow)
-                .SelectMany(w => Option(w as MainTabWindow_Architect))
-                .SelectMany(a => Option(a.selectedDesPanel))
-                .Where(p => p.def.defName == "Industrial")
-                .ForEach(p => OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame());
-*/
+            /*            Option(Find.MainTabsRoot.OpenTab)
+                            .Select(r => r.TabWindow)
+                            .SelectMany(w => Option(w as MainTabWindow_Architect))
+                            .SelectMany(a => Option(a.selectedDesPanel))
+                            .Where(p => p.def.defName == "Industrial")
+                            .ForEach(p => OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame());
+            */
             if (Find.Selector.FirstSelectedObject is IBeltConveyorLinkable)
             {
                 OverlayDrawHandler_UGConveyor.DrawOverlayThisFrame();
@@ -121,18 +137,24 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public void AfterAction(int ticks, Action act)
         {
+            //Enforce a Minimum of 1 "ticks"
             if (ticks < 1)
+            {
                 ticks = 1;
+            }
 
-            if (!this.tickActionsDict.TryGetValue(Find.TickManager.TicksGame + ticks, out HashSet<Action> set))
+            //Register a Given Action to an Expected Completion Tick
+            var ExecutionTick = Find.TickManager.TicksGame + ticks;
+            if (!this.tickActionsDict.TryGetValue(ExecutionTick, out HashSet<Action> set))
             {
                 set = new HashSet<Action>();
-                this.tickActionsDict[Find.TickManager.TicksGame + ticks] = set;
+                this.tickActionsDict[ExecutionTick] = set;
             }
 
             set.Add(act);
         }
 
+        //Register an Action for the Next Tick
         public void NextAction(Action act)
         {
             this.AfterAction(1, act);
@@ -158,9 +180,9 @@ namespace ProjectRimFactory.AutoMachineTool
             return this.tickActionsDict.GetOption(Find.TickManager.TicksGame).Select(l => l.Contains(act)).GetOrDefault(false);
         }
 
-  //      private ThingLister thingsList;
+        //      private ThingLister thingsList;
 
-//        public ThingLister ThingsList => thingsList;
+        //        public ThingLister ThingsList => thingsList;
 
 #if DEBUG
         public override void MapComponentOnGUI()

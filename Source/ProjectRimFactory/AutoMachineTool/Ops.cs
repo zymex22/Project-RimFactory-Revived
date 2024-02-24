@@ -1,17 +1,13 @@
-﻿using System;
+﻿using ProjectRimFactory.Common;
+using RimWorld;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Reflection;
 using System.Reflection.Emit;
-
-using RimWorld;
-using Verse;
-using Verse.Sound;
 using UnityEngine;
-using ProjectRimFactory.Common;
+using Verse;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -253,6 +249,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public static TO CopyTo<FROM, TO>(this FROM bill, TO copy) where FROM : Bill_Production where TO : Bill_Production
         {
+            //Todo: Check if we are not missing things
             copy.allowedSkillRange = bill.allowedSkillRange;
             copy.billStack = bill.billStack;
             copy.deleted = bill.deleted;
@@ -262,11 +259,10 @@ namespace ProjectRimFactory.AutoMachineTool
             copy.includeTainted = bill.includeTainted;
             copy.ingredientFilter = bill.ingredientFilter;
             copy.ingredientSearchRadius = bill.ingredientSearchRadius;
-            copy.lastIngredientSearchFailTicks = bill.lastIngredientSearchFailTicks;
             copy.limitToAllowedStuff = bill.limitToAllowedStuff;
             copy.paused = bill.paused;
             copy.pauseWhenSatisfied = bill.pauseWhenSatisfied;
-            copy.SetPawnRestriction( bill.PawnRestriction);
+            copy.SetPawnRestriction(bill.PawnRestriction);
             copy.qualityRange = bill.qualityRange;
             copy.recipe = bill.recipe;
             copy.repeatCount = bill.repeatCount;
@@ -374,7 +370,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return marketValue * 0.1f;
         }
-#endregion
+        #endregion
 
         public static Func<T, TValue> GenerateGetFieldDelegate<T, TValue>(FieldInfo field)
         {

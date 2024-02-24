@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEngine;
 using Verse;
 namespace ProjectRimFactory.Industry
 {
@@ -20,17 +19,18 @@ namespace ProjectRimFactory.Industry
     /// TODO: Set this up as an abstract parent "produce something
     ///       every unit of time" thing?
     /// </summary>
-    public class Building_DeepQuarry : Building
+    public class Building_DeepQuarry : Building, IXMLThingDescription
     {
         public float GetProduceMtbHours { get { return def.GetModExtension<DeepQuarryDefModExtension>().TickCount; } }
         static IEnumerable<ThingDef> cachedPossibleRockDefCandidates;
-        protected int productionTime=0; // number of ticks this has been running since last production check
+        protected int productionTime = 0; // number of ticks this has been running since last production check
         public CompFlickable flick;
         public CompPowerTrader power;
         public CompRefuelable fuel;
         public int ProducedChunksTotal = 0;
 
-        public override void SpawnSetup(Map map, bool respawningAfterLoad) {
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
             base.SpawnSetup(map, respawningAfterLoad);
             flick = GetComp<CompFlickable>();
             power = GetComp<CompPowerTrader>();
@@ -50,6 +50,11 @@ namespace ProjectRimFactory.Industry
                                                          select def;
             }
         }
+        public IEnumerable<ThingDef> GetPossibleRockDefCandidatesFilterd(ThingDef thingDef)
+        {
+            return PossibleRockDefCandidates
+                  .Where(d => !thingDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.building.mineableThing) ?? true);
+        }
 
         /// <summary>
         ///   Tick() action for an arbitrary number of ticks
@@ -63,8 +68,8 @@ namespace ProjectRimFactory.Industry
         private void HandelTick(int numTicks, bool consumeFuelWhileRunning)
         {
             // Log.Message("" + this + ": has flick? " + (flick == null ? "null flick" : (flick.SwitchIsOn ? "flick on" : "flick off"))
-                 // + ". has power? " + (power == null ? "null power" : (power.PowerOn ? "power on" : "power off")) +
-                 // ". has fuel?" + (fuel == null ? "null fuel" : (fuel.HasFuel ? "fueled" : "out of fuel")));
+            // + ". has power? " + (power == null ? "null power" : (power.PowerOn ? "power on" : "power off")) +
+            // ". has fuel?" + (fuel == null ? "null fuel" : (fuel.HasFuel ? "fueled" : "out of fuel")));
 
             // Consume fuel even if turned off or unpowered:
             //   (this could be enabled by some setting in 
@@ -86,7 +91,8 @@ namespace ProjectRimFactory.Industry
                         //    that target fuelConsumptionRate. Grabbing the private result is
                         //    a TODO for later)
                         if (consumeFuelWhileRunning &&
-                            !fuel.Props.consumeFuelOnlyWhenUsed) {
+                            !fuel.Props.consumeFuelOnlyWhenUsed)
+                        {
                             fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
                         }
                         // Note: this doesn't catch any harmony patches to
@@ -147,12 +153,15 @@ namespace ProjectRimFactory.Industry
             HandelTick(2000, true);
         }
 
-        public void TryGenerateResource(int ticksInInterval) {
+        public void TryGenerateResource(int ticksInInterval)
+        {
             // Log.Message("" + this + " trying to generate resource after this many ticks:" + ticksInInterval);
             productionTime += ticksInInterval;
-            if (productionTime >= 2000) {
+            if (productionTime >= 2000)
+            {
                 productionTime = 0;
-                if (Rand.MTBEventOccurs(GetProduceMtbHours, GenDate.TicksPerHour, GenTicks.TickLongInterval)) {
+                if (Rand.MTBEventOccurs(GetProduceMtbHours, GenDate.TicksPerHour, GenTicks.TickLongInterval))
+                {
                     GenerateChunk();
                 }
             }
@@ -171,11 +180,12 @@ namespace ProjectRimFactory.Industry
             ProducedChunksTotal++;
         }
 
+        private ThingDef getRock => GetPossibleRockDefCandidatesFilterd(this.def)
+                .RandomElementByWeight(d => d.building.isResourceRock ? d.building.mineableScatterCommonality * d.building.mineableScatterLumpSizeRange.Average * d.building.mineableDropChance : 3f);
+
         protected virtual Thing GetChunkThingToPlace()
         {
-            ThingDef rock = PossibleRockDefCandidates
-                .Where(d => !this.def.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.building.mineableThing) ?? true)
-                .RandomElementByWeight(d => d.building.isResourceRock ? d.building.mineableScatterCommonality * d.building.mineableScatterLumpSizeRange.Average * d.building.mineableDropChance : 3f);
+            ThingDef rock = getRock;
             // Because we make our rocks ourselves, we have to handle bonus items and product modifications (bonuses) directly:
             var tmpList = new List<Thing>();
             this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList,
@@ -196,6 +206,21 @@ namespace ProjectRimFactory.Industry
             }
             stringBuilder.Append("DeepQuarry_TotalSoFar".Translate(ProducedChunksTotal));
             return stringBuilder.ToString().TrimEndNewlines();
+        }
+
+        public string GetDescription(ThingDef def)
+        {
+            string HelpText = "";
+            //Get Items that Building_DeepQuarry can Produce
+            List<ThingDef> rocks = GetPossibleRockDefCandidatesFilterd(def).ToList();
+            HelpText += "PRF_DescriptionUpdate_CanMine".Translate();
+            foreach (ThingDef rock in rocks)
+            {
+                HelpText += String.Format("    - {0} x{1}\r\n", rock.LabelCap, rock.building.mineableYield);
+            }
+            HelpText += "\r\n";
+
+            return HelpText;
         }
 
 #if DEBUG

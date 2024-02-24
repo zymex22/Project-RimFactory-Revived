@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RimWorld;
-using Verse;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using Verse;
 
 namespace ProjectRimFactory.Storage
 {
@@ -13,17 +8,20 @@ namespace ProjectRimFactory.Storage
     {
 
 
-        public override IntVec3 WorkPosition {
+        public override IntVec3 WorkPosition
+        {
             get
             {
                 return this.Position + this.Rotation.FacingCell;
             }
-        
+
         }
 
 
 
         public override StorageIOMode IOMode { get => StorageIOMode.Output; set => _ = value; }
+
+        public override bool IsAdvancedPort => false;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -36,7 +34,7 @@ namespace ProjectRimFactory.Storage
     {
         public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
         {
-           // base.DrawGhost(def, center, rot, ghostCol, thing);
+            // base.DrawGhost(def, center, rot, ghostCol, thing);
 
             IntVec3 outputCell = center + rot.FacingCell;
 
