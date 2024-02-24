@@ -38,6 +38,20 @@ namespace ProjectRimFactory.SAL3.Things
             }
         }
 
+
+        private bool cellIsZone_Stockpile(IntVec3 cell)
+        {
+            return cell.GetZone(Map) is Zone_Stockpile;
+        }
+        private bool cellIsBuilding_Storage(IntVec3 cell)
+        {
+            return cell.GetThingList(Map).FirstOrDefault(t => t is ISlotGroupParent) is Building_Storage;
+        }
+        private bool cellIsBuilding_BeltConveyor(IntVec3 cell)
+        {
+            return cell.GetThingList(Map).Any(t => t is Building_BeltConveyor);
+        }
+
         public List<IntVec3> CellsToSelect
         {
             get
@@ -52,7 +66,11 @@ namespace ProjectRimFactory.SAL3.Things
                 foreach (IntVec3 c in CellsToTarget)
                 {
                     if (!c.InBounds(this.Map)) continue;
-                    if (this.allowGroundPickup || c.HasSlotGroupParent(Map) || (allowBeltPickup && c.GetThingList(Map).Any(t => t is Building_BeltConveyor)))
+                    if  ((allowStockpilePickup && cellIsZone_Stockpile(c)) || 
+                        (allowStoragePickup && cellIsBuilding_Storage(c)) || 
+                        (allowBeltPickup && cellIsBuilding_BeltConveyor(c)) ||
+                        (this.allowGroundPickup && !cellIsZone_Stockpile(c) && !cellIsBuilding_Storage(c) && !cellIsBuilding_BeltConveyor(c))
+                        )
                     {
                         cachedDetectorCells.Add(c);
                     }
@@ -122,10 +140,34 @@ namespace ProjectRimFactory.SAL3.Things
                 allowGroundPickup = value;
             }
         }
-        public bool AllowStockpilePickup { get => allowStockpilePickup; set => allowStockpilePickup = value; }
-        public bool AllowStoragePickup { get => allowStoragePickup; set => allowStoragePickup = value; }
+        public bool AllowStockpilePickup
+        {
+            get => allowStockpilePickup; 
+            set
+            {
+                if (value != allowStockpilePickup) cachedDetectorCellsDirty = true;
+                allowStockpilePickup = value;
+            }
+        }
+        public bool AllowStoragePickup
+        {
+            get => allowStoragePickup; 
+            set
+            {
+                if (value != allowStoragePickup) cachedDetectorCellsDirty = true;
+                allowStoragePickup = value;
+            }
+        }
         public bool AllowForbiddenPickup { get => allowForbiddenPickup; set => allowForbiddenPickup = value; }
-        public bool AllowBeltPickup { get => allowBeltPickup; set => allowBeltPickup = value; }
+        public bool AllowBeltPickup
+        {
+            get => allowBeltPickup; 
+            set
+            {
+                if (value != allowBeltPickup) cachedDetectorCellsDirty = true;
+                allowBeltPickup = value;
+            }
+        }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -234,8 +276,7 @@ namespace ProjectRimFactory.SAL3.Things
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            if (!this.allowGroundPickup)
-                GenDraw.DrawFieldEdges(CellsToSelect, Color.green);
+            GenDraw.DrawFieldEdges(CellsToSelect, Color.green);
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
