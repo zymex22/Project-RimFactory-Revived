@@ -1,4 +1,5 @@
-﻿using ProjectRimFactory.Common;
+﻿using ProjectRimFactory.AutoMachineTool;
+using ProjectRimFactory.Common;
 using ProjectRimFactory.SAL3.Tools;
 using ProjectRimFactory.Storage;
 using ProjectRimFactory.Storage.UI;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using Verse.Noise;
 
 namespace ProjectRimFactory.SAL3.Things
 {
@@ -50,7 +52,7 @@ namespace ProjectRimFactory.SAL3.Things
                 foreach (IntVec3 c in CellsToTarget)
                 {
                     if (!c.InBounds(this.Map)) continue;
-                    if (this.allowGroundPickup || c.HasSlotGroupParent(Map))
+                    if (this.allowGroundPickup || c.HasSlotGroupParent(Map) || (allowBeltPickup && c.GetThingList(Map).Any(t => t is Building_BeltConveyor)))
                     {
                         cachedDetectorCells.Add(c);
                     }
@@ -69,13 +71,13 @@ namespace ProjectRimFactory.SAL3.Things
                     foreach (Thing t in GatherThingsUtility.AllThingsInCellForUse(c, Map,AllowStockpilePickup))
                     {
                         var SlotGroupParrent = t.GetSlotGroup()?.parent;
-                        if ((SlotGroupParrent is Zone_Stockpile && allowStockpilePickup) ||
-                            (SlotGroupParrent is Building_Storage && allowStoragePickup) ||
-                            (SlotGroupParrent == null && allowGroundPickup))
+                        if ((allowGroundPickup && SlotGroupParrent == null && t.ParentHolder is not Building) ||
+                            (allowStockpilePickup && SlotGroupParrent is Zone_Stockpile) ||
+                            (allowStoragePickup && SlotGroupParrent is Building_Storage) ||
+                            (allowBeltPickup && t.ParentHolder is Building_BeltConveyor))
                         {
                             if ((allowForbiddenPickup || !t.IsForbidden(Faction.OfPlayer)))
                             {
-
                                 yield return t;
                             }
                         }
@@ -108,6 +110,7 @@ namespace ProjectRimFactory.SAL3.Things
         private bool allowStockpilePickup = false;
         private bool allowStoragePickup = false;
         private bool allowForbiddenPickup = false;
+        private bool allowBeltPickup = false;
 
         public bool AllowGroundPickup
         {
@@ -122,6 +125,7 @@ namespace ProjectRimFactory.SAL3.Things
         public bool AllowStockpilePickup { get => allowStockpilePickup; set => allowStockpilePickup = value; }
         public bool AllowStoragePickup { get => allowStoragePickup; set => allowStoragePickup = value; }
         public bool AllowForbiddenPickup { get => allowForbiddenPickup; set => allowForbiddenPickup = value; }
+        public bool AllowBeltPickup { get => allowBeltPickup; set => allowBeltPickup = value; }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {

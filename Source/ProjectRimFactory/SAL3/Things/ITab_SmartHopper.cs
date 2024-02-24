@@ -22,6 +22,7 @@ namespace ProjectRimFactory.SAL3.Things
         private bool Stockpile = false;
         private bool BuildingStorage = false;
         private bool Allowforbidden = false;
+        private bool AllowBelt = false;
 
         public ITab_SmartHopper()
         {
@@ -39,6 +40,7 @@ namespace ProjectRimFactory.SAL3.Things
             Stockpile = hopper.AllowStockpilePickup;
             BuildingStorage = hopper.AllowStoragePickup;
             Allowforbidden = hopper.AllowForbiddenPickup;
+            AllowBelt = hopper.AllowBeltPickup;
 
 
             list.Label("PRF.SmartHopper.ITab.Description".Translate());
@@ -50,11 +52,14 @@ namespace ProjectRimFactory.SAL3.Things
             Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowStorage".Translate(), ref BuildingStorage);
             rect = list.GetRect(30);
             Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowForbidden".Translate(), ref Allowforbidden);
+            rect = list.GetRect(30);
+            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowBelt".Translate(), ref AllowBelt);
 
             hopper.AllowGroundPickup = GroundPickup;
             hopper.AllowStockpilePickup = Stockpile;
             hopper.AllowStoragePickup = BuildingStorage;
             hopper.AllowForbiddenPickup = Allowforbidden;
+            hopper.AllowBeltPickup = AllowBelt;
 
             list.End();
             

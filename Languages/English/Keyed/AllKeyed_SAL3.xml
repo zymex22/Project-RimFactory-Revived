@@ -38,6 +38,7 @@
   <PRF.SmartHopper.ITab.AllowStockpile>Stockpile</PRF.SmartHopper.ITab.AllowStockpile>
   <PRF.SmartHopper.ITab.AllowStorage>Storage Building</PRF.SmartHopper.ITab.AllowStorage>
   <PRF.SmartHopper.ITab.AllowForbidden>Allow forbidden</PRF.SmartHopper.ITab.AllowForbidden>
+  <PRF.SmartHopper.ITab.AllowBelt>Allow Belt</PRF.SmartHopper.ITab.AllowBelt>
 
   <!--Mod settings-->
   <ProjectRimFactoryModName>Project RimFactory</ProjectRimFactoryModName>
