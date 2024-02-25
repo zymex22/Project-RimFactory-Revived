@@ -193,6 +193,7 @@ namespace ProjectRimFactory.SAL3.Things
             Scribe_Values.Look(ref this.allowStockpilePickup, "allowStockpilePickup", false);
             Scribe_Values.Look(ref this.allowStoragePickup, "allowStoragePickup", false);
             Scribe_Values.Look(ref this.allowForbiddenPickup, "allowForbiddenPickup", false);
+            Scribe_Values.Look(ref this.allowBeltPickup, "allowBeltPickup", false);
         }
 
         public override string GetInspectString()
