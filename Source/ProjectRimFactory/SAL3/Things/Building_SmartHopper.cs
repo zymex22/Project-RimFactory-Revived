@@ -89,15 +89,9 @@ namespace ProjectRimFactory.SAL3.Things
                     foreach (Thing t in GatherThingsUtility.AllThingsInCellForUse(c, Map,AllowStockpilePickup))
                     {
                         var SlotGroupParrent = t.GetSlotGroup()?.parent;
-                        if ((allowGroundPickup && SlotGroupParrent == null && t.ParentHolder is not Building) ||
-                            (allowStockpilePickup && SlotGroupParrent is Zone_Stockpile) ||
-                            (allowStoragePickup && SlotGroupParrent is Building_Storage) ||
-                            (allowBeltPickup && t.ParentHolder is Building_BeltConveyor))
+                        if (allowForbiddenPickup || !t.IsForbidden(Faction.OfPlayer))
                         {
-                            if ((allowForbiddenPickup || !t.IsForbidden(Faction.OfPlayer)))
-                            {
-                                yield return t;
-                            }
+                            yield return t;
                         }
                     }
                 }
