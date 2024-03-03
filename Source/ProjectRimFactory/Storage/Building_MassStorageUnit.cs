@@ -254,6 +254,9 @@ namespace ProjectRimFactory.Storage
                 }
             }
 
+            StackIncompleate();
+
+
             // Even though notifying I/O ports that the contents inside the storage unit have changed seems like a good idea, it can cause recursion issues.
             //for (int i = 0; i < ports.Count; i++)
             //{
@@ -268,6 +271,53 @@ namespace ProjectRimFactory.Storage
             //    }
             //}
         }
+
+
+        private void StackIncompleate()
+        {
+            // Only run the Stack attempts if the Storage is full
+            // as that is the only point where #748 occurs
+            int itemsCnt = items.Count;
+            if (MaxNumberItemsInternal >= itemsCnt)
+            {
+                Dictionary<ThingDef, List<Thing>> incompleteStacks = new Dictionary<ThingDef, List<Thing>>();
+                
+                for (int i = 0; i < itemsCnt; i++)
+                {
+                    Thing item = items[i];
+                    ThingDef def = item.def;
+                    if (item.stackCount < def.stackLimit)
+                    {
+                        // Incompleate Stack
+                        incompleteStacks.TryAdd(def, new List<Thing>());
+                        incompleteStacks[def].Add(item);
+
+                    }
+                }
+
+                //Now Stack them Up
+                var vals = incompleteStacks.Values.ToList();
+                int incompleteStacksCnt = incompleteStacks.Count;
+                for (int i = 0; i < incompleteStacksCnt; i++)
+                {
+                    var incompleates = vals[i];
+                    int limit = 20; // Prevent an infinit loop in case we can't stack some
+                    while (incompleates.Count >= 2 && limit > 0)
+                    {
+                        limit--;
+                        var absorber = incompleates[0];
+                        var absorbee = incompleates[1];
+                        absorber.TryAbsorbStack(absorbee, true);
+                        
+                        if (absorbee.stackCount == 0) incompleates.Remove(absorbee);
+                        if (absorber.stackCount == absorber.def.stackLimit) incompleates.Remove(absorber);
+
+                    }
+                }
+            }
+        }
+
+
         //-----------    For compatibility with Pick Up And Haul:    -----------
         //                  (not used internally in any way)
         // true if can store, capacity is how many can store (more than one stack possible)
