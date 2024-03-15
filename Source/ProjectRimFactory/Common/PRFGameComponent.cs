@@ -190,7 +190,11 @@ Log.Warning("---------added test special scuplture: " + t + " at " + t.Position)
                 if (stockGenerators[i] is StockGenerator_SingleDef stockDev)
                 {
                     ThingDef thingDef = (ThingDef)SAL3.ReflectionUtility.StockGenerator_SingleDef_thingDef.GetValue(stockDev);
-                    if (!thingDef.mineable) stockGenerators.RemoveAt(i);
+                    
+                    if (!thingDef.Minifiable && thingDef.category == ThingCategory.Building)
+                    {
+                        stockGenerators.RemoveAt(i);
+                    }
                 }
             }
         }
