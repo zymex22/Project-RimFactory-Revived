@@ -10,15 +10,8 @@ using Verse;
 namespace ProjectRimFactory.Storage
 {
 
-    public interface IRenameBuilding
-    {
-        public string UniqueName { set; get; }
-        public Building Building { get; }
-    }
-
-
     [StaticConstructorOnStartup]
-    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem, IRenameBuilding
+    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem, IRenameable
     {
         public static readonly Texture2D CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
         public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("PRFUi/IoIcon");
@@ -38,11 +31,27 @@ namespace ProjectRimFactory.Storage
         public virtual bool ShowLimitGizmo => true;
 
 
-        public string UniqueName { get => uniqueName; set => uniqueName = value; }
         private string uniqueName;
-        public Building Building => this;
+        //IRenameable
+        public string RenamableLabel
+        {
+            get
+            {
+                return uniqueName ?? LabelNoCount;
+            }
+            set
+            {
+                uniqueName = value;
+            }
+        }
+        //IRenameable
+        public string BaseLabel => LabelNoCount;
+        //IRenameable
+        public string InspectLabel => RenamableLabel;
+        /* TODO Check if we still need that
         public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
         public override string LabelCap => uniqueName ?? base.LabelCap;
+        */
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
         private bool forbidOnPlacement = false;
@@ -362,7 +371,7 @@ namespace ProjectRimFactory.Storage
             yield return new Command_Action
             {
                 icon = RenameTex,
-                action = () => Find.WindowStack.Add(new Dialog_RenameMassStorageUnit(this)),
+                action = () => Find.WindowStack.Add(new Dialog_RenameStorageUnitIOBase(this)),
                 hotKey = KeyBindingDefOf.Misc1,
                 defaultLabel = "PRFRenameMassStorageUnitLabel".Translate(),
                 defaultDesc = "PRFRenameMassStorageUnitDesc".Translate()

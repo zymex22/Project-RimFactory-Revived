@@ -56,7 +56,8 @@ namespace ProjectRimFactory.Drones
             Name = new NameSingle("PRFDroneName".Translate());
 
             //Set the AreaRestriction. null means Unrestricted
-            playerSettings.AreaRestriction = this.station.droneAllowedArea;
+            // TODO Check if that is the correct replacement of if i need that effective thing
+            playerSettings.AreaRestrictionInPawnCurrentMap = this.station.droneAllowedArea;
         }
 
         public override void Tick()

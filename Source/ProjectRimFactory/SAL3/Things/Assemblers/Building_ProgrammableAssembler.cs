@@ -25,7 +25,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             {
                 bill = b;
                 selected = list;
-                workLeft = b.recipe.WorkAmountTotal(ProjectSAL_Utilities.CalculateDominantIngredient(b.recipe, list).def);
+                workLeft = b.recipe.WorkAmountTotal(ProjectSAL_Utilities.CalculateDominantIngredient(b.recipe, list));
             }
             public Bill bill;
             public List<Thing> selected;

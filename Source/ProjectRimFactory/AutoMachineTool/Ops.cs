@@ -255,7 +255,7 @@ namespace ProjectRimFactory.AutoMachineTool
             copy.deleted = bill.deleted;
             copy.hpRange = bill.hpRange;
             copy.includeEquipped = bill.includeEquipped;
-            copy.includeFromZone = bill.includeFromZone;
+            copy.SetIncludeGroup(bill.GetIncludeSlotGroup());
             copy.includeTainted = bill.includeTainted;
             copy.ingredientFilter = bill.ingredientFilter;
             copy.ingredientSearchRadius = bill.ingredientSearchRadius;

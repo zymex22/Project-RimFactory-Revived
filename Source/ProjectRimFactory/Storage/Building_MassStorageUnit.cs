@@ -13,16 +13,14 @@ namespace ProjectRimFactory.Storage
 {
     [StaticConstructorOnStartup]
     public abstract class Building_MassStorageUnit : Building_Storage, IHideItem, IHideRightClickMenu,
-        IForbidPawnOutputItem, IForbidPawnInputItem, IRenameBuilding, ILinkableStorageParent, ILimitWatcher
+        IForbidPawnOutputItem, IForbidPawnInputItem, IRenameable,  ILinkableStorageParent, ILimitWatcher
     {
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
         private readonly List<Thing> items = new List<Thing>();
         private List<Building_StorageUnitIOBase> ports = new List<Building_StorageUnitIOBase>();
 
-        public string UniqueName { get => uniqueName; set => uniqueName = value; }
-        private string uniqueName;
-        public Building Building => this;
+        
         public IntVec3 GetPosition => this.Position;
         public StorageSettings GetSettings => settings;
 
@@ -40,8 +38,7 @@ namespace ProjectRimFactory.Storage
                                               - def.Size.Area + 1;
         public List<Thing> StoredItems => items;
         public int StoredItemsCount => items.Count;
-        public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
-        public override string LabelCap => uniqueName ?? base.LabelCap;
+        
         public virtual bool CanReceiveIO => true;
         public virtual bool Powered => true;
 
@@ -50,6 +47,29 @@ namespace ProjectRimFactory.Storage
         public virtual bool ForbidPawnInput => ForbidPawnAccess;
 
         private StorageOutputUtil outputUtil = null;
+
+        /* TODO Check if we still need that
+        public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
+        public override string LabelCap => uniqueName ?? base.LabelCap;
+        */
+
+        private string uniqueName;
+        //IRenameable
+        public string RenamableLabel
+        {
+            get
+            {
+                return uniqueName ?? LabelNoCount;
+            }
+            set
+            {
+                uniqueName = value;
+            }
+        }
+        //IRenameable
+        public string  BaseLabel => LabelNoCount;
+        //IRenameable
+        public string InspectLabel => RenamableLabel;
 
         public override void Notify_ReceivedThing(Thing newItem)
         {

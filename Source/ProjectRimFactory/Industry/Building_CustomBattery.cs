@@ -14,9 +14,9 @@ namespace ProjectRimFactory.Industry
             Scribe_Values.Look(ref ticksToExplode, "ticksToExplode", 0, false);
         }
 
-        public override void Draw()
+        public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
         {
-            base.Draw();
+            base.DynamicDrawPhaseAt(phase, drawLoc, flip);
             CompPowerBattery comp = GetComp<CompPowerBattery>();
             GenDraw.FillableBarRequest r = default(GenDraw.FillableBarRequest);
             r.center = DrawPos + Vector3.up * 0.1f + Vector3.forward * 0.25f;

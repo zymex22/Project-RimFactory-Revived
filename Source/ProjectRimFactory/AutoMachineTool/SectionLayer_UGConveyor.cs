@@ -9,7 +9,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public SectionLayer_UGConveyor(Section section) : base(section)
         {
             this.requireAddToMapMesh = false;
-            this.relevantChangeTypes = MapMeshFlag.Buildings;
+            this.relevantChangeTypes = MapMeshFlagDefOf.Buildings;
         }
 
         public override void DrawLayer()

@@ -471,7 +471,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 {
                     thingDef = this.bill.recipe.UsesUnfinishedThing ? this.dominant?.def : null;
                 }
-                workAmount = this.bill.recipe.WorkAmountTotal(thingDef);
+                workAmount = this.bill.recipe.WorkAmountForStuff(thingDef);
 
                 float speedfact = my_workTable.GetStatValue(StatDefOf.WorkTableWorkSpeedFactor);
 
@@ -636,7 +636,8 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public override bool Ready()
         {
-            return !(Find.ResearchManager.currentProj == null || !Find.ResearchManager.currentProj.CanBeResearchedAt(researchBench, false));
+            var currentProj = Find.ResearchManager.GetProject(null);
+            return !(currentProj == null || !currentProj.CanBeResearchedAt(researchBench, false));
         }
         public override void Free()
         {
@@ -650,12 +651,13 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void WorkDone(out List<Thing> products)
         {
             products = new List<Thing>();
-            if (Find.ResearchManager.currentProj != null)
+            ResearchProjectDef researchProject = Find.ResearchManager.GetProject(null);
+            if (researchProject != null)
             {
                 float statValue = Mathf.Max(mySAL.powerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Intellectual) * 0.115f + 0.08f), 0.1f);
                 statValue *= researchBench.GetStatValue(StatDefOf.ResearchSpeedFactor);
 
-                statValue /= Find.ResearchManager.currentProj.CostFactor(Faction.OfPlayer.def.techLevel);
+                statValue /= researchProject.CostFactor(Faction.OfPlayer.def.techLevel);
                 //Tuned the factor to 1000 from 100
                 statValue *= 1000;
 
@@ -666,7 +668,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public override bool TryStartWork(out float workAmount)
         {
             workAmount = 0;
-            if (Find.ResearchManager.currentProj != null)
+            if (Find.ResearchManager.GetProject(null) != null)
             {
                 workAmount = 1000f;
                 return true;

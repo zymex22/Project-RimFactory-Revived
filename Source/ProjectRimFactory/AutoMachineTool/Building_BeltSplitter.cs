@@ -124,7 +124,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected void UpdateGraphic()
         {
             if (Spawned) this.Map.mapDrawer.MapMeshDirty(this.Position,
-                MapMeshFlag.Buildings | MapMeshFlag.Things);
+                MapMeshFlagDefOf.Buildings | MapMeshFlagDefOf.Things);
         }
 
         // What does this even mean?

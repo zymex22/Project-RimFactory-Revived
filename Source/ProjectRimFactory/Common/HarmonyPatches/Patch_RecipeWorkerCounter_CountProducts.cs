@@ -21,7 +21,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static void Postfix(RecipeWorkerCounter __instance, ref int __result, Bill_Production bill)
         {
             //Only run if Check everywhere is set
-            if (bill.includeFromZone == null)
+            // TODO Check if that is the correct replacement
+            if (bill.GetIncludeSlotGroup() == null)
             {
                 Map billmap = bill.Map;
                 int i = 0;

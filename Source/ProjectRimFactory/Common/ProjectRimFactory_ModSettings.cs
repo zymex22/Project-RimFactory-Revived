@@ -647,7 +647,7 @@ namespace ProjectRimFactory.Common
             var rectSlider = rect.RightHalf();
             rectSlider.xMin += 20;
             rectSlider.xMax -= 20;
-            this.currentValue = Widgets.HorizontalSlider_NewTemp(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
+            this.currentValue = Widgets.HorizontalSlider(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
             list.Gap(list.verticalSpacing);
         }
     }
@@ -670,7 +670,7 @@ namespace ProjectRimFactory.Common
             var rectSlider = rect.RightHalf();
             rectSlider.xMin += 20;
             rectSlider.xMax -= 20;
-            this.currentValue = (int)Widgets.HorizontalSlider_NewTemp(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
+            this.currentValue = (int)Widgets.HorizontalSlider(rectSlider, this.currentValue, this.minValue, this.maxValue, true, this.currentValue.ToString(), this.minValue.ToString(), this.maxValue.ToString(), this.roundTo);
             list.Gap(list.verticalSpacing);
         }
     }

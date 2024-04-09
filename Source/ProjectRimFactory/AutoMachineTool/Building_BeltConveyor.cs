@@ -125,7 +125,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
                 // force redraw of graphic - links might have changed?
                 if (Spawned) this.Map.mapDrawer.MapMeshDirty(this.Position,
-                          MapMeshFlag.Buildings | MapMeshFlag.Things);
+                          MapMeshFlagDefOf.Buildings | MapMeshFlagDefOf.Things);
             }
         }
         // Note: it might be worth making link and unlink do something with a cached
@@ -336,7 +336,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 GenMapUI.DrawThingLabel(result, c.stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
             }
         }
-        public override void Draw()
+
+        public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
         {
             // Don't draw underground things by default:
             if (this.IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
@@ -344,7 +345,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 // 地下コンベアの場合には表示しない.
                 return;
             }
-            base.Draw();
+            base.DynamicDrawPhaseAt(phase, drawLoc, flip);
             if (this.State != WorkingState.Ready)
             {
                 DrawCarried();
@@ -376,7 +377,7 @@ namespace ProjectRimFactory.AutoMachineTool
             if (gd == null) gd = drawCarried_GraphicBase.data;
             if (gd == null)
             {
-                t.DrawAt(CarryPosition());
+                t.DrawNowAt(CarryPosition());
                 return;
             }
             drawCarried_GraphicDB ??= GraphicDatabase.Get(gd.graphicClass, gd.texPath, drawCarried_GraphicBase.Shader,
