@@ -248,7 +248,8 @@
     <thingClass>ProjectRimFactory.AutoMachineTool.Building_HarvestPuller</thingClass>
     <label>growzone puller</label>
     <description>A specialized puller that will pull from adjacent grow zones. It must be connected to the grow zone to function properly.</description>
-    <placeWorkers>
+    <fillPercent>1</fillPercent>
+	<placeWorkers>
       <li>ProjectRimFactory.Common.PlaceWorker_GrowZonePuller</li>
     </placeWorkers>
     <costList>      <!-- Remove in Lite -->
@@ -313,7 +314,8 @@
     <defName>PRF_SimplePuller_I</defName>
     <label>item puller Mk.I</label>
     <description>A device that pulls items from the input (white cell) and pushes them to the output (yellow cell). Turn it on after setting the filters.\nThis device is very flexible in its connections and works with stockpiles, storage, belts (all versions), I/O, and others.</description>    <!--todo: maybe make a message on spawn if not turned on-->
-    <costList>      <!-- Remove in Lite -->
+    <fillPercent>1</fillPercent>
+	<costList>      <!-- Remove in Lite -->
       <PRF_RoboticArm>1</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
     </costList>
@@ -366,7 +368,8 @@
     <defName>PRF_SimplePuller_II</defName>
     <label>item puller Mk.II</label>
     <description>An optimized puller that runs at higher speeds. Pulls from input (white cell) to output (yellow cell). Very flexible in its connections.</description>    <!--todo: maybe make a message on spawn if not turned on-->
-    <costList>
+    <fillPercent>1</fillPercent>
+	<costList>
       <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
@@ -411,7 +414,8 @@
     <defName>PRF_SimplePuller_II_Side</defName>
     <label>item angle puller</label>
     <description>A specialized puller designed to pull items at a 90-degree angle. Functionally similar to the normal puller. Directions can be swapped after placing.</description>
-    <costList>
+    <fillPercent>1</fillPercent>
+	<costList>
       <ComponentIndustrial>5</ComponentIndustrial>
       <PRF_RoboticArm>2</PRF_RoboticArm>
       <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
