@@ -7,10 +7,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 {
     // A patch to the problem of forbidding what drones have mined.
     // When mineable yields, if pawn is Drone, Drone will be Colonist.
-    [HarmonyPatch(typeof(Mineable), "TrySpawnYield")]
+    [HarmonyPatch(typeof(Mineable), "TrySpawnYield", new System.Type[] { typeof(Map), typeof(bool), typeof(Pawn) })]
     static class Patch_Mineable_TrySpawnYield
     {
-        static void Prefix(Mineable __instance, Map map, float yieldChance, bool moteOnWaste, Pawn pawn)
+        static void Prefix(Mineable __instance, Map map, bool moteOnWaste, Pawn pawn)
         {
             if (pawn is Pawn_Drone)
             {
@@ -18,7 +18,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             }
         }
 
-        static void Postfix(Mineable __instance, Map map, float yieldChance, bool moteOnWaste, Pawn pawn)
+        static void Postfix(Mineable __instance, Map map, bool moteOnWaste, Pawn pawn)
         {
             if (pawn is Pawn_Drone)
             {
