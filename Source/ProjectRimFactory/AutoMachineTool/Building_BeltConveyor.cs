@@ -339,7 +339,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
         {
-            // Don't draw underground things by default:
+            if (phase != DrawPhase.Draw) return; //Crashes when drawing 2 things at the same time in some of the other phases
             if (this.IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
             {
                 // 地下コンベアの場合には表示しない.
@@ -351,7 +351,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 DrawCarried();
             }
         }
-        
+
         //Cache results of expensive calls
         Graphic drawCarried_GraphicBase = null;
         Graphic drawCarried_GraphicDB = null;
