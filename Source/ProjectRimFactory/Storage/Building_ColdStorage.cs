@@ -29,7 +29,7 @@ namespace ProjectRimFactory.Storage
         {
             get
             {
-                return uniqueName ?? LabelNoCount;
+                return uniqueName ?? LabelCapNoCount;
             }
             set
             {
@@ -37,9 +37,9 @@ namespace ProjectRimFactory.Storage
             }
         }
         //IRenameable
-        public string BaseLabel => LabelNoCount;
+        public string BaseLabel => LabelCapNoCount;
         //IRenameable
-        public string InspectLabel => RenamableLabel;
+        public string InspectLabel => LabelCap;
 
         /* TODO Check if we still need that
         public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
@@ -237,7 +237,7 @@ namespace ProjectRimFactory.Storage
         {
             base.DrawGUIOverlay();
             if (Current.CameraDriver.CurrentZoom <= CameraZoomRange.Close)
-                GenMapUI.DrawThingLabel(this, LabelCap + "\n\r" + GetUIThingLabel());
+                GenMapUI.DrawThingLabel(this, RenamableLabel + "\n\r" + GetUIThingLabel());
         }
 
         public bool OutputItem(Thing item)
