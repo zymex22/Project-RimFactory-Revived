@@ -163,6 +163,8 @@ namespace ProjectRimFactory.Storage
             {
                 BoundStorageUnit = null;
             }
+
+            this.def.building.groupingLabel = this.LabelCapNoCount;
         }
 
         protected override void ReceiveCompSignal(string signal)

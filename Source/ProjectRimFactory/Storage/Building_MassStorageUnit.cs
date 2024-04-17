@@ -19,7 +19,6 @@ namespace ProjectRimFactory.Storage
 
         private readonly List<Thing> items = new List<Thing>();
         private List<Building_StorageUnitIOBase> ports = new List<Building_StorageUnitIOBase>();
-
         
         public IntVec3 GetPosition => this.Position;
         public StorageSettings GetSettings => settings;
@@ -227,6 +226,7 @@ namespace ProjectRimFactory.Storage
                 }
             }
 
+            this.def.building.groupingLabel = this.LabelCapNoCount;
         }
 
         public override void DrawGUIOverlay()
