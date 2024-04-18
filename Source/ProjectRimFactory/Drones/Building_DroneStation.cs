@@ -409,6 +409,7 @@ namespace ProjectRimFactory.Drones
         public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
         {
             base.DynamicDrawPhaseAt(phase, drawLoc, flip);
+            if (phase != DrawPhase.Draw) return; //Crashes when drawing 2 things at the same time in some of the other phases
             if (extension.displayDormantDrones)
             {
                 DrawDormantDrones();

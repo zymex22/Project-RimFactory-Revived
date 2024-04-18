@@ -17,6 +17,7 @@ namespace ProjectRimFactory.Industry
         public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
         {
             base.DynamicDrawPhaseAt(phase, drawLoc, flip);
+            if (phase != DrawPhase.Draw) return; //Crashes when drawing 2 things at the same time in some of the other phases
             CompPowerBattery comp = GetComp<CompPowerBattery>();
             GenDraw.FillableBarRequest r = default(GenDraw.FillableBarRequest);
             r.center = DrawPos + Vector3.up * 0.1f + Vector3.forward * 0.25f;
