@@ -353,7 +353,7 @@ namespace ProjectRimFactory.Storage
             foreach (Gizmo g in base.GetGizmos()) yield return g;
             yield return new Command_Action()
             {
-                defaultLabel = "PRFBoundStorageBuilding".Translate() + ": " + (boundStorageUnit?.LabelCap ?? "NoneBrackets".Translate()),
+                defaultLabel = "PRFBoundStorageBuilding".Translate() + ": " + (((IRenameable)boundStorageUnit)?.RenamableLabel ?? "NoneBrackets".Translate()),
                 action = () =>
                 {
                     //ILinkableStorageParent
