@@ -134,7 +134,7 @@ namespace ProjectRimFactory.Common
                 list.Gap();
 
                 rect = list.GetRect(20f);
-                var speed = (int)Widgets.HorizontalSlider_NewTemp(rect, (float)this.Machine.SupplyPowerForSpeed, (float)minPowerSpeed, (float)maxPowerSpeed, true, valueLabelForSpeed,
+                var speed = (int)Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForSpeed, (float)minPowerSpeed, (float)maxPowerSpeed, true, valueLabelForSpeed,
                     "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(minPowerSpeed), "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(maxPowerSpeed), this.Machine.PowerPerStepSpeed);
                 this.Machine.SupplyPowerForSpeed = speed;
                 //Add info Labels below
@@ -175,7 +175,7 @@ namespace ProjectRimFactory.Common
                 list.Gap();
 
                 rect = list.GetRect(20f);
-                var range = Widgets.HorizontalSlider_NewTemp(rect, (float)this.Machine.SupplyPowerForRange, (float)minPowerRange, (float)maxPowerRange, true, valueLabelForRange,
+                var range = Widgets.HorizontalSlider(rect, (float)this.Machine.SupplyPowerForRange, (float)minPowerRange, (float)maxPowerRange, true, valueLabelForRange,
                     "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(minPowerRange), "PRF.AutoMachineTool.SupplyPower.wdLabel".Translate(maxPowerRange), this.Machine.PowerPerStepRange);
                 this.Machine.SupplyPowerForRange = range;
                 //Add info Labels below

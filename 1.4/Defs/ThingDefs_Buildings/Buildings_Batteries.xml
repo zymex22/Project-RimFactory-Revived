@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!-- ==================================== Battery base ===================================== -->
+  <ThingDef Name="BiggerBatteries_BuildingBase" ParentName="PRF_BuildingBase" Abstract="True">
+    <designatorDropdown>PRF_BatteryGroup</designatorDropdown>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <blockWind>true</blockWind>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.40</fillPercent>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsPower</li>
+    </thingCategories>
+    <designationCategory>Power</designationCategory>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <designationHotKey>Misc4</designationHotKey>
+  </ThingDef>
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_BatteryGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+
+  <!-- ==================================== 4k Battery ===================================== -->
+  <ThingDef ParentName="BiggerBatteries_BuildingBase">
+    <defName>PRF_4k_Battery</defName>
+    <label>4k battery</label>
+    <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
+    <description>A battery capable of storing 4,000 watt-days of power, equivalent to almost seven ordinary batteries. This battery is 50% efficient and will explode if exposed to rain.</description>
+    <graphicData>
+      <texPath>Industry/Battery/PRF_4k_Battery</texPath>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Mass>40</Mass>
+      <Flammability>1.0</Flammability>
+      <Beauty>-40</Beauty>
+      <MarketValue>490</MarketValue>
+    </statBases>
+    <size>(1,1)</size>
+    <costList>
+      <Steel>150</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>4000</storedEnergyMax>
+        <efficiency>0.5</efficiency>
+        <shortCircuitInRain>true</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>2</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <researchPrerequisites>
+      <li>PRF_EnhancedBatteries</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!-- ==================================== 16k Battery ===================================== -->
+  <ThingDef ParentName="BiggerBatteries_BuildingBase">
+    <defName>PRF_16k_Battery</defName>
+    <label>16k battery</label>
+    <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
+    <description>A battery capable of storing 16,000 watt-days of power, equivalent to almost twenty-seven ordinary batteries. This battery is 50% efficient and will explode if exposed to rain.</description>
+    <graphicData>
+      <texPath>Industry/Battery/PRF_16k_Battery</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(2,1)</drawSize>
+    </graphicData>
+    <rotatable>true</rotatable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Mass>60</Mass>
+      <MarketValue>1130</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Beauty>-80</Beauty>
+    </statBases>
+    <size>(2,1)</size>
+    <costList>
+      <Steel>300</Steel>
+      <Plasteel>25</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>16000</storedEnergyMax>
+        <efficiency>0.5</efficiency>
+        <shortCircuitInRain>true</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <researchPrerequisites>
+      <li>PRF_LargeBatteries</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!-- ==================================== 64k Battery ===================================== -->
+  <ThingDef ParentName="BiggerBatteries_BuildingBase">
+    <defName>PRF_64k_Battery</defName>
+    <label>64k battery</label>
+    <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
+    <description>A superior battery capable of storing 64,000 watt-days of power. This ruggedized device is 90% efficient and water-resistant enough to be stored outside, although it's expensive enough that you may want to think twice.</description>
+    <graphicData>
+      <texPath>Industry/Battery/PRF_64k_Battery</texPath>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <rotatable>false</rotatable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <MarketValue>5320</MarketValue>
+      <Mass>80</Mass>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <size>(2,2)</size>
+    <costList>
+      <Steel>500</Steel>
+      <Plasteel>100</Plasteel>
+      <Gold>50</Gold>
+      <ComponentIndustrial>15</ComponentIndustrial>
+      <ComponentSpacer>4</ComponentSpacer>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>64000</storedEnergyMax>
+        <efficiency>0.9</efficiency>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>4</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <researchPrerequisites>
+      <li>PRF_VeryLargeBatteries</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!-- ==================================== 256k Battery ===================================== -->
+  <ThingDef ParentName="BiggerBatteries_BuildingBase">
+    <defName>PRF_256k_Battery</defName>
+    <label>256k battery</label>
+    <thingClass>ProjectRimFactory.Archo.Things.Building_HexCapacitor</thingClass>
+    <description>A tremendously powerful battery capable of storing 256,000 watt-days of power. The integrated AI management system reduces inefficiency losses to effectively zero, and the device is waterproof and will never break down, and it's surprisingly beautiful to look at. Watch out for short-circuits though!</description>
+    <graphicData>
+      <texPath>Industry/Battery/PRF_256k_Battery</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(4,2)</drawSize>
+    </graphicData>
+    <rotatable>true</rotatable>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <tickerType>Normal</tickerType>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>800</WorkToBuild>
+      <Mass>80</Mass>
+      <MarketValue>14750</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Beauty>50</Beauty>
+    </statBases>
+    <size>(4,2)</size>
+    <costList>
+      <Steel>1000</Steel>
+      <Plasteel>200</Plasteel>
+      <Gold>200</Gold>
+      <ComponentSpacer>12</ComponentSpacer>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <ComponentIndustrial>30</ComponentIndustrial>
+      <AIPersonaCore>1</AIPersonaCore>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Battery">
+        <storedEnergyMax>256000</storedEnergyMax>
+        <efficiency>1</efficiency>
+        <shortCircuitInRain>false</shortCircuitInRain>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <researchPrerequisites>
+      <li>PRF_VeryLargeBatteries</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+
+</Defs>

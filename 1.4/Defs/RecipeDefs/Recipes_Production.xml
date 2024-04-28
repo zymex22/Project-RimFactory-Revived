@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <RecipeDef>
+    <defName>PRF_MetalFromSlagBulk</defName>
+    <label>smelt metal from slag in bulk</label>
+    <description>Use heat and strong electromagnets to extract useful metal from slag chunks in bulk.</description>
+    <jobString>Smelting metal from slag.</jobString>
+    <workAmount>1000</workAmount>
+    <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+    <effectWorking>Smelt</effectWorking>
+    <soundWorking>Recipe_Smelt</soundWorking>
+    <allowMixingIngredients>true</allowMixingIngredients>
+    <recipeUsers>
+      <li>PRF_FurnaceI</li>
+      <li>PRF_FurnaceII</li>
+      <li>PRF_FurnaceIII</li>
+    </recipeUsers>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ChunkSlagSteel</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <products>
+      <Steel>60</Steel>
+    </products>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ChunkSlagSteel</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <skillRequirements>
+      <Crafting>6</Crafting>
+    </skillRequirements>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MakeStoneBlocksBase">
+    <defName>PRF_StoneBlocksAnyBulk</defName>
+    <label>make any stone blocks in bulk</label>
+    <description>Cut rock chunks into usable stone blocks in bulk.</description>
+    <workerCounterClass>RecipeWorkerCounter_MakeStoneBlocks</workerCounterClass>
+    <workAmount>3600</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <categories>
+            <li>StoneChunks</li>
+          </categories>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <categories>
+        <li>StoneChunks</li>
+      </categories>
+    </fixedIngredientFilter>
+    <specialProducts>
+      <li>Butchery</li>
+    </specialProducts>
+    <skillRequirements>
+      <Crafting>6</Crafting>
+    </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MakeStoneBlocksBase">
+    <defName>PRF_SandstoneBlocksBulk</defName>
+    <label>make sandstone blocks in bulk</label>
+    <description>Cut sandstone chunks into usable sandstone blocks in bulk.</description>
+    <workAmount>3600</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ChunkSandstone</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ChunkSandstone</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <BlocksSandstone>60</BlocksSandstone>
+    </products>
+    <skillRequirements>
+      <Crafting>6</Crafting>
+    </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MakeStoneBlocksBase">
+    <defName>PRF_GraniteBlocksBulk</defName>
+    <label>make granite blocks in bulk</label>
+    <description>Cut granite chunks into usable granite blocks in bulk.</description>
+    <workAmount>3600</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ChunkGranite</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ChunkGranite</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <BlocksGranite>60</BlocksGranite>
+    </products>
+    <skillRequirements>
+      <Crafting>6</Crafting>
+    </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MakeStoneBlocksBase">
+    <defName>PRF_LimestoneBlocksBulk</defName>
+    <label>make limestone blocks in bulk</label>
+    <description>Cut limestone chunks into usable limestone blocks in bulk.</description>
+    <workAmount>3600</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ChunkLimestone</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ChunkLimestone</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <BlocksLimestone>60</BlocksLimestone>
+    </products>
+    <skillRequirements>
+      <Crafting>6</Crafting>
+    </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MakeStoneBlocksBase">
+    <defName>PRF_SlateBlocksBulk</defName>
+    <label>make slate blocks in bulk</label>
+    <description>Cut slate chunks into usable slate blocks in bulk.</description>
+    <workAmount>3600</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ChunkSlate</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ChunkSlate</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <BlocksSlate>60</BlocksSlate>
+    </products>
+    <skillRequirements>
+      <Crafting>6</Crafting>
+    </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
+  </RecipeDef>
+
+  <RecipeDef ParentName="MakeStoneBlocksBase">
+    <defName>PRF_MarbleBlocksBulk</defName>
+    <label>make marble blocks in bulk</label>
+    <description>Cut marble chunks into usable marble blocks in bulk.</description>
+    <workAmount>3600</workAmount>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>ChunkMarble</li>
+          </thingDefs>
+        </filter>
+        <count>3</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>ChunkMarble</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <products>
+      <BlocksMarble>60</BlocksMarble>
+    </products>
+    <skillRequirements>
+      <Crafting>6</Crafting>
+    </skillRequirements>
+    <recipeUsers Inherit="False">
+      <li>PRF_StoneWorks</li>
+    </recipeUsers>
+  </RecipeDef>
+
+</Defs>

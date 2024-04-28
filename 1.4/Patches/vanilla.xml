@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Patch>
+  <!--================================ Patches for vanilla ====================================== -->
+
+  <!--================================ Add name for vanilla Research bench so we can use it as parent ====================================== -->
+  <!--<Operation Class="PatchOperationAttributeSet">
+    <xpath>/Defs/ThingDef[defName="HiTechResearchBench"]</xpath>
+    <attribute>Name</attribute>
+    <value>ResearchBenchVanilla</value>
+  </Operation> -->
+
+  <!--================================ add linkable for factory research linkable ====================================== -->
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName="HiTechResearchBench"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+    <value>
+      <li>PRF_ResearchTerminal</li>
+    </value>
+  </Operation>
+
+  <!--================================ Add concrete dropdown Menu ====================================== -->
+
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Armored Floors</li>
+    </mods>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>/Defs/TerrainDef[defName="Concrete"]</xpath>
+      <value>
+        <designatorDropdown>PRF_ConcreteFloorGroup</designatorDropdown>
+      </value>
+    </nomatch>
+  </Operation>
+
+  <!--================================ Make stone blocks sellable ========================================-->
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>/Defs/ThingDef[@Name = "StoneBlocksBase"]/tradeability</xpath>
+    <value>
+      <tradeability>All</tradeability>
+    </value>
+  </Operation>
+
+
+</Patch>

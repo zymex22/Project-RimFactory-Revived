@@ -18,10 +18,10 @@ namespace ProjectRimFactory.Common
             float num = Prefs.UIScale / 2f;
             if (Prefs.UIScale > 1f && Math.Abs(num - Mathf.Floor(num)) > float.Epsilon)
             {
-                val.xMin = Widgets.AdjustCoordToUIScalingFloor(rect.xMin);
-                val.xMax = Widgets.AdjustCoordToUIScalingFloor(rect.xMax);
-                val.yMin = Widgets.AdjustCoordToUIScalingFloor(rect.yMin);
-                val.yMax = Widgets.AdjustCoordToUIScalingFloor(rect.yMax);
+                val.xMin = LudeonTK.UIScaling.AdjustCoordToUIScalingFloor(rect.xMin);
+                val.xMax = LudeonTK.UIScaling.AdjustCoordToUIScalingFloor(rect.xMax);
+                val.yMin = LudeonTK.UIScaling.AdjustCoordToUIScalingFloor(rect.yMin);
+                val.yMax = LudeonTK.UIScaling.AdjustCoordToUIScalingFloor(rect.yMax);
             }
             GUI.Label(val, label, gUIStyle);
         }
@@ -50,11 +50,18 @@ namespace ProjectRimFactory.Common
                 }
                 if (!pawn.RaceProps.Humanlike)
                 {
-                    if (!pawn.Drawer.renderer.graphics.AllResolved)
+
+                    /*if (!pawn.Drawer.renderer.graphics.AllResolved)
                     {
                         pawn.Drawer.renderer.graphics.ResolveAllGraphics();
                     }
                     Material obj = pawn.Drawer.renderer.graphics.nakedGraphic.MatAt(Rot4.East);
+                    */
+                    var Graphic = pawn.Drawer.renderer.BodyGraphic;
+                    if (Graphic == null) Log.Error($"PRF Can't get the Body Graphic for {pawn}");
+                    Material obj = Graphic.MatAt(Rot4.East);
+
+
                     color = obj.color;
                     return obj.mainTexture;
 

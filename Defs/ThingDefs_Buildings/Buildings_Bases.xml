@@ -44,11 +44,6 @@
       <Mass>20</Mass>
     </statBases>
     <interactionCellIcon>DiningChair</interactionCellIcon>
-    <comps>
-      <li>
-        <compClass>CompReportWorkSpeed</compClass>
-      </li>
-    </comps>
     <placeWorkers>
       <li>PlaceWorker_ReportWorkSpeedPenalties</li>
     </placeWorkers>
@@ -61,8 +56,8 @@
     <staticSunShadowHeight>0.20</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
     <canOverlapZones>false</canOverlapZones>    <!-- zones as in storage zones, growing zones, etc -->
     <comps>
-      <li>
-        <compClass>CompReportWorkSpeed</compClass>
+      <li Class="CompProperties_ReportWorkSpeed">
+        <workSpeedStat>WorkTableWorkSpeedFactor</workSpeedStat>
       </li>
     </comps>
     <placeWorkers>      <!-- Restrictor when placing the building. Class name -->

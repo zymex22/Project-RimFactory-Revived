@@ -264,7 +264,7 @@ namespace ProjectRimFactory.Drones
 
             for (int i = 0; i < spawnedDrones.Count; i++)
             {
-                spawnedDrones[i].playerSettings.AreaRestriction = droneAllowedArea;
+                spawnedDrones[i].playerSettings.AreaRestrictionInPawnCurrentMap = droneAllowedArea;
             }
         }
 
@@ -406,9 +406,10 @@ namespace ProjectRimFactory.Drones
             }
         }
 
-        public override void Draw()
+        public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
         {
-            base.Draw();
+            base.DynamicDrawPhaseAt(phase, drawLoc, flip);
+            if (phase != DrawPhase.Draw) return; //Crashes when drawing 2 things at the same time in some of the other phases
             if (extension.displayDormantDrones)
             {
                 DrawDormantDrones();

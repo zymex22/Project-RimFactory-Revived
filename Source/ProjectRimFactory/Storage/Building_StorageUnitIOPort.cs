@@ -10,15 +10,8 @@ using Verse;
 namespace ProjectRimFactory.Storage
 {
 
-    public interface IRenameBuilding
-    {
-        public string UniqueName { set; get; }
-        public Building Building { get; }
-    }
-
-
     [StaticConstructorOnStartup]
-    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem, IRenameBuilding
+    public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawnInputItem, IRenameable
     {
         public static readonly Texture2D CargoPlatformTex = ContentFinder<Texture2D>.Get("Storage/CargoPlatform");
         public static readonly Texture2D IOModeTex = ContentFinder<Texture2D>.Get("PRFUi/IoIcon");
@@ -38,11 +31,27 @@ namespace ProjectRimFactory.Storage
         public virtual bool ShowLimitGizmo => true;
 
 
-        public string UniqueName { get => uniqueName; set => uniqueName = value; }
         private string uniqueName;
-        public Building Building => this;
+        //IRenameable
+        public string RenamableLabel
+        {
+            get
+            {
+                return uniqueName ?? LabelCapNoCount;
+            }
+            set
+            {
+                uniqueName = value;
+            }
+        }
+        //IRenameable
+        public string BaseLabel => LabelCapNoCount;
+        //IRenameable
+        public string InspectLabel => LabelCap;
+        /* TODO Check if we still need that
         public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
         public override string LabelCap => uniqueName ?? base.LabelCap;
+        */
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
         private bool forbidOnPlacement = false;
@@ -154,6 +163,8 @@ namespace ProjectRimFactory.Storage
             {
                 BoundStorageUnit = null;
             }
+
+            this.def.building.groupingLabel = this.LabelCapNoCount;
         }
 
         protected override void ReceiveCompSignal(string signal)
@@ -342,14 +353,14 @@ namespace ProjectRimFactory.Storage
             foreach (Gizmo g in base.GetGizmos()) yield return g;
             yield return new Command_Action()
             {
-                defaultLabel = "PRFBoundStorageBuilding".Translate() + ": " + (boundStorageUnit?.LabelCap ?? "NoneBrackets".Translate()),
+                defaultLabel = "PRFBoundStorageBuilding".Translate() + ": " + (((IRenameable)boundStorageUnit)?.RenamableLabel ?? "NoneBrackets".Translate()),
                 action = () =>
                 {
                     //ILinkableStorageParent
                     List<Building> mylist = Map.listerBuildings.allBuildingsColonist.Where(b => (b as ILinkableStorageParent) != null && (b as ILinkableStorageParent).CanUseIOPort).ToList();
                     if (IsAdvancedPort) mylist.RemoveAll(b => !(b as ILinkableStorageParent).AdvancedIOAllowed);
                     List<FloatMenuOption> list = new List<FloatMenuOption>(
-                        mylist.Select(b => new FloatMenuOption(b.LabelCap, () => SelectedPorts().ToList().ForEach(p => p.BoundStorageUnit = (b as ILinkableStorageParent))))
+                        mylist.Select(b => new FloatMenuOption(((IRenameable)b).RenamableLabel, () => SelectedPorts().ToList().ForEach(p => p.BoundStorageUnit = (b as ILinkableStorageParent))))
                     );
                     if (list.Count == 0)
                     {
@@ -362,7 +373,7 @@ namespace ProjectRimFactory.Storage
             yield return new Command_Action
             {
                 icon = RenameTex,
-                action = () => Find.WindowStack.Add(new Dialog_RenameMassStorageUnit(this)),
+                action = () => Find.WindowStack.Add(new Dialog_RenameStorageUnitIOBase(this)),
                 hotKey = KeyBindingDefOf.Misc1,
                 defaultLabel = "PRFRenameMassStorageUnitLabel".Translate(),
                 defaultDesc = "PRFRenameMassStorageUnitDesc".Translate()

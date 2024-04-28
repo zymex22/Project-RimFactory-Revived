@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--============================================== Batteries Research base ============================================-->
+  <ResearchProjectDef Name="PRF_BatteriesResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>3.5</researchViewY>
+    <techLevel>Industrial</techLevel>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_BatteriesResearch">
+    <defName>PRF_EnhancedBatteries</defName>
+    <label>electrical batteries</label>
+    <description>Build large batteries for the efficient storage of electricity. This first tier unlocks the 4k battery cell.</description>
+    <baseCost>750</baseCost>
+    <prerequisites>
+      <li>Batteries</li>
+      <li>PRF_CoreTierI</li>
+    </prerequisites>
+    <researchViewX>3</researchViewX>
+    <researchViewY>3</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_BatteriesResearch">
+    <defName>PRF_LargeBatteries</defName>
+    <label>improved batteries</label>
+    <description>Build even larger batteries for the efficient storage of electricity. The second tier unlocks the 16k and 64k battery cells.</description>
+    <baseCost>1200</baseCost>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <prerequisites>
+      <li>PRF_EnhancedBatteries</li>
+      <li>PRF_CoreTierII</li>
+    </prerequisites>
+    <researchViewX>6</researchViewX>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_BatteriesResearch">
+    <defName>PRF_VeryLargeBatteries</defName>
+    <label>advanced batteries</label>
+    <description>Push the limits of battery storage technology, and create highly efficient 256k battery cells for the mass storage of power.</description>
+    <baseCost>2000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+    <prerequisites>
+      <li>PRF_LargeBatteries</li>
+      <li>PRF_CoreTierIII</li>
+    </prerequisites>
+    <researchViewX>9</researchViewX>
+  </ResearchProjectDef>
+
+</Defs>

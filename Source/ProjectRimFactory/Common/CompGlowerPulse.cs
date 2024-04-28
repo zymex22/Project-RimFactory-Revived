@@ -36,7 +36,8 @@ namespace ProjectRimFactory.Common
             if (this.needUpdate || this.Props.pulse)
             {
                 this.Props.Update();
-                this.parent.Map.glowGrid.MarkGlowGridDirty(this.parent.Position);
+                // MarkGlowGridDirty
+                this.parent.Map.glowGrid.DirtyCache(this.parent.Position);
                 this.needUpdate = false;
             }
         }

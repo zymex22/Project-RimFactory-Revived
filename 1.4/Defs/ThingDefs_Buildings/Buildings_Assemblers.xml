@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--
+Mod extennsion for assemblers
+  <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <importRecipesFrom>               import bills from a existing workbench, more then 1 can be used
+          <li>ElectricStove</li>
+        </importRecipesFrom>
+        <workSpeedBaseFactor>2</workSpeedBaseFactor> Workspeed boost normal = 1
+        <skillLevel>20</skillLevel>       skill level set all skill to XX if not set skill = 10
+        <workingGraphicData>  Working texture swap
+          <graphicClass>Graphic_Single</graphicClass>
+          <texPath>SAL3/SpacerCookerWorking</texPath>
+          <drawSize>(3,3)</drawSize>
+        </workingGraphicData>
+        <drawStatus>true</drawStatus>     Show working/idle status
+        <doEffect>true</doEffect>         Sound and visual effect activate
+        <overrideRecipeEffecter>          List of Recipe and Effecter to overwrite.
+
+          <RecipeDef.defName Effecter="EffecterDef.defName" Sound="SoundDef.defName" />     Override a specific recipe effect and sound
+          RecipeDef - see RimWorld\Data\Core\Defs\RecipeDefs\Recipes_*.xml                  find recipeDef here
+          EffecterDef - see RimWorld\Data\Core\Defs\Effects\Effecter_*.xml                  find effectDef here
+          SoundDef - see RimWorld\Data\Core\Defs\SoundDefs\*_Sustainers_*.xml               find soundDef here
+
+        <CookMealSimple Effecter="Repair" />                                               example
+        <CookMealSimpleBulk Effecter="ButcherFlesh" Sound="Recipe_ButcherCorpseFlesh" />   example
+        </overrideRecipeEffecter>
+
+        <defaultEffecter>Drill</defaultEffecter>
+        Effect that is used when RecipeDef.effectWorking and RecipeDef.soundWorking does not exist or is not defined in overrideRecipeEffecter.
+        <defaultSound></defaultSound>
+      </li>
+  </modExtensions>
+  <comps>
+      <li Class="ProjectRimFactory.Common.CompProperties_GlowerPulse">    Comp for pulseglow when working
+        <minGlowRadius>1</minGlowRadius>                                  smallest size
+        <maxGlowRadius>3</maxGlowRadius>                                  largest size
+        <minGlowColor>(100,0,0,10)</minGlowColor>                         color and opacity when smallest
+        <maxGlowColor>(230,0,0,100)</maxGlowColor>                        color and opacity when largest
+        <intervalTicks>30</intervalTicks>                                 interval
+        easingType : EasingLinear, EasingSineInOut, EasingQuadInOut, EasingCubicInOut, EasingExpInOut, EasingElasticInOut, EasingBounceInOut, EasingQuadIn, EasingQuadOut, EasingCubicIn, EasingCubicOut https://easings.net/en
+        <easingType>ProjectRimFactory.Common.EasingCubicIn</easingType>   Type pulse see above link for types
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        speed settings
+
+
+        <minSpeedFactor>1</minSpeedFactor>
+        <maxPowerForSpeed>3000</maxPowerForSpeed>
+        <maxSpeedFactor>2</maxSpeedFactor>
+        range settings
+
+
+        <minRange>1</minRange>
+        <maxPowerForRange>1000</maxPowerForRange>
+        <maxRange>3</maxRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+        range color settings
+        <blueprintMin>(1,1,1,1)</blueprintMin>
+        <blueprintMax>(0.5,0.5,0.5,0.6)</blueprintMax>
+        <instance>(1,1,1,1)</instance>
+        <otherInstance>(1,1,1,0.35)</otherInstance>
+      </li>
+  </comps>
+    -->
+
+
+  <DesignatorDropdownGroupDef>    <!-- Create Downdown group, one for each dropdown -->
+    <defName>PRF_AssemblerGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!--====================AssemblerBase====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
+  <ThingDef Name="PRF_AssemblerBase" ParentName="PRF_BuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRF_BuildingBase -->
+    <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
+      <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
+      <Mass>70</Mass>      <!-- mass in kg -->
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
+      <drawSize>(3,3)</drawSize>      <!-- Scale texture up/down to fit -->
+      <!-- <shaderType></shaderType> -->      <!-- used when using mask and such eq. CutoutComplex others: None, Cutout, CutoutFlying, CutoutPlant, CutoutSkin, Transparent, TransparentPostLight, MetaOverlay, Mote, MoteGlow -->
+    </graphicData>
+    <!-- The layer this thing is rendered on. Usually the same value as category. -->
+    <passability>PassThroughOnly</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
+    <blockWind>true</blockWind>    <!-- 	Whether this building can block wind or not. -->
+    <fillPercent>0.5</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
+    <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
+    <canOverlapZones>false</canOverlapZones>    <!-- zones as in storage zones, growing zones, etc -->
+    <castEdgeShadows>true</castEdgeShadows>
+    <size>(3,3)</size>    <!-- Ingame cell/ground size (x,y) -->
+    <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
+    <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
+    <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
+    <neverMultiSelect>true</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
+    <drawGUIOverlay>true</drawGUIOverlay>    <!-- Whether GUI will show up when you select this thing. -->
+    <inspectorTabs>      <!-- A list of ITabs that will show up in the inspector when you select this item. These ITabs are for example the "Bills" buttons (ITab_Bills) and the art description (ITab_Art). -->
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>      <!-- Setup bills for assemblers -->
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <!-- option to power off -->
+    </comps>
+  </ThingDef>
+
+  <!--==================== Recipe database ====================-->
+  <!-- This machine can import recipes from any bench and afterwards being moved near a assembler for use. -->
+  <ThingDef ParentName="PRF_BuildingBase">
+    <defName>PRF_RecipeDatabase</defName>
+    <label>portable recipe database</label>
+    <description>A portable storage device that can duplicate and transfer bills and recipes from worktables to assemblers. Uploaded recipes and bills will be automatically lost if the portable database is either moved or destroyed.\n\nThe white cells represent the import range for the database.\n\nI wonder what all these other buttons do...</description>
+    <thingClass>ProjectRimFactory.SAL3.Things.Building_RecipeHolder</thingClass>
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
+    <graphicData>
+      <texPath>SAL3/DISK_HARDWARE4</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <uiIconScale>0.7</uiIconScale>
+    <rotatable>true</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>70</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <statBases>
+      <WorkToBuild>800</WorkToBuild>
+      <MaxHitPoints>150</MaxHitPoints>
+      <MarketValue>1140</MarketValue>
+      <Flammability>1.0</Flammability>
+      <Mass>15</Mass>
+    </statBases>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <costList>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+      <Steel>20</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+      <PRF_DataDisk>1</PRF_DataDisk>
+    </costList>
+    <tickerType>Normal</tickerType>
+    <neverMultiSelect>true</neverMultiSelect>
+    <staticSunShadowHeight>0.1</staticSunShadowHeight>
+    <inspectorTabs>
+      <li>ProjectRimFactory.SAL3.Things.ITab_RecipeHolder</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>3</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>5</range>
+        <ghostColor>(1,1,1,1)</ghostColor>
+      </li>
+    </comps>
+    <researchPrerequisites>
+      <li>PRF_MagneticTape</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!--============================================================-->
+  <!-- *^*^*^*^* Simple Assembler *^*^*^*^* -->
+  <!-- Simple assembler is cooking, industrial and all other types they work like Universal assembler, but with preset recipy, look at selfcooker for example. -->
+  <!-- Theese can also import/copy recipes from a whole bench which for mod support can be very usefull. -->
+  <!--============================================================-->
+
+
+  <!--==================== Universal Assembler ====================-->
+  <!-- This is a fixed type of assembler that always will work at same speed and can import recipes from DB. -->
+  <ThingDef ParentName="PRF_AssemblerBase">
+    <defName>PRF_TypeOneAssembler_I</defName>    <!-- The defName, in-script name, of this item that can be referred to by C# or other XML files. -->
+    <label>assembler</label>    <!-- The in-game (as opposed to in-script defName) name for this item in lowercase. The game automatically makes the first character uppercase. -->
+    <description>An automatic assembler controlled by a computer. Despite being called an assembler, it's also capable of simpler procedures such as cutting stone blocks, and refinery work.\n\nDownloads recipes from an adjacent recipe database.\n\nThe white cells represent the input range; the blue cells represent the database range, and the yellow cell represents the output.</description>    <!-- The description for this item, shown when the item's information tab is opened. You can use escape characters in this string, like \n for a newline. -->
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>    <!-- Use Dropdown Group -->
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_SmartAssembler</thingClass>    <!-- What C# class to call when doing anything with this thing. Unless you know what you're doing, it's suggested to use the same thingClass similar things use. -->
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- for being able to swap between textures each rotation -->
+      <texPath>SAL3/smart_assembler</texPath>      <!-- The path relative to ../Textures/ in which this thing's texture is stored. -->
+    </graphicData>
+    <costList>      <!-- cost list for fixed prices, uses def names -->
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <Steel>120</Steel>
+      <Plasteel>10</Plasteel>
+      <PRF_ElectronicChip_I>2</PRF_ElectronicChip_I>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>2500</WorkToBuild>
+      <MarketValue>4725</MarketValue>      <!-- 	The "market value" of this thing. Please note that sellPriceFactor halves this value when selling the thing, and that the Social skill influences the actual value. -->
+    </statBases>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
+    </building>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <!-- enable breakdown of machines -->
+      <li Class="CompProperties_Power">        <!-- enable Power usage -->
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>625</basePowerConsumption>        <!-- set power uge -->
+      </li>
+      <li Class="CompProperties_HeatPusher">        <!-- Produce fixed amount of heat while on -->
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>3</heatPerSecond>        <!-- Vanilla stove create 5 -->
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>3</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
+    </comps>
+    <researchPrerequisites>      <!-- Needed Research to see in menus -->
+      <li>PRF_UniversalAutocrafting</li>
+    </researchPrerequisites>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>9</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+
+  <!--==================== Adaptive Assembler ====================-->
+  <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
+  <ThingDef ParentName="PRF_AssemblerBase">
+    <defName>PRF_TypeTwoAssembler_I</defName>
+    <label>adaptive assembler</label>
+    <description>An automatic assembler controlled by a primitive AI.\n\nThe simple artificial neural network enables it to learn, to be more precise and efficient at individual recipes. Slowly overwrites currently unused recipe algorithms, as it has limited processing and memory capacity.\n\nDownloads recipes from an adjacent recipe database.\n\nThe white cells represent the input range; the blue cells represent the database range, and the yellow cell represents the output.</description>
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>SAL3/correcting_assembler</texPath>
+    </graphicData>
+    <costList>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>4</PRF_ElectronicChip_I>
+      <PRF_ElectronicChip_II>2</PRF_ElectronicChip_II>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <Plasteel>10</Plasteel>
+      <Steel>150</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>3000</WorkToBuild>
+      <MarketValue>7205</MarketValue>
+    </statBases>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>750</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>5</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~5</floatrange_Range>
+        <powerPerStepRange>375</powerPerStepRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.Assemblers.Special.ModExtension_LearningAssembler">        <!-- setting for adaptive assembler only? -->
+        <MinSpeed>1</MinSpeed>        <!-- 1 = 100%, if not set min= 50% (default: 100%) -->
+        <MaxSpeed>5</MaxSpeed>        <!-- 5 = 500%, if not set max= infinite (default: 500%) -->
+        <MinQuality>Awful</MinQuality>        <!-- start out at... (default: Awful)(Awful, Poor, Normal, Good, Excellent, Masterwork, Legendary) -->
+        <MaxQuality>Masterwork</MaxQuality>        <!-- max out at... (default: Masterwork)-->
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>        <!-- Base level skills if nothing is defined below -->
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>12</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_SelfCorrectingAssemblers</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Adaptive Assembler T4 Good ====================-->
+  <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
+  <ThingDef ParentName="PRF_AssemblerBase">
+    <defName>PRF_TypeTwoAssembler_II</defName>
+    <label>quantum assembler (prime)</label>
+    <description>This assembler is an upgraded version that works very slowly, but it starts at normal quality instead of awful and so will ramp up faster. It also has a huge database input range.\n\nThe white cells represent the input range; the blue cells represent the database range, and the yellow cell represents the output.</description>
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>SAL3/T4_assembler_I</texPath>
+    </graphicData>
+    <costList>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_II>4</PRF_ElectronicChip_II>
+      <PRF_ElectronicChip_III>2</PRF_ElectronicChip_III>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <Plasteel>100</Plasteel>
+      <Steel>200</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <WorkToBuild>15000</WorkToBuild>
+      <MarketValue>10000</MarketValue>
+    </statBases>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>24</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~1</floatrange_SpeedFactor>
+        <powerPerStepSpeed>0</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~10</floatrange_Range>
+        <powerPerStepRange>300</powerPerStepRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.Assemblers.Special.ModExtension_LearningAssembler">        <!-- setting for adaptive assembler only? -->
+        <MinSpeed>0.1</MinSpeed>        <!-- 1 = 100%, if not set min= 50% (default: 100%) -->
+        <MaxSpeed>1</MaxSpeed>        <!-- 5 = 500%, if not set max= infinite (default: 500%) -->
+        <MinQuality>Normal</MinQuality>        <!-- start out at... (default: Awful)(Awful, Poor, Normal, Good, Excellent, Masterwork, Legendary) -->
+        <MaxQuality>Legendary</MaxQuality>        <!-- max out at... (default: Masterwork)-->
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>20</BaseSkill>        <!-- Base level skills if nothing is defined below -->
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>12</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_SelfCorrectingAssemblersII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Adaptive Assembler T4 Fast ====================-->
+  <!-- This is a self improving type assembler that wil become faster and better qual. over to by doing same bill over and over. -->
+  <ThingDef ParentName="PRF_AssemblerBase">
+    <defName>PRF_TypeTwoAssembler_III</defName>
+    <label>quantum assembler (overclocked)</label>
+    <description>A high-end assembler that works at a high rate starts faster and can ramp up higher than other assemblers. The output isn't very good quality though. The database input range is huge.\n\nThe white cells represent the input range; the blue cells represent the database range, and the yellow cell represents the output.</description>
+    <designatorDropdown>PRF_AssemblerGroup</designatorDropdown>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Special.Building_Assembler_Learning</thingClass>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <texPath>SAL3/T4_assembler_II</texPath>
+    </graphicData>
+    <costList>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>4</PRF_ElectronicChip_I>
+      <PRF_ElectronicChip_III>2</PRF_ElectronicChip_III>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <Plasteel>100</Plasteel>
+      <Steel>150</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+    </inspectorTabs>
+    <statBases>
+      <MaxHitPoints>500</MaxHitPoints>
+      <WorkToBuild>10000</WorkToBuild>
+      <MarketValue>12500</MarketValue>
+    </statBases>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>      <!-- To be able to build as walls -->
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1000</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.CompProperties_RecipeImportRange">
+        <range>24</range>
+        <ghostColor>(0,1,1,1)</ghostColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>2500</powerPerStepSpeed>
+        <powerStepFactor>4</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~10</floatrange_Range>
+        <powerPerStepRange>300</powerPerStepRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension">
+        <drawStatus>true</drawStatus>
+        <doEffect>false</doEffect>
+      </li>
+      <li Class="ProjectRimFactory.SAL3.Things.Assemblers.Special.ModExtension_LearningAssembler">        <!-- setting for adaptive assembler only? -->
+        <MinSpeed>3</MinSpeed>        <!-- 1 = 100%, if not set min= 50% (default: 100%) -->
+        <MaxSpeed>10</MaxSpeed>        <!-- 5 = 500%, if not set max= infinite (default: 500%) -->
+        <MinQuality>Awful</MinQuality>        <!-- start out at... (default: Awful)(Awful, Poor, Normal, Good, Excellent, Masterwork, Legendary) -->
+        <MaxQuality>Normal</MaxQuality>        <!-- max out at... (default: Masterwork)-->
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>10</BaseSkill>        <!-- Base level skills if nothing is defined below -->
+        <skills>
+          <li>
+            <def>Artistic</def>
+            <levelInt>1</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_SelfCorrectingAssemblersII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>

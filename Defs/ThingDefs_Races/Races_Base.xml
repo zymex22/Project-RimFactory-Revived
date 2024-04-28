@@ -127,6 +127,7 @@
       <intelligence>ToolUser</intelligence>
       <thinkTreeMain>PRFDrone</thinkTreeMain>
       <thinkTreeConstant>DroneConstant</thinkTreeConstant>
+	  <renderTree>Misc</renderTree>
       <body>PRFDrone</body>
       <baseBodySize>0.5</baseBodySize>
       <baseHealthScale>0.8</baseHealthScale>

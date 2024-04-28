@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--===================== Achievement Tab =====================-->
+  <!-- <AchievementsExpanded.AchievementTabDef>
+    <defName>PRF_Achievement</defName>
+    <label>Project RimFactory</label>
+  </AchievementsExpanded.AchievementTabDef> -->
+
+  <!--===================== example =====================-->
+  <!-- <AchievementsExpanded.AchievementDef>
+    <defName></defName>
+    <tab>PRF_Achievement</tab>
+    <label></label>
+    <description></description>
+
+    <tracker Class=""></tracker>
+
+    <texPath></texPath>
+    <points></points>
+  </AchievementsExpanded.AchievementDef> -->
+
+  <!-- Find more tracker examples here:
+https://github.com/AndroidQuazar/VanillaAchievementsExpanded/wiki/Available-Trackers-for-XML
+-->
+  <!--======================== Getting started ========================-->
+  <!-- Tier 0-->
+  <!--<AchievementsExpanded.AchievementDef>
+    <defName>PRF_GettingStarted</defName>
+    <tab>PRF_Achievement</tab>
+    <label>Getting Started</label>
+    <description>Get your factory research going.</description>
+
+    <tracker Class="AchievementsExpanded.ResearchTracker">
+      <def>PRF_CoreTierO</def>
+    </tracker>
+
+    <texPath>Achievements/OutOfTheDarkAge</texPath>
+    <points>5</points>
+  </AchievementsExpanded.AchievementDef> -->
+
+  <!-- Tier 1-->
+  <!--<AchievementsExpanded.AchievementDef>
+    <defName>PRF_A_TierI</defName>
+    <tab>PRF_Achievement</tab>
+    <label>Early Automation</label>
+    <description>Get your factory research going.</description>
+
+    <tracker Class="AchievementsExpanded.ResearchTracker">
+      <def>PRF_CoreTierI</def>
+    </tracker>
+
+    <texPath>Achievements/OutOfTheDarkAge</texPath>
+    <points>10</points>
+  </AchievementsExpanded.AchievementDef> -->
+
+  <!-- Tier 2-->
+  <!--<AchievementsExpanded.AchievementDef>
+    <defName>PRF_A_TierII</defName>
+    <tab>PRF_Achievement</tab>
+    <label>Getting Advanced</label>
+    <description>Get your factory research going.</description>
+
+    <tracker Class="AchievementsExpanded.ResearchTracker">
+      <def>PRF_CoreTierII</def>
+    </tracker>
+
+    <texPath>Achievements/OutOfTheDarkAge</texPath>
+    <points>15</points>
+  </AchievementsExpanded.AchievementDef> -->
+
+  <!-- Tier 3-->
+  <!--<AchievementsExpanded.AchievementDef>
+    <defName>PRF_A_TierIII</defName>
+    <tab>PRF_Achievement</tab>
+    <label>Self Learning</label>
+    <description>Get your factory research going.</description>
+
+    <tracker Class="AchievementsExpanded.ResearchTracker">
+      <def>PRF_CoreTierIII</def>
+    </tracker>
+
+    <texPath>Achievements/OutOfTheDarkAge</texPath>
+    <points>25</points>
+  </AchievementsExpanded.AchievementDef> -->
+
+  <!-- Tier 4-->
+  <!--<AchievementsExpanded.AchievementDef>
+    <defName>PRF_A_TierIV</defName>
+    <tab>PRF_Achievement</tab>
+    <label>Now Its Getting Crazy</label>
+    <description>Get your factory research going.</description>
+
+    <tracker Class="AchievementsExpanded.ResearchTracker">
+      <def>PRF_CoreTierIV</def>
+    </tracker>
+
+    <texPath>Achievements/OutOfTheDarkAge</texPath>
+    <points>50</points>
+  </AchievementsExpanded.AchievementDef> -->
+</Defs>

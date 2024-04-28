@@ -66,7 +66,7 @@ namespace ProjectRimFactory.SAL3.Things
         }
         protected virtual float GetLearnRecipeWorkAmount(RecipeDef recipe)
         {
-            return recipe.WorkAmountTotal(ThingDefOf.Steel);
+            return recipe.WorkAmountForStuff(ThingDefOf.Steel);
         }
 
         //================================ Overrides
