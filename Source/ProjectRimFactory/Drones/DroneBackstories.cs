@@ -25,6 +25,7 @@ namespace ProjectRimFactory.Drones
                     workDisables = WorkTags.Social,
                     slot = BackstorySlot.Childhood,
                     baseDesc = "NoneBrackets".Translate(),
+                    description = "NoneBrackets".Translate(),
                     modContentPack = LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().Content
                 };
 
@@ -36,6 +37,7 @@ namespace ProjectRimFactory.Drones
                     workDisables = WorkTags.Social,
                     slot = BackstorySlot.Adulthood,
                     baseDesc = "NoneBrackets".Translate(),
+                    description = "NoneBrackets".Translate(),
                     modContentPack = LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().Content
                 };
 
