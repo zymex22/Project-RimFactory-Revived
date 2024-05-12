@@ -86,6 +86,10 @@ namespace ProjectRimFactory.Common
          AccessTools.Method(typeof(RimWorld.Building_Storage), "Accepts", new Type[] { typeof(Verse.Thing) }),
          AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Building_Storage_Accepts), "Prefix")
          );
+        public static TogglePatch Patch_StorageSettings_AllowedToAccept = new TogglePatch(
+         AccessTools.Method(typeof(RimWorld.StorageSettings), "AllowedToAccept", new Type[] { typeof(Verse.Thing) }),
+         AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_StorageSettings_AllowedToAccept), "Prefix")
+         );
         public static TogglePatch Patch_ForbidUtility_IsForbidden = new TogglePatch(
          AccessTools.Method(typeof(RimWorld.ForbidUtility), "IsForbidden", new Type[] { typeof(Thing), typeof(Pawn) }),
          AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_ForbidUtility_IsForbidden), "Prefix")
@@ -113,6 +117,7 @@ namespace ProjectRimFactory.Common
             Patch_FloatMenuMakerMap_ChoicesAtFor.PatchHandler(state);
             Patch_Building_Storage_Accepts.PatchHandler(state);
             Patch_ForbidUtility_IsForbidden.PatchHandler(state);
+            Patch_StorageSettings_AllowedToAccept.PatchHandler(state);
         }
 
         public static void Register(Building_MassStorageUnit building)
