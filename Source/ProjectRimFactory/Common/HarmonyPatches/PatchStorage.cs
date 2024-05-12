@@ -28,6 +28,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
+    // TODO Check if we still need that in 1.5
     class Patch_Building_Storage_Accepts
     {
         static bool Prefix(Building_Storage __instance, Thing t, out bool __result)
@@ -43,6 +44,31 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     return false;
                 }
             }
+            return true;
+        }
+    }
+
+    // 1.5 Stuff
+    class Patch_StorageSettings_AllowedToAccept
+    {
+        static bool Prefix(IStoreSettingsParent ___owner, Thing t, out bool __result)
+        {
+            __result = false;
+            if (___owner is Building_Storage storage)
+            {
+                //Check if pawn input is forbidden
+                if ((storage as IForbidPawnInputItem)?.ForbidPawnInput ?? false)
+                {
+                    //#699 #678
+                    //This check is needed to support the use of the Limit function for the IO Ports
+                    if (storage.Position != t.Position)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            
             return true;
         }
     }
