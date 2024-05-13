@@ -20,19 +20,26 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             {
                 if (target.HasThing && target.Thing != null && p != null && p != PRFGameComponent.PRF_StaticPawn)
                 {
-                    Building_AutoMachineTool building = (Building_AutoMachineTool)target.Thing.InteractionCell.GetThingList(p.Map).Where(t => t is Building_AutoMachineTool).FirstOrDefault();
+                    var thing = target.Thing;
+                    if (thing != null && thing is Pawn)
+                    {
+                        // SAL do not work on Pawns
+                        return;
+                    }
+                    var interact = thing.InteractionCell;
+                    if (interact == null)
+                    {
+                        return;
+                    }
+                    var thinglist = interact.GetThingList(p.Map);
+                    
+                    Building_AutoMachineTool building = (Building_AutoMachineTool)thinglist.Where(t => t is Building_AutoMachineTool).FirstOrDefault();
                     if (building != null)
                     {
                         __result = false;
                     }
-
                 }
-
-
-
             }
-
-
         }
     }
 }
