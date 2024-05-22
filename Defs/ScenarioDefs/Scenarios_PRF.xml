@@ -156,6 +156,7 @@
                     <def>CreateIncident</def>
                     <incident>RaidEnemy</incident>
                     <intervalDays>10</intervalDays>
+                    <maxDays>10</maxDays>
                 </li>
                 <li Class="ScenPart_StartingThing_Defined">
                     <def>StartingThing_Defined</def>
