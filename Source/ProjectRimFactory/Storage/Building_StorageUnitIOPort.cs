@@ -226,7 +226,7 @@ namespace ProjectRimFactory.Storage
 
         public void RefreshStoreSettings()
         {
-            if (mode == StorageIOMode.Output)
+            if (IOMode == StorageIOMode.Output)
             {
                 settings = outputStoreSettings;
                 if (boundStorageUnit != null && settings.Priority != boundStorageUnit.GetSettings.Priority)
