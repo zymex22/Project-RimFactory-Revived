@@ -448,6 +448,12 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 if (!this.CanLinkFrom(linkableGiver, false)) return false;
             }
+            else 
+            {
+                // If the giver is not a IBeltConveyorLinkable we should assume that the giver is above the ground
+                // UG Belts should not receive items per default from above ground buildings
+                if (IsUnderground) return false;
+            }
             Debug.Message(Debug.Flag.Conveyors, "  It can accept items from " +
                 (giver == null ? "that direction." : giver.ToString()));
             if (this.State == WorkingState.Ready)
