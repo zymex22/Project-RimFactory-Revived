@@ -355,7 +355,14 @@ namespace ProjectRimFactory.Storage
 
         private void deregisterDrawItem(Thing item)
         {
-            Map.dynamicDrawManager.DeRegisterDrawable(item);
+            var drawerType = item.def.drawerType;
+            if (drawerType is DrawerType.MapMeshAndRealTime or DrawerType.RealtimeOnly)
+            {
+                Map.dynamicDrawManager.DeRegisterDrawable(item);
+            }
+
+            //we would need to undo that
+           // item.def.drawGUIOverlay = false;
         }
 
         public void HandleMoveItem(Thing item)
