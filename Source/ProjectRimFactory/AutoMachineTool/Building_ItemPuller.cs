@@ -110,7 +110,7 @@ namespace ProjectRimFactory.AutoMachineTool
         protected virtual Thing TargetThing()
         {
             Thing target = null;
-            var allThings = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map).ToArray();
+            var allThings = (this.Position + this.Rotation.Opposite.FacingCell).AllThingsInCellForUse(this.Map,true,true).ToArray();
 
             var AllReserved = this.Map.reservationManager.AllReservedThings().ToHashSet();
 
