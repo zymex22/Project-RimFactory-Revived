@@ -28,7 +28,8 @@ namespace ProjectRimFactory
         /// <returns>The items in cell <paramref name="c"/> for use.</returns>
         /// <param name="c">Cell</param>
         /// <param name="map">Map</param>
-        public static IEnumerable<Thing> AllThingsInCellForUse(this IntVec3 c, Map map, bool allowStorageZones = true)
+        public static IEnumerable<Thing> AllThingsInCellForUse(this IntVec3 c, Map map, bool allowStorageZones = true,
+            bool allowUGEntranceConnector = false, bool allowUGBelts = false)
         {
 
             if (!c.InBounds(map)) yield break;
@@ -41,12 +42,20 @@ namespace ProjectRimFactory
                 {
                     if (holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner)
                     {
-                        switch (t)
+                        if (t is Building_BeltConveyor belt && belt.IsUnderground && !allowUGBelts)
                         {
-                            // If the belt is underground or it's a connector to send items underground, skip it.
-                            case Building_BeltConveyor belt when belt.IsUnderground:
-                            case Building_BeltConveyorUGConnector _:
-                                continue;
+                            // It the target is an Underground Belt & wen don't Explicitly allow that then don't place anything
+                            continue;
+                        } else if (t is Building_BeltConveyorUGConnector connector)
+                        {
+                            if (connector.ToUnderground)
+                            {
+                                if (!allowUGEntranceConnector) {
+                                    continue; // Don't allow Entrance unless specifically allowed
+                                }
+                            }
+                            // Exits should always be allowed
+
                         }
 
                         for (int j = owner.InnerListForReading.Count - 1; j >= 0; j--)
