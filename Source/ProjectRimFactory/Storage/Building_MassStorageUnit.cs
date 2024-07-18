@@ -353,9 +353,17 @@ namespace ProjectRimFactory.Storage
             deregisterDrawItem(item);
         }
 
+        /// <summary>
+        /// Hides Things that get drawn with a RealTime Drawer
+        /// </summary>
+        /// <param name="item"></param>
         private void deregisterDrawItem(Thing item)
         {
-            Map.dynamicDrawManager.DeRegisterDrawable(item);
+            if (item.def.drawerType is DrawerType.MapMeshAndRealTime or DrawerType.RealtimeOnly)
+            {
+                Map.dynamicDrawManager.DeRegisterDrawable(item);
+            }
+
         }
 
         public void HandleMoveItem(Thing item)
