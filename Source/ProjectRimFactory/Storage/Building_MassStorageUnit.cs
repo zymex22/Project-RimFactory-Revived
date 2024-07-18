@@ -247,17 +247,19 @@ namespace ProjectRimFactory.Storage
         {
             items.Clear();
             ItemCounts.Clear();
-
+            var thisPos = Position;
+            var thisMap = Map;
             if (!Spawned) return; // don't want to try getting lists of things when not on a map (see 155)
             foreach (var cell in AllSlotCells())
             {
-                var things = new List<Thing>(cell.GetThingList(Map));
-                for (var i = 0; i < things.Count; i++)
+                var things = new List<Thing>(cell.GetThingList(thisMap));
+                int cnt = things.Count;
+                for (var i = 0; i < cnt; i++)
                 {
                     var item = things[i];
                     if (item.def.category == ThingCategory.Item)
                     {
-                        if (cell != Position)
+                        if (cell != thisPos)
                         {
                             HandleNewItem(item);
                         }
