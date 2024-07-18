@@ -4,6 +4,9 @@ using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
+    /// <summary>
+    /// Notifies Building_MassStorageUnit via Notify_LostThing(t) if a contained Item was moved away
+    /// </summary>
     [HarmonyPatch(typeof(Thing), "set_Position")]
     public static class SetPositionPatch
     {
@@ -11,9 +14,13 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             __state = null;
             IntVec3 pos = __instance.Position;
-            if (__instance.def.category == ThingCategory.Item && pos.IsValid && __instance.Map != null)
+            if (__instance.def.category == ThingCategory.Item && pos.IsValid)
             {
-                __state = pos.GetFirst<Building_MassStorageUnit>(__instance.Map);
+                var map = __instance.Map;
+                if (map != null)
+                {
+                    __state = pos.GetFirst<Building_MassStorageUnit>(map);
+                }
             }
         }
         public static void Postfix(Thing __instance, Building_MassStorageUnit __state)

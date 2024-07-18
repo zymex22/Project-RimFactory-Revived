@@ -56,7 +56,7 @@ namespace ProjectRimFactory.Storage
                 Log.Error($"PRF GetstoredItem @{this.Position} map is null");
                 return null;
             }
-            return WorkPosition.GetFirstItem(Map);
+            return WorkPosition.GetFirstItem(map);
         }
 
         public bool CanGetNewItem => GetstoredItem() == null && (powerComp?.PowerOn ?? false);
