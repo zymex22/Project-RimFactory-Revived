@@ -60,7 +60,7 @@ namespace ProjectRimFactory.Common
 
         private void LoadModSupport()
         {
-            if (ModLister.HasActiveModWithName("RimFridge Updated"))
+            if (ModLister.HasActiveModWithName("RimFridge: Now with Shelves!"))
             {
                 ModSupport_RrimFridge_GetFridgeCache = AccessTools.Method("RimFridge.FridgeCache:GetFridgeCache");
                 ModSupport_RrimFridge_HasFridgeAt = AccessTools.Method("RimFridge.FridgeCache:HasFridgeAt");
