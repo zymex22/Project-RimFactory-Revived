@@ -437,12 +437,14 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 return;
             }
             // GenRecipe handles creating any bonus products
+            if (this.def == PRFDefOf.PRF_Recycler) Patch_Thing_SmeltProducts.RecyclerProducingItems = true;
             IEnumerable<Thing> products = GenRecipe.MakeRecipeProducts(currentBillReport.bill.recipe, buildingPawn, currentBillReport.selected, ProjectSAL_Utilities.CalculateDominantIngredient(currentBillReport.bill.recipe, currentBillReport.selected), this);
             foreach (Thing thing in products)
             {
                 PostProcessRecipeProduct(thing);
                 thingQueue.Add(thing);
             }
+            Patch_Thing_SmeltProducts.RecyclerProducingItems = false;
             for (int i = 0; i < currentBillReport.selected.Count; i++)
             {
                 if (currentBillReport.selected[i] is Corpse c)

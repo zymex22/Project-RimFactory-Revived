@@ -46,6 +46,7 @@ namespace ProjectRimFactory.Common
         public static ThingDef PRF_DroneModule;
         public static ThingDef Column;
         public static ThingDef PRF_MiniDroneColumn;
+        public static ThingDef PRF_Recycler;
 
         public static BackstoryDef ChildSpy47;
         public static BackstoryDef ColonySettler53;
