@@ -121,6 +121,7 @@ namespace ProjectRimFactory.Storage
                 icon = TexUI.RotRightTex,
                 action = () =>
                 {
+                    items.Clear(); // Force a real Refresh
                     RefreshStorage();
                     Messages.Message("PRFReorganize_Message".Translate(), MessageTypeDefOf.NeutralEvent);
                 },
@@ -141,14 +142,25 @@ namespace ProjectRimFactory.Storage
 
         public virtual void RegisterNewItem(Thing newItem)
         {
+            ItemCountsAdded(newItem.def, newItem.stackCount);
             var things = Position.GetThingList(Map);
             for (var i = 0; i < things.Count; i++)
             {
                 var item = things[i];
-                if (item == newItem) continue;
+                if (item == newItem)
+                {
+                    continue;
+                }
+
                 if (item.def.category == ThingCategory.Item && item.CanStackWith(newItem))
+                {
                     item.TryAbsorbStack(newItem, true);
-                if (newItem.Destroyed) break;
+                }
+
+                if (newItem.Destroyed)
+                {
+                    break;
+                }
             }
 
             //Add a new stack of a thing
@@ -157,10 +169,9 @@ namespace ProjectRimFactory.Storage
                 if (!items.Contains(newItem))
                 {
                     items.Add(newItem);
-                    ItemCountsAdded(newItem.def, newItem.stackCount);
                 }
 
-                //What appens if its full?
+                //What happens if its full?
                 if (CanStoreMoreItems) newItem.Position = Position;
                 if (!newItem.Spawned) newItem.SpawnSetup(Map, false);
             }
@@ -245,11 +256,16 @@ namespace ProjectRimFactory.Storage
         //TODO Why do we need to clear Items here?
         public virtual void RefreshStorage()
         {
+            // We certainly need it after Load to fill items initially
+            // But we might not need it afterwards
+            if (items.Count > 0) return;
+            
             items.Clear();
             ItemCounts.Clear();
             var thisPos = Position;
             var thisMap = Map;
             if (!Spawned) return; // don't want to try getting lists of things when not on a map (see 155)
+            
             foreach (var cell in AllSlotCells())
             {
                 var things = new List<Thing>(cell.GetThingList(thisMap));
