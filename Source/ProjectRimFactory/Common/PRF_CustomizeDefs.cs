@@ -116,19 +116,28 @@ namespace ProjectRimFactory.Common
 
                 ArchitectMenu_ClearCache();
 
-                if (ProjectRimFactory_ModComponent.ModSupport_ReserchPal)
-                {
-                    ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
-                }
-                else if (ProjectRimFactory_ModComponent.ModSupport_ReserchPowl)
-                {
-                    ProjectRimFactory_ModComponent.ModSupport_ReserchPowl_ResetLayout.Invoke(null, null);
-                }
+                ModSupportResetLayout();
             }
 
 
 
 
+        }
+
+        private static void ModSupportResetLayout()
+        {
+            if (ProjectRimFactory_ModComponent.ModSupport_ReserchPal)
+            {
+                ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
+            }
+            else if (ProjectRimFactory_ModComponent.ModSupport_ReserchPowl)
+            {
+                ProjectRimFactory_ModComponent.ModSupport_ReserchPowl_ResetLayout.Invoke(null, null);
+            }
+            else if (ProjectRimFactory_ModComponent.ModSupport_ResearchTreeContinued)
+            {
+                ProjectRimFactory_ModComponent.ModSupport_ResearchTreeContinued_ResetLayout.Invoke(null, [true]);
+            }
         }
 
         private static void clearRecipesCache()
@@ -226,14 +235,7 @@ namespace ProjectRimFactory.Common
             }
             if (Current.Game?.researchManager != null) SAL3.ReflectionUtility.ResearchManager_progress.SetValue(Current.Game.researchManager, progress);
 
-            if (ProjectRimFactory_ModComponent.ModSupport_ReserchPal)
-            {
-                ProjectRimFactory_ModComponent.ModSupport_ReserchPal_ResetLayout.Invoke(null, null);
-            }
-            else if (ProjectRimFactory_ModComponent.ModSupport_ReserchPowl)
-            {
-                ProjectRimFactory_ModComponent.ModSupport_ReserchPowl_ResetLayout.Invoke(null, null);
-            }
+            ModSupportResetLayout();
 
         }
 
