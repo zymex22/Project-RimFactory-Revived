@@ -200,6 +200,11 @@ namespace ProjectRimFactory.SAL3.Things
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            
+            // Check for Null Ref issues in Saved or Queued recipes
+            // (That can happen if Mods are Removed mid-Save or some mod makes a breaking change)
+            recipes.RemoveAll(recipeDef => recipeDef is null);
+            quered_recipes.RemoveAll(recipeDef => recipeDef is null);
 
             // Remove existing Mech Bills as the don't work
             // This code can be removed in the future once we are reasonably certain that this was executed on each affected Save
