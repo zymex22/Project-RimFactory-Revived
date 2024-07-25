@@ -50,8 +50,10 @@ namespace ProjectRimFactory.Common
 
         public static System.Reflection.MethodInfo ModSupport_ReserchPal_ResetLayout = null;
         public static System.Reflection.MethodInfo ModSupport_ReserchPowl_ResetLayout = null;
+        public static System.Reflection.MethodInfo ModSupport_ResearchTreeContinued_ResetLayout = null;
         public static bool ModSupport_ReserchPal = false;
         public static bool ModSupport_ReserchPowl = false;
+        public static bool ModSupport_ResearchTreeContinued = false;
 
         public static bool ModSupport_SeedsPlease = false;
         public static bool ModSupport_SeedsPleaseLite = false;
@@ -141,7 +143,20 @@ namespace ProjectRimFactory.Common
                 {
                     Log.Warning("Project Rimfactory - Failed to added Support for ResearchPowl when using Lite Mode");
                 }
+            }else if (ModLister.HasActiveModWithName("Research Tree (Continued)"))
+            {
+                ModSupport_ResearchTreeContinued_ResetLayout = AccessTools.Method("FluffyResearchTree.Tree:Reset");
+                if (ModSupport_ResearchTreeContinued_ResetLayout != null)
+                {
+                    Log.Message("Project Rimfactory - added Support for Research Tree (Continued) when using Lite Mode");
+                    ModSupport_ResearchTreeContinued = true;
+                }
+                else
+                {
+                    Log.Warning("Project Rimfactory - Failed to added Support for Research Tree (Continued) when using Lite Mode");
+                }
             }
+            
             if (ModLister.HasActiveModWithName("[KV] Save Storage, Outfit, Crafting, Drug, & Operation Settings [1.4]"))
             {
                 //Get the Local Transpilers
