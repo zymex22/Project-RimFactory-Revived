@@ -153,6 +153,25 @@ namespace ProjectRimFactory.Common
             }
         }
 
+        private string GetSlotGroupName(ISlotGroupParent slotGroup)
+        {
+            string appendGroup = "";
+            if (slotGroup is IStorageGroupMember storageGroupMember)
+            {
+                if (storageGroupMember.Group != null && storageGroupMember.Group.RenamableLabel != "")
+                {
+                    appendGroup = $" ({storageGroupMember.Group.RenamableLabel})";
+                }
+            }
+            
+            if (slotGroup is IRenameable renameable)
+            {
+                return $"{renameable.RenamableLabel}{appendGroup}";
+            }
+            
+            return $"{slotGroup.SlotYielderLabel()}{appendGroup}";
+        }
+        
         protected override void FillTab()
         {
             Listing_Standard list = new Listing_Standard();
@@ -273,7 +292,7 @@ namespace ProjectRimFactory.Common
                 if (Widgets.ButtonText(rect.RightHalf(), this.Machine.TargetSlotGroup?.parent?.SlotYielderLabel() ?? "PRF.AutoMachineTool.EntierMap".Translate()))
                 {
                     Find.WindowStack.Add(new FloatMenu(groups
-                        .Select(g => new FloatMenuOption(g.parent.SlotYielderLabel(), () => this.Machine.TargetSlotGroup =g))
+                        .Select(g => new FloatMenuOption( GetSlotGroupName(g.parent), () => this.Machine.TargetSlotGroup =g))
                         .ToList()
                         .Head(new FloatMenuOption("PRF.AutoMachineTool.EntierMap".Translate(), () => this.Machine.TargetSlotGroup = null))));
                 }
