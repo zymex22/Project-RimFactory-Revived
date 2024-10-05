@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <SALMessage_NoDataDiskFound>Сначала поместите диск с данными рядом.</SALMessage_NoDataDiskFound>
-  <SearchingForIngredients>Поиск ингридиентов...</SearchingForIngredients>
+  <SearchingForIngredients>Поиск ингредиентов...</SearchingForIngredients>
   <SAL3_BillReport>Текущий счет: {0} (Работы осталось: {1})</SAL3_BillReport>
   <SAL3_Products>Продукты, ожидающие размещения: {0}</SAL3_Products>
   <SALMessage_NoRecipes>Рецепты не найдены.</SALMessage_NoRecipes>
