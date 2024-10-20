@@ -116,6 +116,22 @@ namespace ProjectRimFactory.AutoMachineTool
             /*Log.Message("pre release");
             debugListReservations();
             */
+            // SOS2 Can apparently make the map null ....
+            if (map is null)
+            {
+                Log.Warning("PRF SAL_TargetBench:generalRelease NULL map");
+                if (mySAL is null)
+                {
+                    Log.Error("PRF SAL is NULL, Can't release Reservation. Skipping");
+                    return;
+                }
+                map = mySAL.Map;
+                if (map is null)
+                {
+                    Log.Error("PRF SAL map is also NULL, Can't release Reservation. Skipping");
+                    return;
+                }
+            }
             map.reservationManager.Release(tb, PRFGameComponent.PRF_StaticPawn, PRFGameComponent.PRF_StaticJob);
             //Log.Message("generalRelease for " + (Position + Rotation.FacingCell) );
             //Log.Message("post release");
