@@ -1,6 +1,7 @@
 ﻿using ProjectRimFactory.Common;
 using RimWorld;
 using System.Linq;
+using ProjectRimFactory.Common.HarmonyPatches;
 using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
 
@@ -71,26 +72,27 @@ namespace ProjectRimFactory.AutoMachineTool
         public bool IsLimit(Thing thing)
         {
             if (!productLimitation) return false;
-
-            var targetSG = targetSlotGroup;
-
-            if (targetSG == null)
+            
+            if (targetSlotGroup == null)
             {
                 return this.CountFromMap(thing.def) >= productLimitCount;
             }
+            
+            // Use the faster limitWatcher if Available
+            if (targetSlotGroup.parent is ILimitWatcher limitWatcher)
+            {
+                if (limitWatcher.ItemIsLimit(thing.def,this.countStacks, productLimitCount)) return true;
+            }
             else
             {
-                if (targetSG.parent is ILimitWatcher limitWatcher)
-                {
-                    return (limitWatcher.ItemIsLimit(thing.def,this.countStacks, productLimitCount) || !targetSG.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
-                }
-                else
-                {
-                    return (this.CheckSlotGroup(targetSG, thing.def, productLimitCount) || !targetSG.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)));
-                }
-
-                
+                if (this.CheckSlotGroup(targetSlotGroup, thing.def, productLimitCount)) return true;
             }
+            
+            // Disable Accepts Patch override for this call(s) of IsValidStorageFor
+            PatchStorageUtil.SkippAcceptsPatch = true;
+            bool isValidCheck = !targetSlotGroup.CellsList.Any(c => c.IsValidStorageFor(this.Map, thing)); 
+            PatchStorageUtil.SkippAcceptsPatch = false;
+            return isValidCheck;
 
         }
 
