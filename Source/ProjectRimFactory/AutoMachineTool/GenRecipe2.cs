@@ -145,19 +145,19 @@ namespace ProjectRimFactory.AutoMachineTool
                 QualityCategory qualityCategory = QualityUtility.GenerateQualityCreatedByPawn(level, false);
                 compQuality.SetQuality(qualityCategory, ArtGenerationContext.Colony);
             }
-            CompArt compArt = product.TryGetComp<CompArt>();
+            /*CompArt compArt = product.TryGetComp<CompArt>();
             if (compArt != null)
             {
                 if (compQuality.Quality >= QualityCategory.Excellent)
                 {
-                    /*
+                    
                     TaleRecorder.RecordTale(TaleDefOf.CraftedArt, new object[]
                     {
                         product
                     });
-                    */
+                   
                 }
-            }
+            }*/
             if (precept != null)
             {
                 product.StyleSourcePrecept = precept;
