@@ -35,7 +35,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             __result = false;
             //Check if pawn input is forbidden
-            if ((__instance as IForbidPawnInputItem)?.ForbidPawnInput ?? false)
+            if (!PatchStorageUtil.SkippAcceptsPatch && ((__instance as IForbidPawnInputItem)?.ForbidPawnInput ?? false))
             {
                 //#699 #678
                 //This check is needed to support the use of the Limit function for the IO Ports
@@ -57,7 +57,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             if (___owner is Building_Storage storage)
             {
                 //Check if pawn input is forbidden
-                if ((storage as IForbidPawnInputItem)?.ForbidPawnInput ?? false)
+                if (!PatchStorageUtil.SkippAcceptsPatch && ((storage as IForbidPawnInputItem)?.ForbidPawnInput ?? false))
                 {
                     //#699 #678
                     //This check is needed to support the use of the Limit function for the IO Ports
@@ -152,7 +152,9 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         private static Dictionary<Tuple<Map, IntVec3, Type>, object> cache = new Dictionary<Tuple<Map, IntVec3, Type>, object>();
         private static int lastTick = 0;
         private static Dictionary<Map, PRFMapComponent> mapComps = new Dictionary<Map, PRFMapComponent>();
-
+        public static bool SkippAcceptsPatch = false;
+        
+        
         public static PRFMapComponent GetPRFMapComponent(Map map)
         {
             PRFMapComponent outval = null;
