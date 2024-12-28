@@ -132,7 +132,7 @@ namespace ProjectRimFactory.Common
             Scribe_Values.Look(ref PRF_LiteMode, "PRF_LiteMode", false);
             Scribe_Values.Look(ref PRF_Patch_Reachability_CanReach, "PRF_Patch_Reachability_CanReach", false);
             Scribe_Values.Look(ref PRF_UseFuzzySearch, "PRF_UseFuzzySearch", true);
-            Scribe_Values.Look(ref PRF_PlaceConveyorCable, "PRF_UseFuzzySearch", true);
+            Scribe_Values.Look(ref PRF_PlaceConveyorCable, "PRF_PlaceConveyorCable", true);
             PRF_LiteMode_last = PRF_LiteMode;
         }
 
