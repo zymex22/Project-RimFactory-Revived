@@ -11,6 +11,9 @@
   <PRF_Settings_GeneralOptions_Header>General Options</PRF_Settings_GeneralOptions_Header>
   <PRF_Settings_GeneralOptions_DSU_UseFuzzySearch_ToolTip>Toggle the use of the Fuzzy Search algorithm for the storage item view\nIf Active Fuzzy Search will be used, otherwise it will use exact matches.</PRF_Settings_GeneralOptions_DSU_UseFuzzySearch_ToolTip>
   <PRF_Settings_GeneralOptions_DSU_UseFuzzySearch>Use Fuzzy-Search for the storage item view</PRF_Settings_GeneralOptions_DSU_UseFuzzySearch>
+  
+  <PRF_Settings_GeneralOptions_PlaceConveyorCable_ToolTip>Toggle the automatic placement of a cable when constructing a conveyor belt.</PRF_Settings_GeneralOptions_PlaceConveyorCable_ToolTip>
+  <PRF_Settings_GeneralOptions_PlaceConveyorCable>Auto place cable with conveyor belt</PRF_Settings_GeneralOptions_PlaceConveyorCable>
 
   <PRF.Common.ForbidOnPlacingDefault>Forbid items on placement</PRF.Common.ForbidOnPlacingDefault>
   <PRF.Common.ForbidOnPlacingDefaultDesc>When enabled machine products will be automatically forbidden on placement.</PRF.Common.ForbidOnPlacingDefaultDesc>

@@ -44,11 +44,11 @@ namespace ProjectRimFactory
                                 }
                             }
                         }
-                        if (undergroundCable == null) undergroundCable = ThingDefOf.PowerConduit;
+                        if (undergroundCable == null) undergroundCable = ThingDefOf.HiddenConduit;
                     }
                     return undergroundCable;
                 }
-                return p.transmitter ?? ThingDefOf.PowerConduit;
+                return p.transmitter ?? ThingDefOf.HiddenConduit;
             }
         }
         public override void PostSpawnSetup(bool respawningAfterLoad)
@@ -66,7 +66,7 @@ namespace ProjectRimFactory
                         break;
                     }
                 }
-                if (!isTransmitterHere)
+                if (!isTransmitterHere && Common.ProjectRimFactory_ModSettings.PRF_PlaceConveyorCable)
                 {
                     var conduit = GenSpawn.Spawn(TransmitterDef, parent.Position, parent.Map);
                     conduit.SetFaction(Faction.OfPlayer); // heh; don't forget
@@ -104,7 +104,7 @@ namespace ProjectRimFactory
         {
             this.compClass = typeof(CompTransmitsPower);
         }
-        public ThingDef transmitter = null;  //ThingDefOf.PowerConduit;
+        public ThingDef transmitter = null;  //ThingDefOf.HiddenConduit;
         static public List<string> possibleUndergroundTransmitters;
     }
 }
