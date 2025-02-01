@@ -12,7 +12,7 @@
 
       <li Class="StockGenerator_SingleDef">
         <thingDef>Silver</thingDef>
-        <countRange>3500~10000</countRange>
+        <countRange>2500~10000</countRange>
       </li>
       <li Class="StockGenerator_SingleDef">
         <thingDef>Chemfuel</thingDef>
@@ -149,11 +149,11 @@
         <thingDef>TableRoboticMachining</thingDef>
         <countRange>0~3</countRange>
       </li>
-      <!--  -->
+      <!-- all prf stuff, some excluded for balance -->
       <li Class="StockGenerator_Category">
         <categoryDef>BuildingsAutomation</categoryDef>
-        <thingDefCountRange>10~40</thingDefCountRange>
-        <countRange>0~5</countRange>
+        <thingDefCountRange>5~30</thingDefCountRange>
+        <countRange>0~4</countRange>
         <excludedThingDefs>
           <li>PRF_Conveyor_Simple_I</li>
           <li>PRF_Conveyor_Wall_I</li>
@@ -163,6 +163,22 @@
           <li>PRF_Conveyor_Splitter_I</li>
           <li>PRF_Conveyor_Splitter_UG</li>
           <li>PRF_Conveyor_Splitter_Wall</li>
+          <!-- spacer stuff out too OP -->  
+          <li>PRF_GenericAnimalHarvester_II</li>
+          <li>PRF_TypeTwoAssembler_II</li>
+          <li>PRF_TypeTwoAssembler_III</li>
+          <li>PRF_SelfCookerIII</li>
+          <li>PRF_DroneCultivator_III</li>
+          <li>PRF_Sprinkler_II</li>
+          <li>PRF_MetalRefinery</li>
+          <li>PRF_FurnaceIII</li>
+          <li>PRF_BillTypeMiner_I</li>
+          <li>PRF_DeepQuarry_mkIII</li>
+          <li>PRF_GodlyCrafter</li>
+          <li>PRF_OverclockedAutoAssemblerII</li>
+          <li>PRF_TheArtMachine</li>
+
+
         </excludedThingDefs>
       </li>
       <!-- ======================  ==================== -->

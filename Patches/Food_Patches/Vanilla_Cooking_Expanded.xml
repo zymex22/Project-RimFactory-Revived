@@ -22,11 +22,44 @@
 						<li>VCE_Grill</li>
 					</value>
 				</li> -->
-				<li Class="PatchOperationAdd">					<!-- adding new food types to self cooker -->
+				<li Class="PatchOperationAdd">					<!-- adding new food types to T3 Spacer Cooker  -->
 					<xpath>/Defs/ThingDef[defName="PRF_SelfCookerIII"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/importRecipesFrom</xpath>
 					<value>
 						<li>VCE_DeepFrier</li>
 						<li>VCE_Grill</li>
+						<li>VCE_CondimentPrepTable</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+	
+<!-- Sushi module  -->
+		<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Vanilla Cooking Expanded - Sushi</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations> 
+			<!-- adding recipes to food prepper -->
+				<!-- <li Class="PatchOperationAdd">					
+					<xpath>/Defs/ThingDef[defName="PRF_SelfPrepper"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/importRecipesFrom</xpath>
+					<value>
+						<li>VCE_SoyFermenter</li>
+					</value>
+				</li> -->
+				<!-- <li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_SelfCookerI"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/importRecipesFrom</xpath>
+					<value>
+						<li>VCE_DeepFrier</li>
+						<li>VCE_Grill</li>
+					</value>
+				</li> -->
+				<li Class="PatchOperationAdd">					<!-- adding new food types to T3 Spacer Cooker  -->
+					<xpath>/Defs/ThingDef[defName="PRF_SelfCookerIII"]/modExtensions/li[@Class="ProjectRimFactory.SAL3.Exposables.AssemblerDefModExtension"]/importRecipesFrom</xpath>
+					<value>
+						<li>VCE_SushiPrepTable</li>
 					</value>
 				</li>
 			</operations>

@@ -13,6 +13,9 @@
       <WorkToBuild>100</WorkToBuild>
     </statBases>
     <useHitPoints>True</useHitPoints>
+    <researchPrerequisites>
+      <li>ColoredLights</li>
+    </researchPrerequisites>
     <graphicData>
       <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
       <drawSize>(1,1)</drawSize>      <!-- Scale texture up/down to fit -->
@@ -33,7 +36,7 @@
   <!--======================================= NR Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_WallLight</defName>
-    <label>wall lamp</label>
+    <label>adv. wall lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
     <description>An electrical wall lamp that lights an area. People need light to move and work at full speed.\n\nThese lamps are unlike other wall lamps, multisided and atlased to fit different walls.\nGood for small rooms or other tightly packed spaces.\nYou may change the color if you've researched colored lights.</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
@@ -90,7 +93,7 @@
   <!--======================================= NR Sun Wall Lamps (graphicClass by graphicClass Nobo) ===============================================-->
   <ThingDef ParentName="PRF_MiscBase">
     <defName>PRF_SunWallLight</defName>
-    <label>sun wall lamp</label>
+    <label>adv. sun wall lamp</label>
     <designationCategory>Furniture</designationCategory>    <!--architect menu location-->
     <description>An industrial wall lamp which lights an area brightly enough to grow crops, but consumes a huge amount of power. Automatically turns itself off at night.</description>
     <uiIconPath>Misc/WallLightIcon</uiIconPath>
