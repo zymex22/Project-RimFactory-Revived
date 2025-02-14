@@ -28,49 +28,17 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    // TODO Check if we still need that in 1.5
-    class Patch_Building_Storage_Accepts
+    class Patch_StoreUtility_TryFindBestBetterStoreCellForWorker
     {
-        static bool Prefix(Building_Storage __instance, Thing t, out bool __result)
+        static bool Prefix(Thing t, Pawn carrier, Map map, Faction faction, ISlotGroup slotGroup,
+            bool needAccurateResult, ref IntVec3 closestSlot, ref float closestDistSquared,
+            ref StoragePriority foundPriority)
         {
-            __result = false;
-            //Check if pawn input is forbidden
-            if (!PatchStorageUtil.SkippAcceptsPatch && ((__instance as IForbidPawnInputItem)?.ForbidPawnInput ?? false))
-            {
-                //#699 #678
-                //This check is needed to support the use of the Limit function for the IO Ports
-                if (__instance.Position != t.Position) 
-                {
-                    return false;
-                }
-            }
-            return true;
+            if (slotGroup is not SlotGroup sg) return true;
+            if (sg.parent is not Building_Storage storage) return true;
+            return !((storage as IForbidPawnInputItem)?.ForbidPawnInput ?? false);
         }
-    }
-
-    // 1.5 Stuff
-    class Patch_StorageSettings_AllowedToAccept
-    {
-        static bool Prefix(IStoreSettingsParent ___owner, Thing t, out bool __result)
-        {
-            __result = false;
-            if (___owner is Building_Storage storage)
-            {
-                //Check if pawn input is forbidden
-                if (!PatchStorageUtil.SkippAcceptsPatch && ((storage as IForbidPawnInputItem)?.ForbidPawnInput ?? false))
-                {
-                    //#699 #678
-                    //This check is needed to support the use of the Limit function for the IO Ports
-                    if (storage.Position != t.Position)
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            
-            return true;
-        }
+        
     }
 
     class Patch_FloatMenuMakerMap_ChoicesAtFor
