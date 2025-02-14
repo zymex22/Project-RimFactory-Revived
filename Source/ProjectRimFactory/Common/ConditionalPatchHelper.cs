@@ -3,6 +3,7 @@ using ProjectRimFactory.Storage;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -82,13 +83,9 @@ namespace ProjectRimFactory.Common
           AccessTools.Method(typeof(RimWorld.FloatMenuMakerMap), "ChoicesAtFor", new Type[] { typeof(UnityEngine.Vector3), typeof(Pawn), typeof(bool) }),
           AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_FloatMenuMakerMap_ChoicesAtFor), "Prefix")
           );
-        public static TogglePatch Patch_Building_Storage_Accepts = new TogglePatch(
-         AccessTools.Method(typeof(RimWorld.Building_Storage), "Accepts", new Type[] { typeof(Verse.Thing) }),
-         AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_Building_Storage_Accepts), "Prefix")
-         );
-        public static TogglePatch Patch_StorageSettings_AllowedToAccept = new TogglePatch(
-         AccessTools.Method(typeof(RimWorld.StorageSettings), "AllowedToAccept", new Type[] { typeof(Verse.Thing) }),
-         AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_StorageSettings_AllowedToAccept), "Prefix")
+        public static TogglePatch Patch_StoreUtility_TryFindBestBetterStoreCellForWorker = new TogglePatch(
+         AccessTools.Method(typeof(RimWorld.StoreUtility), "TryFindBestBetterStoreCellForWorker"),
+         AccessTools.Method(typeof(ProjectRimFactory.Common.HarmonyPatches.Patch_StoreUtility_TryFindBestBetterStoreCellForWorker), "Prefix")
          );
         public static TogglePatch Patch_ForbidUtility_IsForbidden = new TogglePatch(
          AccessTools.Method(typeof(RimWorld.ForbidUtility), "IsForbidden", new Type[] { typeof(Thing), typeof(Pawn) }),
@@ -115,9 +112,8 @@ namespace ProjectRimFactory.Common
             Patch_ThingWithComps_DrawGUIOverlay.PatchHandler(state);
             Patch_Thing_DrawGUIOverlay.PatchHandler(state);
             Patch_FloatMenuMakerMap_ChoicesAtFor.PatchHandler(state);
-            Patch_Building_Storage_Accepts.PatchHandler(state);
             Patch_ForbidUtility_IsForbidden.PatchHandler(state);
-            Patch_StorageSettings_AllowedToAccept.PatchHandler(state);
+            Patch_StoreUtility_TryFindBestBetterStoreCellForWorker.PatchHandler(state);
         }
 
         public static void Register(Building_MassStorageUnit building)
