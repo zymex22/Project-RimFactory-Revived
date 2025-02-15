@@ -438,42 +438,56 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
             // GenRecipe handles creating any bonus products
             if (this.def == PRFDefOf.PRF_Recycler) Patch_Thing_SmeltProducts.RecyclerProducingItems = true;
+            Patch_CompFoodPoisonable_Notify_RecipeProduced.AssemblerRefrence = this;
             IEnumerable<Thing> products = GenRecipe.MakeRecipeProducts(currentBillReport.bill.recipe, buildingPawn, currentBillReport.selected, ProjectSAL_Utilities.CalculateDominantIngredient(currentBillReport.bill.recipe, currentBillReport.selected), this);
             foreach (Thing thing in products)
             {
                 PostProcessRecipeProduct(thing);
                 thingQueue.Add(thing);
             }
+            Patch_CompFoodPoisonable_Notify_RecipeProduced.AssemblerRefrence = null;
             Patch_Thing_SmeltProducts.RecyclerProducingItems = false;
+            
+            // Consume the Input
             for (int i = 0; i < currentBillReport.selected.Count; i++)
             {
-                if (currentBillReport.selected[i] is Corpse c)
-                {
-                    if (c.InnerPawn?.apparel != null)
-                    {
-                        List<Apparel> apparel = new List<Apparel>(c.InnerPawn.apparel.WornApparel);
-                        for (int j = 0; j < apparel.Count; j++)
-                        {
-                            thingQueue.Add(apparel[j]);
-                            c.InnerPawn.apparel.Remove(apparel[j]);
-                        }
-                    }
-                    if (c.InnerPawn.inventory?.innerContainer != null)
-                    {
-                        List<Thing> things = c.InnerPawn.inventory.innerContainer.ToList();
-                        for (int j = 0; j < things.Count; j++)
-                        {
-                            thingQueue.Add(things[j]);
-                            c.InnerPawn.inventory.innerContainer.Remove(things[j]);
-                        }
-                    }
-
-                }
-                currentBillReport.bill.recipe.Worker.ConsumeIngredient(currentBillReport.selected[i], currentBillReport.bill.recipe, Map);
-
+                var selected = currentBillReport.selected[i];
+                TryGetCorpseItems(selected);
+                currentBillReport.bill.recipe.Worker.ConsumeIngredient(selected, currentBillReport.bill.recipe, Map);
             }
 
             thingQueue.AddRange(from Thing t in currentBillReport.selected where t.Spawned select t);
+        }
+        
+        /// <summary>
+        /// Checks if <paramref name="selected"/> is a <see cref="Corpse"/>
+        /// If so adds all attached Things to the <see cref="thingQueue"/>
+        /// </summary>
+        /// <param name="selected">a processed Item</param>
+        private void TryGetCorpseItems(Thing selected)
+        {
+            if (selected is not Corpse c) return;
+            var innerPawn = c.InnerPawn;
+            if (innerPawn is null) return;
+                    
+            if (innerPawn.apparel != null)
+            {
+                List<Apparel> apparel = new List<Apparel>(innerPawn.apparel.WornApparel);
+                for (int j = 0; j < apparel.Count; j++)
+                {
+                    thingQueue.Add(apparel[j]);
+                    innerPawn.apparel.Remove(apparel[j]);
+                }
+            }
+            if (innerPawn.inventory?.innerContainer != null)
+            {
+                List<Thing> things = innerPawn.inventory.innerContainer.ToList();
+                for (int j = 0; j < things.Count; j++)
+                {
+                    thingQueue.Add(things[j]);
+                    innerPawn.inventory.innerContainer.Remove(things[j]);
+                }
+            }
         }
 
         public override string GetInspectString()
