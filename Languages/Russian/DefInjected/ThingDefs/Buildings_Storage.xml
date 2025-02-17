@@ -10,7 +10,7 @@
   <IndustrialStorageUnit.label>Промышленное хранилище (устаревшее)</IndustrialStorageUnit.label>
   <IndustrialStorageUnit.description>Это здание будет устаревшим в релизе. Пожалуйста, используйте грузовую платформу.</IndustrialStorageUnit.description>
   
-  <PRF_DigitalStorageUnit_I.label>Грузавая платформа</PRF_DigitalStorageUnit_I.label>
+  <PRF_DigitalStorageUnit_I.label>Грузовая платформа</PRF_DigitalStorageUnit_I.label>
   <PRF_DigitalStorageUnit_I.description>Хранит бесконечное количество предметов. Потребляет 10 Вт энергии за каждый стак, который он держит. Когда ваша колония теряет силу, предметы будут сохранены внутри, но здание перестанет тянуть предметы в центральную ячейку.</PRF_DigitalStorageUnit_I.description>
 
 </LanguageData>
