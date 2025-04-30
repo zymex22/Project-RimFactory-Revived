@@ -31,22 +31,13 @@ namespace ProjectRimFactory.Storage
 
         public override StorageIOMode IOMode
         {
-            get
-            {
-                return StorageIOMode.Output;
-            }
+            get => StorageIOMode.Output;
             set
             {
             }
         }
 
-        public override bool ForbidPawnInput
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool ForbidPawnInput => true;
 
         private Thing GetstoredItem()
         {

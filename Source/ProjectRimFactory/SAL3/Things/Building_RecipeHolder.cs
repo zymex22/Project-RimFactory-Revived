@@ -26,15 +26,8 @@ namespace ProjectRimFactory.SAL3.Things
 
         public List<RecipeDef> Quered_Recipes
         {
-            get
-            {
-
-                return quered_recipes;
-            }
-            set
-            {
-                quered_recipes = value;
-            }
+            get => quered_recipes;
+            set => quered_recipes = value;
         }
 
         public List<RecipeDef> Learnable_Recipes => GetAllProvidedRecipeDefs().ToList();

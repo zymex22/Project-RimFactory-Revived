@@ -12,7 +12,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public IPowerSupplyMachine RangePowerSupplyMachine => powerWorkSetting;
 
-        protected virtual int? SkillLevel { get => null; }
+        protected virtual int? SkillLevel => null;
 
         [Unsaved]
         protected bool setInitialMinPower = true;

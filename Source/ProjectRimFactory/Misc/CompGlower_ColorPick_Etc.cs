@@ -91,13 +91,8 @@ namespace ProjectRimFactory.Misc
 
     public class CompGlower_ColorPick : CompGlower
     {
-        public new CompProperties_Glower_ColorPick Props
-        {
-            get
-            {
-                return (props as CompProperties_Glower_ColorPick);
-            }
-        }
+        public new CompProperties_Glower_ColorPick Props => (props as CompProperties_Glower_ColorPick);
+
         public override void PostExposeData()
         {
             base.PostExposeData();

@@ -11,13 +11,7 @@ namespace ProjectRimFactory.AutoMachineTool
     class Graphic_Selectable : Graphic_Collection
     {
 
-        public override Material MatSingle
-        {
-            get
-            {
-                return this.subGraphics[0].MatSingle;
-            }
-        }
+        public override Material MatSingle => this.subGraphics[0].MatSingle;
 
         public Graphic Get(string path)
         {
@@ -36,13 +30,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private Dictionary<string, Graphic> pathDic = new Dictionary<string, Graphic>();
 
-        public override bool ShouldDrawRotated
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool ShouldDrawRotated => true;
 
         public override void Init(GraphicRequest req)
         {

@@ -443,15 +443,9 @@ namespace ProjectRimFactory.AutoMachineTool
             }
         }
 
-        public T Value
-        {
-            get { return value; }
-        }
+        public T Value => value;
 
-        public bool HasValue
-        {
-            get { return hasValue; }
-        }
+        public bool HasValue => hasValue;
 
         public Option()
         {

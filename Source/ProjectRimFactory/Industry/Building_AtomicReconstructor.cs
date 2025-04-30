@@ -15,13 +15,7 @@ namespace ProjectRimFactory.Industry
         CompRefuelable refuelableComp;
         CompOutputAdjustable outputComp;
 
-        public int PaperclipConsumptionFactor
-        {
-            get
-            {
-                return speedFactor * speedFactor;
-            }
-        }
+        public int PaperclipConsumptionFactor => speedFactor * speedFactor;
 
         public int TotalWorkRequired
         {
@@ -53,28 +47,13 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        public string ProgressToStringPercent
-        {
-            get
-            {
-                return ThingToGenerate == null ? 0f.ToStringPercent() : (progressTicks / (float)TotalWorkRequired).ToStringPercent();
-            }
-        }
+        public string ProgressToStringPercent => ThingToGenerate == null ? 0f.ToStringPercent() : (progressTicks / (float)TotalWorkRequired).ToStringPercent();
 
-        public string EstimatedProductionTimeLeftPeriod
-        {
-            get
-            {
-                return ((TotalWorkRequired - progressTicks) / speedFactor).ToStringTicksToPeriod();
-            }
-        }
+        public string EstimatedProductionTimeLeftPeriod => ((TotalWorkRequired - progressTicks) / speedFactor).ToStringTicksToPeriod();
 
         public ThingDef ThingToGenerate
         {
-            get
-            {
-                return thingToGenerate;
-            }
+            get => thingToGenerate;
             set
             {
                 thingToGenerate = value;

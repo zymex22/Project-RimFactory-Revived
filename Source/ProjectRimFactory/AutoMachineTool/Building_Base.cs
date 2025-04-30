@@ -65,7 +65,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected WorkingState State
         {
-            get { return this.state; }
+            get => this.state;
             set
             {
                 if (this.state != value)
@@ -99,14 +99,9 @@ namespace ProjectRimFactory.AutoMachineTool
         ///   other source also saves the item - a spawned item is saved
         ///   by the map.
         /// </summary>
-        protected virtual LookMode WorkingLookMode
-        {
-            get => LookMode.Reference;
-        }
-        protected virtual LookMode ProductsLookMode
-        {
-            get => LookMode.Deep;
-        }
+        protected virtual LookMode WorkingLookMode => LookMode.Reference;
+
+        protected virtual LookMode ProductsLookMode => LookMode.Deep;
 
         public override void ExposeData()
         {

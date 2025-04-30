@@ -22,13 +22,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return IsWall(c, parent.Map);
         }
 
-        public override bool ShouldDrawRotated
-        {
-            get
-            {
-                return this.data == null || this.data.drawRotated;
-            }
-        }
+        public override bool ShouldDrawRotated => this.data == null || this.data.drawRotated;
 
         private bool IsWall(IntVec3 pos, Map map)
         {

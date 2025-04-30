@@ -39,7 +39,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return false;
         }
 
-        public bool ToUnderground { get => this.modExtension_Conveyor.toUnderground; }
+        public bool ToUnderground => this.modExtension_Conveyor.toUnderground;
 
         public override bool CanSendToLevel(ConveyorLevel level)
         {

@@ -24,13 +24,8 @@ namespace ProjectRimFactory.CultivatorTools
             }
             return list;
         }
-        public List<IntVec3> CellsInRange
-        {
-            get
-            {
-                return selectedCellsCache.Get();
-            }
-        }
+        public List<IntVec3> CellsInRange => selectedCellsCache.Get();
+
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();

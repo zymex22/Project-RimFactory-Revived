@@ -35,14 +35,8 @@ namespace ProjectRimFactory.Storage
         //IRenameable
         public string RenamableLabel
         {
-            get
-            {
-                return uniqueName ?? LabelCapNoCount;
-            }
-            set
-            {
-                uniqueName = value;
-            }
+            get => uniqueName ?? LabelCapNoCount;
+            set => uniqueName = value;
         }
         //IRenameable
         public string BaseLabel => LabelCapNoCount;
@@ -64,10 +58,7 @@ namespace ProjectRimFactory.Storage
 
         public virtual StorageIOMode IOMode
         {
-            get
-            {
-                return mode;
-            }
+            get => mode;
             set
             {
                 if (mode == value) return;
@@ -78,10 +69,7 @@ namespace ProjectRimFactory.Storage
 
         public ILinkableStorageParent BoundStorageUnit
         {
-            get
-            {
-                return boundStorageUnit;
-            }
+            get => boundStorageUnit;
             set
             {
                 boundStorageUnit?.DeregisterPort(this);
@@ -101,10 +89,7 @@ namespace ProjectRimFactory.Storage
                 }
                 return outputSettings;
             }
-            set
-            {
-                outputSettings = value;
-            }
+            set => outputSettings = value;
         }
 
         //
@@ -450,10 +435,7 @@ namespace ProjectRimFactory.Storage
 
         public override StorageIOMode IOMode
         {
-            get
-            {
-                return mode;
-            }
+            get => mode;
             set
             {
                 if (mode == value) return;

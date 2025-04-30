@@ -61,7 +61,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private bool OutputSides => this.def.GetModExtension<ModExtension_Puller>()?.outputSides ?? false;
 
-        protected override LookMode WorkingLookMode { get => LookMode.Deep; } // despawned
+        protected override LookMode WorkingLookMode => LookMode.Deep; // despawned
         /// <summary>
         /// Whether the puller grabs a single item or the entire stack
         /// </summary>

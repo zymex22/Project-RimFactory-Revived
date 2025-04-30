@@ -59,13 +59,8 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return tmpG;
         }
-        public override Material MatSingle
-        {
-            get
-            {
-                return NS.MatSingle;
-            }
-        }
+        public override Material MatSingle => NS.MatSingle;
+
         public override Material MatSingleFor(Thing thing)
         {
             if (thing.Rotation == Rot4.North || thing.Rotation == Rot4.South)

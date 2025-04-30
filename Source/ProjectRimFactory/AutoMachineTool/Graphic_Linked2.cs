@@ -23,13 +23,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public Graphic subGraphic;
 
-        public override Material MatSingle
-        {
-            get
-            {
-                return this.subMats[(int)LinkDirections.None];
-            }
-        }
+        public override Material MatSingle => this.subMats[(int)LinkDirections.None];
 
         public override Material MatSingleFor(Thing thing)
         {

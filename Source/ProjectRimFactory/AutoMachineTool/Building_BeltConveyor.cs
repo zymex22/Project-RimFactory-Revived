@@ -101,10 +101,11 @@ namespace ProjectRimFactory.AutoMachineTool
 
         /************* Conveyors IBeltConveyor ***********/
         public bool IsStuck => this.stuck;
-        public bool IsUnderground { get => this.modExtension_Conveyor?.underground ?? false; }
+        public bool IsUnderground => this.modExtension_Conveyor?.underground ?? false;
+
         public virtual bool IsEndOfLine
         {
-            get { return isEndOfLine; }
+            get => isEndOfLine;
             set
             {
                 if (isEndOfLine && value == false)
@@ -422,13 +423,8 @@ namespace ProjectRimFactory.AutoMachineTool
         /// <summary>
         /// External use only - default draw height for carried items
         /// </summary>
-        public float CarriedItemDrawHeight
-        {
-            get
-            {
-                return this.TrueCenter().y + defaultCarriedItemDrawHeight;
-            }
-        }
+        public float CarriedItemDrawHeight => this.TrueCenter().y + defaultCarriedItemDrawHeight;
+
         public override string GetInspectString()
         {
             if (IsEndOfLine)
@@ -526,10 +522,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         // We (LWM) are mean and don't allow conveyors to change the "Obey Storage Filters"
         //   setting.  Maybe if zymex is really nice we can change this....
-        public override PRFBSetting SettingsOptions
-        {
-            get => base.SettingsOptions & ~PRFBSetting.optionObeysStorageFilters;
-        }
+        public override PRFBSetting SettingsOptions => base.SettingsOptions & ~PRFBSetting.optionObeysStorageFilters;
 
         /******** AutoMachineTool logic *********/
         protected override bool TryStartWorking(out Thing target, out float workAmount)
