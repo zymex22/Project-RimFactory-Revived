@@ -29,7 +29,7 @@ namespace ProjectRimFactory.SAL3.Tools
                 {
                     return stuffs.Where((Thing x) => x.def.IsStuff).RandomElementByWeight((Thing x) => x.stackCount);
                 }
-                return stuffs.RandomElementByWeight((Thing x) => x.stackCount); ;
+                return stuffs.RandomElementByWeight((Thing x) => x.stackCount);
             }
             //Return steel instead of Null to prevent null ref in some cases
             return ThingMaker.MakeThing(ThingDefOf.Steel);

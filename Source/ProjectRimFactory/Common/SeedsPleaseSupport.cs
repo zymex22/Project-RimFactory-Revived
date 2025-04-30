@@ -24,7 +24,7 @@ namespace ProjectRimFactory.Common
                 return tryPlantNew(plantDef, SeedInputArea, map);
             }else if (ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite)
             {
-                return tryPlantNew(plantDef, SeedInputArea, map); ;
+                return tryPlantNew(plantDef, SeedInputArea, map);
             }
 
             //No Seeds Mod Active

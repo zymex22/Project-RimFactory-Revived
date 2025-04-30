@@ -62,7 +62,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public IEnumerable<IntVec3> GetAllTargetCells()
         {
             this.CacheTargetCells();
-            return powerWorkSetting.GetRangeCells()?.ToHashSet() ?? new HashSet<IntVec3>(); ;
+            return powerWorkSetting.GetRangeCells()?.ToHashSet() ?? new HashSet<IntVec3>();
         }
 
         private void CacheTargetCells()
