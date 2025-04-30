@@ -1,11 +1,6 @@
 using HarmonyLib;
 using ProjectRimFactory.SAL3.Things.Assemblers;
 using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Reflection.Emit; // for OpCodes in Harmony Transpiler
-using System.Runtime.CompilerServices;
 using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches

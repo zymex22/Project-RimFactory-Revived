@@ -1,6 +1,4 @@
 ﻿using HarmonyLib;
-using ProjectRimFactory.Common.HarmonyPatches;
-using ProjectRimFactory.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;

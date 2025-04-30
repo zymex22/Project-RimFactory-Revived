@@ -1,5 +1,4 @@
-﻿using ProjectRimFactory.SAL3.Things.Assemblers;
-using ProjectRimFactory.SAL3.Tools;
+﻿using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
 using System;
 using System.Collections.Generic;

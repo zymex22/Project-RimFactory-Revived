@@ -1,6 +1,5 @@
 ﻿using ProjectRimFactory.AutoMachineTool;
 using ProjectRimFactory.Common;
-using ProjectRimFactory.SAL3.Tools;
 using ProjectRimFactory.Storage;
 using ProjectRimFactory.Storage.UI;
 using RimWorld;
@@ -8,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
-using Verse.Noise;
 
 namespace ProjectRimFactory.SAL3.Things
 {

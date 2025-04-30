@@ -1,5 +1,4 @@
-﻿using RimWorld;
-using Verse;
+﻿using Verse;
 namespace ProjectRimFactory.CultivatorTools
 {
     public class CultivatorDefModExtension : DefModExtension, ProjectRimFactory.Common.IXMLThingDescription

@@ -2,7 +2,6 @@
 using ProjectRimFactory.SAL3.Things.Assemblers;
 using RimWorld;
 using System.Linq;
-using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
