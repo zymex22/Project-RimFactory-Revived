@@ -9,20 +9,9 @@ namespace ProjectRimFactory.Drones
 {
     public abstract class Building_WorkGiverDroneStation : Building_DroneStation
     {
-        public virtual IEnumerable<WorkTypeDef> WorkTypes
-        {
-            get
-            {
-                return extension.workTypes;
-            }
-        }
-        public virtual Dictionary<WorkTypeDef, bool> WorkSettings_dict
-        {
-            get
-            {
-                return WorkSettings;
-            }
-        }
+        public virtual IEnumerable<WorkTypeDef> WorkTypes => extension.workTypes;
+
+        public virtual Dictionary<WorkTypeDef, bool> WorkSettings_dict => WorkSettings;
 
 
         Pawn_WorkSettings workSettings = null;

@@ -39,13 +39,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         private static int lastDrawFrame;
 
-        public static bool ShouldDraw
-        {
-            get
-            {
-                return lastDrawFrame + 1 >= Time.frameCount;
-            }
-        }
+        public static bool ShouldDraw => lastDrawFrame + 1 >= Time.frameCount;
 
         public static void DrawOverlayThisFrame()
         {

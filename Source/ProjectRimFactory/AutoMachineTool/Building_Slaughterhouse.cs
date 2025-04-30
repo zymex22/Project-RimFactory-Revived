@@ -12,7 +12,7 @@ namespace ProjectRimFactory.AutoMachineTool
     public class Building_Slaughterhouse : Building_BaseRange<Pawn>, ISlaughterhouse
     {
 
-        public Dictionary<ThingDef, SlaughterSettings> Settings { get => this.slaughterSettings; }
+        public Dictionary<ThingDef, SlaughterSettings> Settings => this.slaughterSettings;
 
         private Dictionary<ThingDef, SlaughterSettings> slaughterSettings = new Dictionary<ThingDef, SlaughterSettings>();
 

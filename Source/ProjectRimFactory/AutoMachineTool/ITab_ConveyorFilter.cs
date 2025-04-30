@@ -27,7 +27,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private string description;
 
-        private Building_BeltSplitter Splitter { get => (Building_BeltSplitter)this.SelThing; }
+        private Building_BeltSplitter Splitter => (Building_BeltSplitter)this.SelThing;
         private Rot4? selectedDir;
 
         public override bool IsVisible => true; //TODO: do this.Conveyor.Filters.Count > 1;?

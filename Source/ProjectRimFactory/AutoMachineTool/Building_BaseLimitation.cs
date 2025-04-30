@@ -14,7 +14,7 @@ namespace ProjectRimFactory.AutoMachineTool
         private SlotGroup targetSlotGroup = null;
         public SlotGroup TargetSlotGroup { get => targetSlotGroup; set => targetSlotGroup = value; }
         public bool CountStacks { get => this.countStacks; set => this.countStacks = value; }
-        public virtual bool ProductLimitationDisable { get => false; }
+        public virtual bool ProductLimitationDisable => false;
 
         private int productLimitCount = 100;
         private bool productLimitation = false;

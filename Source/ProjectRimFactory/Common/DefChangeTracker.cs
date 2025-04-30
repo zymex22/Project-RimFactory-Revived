@@ -17,7 +17,7 @@ namespace ProjectRimFactory.Common
     {
         private static Dictionary<string, object> defaultDefValues = new Dictionary<string, object>();
 
-        public bool HasAnyDefaultValues { get { return defaultDefValues.Count > 0; } }
+        public bool HasAnyDefaultValues => defaultDefValues.Count > 0;
 
         public void AddDefaultValue(string defName, string keylet, object defaultValue)
         {

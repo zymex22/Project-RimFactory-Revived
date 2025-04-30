@@ -32,7 +32,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return extension_Skills?.GetExtendedSkillLevel(def, typeof(Building_AutoMachineTool)) ?? this.SkillLevel ?? 0;
         }
 
-        protected override int? SkillLevel { get { return this.def.GetModExtension<ModExtension_Tier>()?.skillLevel; } }
+        protected override int? SkillLevel => this.def.GetModExtension<ModExtension_Tier>()?.skillLevel;
 
         public override bool Glowable => false;
 

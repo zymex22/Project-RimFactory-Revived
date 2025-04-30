@@ -116,10 +116,7 @@ namespace ProjectRimFactory.Storage.UI
 
         private Action postClose;
 
-        public override Vector2 InitialSize
-        {
-            get { return new Vector2(500f, 250f); }
-        }
+        public override Vector2 InitialSize => new(500f, 250f);
 
         private bool validator(bool data)
         {

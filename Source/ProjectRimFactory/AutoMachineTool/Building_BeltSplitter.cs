@@ -36,10 +36,9 @@ namespace ProjectRimFactory.AutoMachineTool
             //   But splitters are smart, they can figure stuff out:
             this.obeysStorageFilters = true;
         }
-        public override PRFBSetting SettingsOptions
-        { // allow player to change this at playtime:
-            get => base.SettingsOptions | PRFBSetting.optionObeysStorageFilters;
-        }
+        public override PRFBSetting SettingsOptions =>
+            // allow player to change this at playtime:
+            base.SettingsOptions | PRFBSetting.optionObeysStorageFilters;
 
         protected override Rot4 OutputDirection => dest;
         public override IEnumerable<Rot4> ActiveOutputDirections

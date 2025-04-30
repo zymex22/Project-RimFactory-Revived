@@ -94,7 +94,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         ISlaughterhouse slaughterhouse => this.SelThing as ISlaughterhouse;
 
-        public Dictionary<ThingDef, SlaughterSettings> Settings { get => slaughterhouse.Settings; }
+        public Dictionary<ThingDef, SlaughterSettings> Settings => slaughterhouse.Settings;
 
         public ITab_Slaughterhouse()
         {

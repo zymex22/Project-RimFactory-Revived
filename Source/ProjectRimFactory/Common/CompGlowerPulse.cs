@@ -46,10 +46,7 @@ namespace ProjectRimFactory.Common
 
         public new bool Glows
         {
-            get
-            {
-                return this.glows;
-            }
+            get => this.glows;
 
             set
             {

@@ -37,13 +37,7 @@ namespace ProjectRimFactory.SAL3.UI
 
         public static readonly FieldInfo PasteSizeField = typeof(ITab_Bills).GetField("PasteSize", BindingFlags.NonPublic | BindingFlags.Static);
 
-        protected IBillTab SelBuilding
-        {
-            get
-            {
-                return (IBillTab)SelThing;
-            }
-        }
+        protected IBillTab SelBuilding => (IBillTab)SelThing;
 
         public ITab_SAL3Bills()
         {

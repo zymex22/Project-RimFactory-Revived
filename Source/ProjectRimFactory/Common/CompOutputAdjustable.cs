@@ -13,13 +13,8 @@ namespace ProjectRimFactory.Common
         public CompProperties_CompOutputAdjustable Props => (CompProperties_CompOutputAdjustable)this.props;
 
         List<IntVec3> possibleOutputs = new List<IntVec3>();
-        public IntVec3 CurrentCell
-        {
-            get
-            {
-                return possibleOutputs[index %= possibleOutputs.Count];
-            }
-        }
+        public IntVec3 CurrentCell => possibleOutputs[index %= possibleOutputs.Count];
+
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);

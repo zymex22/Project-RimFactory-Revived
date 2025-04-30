@@ -8,13 +8,7 @@ namespace ProjectRimFactory.Industry
 {
     public class Building_PaperclipFactory : Building_SimpleAssembler
     {
-        public float PaperclipsPerKilogramModifier
-        {
-            get
-            {
-                return 0.25f;
-            }
-        }
+        public float PaperclipsPerKilogramModifier => 0.25f;
 
         protected override void PostProcessRecipeProduct(Thing thing)
         {

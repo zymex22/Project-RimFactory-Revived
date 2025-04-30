@@ -13,13 +13,7 @@ namespace ProjectRimFactory.Drones
             //Load the initial Drone Count. This must not happen on each load
             refuelableComp.Refuel(extension.GetDronesOnSpawn(refuelableComp));
         }
-        public override int DronesLeft
-        {
-            get
-            {
-                return Mathf.RoundToInt(refuelableComp.Fuel) - spawnedDrones.Count;
-            }
-        }
+        public override int DronesLeft => Mathf.RoundToInt(refuelableComp.Fuel) - spawnedDrones.Count;
 
         Dictionary<string, int> IAdditionalPowerConsumption.AdditionalPowerConsumption => new Dictionary<string, int> { { "Drone Count", (int)(refuelableComp?.Fuel ?? 0) * 10 } };
 

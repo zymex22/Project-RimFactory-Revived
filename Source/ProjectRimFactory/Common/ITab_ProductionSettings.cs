@@ -83,19 +83,19 @@ namespace ProjectRimFactory.Common
 
         bool ShowAreaSelectButton => supplyMachineHolder != null;
 
-        private IProductLimitation Machine { get => this.SelThing as IProductLimitation; }
+        private IProductLimitation Machine => this.SelThing as IProductLimitation;
 
 
-        private IPowerSupplyMachineHolder supplyMachineHolder { get => this.SelThing as IPowerSupplyMachineHolder; }
+        private IPowerSupplyMachineHolder supplyMachineHolder => this.SelThing as IPowerSupplyMachineHolder;
 
         // private CompProperties_PowerWorkSetting compProperties_PowerWorkSetting { get => this.SelThing.GetComp<CompProperties_PowerWorkSetting>(); }
 
 
-        private IPRF_SettingsContentLink pRF_SettingsContent { get => this.SelThing as IPRF_SettingsContentLink; }
+        private IPRF_SettingsContentLink pRF_SettingsContent => this.SelThing as IPRF_SettingsContentLink;
 
-        private IPRF_Building pRF_Building { get => this.SelThing as IPRF_Building; }
+        private IPRF_Building pRF_Building => this.SelThing as IPRF_Building;
 
-        private PRF_Building PRFB { get => this.SelThing as PRF_Building; }
+        private PRF_Building PRFB => this.SelThing as PRF_Building;
 
         private ThingWithComps selThingWithComps => this.SelThing as ThingWithComps;
 

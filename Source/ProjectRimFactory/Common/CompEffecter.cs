@@ -67,10 +67,7 @@ namespace ProjectRimFactory.Common
 
         public bool Enable
         {
-            get
-            {
-                return this.enable;
-            }
+            get => this.enable;
             set
             {
                 if (this.enable != value)

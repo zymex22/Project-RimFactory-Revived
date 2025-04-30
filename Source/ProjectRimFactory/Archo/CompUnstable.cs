@@ -8,13 +8,8 @@ namespace ProjectRimFactory.Archo
     public class CompUnstable : ThingComp
     {
         public int ticksLeft;
-        public CompProperties_Unstable Props
-        {
-            get
-            {
-                return (CompProperties_Unstable)props;
-            }
-        }
+        public CompProperties_Unstable Props => (CompProperties_Unstable)props;
+
         public override void CompTick()
         {
             base.CompTick();

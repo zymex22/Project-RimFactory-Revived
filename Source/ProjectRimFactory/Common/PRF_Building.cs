@@ -13,10 +13,7 @@ namespace ProjectRimFactory.Common
         public virtual bool AcceptsThing(Thing newThing, IPRF_Building giver) => false;
         // If something else wants to take an item from us
         public abstract Thing GetThingBy(Func<Thing, bool> optionalValidator = null);
-        public virtual IEnumerable<Thing> AvailableThings
-        {
-            get => Enumerable.Empty<Thing>();
-        }
+        public virtual IEnumerable<Thing> AvailableThings => Enumerable.Empty<Thing>();
 
         public virtual void EffectOnPlaceThing(Thing t) { }
         public virtual void EffectOnAcceptThing(Thing t) { }
@@ -44,11 +41,9 @@ namespace ProjectRimFactory.Common
             get => outputToEntireStockpile;
             set => outputToEntireStockpile = value;
         }
-        public virtual PRFBSetting SettingsOptions
-        {
-            get => PRFBSetting.optionObeysStorageFilters |
-                PRFBSetting.optionOutputToEntireStockpie;
-        }
+        public virtual PRFBSetting SettingsOptions =>
+            PRFBSetting.optionObeysStorageFilters |
+            PRFBSetting.optionOutputToEntireStockpie;
 
         protected bool outputToEntireStockpile = false;
         protected bool obeysStorageFilters = true;

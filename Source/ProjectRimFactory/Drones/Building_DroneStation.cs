@@ -151,13 +151,7 @@ namespace ProjectRimFactory.Drones
 
         private const int defaultSkillLevel = 20;
 
-        public int GetdefaultSkillLevel
-        {
-            get
-            {
-                return defaultSkillLevel;
-            }
-        }
+        public int GetdefaultSkillLevel => defaultSkillLevel;
 
         protected CompRefuelable refuelableComp;
 
@@ -165,14 +159,8 @@ namespace ProjectRimFactory.Drones
 
         public List<SkillRecord> GetDroneSkillsRecord
         {
-            get
-            {
-                return droneSkillsRecord;
-            }
-            set
-            {
-                droneSkillsRecord = value;
-            }
+            get => droneSkillsRecord;
+            set => droneSkillsRecord = value;
         }
 
         //Return the Range depending on the Active Defenition
@@ -282,14 +270,8 @@ namespace ProjectRimFactory.Drones
 
         public Dictionary<WorkTypeDef, bool> GetWorkSettings
         {
-            get
-            {
-                return WorkSettings;
-            }
-            set
-            {
-                WorkSettings = value;
-            }
+            get => WorkSettings;
+            set => WorkSettings = value;
         }
 
         public List<SkillRecord> DroneSeetings_skillDefs => droneSkillsRecord;

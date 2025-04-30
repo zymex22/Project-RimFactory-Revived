@@ -110,10 +110,7 @@ namespace ProjectRimFactory.SAL3.Things
                 }
                 return outputSettings;
             }
-            set
-            {
-                outputSettings = value;
-            }
+            set => outputSettings = value;
         }
 
 

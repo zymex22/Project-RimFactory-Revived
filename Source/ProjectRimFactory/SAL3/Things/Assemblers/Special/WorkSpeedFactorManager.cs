@@ -14,10 +14,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
         float learningRateCached = WorkSpeedFactorManager.LearningRateCachedDefault;
         public float LearningRate
         {
-            get
-            {
-                return learningRateCached;
-            }
+            get => learningRateCached;
             set
             {
                 UpdateFactorCache();
@@ -27,10 +24,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
         public int DeltaTicks => Find.TickManager.TicksAbs - lastTick;
         public float FactorFinal
         {
-            get
-            {
-                return factorCached * Mathf.Pow(2, -(DeltaTicks * LearningRate));
-            }
+            get => factorCached * Mathf.Pow(2, -(DeltaTicks * LearningRate));
             set
             {
                 factorCached = value;
@@ -66,10 +60,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
         float learningRateCached = LearningRateCachedDefault;
         public virtual float LearningRate
         {
-            get
-            {
-                return learningRateCached;
-            }
+            get => learningRateCached;
             set
             {
                 foreach (RecipeDef recipe in factors.Keys)

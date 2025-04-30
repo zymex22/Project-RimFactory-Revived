@@ -56,14 +56,8 @@ namespace ProjectRimFactory.Storage
         //IRenameable
         public string RenamableLabel
         {
-            get
-            {
-                return uniqueName ?? LabelCapNoCount;
-            }
-            set
-            {
-                uniqueName = value;
-            }
+            get => uniqueName ?? LabelCapNoCount;
+            set => uniqueName = value;
         }
         //IRenameable
         public string  BaseLabel => LabelCapNoCount;

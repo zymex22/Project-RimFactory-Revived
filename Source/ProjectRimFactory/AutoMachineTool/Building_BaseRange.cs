@@ -22,7 +22,7 @@ namespace ProjectRimFactory.AutoMachineTool
         // public override int MinPowerForRange => this.RangeExtension.minPower;
         // public override int MaxPowerForRange => this.RangeExtension.maxPower;
 
-        public override bool Glowable { get => false; }
+        public override bool Glowable => false;
 
         private bool glow = false;
         public override bool Glow

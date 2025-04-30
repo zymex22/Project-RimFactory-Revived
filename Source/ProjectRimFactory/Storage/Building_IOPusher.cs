@@ -8,15 +8,7 @@ namespace ProjectRimFactory.Storage
     {
 
 
-        public override IntVec3 WorkPosition
-        {
-            get
-            {
-                return this.Position + this.Rotation.FacingCell;
-            }
-
-        }
-
+        public override IntVec3 WorkPosition => this.Position + this.Rotation.FacingCell;
 
 
         public override StorageIOMode IOMode { get => StorageIOMode.Output; set => _ = value; }

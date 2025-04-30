@@ -12,7 +12,8 @@ namespace ProjectRimFactory.Drones
 
         private int dronesLeft;
 
-        public override int DronesLeft { get => dronesLeft - spawnedDrones.Count; }
+        public override int DronesLeft => dronesLeft - spawnedDrones.Count;
+
         public override void Notify_DroneLost()
         {
             dronesLeft--;

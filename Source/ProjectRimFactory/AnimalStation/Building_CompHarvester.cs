@@ -14,13 +14,7 @@ namespace ProjectRimFactory.AnimalStation
         public static readonly PropertyInfo ResourceDef = typeof(CompHasGatherableBodyResource).GetProperty("ResourceDef", BindingFlags.NonPublic | BindingFlags.Instance);
         public static readonly FieldInfo Fullness = typeof(CompHasGatherableBodyResource).GetField("fullness", BindingFlags.NonPublic | BindingFlags.Instance);
 
-        public IEnumerable<IntVec3> ScannerCells
-        {
-            get
-            {
-                return this.GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenAdj.OccupiedRect(this).ExpandedBy(1).Cells;
-            }
-        }
+        public IEnumerable<IntVec3> ScannerCells => this.GetComp<CompPowerWorkSetting>()?.GetRangeCells() ?? GenAdj.OccupiedRect(this).ExpandedBy(1).Cells;
 
         public IPowerSupplyMachine RangePowerSupplyMachine => this.GetComp<CompPowerWorkSetting>();
 

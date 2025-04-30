@@ -21,7 +21,7 @@ namespace ProjectRimFactory.Industry
     /// </summary>
     public class Building_DeepQuarry : Building, IXMLThingDescription
     {
-        public float GetProduceMtbHours { get { return def.GetModExtension<DeepQuarryDefModExtension>().TickCount; } }
+        public float GetProduceMtbHours => def.GetModExtension<DeepQuarryDefModExtension>().TickCount;
         static IEnumerable<ThingDef> cachedPossibleRockDefCandidates;
         protected int productionTime = 0; // number of ticks this has been running since last production check
         public CompFlickable flick;
