@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using Verse;
-using static ProjectRimFactory.AutoMachineTool.Ops;
 
 namespace ProjectRimFactory
 {

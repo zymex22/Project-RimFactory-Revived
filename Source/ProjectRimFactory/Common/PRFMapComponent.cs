@@ -1,6 +1,5 @@
 ﻿using ProjectRimFactory.AutoMachineTool;
 using System.Collections.Generic;
-using System.Linq;
 using Verse;
 
 namespace ProjectRimFactory.Common

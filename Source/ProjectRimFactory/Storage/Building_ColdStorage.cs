@@ -1,5 +1,4 @@
-﻿using ProjectRimFactory.Common;
-using ProjectRimFactory.Common.HarmonyPatches;
+﻿using ProjectRimFactory.Common.HarmonyPatches;
 using ProjectRimFactory.Storage.Editables;
 using ProjectRimFactory.Storage.UI;
 using RimWorld;

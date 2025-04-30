@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using ProjectRimFactory.SAL3.Things.Assemblers;
 using ProjectRimFactory.SAL3.UI;
 using RimWorld;
 using System;

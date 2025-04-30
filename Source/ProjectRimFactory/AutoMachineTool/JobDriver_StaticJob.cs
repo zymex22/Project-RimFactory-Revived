@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using RimWorld;
+﻿using System.Collections.Generic;
 using Verse.AI;
 
 namespace ProjectRimFactory.AutoMachineTool
