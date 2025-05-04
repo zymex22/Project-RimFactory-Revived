@@ -10,32 +10,32 @@
 				<li Class="PatchOperationAdd">
 					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkIII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
 					<value>
-						<li>ChunkAndesite</li>
-						<li>ChunkAnorthosite</li>
-						<li>ChunkBasalt</li>
-						<li>ChunkBlueschist</li>
-						<li>ChunkChalk</li>
-						<li>ChunkCharnockite</li>
-						<li>ChunkCreoleMarble</li>
-						<li>ChunkDacite</li>
-						<li>ChunkDunite</li>
-						<li>ChunkEmperadordark</li>
-						<li>ChunkEtowahMarble</li>
-						<li>ChunkGabbro</li>
-						<li>ChunkGreenSchist</li>
-						<li>ChunkJaspillite</li>
-						<li>ChunkLepidolite</li>
-						<li>ChunkLherzolite</li>
-						<li>ChunkLignite</li>
-						<li>ChunkMigmatite</li>
-						<li>ChunkMonzonite</li>
-						<li>ChunkObsidian</li>
-						<li>ChunkRhyolite</li>
-						<li>ChunkScoria</li>
-						<li>ChunkSerpentinite</li>
-						<li>ChunkSiltstone</li>
-						<li>ChunkSovite</li>
-						<li>ChunkThometzekite</li>
+						<li>ChunkKura_Andesite</li>
+						<li>ChunkKura_Anorthosite</li>
+						<li>ChunkKura_Basalt</li>
+						<li>ChunkKura_Blueschist</li>
+						<li>ChunkKura_Chalk</li>
+						<li>ChunkKura_Charnockite</li>
+						<li>ChunkKura_CreoleMarble</li>
+						<li>ChunkKura_Dacite</li>
+						<li>ChunkKura_Dunite</li>
+						<li>ChunkKura_Emperadordark</li>
+						<li>ChunkKura_EtowahMarble</li>
+						<li>ChunkKura_Gabbro</li>
+						<li>ChunkKura_GreenSchist</li>
+						<li>ChunkKura_Jaspillite</li>
+						<li>ChunkKura_Lepidolite</li>
+						<li>ChunkKura_Lherzolite</li>
+						<li>ChunkKura_Lignite</li>
+						<li>ChunkKura_Migmatite</li>
+						<li>ChunkKura_Monzonite</li>
+						<li>ChunkKura_Obsidian</li>
+						<li>ChunkKura_Rhyolite</li>
+						<li>ChunkKura_Scoria</li>
+						<li>ChunkKura_Serpentinite</li>
+						<li>ChunkKura_Siltstone</li>
+						<li>ChunkKura_Sovite</li>
+						<li>ChunkKura_Thometzekite</li>
 					</value>
 				</li>
 				<!-- Define new recipes for excavating rocks from the mod -->
@@ -48,7 +48,7 @@
 							<description>Mining andesite.</description>
 							<jobString>Mining andesite.</jobString>
 							<products>
-								<ChunkAndesite>1</ChunkAndesite>
+								<ChunkKura_Andesite>1</ChunkKura_Andesite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -57,7 +57,7 @@
 							<description>Mining anorthosite.</description>
 							<jobString>Mining anorthosite.</jobString>
 							<products>
-								<ChunkAnorthosite>1</ChunkAnorthosite>
+								<ChunkKura_Anorthosite>1</ChunkKura_Anorthosite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -66,7 +66,7 @@
 							<description>Mining basalt.</description>
 							<jobString>Mining basalt.</jobString>
 							<products>
-								<ChunkBasalt>1</ChunkBasalt>
+								<ChunkKura_Basalt>1</ChunkKura_Basalt>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -75,7 +75,7 @@
 							<description>Mining blue schist.</description>
 							<jobString>Mining blue schist.</jobString>
 							<products>
-								<ChunkBlueschist>1</ChunkBlueschist>
+								<ChunkKura_Blueschist>1</ChunkKura_Blueschist>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -84,7 +84,7 @@
 							<description>Mining chalk.</description>
 							<jobString>Mining chalk.</jobString>
 							<products>
-								<ChunkChalk>1</ChunkChalk>
+								<ChunkKura_Chalk>1</ChunkKura_Chalk>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -93,7 +93,7 @@
 							<description>Mining charnockite.</description>
 							<jobString>Mining charnockite.</jobString>
 							<products>
-								<ChunkCharnockite>1</ChunkCharnockite>
+								<ChunkKura_Charnockite>1</ChunkKura_Charnockite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -102,7 +102,7 @@
 							<description>Mining creole marble.</description>
 							<jobString>Mining creole marble.</jobString>
 							<products>
-								<ChunkCreoleMarble>1</ChunkCreoleMarble>
+								<ChunkKura_CreoleMarble>1</ChunkKura_CreoleMarble>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -111,7 +111,7 @@
 							<description>Mining dacite.</description>
 							<jobString>Mining dacite.</jobString>
 							<products>
-								<ChunkDacite>1</ChunkDacite>
+								<ChunkKura_Dacite>1</ChunkKura_Dacite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -120,7 +120,7 @@
 							<description>Mining dunite.</description>
 							<jobString>Mining dunite.</jobString>
 							<products>
-								<ChunkDunite>1</ChunkDunite>
+								<ChunkKura_Dunite>1</ChunkKura_Dunite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -129,7 +129,7 @@
 							<description>Mining emperador dark.</description>
 							<jobString>Mining emperador dark.</jobString>
 							<products>
-								<ChunkEmperadordark>1</ChunkEmperadordark>
+								<ChunkKura_Emperadordark>1</ChunkKura_Emperadordark>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -138,7 +138,7 @@
 							<description>Mining etowah marble.</description>
 							<jobString>Mining etowah marble.</jobString>
 							<products>
-								<ChunkEtowahMarble>1</ChunkEtowahMarble>
+								<ChunkKura_EtowahMarble>1</ChunkKura_EtowahMarble>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -147,7 +147,7 @@
 							<description>Mining gabbro.</description>
 							<jobString>Mining gabbro.</jobString>
 							<products>
-								<ChunkGabbro>1</ChunkGabbro>
+								<ChunkKura_Gabbro>1</ChunkKura_Gabbro>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -156,7 +156,7 @@
 							<description>Mining green schist.</description>
 							<jobString>Mining green schist.</jobString>
 							<products>
-								<ChunkGreenSchist>1</ChunkGreenSchist>
+								<ChunkKura_GreenSchist>1</ChunkKura_GreenSchist>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -165,7 +165,7 @@
 							<description>Mining jaspillite.</description>
 							<jobString>Mining jaspillite.</jobString>
 							<products>
-								<ChunkJaspillite>1</ChunkJaspillite>
+								<ChunkKura_Jaspillite>1</ChunkKura_Jaspillite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -174,7 +174,7 @@
 							<description>Mining lepidolite.</description>
 							<jobString>Mining lepidolite.</jobString>
 							<products>
-								<ChunkLepidolite>1</ChunkLepidolite>
+								<ChunkKura_Lepidolite>1</ChunkKura_Lepidolite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -183,7 +183,7 @@
 							<description>Mining lherzolite.</description>
 							<jobString>Mining lherzolite.</jobString>
 							<products>
-								<ChunkLherzolite>1</ChunkLherzolite>
+								<ChunkKura_Lherzolite>1</ChunkKura_Lherzolite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -192,7 +192,7 @@
 							<description>Mining lignite.</description>
 							<jobString>Mining lignite.</jobString>
 							<products>
-								<ChunkLignite>1</ChunkLignite>
+								<ChunkKura_Lignite>1</ChunkKura_Lignite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -201,7 +201,7 @@
 							<description>Mining migmatite.</description>
 							<jobString>Mining migmatite.</jobString>
 							<products>
-								<ChunkMigmatite>1</ChunkMigmatite>
+								<ChunkKura_Migmatite>1</ChunkKura_Migmatite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -210,7 +210,7 @@
 							<description>Mining monzonite.</description>
 							<jobString>Mining monzonite.</jobString>
 							<products>
-								<ChunkMonzonite>1</ChunkMonzonite>
+								<ChunkKura_Monzonite>1</ChunkKura_Monzonite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -219,7 +219,7 @@
 							<description>Mining obsidian.</description>
 							<jobString>Mining obsidian.</jobString>
 							<products>
-								<ChunkObsidian>1</ChunkObsidian>
+								<ChunkKura_Obsidian>1</ChunkKura_Obsidian>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -228,7 +228,7 @@
 							<description>Mining rhyolite.</description>
 							<jobString>Mining rhyolite.</jobString>
 							<products>
-								<ChunkRhyolite>1</ChunkRhyolite>
+								<ChunkKura_Rhyolite>1</ChunkKura_Rhyolite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -237,7 +237,7 @@
 							<description>Mining scoria.</description>
 							<jobString>Mining scoria.</jobString>
 							<products>
-								<ChunkScoria>1</ChunkScoria>
+								<ChunkKura_Scoria>1</ChunkKura_Scoria>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -246,7 +246,7 @@
 							<description>Mining serpentinite.</description>
 							<jobString>Mining serpentinite.</jobString>
 							<products>
-								<ChunkSerpentinite>1</ChunkSerpentinite>
+								<ChunkKura_Serpentinite>1</ChunkKura_Serpentinite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -255,7 +255,7 @@
 							<description>Mining siltstone.</description>
 							<jobString>Mining siltstone.</jobString>
 							<products>
-								<ChunkSiltstone>1</ChunkSiltstone>
+								<ChunkKura_Siltstone>1</ChunkKura_Siltstone>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -264,7 +264,7 @@
 							<description>Mining sovite.</description>
 							<jobString>Mining sovite.</jobString>
 							<products>
-								<ChunkSovite>1</ChunkSovite>
+								<ChunkKura_Sovite>1</ChunkKura_Sovite>
 							</products>
 						</RecipeDef>
 						<RecipeDef ParentName="PRF_MiningWork">
@@ -273,7 +273,7 @@
 							<description>Mining thometzekite.</description>
 							<jobString>Mining thometzekite.</jobString>
 							<products>
-								<ChunkThometzekite>1</ChunkThometzekite>
+								<ChunkKura_Thometzekite>1</ChunkKura_Thometzekite>
 							</products>
 						</RecipeDef>
 					</value>
