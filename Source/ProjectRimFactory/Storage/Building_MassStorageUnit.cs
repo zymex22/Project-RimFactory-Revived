@@ -67,7 +67,11 @@ namespace ProjectRimFactory.Storage
         public override void Notify_ReceivedThing(Thing newItem)
         {
             base.Notify_ReceivedThing(newItem);
-            if (newItem.Position != Position) HandleNewItem(newItem);
+            if (newItem.Position != Position)
+            {
+                HandleNewItem(newItem);
+            }
+
             RefreshStorage();
         }
 
@@ -255,7 +259,7 @@ namespace ProjectRimFactory.Storage
             if (items.Count > 0) return;
             
             items.Clear();
-            ItemCounts.Clear();
+            itemCounts.Clear();
             var thisPos = Position;
             var thisMap = Map;
             if (!Spawned) return; // don't want to try getting lists of things when not on a map (see 155)
@@ -358,7 +362,12 @@ namespace ProjectRimFactory.Storage
         {
             return CapacityAt(thing, cell, map, out _);
         }
-
+        
+        /// <summary>
+        /// Calls <see cref="RegisterNewItem"/> And <see cref="deregisterDrawItem"/>
+        /// for the Item.
+        /// </summary>
+        /// <param name="item"></param>
         public void HandleNewItem(Thing item)
         {
             RegisterNewItem(item);
@@ -395,31 +404,30 @@ namespace ProjectRimFactory.Storage
 
         void ItemCountsRemoved(ThingDef def , int cnt)
         {
-            if(ItemCounts.TryGetValue(def, out var count))
+            if(itemCounts.TryGetValue(def, out var count))
             {
                 if (cnt > count)
                 {
                     Log.Error($"ItemCountsRemoved attempted to remove {cnt}/{count} Items of {def}");
-                    ItemCounts[def] = 0;
+                    itemCounts[def] = 0;
                 }
-                ItemCounts[def] -= cnt;
-
+                itemCounts[def] -= cnt;
             }
             else
             {
                 Log.Error($"ItemCountsRemoved attempted to remove nonexistent def {def}");
             }
-
         }
-        void ItemCountsAdded(ThingDef def , int cnt)
+        
+        public void ItemCountsAdded(ThingDef def , int cnt)
         {
-            if (!ItemCounts.TryAdd(def, cnt))
+            if (!itemCounts.TryAdd(def, cnt))
             {
-                ItemCounts[def] += cnt;
+                itemCounts[def] += cnt;
             }
         }
 
-        readonly Dictionary<ThingDef, int> ItemCounts = new();
+        readonly Dictionary<ThingDef, int> itemCounts = new();
 
         public bool ItemIsLimit(ThingDef thing,bool CntStacks, int limit)
         {
@@ -429,7 +437,7 @@ namespace ProjectRimFactory.Storage
             }
 
             int cnt = 0;
-            ItemCounts.TryGetValue(thing, out cnt);
+            itemCounts.TryGetValue(thing, out cnt);
             if (CntStacks)
             {
                 cnt = Mathf.CeilToInt(((float)cnt) / thing.stackLimit);
