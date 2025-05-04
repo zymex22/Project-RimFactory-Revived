@@ -57,6 +57,17 @@ namespace ProjectRimFactory.Common
         public static bool ModSupport_SeedsPleaseLite = false;
 
         public static bool ModSupport_VEF_DualCropExtension = false;
+        
+        private static MethodInfo ModSupport_SOS2_MoveShipFlagGetter = null;
+        public static bool ModSupport_SOS2_MoveShip
+        {
+            get
+            {
+                if (ModSupport_SOS2_MoveShipFlagGetter is null) return false;
+                return (bool)ModSupport_SOS2_MoveShipFlagGetter.Invoke(null, new object[] { });
+            }
+        }
+
 
         private void LoadModSupport()
         {
@@ -252,6 +263,22 @@ namespace ProjectRimFactory.Common
                 }
                 
             }
+            if (ModLister.HasActiveModWithName("Save Our Ship 2"))
+            {
+                try
+                {
+                    var shipInteriorMod2 = Type.GetType("SaveOurShip2.ShipInteriorMod2, ShipsHaveInsides", true);
+                    ModSupport_SOS2_MoveShipFlagGetter = shipInteriorMod2.GetMethod("get_MoveShipFlag", BindingFlags.Public | BindingFlags.Static);
+                    Log.Message("Project Rimfactory - Added Support for Save Our Ship 2");
+                }
+                catch (Exception e)
+                {
+                    Log.Warning("Project Rimfactory - ailed to add Support for Save Our Ship 2");
+                    Log.Error(e.Message);
+                }
+                
+            }
+
 
 
         }

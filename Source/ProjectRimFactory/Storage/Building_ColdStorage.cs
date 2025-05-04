@@ -5,6 +5,7 @@ using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ProjectRimFactory.Common;
 using UnityEngine;
 using Verse;
 
@@ -183,14 +184,20 @@ namespace ProjectRimFactory.Storage
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            var thingsToSplurge = items;
-            for (var i = 0; i < thingsToSplurge.Count; i++)
-                if (thingsToSplurge[i].def.category == ThingCategory.Item)
+            if (!ProjectRimFactory_ModComponent.ModSupport_SOS2_MoveShip)
+            {
+                var thingsToSplurge = items;
+                for (var i = 0; i < thingsToSplurge.Count; i++)
                 {
-                    //thingsToSplurge[i].DeSpawn();
-                    GenPlace.TryPlaceThing(thingsToSplurge[i], Position, Map, ThingPlaceMode.Near);
+                    if (thingsToSplurge[i].def.category == ThingCategory.Item)
+                    {
+                        GenPlace.TryPlaceThing(thingsToSplurge[i], Position, Map, ThingPlaceMode.Near);
+                    }
                 }
-            PatchStorageUtil.GetPRFMapComponent(Map).DeRegisterColdStorageBuilding(this);
+
+                PatchStorageUtil.GetPRFMapComponent(Map).DeRegisterColdStorageBuilding(this); 
+            }
+            
             base.DeSpawn(mode);
         }
 
