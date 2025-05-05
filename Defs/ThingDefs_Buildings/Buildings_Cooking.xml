@@ -367,6 +367,7 @@
     <size>(1,1)</size>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <fillPercent>1.0</fillPercent>
+    <blockWeather>true</blockWeather>
     <pathCost>60</pathCost>
     <uiIconScale>0.6</uiIconScale>
     <statBases>
