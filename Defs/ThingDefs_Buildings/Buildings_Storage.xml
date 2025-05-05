@@ -663,6 +663,7 @@
     <thingClass>ProjectRimFactory.Storage.Building_ItemSlide</thingClass>
     <label>item chute</label>
     <description>This belt chute/hopper is used for pawns or drones to fill a facing belt without the need for a stockpile and a puller. Basically, it's a small stockpile that automatically pushes onto a belt.</description>
+    <fillPercent>0.5</fillPercent>
     <graphicData>
       <texPath>Storage/ItemSlide</texPath>
       <graphicClass>Graphic_Multi</graphicClass>

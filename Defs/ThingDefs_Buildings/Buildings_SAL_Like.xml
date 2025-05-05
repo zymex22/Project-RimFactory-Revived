@@ -32,7 +32,7 @@
       <Mass>70</Mass>
     </statBases>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
-    <fillPercent>1</fillPercent>
+    <fillPercent>0.8</fillPercent>
     <comps>
       <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
         <SupportDiagonal>true</SupportDiagonal>
