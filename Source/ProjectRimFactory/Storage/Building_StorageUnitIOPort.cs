@@ -309,14 +309,14 @@ namespace ProjectRimFactory.Storage
                             }
                         }
                     }
-                    //Transfre a item back if it is either too few or disallowed
-                    if (currentItem != null && (!settings.AllowedToAccept(currentItem) || !OutputSettings.SatisfiesMin(currentItem.stackCount)) && boundStorageUnit.GetSettings.AllowedToAccept(currentItem))
+                    // Transfer a item back if it is either too few or disallowed
+                    if (currentItem != null && !OutputSettings.useMax &&  (!settings.AllowedToAccept(currentItem) || !OutputSettings.SatisfiesMin(currentItem.stackCount)) && boundStorageUnit.GetSettings.AllowedToAccept(currentItem))
                     {
                         currentItem.SetForbidden(false, false);
                         boundStorageUnit.HandleNewItem(currentItem);
                     }
-                    //Transfer the diffrence back if it is too much
-                    if (currentItem != null && (!OutputSettings.SatisfiesMax(currentItem.stackCount, currentItem.def.stackLimit) && boundStorageUnit.GetSettings.AllowedToAccept(currentItem)))
+                    // Transfer the difference back if it is too much
+                    if (currentItem != null && OutputSettings.useMax && (!OutputSettings.SatisfiesMax(currentItem.stackCount, currentItem.def.stackLimit) && boundStorageUnit.GetSettings.AllowedToAccept(currentItem)))
                     {
                         int splitCount = -OutputSettings.CountNeededToReachMax(currentItem.stackCount, currentItem.def.stackLimit);
                         if (splitCount > 0)
