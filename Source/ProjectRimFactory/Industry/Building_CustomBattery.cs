@@ -37,6 +37,7 @@ namespace ProjectRimFactory.Industry
         protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             if (ticksToExplode > 0)
             {
                 if (wickSustainer == null)

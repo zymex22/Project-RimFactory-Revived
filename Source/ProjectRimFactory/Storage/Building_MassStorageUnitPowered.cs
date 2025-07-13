@@ -71,6 +71,7 @@ namespace ProjectRimFactory.Storage
         protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             if (this.IsHashIntervalTick(60))
             {
                 UpdatePowerConsumption();

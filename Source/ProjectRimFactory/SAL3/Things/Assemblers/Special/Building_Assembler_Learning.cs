@@ -56,6 +56,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
         protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             if (currentBillReport != null && this.IsHashIntervalTick(60) && this.Active)
             {
                 if (modExtension_LearningAssembler != null && MaxSpeed <= manager.GetFactorFor(currentBillReport.bill.recipe))

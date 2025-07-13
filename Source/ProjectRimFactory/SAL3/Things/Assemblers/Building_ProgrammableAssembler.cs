@@ -313,6 +313,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             if (this.IsHashIntervalTick(10) && Active)
             {
                 if (thingQueue.Count > 0 &&

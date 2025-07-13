@@ -196,6 +196,7 @@ namespace ProjectRimFactory.SAL3.Things
         protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             if (Find.TickManager.TicksGame % 35 == 0 && GetComp<CompPowerTrader>().PowerOn)
             {
                 foreach (var element in ThingsToSelect)

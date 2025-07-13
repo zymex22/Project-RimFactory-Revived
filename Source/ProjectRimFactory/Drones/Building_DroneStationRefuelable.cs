@@ -33,6 +33,7 @@ namespace ProjectRimFactory.Drones
         protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
 
             if (this.IsHashIntervalTick(60))
             {

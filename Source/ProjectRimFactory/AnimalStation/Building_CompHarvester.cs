@@ -23,6 +23,7 @@ namespace ProjectRimFactory.AnimalStation
         public override void TickRare()
         {
             base.TickRare();
+            if (!Spawned) return;
             if (!GetComp<CompPowerTrader>().PowerOn) return;
             foreach (Pawn p in (from c in ScannerCells
                                 from p in c.GetThingList(Map).OfType<Pawn>()

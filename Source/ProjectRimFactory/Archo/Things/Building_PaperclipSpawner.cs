@@ -25,6 +25,7 @@ namespace ProjectRimFactory.Archo.Things
 
         protected override void Tick()
         {
+            if (!Spawned) return;
             if (this.IsHashIntervalTick(10) && powerComp.PowerOn)
             {
                 workDone++;

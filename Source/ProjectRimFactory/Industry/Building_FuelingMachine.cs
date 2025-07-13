@@ -13,11 +13,13 @@ namespace ProjectRimFactory.Industry
         protected override void Tick()
         { // in case you *really* want to use Tick
             base.Tick();
+            if (!Spawned) return;
             if (this.IsHashIntervalTick(10)) Refuel();
         }
         public override void TickRare()
         { // prefer to use TickRare
             base.TickRare();
+            if (!Spawned) return;
             Refuel();
         }
 

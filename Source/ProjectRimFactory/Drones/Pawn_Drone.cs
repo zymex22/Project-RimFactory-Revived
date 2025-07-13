@@ -68,6 +68,7 @@ namespace ProjectRimFactory.Drones
 
             //JobTrackerTick is the biggest / only issue. its insanly high for some reason
             base.Tick();
+            if (!Spawned) return;
             if (Downed)
             {
                 Kill(null);
@@ -85,6 +86,7 @@ namespace ProjectRimFactory.Drones
         public override void TickLong()
         {
             base.TickLong();
+            if (!Spawned) return;
             station.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings, true);
         }
 

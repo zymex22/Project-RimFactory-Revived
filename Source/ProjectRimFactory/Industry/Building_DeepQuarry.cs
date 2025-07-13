@@ -140,16 +140,19 @@ namespace ProjectRimFactory.Industry
         protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             HandelTick(1, false); // CompRefuelable burns fuel on Tick() without extra work
         }
         public override void TickRare()
         {
             base.TickRare();
+            if (!Spawned) return;
             HandelTick(250, true);
         }
         public override void TickLong()
         {
             base.TickLong();
+            if (!Spawned) return;
             HandelTick(2000, true);
         }
 

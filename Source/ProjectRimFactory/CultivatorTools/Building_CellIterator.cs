@@ -53,6 +53,7 @@ namespace ProjectRimFactory.CultivatorTools
         protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             if (Find.TickManager.TicksGame % TickRate == 0 && Powered && Fueled)
                 DoTickerWork();
         }

@@ -79,6 +79,7 @@ namespace ProjectRimFactory.Industry
         protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             if (powerComp.PowerOn)
             {
                 if (ThingToGenerate != null)
