@@ -15,14 +15,14 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     /// This prevents UI Clutter 
     /// and also improves performance compared to vanilla 1.4 without this Patch
     /// </summary>
-   // [HarmonyPatch]
+    [HarmonyPatch]
     class Patch_Building_Storage_GetGizmos
     {
         //The target method is found using the custom logic defined here
         static MethodBase TargetMethod()
         {
             var predicateClass = typeof(Building_Storage).GetNestedTypes(HarmonyLib.AccessTools.all)
-               .FirstOrDefault(t => t.FullName.Contains("d__52"));
+               .FirstOrDefault(t => t.FullName.Contains("d__54"));
             if (predicateClass == null)
             {
                 Log.Error("PRF Harmony Error - predicateClass == null for Patch_Building_Storage_GetGizmos.TargetMethod()");
