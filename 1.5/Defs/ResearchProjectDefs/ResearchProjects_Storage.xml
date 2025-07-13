@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <!--============================================== Storage Research base ============================================-->
+  <ResearchProjectDef Name="PRF_StorageResearch" Abstract="True">
+    <tab>Automation</tab>
+    <researchViewY>1.7</researchViewY>
+  </ResearchProjectDef>
+
+  <!--============================================== Crates ============================================-->
+  <ResearchProjectDef ParentName="PRF_StorageResearch">
+    <defName>PRF_Crates</defName>
+    <label>wooden stockpile crates</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>750</baseCost>
+    <researchViewX>3</researchViewX>
+    <description>Rudimentary storage boxes allow many stacks of items to stay organized and space-efficient.</description>
+    <prerequisites>
+      <li>Smithing</li>
+    </prerequisites>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_StorageResearch">
+    <defName>PRF_SteelCrates</defName>
+    <label>steel stockpile crates</label>
+    <techLevel>Industrial</techLevel>
+    <baseCost>1500</baseCost>
+    <researchViewX>6</researchViewX>
+    <description>Stronger materials allow for improved storage space.</description>
+    <prerequisites>
+      <li>PRF_Crates</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+  </ResearchProjectDef>
+
+  <!--============================================== IO Storage ============================================-->
+  <ResearchProjectDef ParentName="PRF_StorageResearch">
+    <defName>PRF_StorageIO</defName>
+    <label>Thornsworth holographic storage</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>4000</baseCost>
+    <researchViewX>9</researchViewX>
+    <researchViewY>1.9</researchViewY>
+    <description>The holographam artist Thornsworth produced masterpieces for many years despite gradually developing blindness. When holographic data storage was perfected, he was instrumental in developing holographic item storage.\nAllows items to be stored in a digital storage unit, which can transmit and receive wirelessly to any I/O port on the map.\n\nYou will be missed, Thornsworth.</description>
+    <prerequisites>
+      <li>PRF_SteelCrates</li>
+      <li>PRF_CoreTierIII</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef ParentName="PRF_StorageResearch">
+    <defName>PRF_StorageIO_II</defName>
+    <label>improved wireless storage</label>
+    <techLevel>Spacer</techLevel>
+    <baseCost>1000</baseCost>
+    <researchViewX>9.5</researchViewX>
+    <researchViewY>1.9</researchViewY>
+    <description>Advancements in wireless storage.\nAllows you to build I/O pushers (and more, soon).</description>
+    <prerequisites>
+      <li>PRF_StorageIO</li>
+    </prerequisites>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+      <li>PRF_ResearchTerminal</li>
+    </requiredResearchFacilities>
+  </ResearchProjectDef>
+</Defs>

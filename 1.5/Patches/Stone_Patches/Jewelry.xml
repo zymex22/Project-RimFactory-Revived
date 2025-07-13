@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!-- Jewelry -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Jewelry</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<!-- Remove/Exclude ores from standard chances and Bills on miners -->
+				<li Class="PatchOperationAdd">					<!-- T1-T3 miner Remove from standard chance -->
+					<xpath>/Defs/ThingDef[starts-with(defName, "PRF_DeepQuarry_mk") or defName="PRF_BillTypeMiner_I"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<value>
+						<li>Sapphire</li>
+						<li>Ruby</li>
+						<li>Diamond</li>
+					</value>
+				</li>
+				<!-- Add ores to special chances and balance how often and amount -->
+				<li Class="PatchOperationAdd">					<!-- T1 miner add it back to customize it-->
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkI"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+					<value>
+						<Sapphire Weight="0.015" Count="10" />
+						<Ruby Weight="0.015" Count="10" />
+						<Diamond Weight="0.01" Count="5" />
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">					<!-- T2 miner miner add it back to customize it-->
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+					<value>
+						<Sapphire Weight="0.4" Count="20" />
+						<Ruby Weight="0.4" Count="20" />
+						<Diamond Weight="0.3" Count="10" />
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">					<!-- T3 miner Add it as a special extra chance -->
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkIII" or defName="PRF_BillTypeMiner_I"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+					<value>
+						<Sapphire Weight="0.45" Count="20" />
+						<Ruby Weight="0.4" Count="20" />
+						<Diamond Weight="0.3" Count="20" />
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

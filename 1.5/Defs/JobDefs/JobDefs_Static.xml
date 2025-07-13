@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <JobDef>
+    <defName>PRFStaticJob</defName>
+    <driverClass>ProjectRimFactory.AutoMachineTool.JobDriver_StaticJob</driverClass>
+    <reportString>S.A.L Working</reportString>
+  </JobDef>
+</Defs>

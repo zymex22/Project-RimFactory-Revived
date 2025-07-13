@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_MinersGroup</defName>
+  </DesignatorDropdownGroupDef>
+
+  <!--==================== Miners Base ====================-->
+  <ThingDef Name="PRF_MinersBase" ParentName="PRF_BuildingBase" Abstract="True">
+    <passability>PassThroughOnly</passability>
+    <blockLight>false</blockLight>
+    <blockWind>true</blockWind>
+    <designatorDropdown>PRF_MinersGroup</designatorDropdown>
+    <altitudeLayer>Building</altitudeLayer>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>0.8</Flammability>
+      <Mass>80</Mass>
+    </statBases>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <rotatable>false</rotatable>
+    <pathCost>70</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Ground type to build on -->
+    <castEdgeShadows>true</castEdgeShadows>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <building>
+      <uninstallWork>1800</uninstallWork>
+    </building>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <tickerType>Rare</tickerType>
+    <comps>
+      <li Class="CompProperties_Flickable" />
+    </comps>
+  </ThingDef>
+
+  <!--==================== MineShaft T0 ====================-->
+  <!-- This one functions like a vanilla bench and just uses normal recipes, but mod extension make random outputs -->
+  <ThingDef ParentName="BenchBase">
+    <defName>PRF_MineShaft</defName>
+    <label>mine shaft</label>
+    <description>An early mine shaft entrance, which lets you set a target mine operation where a pawn will go into the mountain and mine out what you desire. It also has a slim chance of finding rare/junk bonus items while operating.\nShould be placed in a mountain wall to operate.</description>
+    <thingClass>Building_WorkTable</thingClass>
+    <designationCategory>Production</designationCategory>    <!--architect menu location-->
+    <clearBuildingArea>false</clearBuildingArea>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <graphicData>
+      <texPath>Industry/MiningShaft</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,1.1)</drawSize>
+      <shaderType>CutoutComplex</shaderType>
+      <shadowData>
+        <volume>(2.85, 0.3, 0.62)</volume>
+        <offset>(0, 0, 0.20)</offset>
+      </shadowData>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <constructEffect></constructEffect>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>75</costStuffCount>    <!-- Set price for stone blocks -->
+    <costList>
+      <WoodLog>50</WoodLog>
+    </costList>
+    <recipes>
+      <li>PRF_Excavate_Granite</li>
+      <li>PRF_Excavate_Sandstone</li>
+      <li>PRF_Excavate_Limestone</li>
+      <li>PRF_Excavate_Slate</li>
+      <li>PRF_Excavate_Marble</li>
+    </recipes>
+    <fillPercent>0.5</fillPercent>
+    <useHitPoints>True</useHitPoints>
+    <statBases>
+      <WorkToBuild>3500</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <Cleanliness>-10</Cleanliness>
+    </statBases>
+    <size>(3,1)</size>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <hasInteractionCell>True</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <interactionCellIcon />
+    <surfaceType>Item</surfaceType>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <inspectorTabs>
+      <li>ITab_Bills</li>
+    </inspectorTabs>
+    <building>
+      <isEdifice>false</isEdifice>
+      <spawnedConceptLearnOpportunity>BillsTab</spawnedConceptLearnOpportunity>
+    </building>
+    <!-- Here is where magic starts: -->
+    <modExtensions>
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">        <!-- see info: Source/ProjectRimFactory/Common/ModExtension_ModifyProduct.txt -->
+        <replaceOrigProduct>true</replaceOrigProduct>
+        <bonusYields Chance="0.10">          <!-- this apply to ALL bills on T0 miner (10% chance) -->
+          <!-- Rare ore Bonus: -->
+          <ChunkSlagSteel Weight="1" Count="1" />
+          <Gold Weight="0.005" Count="5" />
+          <Jade Weight="0.01" Count="5" />
+          <Silver Weight="0.015" Count="10" />
+          <!-- Junk Bonus -->
+          <InsectJelly Weight="0.05" Count="5" />
+          <Steel Weight="0.01" Count="10" />
+          <ComponentIndustrial Weight="0.002" Count="5" />
+        </bonusYields>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>Stonecutting</li>
+    </researchPrerequisites>
+    <designationHotKey>Misc9</designationHotKey>
+    <placeWorkers>
+      <li>ProjectRimFactory.Common.PlaceWorker_NaturalWall</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <!--==================== Quarry T1 Auger drill ====================-->
+  <!-- This is old type miner from original prf, it will mine random ores from any minable resource when powered -->
+  <ThingDef ParentName="PRF_MinersBase">
+    <defName>PRF_DeepQuarry_mkI</defName>
+    <label>auger drill</label>
+    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <description>An early automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 8 hours.\n\nWARNING: Automated mining operations can draw insectoid infestations to your location!</description>
+    <graphicData>
+      <texPath>Industry/Drill</texPath>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <castEdgeShadows>false</castEdgeShadows>
+    <size>(2,2)</size>
+    <statBases>
+      <WorkToBuild>4000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <MarketValue>2175</MarketValue>
+      <Beauty>-25</Beauty>
+      <Mass>35</Mass>
+    </statBases>
+    <costList>
+      <Steel>450</Steel>
+      <ComponentIndustrial>5</ComponentIndustrial>
+      <PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>10.0</fuelConsumptionRate>
+        <fuelCapacity>100.0</fuelCapacity>
+        <fuelFilter>
+          <thingDefs>
+            <li>WoodLog</li>
+          </thingDefs>
+        </fuelFilter>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_CreatesInfestations" />
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>6</heatPerSecond>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
+        <effect>Drill</effect>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
+        <TickCount>8</TickCount>
+      </li>
+      <!-- excludeOres : exclude ore list. -->
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>Gold</li>
+          <li>Uranium</li>
+          <li>ComponentIndustrial</li>
+          <li>Steel</li>
+          <li>Plasteel</li>
+          <li>Jade</li>
+          <li>Silver</li>
+        </excludeOres>
+      </li>
+      <!-- ModifyProduct - give bonus items :
+           Bonus yield ore list. for example: 10% bonus yield chance, Steel bonus : Plasteel bonus = 1 : 2
+               (so 10% of anything, and get twice as much bonus plasteel as bonus steel)
+           <bonusYields Chance="0.1">
+             <Steel Weight="1" Count="10" />
+             <Plasteel Weight="2" Count="15" />
+           </bonusYields>
+           <replaceOrigProduct>true</replaceOrigProduct> - whether to replace product or add bonus in addition; defaults to false (add)
+      -->
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
+        <bonusYields Chance="0.18">
+          <ChunkSlagSteel Weight="1" Count="1" />
+          <Gold Weight="0.02" Count="10" />
+          <Jade Weight="0.02" Count="10" />
+          <Silver Weight="0.02" Count="30" />
+        </bonusYields>
+      </li>
+    </modExtensions>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <researchPrerequisites>
+      <li>PRF_AutonomousMining</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Quarry T2 ====================-->
+  <ThingDef ParentName="PRF_MinersBase">
+    <defName>PRF_DeepQuarry_mkII</defName>
+    <label>pulse drill Mk.I</label>
+    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <description>An automated quarry that continuously extracts resources from the ground, including rock chunks, materials and components. Produces a random resource roughly once every 3 hours.\n\nWARNING: Automated mining operations can draw insectoid infestations to your location!</description>
+    <graphicData>
+      <texPath>Industry/DeepQuarry</texPath>
+      <drawSize>(2.4,2.4)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <statBases>
+      <WorkToBuild>6500</WorkToBuild>
+      <MaxHitPoints>350</MaxHitPoints>
+      <MarketValue>2940</MarketValue>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <costList>
+      <Steel>400</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <Plasteel>50</Plasteel>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>800</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_CreatesInfestations" />
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>5</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(217,112,33,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_Effecter">
+        <effect>Drill</effect>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
+        <TickCount>3</TickCount>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>ComponentIndustrial</li>
+          <li>Plasteel</li>
+          <li>ChunkSandstone</li>
+          <li>ChunkGranite</li>
+          <li>ChunkLimestone</li>
+          <li>ChunkSlate</li>
+          <li>ChunkMarble</li>
+        </excludeOres>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
+        <bonusYields Chance="0.1">
+          <ChunkSandstone Weight="1" Count="1" />
+          <ChunkGranite Weight="1" Count="1" />
+          <ChunkLimestone Weight="1" Count="1" />
+          <ChunkSlate Weight="1" Count="1" />
+          <ChunkMarble Weight="1" Count="1" />
+        </bonusYields>
+      </li>
+    </modExtensions>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRF_AutonomousMiningII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=========================== Portable Miner MkI ==================================-->
+  <!-- This is a drone/cultivator type miner that can mine in a selected area. -->
+  <!-- <ThingDef ParentName="PRF_MiniDroneStation">
+    <defName>PRF_PortableMinerMkI</defName>
+    <label>portable miner Mk.I</label>
+    <designatorDropdown>PRF_MinersGroup</designatorDropdown>
+    <graphicData>
+      <texPath>Drones/MiniDroneStation</texPath>
+      <drawRotated>false</drawRotated>
+    </graphicData>
+    <rotatable>true</rotatable>
+    <description>This is a portable drone miner Mk.I. It works in much the same way as a cultivator and can be picked and carried when you are traveling around the rim for your remote mining operations. It is also excellent for excavating your new base.\nIt has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat and only work 1-hour shifts.</description>
+    <costList>
+      <PRF_DroneModule>2</PRF_DroneModule>
+      <Steel>30</Steel>
+      <Plasteel>20</Plasteel>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <MarketValue>1050</MarketValue>
+      <WorkToBuild>750</WorkToBuild>
+      <MaxHitPoints>50</MaxHitPoints>
+      <Mass>20</Mass>
+    </statBases>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0</fuelConsumptionRate>
+        <fuelCapacity>2</fuelCapacity>
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelFilter>
+          <thingDefs>
+            <li>PRF_DroneModule</li>
+          </thingDefs>
+        </fuelFilter>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>2</initialConfigurableTargetFuelLevel>
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+
+
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <minPowerForRange>850</minPowerForRange>
+        <minRange>6</minRange>
+        <maxPowerForRange>1650</maxPowerForRange>
+        <maxRange>12</maxRange>
+        <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <displayDormantDrones>false</displayDormantDrones>
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <Sleeptimes>1,3,5,7,9,11,13,15,17,19,21,23</Sleeptimes>
+        <workTypes>
+          <li>Mining</li>
+        </workTypes>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ReserchOverrides</SkillUsage>
+        <BaseSkill>1</BaseSkill>
+        <skills>
+          <li>
+            <def>Mining</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_AutonomousMiningII</li>
+      <li>PRF_BasicDrones</li>
+    </researchPrerequisites>
+  </ThingDef> -->
+
+  <!--=========================== Portable Miner MkII ==================================-->
+  <!-- <ThingDef ParentName="PRF_MiniDroneStation">
+    <defName>PRF_PortableMinerMkII</defName>
+    <label>portable miner Mk.II</label>
+    <designatorDropdown>PRF_MinersGroup</designatorDropdown>
+    <graphicData>
+      <texPath>Drones/MiniDroneStation</texPath>
+      <drawRotated>false</drawRotated>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <size>(2,2)</size>
+    <rotatable>true</rotatable>
+    <description>This is a portable drone miner Mk.II. It works in much the same way as a cultivator and can be picked and carried when you are traveling around the rim for your remote mining operations. It is also excellent for excavating your new base.\nIt has a base mining level of 10 but can be upgraded with drone research.\nIt will take breaks to not overheat and only work 1-hour shifts.</description>
+    <costList>
+      <PRF_DroneModule>4</PRF_DroneModule>
+      <Steel>10</Steel>
+      <Plasteel>30</Plasteel>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+      <ComponentIndustrial>5</ComponentIndustrial>
+    </costList>
+    <statBases>
+      <MarketValue>4080</MarketValue>
+      <WorkToBuild>1200</WorkToBuild>
+      <MaxHitPoints>125</MaxHitPoints>
+      <Mass>35</Mass>
+    </statBases>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>
+    </inspectorTabs>
+    <comps Inherit="false">
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerPlantSolar</compClass>
+        <basePowerConsumption>-1</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelConsumptionRate>0</fuelConsumptionRate>
+        <fuelCapacity>4</fuelCapacity>
+        <fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelFilter>
+          <thingDefs>
+            <li>PRF_DroneModule</li>
+          </thingDefs>
+        </fuelFilter>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>4</initialConfigurableTargetFuelLevel>
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+
+
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+
+        <minRange>8</minRange>
+        <maxPowerForRange>1700</maxPowerForRange>
+        <maxRange>20</maxRange>
+        <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+        <displayDormantDrones>false</displayDormantDrones>
+        <spawnWithFullDrones>true</spawnWithFullDrones>
+        <Sleeptimes>1,2,3,4,5,19,20,21,22,23,0</Sleeptimes>
+        <workTypes>
+          <li>Mining</li>
+          <li>Hauling</li>
+        </workTypes>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ReserchOverrides</SkillUsage>
+        <BaseSkill>1</BaseSkill>
+        <skills>
+          <li>
+            <def>Mining</def>
+            <levelInt>10</levelInt>
+          </li>
+        </skills>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>PRF_AutonomousMiningIII</li>
+      <li>PRF_BasicDrones</li>
+    </researchPrerequisites>
+  </ThingDef> -->
+
+  <!--==================== Quarry T3.2  ====================-->
+  <ThingDef ParentName="PRF_MinersBase">
+    <defName>PRF_DeepQuarry_mkIII</defName>
+    <label>pulse drill Mk.II</label>
+    <description>The most advanced form of the automated quarry, this device uses advanced techniques to safely mine without drawing the attention of insectoids. It will also only produce valuable minerals, never stone.</description>
+    <thingClass>ProjectRimFactory.Industry.Building_DeepQuarry</thingClass>
+    <graphicData>
+      <texPath>Industry/DrillT32</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <size>(3,3)</size>
+    <statBases>
+      <WorkToBuild>6800</WorkToBuild>
+      <MaxHitPoints>800</MaxHitPoints>
+      <MarketValue>6893</MarketValue>
+      <Flammability>0.2</Flammability>
+    </statBases>
+    <costList>
+      <Steel>1000</Steel>
+      <ComponentIndustrial>25</ComponentIndustrial>
+      <ComponentSpacer>5</ComponentSpacer>
+      <Plasteel>50</Plasteel>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>5000</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>20</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="ProjectRimFactory.Industry.DeepQuarryDefModExtension">
+        <TickCount>2</TickCount>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>ComponentIndustrial</li>
+          <li>Plasteel</li>
+          <li>ChunkSandstone</li>
+          <li>ChunkGranite</li>
+          <li>ChunkLimestone</li>
+          <li>ChunkSlate</li>
+          <li>ChunkMarble</li>
+        </excludeOres>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
+        <bonusYields Chance="0.1">
+          <!-- Junks -->
+          <InsectJelly Weight="0.2" Count="30" />
+          <Steel Weight="0.18" Count="40" />
+          <ComponentIndustrial Weight="0.02" Count="5" />
+          <!-- Rares -->
+          <Uranium Weight="0.9" Count="40" />
+          <Gold Weight="0.4" Count="40" />
+          <Jade Weight="0.4" Count="40" />
+          <Silver Weight="0.6" Count="40" />
+          <Plasteel Weight="0.03" Count="5" />
+        </bonusYields>
+      </li>
+    </modExtensions>
+
+    <staticSunShadowHeight>1</staticSunShadowHeight>
+    <researchPrerequisites>
+      <li>PRF_AutonomousMiningIII</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--==================== Quarry T3 Plasma Drill ====================-->
+  <!-- This is a Bill type miner where it will auto add any minable ores as a bill option, This is originally from Nobo's NR AutoMachineTool mod -->
+  <!-- it behave more ore less like omnicore drill(mod), and such just this one is automatic (no pawn needed) -->
+  <ThingDef ParentName="PRF_MinersBase">
+    <defName>PRF_BillTypeMiner_I</defName>
+    <label>plasma drill</label>
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
+    <description>With highly advanced spacer technology auto mining has been made more precise than ever, and you can now adjust what ores to mine for and even balance power for speed. It will set the primary ore type and receive occasional bonuses in the form of rare ores and junk.</description>
+    <tickerType>Never</tickerType>
+    <graphicData>
+      <texPath>Industry/DrillT3</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <costList>
+      <Steel>1000</Steel>
+      <ComponentIndustrial>25</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
+      <Plasteel>100</Plasteel>
+      <PRF_MachineFrame_III>1</PRF_MachineFrame_III>
+      <PRF_ElectronicChip_II>1</PRF_ElectronicChip_II>
+    </costList>
+    <statBases>
+      <WorkToBuild>7600</WorkToBuild>
+      <MaxHitPoints>800</MaxHitPoints>
+      <MarketValue>8663</MarketValue>
+      <Flammability>0.2</Flammability>
+    </statBases>
+    <researchPrerequisites>
+      <li>PRF_AutonomousMiningIII</li>
+    </researchPrerequisites>
+    <size>(3,3)</size>
+    <comps>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>3000</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>20</heatPerSecond>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>5~15</floatrange_SpeedFactor>
+        <powerPerStepSpeed>1000</powerPerStepSpeed>
+        <powerStepFactor>1</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>0~0</floatrange_Range>
+        <powerPerStepRange>0</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>        <!--Temp-->
+      </li>
+    </comps>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>      <!-- ITab -->
+    </inspectorTabs>
+    <modExtensions>
+      <!--  <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
+        <effectWorking>Drill</effectWorking>
+      </li>        -->      <!-- If want Smoke effect on or not comment out to remove smoke -->
+      <li Class="ProjectRimFactory.Common.ModExtension_Miner">
+        <excludeOres>
+          <li>Gold</li>
+          <li>Uranium</li>
+          <li>ComponentIndustrial</li>
+          <li>Plasteel</li>
+          <li>Jade</li>
+          <li>Silver</li>
+        </excludeOres>
+      </li>
+      <li Class="ProjectRimFactory.Common.ModExtension_ModifyProduct">
+        <replaceOrigProduct>true</replaceOrigProduct>
+        <bonusYields Chance="0.05">
+          <!-- Junks -->
+          <InsectJelly Weight="0.2" Count="30" />
+          <Steel Weight="0.2" Count="40" />
+          <!-- Rares -->
+          <Uranium Weight="0.9" Count="40" />
+          <Gold Weight="0.4" Count="40" />
+          <Jade Weight="0.4" Count="40" />
+          <Silver Weight="0.7" Count="40" />
+          <Plasteel Weight="0.01" Count="5" />
+        </bonusYields>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+</Defs>

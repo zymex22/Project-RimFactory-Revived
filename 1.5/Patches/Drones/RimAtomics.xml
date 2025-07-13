@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!--RimFridge -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Dubs Rimatomics</li>
+			<li>Rimatomics</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<!-- ============== Adding Mini atomic drone station =============== -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<ThingDef ParentName="PRF_MiniDroneStation">
+							<defName>PRF_MiniHelperAtomic</defName>
+							<label>mini RimAtomic station</label>
+							<graphicData>
+								<texPath>Drones/MiniDroneStationAtomic</texPath>
+							</graphicData>
+
+							<description>A mini atomic workshop helper for RimAtomics to maintain and fuel your reactors; it can flick, haul, handle nuclear tasks, and firefight.</description>
+							<costList>
+								<PRF_MachineFrame_I>1</PRF_MachineFrame_I>
+								<PRF_DroneModule>2</PRF_DroneModule>
+								<Steel>30</Steel>
+								<Plasteel>20</Plasteel>
+								<ComponentIndustrial>3</ComponentIndustrial>
+							</costList>
+							<inspectorTabs>
+								<li>ProjectRimFactory.Common.ITab_PowerSupply</li>								<!-- Power boost -->
+							</inspectorTabs>
+							<comps>
+								<li Class="CompProperties_Breakdownable"/>
+								<li Class="CompProperties_Refuelable">
+									<fuelConsumptionRate>0</fuelConsumptionRate>
+									<fuelCapacity>2</fuelCapacity>
+									<fuelConsumptionPerTickInRain>0</fuelConsumptionPerTickInRain>
+									<consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+									<fuelFilter>
+										<thingDefs>
+											<li>PRF_DroneModule</li>
+										</thingDefs>
+									</fuelFilter>
+									<targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+									<initialConfigurableTargetFuelLevel>1</initialConfigurableTargetFuelLevel>
+									<drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+								</li>
+								<li Class="CompProperties_Power">
+									<compClass>CompPowerTrader</compClass>
+									<shortCircuitInRain>false</shortCircuitInRain>
+									<basePowerConsumption>300</basePowerConsumption>
+								</li>
+								<li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+									<!-- Speed Settings -->
+									<floatrange_SpeedFactor>0</floatrange_SpeedFactor>
+									<powerPerStepSpeed>0</powerPerStepSpeed>
+									<powerStepFactor>1</powerStepFactor>
+									<!-- Range Settings -->
+									<floatrange_Range>3~6</floatrange_Range>
+									<powerPerStepRange>200</powerPerStepRange>
+									<allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+									<rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+								</li>
+							</comps>
+							<modExtensions>
+								<li Class="ProjectRimFactory.Drones.DefModExtension_DroneStation">
+									<displayDormantDrones>false</displayDormantDrones>									<!-- Drones will sit on top while not working -->
+									<spawnWithFullDrones>true</spawnWithFullDrones>
+									<workTypes>
+										<li>BasicWorker</li>
+										<li>Hauling</li>
+										<li>NuclearWork</li>
+										<li>Firefighter</li>
+									</workTypes>
+								</li>
+								<li Class="ProjectRimFactory.Common.ModExtension_Skills">
+									<SkillUsage>ReserchOverrides</SkillUsage>
+									<BaseSkill>10</BaseSkill>
+									<skills>
+										<!--<li>
+            						<def>Intellectual</def>
+            						<levelInt>11</levelInt>
+          							</li>-->
+									</skills>
+								</li>
+							</modExtensions>
+							<researchPrerequisites>
+								<li>PRF_ImprovedDrones</li>
+							</researchPrerequisites>
+							<designatorDropdown>PRF_MiniDroneStationGroup</designatorDropdown>
+						</ThingDef>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
