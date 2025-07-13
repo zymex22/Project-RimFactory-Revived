@@ -71,13 +71,14 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
     }
 
-    class Patch_FloatMenuMakerMap_ChoicesAtFor
+    class Patch_FloatMenuMakerMap_GetOptions
     {
-        static bool Prefix(Vector3 clickPos, Pawn pawn, out List<FloatMenuOption> __result)
+        static bool Prefix(List<Pawn> selectedPawns, Vector3 clickPos, out List<FloatMenuOption> __result, out FloatMenuContext context)
         {
-            if (pawn.Map.GetComponent<PRFMapComponent>().iHideRightMenus.Contains(clickPos.ToIntVec3()))
+            context = null;
+            if (Find.CurrentMap.GetComponent<PRFMapComponent>().iHideRightMenus.Contains(clickPos.ToIntVec3()))
             {
-                __result = new List<FloatMenuOption>();
+                __result = [];
                 return false;
             }
             __result = null;
