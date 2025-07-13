@@ -53,7 +53,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             return (QualityCategory)((int)expectedQuality);
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             if (currentBillReport != null && this.IsHashIntervalTick(60) && this.Active)

@@ -30,7 +30,7 @@ namespace ProjectRimFactory.Drones
 
         private int last_fuel_cnt = 0;
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
 

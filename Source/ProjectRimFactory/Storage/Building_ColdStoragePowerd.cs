@@ -45,14 +45,15 @@ namespace ProjectRimFactory.Storage
             base.ReceiveCompSignal(signal);
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             if (this.IsHashIntervalTick(60))
             {
                 UpdatePowerConsumption();
             }
-            thingOwner.ThingOwnerTick();
+            //ThingOwnerTick
+            thingOwner.DoTick();
         }
 
         public override void PostMapInit()

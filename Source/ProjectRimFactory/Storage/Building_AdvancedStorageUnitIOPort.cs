@@ -72,7 +72,7 @@ namespace ProjectRimFactory.Storage
             }
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             updateQueue();
 

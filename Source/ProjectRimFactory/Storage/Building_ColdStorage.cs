@@ -69,6 +69,7 @@ namespace ProjectRimFactory.Storage
         IntVec3 IHaulDestination.Position => this.Position;
 
         Map IHaulDestination.Map => this.Map;
+        public bool HaulDestinationEnabled => true;
 
         bool IStoreSettingsParent.StorageTabVisible => true;
 

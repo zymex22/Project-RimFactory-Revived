@@ -41,7 +41,7 @@
       <isEdifice>false</isEdifice>
     </building>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
-    <placingDraggableDimensions>1</placingDraggableDimensions>
+    <drawStyleCategory>Walls</drawStyleCategory>
     <size>(1,1)</size>
     <researchPrerequisites>      <!-- Optional. The player will not be able to build the floor or terrain until completing one or more research projects -->
       <li>Machining</li>

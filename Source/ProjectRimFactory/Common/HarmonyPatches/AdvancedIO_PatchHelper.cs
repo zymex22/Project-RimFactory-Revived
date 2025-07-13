@@ -146,7 +146,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         /// <returns></returns>
         public static float CalculatePath(Pawn pawn, IntVec3 thingPos, IntVec3 targetPos, Map map)
         {
-            return map.pathFinder.FindPath(pawn.Position, thingPos, pawn).TotalCost + map.pathFinder.FindPath(thingPos, targetPos, pawn).TotalCost;
+            return map.pathFinder.FindPathNow(pawn.Position, thingPos, pawn).TotalCost + map.pathFinder.FindPathNow(thingPos, targetPos, pawn).TotalCost;
         }
 
 

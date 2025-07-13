@@ -60,7 +60,7 @@ namespace ProjectRimFactory.Drones
             playerSettings.AreaRestrictionInPawnCurrentMap = this.station.droneAllowedArea;
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             //This is an issue
             //from what i understand base.base is not a option

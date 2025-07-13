@@ -50,7 +50,7 @@ namespace ProjectRimFactory.CultivatorTools
 
         abstract protected int cellCount { get; }
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             if (Find.TickManager.TicksGame % TickRate == 0 && Powered && Fueled)

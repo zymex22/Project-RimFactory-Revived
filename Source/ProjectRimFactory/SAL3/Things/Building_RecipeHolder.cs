@@ -130,7 +130,7 @@ namespace ProjectRimFactory.SAL3.Things
             }
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             if (this.IsHashIntervalTick(60) && GetComp<CompPowerTrader>()?.PowerOn != false)
             {

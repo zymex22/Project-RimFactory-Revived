@@ -594,7 +594,7 @@
   </ThingDef>
   <!--======================================= Conveyor belt base   ===============================================-->
   <ThingDef Name="PRF_DraggableConveyorBelt_Base" ParentName="PRF_Conveyor_Base" Abstract="true">
-    <placingDraggableDimensions>1</placingDraggableDimensions>
+    <drawStyleCategory>Walls</drawStyleCategory>
   </ThingDef>
 
   <!--======================================= Conveyor belt normal ===============================================-->

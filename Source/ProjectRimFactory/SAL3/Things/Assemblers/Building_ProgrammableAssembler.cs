@@ -310,7 +310,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             return null;
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             if (this.IsHashIntervalTick(10) && Active)

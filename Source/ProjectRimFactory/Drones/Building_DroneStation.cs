@@ -443,7 +443,7 @@ namespace ProjectRimFactory.Drones
         protected int additionJobSearchTickDelay = 0;
 
 
-        public override void Tick()
+        protected override void Tick()
         {
             //Base Tick
             base.Tick();

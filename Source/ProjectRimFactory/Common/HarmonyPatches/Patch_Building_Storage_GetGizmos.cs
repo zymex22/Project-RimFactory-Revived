@@ -15,7 +15,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     /// This prevents UI Clutter 
     /// and also improves performance compared to vanilla 1.4 without this Patch
     /// </summary>
-    [HarmonyPatch]
+   // [HarmonyPatch]
     class Patch_Building_Storage_GetGizmos
     {
         //The target method is found using the custom logic defined here

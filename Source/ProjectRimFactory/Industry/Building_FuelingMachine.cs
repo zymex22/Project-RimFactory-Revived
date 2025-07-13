@@ -9,7 +9,8 @@ namespace ProjectRimFactory.Industry
     public class Building_FuelingMachine : Building
     {
         public IntVec3 FuelableCell => Rotation.FacingCell + Position;
-        public override void Tick()
+
+        protected override void Tick()
         { // in case you *really* want to use Tick
             base.Tick();
             if (this.IsHashIntervalTick(10)) Refuel();

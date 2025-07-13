@@ -137,7 +137,7 @@ namespace ProjectRimFactory.Industry
         ///  Much better performance if you have a lot of these
         /// 
         /// </summary>
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             HandelTick(1, false); // CompRefuelable burns fuel on Tick() without extra work

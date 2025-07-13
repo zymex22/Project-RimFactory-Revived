@@ -31,7 +31,7 @@ namespace ProjectRimFactory.Drones.AI
                     List<Thing> list = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.AlwaysFlee);
                     for (int i = 0; i < list.Count; i++)
                     {
-                        if (pawn.Position.InHorDistOf(list[i].Position, 18f) && SelfDefenseUtility.ShouldFleeFrom(list[i], pawn, false, false))
+                        if (pawn.Position.InHorDistOf(list[i].Position, 18f) && FleeUtility.ShouldFleeFrom(list[i], pawn, false, false))
                         {
                             return ReturnToStationJob((Pawn_Drone)pawn);
                         }
@@ -48,7 +48,7 @@ namespace ProjectRimFactory.Drones.AI
                     for (int j = 0; j < potentialTargetsFor.Count; j++)
                     {
                         Thing thing = potentialTargetsFor[j].Thing;
-                        if (pawn.Position.InHorDistOf(thing.Position, 18f) && SelfDefenseUtility.ShouldFleeFrom(thing, pawn, false, true))
+                        if (pawn.Position.InHorDistOf(thing.Position, 18f) && FleeUtility.ShouldFleeFrom(thing, pawn, false, true))
                         {
                             return ReturnToStationJob((Pawn_Drone)pawn);
                         }

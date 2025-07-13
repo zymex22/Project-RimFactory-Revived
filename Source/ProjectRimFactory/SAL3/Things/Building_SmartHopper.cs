@@ -193,7 +193,7 @@ namespace ProjectRimFactory.SAL3.Things
             else return base.GetInspectString();
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
             if (Find.TickManager.TicksGame % 35 == 0 && GetComp<CompPowerTrader>().PowerOn)

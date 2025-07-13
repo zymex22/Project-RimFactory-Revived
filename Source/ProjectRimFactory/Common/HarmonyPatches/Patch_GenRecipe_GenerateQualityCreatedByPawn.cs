@@ -8,7 +8,7 @@ using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches;
 
-[HarmonyPatch(typeof(QualityUtility), "GenerateQualityCreatedByPawn", new Type[] { typeof(Pawn), typeof(SkillDef) })]
+//[HarmonyPatch(typeof(QualityUtility), "GenerateQualityCreatedByPawn", new Type[] { typeof(Pawn), typeof(SkillDef) })]
 class Patch_GenRecipe_GenerateQualityCreatedByPawn
 {
     static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill)
