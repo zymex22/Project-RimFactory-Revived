@@ -106,9 +106,9 @@ namespace ProjectRimFactory.Drones.AI
 
         public Job ReturnToStationJob(Pawn_Drone drone)
         {
-            if (drone.station != null && drone.Map == drone.station.Map)
+            if (drone.BaseStation != null && drone.Map == drone.BaseStation.Map)
             {
-                return new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.station);
+                return new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.BaseStation);
             }
             return null;
         }

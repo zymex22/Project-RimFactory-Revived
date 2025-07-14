@@ -41,7 +41,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 Traverse.Create(__instance).Method("CleanupCurrentJob", condition, true, true, canReturnToPool).GetValue();
                 //Send the Drone Home
                 Pawn_Drone drone = (Pawn_Drone)___pawn;
-                __instance.StartJob(new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.station));
+                __instance.StartJob(new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.BaseStation));
 
 
                 return false;
@@ -63,7 +63,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             if (pawn.kindDef == PRFDefOf.PRFDroneKind)
             {
                 Pawn_Drone drone = (Pawn_Drone)pawn;
-                IntVec3 DroneStationPos = drone.station.Position;
+                IntVec3 DroneStationPos = drone.BaseStation.Position;
 
                 //Remove work on the station itself
                 __result = __result.Where(u => u.Position != DroneStationPos).ToList();

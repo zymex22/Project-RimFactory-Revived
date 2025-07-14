@@ -6,7 +6,7 @@ using Verse;
 
 namespace ProjectRimFactory.Drones
 {
-    public class DefModExtension_DroneStation : DefModExtension, ProjectRimFactory.Common.IXMLThingDescription
+    public class DefModExtension_DroneStation : DefModExtension, Common.IXMLThingDescription
     {
         public int maxNumDrones;
         public bool displayDormantDrones;
@@ -20,15 +20,15 @@ namespace ProjectRimFactory.Drones
         public string GetDescription(ThingDef def)
         {
             string text = "";
-            CompProperties_Refuelable refule = (CompProperties_Refuelable)def.comps.Where(c => (c.compClass == typeof(CompRefuelable))).FirstOrDefault();
+            CompProperties_Refuelable propertiesRefuel = (CompProperties_Refuelable)def.comps.FirstOrDefault(c => (c.compClass == typeof(CompRefuelable)));
             int maxdrones = maxNumDrones;
-            if (refule != null)
+            if (propertiesRefuel != null)
             {
-                maxdrones = (int)refule.fuelCapacity;
+                maxdrones = (int)propertiesRefuel.fuelCapacity;
             }
 
             text += "PRF_UTD_DefModExtension_DroneStation_MaxDrones".Translate(maxdrones) + "\r\n";
-            text += "PRF_UTD_DefModExtension_DroneStation_IncludedDrones".Translate(GetDronesOnSpawn(null, refule)) + "\r\n";
+            text += "PRF_UTD_DefModExtension_DroneStation_IncludedDrones".Translate(GetDronesOnSpawn(null, propertiesRefuel)) + "\r\n";
             if (Sleeptimes != "")
             {
                 text += "PRF_UTD_DefModExtension_DroneStation_SleepTimes".Translate(Sleeptimes) + "\r\n";
@@ -55,9 +55,9 @@ namespace ProjectRimFactory.Drones
         /// <summary>
         /// Returns the number of Drones that should be availibale on Spawn.
         /// </summary>
-        public int GetDronesOnSpawn(CompRefuelable fuelcomp = null, CompProperties_Refuelable fuelcompp = null)
+        public int GetDronesOnSpawn(CompRefuelable fuelComp = null, CompProperties_Refuelable fuelCompProperties = null)
         {
-            CompProperties_Refuelable props = fuelcomp?.Props ?? fuelcompp;
+            var props = fuelComp?.Props ?? fuelCompProperties;
             if (spawnWithFullDrones)
             {
                 return (int)(props?.fuelCapacity ?? maxNumDrones);

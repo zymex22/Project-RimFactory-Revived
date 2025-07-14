@@ -11,23 +11,23 @@ namespace ProjectRimFactory.Drones.AI
         protected override Job TryGiveJob(Pawn pawn)
         {
             Pawn_Drone drone = (Pawn_Drone)pawn;
-            if (drone.station != null)
+            if (drone.BaseStation != null)
             {
-                if (drone.station.Spawned && drone.station.Map == pawn.Map)
+                if (drone.BaseStation.Spawned && drone.BaseStation.Map == pawn.Map)
                 {
                     Job result = null;
-                    if (drone.station is Building_WorkGiverDroneStation b)
+                    if (drone.BaseStation is Building_WorkGiverDroneStation b)
                     {
 
-                        if (!(drone.station.cachedSleepTimeList.Contains(GenLocalDate.HourOfDay(drone).ToString())))
+                        if (!(drone.BaseStation.CachedSleepTimeList.Contains(GenLocalDate.HourOfDay(drone).ToString())))
                         {
                             pawn.workSettings = new Pawn_WorkSettings(pawn);
                             pawn.workSettings.EnableAndInitialize();
                             pawn.workSettings.DisableAll();
 
-                            foreach (WorkTypeDef def in b.WorkSettings_dict.Keys)
+                            foreach (WorkTypeDef def in b.WorkSettingsDict.Keys)
                             {
-                                if (b.WorkSettings_dict[def])
+                                if (b.WorkSettingsDict[def])
                                 {
                                     pawn.workSettings.SetPriority(def, 3);
                                 }
@@ -39,10 +39,10 @@ namespace ProjectRimFactory.Drones.AI
 
 
                             // So the station finds the best job for the pawn
-                            result = b.TryIssueJobPackageDrone(drone, true).Job;
+                            result = b.TryIssueJobPackageDrone(drone, default, true).Job;
                             if (result == null)
                             {
-                                result = b.TryIssueJobPackageDrone(drone, false).Job;
+                                result = b.TryIssueJobPackageDrone(drone, default,false).Job;
                             }
 
                         }
@@ -50,11 +50,11 @@ namespace ProjectRimFactory.Drones.AI
                     }
                     else
                     {
-                        result = drone.station.TryGiveJob(drone);
+                        result = drone.BaseStation.TryGiveJob(drone);
                     }
                     if (result == null)
                     {
-                        result = new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.station);
+                        result = new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.BaseStation);
                     }
                     return result;
                 }

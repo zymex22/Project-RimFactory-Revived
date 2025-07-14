@@ -8,7 +8,7 @@ namespace ProjectRimFactory.Drones
 {
     public class Building_DroneCultivator : Building_WorkGiverDroneStation
     {
-        private int totalDroneCount => spawnedDrones.Count + dronesLeft;
+        private int TotalDroneCount => spawnedDrones.Count + dronesLeft;
 
         private int dronesLeft;
 
@@ -32,7 +32,7 @@ namespace ProjectRimFactory.Drones
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            if (totalDroneCount < extension.GetDronesOnSpawn())
+            if (TotalDroneCount < extension.GetDronesOnSpawn())
             {
                 dronesLeft = extension.GetDronesOnSpawn();
             }
@@ -58,7 +58,7 @@ namespace ProjectRimFactory.Drones
         protected void MakeMatchingGrowZone()
         {
             Designator_ZoneAdd_Growing designator = new Designator_ZoneAdd_Growing();
-            designator.DesignateMultiCell(from tempCell in cashed_GetCoverageCells
+            designator.DesignateMultiCell(from tempCell in CashedGetCoverageCells
                                           where designator.CanDesignateCell(tempCell).Accepted
                                           select tempCell);
         }

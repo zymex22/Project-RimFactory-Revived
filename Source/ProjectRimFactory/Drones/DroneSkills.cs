@@ -15,7 +15,8 @@ namespace ProjectRimFactory.Drones
         /// <param name="modExtension_Skills">Optional ModExtension_Skills</param>
         /// <param name="forceUpdate">Enforce a reload of the Skills</param>
         /// <returns>Cache Output</returns>
-        public static List<SkillRecord> UpdateSkills(Pawn_SkillTracker skill, List<SkillRecord> skillRecords, ModExtension_Skills modExtension_Skills = null, bool forceUpdate = false)
+        public static List<SkillRecord> UpdateSkills(Pawn_SkillTracker skill, List<SkillRecord> skillRecords, 
+            ModExtension_Skills modExtension_Skills = null, bool forceUpdate = false)
         {
             if (skillRecords.Count == 0 || forceUpdate)
             {
@@ -34,12 +35,14 @@ namespace ProjectRimFactory.Drones
                                 }
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchIsCapping:
                                 {
-                                    record.levelInt = Mathf.Clamp(modExtension_Skills.GetSkillLevel(record.def), 0, ReserchSkillModifier.GetResechSkillLevel());
+                                    record.levelInt = Mathf.Clamp(modExtension_Skills.GetSkillLevel(record.def),
+                                        0, ReserchSkillModifier.GetResechSkillLevel());
                                     break;
                                 }
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ThisIsCapping:
                                 {
-                                    record.levelInt = Mathf.Clamp(ReserchSkillModifier.GetResechSkillLevel(), 0, modExtension_Skills.GetSkillLevel(record.def));
+                                    record.levelInt = Mathf.Clamp(ReserchSkillModifier.GetResechSkillLevel(),
+                                        0, modExtension_Skills.GetSkillLevel(record.def));
                                     break;
                                 }
                             case ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchOverrides:
@@ -53,8 +56,6 @@ namespace ProjectRimFactory.Drones
                                     break;
                                 }
                         }
-
-
                     }
                     else
                     {

@@ -15,7 +15,7 @@ namespace ProjectRimFactory.Drones.AI
                 {
                     pawn.inventory.DropAllNearPawn(pawn.Position);
                     pawn.Destroy();
-                    ((Pawn_Drone)pawn).station.Notify_DroneGained();
+                    ((Pawn_Drone)pawn).BaseStation.Notify_DroneGained();
                 },
                 defaultCompleteMode = ToilCompleteMode.Instant
             };
