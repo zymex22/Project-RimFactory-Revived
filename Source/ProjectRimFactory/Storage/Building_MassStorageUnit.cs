@@ -17,12 +17,12 @@ namespace ProjectRimFactory.Storage
     {
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
-        private readonly List<Thing> items = new List<Thing>();
-        private List<Building_StorageUnitIOBase> ports = new List<Building_StorageUnitIOBase>();
+        private readonly List<Thing> items = [];
+        private List<Building_StorageUnitIOBase> ports = [];
         
         public IntVec3 GetPosition => this.Position;
         public StorageSettings GetSettings => settings;
-
+        
         public bool CanUseIOPort => def.GetModExtension<DefModExtension_CanUseStorageIOPorts>() != null;
 
         public LocalTargetInfo GetTargetInfo => this;
@@ -47,11 +47,6 @@ namespace ProjectRimFactory.Storage
 
         private StorageOutputUtil outputUtil = null;
 
-        /* TODO Check if we still need that
-        public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
-        public override string LabelCap => uniqueName ?? base.LabelCap;
-        */
-
         private string uniqueName;
         //IRenameable
         public string RenamableLabel
@@ -67,11 +62,10 @@ namespace ProjectRimFactory.Storage
         public override void Notify_ReceivedThing(Thing newItem)
         {
             base.Notify_ReceivedThing(newItem);
-            if (newItem.Position != Position)
+            if (newItem.Position != Position && !GravshipPlacementUtility.placingGravship)
             {
                 HandleNewItem(newItem);
             }
-
             RefreshStorage();
         }
 
@@ -119,8 +113,7 @@ namespace ProjectRimFactory.Storage
                 icon = TexUI.RotRightTex,
                 action = () =>
                 {
-                    items.Clear(); // Force a real Refresh
-                    RefreshStorage();
+                    RefreshStorage(true);
                     Messages.Message("PRFReorganize_Message".Translate(), MessageTypeDefOf.NeutralEvent);
                 },
                 defaultLabel = "PRFReorganize".Translate(),
@@ -154,25 +147,22 @@ namespace ProjectRimFactory.Storage
                 {
                     item.TryAbsorbStack(newItem, true);
                 }
-
-                if (newItem.Destroyed)
-                {
-                    break;
-                }
+                
+                // It is fully absorbed
+                if (newItem.Destroyed) return;
             }
-
+            
             //Add a new stack of a thing
-            if (!newItem.Destroyed)
+            if (newItem.Destroyed) return;
+            
+            if (!items.Contains(newItem))
             {
-                if (!items.Contains(newItem))
-                {
-                    items.Add(newItem);
-                }
-
-                //What happens if its full?
-                if (CanStoreMoreItems) newItem.Position = Position;
-                if (!newItem.Spawned) newItem.SpawnSetup(Map, false);
+                items.Add(newItem);
             }
+            
+            //What happens if its full?
+            if (CanStoreMoreItems) newItem.Position = Position;
+            if (!newItem.Spawned) newItem.SpawnSetup(Map, false);
         }
 
         public override void ExposeData()
@@ -226,12 +216,10 @@ namespace ProjectRimFactory.Storage
             RefreshStorage();
             foreach (var port in ports)
             {
-                if (port?.Spawned ?? false)
+                if (port is null || !port.Spawned) continue;
+                if (port.Map != map)
                 {
-                    if (port.Map != map)
-                    {
-                        port.BoundStorageUnit = null;
-                    }
+                    port.BoundStorageUnit = null;
                 }
             }
 
@@ -252,8 +240,9 @@ namespace ProjectRimFactory.Storage
 
 
         //TODO Why do we need to clear Items here?
-        public virtual void RefreshStorage()
+        public virtual void RefreshStorage(bool fullRefresh = false)
         {
+            if (fullRefresh) items.Clear();
             // We certainly need it after Load to fill items initially
             // But we might not need it afterwards
             if (items.Count > 0) return;
@@ -267,25 +256,21 @@ namespace ProjectRimFactory.Storage
             foreach (var cell in AllSlotCells())
             {
                 var things = new List<Thing>(cell.GetThingList(thisMap));
-                int cnt = things.Count;
+                var cnt = things.Count;
                 for (var i = 0; i < cnt; i++)
                 {
                     var item = things[i];
-                    if (item.def.category == ThingCategory.Item)
+                    if (item.def.category != ThingCategory.Item) continue;
+                    if (cell != thisPos && !GravshipPlacementUtility.placingGravship)
                     {
-                        if (cell != thisPos)
-                        {
-                            HandleNewItem(item);
-                        }
-                        else
-                        {
-                            if (!items.Contains(item))
-                            {
-                                items.Add(item);
-                                ItemCountsAdded(item.def, item.stackCount);
-                                deregisterDrawItem(item);
-                            }
-                        }
+                        HandleNewItem(item);
+                    }
+                    else
+                    {
+                        if (items.Contains(item)) continue;
+                        items.Add(item);
+                        ItemCountsAdded(item.def, item.stackCount);
+                        DeregisterDrawItem(item);
                     }
                 }
             }
@@ -364,27 +349,26 @@ namespace ProjectRimFactory.Storage
         }
         
         /// <summary>
-        /// Calls <see cref="RegisterNewItem"/> And <see cref="deregisterDrawItem"/>
+        /// Calls <see cref="RegisterNewItem"/> And <see cref="DeregisterDrawItem"/>
         /// for the Item.
         /// </summary>
         /// <param name="item"></param>
         public void HandleNewItem(Thing item)
         {
             RegisterNewItem(item);
-            deregisterDrawItem(item);
+            DeregisterDrawItem(item);
         }
 
         /// <summary>
         /// Hides Things that get drawn with a RealTime Drawer
         /// </summary>
         /// <param name="item"></param>
-        private void deregisterDrawItem(Thing item)
+        private void DeregisterDrawItem(Thing item)
         {
             if (item.def.drawerType is DrawerType.MapMeshAndRealTime or DrawerType.RealtimeOnly)
             {
                 Map.dynamicDrawManager.DeRegisterDrawable(item);
             }
-
         }
 
         public void HandleMoveItem(Thing item)
@@ -402,43 +386,42 @@ namespace ProjectRimFactory.Storage
             return AllSlotCells()?.Contains(pos) ?? false;
         }
 
-        void ItemCountsRemoved(ThingDef def , int cnt)
+        void ItemCountsRemoved(ThingDef removedDef , int cnt)
         {
-            if(itemCounts.TryGetValue(def, out var count))
+            if(itemCounts.TryGetValue(removedDef, out var count))
             {
                 if (cnt > count)
                 {
-                    Log.Error($"ItemCountsRemoved attempted to remove {cnt}/{count} Items of {def}");
-                    itemCounts[def] = 0;
+                    Log.Error($"ItemCountsRemoved attempted to remove {cnt}/{count} Items of {removedDef}");
+                    itemCounts[removedDef] = 0;
                 }
-                itemCounts[def] -= cnt;
+                itemCounts[removedDef] -= cnt;
             }
             else
             {
-                Log.Error($"ItemCountsRemoved attempted to remove nonexistent def {def}");
+                Log.Error($"ItemCountsRemoved attempted to remove nonexistent def {removedDef}");
             }
         }
         
-        public void ItemCountsAdded(ThingDef def , int cnt)
+        public void ItemCountsAdded(ThingDef addedDef , int cnt)
         {
-            if (!itemCounts.TryAdd(def, cnt))
+            if (!itemCounts.TryAdd(addedDef, cnt))
             {
-                itemCounts[def] += cnt;
+                itemCounts[addedDef] += cnt;
             }
         }
 
         readonly Dictionary<ThingDef, int> itemCounts = new();
 
-        public bool ItemIsLimit(ThingDef thing,bool CntStacks, int limit)
+        public bool ItemIsLimit(ThingDef thing,bool cntStacks, int limit)
         {
             if (limit < 0)
             {
                 return true;
             }
 
-            int cnt = 0;
-            itemCounts.TryGetValue(thing, out cnt);
-            if (CntStacks)
+            itemCounts.TryGetValue(thing, out var cnt);
+            if (cntStacks)
             {
                 cnt = Mathf.CeilToInt(((float)cnt) / thing.stackLimit);
             }
