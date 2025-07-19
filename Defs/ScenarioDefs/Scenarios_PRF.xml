@@ -24,7 +24,7 @@
                 </connections>
             </surfaceLayer>
             <parts>
-                <li Class="ScenPart_PlanetLayer">
+                <li MayRequire="Ludeon.RimWorld.Odyssey" Class="ScenPart_PlanetLayer">
                     <def>PlanetLayer</def>
                     <layer>Orbit</layer>
                     <settingsDef>Orbit</settingsDef>
