@@ -12,8 +12,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
     public abstract class Building_DynamicBillGiver : PRF_Building, IBillGiver, IBillTab
     {
         public abstract BillStack BillStack { get; }
-
-        public virtual IEnumerable<IntVec3> IngredientStackCells => this.GetComp<CompPowerWorkSetting>()?.GetRangeCells().Where(c => c.InBounds(this.Map)) ?? GenAdj.CellsAdjacent8Way(this).Where(c => c.InBounds(this.Map));
+        
+        // TODO: This could be much more efficient if that base is even used
+        public virtual IEnumerable<IntVec3> IngredientStackCells => this.GetComp<CompPowerWorkSetting>()?.GetRangeCells().
+            Where(c => c.InBounds(this.Map)) ?? GenAdj.CellsAdjacent8Way(this).Where(c => c.InBounds(this.Map));
         public bool CurrentlyUsableForBills() => false;
 
         public abstract IEnumerable<RecipeDef> GetAllRecipes();

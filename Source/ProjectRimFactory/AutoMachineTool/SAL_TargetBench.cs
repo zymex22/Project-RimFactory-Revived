@@ -670,7 +670,7 @@ namespace ProjectRimFactory.AutoMachineTool
             ResearchProjectDef researchProject = Find.ResearchManager.GetProject(null);
             if (researchProject != null)
             {
-                float statValue = Mathf.Max(mySAL.powerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Intellectual) * 0.115f + 0.08f), 0.1f);
+                float statValue = Mathf.Max(mySAL.PowerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Intellectual) * 0.115f + 0.08f), 0.1f);
                 statValue *= researchBench.GetStatValue(StatDefOf.ResearchSpeedFactor);
 
                 statValue /= researchProject.CostFactor(Faction.OfPlayer.def.techLevel);
@@ -767,7 +767,7 @@ namespace ProjectRimFactory.AutoMachineTool
             CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
 
             //Vanilla Mining Speed Calc may need an Update if Vanilla is Updated 
-            float statValue = DeepDrill_WorkAmount * Mathf.Max(mySAL.powerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Mining) * 0.12f + 0.04f), 0.1f);
+            float statValue = DeepDrill_WorkAmount * Mathf.Max(mySAL.PowerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Mining) * 0.12f + 0.04f), 0.1f);
 
             ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) + statValue);
             ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) + statValue * miningyieldfactors[mySAL.GetSkillLevel(SkillDefOf.Mining)] / 10000f);

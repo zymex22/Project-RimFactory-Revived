@@ -27,9 +27,9 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
 
-            if (!powerWorkSetting.Props.allowManualRangeTypeChange)
+            if (!PowerWorkSetting.Props.allowManualRangeTypeChange)
             {
-                powerWorkSetting.RangeTypeRot = this.Rotation;
+                PowerWorkSetting.RangeTypeRot = this.Rotation;
             }
 
         }

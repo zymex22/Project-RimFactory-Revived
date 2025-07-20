@@ -8,55 +8,37 @@ namespace ProjectRimFactory.AutoMachineTool
     public abstract class Building_BaseMachine<T> : Building_Base<T>, IPowerSupplyMachineHolder, IBeltConveyorSender where T : Thing
     {
 
-        public CompPowerWorkSetting powerWorkSetting;
+        public CompPowerWorkSetting PowerWorkSetting;
 
-        public IPowerSupplyMachine RangePowerSupplyMachine => powerWorkSetting;
+        public IPowerSupplyMachine RangePowerSupplyMachine => PowerWorkSetting;
 
         protected virtual int? SkillLevel => null;
 
-        [Unsaved]
-        protected bool setInitialMinPower = true;
-
-        protected CompPowerTrader powerComp;
+        private CompPowerTrader powerComp;
 
 
         public override void ExposeData()
         {
             base.ExposeData();
-            powerWorkSetting = this.GetComp<CompPowerWorkSetting>();
+            PowerWorkSetting = GetComp<CompPowerWorkSetting>();
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            this.powerComp = this.TryGetComp<CompPowerTrader>();
-            powerWorkSetting = this.GetComp<CompPowerWorkSetting>();
+            powerComp = this.TryGetComp<CompPowerTrader>();
+            PowerWorkSetting = GetComp<CompPowerWorkSetting>();
 
-            if (!respawningAfterLoad)
-            {
-                if (setInitialMinPower)
-                    powerWorkSetting.SupplyPowerForSpeed = 0;
-            }
-
-            this.MapManager.NextAction(powerWorkSetting.RefreshPowerStatus);
-            this.MapManager.AfterAction(5, powerWorkSetting.RefreshPowerStatus);
+            MapManager.NextAction(PowerWorkSetting.RefreshPowerStatus);
+            MapManager.AfterAction(5, PowerWorkSetting.RefreshPowerStatus);
         }
 
         protected override bool IsActive()
         {
-            if (this.powerComp == null || !this.powerComp.PowerOn)
-            {
-                return false;
-            }
-            return base.IsActive();
+            return powerComp is { PowerOn: true } && base.IsActive();
         }
 
-        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
-        {
-            base.DeSpawn();
-        }
-
-        protected override float WorkAmountPerTick => 10 * this.powerWorkSetting.GetSpeedFactor();
+        protected override float WorkAmountPerTick => 10 * PowerWorkSetting.GetSpeedFactor();
 
         public virtual bool Glowable => false;
 
@@ -64,9 +46,9 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override void ReceiveCompSignal(string signal)
         {
-            if (signal == CompPowerTrader.PowerTurnedOffSignal || signal == CompPowerTrader.PowerTurnedOnSignal)
+            if (signal is CompPowerTrader.PowerTurnedOffSignal or CompPowerTrader.PowerTurnedOnSignal)
             {
-                powerWorkSetting.RefreshPowerStatus();
+                PowerWorkSetting.RefreshPowerStatus();
             }
         }
     }
