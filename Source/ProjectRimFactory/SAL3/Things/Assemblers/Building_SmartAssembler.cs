@@ -14,21 +14,21 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                    from Thing t in c.GetThingList(Map)
                    let h = t as Building_RecipeHolder
                    where h != null
-                   from RecipeDef recipe in h.recipes
+                   from RecipeDef recipe in h.Recipes
                    where base.SatisfiesSkillRequirements(recipe)
                    select recipe;
         }
 
         public virtual void Notify_RecipeHolderRemoved()
         {
-            int count = BillStack.Bills.Count;
-            bool removed = false;
-            HashSet<RecipeDef> set = new HashSet<RecipeDef>(GetAllRecipes());
+            if (GravshipPlacementUtility.placingGravship || GravshipUtility.generatingGravship) return; // Don't remove stuff on GravShip move
+            var count = BillStack.Bills.Count;
+            HashSet<RecipeDef> set = [..GetAllRecipes()];
             BillStack.Bills.RemoveAll(b => !set.Contains(b.recipe));
-            removed = BillStack.Bills.Count < count;
+            var removed = BillStack.Bills.Count < count;
             if (CurrentBillReport != null && !set.Contains(CurrentBillReport.bill.recipe))
             {
-                for (int i = 0; i < CurrentBillReport.selected.Count; i++)
+                for (var i = 0; i < CurrentBillReport.selected.Count; i++)
                 {
                     GenPlace.TryPlaceThing(CurrentBillReport.selected[i], Position, Map, ThingPlaceMode.Near);
                 }

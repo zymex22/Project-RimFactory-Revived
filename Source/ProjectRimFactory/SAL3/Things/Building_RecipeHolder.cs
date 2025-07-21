@@ -9,11 +9,11 @@ namespace ProjectRimFactory.SAL3.Things
 {
     public class Building_RecipeHolder : Building, IRecipeHolderInterface
     {
-        static readonly IntVec3 Up = new IntVec3(0, 0, 1);
+        private static readonly IntVec3 Up = new IntVec3(0, 0, 1);
         //================================ Fields
-        protected RecipeDef workingRecipe;
-        protected float workAmount;
-        public List<RecipeDef> recipes = new List<RecipeDef>();
+        private RecipeDef workingRecipe;
+        private float workAmount;
+        public List<RecipeDef> Recipes = [];
         //================================ Misc
         public IEnumerable<Building_WorkTable> Tables => from IntVec3 cell in this.GetComp<CompRecipeImportRange>()?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)
                                                          where cell.InBounds(this.Map)
@@ -35,23 +35,23 @@ namespace ProjectRimFactory.SAL3.Things
         public float Progress_Learning => workAmount;
 
         RecipeDef IRecipeHolderInterface.Recipe_Learning { get => workingRecipe; set => workingRecipe = value; }
-        List<RecipeDef> IRecipeHolderInterface.Saved_Recipes { get => recipes; set => recipes = value; }
+        List<RecipeDef> IRecipeHolderInterface.Saved_Recipes { get => Recipes; set => Recipes = value; }
 
         // Used To detect if this is of type Bill_Mech
         // This is the same Logic as in RimWorld.BillUtility:MakeNewBill()
-        private bool IsBill_Mech(RecipeDef def)
+        private static bool IsBill_Mech(RecipeDef recipeDef)
         {
-            return def.mechResurrection || def.gestationCycles > 0;
+            return recipeDef.mechResurrection || recipeDef.gestationCycles > 0;
         }
 
         public virtual IEnumerable<RecipeDef> GetAllProvidedRecipeDefs()
         {
-            HashSet<RecipeDef> result = new HashSet<RecipeDef>();
-            foreach (Building_WorkTable table in Tables)
+            HashSet<RecipeDef> result = [];
+            foreach (var table in Tables)
             {
-                foreach (RecipeDef recipe in table.def.AllRecipes)
+                foreach (var recipe in table.def.AllRecipes)
                 {
-                    if (recipe.AvailableNow && !recipes.Contains(recipe) && !result.Contains(recipe) && !IsBill_Mech(recipe))
+                    if (recipe.AvailableNow && !Recipes.Contains(recipe) && !result.Contains(recipe) && !IsBill_Mech(recipe))
                         result.Add(recipe);
                 }
             }
@@ -81,16 +81,13 @@ namespace ProjectRimFactory.SAL3.Things
 
         List<FloatMenuOption> GetDebugOptions()
         {
-            List<FloatMenuOption> list = new List<FloatMenuOption>
-            {
-                new FloatMenuOption("Insta-finish", () => workAmount = 0f)
-            };
+            List<FloatMenuOption> list = [new FloatMenuOption("Insta-finish", () => workAmount = 0f)];
             return list;
         }
 
         protected virtual IEnumerable<FloatMenuOption> GetPossibleOptions()
         {
-            foreach (RecipeDef recipe in GetAllProvidedRecipeDefs())
+            foreach (var recipe in GetAllProvidedRecipeDefs())
             {
                 yield return new FloatMenuOption(recipe.LabelCap, () =>
                 {
@@ -109,23 +106,22 @@ namespace ProjectRimFactory.SAL3.Things
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             ResetProgress();
-            Map mapBefore = Map;
+            var mapBefore = Map;
             // Do not remove ToList - It evaluates the enumerable
-            List<IntVec3> cells = GenAdj.CellsAdjacent8Way(this).ToList();
-            base.DeSpawn();
-            for (int i = 0; i < cells.Count; i++)
+            var cells = GenAdj.CellsAdjacent8Way(this).ToList();
+            base.DeSpawn(mode);
+            for (var i = 0; i < cells.Count; i++)
             {
-                List<Thing> things = mapBefore.thingGrid.ThingsListAt(cells[i]);
-                for (int j = things.Count - 1; j >= 0; j--)
+                var things = mapBefore.thingGrid.ThingsListAt(cells[i]);
+                
+                for (var j = things.Count - 1; j >= 0; j--)
                 {
-                    if (things[j] is Building_SmartAssembler)
-                    {
-                        (things[j] as Building_SmartAssembler).Notify_RecipeHolderRemoved();
-                        // break; // We can afford to be silly and check everything in this one cell.
-                        // despawning does not happen often, right?
-                        // maybe?
-                        break; // maybe not, who knows.
-                    }
+                    if (things[j] is not Building_SmartAssembler assembler) continue;
+                    assembler.Notify_RecipeHolderRemoved();
+                    // break; // We can afford to be silly and check everything in this one cell.
+                    // despawning does not happen often, right?
+                    // maybe?
+                    break; // maybe not, who knows.
                 }
             }
         }
@@ -142,7 +138,7 @@ namespace ProjectRimFactory.SAL3.Things
                     if (workAmount < 0)
                     {
                         // Encode recipe
-                        recipes.Add(workingRecipe);
+                        Recipes.Add(workingRecipe);
                         ResetProgress();
                     }
                 }
@@ -152,8 +148,6 @@ namespace ProjectRimFactory.SAL3.Things
                     workAmount = GetLearnRecipeWorkAmount(workingRecipe);
                     Quered_Recipes.RemoveAt(0);
                 }
-
-
             }
             base.Tick();
         }
@@ -162,17 +156,17 @@ namespace ProjectRimFactory.SAL3.Things
         {
             base.ExposeData();
             Scribe_Defs.Look(ref workingRecipe, "workingRecipe");
-            Scribe_Collections.Look(ref recipes, "recipes", LookMode.Def);
+            Scribe_Collections.Look(ref Recipes, "recipes", LookMode.Def);
             Scribe_Values.Look(ref workAmount, "workAmount");
 
             Scribe_Collections.Look(ref quered_recipes, "quered_recipes");
 
-            quered_recipes ??= new List<RecipeDef>();
+            quered_recipes ??= [];
         }
         public override string GetInspectString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            string baseInspectString = base.GetInspectString();
+            var stringBuilder = new StringBuilder();
+            var baseInspectString = base.GetInspectString();
             if (baseInspectString.Length > 0)
             {
                 stringBuilder.AppendLine(baseInspectString);
@@ -181,14 +175,14 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 stringBuilder.AppendLine("SALInspect_RecipeReport".Translate(workingRecipe.label, workAmount.ToStringWorkAmount()));
             }
-            stringBuilder.AppendLine("SAL3_StoredRecipes".Translate(string.Join(", ", recipes.Select(r => r.label).ToArray())));
+            stringBuilder.AppendLine("SAL3_StoredRecipes".Translate(string.Join(", ", Recipes.Select(r => r.label).ToArray())));
             return stringBuilder.ToString().TrimEndNewlines();
         }
 
         public override void PostMake()
         {
             base.PostMake();
-            quered_recipes ??= new List<RecipeDef>();
+            quered_recipes ??= [];
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -197,12 +191,8 @@ namespace ProjectRimFactory.SAL3.Things
             
             // Check for Null Ref issues in Saved or Queued recipes
             // (That can happen if Mods are Removed mid-Save or some mod makes a breaking change)
-            recipes.RemoveAll(recipeDef => recipeDef is null);
+            Recipes.RemoveAll(recipeDef => recipeDef is null);
             quered_recipes.RemoveAll(recipeDef => recipeDef is null);
-
-            // Remove existing Mech Bills as the don't work
-            // This code can be removed in the future once we are reasonably certain that this was executed on each affected Save
-            recipes.RemoveAll(r => IsBill_Mech(r));
         }
     }
 }
