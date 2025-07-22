@@ -18,9 +18,9 @@ namespace ProjectRimFactory.Storage
 
         protected ThingOwner<Thing> thingOwner;
 
-        private List<Thing> items => thingOwner.InnerListForReading;
+        private List<Thing> Items => thingOwner.InnerListForReading;
 
-        private List<Building_StorageUnitIOBase> ports = new List<Building_StorageUnitIOBase>();
+        private List<Building_StorageUnitIOBase> ports = [];
 
         
         private string uniqueName;
@@ -35,11 +35,6 @@ namespace ProjectRimFactory.Storage
         //IRenameable
         public string InspectLabel => LabelCap;
 
-        /* TODO Check if we still need that
-        public override string LabelNoCount => uniqueName ?? base.LabelNoCount;
-        public override string LabelCap => uniqueName ?? base.LabelCap;
-         */
-
         public StorageSettings settings;
 
         //Initialized at spawn
@@ -50,8 +45,8 @@ namespace ProjectRimFactory.Storage
         //   One item on each cell and the rest multi-stacked on Position?
         public int MaxNumberItemsInternal => (ModExtension_Crate?.limit ?? int.MaxValue)
                                               - def.Size.Area + 1;
-        public List<Thing> StoredItems => items;
-        public int StoredItemsCount => items.Count;
+        public List<Thing> StoredItems => Items;
+        public int StoredItemsCount => Items.Count;
         public virtual bool CanReceiveIO => true;
         public virtual bool Powered => true;
 
@@ -125,16 +120,16 @@ namespace ProjectRimFactory.Storage
 
         public virtual void RegisterNewItem(Thing newItem)
         {
-            if (items.Contains(newItem))
+            if (Items.Contains(newItem))
             {
                 Log.Message($"dup: {newItem}");
                 return;
             }
 
-            var items_arr = items.ToArray();
-            for (var i = 0; i < items_arr.Length; i++)
+            var itemsArr = Items.ToArray();
+            for (var i = 0; i < itemsArr.Length; i++)
             {
-                var item = items_arr[i];
+                var item = itemsArr[i];
                 //CanStackWith is already called by TryAbsorbStack...
                 //Is the Item Check really needed?
                 if (item.def.category == ThingCategory.Item)
@@ -143,25 +138,20 @@ namespace ProjectRimFactory.Storage
             }
 
             //Add a new stack of a thing
-            if (!newItem.Destroyed)
-            {
-                //Remove current holdingOwner before adding the Item to the Storage
-                if (newItem.holdingOwner != null)
-                {
-                    newItem.holdingOwner.Remove(newItem);
-                }
-                //TryAdd Could also handle Merging this is disabled for the following reasons
-                //We already handle that above
-                //Our option should be faster
-                thingOwner.TryAdd(newItem, false);
+            if (newItem.Destroyed) return;
+            //Remove current holdingOwner before adding the Item to the Storage
+            newItem.holdingOwner?.Remove(newItem);
+            //TryAdd Could also handle Merging this is disabled for the following reasons
+            //We already handle that above
+            //Our option should be faster
+            thingOwner.TryAdd(newItem, false);
 
-                //What appens if its full?
-                if (CanStoreMoreItems)
-                {
-                    newItem.Position = Position;
-                }
-                if (newItem.Spawned) newItem.DeSpawn();
+            //What happens if it's full?
+            if (CanStoreMoreItems)
+            {
+                newItem.Position = Position;
             }
+            if (newItem.Spawned) newItem.DeSpawn();
         }
 
         public override void ExposeData()
@@ -179,15 +169,15 @@ namespace ProjectRimFactory.Storage
             var original = base.GetInspectString();
             var stringBuilder = new StringBuilder();
             if (!string.IsNullOrEmpty(original)) stringBuilder.AppendLine(original);
-            stringBuilder.Append("PRF_TotalStacksNum".Translate(items.Count));
+            stringBuilder.Append("PRF_TotalStacksNum".Translate(Items.Count));
             return stringBuilder.ToString();
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            if (!ProjectRimFactory_ModComponent.ModSupport_SOS2_MoveShip)
+            if (!ProjectRimFactory_ModComponent.ModSupport_SOS2_MoveShip && !GravshipUtility.generatingGravship)
             {
-                var thingsToSplurge = items;
+                var thingsToSplurge = Items;
                 for (var i = 0; i < thingsToSplurge.Count; i++)
                 {
                     if (thingsToSplurge[i].def.category == ThingCategory.Item)
@@ -224,10 +214,10 @@ namespace ProjectRimFactory.Storage
         public float GetItemWealth()
         {
             float output = 0;
-            var itemsc = items.Count;
+            var itemsc = Items.Count;
             for (int i = 0; i < itemsc; i++)
             {
-                var item = items[i];
+                var item = Items[i];
                 output += item.MarketValue * item.stackCount;
             }
 
@@ -344,9 +334,9 @@ namespace ProjectRimFactory.Storage
         public void HandleMoveItem(Thing item)
         {
             //With the use of thingOwner this check might be redundent
-            if (items.Contains(item))
+            if (Items.Contains(item))
             {
-                items.Remove(item);
+                Items.Remove(item);
             }
         }
 
