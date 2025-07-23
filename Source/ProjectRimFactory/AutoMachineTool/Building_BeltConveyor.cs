@@ -45,7 +45,6 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public Building_BeltConveyor()
         {
-            base.setInitialMinPower = false;
             this.thingOwnerInt = new ThingOwner_Conveyor(this);
             // this is a horrible bastardization of AutoMachineTool and 
             //  RW's ThingOwner mechanism, made viable by C#'s list-by-

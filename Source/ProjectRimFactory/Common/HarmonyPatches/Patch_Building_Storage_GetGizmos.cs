@@ -22,7 +22,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         static MethodBase TargetMethod()
         {
             var predicateClass = typeof(Building_Storage).GetNestedTypes(HarmonyLib.AccessTools.all)
-               .FirstOrDefault(t => t.FullName.Contains("d__52"));
+               .FirstOrDefault(t => t.FullName.Contains("d__54"));
             if (predicateClass == null)
             {
                 Log.Error("PRF Harmony Error - predicateClass == null for Patch_Building_Storage_GetGizmos.TargetMethod()");

@@ -2,57 +2,57 @@
 using System;
 using UnityEngine;
 using Verse;
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace ProjectRimFactory.Common
 {
     public class CompGlowerPulse : CompGlower, ITicker
     {
-        public new CompProperties_GlowerPulse Props => (CompProperties_GlowerPulse)this.props;
+        private new CompProperties_GlowerPulse Props => (CompProperties_GlowerPulse)props;
 
         public override void PostExposeData()
         {
             base.PostExposeData();
-            Scribe_Values.Look<bool>(ref this.glows, "glows", true);
-            this.Props.Glows = this.glows;
+            Scribe_Values.Look<bool>(ref glows, "glows", true);
+            Props.Glows = glows;
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
-            this.Props.Glows = this.glows;
+            Props.Glows = glows;
 
-            this.parent.Map.GetComponent<PRFMapComponent>()?.AddTicker(this);
+            parent.Map.GetComponent<PRFMapComponent>()?.AddTicker(this);
         }
 
-        public override void PostDeSpawn(Map map)
+        public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
         {
-            base.PostDeSpawn(map);
+            base.PostDeSpawn(map, mode);
 
             map.GetComponent<PRFMapComponent>()?.RemoveTicker(this);
         }
 
         public void Tick()
         {
-            if (this.needUpdate || this.Props.pulse)
-            {
-                this.Props.Update();
-                // MarkGlowGridDirty
-                this.parent.Map.glowGrid.DirtyCache(this.parent.Position);
-                this.needUpdate = false;
-            }
+            if (!needUpdate && !Props.pulse) return;
+            Props.Update();
+            // MarkGlowGridDirty
+            //DirtyCache
+            parent.Map.glowGrid.DirtyCell(parent.Position);
+            needUpdate = false;
         }
 
         private bool glows = true;
 
         public new bool Glows
         {
-            get => this.glows;
+            get => glows;
 
             set
             {
-                this.glows = value;
-                this.Props.Glows = value;
-                this.needUpdate = true;
+                glows = value;
+                Props.Glows = value;
+                needUpdate = true;
             }
         }
 
@@ -64,7 +64,7 @@ namespace ProjectRimFactory.Common
     {
         public CompProperties_GlowerPulse()
         {
-            this.compClass = typeof(CompGlowerPulse);
+            compClass = typeof(CompGlowerPulse);
         }
         public int lastTick = 0;
 
@@ -88,44 +88,44 @@ namespace ProjectRimFactory.Common
 
         public void Update()
         {
-            if (this.lastTick == Find.TickManager.TicksGame)
+            if (lastTick == Find.TickManager.TicksGame)
             {
                 return;
             }
-            this.lastTick = Find.TickManager.TicksGame;
-            if (this.Glows)
+            lastTick = Find.TickManager.TicksGame;
+            if (Glows)
             {
                 if (!pulse)
                 {
-                    this.glowColor = Color32.Lerp(minGlowColor.ProjectToColor32, maxGlowColor.ProjectToColor32, 0.5f).AsColorInt();
-                    this.glowRadius = Mathf.Lerp(minGlowRadius, maxGlowRadius, 0.5f);
+                    glowColor = Color32.Lerp(minGlowColor.ProjectToColor32(), maxGlowColor.ProjectToColor32(), 0.5f).AsColorInt();
+                    glowRadius = Mathf.Lerp(minGlowRadius, maxGlowRadius, 0.5f);
                     return;
                 }
-                if (this.easing == null)
+                if (easing == null)
                 {
-                    if (this.easingType != null)
+                    if (easingType != null)
                     {
-                        this.easing = (IEasing)Activator.CreateInstance(this.easingType);
+                        easing = (IEasing)Activator.CreateInstance(easingType);
                     }
                     else
                     {
-                        this.easing = new EasingLinear();
+                        easing = new EasingLinear();
                     }
                 }
-                var time = ((Find.TickManager.TicksGame + lag) % (this.intervalTicks * 2)) / this.intervalTicks;
+                var time = ((Find.TickManager.TicksGame + lag) % (intervalTicks * 2)) / intervalTicks;
                 if (time > 1.0f)
                 {
                     time = 2.0f - time;
                 }
-                var factor = this.easing.GetValue(time);
+                var factor = easing.GetValue(time);
 
-                this.glowColor = Color32.Lerp(minGlowColor.ProjectToColor32, maxGlowColor.ProjectToColor32, factor).AsColorInt();
-                this.glowRadius = Mathf.Lerp(minGlowRadius, maxGlowRadius, factor);
+                glowColor = Color32.Lerp(minGlowColor.ProjectToColor32(), maxGlowColor.ProjectToColor32(), factor).AsColorInt();
+                glowRadius = Mathf.Lerp(minGlowRadius, maxGlowRadius, factor);
             }
             else
             {
-                this.glowColor = ((Color32)Color.clear).AsColorInt();
-                this.glowRadius = 0;
+                glowColor = ((Color32)Color.clear).AsColorInt();
+                glowRadius = 0;
             }
         }
     }

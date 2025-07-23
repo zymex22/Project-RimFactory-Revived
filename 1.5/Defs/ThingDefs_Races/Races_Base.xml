@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+<!-- ================================= Pawn Base =================================== -->
+  <ThingDef Name="PRFBasePawn" Abstract="True">
+    <thingClass>Pawn</thingClass>
+    <category>Pawn</category>
+    <selectable>true</selectable>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <useHitPoints>false</useHitPoints>
+    <hasTooltip>true</hasTooltip>
+    <soundImpactDefault>BulletImpact_Flesh</soundImpactDefault>
+    <statBases>
+      <Mass>70</Mass>
+    </statBases>
+    <inspectorTabs>
+      <li>ITab_Pawn_Health</li>
+      <li>ITab_Pawn_Needs</li>
+      <li>ITab_Pawn_Character</li>
+      <li>ITab_Pawn_Training</li>
+      <li>ITab_Pawn_Social</li>
+      <li>ITab_Pawn_Guest</li>
+      <li>ITab_Pawn_Prisoner</li>
+      <li>ITab_Pawn_FormingCaravan</li>
+      <li>ITab_Pawn_Gear</li>
+      <li>ITab_Pawn_Log</li>
+    </inspectorTabs>
+    <comps>
+      <li>
+        <compClass>CompAttachBase</compClass>
+      </li>
+    </comps>
+    <drawGUIOverlay>true</drawGUIOverlay>
+  </ThingDef>
+
+
+<!-- ================================= Drone Base =================================== -->
+  <ThingDef Name="PRFDroneBase" Abstract="True">
+    <statBases>
+      <PsychicSensitivity>0</PsychicSensitivity>
+      <Flammability>0</Flammability>
+      <ComfyTemperatureMin>-100</ComfyTemperatureMin>
+      <ComfyTemperatureMax>250</ComfyTemperatureMax>
+      <LeatherAmount>25</LeatherAmount>
+      <Mass>20</Mass>
+      <FilthRate>0</FilthRate>
+    </statBases>
+    <inspectorTabs>
+      <!-- 
+      <li>ITab_Pawn_Health</li>
+      <li>ITab_Pawn_Needs</li> 
+      <li>ITab_Pawn_Gear</li>
+	  <li>ITab_Pawn_Character</li>
+	  <li>ITab_Pawn_Training</li>
+	  <li>ITab_Pawn_Guest</li>
+	  <li>ITab_Pawn_Prisoner</li>
+	  <li>ITab_Pawn_Social</li> 
+      <li>ITab_Pawn_FormingCaravan</li>
+      <li>ITab_Pawn_Log</li>
+	  -->
+    </inspectorTabs>
+    <comps>
+      <li>
+        <compClass>CompAttachBase</compClass>
+      </li>
+    </comps>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <race>
+      <thinkTreeMain>Animal</thinkTreeMain>
+      <thinkTreeConstant>AnimalConstant</thinkTreeConstant>
+      <nameGenerator>NamerAnimalGenericMale</nameGenerator>
+      <nameGeneratorFemale>NamerAnimalGenericFemale</nameGeneratorFemale>
+      <manhunterOnDamageChance>0.0125</manhunterOnDamageChance>
+      <manhunterOnTameFailChance>0.003</manhunterOnTameFailChance>
+      <fleshType>Mechanoid</fleshType>
+      <needsRest>false</needsRest>
+      <hasGenders>false</hasGenders>
+      <makesFootprints>false</makesFootprints>
+      <foodType>None</foodType>
+    </race>
+    <thingClass>Pawn</thingClass>
+    <category>Pawn</category>
+    <selectable>false</selectable>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Pawn</altitudeLayer>
+    <useHitPoints>false</useHitPoints>
+    <hasTooltip>true</hasTooltip>
+    <soundImpactDefault>BulletImpact_Metal</soundImpactDefault>
+  </ThingDef>
+
+
+<!-- ================================= Drone =================================== -->
+  <ThingDef ParentName="PRFDroneBase">
+    <defName>PRFDrone</defName>
+    <label>drone</label>
+    <description>A small, low-flying drone.</description>
+    <thingClass>ProjectRimFactory.Drones.Pawn_Drone</thingClass>
+    <graphicData>
+      <texPath>Common/DroneModule</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+      <drawSize>1</drawSize>
+      <shadowData>
+        <volume>(0.4, 0.4, 0.4)</volume>
+      </shadowData>
+    </graphicData>
+    <statBases>
+      <MoveSpeed>6.6</MoveSpeed>
+      <ArmorRating_Blunt>0.1</ArmorRating_Blunt>
+      <ArmorRating_Sharp>0.25</ArmorRating_Sharp>
+      <MeatAmount>0</MeatAmount>
+    </statBases>
+    <tools>
+      <li>
+        <label>head</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>7</power>
+        <cooldownTime>1.65</cooldownTime>
+        <linkedBodyPartsGroup>HeadAttackTool</linkedBodyPartsGroup>
+        <chanceFactor>0.2</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <petness>0</petness>
+      <intelligence>ToolUser</intelligence>
+      <thinkTreeMain>PRFDrone</thinkTreeMain>
+      <thinkTreeConstant>DroneConstant</thinkTreeConstant>
+	  <renderTree>Misc</renderTree>
+      <body>PRFDrone</body>
+      <baseBodySize>0.5</baseBodySize>
+      <baseHealthScale>0.8</baseHealthScale>
+      <lifeStageAges>
+        <li>
+          <def>MechanoidFullyFormed</def>
+          <minAge>0</minAge>
+          <soundWounded>Pawn_Melee_MechanoidSlash_HitBuilding</soundWounded>
+          <!--soundDeath>Pawn_Mech_Scyther_Death</soundDeath-->
+          <!--soundCall>Pawn_Mech_Scyther_Call</soundCall-->
+        </li>
+      </lifeStageAges>
+      <soundCallIntervalRange>
+        <min>1000</min>
+        <max>2000</max>
+      </soundCallIntervalRange>
+      <soundMeleeHitPawn>Pawn_Melee_MechanoidSlash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_MechanoidSlash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_MechanoidSlash_Miss</soundMeleeMiss>
+    </race>
+    <butcherProducts>
+      <Steel>20</Steel>
+      <Plasteel>5</Plasteel>
+    </butcherProducts>
+  </ThingDef>
+
+<!-- ================================= Drone PawnKindDef =================================== -->
+  <PawnKindDef>
+    <defName>PRFDroneKind</defName>
+    <label>drone</label>
+    <race>PRFDrone</race>
+    <combatPower>160</combatPower>
+    <defaultFactionType>PlayerColony</defaultFactionType>
+    <aiAvoidCover>true</aiAvoidCover>
+    <isFighter>false</isFighter>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>Common/DroneModule</texPath>
+          <graphicClass>Graphic_Single</graphicClass>
+          <shaderType>Transparent</shaderType>
+          <drawSize>1</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.4, 0.4)</volume>
+          </shadowData>
+        </bodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+</Defs>

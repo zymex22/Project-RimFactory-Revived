@@ -72,8 +72,9 @@ namespace ProjectRimFactory.Storage
             }
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
+            if (!Spawned) return;
             updateQueue();
 
             if (this.IsHashIntervalTick(10))

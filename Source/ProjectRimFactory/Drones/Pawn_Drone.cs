@@ -5,11 +5,12 @@ using Verse;
 
 namespace ProjectRimFactory.Drones
 {
-
-
+    
     public class Pawn_Drone : Pawn
     {
-        public Building_DroneStation station;
+        public Building_DroneStation BaseStation;
+        
+        private ModExtension_Skills skillSettings;
 
         // don't do anythin exciting when killed - just disappear:
         //   (this keeps weird side effects from happening, such as
@@ -29,12 +30,10 @@ namespace ProjectRimFactory.Drones
             ReflectionUtility.mapIndexOrState.SetValue(this, (sbyte)-2);
         }
 
-        private ModExtension_Skills skillSettings;
-
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             //Kill all invalid spawns
-            if (this.station == null)
+            if (this.BaseStation == null)
             {
                 this.Kill(null);
                 return;
@@ -42,8 +41,8 @@ namespace ProjectRimFactory.Drones
 
             base.SpawnSetup(map, respawningAfterLoad);
             skills = new Pawn_SkillTracker(this);
-            skillSettings = station.def.GetModExtension<ModExtension_Skills>();
-            station.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings, true);
+            skillSettings = BaseStation.def.GetModExtension<ModExtension_Skills>();
+            BaseStation.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills, BaseStation.GetDroneSkillsRecord, skillSettings, true);
 
             story = new Pawn_StoryTracker(this)
             {
@@ -57,10 +56,10 @@ namespace ProjectRimFactory.Drones
 
             //Set the AreaRestriction. null means Unrestricted
             // TODO Check if that is the correct replacement of if i need that effective thing
-            playerSettings.AreaRestrictionInPawnCurrentMap = this.station.droneAllowedArea;
+            playerSettings.AreaRestrictionInPawnCurrentMap = this.BaseStation.DroneAllowedArea;
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             //This is an issue
             //from what i understand base.base is not a option
@@ -68,39 +67,30 @@ namespace ProjectRimFactory.Drones
 
             //JobTrackerTick is the biggest / only issue. its insanly high for some reason
             base.Tick();
+            if (!Spawned) return;
             if (Downed)
             {
                 Kill(null);
             }
         }
 
-        //Disabeling this for now as i think we dont need the refresh on Rare Tick.
-        //I think on spawn && Long Tick is Enoth
-        //public override void TickRare()
-        //{
-        //    base.TickRare();
-        //    DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings);
-        //}
-
         public override void TickLong()
         {
             base.TickLong();
-            station.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills, station.GetDroneSkillsRecord, skillSettings, true);
+            if (!Spawned) return;
+            BaseStation.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills, BaseStation.GetDroneSkillsRecord, skillSettings, true);
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             base.DeSpawn(mode);
-            if (station != null)
-            {
-                station.Notify_DroneMayBeLost(this);
-            }
+            BaseStation?.Notify_DroneMayBeLost(this);
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look(ref station, "station");
+            Scribe_References.Look(ref BaseStation, "station");
         }
     }
 }

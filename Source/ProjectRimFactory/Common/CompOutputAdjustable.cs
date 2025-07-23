@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -6,34 +7,59 @@ namespace ProjectRimFactory.Common
 {
     public class CompOutputAdjustable : ThingComp
     {
-        int index;
-
+        private int index = 0;
+        
+        // Normalized to possibleOutputs.Count
+        private int Index
+        {
+            get => index;
+            set
+            {
+                index = value;
+                if (index < 0) index += possibleOutputs.Count;
+                index %= possibleOutputs.Count;
+            }
+        }
+        
         public bool Visible = true;
 
         public CompProperties_CompOutputAdjustable Props => (CompProperties_CompOutputAdjustable)this.props;
 
-        List<IntVec3> possibleOutputs = new List<IntVec3>();
-        public IntVec3 CurrentCell => possibleOutputs[index %= possibleOutputs.Count];
+        private List<IntVec3> possibleOutputs = [];
+        public IntVec3 CurrentCell => possibleOutputs[Index];
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
+            
+            if (GravshipPlacementUtility.placingGravship)
+            {
+                var rotInCurrentLanding = Find.CurrentGravship.Rotation;
+                var rotInt = rotInCurrentLanding.AsInt;
+                rotInt = rotInt switch
+                {
+                    1 => 3,
+                    3 => 1,
+                    _ => rotInt
+                };
+
+                Index += ((possibleOutputs.Count / 4) * rotInt);
+            }
             if (Props.SupportDiagonal)
             {
-                possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacent8Way(parent));
+                possibleOutputs = [..GenAdj.CellsAdjacent8Way(parent)];
             }
             else
             {
-                possibleOutputs = new List<IntVec3>(GenAdj.CellsAdjacentCardinal(parent));
+                possibleOutputs = [..GenAdj.CellsAdjacentCardinal(parent)];
             }
-
         }
         public override void PostDrawExtraSelectionOverlays()
         {
             base.PostDrawExtraSelectionOverlays();
             if (Visible)
             {
-                GenDraw.DrawFieldEdges(new List<IntVec3> { CurrentCell }, Color.yellow);
+                GenDraw.DrawFieldEdges([CurrentCell], Color.yellow);
             }
 
         }
@@ -45,18 +71,8 @@ namespace ProjectRimFactory.Common
                 yield return new Command_ActionRightLeft()
                 {
                     defaultLabel = "AdjustDirection_Output".Translate(),
-                    actionL = () => index++,
-                    actionR = () =>
-                    {
-                        if (index == 0)
-                        {
-                            index = possibleOutputs.Count - 1;
-                        }
-                        else
-                        {
-                            index--;
-                        }
-                    },
+                    actionL = () => Index++,
+                    actionR = () => Index--,
                     icon = TexUI.RotRightTex,
                     defaultIconColor = Color.green
                 };

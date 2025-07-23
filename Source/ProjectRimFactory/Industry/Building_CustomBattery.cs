@@ -34,9 +34,10 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             if (ticksToExplode > 0)
             {
                 if (wickSustainer == null)

@@ -200,9 +200,10 @@ namespace ProjectRimFactory.Storage
         }
 
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
+            if (!Spawned) return;
             if (this.IsHashIntervalTick(10))
             {
                 Notify_NeedRefresh();

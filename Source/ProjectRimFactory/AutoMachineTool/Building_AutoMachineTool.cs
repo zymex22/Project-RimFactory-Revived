@@ -15,8 +15,8 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public Building_AutoMachineTool()
         {
-            this.forcePlace = false;
-            this.targetEnumrationCount = 0;
+            forcePlace = false;
+            targetEnumrationCount = 0;
         }
 
         private bool forbidItem = false;
@@ -25,38 +25,38 @@ namespace ProjectRimFactory.AutoMachineTool
 
         ModExtension_Skills extension_Skills;
 
-        public ModExtension_ModifyProduct ModifyProductExt => this.def.GetModExtension<ModExtension_ModifyProduct>();
+        public ModExtension_ModifyProduct ModifyProductExt => def.GetModExtension<ModExtension_ModifyProduct>();
 
         public int GetSkillLevel(SkillDef def)
         {
-            return extension_Skills?.GetExtendedSkillLevel(def, typeof(Building_AutoMachineTool)) ?? this.SkillLevel ?? 0;
+            return extension_Skills?.GetExtendedSkillLevel(def, typeof(Building_AutoMachineTool)) ?? SkillLevel ?? 0;
         }
 
-        protected override int? SkillLevel => this.def.GetModExtension<ModExtension_Tier>()?.skillLevel;
+        protected override int? SkillLevel => def.GetModExtension<ModExtension_Tier>()?.skillLevel;
 
         public override bool Glowable => false;
 
         public override void ExposeData()
         {
-            Scribe_Deep.Look<SAL_TargetBench>(ref this.salTarget, "salTarget");
+            Scribe_Deep.Look<SAL_TargetBench>(ref salTarget, "salTarget");
             base.ExposeData();
-            Scribe_Values.Look<bool>(ref this.forbidItem, "forbidItem");
+            Scribe_Values.Look<bool>(ref forbidItem, "forbidItem");
 
         }
 
         public bool GetTarget()
         {
-            bool verdict = GetTarget(this.Position, this.Rotation, this.Map, true);
+            bool verdict = GetTarget(Position, Rotation, Map, true);
             //Alter visuals based on the target
-            if (verdict && !(salTarget is SAL_TargetWorktable))
+            if (verdict && salTarget is not SAL_TargetWorktable)
             {
-                this.compOutputAdjustable.Visible = false;
-                this.powerWorkSetting.RangeSettingHide = true;
+                compOutputAdjustable.Visible = false;
+                PowerWorkSetting.RangeSettingHide = true;
             }
             else if (verdict)
             {
-                this.compOutputAdjustable.Visible = true;
-                this.powerWorkSetting.RangeSettingHide = false;
+                compOutputAdjustable.Visible = true;
+                PowerWorkSetting.RangeSettingHide = false;
             }
 
             return verdict;
@@ -68,34 +68,29 @@ namespace ProjectRimFactory.AutoMachineTool
                 .Where(t => t.def.category == ThingCategory.Building)
                 .Where(t => t.InteractionCell == pos);
 
-            Building_WorkTable new_my_workTable = (Building_WorkTable)buildings
-                .Where(t => t is Building_WorkTable)
-                .FirstOrDefault();
-            Building new_drilltypeBuilding = (Building)buildings
-                .Where(t => t is Building && t.TryGetComp<CompDeepDrill>() != null)
-                .FirstOrDefault();
-            Building_ResearchBench new_researchBench = (Building_ResearchBench)buildings
-                .Where(t => t is Building_ResearchBench)
-                .FirstOrDefault();
+            var newMyWorkTable = (Building_WorkTable)buildings.FirstOrDefault(t => t is Building_WorkTable);
+            var new_drilltypeBuilding = (Building)buildings.FirstOrDefault(t => t is Building && t.TryGetComp<CompDeepDrill>() != null);
+            var new_researchBench = (Building_ResearchBench)buildings.FirstOrDefault(t => t is Building_ResearchBench);
+            
             if (spawned)
             {
-                if ((salTarget is SAL_TargetWorktable && new_my_workTable == null) || (salTarget is SAL_TargetResearch && new_researchBench == null) || (salTarget is SAL_TargetDeepDrill && new_drilltypeBuilding == null))
+                if ((salTarget is SAL_TargetWorktable && newMyWorkTable == null) || (salTarget is SAL_TargetResearch && new_researchBench == null) || (salTarget is SAL_TargetDeepDrill && new_drilltypeBuilding == null))
                 {
                     //Log.Message($"new_my_workTable == null: {new_my_workTable == null}|| new_researchBench == null: {new_researchBench == null}|| new_drilltypeBuilding == null: {new_drilltypeBuilding == null} ");
                     salTarget.Free();
                 }
             }
-            if (new_my_workTable != null)
+            if (newMyWorkTable != null)
             {
-                salTarget = new SAL_TargetWorktable(this, this.Position, this.Map, this.Rotation, new_my_workTable);
+                salTarget = new SAL_TargetWorktable(this, Position, Map, Rotation, newMyWorkTable);
             }
             else if (new_drilltypeBuilding != null)
             {
-                salTarget = new SAL_TargetDeepDrill(this, this.Position, this.Map, this.Rotation, new_drilltypeBuilding);
+                salTarget = new SAL_TargetDeepDrill(this, Position, Map, Rotation, new_drilltypeBuilding);
             }
             else if (new_researchBench != null)
             {
-                salTarget = new SAL_TargetResearch(this, this.Position, this.Map, this.Rotation, new_researchBench);
+                salTarget = new SAL_TargetResearch(this, Position, Map, Rotation, new_researchBench);
             }
             else
             {
@@ -109,7 +104,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
-            if (salTarget == null && this.State != WorkingState.Ready) this.State = WorkingState.Ready;
+            if (salTarget == null && State != WorkingState.Ready) State = WorkingState.Ready;
             base.SpawnSetup(map, respawningAfterLoad);
 
             if (salTarget == null)
@@ -122,19 +117,19 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             salTarget?.Free();
-            base.DeSpawn();
+            base.DeSpawn(mode);
             salTarget = null;
         }
 
         public override void PostMapInit()
         {
             base.PostMapInit();
-            this.WorkTableSetting();
+            WorkTableSetting();
         }
 
         protected override void Reset()
         {
-            salTarget?.Reset(this.State);
+            salTarget?.Reset(State);
 
             base.Reset();
         }
@@ -142,13 +137,13 @@ namespace ProjectRimFactory.AutoMachineTool
         protected override void CleanupWorkingEffect()
         {
             base.CleanupWorkingEffect();
-            salTarget?.CleanupWorkingEffect(this.MapManager);
+            salTarget?.CleanupWorkingEffect(MapManager);
         }
 
         protected override void CreateWorkingEffect()
         {
             base.CreateWorkingEffect();
-            salTarget?.CreateWorkingEffect(this.MapManager);
+            salTarget?.CreateWorkingEffect(MapManager);
         }
 
 
@@ -163,22 +158,20 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         private void WorkTableSetting()
         {
-            if (salTarget == null)
-            {
-                GetTarget();
-                this.Reset();
-            }
+            if (salTarget != null) return;
+            GetTarget();
+            Reset();
         }
 
         protected override void Ready()
         {
-            this.WorkTableSetting();
+            WorkTableSetting();
             base.Ready();
         }
 
         private IntVec3 FacingCell()
         {
-            return this.Position + this.Rotation.FacingCell;
+            return Position + Rotation.FacingCell;
         }
 
 
@@ -202,41 +195,23 @@ namespace ProjectRimFactory.AutoMachineTool
             return res;
         }
 
-        protected override bool FinishWorking(Building_AutoMachineTool working, out List<Thing> products)
+        protected override bool FinishWorking(Building_AutoMachineTool _, out List<Thing> products)
         {
             salTarget.WorkDone(out products);
             return true;
-        }
-
-        public List<IntVec3> OutputZone()
-        {
-            return this.OutputCell().SlotGroupCells(Map);
         }
 
         public override IntVec3 OutputCell()
         {
             return compOutputAdjustable.CurrentCell;
         }
-
-        public override IEnumerable<InspectTabBase> GetInspectTabs()
-        {
-            return base.GetInspectTabs();
-        }
-
-
-
+        
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (var g in base.GetGizmos())
             {
                 yield return g;
             }
-        }
-
-        public override string GetInspectString()
-        {
-            String msg = base.GetInspectString();
-            return msg;
         }
 
         public Room GetRoom(RegionType type)
@@ -247,24 +222,21 @@ namespace ProjectRimFactory.AutoMachineTool
 
         private Building_WorkTable GetmyTragetWorktable()
         {
-            return (Building_WorkTable)this.FacingCell().GetThingList(Map)
+            return (Building_WorkTable)FacingCell()
+                .GetThingList(Map)
                 .Where(t => t.def.category == ThingCategory.Building)
-                .Where(t => t is Building_WorkTable)
-                .Where(t => t.InteractionCell == this.Position).FirstOrDefault();
+                .Where(t => t is Building_WorkTable).FirstOrDefault(t => t.InteractionCell == Position);
         }
 
-        protected override bool WorkInterruption(Building_AutoMachineTool working)
+        protected override bool WorkInterruption(Building_AutoMachineTool _)
         {
-            //Interupt if worktable chenged or is null
-            if (salTarget == null || (salTarget is SAL_TargetWorktable && GetmyTragetWorktable() == null /*|| GetmyTragetWorktable() != my_workTable*/))
+            //Interrupt if worktable changed or is null
+            if (salTarget == null || (salTarget is SAL_TargetWorktable && GetmyTragetWorktable() == null))
             {
                 return true;
             }
             //Interrupt if worktable is not ready for work
-            //if (my_workTable != null) return !my_workTable.CurrentlyUsableForBills();
-
-            var notready = !salTarget.Ready();
-            return notready;
+            return !salTarget.Ready();
         }
 
     }

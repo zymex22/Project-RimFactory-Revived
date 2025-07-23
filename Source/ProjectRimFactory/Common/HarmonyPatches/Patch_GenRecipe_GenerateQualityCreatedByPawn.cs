@@ -8,18 +8,15 @@ using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches;
 
-[HarmonyPatch(typeof(QualityUtility), "GenerateQualityCreatedByPawn", new Type[] { typeof(Pawn), typeof(SkillDef) })]
+[HarmonyPatch(typeof(QualityUtility), "GenerateQualityCreatedByPawn", new Type[] { typeof(Pawn), typeof(SkillDef), typeof(bool) })]
 class Patch_GenRecipe_GenerateQualityCreatedByPawn
 {
-    static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill)
+    static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill , bool consumeInspiration)
     {
-        ISetQualityDirectly isqd = PatchStorageUtil.Get<ISetQualityDirectly>(pawn.Map, pawn.Position);
-        if (isqd != null)
-        {
-            __result = isqd.GetQuality(relevantSkill);
-            return false;
-        }
-        return true;
+        var setQualityDirectly = PatchStorageUtil.Get<ISetQualityDirectly>(pawn.Map, pawn.Position);
+        if (setQualityDirectly == null) return true;
+        __result = setQualityDirectly.GetQuality(relevantSkill);
+        return false;
     }
 
     //Prevent Biotech(Mech Changes) from interfering with Drone Skills
@@ -68,11 +65,7 @@ class Patch_GenRecipe_GenerateQualityCreatedByPawn
     /// <returns></returns>
     public static bool IsMechanoid(Pawn pawn)
     {
-        if (pawn is Pawn_Drone)
-        {
-            return false;
-        }
-        return pawn.RaceProps.IsMechanoid;
+        return pawn is not Pawn_Drone && pawn.RaceProps.IsMechanoid;
     }
 }
 

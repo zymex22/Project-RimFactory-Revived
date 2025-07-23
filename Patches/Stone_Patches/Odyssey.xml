@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Odyssey</li>
+		</mods>
+		<!-- Remove/Exclude Vacston from Drills -->
+		<match Class="PatchOperationAdd">
+			<xpath>/Defs/ThingDef[starts-with(defName, "PRF_DeepQuarry_mk") or defName="PRF_BillTypeMiner_I"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+			<value>
+				<li>ChunkVacstone</li>
+			</value>
+		</match>
+	</Operation>
+</Patch>

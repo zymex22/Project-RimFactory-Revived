@@ -13,7 +13,7 @@ namespace ProjectRimFactory.Industry
         protected override void PostProcessRecipeProduct(Thing thing)
         {
             int limit = thing.def.stackLimit;
-            int paperclips = Mathf.RoundToInt(currentBillReport.selected.Sum(t => t.PaperclipAmount() * PaperclipsPerKilogramModifier));
+            int paperclips = Mathf.RoundToInt(CurrentBillReport.selected.Sum(t => t.PaperclipAmount() * PaperclipsPerKilogramModifier));
             if (paperclips <= limit)
             {
                 thing.stackCount = paperclips;
@@ -27,7 +27,7 @@ namespace ProjectRimFactory.Industry
                     int count = Math.Min(paperclips, limit);
                     Thing newThing = ThingMaker.MakeThing(thing.def);
                     newThing.stackCount = count;
-                    thingQueue.Add(newThing);
+                    ThingQueue.Add(newThing);
                     paperclips -= count;
                 }
             }

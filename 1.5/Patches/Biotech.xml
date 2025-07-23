@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Biotech</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <success>Always</success>
+      <operations>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs</xpath>
+        <value>
+          <RecipeDef>
+            <defName>PRF_Destroy_Wastepack</defName>
+            <label>destroy Wastepack</label>
+            <description>Destroy Wastepack.</description>
+            <jobString>Pulverizing Wastepack.</jobString>
+            <workAmount>8000</workAmount>
+            <workSpeedStat>GeneralLaborSpeed</workSpeedStat>
+            <effectWorking>Cremate</effectWorking>
+            <soundWorking>Recipe_Cremate</soundWorking>
+            <autoStripCorpses>false</autoStripCorpses>
+            <ingredients>
+              <li>
+                <filter>
+                  <thingDefs>
+                    <li>Neutroamine</li>
+                  </thingDefs>
+                </filter>
+                <count>8</count>
+              </li>
+              <li>
+                <filter>
+                  <thingDefs>
+                    <li>Wastepack</li>
+                  </thingDefs>
+                </filter>
+                <count>1</count>
+              </li>
+            </ingredients>
+          </RecipeDef>
+        </value>
+      </li>
+      <li Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName = "PRF_Recycler"]/recipes</xpath>
+        <value>
+          <li>PRF_Destroy_Wastepack</li>
+        </value>
+      </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

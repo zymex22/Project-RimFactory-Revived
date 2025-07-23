@@ -11,6 +11,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
     public class Building_Assembler_Learning : Building_SmartAssembler, ISetQualityDirectly
     {
+        WorkSpeedFactorManager manager;
+        
         public float FactorOffset => modExtension_LearningAssembler?.MinSpeed ?? 0.5f;
 
         public float MaxSpeed
@@ -23,16 +25,16 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             }
         }
 
-        public float Progress => Mathf.Clamp01(manager.GetFactorFor(currentBillReport.bill.recipe) / MaxSpeed);
+        public float Progress => Mathf.Clamp01(manager.GetFactorFor(CurrentBillReport.bill.recipe) / MaxSpeed);
 
         /// <summary>
         /// Maps the 0..1 progress to -.1..1.1 scale
         /// Slightly favors low quality at low progress, and high quality at high progress.
         /// </summary>
         public float NormalizedProgress => (Progress * 1.2f) - 0.1f;
-        WorkSpeedFactorManager manager = new WorkSpeedFactorManager();
+        
         protected override float ProductionSpeedFactor =>
-            currentBillReport == null ? FactorOffset : manager.GetFactorFor(currentBillReport.bill.recipe) + FactorOffset;
+            CurrentBillReport == null ? FactorOffset : manager.GetFactorFor(CurrentBillReport.bill.recipe) + FactorOffset;
 
         private ModExtension_LearningAssembler modExtension_LearningAssembler => this.def.GetModExtension<ModExtension_LearningAssembler>();
 
@@ -53,27 +55,28 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             return (QualityCategory)((int)expectedQuality);
         }
 
-        public override void Tick()
+        protected override void Tick()
         {
             base.Tick();
-            if (currentBillReport != null && this.IsHashIntervalTick(60) && this.Active)
+            if (!Spawned) return;
+            if (CurrentBillReport != null && this.IsHashIntervalTick(60) && this.Active)
             {
-                if (modExtension_LearningAssembler != null && MaxSpeed <= manager.GetFactorFor(currentBillReport.bill.recipe))
+                if (modExtension_LearningAssembler != null && MaxSpeed <= manager.GetFactorFor(CurrentBillReport.bill.recipe))
                 {
                     return;
                 }
 
 
-                manager.IncreaseWeight(currentBillReport.bill.recipe, 0.001f * currentBillReport.bill.recipe.workSkillLearnFactor);
+                manager.IncreaseWeight(CurrentBillReport.bill.recipe, 0.001f * CurrentBillReport.bill.recipe.workSkillLearnFactor);
             }
         }
         public override string GetInspectString()
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(base.GetInspectString());
-            if (currentBillReport != null)
+            if (CurrentBillReport != null)
             {
-                stringBuilder.AppendLine("SALCurrentProductionSpeed".Translate(currentBillReport.bill.recipe.label, ProductionSpeedFactor.ToStringPercent()));
+                stringBuilder.AppendLine("SALCurrentProductionSpeed".Translate(CurrentBillReport.bill.recipe.label, ProductionSpeedFactor.ToStringPercent()));
             }
             return stringBuilder.ToString().TrimEndNewlines();
         }
@@ -107,6 +110,12 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
         {
             Scribe_Deep.Look(ref manager, "manager");
             base.ExposeData();
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            manager ??= new WorkSpeedFactorManager();
         }
     }
 }

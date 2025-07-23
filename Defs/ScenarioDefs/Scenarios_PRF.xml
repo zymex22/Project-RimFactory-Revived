@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-    <ScenarioDef>
+    <ScenarioDef ParentName="ScenarioBase">
         <defName>PRF_FactoryEntrepreneur</defName>
         <label>Factory Entrepreneur</label>
         <description>A small group of engineers is sent to aid a newly founded factory with a cargo full of new equipment and supplies. On the way, they are attacked by pirates and crash land on a nearby planet. They must now survive and build a new factory.\n\nThere will be a raid in ten days, by the very pirates who shot their ship down. You should quickly prepare.</description>
@@ -10,7 +10,33 @@
                 <def>PlayerFaction</def>
                 <factionDef>PlayerColony</factionDef>
             </playerFaction>
+            <surfaceLayer>
+                <def>SurfaceLayerFixed</def>
+                <layer>Surface</layer>
+                <settingsDef>Surface</settingsDef>
+                <hide>True</hide>
+                <tag>Surface</tag>
+                <connections>
+                    <li>
+                        <tag>Orbit</tag>
+                        <zoomMode>ZoomOut</zoomMode>
+                    </li>
+                </connections>
+            </surfaceLayer>
             <parts>
+                <li MayRequire="Ludeon.RimWorld.Odyssey" Class="ScenPart_PlanetLayer">
+                    <def>PlanetLayer</def>
+                    <layer>Orbit</layer>
+                    <settingsDef>Orbit</settingsDef>
+                    <hide>True</hide>
+                    <tag>Orbit</tag>
+                    <connections>
+                        <li>
+                            <tag>Surface</tag>
+                            <zoomMode>ZoomIn</zoomMode>
+                        </li>
+                    </connections>
+                </li>
                 <li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
                     <def>ConfigPage_ConfigureStartingPawns</def>
                     <pawnCount>4</pawnCount>

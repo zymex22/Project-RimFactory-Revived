@@ -22,8 +22,10 @@ namespace ProjectRimFactory.Archo.Things
             powerComp = GetComp<CompPowerTrader>();
             outputComp = GetComp<CompOutputAdjustable>();
         }
-        public override void Tick()
+
+        protected override void Tick()
         {
+            if (!Spawned) return;
             if (this.IsHashIntervalTick(10) && powerComp.PowerOn)
             {
                 workDone++;
