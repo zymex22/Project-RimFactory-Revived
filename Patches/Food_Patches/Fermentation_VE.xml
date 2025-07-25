@@ -11,7 +11,7 @@
         <li Class="PatchOperationAdd">
           <xpath>/Defs/ThingDef[defName = "PRF_FermentingBarrel"]/recipes</xpath>
           <value>
-            <li>Brew_VBE_AmbrandyNormal</li>
+            <li>Brew_VBE_Ambrandy</li>
             <li>Brew_VBE_Gin</li>
             <li>Brew_VBE_Tequila</li>
             <li>Brew_VBE_Vodka</li>
