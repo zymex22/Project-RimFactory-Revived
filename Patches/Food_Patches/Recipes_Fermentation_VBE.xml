@@ -12,7 +12,7 @@
           <xpath>/Defs</xpath>
           <value>
             <RecipeDef>
-              <defName>Brew_VBE_AmbrandyNormal</defName>
+              <defName>Brew_VBE_Ambrandy</defName>
               <label>brew ambrandy x10</label>
               <description>Brew ambrandy x10.</description>
               <jobString>Brewing ambrandy.</jobString>
@@ -37,7 +37,7 @@
                 </thingDefs>
               </fixedIngredientFilter>
               <products>
-                <VBE_AmbrandyNormal>10</VBE_AmbrandyNormal>
+                <VBE_Ambrandy>10</VBE_Ambrandy>
               </products>
             </RecipeDef>
 
