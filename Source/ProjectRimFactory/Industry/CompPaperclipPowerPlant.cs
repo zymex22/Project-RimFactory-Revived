@@ -11,11 +11,11 @@ namespace ProjectRimFactory.Industry
     [StaticConstructorOnStartup]
     public class CompPaperclipPowerPlant : CompPowerPlant
     {
-        public static readonly Texture2D SetTargetFuelLevelCommand = ContentFinder<Texture2D>.Get("UI/Commands/SetTargetFuelLevel", true);
+        private static readonly Texture2D SetTargetFuelLevelCommand = ContentFinder<Texture2D>.Get("UI/Commands/SetTargetFuelLevel", true);
 
-        public int fuelPerSecond = 1;
-        public int currentPowerModifierPct = 100;
-        int maxPowerModifierPct = 100;
+        private int fuelPerSecond = 1;
+        private int currentPowerModifierPct = 100;
+        private int maxPowerModifierPct = 100;
 
         protected float PowerProductionModifier => (currentPowerModifierPct * fuelPerSecond) / 10; // 100W per paperclip per second
 
@@ -24,7 +24,7 @@ namespace ProjectRimFactory.Industry
         public override void ReceiveCompSignal(string signal)
         {
             base.ReceiveCompSignal(signal);
-            if (signal == "RanOutOfFuel" || signal == "FlickedOff")
+            if (signal is "RanOutOfFuel" or "FlickedOff")
             {
                 currentPowerModifierPct = 100;
             }
@@ -79,10 +79,10 @@ namespace ProjectRimFactory.Industry
 
         public override string CompInspectStringExtra()
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             builder.AppendLine(base.CompInspectStringExtra());
             builder.AppendLine("PaperclipGeneratorEfficiency".Translate(currentPowerModifierPct, maxPowerModifierPct));
-            int runsOutTicks = (int)(parent.GetComp<CompRefuelable>().Fuel / fuelPerSecond * 60f);
+            var runsOutTicks = (int)(parent.GetComp<CompRefuelable>().Fuel / fuelPerSecond * 60f);
             builder.Append("PaperclipsRunOutIn".Translate(runsOutTicks.ToStringTicksToPeriod()));
             return builder.ToString();
         }

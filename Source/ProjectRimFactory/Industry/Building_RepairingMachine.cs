@@ -9,7 +9,7 @@ namespace ProjectRimFactory.Industry
     {
         public class Recipe_Repair : RecipeWorker
         {
-            public override void ConsumeIngredient(Thing ingredient, RecipeDef recipe, Map map)
+            public override void ConsumeIngredient(Thing ingredient, RecipeDef _, Map map)
             {
                 if (ingredient.def == PRFDefOf.Paperclip)
                 {
@@ -22,12 +22,12 @@ namespace ProjectRimFactory.Industry
             }
         }
 
-        public const int TicksPerHitPoint = 60;
+        private const int TicksPerHitPoint = 60;
 
         protected override void Notify_BillStarted()
         {
             base.Notify_BillStarted();
-            Thing thingToRepair = CurrentBillReport.selected.Find(t => t.def != PRFDefOf.Paperclip);
+            var thingToRepair = CurrentBillReport.selected.Find(t => t.def != PRFDefOf.Paperclip);
             CurrentBillReport.workLeft = (thingToRepair.MaxHitPoints - thingToRepair.HitPoints) * TicksPerHitPoint;
         }
     }

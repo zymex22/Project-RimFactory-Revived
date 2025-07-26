@@ -11,36 +11,31 @@ namespace ProjectRimFactory.Industry
 {
     public class Building_PaperclipDuplicator : Building
     {
-        long paperclipCount;
-        int lastTick = Find.TickManager.TicksGame;
-        public Building_MassStorageUnit boundStorageUnit;
-
-        CompOutputAdjustable outputComp;
-        CompPowerTrader powerComp;
+        private long paperclipCount;
+        private int lastTick = Find.TickManager.TicksGame;
+        public Building_MassStorageUnit BoundStorageUnit;
         public long PaperclipsActual
         {
             get
             {
                 long result = 0;
-                if (paperclipCount != long.MaxValue)
+                if (paperclipCount == long.MaxValue) return result;
+                try
                 {
-                    try
+                    checked
                     {
-                        checked
-                        {
-                            result = (long)(paperclipCount * Math.Pow(1.05, (Find.TickManager.TicksGame - lastTick).TicksToDays()));
-                        }
+                        result = (long)(paperclipCount * Math.Pow(1.05, (Find.TickManager.TicksGame - lastTick).TicksToDays()));
                     }
-                    catch (OverflowException)
-                    {
-                        Find.WindowStack.Add(new Dialog_MessageBox("PRF_ArchoCipher_BankOverflow".Translate()));
-                        PaperclipsActual = long.MaxValue;
-                        result = long.MaxValue;
-                    }
+                }
+                catch (OverflowException)
+                {
+                    Find.WindowStack.Add(new Dialog_MessageBox("PRF_ArchoCipher_BankOverflow".Translate()));
+                    PaperclipsActual = long.MaxValue;
+                    result = long.MaxValue;
                 }
                 return result;
             }
-            set
+            private set
             {
                 paperclipCount = value;
                 lastTick = Find.TickManager.TicksGame;
@@ -48,40 +43,25 @@ namespace ProjectRimFactory.Industry
         }
         public virtual void DepositPaperclips(int count)
         {
-            PaperclipsActual = PaperclipsActual + count;
+            PaperclipsActual += count;
         }
         public virtual void WithdrawPaperclips(int count)
         {
-            PaperclipsActual = PaperclipsActual - count;
+            PaperclipsActual -= count;
         }
-        public override void PostMake()
-        {
-            base.PostMake();
-            outputComp = GetComp<CompOutputAdjustable>();
-            powerComp = GetComp<CompPowerTrader>();
-        }
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        {
-            base.SpawnSetup(map, respawningAfterLoad);
-            outputComp = GetComp<CompOutputAdjustable>();
-            powerComp = GetComp<CompPowerTrader>();
-        }
-        protected override void ReceiveCompSignal(string signal)
-        {
-            base.ReceiveCompSignal(signal);
-        }
+        
         public override string GetInspectString()
         {
-            StringBuilder builder = new StringBuilder();
-            string str = base.GetInspectString();
+            var builder = new StringBuilder();
+            var str = base.GetInspectString();
             if (!string.IsNullOrEmpty(str))
             {
                 builder.AppendLine(str);
             }
             builder.AppendLine("PaperclipsInDuplicator".Translate(PaperclipsActual.ToString()));
-            if (boundStorageUnit != null)
+            if (BoundStorageUnit != null)
             {
-                builder.AppendLine("PaperclipsInStorageUnit".Translate(boundStorageUnit.StoredItems.Where(t => t.def == PRFDefOf.Paperclip).Sum(t => t.stackCount)));
+                builder.AppendLine("PaperclipsInStorageUnit".Translate(BoundStorageUnit.StoredItems.Where(t => t.def == PRFDefOf.Paperclip).Sum(t => t.stackCount)));
             }
             else
             {
@@ -108,7 +88,7 @@ namespace ProjectRimFactory.Industry
                             {
                                 if (PaperclipsActual != long.MaxValue)
                                 {
-                                    PaperclipsActual = PaperclipsActual * 2;
+                                    PaperclipsActual *= 2;
                                 }
                             }
                         }
@@ -126,7 +106,7 @@ namespace ProjectRimFactory.Industry
             base.ExposeData();
             Scribe_Values.Look(ref paperclipCount, "paperclipCount");
             Scribe_Values.Look(ref lastTick, "lastTick");
-            Scribe_References.Look(ref boundStorageUnit, "boundStorageUnit");
+            Scribe_References.Look(ref BoundStorageUnit, "boundStorageUnit");
         }
     }
 }
