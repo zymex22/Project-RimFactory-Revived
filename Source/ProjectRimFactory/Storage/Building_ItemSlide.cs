@@ -7,17 +7,12 @@ using Verse;
 
 namespace ProjectRimFactory.Storage
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     class Building_ItemSlide : Building_Crate, IPRF_Building
     {
         public IEnumerable<Thing> AvailableThings => throw new NotImplementedException();
 
-        public virtual bool ForbidOnPlacingDefault
-        {
-            get => forbidOnPlacingDefault;
-            set => forbidOnPlacingDefault = value;
-        }
-
-        protected bool forbidOnPlacingDefault = false;
+        public virtual bool ForbidOnPlacingDefault { get; set; }
 
         public bool ObeysStorageFilters => false;
 
@@ -25,15 +20,9 @@ namespace ProjectRimFactory.Storage
 
         public bool AcceptsThing(Thing newThing, IPRF_Building giver = null)
         {
-            
-            if (base.Accepts(newThing) && CanStoreMoreItems){
-                Notify_ReceivedThing(newThing);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (!Accepts(newThing) || !CanStoreMoreItems) return false;
+            Notify_ReceivedThing(newThing);
+            return true;
         }
 
         public void EffectOnAcceptThing(Thing t)
@@ -49,14 +38,11 @@ namespace ProjectRimFactory.Storage
         //TODO
         public bool ForbidOnPlacing(Thing t)
         {
-            if (outputCell.GetThingList(Map).Where(type => type is IPRF_Building || type is Building_StorageUnitIOBase || type is Building_MassStorageUnit).Any<Thing>())
+            if (OutputCell.GetThingList(Map).Any(type => type is IPRF_Building or Building_StorageUnitIOBase or Building_MassStorageUnit))
             {
                 return ForbidOnPlacingDefault;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         public Thing GetThingBy(Func<Thing, bool> optionalValidator = null)
@@ -64,29 +50,29 @@ namespace ProjectRimFactory.Storage
             throw new NotImplementedException();
         }
 
-        private IntVec3 outputCell => this.Position + this.Rotation.FacingCell;
+        private IntVec3 OutputCell => Position + Rotation.FacingCell;
 
-        private void trySlideItem()
+        private void TrySlideItem()
         {
-            IPRF_Building target_IPRF_Building = (IPRF_Building)outputCell.GetThingList(Map).Where(type => type is IPRF_Building).FirstOrDefault<Thing>();
-            if (target_IPRF_Building != null)
+            var targetIprfBuilding = (IPRF_Building)OutputCell.GetThingList(Map).FirstOrDefault(type => type is IPRF_Building);
+            if (targetIprfBuilding != null)
             {
-                target_IPRF_Building.AcceptsThing(StoredItems[0], this);
+                targetIprfBuilding.AcceptsThing(StoredItems[0], this);
             }
             else
             {
-                this.PRFTryPlaceThing(StoredItems[0], outputCell, this.Map);
+                this.PRFTryPlaceThing(StoredItems[0], OutputCell, Map);
             }
         }
 
         protected override void Tick()
         {
             base.Tick();
-            if (!this.Spawned) return;
+            if (!Spawned) return;
 
-            if (this.StoredItemsCount > 0)
+            if (StoredItemsCount > 0)
             {
-                trySlideItem();
+                TrySlideItem();
             }
 
 
@@ -94,23 +80,29 @@ namespace ProjectRimFactory.Storage
 
     }
 
+    // ReSharper disable once UnusedType.Global
     class PlaceWorker_ItemSlide : PlaceWorker
     {
-        public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null, Thing thing = null)
+        public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, 
+            Thing thingToIgnore = null, Thing thing = null)
         {
-            AcceptanceReport acceptanceBase = base.AllowsPlacing(checkingDef, loc, rot, map, thingToIgnore, thing);
-            if (acceptanceBase.Accepted)
+            var acceptanceBase = base.AllowsPlacing(checkingDef, loc, rot, map, thingToIgnore, thing);
+            if (!acceptanceBase.Accepted) return acceptanceBase;
+            
+            //Check if the traget is another slide
+            var outputCell = loc + rot.FacingCell;
+            var thingList = map.thingGrid.ThingsListAt(outputCell);
+            if (thingList.Any(t => t is Building_ItemSlide || t.def.entityDefToBuild == checkingDef))
             {
-                //Check if the traget is another slide
-                IntVec3 outputCell = loc + rot.FacingCell;
-                List<Thing> thingList = map.thingGrid.ThingsListAt(outputCell);
-                if (thingList.Where(t => t is Building_ItemSlide || t.def.entityDefToBuild == checkingDef).Any()) return new AcceptanceReport("PRF_PlaceWorker_ItemSlide_Denied".Translate());
+                return new AcceptanceReport("PRF_PlaceWorker_ItemSlide_Denied".Translate());
+            }
 
-                //Check if there is a slide placing there
-                if (GenAdj.CellsAdjacentCardinal(loc, rot, checkingDef.Size).Where(c => map.thingGrid.ThingsListAt(c).Where(t => (t is Building_ItemSlide || t.def.entityDefToBuild == checkingDef) && (t.Position + t.Rotation.FacingCell == loc)).Any()).Any())
-                {
-                    return new AcceptanceReport("PRF_PlaceWorker_ItemSlide_Denied".Translate());
-                }
+            //Check if there is a slide placing there
+            if (GenAdj.CellsAdjacentCardinal(loc, rot, checkingDef.Size)
+                .Any(c => map.thingGrid.ThingsListAt(c)
+                    .Any(t => (t is Building_ItemSlide || t.def.entityDefToBuild == checkingDef) && t.Position + t.Rotation.FacingCell == loc)))
+            {
+                return new AcceptanceReport("PRF_PlaceWorker_ItemSlide_Denied".Translate());
             }
 
             return acceptanceBase;
@@ -118,11 +110,8 @@ namespace ProjectRimFactory.Storage
 
         public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
         {
-
-            IntVec3 outputCell = center + rot.FacingCell;
-
-
-            GenDraw.DrawFieldEdges(new List<IntVec3> { outputCell }, Common.CommonColors.outputCell);
+            var outputCell = center + rot.FacingCell;
+            GenDraw.DrawFieldEdges([outputCell], CommonColors.outputCell);
 
         }
     }

@@ -7,26 +7,25 @@ namespace ProjectRimFactory.Storage
 {
     public class Building_AdvancedStorageUnitIOPort : Building_StorageUnitIOBase
     {
+        protected override bool ShowLimitGizmo => false;
 
-        public override bool ShowLimitGizmo => false;
-
-        private List<Thing> placementQueue = new List<Thing>();
+        private List<Thing> placementQueue = [];
 
         public void AddItemToQueue(Thing thing)
         {
             placementQueue.Add(thing);
         }
 
-        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        public override void DeSpawn(DestroyMode destroyMode = DestroyMode.Vanish)
         {
-            this.Map.GetComponent<PRFMapComponent>().DeRegisteradvancedIOLocations(this.Position);
-            base.DeSpawn(mode);
+            Map.GetComponent<PRFMapComponent>().DeRegisteradvancedIOLocations(Position);
+            base.DeSpawn(destroyMode);
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            map.GetComponent<PRFMapComponent>().RegisteradvancedIOLocations(this.Position, this);
+            map.GetComponent<PRFMapComponent>().RegisteradvancedIOLocations(Position, this);
         }
 
         public override StorageIOMode IOMode
@@ -39,22 +38,22 @@ namespace ProjectRimFactory.Storage
 
         public override bool ForbidPawnInput => true;
 
-        private Thing GetstoredItem()
+        private Thing GetStoredItem()
         {
             var map = Map;
             if (map is null)
             {
-                Log.Error($"PRF GetstoredItem @{this.Position} map is null");
+                Log.Error($"PRF GetStoredItem @{Position} map is null");
                 return null;
             }
             return WorkPosition.GetFirstItem(map);
         }
 
-        public bool CanGetNewItem => GetstoredItem() == null && (powerComp?.PowerOn ?? false);
+        public bool CanGetNewItem => GetStoredItem() == null && (powerComp?.PowerOn ?? false);
 
-        public override bool IsAdvancedPort => true;
+        protected override bool IsAdvancedPort => true;
 
-        public void updateQueue()
+        public void UpdateQueue()
         {
             if (CanGetNewItem && placementQueue.Count > 0)
             {
@@ -68,22 +67,20 @@ namespace ProjectRimFactory.Storage
         {
             if (thing != null)
             {
-                thing.Position = this.Position;
+                thing.Position = Position;
             }
         }
 
         protected override void Tick()
         {
             if (!Spawned) return;
-            updateQueue();
+            UpdateQueue();
 
-            if (this.IsHashIntervalTick(10))
+            if (!this.IsHashIntervalTick(10)) return;
+            var thing = GetStoredItem();
+            if (thing != null && !Map.reservationManager.AllReservedThings().Contains(thing))
             {
-                var thing = GetstoredItem();
-                if (thing != null && !this.Map.reservationManager.AllReservedThings().Contains(thing))
-                {
-                    RefreshInput();
-                }
+                RefreshInput();
             }
 
         }

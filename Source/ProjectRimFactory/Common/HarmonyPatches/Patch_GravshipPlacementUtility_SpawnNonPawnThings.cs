@@ -22,7 +22,7 @@ public class Patch_GravshipPlacementUtility_SpawnNonPawnThings
         foreach (var thing in storedBuildings.Where(thing => thing.def.building.maxItemsInCell == 1))
         {
             // TODO: I wonder would there be any negative effect in always defaulting to int.MaxValue
-            thing.def.building.maxItemsInCell = thing.ModExtension_Crate?.limit ?? int.MaxValue;
+            thing.def.building.maxItemsInCell = thing.ModExtensionCrate?.limit ?? int.MaxValue;
         }
             
         return true;
