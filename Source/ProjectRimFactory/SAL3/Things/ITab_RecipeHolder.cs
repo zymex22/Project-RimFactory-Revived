@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using System;
+using RimWorld;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
@@ -9,15 +10,15 @@ namespace ProjectRimFactory.SAL3.Things
     interface IRecipeHolderInterface
     {
         //List of Recipes saved on the Recipie Holder
-        List<RecipeDef> Saved_Recipes { get; set; }
-        //List of Recipes Quered up to be Learnd / Saved to the Recipie Holder
-        List<RecipeDef> Quered_Recipes { get; set; }
-        //List of Recipes that could be Learnd by the Recipie Holder
-        List<RecipeDef> Learnable_Recipes { get; }
-        //
-        RecipeDef Recipe_Learning { get; set; }
+        List<RecipeDef> SavedRecipes { get; set; }
+        //List of Recipes queued  up to be Learned / Saved to the Recipe Holder
+        List<RecipeDef> QueuedRecipes { get; set; }
+        //List of Recipes that could be Learned by the Recipe Holder
+        List<RecipeDef> LearnableRecipes { get; }
+        
+        RecipeDef RecipeLearning { get; set; }
 
-        float Progress_Learning { get; }
+        float ProgressLearning { get; }
 
 
     }
@@ -26,89 +27,82 @@ namespace ProjectRimFactory.SAL3.Things
     class ITab_RecipeHolder : ITab
     {
 
-        private const int ROW_HIGHT = 30;
+        private const int RowHeight = 30;
         private float scrollViewHeight;
 
-        private static readonly Vector2 WinSize = new Vector2(520f, 500f);
+        private static readonly Vector2 WinSize = new(520f, 500f);
 
-        private IRecipeHolderInterface parrentDB => this.SelThing as IRecipeHolderInterface;
+        private IRecipeHolderInterface ParrentDB => SelThing as IRecipeHolderInterface;
 
 
-        enum enum_RecipeStatus
+        private enum Enum_RecipeStatus
         {
             Saved,
-            Quered,
+            Queued,
             Learnable,
-            InPorogress
+            InProgress
         }
-
-
 
         private void RefreshRecipeList()
         {
-            Recipes = new Dictionary<RecipeDef, enum_RecipeStatus>();
-            foreach (RecipeDef r in parrentDB.Learnable_Recipes)
+            recipes = new Dictionary<RecipeDef, Enum_RecipeStatus>();
+            foreach (var r in ParrentDB.LearnableRecipes)
             {
-                if (parrentDB.Quered_Recipes.Contains(r))
+                if (ParrentDB.QueuedRecipes.Contains(r))
                 {
-                    Recipes[r] = enum_RecipeStatus.Quered;
+                    recipes[r] = Enum_RecipeStatus.Queued;
                 }
-                else if (parrentDB.Recipe_Learning == r)
+                else if (ParrentDB.RecipeLearning == r)
                 {
-                    Recipes[r] = enum_RecipeStatus.InPorogress;
+                    recipes[r] = Enum_RecipeStatus.InProgress;
                 }
                 else
                 {
-                    Recipes[r] = enum_RecipeStatus.Learnable;
+                    recipes[r] = Enum_RecipeStatus.Learnable;
                 }
             }
-            foreach (RecipeDef r in parrentDB.Saved_Recipes)
+            foreach (var r in ParrentDB.SavedRecipes)
             {
-                Recipes[r] = enum_RecipeStatus.Saved;
+                recipes[r] = Enum_RecipeStatus.Saved;
             }
         }
 
-        private Dictionary<RecipeDef, enum_RecipeStatus> Recipes;
-
-
-
-
-
+        private Dictionary<RecipeDef, Enum_RecipeStatus> recipes;
 
         public ITab_RecipeHolder()
         {
-            this.size = WinSize;
-            this.labelKey = "PRF_RecipeTab_TabName".Translate(); ;
+            size = WinSize;
+            labelKey = "PRF_RecipeTab_TabName".Translate(); ;
         }
         private Vector2 scrollPos;
 
         private bool showSaved = true;
         private bool showLearnable = true;
-        private bool showQuered = true;
-        private string searchText = "";
+        private bool showQueued = true;
+        private string searchText = string.Empty;
 
-        private bool ShouldDrawRow(RecipeDef recipe, ref float curY, float ViewRecthight, float scrollY, string search)
+        private bool ShouldDrawRow(RecipeDef recipe, ref float curY, float viewRectHeight, float scrollY, string search)
         {
-            if (!showLearnable && Recipes[recipe] == enum_RecipeStatus.Learnable) return false;
-            if (!showQuered && Recipes[recipe] == enum_RecipeStatus.Quered) return false;
-            if (!showSaved && Recipes[recipe] == enum_RecipeStatus.Saved) return false;
-            if (search != "" && !recipe.label.ToLower().Contains(search.ToLower())) return false;
+            if (!showLearnable && recipes[recipe] == Enum_RecipeStatus.Learnable) return false;
+            if (!showQueued && recipes[recipe] == Enum_RecipeStatus.Queued) return false;
+            if (!showSaved && recipes[recipe] == Enum_RecipeStatus.Saved) return false;
+            if (search != string.Empty && !recipe.label.ToLower().Contains(search.ToLower())) return false;
 
-            //The item is above the view (including a safty margin of one item)
-            if ((curY + ROW_HIGHT - scrollY) < 0)
+            //The item is above the view (including a safety margin of one item)
+            if (curY + RowHeight - scrollY < 0)
             {
-                curY += ROW_HIGHT;
+                curY += RowHeight;
                 return false;
             }
 
-            // the item is above the lower limit (including a safty margin of one item)
-            if ((curY - ROW_HIGHT - scrollY - ViewRecthight) < 0)
+            // the item is above the lower limit (including a safety margin of one item)
+            if (curY - RowHeight - scrollY - viewRectHeight < 0)
             {
                 return true;
             }
 
             //Item is below the lower limit
-            curY += ROW_HIGHT;
+            curY += RowHeight;
 
             return false;
         }
@@ -118,25 +112,22 @@ namespace ProjectRimFactory.SAL3.Things
         {
             RefreshRecipeList();
 
-            Listing_Standard list = new Listing_Standard();
-            Rect inRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
-            Rect rect;
-
-
+            var list = new Listing_Standard();
+            var inRect = new Rect(0f, 0f, WinSize.x, WinSize.y).ContractedBy(10f);
 
             float currY = 0;
             list.Begin(inRect);
             list.Gap();
 
 
-            rect = list.GetRect(30);
+            var rect = list.GetRect(30);
 
             rect.width = (WinSize.x / 3) - 20;
             Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterSaved".Translate(), ref showSaved);
             rect.x += rect.width + 10;
             Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterLearnable".Translate(), ref showLearnable);
             rect.x += rect.width + 10;
-            Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterQueue".Translate(), ref showQuered);
+            Widgets.CheckboxLabeled(rect, "PRF_RecipeTab_FilterQueue".Translate(), ref showQueued);
 
             currY += 40;
             rect = list.GetRect(10);
@@ -159,7 +150,7 @@ namespace ProjectRimFactory.SAL3.Things
             currY = 0;
 
 
-            foreach (RecipeDef recipe in Recipes.Keys)
+            foreach (var recipe in recipes.Keys)
             {
                 if (!ShouldDrawRow(recipe, ref currY, outRect.height, scrollPos.y, searchText)) continue;
 
@@ -175,18 +166,15 @@ namespace ProjectRimFactory.SAL3.Things
         }
 
 
-        private void DrawRecipeRow(RecipeDef recipe, ref float currY, float viewRect_width)
+        private void DrawRecipeRow(RecipeDef recipe, ref float currY, float viewRectWidth)
         {
-            Rect rect2;
-            Rect rect;
-
-            rect = new Rect(0, currY, viewRect_width, 30);
-            currY += ROW_HIGHT;
+            var rect = new Rect(0, currY, viewRectWidth, 30);
+            currY += RowHeight;
 
             //Display Image of Product
             if (recipe.products.Count > 0)
             {
-                rect2 = rect;
+                var rect2 = rect;
                 rect2.width = 30;
                 rect2.height = 30;
                 Widgets.DefIcon(rect2, recipe.products[0].thingDef);
@@ -194,27 +182,27 @@ namespace ProjectRimFactory.SAL3.Things
 
 
             rect.x = 60;
-            Widgets.Label(rect, "" + recipe.label);
+            Widgets.Label(rect, string.Empty + recipe.label);
 
             rect.width = 100;
             rect.x = 350;
 
 
-            if (Recipes[recipe] == enum_RecipeStatus.Learnable)
+            if (recipes[recipe] == Enum_RecipeStatus.Learnable)
             {
                 if (Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Learn".Translate()))
                 {
-                    parrentDB.Quered_Recipes.Add(recipe);
+                    ParrentDB.QueuedRecipes.Add(recipe);
 
                 }
             }
-            else if (Recipes[recipe] == enum_RecipeStatus.Quered)
+            else if (recipes[recipe] == Enum_RecipeStatus.Queued)
             {
                 if (Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Cancel".Translate()))
                 {
-                    if (parrentDB.Quered_Recipes.Contains(recipe))
+                    if (ParrentDB.QueuedRecipes.Contains(recipe))
                     {
-                        parrentDB.Quered_Recipes.Remove(recipe);
+                        ParrentDB.QueuedRecipes.Remove(recipe);
                     }
 
                 }
@@ -229,12 +217,12 @@ namespace ProjectRimFactory.SAL3.Things
                     parrentDB.Saved_Recipes.Remove(recipe);
                 }
             }*/
-            else if (Recipes[recipe] == enum_RecipeStatus.InPorogress)
+            else if (recipes[recipe] == Enum_RecipeStatus.InProgress)
             {
                 //TODO add a Are you sure? popup
-                if (Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Abort".Translate(parrentDB.Progress_Learning.ToStringWorkAmount())))
+                if (Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Abort".Translate(ParrentDB.ProgressLearning.ToStringWorkAmount())))
                 {
-                    parrentDB.Recipe_Learning = null;
+                    ParrentDB.RecipeLearning = null;
                 }
             }
         }

@@ -123,7 +123,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                             if (AdvancedIO_PatchHelper.CanMoveItem(port.Value, target.Cell))
                             {
                                 port.Value.AddItemToQueue(target.Thing);
-                                port.Value.updateQueue();
+                                port.Value.UpdateQueue();
                                 
                                 break;
                             }

@@ -9,28 +9,28 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
     {
         public override IEnumerable<RecipeDef> GetAllRecipes()
         {
-            return from IntVec3 c in this.GetComp<CompRecipeImportRange>()?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)
-                   where c.InBounds(this.Map)
+            return from IntVec3 c in GetComp<CompRecipeImportRange>()?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)
+                   where c.InBounds(Map)
                    from Thing t in c.GetThingList(Map)
                    let h = t as Building_RecipeHolder
                    where h != null
                    from RecipeDef recipe in h.Recipes
-                   where base.SatisfiesSkillRequirements(recipe)
+                   where SatisfiesSkillRequirements(recipe)
                    select recipe;
         }
 
-        public virtual void Notify_RecipeHolderRemoved()
+        public void Notify_RecipeHolderRemoved()
         {
             if (GravshipPlacementUtility.placingGravship || GravshipUtility.generatingGravship) return; // Don't remove stuff on GravShip move
             var count = BillStack.Bills.Count;
             HashSet<RecipeDef> set = [..GetAllRecipes()];
             BillStack.Bills.RemoveAll(b => !set.Contains(b.recipe));
             var removed = BillStack.Bills.Count < count;
-            if (CurrentBillReport != null && !set.Contains(CurrentBillReport.bill.recipe))
+            if (CurrentBillReport != null && !set.Contains(CurrentBillReport.Bill.recipe))
             {
-                for (var i = 0; i < CurrentBillReport.selected.Count; i++)
+                for (var i = 0; i < CurrentBillReport.Selected.Count; i++)
                 {
-                    GenPlace.TryPlaceThing(CurrentBillReport.selected[i], Position, Map, ThingPlaceMode.Near);
+                    GenPlace.TryPlaceThing(CurrentBillReport.Selected[i], Position, Map, ThingPlaceMode.Near);
                 }
                 CurrentBillReport = null;
                 removed = true;

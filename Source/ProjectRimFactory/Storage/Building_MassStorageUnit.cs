@@ -17,10 +17,9 @@ namespace ProjectRimFactory.Storage
     {
         private static readonly Texture2D RenameTex = ContentFinder<Texture2D>.Get("UI/Buttons/Rename");
 
-        private readonly List<Thing> items = [];
         private List<Building_StorageUnitIOBase> ports = [];
         
-        public IntVec3 GetPosition => this.Position;
+        public IntVec3 GetPosition => Position;
         public StorageSettings GetSettings => settings;
         
         public bool CanUseIOPort => def.GetModExtension<DefModExtension_CanUseStorageIOPorts>() != null;
@@ -28,24 +27,25 @@ namespace ProjectRimFactory.Storage
         public LocalTargetInfo GetTargetInfo => this;
 
         //Initialized at spawn
-        public DefModExtension_Crate ModExtension_Crate = null;
+        public DefModExtension_Crate ModExtensionCrate;
 
-        public abstract bool CanStoreMoreItems { get; }
+        protected abstract bool CanStoreMoreItems { get; }
         // The maximum number of item stacks at this.Position:
         //   One item on each cell and the rest multi-stacked on Position?
-        public virtual int MaxNumberItemsInternal => (ModExtension_Crate?.limit ?? int.MaxValue)
+        protected virtual int MaxNumberItemsInternal => (ModExtensionCrate?.limit ?? int.MaxValue)
                                               - def.Size.Area + 1;
-        public List<Thing> StoredItems => items;
-        public int StoredItemsCount => items.Count;
+        public List<Thing> StoredItems { get; } = [];
+
+        public int StoredItemsCount => StoredItems.Count;
         
         public virtual bool CanReceiveIO => true;
         public virtual bool Powered => true;
 
-        public bool ForbidPawnAccess => ModExtension_Crate?.forbidPawnAccess ?? false;
+        protected bool ForbidPawnAccess => ModExtensionCrate?.forbidPawnAccess ?? false;
 
         public virtual bool ForbidPawnInput => ForbidPawnAccess;
 
-        private StorageOutputUtil outputUtil = null;
+        private StorageOutputUtil outputUtil;
 
         private string uniqueName;
         //IRenameable
@@ -72,17 +72,17 @@ namespace ProjectRimFactory.Storage
         public override void Notify_LostThing(Thing newItem)
         {
             base.Notify_LostThing(newItem);
-            items.Remove(newItem);
+            StoredItems.Remove(newItem);
             ItemCountsRemoved(newItem.def, newItem.stackCount);
             RefreshStorage();
         }
 
         public virtual bool ForbidPawnOutput => ForbidPawnAccess;
 
-        public virtual bool HideItems => ModExtension_Crate?.hideItems ?? false;
+        public virtual bool HideItems => ModExtensionCrate?.hideItems ?? false;
 
         public virtual bool HideRightClickMenus =>
-            ModExtension_Crate?.hideRightClickMenus ?? false;
+            ModExtensionCrate?.hideRightClickMenus ?? false;
 
         public bool AdvancedIOAllowed => true;
 
@@ -121,7 +121,7 @@ namespace ProjectRimFactory.Storage
             };
         }
 
-        public virtual string GetUIThingLabel()
+        protected virtual string GetUIThingLabel()
         {
             return "PRFMassStorageUIThingLabel".Translate(StoredItemsCount);
         }
@@ -131,7 +131,7 @@ namespace ProjectRimFactory.Storage
             return "PRFItemsTabLabel".Translate(StoredItemsCount, itemsSelected);
         }
 
-        public virtual void RegisterNewItem(Thing newItem)
+        private void RegisterNewItem(Thing newItem)
         {
             ItemCountsAdded(newItem.def, newItem.stackCount);
             var things = Position.GetThingList(Map);
@@ -155,9 +155,9 @@ namespace ProjectRimFactory.Storage
             //Add a new stack of a thing
             if (newItem.Destroyed) return;
             
-            if (!items.Contains(newItem))
+            if (!StoredItems.Contains(newItem))
             {
-                items.Add(newItem);
+                StoredItems.Add(newItem);
             }
             
             //What happens if its full?
@@ -170,7 +170,7 @@ namespace ProjectRimFactory.Storage
             base.ExposeData();
             Scribe_Collections.Look(ref ports, "ports", LookMode.Reference);
             Scribe_Values.Look(ref uniqueName, "uniqueName");
-            ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
+            ModExtensionCrate ??= def.GetModExtension<DefModExtension_Crate>();
         }
 
         public override string GetInspectString()
@@ -178,7 +178,7 @@ namespace ProjectRimFactory.Storage
             var original = base.GetInspectString();
             var stringBuilder = new StringBuilder();
             if (!string.IsNullOrEmpty(original)) stringBuilder.AppendLine(original);
-            stringBuilder.Append("PRF_TotalStacksNum".Translate(items.Count));
+            stringBuilder.Append("PRF_TotalStacksNum".Translate(StoredItems.Count));
             return stringBuilder.ToString();
         }
 
@@ -212,7 +212,7 @@ namespace ProjectRimFactory.Storage
                 map.GetComponent<PRFMapComponent>().RegisterIHideItemPos(cell, this);
                 map.GetComponent<PRFMapComponent>().RegisterIForbidPawnOutputItem(cell, this);
             }
-            ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
+            ModExtensionCrate ??= def.GetModExtension<DefModExtension_Crate>();
             RefreshStorage();
             foreach (var port in ports)
             {
@@ -223,7 +223,7 @@ namespace ProjectRimFactory.Storage
                 }
             }
 
-            this.def.building.groupingLabel = this.LabelCapNoCount;
+            def.building.groupingLabel = LabelCapNoCount;
         }
 
         public override void DrawGUIOverlay()
@@ -240,14 +240,14 @@ namespace ProjectRimFactory.Storage
 
 
         //TODO Why do we need to clear Items here?
-        public virtual void RefreshStorage(bool fullRefresh = false)
+        public void RefreshStorage(bool fullRefresh = false)
         {
-            if (fullRefresh) items.Clear();
+            if (fullRefresh) StoredItems.Clear();
             // We certainly need it after Load to fill items initially
             // But we might not need it afterwards
-            if (items.Count > 0) return;
+            if (StoredItems.Count > 0) return;
             
-            items.Clear();
+            StoredItems.Clear();
             itemCounts.Clear();
             var thisPos = Position;
             var thisMap = Map;
@@ -267,8 +267,8 @@ namespace ProjectRimFactory.Storage
                     }
                     else
                     {
-                        if (items.Contains(item)) continue;
-                        items.Add(item);
+                        if (StoredItems.Contains(item)) continue;
+                        StoredItems.Add(item);
                         ItemCountsAdded(item.def, item.stackCount);
                         DeregisterDrawItem(item);
                     }
@@ -296,7 +296,7 @@ namespace ProjectRimFactory.Storage
         {
             //Some Sanity Checks
             capacity = 0;
-            if (thing == null || map == null || map != this.Map || cell == null || !this.Spawned)
+            if (thing == null || map == null || map != Map || cell == null || !Spawned)
             {
                 Log.Error("PRF DSU CapacityAt Sanity Check Error");
                 return false;
@@ -304,7 +304,7 @@ namespace ProjectRimFactory.Storage
             thing = thing.GetInnerIfMinified();
 
             //Check if thing can be stored based upon the storgae settings
-            if (!this.Accepts(thing))
+            if (!Accepts(thing))
             {
                 return false;
             }
@@ -316,10 +316,10 @@ namespace ProjectRimFactory.Storage
             var storedItems = Position.GetThingList(Map).Where(t => t.def.category == ThingCategory.Item);
 
             //Find the Stack size for the thing
-            int maxstacksize = thing.def.stackLimit;
+            var maxstacksize = thing.def.stackLimit;
             //Get capacity of partial Stacks
             //  So 45 Steel and 75 Steel and 11 Steel give 30+64 more capacity for steel
-            foreach (Thing partialStack in storedItems.Where(t => t.def == thing.def && t.stackCount < maxstacksize))
+            foreach (var partialStack in storedItems.Where(t => t.def == thing.def && t.stackCount < maxstacksize))
             {
                 capacity += maxstacksize - partialStack.stackCount;
             }
@@ -376,7 +376,7 @@ namespace ProjectRimFactory.Storage
             //throw new System.NotImplementedException();
         }
 
-        public bool CanReciveThing(Thing item)
+        public bool CanReceiveThing(Thing item)
         {
             return settings.AllowedToAccept(item) && CanReceiveIO && CanStoreMoreItems;
         }

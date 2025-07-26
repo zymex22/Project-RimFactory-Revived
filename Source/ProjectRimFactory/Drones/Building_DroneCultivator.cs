@@ -6,15 +6,16 @@ using Verse;
 
 namespace ProjectRimFactory.Drones
 {
+    // ReSharper disable once UnusedType.Global
     public class Building_DroneCultivator : Building_WorkGiverDroneStation
     {
-        private int TotalDroneCount => spawnedDrones.Count + dronesLeft;
+        private int TotalDroneCount => SpawnedDrones.Count + dronesLeft;
 
         private int dronesLeft;
 
-        public override int DronesLeft => dronesLeft - spawnedDrones.Count;
+        protected override int DronesLeft => dronesLeft - SpawnedDrones.Count;
 
-        public override void Notify_DroneLost()
+        protected override void Notify_DroneLost()
         {
             dronesLeft--;
         }
@@ -26,15 +27,15 @@ namespace ProjectRimFactory.Drones
         public override void PostMake()
         {
             base.PostMake();
-            dronesLeft = extension.GetDronesOnSpawn();
+            dronesLeft = DefModExtensionDroneStation.GetDronesOnSpawn();
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            if (TotalDroneCount < extension.GetDronesOnSpawn())
+            if (TotalDroneCount < DefModExtensionDroneStation.GetDronesOnSpawn())
             {
-                dronesLeft = extension.GetDronesOnSpawn();
+                dronesLeft = DefModExtensionDroneStation.GetDronesOnSpawn();
             }
         }
 
@@ -55,9 +56,9 @@ namespace ProjectRimFactory.Drones
             };
         }
 
-        protected void MakeMatchingGrowZone()
+        private void MakeMatchingGrowZone()
         {
-            Designator_ZoneAdd_Growing designator = new Designator_ZoneAdd_Growing();
+            var designator = new Designator_ZoneAdd_Growing();
             designator.DesignateMultiCell(from tempCell in CashedGetCoverageCells
                                           where designator.CanDesignateCell(tempCell).Accepted
                                           select tempCell);

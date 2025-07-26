@@ -10,7 +10,7 @@ namespace ProjectRimFactory.AutoMachineTool
         Map Map { get; }
         IntVec3 Position { get; }
         Room GetRoom(RegionType type);
-        int GetSkillLevel(SkillDef def);
+        int GetSkillLevel(SkillDef skillDef);
     }
 
     public static class IRecipeProductWorkerExtension

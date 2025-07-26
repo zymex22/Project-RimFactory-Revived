@@ -17,7 +17,7 @@ namespace ProjectRimFactory.Storage
 
         public void HandleMoveItem(Thing item);
 
-        public bool CanReciveThing(Thing item);
+        public bool CanReceiveThing(Thing item);
 
         public bool HoldsPos(IntVec3 pos);
 
@@ -28,8 +28,7 @@ namespace ProjectRimFactory.Storage
         public StorageSettings GetSettings { get; }
 
         public IntVec3 GetPosition { get; }
-
-        public string LabelCap { get; }
+        
         public bool CanReceiveIO { get; }
         public Map Map { get; }
 

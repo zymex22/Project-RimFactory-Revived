@@ -54,8 +54,6 @@ namespace ProjectRimFactory.AutoMachineTool
         [Unsaved]
         private int splittedTargetCellsIndex = 0;
 
-        private const int CACHE_CLEAR_INTERVAL_TICKS = 180;
-
         public IEnumerable<IntVec3> GetAllTargetCells()
         {
             CacheTargetCells();

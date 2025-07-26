@@ -10,57 +10,43 @@ namespace ProjectRimFactory.Drones.AI
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            Pawn_Drone drone = (Pawn_Drone)pawn;
-            if (drone.BaseStation != null)
+            var drone = (Pawn_Drone)pawn;
+            if (drone.BaseStation == null) return null;
+            if (!drone.BaseStation.Spawned || drone.BaseStation.Map != pawn.Map)
+                return new Job(PRFDefOf.PRFDrone_SelfTerminate);
+            Job result;
+            if (drone.BaseStation is Building_WorkGiverDroneStation b)
             {
-                if (drone.BaseStation.Spawned && drone.BaseStation.Map == pawn.Map)
+                if (drone.BaseStation.CachedSleepTimeList.Contains(GenLocalDate.HourOfDay(drone).ToString()))
+                    return new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.BaseStation);
+                pawn.workSettings = new Pawn_WorkSettings(pawn);
+                pawn.workSettings.EnableAndInitialize();
+                pawn.workSettings.DisableAll();
+
+                foreach (var def in b.WorkSettingsDict.Keys)
                 {
-                    Job result = null;
-                    if (drone.BaseStation is Building_WorkGiverDroneStation b)
+                    if (b.WorkSettingsDict[def])
                     {
-
-                        if (!(drone.BaseStation.CachedSleepTimeList.Contains(GenLocalDate.HourOfDay(drone).ToString())))
-                        {
-                            pawn.workSettings = new Pawn_WorkSettings(pawn);
-                            pawn.workSettings.EnableAndInitialize();
-                            pawn.workSettings.DisableAll();
-
-                            foreach (WorkTypeDef def in b.WorkSettingsDict.Keys)
-                            {
-                                if (b.WorkSettingsDict[def])
-                                {
-                                    pawn.workSettings.SetPriority(def, 3);
-                                }
-                                else
-                                {
-                                    pawn.workSettings.SetPriority(def, 0);
-                                }
-                            }
-
-
-                            // So the station finds the best job for the pawn
-                            result = b.TryIssueJobPackageDrone(drone, default, true).Job;
-                            if (result == null)
-                            {
-                                result = b.TryIssueJobPackageDrone(drone, default,false).Job;
-                            }
-
-                        }
-
+                        pawn.workSettings.SetPriority(def, 3);
                     }
                     else
                     {
-                        result = drone.BaseStation.TryGiveJob(drone);
+                        pawn.workSettings.SetPriority(def, 0);
                     }
-                    if (result == null)
-                    {
-                        result = new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.BaseStation);
-                    }
-                    return result;
                 }
-                return new Job(PRFDefOf.PRFDrone_SelfTerminate);
+
+
+                // So the station finds the best job for the pawn
+                result = b.TryIssueJobPackageDrone(drone, default, true).Job 
+                         ?? b.TryIssueJobPackageDrone(drone, default,false).Job;
+
             }
-            return null;
+            else
+            {
+                result = drone.BaseStation.TryGiveJob(drone);
+            }
+
+            return result ?? new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.BaseStation);
         }
     }
 }

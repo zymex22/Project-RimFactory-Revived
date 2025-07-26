@@ -4,6 +4,7 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectRimFactory.SAL3.Tools;
 using UnityEngine;
 using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
@@ -29,7 +30,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public Building_Miner()
         {
             billStack = new BillStack(this);
-            forcePlace = false;
+            ForcePlace = false;
         }
 
         public override void ExposeData()
@@ -39,7 +40,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_References.Look(ref workingBill, "workingBill");
             if (Scribe.mode == LoadSaveMode.PostLoadInit && workingBill == null)
             {
-                readyOnStart = true;
+                ReadyOnStart = true;
             }
             billStack.Bills.RemoveAll(b => def.GetModExtension<ModExtension_Miner>()?.IsExcluded(b.recipe.ProducedThingDef) ?? false);
         }
@@ -61,11 +62,11 @@ namespace ProjectRimFactory.AutoMachineTool
             return true;
         }
 
-        protected override bool FinishWorking(Building_Miner _, out List<Thing> products)
+        protected override bool FinishWorking(Building_Miner _, out List<Thing> outputProducts)
         {
-            products = GenRecipe2.MakeRecipeProducts(workingBill.recipe, this, [], null, this).ToList();
+            outputProducts = GenRecipe2.MakeRecipeProducts(workingBill.recipe, this, [], null, this).ToList();
             // Because we use custom GenRecipe2, we have to handle bonus items and product modifications (bonuses) directly:
-            def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(products,
+            def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(outputProducts,
                                                         this as IBillGiver, this, workingBill.recipe);
             workingBill.Notify_IterationCompleted(null, []);
             workingBill = null;
@@ -87,7 +88,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return RegionAndRoomQuery.GetRoom(this, type);
         }
 
-        public int GetSkillLevel(SkillDef _)
+        public int GetSkillLevel(SkillDef skillDef)
         {
             return 20;
         }
@@ -151,7 +152,7 @@ namespace ProjectRimFactory.AutoMachineTool
         
         public override IntVec3 OutputCell()
         {
-            return compOutputAdjustable.CurrentCell;
+            return CompOutputAdjustable.CurrentCell;
         }
 
         public Bill MakeNewBill(RecipeDef recipe)
@@ -224,7 +225,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var acceptableRecipeDefs = recipeDefs
                 .FindAll(r => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(r.products[0].thingDef) ?? true);
             minerDef.recipes = acceptableRecipeDefs;
-            SAL3.ReflectionUtility.allRecipesCached.SetValue(minerDef, null);
+            ReflectionUtility.AllRecipesCached.SetValue(minerDef, null);
 
             //change those three lines to this when all recipes are done:
             //minerDef.recipes = recipeDefs;

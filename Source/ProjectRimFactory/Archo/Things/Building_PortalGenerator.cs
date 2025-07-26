@@ -7,9 +7,10 @@ using Verse;
 
 namespace ProjectRimFactory.Archo.Things
 {
+    // ReSharper disable once UnusedType.Global
     public class Building_PortalGenerator : Building
     {
-        public static readonly FieldInfo InnerContainerField = typeof(Building_Casket).GetField("innerContainer", BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly FieldInfo InnerContainerField = typeof(Building_Casket).GetField("innerContainer", BindingFlags.NonPublic | BindingFlags.Instance);
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (Gizmo g in base.GetGizmos()) yield return g;
@@ -27,14 +28,15 @@ namespace ProjectRimFactory.Archo.Things
             base.DrawExtraSelectionOverlays();
             PortalGeneratorUtility.DrawBlueprintFieldEdges(Position);
         }
-        public List<FloatMenuOption> GetDebugActions()
+
+        private List<FloatMenuOption> GetDebugActions()
         {
             return new List<FloatMenuOption>()
             {
                 new FloatMenuOption("Liquidate room", LiquidateRoom),
                 new FloatMenuOption("Calculate eligibility for liquidation", () =>
                 {
-                    AcceptanceReport acc = RecalculateEligibilityForTeleport();
+                    var acc = RecalculateEligibilityForTeleport();
                     if (acc.Accepted)
                     {
                         Messages.Message("Eligible for liquidation.", MessageTypeDefOf.PositiveEvent);
@@ -46,117 +48,119 @@ namespace ProjectRimFactory.Archo.Things
                 })
             };
         }
-        public AcceptanceReport RecalculateEligibilityForTeleport()
+
+        private AcceptanceReport RecalculateEligibilityForTeleport()
         {
-            int humanPawnCount = 0;
-            Room room = Position.GetRoom(Map);
-            if (room != null && room.OpenRoofCount == 0)
+            var humanPawnCount = 0;
+            var room = Position.GetRoom(Map);
+            if (room == null || room.OpenRoofCount != 0)
+            {
+                return "TeleportReport_RoomOutdoorsOrUnroofed".Translate(); // Room is outdoors or unroofed.
+            }
+            else
             {
                 // Check floors
-                List<List<IntVec3>> floorPlan = PortalGeneratorUtility.FieldEdgeCells(Position);
-                foreach (IntVec3 cell in CellRect.CenteredOn(Position, 7, 7))
+                var floorPlan = PortalGeneratorUtility.FieldEdgeCells(Position);
+                foreach (var cell in CellRect.CenteredOn(Position, 7, 7))
                 {
-                    foreach (Thing t in cell.GetThingList(Map))
+                    foreach (var t in cell.GetThingList(Map))
                     {
                         if (t.def.passability == Traversability.Impassable)
                         {
-                            return "TeleportReport_CellImpassable".Translate(); // Walls and other impassable buildings cannot be placed within a 7x7 square around portal.
+                            return
+                                "TeleportReport_CellImpassable"
+                                    .Translate(); // Walls and other impassable buildings cannot be placed within a 7x7 square around portal.
                         }
-                        if (t is Building_CryptosleepCasket c)
+
+                        if (t is not Building_CryptosleepCasket c) continue;
+                        foreach (var thing in c.SearchableContents)
                         {
-                            foreach (Thing thing in ((IEnumerable<Thing>)InnerContainerField.GetValue(t)))
+                            if (thing is not Pawn p) continue;
+                            if (p.RaceProps.Humanlike)
                             {
-                                if (thing is Pawn p)
-                                {
-                                    if (p.RaceProps.Humanlike)
-                                    {
-                                        humanPawnCount++;
-                                    }
-                                }
+                                humanPawnCount++;
                             }
                         }
                     }
+
                     if (floorPlan[0].Contains(cell))
                     {
                         if (cell.GetTerrain(Map) != PRFDefOf.PRFFloorComputer)
                         {
-                            return "TeleportReport_FloorLayoutIncorrect".Translate(); // The floor layout around the portal generator is incorrect.
+                            return "TeleportReport_FloorLayoutIncorrect"
+                                .Translate(); // The floor layout around the portal generator is incorrect.
                         }
                     }
                     else if (floorPlan[1].Contains(cell))
                     {
                         if (cell.GetTerrain(Map) != PRFDefOf.PRFZCompositeTile)
                         {
-                            return "TeleportReport_FloorLayoutIncorrect".Translate(); // The floor layout around the portal generator is incorrect.
+                            return "TeleportReport_FloorLayoutIncorrect"
+                                .Translate(); // The floor layout around the portal generator is incorrect.
                         }
                     }
                     else if (floorPlan[2].Contains(cell))
                     {
                         if (cell.GetTerrain(Map) != PRFDefOf.PRFYCompositeTile)
                         {
-                            return "TeleportReport_FloorLayoutIncorrect".Translate(); // The floor layout around the portal generator is incorrect.
+                            return "TeleportReport_FloorLayoutIncorrect"
+                                .Translate(); // The floor layout around the portal generator is incorrect.
                         }
                     }
                 }
             }
-            else
-            {
-                return "TeleportReport_RoomOutdoorsOrUnroofed".Translate(); // Room is outdoors or unroofed.
-            }
+
             if (humanPawnCount == 0)
             {
                 return "TeleportReport_NoHumanlikePawnsForTransportation".Translate(); // No humanlike pawns to transport.
             }
             return true;
         }
-        public void LiquidateRoom()
+
+        private void LiquidateRoom()
         {
-            Room room = Position.GetRoom(Map);
-            if (room != null && !room.PsychologicallyOutdoors)
+            var room = Position.GetRoom(Map);
+            if (room == null || room.PsychologicallyOutdoors) return;
+            var wealth = room.GetStat(RoomStatDefOf.Wealth);
+            float roomSize = room.CellCount;
+            float humanPawnCount = 0;
+            float nonHumanPawnCount = 0;
+            foreach (var cell in room.Cells)
             {
-                float wealth = room.GetStat(RoomStatDefOf.Wealth);
-                float roomSize = room.CellCount;
-                float humanPawnCount = 0;
-                float nonHumanPawnCount = 0;
-                foreach (IntVec3 cell in room.Cells)
+                if (Map.terrainGrid.CanRemoveTopLayerAt(cell))
                 {
-                    if (Map.terrainGrid.CanRemoveTopLayerAt(cell))
+                    Map.terrainGrid.RemoveTopLayer(cell, false);
+                    FilthMaker.RemoveAllFilth(cell, Map);
+                }
+                foreach (var t in cell.GetThingList(Map).ToList())
+                {
+                    if (t is Building_CryptosleepCasket)
                     {
-                        Map.terrainGrid.RemoveTopLayer(cell, false);
-                        FilthMaker.RemoveAllFilth(cell, Map);
-                    }
-                    foreach (Thing t in cell.GetThingList(Map).ToList())
-                    {
-                        if (t is Building_CryptosleepCasket)
+                        foreach (var thing in ((IEnumerable<Thing>)InnerContainerField.GetValue(t)))
                         {
-                            foreach (Thing thing in ((IEnumerable<Thing>)InnerContainerField.GetValue(t)))
+                            if (thing is not Pawn p) continue;
+                            if (p.RaceProps.Humanlike)
                             {
-                                if (thing is Pawn p)
-                                {
-                                    if (p.RaceProps.Humanlike)
-                                    {
-                                        humanPawnCount++;
-                                    }
-                                    else
-                                    {
-                                        nonHumanPawnCount++;
-                                    }
-                                }
+                                humanPawnCount++;
+                            }
+                            else
+                            {
+                                nonHumanPawnCount++;
                             }
                         }
-                        if (t.def.destroyable && t != this)
-                        {
-                            t.Destroy();
-                        }
+                    }
+                    if (t.def.destroyable && t != this)
+                    {
+                        t.Destroy();
                     }
                 }
-                float points = 0.001f * wealth + roomSize + 10f * nonHumanPawnCount + 100f * humanPawnCount;
-                if (Prefs.DevMode)
-                {
-                    Log.Message($"==SpdTec Room Liquidation Report==\nWealth: {wealth}\nRoom size: {roomSize}\nPawns: (non-human {nonHumanPawnCount}), (human {humanPawnCount})\nPoints: {points}");
-                }
-                this.Destroy();
             }
+            var points = 0.001f * wealth + roomSize + 10f * nonHumanPawnCount + 100f * humanPawnCount;
+            if (Prefs.DevMode)
+            {
+                Log.Message($"==SpdTec Room Liquidation Report==\nWealth: {wealth}\nRoom size: {roomSize}\nPawns: (non-human {nonHumanPawnCount}), (human {humanPawnCount})\nPoints: {points}");
+            }
+            Destroy();
         }
     }
 }

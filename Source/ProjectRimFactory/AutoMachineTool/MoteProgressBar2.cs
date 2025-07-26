@@ -12,7 +12,7 @@ namespace ProjectRimFactory.AutoMachineTool
             if (phase != DrawPhase.Draw) return; //Crashes when drawing 2 things at the same time in some of the other phases
             if (progressGetter != null)
             {
-                this.progress = Mathf.Clamp01(this.progressGetter());
+                progress = Mathf.Clamp01(progressGetter());
             }
             base.DynamicDrawPhaseAt(phase, drawLoc, flip);
         }

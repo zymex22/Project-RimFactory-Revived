@@ -4,13 +4,9 @@ using Verse;
 
 namespace ProjectRimFactory.Archo
 {
-    public class WorldComponent_NotificatonManager : WorldComponent
+    public class WorldComponent_NotificatonManager(World world) : WorldComponent(world)
     {
-        public List<string> notifiedMessages = new List<string>();
-
-        public WorldComponent_NotificatonManager(World world) : base(world)
-        {
-        }
+        public List<string> notifiedMessages = [];
 
         public override void ExposeData()
         {

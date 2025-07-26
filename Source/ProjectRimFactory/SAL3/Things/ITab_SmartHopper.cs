@@ -5,56 +5,58 @@ using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
 {
+    // ReSharper disable once InconsistentNaming
+    // ReSharper disable once UnusedType.Global
     public class ITab_SmartHopper : ITab
     {
         
-        private static readonly Vector2 WinSize = new Vector2(200f, 200f);
+        private static readonly Vector2 WinSize = new(200f, 200f);
 
-        private IPickupSettings hopper => this.SelThing as IPickupSettings;
+        private IPickupSettings Hopper => SelThing as IPickupSettings;
 
 
-        private bool GroundPickup = false;
-        private bool Stockpile = false;
-        private bool BuildingStorage = false;
-        private bool Allowforbidden = false;
-        private bool AllowBelt = false;
+        private bool groundPickup;
+        private bool stockpile;
+        private bool buildingStorage;
+        private bool allowForbidden;
+        private bool allowBelt;
 
         public ITab_SmartHopper()
         {
-            this.size = WinSize;
-            this.labelKey = "PRF.SmartHopper.ITab.Name";
+            size = WinSize;
+            labelKey = "PRF.SmartHopper.ITab.Name";
         }
 
         protected override void FillTab()
         {
-            Listing_Standard list = new Listing_Standard();
-            Rect rect = new Rect(0f, 0f, WinSize.x-20f, WinSize.y).ContractedBy(10f);
+            var list = new Listing_Standard();
+            var rect = new Rect(0f, 0f, WinSize.x-20f, WinSize.y).ContractedBy(10f);
             list.Begin(rect);
 
-            GroundPickup = hopper.AllowGroundPickup;
-            Stockpile = hopper.AllowStockpilePickup;
-            BuildingStorage = hopper.AllowStoragePickup;
-            Allowforbidden = hopper.AllowForbiddenPickup;
-            AllowBelt = hopper.AllowBeltPickup;
+            groundPickup = Hopper.AllowGroundPickup;
+            stockpile = Hopper.AllowStockpilePickup;
+            buildingStorage = Hopper.AllowStoragePickup;
+            allowForbidden = Hopper.AllowForbiddenPickup;
+            allowBelt = Hopper.AllowBeltPickup;
 
 
             list.Label("PRF.SmartHopper.ITab.Description".Translate());
             rect = list.GetRect(30);
-            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowGround".Translate(), ref GroundPickup);
+            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowGround".Translate(), ref groundPickup);
             rect = list.GetRect(30);
-            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowStockpile".Translate(), ref Stockpile);
+            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowStockpile".Translate(), ref stockpile);
             rect = list.GetRect(30);
-            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowStorage".Translate(), ref BuildingStorage);
+            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowStorage".Translate(), ref buildingStorage);
             rect = list.GetRect(30);
-            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowForbidden".Translate(), ref Allowforbidden);
+            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowForbidden".Translate(), ref allowForbidden);
             rect = list.GetRect(30);
-            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowBelt".Translate(), ref AllowBelt);
+            Widgets.CheckboxLabeled(rect, "PRF.SmartHopper.ITab.AllowBelt".Translate(), ref allowBelt);
 
-            hopper.AllowGroundPickup = GroundPickup;
-            hopper.AllowStockpilePickup = Stockpile;
-            hopper.AllowStoragePickup = BuildingStorage;
-            hopper.AllowForbiddenPickup = Allowforbidden;
-            hopper.AllowBeltPickup = AllowBelt;
+            Hopper.AllowGroundPickup = groundPickup;
+            Hopper.AllowStockpilePickup = stockpile;
+            Hopper.AllowStoragePickup = buildingStorage;
+            Hopper.AllowForbiddenPickup = allowForbidden;
+            Hopper.AllowBeltPickup = allowBelt;
 
             list.End();
             

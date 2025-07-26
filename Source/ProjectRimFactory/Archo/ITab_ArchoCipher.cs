@@ -17,25 +17,25 @@ namespace ProjectRimFactory.Archo
         public override bool IsVisible => PRFDefOf.PRFOrdoDataRummaging.IsFinished;
         protected override void FillTab()
         {
-            Rect rect = new Rect(0f, 0f, size.x, size.y).ContractedBy(10f);
-            Listing_Standard listing = new Listing_Standard();
+            var rect = new Rect(0f, 0f, size.x, size.y).ContractedBy(10f);
+            var listing = new Listing_Standard();
             listing.Begin(rect);
             listing.Label("PRFArchoCipherInterpreter".Translate());
             ciphertext = listing.TextEntryLabeled("PRF_InsertCiphertext".Translate(), ciphertext);
             if (listing.ButtonText("PRF_ButtonDecipher".Translate()))
             {
-                string result = ArchoCipher.Decipher(ciphertext);
+                var result = ArchoCipher.Decipher(ciphertext);
                 if (result != null)
                 {
                     resultText = result;
                 }
                 else
                 {
-                    System.Random random = new System.Random(ciphertext.Sum(Convert.ToInt32));
-                    int length = random.Next(1, 513);
+                    var random = new System.Random(ciphertext.Sum(Convert.ToInt32));
+                    var length = random.Next(1, 513);
                     string gibberish = "PRF_GibberishAlphabet".Translate();
-                    char[] output = new char[length];
-                    for (int i = 0; i < output.Length; i++)
+                    var output = new char[length];
+                    for (var i = 0; i < output.Length; i++)
                     {
                         output[i] = gibberish[random.Next(gibberish.Length)];
                     }
@@ -50,7 +50,8 @@ namespace ProjectRimFactory.Archo
             listing.Label(resultText);
             listing.End();
         }
-        public string ciphertext;
-        public string resultText;
+
+        private string ciphertext;
+        private string resultText;
     }
 }

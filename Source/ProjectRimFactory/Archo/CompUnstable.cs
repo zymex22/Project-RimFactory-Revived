@@ -8,7 +8,7 @@ namespace ProjectRimFactory.Archo
     public class CompUnstable : ThingComp
     {
         public int ticksLeft;
-        public CompProperties_Unstable Props => (CompProperties_Unstable)props;
+        private CompProperties_Unstable Props => (CompProperties_Unstable)props;
 
         public override void CompTick()
         {
@@ -24,9 +24,9 @@ namespace ProjectRimFactory.Archo
         {
             return "PRF_TimeLeftToDisintegrate".Translate(ticksLeft.ToStringTicksToPeriod());
         }
-        public override void Initialize(CompProperties props)
+        public override void Initialize(CompProperties compProperties)
         {
-            base.Initialize(props);
+            base.Initialize(compProperties);
             ticksLeft = Props.ticksToDisintegrate;
         }
         public override void PostExposeData()
@@ -35,10 +35,10 @@ namespace ProjectRimFactory.Archo
         }
         public override string TransformLabel(string label)
         {
-            float ratio = (float)ticksLeft / Props.ticksToDisintegrate;
-            int green = Mathf.RoundToInt(ratio * 255);
-            int red = Mathf.RoundToInt((1 - ratio) * 255);
-            return $"<color=#{red.ToString("x2")}{green.ToString("x2")}00>{label}</color>";
+            var ratio = (float)ticksLeft / Props.ticksToDisintegrate;
+            var green = Mathf.RoundToInt(ratio * 255);
+            var red = Mathf.RoundToInt((1 - ratio) * 255);
+            return $"<color=#{red:x2}{green:x2}00>{label}</color>";
         }
     }
 }

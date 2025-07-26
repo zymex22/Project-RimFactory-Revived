@@ -1,5 +1,4 @@
-﻿using System;
-using HarmonyLib;
+﻿using HarmonyLib;
 using ProjectRimFactory.Common;
 using RimWorld;
 using RimWorld.Planet;
@@ -18,12 +17,14 @@ namespace ProjectRimFactory.Storage.UI
     // TODO: Use harmony to make ITab_Items actually a ITab_DeepStorage_Inventory and add right click menu
     // Only do above if LWM is installed ofc - rider
     [StaticConstructorOnStartup]
+    // ReSharper disable once InconsistentNaming
+    // ReSharper disable once UnusedType.Global
     public class ITab_Items : ITab
     {
         static ITab_Items()
         {
             DropUI = (Texture2D)AccessTools.Field(AccessTools.TypeByName("Verse.TexButton"), "Drop").GetValue(null);
-            MenuUI = (Texture2D)AccessTools.Field(AccessTools.TypeByName("Verse.TexButton"), "ToggleLog").GetValue(null); ; // ToggleLog
+            MenuUI = (Texture2D)AccessTools.Field(AccessTools.TypeByName("Verse.TexButton"), "ToggleLog").GetValue(null); // ToggleLog
         }
 
         private static readonly Texture2D MenuUI;
@@ -40,7 +41,7 @@ namespace ProjectRimFactory.Storage.UI
             labelKey = "PRFItemsTab";
         }
 
-        private static ILinkableStorageParent oldSelectedMassStorageUnit = null;
+        private static ILinkableStorageParent oldSelectedMassStorageUnit;
 
         private ILinkableStorageParent SelectedMassStorageUnit => SelThing is Building_StorageUnitIOBase ioPort ? 
             ioPort.BoundStorageUnit : (ILinkableStorageParent)SelThing;
@@ -68,13 +69,13 @@ namespace ProjectRimFactory.Storage.UI
         private static bool ItemIsVisible(float curY, float viewRectHeight, float scrollY, float rowHeight = 28f)
         {
             //The item is above the view (including a safty margin of one item)
-            if ((curY + rowHeight - scrollY) < 0)
+            if (curY + rowHeight - scrollY < 0)
             {
                 return false;
             }
 
             // the item is above the lower limit (including a safty margin of one item)
-            if ((curY - rowHeight - scrollY - viewRectHeight) < 0)
+            if (curY - rowHeight - scrollY - viewRectHeight < 0)
             {
                 return true;
             }
@@ -163,7 +164,7 @@ namespace ProjectRimFactory.Storage.UI
                 //Construct cache
                 if (!CanBeConsumedBy.ContainsKey(thing))
                 {
-                    CanBeConsumedBy.Add(thing, pawns.Where(p => p.RaceProps.CanEverEat(thing) == true).ToList());
+                    CanBeConsumedBy.Add(thing, pawns.Where(p => p.RaceProps.CanEverEat(thing)).ToList());
                 }
                 if (!ThingMaxHitPoints.ContainsKey(thing))
                 {
@@ -221,7 +222,7 @@ namespace ProjectRimFactory.Storage.UI
             }
 
             var p = colonists?.Where(col => col.IsColonistPlayerControlled && !col.Dead && col.Spawned && !col.Downed)
-                .ToArray().FirstOrFallback<Pawn>(null);
+                .ToArray().FirstOrFallback();
             
             if (p != null && ChoicesForThing(thing, p, labelMoCount).Count > 0)
             {

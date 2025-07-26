@@ -12,35 +12,41 @@ namespace ProjectRimFactory.Drones
     {
         Dictionary<WorkTypeDef, bool> GetWorkSettings { get; set; }
 
-        List<SkillRecord> DroneSeetings_skillDefs { get; }
+        List<SkillRecord> DroneSettingsSkillDefs { get; }
 
         string[] GetSleepTimeList { get; }
 
-        CompRefuelable compRefuelable { get; }
+        CompRefuelable CompRefuelable { get; }
 
     }
 
     public class ITab_DroneStation_Def : IPRF_SettingsContent
     {
 
-        private static GUIStyle richTextStyle
+        private static GUIStyle RichTextStyle
         {
             get
             {
-                GUIStyle gtter_richTextStyle = new GUIStyle();
-                gtter_richTextStyle.richText = true;
-                gtter_richTextStyle.normal.textColor = Color.white;
-                return gtter_richTextStyle;
+                var textStyle = new GUIStyle
+                {
+                    richText = true,
+                    normal =
+                    {
+                        textColor = Color.white
+                    }
+                };
+                return textStyle;
             }
         }
-        object caller = null;
+
+        private readonly object caller;
 
         IDroneSeetingsITab droneStation => caller as IDroneSeetingsITab;
 
 
-        public ITab_DroneStation_Def(object callero)
+        public ITab_DroneStation_Def(object callerParam)
         {
-            caller = callero;
+            caller = callerParam;
         }
 
         public float ITab_Settings_Minimum_x => 400;
@@ -55,7 +61,7 @@ namespace ProjectRimFactory.Drones
                 {
                     additionalHeight += 70;
                 }
-                if (droneStation.compRefuelable != null)
+                if (droneStation.CompRefuelable != null)
                 {
                     additionalHeight += 70;
                 }
@@ -71,16 +77,16 @@ namespace ProjectRimFactory.Drones
         private bool CheckboxHelper(Rect rect, Listing_Standard list, bool variable, WorkTypeDef def)
         {
             rect = list.GetRect(30f); //That seems to affect the text possition
-            bool lstatus = variable;
+            var lstatus = variable;
             Widgets.CheckboxLabeled(rect, def.labelShort, ref lstatus);
-            Rect rect2 = rect;
+            var rect2 = rect;
 
-            string labeltext = "ITab_DroneStation_averageskill".Translate();
-            rect2.x = 400 - (10 * labeltext.Length);
+            string labelText = "ITab_DroneStation_averageskill".Translate();
+            rect2.x = 400 - (10 * labelText.Length);
             if (def.relevantSkills.Count > 0)
             {
-                int medSkill = 0;
-                foreach (SkillRecord skill in droneStation.DroneSeetings_skillDefs)
+                var medSkill = 0;
+                foreach (var skill in droneStation.DroneSettingsSkillDefs)
                 {
                     if (def.relevantSkills.Contains(skill.def))
                     {
@@ -89,9 +95,9 @@ namespace ProjectRimFactory.Drones
                 }
                 rect2.y += 5;
 
-                medSkill = medSkill / def.relevantSkills.Count;
+                medSkill /= def.relevantSkills.Count;
 
-                Widgets.Label(rect2, labeltext + medSkill);
+                Widgets.Label(rect2, labelText + medSkill);
             }
             else
             {
@@ -101,7 +107,7 @@ namespace ProjectRimFactory.Drones
             return lstatus;
         }
 
-        public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect)
+        public Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrentRect)
         {
 
             var rect = new Rect();
@@ -110,7 +116,7 @@ namespace ProjectRimFactory.Drones
             list.Label("ITab_DroneStation_InfoLabel".Translate());
             list.GapLine();
 
-            foreach (WorkTypeDef def in droneStation.GetWorkSettings.Keys.ToList())
+            foreach (var def in droneStation.GetWorkSettings.Keys.ToList())
             {
                 droneStation.GetWorkSettings[def] = CheckboxHelper(rect, list, droneStation.GetWorkSettings[def], def);
             }
@@ -124,42 +130,34 @@ namespace ProjectRimFactory.Drones
 
                 rect = list.GetRect(30f);
                 // droneInterface.GetSleepTimeList
-                string txt = "";
-                for (int i = 0; i < 24; i++)
+                var txt = string.Empty;
+                for (var i = 0; i < 24; i++)
                 {
                     if (droneStation.GetSleepTimeList.Contains(i.ToString()))
                     {
-                        txt += "<color=red><b>" + i.ToString() + "</b></color> ";
+                        txt += $"<color=red><b>{i}</b></color> ";
                     }
                     else
                     {
-                        txt += i.ToString() + " ";
+                        txt += $"{i} ";
                     }
                 }
-                CommonGUIFunctions.Label(rect, txt, richTextStyle);
-
-
+                CommonGUIFunctions.Label(rect, txt, RichTextStyle);
+                
             }
 
 
-            //Add the fule display if existing
-            if (droneStation.compRefuelable != null)
-            {
-                list.GapLine();
-                list.Label("ITab_DroneStation_SetTargetFuel".Translate());
+            //Add the fuel display if existing
+            if (droneStation.CompRefuelable == null) return list;
+            list.GapLine();
+            list.Label("ITab_DroneStation_SetTargetFuel".Translate());
 
-                rect = list.GetRect(30f);
-                list.Gap();
-                droneStation.compRefuelable.TargetFuelLevel = Widgets.HorizontalSlider(rect, droneStation.compRefuelable.TargetFuelLevel, 0, droneStation.compRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(droneStation.compRefuelable.TargetFuelLevel), "0", droneStation.compRefuelable.Props.fuelCapacity.ToString(), 1);
-            }
-
-
+            rect = list.GetRect(30f);
+            list.Gap();
+            droneStation.CompRefuelable.TargetFuelLevel = Widgets.HorizontalSlider(rect, droneStation.CompRefuelable.TargetFuelLevel, 0, droneStation.CompRefuelable.Props.fuelCapacity, true, "SetTargetFuelLevel".Translate(droneStation.CompRefuelable.TargetFuelLevel), "0", droneStation.CompRefuelable.Props.fuelCapacity.ToString(), 1);
+            
             return list;
         }
-
-
-
-
     }
 
 }

@@ -16,31 +16,41 @@ namespace ProjectRimFactory.Industry.UI
             size = new Vector2(400f, 400f);
             labelKey = "PRFAtomicReconstructionTab";
         }
-        public Building_AtomicReconstructor SelBuilding => (Building_AtomicReconstructor)SelThing;
-        public Comparer<ThingDef> ThingDefComparer = Comparer<ThingDef>.Create((first, second) => first.LabelCap.RawText.CompareTo(second.LabelCap.RawText));
+
+        private Building_AtomicReconstructor SelBuilding => (Building_AtomicReconstructor)SelThing;
+        private readonly Comparer<ThingDef> thingDefComparer = Comparer<ThingDef>
+            .Create((first, second) => first.LabelCap.RawText.CompareTo(second.LabelCap.RawText));
+
+        private readonly string nowProducing = "AtomicReconstructionTab_NowProducing".Translate().RawText;
+        private readonly string paperclipCost = "AtomicReconstructionTab_PaperclipCost".Translate().RawText;
+        private readonly string consumptionPerSecond =
+            "AtomicReconstructionTab_ConsumptionPerSecond".Translate().RawText;
+        private readonly string progress = "AtomicReconstructionTab_Progress".Translate().RawText;
+        private readonly string noneBrackets = "NoneBrackets".Translate().RawText;
+        
         protected override void FillTab()
         {
 
-            Rect rect = new Rect(0f, 0f, size.x, size.y).ContractedBy(10f);
-            Listing_Standard listing = new Listing_Standard(GameFont.Small);
+            var rect = new Rect(0f, 0f, size.x, size.y).ContractedBy(10f);
+            var listing = new Listing_Standard(GameFont.Small);
             listing.Begin(rect);
             listing.Label(SelThing.LabelCapNoCount);
-            listing.LabelDouble("AtomicReconstructionTab_NowProducing".Translate().RawText, (SelBuilding.ThingToGenerate?.LabelCap ?? "NoneBrackets".Translate().RawText));
-            listing.LabelDouble("AtomicReconstructionTab_PaperclipCost".Translate().RawText, SelBuilding.ItemBaseCost.ToStringDecimalIfSmall());
-            listing.LabelDouble("AtomicReconstructionTab_ConsumptionPerSecond".Translate().RawText, (SelBuilding.FuelConsumptionPerTick * 60f).ToStringDecimalIfSmall());
-            listing.LabelDouble("AtomicReconstructionTab_Progress".Translate().RawText, SelBuilding.ProgressToStringPercent + $" ({SelBuilding.EstimatedProductionTimeLeftPeriod})");
+            listing.LabelDouble(nowProducing, (SelBuilding.ThingToGenerate?.LabelCap ?? noneBrackets));
+            listing.LabelDouble(paperclipCost, SelBuilding.ItemBaseCost.ToStringDecimalIfSmall());
+            listing.LabelDouble(consumptionPerSecond, (SelBuilding.FuelConsumptionPerTick * 60f).ToStringDecimalIfSmall());
+            listing.LabelDouble(progress, SelBuilding.ProgressToStringPercent + $" ({SelBuilding.EstimatedProductionTimeLeftPeriod})");
             listing.Label("AtomicReconstructionTab_Speed".Translate(SelBuilding.speedFactor, SelBuilding.PaperclipConsumptionFactor));
             SelBuilding.speedFactor = (int)listing.Slider(SelBuilding.speedFactor, 1f, 20f);
             searchQuery = listing.TextEntry(searchQuery);
-            Rect rect2 = new Rect(0, listing.CurHeight, rect.width, rect.height - listing.CurHeight);
-            Rect viewRect = new Rect(0f, 0f, rect2.width - 16f, scrollViewHeight);
+            var rect2 = new Rect(0, listing.CurHeight, rect.width, rect.height - listing.CurHeight);
+            var viewRect = new Rect(0f, 0f, rect2.width - 16f, scrollViewHeight);
             Widgets.BeginScrollView(rect2, ref scrollPos, viewRect);
             float curY = 0;
             // Draw reset button
-            Rect resetRect = new Rect(0f, curY, viewRect.width, 28f);
-            Widgets.Label(new Rect(36f, resetRect.y, resetRect.width - 36f, resetRect.height), "NoneBrackets".Translate().RawText);
+            var resetRect = new Rect(0f, curY, viewRect.width, 28f);
+            Widgets.Label(new Rect(36f, resetRect.y, resetRect.width - 36f, resetRect.height), noneBrackets);
             Widgets.DrawHighlightIfMouseover(resetRect);
-            if (GUI.Button(resetRect, "", Widgets.EmptyStyle))
+            if (GUI.Button(resetRect, string.Empty, Widgets.EmptyStyle))
             {
                 if (SelBuilding.ThingToGenerate != null)
                 {
@@ -49,7 +59,7 @@ namespace ProjectRimFactory.Industry.UI
                 SoundDefOf.Click.PlayOneShot(SoundInfo.OnCamera());
             }
             curY += 28f;
-            foreach (ThingDef tDef in AllAllowedThingDefsColonyCanProduce().OrderBy(d => d, ThingDefComparer))
+            foreach (var tDef in AllAllowedThingDefsColonyCanProduce().OrderBy(d => d, thingDefComparer))
             {
                 if (searchQuery == null || tDef.label.ToLower().Contains(searchQuery))
                 {
@@ -72,7 +82,7 @@ namespace ProjectRimFactory.Industry.UI
         }
         private void DrawThingDefRow(ref float y, float width, ThingDef thingDef)
         {
-            Rect rect = new Rect(0f, y, width, 28f);
+            var rect = new Rect(0f, y, width, 28f);
             if (Mouse.IsOver(rect))
             {
                 GUI.color = new Color(0.5f, 0.5f, 0.5f, 1f);
@@ -87,11 +97,11 @@ namespace ProjectRimFactory.Industry.UI
             }
             Text.Anchor = TextAnchor.MiddleLeft;
             GUI.color = new Color(0.9f, 0.9f, 0.9f, 1f);
-            Rect rect5 = new Rect(36f, y, rect.width - 36f, rect.height);
+            var rect5 = new Rect(36f, y, rect.width - 36f, rect.height);
             Text.WordWrap = false;
-            Widgets.Label(rect5, thingDef.LabelCap.Truncate(rect5.width, null));
+            Widgets.Label(rect5, thingDef.LabelCap.Truncate(rect5.width));
             Text.WordWrap = true;
-            string text2 = thingDef.description;
+            var text2 = thingDef.description;
             if (y > -28f)
             {
                 TooltipHandler.TipRegion(rect, string.IsNullOrEmpty(text2) ? "PRFNoDesc".Translate().RawText : text2);
@@ -108,47 +118,45 @@ namespace ProjectRimFactory.Industry.UI
             y += 28f;
         }
 
-        public static IEnumerable<ThingDef> AllAllowedThingDefsColonyCanProduce()
+        private static IEnumerable<ThingDef> AllAllowedThingDefsColonyCanProduce()
         {
-            foreach (ThingDef tDef in DefDatabase<ThingDef>.AllDefs)
+            foreach (var tDef in DefDatabase<ThingDef>.AllDefs)
             {
-                if (!tDef.MadeFromStuff && tDef.GetModExtension<DefModExtension_AtomicReconstructorDisallow>() == null)
+                if (tDef.MadeFromStuff || tDef.GetModExtension<DefModExtension_AtomicReconstructorDisallow>() != null) continue;
+                var ex = tDef.GetModExtension<DefModExtension_AtomicReconstructorResearchPrerequisite>();
+                if (ex != null)
                 {
-                    DefModExtension_AtomicReconstructorResearchPrerequisite ex = tDef.GetModExtension<DefModExtension_AtomicReconstructorResearchPrerequisite>();
-                    if (ex != null)
+                    if (ex.prerequisites?.All(r => r.IsFinished) == false)
                     {
-                        if (ex.prerequisites?.All(r => r.IsFinished) == false)
-                        {
-                            continue;
-                        }
-                        if (ex.ignoreMainPrerequisites)
-                        {
+                        continue;
+                    }
+                    if (ex.ignoreMainPrerequisites)
+                    {
+                        yield return tDef;
+                        continue;
+                    }
+                }
+
+                if (tDef.thingCategories == null) continue;
+                foreach (var cat in from tcd in tDef.thingCategories from child in tcd.ThisAndParents() select child)
+                {
+                    switch (cat.defName)
+                    {
+                        case nameof(ThingCategoryDefOf.ResourcesRaw) when PRFDefOf.PRFAtomicReconstruction.IsFinished:
+                        case nameof(ThingCategoryDefOf.Foods) when PRFDefOf.PRFEdiblesSynthesis.IsFinished:
+                        case nameof(ThingCategoryDefOf.Manufactured) when PRFDefOf.PRFManufacturablesProduction.IsFinished:
                             yield return tDef;
-                            continue;
-                        }
-                    }
-                    if (tDef.thingCategories != null)
-                    {
-                        foreach (ThingCategoryDef cat in from tcd in tDef.thingCategories from child in tcd.ThisAndParents() select child)
-                        {
-                            switch (cat.defName)
-                            {
-                                case nameof(ThingCategoryDefOf.ResourcesRaw) when PRFDefOf.PRFAtomicReconstruction.IsFinished:
-                                case nameof(ThingCategoryDefOf.Foods) when PRFDefOf.PRFEdiblesSynthesis.IsFinished:
-                                case nameof(ThingCategoryDefOf.Manufactured) when PRFDefOf.PRFManufacturablesProduction.IsFinished:
-                                    yield return tDef;
-                                    break;
-                                default:
-                                    continue;
-                            }
                             break;
-                        }
+                        default:
+                            continue;
                     }
+                    break;
                 }
             }
         }
-        Vector2 scrollPos;
-        float scrollViewHeight;
-        string searchQuery;
+
+        private Vector2 scrollPos;
+        private float scrollViewHeight;
+        private string searchQuery;
     }
 }

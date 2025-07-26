@@ -41,18 +41,18 @@ namespace ProjectRimFactory.Drones
                     modContentPack = LoadedModManager.GetMod<ProjectRimFactory_ModComponent>().Content
                 };
 
-                var BackstoryDefs = DefDatabase<BackstoryDef>.AllDefsListForReading;
-                TryAddBacksoryDef(BackstoryDefs, childhood);
-                TryAddBacksoryDef(BackstoryDefs, adulthood);
+                var backstoryDefs = DefDatabase<BackstoryDef>.AllDefsListForReading;
+                TryAddBackstoryDef(backstoryDefs, childhood);
+                TryAddBackstoryDef(backstoryDefs, adulthood);
             });
         }
 
-        private static void TryAddBacksoryDef(List<BackstoryDef> BackstoryDefs, BackstoryDef backstoryDef)
+        private static void TryAddBackstoryDef(List<BackstoryDef> backstoryDefs, BackstoryDef backstoryDef)
         {
             //this check is required to avoid an issue with "BetterLoading" as it calls "LongEventHandler.ExecuteWhenFinished" twice 
-            if (!BackstoryDefs.Contains(backstoryDef))
+            if (!backstoryDefs.Contains(backstoryDef))
             {
-                BackstoryDefs.Add(backstoryDef);
+                backstoryDefs.Add(backstoryDef);
             }
         }
     }

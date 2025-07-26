@@ -16,7 +16,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             if (target.HasThing == false && ___map != null && target.Cell.InBounds(___map))
             {
                 Building_StorageUnitIOBase building_target = (Building_StorageUnitIOBase)target.Cell.GetThingList(___map).Where(t => t is Building_StorageUnitIOBase).FirstOrDefault();
-                if (building_target != null && building_target.mode == StorageIOMode.Input)
+                if (building_target != null && building_target.Mode == StorageIOMode.Input)
                 {
                     __result = true;
                     return false;

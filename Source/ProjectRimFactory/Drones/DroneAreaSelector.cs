@@ -16,11 +16,9 @@ public class DroneAreaSelector : Designator
 
     public Action<Area> SelectAction;
 
-    public static Area SelectedArea => selectedArea;
-        
     public override AcceptanceReport CanDesignateCell(IntVec3 loc)
     {
-        return loc.InBounds(base.Map) && Designator_AreaAllowed.SelectedArea != null && !Designator_AreaAllowed.SelectedArea[loc];
+        return loc.InBounds(Map) && Designator_AreaAllowed.SelectedArea != null && !Designator_AreaAllowed.SelectedArea[loc];
     }
     public override void SelectedUpdate() {}
 
@@ -34,23 +32,9 @@ public class DroneAreaSelector : Designator
         AreaUtility.MakeAllowedAreaListFloatMenu(delegate (Area a)
         {
             selectedArea = a;
-            /*
-            base.ProcessInput(ev);
-
-            selectedArea == null --> Unrestricted
-            selectedArea != null --> User Area
-            */
             SelectAction(selectedArea);
 
-        }, addNullAreaOption: true, addManageOption: false, base.Map);
+        }, addNullAreaOption: true, addManageOption: false, Map);
     }
-    //public static void ClearSelectedArea()
-    //{
-    //    selectedArea = null;
-    //}
-    //protected override void FinalizeDesignationSucceeded()
-    //{
-    //    base.FinalizeDesignationSucceeded();
-    //    PlayerKnowledgeDatabase.KnowledgeDemonstrated(ConceptDefOf.AllowedAreas, KnowledgeAmount.SpecificInteraction);
-    //}
+
 }

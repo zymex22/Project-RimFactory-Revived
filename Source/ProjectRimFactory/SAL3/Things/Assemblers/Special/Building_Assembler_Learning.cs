@@ -11,72 +11,68 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
     public class Building_Assembler_Learning : Building_SmartAssembler, ISetQualityDirectly
     {
-        WorkSpeedFactorManager manager;
-        
-        public float FactorOffset => modExtension_LearningAssembler?.MinSpeed ?? 0.5f;
+        private WorkSpeedFactorManager manager;
 
-        public float MaxSpeed
+        private float FactorOffset => ModExtensionLearningAssembler?.MinSpeed ?? 0.5f;
+
+        private float MaxSpeed
         {
             get
             {
-                var effectiveMaxSpeed = modExtension_LearningAssembler?.MaxSpeed ?? float.PositiveInfinity;
-
+                var effectiveMaxSpeed = ModExtensionLearningAssembler?.MaxSpeed ?? float.PositiveInfinity;
                 return effectiveMaxSpeed - FactorOffset;
             }
         }
 
-        public float Progress => Mathf.Clamp01(manager.GetFactorFor(CurrentBillReport.bill.recipe) / MaxSpeed);
+        private float Progress => Mathf.Clamp01(manager.GetFactorFor(CurrentBillReport.Bill.recipe) / MaxSpeed);
 
         /// <summary>
         /// Maps the 0..1 progress to -.1..1.1 scale
         /// Slightly favors low quality at low progress, and high quality at high progress.
         /// </summary>
-        public float NormalizedProgress => (Progress * 1.2f) - 0.1f;
+        private float NormalizedProgress => (Progress * 1.2f) - 0.1f;
         
         protected override float ProductionSpeedFactor =>
-            CurrentBillReport == null ? FactorOffset : manager.GetFactorFor(CurrentBillReport.bill.recipe) + FactorOffset;
+            CurrentBillReport == null ? FactorOffset : manager.GetFactorFor(CurrentBillReport.Bill.recipe) + FactorOffset;
 
-        private ModExtension_LearningAssembler modExtension_LearningAssembler => this.def.GetModExtension<ModExtension_LearningAssembler>();
+        private ModExtension_LearningAssembler ModExtensionLearningAssembler => def.GetModExtension<ModExtension_LearningAssembler>();
 
         //Calculate the Item Quality based on the ProductionSpeedFactor (Used by the Harmony Patch; see Patch_GenRecipe_MakeRecipeProducts.cs)
         QualityCategory ISetQualityDirectly.GetQuality(SkillDef relevantSkill)
         {
-            if (modExtension_LearningAssembler == null)
+            if (ModExtensionLearningAssembler == null)
             {
                 Log.Error("Got a Building_Assembler_Learning without a modExtension_LearningAssembler, please report this error!");
                 return QualityCategory.Normal;
             }
-            float maxQualityFactor = (float)modExtension_LearningAssembler.MaxQuality;
-            float centerX = NormalizedProgress * maxQualityFactor;
-            float expectedQuality = Rand.Gaussian(centerX, 1.25f);
+            var maxQualityFactor = (float)ModExtensionLearningAssembler.MaxQuality;
+            var centerX = NormalizedProgress * maxQualityFactor;
+            var expectedQuality = Rand.Gaussian(centerX, 1.25f);
 
-            expectedQuality = Mathf.Clamp(expectedQuality, (int)modExtension_LearningAssembler.MinQuality, (int)modExtension_LearningAssembler.MaxQuality);
+            expectedQuality = Mathf.Clamp(expectedQuality, (int)ModExtensionLearningAssembler.MinQuality, (int)ModExtensionLearningAssembler.MaxQuality);
 
-            return (QualityCategory)((int)expectedQuality);
+            return (QualityCategory)(int)expectedQuality;
         }
 
         protected override void Tick()
         {
             base.Tick();
             if (!Spawned) return;
-            if (CurrentBillReport != null && this.IsHashIntervalTick(60) && this.Active)
+            if (CurrentBillReport == null || !this.IsHashIntervalTick(60) || !Active) return;
+            if (ModExtensionLearningAssembler != null && MaxSpeed <= manager.GetFactorFor(CurrentBillReport.Bill.recipe))
             {
-                if (modExtension_LearningAssembler != null && MaxSpeed <= manager.GetFactorFor(CurrentBillReport.bill.recipe))
-                {
-                    return;
-                }
-
-
-                manager.IncreaseWeight(CurrentBillReport.bill.recipe, 0.001f * CurrentBillReport.bill.recipe.workSkillLearnFactor);
+                return;
             }
+            
+            manager.IncreaseWeight(CurrentBillReport.Bill.recipe, 0.001f * CurrentBillReport.Bill.recipe.workSkillLearnFactor);
         }
         public override string GetInspectString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(base.GetInspectString());
             if (CurrentBillReport != null)
             {
-                stringBuilder.AppendLine("SALCurrentProductionSpeed".Translate(CurrentBillReport.bill.recipe.label, ProductionSpeedFactor.ToStringPercent()));
+                stringBuilder.AppendLine("SALCurrentProductionSpeed".Translate(CurrentBillReport.Bill.recipe.label, ProductionSpeedFactor.ToStringPercent()));
             }
             return stringBuilder.ToString().TrimEndNewlines();
         }
@@ -94,12 +90,12 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
             yield return new FloatMenuOption("View active skills", () =>
             {
                 manager.TrimUnnecessaryFactors();
-                StringBuilder stringBuilder = new StringBuilder();
+                var stringBuilder = new StringBuilder();
                 stringBuilder.AppendLine("Active skills ranked descending:");
-                RecipeDef[] keys = manager.factors.Keys.ToArray();
-                WorkSpeedFactorEntry[] values = manager.factors.Values.ToArray();
+                var keys = manager.factors.Keys.ToArray();
+                var values = manager.factors.Values.ToArray();
                 Array.Sort(values, keys);
-                for (int i = keys.Length - 1; i >= 0; i--)
+                for (var i = keys.Length - 1; i >= 0; i--)
                 {
                     stringBuilder.AppendLine($"{keys[i].LabelCap}: {values[i].FactorFinal + FactorOffset}");
                 }

@@ -19,15 +19,16 @@ namespace ProjectRimFactory.Industry
     /// TODO: Set this up as an abstract parent "produce something
     ///       every unit of time" thing?
     /// </summary>
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Building_DeepQuarry : Building, IXMLThingDescription
     {
-        public float GetProduceMtbHours => def.GetModExtension<DeepQuarryDefModExtension>().TickCount;
+        private float GetProduceMtbHours => def.GetModExtension<DeepQuarryDefModExtension>().TickCount;
         static IEnumerable<ThingDef> cachedPossibleRockDefCandidates;
-        protected int productionTime = 0; // number of ticks this has been running since last production check
-        public CompFlickable flick;
-        public CompPowerTrader power;
-        public CompRefuelable fuel;
-        public int ProducedChunksTotal = 0;
+        private int productionTime; // number of ticks this has been running since last production check
+        private CompFlickable flick;
+        private CompPowerTrader power;
+        private CompRefuelable fuel;
+        private int producedChunksTotal;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -37,7 +38,7 @@ namespace ProjectRimFactory.Industry
             fuel = GetComp<CompRefuelable>();
         }
 
-        public static IEnumerable<ThingDef> PossibleRockDefCandidates
+        private static IEnumerable<ThingDef> PossibleRockDefCandidates
         {
             get
             {
@@ -50,7 +51,8 @@ namespace ProjectRimFactory.Industry
                                                          select def;
             }
         }
-        public IEnumerable<ThingDef> GetPossibleRockDefCandidatesFilterd(ThingDef thingDef)
+
+        private IEnumerable<ThingDef> GetPossibleRockDefCandidatesFilterd(ThingDef thingDef)
         {
             return PossibleRockDefCandidates
                   .Where(d => !thingDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(d.building.mineableThing) ?? true);
@@ -71,51 +73,40 @@ namespace ProjectRimFactory.Industry
             // + ". has power? " + (power == null ? "null power" : (power.PowerOn ? "power on" : "power off")) +
             // ". has fuel?" + (fuel == null ? "null fuel" : (fuel.HasFuel ? "fueled" : "out of fuel")));
 
-            // Consume fuel even if turned off or unpowered:
-            //   (this could be enabled by some setting in 
-            //    the ModExtension)
-            /*if (consumeFuelWhileRunning && fuel != null &&
-                !fuel.Props.consumeFuelOnlyWhenUsed) {
-                fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
-            }*/
-
-            if (flick == null || flick.SwitchIsOn) // Either no switch or turned on
+            if (flick is { SwitchIsOn: false }) return; // Has switch and is off
+            if (power is { PowerOn: false }) return; // Uses Power but is off
+            if (fuel != null) // uses fuel
             {
-                if (power == null || power.PowerOn) // Either does not use power or has power
+                // If we need to consume fuel ourselves:
+                // The fuel consuption per Tick is fuel.Props.fuelConsumptionRate/60000
+                //   (per CompRefuelable - note that we will miss any Harmony patches
+                //    that target fuelConsumptionRate. Grabbing the private result is
+                //    a TODO for later)
+                if (consumeFuelWhileRunning && !fuel.Props.consumeFuelOnlyWhenUsed)
                 {
-                    if (fuel != null) // uses fuel
-                    {
-                        // If we need to consume fuel ourselves:
-                        // The fuel consuption per Tick is fuel.Props.fuelConsumptionRate/60000
-                        //   (per CompRefuelable - note that we will miss any Harmony patches
-                        //    that target fuelConsumptionRate. Grabbing the private result is
-                        //    a TODO for later)
-                        if (consumeFuelWhileRunning &&
-                            !fuel.Props.consumeFuelOnlyWhenUsed)
-                        {
-                            fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
-                        }
-                        // Note: this doesn't catch any harmony patches to
-                        //   Notify_UsedThisTick()
-                        // One (rather silly) option would be:
-                        //   for (int i=0; i<numTicks; i++) fuel.Notify_UsedThisTick();
-                        // As per Thornsworth:
-                        //    dear god. do the calculation yourself
-                        //    geeze
-
-                        // Vanilla's CompRefuelable does this:
-                        fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
-                        if (fuel.HasFuel)
-                        {
-                            TryGenerateResource(numTicks);
-                        }
-                    }
-                    else  //fuel==null, does not use fuel
-                    {
-                        // already know it's turned on and powered
-                        TryGenerateResource(numTicks);
-                    }
+                    fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
                 }
+                // Note: this doesn't catch any harmony patches to
+                //   Notify_UsedThisTick()
+                // One (rather silly) option would be:
+                //   for (int i=0; i<numTicks; i++) fuel.Notify_UsedThisTick();
+                // As per Thornsworth:
+                //    dear god. do the calculation yourself
+                //    geeze
+                
+                // oops, I guess // was missing here
+                // Vanilla's CompRefuelable does this:
+                //fuel.ConsumeFuel(fuel.Props.fuelConsumptionRate / 6000 * numTicks);
+                
+                if (fuel.HasFuel)
+                {
+                    TryGenerateResource(numTicks);
+                }
+            }
+            else  //fuel==null, does not use fuel
+            {
+                // already know it's turned on and powered
+                TryGenerateResource(numTicks);
             }
         }
 
@@ -156,7 +147,7 @@ namespace ProjectRimFactory.Industry
             HandelTick(2000, true);
         }
 
-        public void TryGenerateResource(int ticksInInterval)
+        private void TryGenerateResource(int ticksInInterval)
         {
             // Log.Message("" + this + " trying to generate resource after this many ticks:" + ticksInInterval);
             productionTime += ticksInInterval;
@@ -172,15 +163,15 @@ namespace ProjectRimFactory.Industry
 
         public override void ExposeData()
         {
-            Scribe_Values.Look(ref ProducedChunksTotal, "producedTotal");
+            Scribe_Values.Look(ref producedChunksTotal, "producedTotal");
             Scribe_Values.Look(ref productionTime, "PRF_productionTime");
             base.ExposeData();
         }
 
-        public virtual void GenerateChunk()
+        protected virtual void GenerateChunk()
         {
             GenPlace.TryPlaceThing(GetChunkThingToPlace(), GetComp<CompOutputAdjustable>().CurrentCell, Map, ThingPlaceMode.Near);
-            ProducedChunksTotal++;
+            producedChunksTotal++;
         }
 
         private ThingDef getRock => GetPossibleRockDefCandidatesFilterd(this.def)
@@ -188,42 +179,40 @@ namespace ProjectRimFactory.Industry
 
         protected virtual Thing GetChunkThingToPlace()
         {
-            ThingDef rock = getRock;
+            var rock = getRock;
             // Because we make our rocks ourselves, we have to handle bonus items and product modifications (bonuses) directly:
             var tmpList = new List<Thing>();
-            this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList,
-                                                        this as IBillGiver, this);
+            def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList, this as IBillGiver, this);
             if (tmpList.Count > 0) return tmpList[0]; // code framework enforces placing only a single thing
-            Thing t = ThingMaker.MakeThing(rock.building.mineableThing);
+            var t = ThingMaker.MakeThing(rock.building.mineableThing);
             t.stackCount = rock.building.mineableYield;
             return t;
         }
 
         public override string GetInspectString()
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            string s = base.GetInspectString();
+            var stringBuilder = new StringBuilder();
+            var s = base.GetInspectString();
             if (!string.IsNullOrEmpty(s))
             {
                 stringBuilder.AppendLine(s);
             }
-            stringBuilder.Append("DeepQuarry_TotalSoFar".Translate(ProducedChunksTotal));
+            stringBuilder.Append("DeepQuarry_TotalSoFar".Translate(producedChunksTotal));
             return stringBuilder.ToString().TrimEndNewlines();
         }
 
         public string GetDescription(ThingDef def)
         {
-            string HelpText = "";
             //Get Items that Building_DeepQuarry can Produce
-            List<ThingDef> rocks = GetPossibleRockDefCandidatesFilterd(def).ToList();
-            HelpText += "PRF_DescriptionUpdate_CanMine".Translate();
-            foreach (ThingDef rock in rocks)
+            var rocks = GetPossibleRockDefCandidatesFilterd(def).ToList();
+            var helpText = "PRF_DescriptionUpdate_CanMine".Translate();
+            foreach (var rock in rocks)
             {
-                HelpText += String.Format("    - {0} x{1}\r\n", rock.LabelCap, rock.building.mineableYield);
+                helpText += $"    - {rock.LabelCap} x{rock.building.mineableYield}\r\n";
             }
-            HelpText += "\r\n";
+            helpText += "\r\n";
 
-            return HelpText;
+            return helpText;
         }
 
 #if DEBUG

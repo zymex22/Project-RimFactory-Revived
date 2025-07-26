@@ -18,83 +18,85 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public Graphic_Linked2() : base()
         {
-            this.subGraphic = new Graphic_Single();
+            subGraphic = new Graphic_Single();
         }
 
         public Graphic subGraphic;
 
-        public override Material MatSingle => this.subMats[(int)LinkDirections.None];
+        public override Material MatSingle => subMats[(int)LinkDirections.None];
 
         public override Material MatSingleFor(Thing thing)
         {
-            return this.LinkedDrawMatFrom(thing, thing.Position);
+            return LinkedDrawMatFrom(thing, thing.Position);
         }
 
         public override void Init(GraphicRequest req)
         {
-            this.data = req.graphicData;
-            this.path = req.path;
-            this.color = req.color;
-            this.colorTwo = req.colorTwo;
-            this.drawSize = req.drawSize;
-            this.subGraphic.Init(req);
+            data = req.graphicData;
+            path = req.path;
+            color = req.color;
+            colorTwo = req.colorTwo;
+            drawSize = req.drawSize;
+            subGraphic.Init(req);
 
-            this.CreateSubMats();
+            CreateSubMats();
         }
 
         public void CreateSubMats()
         {
-            Vector2 mainTextureScale = new Vector2(0.25f, 0.25f);
-            for (int i = 0; i < 16; i++)
+            var mainTextureScale = new Vector2(0.25f, 0.25f);
+            for (var i = 0; i < 16; i++)
             {
-                float x = (float)(i % 4) * 0.25f;
-                float y = (float)(i / 4) * 0.25f;
-                Vector2 mainTextureOffset = new Vector2(x, y);
-                Material material = new Material(this.subGraphic.MatSingle);
-                material.name = this.subGraphic.MatSingle.name + "_ASM" + i;
-                material.mainTextureScale = mainTextureScale;
-                material.mainTextureOffset = mainTextureOffset;
-                this.subMats[i] = material;
+                var x = (float)(i % 4) * 0.25f;
+                var y = (float)(i / 4) * 0.25f;
+                var mainTextureOffset = new Vector2(x, y);
+                var material = new Material(subGraphic.MatSingle)
+                {
+                    name = subGraphic.MatSingle.name + "_ASM" + i,
+                    mainTextureScale = mainTextureScale,
+                    mainTextureOffset = mainTextureOffset
+                };
+                subMats[i] = material;
             }
         }
 
         protected Material[] subMats = new Material[16];
 
-        protected Material LinkedDrawMatFrom(Thing parent, IntVec3 cell)
+        private Material LinkedDrawMatFrom(Thing parent, IntVec3 cell)
         {
-            int num = 0;
-            int num2 = 1;
-            for (int i = 0; i < 4; i++)
+            var num = 0;
+            var num2 = 1;
+            for (var i = 0; i < 4; i++)
             {
-                if (this.ShouldLinkWith(new Rot4(i), parent))
+                if (ShouldLinkWith(new Rot4(i), parent))
                 {
                     num += num2;
                 }
                 num2 *= 2;
             }
-            LinkDirections linkSet = (LinkDirections)num;
+            var linkSet = (LinkDirections)num;
             return LinkedMaterial(parent, linkSet);
         }
 
-        public virtual Material LinkedMaterial(Thing parent, LinkDirections linkSet)
+        private Material LinkedMaterial(Thing _, LinkDirections linkSet)
         {
-            return this.subMats[(int)linkSet];
+            return subMats[(int)linkSet];
         }
 
-        public abstract bool ShouldLinkWith(Rot4 dir, Thing parent);
+        protected abstract bool ShouldLinkWith(Rot4 dir, Thing parent);
 
         //TODO Changed in 1.3 --> extraRotation was added. any changes needed?
         public override void Print(SectionLayer layer, Thing thing, float extraRotation)
         {
-            Material mat = this.LinkedDrawMatFrom(thing, thing.Position);
-            Printer_Plane.PrintPlane(layer, thing.TrueCenter(), this.drawSize, mat);
+            var mat = LinkedDrawMatFrom(thing, thing.Position);
+            Printer_Plane.PrintPlane(layer, thing.TrueCenter(), drawSize, mat);
         }
 
         public override void DrawWorker(Vector3 loc, Rot4 rot, ThingDef thingDef, Thing thing, float extraRotation)
         {
-            if (!(thing is MinifiedThing))
+            if (thing is not MinifiedThing)
             {
-                GraphicDatabase.Get<Graphic_Single>(thingDef.uiIconPath, ShaderTypeDefOf.EdgeDetect.Shader, thingDef.graphicData.drawSize, this.color, this.colorTwo)
+                GraphicDatabase.Get<Graphic_Single>(thingDef.uiIconPath, ShaderTypeDefOf.EdgeDetect.Shader, thingDef.graphicData.drawSize, color, colorTwo)
                     .DrawWorker(loc, rot, thingDef, thing, extraRotation);
             }
             else
@@ -109,9 +111,11 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public override Graphic GetColoredVersion(Shader newShader, Color newColor, Color newColorTwo)
         {
-            var g = new T();
-            g.subGraphic = this.subGraphic.GetColoredVersion(newShader, newColor, newColorTwo);
-            g.data = this.data;
+            var g = new T
+            {
+                subGraphic = subGraphic.GetColoredVersion(newShader, newColor, newColorTwo),
+                data = data
+            };
             g.CreateSubMats();
             return g;
         }

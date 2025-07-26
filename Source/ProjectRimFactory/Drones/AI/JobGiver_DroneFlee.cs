@@ -11,100 +11,95 @@ namespace ProjectRimFactory.Drones.AI
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            Job result;
-            if (pawn.playerSettings != null && pawn.playerSettings.UsesConfigurableHostilityResponse)
+            if (pawn.playerSettings is { UsesConfigurableHostilityResponse: true })
             {
-                result = null;
+                return null;
             }
-            else if (ThinkNode_ConditionalShouldFollowMaster.ShouldFollowMaster(pawn))
+
+            if (ThinkNode_ConditionalShouldFollowMaster.ShouldFollowMaster(pawn))
             {
-                result = null;
+                return null;
             }
-            else if (pawn.Map is null) //needed for 1.4
+
+            if (pawn.Map is null) //needed for 1.4
             {
-                result = null;
+                return null;
             }
-            else
+
+            if (pawn.Faction == null)
             {
-                if (pawn.Faction == null)
+                var list = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.AlwaysFlee);
+                for (var i = 0; i < list.Count; i++)
                 {
-                    List<Thing> list = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.AlwaysFlee);
-                    for (int i = 0; i < list.Count; i++)
+                    if (pawn.Position.InHorDistOf(list[i].Position, 18f) && FleeUtility.ShouldFleeFrom(list[i], pawn, false, false))
                     {
-                        if (pawn.Position.InHorDistOf(list[i].Position, 18f) && FleeUtility.ShouldFleeFrom(list[i], pawn, false, false))
-                        {
-                            return ReturnToStationJob((Pawn_Drone)pawn);
-                        }
-                    }
-                    Job job2 = FleeLargeFireJob(pawn);
-                    if (job2 != null)
-                    {
-                        return job2;
+                        return ReturnToStationJob((Pawn_Drone)pawn);
                     }
                 }
-                else if (pawn.GetLord() == null)
+                var job2 = FleeLargeFireJob(pawn);
+                if (job2 != null)
                 {
-                    List<IAttackTarget> potentialTargetsFor = pawn.Map.attackTargetsCache.GetPotentialTargetsFor(pawn);
-                    for (int j = 0; j < potentialTargetsFor.Count; j++)
+                    return job2;
+                }
+            }
+            else if (pawn.GetLord() == null)
+            {
+                var potentialTargetsFor = pawn.Map.attackTargetsCache.GetPotentialTargetsFor(pawn);
+                for (var j = 0; j < potentialTargetsFor.Count; j++)
+                {
+                    var thing = potentialTargetsFor[j].Thing;
+                    if (pawn.Position.InHorDistOf(thing.Position, 18f) && FleeUtility.ShouldFleeFrom(thing, pawn, false, true))
                     {
-                        Thing thing = potentialTargetsFor[j].Thing;
-                        if (pawn.Position.InHorDistOf(thing.Position, 18f) && FleeUtility.ShouldFleeFrom(thing, pawn, false, true))
-                        {
-                            return ReturnToStationJob((Pawn_Drone)pawn);
-                        }
+                        return ReturnToStationJob((Pawn_Drone)pawn);
                     }
                 }
-                result = null;
             }
-            return result;
+
+            return null;
         }
 
         private Job FleeLargeFireJob(Pawn pawn)
         {
-            List<Thing> list = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.Fire);
-            Job result;
+            var list = pawn.Map.listerThings.ThingsInGroup(ThingRequestGroup.Fire);
             if (list.Count < 60)
             {
-                result = null;
+                return null;
             }
-            else
+
+            var tp = TraverseParms.For(pawn);
+            Fire closestFire = null;
+            var closestDistSq = -1f;
+            var firesCount = 0;
+            RegionTraverser.BreadthFirstTraverse(pawn.Position, pawn.Map, (Region from, Region to) => to.Allows(tp, false), delegate (Region x)
             {
-                TraverseParms tp = TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false);
-                Fire closestFire = null;
-                float closestDistSq = -1f;
-                int firesCount = 0;
-                RegionTraverser.BreadthFirstTraverse(pawn.Position, pawn.Map, (Region from, Region to) => to.Allows(tp, false), delegate (Region x)
+                var list2 = x.ListerThings.ThingsInGroup(ThingRequestGroup.Fire);
+                for (var i = 0; i < list2.Count; i++)
                 {
-                    List<Thing> list2 = x.ListerThings.ThingsInGroup(ThingRequestGroup.Fire);
-                    for (int i = 0; i < list2.Count; i++)
+                    var num = (float)pawn.Position.DistanceToSquared(list2[i].Position);
+                    if (num <= 400f)
                     {
-                        float num = (float)pawn.Position.DistanceToSquared(list2[i].Position);
-                        if (num <= 400f)
+                        if (closestFire == null || num < closestDistSq)
                         {
-                            if (closestFire == null || num < closestDistSq)
-                            {
-                                closestDistSq = num;
-                                closestFire = (Fire)list2[i];
-                            }
-                            firesCount++;
+                            closestDistSq = num;
+                            closestFire = (Fire)list2[i];
                         }
-                    }
-                    return closestDistSq <= 100f && firesCount >= 60;
-                }, 18, RegionType.Set_Passable);
-                if (closestDistSq <= 100f && firesCount >= 60)
-                {
-                    Job job = ReturnToStationJob((Pawn_Drone)pawn);
-                    if (job != null)
-                    {
-                        return job;
+                        firesCount++;
                     }
                 }
-                result = null;
+                return closestDistSq <= 100f && firesCount >= 60;
+            }, 18, RegionType.Set_Passable);
+            if (closestDistSq <= 100f && firesCount >= 60)
+            {
+                var job = ReturnToStationJob((Pawn_Drone)pawn);
+                if (job != null)
+                {
+                    return job;
+                }
             }
-            return result;
+            return null;
         }
 
-        public Job ReturnToStationJob(Pawn_Drone drone)
+        private static Job ReturnToStationJob(Pawn_Drone drone)
         {
             if (drone.BaseStation != null && drone.Map == drone.BaseStation.Map)
             {

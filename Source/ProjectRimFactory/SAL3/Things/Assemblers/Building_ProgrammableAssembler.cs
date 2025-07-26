@@ -23,19 +23,19 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
             public BillReport(Bill b, List<Thing> list)
             {
-                bill = b;
-                selected = list;
-                workLeft = b.recipe.WorkAmountTotal(ProjectSAL_Utilities.CalculateDominantIngredient(b.recipe, list));
+                Bill = b;
+                Selected = list;
+                WorkLeft = b.recipe.WorkAmountTotal(ProjectSal_Utilities.CalculateDominantIngredient(b.recipe, list));
             }
-            public Bill bill;
-            public List<Thing> selected;
-            public float workLeft;
+            public Bill Bill;
+            public List<Thing> Selected;
+            public float WorkLeft;
 
             public void ExposeData()
             {
-                Scribe_References.Look(ref bill, "bill");
-                Scribe_Collections.Look(ref selected, "selected", LookMode.Deep);
-                Scribe_Values.Look(ref workLeft, "workLeft");
+                Scribe_References.Look(ref Bill, "bill");
+                Scribe_Collections.Look(ref Selected, "selected", LookMode.Deep);
+                Scribe_Values.Look(ref WorkLeft, "workLeft");
             }
         }
         
@@ -43,22 +43,23 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         private CompRefuelable compRefuelable;
         private CompFlickable compFlick;
         private CompOutputAdjustable compOutputAdjustable;
+        protected AssemblerDefModExtension AssemblerDefModExtension;
         
-        public override Graphic Graphic => (this.Active)
+        public override Graphic Graphic => (Active)
             ? (CurrentBillReport == null
                 // powered on but idle:
                 ? base.Graphic
                 // powered on and working:
-                : def.GetModExtension<AssemblerDefModExtension>()?.WorkingGrahic ?? base.Graphic)
+                : AssemblerDefModExtension?.WorkingGrahic ?? base.Graphic)
             // not powered on:
-            : def.GetModExtension<AssemblerDefModExtension>()?.PowerOffGrahic ?? base.Graphic;
+            : AssemblerDefModExtension?.PowerOffGrahic ?? base.Graphic;
 
-        public bool DrawStatus => def.GetModExtension<AssemblerDefModExtension>()?.drawStatus ?? true;
+        private bool DrawStatus => AssemblerDefModExtension?.drawStatus ?? true;
 
         // Pawn
-        public Pawn BuildingPawn;
+        private Pawn buildingPawn;
 
-        public virtual void DoPawn()
+        private void DoPawn()
         {
             try
             {
@@ -70,7 +71,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     s.Level = ExtensionSkills.GetExtendedSkillLevel(s.def, typeof(Building_ProgrammableAssembler));
                 }
 
-                //disable stuff thats not needed
+                //disable stuff that's not needed
                 //also prevents some instances of disabled skills
                 p.ideo = null;
                 p.genes = null;
@@ -78,7 +79,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 p.guest = null;
 
                 //Assign Pawn's mapIndexOrState to building's mapIndexOrState
-                ReflectionUtility.mapIndexOrState.SetValue(p, ReflectionUtility.mapIndexOrState.GetValue(this));
+                ReflectionUtility.MapIndexOrState.SetValue(p, ReflectionUtility.MapIndexOrState.GetValue(this));
 
                 //Assign Pawn's position without nasty errors
                 p.SetPositionDirect(PositionHeld);
@@ -93,15 +94,15 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 p.Notify_DisabledWorkTypesChanged();
 
                 //Pawn work-related stuffs
-                for (int i = 0; i < 24; i++)
+                for (var i = 0; i < 24; i++)
                 {
                     p.timetable.SetAssignment(i, TimeAssignmentDefOf.Work);
                 }
-                BuildingPawn = p;
+                buildingPawn = p;
             }
             catch (Exception ex)
             {
-                Log.Error("ERROR=: " + ex.ToString());
+                Log.Error("ERROR=: " + ex);
             }
         }
 
@@ -112,21 +113,21 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             p.story.Adulthood = PRFDefOf.ColonySettler53;
 
             //Clear traits
-            p.story.traits.allTraits = new List<Trait>();
+            p.story.traits.allTraits = [];
             //Reset cache
 
             //ReflectionUtility.cachedDisabledWorkTypes.SetValue(p.story, null);
             //Reset cache for each skill
 
-            for (int i = 0; i < p.skills.skills.Count; i++)
+            for (var i = 0; i < p.skills.skills.Count; i++)
             {
-                ReflectionUtility.cachedTotallyDisabled.SetValue(p.skills.skills[i], BoolUnknown.Unknown);
+                ReflectionUtility.CachedTotallyDisabled.SetValue(p.skills.skills[i], BoolUnknown.Unknown);
             }
 
         }
 
         // Misc
-        public BillStack billStack;
+        private BillStack billStack;
         public override BillStack BillStack => billStack;
         public Building_ProgrammableAssembler()
         {
@@ -139,7 +140,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             Scribe_Deep.Look(ref CurrentBillReport, "currentBillReport");
             Scribe_Collections.Look(ref ThingQueue, "thingQueue", LookMode.Deep);
             Scribe_Values.Look(ref allowForbidden, "allowForbidden");
-            Scribe_Deep.Look(ref BuildingPawn, "buildingPawn");
+            Scribe_Deep.Look(ref buildingPawn, "buildingPawn");
         }
         public override IEnumerable<Gizmo> GetGizmos()
         {
@@ -199,18 +200,16 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             {
                 if (CurrentBillReport != null)
                 {
-                    Log.Message("Selected things: " + string.Join(", ", CurrentBillReport.selected.Select(StringConverter).ToArray()));
+                    Log.Message("Selected things: " + string.Join(", ", CurrentBillReport.Selected.Select(StringConverter).ToArray()));
                 }
             });
             yield return new FloatMenuOption("View all items available for input", () =>
             {
                 Log.Message(string.Join(", ", AllAccessibleThings.Select(StringConverter).ToArray()));
             });
-            yield break;
         }
 
-        private MapTickManager mapManager;
-        protected MapTickManager MapManager => mapManager;
+        private MapTickManager MapManager { get; set; }
 
         private PRFGameComponent prfGameComp = Current.Game.GetComponent<PRFGameComponent>();
 
@@ -218,25 +217,26 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         {
             base.SpawnSetup(map, respawningAfterLoad);
             compOutputAdjustable = GetComp<CompOutputAdjustable>();
-            mapManager = map.GetComponent<MapTickManager>();
-            if (BuildingPawn == null)
+            MapManager = map.GetComponent<MapTickManager>();
+            if (buildingPawn == null)
                 DoPawn();
 
-            BuildingPawn?.skills.skills.ForEach(s =>
+            buildingPawn?.skills.skills.ForEach(s =>
             {
                 s.Level = ExtensionSkills.GetExtendedSkillLevel(s.def, typeof(Building_ProgrammableAssembler));
-                ReflectionUtility.cachedTotallyDisabled.SetValue(s, BoolUnknown.Unknown);
+                ReflectionUtility.CachedTotallyDisabled.SetValue(s, BoolUnknown.Unknown);
             });
 
             compPowerTrader = GetComp<CompPowerTrader>();
             compRefuelable = GetComp<CompRefuelable>();
             compFlick = GetComp<CompFlickable>();
+            AssemblerDefModExtension = def.GetModExtension<AssemblerDefModExtension>();
             prfGameComp = Current.Game.GetComponent<PRFGameComponent>();
 
             //Assign Pawn's mapIndexOrState to building's mapIndexOrState
-            ReflectionUtility.mapIndexOrState.SetValue(BuildingPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
+            ReflectionUtility.MapIndexOrState.SetValue(buildingPawn, ReflectionUtility.MapIndexOrState.GetValue(this));
             //Assign Pawn's position without nasty errors
-            BuildingPawn.SetPositionDirect(Position);
+            buildingPawn!.SetPositionDirect(Position);
 
             //Need this type of call to set the Powerconsumption on load
             //A normal call will not work
@@ -249,7 +249,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             prfGameComp.RegisterAssemblerQueue(this);
 
             //Check if the Current Bill still Exists
-            if (CurrentBillReport?.bill is null)
+            if (CurrentBillReport?.Bill is null)
             {
                 //Remove Bill
                 CurrentBillReport = null;
@@ -257,16 +257,14 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         }
 
-        protected virtual bool Active => compPowerTrader?.PowerOn != false
-                                       && compRefuelable?.HasFuel != false
-                                       && compFlick?.SwitchIsOn != false;
+        protected bool Active => compPowerTrader?.PowerOn != false && compRefuelable?.HasFuel != false && compFlick?.SwitchIsOn != false;
 
-        protected IEnumerable<Thing> AllAccessibleThings => from t in AllThingsInArea
+        private IEnumerable<Thing> AllAccessibleThings => from t in AllThingsInArea
                                                             where (AllowForbidden || !t.IsForbidden(Faction))
                                                             where (!Map.reservationManager.AllReservedThings().Contains(t))
                                                             select t;
 
-        protected IEnumerable<Thing> AllThingsInArea
+        private IEnumerable<Thing> AllThingsInArea
         {
             get
             {
@@ -285,11 +283,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                         }
                     }
                 }
-                yield break;
             }
         }
-        
-        protected IEnumerable<Bill> AllBillsShouldDoNow => from b in billStack.Bills
+
+        private IEnumerable<Bill> AllBillsShouldDoNow => from b in billStack.Bills
                                                            where b.ShouldDoNow()
                                                            select b;
         public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null)
@@ -316,15 +313,15 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 if (CurrentBillReport != null)
                 {
                     //Update the Required Work
-                    CurrentBillReport.workLeft -= 10f * ProductionSpeedFactor * (this.TryGetComp<CompPowerWorkSetting>()?.GetSpeedFactor() ?? 1f);
+                    CurrentBillReport.WorkLeft -= 10f * ProductionSpeedFactor * (this.TryGetComp<CompPowerWorkSetting>()?.GetSpeedFactor() ?? 1f);
                     //If Work Finished
-                    if (CurrentBillReport.workLeft <= 0)
+                    if (CurrentBillReport.WorkLeft <= 0)
                     {
                         try
                         {
                             ProduceItems();
-                            CurrentBillReport.bill.Notify_IterationCompleted(BuildingPawn, CurrentBillReport.selected);
-                            Notify_RecipeCompleted(CurrentBillReport.bill.recipe);
+                            CurrentBillReport.Bill.Notify_IterationCompleted(buildingPawn, CurrentBillReport.Selected);
+                            Notify_RecipeCompleted(CurrentBillReport.Bill.recipe);
                         }
                         catch (Exception ex)
                         {
@@ -348,12 +345,11 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             // Effect.
             if (CurrentBillReport != null && Active)
             {
-                var ext = this.def.GetModExtension<AssemblerDefModExtension>();
                 effecter ??=
-                    (ext == null ? CurrentBillReport.bill.recipe?.effectWorking : ext.GetEffecter(this.CurrentBillReport.bill.recipe))
+                    (AssemblerDefModExtension == null ? CurrentBillReport.Bill.recipe?.effectWorking : AssemblerDefModExtension.GetEffecter(CurrentBillReport.Bill.recipe))
                     ?.Spawn();
                 sound ??=
-                    (ext == null ? CurrentBillReport.bill.recipe?.soundWorking : ext.GetSound(this.CurrentBillReport.bill.recipe))
+                    (AssemblerDefModExtension == null ? CurrentBillReport.Bill.recipe?.soundWorking : AssemblerDefModExtension.GetSound(CurrentBillReport.Bill.recipe))
                     ?.TrySpawnSustainer(this);
                 effecter?.EffectTick(this, this);
                 sound?.SustainerUpdate();
@@ -406,16 +402,17 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             return null;
         }
 
-        private ModExtension_Skills ExtensionSkills => this.def.GetModExtension<ModExtension_Skills>();
+        private ModExtension_Skills ExtensionSkills => def.GetModExtension<ModExtension_Skills>();
 
         static bool TryFindBestBillIngredientsInSet(List<Thing> accessibleThings, Bill b, List<ThingCount> chosen)
         {
             //TryFindBestBillIngredientsInSet Expects a List of Both Available & Allowed Things as "accessibleThings"
             List<IngredientCount> missing = []; // Needed for 1.4
-            return (bool)ReflectionUtility.TryFindBestBillIngredientsInSet.Invoke(null, new object[] { accessibleThings, b, chosen, new IntVec3(), false, missing });
+            return (bool)ReflectionUtility.TryFindBestBillIngredientsInSet
+                .Invoke(null, [accessibleThings, b, chosen, new IntVec3(), false, missing]);
         }
 
-        protected virtual void ProduceItems()
+        private void ProduceItems()
         {
             if (CurrentBillReport == null)
             {
@@ -425,9 +422,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             // GenRecipe handles creating any bonus products
             if (def == PRFDefOf.PRF_Recycler) Patch_Thing_SmeltProducts.RecyclerProducingItems = true;
             Patch_CompFoodPoisonable_Notify_RecipeProduced.AssemblerRefrence = this;
-            var products = GenRecipe.MakeRecipeProducts(CurrentBillReport.bill.recipe, BuildingPawn,
-                CurrentBillReport.selected, 
-                ProjectSAL_Utilities.CalculateDominantIngredient(CurrentBillReport.bill.recipe, CurrentBillReport.selected),
+            var products = GenRecipe.MakeRecipeProducts(CurrentBillReport.Bill.recipe, buildingPawn,
+                CurrentBillReport.Selected, 
+                ProjectSal_Utilities.CalculateDominantIngredient(CurrentBillReport.Bill.recipe, CurrentBillReport.Selected),
                 this);
             
             foreach (var thing in products)
@@ -439,14 +436,14 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             Patch_Thing_SmeltProducts.RecyclerProducingItems = false;
             
             // Consume the Input
-            for (var i = 0; i < CurrentBillReport.selected.Count; i++)
+            for (var i = 0; i < CurrentBillReport.Selected.Count; i++)
             {
-                var selected = CurrentBillReport.selected[i];
+                var selected = CurrentBillReport.Selected[i];
                 TryGetCorpseItems(selected);
-                CurrentBillReport.bill.recipe.Worker.ConsumeIngredient(selected, CurrentBillReport.bill.recipe, Map);
+                CurrentBillReport.Bill.recipe.Worker.ConsumeIngredient(selected, CurrentBillReport.Bill.recipe, Map);
             }
 
-            ThingQueue.AddRange(from Thing t in CurrentBillReport.selected where t.Spawned select t);
+            ThingQueue.AddRange(from Thing t in CurrentBillReport.Selected where t.Spawned select t);
         }
         
         /// <summary>
@@ -469,14 +466,14 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     innerPawn.apparel.Remove(apparel[j]);
                 }
             }
-            if (innerPawn.inventory?.innerContainer != null)
+
+            if (innerPawn.inventory?.innerContainer == null) return;
+            
+            var things = innerPawn.inventory.innerContainer.ToList();
+            for (var j = 0; j < things.Count; j++)
             {
-                var things = innerPawn.inventory.innerContainer.ToList();
-                for (var j = 0; j < things.Count; j++)
-                {
-                    ThingQueue.Add(things[j]);
-                    innerPawn.inventory.innerContainer.Remove(things[j]);
-                }
+                ThingQueue.Add(things[j]);
+                innerPawn.inventory.innerContainer.Remove(things[j]);
             }
         }
 
@@ -497,7 +494,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 else
                 { 
                     // assembler is working
-                    stringBuilder.AppendLine("SAL3_BillReport".Translate(CurrentBillReport.bill.Label, CurrentBillReport.workLeft.ToStringWorkAmount()));
+                    stringBuilder.AppendLine("SAL3_BillReport".Translate(CurrentBillReport.Bill.Label,
+                        CurrentBillReport.WorkLeft.ToStringWorkAmount()));
                 }
             }
             // even if it's not active, show any products ready to place:
@@ -509,14 +507,14 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         // Settings
         private bool allowForbidden; // internal variable
-        public virtual bool AllowForbidden => allowForbidden;
-        protected virtual float ProductionSpeedFactor => def.GetModExtension<AssemblerDefModExtension>()?.workSpeedBaseFactor ?? 1f;
+        private bool AllowForbidden => allowForbidden;
+        protected virtual float ProductionSpeedFactor => AssemblerDefModExtension?.workSpeedBaseFactor ?? 1f;
 
-        protected virtual bool SatisfiesSkillRequirements(RecipeDef recipe)
+        protected bool SatisfiesSkillRequirements(RecipeDef recipe)
         {
-            if (BuildingPawn is { skills: not null })
+            if (buildingPawn is { skills: not null })
             {
-                return recipe.PawnSatisfiesSkillRequirements(this.BuildingPawn);
+                return recipe.PawnSatisfiesSkillRequirements(buildingPawn);
             }
             return recipe.skillRequirements?.All(s => s.minLevel <= ExtensionSkills.GetExtendedSkillLevel(s.skill, typeof(Building_ProgrammableAssembler))) ?? true;
         }
@@ -545,13 +543,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 { 
                     // the assembler is actively working
                     // set the status text to the bill's label:
-                    label = CurrentBillReport.bill.LabelCap;
+                    label = CurrentBillReport.Bill.LabelCap;
                 }
                 else 
                 {
                     // the assembler is NOT working
                     // show why it is not working:
-                    label = this.BillStack.AnyShouldDoNow ? 
+                    label = BillStack.AnyShouldDoNow ? 
                         "SearchingForIngredients".Translate() // it DOES have bills
                         : "AssemblerNoBills".Translate();     // it DOESN'T have bills:
                 }
@@ -587,7 +585,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         }
 
         // Other virtual methods
-        protected virtual void Notify_RecipeCompleted(RecipeDef recipe)
+        private void Notify_RecipeCompleted(RecipeDef _)
         {
         }
 
@@ -612,7 +610,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 //some of the things contained are marked as Destroyed for some reason. they should not be Destroyed
                 if (ThingQueue[i].Destroyed) ThingQueue[i].ForceSetStateToUnspawned();
 
-                this.PRFTryPlaceThing(ThingQueue[i], this.Position, this.Map, true);
+                this.PRFTryPlaceThing(ThingQueue[i], Position, Map, true);
             }
 
             base.DeSpawn(mode);
@@ -649,13 +647,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         //max number of items that can be stored in thingQueue before production is halted
         private const int MaxThingQueueCount = 100;
 
-        protected bool AllowProductionThingQueue => ThingQueue.Count < MaxThingQueueCount;
+        private bool AllowProductionThingQueue => ThingQueue.Count < MaxThingQueueCount;
 
         Map IAssemblerQueue.Map => Map;
 
         [Unsaved]
-        private Effecter effecter = null;
+        private Effecter effecter;
         [Unsaved]
-        private Sustainer sound = null;
+        private Sustainer sound;
     }
 }

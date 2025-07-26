@@ -8,8 +8,8 @@ namespace ProjectRimFactory.Industry
     {
         public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
         {
-            base.DrawGhost(def, center, rot, ghostCol);
-            GenDraw.DrawFieldEdges(new List<IntVec3>() { rot.FacingCell + center }, Color.yellow);
+            base.DrawGhost(def, center, rot, ghostCol, thing);
+            GenDraw.DrawFieldEdges([rot.FacingCell + center], Color.yellow);
         }
     }
 }

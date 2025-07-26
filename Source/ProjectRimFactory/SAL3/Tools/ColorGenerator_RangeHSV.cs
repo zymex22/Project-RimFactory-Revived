@@ -3,6 +3,7 @@ using Verse;
 
 namespace ProjectRimFactory.SAL3.Tools
 {
+    // ReSharper disable once UnusedType.Global
     public class ColorGenerator_RangeHSV : ColorGenerator
     {
         public FloatRange rangeH;

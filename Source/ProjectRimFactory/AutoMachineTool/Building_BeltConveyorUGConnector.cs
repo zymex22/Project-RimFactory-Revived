@@ -9,14 +9,14 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.DrawGUIOverlay();
 
-            if (this.State != WorkingState.Ready && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
+            if (State != WorkingState.Ready && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
             {
                 var p = CarryPosition();
-                if (!this.ToUnderground || this.WorkLeft > 0.7f)
+                if (!ToUnderground || WorkLeft > 0.7f)
                 {
                     Vector2 result = Find.Camera.WorldToScreenPoint(p + new Vector3(0, 0, -0.4f)) / Prefs.UIScale;
                     result.y = (float)UI.screenHeight - result.y;
-                    GenMapUI.DrawThingLabel(result, this.CarryingThing().stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
+                    GenMapUI.DrawThingLabel(result, CarryingThing().stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
                 }
             }
         }
@@ -33,17 +33,17 @@ namespace ProjectRimFactory.AutoMachineTool
         //TODO: Decide if we allow this.
         protected override bool TryStartWorking(out Thing target, out float workAmount)
         {
-            if (this.ToUnderground) return base.TryStartWorking(out target, out workAmount);
+            if (ToUnderground) return base.TryStartWorking(out target, out workAmount);
             target = null;
             workAmount = 1f;
             return false;
         }
 
-        public bool ToUnderground => this.modExtension_Conveyor.toUnderground;
+        public bool ToUnderground => modExtension_Conveyor.toUnderground;
 
         public override bool CanSendToLevel(ConveyorLevel level)
         {
-            if (this.ToUnderground)
+            if (ToUnderground)
             {
                 if (level == ConveyorLevel.Underground) return true;
             }
@@ -53,7 +53,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public override bool CanReceiveFromLevel(ConveyorLevel level)
         {
-            if (this.ToUnderground)
+            if (ToUnderground)
             {
                 if (level == ConveyorLevel.Ground) return true;
             }
@@ -63,7 +63,7 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public override bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition = true)
         {
-            if (this.ToUnderground)
+            if (ToUnderground)
             {
                 if (!otherBeltLinkable.CanReceiveFromLevel(ConveyorLevel.Underground)) return false;
             }
@@ -73,10 +73,10 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             if (!checkPosition) return true;
             // Connectors can only link to something directly in front of them:
-            return (this.Position + this.Rotation.FacingCell == otherBeltLinkable.Position);
+            return (Position + Rotation.FacingCell == otherBeltLinkable.Position);
         }
 
-        new public static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
+        public new static bool CanDefSendToRot4AtLevel(ThingDef def, Rot4 defRotation,
                      Rot4 queryRotation, ConveyorLevel queryLevel)
         {
             // Not going to error check here: if there's a config error, there will be prominent
@@ -93,7 +93,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             return defRotation == queryRotation;
         }
-        new public static bool CanDefReceiveFromRot4AtLevel(ThingDef def, Rot4 defRotation,
+        public new static bool CanDefReceiveFromRot4AtLevel(ThingDef def, Rot4 defRotation,
                       Rot4 queryRotation, ConveyorLevel queryLevel)
         {
             if ((queryLevel == ConveyorLevel.Ground &&

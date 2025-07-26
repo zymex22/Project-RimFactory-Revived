@@ -1,5 +1,6 @@
 ﻿using ProjectRimFactory.Common;
 using ProjectRimFactory.SAL3;
+using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
 using Verse;
 
@@ -18,24 +19,24 @@ namespace ProjectRimFactory.Drones
         public override void Kill(DamageInfo? dinfo, Hediff exactCulprit = null)
         {
             // don't call base.Kill
-            this.Destroy();
+            Destroy();
         }
 
         // or destroyed
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
-            if (this.Spawned) this.DeSpawn();
+            if (Spawned) DeSpawn();
             // don't call base.Destroy();
             // DO set mapIndexOrState to -2 to make "thing.Destroyed" true (needed for Work Tab Compatibility)
-            ReflectionUtility.mapIndexOrState.SetValue(this, (sbyte)-2);
+            ReflectionUtility.MapIndexOrState.SetValue(this, (sbyte)-2);
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             //Kill all invalid spawns
-            if (this.BaseStation == null)
+            if (BaseStation == null)
             {
-                this.Kill(null);
+                Kill(null);
                 return;
             }
 
@@ -56,7 +57,7 @@ namespace ProjectRimFactory.Drones
 
             //Set the AreaRestriction. null means Unrestricted
             // TODO Check if that is the correct replacement of if i need that effective thing
-            playerSettings.AreaRestrictionInPawnCurrentMap = this.BaseStation.DroneAllowedArea;
+            playerSettings.AreaRestrictionInPawnCurrentMap = BaseStation.DroneAllowedArea;
         }
 
         protected override void Tick()
