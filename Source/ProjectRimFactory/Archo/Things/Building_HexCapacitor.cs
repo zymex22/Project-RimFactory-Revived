@@ -4,9 +4,10 @@ using Verse;
 
 namespace ProjectRimFactory.Archo.Things
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Building_HexCapacitor : Building
     {
-        CompPowerBattery batteryComp;
+        private CompPowerBattery batteryComp;
         public override void DrawGUIOverlay()
         {
             base.DrawGUIOverlay();
