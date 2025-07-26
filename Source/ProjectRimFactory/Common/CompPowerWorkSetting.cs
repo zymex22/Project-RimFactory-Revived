@@ -17,7 +17,7 @@ namespace ProjectRimFactory.Common
 
         public int MaxPowerForRange => (int)(Props.floatrange_Range.Span * Props.powerPerStepRange);
 
-        public IRangeCells rangeCells = null;
+        public IRangeCells rangeCells;
 
         public float SupplyPowerForSpeed
         {
@@ -68,12 +68,12 @@ namespace ProjectRimFactory.Common
 
         }
 
-        private float powerForSpeed = 0;
+        private float powerForSpeed;
 
 
         public Rot4 RangeTypeRot = Rot4.North;
 
-        private float powerForRange = 0;
+        private float powerForRange;
 
         private enum rangeTypeClassEnum
         {
@@ -128,11 +128,11 @@ namespace ProjectRimFactory.Common
 
         public float PowerPerStepRange => Props.powerPerStepRange;
 
-        public FloatRange FloatRange_Range => Props.floatrange_Range;
+        public FloatRange FloatRangeRange => Props.floatrange_Range;
 
         public float CurrentRange => GetRange();
 
-        public FloatRange FloatRange_SpeedFactor => Props.floatrange_SpeedFactor;
+        public FloatRange FloatRangeSpeedFactor => Props.floatrange_SpeedFactor;
 
         public float CurrentSpeedFactor => GetSpeedFactor();
 
@@ -239,7 +239,7 @@ namespace ProjectRimFactory.Common
             base.PostDrawExtraSelectionOverlays();
             if (RangeSetting)
             {
-                DrawRangeCells(CommonColors.instance);
+                DrawRangeCells(CommonColors.Instance);
             }
         }
 
@@ -261,7 +261,7 @@ namespace ProjectRimFactory.Common
 
 
 
-        public IRangeCells[] rangeTypes = new IRangeCells[] { new CircleRange(), new FacingRectRange(), new RectRange() };
+        public IRangeCells[] rangeTypes = { new CircleRange(), new FacingRectRange(), new RectRange() };
 
     }
 
@@ -295,8 +295,8 @@ namespace ProjectRimFactory.Common
             base.DrawGhost(center, rot, thingDef, ghostCol, drawAltitude, thing);
             var min = propsRangeType.RangeCells(center, rot, thingDef, floatrange_Range.min);
             var max = propsRangeType.RangeCells(center, rot, thingDef, floatrange_Range.max);
-            min.Select(c => new { Cell = c, Color = CommonColors.blueprintMin })
-                .Concat(max.Select(c => new { Cell = c, Color = CommonColors.blueprintMax }))
+            min.Select(c => new { Cell = c, Color = CommonColors.BlueprintMin })
+                .Concat(max.Select(c => new { Cell = c, Color = CommonColors.BlueprintMax }))
                 .GroupBy(a => a.Color)
                 .ToList()
                 .ForEach(g => GenDraw.DrawFieldEdges(g.Select(a => a.Cell).ToList(), g.Key));
@@ -304,7 +304,7 @@ namespace ProjectRimFactory.Common
             var map = Find.CurrentMap;
             map.listerThings.ThingsOfDef(thingDef).Select(t => t.TryGetComp<CompPowerWorkSetting>())
                 .Where(c => c is { RangeSetting: true })
-                .ToList().ForEach(c => c.DrawRangeCells(CommonColors.otherInstance));
+                .ToList().ForEach(c => c.DrawRangeCells(CommonColors.OtherInstance));
         }
 
         //https://stackoverflow.com/a/457708

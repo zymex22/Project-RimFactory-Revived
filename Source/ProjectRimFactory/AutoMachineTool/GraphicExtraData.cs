@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
+using Debug = ProjectRimFactory.Common.Debug;
 
 namespace ProjectRimFactory
 {

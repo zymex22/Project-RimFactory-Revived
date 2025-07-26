@@ -71,18 +71,15 @@ namespace ProjectRimFactory
             {
                 //Log.Message("PRF Loading Sculpture " + titleKey);
                 var all = Common.ProjectRimFactory_ModComponent.availableSpecialSculptures;
-                if (all != null)
+                var s = all?.FirstOrDefault(x => x.id == id);
+                if (s != null)
                 {
-                    var s = all.FirstOrDefault(x => x.id == this.id);
-                    if (s != null)
-                    {
-                        // Update graphic from master XML
-                        this.graphicData = s.graphicData;
-                        this.graphic = s.graphic;
-                        this.maxNumberCopies = s.maxNumberCopies;
-                    }
+                    // Update graphic from master XML
+                    graphicData = s.graphicData;
+                    graphic = s.graphic;
+                    maxNumberCopies = s.maxNumberCopies;
                 }
-                foreach (Thing t in this.currentInstances)
+                foreach (Thing t in currentInstances)
                     MakeItemSpecial(t);
             }
         }
@@ -90,7 +87,7 @@ namespace ProjectRimFactory
         public void Init()
         {
             if (graphicData != null)
-                this.graphic = graphicData.Graphic;
+                graphic = graphicData.Graphic;
         }
         // Handle magic of making art item into this special sculpture
         // Note: Description is handled by harmony patch checking against
@@ -102,19 +99,17 @@ namespace ProjectRimFactory
             // Use HarmonyLib to set internal string values for title and author:
             AccessTools.Field(typeof(CompArt), "titleInt").SetValue(artComp, titleKey.Translate());
             AccessTools.Field(typeof(CompArt), "authorNameInt").SetValue(artComp, authorKey.Translate());
-            if (this.graphicData != null)
+            if (graphicData != null)
                 AccessTools.Field(typeof(Thing), "graphicInt").SetValue(artComp.parent, graphicData.Graphic);
         }
         // Pre-load game init:
         static public void PreStartGame()
         {
             var all = Common.ProjectRimFactory_ModComponent.availableSpecialSculptures;
-            if (all != null)
+            if (all == null) return;
+            foreach (var s in all)
             {
-                foreach (var s in all)
-                {
-                    s.currentInstances = null;
-                }
+                s.currentInstances = null;
             }
         }
         // Load from XML file Settings/SpecialSculpture.xml; called from ModComponent

@@ -114,7 +114,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     foreach (var port in Ports)
                     {
                         var PortIsCloser = port.Key < DistanceToTarget;
-                        if (PortIsCloser || (ConditionalPatchHelper.Patch_Reachability_CanReach.Status 
+                        if (PortIsCloser || (ConditionalPatchHelper.PatchReachabilityCanReach.Status 
                                              && pawnMap.reachability.CanReach(pawnPos, 
                                                  target.Thing, Verse.AI.PathEndMode.Touch, 
                                                  TraverseParms.For(___pawn)) 

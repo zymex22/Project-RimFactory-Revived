@@ -4,28 +4,24 @@ using Verse;
 
 namespace ProjectRimFactory.Common
 {
-    class Command_ActionRightLeft : Command
+    internal class Command_ActionRightLeft : Command
     {
 
-        private static bool wasRightClick = false;
+        private static bool wasRightClick;
 
-        public Action actionL;
-        public Action actionR;
-
-        private Color? iconDrawColorOverride;
-
-        public override Color IconDrawColor => iconDrawColorOverride ?? base.IconDrawColor;
-
+        public Action ActionL;
+        public Action ActionR;
+        
         public override void ProcessInput(Event ev)
         {
             base.ProcessInput(ev);
             if (wasRightClick)
             {
-                actionR();
+                ActionR();
             }
             else
             {
-                actionL();
+                ActionL();
             }
 
         }
@@ -42,11 +38,6 @@ namespace ProjectRimFactory.Common
             {
                 wasRightClick = true;
             }
-        }
-
-        public void SetColorOverride(Color color)
-        {
-            iconDrawColorOverride = color;
         }
 
     }

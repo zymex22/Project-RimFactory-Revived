@@ -12,10 +12,10 @@ namespace ProjectRimFactory
     public class PRFGameComponent : GameComponent
     {
         public List<SpecialSculpture> specialScupltures;  // currently in game
-        public List<IAssemblerQueue> AssemblerQueue = new List<IAssemblerQueue>();
+        public List<IAssemblerQueue> AssemblerQueue = [];
 
-        public static Pawn PRF_StaticPawn = null;
-        public static Job PRF_StaticJob = null;
+        public static Pawn PRF_StaticPawn;
+        public static Job PRF_StaticJob;
 
         public static void GenStaticPawn()
         {
@@ -29,7 +29,7 @@ namespace ProjectRimFactory
 
             //Back Compatibility Setup
 
-            List<BackCompatibilityConverter> data = (List<BackCompatibilityConverter>)ReflectionUtility.BackCompatibilityConversionChain.GetValue(null);
+            var data = (List<BackCompatibilityConverter>)ReflectionUtility.BackCompatibilityConversionChain.GetValue(null);
             data.Add(new Common.BackCompatibility.PRF_BackCompatibilityConverter());
             ReflectionUtility.BackCompatibilityConversionChain.SetValue(null, data);
 
@@ -44,14 +44,11 @@ namespace ProjectRimFactory
             Scribe_Deep.Look(ref PRF_StaticPawn, "PRF_StaticPawn");
             Scribe_Deep.Look(ref PRF_StaticJob, "PRF_StaticJob");
 
-
-
-
         }
         public void RegisterAssemblerQueue(IAssemblerQueue queue)
         {
-            //enshure that there are no duplicates
-            //im shure there is a better way
+            //ensure that there are no duplicates
+            //im sure there is a better way
             // AssemblerQueue.RemoveAll(q => queue.ToString() == q.ToString());
 
             AssemblerQueue.Add(queue);
@@ -85,7 +82,7 @@ namespace ProjectRimFactory
                                     .Where(s => (s.limitToDefs?.Contains(item.def) != false))
                                     .InRandomOrder())
                 {
-                    if (this.specialScupltures == null) { specialSculpture = ss; break; }
+                    if (specialScupltures == null) { specialSculpture = ss; break; }
                     var inGameWithSameId = specialScupltures.FirstOrDefault(s => s.id == ss.id);
                     if (inGameWithSameId == null) { specialSculpture = ss; break; }
                     if (inGameWithSameId.currentInstances == null ||
@@ -102,12 +99,12 @@ namespace ProjectRimFactory
             }
             specialSculpture.MakeItemSpecial(item);
             // bookkeeping:
-            if (this.specialScupltures == null) specialScupltures = new List<SpecialSculpture>();
-            var alreadyRecordedSpecialSculpture = this.specialScupltures
+            if (specialScupltures == null) specialScupltures = new List<SpecialSculpture>();
+            var alreadyRecordedSpecialSculpture = specialScupltures
                              .FirstOrDefault(s => s.id == specialSculpture.id);
             if (alreadyRecordedSpecialSculpture == null)
             {
-                this.specialScupltures.Add(specialSculpture);
+                specialScupltures.Add(specialSculpture);
                 alreadyRecordedSpecialSculpture = specialSculpture;
             } // alreadyRSS has been added to list one way or another now
             if (alreadyRecordedSpecialSculpture.currentInstances == null)
@@ -126,7 +123,7 @@ namespace ProjectRimFactory
                                           Thing dominantIngredient)
         {
             //TODO: allow extraData to specify which special sculpture?
-            foreach (Thing p in products)
+            foreach (var p in products)
             {
                 if (Current.Game.GetComponent<PRFGameComponent>().TryAddSpecialSculpture(p))
                 {
@@ -186,11 +183,11 @@ Log.Warning("---------added test special scuplture: " + t + " at " + t.Position)
         {
             var stockGenerators = PRFDefOf.PRF_Factory_Supplier.stockGenerators;
 
-            for (int i = stockGenerators.Count - 1; i >= 0; i--)
+            for (var i = stockGenerators.Count - 1; i >= 0; i--)
             {
                 if (stockGenerators[i] is StockGenerator_SingleDef stockDev)
                 {
-                    ThingDef thingDef = (ThingDef)ReflectionUtility.StockGeneratorSingleDefThingDef.GetValue(stockDev);
+                    var thingDef = (ThingDef)ReflectionUtility.StockGeneratorSingleDefThingDef.GetValue(stockDev);
                     
                     if (!thingDef.Minifiable && thingDef.category == ThingCategory.Building)
                     {
@@ -199,13 +196,5 @@ Log.Warning("---------added test special scuplture: " + t + " at " + t.Position)
                 }
             }
         }
-
-
-
     }
-
-
-
-
-
 }

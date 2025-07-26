@@ -6,19 +6,16 @@ namespace ProjectRimFactory
 {
     public class CompTransmitsPower : ThingComp
     {
-        //TODO: Sometime in 2021, this can be removed!
-        static int version = 2;
-        static ThingDef undergroundCable = null;
-        bool hasConduitInt = true;
+        private static ThingDef undergroundCable;
+        private bool hasConduitInt = true;
         
         public override void PostExposeData()
         {
             base.PostExposeData();
             Scribe_Values.Look(ref hasConduitInt, "PRF_CTP_hasConduit", false);
-            if (Scribe.mode == LoadSaveMode.Saving) version = 2;
-            Scribe_Values.Look(ref version, "PRF_CTP_V", 1);
         }
-        public ThingDef TransmitterDef
+
+        private ThingDef TransmitterDef
         {
             get
             {
@@ -51,7 +48,7 @@ namespace ProjectRimFactory
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
-            if (version != 1 && (respawningAfterLoad || !hasConduitInt)) return;
+            if (respawningAfterLoad || !hasConduitInt) return;
             
             var isTransmitterHere = false;
             foreach (var t in parent.Map.thingGrid.ThingsListAt(parent.Position))
@@ -68,16 +65,16 @@ namespace ProjectRimFactory
             conduit.SetFaction(Faction.OfPlayer); // heh; don't forget
             hasConduitInt = false;
             var comps = parent.AllComps;
-            for (int i = 0; i < comps.Count; i++)
+            for (var i = 0; i < comps.Count; i++)
             {
                 if (comps[i] is CompPower cp)
                 {
-                    cp.ConnectToTransmitter(conduit.TryGetComp<CompPower>(), respawningAfterLoad);
+                    cp.ConnectToTransmitter(conduit.TryGetComp<CompPower>());
                     break;
                 }
                 if (comps[i] == this)
                 {
-                    Log.Warning("PRF Warning: " + parent.def.defName + " has " + this.GetType() + " before CompPower!\n" +
+                    Log.Warning("PRF Warning: " + parent.def.defName + " has " + GetType() + " before CompPower!\n" +
                                 "  This will make connecting to power grid difficult");
                 }
             }
@@ -88,7 +85,7 @@ namespace ProjectRimFactory
     {
         public CompProperties_TransmitsPower()
         {
-            this.compClass = typeof(CompTransmitsPower);
+            compClass = typeof(CompTransmitsPower);
         }
         public ThingDef transmitter = null;  //ThingDefOf.HiddenConduit;
         static public List<string> possibleUndergroundTransmitters;

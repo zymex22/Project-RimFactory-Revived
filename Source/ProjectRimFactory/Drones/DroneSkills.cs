@@ -42,18 +42,18 @@ namespace ProjectRimFactory.Drones
                             modExtensionSkills.GetSkillLevel(record.def),
                         ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchIsCapping =>
                             Mathf.Clamp(modExtensionSkills.GetSkillLevel(record.def), 0,
-                                ReserchSkillModifier.GetResechSkillLevel()),
+                                ReserchSkillModifier.GetResearchSkillLevel()),
                         ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ThisIsCapping =>
-                            Mathf.Clamp(ReserchSkillModifier.GetResechSkillLevel(), 0,
+                            Mathf.Clamp(ReserchSkillModifier.GetResearchSkillLevel(), 0,
                                 modExtensionSkills.GetSkillLevel(record.def)),
                         ModExtension_Skills.enum_ModExtension_SkillsskillUsage.ReserchOverrides =>
-                            ReserchSkillModifier.GetResechSkillLevel(),
+                            ReserchSkillModifier.GetResearchSkillLevel(),
                         _ => modExtensionSkills.GetSkillLevel(record.def)
                     };
                     continue;
                 }
 
-                record.levelInt = ReserchSkillModifier.GetResechSkillLevel(); //No Settings Found use the Reserch Directly
+                record.levelInt = ReserchSkillModifier.GetResearchSkillLevel(); //No Settings Found use the Reserch Directly
                 
             }
 

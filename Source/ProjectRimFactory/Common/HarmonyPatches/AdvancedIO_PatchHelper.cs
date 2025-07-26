@@ -16,7 +16,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         /// <returns></returns>
         public static IEnumerable<KeyValuePair<IntVec3, Building_AdvancedStorageUnitIOPort>> GetAdvancedIOPorts(Map map)
         {
-            var Ports = PatchStorageUtil.GetPRFMapComponent(map).GetadvancedIOLocations.Where(l => (l.Value.boundStorageUnit?.Powered ?? false) && l.Value.CanGetNewItem);
+            var Ports = PatchStorageUtil.GetPRFMapComponent(map).GetAdvancedIOLocations.Where(l => (l.Value.boundStorageUnit?.Powered ?? false) && l.Value.CanGetNewItem);
             return Ports;
         }
 

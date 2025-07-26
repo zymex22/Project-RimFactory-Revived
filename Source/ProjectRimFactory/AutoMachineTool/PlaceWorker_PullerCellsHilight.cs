@@ -30,8 +30,8 @@ namespace ProjectRimFactory.AutoMachineTool
                 outputCell = def.GetModExtension<ModExtension_Puller>().GetOutputCell(center, rot, isRight);
             }
 
-            GenDraw.DrawFieldEdges([inputCell], Common.CommonColors.inputCell);
-            GenDraw.DrawFieldEdges([outputCell], Common.CommonColors.outputCell);
+            GenDraw.DrawFieldEdges([inputCell], Common.CommonColors.InputCell);
+            GenDraw.DrawFieldEdges([outputCell], Common.CommonColors.OutputCell);
         }
     }
 }

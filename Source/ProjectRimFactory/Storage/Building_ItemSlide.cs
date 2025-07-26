@@ -111,7 +111,7 @@ namespace ProjectRimFactory.Storage
         public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
         {
             var outputCell = center + rot.FacingCell;
-            GenDraw.DrawFieldEdges([outputCell], CommonColors.outputCell);
+            GenDraw.DrawFieldEdges([outputCell], CommonColors.OutputCell);
 
         }
     }

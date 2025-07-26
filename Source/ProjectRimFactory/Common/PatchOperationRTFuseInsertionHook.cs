@@ -7,11 +7,7 @@ namespace ProjectRimFactory.Common
     {
         protected override bool ApplyWorker(XmlDocument xml)
         {
-            if (GenTypes.GetTypeInAnyAssembly("RT_Fuse.CompRTFuse") != null)
-            {
-                return base.ApplyWorker(xml);
-            }
-            return true;
+            return GenTypes.GetTypeInAnyAssembly("RT_Fuse.CompRTFuse") == null || base.ApplyWorker(xml);
         }
     }
 }

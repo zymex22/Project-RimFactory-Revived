@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System;
 using System.Collections.Generic;
+using ProjectRimFactory.Common;
 using UnityEngine;
 using Verse;
 

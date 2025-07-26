@@ -30,7 +30,7 @@ namespace ProjectRimFactory.Storage
             IntVec3 outputCell = center + rot.FacingCell;
 
 
-            GenDraw.DrawFieldEdges([outputCell], Common.CommonColors.outputCell);
+            GenDraw.DrawFieldEdges([outputCell], Common.CommonColors.OutputCell);
 
 
 

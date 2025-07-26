@@ -8,21 +8,20 @@ namespace ProjectRimFactory.Common
     public class ModExtension_Graphic : DefModExtension
     {
         [XmlInheritanceAllowDuplicateNodes]
-        List<GraphicDataListItem> graphicDataList = new List<GraphicDataListItem>();
+        List<GraphicDataListItem> graphicDataList = [];
 
-        public IEnumerable<Graphic> Graphics => this.graphicDataList.Select(i => i.Graphic);
+        public IEnumerable<Graphic> Graphics => graphicDataList.Select(i => i.Graphic);
 
-        public Graphic FirstGraphic => this.Graphics.FirstOrDefault();
+        public Graphic FirstGraphic => Graphics.FirstOrDefault();
 
-        private Dictionary<string, int> getByNameCache = new Dictionary<string, int>();
+        private Dictionary<string, int> getByNameCache = new();
 
         public Graphic GetByName(string name)
         {
-            int index;
             if (name is null) return null;
-            if (!getByNameCache.TryGetValue(name, out index))
+            if (!getByNameCache.TryGetValue(name, out var index))
             {
-                var value = this.graphicDataList.Where(g => g.name == name).FirstOrDefault();
+                var value = graphicDataList.FirstOrDefault(g => g.name == name);
                 index = graphicDataList.IndexOf(value);
                 getByNameCache.Add(name, index);
             }
@@ -35,14 +34,14 @@ namespace ProjectRimFactory.Common
     {
         public void LoadDataFromXmlCustom(XmlNode xmlRoot)
         {
-            this.name = xmlRoot.Name;
-            this.graphicData = DirectXmlToObject.ObjectFromXml<GraphicData>(xmlRoot.FirstChild, false);
+            name = xmlRoot.Name;
+            graphicData = DirectXmlToObject.ObjectFromXml<GraphicData>(xmlRoot.FirstChild, false);
         }
 
         public string name;
 
         public GraphicData graphicData;
 
-        public Graphic Graphic => this.graphicData?.Graphic ?? null;
+        public Graphic Graphic => graphicData?.Graphic ?? null;
     }
 }

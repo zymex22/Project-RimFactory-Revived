@@ -46,8 +46,6 @@ namespace ProjectRimFactory.Common
 
         public new bool Glows
         {
-            get => glows;
-
             set
             {
                 glows = value;

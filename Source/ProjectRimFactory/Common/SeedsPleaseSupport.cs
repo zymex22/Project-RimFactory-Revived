@@ -12,14 +12,11 @@ namespace ProjectRimFactory.Common
             return building.OccupiedRect().ExpandedBy(1);
         }
 
-        public static bool TryPlantNew(ThingDef plantDef, CellRect SeedInputArea, Map map)
+        public static bool TryPlantNew(ThingDef plantDef, CellRect seedInputArea, Map map)
         {
-            if (ProjectRimFactory_ModComponent.ModSupport_SeedsPlease)
+            if (ProjectRimFactory_ModComponent.ModSupport_SeedsPlease || ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite)
             {
-                return tryPlantNew(plantDef, SeedInputArea, map);
-            }else if (ProjectRimFactory_ModComponent.ModSupport_SeedsPleaseLite)
-            {
-                return tryPlantNew(plantDef, SeedInputArea, map);
+                return tryPlantNew(plantDef, seedInputArea, map);
             }
 
             //No Seeds Mod Active
@@ -33,14 +30,14 @@ namespace ProjectRimFactory.Common
         /// else don't plant
         /// </summary>
         /// <param name="plantDef"></param>
-        /// <param name="SeedInputArea"></param>
+        /// <param name="seedInputArea"></param>
         /// <param name="map"></param>
         /// <returns></returns>
-        private static bool tryPlantNew(ThingDef plantDef,CellRect SeedInputArea,Map map)
+        private static bool tryPlantNew(ThingDef plantDef,CellRect seedInputArea,Map map)
         {
             //Search for seeds in SeedInputArea
             Thing seed = null;
-            foreach (var cell in SeedInputArea)
+            foreach (var cell in seedInputArea)
             {
                 seed = cell.GetThingList(map).Find(t => t.def == plantDef.blueprintDef);
                 if (seed != null) break;
@@ -85,7 +82,7 @@ namespace ProjectRimFactory.Common
             var type = seed.GetType();
             var props = type.GetField("seed").GetValue(seed);
             var propType = props.GetType();
-            int count = 0;
+            int count;
             //This section of code adapted of notfood's original source
             float parameter = Mathf.Max(Mathf.InverseLerp(p.def.plant.harvestMinGrowth, 1.2f, p.Growth), 1f);
             if ((float)propType.GetField("seedFactor").GetValue(props) > 0f && Rand.Value < (float)propType.GetField("baseChance").GetValue(props) * parameter)

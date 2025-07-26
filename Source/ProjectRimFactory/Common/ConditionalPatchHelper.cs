@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using RimWorld;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -14,16 +13,15 @@ namespace ProjectRimFactory.Common
     {
         public class TogglePatch
         {
-            private bool patched = false;
-            public bool Status => patched;
+            public bool Status { get; private set; }
 
             private readonly MethodInfo baseMethodInfo;
-            private readonly HarmonyMethod transpilerHarmonyMethod = null;
-            private readonly HarmonyMethod prefixHarmonyMethod = null;
-            private readonly HarmonyMethod postfixHarmonyMethod = null;
-            private readonly MethodInfo transpilerMethodInfo = null;
-            private readonly MethodInfo prefixMethodInfo = null;
-            private readonly MethodInfo postfixMethodInfo = null;
+            private readonly HarmonyMethod transpilerHarmonyMethod;
+            private readonly HarmonyMethod prefixHarmonyMethod;
+            private readonly HarmonyMethod postfixHarmonyMethod;
+            private readonly MethodInfo transpilerMethodInfo;
+            private readonly MethodInfo prefixMethodInfo;
+            private readonly MethodInfo postfixMethodInfo;
 
             public TogglePatch(MethodInfo baseMethod, MethodInfo prefix = null, MethodInfo postfix = null, MethodInfo transpiler = null)
             {
@@ -38,93 +36,100 @@ namespace ProjectRimFactory.Common
 
             public void PatchHandler(bool patch)
             {
-                if (patch && !patched)
+                if (patch && !Status)
                 {
-                    harmony_instance.Patch(baseMethodInfo, prefixHarmonyMethod, postfixHarmonyMethod, transpilerHarmonyMethod);
-                    patched = true;
+                    harmonyInstance.Patch(baseMethodInfo, prefixHarmonyMethod, postfixHarmonyMethod, transpilerHarmonyMethod);
+                    Status = true;
                 }
-                else if (patched && !patch)
+                else if (Status && !patch)
                 {
-                    if (transpilerMethodInfo != null) harmony_instance.Unpatch(baseMethodInfo, transpilerMethodInfo);
-                    if (prefixMethodInfo != null) harmony_instance.Unpatch(baseMethodInfo, prefixMethodInfo);
-                    if (postfixMethodInfo != null) harmony_instance.Unpatch(baseMethodInfo, postfixMethodInfo);
-                    patched = false;
+                    if (transpilerMethodInfo != null) harmonyInstance.Unpatch(baseMethodInfo, transpilerMethodInfo);
+                    if (prefixMethodInfo != null) harmonyInstance.Unpatch(baseMethodInfo, prefixMethodInfo);
+                    if (postfixMethodInfo != null) harmonyInstance.Unpatch(baseMethodInfo, postfixMethodInfo);
+                    Status = false;
                 }
             }
 
         }
 
         //conditional
-        private static Harmony harmony_instance = null;
+        private static Harmony harmonyInstance;
 
-        public static TogglePatch Patch_Reachability_CanReach = new TogglePatch(
+        public static readonly TogglePatch PatchReachabilityCanReach = new(
             AccessTools.Method(typeof(Reachability), "CanReach", new Type[] { typeof(IntVec3), typeof(LocalTargetInfo), typeof(PathEndMode), typeof(TraverseParms) }),
             null,
             AccessTools.Method(typeof(HarmonyPatches.Patch_Reachability_CanReach), "Postfix")
             );
 
         //Storage Patches
-        public static TogglePatch Patch_MinifiedThing_Print = new TogglePatch(
+        private static readonly TogglePatch PatchMinifiedThingPrint = new(
             AccessTools.Method(typeof(MinifiedThing), "Print", new Type[] { typeof(SectionLayer) }),
             AccessTools.Method(typeof(HarmonyPatches.Patch_MinifiedThing_Print), "Prefix")
             );
-        public static TogglePatch Patch_Thing_Print = new TogglePatch(
+
+        private static readonly TogglePatch PatchThingPrint = new(
             AccessTools.Method(typeof(Thing), "Print", new Type[] { typeof(SectionLayer) }),
             AccessTools.Method(typeof(HarmonyPatches.Patch_Thing_Print), "Prefix")
             );
-        public static TogglePatch Patch_ThingWithComps_DrawGUIOverlay = new TogglePatch(
+
+        private static readonly TogglePatch PatchThingWithCompsDrawGUIOverlay = new(
            AccessTools.Method(typeof(ThingWithComps), "DrawGUIOverlay"),
            AccessTools.Method(typeof(HarmonyPatches.Patch_ThingWithComps_DrawGUIOverlay), "Prefix")
            );
-        public static TogglePatch Patch_Thing_DrawGUIOverlay = new TogglePatch(
+
+        private static readonly TogglePatch PatchThingDrawGUIOverlay = new(
            AccessTools.Method(typeof(Thing), "DrawGUIOverlay"),
            AccessTools.Method(typeof(HarmonyPatches.Patch_Thing_DrawGUIOverlay), "Prefix")
            );
-        public static TogglePatch Patch_FloatMenuMakerMap_ChoicesAtFor = new TogglePatch(
+
+        private static readonly TogglePatch PatchFloatMenuMakerMapChoicesAtFor = new(
           AccessTools.Method(typeof(FloatMenuMakerMap), "GetOptions"),
           AccessTools.Method(typeof(HarmonyPatches.Patch_FloatMenuMakerMap_GetOptions), "Prefix")
           );
-        public static TogglePatch Patch_Building_Storage_Accepts = new TogglePatch(
+
+        private static readonly TogglePatch PatchBuildingStorageAccepts = new(
          AccessTools.Method(typeof(Building_Storage), "Accepts", new Type[] { typeof(Thing) }),
          AccessTools.Method(typeof(HarmonyPatches.Patch_Building_Storage_Accepts), "Prefix")
          );
-        public static TogglePatch Patch_StorageSettings_AllowedToAccept = new TogglePatch(
+
+        private static readonly TogglePatch PatchStorageSettingsAllowedToAccept = new(
          AccessTools.Method(typeof(StorageSettings), "AllowedToAccept", new Type[] { typeof(Thing) }),
          AccessTools.Method(typeof(HarmonyPatches.Patch_StorageSettings_AllowedToAccept), "Prefix")
          );
-        public static TogglePatch Patch_ForbidUtility_IsForbidden = new TogglePatch(
+
+        private static readonly TogglePatch PatchForbidUtilityIsForbidden = new(
          AccessTools.Method(typeof(ForbidUtility), "IsForbidden", new Type[] { typeof(Thing), typeof(Pawn) }),
          AccessTools.Method(typeof(HarmonyPatches.Patch_ForbidUtility_IsForbidden), "Prefix")
          );
 
         public static void InitHarmony(Harmony harmony)
         {
-            harmony_instance = harmony;
+            harmonyInstance = harmony;
         }
 
-        static List<Building_MassStorageUnit> building_MassStorages = [];
+        private static readonly List<Building_MassStorageUnit> BuildingMassStorages = [];
 
         private static void UpdatePatchStorage()
         {
-            var state = building_MassStorages.Count > 0;
-            Patch_MinifiedThing_Print.PatchHandler(state);
-            Patch_Thing_Print.PatchHandler(state);
-            Patch_ThingWithComps_DrawGUIOverlay.PatchHandler(state);
-            Patch_Thing_DrawGUIOverlay.PatchHandler(state);
-            Patch_FloatMenuMakerMap_ChoicesAtFor.PatchHandler(state);
-            Patch_Building_Storage_Accepts.PatchHandler(state);
-            Patch_ForbidUtility_IsForbidden.PatchHandler(state);
-            Patch_StorageSettings_AllowedToAccept.PatchHandler(state);
+            var state = BuildingMassStorages.Count > 0;
+            PatchMinifiedThingPrint.PatchHandler(state);
+            PatchThingPrint.PatchHandler(state);
+            PatchThingWithCompsDrawGUIOverlay.PatchHandler(state);
+            PatchThingDrawGUIOverlay.PatchHandler(state);
+            PatchFloatMenuMakerMapChoicesAtFor.PatchHandler(state);
+            PatchBuildingStorageAccepts.PatchHandler(state);
+            PatchForbidUtilityIsForbidden.PatchHandler(state);
+            PatchStorageSettingsAllowedToAccept.PatchHandler(state);
         }
 
         public static void Register(Building_MassStorageUnit building)
         {
-            building_MassStorages.Add(building);
+            BuildingMassStorages.Add(building);
             UpdatePatchStorage();
         }
         public static void Deregister(Building_MassStorageUnit building)
         {
-            building_MassStorages.Remove(building);
+            BuildingMassStorages.Remove(building);
             UpdatePatchStorage();
         }
 

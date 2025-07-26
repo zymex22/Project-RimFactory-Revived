@@ -9,7 +9,7 @@ namespace ProjectRimFactory.Common
 
         public bool IsExcluded(ThingDef def)
         {
-            return this.excludeOres?.Contains(def) ?? false;
+            return excludeOres?.Contains(def) ?? false;
         }
     }
 }

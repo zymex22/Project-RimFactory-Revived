@@ -8,44 +8,39 @@ namespace ProjectRimFactory
     {
         static RS()
         {
-            PregnantIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Pregnant", true);
-            BondIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Bond", true);
-            MaleIcon = GenderUtility.GetIcon(Gender.Male);
-            FemaleIcon = GenderUtility.GetIcon(Gender.Female);
-            SlaughterIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Slaughter", true);
-            TrainedIcon = ContentFinder<Texture2D>.Get("UI/Icons/Trainables/Obedience", true);
-            YoungIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Young", true);
-            AdultIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Adult", true);
+            PregnantIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Pregnant");
+            BondIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Bond");
+            MaleIcon = Gender.Male.GetIcon();
+            FemaleIcon = Gender.Female.GetIcon();
+            SlaughterIcon = ContentFinder<Texture2D>.Get("UI/Icons/Animal/Slaughter");
+            TrainedIcon = ContentFinder<Texture2D>.Get("UI/Icons/Trainables/Obedience");
+            YoungIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Young");
+            AdultIcon = ContentFinder<Texture2D>.Get("UI/Icons/LifeStage/Adult");
 
-            ForbidOn = ContentFinder<Texture2D>.Get("UI/Designators/ForbidOn", true);
-            ForbidOff = ContentFinder<Texture2D>.Get("UI/Designators/ForbidOff", true);
-
-
-            OutputDirectionIcon = ContentFinder<Texture2D>.Get("PRFUi/OutputDirection", true);
-            ForbidIcon = ContentFinder<Texture2D>.Get("PRFUi/Forbid", true);
-            PlayIcon = ContentFinder<Texture2D>.Get("PRFUi/Play", true);
-
-            SplitterDisabeld = ContentFinder<Texture2D>.Get("PRFUi/ForbidIcon", true);
-            SplitterArrow_Up = ContentFinder<Texture2D>.Get("PRFUi/UpArrow", true);
-            SplitterArrow_Right = ContentFinder<Texture2D>.Get("PRFUi/RightArrow", true);
-            SplitterArrow_Left = ContentFinder<Texture2D>.Get("PRFUi/LeftArrow", true);
-            SplitterArrow_Down = ContentFinder<Texture2D>.Get("PRFUi/DownArrow", true);
+            ForbidOn = ContentFinder<Texture2D>.Get("UI/Designators/ForbidOn");
+            ForbidOff = ContentFinder<Texture2D>.Get("UI/Designators/ForbidOff");
 
 
-            DeleteX = ContentFinder<Texture2D>.Get("UI/Buttons/Delete", true);
+            OutputDirectionIcon = ContentFinder<Texture2D>.Get("PRFUi/OutputDirection");
+            PlayIcon = ContentFinder<Texture2D>.Get("PRFUi/Play");
 
-            Arrow = ContentFinder<Texture2D>.Get("UI/Overlays/Arrow", true);
+            SplitterDisabled = ContentFinder<Texture2D>.Get("PRFUi/ForbidIcon");
+            SplitterArrowUp = ContentFinder<Texture2D>.Get("PRFUi/UpArrow");
+            SplitterArrowRight = ContentFinder<Texture2D>.Get("PRFUi/RightArrow");
+            SplitterArrowLeft = ContentFinder<Texture2D>.Get("PRFUi/LeftArrow");
+            SplitterArrowDown = ContentFinder<Texture2D>.Get("PRFUi/DownArrow");
+            
+            Arrow = ContentFinder<Texture2D>.Get("UI/Overlays/Arrow");
             // Initialize graphics for SpecialSculptures:
-            foreach (var s in ProjectRimFactory.Common.
-                     ProjectRimFactory_ModComponent.availableSpecialSculptures)
+            foreach (var s in Common.ProjectRimFactory_ModComponent.availableSpecialSculptures)
                 s.Init();
         }
 
-        public static readonly Texture2D SplitterArrow_Up;
-        public static readonly Texture2D SplitterArrow_Right;
-        public static readonly Texture2D SplitterArrow_Left;
-        public static readonly Texture2D SplitterArrow_Down;
-        public static readonly Texture2D SplitterDisabeld;
+        public static readonly Texture2D SplitterArrowUp;
+        public static readonly Texture2D SplitterArrowRight;
+        public static readonly Texture2D SplitterArrowLeft;
+        public static readonly Texture2D SplitterArrowDown;
+        public static readonly Texture2D SplitterDisabled;
 
         public static readonly Texture2D ForbidOn;
         public static readonly Texture2D ForbidOff;
@@ -61,11 +56,8 @@ namespace ProjectRimFactory
         public static readonly Texture2D AdultIcon;
 
         public static readonly Texture2D OutputDirectionIcon;
-        public static readonly Texture2D ForbidIcon;
         public static readonly Texture2D PlayIcon;
-
-        public static readonly Texture2D DeleteX;
-
+        
         public static readonly Texture2D Arrow;
     }
 }

@@ -7,7 +7,7 @@ namespace ProjectRimFactory.Common
 {
     public class CompOutputAdjustable : ThingComp
     {
-        private int index = 0;
+        private int index;
         
         // Normalized to possibleOutputs.Count
         private int Index
@@ -23,7 +23,7 @@ namespace ProjectRimFactory.Common
         
         public bool Visible = true;
 
-        public CompProperties_CompOutputAdjustable Props => (CompProperties_CompOutputAdjustable)this.props;
+        private CompProperties_CompOutputAdjustable Props => (CompProperties_CompOutputAdjustable)props;
 
         private List<IntVec3> possibleOutputs = [];
         public IntVec3 CurrentCell => possibleOutputs[Index];
@@ -71,8 +71,8 @@ namespace ProjectRimFactory.Common
                 yield return new Command_ActionRightLeft()
                 {
                     defaultLabel = "AdjustDirection_Output".Translate(),
-                    actionL = () => Index++,
-                    actionR = () => Index--,
+                    ActionL = () => Index++,
+                    ActionR = () => Index--,
                     icon = TexUI.RotRightTex,
                     defaultIconColor = Color.green
                 };

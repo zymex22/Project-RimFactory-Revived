@@ -74,7 +74,7 @@ namespace ProjectRimFactory.Common
             TooltipHandler.TipRegion(rect, "PRF_Settings_C_Patches_Reachability_CanReach_ToolTip".Translate());
             Widgets.CheckboxLabeled(rect, "PRF_Settings_C_Patches_Reachability_CanReach".Translate(), ref PRF_Patch_Reachability_CanReach);
             list.Gap();
-            ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
+            ConditionalPatchHelper.PatchReachabilityCanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
 
             AddHeader(list, "PRF_Settings_GeneralOptions_Header".Translate());
 

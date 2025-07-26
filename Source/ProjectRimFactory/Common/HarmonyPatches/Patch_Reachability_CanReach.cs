@@ -61,7 +61,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             //TODO: Rework that -> This includes items in PRF Crates & Excludes items from Cold Storage(Note they currently have bigger issues)
             if (!mapComp.ShouldHideItemsAtPos(ThingPos)) return false;
 
-            var AdvancedIOLocations = mapComp.GetadvancedIOLocations;
+            var AdvancedIOLocations = mapComp.GetAdvancedIOLocations;
             var cnt = AdvancedIOLocations.Count;
             //Check Every Advanced IO Port
             for (int i = 0; i < cnt; i++)

@@ -105,7 +105,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
             //If the Port is Closer then it is a better choice
             //#691 If the Port is the only Option it must be used
-            if ( mindist < Distance || (ConditionalPatchHelper.Patch_Reachability_CanReach.Status && pawn.Map.reachability.CanReach(start,thing,Verse.AI.PathEndMode.Touch, TraverseParms.For(pawn)) && Patch_Reachability_CanReach.CanReachThing(thing) ))
+            if ( mindist < Distance || (ConditionalPatchHelper.PatchReachabilityCanReach.Status && pawn.Map.reachability.CanReach(start,thing,Verse.AI.PathEndMode.Touch, TraverseParms.For(pawn)) && Patch_Reachability_CanReach.CanReachThing(thing) ))
             {
                 //Check if the Port can be used
                 //TODO: Check TODO in Line 88

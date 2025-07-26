@@ -13,7 +13,7 @@ namespace ProjectRimFactory.Common
         public virtual bool AcceptsThing(Thing newThing, IPRF_Building giver) => false;
         // If something else wants to take an item from us
         public abstract Thing GetThingBy(Func<Thing, bool> optionalValidator = null);
-        public virtual IEnumerable<Thing> AvailableThings => Enumerable.Empty<Thing>();
+        public virtual IEnumerable<Thing> AvailableThings => [];
 
         public virtual void EffectOnPlaceThing(Thing t) { }
         public virtual void EffectOnAcceptThing(Thing t) { }
@@ -45,10 +45,10 @@ namespace ProjectRimFactory.Common
             PRFBSetting.optionObeysStorageFilters |
             PRFBSetting.optionOutputToEntireStockpie;
 
-        protected bool outputToEntireStockpile = false;
+        protected bool outputToEntireStockpile;
         protected bool obeysStorageFilters = true;
 
-        protected bool forbidOnPlacingDefault = false;
+        private bool forbidOnPlacingDefault;
 
         public override void ExposeData()
         {
@@ -65,10 +65,10 @@ namespace ProjectRimFactory.Common
             //Try highlight Output Area
             if (OutputToEntireStockpile && OutputCell() != IntVec3.Invalid)
             { 
-                var slotGroup = OutputCell().GetSlotGroup(this.Map);
+                var slotGroup = OutputCell().GetSlotGroup(Map);
                 if (slotGroup != null)
                 {
-                    GenDraw.DrawFieldEdges(slotGroup.CellsList, CommonColors.outputZone);
+                    GenDraw.DrawFieldEdges(slotGroup.CellsList, CommonColors.OutputZone);
                 }
             }
         }

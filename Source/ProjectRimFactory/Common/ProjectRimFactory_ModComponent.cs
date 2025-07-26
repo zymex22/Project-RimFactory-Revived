@@ -22,7 +22,7 @@ namespace ProjectRimFactory.Common
                 availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
                 
                 ConditionalPatchHelper.InitHarmony(this.HarmonyInstance);
-                ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
+                ConditionalPatchHelper.PatchReachabilityCanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
             }
             catch (Exception ex)
             {
