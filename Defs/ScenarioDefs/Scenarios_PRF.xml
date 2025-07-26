@@ -24,19 +24,6 @@
                 </connections>
             </surfaceLayer>
             <parts>
-                <li MayRequire="Ludeon.RimWorld.Odyssey" Class="ScenPart_PlanetLayer">
-                    <def>PlanetLayer</def>
-                    <layer>Orbit</layer>
-                    <settingsDef>Orbit</settingsDef>
-                    <hide>True</hide>
-                    <tag>Orbit</tag>
-                    <connections>
-                        <li>
-                            <tag>Surface</tag>
-                            <zoomMode>ZoomIn</zoomMode>
-                        </li>
-                    </connections>
-                </li>
                 <li Class="ScenPart_ConfigPage_ConfigureStartingPawns">
                     <def>ConfigPage_ConfigureStartingPawns</def>
                     <pawnCount>4</pawnCount>
