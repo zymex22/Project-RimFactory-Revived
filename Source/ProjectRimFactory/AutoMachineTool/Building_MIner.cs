@@ -4,6 +4,7 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectRimFactory.SAL3.Tools;
 using UnityEngine;
 using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
@@ -224,7 +225,7 @@ namespace ProjectRimFactory.AutoMachineTool
             var acceptableRecipeDefs = recipeDefs
                 .FindAll(r => !minerDef.GetModExtension<ModExtension_Miner>()?.IsExcluded(r.products[0].thingDef) ?? true);
             minerDef.recipes = acceptableRecipeDefs;
-            SAL3.ReflectionUtility.allRecipesCached.SetValue(minerDef, null);
+            ReflectionUtility.AllRecipesCached.SetValue(minerDef, null);
 
             //change those three lines to this when all recipes are done:
             //minerDef.recipes = recipeDefs;

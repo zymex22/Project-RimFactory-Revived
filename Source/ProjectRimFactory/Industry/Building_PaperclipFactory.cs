@@ -13,7 +13,7 @@ namespace ProjectRimFactory.Industry
         protected override void PostProcessRecipeProduct(Thing thing)
         {
             var limit = thing.def.stackLimit;
-            var paperclips = Mathf.RoundToInt(CurrentBillReport.selected.Sum(t => t.PaperclipAmount() * PaperclipsPerKilogramModifier));
+            var paperclips = Mathf.RoundToInt(CurrentBillReport.Selected.Sum(t => t.PaperclipAmount() * PaperclipsPerKilogramModifier));
             if (paperclips <= limit)
             {
                 thing.stackCount = paperclips;

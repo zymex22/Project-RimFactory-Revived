@@ -7,35 +7,36 @@ using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Building_RecipeHolder : Building, IRecipeHolderInterface
     {
-        private static readonly IntVec3 Up = new IntVec3(0, 0, 1);
         //================================ Fields
         private RecipeDef workingRecipe;
         private float workAmount;
         public List<RecipeDef> Recipes = [];
         //================================ Misc
-        public IEnumerable<Building_WorkTable> Tables => from IntVec3 cell in this.GetComp<CompRecipeImportRange>()?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)
-                                                         where cell.InBounds(this.Map)
+        private IEnumerable<Building_WorkTable> Tables => from IntVec3 cell in GetComp<CompRecipeImportRange>()?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)
+                                                         where cell.InBounds(Map)
                                                          from Thing t in cell.GetThingList(Map)
                                                          let building = t as Building_WorkTable
                                                          where building != null
                                                          select building;
 
-        private List<RecipeDef> quered_recipes;
+        private List<RecipeDef> queuedRecipes;
+                                
 
-        public List<RecipeDef> Quered_Recipes
+        public List<RecipeDef> QueuedRecipes
         {
-            get => quered_recipes;
-            set => quered_recipes = value;
+            get => queuedRecipes;
+            set => queuedRecipes = value;
         }
 
-        public List<RecipeDef> Learnable_Recipes => GetAllProvidedRecipeDefs().ToList();
+        public List<RecipeDef> LearnableRecipes => GetAllProvidedRecipeDefs().ToList();
 
-        public float Progress_Learning => workAmount;
+        public float ProgressLearning => workAmount;
 
-        RecipeDef IRecipeHolderInterface.Recipe_Learning { get => workingRecipe; set => workingRecipe = value; }
-        List<RecipeDef> IRecipeHolderInterface.Saved_Recipes { get => Recipes; set => Recipes = value; }
+        RecipeDef IRecipeHolderInterface.RecipeLearning { get => workingRecipe; set => workingRecipe = value; }
+        List<RecipeDef> IRecipeHolderInterface.SavedRecipes { get => Recipes; set => Recipes = value; }
 
         // Used To detect if this is of type Bill_Mech
         // This is the same Logic as in RimWorld.BillUtility:MakeNewBill()
@@ -44,7 +45,7 @@ namespace ProjectRimFactory.SAL3.Things
             return recipeDef.mechResurrection || recipeDef.gestationCycles > 0;
         }
 
-        public virtual IEnumerable<RecipeDef> GetAllProvidedRecipeDefs()
+        protected virtual IEnumerable<RecipeDef> GetAllProvidedRecipeDefs()
         {
             HashSet<RecipeDef> result = [];
             foreach (var table in Tables)
@@ -52,7 +53,9 @@ namespace ProjectRimFactory.SAL3.Things
                 foreach (var recipe in table.def.AllRecipes)
                 {
                     if (recipe.AvailableNow && !Recipes.Contains(recipe) && !result.Contains(recipe) && !IsBill_Mech(recipe))
+                    {
                         result.Add(recipe);
+                    }
                 }
             }
             return result;
@@ -79,22 +82,10 @@ namespace ProjectRimFactory.SAL3.Things
             }
         }
 
-        List<FloatMenuOption> GetDebugOptions()
+        private List<FloatMenuOption> GetDebugOptions()
         {
-            List<FloatMenuOption> list = [new FloatMenuOption("Insta-finish", () => workAmount = 0f)];
+            List<FloatMenuOption> list = [new("Insta-finish", () => workAmount = 0f)];
             return list;
-        }
-
-        protected virtual IEnumerable<FloatMenuOption> GetPossibleOptions()
-        {
-            foreach (var recipe in GetAllProvidedRecipeDefs())
-            {
-                yield return new FloatMenuOption(recipe.LabelCap, () =>
-                {
-                    workingRecipe = recipe;
-                    workAmount = GetLearnRecipeWorkAmount(recipe);
-                });
-            }
         }
 
         private void ResetProgress()
@@ -142,11 +133,11 @@ namespace ProjectRimFactory.SAL3.Things
                         ResetProgress();
                     }
                 }
-                else if (Quered_Recipes.Count >= 1)
+                else if (QueuedRecipes.Count >= 1)
                 {
-                    workingRecipe = Quered_Recipes[0];
+                    workingRecipe = QueuedRecipes[0];
                     workAmount = GetLearnRecipeWorkAmount(workingRecipe);
-                    Quered_Recipes.RemoveAt(0);
+                    QueuedRecipes.RemoveAt(0);
                 }
             }
             base.Tick();
@@ -159,9 +150,9 @@ namespace ProjectRimFactory.SAL3.Things
             Scribe_Collections.Look(ref Recipes, "recipes", LookMode.Def);
             Scribe_Values.Look(ref workAmount, "workAmount");
 
-            Scribe_Collections.Look(ref quered_recipes, "quered_recipes");
+            Scribe_Collections.Look(ref queuedRecipes, "quered_recipes");
 
-            quered_recipes ??= [];
+            queuedRecipes ??= [];
         }
         public override string GetInspectString()
         {
@@ -182,7 +173,7 @@ namespace ProjectRimFactory.SAL3.Things
         public override void PostMake()
         {
             base.PostMake();
-            quered_recipes ??= [];
+            queuedRecipes ??= [];
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -192,7 +183,7 @@ namespace ProjectRimFactory.SAL3.Things
             // Check for Null Ref issues in Saved or Queued recipes
             // (That can happen if Mods are Removed mid-Save or some mod makes a breaking change)
             Recipes.RemoveAll(recipeDef => recipeDef is null);
-            quered_recipes.RemoveAll(recipeDef => recipeDef is null);
+            queuedRecipes.RemoveAll(recipeDef => recipeDef is null);
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ProjectRimFactory.SAL3.Tools;
 using Verse;
 
 namespace ProjectRimFactory.Common
@@ -145,7 +146,7 @@ namespace ProjectRimFactory.Common
             List<ThingDef> thingDefs = DefDatabase<ThingDef>.AllDefsListForReading.Where(d => d.IsWorkTable).ToList();
             foreach (ThingDef thingDef in thingDefs)
             {
-                SAL3.ReflectionUtility.allRecipesCached.SetValue(thingDef, null);
+                ReflectionUtility.AllRecipesCached.SetValue(thingDef, null);
             }
         }
 
@@ -220,7 +221,7 @@ namespace ProjectRimFactory.Common
             Dictionary<ResearchProjectDef, float> progress = new Dictionary<ResearchProjectDef, float>();
             if (Current.Game?.researchManager != null)
             {
-                progress = (Dictionary<ResearchProjectDef, float>)SAL3.ReflectionUtility.ResearchManager_progress.GetValue(Current.Game.researchManager);
+                progress = (Dictionary<ResearchProjectDef, float>)ReflectionUtility.ResearchManagerProgress.GetValue(Current.Game.researchManager);
             }
             List<ResearchProjectDef> researchProjects = ProjectRimFactory_ModSettings.defTracker.GetAllWithKeylet<ResearchProjectDef>("res").ToList();
 
@@ -233,7 +234,7 @@ namespace ProjectRimFactory.Common
                     progress.Remove(def);
                 }
             }
-            if (Current.Game?.researchManager != null) SAL3.ReflectionUtility.ResearchManager_progress.SetValue(Current.Game.researchManager, progress);
+            if (Current.Game?.researchManager != null) ReflectionUtility.ResearchManagerProgress.SetValue(Current.Game.researchManager, progress);
 
             ModSupportResetLayout();
 

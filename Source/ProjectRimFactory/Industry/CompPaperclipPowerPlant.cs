@@ -3,6 +3,7 @@ using ProjectRimFactory.SAL3;
 using RimWorld;
 using System.Collections.Generic;
 using System.Text;
+using ProjectRimFactory.SAL3.Tools;
 using UnityEngine;
 using Verse;
 
@@ -19,7 +20,7 @@ namespace ProjectRimFactory.Industry
 
         protected float PowerProductionModifier => (currentPowerModifierPct * fuelPerSecond) / 10; // 100W per paperclip per second
 
-        protected override float DesiredPowerOutput => -(float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(Props) * PowerProductionModifier;
+        protected override float DesiredPowerOutput => -(float)ReflectionUtility.CompPropertiesPowerBasePowerConsumption.GetValue(Props) * PowerProductionModifier;
 
         public override void ReceiveCompSignal(string signal)
         {

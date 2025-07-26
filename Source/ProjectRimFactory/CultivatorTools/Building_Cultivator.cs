@@ -3,6 +3,7 @@ using ProjectRimFactory.SAL3;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectRimFactory.SAL3.Tools;
 using UnityEngine;
 using Verse;
 
@@ -147,19 +148,19 @@ namespace ProjectRimFactory.CultivatorTools
             if (SeedLiteDualCropSupportActive)
             {
                 //Cache PRF_StaticPawn Position & mapIndexOrState
-                prfStaticPawnState = ReflectionUtility.mapIndexOrState.GetValue(PRFGameComponent.PRF_StaticPawn);
+                prfStaticPawnState = ReflectionUtility.MapIndexOrState.GetValue(PRFGameComponent.PRF_StaticPawn);
                 prfStaticPawnPos = PRFGameComponent.PRF_StaticPawn!.Position;
 
                 //Set PRF_StaticPawn.Position to the Output Cell -> Sets the placement position for the Seed
                 PRFGameComponent.PRF_StaticPawn.Position = compOutputAdjustable.CurrentCell;
                 //Set PRF_StaticPawn.mapIndexOrState to this.mapIndexOrState -> needed that PRF_StaticPawn.Map != null
-                ReflectionUtility.mapIndexOrState.SetValue(PRFGameComponent.PRF_StaticPawn, ReflectionUtility.mapIndexOrState.GetValue(this));
+                ReflectionUtility.MapIndexOrState.SetValue(PRFGameComponent.PRF_StaticPawn, ReflectionUtility.MapIndexOrState.GetValue(this));
             }
             p.PlantCollected(PRFGameComponent.PRF_StaticPawn, PlantDestructionMode.Chop);
             if (SeedLiteDualCropSupportActive)
             {
                 //Reset PRF_StaticPawn Position & mapIndexOrState
-                ReflectionUtility.mapIndexOrState.SetValue(PRFGameComponent.PRF_StaticPawn, prfStaticPawnState);
+                ReflectionUtility.MapIndexOrState.SetValue(PRFGameComponent.PRF_StaticPawn, prfStaticPawnState);
                 PRFGameComponent.PRF_StaticPawn!.Position= prfStaticPawnPos;
             }
         }

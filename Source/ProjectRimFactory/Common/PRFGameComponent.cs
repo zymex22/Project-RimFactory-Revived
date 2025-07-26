@@ -3,6 +3,7 @@ using ProjectRimFactory.Common.HarmonyPatches;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectRimFactory.SAL3.Tools;
 using Verse;
 using Verse.AI;
 
@@ -28,9 +29,9 @@ namespace ProjectRimFactory
 
             //Back Compatibility Setup
 
-            List<BackCompatibilityConverter> data = (List<BackCompatibilityConverter>)SAL3.ReflectionUtility.BackCompatibility_conversionChain.GetValue(null);
+            List<BackCompatibilityConverter> data = (List<BackCompatibilityConverter>)ReflectionUtility.BackCompatibilityConversionChain.GetValue(null);
             data.Add(new Common.BackCompatibility.PRF_BackCompatibilityConverter());
-            SAL3.ReflectionUtility.BackCompatibility_conversionChain.SetValue(null, data);
+            ReflectionUtility.BackCompatibilityConversionChain.SetValue(null, data);
 
             PRFDefOf.PRFDrone.race.mechEnabledWorkTypes.AddRange(DefDatabase<WorkTypeDef>.AllDefs);
 
@@ -189,7 +190,7 @@ Log.Warning("---------added test special scuplture: " + t + " at " + t.Position)
             {
                 if (stockGenerators[i] is StockGenerator_SingleDef stockDev)
                 {
-                    ThingDef thingDef = (ThingDef)SAL3.ReflectionUtility.StockGenerator_SingleDef_thingDef.GetValue(stockDev);
+                    ThingDef thingDef = (ThingDef)ReflectionUtility.StockGeneratorSingleDefThingDef.GetValue(stockDev);
                     
                     if (!thingDef.Minifiable && thingDef.category == ThingCategory.Building)
                     {

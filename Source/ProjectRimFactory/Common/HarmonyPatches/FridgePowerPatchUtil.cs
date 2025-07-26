@@ -2,6 +2,7 @@
 using ProjectRimFactory.Storage;
 using RimWorld;
 using System.Collections.Generic;
+using ProjectRimFactory.SAL3.Tools;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -17,7 +18,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         public static void UpdatePowerDraw(Building_MassStorageUnitPowered dsu, CompPowerTrader powertrader)
         {
             float powerDraw = 0;
-            if (!FridgePowerDrawPerUnit.TryGetValue(dsu, out powerDraw)) powerDraw = -1 * (float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(powertrader.Props);
+            if (!FridgePowerDrawPerUnit.TryGetValue(dsu, out powerDraw)) powerDraw = -1 * (float)ReflectionUtility.CompPropertiesPowerBasePowerConsumption.GetValue(powertrader.Props);
             powertrader.powerOutputInt = powerDraw - dsu.ExtraPowerDraw;
         }
 

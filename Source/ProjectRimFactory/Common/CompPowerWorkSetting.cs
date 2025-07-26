@@ -3,6 +3,7 @@ using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectRimFactory.SAL3.Tools;
 using UnityEngine;
 using Verse;
 
@@ -105,7 +106,7 @@ namespace ProjectRimFactory.Common
 
         }
 
-        public float BasePowerConsumption => (float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(powerComp.Props);
+        public float BasePowerConsumption => (float)ReflectionUtility.CompPropertiesPowerBasePowerConsumption.GetValue(powerComp.Props);
 
         public int CurrentPowerConsumption => (int)powerComp.PowerOutput;
 
@@ -203,7 +204,7 @@ namespace ProjectRimFactory.Common
         {
             if (powerComp != null)
             {
-                powerComp.PowerOutput = -(float)ReflectionUtility.CompProperties_Power_basePowerConsumption.GetValue(powerComp.Props) - SupplyPowerForSpeed - SupplyPowerForRange - AdditionalPowerDrain;
+                powerComp.PowerOutput = -(float)ReflectionUtility.CompPropertiesPowerBasePowerConsumption.GetValue(powerComp.Props) - SupplyPowerForSpeed - SupplyPowerForRange - AdditionalPowerDrain;
             }
         }
 

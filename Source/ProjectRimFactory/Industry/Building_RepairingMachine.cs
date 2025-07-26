@@ -27,8 +27,8 @@ namespace ProjectRimFactory.Industry
         protected override void Notify_BillStarted()
         {
             base.Notify_BillStarted();
-            var thingToRepair = CurrentBillReport.selected.Find(t => t.def != PRFDefOf.Paperclip);
-            CurrentBillReport.workLeft = (thingToRepair.MaxHitPoints - thingToRepair.HitPoints) * TicksPerHitPoint;
+            var thingToRepair = CurrentBillReport.Selected.Find(t => t.def != PRFDefOf.Paperclip);
+            CurrentBillReport.WorkLeft = (thingToRepair.MaxHitPoints - thingToRepair.HitPoints) * TicksPerHitPoint;
         }
     }
 }

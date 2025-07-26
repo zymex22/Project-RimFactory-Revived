@@ -62,7 +62,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
             //bool added = false;
 
-            var reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(map.reservationManager);
+            var reservations = (List<ReservationManager.Reservation>)ReflectionUtility.SalReservations.GetValue(map.reservationManager);
             var res = new ReservationManager.Reservation(PRFGameComponent.PRF_StaticPawn, PRFGameComponent.PRF_StaticJob, 1, -1, tb, null);
 
             if (!reservations.Any(r => r.Claimant == PRFGameComponent.PRF_StaticPawn && r.Job == PRFGameComponent.PRF_StaticJob && r.Target == tb))
@@ -70,7 +70,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 reservations.Add(res);
             }
             
-            ReflectionUtility.sal_reservations.SetValue(map.reservationManager, reservations);
+            ReflectionUtility.SalReservations.SetValue(map.reservationManager, reservations);
         }
 
         protected void GeneralRelease(Building tb)
@@ -427,7 +427,7 @@ namespace ProjectRimFactory.AutoMachineTool
             ingredients = things?.Where(t => t.count > 0).Select(t => t.thing.SplitOff(t.count))?.ToList() ?? [];
 
             //Get dominant ingredient
-            dominant = ProjectSAL_Utilities.CalculateDominantIngredient(bill.recipe,ingredients);
+            dominant = ProjectSal_Utilities.CalculateDominantIngredient(bill.recipe,ingredients);
 
 
             if (bill.recipe.UsesUnfinishedThing)
@@ -708,14 +708,14 @@ namespace ProjectRimFactory.AutoMachineTool
             //Vanilla Mining Speed Calc may need an Update if Vanilla is Updated 
             float statValue = DeepDrillWorkAmount * Mathf.Max(mySAL.PowerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Mining) * 0.12f + 0.04f), 0.1f);
 
-            ReflectionUtility.drill_portionProgress.SetValue(localCompDeepDrill, (float)ReflectionUtility.drill_portionProgress.GetValue(localCompDeepDrill) + statValue);
-            ReflectionUtility.drill_portionYieldPct.SetValue(localCompDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(localCompDeepDrill) + statValue * miningYieldFactors[mySAL.GetSkillLevel(SkillDefOf.Mining)] / 10000f);
-            ReflectionUtility.drill_lastUsedTick.SetValue(localCompDeepDrill, Find.TickManager.TicksGame);
-            if ((float)ReflectionUtility.drill_portionProgress.GetValue(localCompDeepDrill) > 10000f)
+            ReflectionUtility.DrillPortionProgress.SetValue(localCompDeepDrill, (float)ReflectionUtility.DrillPortionProgress.GetValue(localCompDeepDrill) + statValue);
+            ReflectionUtility.DrillPortionYieldPct.SetValue(localCompDeepDrill, (float)ReflectionUtility.DrillPortionYieldPct.GetValue(localCompDeepDrill) + statValue * miningYieldFactors[mySAL.GetSkillLevel(SkillDefOf.Mining)] / 10000f);
+            ReflectionUtility.DrillLastUsedTick.SetValue(localCompDeepDrill, Find.TickManager.TicksGame);
+            if ((float)ReflectionUtility.DrillPortionProgress.GetValue(localCompDeepDrill) > 10000f)
             {
-                ReflectionUtility.drill_TryProducePortion.Invoke(localCompDeepDrill, new[] { ReflectionUtility.drill_portionYieldPct.GetValue(localCompDeepDrill), null });
-                ReflectionUtility.drill_portionProgress.SetValue(localCompDeepDrill, 0);
-                ReflectionUtility.drill_portionYieldPct.SetValue(localCompDeepDrill, 0);
+                ReflectionUtility.DrillTryProducePortion.Invoke(localCompDeepDrill, new[] { ReflectionUtility.DrillPortionYieldPct.GetValue(localCompDeepDrill), null });
+                ReflectionUtility.DrillPortionProgress.SetValue(localCompDeepDrill, 0);
+                ReflectionUtility.DrillPortionYieldPct.SetValue(localCompDeepDrill, 0);
             }
         }
 

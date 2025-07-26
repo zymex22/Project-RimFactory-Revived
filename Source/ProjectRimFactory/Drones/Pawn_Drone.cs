@@ -1,5 +1,6 @@
 ﻿using ProjectRimFactory.Common;
 using ProjectRimFactory.SAL3;
+using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
 using Verse;
 
@@ -27,7 +28,7 @@ namespace ProjectRimFactory.Drones
             if (Spawned) DeSpawn();
             // don't call base.Destroy();
             // DO set mapIndexOrState to -2 to make "thing.Destroyed" true (needed for Work Tab Compatibility)
-            ReflectionUtility.mapIndexOrState.SetValue(this, (sbyte)-2);
+            ReflectionUtility.MapIndexOrState.SetValue(this, (sbyte)-2);
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)

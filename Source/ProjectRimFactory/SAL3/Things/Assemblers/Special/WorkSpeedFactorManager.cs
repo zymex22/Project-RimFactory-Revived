@@ -9,9 +9,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 {
     public sealed class WorkSpeedFactorEntry : IExposable, IComparable<WorkSpeedFactorEntry>
     {
-        int lastTick = 0;
-        float factorCached = 0;
-        float learningRateCached = WorkSpeedFactorManager.LearningRateCachedDefault;
+        private int lastTick = 0;
+        private float factorCached = 0;
+        private float learningRateCached = WorkSpeedFactorManager.LearningRateCachedDefault;
         public float LearningRate
         {
             get => learningRateCached;
@@ -56,14 +56,14 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
     public class WorkSpeedFactorManager : IExposable
     {
         public const float LearningRateCachedDefault = 1f / GenDate.TicksPerTwelfth;
-        public Dictionary<RecipeDef, WorkSpeedFactorEntry> factors = new Dictionary<RecipeDef, WorkSpeedFactorEntry>();
-        float learningRateCached = LearningRateCachedDefault;
+        public Dictionary<RecipeDef, WorkSpeedFactorEntry> factors = new();
+        private float learningRateCached = LearningRateCachedDefault;
         public virtual float LearningRate
         {
             get => learningRateCached;
             set
             {
-                foreach (RecipeDef recipe in factors.Keys)
+                foreach (var recipe in factors.Keys)
                 {
                     factors[recipe].LearningRate = value;
                 }
@@ -72,30 +72,26 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
         }
         public virtual void IncreaseWeight(RecipeDef recipe, float factor)
         {
-            if (factors.TryGetValue(recipe, out WorkSpeedFactorEntry entry))
+            if (factors.TryGetValue(recipe, out var entry))
             {
                 entry.FactorFinal += factor;
             }
             else
             {
-                factors.Add(recipe, new WorkSpeedFactorEntry() { FactorFinal = factor });
+                factors.Add(recipe, new WorkSpeedFactorEntry { FactorFinal = factor });
             }
         }
         public virtual float GetFactorFor(RecipeDef recipe)
         {
-            if (factors.TryGetValue(recipe, out WorkSpeedFactorEntry val))
-            {
-                return val.FactorFinal;
-            }
-            return 0f;
+            return factors.TryGetValue(recipe, out var val) ? val.FactorFinal : 0f;
         }
 
         public void TrimUnnecessaryFactors()
         {
-            List<RecipeDef> keysList = factors.Keys.ToList(); // ToList evaluates the KeyCollection.Enumerator
-            for (int i = 0; i < keysList.Count; i++)
+            var keysList = factors.Keys.ToList(); // ToList evaluates the KeyCollection.Enumerator
+            for (var i = 0; i < keysList.Count; i++)
             {
-                RecipeDef key = keysList[i];
+                var key = keysList[i];
                 if (factors[key].FactorFinal < 0.005f)// Pruned if under 0.5%
                 {
                     factors.Remove(key);

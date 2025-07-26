@@ -11,36 +11,16 @@ namespace ProjectRimFactory.SAL3.Exposables
         public List<ThingDef> importRecipesFrom;
         public bool drawStatus = false;
         public bool doEffect = false;
-        public List<RecipeEffecter> overrideRecipeEffecter = new List<RecipeEffecter>();
+        public List<RecipeEffecter> overrideRecipeEffecter = [];
         public EffecterDef defaultEffecter;
         public SoundDef defaultSound;
 
         public GraphicData workingGraphicData;
         public GraphicData powerOffGraphicData;
 
-        public Graphic WorkingGrahic
-        {
-            get
-            {
-                if (workingGraphicData != null)
-                {
-                    return workingGraphicData.Graphic;
-                }
-                return null;
-            }
-        }
+        public Graphic WorkingGrahic => workingGraphicData?.Graphic;
 
-        public Graphic PowerOffGrahic
-        {
-            get
-            {
-                if (powerOffGraphicData != null)
-                {
-                    return powerOffGraphicData.Graphic;
-                }
-                return null;
-            }
-        }
+        public Graphic PowerOffGrahic => powerOffGraphicData?.Graphic;
 
         private bool IsNothingEffectAndSound(RecipeDef recipe)
         {
@@ -49,21 +29,21 @@ namespace ProjectRimFactory.SAL3.Exposables
 
         public EffecterDef GetEffecter(RecipeDef recipe)
         {
-            if (!this.doEffect)
+            if (!doEffect)
             {
                 return null;
             }
-            var overridden = this.overrideRecipeEffecter.Where(e => e.recipe == recipe).FirstOrDefault();
+            var overridden = overrideRecipeEffecter.FirstOrDefault(e => e.recipe == recipe);
             return overridden == null ? (IsNothingEffectAndSound(recipe) ? defaultEffecter : recipe.effectWorking) : overridden.effecter;
         }
 
         public SoundDef GetSound(RecipeDef recipe)
         {
-            if (!this.doEffect)
+            if (!doEffect)
             {
                 return null;
             }
-            var overridden = this.overrideRecipeEffecter.Where(e => e.recipe == recipe).FirstOrDefault();
+            var overridden = overrideRecipeEffecter.FirstOrDefault(e => e.recipe == recipe);
             return overridden == null ? (IsNothingEffectAndSound(recipe) ? defaultSound : recipe.soundWorking) : overridden.sound;
         }
     }
