@@ -19,15 +19,14 @@ namespace ProjectRimFactory.Drones
 
         public string GetDescription(ThingDef def)
         {
-            string text = "";
-            CompProperties_Refuelable propertiesRefuel = (CompProperties_Refuelable)def.comps.FirstOrDefault(c => (c.compClass == typeof(CompRefuelable)));
-            int maxdrones = maxNumDrones;
+            var propertiesRefuel = def.GetCompProperties<CompProperties_Refuelable>();
+            var maxdrones = maxNumDrones;
             if (propertiesRefuel != null)
             {
                 maxdrones = (int)propertiesRefuel.fuelCapacity;
             }
 
-            text += "PRF_UTD_DefModExtension_DroneStation_MaxDrones".Translate(maxdrones) + "\r\n";
+            var text = "PRF_UTD_DefModExtension_DroneStation_MaxDrones".Translate(maxdrones) + "\r\n";
             text += "PRF_UTD_DefModExtension_DroneStation_IncludedDrones".Translate(GetDronesOnSpawn(null, propertiesRefuel)) + "\r\n";
             if (Sleeptimes != "")
             {
@@ -53,7 +52,7 @@ namespace ProjectRimFactory.Drones
         }
 
         /// <summary>
-        /// Returns the number of Drones that should be availibale on Spawn.
+        /// Returns the number of Drones that should be available on Spawn.
         /// </summary>
         public int GetDronesOnSpawn(CompRefuelable fuelComp = null, CompProperties_Refuelable fuelCompProperties = null)
         {

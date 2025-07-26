@@ -5,7 +5,7 @@ namespace ProjectRimFactory.Drones
 {
     public class Building_DroneStationSpecialGraphics : Building_DroneStationRefuelable
     {
-        public override void DrawDormantDrones()
+        protected override void DrawDormantDrones()
         {
             if (DronesLeft > 0)
             {
