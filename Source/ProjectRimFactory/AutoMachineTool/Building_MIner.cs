@@ -29,7 +29,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public Building_Miner()
         {
             billStack = new BillStack(this);
-            forcePlace = false;
+            ForcePlace = false;
         }
 
         public override void ExposeData()
@@ -39,7 +39,7 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_References.Look(ref workingBill, "workingBill");
             if (Scribe.mode == LoadSaveMode.PostLoadInit && workingBill == null)
             {
-                readyOnStart = true;
+                ReadyOnStart = true;
             }
             billStack.Bills.RemoveAll(b => def.GetModExtension<ModExtension_Miner>()?.IsExcluded(b.recipe.ProducedThingDef) ?? false);
         }
@@ -61,11 +61,11 @@ namespace ProjectRimFactory.AutoMachineTool
             return true;
         }
 
-        protected override bool FinishWorking(Building_Miner _, out List<Thing> products)
+        protected override bool FinishWorking(Building_Miner _, out List<Thing> outputProducts)
         {
-            products = GenRecipe2.MakeRecipeProducts(workingBill.recipe, this, [], null, this).ToList();
+            outputProducts = GenRecipe2.MakeRecipeProducts(workingBill.recipe, this, [], null, this).ToList();
             // Because we use custom GenRecipe2, we have to handle bonus items and product modifications (bonuses) directly:
-            def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(products,
+            def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(outputProducts,
                                                         this as IBillGiver, this, workingBill.recipe);
             workingBill.Notify_IterationCompleted(null, []);
             workingBill = null;
@@ -87,7 +87,7 @@ namespace ProjectRimFactory.AutoMachineTool
             return RegionAndRoomQuery.GetRoom(this, type);
         }
 
-        public int GetSkillLevel(SkillDef _)
+        public int GetSkillLevel(SkillDef skillDef)
         {
             return 20;
         }
@@ -151,7 +151,7 @@ namespace ProjectRimFactory.AutoMachineTool
         
         public override IntVec3 OutputCell()
         {
-            return compOutputAdjustable.CurrentCell;
+            return CompOutputAdjustable.CurrentCell;
         }
 
         public Bill MakeNewBill(RecipeDef recipe)

@@ -55,54 +55,25 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
 
-
-        public void generalReserve(Building tb)
+        protected void GeneralReserve(Building tb)
         {
             if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
-            if (PRFGameComponent.PRF_StaticJob == null) PRFGameComponent.PRF_StaticJob = new Job(PRFDefOf.PRFStaticJob);
+            PRFGameComponent.PRF_StaticJob ??= new Job(PRFDefOf.PRFStaticJob);
 
             //bool added = false;
 
-            List<ReservationManager.Reservation> reservations;
-            reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(map.reservationManager);
+            var reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(map.reservationManager);
             var res = new ReservationManager.Reservation(PRFGameComponent.PRF_StaticPawn, PRFGameComponent.PRF_StaticJob, 1, -1, tb, null);
 
-            if (!reservations.Where(r => r.Claimant == PRFGameComponent.PRF_StaticPawn && r.Job == PRFGameComponent.PRF_StaticJob && r.Target == tb).Any())
+            if (!reservations.Any(r => r.Claimant == PRFGameComponent.PRF_StaticPawn && r.Job == PRFGameComponent.PRF_StaticJob && r.Target == tb))
             {
-                //Log.Message("pre adding:");
-                //debugListReservations();
-                //Log.Message($"added res for {res.Target}");
                 reservations.Add(res);
-                //added = true;
             }
-
-            //Log.Message("pre reserve");
-            //debugListReservations();
+            
             ReflectionUtility.sal_reservations.SetValue(map.reservationManager, reservations);
-            //Log.Message("post reserve");
-            //debugListReservations();
-            //if (added)
-            //{
-            //    Log.Message("post adding:");
-            //    debugListReservations();
-            //}
-
         }
 
-        public void debugListReservations()
-        {
-            List<ReservationManager.Reservation> reservations;
-            reservations = (List<ReservationManager.Reservation>)ReflectionUtility.sal_reservations.GetValue(map.reservationManager);
-            reservations = reservations.Where(r => r.Faction != null && r.Faction.IsPlayer).ToList();
-            foreach (ReservationManager.Reservation res in reservations)
-            {
-                Log.Message($"Reservation for {res.Claimant} at {res.Target}");
-
-            }
-
-        }
-
-        public void generalRelease(Building tb)
+        protected void GeneralRelease(Building tb)
         {
             if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
             PRFGameComponent.PRF_StaticJob ??= new Job(PRFDefOf.PRFStaticJob);
@@ -133,17 +104,14 @@ namespace ProjectRimFactory.AutoMachineTool
                 }
             }
             map.reservationManager.Release(tb, PRFGameComponent.PRF_StaticPawn, PRFGameComponent.PRF_StaticJob);
-            //Log.Message("generalRelease for " + (Position + Rotation.FacingCell) );
-            //Log.Message("post release");
-            //debugListReservations();
         }
 
         public virtual void ExposeData()
         {
-            Scribe_References.Look<Map>(ref map, "map");
-            Scribe_References.Look<Building_AutoMachineTool>(ref mySAL, "mySAL");
-            Scribe_Values.Look<IntVec3>(ref Position, "Position");
-            Scribe_Values.Look<Rot4>(ref Rotation, "Rotation");
+            Scribe_References.Look(ref map, "map");
+            Scribe_References.Look(ref mySAL, "mySAL");
+            Scribe_Values.Look(ref Position, "Position");
+            Scribe_Values.Look(ref Rotation, "Rotation");
         }
     }
 
@@ -182,27 +150,27 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void Free()
         {
             AllowBills();
-            base.generalRelease(my_workTable);
+            GeneralRelease(my_workTable);
         }
         public override void Reserve()
         {
-            base.generalReserve(my_workTable);
+            GeneralReserve(my_workTable);
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Deep.Look<UnfinishedThing>(ref this.unfinished, "unfinished");
-            Scribe_References.Look<Bill>(ref this.bill, "bill");
-            Scribe_References.Look<Thing>(ref this.dominant, "dominant");
-            Scribe_References.Look<Building_WorkTable>(ref this.my_workTable, "my_workTable");
+            Scribe_Deep.Look(ref unfinished, "unfinished");
+            Scribe_References.Look(ref bill, "bill");
+            Scribe_References.Look(ref dominant, "dominant");
+            Scribe_References.Look(ref my_workTable, "my_workTable");
             if (unfinished == null)
             {
-                Scribe_Collections.Look<Thing>(ref this.ingredients, "ingredients", LookMode.Deep);
+                Scribe_Collections.Look(ref ingredients, "ingredients", LookMode.Deep);
             }
             else
             {
-                Scribe_Collections.Look<Thing>(ref this.ingredients, "ingredients", LookMode.Reference);
+                Scribe_Collections.Look(ref ingredients, "ingredients", LookMode.Reference);
             }
 
         }
@@ -225,20 +193,20 @@ namespace ProjectRimFactory.AutoMachineTool
                 my_workTable.BillStack.Clear();
                 my_workTable.BillStack.Bills.AddRange(tmp.SelectMany(b =>
                 {
-                    var forbidded = b as IBill_PawnForbidded;
-                    Bill unforbbided = b;
-                    if (forbidded != null)
+                    var forbidden = b as IBill_PawnForbidded;
+                    var unForbidden = b;
+                    if (forbidden == null) return Option(unForbidden);
+                    if (b is Bill_ProductionWithUft productionWithUft)
                     {
-                        if (b is Bill_ProductionWithUft)
-                        {
-                            unforbbided = ((Bill_ProductionWithUft)b).CopyTo((Bill_ProductionWithUft)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_ProductionWithUft), b.recipe, b.precept));
-                        }
-                        else if (b is Bill_Production)
-                        {
-                            unforbbided = ((Bill_Production)b).CopyTo((Bill_Production)Activator.CreateInstance(forbidded.Original?.GetType() ?? typeof(Bill_Production), b.recipe, b.precept));
-                        }
+                        unForbidden = productionWithUft.CopyTo((Bill_ProductionWithUft)Activator
+                            .CreateInstance(forbidden.Original?.GetType() ?? typeof(Bill_ProductionWithUft), productionWithUft.recipe, productionWithUft.precept));
                     }
-                    return Option(unforbbided);
+                    else if (b is Bill_Production billProduction)
+                    {
+                        unForbidden = billProduction.CopyTo((Bill_Production)Activator
+                            .CreateInstance(forbidden.Original?.GetType() ?? typeof(Bill_Production), billProduction.recipe, billProduction.precept));
+                    }
+                    return Option(unForbidden);
                 }));
             }
         }
@@ -246,8 +214,8 @@ namespace ProjectRimFactory.AutoMachineTool
         private List<Thing> Consumable()
         {
             return mySAL.GetAllTargetCells()
-                .SelectMany(c => c.AllThingsInCellForUse(this.map,false)) // Use GatherThingsUtility to also grab from belts
-                .Distinct<Thing>().ToList();
+                .SelectMany(c => c.AllThingsInCellForUse(map,false)) // Use GatherThingsUtility to also grab from belts
+                .Distinct().ToList();
         }
 
         public override void Reset(WorkingState workingState)
@@ -255,29 +223,29 @@ namespace ProjectRimFactory.AutoMachineTool
             if (workingState == WorkingState.Working)
             {
 
-                if (this.unfinished == null)
+                if (unfinished == null)
                 {
-                    this.ingredients.ForEach(t => GenPlace.TryPlaceThing(t, Position, this.map, ThingPlaceMode.Near));
+                    ingredients.ForEach(t => GenPlace.TryPlaceThing(t, Position, map, ThingPlaceMode.Near));
                 }
                 else
                 {
-                    GenPlace.TryPlaceThing(this.unfinished, Position, this.map, ThingPlaceMode.Near);
-                    this.unfinished.Destroy(DestroyMode.Cancel);
+                    GenPlace.TryPlaceThing(unfinished, Position, map, ThingPlaceMode.Near);
+                    unfinished.Destroy(DestroyMode.Cancel);
                 }
             }
 
-            this.bill = null;
-            this.dominant = null;
-            this.unfinished = null;
-            this.ingredients = null;
+            bill = null;
+            dominant = null;
+            unfinished = null;
+            ingredients = null;
 
             base.Reset(workingState);
         }
 
         public override void CreateWorkingEffect(MapTickManager mapTickManager)
         {
-            workingEffect = this.bill.recipe.effectWorking?.Spawn();
-            var sound = this.bill.recipe.soundWorking;
+            workingEffect = bill.recipe.effectWorking?.Spawn();
+            var sound = bill.recipe.soundWorking;
 
             if (sound?.sustain ?? false)
             {
@@ -302,14 +270,14 @@ namespace ProjectRimFactory.AutoMachineTool
             workingSound?.End();
             workingSound = null;
 
-            mapTickManager.RemoveEachTickAction(this.EffectTick);
+            mapTickManager.RemoveEachTickAction(EffectTick);
             base.CleanupWorkingEffect(mapTickManager);
         }
         protected bool EffectTick()
         {
             workingEffect?.EffectTick(new TargetInfo(mySAL), new TargetInfo(my_workTable));
 
-            return this.workingEffect == null;
+            return workingEffect == null;
         }
         private struct ThingDefGroup
         {
@@ -344,17 +312,17 @@ namespace ProjectRimFactory.AutoMachineTool
             var ingredients = bill.recipe.ingredients.Select(i =>
             {
                 var result = new List<ThingAmount>();
-                float remain = i.GetBaseCount();
+                var remain = i.GetBaseCount();
 
                 foreach (var things in grouped)
                 {
                     foreach (var amount in things.consumable)
                     {
                         var thing = amount.thing;
-                        if (i.filter.Allows(thing) && (bill.ingredientFilter.Allows(thing) || i.IsFixedIngredient) && !this.map.reservationManager.AllReservedThings().Contains(thing))
+                        if (i.filter.Allows(thing) && (bill.ingredientFilter.Allows(thing) || i.IsFixedIngredient) && !map.reservationManager.AllReservedThings().Contains(thing))
                         {
-                            remain = remain - bill.recipe.IngredientValueGetter.ValuePerUnitOf(thing.def) * amount.count;
-                            int consumption = amount.count;
+                            remain -= bill.recipe.IngredientValueGetter.ValuePerUnitOf(thing.def) * amount.count;
+                            var consumption = amount.count;
                             if (remain <= 0.0f)
                             {
                                 consumption -= Mathf.RoundToInt(-remain / bill.recipe.IngredientValueGetter.ValuePerUnitOf(thing.def));
@@ -391,114 +359,100 @@ namespace ProjectRimFactory.AutoMachineTool
                     grouped = grouping(grouped.SelectMany(x => x.consumable).ToList());
                     return result;
                 }
-                else
-                {
-                    // 割り当てできなければ、空リスト.
-                    return new List<ThingAmount>();
-                }
+
+                // 割り当てできなければ、空リスト.
+                return [];
             }).ToList();
 
             if (ingredients.All(x => x.Count > 0))
             {
                 return ingredients.SelectMany(c => c).ToList();
             }
-            else
-            {
-                return new List<ThingAmount>();
-            }
+
+            return [];
         }
 
-        private Bill GetnextBill(List<Thing> consumable, out List<ThingAmount> ingredients)
+        private Bill GetNextBill(List<Thing> consumable, out List<ThingAmount> billIngredients)
         {
-            ingredients = new List<ThingAmount>();
+            billIngredients = [];
             //Return null as Workbench is not ready
             if (!my_workTable.CurrentlyUsableForBills()) return null;
-            foreach (Bill bill in my_workTable.billStack)
+            foreach (var nextBill in my_workTable.billStack)
             {
                 //Ready to start?
-                if (!bill.ShouldDoNow() || !bill.recipe.AvailableNow) continue;
-                //Sufficiant skills?
-                if (!bill.recipe.skillRequirements?.All(r => r.minLevel <= mySAL.GetSkillLevel(r.skill)) ?? false) continue;
+                if (!nextBill.ShouldDoNow() || !nextBill.recipe.AvailableNow) continue;
+                //Sufficient skills?
+                if (!nextBill.recipe.skillRequirements?.All(r => r.minLevel <= mySAL.GetSkillLevel(r.skill)) ?? false) continue;
 
-                if (bill.recipe.ingredients.Count == 0)
+                if (nextBill.recipe.ingredients.Count == 0)
                 {
-                    ingredients = null;
-                    return bill;
+                    billIngredients = null;
+                    return nextBill;
                 }
                 if (consumable == null) continue;
-                ingredients = Ingredients(bill, consumable);
-                if (ingredients.Count > 0) return bill;
+                billIngredients = Ingredients(nextBill, consumable);
+                if (billIngredients.Count > 0) return nextBill;
 
             }
-            ingredients = new List<ThingAmount>();
+            billIngredients = [];
             return null;
 
         }
 
         public override void WorkDone(out List<Thing> products)
         {
-            products = GenRecipe2.MakeRecipeProducts(this.bill.recipe, mySAL, this.ingredients, this.dominant, my_workTable, this.bill.precept).ToList();
+            products = GenRecipe2.MakeRecipeProducts(bill.recipe, mySAL, ingredients, dominant, my_workTable, bill.precept).ToList();
 
-            this.ingredients.ForEach(i => bill.recipe.Worker.ConsumeIngredient(i, bill.recipe, map));
-            Option(this.unfinished).ForEach(u => u.Destroy(DestroyMode.Vanish));
-            this.bill.Notify_IterationCompleted(null, this.ingredients);
+            ingredients.ForEach(i => bill.recipe.Worker.ConsumeIngredient(i, bill.recipe, map));
+            Option(unfinished).ForEach(u => u.Destroy(DestroyMode.Vanish));
+            bill.Notify_IterationCompleted(null, ingredients);
 
-            this.bill = null;
-            this.dominant = null;
-            this.unfinished = null;
-            this.ingredients = null;
+            bill = null;
+            dominant = null;
+            unfinished = null;
+            ingredients = null;
             // Because we use custom GenRecipe2, we have to handle bonus items and product modifications directly:
-            mySAL.ModifyProductExt?.ProcessProducts(products, this as IBillGiver, mySAL, this.bill.recipe); // this as IBillGiver is probably null
+            mySAL.ModifyProductExt?.ProcessProducts(products, this as IBillGiver, mySAL, bill.recipe); // this as IBillGiver is probably null
         }
 
         public override bool TryStartWork(out float workAmount)
         {
-
+            workAmount = 0;
             var consumable = Consumable();
 
-            List<ThingAmount> things;
+            var nextBill = GetNextBill(consumable, out var things);
+            if (nextBill == null) return false;
+            bill = nextBill;
 
-            Bill nextbill = GetnextBill(consumable, out things);
-            if (nextbill != null)
+            ingredients = things?.Where(t => t.count > 0).Select(t => t.thing.SplitOff(t.count))?.ToList() ?? [];
+
+            //Get dominant ingredient
+            dominant = ProjectSAL_Utilities.CalculateDominantIngredient(bill.recipe,ingredients);
+
+
+            if (bill.recipe.UsesUnfinishedThing)
             {
-                this.bill = nextbill;
-
-                this.ingredients = things?.Where(t => t.count > 0).Select(t => t.thing.SplitOff(t.count))?.ToList() ?? new List<Thing>();
-
-                //Get dominant ingredient
-                this.dominant = ProjectSAL_Utilities.CalculateDominantIngredient(this.bill.recipe,this.ingredients);
-
-
-                if (this.bill.recipe.UsesUnfinishedThing)
-                {
-                    ThingDef stuff = (!this.bill.recipe.unfinishedThingDef.MadeFromStuff) ? null : this.dominant.def;
-                    this.unfinished = (UnfinishedThing)ThingMaker.MakeThing(this.bill.recipe.unfinishedThingDef, stuff);
-                    this.unfinished.BoundBill = (Bill_ProductionWithUft)this.bill;
-                    this.unfinished.ingredients = this.ingredients;
-                    CompColorable compColorable = this.unfinished.TryGetComp<CompColorable>();
-                    if (compColorable != null)
-                    {
-                        compColorable.SetColor(this.dominant.DrawColor);
-                    }
-                }
-
-                ThingDef thingDef = null;
-                if (this.bill.recipe.UsesUnfinishedThing && this.bill.recipe.unfinishedThingDef.MadeFromStuff)
-                {
-                    thingDef = this.bill.recipe.UsesUnfinishedThing ? this.dominant?.def : null;
-                }
-                workAmount = this.bill.recipe.WorkAmountForStuff(thingDef);
-
-                float speedfact = my_workTable.GetStatValue(StatDefOf.WorkTableWorkSpeedFactor);
-
-                workAmount /= speedfact;
-                return true;
+                var stuff = (!bill.recipe.unfinishedThingDef.MadeFromStuff) ? null : dominant.def;
+                unfinished = (UnfinishedThing)ThingMaker.MakeThing(bill.recipe.unfinishedThingDef, stuff);
+                unfinished.BoundBill = (Bill_ProductionWithUft)bill;
+                unfinished.ingredients = ingredients;
+                var compColorable = unfinished.TryGetComp<CompColorable>();
+                compColorable?.SetColor(dominant.DrawColor);
             }
-            else
+
+            ThingDef thingDef = null;
+            if (bill.recipe.UsesUnfinishedThing && bill.recipe.unfinishedThingDef.MadeFromStuff)
             {
-                workAmount = 0;
-                return false;
+                thingDef = bill.recipe.UsesUnfinishedThing ? dominant?.def : null;
             }
+            workAmount = bill.recipe.WorkAmountForStuff(thingDef);
+
+            var speedFact = my_workTable.GetStatValue(StatDefOf.WorkTableWorkSpeedFactor);
+
+            workAmount /= speedFact;
+            return true;
+
+
         }
 
         public override TargetInfo TargetInfo()
@@ -527,39 +481,39 @@ namespace ProjectRimFactory.AutoMachineTool
             public override void ExposeData()
             {
                 base.ExposeData();
-                Scribe_Deep.Look(ref this.original, "original");
+                Scribe_Deep.Look(ref original, "original");
                 if (Scribe.mode == LoadSaveMode.PostLoadInit)
                 {
-                    this.original.billStack = this.billStack;
+                    original.billStack = billStack;
                 }
             }
 
             public Bill original;
 
-            public Bill Original { get => this.original; set => this.original = value; }
+            public Bill Original { get => original; set => original = value; }
 
             public override Bill Clone()
             {
-                var clone = (Bill_Production)this.original.Clone();
+                var clone = (Bill_Production)original.Clone();
                 return this.CopyTo(clone);
             }
 
             public override void Notify_DoBillStarted(Pawn billDoer)
             {
                 base.Notify_DoBillStarted(billDoer);
-                Option(this.original).ForEach(o => o.Notify_DoBillStarted(billDoer));
+                Option(original).ForEach(o => o.Notify_DoBillStarted(billDoer));
             }
 
             public override void Notify_IterationCompleted(Pawn billDoer, List<Thing> ingredients)
             {
                 base.Notify_IterationCompleted(billDoer, ingredients);
-                Option(this.original).ForEach(o => o.Notify_IterationCompleted(billDoer, ingredients));
+                Option(original).ForEach(o => o.Notify_IterationCompleted(billDoer, ingredients));
             }
 
             public override void Notify_PawnDidWork(Pawn p)
             {
                 base.Notify_PawnDidWork(p);
-                Option(this.original).ForEach(o => o.Notify_PawnDidWork(p));
+                Option(original).ForEach(o => o.Notify_PawnDidWork(p));
             }
 
             // proxy call. override other properties and methods.
@@ -585,39 +539,39 @@ namespace ProjectRimFactory.AutoMachineTool
             public override void ExposeData()
             {
                 base.ExposeData();
-                Scribe_Deep.Look(ref this.original, "original");
+                Scribe_Deep.Look(ref original, "original");
                 if (Scribe.mode == LoadSaveMode.PostLoadInit)
                 {
-                    this.original.billStack = this.billStack;
+                    original.billStack = billStack;
                 }
             }
 
             public Bill original;
 
-            public Bill Original { get => this.original; set => this.original = value; }
+            public Bill Original { get => original; set => original = value; }
 
             public override Bill Clone()
             {
-                var clone = (Bill_ProductionWithUft)this.original.Clone();
+                var clone = (Bill_ProductionWithUft)original.Clone();
                 return this.CopyTo(clone);
             }
 
             public override void Notify_DoBillStarted(Pawn billDoer)
             {
                 base.Notify_DoBillStarted(billDoer);
-                Option(this.original).ForEach(o => o.Notify_DoBillStarted(billDoer));
+                Option(original).ForEach(o => o.Notify_DoBillStarted(billDoer));
             }
 
             public override void Notify_IterationCompleted(Pawn billDoer, List<Thing> ingredients)
             {
                 base.Notify_IterationCompleted(billDoer, ingredients);
-                Option(this.original).ForEach(o => o.Notify_IterationCompleted(billDoer, ingredients));
+                Option(original).ForEach(o => o.Notify_IterationCompleted(billDoer, ingredients));
             }
 
             public override void Notify_PawnDidWork(Pawn p)
             {
                 base.Notify_PawnDidWork(p);
-                Option(this.original).ForEach(o => o.Notify_PawnDidWork(p));
+                Option(original).ForEach(o => o.Notify_PawnDidWork(p));
             }
 
             // proxy call. override other properties and methods.
@@ -657,42 +611,35 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public override void Free()
         {
-            base.generalRelease(researchBench);
+            GeneralRelease(researchBench);
         }
         public override void Reserve()
         {
-            base.generalReserve(researchBench);
+            GeneralReserve(researchBench);
         }
 
         public override void WorkDone(out List<Thing> products)
         {
-            products = new List<Thing>();
-            ResearchProjectDef researchProject = Find.ResearchManager.GetProject(null);
-            if (researchProject != null)
-            {
-                float statValue = Mathf.Max(mySAL.PowerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Intellectual) * 0.115f + 0.08f), 0.1f);
-                statValue *= researchBench.GetStatValue(StatDefOf.ResearchSpeedFactor);
+            products = [];
+            var researchProject = Find.ResearchManager.GetProject(null);
+            if (researchProject == null) return;
+            var statValue = Mathf.Max(mySAL.PowerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Intellectual) * 0.115f + 0.08f), 0.1f);
+            statValue *= researchBench.GetStatValue(StatDefOf.ResearchSpeedFactor);
 
-                statValue /= researchProject.CostFactor(Faction.OfPlayer.def.techLevel);
-                //Tuned the factor to 1000 from 100
-                statValue *= 1000;
+            statValue /= researchProject.CostFactor(Faction.OfPlayer.def.techLevel);
+            //Tuned the factor to 1000 from 100
+            statValue *= 1000;
 
-                Find.ResearchManager.ResearchPerformed(statValue, null);
-            }
+            Find.ResearchManager.ResearchPerformed(statValue, null);
         }
 
         public override bool TryStartWork(out float workAmount)
         {
             workAmount = 0;
-            if (Find.ResearchManager.GetProject(null) != null)
-            {
-                workAmount = 1000f;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (Find.ResearchManager.GetProject() is null) return false;
+            workAmount = 1000f;
+            return true;
+
         }
 
         public override TargetInfo TargetInfo()
@@ -702,25 +649,17 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void ExposeData()
         {
-            //Log.Message($"SAL_TargetResearch: {Scribe.mode}");
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                //Log.Message("call Free");
-                //debugListReservations();
-                this.Free();
-                //Log.Message("Free done");
-                //debugListReservations();
+                Free();
             }
 
             base.ExposeData();
-            Scribe_References.Look<Building_ResearchBench>(ref this.researchBench, "researchBench");
+            Scribe_References.Look(ref researchBench, "researchBench");
 
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                //Log.Message("----------");
-                //debugListReservations();
-                //Log.Message("----------");
-                this.Reserve();
+                Reserve();
             }
 
         }
@@ -731,9 +670,9 @@ namespace ProjectRimFactory.AutoMachineTool
         private CompDeepDrill compDeepDrill;
 
         //Based Upon Vanilla but capped at 1 to reduce unessesary calculations
-        private readonly float[] miningyieldfactors = { 0.6f, 0.7f, 0.8f, 0.85f, 0.9f, 0.925f, 0.95f, 0.975f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f };
+        private readonly float[] miningYieldFactors = [0.6f, 0.7f, 0.8f, 0.85f, 0.9f, 0.925f, 0.95f, 0.975f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f];
 
-        private const float DeepDrill_WorkAmount = 1000f;
+        private const float DeepDrillWorkAmount = 1000f;
 
         //For IExposable
         public SAL_TargetDeepDrill()
@@ -743,7 +682,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public SAL_TargetDeepDrill(Building_AutoMachineTool mySAL, IntVec3 position, Map map, Rot4 rotation, Building drilltypeBuilding) : base(mySAL, position, map, rotation)
         {
             this.drilltypeBuilding = drilltypeBuilding;
-            this.compDeepDrill ??= drilltypeBuilding.TryGetComp<CompDeepDrill>();
+            compDeepDrill ??= drilltypeBuilding.TryGetComp<CompDeepDrill>();
         }
         public override bool Ready()
         {
@@ -751,11 +690,11 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public override void Free()
         {
-            base.generalRelease(drilltypeBuilding);
+            GeneralRelease(drilltypeBuilding);
         }
         public override void Reserve()
         {
-            base.generalReserve(drilltypeBuilding);
+            GeneralReserve(drilltypeBuilding);
         }
 
         public override void WorkDone(out List<Thing> products)
@@ -764,19 +703,19 @@ namespace ProjectRimFactory.AutoMachineTool
             // From my understanding this WorkDone is added each pawn.tick
             //We dont want this with reflection so i will use a multiplier instead --> DeepDrill_WorkAmount
 
-            CompDeepDrill compDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
+            var localCompDeepDrill = drilltypeBuilding.TryGetComp<CompDeepDrill>();
 
             //Vanilla Mining Speed Calc may need an Update if Vanilla is Updated 
-            float statValue = DeepDrill_WorkAmount * Mathf.Max(mySAL.PowerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Mining) * 0.12f + 0.04f), 0.1f);
+            float statValue = DeepDrillWorkAmount * Mathf.Max(mySAL.PowerWorkSetting.GetSpeedFactor() * (mySAL.GetSkillLevel(SkillDefOf.Mining) * 0.12f + 0.04f), 0.1f);
 
-            ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) + statValue);
-            ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill) + statValue * miningyieldfactors[mySAL.GetSkillLevel(SkillDefOf.Mining)] / 10000f);
-            ReflectionUtility.drill_lastUsedTick.SetValue(compDeepDrill, Find.TickManager.TicksGame);
-            if ((float)ReflectionUtility.drill_portionProgress.GetValue(compDeepDrill) > 10000f)
+            ReflectionUtility.drill_portionProgress.SetValue(localCompDeepDrill, (float)ReflectionUtility.drill_portionProgress.GetValue(localCompDeepDrill) + statValue);
+            ReflectionUtility.drill_portionYieldPct.SetValue(localCompDeepDrill, (float)ReflectionUtility.drill_portionYieldPct.GetValue(localCompDeepDrill) + statValue * miningYieldFactors[mySAL.GetSkillLevel(SkillDefOf.Mining)] / 10000f);
+            ReflectionUtility.drill_lastUsedTick.SetValue(localCompDeepDrill, Find.TickManager.TicksGame);
+            if ((float)ReflectionUtility.drill_portionProgress.GetValue(localCompDeepDrill) > 10000f)
             {
-                ReflectionUtility.drill_TryProducePortion.Invoke(compDeepDrill, new object[] { ReflectionUtility.drill_portionYieldPct.GetValue(compDeepDrill), null });
-                ReflectionUtility.drill_portionProgress.SetValue(compDeepDrill, 0);
-                ReflectionUtility.drill_portionYieldPct.SetValue(compDeepDrill, 0);
+                ReflectionUtility.drill_TryProducePortion.Invoke(localCompDeepDrill, new[] { ReflectionUtility.drill_portionYieldPct.GetValue(localCompDeepDrill), null });
+                ReflectionUtility.drill_portionProgress.SetValue(localCompDeepDrill, 0);
+                ReflectionUtility.drill_portionYieldPct.SetValue(localCompDeepDrill, 0);
             }
         }
 
@@ -784,15 +723,9 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             workAmount = 0;
             compDeepDrill ??= drilltypeBuilding.TryGetComp<CompDeepDrill>();
-            if (compDeepDrill.CanDrillNow())
-            {
-                workAmount = DeepDrill_WorkAmount;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            if (!compDeepDrill.CanDrillNow()) return false;
+            workAmount = DeepDrillWorkAmount;
+            return true;
         }
 
         public override TargetInfo TargetInfo()
@@ -801,25 +734,16 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public override void ExposeData()
         {
-
-            //Log.Message($"SAL_TargetDeepDrill: {Scribe.mode}");
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                //Log.Message("call Free");
-                //debugListReservations();
-                this.Free();
-                //Log.Message("Free done");
-                //debugListReservations();
+                Free();
             }
 
             base.ExposeData();
-            Scribe_References.Look<Building>(ref this.drilltypeBuilding, "drilltypeBuilding");
+            Scribe_References.Look(ref drilltypeBuilding, "drilltypeBuilding");
             if (Scribe.mode == LoadSaveMode.Saving)
             {
-                this.Reserve();
-                //    Log.Message("----------");
-                //    debugListReservations();
-                //    Log.Message("----------");
+                Reserve();
             }
         }
     }
