@@ -29,18 +29,21 @@ namespace ProjectRimFactory.CultivatorTools
         public static IPlantToGrowSettable GetIPlantToGrowSettable(IntVec3 c, Map map)
         {
             var zone = c.GetZone(map);
-            var building = c.GetThingList(map).Where(t => t.def.category == ThingCategory.Building).Where(t => t is IPlantToGrowSettable).Select(t => (IPlantToGrowSettable)t).FirstOrDefault();
-            if (building is IPlantToGrowSettable b) return b;
+            var building = c.GetThingList(map)
+                .Where(t => t.def.category == ThingCategory.Building).OfType<IPlantToGrowSettable>().FirstOrDefault();
+            if (building is not null) return building;
             if (zone is IPlantToGrowSettable z) return z;
             return null;
         }
 
         public static bool CanPlantRightNow(this IPlantToGrowSettable planter)
         {
-            return (!planter.CanAcceptSowNow()) ? false :
-                (planter is Zone_Growing z) ? z.allowSow :
-                (planter is Thing t) ? !t.IsForbidden(Faction.OfPlayer) :
-                true;
+            return planter.CanAcceptSowNow() && 
+                   planter switch
+                   {
+                       Zone_Growing z => z.allowSow,
+                       _ => (planter is not Thing t) || !t.IsForbidden(Faction.OfPlayer)
+                   };
         }
     }
 }

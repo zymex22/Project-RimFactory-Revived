@@ -3,23 +3,23 @@ using Verse;
 
 namespace ProjectRimFactory.CultivatorTools
 {
+    // ReSharper disable once UnusedType.Global
     public class Building_Sprinkler : Building_RadialCellIterator
     {
-        public override int TickRate => def.GetModExtension<CultivatorDefModExtension>()?.TickFrequencyDivisor ?? 50;
+        protected override int TickRate => CultivatorDefModExtension?.TickFrequencyDivisor ?? 50;
 
-        private int GrowRate => def.GetModExtension<CultivatorDefModExtension>()?.GrowRate ?? 2500;
+        private int GrowRate => CultivatorDefModExtension?.GrowRate ?? 2500;
 
-        public override bool DoIterationWork(IntVec3 c)
+        protected override bool DoIterationWork(IntVec3 cell)
         {
-            var plant = c.GetPlant(Map);
-            if (plant != null && !Map.reservationManager.IsReservedByAnyoneOf(plant, Faction))
-            {
-                var rate = GetGrowthRatePerTickFor(plant);
-                plant.Growth += rate * this.GrowRate;//Growth sped up by 1hr
-            }
+            var plant = cell.GetPlant(Map);
+            if (plant == null || Map.reservationManager.IsReservedByAnyoneOf(plant, Faction)) return true;
+            var rate = GetGrowthRatePerTickFor(plant);
+            plant.Growth += rate * GrowRate; //Growth sped up by 1hr
             return true;
         }
-        public float GetGrowthRatePerTickFor(Plant p)
+
+        private static float GetGrowthRatePerTickFor(Plant p)
         {
             var num = 1f / (60000f * p.def.plant.growDays);
             return num * p.GrowthRate;

@@ -6,19 +6,15 @@ namespace ProjectRimFactory.CultivatorTools
     {
         public int RadialCellCount { get; private set; }
 
-        public override IntVec3 Current => GenRadial.RadialPattern[currentPosition + 1] + Position;
+        protected override IntVec3 Current => GenRadial.RadialPattern[CurrentPosition + 1] + Position;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
             RadialCellCount = GenRadial.NumCellsInRadius(def.specialDisplayRadius);
         }
-        public override void DrawExtraSelectionOverlays()
-        {
-            base.DrawExtraSelectionOverlays();
-        }
 
-        protected override int cellCount => RadialCellCount;
+        protected override int CellCount => RadialCellCount;
 
     }
 }
