@@ -25,6 +25,7 @@
     <canOverlapZones>false</canOverlapZones>
     <drawGUIOverlay>true</drawGUIOverlay>
     <building>
+      <blueprintClass>Blueprint_Storage</blueprintClass>
       <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
       <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
       <fixedStorageSettings>
