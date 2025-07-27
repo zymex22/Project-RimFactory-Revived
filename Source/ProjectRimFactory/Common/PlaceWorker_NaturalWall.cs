@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Verse;
 
 namespace ProjectRimFactory.Common
@@ -9,31 +8,29 @@ namespace ProjectRimFactory.Common
     {
         public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null, Thing thing = null)
         {
-            IEnumerable<IntVec3> allcells = GenAdj.CellsOccupiedBy(loc, rot, checkingDef.Size);
+            var allcells = GenAdj.CellsOccupiedBy(loc, rot, checkingDef.Size);
             if (
                 allcells.All(t =>
-                    t.GetThingList(map).Where(t => t.def.IsNonResourceNaturalRock || t.def.IsSmoothed).Any()
-                    && !(t.GetThingList(map).Where(t => t.def == (checkingDef as ThingDef)).Any())
+                    t.GetThingList(map).Any(thing1 => thing1.def.IsNonResourceNaturalRock || thing1.def.IsSmoothed)
+                    && !(t.GetThingList(map).Any(thing1 => thing1.def == (checkingDef as ThingDef)))
                 )
             )
             {
                 return AcceptanceReport.WasAccepted;
             }
-            else
-            {
-                return new AcceptanceReport("PRF_PlaceWorker_NaturalWall_denied".Translate());
-            }
+
+            return new AcceptanceReport("PRF_PlaceWorker_NaturalWall_denied".Translate());
         }
 
         public override bool ForceAllowPlaceOver(BuildableDef other)
         {
-            if (other.blueprintDef != null && other.blueprintDef.IsSmoothed)
+            if (other.blueprintDef is { IsSmoothed: true })
             {
 
                 return true;
             }
-            var def = other as ThingDef;
-            if (def != null && def.IsNonResourceNaturalRock)
+
+            if (other is ThingDef { IsNonResourceNaturalRock: true })
             {
 
                 return true;

@@ -14,13 +14,14 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     [HarmonyPatch(typeof(TradeUtility), "AllLaunchableThingsForTrade")]
     class Patch_TradeUtility_AllLaunchableThingsForTrade
     {
+        // ReSharper disable once UnusedMember.Local
         static void Postfix(Map map, ref IEnumerable<Thing> __result)
         {
-            HashSet<Thing> yieldedThings = new HashSet<Thing>();
-            yieldedThings.AddRange<Thing>(__result);
-            foreach (ILinkableStorageParent dsu in TradePatchHelper.AllPowered(map))
+            HashSet<Thing> yieldedThings = [];
+            yieldedThings.AddRange(__result);
+            foreach (var dsu in TradePatchHelper.AllPowered(map))
             {
-                yieldedThings.AddRange<Thing>(dsu.StoredItems);
+                yieldedThings.AddRange(dsu.StoredItems);
             }
             __result = yieldedThings;
 
@@ -30,13 +31,15 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     //This Patch Allows the player to start an orvital Trade without a Trade beacon but with a DSU.
     //Without this patch a player would need a dummy beacon to use Patch_DSU_OrbitalTrade
     [HarmonyPatch]
+    // ReSharper disable once InconsistentNaming
     public static class Patch_PassingShip_c__DisplayClass24_0
     {
-        public static Type predicateClass;
+        private static Type predicateClass;
+        // ReSharper disable once UnusedMember.Local
         static MethodBase TargetMethod()//The target method is found using the custom logic defined here
         {
-            predicateClass = typeof(PassingShip).GetNestedTypes(HarmonyLib.AccessTools.all)
-               .FirstOrDefault(t => t.FullName.Contains("c__DisplayClass23_0"));
+            predicateClass = typeof(PassingShip).GetNestedTypes(AccessTools.all)
+               .FirstOrDefault(t => t!.FullName!.Contains("c__DisplayClass23_0"));
             if (predicateClass == null)
             {
                 Log.Error("PRF Harmony Error - predicateClass == null for Patch_PassingShip_DSUisTradebeacon.TargetMethod()");
@@ -52,11 +55,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             return m;
         }
 
+        // ReSharper disable once UnusedMember.Local
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
 
-            Type hiddenClass = typeof(PassingShip).GetNestedTypes(HarmonyLib.AccessTools.all)
-               .FirstOrDefault(t => t.FullName.Contains("c__DisplayClass23_0"));
+            Type hiddenClass = typeof(PassingShip).GetNestedTypes(AccessTools.all)
+               .FirstOrDefault(t => t!.FullName!.Contains("c__DisplayClass23_0"));
 
             bool foundLocaterString = false;
             foreach (var instruction in instructions)
@@ -86,8 +90,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(hiddenClass, "<>4__this"));
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.PropertyGetter(typeof(PassingShip), "Map"));
                     //Call --> Building_MassStorageUnitPowered.AnyPowerd with the above as an argument
-                    yield return new CodeInstruction(OpCodes.Call, HarmonyLib.AccessTools
-                        .Method(typeof(TradePatchHelper), nameof(TradePatchHelper.AnyPowerd), new[] { typeof(Map) }));
+                    yield return new CodeInstruction(OpCodes.Call, AccessTools
+                        .Method(typeof(TradePatchHelper), nameof(TradePatchHelper.AnyPowered), [typeof(Map)]));
                     yield return new CodeInstruction(OpCodes.Brtrue_S, instruction.operand);
                     continue;
 
@@ -103,7 +107,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     public static class TradePatchHelper
     {
-        public static bool AnyPowerd(Map map)
+        public static bool AnyPowered(Map map)
         {
             return AllPowered(map, true).Any();
         }
@@ -118,7 +122,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     if (any) break;
                 }
             }
-            var cs = PatchStorageUtil.GetPRFMapComponent(map).ColdStorageBuildings.Select(b => b as ILinkableStorageParent);
+            var cs = PatchStorageUtil.GetPRFMapComponent(map).ColdStorageBuildings
+                .Select(ILinkableStorageParent (b) => b);
             foreach (var item in cs)
             {
                 yield return item;

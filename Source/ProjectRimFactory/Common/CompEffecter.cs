@@ -65,19 +65,6 @@ namespace ProjectRimFactory.Common
             sound = null;
         }
 
-        public bool Enable
-        {
-            get => enable;
-            set
-            {
-                if (enable != value)
-                {
-                    enable = value;
-                    UpdateEffecter();
-                }
-            }
-        }
-
         protected virtual bool ShouldBeEffectNow
         {
             get
@@ -90,18 +77,15 @@ namespace ProjectRimFactory.Common
                 {
                     return false;
                 }
-                CompPowerTrader compPowerTrader = parent.TryGetComp<CompPowerTrader>();
-                if (compPowerTrader != null && !compPowerTrader.PowerOn)
+                if (parent.TryGetComp<CompPowerTrader>() is { PowerOn: false })
                 {
                     return false;
                 }
-                CompRefuelable compRefuelable = parent.TryGetComp<CompRefuelable>();
-                if (compRefuelable != null && !compRefuelable.HasFuel)
+                if (parent.TryGetComp<CompRefuelable>() is { HasFuel: false })
                 {
                     return false;
                 }
-                CompSendSignalOnCountdown compSendSignalOnCountdown = parent.TryGetComp<CompSendSignalOnCountdown>();
-                if (compSendSignalOnCountdown != null && compSendSignalOnCountdown.ticksLeft <= 0)
+                if (parent.TryGetComp<CompSendSignalOnCountdown>() is { ticksLeft: <= 0 })
                 {
                     return false;
                 }
@@ -134,15 +118,9 @@ namespace ProjectRimFactory.Common
         public override void ReceiveCompSignal(string signal)
         {
             base.ReceiveCompSignal(signal);
-            if (signal == CompPowerTrader.PowerTurnedOnSignal ||
-                signal == CompPowerTrader.PowerTurnedOffSignal ||
-                signal == CompFlickable.FlickedOnSignal ||
-                signal == CompFlickable.FlickedOffSignal ||
-                signal == CompRefuelable.RefueledSignal ||
-                signal == CompRefuelable.RanOutOfFuelSignal ||
-                signal == CompSchedule.ScheduledOnSignal ||
-                signal == CompSchedule.ScheduledOffSignal)
-            //                signal == MechClusterUtility.DefeatedSignal)
+            if (signal is CompPowerTrader.PowerTurnedOnSignal or CompPowerTrader.PowerTurnedOffSignal or 
+                CompFlickable.FlickedOnSignal or CompFlickable.FlickedOffSignal or CompRefuelable.RefueledSignal or 
+                CompRefuelable.RanOutOfFuelSignal or CompSchedule.ScheduledOnSignal or CompSchedule.ScheduledOffSignal)
             {
                 UpdateEffecter();
             }

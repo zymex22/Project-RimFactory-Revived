@@ -1,4 +1,5 @@
-﻿using RimWorld;
+﻿using System;
+using RimWorld;
 using Verse;
 
 
@@ -15,7 +16,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers.Special
 
         public string GetDescription(ThingDef def)
         {
-            string text = "";
+            var text = string.Empty;
 
             if (MinSpeed == MaxSpeed)
             {

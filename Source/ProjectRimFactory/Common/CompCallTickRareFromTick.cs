@@ -2,6 +2,7 @@
 
 namespace ProjectRimFactory.Common
 {
+    // ReSharper disable once UnusedType.Global
     public class CompCallTickRareFromTick : ThingComp
     {
         public override void CompTick()
@@ -9,7 +10,7 @@ namespace ProjectRimFactory.Common
             base.CompTick();
             if (Find.TickManager.TicksGame % 250 == 0)
             {
-                this.parent?.TickRare();
+                parent?.TickRare();
             }
         }
     }

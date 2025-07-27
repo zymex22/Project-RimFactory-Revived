@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using UnityEngine;
 using Verse;
+using Debug = ProjectRimFactory.Common.Debug;
+
 namespace ProjectRimFactory
 {
     /****************************************************************
@@ -53,37 +54,34 @@ namespace ProjectRimFactory
                                            bool removeExtraFromReq = false)
         {
             outReq = CopyGraphicRequest(req);
-            if (req.graphicData.texPath[0] == '[')
+            if (req.graphicData.texPath[0] != '[') return null;
+            GraphicExtraData extraData = null;
+            try
             {
-                GraphicExtraData extraData = null;
-                try
-                {
-                    var helperDoc = new System.Xml.XmlDocument();
-                    helperDoc.LoadXml(req.graphicData.texPath.Replace('[', '<').Replace(']', '>'));
-                    extraData = DirectXmlToObject.ObjectFromXml<GraphicExtraData>(
-                                                   helperDoc.DocumentElement, false);
-                }
-                catch (Exception e)
-                {
-                    Log.Error("GraphicExtraData was unable to extract XML from \"" + req.graphicData.texPath +
-                    "\"; Exception: " + e);
-                    return null;
-                }
-                extraData.inputString = req.graphicData.texPath;
-                if (removeExtraFromReq)
-                {
-                    outReq.graphicData.texPath = extraData.texPath;
-                    outReq.path = extraData.texPath;
-                }
-                Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data extracted: " + extraData);
-                return extraData;
+                var helperDoc = new System.Xml.XmlDocument();
+                helperDoc.LoadXml(req.graphicData.texPath.Replace('[', '<').Replace(']', '>'));
+                extraData = DirectXmlToObject.ObjectFromXml<GraphicExtraData>(
+                    helperDoc.DocumentElement, false);
             }
+            catch (Exception e)
+            {
+                Log.Error("GraphicExtraData was unable to extract XML from \"" + req.graphicData.texPath +
+                          "\"; Exception: " + e);
+                return null;
+            }
+            extraData.inputString = req.graphicData.texPath;
+            if (removeExtraFromReq)
+            {
+                outReq.graphicData.texPath = extraData.texPath;
+                outReq.path = extraData.texPath;
+            }
+            Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data extracted: " + extraData);
+            return extraData;
 #if DEBUG
             else {
                 Debug.Message(Debug.Flag.ConveyorGraphics, "Graphic Extra Data empty: " + req.graphicData.texPath);
             }
 #endif
-            return null;
         }
         //no idea if this is necessary, but *it works* 
         //  - "it works" is a general theme here
@@ -95,11 +93,9 @@ namespace ProjectRimFactory
                   req.drawSize, req.color, req.colorTwo, gData, req.renderQueue,
                   req.shaderParameters,
                   req.maskPath);
-            if (newTexPath != null)
-            {
-                gr.path = newTexPath;
-                gr.graphicData.texPath = newTexPath;
-            }
+            if (newTexPath == null) return gr;
+            gr.path = newTexPath;
+            gr.graphicData.texPath = newTexPath;
             return gr;
         }
 #if DEBUG

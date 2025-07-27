@@ -76,7 +76,8 @@ namespace ProjectRimFactory.Common
 {
     //NOTE: anything that does not use vanilla's bill recipe products generation must directy call
     //   this.def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(tmpList, this as IBillGiver, this);
-    [HarmonyPatch(typeof(Verse.GenRecipe), "MakeRecipeProducts")]
+    [HarmonyPatch(typeof(GenRecipe), "MakeRecipeProducts")]
+    // ReSharper disable once UnusedType.Global
     static class Patch_GenRecipe_MakeRecipeProducts_BonusYield
     {
         static IEnumerable<Thing> Postfix(IEnumerable<Thing> __result, RecipeDef recipeDef, Pawn worker, List<Thing> ingredients,
@@ -85,7 +86,7 @@ namespace ProjectRimFactory.Common
             //Log.Warning("Harmony P called");
             var products = new List<Thing>(__result); // List->IEnumerable->List, etc. As one does.
             if (billGiver is Thing t && // `is` implies non-null
-                t.def.GetModExtension<ModExtension_ModifyProduct>() is ModExtension_ModifyProduct { autoModify: true } productExt)
+                t.def.GetModExtension<ModExtension_ModifyProduct>() is { autoModify: true } productExt)
             {
                 productExt.ProcessProducts(products, billGiver, t, recipeDef, worker, ingredients, dominantIngredient);
             }
@@ -111,7 +112,7 @@ namespace ProjectRimFactory.Common
 #if DEBUG
         public string name;
 #endif
-        public static Dictionary<string, ProductChangerDel> specialNames = new Dictionary<string, ProductChangerDel>
+        public static Dictionary<string, ProductChangerDel> specialNames = new()
         { // case INsensitive:
             { "default", ModExtension_ModifyProduct.TryGetDefaultBonusYield },
             { "simplebonus", ModExtension_ModifyProduct.TryGetSimpleBonusYield },
@@ -216,9 +217,9 @@ namespace ProjectRimFactory.Common
                 if (!doAll) return tmp;
                 if (tmp) gotSomeResult = true;
             }
-            if (this.def != null || this.bonusYields != null || this.billBonusYields != null)
+            if (def != null || bonusYields != null || billBonusYields != null)
             {
-                Thing t = this.BonusThing();
+                Thing t = BonusThing();
                 Debug.Message(Debug.Flag.ExtModifyProduct, (t == null ? "  Tried to get bonus item. Failed." : ("  Tried to get bonus item. Got: " + t.ToString())));
                 if (t != null)
                 {
@@ -248,7 +249,7 @@ namespace ProjectRimFactory.Common
         // A direct attempt to get a single bonus item; calling ProcessProducts is preferred
         public Thing TryGetBonus(RecipeDef recipe = null, QualityCategory? minQuality = null, QualityCategory? maxQuality = null)
         {
-            if (!this.MeetsRequirements()) return null;
+            if (!MeetsRequirements()) return null;
             if (altChanger != null)
             {
                 var tmpList = new List<Thing>();
@@ -275,7 +276,7 @@ namespace ProjectRimFactory.Common
         }
 
         public bool MeetsRequirements(List<Thing> products = null) => MeetsQualityRequirements(products) &&
-            (chance == null || Rand.Chance((float)this.chance));
+            (chance == null || Rand.Chance((float)chance));
         // Only checks first item in products that has the Quality comp
         //   Must have an item w/ quality to pass this test
         public bool MeetsQualityRequirements(List<Thing> products)
@@ -314,10 +315,10 @@ namespace ProjectRimFactory.Common
         public Thing SimpleBonusThing(QualityCategory? minQuality = null, QualityCategory? maxQuality = null)
         {
             Thing t = null;
-            if (this.def != null)
+            if (def != null)
             {
-                t = ThingMaker.MakeThing(this.def, this.MaterialDef);
-                t.stackCount = this.Count;
+                t = ThingMaker.MakeThing(def, MaterialDef);
+                t.stackCount = Count;
                 if (t.def.CanHaveFaction)
                 {
                     t.SetFaction(Faction.OfPlayer);
@@ -345,7 +346,7 @@ namespace ProjectRimFactory.Common
             EnsureProperQuality(t);
             return t.TryMakeMinified();
         }
-        public int Count => Mathf.Min(this.count, this.def.stackLimit);
+        public int Count => Mathf.Min(count, def.stackLimit);
 
         public ThingDef MaterialDef
         {
@@ -366,9 +367,9 @@ namespace ProjectRimFactory.Common
         {
             var compQ = t?.TryGetComp<CompQuality>();
             if (compQ == null) return;
-            min ??= this.minQuality;
-            max ??= this.maxQuality;
-            var q = this.quality ?? compQ.Quality;
+            min ??= minQuality;
+            max ??= maxQuality;
+            var q = quality ?? compQ.Quality;
             // restrict to acceptable qualities:
             if (min != null)
             {
@@ -480,9 +481,9 @@ namespace ProjectRimFactory.Common
         {
             if (xmlRoot.Attributes["Chance"] != null)
             {
-                float.TryParse(xmlRoot.Attributes["Chance"].Value, out this.chance);
+                float.TryParse(xmlRoot.Attributes["Chance"].Value, out chance);
             }
-            this.bonuses = xmlRoot.ChildNodes.Cast<XmlNode>().Where(n => n.NodeType == XmlNodeType.Element)
+            bonuses = xmlRoot.ChildNodes.Cast<XmlNode>().Where(n => n.NodeType == XmlNodeType.Element)
                     .Select(n => n as XmlElement)
                     .Where(e => e != null)
                     .Select(e => DirectXmlToObject.ObjectFromXml<BonusYield>(e, false))
@@ -491,8 +492,8 @@ namespace ProjectRimFactory.Common
 
         public Thing GetBonusYield()
         {
-            if (!Rand.Chance(this.chance)) return null;
-            var yield = this.bonuses?
+            if (!Rand.Chance(chance)) return null;
+            var yield = bonuses?
                 .RandomElementByWeightWithFallback(y => y.Weight, null);
             if (yield == null) return null;
             var t = ThingMaker.MakeThing(yield.def, yield.MaterialDef);
@@ -518,11 +519,11 @@ namespace ProjectRimFactory.Common
         public int quality;
         public string materialdef = null;
 
-        public int Count => Mathf.Min(this.count, this.def.stackLimit);
+        public int Count => Mathf.Min(count, def.stackLimit);
 
-        public float Weight => this.weight;
+        public float Weight => weight;
 
-        public int Quality => this.quality;
+        public int Quality => quality;
 
         public ThingDef MaterialDef
         {
@@ -532,10 +533,8 @@ namespace ProjectRimFactory.Common
                 {
                     return ThingDef.Named(materialdef);
                 }
-                else
-                {
-                    return GenStuff.DefaultStuffFor(def);
-                }
+
+                return GenStuff.DefaultStuffFor(def);
             }
         }
 
@@ -549,19 +548,19 @@ namespace ProjectRimFactory.Common
             DirectXmlCrossRefLoader.RegisterObjectWantsCrossRef(this, "def", xmlRoot.Name, null, null);
             if (xmlRoot.Attributes["Weight"] != null)
             {
-                float.TryParse(xmlRoot.Attributes["Weight"].Value, out this.weight);
+                float.TryParse(xmlRoot.Attributes["Weight"].Value, out weight);
             }
             if (xmlRoot.Attributes["Count"] != null)
             {
-                int.TryParse(xmlRoot.Attributes["Count"].Value, out this.count);
+                int.TryParse(xmlRoot.Attributes["Count"].Value, out count);
             }
             if (xmlRoot.Attributes["Quality"] != null)
             {
-                int.TryParse(xmlRoot.Attributes["Quality"].Value, out this.quality);
+                int.TryParse(xmlRoot.Attributes["Quality"].Value, out quality);
             }
             if (xmlRoot.Attributes["MaterialDef"] != null)
             {
-                this.materialdef = xmlRoot.Attributes["MaterialDef"].Value;
+                materialdef = xmlRoot.Attributes["MaterialDef"].Value;
             }
         }
     }

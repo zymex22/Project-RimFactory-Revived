@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -8,32 +7,43 @@ namespace ProjectRimFactory.CultivatorTools
 {
     public abstract class Building_CellIterator : Building
     {
+        protected int CurrentPosition;
 
-        public int currentPosition;
+        private CompRefuelable compRefuelable;
+        private CompPowerTrader compPowerTrader;
+        protected CultivatorDefModExtension CultivatorDefModExtension;
 
-        public bool Fueled => GetComp<CompRefuelable>()?.HasFuel ?? true;
-        public bool Powered => GetComp<CompPowerTrader>()?.PowerOn ?? true;
+        private bool Fueled => compRefuelable?.HasFuel ?? true;
+        private bool Powered => compPowerTrader?.PowerOn ?? true;
 
-        public virtual int TickRate => 250;
+        protected virtual int TickRate => 250;
 
-        public virtual bool CellValidator(IntVec3 c)
+        protected virtual bool CellValidator(IntVec3 cell)
         {
-            return c.InBounds(Map);
+            return cell.InBounds(Map);
         }
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref currentPosition, "currentNumber", 1);
+            Scribe_Values.Look(ref CurrentPosition, "currentNumber", 1);
+        }
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            CultivatorDefModExtension = def.GetModExtension<CultivatorDefModExtension>();
+            compRefuelable = GetComp<CompRefuelable>();
+            compPowerTrader = GetComp<CompPowerTrader>();
         }
 
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(new List<IntVec3> { Current }, Color.yellow);
+            GenDraw.DrawFieldEdges([Current], Color.yellow);
         }
 
-        public void DoTickerWork()
+        private void DoTickerWork()
         {
             base.TickRare();
             var cell = Current;
@@ -44,27 +54,25 @@ namespace ProjectRimFactory.CultivatorTools
             MoveNextInternal();
         }
 
-        public abstract bool DoIterationWork(IntVec3 c);
+        protected abstract bool DoIterationWork(IntVec3 cell);
 
-        abstract public IntVec3 Current { get; }
+        protected abstract IntVec3 Current { get; }
 
-        abstract protected int cellCount { get; }
+        protected abstract int CellCount { get; }
 
         protected override void Tick()
         {
             base.Tick();
             if (!Spawned) return;
-            if (Find.TickManager.TicksGame % TickRate == 0 && Powered && Fueled)
-                DoTickerWork();
+            if (Find.TickManager.TicksGame % TickRate == 0 && Powered && Fueled) DoTickerWork();
         }
 
-        protected void MoveNextInternal()
+        private void MoveNextInternal()
         {
-            for (int i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
-                currentPosition++;
-                if (currentPosition >= cellCount)
-                    currentPosition = 0;
+                CurrentPosition++;
+                if (CurrentPosition >= CellCount) CurrentPosition = 0;
                 var cell = Current;
                 if (CellValidator(cell))
                 {

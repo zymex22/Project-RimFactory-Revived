@@ -12,17 +12,19 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_EndCurrentJob_DroneJobs
     {
 
+        // ReSharper disable once UnusedMember.Local
+        // ReSharper disable once UnusedParameter.Local
         static bool Prefix(Pawn_JobTracker __instance,Pawn ___pawn, JobCondition condition, bool startNewJob = true, bool canReturnToPool = true)
         {
 
-            //Only run the Prefix if its a Drone and the Expected Error Condition did occur
-            if (___pawn.kindDef == PRFDefOf.PRFDroneKind && (condition == JobCondition.ErroredPather || condition == JobCondition.Errored))
+            //Only run the Prefix if it's a Drone and the Expected Error Condition did occur
+            if (___pawn.kindDef == PRFDefOf.PRFDroneKind && condition is JobCondition.ErroredPather or JobCondition.Errored)
             {
-                //Check for a error during PRFDrone_ReturnToStation
+                //Check for an error during PRFDrone_ReturnToStation
                 if (__instance.curJob.def == PRFDefOf.PRFDrone_ReturnToStation)
                 {
-                    IntVec3 pos = ___pawn.Position;
-                    Map map = ___pawn.Map;
+                    var pos = ___pawn.Position;
+                    var map = ___pawn.Map;
                     //no path home -> Power down
                     ___pawn.Destroy();
                     
@@ -37,10 +39,9 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 Log.Warning($"Vanilla Pathing Failed - Drone Returning to Station - {___pawn.Position}->{__instance.curJob.GetTarget(TargetIndex.A).Cell}");
 
                 //Run default Code (may need to update that in the Future (if RW Updates This Method))
-                JobDef jobDef = (__instance.curJob != null) ? __instance.curJob.def : null;
                 Traverse.Create(__instance).Method("CleanupCurrentJob", condition, true, true, canReturnToPool).GetValue();
                 //Send the Drone Home
-                Pawn_Drone drone = (Pawn_Drone)___pawn;
+                var drone = (Pawn_Drone)___pawn;
                 __instance.StartJob(new Job(PRFDefOf.PRFDrone_ReturnToStation, drone.BaseStation));
 
 
@@ -58,15 +59,16 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_PotentialWorkThingsGlobal_DronesRenoveOwnBase
     {
 
+        // ReSharper disable once UnusedMember.Local
         static void Postfix(Pawn pawn, ref IEnumerable<Thing> __result)
         {
             if (pawn.kindDef == PRFDefOf.PRFDroneKind)
             {
-                Pawn_Drone drone = (Pawn_Drone)pawn;
-                IntVec3 DroneStationPos = drone.BaseStation.Position;
+                var drone = (Pawn_Drone)pawn;
+                var droneStationPos = drone.BaseStation.Position;
 
                 //Remove work on the station itself
-                __result = __result.Where(u => u.Position != DroneStationPos).ToList();
+                __result = __result.Where(u => u.Position != droneStationPos).ToList();
             }
         }
     }

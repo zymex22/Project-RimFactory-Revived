@@ -11,8 +11,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         public static bool Prefix(int newTicksGame)
         {
-            var Maps = Current.Game.Maps;
-            foreach (var map in Maps)
+            var maps = Current.Game.Maps;
+            foreach (var map in maps)
             {
                 map.GetComponent<MapTickManager>().HandleTimeSkip(newTicksGame);
             }

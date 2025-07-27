@@ -34,17 +34,19 @@ namespace ProjectRimFactory.Common
     ///  * whether can output produced things to entire stockpile, or only one cell
     ///  * whether to obey IProductLimitation limits on production/storing
     /// </summary>
+    // ReSharper disable once ClassNeverInstantiated.Global
+    // ReSharper disable once InconsistentNaming
     class ITab_ProductionSettings : ITab
     {
-        static List<Func<Thing, bool>> showITabTests = [];
-        static List<Func<Thing, float>> extraHeightRequests = [];
-        static List<Action<Thing, Listing_Standard>> windowContentDrawers = [];
+        private static readonly List<Func<Thing, bool>> ShowITabTests = [];
+        private static readonly List<Func<Thing, float>> ExtraHeightRequests = [];
+        private static readonly List<Action<Thing, Listing_Standard>> WindowContentDrawers = [];
         public static void RegisterSetting(Func<Thing, bool> showResultTest, Func<Thing, float> extraHeightRequest,
                                            Action<Thing, Listing_Standard> windowContents)
         {
-            showITabTests.Add(showResultTest);
-            extraHeightRequests.Add(extraHeightRequest);
-            windowContentDrawers.Add(windowContents);
+            ShowITabTests.Add(showResultTest);
+            ExtraHeightRequests.Add(extraHeightRequest);
+            WindowContentDrawers.Add(windowContents);
             // onOpen=null, etc.
         }
 
@@ -62,45 +64,48 @@ namespace ProjectRimFactory.Common
         {
             get
             {
-                return showITabTests.FirstOrDefault(t => (t != null && t(SelThing))) != null || ShowProductLimt || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton || ShowForbidOnPlacingSetting;
+                return ShowITabTests.FirstOrDefault(t => (t != null && t(SelThing))) != null || ShowProductLimit || ShowOutputToEntireStockpile || ShowObeysStorageFilter || ShowAdditionalSettings || ShowAreaSelectButton || ShowForbidOnPlacingSetting;
             }
         }
-        bool ShowProductLimt => Machine is { ProductLimitationDisable: false };
-        bool ShowOutputToEntireStockpile => (PRFB != null &&
-                ((PRFB.SettingsOptions & PRFBSetting.optionOutputToEntireStockpie) > 0) &&
-                // Only output to stockpile option if belt is above ground!
-                !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground)));
-        bool ShowObeysStorageFilter => (PRFB != null &&
-                (PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
-                !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
 
-        bool ShowForbidOnPlacingSetting => pRF_Building != null;
+        private bool ShowProductLimit => Machine is { ProductLimitationDisable: false };
 
-        bool ShowRangeTypeSelectorButton => ShowAreaSelectButton && compPropertiesPowerWork != null && compPropertiesPowerWork.Props.allowManualRangeTypeChange;
+        private bool ShowOutputToEntireStockpile => (PRFB != null &&
+                                                     ((PRFB.SettingsOptions & PRFBSetting.optionOutputToEntireStockpie) > 0) &&
+                                                     // Only output to stockpile option if belt is above ground!
+                                                     !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground)));
 
-        bool ShowAdditionalSettings => pRF_SettingsContent != null;
+        private bool ShowObeysStorageFilter => (PRFB != null &&
+                                                (PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
+                                               !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
 
-        bool ShowAreaSelectButton => supplyMachineHolder != null;
+        private bool ShowForbidOnPlacingSetting => PRfBuilding != null;
+
+        private bool ShowRangeTypeSelectorButton => ShowAreaSelectButton && CompPropertiesPowerWork != null && CompPropertiesPowerWork.Props.allowManualRangeTypeChange;
+
+        private bool ShowAdditionalSettings => PRfSettingsContent != null;
+
+        private bool ShowAreaSelectButton => SupplyMachineHolder != null;
 
         private IProductLimitation Machine => SelThing as IProductLimitation;
 
 
-        private IPowerSupplyMachineHolder supplyMachineHolder => SelThing as IPowerSupplyMachineHolder;
+        private IPowerSupplyMachineHolder SupplyMachineHolder => SelThing as IPowerSupplyMachineHolder;
 
         // private CompProperties_PowerWorkSetting compProperties_PowerWorkSetting { get => this.SelThing.GetComp<CompProperties_PowerWorkSetting>(); }
 
 
-        private IPRF_SettingsContentLink pRF_SettingsContent => SelThing as IPRF_SettingsContentLink;
+        private IPRF_SettingsContentLink PRfSettingsContent => SelThing as IPRF_SettingsContentLink;
 
-        private IPRF_Building pRF_Building => SelThing as IPRF_Building;
+        private IPRF_Building PRfBuilding => SelThing as IPRF_Building;
 
         private PRF_Building PRFB => SelThing as PRF_Building;
 
-        private ThingWithComps selThingWithComps => SelThing as ThingWithComps;
+        private ThingWithComps SelThingWithComps => SelThing as ThingWithComps;
 
-        private CompPowerWorkSetting compPropertiesPowerWork => selThingWithComps?.GetComp<CompPowerWorkSetting>();
+        private CompPowerWorkSetting CompPropertiesPowerWork => SelThingWithComps?.GetComp<CompPowerWorkSetting>();
 
-        private static TipSignal rotInputRangeTip = new TipSignal("PRF_SettingsITab_TipSignal_RotInputRange".Translate());
+        private static readonly TipSignal RotInputRangeTip = new("PRF_SettingsITab_TipSignal_RotInputRange".Translate());
 
 
         protected override void UpdateSize()
@@ -113,28 +118,28 @@ namespace ProjectRimFactory.Common
             if (ShowObeysStorageFilter) winSize.y += 24f;
             if (ShowForbidOnPlacingSetting) winSize.y += 24f;
 
-            for (int i = 0; i < showITabTests.Count; i++)
+            for (int i = 0; i < ShowITabTests.Count; i++)
             {
-                if (showITabTests[i]?.Invoke(SelThing) == true)
+                if (ShowITabTests[i]?.Invoke(SelThing) == true)
                 {
-                    winSize.y += (extraHeightRequests[i]?.Invoke(SelThing) ?? 0);
+                    winSize.y += (ExtraHeightRequests[i]?.Invoke(SelThing) ?? 0);
                 }
             }
 
-            if (ShowProductLimt) winSize.y += 200f; //270
+            if (ShowProductLimit) winSize.y += 200f; //270
 
-            if (pRF_SettingsContent != null)
+            if (PRfSettingsContent != null)
             {
 
-                winSize.y += pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Additional_y;
-                winSize.x = Mathf.Max(winSize.x, pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_Minimum_x);
+                winSize.y += PRfSettingsContent.PRF_SettingsContentOb.ITab_Settings_Additional_y;
+                winSize.x = Mathf.Max(winSize.x, PRfSettingsContent.PRF_SettingsContentOb.ITab_Settings_Minimum_x);
             }
             if (ShowRangeTypeSelectorButton) winSize.y += 30f;
 
             float maxHeight = 900f;
             float minHeight = 70f; // if this starts too large, the window will be too high
             float inspectWindowHeight = 268f; // Note: at least one mod makes this larger - this may not be enough.
-            if (UI.screenHeight > minHeight - inspectWindowHeight) maxHeight = (float)UI.screenHeight - inspectWindowHeight;
+            if (UI.screenHeight > minHeight - inspectWindowHeight) maxHeight = UI.screenHeight - inspectWindowHeight;
             winSize.y = Mathf.Clamp(winSize.y, minHeight, maxHeight); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
 
             size = winSize;
@@ -152,12 +157,12 @@ namespace ProjectRimFactory.Common
             }
         }
 
-        private string GetSlotGroupName(ISlotGroupParent slotGroup)
+        private static string GetSlotGroupName(ISlotGroupParent slotGroup)
         {
-            string appendGroup = "";
+            var appendGroup = string.Empty;
             if (slotGroup is IStorageGroupMember storageGroupMember)
             {
-                if (storageGroupMember.Group != null && storageGroupMember.Group.RenamableLabel != "")
+                if (storageGroupMember.Group != null && storageGroupMember.Group.RenamableLabel != string.Empty)
                 {
                     appendGroup = $" ({storageGroupMember.Group.RenamableLabel})";
                 }
@@ -209,23 +214,23 @@ namespace ProjectRimFactory.Common
             }
             if (ShowForbidOnPlacingSetting)
             {
-                bool tmpB = pRF_Building.ForbidOnPlacingDefault;
+                bool tmpB = PRfBuilding.ForbidOnPlacingDefault;
                 list.CheckboxLabeled("PRF.Common.ForbidOnPlacingDefault".Translate(), ref tmpB,
                     "PRF.Common.ForbidOnPlacingDefaultDesc".Translate());
-                if (tmpB != pRF_Building.ForbidOnPlacingDefault)
-                    pRF_Building.ForbidOnPlacingDefault = tmpB;
+                if (tmpB != PRfBuilding.ForbidOnPlacingDefault)
+                    PRfBuilding.ForbidOnPlacingDefault = tmpB;
             }
 
             //Registerd Settings
             //Whats that?
-            for (int i = 0; i < showITabTests.Count; i++)
+            for (int i = 0; i < ShowITabTests.Count; i++)
             {
-                if (showITabTests[i]?.Invoke(SelThing) == true)
+                if (ShowITabTests[i]?.Invoke(SelThing) == true)
                 {
-                    if (windowContentDrawers[i] != null)
+                    if (WindowContentDrawers[i] != null)
                     {
                         if (doneSection) list.GapLine();
-                        windowContentDrawers[i](SelThing, list);
+                        WindowContentDrawers[i](SelThing, list);
                         doneSection = true;
                     }
                 }
@@ -269,7 +274,7 @@ namespace ProjectRimFactory.Common
                     TooltipHandler.TipRegion(rect, labelTip);
                 }
                 Widgets.Label(rect.LeftHalf(), label);
-                Widgets.TextFieldNumeric<int>(rect.RightHalf(), ref limit, ref buf, 1, 1000000);
+                Widgets.TextFieldNumeric(rect.RightHalf(), ref limit, ref buf, 1, 1000000);
                 list.Gap();
 
                 bool countStacks = Machine.CountStacks;
@@ -299,9 +304,9 @@ namespace ProjectRimFactory.Common
             }
 
             //Other Registerd settings (Drone Station)
-            if (pRF_SettingsContent != null)
+            if (PRfSettingsContent != null)
             {
-                list = pRF_SettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list, inRect);
+                list = PRfSettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list, inRect);
             }
 
             //Range Type
@@ -312,15 +317,15 @@ namespace ProjectRimFactory.Common
                 inRect = list.GetRect(30f);
 
                 Widgets.Label(inRect.LeftHalf(), "PRF_SettingsTab_RangeType_Label".Translate());
-                if (Widgets.ButtonText(inRect.RightHalf(), (compPropertiesPowerWork.rangeCells as IRangeCells).ToText()))
+                if (Widgets.ButtonText(inRect.RightHalf(), CompPropertiesPowerWork.rangeCells.ToText()))
                 {
-                    Find.WindowStack.Add(new FloatMenu(compPropertiesPowerWork.rangeTypes
+                    Find.WindowStack.Add(new FloatMenu(CompPropertiesPowerWork.rangeTypes
                       .Select(d => new FloatMenuOption(d.ToText(),
-                      () => compPropertiesPowerWork.rangeCells = d
+                      () => CompPropertiesPowerWork.rangeCells = d
                       )).ToList()));
 
                 }
-                if ((compPropertiesPowerWork.rangeCells as IRangeCells).NeedsRotate)
+                if (CompPropertiesPowerWork.rangeCells.NeedsRotate)
                 {
 
                     inRect2 = inRect;
@@ -331,9 +336,9 @@ namespace ProjectRimFactory.Common
                     //Add Rotate Button
                     if (Widgets.ButtonImage(inRect2, TexUI.RotRightTex))
                     {
-                        compPropertiesPowerWork.RangeTypeRot.Rotate(RotationDirection.Clockwise);
+                        CompPropertiesPowerWork.RangeTypeRot.Rotate(RotationDirection.Clockwise);
                     }
-                    TooltipHandler.TipRegion(inRect2, rotInputRangeTip);
+                    TooltipHandler.TipRegion(inRect2, RotInputRangeTip);
 
                 }
                 list.Gap();

@@ -14,10 +14,6 @@ namespace ProjectRimFactory.Common
             cacheGetter = func;
             cache = cacheGetter();
         }
-        public Cache(Func<T> func, int ticksUpdateInterval) : this(func)
-        {
-            updateInterval = ticksUpdateInterval;
-        }
         public T Get()
         {
             if (lastTick + updateInterval < Find.TickManager.TicksAbs)
@@ -26,7 +22,8 @@ namespace ProjectRimFactory.Common
             }
             return cache;
         }
-        public T UpdateCache()
+
+        private T UpdateCache()
         {
             lastTick = Find.TickManager.TicksAbs;
             return cache = cacheGetter();

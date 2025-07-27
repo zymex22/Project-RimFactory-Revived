@@ -4,7 +4,7 @@ using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    class Patch_QualityBuilder_pawnCanConstruct
+    class Patch_QualityBuilder_PawnCanConstruct
     {
         public static void Postfix(Pawn pawn, ref bool __result)
         {

@@ -2,9 +2,10 @@
 
 namespace ProjectRimFactory.AnimalStation
 {
+    // ReSharper disable once UnusedType.Global
     public class Building_Milker : Building_CompHarvester
     {
-        public override bool CompValidator(CompHasGatherableBodyResource comp)
+        protected override bool CompValidator(CompHasGatherableBodyResource comp)
         {
             return comp is CompMilkable;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Verse;
-namespace ProjectRimFactory
+
+namespace ProjectRimFactory.Common
 {
     /// <summary>
     /// A set of Debug trace functions for help in tracking weird problems.

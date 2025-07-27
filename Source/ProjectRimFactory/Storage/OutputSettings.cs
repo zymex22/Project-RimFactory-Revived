@@ -41,12 +41,12 @@ namespace ProjectRimFactory.Storage
 
         public void Copy(OutputSettings other)
         {
-            other.minTooltip = this.minTooltip;
-            other.maxTooltip = this.maxTooltip;
-            other.useMin = this.useMin;
-            other.useMax = this.useMax;
-            other.min = this.min;
-            other.max = this.max;
+            other.minTooltip = minTooltip;
+            other.maxTooltip = maxTooltip;
+            other.useMin = useMin;
+            other.useMax = useMax;
+            other.min = min;
+            other.max = max;
         }
 
         public string minTooltip;

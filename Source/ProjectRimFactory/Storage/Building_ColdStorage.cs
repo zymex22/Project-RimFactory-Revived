@@ -35,42 +35,33 @@ namespace ProjectRimFactory.Storage
         //IRenameable
         public string InspectLabel => LabelCap;
 
-        public StorageSettings settings;
+        private StorageSettings settings;
 
         //Initialized at spawn
-        public DefModExtension_Crate ModExtension_Crate = null;
+        protected DefModExtension_Crate ModExtensionCrate;
 
-        public abstract bool CanStoreMoreItems { get; }
+        protected abstract bool CanStoreMoreItems { get; }
         // The maximum number of item stacks at this.Position:
         //   One item on each cell and the rest multi-stacked on Position?
-        public int MaxNumberItemsInternal => (ModExtension_Crate?.limit ?? int.MaxValue)
+        protected int MaxNumberItemsInternal => (ModExtensionCrate?.limit ?? int.MaxValue)
                                               - def.Size.Area + 1;
         public List<Thing> StoredItems => Items;
         public int StoredItemsCount => Items.Count;
         public virtual bool CanReceiveIO => true;
         public virtual bool Powered => true;
 
-        public bool ForbidPawnAccess => ModExtension_Crate?.forbidPawnAccess ?? false;
+        public bool ForbidPawnAccess => ModExtensionCrate?.forbidPawnAccess ?? false;
 
-        public virtual bool ForbidPawnInput => ForbidPawnAccess;
+        IntVec3 IHaulDestination.Position => Position;
 
-        public virtual bool ForbidPawnOutput => ForbidPawnAccess;
-
-        public virtual bool HideItems => ModExtension_Crate?.hideItems ?? false;
-
-        public virtual bool HideRightClickMenus =>
-            ModExtension_Crate?.hideRightClickMenus ?? false;
-
-        IntVec3 IHaulDestination.Position => this.Position;
-
-        Map IHaulDestination.Map => this.Map;
+        Map IHaulDestination.Map => Map;
         public bool HaulDestinationEnabled => true;
 
         bool IStoreSettingsParent.StorageTabVisible => true;
 
         public bool AdvancedIOAllowed => false;
 
-        public IntVec3 GetPosition => this.Position;
+        public IntVec3 GetPosition => Position;
 
         public StorageSettings GetSettings => settings;
 
@@ -78,7 +69,7 @@ namespace ProjectRimFactory.Storage
 
         public bool CanUseIOPort => true;
 
-        private StorageOutputUtil outputUtil = null;
+        private StorageOutputUtil outputUtil;
 
         public void DeregisterPort(Building_StorageUnitIOBase port)
         {
@@ -108,7 +99,7 @@ namespace ProjectRimFactory.Storage
             };
         }
 
-        public virtual string GetUIThingLabel()
+        protected virtual string GetUIThingLabel()
         {
             return "PRFMassStorageUIThingLabel".Translate(StoredItemsCount);
         }
@@ -118,7 +109,7 @@ namespace ProjectRimFactory.Storage
             return "PRFItemsTabLabel".Translate(StoredItemsCount, itemsSelected);
         }
 
-        public virtual void RegisterNewItem(Thing newItem)
+        private void RegisterNewItem(Thing newItem)
         {
             if (Items.Contains(newItem))
             {
@@ -158,10 +149,10 @@ namespace ProjectRimFactory.Storage
         {
             base.ExposeData();
             Scribe_Collections.Look(ref ports, "ports", LookMode.Reference);
-            Scribe_Deep.Look(ref this.thingOwner, "thingowner", this);
+            Scribe_Deep.Look(ref thingOwner, "thingowner", this);
             Scribe_Values.Look(ref uniqueName, "uniqueName");
             Scribe_Deep.Look(ref settings, "settings", this);
-            ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
+            ModExtensionCrate ??= def.GetModExtension<DefModExtension_Crate>();
         }
 
         public override string GetInspectString()
@@ -196,7 +187,7 @@ namespace ProjectRimFactory.Storage
         {
             base.SpawnSetup(map, respawningAfterLoad);
             PatchStorageUtil.GetPRFMapComponent(Map).RegisterColdStorageBuilding(this);
-            ModExtension_Crate ??= def.GetModExtension<DefModExtension_Crate>();
+            ModExtensionCrate ??= def.GetModExtension<DefModExtension_Crate>();
             outputUtil = new StorageOutputUtil(this);
             foreach (var port in ports)
             {
@@ -214,8 +205,8 @@ namespace ProjectRimFactory.Storage
         public float GetItemWealth()
         {
             float output = 0;
-            var itemsc = Items.Count;
-            for (int i = 0; i < itemsc; i++)
+            var itemCount = Items.Count;
+            for (var i = 0; i < itemCount; i++)
             {
                 var item = Items[i];
                 output += item.MarketValue * item.stackCount;
@@ -243,7 +234,7 @@ namespace ProjectRimFactory.Storage
         {
             //Some Sanity Checks
             capacity = 0;
-            if (thing == null || map == null || map != this.Map || cell == null || !this.Spawned)
+            if (thing == null || map == null || map != Map || cell == null || !Spawned)
             {
                 Log.Error("PRF DSU CapacityAt Sanity Check Error");
                 return false;
@@ -251,7 +242,7 @@ namespace ProjectRimFactory.Storage
             thing = thing.GetInnerIfMinified();
 
             //Check if thing can be stored based upon the storgae settings
-            if (!this.Accepts(thing))
+            if (!Accepts(thing))
             {
                 return false;
             }
@@ -308,7 +299,7 @@ namespace ProjectRimFactory.Storage
 
         StorageSettings IStoreSettingsParent.GetParentStoreSettings()
         {
-            StorageSettings fixedStorageSettings = def.building.fixedStorageSettings;
+            var fixedStorageSettings = def.building.fixedStorageSettings;
             if (fixedStorageSettings != null)
             {
                 return fixedStorageSettings;
@@ -340,7 +331,7 @@ namespace ProjectRimFactory.Storage
             }
         }
 
-        public bool CanReciveThing(Thing item)
+        public bool CanReceiveThing(Thing item)
         {
             return settings.AllowedToAccept(item) && CanReceiveIO && CanStoreMoreItems;
         }

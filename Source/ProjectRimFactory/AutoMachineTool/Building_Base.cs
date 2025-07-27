@@ -20,44 +20,41 @@ namespace ProjectRimFactory.AutoMachineTool
         IntVec3 OutputCell();
     }
 
-    public abstract class Building_Base<T> : ProjectRimFactory.Common.PRF_Building, IProductOutput where T : Thing
+    public abstract class Building_Base<T> : PRF_Building, IProductOutput where T : Thing
     {
         private WorkingState state;
-        private static HashSet<T> workingSet = new HashSet<T>();
         protected T working;
-        protected List<Thing> products = new List<Thing>();
+        protected List<Thing> Products = [];
         private float totalWorkAmount;
         private int workStartTick;
         [Unsaved]
         private Effecter progressBar;
         [Unsaved]
-        protected bool showProgressBar = true;
+        protected bool ShowProgressBar = true;
         [Unsaved]
-        protected bool placeFirstAbsorb = false;
-        [Unsaved]
-        protected bool readyOnStart = false;
-        [Unsaved]
-        protected int startCheckIntervalTicks = 30;
+        protected bool ReadyOnStart = false;
+        [Unsaved] 
+        private const int StartCheckIntervalTicks = 30;
 
-        public CompOutputAdjustable compOutputAdjustable;
+        protected CompOutputAdjustable CompOutputAdjustable;
 
 
         public override void PostMake()
         {
             base.PostMake();
-            compOutputAdjustable = GetComp<CompOutputAdjustable>();
+            CompOutputAdjustable = GetComp<CompOutputAdjustable>();
         }
 
-        private MapTickManager mapManager;
+        protected MapTickManager MapManager { get; private set; }
+
         public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null)
         {
-            foreach (Thing p in products)
+            foreach (var thing in Products)
             {
-                if (optionalValidator == null
-                     || optionalValidator(p))
+                if (optionalValidator is null || optionalValidator(thing))
                 {
-                    products.Remove(p);
-                    return p;
+                    Products.Remove(thing);
+                    return thing;
                 }
             }
             return null;
@@ -65,32 +62,19 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected WorkingState State
         {
-            get => this.state;
-            set
-            {
-                if (this.state != value)
-                {
-                    OnChangeState(this.state, value);
-                    this.state = value;
-                }
-            }
+            get => state;
+            set => state = value;
         }
 
-        protected T Working => this.working;
-
-        protected MapTickManager MapManager => this.mapManager;
-
-        protected virtual void OnChangeState(WorkingState before, WorkingState after)
-        {
-        }
-
+        protected T Working => working;
+        
         protected virtual void ClearActions()
         {
-            this.MapManager.RemoveAfterAction(this.Ready);
-            this.MapManager.RemoveAfterAction(this.Placing);
-            this.MapManager.RemoveAfterAction(this.CheckWork);
-            this.MapManager.RemoveAfterAction(this.StartWork);
-            this.MapManager.RemoveAfterAction(this.FinishWork);
+            MapManager.RemoveAfterAction(Ready);
+            MapManager.RemoveAfterAction(Placing);
+            MapManager.RemoveAfterAction(CheckWork);
+            MapManager.RemoveAfterAction(StartWork);
+            MapManager.RemoveAfterAction(FinishWork);
         }
         /// <summary>
         /// The mode to use for saving/loading `working` for this class.
@@ -107,304 +91,294 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.ExposeData();
 
-            Scribe_Values.Look(ref this.state, "workingState", WorkingState.Ready);
-            Scribe_Values.Look(ref this.totalWorkAmount, "totalWorkAmount", 0f);
-            Scribe_Values.Look(ref this.workStartTick, "workStartTick", 0);
-            Scribe_Collections.Look<Thing>(ref this.products, "products", ProductsLookMode);
+            Scribe_Values.Look(ref state, "workingState", WorkingState.Ready);
+            Scribe_Values.Look(ref totalWorkAmount, "totalWorkAmount", 0f);
+            Scribe_Values.Look(ref workStartTick, "workStartTick", 0);
+            Scribe_Collections.Look<Thing>(ref Products, "products", ProductsLookMode);
             if (WorkingLookMode == LookMode.Deep)
             {
-                Scribe_Deep.Look<T>(ref this.working, "working");
+                Scribe_Deep.Look<T>(ref working, "working");
             }
             else if (WorkingLookMode == LookMode.Reference)
             {
-                Scribe_References.Look<T>(ref this.working, "working");
+                Scribe_References.Look<T>(ref working, "working");
             }
         }
 
         public override void PostMapInit()
         {
             base.PostMapInit();
-            if (this.products == null)
-                this.products = new List<Thing>();
-            if (this.working == null && this.State == WorkingState.Working)
-                this.ForceReady();
-            if (this.products.Count == 0 && this.State == WorkingState.Placing)
-                this.ForceReady();
-        }
-
-        protected static bool InWorking(T thing)
-        {
-            return workingSet.Contains(thing);
+            Products ??= [];
+            if (working == null && State == WorkingState.Working)
+                ForceReady();
+            if (Products.Count == 0 && State == WorkingState.Placing)
+                ForceReady();
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            this.mapManager = map.GetComponent<MapTickManager>();
-            compOutputAdjustable = GetComp<CompOutputAdjustable>();
-            if (readyOnStart) // No check for respawning after load?
+            MapManager = map.GetComponent<MapTickManager>();
+            CompOutputAdjustable = GetComp<CompOutputAdjustable>();
+            if (ReadyOnStart) // No check for respawning after load?
             {
-                this.State = WorkingState.Ready;
-                this.Reset();
-                MapManager.AfterAction(Rand.Range(0, this.startCheckIntervalTicks), this.Ready);
+                State = WorkingState.Ready;
+                Reset();
+                MapManager.AfterAction(Rand.Range(0, StartCheckIntervalTicks), Ready);
             }
             else
             {
-                if (this.State == WorkingState.Ready)
+                switch (State)
                 {
-                    MapManager.AfterAction(Rand.Range(0, this.startCheckIntervalTicks), this.Ready);
-                }
-                else if (this.State == WorkingState.Working)
-                {
-                    MapManager.NextAction(this.StartWork);
-                }
-                else if (this.State == WorkingState.Placing)
-                {
-                    MapManager.NextAction(this.Placing);
+                    case WorkingState.Ready:
+                        MapManager.AfterAction(Rand.Range(0, StartCheckIntervalTicks), Ready);
+                        break;
+                    case WorkingState.Working:
+                        MapManager.NextAction(StartWork);
+                        break;
+                    case WorkingState.Placing:
+                        MapManager.NextAction(Placing);
+                        break;
                 }
             }
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            this.Reset();
-            this.ClearActions();
+            Reset();
+            ClearActions();
             base.DeSpawn(mode);
         }
 
         protected virtual bool IsActive()
         {
-            if (this.Destroyed || !this.Spawned)
+            if (Destroyed || !Spawned)
             {
                 return false;
             }
-            //Check if Output is in Bounds
-            if (!OutputCell().InBounds(this.Map)) return false;
 
-            return true;
+            //Check if Output is in Bounds
+            return OutputCell().InBounds(Map);
         }
 
         protected virtual void Reset()
         {
-            if (this.State != WorkingState.Ready)
+            if (State != WorkingState.Ready)
             {
-                this.products.ForEach(t =>
+                Products.ForEach(t =>
                 {
-                    if (t != null && !t.Destroyed)
+                    if (t is null || t.Destroyed) return;
+                    if (t.Spawned)
                     {
-                        if (t.Spawned)
-                        {
-                            t.DeSpawn();
-                        }
-                        GenPlace.TryPlaceThing(t, this.Position, this.Map, ThingPlaceMode.Near);
+                        t.DeSpawn();
                     }
+                    GenPlace.TryPlaceThing(t, Position, Map, ThingPlaceMode.Near);
                 });
             }
-            this.CleanupWorkingEffect();
-            this.State = WorkingState.Ready;
-            this.totalWorkAmount = 0;
-            this.workStartTick = 0;
-            workingSet.Remove(working);
-            this.working = null;
-            this.products.Clear();
+            CleanupWorkingEffect();
+            State = WorkingState.Ready;
+            totalWorkAmount = 0;
+            workStartTick = 0;
+            working = null;
+            Products.Clear();
         }
 
         protected void ForceReady()
         {
-            this.Reset();
-            this.ClearActions();
-            MapManager.NextAction(this.Ready);
+            Reset();
+            ClearActions();
+            MapManager.NextAction(Ready);
         }
 
         protected virtual void CleanupWorkingEffect()
         {
-            Option(this.progressBar).ForEach(e => e.Cleanup());
-            this.progressBar = null;
+            Option(progressBar).ForEach(e => e.Cleanup());
+            progressBar = null;
         }
 
         protected virtual void CreateWorkingEffect()
         {
-            this.CleanupWorkingEffect();
-            if (this.showProgressBar)
+            CleanupWorkingEffect();
+            if (ShowProgressBar)
             {
                 Option(ProgressBarTarget()).ForEach(t =>
                 {
-                    this.progressBar = DefDatabase<EffecterDef>.GetNamed("AutoMachineTool_Effect_ProgressBar").Spawn();
-                    this.progressBar.EffectTick(ProgressBarTarget(), TargetInfo.Invalid);
-                    ((MoteProgressBar2)((SubEffecter_ProgressBar)progressBar.children[0]).mote).progressGetter = () => (this.CurrentWorkAmount / this.totalWorkAmount);
+                    progressBar = DefDatabase<EffecterDef>.GetNamed("AutoMachineTool_Effect_ProgressBar").Spawn();
+                    progressBar.EffectTick(ProgressBarTarget(), TargetInfo.Invalid);
+                    ((MoteProgressBar2)((SubEffecter_ProgressBar)progressBar.children[0]).mote).progressGetter = () => (CurrentWorkAmount / totalWorkAmount);
                 });
             }
         }
 
         protected virtual TargetInfo ProgressBarTarget()
         {
-            if (this.working.Spawned)
+            if (working.Spawned)
             {
-                return this.working;
+                return working;
             }
             return this;
         }
 
         protected virtual void Ready()
         {
-            if (this.State != WorkingState.Ready || !this.Spawned)
+            if (State != WorkingState.Ready || !Spawned)
             {
                 return;
             }
-            if (!this.IsActive())
+            if (!IsActive())
             {
-                this.Reset();
+                Reset();
                 MapManager.AfterAction(30, Ready);
                 return;
             }
 
-            if (this.TryStartWorking(out this.working, out this.totalWorkAmount))
+            if (TryStartWorking(out working, out totalWorkAmount))
             {
-                this.State = WorkingState.Working;
-                this.workStartTick = Find.TickManager.TicksAbs;
-                MapManager.NextAction(this.StartWork);
+                State = WorkingState.Working;
+                workStartTick = Find.TickManager.TicksAbs;
+                MapManager.NextAction(StartWork);
             }
             else
             {
-                MapManager.AfterAction(this.startCheckIntervalTicks, Ready);
+                MapManager.AfterAction(StartCheckIntervalTicks, Ready);
             }
         }
 
         private int CalcRemainTick()
         {
-            if (float.IsInfinity(this.totalWorkAmount))
+            if (float.IsInfinity(totalWorkAmount))
             {
                 return int.MaxValue;
             }
-            return Mathf.Max(1, Mathf.CeilToInt((this.totalWorkAmount - this.CurrentWorkAmount) / this.WorkAmountPerTick));
+            return Mathf.Max(1, Mathf.CeilToInt((totalWorkAmount - CurrentWorkAmount) / WorkAmountPerTick));
         }
 
-        protected float CurrentWorkAmount => (Find.TickManager.TicksAbs - this.workStartTick) * WorkAmountPerTick;
+        private float CurrentWorkAmount => (Find.TickManager.TicksAbs - workStartTick) * WorkAmountPerTick;
 
-        protected float WorkLeft => this.totalWorkAmount - this.CurrentWorkAmount;
+        protected float WorkLeft => totalWorkAmount - CurrentWorkAmount;
 
         protected virtual void StartWork()
         {
-            if (this.State != WorkingState.Working || !this.Spawned)
+            if (State != WorkingState.Working || !Spawned)
             {
                 return;
             }
-            if (!this.IsActive())
+            if (!IsActive())
             {
-                this.ForceReady();
+                ForceReady();
                 return;
             }
             CreateWorkingEffect();
-            MapManager.AfterAction(30, this.CheckWork);
-            if (!float.IsInfinity(this.totalWorkAmount))
+            MapManager.AfterAction(30, CheckWork);
+            if (!float.IsInfinity(totalWorkAmount))
             {
-                MapManager.AfterAction(this.CalcRemainTick(), this.FinishWork);
+                MapManager.AfterAction(CalcRemainTick(), FinishWork);
             }
         }
 
         protected virtual void ForceStartWork(T working, float workAmount)
         {
-            this.Reset();
-            this.ClearActions();
+            Reset();
+            ClearActions();
 
-            this.State = WorkingState.Working;
+            State = WorkingState.Working;
             this.working = working;
-            this.totalWorkAmount = workAmount;
-            this.workStartTick = Find.TickManager.TicksAbs;
+            totalWorkAmount = workAmount;
+            workStartTick = Find.TickManager.TicksAbs;
             MapManager.NextAction(StartWork);
         }
 
         protected virtual void CheckWork()
         {
-            if (this.State != WorkingState.Working || !this.Spawned)
+            if (State != WorkingState.Working || !Spawned)
             {
                 return;
             }
-            if (!this.IsActive())
+            if (!IsActive())
             {
-                this.ForceReady();
+                ForceReady();
                 return;
             }
-            if (this.WorkInterruption(this.working))
+            if (WorkInterruption(working))
             {
-                this.ForceReady();
+                ForceReady();
                 return;
             }
-            if (this.CurrentWorkAmount >= this.totalWorkAmount)
+            if (CurrentWorkAmount >= totalWorkAmount)
             {
                 // 作業中に電力が変更されて終わってしまった場合、次TickでFinish呼び出し.
                 // If the power is changed during work and it ends, 
                 //     call Finish with the next tick.
-                MapManager.NextAction(this.FinishWork);
+                MapManager.NextAction(FinishWork);
             }
             else
             {
-                MapManager.AfterAction(30, this.CheckWork);
+                MapManager.AfterAction(30, CheckWork);
             }
         }
 
         protected virtual void FinishWork()
         {
-            if (this.State != WorkingState.Working || !this.Spawned)
+            if (State != WorkingState.Working || !Spawned)
             {
                 return;
             }
-            MapManager.RemoveAfterAction(this.CheckWork);
-            MapManager.RemoveAfterAction(this.FinishWork);
-            if (!this.IsActive())
+            MapManager.RemoveAfterAction(CheckWork);
+            MapManager.RemoveAfterAction(FinishWork);
+            if (!IsActive())
             {
-                this.ForceReady();
+                ForceReady();
                 return;
             }
-            if (this.WorkInterruption(this.working))
+            if (WorkInterruption(working))
             {
-                this.ForceReady();
+                ForceReady();
                 return;
             }
-            if (this.FinishWorking(this.working, out this.products))
+            if (FinishWorking(working, out Products))
             {
-                this.State = WorkingState.Placing;
-                this.CleanupWorkingEffect();
-                this.working = null;
-                if (this.products == null || this.products.Count == 0)
+                State = WorkingState.Placing;
+                CleanupWorkingEffect();
+                working = null;
+                if (Products == null || Products.Count == 0)
                 {
-                    this.Reset();
-                    MapManager.NextAction(this.Ready);
+                    Reset();
+                    MapManager.NextAction(Ready);
                 }
                 else
                 {
-                    MapManager.NextAction(this.Placing);
+                    MapManager.NextAction(Placing);
                 }
             }
             else
             {
-                this.Reset();
-                MapManager.NextAction(this.Ready);
+                Reset();
+                MapManager.NextAction(Ready);
             }
         }
 
         protected virtual void Placing()
         {
-            if (this.State != WorkingState.Placing || !this.Spawned)
+            if (State != WorkingState.Placing || !Spawned)
             {
                 return;
             }
-            if (!this.IsActive())
+            if (!IsActive())
             {
-                this.ForceReady();
+                ForceReady();
                 return;
             }
 
-            if (this.PlaceProduct(ref this.products))
+            if (PlaceProduct(ref Products))
             {
-                this.State = WorkingState.Ready;
-                this.Reset();
+                State = WorkingState.Ready;
+                Reset();
                 MapManager.NextAction(Ready);
             }
             else
             {
                 // If we are still Placing, try again in 30
-                if (this.State == WorkingState.Placing) MapManager.AfterAction(30, this.Placing);
+                if (State == WorkingState.Placing) MapManager.AfterAction(30, Placing);
             }
         }
 
@@ -414,65 +388,65 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected abstract bool TryStartWorking(out T target, out float workAmount);
 
-        protected abstract bool FinishWorking(T working, out List<Thing> products);
+        protected abstract bool FinishWorking(T working, out List<Thing> outputProducts);
 
-        protected bool forcePlace = true;
+        protected bool ForcePlace = true;
 
-        protected virtual bool PlaceProduct(ref List<Thing> products)
+        protected virtual bool PlaceProduct(ref List<Thing> things)
         {
             // Use Aggregate() to attempt to place each item in products
             //   Any unplaced products accumulate in the new List<Thing>,
             //   and stay in products.
             // Is there any reason this uses `ref List<Thing> products`
             //   instead of `this.products`?
-            products = products.Aggregate(new List<Thing>(), (total, target) =>
+            things = things.Aggregate(new List<Thing>(), (total, target) =>
             {
                 if (target.Spawned) target.DeSpawn();
-                if (this.PRFTryPlaceThing(target, OutputCell(), this.Map, this.forcePlace))
+                if (this.PRFTryPlaceThing(target, OutputCell(), Map, ForcePlace))
                 {
                     return total;
                 }
                 return total.Append(target);
             });
             // if there are any left in products, we didn't place them all:
-            return !this.products.Any();
+            return !this.Products.Any();
         }
 
         public override IntVec3 OutputCell()
         {
-            return FacingCell(this.Position, this.def.Size, this.Rotation.Opposite);
+            return FacingCell(Position, def.Size, Rotation.Opposite);
         }
 
         public override string GetInspectString()
         {
             String msg = base.GetInspectString();
             msg += "\n";
-            switch (this.State)
+            switch (State)
             {
                 case WorkingState.Working:
-                    if (float.IsInfinity(this.totalWorkAmount))
+                    if (float.IsInfinity(totalWorkAmount))
                     {
                         msg += "PRF.AutoMachineTool.StatWorkingNotParam".Translate();
                     }
                     else
                     {
                         msg += "PRF.AutoMachineTool.StatWorking".Translate(
-                            Mathf.RoundToInt(Math.Min(this.CurrentWorkAmount, this.totalWorkAmount)),
-                            Mathf.RoundToInt(this.totalWorkAmount),
-                            Mathf.RoundToInt(Mathf.Clamp01(this.CurrentWorkAmount / this.totalWorkAmount) * 100));
+                            Mathf.RoundToInt(Math.Min(CurrentWorkAmount, totalWorkAmount)),
+                            Mathf.RoundToInt(totalWorkAmount),
+                            Mathf.RoundToInt(Mathf.Clamp01(CurrentWorkAmount / totalWorkAmount) * 100));
                     }
                     break;
                 case WorkingState.Ready:
                     msg += "PRF.AutoMachineTool.StatReady".Translate();
                     break;
                 case WorkingState.Placing:
-                    if (this.products.Count != 1)
-                        msg += "PRF.AutoMachineTool.StatPlacing".Translate(this.products.Count);
+                    if (Products.Count != 1)
+                        msg += "PRF.AutoMachineTool.StatPlacing".Translate(Products.Count);
                     else
-                        msg += "PRF.AutoMachineTool.PlacingSingle".Translate(this.products[0].Label);
+                        msg += "PRF.AutoMachineTool.PlacingSingle".Translate(Products[0].Label);
                     break;
                 default:
-                    msg += this.State.ToString();
+                    msg += State.ToString();
                     break;
             }
             return msg;
@@ -480,29 +454,10 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public void NortifyReceivable()
         {
-            if (this.State == WorkingState.Placing && this.Spawned)
-            {
-                if (!this.MapManager.IsExecutingThisTick(this.Placing))
-                {
-                    this.MapManager.RemoveAfterAction(this.Placing);
-                    this.MapManager.NextAction(this.Placing);
-                }
-            }
+            if (State != WorkingState.Placing || !Spawned) return;
+            if (MapManager.IsExecutingThisTick(Placing)) return;
+            MapManager.RemoveAfterAction(Placing);
+            MapManager.NextAction(Placing);
         }
-
-        protected List<Thing> CreateThings(ThingDef def, int count)
-        {
-            var quot = count / def.stackLimit;
-            var remain = count % def.stackLimit;
-            return Enumerable.Range(0, quot + 1)
-                .Select((c, i) => i == quot ? remain : def.stackLimit)
-                .Select(c =>
-                {
-                    Thing p = ThingMaker.MakeThing(def, null);
-                    p.stackCount = c;
-                    return p;
-                }).ToList();
-        }
-
     }
 }

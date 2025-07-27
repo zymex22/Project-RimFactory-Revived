@@ -7,26 +7,26 @@ namespace ProjectRimFactory.SAL3.Things
 {
     public class CompRecipeImportRange : ThingComp
     {
-        public CompProperties_RecipeImportRange Props => (CompProperties_RecipeImportRange)this.props;
+        public CompProperties_RecipeImportRange Props => (CompProperties_RecipeImportRange)props;
 
         public IEnumerable<IntVec3> RangeCells()
         {
-            return this.Props.CellsWithinRange(this.parent.Position);
+            return Props.CellsWithinRange(parent.Position);
         }
 
         public override void PostDrawExtraSelectionOverlays()
         {
             base.PostDrawExtraSelectionOverlays();
-            GenDraw.DrawFieldEdges(this.Props.CellsWithinRange(this.parent.Position).ToList(), this.Props.ghostColor);
+            GenDraw.DrawFieldEdges(Props.CellsWithinRange(parent.Position).ToList(), Props.ghostColor);
         }
 
     }
 
-    public class CompProperties_RecipeImportRange : CompProperties, ProjectRimFactory.Common.IXMLThingDescription
+    public class CompProperties_RecipeImportRange : CompProperties, Common.IXMLThingDescription
     {
         public CompProperties_RecipeImportRange()
         {
-            this.compClass = typeof(CompRecipeImportRange);
+            compClass = typeof(CompRecipeImportRange);
         }
 
         public float range = 5f;
@@ -37,12 +37,12 @@ namespace ProjectRimFactory.SAL3.Things
         {
             base.DrawGhost(center, rot, thingDef, ghostCol, drawAltitude, thing);
             var list = CellsWithinRange(center).ToList();
-            GenDraw.DrawFieldEdges(list, this.ghostColor);
+            GenDraw.DrawFieldEdges(list, ghostColor);
         }
 
         public IEnumerable<IntVec3> CellsWithinRange(IntVec3 center)
         {
-            return GenRadial.RadialCellsAround(center, this.range, true);
+            return GenRadial.RadialCellsAround(center, range, true);
         }
 
         public string GetDescription(ThingDef def)

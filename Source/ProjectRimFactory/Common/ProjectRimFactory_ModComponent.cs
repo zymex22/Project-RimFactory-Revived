@@ -22,7 +22,7 @@ namespace ProjectRimFactory.Common
                 availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
                 
                 ConditionalPatchHelper.InitHarmony(this.HarmonyInstance);
-                ConditionalPatchHelper.Patch_Reachability_CanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
+                ConditionalPatchHelper.PatchReachabilityCanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
             }
             catch (Exception ex)
             {
@@ -251,8 +251,8 @@ namespace ProjectRimFactory.Common
 
                 if (QualityBuilder_pawnCanConstruct != null && QualityBuilder_getPawnConstructionSkill != null)
                 {
-                    var postfix_pawnCanConstruct = typeof(HarmonyPatches.Patch_QualityBuilder_pawnCanConstruct).GetMethod("Postfix");
-                    var prefix_getPawnConstructionSkill = typeof(HarmonyPatches.Patch_QualityBuilder_getPawnConstructionSkill).GetMethod("Prefix");
+                    var postfix_pawnCanConstruct = typeof(HarmonyPatches.Patch_QualityBuilder_PawnCanConstruct).GetMethod("Postfix");
+                    var prefix_getPawnConstructionSkill = typeof(HarmonyPatches.Patch_QualityBuilder_GetPawnConstructionSkill).GetMethod("Prefix");
                     this.HarmonyInstance.Patch(QualityBuilder_pawnCanConstruct, null, new HarmonyMethod(postfix_pawnCanConstruct));
                     this.HarmonyInstance.Patch(QualityBuilder_getPawnConstructionSkill, new HarmonyMethod(prefix_getPawnConstructionSkill));
                     Log.Message("Project Rimfactory - Added Support for QualityBuilder");

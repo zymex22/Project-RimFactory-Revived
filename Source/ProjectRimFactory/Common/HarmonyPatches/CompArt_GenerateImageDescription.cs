@@ -1,24 +1,25 @@
 ﻿using HarmonyLib;
 using RimWorld;
 using Verse;
+// ReSharper disable UnusedMember.Global
 
-namespace ProjectRimFactory
+namespace ProjectRimFactory.Common.HarmonyPatches
 {
     /// <summary>
-    /// Harmony Patch to make special scupltures have a correct description in game
+    /// Harmony Patch to make special sculptures have a correct description in game
     /// </summary>
-    [HarmonyPatch(typeof(RimWorld.CompArt), "GenerateImageDescription")]
+    [HarmonyPatch(typeof(CompArt), "GenerateImageDescription")]
+    // ReSharper disable once UnusedType.Global
     public class CompArt_GenerateImageDescription
     {
-        static public bool Prefix(out TaggedString __result, CompArt __instance)
+        public static bool Prefix(out TaggedString __result, CompArt __instance)
         {
             Thing t = __instance.parent;
-            var ss = Current.Game.GetComponent<PRFGameComponent>().specialScupltures;
-            if (ss == null) return true;
-            var s = ss.FirstOrDefault(x => x.currentInstances != null &&
-                                           x.currentInstances.Contains(t));
-            if (s == null) return true;
-            __result = new TaggedString(s.descKey.Translate());
+            var specialSculptures = Current.Game.GetComponent<PRFGameComponent>().specialScupltures;
+            var sculpture = specialSculptures?.FirstOrDefault(x => x.currentInstances != null &&
+                                            x.currentInstances.Contains(t));
+            if (sculpture == null) return true;
+            __result = new TaggedString(sculpture.descKey.Translate());
             return false; // skip vanilla
         }
     }

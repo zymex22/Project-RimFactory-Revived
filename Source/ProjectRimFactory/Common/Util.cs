@@ -8,42 +8,40 @@ namespace ProjectRimFactory.Common
     {
         public static Color A(this Color color, float a)
         {
-            return ProjectRimFactory.AutoMachineTool.Ops.A(color, a);
+            return AutoMachineTool.Ops.A(color, a);
         }
 
         public static IntVec3 FacingCell(IntVec3 center, IntVec2 size, Rot4 rot)
         {
-            return ProjectRimFactory.AutoMachineTool.Ops.FacingCell(center, size, rot);
+            return AutoMachineTool.Ops.FacingCell(center, size, rot);
         }
 
         public static IEnumerable<IntVec3> FacingRect(IntVec3 pos, Rot4 dir, int range)
         {
-            return ProjectRimFactory.AutoMachineTool.Ops.FacingRect(pos, dir, range);
+            return AutoMachineTool.Ops.FacingRect(pos, dir, range);
         }
 
         public static IEnumerable<IntVec3> FacingRect(Thing thing, Rot4 dir, int range)
         {
-            return ProjectRimFactory.AutoMachineTool.Ops.FacingRect(thing, dir, range);
+            return AutoMachineTool.Ops.FacingRect(thing, dir, range);
         }
 
         public static IEnumerable<IntVec3> FacingRect(IntVec3 center, IntVec2 size, Rot4 dir, int range)
         {
-            return ProjectRimFactory.AutoMachineTool.Ops.FacingRect(center, size, dir, range);
+            return AutoMachineTool.Ops.FacingRect(center, size, dir, range);
         }
 
         //reverses the action performed by Verse.GenAdj.AdjustForRotation(ref IntVec3 center, ref IntVec2 size, Rot4 rot)
         //This is needed as the game calls it in CellsOccupiedBy and its purpose is the rotation around the mouse pointer.
         public static void CounterAdjustForRotation(ref IntVec3 center, ref IntVec2 size, Rot4 rot)
         {
-            if (size.x == 1 && size.z == 1)
+            if (size is { x: 1, z: 1 })
             {
                 return;
             }
             if (rot.IsHorizontal)
             {
-                int x = size.x;
-                size.x = size.z;
-                size.z = x;
+                (size.x, size.z) = (size.z, size.x);
             }
             switch (rot.AsInt)
             {

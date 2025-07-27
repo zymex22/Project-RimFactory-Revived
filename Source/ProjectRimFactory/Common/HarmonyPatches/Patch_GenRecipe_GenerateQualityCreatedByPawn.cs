@@ -11,6 +11,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches;
 [HarmonyPatch(typeof(QualityUtility), "GenerateQualityCreatedByPawn", new Type[] { typeof(Pawn), typeof(SkillDef), typeof(bool) })]
 class Patch_GenRecipe_GenerateQualityCreatedByPawn
 {
+    // ReSharper disable once UnusedMember.Local
+    // ReSharper disable once UnusedParameter.Local
     static bool Prefix(ref QualityCategory __result, Pawn pawn, SkillDef relevantSkill , bool consumeInspiration)
     {
         var setQualityDirectly = PatchStorageUtil.Get<ISetQualityDirectly>(pawn.Map, pawn.Position);
@@ -20,6 +22,8 @@ class Patch_GenRecipe_GenerateQualityCreatedByPawn
     }
 
     //Prevent Biotech(Mech Changes) from interfering with Drone Skills
+    // ReSharper disable once ArrangeTypeMemberModifiers
+    // ReSharper disable once UnusedMember.Local
     static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
 
@@ -47,7 +51,7 @@ class Patch_GenRecipe_GenerateQualityCreatedByPawn
                 //with a call to Patch_GenRecipe_GenerateQualityCreatedByPawn:IsMechanoid(Pawn pawn)
                 instruction.operand = AccessTools.Method(
                     typeof(Patch_GenRecipe_GenerateQualityCreatedByPawn),
-                    nameof(Patch_GenRecipe_GenerateQualityCreatedByPawn.IsMechanoid), new[] { typeof(Pawn)});
+                    nameof(IsMechanoid), [typeof(Pawn)]);
                 foundReplaceMarker = false;
             }
 

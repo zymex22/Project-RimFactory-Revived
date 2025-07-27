@@ -10,16 +10,17 @@ using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
 {
+    // ReSharper disable once UnusedType.Global
     public class Building_SmartHopper : Building, IStoreSettingsParent, IPowerSupplyMachineHolder, IPickupSettings
     {
         private OutputSettings outputSettings;
 
-        public List<IntVec3> cachedDetectorCells = [];
+        private readonly List<IntVec3> cachedDetectorCells = [];
         private bool cachedDetectorCellsDirty = true;
 
-        public StorageSettings settings;
+        private StorageSettings settings;
 
-        public Thing StoredThing => Position.GetFirstItem(Map);
+        private Thing StoredThing => Position.GetFirstItem(Map);
 
         private CompPowerWorkSetting compPowerWorkSetting;
 
@@ -48,7 +49,7 @@ namespace ProjectRimFactory.SAL3.Things
             return cell.GetThingList(Map).Any(t => t is Building_BeltConveyor);
         }
 
-        public List<IntVec3> CellsToSelect
+        private List<IntVec3> CellsToSelect
         {
             get
             {
@@ -76,7 +77,7 @@ namespace ProjectRimFactory.SAL3.Things
             }
         }
 
-        public IEnumerable<Thing> ThingsToSelect
+        private IEnumerable<Thing> ThingsToSelect
         {
             get
             {
@@ -95,20 +96,19 @@ namespace ProjectRimFactory.SAL3.Things
 
         public bool StorageTabVisible => true;
 
-        public OutputSettings OutputSettings
+        private OutputSettings OutputSettings
         {
             get
             {
                 return outputSettings ??= new OutputSettings("SmartHopper_Minimum_UseTooltip", "SmartHopper_Maximum_UseTooltip");
             }
-            set => outputSettings = value;
         }
         
-        private bool allowGroundPickup = false;
-        private bool allowStockpilePickup = false;
-        private bool allowStoragePickup = false;
-        private bool allowForbiddenPickup = false;
-        private bool allowBeltPickup = false;
+        private bool allowGroundPickup;
+        private bool allowStockpilePickup;
+        private bool allowStoragePickup;
+        private bool allowForbiddenPickup;
+        private bool allowBeltPickup;
 
         public bool AllowGroundPickup
         {
@@ -169,19 +169,23 @@ namespace ProjectRimFactory.SAL3.Things
             base.ExposeData();
             Scribe_Deep.Look(ref outputSettings, "outputSettings", "SmartHopper_Minimum_UseTooltip", "SmartHopper_Maximum_UseTooltip");
             Scribe_Deep.Look(ref settings, "settings", this);
-            Scribe_Values.Look(ref allowGroundPickup, "allowGroundPickup", false);
-            Scribe_Values.Look(ref allowStockpilePickup, "allowStockpilePickup", false);
-            Scribe_Values.Look(ref allowStoragePickup, "allowStoragePickup", false);
-            Scribe_Values.Look(ref allowForbiddenPickup, "allowForbiddenPickup", false);
-            Scribe_Values.Look(ref allowBeltPickup, "allowBeltPickup", false);
+            Scribe_Values.Look(ref allowGroundPickup, "allowGroundPickup");
+            Scribe_Values.Look(ref allowStockpilePickup, "allowStockpilePickup");
+            Scribe_Values.Look(ref allowStoragePickup, "allowStoragePickup");
+            Scribe_Values.Look(ref allowForbiddenPickup, "allowForbiddenPickup");
+            Scribe_Values.Look(ref allowBeltPickup, "allowBeltPickup");
         }
 
         public override string GetInspectString()
         {
-            if (OutputSettings.useMin && OutputSettings.useMax) return base.GetInspectString() + "\n" + "SmartHopper_Minimum".Translate(OutputSettings.min) + "\n" + "SmartHopper_Maximum".Translate(OutputSettings.max);
-            else if (OutputSettings.useMin && !OutputSettings.useMax) return base.GetInspectString() + "\n" + "SmartHopper_Minimum".Translate(OutputSettings.min);
-            else if (!OutputSettings.useMin && OutputSettings.useMax) return base.GetInspectString() + "\n" + "SmartHopper_Maximum".Translate(OutputSettings.max);
-            else return base.GetInspectString();
+            if (OutputSettings.useMin && OutputSettings.useMax)
+                return base.GetInspectString() + "\n" + "SmartHopper_Minimum".Translate(OutputSettings.min) + "\n" + "SmartHopper_Maximum".Translate(OutputSettings.max);
+            if (OutputSettings.useMin && !OutputSettings.useMax)
+                return base.GetInspectString() + "\n" + "SmartHopper_Minimum".Translate(OutputSettings.min);
+            if (!OutputSettings.useMin && OutputSettings.useMax)
+                return base.GetInspectString() + "\n" + "SmartHopper_Maximum".Translate(OutputSettings.max);
+            
+            return base.GetInspectString();
         }
 
         protected override void Tick()
@@ -191,7 +195,7 @@ namespace ProjectRimFactory.SAL3.Things
             if (Find.TickManager.TicksGame % 35 != 0 || !GetComp<CompPowerTrader>().PowerOn) return;
             foreach (var element in ThingsToSelect)
             {
-                bool withinLimits = true;
+                var withinLimits = true;
                 if (OutputSettings.useMin) withinLimits = (element.stackCount >= OutputSettings.min);
 
                 if (element.def.category == ThingCategory.Item && settings.AllowedToAccept(element) && withinLimits)
@@ -204,7 +208,7 @@ namespace ProjectRimFactory.SAL3.Things
             if (StoredThing == null) return;
             if (settings.AllowedToAccept(StoredThing))
             {
-                bool forbidItem = true;
+                var forbidItem = true;
 
                 if (OutputSettings.useMin || OutputSettings.useMax)
                 {
@@ -222,7 +226,7 @@ namespace ProjectRimFactory.SAL3.Things
             StoredThing.SetForbidden(false, false);
         }
 
-        public virtual void TryStoreThing(Thing element)
+        protected virtual void TryStoreThing(Thing element)
         {
             if (StoredThing != null)
             {

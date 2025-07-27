@@ -1,12 +1,12 @@
-﻿using ProjectRimFactory.Common;
-using RimWorld;
-using System;
+﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Emit; // for dynamic method
+using System.Reflection.Emit;
+using RimWorld;
 using Verse;
+// for dynamic method
 
-namespace ProjectRimFactory
+namespace ProjectRimFactory.Common
 {
     public static class PlaceThingUtility
     {
@@ -35,7 +35,7 @@ namespace ProjectRimFactory
             }
 
             // Storage:
-            SlotGroup slotGroup = cell.GetSlotGroup(map);
+            var slotGroup = cell.GetSlotGroup(map);
             if (slotGroup != null)
             {
                 Debug.Warning(Debug.Flag.PlaceThing, "Placing " + t + " in slotGroup: " + slotGroup.parent + " at " + cell);
@@ -61,8 +61,8 @@ namespace ProjectRimFactory
             // Search through all items in cell: see if any will absorb
             //   our thing.  If we find a PRF_Building, stop looking and
             //   try to pass it on.
-            bool cellIsImpassible = false;
-            foreach (Thing otherThing in map.thingGrid.ThingsListAt(cell))
+            var cellIsImpassible = false;
+            foreach (var otherThing in map.thingGrid.ThingsListAt(cell))
             {
                 if (otherThing.TryAbsorbStack(t, true))
                 {
@@ -72,16 +72,12 @@ namespace ProjectRimFactory
                 }
                 if (otherThing.def.passability == Traversability.Impassable)
                     cellIsImpassible = true;
-                if (otherThing is IPRF_Building)
+                if (otherThing is IPRF_Building otherBuilding && placer.PlaceThingNextBuilding(otherBuilding, t, cell, map))
                 {
-                    if (placer.PlaceThingNextBuilding((otherThing as IPRF_Building),
-                        t, cell, map))
-                    {
-                        Debug.Message(Debug.Flag.PlaceThing, placer +
-                          " gave " + t + " to " + otherThing);
-                        placer.EffectOnPlaceThing(t);
-                        return true;
-                    }
+                    Debug.Message(Debug.Flag.PlaceThing, placer +
+                                                         " gave " + t + " to " + otherThing);
+                    placer.EffectOnPlaceThing(t);
+                    return true;
                     // Continue loop - may be more than 1 PRF_Building here
                 }
             }
@@ -96,7 +92,7 @@ namespace ProjectRimFactory
             if (CallNoStorageBlockersIn(cell, map, t))
             {
                 Debug.Message(Debug.Flag.PlaceThing, "  placing directly.");
-                bool wasSpawned = t.Spawned;
+                var wasSpawned = t.Spawned;
                 if (wasSpawned) t.DeSpawn();
                 if (!GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct))
                 {
@@ -140,11 +136,11 @@ namespace ProjectRimFactory
             // Head off a lot of potential calculation:
             // TODO: Deal properly with underground conveyors (need options to allow
             //       player to decide how that works.
-            if (placer.ObeysStorageFilters && !slotGroup.parent.Accepts(t)) return false;
+            if (placer!.ObeysStorageFilters && !slotGroup.parent.Accepts(t)) return false;
             if (CallNoStorageBlockersIn(cell, map, t))
             {
                 Debug.Message(Debug.Flag.PlaceThing, "Found NoStorageBlockersIn(" + cell + ", map, " + t + ") - Placing");
-                bool wasSpawned = t.Spawned;
+                var wasSpawned = t.Spawned;
                 if (wasSpawned) t.DeSpawn();
                 if (!GenPlace.TryPlaceThing(t, cell, map, ThingPlaceMode.Direct))
                 {
@@ -172,32 +168,30 @@ namespace ProjectRimFactory
         /// <param name="t">thing to place.</param>
         /// <param name="slotGroup">SlotGroup.</param>
         /// <param name="cell">optional first cell</param>
-        public static bool PlaceThingAnywhereInSlotGroup(this IPRF_Building placer, Thing t,
+        private static bool PlaceThingAnywhereInSlotGroup(this IPRF_Building placer, Thing t,
             SlotGroup slotGroup, IntVec3? cell = null)
         {
             // Should we even be putting anything here?
             if (placer.ObeysStorageFilters && !slotGroup.parent.Accepts(t)) return false;
-            Map map = placer.Map;
+            var map = placer.Map;
             // Go through slotGroup, starting with cell if given
             // TODO: go thru slotgroup in order of increasing distance from cell?
             foreach (var c in (cell != null ? ((new[] { (IntVec3)cell }).Concat(slotGroup.CellsList.Where(x => x != cell)))
                                           : slotGroup.CellsList))
             {
-                if (CallNoStorageBlockersIn(c, map, t))
+                if (!CallNoStorageBlockersIn(c, map, t)) continue;
+                Debug.Message(Debug.Flag.PlaceThing, "Found NoStorageBlockersIn(" + cell + ", map, " + t + ") - Placing");
+                if (t.Spawned) t.DeSpawn();
+                if (!GenPlace.TryPlaceThing(t, c, map, ThingPlaceMode.Direct))
                 {
-                    Debug.Message(Debug.Flag.PlaceThing, "Found NoStorageBlockersIn(" + cell + ", map, " + t + ") - Placing");
-                    if (t.Spawned) t.DeSpawn();
-                    if (!GenPlace.TryPlaceThing(t, c, map, ThingPlaceMode.Direct))
-                    {
-                        // This happens if some was absorbed, but not the whole stack
-                        //  We should continue on, to see if we can place everything
-                        Debug.Message(Debug.Flag.PlaceThing, "  some was absorbed, still have " + t.stackCount);
-                        continue;
-                    }
-                    placer.EffectOnPlaceThing(t);
-                    if (placer.ForbidOnPlacing(t)) t.SetForbidden(true, false);
-                    return true;
+                    // This happens if some was absorbed, but not the whole stack
+                    //  We should continue on, to see if we can place everything
+                    Debug.Message(Debug.Flag.PlaceThing, "  some was absorbed, still have " + t.stackCount);
+                    continue;
                 }
+                placer.EffectOnPlaceThing(t);
+                if (placer.ForbidOnPlacing(t)) t.SetForbidden(true, false);
+                return true;
             }
             Debug.Message(Debug.Flag.PlaceThing, "There were StorageBlockersIn every cell of "
                        + slotGroup.parent + " - cannot place" + t);
@@ -237,7 +231,7 @@ namespace ProjectRimFactory
             //il.Emit(OpCodes.Ldarg_0); // put IntVec3 cell on the stack//uncomment for debug
             //il.Emit(OpCodes.Ldarg_1); // Map for debug
             //il.Emit(OpCodes.Ldarg_2); // Thing for debug
-            il.Emit(OpCodes.Call, typeof(RimWorld.StoreUtility).GetMethod("NoStorageBlockersIn",
+            il.Emit(OpCodes.Call, typeof(StoreUtility).GetMethod("NoStorageBlockersIn",
                 BindingFlags.Static | BindingFlags.NonPublic));
             //il.Emit(OpCodes.Call, typeof(PlaceThingUtility).GetMethod("PostCallDebug", BindingFlags.Static | BindingFlags.Public));
             il.Emit(OpCodes.Ret);

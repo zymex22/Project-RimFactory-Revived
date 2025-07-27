@@ -49,24 +49,23 @@ namespace ProjectRimFactory.Misc
     {
         public CompProperties_Glower_ColorPick()
         {
-            this.compClass = typeof(CompGlower_ColorPick);
+            compClass = typeof(CompGlower_ColorPick);
         }
         public override void ResolveReferences(ThingDef parentDef)
         {
             base.ResolveReferences(parentDef);
             // Use this opportunity to create a set of these compProperties, one for each color:
-            colorComps = new List<CompProperties_Glower_ColorPick>();
-            colorComps.Add(this);
+            colorComps = [this];
             if (moreColors.NullOrEmpty()) return;
             foreach (var kc in moreColors)
             {
-                CompProperties_Glower_ColorPick nextColor = new CompProperties_Glower_ColorPick()
+                var nextColor = new CompProperties_Glower_ColorPick()
                 {
-                    overlightRadius = this.overlightRadius,
-                    glowRadius = this.glowRadius,
+                    overlightRadius = overlightRadius,
+                    glowRadius = glowRadius,
                     glowColor = kc.color,
                     key = kc.key,
-                    colorComps = this.colorComps,
+                    colorComps = colorComps,
                 };
                 colorComps.Add(nextColor);
             }
@@ -96,9 +95,9 @@ namespace ProjectRimFactory.Misc
         public override void PostExposeData()
         {
             base.PostExposeData();
-            string origKey = Props.key;
-            string defaultKey = Props.colorComps[0].key;
-            string key = origKey;
+            var origKey = Props.key;
+            var defaultKey = Props.colorComps[0].key;
+            var key = origKey;
             Scribe_Values.Look(ref key, "glower_color", defaultKey);
             if (key != origKey)
             { // loaded new color
@@ -106,7 +105,7 @@ namespace ProjectRimFactory.Misc
             }
         }
 
-        public void ChangeColor(string key)
+        private void ChangeColor(string key)
         {
             if (key == Props.key) return;
             if (Props.prerequisites != null)
@@ -114,7 +113,7 @@ namespace ProjectRimFactory.Misc
                 // it's possible to trigger ChangeColor() if multiple
                 // things are selected, so this check is needed here,
                 // even if we check elsewhere
-                for (int i = 0; i < Props.prerequisites.Count; i++)
+                for (var i = 0; i < Props.prerequisites.Count; i++)
                 {
                     if (!Props.prerequisites[i].IsFinished) return;
                 }
@@ -122,45 +121,43 @@ namespace ProjectRimFactory.Misc
             // It may end up possible to request color changes to
             //   a color not available.  It's probably best to just
             //   roll with it.
-            bool found = false;
+            var found = false;
             foreach (var c in Props.colorComps)
             {
                 if (c.key == key)
                 {
                     //Log.Message(""+parent+" changing color to "+key);
-                    this.props = c;
+                    props = c;
                     found = true;
                     break;
                 }
             }
-            if (found && parent.Spawned)
-            {
-                // If the glower is currently lit, we need to refresh
-                //   the "glow grid".  One easy way to reliably check
-                //   whether it's on is to check the glow Grid to see
-                //   if the comp is registered there.
-                //   But.  It's a private field.  So.  Magic:
-                var grid = parent.Map?.glowGrid;
-                if (grid == null) return;
-                // note: reflection is slow, but we don't care: the user
-                // does not change colors 37847 times each second.
-                var privateField = typeof(Verse.GlowGrid).GetField("litGlowers", BindingFlags.GetField |
-                                                                 BindingFlags.NonPublic | BindingFlags.Instance);
-                HashSet<CompGlower> litGlowers = (HashSet<CompGlower>)privateField.GetValue(grid);
-                if (litGlowers.Contains(this))
-                {
-                    //Log.Message("    Re-registering comp with glowGrid");
-                    parent.Map.glowGrid.DeRegisterGlower(this);
-                    parent.Map.glowGrid.RegisterGlower(this);
-                }
-            }
+
+            if (!found || !parent.Spawned) return;
+            // If the glower is currently lit, we need to refresh
+            //   the "glow grid".  One easy way to reliably check
+            //   whether it's on is to check the glow Grid to see
+            //   if the comp is registered there.
+            //   But.  It's a private field.  So.  Magic:
+            var grid = parent.Map?.glowGrid;
+            if (grid == null) return;
+            // note: reflection is slow, but we don't care: the user
+            // does not change colors 37847 times each second.
+            var privateField = typeof(GlowGrid).GetField("litGlowers", BindingFlags.GetField | 
+                                                                       BindingFlags.NonPublic | BindingFlags.Instance);
+            var litGlowers = (HashSet<CompGlower>)privateField.GetValue(grid);
+            if (!litGlowers.Contains(this)) return;
+            //Log.Message("    Re-registering comp with glowGrid");
+            parent.Map.glowGrid.DeRegisterGlower(this);
+            parent.Map.glowGrid.RegisterGlower(this);
         }
-        public void ChangeColorAllSelected(string key)
+
+        private static void ChangeColorAllSelected(string key)
         {
             var selected = Find.Selector.SelectedObjects;
             if (selected.NullOrEmpty()) return;
             if (selected.Count < 2) return;
-            foreach (object o in selected)
+            foreach (var o in selected)
             {
                 var c = (o as ThingWithComps)?.GetComp<CompGlower_ColorPick>();
                 if (c == null) continue;
@@ -185,33 +182,32 @@ namespace ProjectRimFactory.Misc
                     if (!Props.prerequisites[i].IsFinished) yield break;
                 }
             }
-            Color tmpColor = Props.glowColor.ToColor; // current color
+            var tmpColor = Props.glowColor.ToColor; // current color
             // don't blind anyone with bright icon:
             tmpColor.a = 0.75f; // lowering "a" lowers how much color shows up
 
             yield return new Command_Action
             {
-                defaultLabel = "PRF_ChangeColorGizmo".Translate(this.Props.key.Translate()),
+                defaultLabel = "PRF_ChangeColorGizmo".Translate(Props.key.Translate()),
                 //           (color)\nChange Color?
                 defaultIconColor = tmpColor,
                 groupKey = Props.groupId, // select multiple things at once
-                icon = ContentFinder<Texture2D>.Get("PRFUi/Lamp", true), // nice bright white background
+                icon = ContentFinder<Texture2D>.Get("PRFUi/Lamp"), // nice bright white background
                 action = delegate ()
                 {
-                    List<FloatMenuOption> mlist = new List<FloatMenuOption>();
-                    foreach (var c in this.Props.colorComps)
+                    var mlist = new List<FloatMenuOption>();
+                    foreach (var c in Props.colorComps)
                     {
                         mlist.Add(new FloatMenuOption(c.key.Translate(),
-                                                      delegate ()
+                                                      delegate
                                                       {
-                                                          this.ChangeColor(c.key);
+                                                          ChangeColor(c.key);
                                                           ChangeColorAllSelected(c.key);
                                                       }));
                     }
                     Find.WindowStack.Add(new FloatMenu(mlist));
                 }
             };
-            yield break;
         }
     }
 }

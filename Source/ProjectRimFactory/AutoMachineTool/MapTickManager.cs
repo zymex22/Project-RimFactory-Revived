@@ -18,10 +18,10 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.MapComponentTick();
 
-            var removeSet = this.eachTickActions.ToList().Where(Exec).ToHashSet();
+            var removeSet = eachTickActions.ToList().Where(Exec).ToHashSet();
 
             
-            removeSet.ForEach(r => this.eachTickActions.Remove(r));
+            removeSet.ForEach(r => eachTickActions.Remove(r));
 #if DEBUG
             if ((Debug.activeFlags & Debug.Flag.Benchmark) > 0) {
                 System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
@@ -60,23 +60,23 @@ namespace ProjectRimFactory.AutoMachineTool
 
             // Need ToList() b/c the list of tickActions can change
             //Execute the Action Associated with the Current Tick
-            this.tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
+            tickActionsDict.GetOption(Find.TickManager.TicksGame).ForEach(s => s.ToList().ForEach(Exec));
 
 #endif
-            this.tickActionsDict.Remove(Find.TickManager.TicksGame);
+            tickActionsDict.Remove(Find.TickManager.TicksGame);
         }
 
-        public void HandleTimeSkip(int NewCurrentTick)
+        public void HandleTimeSkip(int newCurrentTick)
         {
             //Update Keys in tickActionsDict To be in line with the current Tick
             var currentTick = Find.TickManager.TicksGame;
-            var offset = NewCurrentTick - currentTick;
+            var offset = newCurrentTick - currentTick;
 
-            var old_tickActionsDict = tickActionsDict.ToDictionary(entry => entry.Key,
+            var oldTickActionsDict = tickActionsDict.ToDictionary(entry => entry.Key,
                                                    entry => entry.Value);
 
             tickActionsDict.Clear();
-            foreach (var old in old_tickActionsDict)
+            foreach (var old in oldTickActionsDict)
             {
                 tickActionsDict[old.Key + offset] = old.Value;
             }
@@ -131,9 +131,9 @@ namespace ProjectRimFactory.AutoMachineTool
         }
 
 
-        private Dictionary<int, HashSet<Action>> tickActionsDict = new Dictionary<int, HashSet<Action>>();
+        private readonly Dictionary<int, HashSet<Action>> tickActionsDict = new();
 
-        private HashSet<Func<bool>> eachTickActions = new HashSet<Func<bool>>();
+        private readonly HashSet<Func<bool>> eachTickActions = [];
 
         public void AfterAction(int ticks, Action act)
         {
@@ -144,11 +144,11 @@ namespace ProjectRimFactory.AutoMachineTool
             }
 
             //Register a Given Action to an Expected Completion Tick
-            var ExecutionTick = Find.TickManager.TicksGame + ticks;
-            if (!this.tickActionsDict.TryGetValue(ExecutionTick, out HashSet<Action> set))
+            var executionTick = Find.TickManager.TicksGame + ticks;
+            if (!tickActionsDict.TryGetValue(executionTick, out var set))
             {
-                set = new HashSet<Action>();
-                this.tickActionsDict[ExecutionTick] = set;
+                set = [];
+                tickActionsDict[executionTick] = set;
             }
 
             set.Add(act);
@@ -157,27 +157,27 @@ namespace ProjectRimFactory.AutoMachineTool
         //Register an Action for the Next Tick
         public void NextAction(Action act)
         {
-            this.AfterAction(1, act);
+            AfterAction(1, act);
         }
 
         public void EachTickAction(Func<bool> act)
         {
-            this.eachTickActions.Add(act);
+            eachTickActions.Add(act);
         }
 
         public void RemoveAfterAction(Action act)
         {
-            this.tickActionsDict.ForEach(kv => kv.Value.Remove(act));
+            tickActionsDict.ForEach(kv => kv.Value.Remove(act));
         }
 
         public void RemoveEachTickAction(Func<bool> act)
         {
-            this.eachTickActions.Remove(act);
+            eachTickActions.Remove(act);
         }
 
         public bool IsExecutingThisTick(Action act)
         {
-            return this.tickActionsDict.GetOption(Find.TickManager.TicksGame).Select(l => l.Contains(act)).GetOrDefault(false);
+            return tickActionsDict.GetOption(Find.TickManager.TicksGame).Select(l => l.Contains(act)).GetOrDefault(false);
         }
 
         //      private ThingLister thingsList;
@@ -205,13 +205,13 @@ namespace ProjectRimFactory.AutoMachineTool
             this.map = map;
         }
 
-        private Map map;
+        private readonly Map map;
 
-        private Dictionary<Type, List<ThingDef>> typeDic = new Dictionary<Type, List<ThingDef>>();
+        private readonly Dictionary<Type, List<ThingDef>> typeDic = new();
 
         public IEnumerable<T> ForAssignableFrom<T>() where T : Thing
         {
-            if (!typeDic.TryGetValue(typeof(T), out List<ThingDef> defs))
+            if (!typeDic.TryGetValue(typeof(T), out var defs))
             {
                 defs = DefDatabase<ThingDef>.AllDefs.Where(d => typeof(T).IsAssignableFrom(d.thingClass)).ToList();
                 typeDic[typeof(T)] = defs;
@@ -219,7 +219,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 L("ThingLister type : " + typeof(T) + " / defs count : " + defs.Count);
 #endif
             }
-            return defs.SelectMany(d => this.map.listerThings.ThingsOfDef(d)).SelectMany(t => Option(t as T));
+            return defs.SelectMany(d => map.listerThings.ThingsOfDef(d)).SelectMany(t => Option(t as T));
         }
     }
 }

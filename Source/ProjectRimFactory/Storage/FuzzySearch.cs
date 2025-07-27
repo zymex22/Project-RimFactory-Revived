@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProjectRimFactory.Storage.UI
+namespace ProjectRimFactory.Storage
 {
     // Helper class made from 
     // https://github.com/kdjones/fuzzystring/blob/1828d564bf9e3b2cda0eb81970d53561573b5def/FuzzyString/LevenshteinDistance.cs#L21
@@ -17,20 +17,17 @@ namespace ProjectRimFactory.Storage.UI
 
         private static int HammingDistance(this string source, string target)
         {
-            int distance = 0;
+            var distance = 0;
 
-            if (source.Length == target.Length)
+            if (source.Length != target.Length) return 99999;
+            for (var i = 0; i < source.Length; i++)
             {
-                for (int i = 0; i < source.Length; i++)
+                if (!source[i].Equals(target[i]))
                 {
-                    if (!source[i].Equals(target[i]))
-                    {
-                        distance++;
-                    }
+                    distance++;
                 }
-                return distance;
             }
-            else { return 99999; }
+            return distance;
         }
 
         /// <summary>

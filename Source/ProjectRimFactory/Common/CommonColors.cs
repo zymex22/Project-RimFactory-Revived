@@ -2,50 +2,41 @@
 
 namespace ProjectRimFactory.Common
 {
-    class CommonColors
+    internal static class CommonColors
     {
 
-        static public Color GetCellPatternColor(CellPattern pat)
+        public static Color GetCellPatternColor(CellPattern pat)
         {
-            switch (pat)
+            return pat switch
             {
-                case CellPattern.BlurprintMin:
-                    return blueprintMin;
-                case CellPattern.BlurprintMax:
-                    return blueprintMax;
-                case CellPattern.Instance:
-                    return instance;
-                case CellPattern.OtherInstance:
-                    return otherInstance;
-                case CellPattern.OutputCell:
-                    return outputCell;
-                case CellPattern.OutputZone:
-                    return outputZone;
-                case CellPattern.InputCell:
-                    return inputCell;
-                case CellPattern.InputZone:
-                    return inputZone;
-            }
-            return Color.white;
+                CellPattern.BlueprintMin => BlueprintMin,
+                CellPattern.BlueprintMax => BlueprintMax,
+                CellPattern.Instance => Instance,
+                CellPattern.OtherInstance => OtherInstance,
+                CellPattern.OutputCell => OutputCell,
+                CellPattern.OutputZone => OutputZone,
+                CellPattern.InputCell => InputCell,
+                CellPattern.InputZone => InputZone,
+                _ => Color.white
+            };
         }
 
-        static public Color blueprintMin = Color.white;
-        static public Color blueprintMax = Color.gray.A(0.6f);
-        static public Color instance = Color.white;
-        static public Color otherInstance = Color.white.A(0.35f);
-        static public Color inputCell = Color.white;
-        static public Color inputZone = Color.white.A(0.5f);
-        static public Color outputCell = Color.yellow;
-        static public Color outputZone = Color.yellow.A(0.5f);
-        static public Color WorkbenchCell = Color.blue;
-        static public Color WorkbenchAlpha = Color.blue.A(0.5f);
-        static public Color SeedsInputZone = new Color(0.3f, 0.15f, 0f);//#4d2600
+        public static Color BlueprintMin = Color.white;
+        public static Color BlueprintMax = Color.gray.A(0.6f);
+        public static Color Instance = Color.white;
+        public static Color OtherInstance = Color.white.A(0.35f);
+        public static Color InputCell = Color.white;
+        private static readonly Color InputZone = Color.white.A(0.5f);
+        public static Color OutputCell = Color.yellow;
+        public static Color OutputZone = Color.yellow.A(0.5f);
+        public static Color WorkbenchAlpha = Color.blue.A(0.5f);
+        public static Color SeedsInputZone = new(0.3f, 0.15f, 0f);//#4d2600
 
 
         public enum CellPattern
         {
-            BlurprintMin,
-            BlurprintMax,
+            BlueprintMin,
+            BlueprintMax,
             Instance,
             OtherInstance,
             OutputCell,
@@ -53,7 +44,5 @@ namespace ProjectRimFactory.Common
             InputCell,
             InputZone,
         }
-
-
     }
 }

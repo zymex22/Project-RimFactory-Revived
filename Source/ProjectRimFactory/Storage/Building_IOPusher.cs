@@ -1,27 +1,26 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace ProjectRimFactory.Storage
 {
+    // ReSharper disable once UnusedType.Global
     public class Building_IOPusher : Building_StorageUnitIOBase
     {
-
-
-        public override IntVec3 WorkPosition => this.Position + this.Rotation.FacingCell;
+        protected override IntVec3 WorkPosition => Position + Rotation.FacingCell;
 
 
         public override StorageIOMode IOMode { get => StorageIOMode.Output; set => _ = value; }
 
-        public override bool IsAdvancedPort => false;
+        protected override bool IsAdvancedPort => false;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            base.mode = IOMode;
+            Mode = IOMode;
         }
     }
 
+    // ReSharper disable once UnusedType.Global
     class PlaceWorker_IOPusherHilight : PlaceWorker
     {
         public override void DrawGhost(ThingDef def, IntVec3 center, Rot4 rot, Color ghostCol, Thing thing = null)
@@ -31,7 +30,7 @@ namespace ProjectRimFactory.Storage
             IntVec3 outputCell = center + rot.FacingCell;
 
 
-            GenDraw.DrawFieldEdges(new List<IntVec3> { outputCell }, Common.CommonColors.outputCell);
+            GenDraw.DrawFieldEdges([outputCell], Common.CommonColors.OutputCell);
 
 
 

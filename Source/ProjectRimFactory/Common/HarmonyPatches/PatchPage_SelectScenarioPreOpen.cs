@@ -8,6 +8,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     [HarmonyPatch(typeof(Page_SelectScenario), "PreOpen")]
     class PatchPage_SelectScenarioPreOpen
     {
+        // ReSharper disable once UnusedMember.Local
         static bool Prefix()
         {
             if (ProjectRimFactory_ModSettings.PRF_LiteMode)

@@ -7,17 +7,14 @@ namespace ProjectRimFactory.Common
     {
         public override AcceptanceReport AllowsPlacing(BuildableDef checkingDef, IntVec3 loc, Rot4 rot, Map map, Thing thingToIgnore = null, Thing thing = null)
         {
-            IntVec3 inputCell;
-            inputCell = loc + rot.Opposite.FacingCell;
+             var inputCell = loc + rot.Opposite.FacingCell;
 
             if (inputCell.InBounds(map) && inputCell.GetZone(map) is IPlantToGrowSettable)
             {
                 return AcceptanceReport.WasAccepted;
             }
-            else
-            {
-                return new AcceptanceReport("PRF_PlaceWorker_GrowZonePuller".Translate());
-            }
+
+            return new AcceptanceReport("PRF_PlaceWorker_GrowZonePuller".Translate());
         }
 
     }

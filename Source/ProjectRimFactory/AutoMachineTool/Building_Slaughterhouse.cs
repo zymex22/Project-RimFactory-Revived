@@ -12,15 +12,15 @@ namespace ProjectRimFactory.AutoMachineTool
     public class Building_Slaughterhouse : Building_BaseRange<Pawn>, ISlaughterhouse
     {
 
-        public Dictionary<ThingDef, SlaughterSettings> Settings => this.slaughterSettings;
+        public Dictionary<ThingDef, SlaughterSettings> Settings => slaughterSettings;
 
-        private Dictionary<ThingDef, SlaughterSettings> slaughterSettings = new Dictionary<ThingDef, SlaughterSettings>();
+        private Dictionary<ThingDef, SlaughterSettings> slaughterSettings = new();
 
         public override bool ProductLimitationDisable => true;
 
         public override IntVec3 OutputCell()
         {
-            return compOutputAdjustable.CurrentCell;
+            return CompOutputAdjustable.CurrentCell;
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -29,7 +29,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
             if (!PowerWorkSetting.Props.allowManualRangeTypeChange)
             {
-                PowerWorkSetting.RangeTypeRot = this.Rotation;
+                PowerWorkSetting.RangeTypeRot = Rotation;
             }
 
         }
@@ -45,28 +45,29 @@ namespace ProjectRimFactory.AutoMachineTool
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Collections.Look<ThingDef, SlaughterSettings>(ref this.slaughterSettings, "slaughterSettings", LookMode.Def, LookMode.Deep);
+            Scribe_Collections.Look(ref slaughterSettings, "slaughterSettings", LookMode.Def, LookMode.Deep);
         }
 
         protected override void Reset()
         {
-            if (this.Working != null && this.Working.jobs != null && this.Working.jobs.curJob != null && this.Working.jobs.curJob.def == JobDefOf.Wait_MaintainPosture)
+            if (Working != null && Working.jobs != null && Working.jobs.curJob != null && Working.jobs.curJob.def == JobDefOf.Wait_MaintainPosture)
             {
-                this.Working.jobs.EndCurrentJob(JobCondition.InterruptForced, true);
+                Working.jobs.EndCurrentJob(JobCondition.InterruptForced, true);
             }
             base.Reset();
         }
-
+        
+        // TODO take another look at this. this seems to get all pawns for Slaughter from the entire map
         private HashSet<Pawn> ShouldSlaughterPawns()
         {
-            var mapPawns = this.Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
-            return this.slaughterSettings.Values.Where(s => s.doSlaughter).SelectMany(s =>
+            var mapPawns = Map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer);
+            return slaughterSettings.Values.Where(s => s.doSlaughter).SelectMany(s =>
             {
                 var pawns = mapPawns.Where(p => p.def == s.def);
                 Func<Pawn, bool> where = (p) =>
                 {
-                    bool result = true;
-                    if (result && !s.hasBonds) result = p.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Bond) == null;
+                    var result = true;
+                    if (!s.hasBonds) result = p.relations.GetFirstDirectRelationPawn(PawnRelationDefOf.Bond) == null;
                     if (result && !s.pregnancy) result = p.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.Pregnant, true) == null;
                     if (result && !s.trained) result = !p.training.HasLearned(TrainableDefOf.Obedience);
                     return result;
@@ -94,16 +95,16 @@ namespace ProjectRimFactory.AutoMachineTool
             workAmount = 400f;
             target = null;
             var tmp = GetTargetCells()
-                .SelectMany(c => c.GetThingList(this.Map))
+                .SelectMany(c => c.GetThingList(Map))
                 .Where(t => t.def.category == ThingCategory.Pawn)
                 .SelectMany(t => Option(t as Pawn))
-                .Where(p => !InWorking(p))
-                .Where(p => this.slaughterSettings.ContainsKey(p.def));
+                .Where(p => slaughterSettings.ContainsKey(p.def));
             if (!tmp.FirstOption().HasValue)
             {
                 return false;
             }
             var targets = ShouldSlaughterPawns();
+            
             target = tmp.Where(p => targets.Contains(p))
                 .FirstOption()
                 .GetOrDefault(null);
@@ -114,20 +115,20 @@ namespace ProjectRimFactory.AutoMachineTool
             return target != null;
         }
 
-        protected override bool FinishWorking(Pawn working, out List<Thing> products)
+        protected override bool FinishWorking(Pawn working, out List<Thing> outputProducts)
         {
             if (working.jobs.curJob.def == JobDefOf.Wait_MaintainPosture)
             {
                 working.jobs.EndCurrentJob(JobCondition.InterruptForced, true);
             }
-            int num = Mathf.Max(GenMath.RoundRandom(working.BodySize * 8f), 1);
-            for (int i = 0; i < num; i++)
+            var num = Mathf.Max(GenMath.RoundRandom(working.BodySize * 8f), 1);
+            for (var i = 0; i < num; i++)
             {
                 working.health.DropBloodFilth();
             }
             Map.designationManager.AddDesignation(new Designation(working, DesignationDefOf.Slaughter));
             working.Kill(new DamageInfo(DamageDefOf.ExecutionCut, 0));
-            products = new List<Thing>().Append(working.Corpse);
+            outputProducts = new List<Thing>().Append(working.Corpse);
             working.Corpse.DeSpawn();
             working.Corpse.SetForbidden(false);
             return true;

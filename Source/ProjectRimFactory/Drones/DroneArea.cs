@@ -13,6 +13,7 @@ public class DroneArea : Area
     /// <summary>
     /// Required for ExposeData
     /// </summary>
+    // ReSharper disable once UnusedMember.Global
     public DroneArea() {}
     public DroneArea(AreaManager areaManager, string label = null) : base(areaManager)
     {
@@ -23,7 +24,7 @@ public class DroneArea : Area
         }
         else
         {
-            int num = 1;
+            var num = 1;
             while (true)
             {
                 labelInt = "AreaDefaultLabel".Translate(num);
@@ -46,7 +47,7 @@ public class DroneArea : Area
 
     public override int ListPriority => 3000;
 
-    private bool mutable = false;
+    private bool mutable;
 
     public override bool Mutable => mutable;
 

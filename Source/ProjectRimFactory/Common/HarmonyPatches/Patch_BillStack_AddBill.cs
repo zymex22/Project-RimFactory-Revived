@@ -5,14 +5,17 @@ using System.Linq;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    //This Patch ensures that Assemblers using the Recipie DB only allow Recipies to be imported that are available to them
+    //This Patch ensures that Assemblers using the Recipe DB only allow Recipes to be imported that are available to them
     [HarmonyPatch(typeof(BillStack), "AddBill")]
     class Patch_BillStack_AddBill
     {
+        // ReSharper disable once ArrangeTypeMemberModifiers
+        // ReSharper disable once UnusedMember.Local
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once UnusedParameter.Local
         static bool Prefix(BillStack __instance, Bill bill, IBillGiver ___billGiver)
         {
-            Building_ProgrammableAssembler assembler = ___billGiver as Building_ProgrammableAssembler;
-            if (assembler != null)
+            if (___billGiver is Building_ProgrammableAssembler assembler)
             {
                 //Is an Assembler
                 return assembler.GetAllRecipes().Any(r => bill.recipe == r);

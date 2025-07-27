@@ -18,11 +18,13 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_UpdateResourceCounts_AssemblerQueue
     {
 
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once UnusedParameter.Local
+        // ReSharper disable once UnusedMember.Local
         static void Postfix(ResourceCounter __instance, Dictionary<ThingDef, int> ___countedAmounts, Map ___map)
         {
-            int i = 0;
-            PRFGameComponent gamecomp = Current.Game.GetComponent<PRFGameComponent>();
-            for (i = 0; i < gamecomp.AssemblerQueue.Count; i++)
+            var gamecomp = Current.Game.GetComponent<PRFGameComponent>();
+            for (var i = 0; i < gamecomp.AssemblerQueue.Count; i++)
             {
                 //Don't count Recorces of other maps
                 if (gamecomp.AssemblerQueue[i].Map != ___map) continue;

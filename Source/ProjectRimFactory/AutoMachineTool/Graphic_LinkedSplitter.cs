@@ -76,21 +76,21 @@ namespace ProjectRimFactory.AutoMachineTool
             };
             if (extraData.arrowTexPath1 != null)
             {
-                this.arrowOutput = MaterialPool.MatFrom(extraData.arrowTexPath1);
+                arrowOutput = MaterialPool.MatFrom(extraData.arrowTexPath1);
             }
             if (extraData.arrowTexPath2 != null)
             {
-                this.arrowInput = MaterialPool.MatFrom(extraData.arrowTexPath2);
+                arrowInput = MaterialPool.MatFrom(extraData.arrowTexPath2);
             }
         }
 
         //Note: if someone wanted to make this accessible via XML, go for it!
-        public Vector3 BuildingOffset => new Vector3(0, 0.3f, 0); // mostly picked by trial and error
+        public Vector3 BuildingOffset => new(0, 0.3f, 0); // mostly picked by trial and error
         // Make sure arrows show over building:
         public Vector3 ArrowOffset(Rot4 rot)
         {
-            var preOffset = this.arrowOffsetsByRot4[rot.AsInt];
-            var building = this.BuildingOffset;
+            var preOffset = arrowOffsetsByRot4[rot.AsInt];
+            var building = BuildingOffset;
             var offset = new Vector3(preOffset.x,
                      Mathf.Max(preOffset.y, building.y + 0.01f),
                      preOffset.z);
@@ -104,7 +104,7 @@ namespace ProjectRimFactory.AutoMachineTool
             //   if it's underground (unless something is selected, etc etc)
             if (thing is Building_BeltSplitter splitter)
             {
-                if (splitter.IsUnderground && !(layer is SectionLayer_UGConveyor))
+                if (splitter.IsUnderground && layer is not SectionLayer_UGConveyor)
                     return;
                 // We want to draw the open door only if something is using the S
                 //   facing wall, so either an output link to the S or an incoming link:
@@ -133,7 +133,7 @@ namespace ProjectRimFactory.AutoMachineTool
                         // offset = i.Position - splitter.Position
                         var r = Rot4.FromIntVec3(i.Position - splitter.Position);
                         Printer_Plane.PrintPlane(layer, thing.TrueCenter()
-                                     + ArrowOffset(r), this.drawSize, arrowInput,
+                                     + ArrowOffset(r), drawSize, arrowInput,
                                      r.Opposite.AsAngle);
                     }
                 }
@@ -142,7 +142,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 {
                     Printer_Plane.PrintPlane(layer, thing.TrueCenter() +
                              ArrowOffset(d),
-                             this.drawSize, arrowOutput, d.AsAngle);
+                             drawSize, arrowOutput, d.AsAngle);
                 }
             }
             else

@@ -1,5 +1,4 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
@@ -8,18 +7,18 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 {
     class Patch_ForbidUtility_IsForbidden
     {
+        // ReSharper disable once UnusedMember.Local
+        // ReSharper disable once UnusedParameter.Local
         static bool Prefix(Thing t, Pawn pawn, out bool __result)
         {
             __result = true;
-            if (t != null)
+
+            Map thingmap = t?.Map;
+            if (thingmap != null && t.def.category == ThingCategory.Item)
             {
-                Map thingmap = t.Map;
-                if (thingmap != null && t.def.category == ThingCategory.Item)
+                if (PatchStorageUtil.GetPRFMapComponent(thingmap)?.ShouldForbidPawnOutputAtPos(t.Position) ?? false)
                 {
-                    if (PatchStorageUtil.GetPRFMapComponent(thingmap)?.ShouldForbidPawnOutputAtPos(t.Position) ?? false)
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
             return true;
@@ -29,6 +28,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     // TODO Check if we still need that in 1.5
     class Patch_Building_Storage_Accepts
     {
+        // ReSharper disable once UnusedMember.Local
         static bool Prefix(Building_Storage __instance, Thing t, out bool __result)
         {
             __result = false;
@@ -49,6 +49,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     // 1.5 Stuff
     class Patch_StorageSettings_AllowedToAccept
     {
+        // ReSharper disable once UnusedMember.Local
         static bool Prefix(IStoreSettingsParent ___owner, Thing t, out bool __result)
         {
             __result = false;
@@ -73,6 +74,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     class Patch_FloatMenuMakerMap_GetOptions
     {
+        // ReSharper disable once UnusedMember.Local
+        // ReSharper disable once UnusedParameter.Local
         static bool Prefix(List<Pawn> selectedPawns, Vector3 clickPos, out List<FloatMenuOption> __result, out FloatMenuContext context)
         {
             context = null;
@@ -88,6 +91,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     class Patch_Thing_DrawGUIOverlay
     {
+        // ReSharper disable once UnusedMember.Local
         static bool Prefix(Thing __instance)
         {
             if (__instance.def.category == ThingCategory.Item)
@@ -103,6 +107,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     class Patch_ThingWithComps_DrawGUIOverlay
     {
+        // ReSharper disable once UnusedMember.Local
         static bool Prefix(Thing __instance)
         {
             if (__instance.def.category == ThingCategory.Item)
@@ -118,6 +123,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     class Patch_Thing_Print
     {
+        // ReSharper disable once UnusedParameter.Local
+        // ReSharper disable once UnusedMember.Local
         static bool Prefix(Thing __instance, SectionLayer layer)
         {
             if (__instance.def.category == ThingCategory.Item)
@@ -133,6 +140,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     class Patch_MinifiedThing_Print
     {
+        // ReSharper disable once UnusedParameter.Local
+        // ReSharper disable once UnusedMember.Local
         static bool Prefix(Thing __instance, SectionLayer layer)
         {
             if (__instance.def.category == ThingCategory.Item)
@@ -148,43 +157,30 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
     static class PatchStorageUtil
     {
-        private static Dictionary<Tuple<Map, IntVec3, Type>, object> cache = new Dictionary<Tuple<Map, IntVec3, Type>, object>();
-        private static int lastTick = 0;
-        private static Dictionary<Map, PRFMapComponent> mapComps = new Dictionary<Map, PRFMapComponent>();
+        static PatchStorageUtil()
+        {
+            MapComps = new Dictionary<Map, PRFMapComponent>();
+        }
+        
+        private static readonly Dictionary<Map, PRFMapComponent> MapComps;
         public static bool SkippAcceptsPatch = false;
         
         
+        // ReSharper disable once InconsistentNaming
         public static PRFMapComponent GetPRFMapComponent(Map map)
         {
-            PRFMapComponent outval = null;
-            if (map is not null && !mapComps.TryGetValue(map, out outval))
+            PRFMapComponent outVal = null;
+            if (map is not null && !MapComps.TryGetValue(map, out outVal))
             {
-                outval = map.GetComponent<PRFMapComponent>();
-                mapComps.Add(map, outval);
+                outVal = map.GetComponent<PRFMapComponent>();
+                MapComps.Add(map, outVal);
             }
-            return outval;
+            return outVal;
         }
 
         public static T Get<T>(Map map, IntVec3 pos) where T : class
         {
             return pos.IsValid ? pos.GetFirst<T>(map) : null;
-        }
-
-        public static T GetWithTickCache<T>(Map map, IntVec3 pos) where T : class
-        {
-            if (Find.TickManager.TicksGame != lastTick)
-            {
-                cache.Clear();
-                lastTick = Find.TickManager.TicksGame;
-            }
-            var key = new Tuple<Map, IntVec3, Type>(map, pos, typeof(T));
-            if (!cache.TryGetValue(key, out object val))
-            {
-                val = Get<T>(map, pos);
-                cache.Add(key, val);
-            }
-
-            return (T)val;
         }
     }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine;
 using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
+using Debug = ProjectRimFactory.Common.Debug;
 
 namespace ProjectRimFactory.AutoMachineTool
 {
@@ -22,7 +23,7 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public static string ToText(this DirectionPriority pri)
         {
-            return ("PRF.AutoMachineTool.Conveyor.DirectionPriority." + pri.ToString()).Translate();
+            return ("PRF.AutoMachineTool.Conveyor.DirectionPriority." + pri).Translate();
         }
     }
     /// <summary>
@@ -45,13 +46,13 @@ namespace ProjectRimFactory.AutoMachineTool
     {
         public Building_BeltConveyor()
         {
-            this.thingOwnerInt = new ThingOwner_Conveyor(this);
+            thingOwnerInt = new ThingOwner_Conveyor(this);
             // this is a horrible bastardization of AutoMachineTool and 
             //  RW's ThingOwner mechanism, made viable by C#'s list-by-
             //  reference mechanism.  It works great!
-            products = thingOwnerInt.InnerListForReading;
+            Products = thingOwnerInt.InnerListForReading;
             // Conveyors are dumb. They just dump their stuff onto the ground when they end!
-            this.obeysStorageFilters = false;
+            obeysStorageFilters = false;
         }
 
         protected ThingOwner_Conveyor thingOwnerInt;
@@ -78,29 +79,29 @@ namespace ProjectRimFactory.AutoMachineTool
         protected ModExtension_Conveyor modExtension_Conveyor = null;
 
         // Generally important methods:
-        protected virtual Rot4 OutputDirection => this.Rotation;
+        protected virtual Rot4 OutputDirection => Rotation;
         // AutoMachineTool: Building_Base
-        public override IntVec3 OutputCell() => this.Position + this.OutputDirection.FacingCell;
+        public override IntVec3 OutputCell() => Position + OutputDirection.FacingCell;
 
         /**************** IPRF_Building ***************/
         public override Thing GetThingBy(Func<Thing, bool> optionalValidator = null)
         {
             // TODO: underground?  Mod Setting?
-            if (IsUnderground || this.State == WorkingState.Ready) return null;
-            if (optionalValidator == null || optionalValidator(products[0]))
+            if (IsUnderground || State == WorkingState.Ready) return null;
+            if (optionalValidator == null || optionalValidator(Products[0]))
             {
-                this.State = WorkingState.Placing;
-                Thing t = thingOwnerInt.Take(products[0]);
+                State = WorkingState.Placing;
+                Thing t = thingOwnerInt.Take(Products[0]);
                 working = null;
-                this.ForceReady();
+                ForceReady();
                 return t;
             }
             return null;
         }
 
         /************* Conveyors IBeltConveyor ***********/
-        public bool IsStuck => this.stuck;
-        public bool IsUnderground => this.modExtension_Conveyor?.underground ?? false;
+        public bool IsStuck => stuck;
+        public bool IsUnderground => modExtension_Conveyor?.underground ?? false;
 
         public virtual bool IsEndOfLine
         {
@@ -110,9 +111,9 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (isEndOfLine && value == false)
                 {
                     isEndOfLine = false;
-                    if (this.working != null)
+                    if (working != null)
                     {
-                        this.ForceStartWork(working, 1);
+                        ForceStartWork(working, 1);
                     }
                     else
                     {
@@ -124,7 +125,7 @@ namespace ProjectRimFactory.AutoMachineTool
                     isEndOfLine = value;
                 }
                 // force redraw of graphic - links might have changed?
-                if (Spawned) this.Map.mapDrawer.MapMeshDirty(this.Position,
+                if (Spawned) Map.mapDrawer.MapMeshDirty(Position,
                           MapMeshFlagDefOf.Buildings | MapMeshFlagDefOf.Things);
             }
         }
@@ -135,7 +136,7 @@ namespace ProjectRimFactory.AutoMachineTool
         public virtual void Unlink(IBeltConveyorLinkable unlink) { }
         public virtual bool CanSendToLevel(ConveyorLevel level)
         {
-            if (this.IsUnderground)
+            if (IsUnderground)
             {
                 if (level == ConveyorLevel.Underground) return true;
             }
@@ -151,33 +152,33 @@ namespace ProjectRimFactory.AutoMachineTool
         public ThingOwner GetDirectlyHeldThings() => thingOwnerInt;
 
         /********** Pawn Interactions ********/
-        public bool HideRightClickMenus => !this.IsUnderground && this.State != WorkingState.Ready;
+        public bool HideRightClickMenus => !IsUnderground && State != WorkingState.Ready;
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (Gizmo gizmo in base.GetGizmos())
             {
                 yield return gizmo;
             }
-            if (!this.products.NullOrEmpty())
+
+            if (Products.NullOrEmpty()) yield break;
+            var dropThing = Products[0];
+            yield return new Command_Action
             {
-                Thing dropThing = products[0];
-                yield return new Command_Action
+                defaultLabel = "PRF_DropThing".Translate(dropThing.Label),
+                defaultDesc = "PRF_DropFromConveyorDesc".Translate(),
+                icon = (Texture2D)dropThing.Graphic.MatSingleFor(dropThing).mainTexture,
+                action = delegate ()
                 {
-                    defaultLabel = "PRF_DropThing".Translate(dropThing.Label),
-                    defaultDesc = "PRF_DropFromConveyorDesc".Translate(),
-                    icon = (Texture2D)dropThing.Graphic.MatSingleFor(dropThing).mainTexture,
-                    action = delegate ()
-                    {
-                        DropThing(dropThing);
-                        Find.Selector.ClearSelection();
-                        Find.Selector.Select(dropThing);
-                    },
-                };
-            }
+                    DropThing(dropThing);
+                    Find.Selector.ClearSelection();
+                    Find.Selector.Select(dropThing);
+                },
+            };
         }
-        public void DropThing(Thing t)
+
+        private void DropThing(Thing t)
         {
-            if (products == null || !products.Contains(t))
+            if (Products is null || !Products.Contains(t))
             {
                 //TODO: translate
                 Messages.Message("Error: Conveyor " + this + " does not have " + t.Label,
@@ -190,7 +191,7 @@ namespace ProjectRimFactory.AutoMachineTool
                       // no above-ground conveyors, impassable cells:
                       delegate (IntVec3 c)
                       {
-                          if (c.Impassable(this.Map)) return false;
+                          if (c.Impassable(Map)) return false;
                           Debug.Message(Debug.Flag.Conveyors, "  validating " + c);
                           foreach (var jl in c.GetThingList(Map).OfType<IBeltConveyorLinkable>())
                           {
@@ -206,8 +207,8 @@ namespace ProjectRimFactory.AutoMachineTool
             {
                 // successfully placed
                 working = null;
-                products.Remove(t);
-                this.ForceReady();
+                Products.Remove(t);
+                ForceReady();
             }
             else
             { // failed to place
@@ -218,8 +219,8 @@ namespace ProjectRimFactory.AutoMachineTool
         }
         public void Notify_LostItem(Thing item)
         {
-            if ((item.holdingOwner != this.thingOwnerInt) && !thingOwnerInt.Any
-                 && this.State != WorkingState.Ready // nothing happening
+            if ((item.holdingOwner != thingOwnerInt) && !thingOwnerInt.Any
+                 && State != WorkingState.Ready // nothing happening
                  && !usingThingOwnerInt)
             {
                 Debug.Warning(Debug.Flag.Conveyors, this + " was notified it has lost ----- " + item);
@@ -235,29 +236,11 @@ namespace ProjectRimFactory.AutoMachineTool
          * but through the ThingOwner object.
          * Old versions saved directly.
          */
-        protected override LookMode WorkingLookMode
-        {
-            get
-            {
-                if (Scribe.mode == LoadSaveMode.Saving) return LookMode.Reference;
-                if (version == 1) return LookMode.Deep;
-                return LookMode.Reference;
-            }
-        }
-        protected override LookMode ProductsLookMode
-        {
-            get
-            {
-                if (Scribe.mode == LoadSaveMode.Saving) return LookMode.Reference;
-                if (version == 1) return LookMode.Deep;
-                return LookMode.Reference;
-            }
-        }
-        static int version = 2;
+        protected override LookMode WorkingLookMode => LookMode.Reference;
+        protected override LookMode ProductsLookMode => LookMode.Reference;
+
         public override void ExposeData()
         {
-            if (Scribe.mode == LoadSaveMode.Saving) version = 2;
-            Scribe_Values.Look(ref version, "v", 1);
             base.ExposeData();
 
             Scribe_Values.Look(ref stuck, "isStuck", false);
@@ -266,38 +249,30 @@ namespace ProjectRimFactory.AutoMachineTool
             Scribe_Deep.Look(ref thingOwnerInt, "thingOwner", new object[] { this });
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                if (thingOwnerInt == null)
-                {
-                    thingOwnerInt = new ThingOwner_Conveyor(this);
-                }
-                if (version < 2)
-                {
-                    if (working != null) thingOwnerInt.TryAdd(working);
-                    foreach (var t in products) thingOwnerInt.TryAdd(t);
-                }
-                this.products = this.thingOwnerInt.InnerListForReading;
+                thingOwnerInt ??= new ThingOwner_Conveyor(this);
+                Products = thingOwnerInt.InnerListForReading;
             }
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            modExtension_Conveyor = this.def.GetModExtension<ModExtension_Conveyor>();
-            this.showProgressBar = false;
+            modExtension_Conveyor = def.GetModExtension<ModExtension_Conveyor>();
+            ShowProgressBar = false;
             foreach (var c in AllNearbyLinkables())
             {
                 c.Link(this);
-                this.Link(c);
+                Link(c);
             }
             // already set, but just in case:
-            this.products = thingOwnerInt.InnerListForReading;
-            PatchStorageUtil.GetPRFMapComponent(this.Map).NextBeltCache.Clear();
+            Products = thingOwnerInt.InnerListForReading;
+            PatchStorageUtil.GetPRFMapComponent(Map).NextBeltCache.Clear();
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             var targets = AllNearbyLinkables().ToList();
-            PatchStorageUtil.GetPRFMapComponent(this.Map).NextBeltCache.Clear();
+            PatchStorageUtil.GetPRFMapComponent(Map).NextBeltCache.Clear();
             base.DeSpawn(mode);
 
             targets.ForEach(x => x.Unlink(this));
@@ -306,47 +281,44 @@ namespace ProjectRimFactory.AutoMachineTool
         // What does this even mean for a building, anyway?
         public override bool CanStackWith(Thing other)
         {
-            return base.CanStackWith(other) && this.State == WorkingState.Ready;
+            return base.CanStackWith(other) && State == WorkingState.Ready;
         }
 
         /********* Display **********/
-        public bool HideItems => !this.IsUnderground && this.State != WorkingState.Ready;
+        public bool HideItems => !IsUnderground && State != WorkingState.Ready;
         /// <summary>
         /// Output directions used by the Linked Graphic for drawing little arrows
         /// </summary>
         public virtual IEnumerable<Rot4> ActiveOutputDirections
         {
-            get { yield return this.Rotation; }
+            get { yield return Rotation; }
         }
 
         public override void DrawGUIOverlay()
         {
             base.DrawGUIOverlay();
-            if (this.IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
+            if (IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
             {
                 // 地下コンベアの場合には表示しない.
                 return;
             }
-            Thing c = this.CarryingThing();
-            if (c != null && Find.CameraDriver.CurrentZoom == CameraZoomRange.Closest)
-            {
-                var p = CarryPosition();
-                Vector2 result = Find.Camera.WorldToScreenPoint(p + new Vector3(0, 0, -0.4f)) / Prefs.UIScale;
-                result.y = (float)UI.screenHeight - result.y;
-                GenMapUI.DrawThingLabel(result, c.stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
-            }
+            var carryingThing = CarryingThing();
+            if (carryingThing is null || Find.CameraDriver.CurrentZoom != CameraZoomRange.Closest) return;
+            Vector2 result = Find.Camera.WorldToScreenPoint(CarryPosition() + new Vector3(0, 0, -0.4f)) / Prefs.UIScale;
+            result.y = (float)UI.screenHeight - result.y;
+            GenMapUI.DrawThingLabel(result, carryingThing.stackCount.ToStringCached(), GenMapUI.DefaultThingLabelColor);
         }
 
         public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
         {
             if (phase != DrawPhase.Draw) return; //Crashes when drawing 2 things at the same time in some of the other phases
-            if (this.IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
+            if (IsUnderground && !OverlayDrawHandler_UGConveyor.ShouldDraw)
             {
                 // 地下コンベアの場合には表示しない.
                 return;
             }
             base.DynamicDrawPhaseAt(phase, drawLoc, flip);
-            if (this.State != WorkingState.Ready)
+            if (State != WorkingState.Ready)
             {
                 DrawCarried();
             }
@@ -362,54 +334,43 @@ namespace ProjectRimFactory.AutoMachineTool
         /// </summary>
         public virtual void DrawCarried()
         {
-            Thing t = CarryingThing();
-            if (t == null) return;
-            float scale = modExtension_Conveyor?.
-                          carriedItemScale ?? defaultCarriedItemScale;
+            var thing = CarryingThing();
+            if (thing is null) return;
+            var scale = modExtension_Conveyor?.carriedItemScale ?? defaultCarriedItemScale;
             // Took this line from MinifiedThing; don't know if it's needed:
             //   However, it's insuffient to use Graphic's GetCopy() :(
-            drawCarried_GraphicBase ??= t.Graphic.ExtractInnerGraphicFor(t);
+            drawCarried_GraphicBase ??= thing.Graphic.ExtractInnerGraphicFor(thing);
             // Graphic's GetCopy() fails on any Graphic_RandomRotated
             //   And on minified things.  And who knows what else?
             //   There is no easy way to get around this, but this seems
             //   to work the best so far:
-            GraphicData gd = t.def.graphicData;
-            if (gd == null) gd = drawCarried_GraphicBase.data;
+            var gd = thing.def.graphicData ?? drawCarried_GraphicBase.data;
             if (gd == null)
             {
-                t.DrawNowAt(CarryPosition());
+                thing.DrawNowAt(CarryPosition());
                 return;
             }
             drawCarried_GraphicDB ??= GraphicDatabase.Get(gd.graphicClass, gd.texPath, drawCarried_GraphicBase.Shader,
                       new Vector2(scale, scale), drawCarried_GraphicBase.color, drawCarried_GraphicBase.colorTwo);
-            drawCarried_GraphicDB.Draw(this.CarryPosition(), t.Rotation,t, 0f);
+            drawCarried_GraphicDB.Draw(CarryPosition(), thing.Rotation,thing, 0f);
         }
         protected Vector3 CarryPosition()
         {
+            var basePosition = this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0);
             if (IsEndOfLine)
             {
-                return (this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0));
+                return basePosition;
             }
-            if (stuck)
-            {
-                return (this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0) +
-                  this.OutputDirection.FacingCell.ToVector3()
-                    * (stuckDrawPercent + Mathf.Clamp01(WorkLeft)));
-            }
-            else
-            {
-                return (this.TrueCenter() + new Vector3(0, carriedItemDrawHeight, 0) +
-                  this.OutputDirection.FacingCell.ToVector3()
-                    * (1f - Mathf.Clamp01(WorkLeft)));
-            }
+            return (basePosition + OutputDirection.FacingCell.ToVector3() * (1f - Mathf.Clamp01(WorkLeft)));
+            
         }
         protected void CalculateCarriedItemDrawHeight()
         {
-            var nextBelt = this.OutputBelt();
+            var nextBelt = OutputBelt();
             if (nextBelt != null)
             {
                 var theirs = nextBelt.CarriedItemDrawHeight;
-                var ours = this.CarriedItemDrawHeight;
+                var ours = CarriedItemDrawHeight;
                 if (ours < theirs)
                 {  //comparing whose is higher - what, are
                     //                    conveyor belts schoolboys?
@@ -437,11 +398,11 @@ namespace ProjectRimFactory.AutoMachineTool
         public override bool AcceptsThing(Thing newThing, IPRF_Building giver = null)
         {
             Debug.Warning(Debug.Flag.Conveyors, "" + this + " was asked if it will accept " + newThing);
-            if (!this.IsActive()) return false;
+            if (!IsActive()) return false;
             // verify proper levels:
-            if (giver is AutoMachineTool.IBeltConveyorLinkable linkableGiver)
+            if (giver is IBeltConveyorLinkable linkableGiver)
             {
-                if (!this.CanLinkFrom(linkableGiver, false)) return false;
+                if (!CanLinkFrom(linkableGiver, false)) return false;
             }
             else 
             {
@@ -451,16 +412,16 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             Debug.Message(Debug.Flag.Conveyors, "  It can accept items from " +
                 (giver == null ? "that direction." : giver.ToString()));
-            if (this.State == WorkingState.Ready)
+            if (State == WorkingState.Ready)
             {
                 // Note: I don't think there is any benefit to 
                 //   an item being spanwed?  But what do I know?
                 if (newThing.Spawned) newThing.DeSpawn();
                 Debug.Message(Debug.Flag.Conveyors, "  And accepted " + newThing
                     + (newThing.Spawned ? "" : " (not spanwed)"));
-                newThing.Position = this.Position;
+                newThing.Position = Position;
                 stuck = false;
-                this.ForceStartWork(newThing, 1f);
+                ForceStartWork(newThing, 1f);
                 return true;
             }
             else
@@ -468,18 +429,18 @@ namespace ProjectRimFactory.AutoMachineTool
                 //Product must be empty for that error
 
                 Thing target;
-                if (this.State == WorkingState.Working)
+                if (State == WorkingState.Working)
                 {
-                    target = this.Working;
+                    target = Working;
                 }
                 else
                 {
-                    if(this.products.Count == 0)
+                    if(Products.Count == 0)
                     {
                         Log.Error("PRF Belt - products List is Empty");
-                        this.Reset();
+                        Reset();
                     }
-                    target = this.products[0];
+                    target = Products[0];
                 }
 
                 Debug.Message(Debug.Flag.Conveyors, "  but busy with " + target +
@@ -491,32 +452,33 @@ namespace ProjectRimFactory.AutoMachineTool
         public bool CanAcceptNow(Thing thing)
         {
             Debug.Message(Debug.Flag.Conveyors, "  " + this + " was asked if it can accept " + thing);
-            if (!this.IsActive())
+            if (!IsActive())
             {
                 Debug.Message(Debug.Flag.Conveyors, "      but it's not active and can't");
                 return false;
             }
-            switch (this.State)
+            switch (State)
             {
                 case WorkingState.Ready:
                     Debug.Message(Debug.Flag.Conveyors, "    Ready state: yes");
                     return true;
                 case WorkingState.Working:
-                    return ThisCanAcceptThat(this.Working, thing);
+                    return ThisCanAcceptThat(Working, thing);
                 case WorkingState.Placing:
-                    return this.products.Count == 0 || ThisCanAcceptThat(this.products[0], thing);
+                    return Products.Count == 0 || ThisCanAcceptThat(Products[0], thing);
                 default:
                     return false;
             }
         }
-        protected bool ThisCanAcceptThat(Thing t1, Thing t2)
+
+        private static bool ThisCanAcceptThat(Thing thing1, Thing thing2)
         {
-            if(t1 == null || t2 == null)
+            if(thing1 is null || thing2 is null)
             {
-                Log.Error($"PRF ThisCanAcceptThat On thing is Null! t1: {t1} t2: {t2}");
+                Log.Error($"PRF ThisCanAcceptThat On thing is Null! t1: {thing1} t2: {thing2}");
                 return false;
             }
-            return t1.CanStackWith(t2) && t1.stackCount < t1.def.stackLimit;
+            return thing1.CanStackWith(thing2) && thing1.stackCount < thing1.def.stackLimit;
         }
 
         // We (LWM) are mean and don't allow conveyors to change the "Obey Storage Filters"
@@ -528,16 +490,16 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             CalculateCarriedItemDrawHeight();
             workAmount = 1f;
-            if (this.IsUnderground)
+            if (IsUnderground)
             {
                 target = null;
                 return false;
             }
-            target = this.Position.GetThingList(this.Map).FirstOrDefault(t => t.def.EverHaulable);
+            target = Position.GetThingList(Map).FirstOrDefault(t => t.def.EverHaulable);
             if (target != null)
             {
                 if (target.Spawned) target.DeSpawn();
-                target.Position = this.Position;
+                target.Position = Position;
             }
             if (target != null) thingOwnerInt.TryAdd(target);
             return target != null;
@@ -556,7 +518,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.StartWork();
             MapManager.RemoveAfterAction(CheckWork); // StartWork adds this, but...
-            this.CheckWork();  // ...make sure we're not stuck NOW
+            CheckWork();  // ...make sure we're not stuck NOW
         }
 
         protected override void Reset()
@@ -564,12 +526,12 @@ namespace ProjectRimFactory.AutoMachineTool
             //TODO: Underground belts should not spawn items above ground on reset...?
             if (thingOwnerInt.Any)
             {// remove them from care of thingOwner:
-                this.products = new List<Thing>(thingOwnerInt.InnerListForReading);
+                Products = [..thingOwnerInt.InnerListForReading];
                 thingOwnerInt.Clear();
             }
             usingThingOwnerInt = false;
             base.Reset();
-            this.products = thingOwnerInt.InnerListForReading;
+            Products = thingOwnerInt.InnerListForReading;
             // Any of thse could come up in weird scenarios: remove them all?
             MapManager.RemoveAfterAction(CheckWork);
             MapManager.RemoveAfterAction(Placing);
@@ -583,7 +545,7 @@ namespace ProjectRimFactory.AutoMachineTool
         /// is not overridden or messed up.
         /// To override this, override ConveyorPlaceItem() below
         /// </summary>
-        protected sealed override bool PlaceProduct(ref List<Thing> products)
+        protected sealed override bool PlaceProduct(ref List<Thing> things)
         {
             drawCarried_GraphicBase = null;
             drawCarried_GraphicDB = null;
@@ -595,7 +557,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             // Has something else taken the Thing away from us? (b/c they are spawned? or something else?)
             // (I don't think anything is actually using this)
-            if (this.WorkInterruption(products[0]))
+            if (WorkInterruption(things[0]))
             {
                 Debug.Message(Debug.Flag.Conveyors, "  but something has already moved the item.");
                 return true;
@@ -604,7 +566,7 @@ namespace ProjectRimFactory.AutoMachineTool
             //   it might fix itself.
             if (IsEndOfLine) return false;
             usingThingOwnerInt = true;
-            Thing thing = thingOwnerInt.Take(thingOwnerInt[0]);
+            var thing = thingOwnerInt.Take(thingOwnerInt[0]);
             usingThingOwnerInt = false;
             if (thing == null) return true; // trivially true?
             Debug.Warning(Debug.Flag.Conveyors, "Conveyor " + this +
@@ -634,13 +596,13 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             // Try to send to another conveyor first:
             // コンベアある場合、そっちに流す.
-            var outputBelt = this.OutputBelt();
+            var outputBelt = OutputBelt();
             if (outputBelt != null)
             {
-                if ((outputBelt as IPRF_Building).AcceptsThing(thing, this))
+                if (outputBelt.AcceptsThing(thing, this))
                 {
                     NotifyAroundSender();
-                    this.stuck = false;
+                    stuck = false;
                     Debug.Message(Debug.Flag.Conveyors, " and successfully passed it to " + outputBelt);
                     return true;
                 }
@@ -650,11 +612,10 @@ namespace ProjectRimFactory.AutoMachineTool
             else // if no conveyor, place if can
             {
                 Debug.Message(Debug.Flag.Conveyors, "  trying to place at end of conveyor:");
-                if (this.CanSendToLevel(ConveyorLevel.Ground) && this.PRFTryPlaceThing(thing,
-                      this.OutputCell(), this.Map))
+                if (CanSendToLevel(ConveyorLevel.Ground) && this.PRFTryPlaceThing(thing, OutputCell(), Map))
                 {
                     NotifyAroundSender();
-                    this.stuck = false;
+                    stuck = false;
                     Debug.Message(Debug.Flag.Conveyors, "Successfully placed!");
                     return true;
                 }
@@ -664,14 +625,14 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected Thing CarryingThing()
         {
-            if (this.State == WorkingState.Working)
+            if (State == WorkingState.Working)
             {
-                return this.Working;
+                return Working;
             }
-            else if (this.State == WorkingState.Placing)
+            else if (State == WorkingState.Placing)
             {
-                if (this.products == null || products.Count == 0) return null;
-                return products[0];
+                if (Products == null || Products.Count == 0) return null;
+                return Products[0];
             }
             return null;
         }
@@ -683,25 +644,22 @@ namespace ProjectRimFactory.AutoMachineTool
         /// <returns>The belt, or null if none found</returns>
         protected virtual IBeltConveyorLinkable OutputBelt()
         {
-            var cache = PatchStorageUtil.GetPRFMapComponent(this.Map).NextBeltCache;
-            IBeltConveyorLinkable nextBelt = null; ;
-            if (!cache.TryGetValue(this,out nextBelt))
-            {
-                nextBelt = this.OutputCell().GetThingList(this.Map)
+            var cache = PatchStorageUtil.GetPRFMapComponent(Map).NextBeltCache;
+            if (cache.TryGetValue(this, out var nextBelt)) return nextBelt;
+            nextBelt = OutputCell()
+                .GetThingList(Map)
                 .OfType<IBeltConveyorLinkable>()
-                .Where(b => this.CanLinkTo(b, false))
-                .Where(b => b.CanLinkFrom(this))
-                .FirstOrDefault();
-                cache.Add(this, nextBelt);
-            }
+                .Where(b => CanLinkTo(b, false))
+                .FirstOrDefault(b => b.CanLinkFrom(this));
+            cache.Add(this, nextBelt);
             return nextBelt;
         }
 
         protected IEnumerable<IBeltConveyorLinkable> AllNearbyLinkables()
         {
-            return Enumerable.Range(0, 4).Select(i => this.Position + new Rot4(i).FacingCell)
-                .Where(c => c.InBounds(this.Map))
-                .SelectMany(c => c.GetThingList(this.Map))
+            return Enumerable.Range(0, 4).Select(i => Position + new Rot4(i).FacingCell)
+                .Where(c => c.InBounds(Map))
+                .SelectMany(c => c.GetThingList(Map))
                 .OfType<IBeltConveyorLinkable>();
         }
 
@@ -715,9 +673,9 @@ namespace ProjectRimFactory.AutoMachineTool
         //         but might also require AcceptsOutputFrom()...
         private void NotifyAroundSender()
         {
-            new Rot4[] { this.Rotation.Opposite, this.Rotation.Opposite.RotateAsNew(RotationDirection.Clockwise), this.Rotation.Opposite.RotateAsNew(RotationDirection.Counterclockwise) }
-                .Select(r => this.Position + r.FacingCell)
-                .SelectMany(p => p.GetThingList(this.Map).ToList())
+            new Rot4[] { Rotation.Opposite, Rotation.Opposite.RotateAsNew(RotationDirection.Clockwise), Rotation.Opposite.RotateAsNew(RotationDirection.Counterclockwise) }
+                .Select(r => Position + r.FacingCell)
+                .SelectMany(p => p.GetThingList(Map).ToList())
                 .Where(t => t.def.category == ThingCategory.Building)
                 .SelectMany(t => Option(t as IBeltConveyorSender))
                 .ForEach(s => s.NortifyReceivable());
@@ -725,7 +683,7 @@ namespace ProjectRimFactory.AutoMachineTool
 
         protected override bool WorkInterruption(Thing working)
         {
-            if (working == null)
+            if (working is null)
             {
                 Log.Error("PRF - WorkInterruption Null Thing");
                 return true;
@@ -733,16 +691,16 @@ namespace ProjectRimFactory.AutoMachineTool
             return working.holdingOwner != thingOwnerInt;
         }
 
-        protected override bool FinishWorking(Thing working, out List<Thing> products)
+        protected override bool FinishWorking(Thing working, out List<Thing> outputProducts)
         {
-            products = this.products;
-            return products.Count > 0;
+            outputProducts = Products;
+            return outputProducts.Count > 0;
         }
 
         protected override void CheckWork()
         {
-            if (!this.Spawned) return; // maybe a callback hits this after it's destroyed?
-            if (this.thingOwnerInt.Count == 0 || thingOwnerInt[0] == null || this.IsEndOfLine)
+            if (!Spawned) return; // maybe a callback hits this after it's destroyed?
+            if (thingOwnerInt.Count == 0 || thingOwnerInt[0] == null || IsEndOfLine)
             {
                 Debug.Message(Debug.Flag.Conveyors, "      CheckWork: " + this + " empty or EndOfLine");
                 return;
@@ -759,9 +717,9 @@ namespace ProjectRimFactory.AutoMachineTool
             else
             {
                 Debug.Message(Debug.Flag.Conveyors, "      CheckWork: " + this + " checking if all is well");
-                this.CalculateCarriedItemDrawHeight();
+                CalculateCarriedItemDrawHeight();
                 // if work done is below stuckDrawPercent, let it continue forward
-                if (WorkLeft < 1 - this.stuckDrawPercent)
+                if (WorkLeft < 1 - stuckDrawPercent)
                 {
                     if (!CanOutput(working))
                     {
@@ -772,30 +730,30 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             base.CheckWork();
         }
-        protected virtual bool CanOutput(Thing t)
+        protected virtual bool CanOutput(Thing thing)
         {
-            if (t == null)
+            if (thing is null)
             {
                 return true; // Sure? Nothing to place, so can place it trivially.
             }
-            var belt = this.OutputBelt();
+            var belt = OutputBelt();
             if (belt != null)
             {
                 Debug.Message(Debug.Flag.Conveyors,
-                    "  CanOutput: Testing can " + " accept " + t);
-                return belt.CanAcceptNow(t);
+                    "  CanOutput: Testing can " + " accept " + thing);
+                return belt.CanAcceptNow(thing);
             }
-            Debug.Message(Debug.Flag.Conveyors, "    No belts can take " + t);
+            Debug.Message(Debug.Flag.Conveyors, "    No belts can take " + thing);
             if (!CanSendToLevel(ConveyorLevel.Ground)) return false;
             if (OutputToEntireStockpile)
             {
-                SlotGroup slotGroup = OutputCell().GetSlotGroup(Map);
+                var slotGroup = OutputCell().GetSlotGroup(Map);
                 if (slotGroup != null)
                 {
-                    return PlaceThingUtility.CanPlaceThingInSlotGroup(t, slotGroup, Map);
+                    return PlaceThingUtility.CanPlaceThingInSlotGroup(thing, slotGroup, Map);
                 }
             }
-            return PlaceThingUtility.CallNoStorageBlockersIn(OutputCell(), Map, t);
+            return PlaceThingUtility.CallNoStorageBlockersIn(OutputCell(), Map, thing);
         }
 
         /// <summary>
@@ -807,16 +765,13 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             // a simple check to see if we should be unstuck:
             if (!stuck) return true; // ??  Only call if stuck, please
-            if (this.CanOutput(t))
-            {
-                ChangeStuckStatus(t, false);
-                return true;
-            }
-            return false;
+            if (!CanOutput(t)) return false;
+            ChangeStuckStatus(t, false);
+            return true;
         }
         protected void ChangeStuckStatus(Thing t, bool? willBeStuck = null)
         {
-            if (willBeStuck == null) willBeStuck = !stuck;
+            willBeStuck ??= !stuck;
             usingThingOwnerInt = true;
             thingOwnerInt.RemoveAll(thing => true);
             usingThingOwnerInt = false;
@@ -824,14 +779,14 @@ namespace ProjectRimFactory.AutoMachineTool
             if ((bool)willBeStuck)
             {
                 Debug.Message(Debug.Flag.Conveyors, this + " is now stuck with " + t);
-                this.ForceStartWork(t, 1 - stuckDrawPercent
+                ForceStartWork(t, 1 - stuckDrawPercent
                         - Mathf.Clamp01(WorkLeft));
                 stuck = true;
             }
             else
             {
                 Debug.Message(Debug.Flag.Conveyors, this + " is no longer stuck with " + t);
-                this.ForceStartWork(t, 1 - stuckDrawPercent
+                ForceStartWork(t, 1 - stuckDrawPercent
                           - Mathf.Clamp(WorkLeft, 0, 1 - stuckDrawPercent));
                 stuck = false;
             }
@@ -839,12 +794,12 @@ namespace ProjectRimFactory.AutoMachineTool
         public virtual bool CanLinkTo(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition = true)
         {
             // First test: level (e.g., Ground vs Underground):
-            bool flag = false;
+            var flag = false;
             // Loop through enum:
             //   (Seriously, C#, this is stupid syntax)
             foreach (var level in (ConveyorLevel[])Enum.GetValues(typeof(ConveyorLevel)))
             {
-                if (this.CanSendToLevel(level) && otherBeltLinkable.CanReceiveFromLevel(level))
+                if (CanSendToLevel(level) && otherBeltLinkable.CanReceiveFromLevel(level))
                 {
                     flag = true;
                     break;
@@ -853,17 +808,17 @@ namespace ProjectRimFactory.AutoMachineTool
             if (!flag) return false;
             if (!checkPosition) return true;
             // Conveyor Belts can link forward:
-            return (this.OutputCell() == otherBeltLinkable.Position);
+            return (OutputCell() == otherBeltLinkable.Position);
         }
         public virtual bool CanLinkFrom(IBeltConveyorLinkable otherBeltLinkable, bool checkPosition = true)
         {
             // First test: level (e.g., Ground vs Underground):
-            bool flag = false;
+            var flag = false;
             // Loop through enum:
             //   (Seriously, C#, this is stupid syntax)
             foreach (var level in (ConveyorLevel[])Enum.GetValues(typeof(ConveyorLevel)))
             {
-                if (this.CanReceiveFromLevel(level) && otherBeltLinkable.CanSendToLevel(level))
+                if (CanReceiveFromLevel(level) && otherBeltLinkable.CanSendToLevel(level))
                 {
                     flag = true;
                     break;
@@ -875,8 +830,8 @@ namespace ProjectRimFactory.AutoMachineTool
             // But it does assume you are right next to the belt?
             // And it doesn't like it if something right in front of it tries
             //   to give it something - what is it going to do, give it back?
-            if (this.OutputCell() == otherBeltLinkable.Position) return false;
-            return this.Position.AdjacentToCardinal(otherBeltLinkable.Position);
+            if (OutputCell() == otherBeltLinkable.Position) return false;
+            return Position.AdjacentToCardinal(otherBeltLinkable.Position);
         }
         public virtual bool HasLinkWith(IBeltConveyorLinkable otherBelt)
         {
@@ -887,13 +842,14 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public Thing Carrying()
         {
-            if (this.State == WorkingState.Working)
+            if (State == WorkingState.Working)
             {
-                return this.Working;
+                return Working;
             }
-            else if (this.State == WorkingState.Placing)
+
+            if (State == WorkingState.Placing)
             {
-                return this.products.FirstOption().GetOrDefault(null);
+                return Products.FirstOption().GetOrDefault(null);
             }
             return null;
         }
@@ -901,7 +857,7 @@ namespace ProjectRimFactory.AutoMachineTool
         // Static Constructor: rgister with Settings ITab:
         static Building_BeltConveyor()
         {
-            ITab_ProductionSettings.RegisterSetting(ShowEndOfLineSetting, HeightForEOLSetting, DoEOLSettingsWindowContents);
+            ITab_ProductionSettings.RegisterSetting(ShowEndOfLineSetting, HeightForEolSetting, DoEOLSettingsWindowContents);
         }
         // End of Line setting: is the conveyor at the end of its line
         //   If it is, it should hold onto whatever it has unless something takes it?
@@ -909,19 +865,18 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             return (t is IBeltConveyorLinkable);
         }
-        static float HeightForEOLSetting(Thing t)
+
+        private static float HeightForEolSetting(Thing t)
         {
             return 23f;
         }
         static void DoEOLSettingsWindowContents(Thing t, Listing_Standard list)
         {
-            if (t is IBeltConveyorLinkable belt)
-            {
-                bool tmp = belt.IsEndOfLine;
-                list.CheckboxLabeled("PRF.Conveyor.IsEndOfLineSetting".Translate(), ref tmp,
-                                     "PRF.Conveyor.IsEndOfLineSetting.Desc".Translate());
-                if (tmp != belt.IsEndOfLine) belt.IsEndOfLine = tmp;
-            }
+            if (t is not IBeltConveyorLinkable belt) return;
+            bool tmp = belt.IsEndOfLine;
+            list.CheckboxLabeled("PRF.Conveyor.IsEndOfLineSetting".Translate(), ref tmp,
+                "PRF.Conveyor.IsEndOfLineSetting.Desc".Translate());
+            if (tmp != belt.IsEndOfLine) belt.IsEndOfLine = tmp;
         }
 
 

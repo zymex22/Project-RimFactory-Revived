@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
+using Debug = ProjectRimFactory.Common.Debug;
+
 namespace ProjectRimFactory.AutoMachineTool
 {
     /// <summary>
@@ -17,11 +19,11 @@ namespace ProjectRimFactory.AutoMachineTool
         public Graphic_LinkedConveyorWall() : base()
         {
         }
-        bool showW;
-        bool showS;
-        bool showE;
-        GraphicData transitionGData; // Graphic_Multi, one assumes.
-        List<ThingDef> sameLinkDefs;
+        private bool showW;
+        private bool showS;
+        private bool showE;
+        private GraphicData transitionGData; // Graphic_Multi, one assumes.
+        private List<ThingDef> sameLinkDefs;
         public override void ExtraInit(GraphicRequest req, GraphicExtraData extraData)
         {
             Debug.Warning(Debug.Flag.ConveyorGraphics, "Graphics ExtraInit for Graphic_LinkedConveyorWall: (" + req.graphicData.texPath + ")");
@@ -35,8 +37,10 @@ namespace ProjectRimFactory.AutoMachineTool
                 // If this throws errors, that's okay - it's a config error that needs to be fixed:
                 // NOTE: this can be changed later if the graphics needs to allow multilpe defs,
                 //   not all of which may be actually listed...
-                sameLinkDefs = new List<ThingDef>(extraData.specialLinkDefs.Select(
-                    s => DefDatabase<ThingDef>.GetNamed(s)));
+                sameLinkDefs =
+                [
+                    ..extraData.specialLinkDefs.Select(s => DefDatabase<ThingDef>.GetNamed(s))
+                ];
                 Debug.Message(Debug.Flag.ConveyorGraphics, "  added sameLinkDefs: " +
                     (sameLinkDefs == null ? "null" : String.Join(", ", sameLinkDefs)));
             }

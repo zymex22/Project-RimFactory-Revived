@@ -19,26 +19,27 @@ namespace ProjectRimFactory.Common.HarmonyPatches;
 [HarmonyPatch]
 public class Patch_Thing_SmeltProducts
 {
-    private static readonly Type hiddenClass = AccessTools.FirstInner(
+    private static readonly Type HiddenClass = AccessTools.FirstInner(
         typeof(Thing),
         type => type.HasAttribute<CompilerGeneratedAttribute>() && type.Name.Contains(nameof(Thing.SmeltProducts)));
    
     public static MethodBase TargetMethod()
     {
         // Decompiler showed the hidden inner class is "<SmeltProducts>d__223"
-        if (hiddenClass == null)
+        if (HiddenClass == null)
         {
             Log.Error("Couldn't find iterator class -- This should never be reached.");
             return null;
         }
         // and we want the iterator's MoveNext:
-        MethodBase iteratorMethod = HarmonyLib.AccessTools.Method(hiddenClass, "MoveNext");
+        MethodBase iteratorMethod = AccessTools.Method(HiddenClass, "MoveNext");
         if (iteratorMethod == null) Log.Error("Couldn't find MoveNext");
         return iteratorMethod;
     }
 
-    private static bool smeltableFound = false;
+    private static bool smeltableFound;
     
+    // ReSharper disable once UnusedMember.Local
     static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         foreach (var instruction in instructions)
@@ -52,15 +53,12 @@ public class Patch_Thing_SmeltProducts
                     // now replace it with a call to Patch_Thing_SmeltProducts.Smeltable
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
                         typeof(Patch_Thing_SmeltProducts),
-                        nameof(Patch_Thing_SmeltProducts.Smeltable)));
+                        nameof(Smeltable)));
                     continue;
                     
                 }
-                else
-                {
-                    yield return instruction;
-                    continue;
-                }
+                yield return instruction;
+                continue;
             }
             
             // Don't touch the rest

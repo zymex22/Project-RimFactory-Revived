@@ -9,24 +9,25 @@ using Verse;
 namespace ProjectRimFactory.Storage
 {
     [StaticConstructorOnStartup]
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Building_MassStorageUnitPowered : Building_MassStorageUnit
     {
-        private static Texture2D StoragePawnAccessSwitchIcon = ContentFinder<Texture2D>.Get("PRFUi/dsu", true);
+        private static readonly Texture2D StoragePawnAccessSwitchIcon = ContentFinder<Texture2D>.Get("PRFUi/dsu");
 
         //Initialized on spawn
-        private CompPowerTrader compPowerTrader = null;
+        private CompPowerTrader compPowerTrader;
 
         public override bool Powered => compPowerTrader?.PowerOn ?? false;
 
-        public override int MaxNumberItemsInternal => (ModExtension_Crate?.limit ?? int.MaxValue);
+        protected override int MaxNumberItemsInternal => (ModExtensionCrate?.limit ?? int.MaxValue);
 
-        public override bool CanStoreMoreItems => (Powered) && this.Spawned &&
-            (ModExtension_Crate == null || StoredItemsCount < MaxNumberItemsInternal);
-        public override bool CanReceiveIO => base.CanReceiveIO && Powered && this.Spawned;
+        protected override bool CanStoreMoreItems => (Powered) && Spawned &&
+                                                     (ModExtensionCrate == null || StoredItemsCount < MaxNumberItemsInternal);
+        public override bool CanReceiveIO => base.CanReceiveIO && Powered && Spawned;
 
-        public override bool ForbidPawnInput => this.ForbidPawnAccess || !this.pawnAccess || !this.CanStoreMoreItems;
+        public override bool ForbidPawnInput => ForbidPawnAccess || !pawnAccess || !CanStoreMoreItems;
 
-        public override bool ForbidPawnOutput => this.ForbidPawnAccess || !this.pawnAccess;
+        public override bool ForbidPawnOutput => ForbidPawnAccess || !pawnAccess;
 
         public float ExtraPowerDraw => StoredItems.Count * 10f;
 
@@ -42,7 +43,8 @@ namespace ProjectRimFactory.Storage
             base.Notify_LostThing(newItem);
             UpdatePowerConsumption();
         }
-        public void UpdatePowerConsumption()
+
+        private void UpdatePowerConsumption()
         {
             compPowerTrader ??= GetComp<CompPowerTrader>();
             FridgePowerPatchUtil.UpdatePowerDraw(this, compPowerTrader);
@@ -63,8 +65,6 @@ namespace ProjectRimFactory.Storage
                 case "PowerTurnedOn":
                     RefreshStorage();
                     break;
-                default:
-                    break;
             }
         }
 
@@ -82,7 +82,7 @@ namespace ProjectRimFactory.Storage
         {
             base.PostMapInit();
             compPowerTrader ??= GetComp<CompPowerTrader>();
-            this.RefreshStorage();
+            RefreshStorage();
         }
 
         public override IEnumerable<Gizmo> GetGizmos()
@@ -95,18 +95,18 @@ namespace ProjectRimFactory.Storage
                     defaultLabel = "DEBUG: Debug actions",
                     action = () =>
                     {
-                        Find.WindowStack.Add(new FloatMenu(new List<FloatMenuOption>(DebugActions())));
+                        Find.WindowStack.Add(new FloatMenu([..DebugActions()]));
                     }
                 };
             }
 
-            if (!this.ForbidPawnAccess)
+            if (!ForbidPawnAccess)
             {
                 yield return new Command_Toggle()
                 {
                     defaultLabel = "PRFPawnAccessLabel".Translate(),
-                    isActive = () => this.pawnAccess,
-                    toggleAction = () => this.pawnAccess = !this.pawnAccess,
+                    isActive = () => pawnAccess,
+                    toggleAction = () => pawnAccess = !pawnAccess,
                     defaultDesc = "PRFPawnAccessDesc".Translate(),
                     icon = StoragePawnAccessSwitchIcon
                 };
@@ -117,9 +117,9 @@ namespace ProjectRimFactory.Storage
         {
             if (mode == DestroyMode.Deconstruct)
             {
-                if (def.GetModExtension<DefModExtension_Crate>()?.destroyContainsItems ?? false)
+                if (ModExtensionCrate?.destroyContainsItems ?? false)
                 {
-                    this.StoredItems.Where(t => !t.Destroyed).ToList().ForEach(x => x.Destroy());
+                    StoredItems.Where(t => !t.Destroyed).ToList().ForEach(x => x.Destroy());
                 }
             }
             base.DeSpawn(mode);
@@ -131,28 +131,24 @@ namespace ProjectRimFactory.Storage
             yield return new FloatMenuOption("Log item count", () => Log.Message(StoredItemsCount.ToString()));
         }
 
-        public override string GetUIThingLabel()
+        protected override string GetUIThingLabel()
         {
             if ((def.GetModExtension<DefModExtension_Crate>()?.limit).HasValue)
             {
-                return "PRFCrateUIThingLabel".Translate(StoredItemsCount, def.GetModExtension<DefModExtension_Crate>().limit);
+                return "PRFCrateUIThingLabel".Translate(StoredItemsCount, ModExtensionCrate.limit);
             }
-            else
-            {
-                return base.GetUIThingLabel();
-            }
+
+            return base.GetUIThingLabel();
         }
 
         public override string GetITabString(int itemsSelected)
         {
-            if ((def.GetModExtension<DefModExtension_Crate>()?.limit).HasValue)
+            if ((ModExtensionCrate?.limit).HasValue)
             {
-                return "PRFItemsTabLabel_Crate".Translate(StoredItemsCount, def.GetModExtension<DefModExtension_Crate>().limit, itemsSelected);
+                return "PRFItemsTabLabel_Crate".Translate(StoredItemsCount, ModExtensionCrate!.limit, itemsSelected);
             }
-            else
-            {
-                return base.GetITabString(itemsSelected);
-            }
+
+            return base.GetITabString(itemsSelected);
         }
     }
 }
