@@ -19,10 +19,11 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     class Patch_Building_Storage_GetGizmos
     {
         //The target method is found using the custom logic defined here
+        // ReSharper disable once UnusedMember.Local
         static MethodBase TargetMethod()
         {
-            var predicateClass = typeof(Building_Storage).GetNestedTypes(HarmonyLib.AccessTools.all)
-               .FirstOrDefault(t => t.FullName.Contains("d__54"));
+            var predicateClass = typeof(Building_Storage).GetNestedTypes(AccessTools.all)
+               .FirstOrDefault(t => t!.FullName!.Contains("d__54"));
             if (predicateClass == null)
             {
                 Log.Error("PRF Harmony Error - predicateClass == null for Patch_Building_Storage_GetGizmos.TargetMethod()");
@@ -41,7 +42,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
 
-            bool Found_get_NumSelected = false;
+            bool foundGetNumSelected = false;
             object endJumpMarker = null;
             bool addedJump = false;
             foreach (var instruction in instructions)
@@ -50,23 +51,23 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 if (instruction.opcode == OpCodes.Callvirt
                     && instruction.operand.ToString().Contains("get_NumSelected()"))
                 {
-                    Found_get_NumSelected = true;
+                    foundGetNumSelected = true;
                 }
 
                 //Get the Jumpmarker for the End
-                if (Found_get_NumSelected && endJumpMarker == null && instruction.opcode == OpCodes.Bne_Un)
+                if (foundGetNumSelected && endJumpMarker == null && instruction.opcode == OpCodes.Bne_Un)
                 {
                     endJumpMarker = instruction.operand;
                 }
 
-                if (!addedJump && Found_get_NumSelected && instruction.opcode == OpCodes.Ldarg_0)
+                if (!addedJump && foundGetNumSelected && instruction.opcode == OpCodes.Ldarg_0)
                 {
                     //Check if this is a PRF Storage Building
                     yield return new CodeInstruction(OpCodes.Ldarg_0);
                     yield return new CodeInstruction(OpCodes.Ldloc_2);
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
                         typeof(Patch_Building_Storage_GetGizmos),
-                        nameof(Patch_Building_Storage_GetGizmos.IsPRF_StorageBuilding)));
+                        nameof(IsPRF_StorageBuilding)));
                     //Skip to the End if yes
                     yield return new CodeInstruction(OpCodes.Brtrue_S, endJumpMarker);
                     addedJump = true;

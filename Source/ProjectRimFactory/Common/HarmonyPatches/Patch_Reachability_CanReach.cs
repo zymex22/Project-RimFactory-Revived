@@ -9,7 +9,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         //canReachThing Holds the Last item that was checked and Required the use of a Advanced IO Port
         //This is used in other patches to force the use of an IO Port
-        private static Thing canReachThing =null;
+        private static Thing canReachThing;
         public static bool CanReachThing(Thing thing)
         {
             var ret = thing == canReachThing;
@@ -28,7 +28,8 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         /// <param name="__result"></param>
         /// <param name="___map"></param>
         /// <param name="__instance"></param>
-        public static void Postfix(IntVec3 start, LocalTargetInfo dest, PathEndMode peMode, TraverseParms traverseParams, ref bool __result, Map ___map, Reachability __instance)
+        public static void Postfix(IntVec3 start, LocalTargetInfo dest, PathEndMode peMode, TraverseParms traverseParams,
+            ref bool __result, Map ___map, Reachability __instance)
         {
             //There is already a Path
             if (__result) return;
@@ -40,37 +41,37 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             if (thing == null || thing.def.category != ThingCategory.Item) return;
 
             //Quickly get the Map Component (abort if nonexistent)
-            var mapcomp = PatchStorageUtil.GetPRFMapComponent(___map);
-            if (mapcomp == null) return;
+            var mapComponent = PatchStorageUtil.GetPRFMapComponent(___map);
+            if (mapComponent == null) return;
  
             //Is in a DSU
-            if (hasPathToItem(thing,mapcomp,__instance,start,traverseParams))
+            if (HasPathToItem(thing,mapComponent,__instance,start,traverseParams))
             {
                 canReachThing = thing;
                  __result = true;
             }
         }
 
-        //I think i need to rework how, what and where stuff is save for event caching
+        //I think i need to rework how, what and where stuff is saved for event caching
 
-        private static bool hasPathToItem(Thing thing, PRFMapComponent mapComp, Reachability reachability, IntVec3 start, TraverseParms traverseParams)
+        private static bool HasPathToItem(Thing thing, PRFMapComponent mapComp, Reachability reachability, IntVec3 start, TraverseParms traverseParams)
         {
-            var ThingPos = thing.Position;
+            var thingPos = thing.Position;
 
             //Quickly Check if the Item is in a Storage Unit
             //TODO: Rework that -> This includes items in PRF Crates & Excludes items from Cold Storage(Note they currently have bigger issues)
-            if (!mapComp.ShouldHideItemsAtPos(ThingPos)) return false;
+            if (!mapComp.ShouldHideItemsAtPos(thingPos)) return false;
 
-            var AdvancedIOLocations = mapComp.GetAdvancedIOLocations;
-            var cnt = AdvancedIOLocations.Count;
+            var advancedIOLocations = mapComp.GetAdvancedIOLocations;
+            var cnt = advancedIOLocations.Count;
             //Check Every Advanced IO Port
             for (int i = 0; i < cnt; i++)
             {
-                var current = AdvancedIOLocations.ElementAt(i);
+                var current = advancedIOLocations.ElementAt(i);
 
                 //Check if that Port has access to the Item
                 //TODO: Rework that -> Is the Use of the Position really best?
-                if (current.Value.boundStorageUnit?.GetPosition == ThingPos)
+                if (current.Value.boundStorageUnit?.GetPosition == thingPos)
                 {
                     //The Port has access to the Item
                     //Now check if we can reach that Port

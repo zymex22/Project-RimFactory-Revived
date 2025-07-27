@@ -12,12 +12,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     {
         public static void Postfix(ThingComp __instance)
         {
-            var parrent = __instance.parent;
-            if (parrent is Building_MassStorageUnitPowered dsu)
+            var parent = __instance.parent;
+            if (parent is Building_MassStorageUnitPowered dsu)
             {
-                var powertrader = parrent.GetComp<CompPowerTrader>();
-                FridgePowerPatchUtil.FridgePowerDrawPerUnit.SetOrAdd(dsu, powertrader.powerOutputInt);
-                powertrader.powerOutputInt -= dsu.ExtraPowerDraw;
+                var powerTrader = parent.GetComp<CompPowerTrader>();
+                FridgePowerPatchUtil.FridgePowerDrawPerUnit.SetOrAdd(dsu, powerTrader.powerOutputInt);
+                powerTrader.powerOutputInt -= dsu.ExtraPowerDraw;
             }
         }
     }

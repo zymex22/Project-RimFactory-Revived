@@ -1,5 +1,4 @@
-﻿using ProjectRimFactory.SAL3;
-using ProjectRimFactory.Storage;
+﻿using ProjectRimFactory.Storage;
 using RimWorld;
 using System.Collections.Generic;
 using ProjectRimFactory.SAL3.Tools;
@@ -13,13 +12,16 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     /// </summary>
     public static class FridgePowerPatchUtil
     {
-        public static Dictionary<Building_MassStorageUnitPowered, float> FridgePowerDrawPerUnit = new Dictionary<Building_MassStorageUnitPowered, float>();
+        public static readonly Dictionary<Building_MassStorageUnitPowered, float> FridgePowerDrawPerUnit = new();
 
-        public static void UpdatePowerDraw(Building_MassStorageUnitPowered dsu, CompPowerTrader powertrader)
+        public static void UpdatePowerDraw(Building_MassStorageUnitPowered dsu, CompPowerTrader powerTrader)
         {
-            float powerDraw = 0;
-            if (!FridgePowerDrawPerUnit.TryGetValue(dsu, out powerDraw)) powerDraw = -1 * (float)ReflectionUtility.CompPropertiesPowerBasePowerConsumption.GetValue(powertrader.Props);
-            powertrader.powerOutputInt = powerDraw - dsu.ExtraPowerDraw;
+            if (!FridgePowerDrawPerUnit.TryGetValue(dsu, out var powerDraw))
+            {
+                powerDraw = -1 * (float)ReflectionUtility.CompPropertiesPowerBasePowerConsumption.GetValue(powerTrader.Props);
+            }
+
+            powerTrader.powerOutputInt = powerDraw - dsu.ExtraPowerDraw;
         }
 
     }

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using HarmonyLib;
+﻿using HarmonyLib;
 using ProjectRimFactory.Storage;
 using Verse;
 
@@ -10,8 +9,8 @@ public class Patch_Thing_TryAbsorbStack
 {
 
     private static PRFMapComponent prfMapComponent;
-    private static bool relevant = false;
-    private static int baseCount = 0;
+    private static bool relevant;
+    private static int baseCount;
     
     public static bool Prefix(Thing __instance,  Thing other)
     {
@@ -24,6 +23,7 @@ public class Patch_Thing_TryAbsorbStack
         return true;
     }
     
+    // ReSharper disable once UnusedParameter.Global
     public static void Postfix( Thing other, bool respectStackLimit , Thing __instance)
     {
         if (!relevant) return;

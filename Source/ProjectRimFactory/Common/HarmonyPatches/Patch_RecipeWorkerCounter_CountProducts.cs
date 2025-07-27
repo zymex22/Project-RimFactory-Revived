@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using ProjectRimFactory.Storage;
 using RimWorld;
-using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -13,44 +12,43 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     /// - AssemblerQueue
     /// - Cold STorage
     /// 
-    /// Old Note: Art & maybe other things too need a separate patch
+    /// Old Note: Art & maybe other things to need a separate patch
     /// </summary>
     [HarmonyPatch(typeof(RecipeWorkerCounter), "CountProducts")]
     class Patch_RecipeWorkerCounter_CountProducts
     {
+        // ReSharper disable once UnusedMember.Local
         static void Postfix(RecipeWorkerCounter __instance, ref int __result, Bill_Production bill)
         {
             //Only run if Check everywhere is set
             // TODO Check if that is the correct replacement
-            if (bill.GetIncludeSlotGroup() == null)
+            if (bill.GetIncludeSlotGroup() != null) return;
+            
+            Map billMap = bill.Map;
+            ThingDef targetDef = __instance.recipe.products[0].thingDef;
+
+            //Add Items form AssemblerQueue
+            var prfGameComponent = Current.Game.GetComponent<PRFGameComponent>();
+            for (var i = 0; i < prfGameComponent.AssemblerQueue.Count; i++)
             {
-                Map billmap = bill.Map;
-                int i = 0;
-                ThingDef targetDef = __instance.recipe.products[0].thingDef;
-
-                //Add Items form AssemblerQueue
-                PRFGameComponent gamecomp = Current.Game.GetComponent<PRFGameComponent>();
-                for (i = 0; i < gamecomp.AssemblerQueue.Count; i++)
+                //Don't count Resources of other maps
+                if (billMap != prfGameComponent.AssemblerQueue[i].Map) continue;
+                foreach (var heldThing in prfGameComponent.AssemblerQueue[i].GetThingQueue())
                 {
-                    //Don't count Resources of other maps
-                    if (billmap != gamecomp.AssemblerQueue[i].Map) continue;
-                    foreach (Thing heldThing in gamecomp.AssemblerQueue[i].GetThingQueue())
-                    {
-                        TryUpdateResult(ref __result, targetDef, heldThing);
-                    }
+                    TryUpdateResult(ref __result, targetDef, heldThing);
                 }
+            }
 
-                //Add Items stored in ColdStorage
-                List<ILinkableStorageParent> units = PatchStorageUtil.GetPRFMapComponent(billmap).ColdStorageBuildings.Select(b => b as ILinkableStorageParent).ToList();
+            //Add Items stored in ColdStorage
+            var units = PatchStorageUtil.GetPRFMapComponent(billMap).ColdStorageBuildings
+                .Select(ILinkableStorageParent (b) => b).ToList();
 
-                foreach (ILinkableStorageParent dsu in units)
+            foreach (var dsu in units)
+            {
+                foreach (var thing in dsu.StoredItems)
                 {
-                    foreach (var thing in dsu.StoredItems)
-                    {
-                        TryUpdateResult(ref __result, targetDef, thing);
-                    }
+                    TryUpdateResult(ref __result, targetDef, thing);
                 }
-
             }
         }
 

@@ -4,9 +4,9 @@ using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
-    internal class Patch_QualityBuilder_getPawnConstructionSkill
+    internal class Patch_QualityBuilder_GetPawnConstructionSkill
     {
-        static public bool Prefix(out int __result, Pawn pawn)
+        public static bool Prefix(out int __result, Pawn pawn)
         {
             __result = 0;
             if (pawn is Pawn_Drone)

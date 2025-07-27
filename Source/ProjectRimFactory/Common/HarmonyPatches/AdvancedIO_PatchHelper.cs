@@ -14,10 +14,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         /// </summary>
         /// <param name="map"></param>
         /// <returns></returns>
-        public static IEnumerable<KeyValuePair<IntVec3, Building_AdvancedStorageUnitIOPort>> GetAdvancedIOPorts(Map map)
+        private static IEnumerable<KeyValuePair<IntVec3, Building_AdvancedStorageUnitIOPort>> GetAdvancedIOPorts(Map map)
         {
-            var Ports = PatchStorageUtil.GetPRFMapComponent(map).GetAdvancedIOLocations.Where(l => (l.Value.boundStorageUnit?.Powered ?? false) && l.Value.CanGetNewItem);
-            return Ports;
+            var ports = PatchStorageUtil.GetPRFMapComponent(map).
+                GetAdvancedIOLocations.Where(l => 
+                    (l.Value.boundStorageUnit?.Powered ?? false) && l.Value.CanGetNewItem);
+            return ports;
         }
 
         /// <summary>
@@ -26,44 +28,32 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         /// <param name="map"></param>
         /// <param name="referencePos"></param>
         /// <returns></returns>
-        public static List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> GetOrderdAdvancedIOPorts(Map map, IntVec3 referencePos)
+        private static List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> GetOrderedAdvancedIOPorts(Map map, IntVec3 referencePos)
         {
-            var dict_IOports = GetAdvancedIOPorts(map);
-            List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> Ports = new List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>>();
-            foreach (var pair in dict_IOports)
+            var dictIOPorts = GetAdvancedIOPorts(map);
+            var ports = new List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>>();
+            foreach (var pair in dictIOPorts)
             {
                 var distance = pair.Key.DistanceTo(referencePos);
-                Ports.Add(new KeyValuePair<float, Building_AdvancedStorageUnitIOPort>(distance, pair.Value));
+                ports.Add(new KeyValuePair<float, Building_AdvancedStorageUnitIOPort>(distance, pair.Value));
             }
-            return Ports.OrderBy(i => i.Key).ToList();
+            return ports.OrderBy(i => i.Key).ToList();
         }
 
 
-        public static List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> GetOrderdAdvancedIOPorts(Map map, IntVec3 pawnPos, IntVec3 targetPos)
+        public static List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> GetOrderedAdvancedIOPorts(Map map,
+            IntVec3 pawnPos, IntVec3 targetPos)
         {
-            var dict_IOports = GetAdvancedIOPorts(map);
+            var dictIOPorts = GetAdvancedIOPorts(map);
 
-            List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> Ports = new List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>>();
-            foreach (var pair in dict_IOports)
+            var ports = new List<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>>();
+            foreach (var pair in dictIOPorts)
             {
                 var distance = CalculatePath(pawnPos, pair.Key, targetPos);
-                Ports.Add(new KeyValuePair<float, Building_AdvancedStorageUnitIOPort>(distance, pair.Value));
+                ports.Add(new KeyValuePair<float, Building_AdvancedStorageUnitIOPort>(distance, pair.Value));
             }
 
-            return Ports.OrderBy(i => i.Key).ToList();
-        }
-
-
-        /// <summary>
-        /// Returns a List of Ports where the in addition to the lower requirements they are additionally closer then a maxDistance 
-        /// </summary>
-        /// <param name="map"></param>
-        /// <param name="referencePos"></param>
-        /// <param name="maxDistance"></param>
-        /// <returns></returns>
-        public static IEnumerable<KeyValuePair<float, Building_AdvancedStorageUnitIOPort>> GetOrderdAdvancedIOPortsCloserThen(Map map, IntVec3 referencePos, float maxDistance)
-        {
-            return GetOrderdAdvancedIOPorts(map, referencePos).Where(i => i.Key < maxDistance);
+            return ports.OrderBy(i => i.Key).ToList();
         }
 
         /// <summary>
@@ -74,7 +64,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         /// <returns></returns>
         public static KeyValuePair<float, Building_AdvancedStorageUnitIOPort> GetClosestPort(Map map, IntVec3 referencePos)
         {
-            return GetOrderdAdvancedIOPorts(map, referencePos).FirstOrDefault();
+            return GetOrderedAdvancedIOPorts(map, referencePos).FirstOrDefault();
         }
 
         /// <summary>
@@ -87,9 +77,11 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         /// <param name="thing"></param>
         /// <param name="maxDistance"></param>
         /// <returns></returns>
-        public static KeyValuePair<float, Building_AdvancedStorageUnitIOPort> GetClosestPort(Map map, IntVec3 pawnPos, IntVec3 targetPos, Thing thing, float maxDistance)
+        public static KeyValuePair<float, Building_AdvancedStorageUnitIOPort> GetClosestPort(Map map, IntVec3 pawnPos,
+            IntVec3 targetPos, Thing thing, float maxDistance)
         {
-            return GetOrderdAdvancedIOPorts(map, pawnPos, targetPos).Where(p => p.Key < maxDistance && CanMoveItem(p.Value, thing)).FirstOrDefault();
+            return GetOrderedAdvancedIOPorts(map, pawnPos, targetPos)
+                .FirstOrDefault(p => p.Key < maxDistance && CanMoveItem(p.Value, thing));
         }
 
 
@@ -130,25 +122,5 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             return pawnPos.DistanceTo(thingPos) + thingPos.DistanceTo(targetPos);
         }
-
-        /// <summary>
-        /// Calculates the Full Path Cost
-        /// Checking for walls and alike
-        /// The issue with this is that it is extramly expencive.
-        /// 1 Call ~ 0.4ms
-        /// I Hope there is a better way to make this kind of a check
-        /// maybe a manual calculation without the extra stepps included?
-        /// </summary>
-        /// <param name="pawn"></param>
-        /// <param name="thingPos"></param>
-        /// <param name="targetPos"></param>
-        /// <param name="map"></param>
-        /// <returns></returns>
-        public static float CalculatePath(Pawn pawn, IntVec3 thingPos, IntVec3 targetPos, Map map)
-        {
-            return map.pathFinder.FindPathNow(pawn.Position, thingPos, pawn).TotalCost + map.pathFinder.FindPathNow(thingPos, targetPos, pawn).TotalCost;
-        }
-
-
     }
 }

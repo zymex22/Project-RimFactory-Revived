@@ -10,11 +10,13 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     [HarmonyPatch(typeof(FoodUtility), "SpawnedFoodSearchInnerScan")]
     class Patch_FoodUtility_SpawnedFoodSearchInnerScan
     {
-        static object Thingarg = null;
-        static bool afterflaotMin = false;
+        private static object thingarg;
+        private static bool afterflaotMin;
+        
+        // ReSharper disable once UnusedMember.Local
         static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            Thingarg = null;
+            thingarg = null;
             afterflaotMin = false;
 
             foreach (var instruction in instructions)
@@ -33,13 +35,13 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     yield return new CodeInstruction(OpCodes.Ldarg_1);
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
                         typeof(Patch_FoodUtility_SpawnedFoodSearchInnerScan),
-                        nameof(Patch_FoodUtility_SpawnedFoodSearchInnerScan.findClosestPort), new[] { typeof(Pawn), typeof(IntVec3) }));
+                        nameof(FindClosestPort), new[] { typeof(Pawn), typeof(IntVec3) }));
 
 
                     continue;
                 }
 
-                if (instruction.opcode == OpCodes.Stloc_S && instruction.operand.ToString() == "Verse.Thing (7)" && Thingarg == null) Thingarg = instruction.operand;
+                if (instruction.opcode == OpCodes.Stloc_S && instruction.operand.ToString() == "Verse.Thing (7)" && thingarg == null) thingarg = instruction.operand;
 
 
                 if (instruction.opcode == OpCodes.Stloc_S && instruction.operand.ToString() == "System.Single (8)")
@@ -47,21 +49,21 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                     yield return instruction;
 
                     yield return new CodeInstruction(OpCodes.Ldloca_S, instruction.operand);
-                    yield return new CodeInstruction(OpCodes.Ldloc_S, Thingarg);
+                    yield return new CodeInstruction(OpCodes.Ldloc_S, thingarg);
                     yield return new CodeInstruction(OpCodes.Ldarg_0);
                     yield return new CodeInstruction(OpCodes.Ldarg_1);
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
                         typeof(Patch_FoodUtility_SpawnedFoodSearchInnerScan),
-                        nameof(Patch_FoodUtility_SpawnedFoodSearchInnerScan.isIOPortBetter), new[] { typeof(float).MakeByRefType(), typeof(Thing), typeof(Pawn), typeof(IntVec3) }));
+                        nameof(IsIOPortBetter), new[] { typeof(float).MakeByRefType(), typeof(Thing), typeof(Pawn), typeof(IntVec3) }));
                     continue;
                 }
 
 
-                if (instruction.opcode == OpCodes.Ret && Thingarg != null)
+                if (instruction.opcode == OpCodes.Ret && thingarg != null)
                 {
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
                         typeof(Patch_FoodUtility_SpawnedFoodSearchInnerScan),
-                        nameof(Patch_FoodUtility_SpawnedFoodSearchInnerScan.moveItemIfNeeded), new[] { typeof(Thing) }));
+                        nameof(MoveItemIfNeeded), new[] { typeof(Thing) }));
                     yield return new CodeInstruction(OpCodes.Ldloc_3);
                 }
 
@@ -74,15 +76,15 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         }
 
         private static float mindist = float.MaxValue;
-        private static Building_AdvancedStorageUnitIOPort closestPort = null;
+        private static Building_AdvancedStorageUnitIOPort closestPort;
 
-        public static void findClosestPort(Pawn pawn, IntVec3 root)
+        public static void FindClosestPort(Pawn pawn, IntVec3 _)
         {
             //Init vals
             mindist = float.MaxValue;
             closestPort = null;
 
-            if (pawn.Faction == null || !pawn.Faction.IsPlayer) return;
+            if (pawn.Faction is not { IsPlayer: true }) return;
 
             //TODO: Not Optimal for the search. might need update
             var closest = AdvancedIO_PatchHelper.GetClosestPort(pawn.Map, pawn.Position);
@@ -90,35 +92,39 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             closestPort = closest.Value;
         }
 
-        private static bool ioPortSelected = false;
-        private static Thing ioPortSelectedFor = null;
+        private static bool ioPortSelected;
+        private static Thing ioPortSelectedFor;
 
 
         /// <summary>
         /// Checks if the IO Port is a better or the only Option
         /// </summary>
-        /// <param name="Distance"></param>
+        /// <param name="distance"></param>
         /// <param name="thing"></param>
-        public static void isIOPortBetter(ref float Distance, Thing thing, Pawn pawn, IntVec3 start)
+        /// <param name="pawn"></param>
+        /// <param name="start"></param>
+        public static void IsIOPortBetter(ref float distance, Thing thing, Pawn pawn, IntVec3 start)
         {
             ioPortSelected = false;
 
-            //If the Port is Closer then it is a better choice
+            //If the Port is Closer than it is a better choice
             //#691 If the Port is the only Option it must be used
-            if ( mindist < Distance || (ConditionalPatchHelper.PatchReachabilityCanReach.Status && pawn.Map.reachability.CanReach(start,thing,Verse.AI.PathEndMode.Touch, TraverseParms.For(pawn)) && Patch_Reachability_CanReach.CanReachThing(thing) ))
+            if ( mindist < distance || (ConditionalPatchHelper.PatchReachabilityCanReach.Status 
+                                        && pawn.Map.reachability.CanReach(start,thing,Verse.AI.PathEndMode.Touch, TraverseParms.For(pawn)) 
+                                        && Patch_Reachability_CanReach.CanReachThing(thing) ))
             {
                 //Check if the Port can be used
                 //TODO: Check TODO in Line 88
                 if (closestPort != null && AdvancedIO_PatchHelper.CanMoveItem(closestPort, thing))
                 {
-                    Distance = mindist;
+                    distance = mindist;
                     ioPortSelected = true;
                     ioPortSelectedFor = thing;
                 }
             }
         }
 
-        public static void moveItemIfNeeded(Thing thing)
+        public static void MoveItemIfNeeded(Thing thing)
         {
             //When using replimat it might replace thing  
             if (thing != ioPortSelectedFor || !ioPortSelected || thing == null)  return;

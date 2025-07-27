@@ -11,6 +11,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     /// </summary>
     public static class Patch_FridgeUtility_Tick
     {
+        // ReSharper disable once InconsistentNaming
         public static void Postfix(List<CompPowerTrader> ___fridgeCache)
         {
             foreach (var item in ___fridgeCache)

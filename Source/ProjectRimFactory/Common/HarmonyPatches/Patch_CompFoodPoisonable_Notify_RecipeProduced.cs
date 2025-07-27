@@ -9,6 +9,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     // Building_SimpleAssembler assembler   -> Use the Room of The output cell instead of the Pawn
     // .def.defName == "PRF_SelfCookerIII"  -> Skip
     [HarmonyPatch(typeof(CompFoodPoisonable), "Notify_RecipeProduced")]
+    // ReSharper disable once ClassNeverInstantiated.Global
     class Patch_CompFoodPoisonable_Notify_RecipeProduced
     {
         public static bool Prefix(CompFoodPoisonable __instance,  Pawn pawn)

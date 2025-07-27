@@ -10,18 +10,14 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
         public static void Postfix(JobDriver_HaulToTransporter __instance)
         {
-            var pawnpos = __instance.pawn.Position;
-            var ThingPos = __instance.job.targetA.Cell;
-            var TransporterPos = __instance.job.targetB.Cell;
-
-
-            var ThingDist = AdvancedIO_PatchHelper.CalculatePath(pawnpos, ThingPos, TransporterPos);
-            Building_AdvancedStorageUnitIOPort closestPort = null;
-            var mindist = ThingDist;
-
-
-            var closest = AdvancedIO_PatchHelper.GetClosestPort(__instance.pawn.Map, pawnpos, TransporterPos, __instance.job.targetA.Thing, ThingDist);
-            closestPort = closest.Value;
+            var pawnPos = __instance.pawn.Position;
+            var thingPos = __instance.job.targetA.Cell;
+            var transporterPos = __instance.job.targetB.Cell;
+            
+            var thingDist = AdvancedIO_PatchHelper.CalculatePath(pawnPos, thingPos, transporterPos);
+            
+            var closest = AdvancedIO_PatchHelper.GetClosestPort(__instance.pawn.Map, pawnPos, transporterPos, __instance.job.targetA.Thing, thingDist);
+            var closestPort = closest.Value;
 
             if (closestPort is null) return;
 
