@@ -125,18 +125,10 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
 
         }
-
-        // Misc
-        private BillStack billStack;
-        public override BillStack BillStack => billStack;
-        public Building_ProgrammableAssembler()
-        {
-            billStack = new BillStack(this);
-        }
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Deep.Look(ref billStack, "bills", this);
+            //Scribe_Deep.Look(ref billStack, "bills", this);
             Scribe_Deep.Look(ref CurrentBillReport, "currentBillReport");
             Scribe_Collections.Look(ref ThingQueue, "thingQueue", LookMode.Deep);
             Scribe_Values.Look(ref allowForbidden, "allowForbidden");
@@ -341,6 +333,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                         Notify_BillStarted();
                     }
                 }
+                
+                
             }
             // Effect.
             if (CurrentBillReport != null && Active)
@@ -387,14 +381,17 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         {
             var allThings = AllAccessibleThings;
             var allBills = AllBillsShouldDoNow;
-
+            
             foreach (var bill in allBills)
             {
-                List<ThingCount> chosen = [];
+                if (bill.recipe.ingredients.Count == 0)
+                {
+                    return new BillReport(bill, []);
+                }
                 var allAccessibleAllowedThings = allThings.Where(x => bill.IsFixedOrAllowedIngredient(x)).ToList();
 
                 if (allAccessibleAllowedThings.Count <= 0 && bill.ingredientFilter.AllowedThingDefs.Any()) continue;
-                if (TryFindBestBillIngredientsInSet(allAccessibleAllowedThings, bill, chosen))
+                if (TryFindBestBillIngredientsInSet(allAccessibleAllowedThings, bill, out var chosen))
                 {
                     return new BillReport(bill, (from ta in chosen select ta.Thing.SplitOff(ta.Count)).ToList());
                 }
@@ -404,8 +401,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         private ModExtension_Skills ExtensionSkills => def.GetModExtension<ModExtension_Skills>();
 
-        static bool TryFindBestBillIngredientsInSet(List<Thing> accessibleThings, Bill b, List<ThingCount> chosen)
+        static bool TryFindBestBillIngredientsInSet(List<Thing> accessibleThings, Bill b, out List<ThingCount> chosen)
         {
+            chosen = [];
             //TryFindBestBillIngredientsInSet Expects a List of Both Available & Allowed Things as "accessibleThings"
             List<IngredientCount> missing = []; // Needed for 1.4
             return (bool)ReflectionUtility.TryFindBestBillIngredientsInSet
@@ -422,10 +420,18 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             // GenRecipe handles creating any bonus products
             if (def == PRFDefOf.PRF_Recycler) Patch_Thing_SmeltProducts.RecyclerProducingItems = true;
             Patch_CompFoodPoisonable_Notify_RecipeProduced.AssemblerRefrence = this;
+            
+            
+            
+            
             var products = GenRecipe.MakeRecipeProducts(CurrentBillReport.Bill.recipe, buildingPawn,
                 CurrentBillReport.Selected, 
                 ProjectSal_Utilities.CalculateDominantIngredient(CurrentBillReport.Bill.recipe, CurrentBillReport.Selected),
-                this);
+                this).ToList();
+            
+            
+            // TODO I hope that works
+            def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(products, this, this, CurrentBillReport.Bill.recipe);
             
             foreach (var thing in products)
             {

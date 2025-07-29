@@ -556,9 +556,9 @@
   <ThingDef ParentName="PRF_MinersBase">
     <defName>PRF_BillTypeMiner_I</defName>
     <label>plasma drill</label>
-    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Miner</thingClass>
+    <thingClass>ProjectRimFactory.SAL3.Things.Assemblers.Building_Miner</thingClass>
     <description>With highly advanced spacer technology auto mining has been made more precise than ever, and you can now adjust what ores to mine for and even balance power for speed. It will set the primary ore type and receive occasional bonuses in the form of rare ores and junk.</description>
-    <tickerType>Never</tickerType>
+    <tickerType>Normal</tickerType>
     <graphicData>
       <texPath>Industry/DrillT3</texPath>
       <drawSize>(3,3)</drawSize>
@@ -612,7 +612,7 @@
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
     <inspectorTabs>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
-      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>      <!-- ITab -->
+      <li>ITab_Bills</li>      <!-- ITab -->
     </inspectorTabs>
     <modExtensions>
       <!--  <li Class="ProjectRimFactory.AutoMachineTool.ModExtension_EffectWorking">
@@ -641,6 +641,16 @@
           <Silver Weight="0.7" Count="40" />
           <Plasteel Weight="0.01" Count="5" />
         </bonusYields>
+      </li>
+	  <li Class="ProjectRimFactory.Common.ModExtension_Skills">
+        <SkillUsage>ThisOverrides</SkillUsage>
+        <BaseSkill>0</BaseSkill>
+        <skills>
+          <li>
+            <def>Mining</def>
+            <levelInt>20</levelInt>
+          </li>
+        </skills>
       </li>
     </modExtensions>
   </ThingDef>
