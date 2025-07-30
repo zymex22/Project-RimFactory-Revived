@@ -16,8 +16,20 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+            RegisterRecipes();
+        }
+
+        private void RegisterRecipes()
+        {
             def.recipes ??= [];
-            def.recipes.AddRange(GetImportedRecipes());
+
+            var newRecipes = GetImportedRecipes();
+
+            foreach (var recipe in newRecipes)
+            {
+                if (def.recipes.Contains(recipe)) continue;
+                def.recipes.Add(recipe);
+            }
             ReflectionUtility.AllRecipesCached.SetValue(def, null);
         }
 
