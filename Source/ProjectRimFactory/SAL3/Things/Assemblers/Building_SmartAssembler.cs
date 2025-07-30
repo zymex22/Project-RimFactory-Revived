@@ -129,8 +129,8 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         public void RecipeProviderRemoved(Building_RecipeHolder buildingRecipeHolder)
         {
+            if (GravshipPlacementUtility.placingGravship || GravshipUtility.generatingGravship) return; // Don't remove stuff on GravShip move
             subscribedBills.Remove(buildingRecipeHolder);
-            
             UpdateBills();
         }
 
