@@ -1,5 +1,6 @@
 ﻿using ProjectRimFactory.AutoMachineTool;
 using System.Collections.Generic;
+using ProjectRimFactory.SAL3.Things;
 using Verse;
 
 namespace ProjectRimFactory.Common
@@ -19,6 +20,24 @@ namespace ProjectRimFactory.Common
         public Dictionary<IntVec3, Storage.Building_AdvancedStorageUnitIOPort> GetAdvancedIOLocations { get; } = new();
 
         public readonly Dictionary<Building_BeltConveyor, IBeltConveyorLinkable> NextBeltCache = new();
+        
+        private readonly List<IRecipeSubscriber> recipeSubscribers = [];
+
+        public void RegisterRecipeSubscriber(IRecipeSubscriber recipeSubscriber)
+        {
+            recipeSubscribers.Add(recipeSubscriber);
+        }
+        public void DeregisterRecipeSubscriber(IRecipeSubscriber recipeSubscriber)
+        {
+            recipeSubscribers.Remove(recipeSubscriber);
+        }
+        public void NotifyRecipeSubscriberOfProvider(IntVec3 pos, Building_RecipeHolder recipeHolder)
+        {
+            foreach (var subscriber in recipeSubscribers)
+            {
+                subscriber.RecipeProviderSpawnedAt(pos, recipeHolder);
+            }
+        }
 
 
         public void RegisterColdStorageBuilding(Storage.Building_ColdStorage port)

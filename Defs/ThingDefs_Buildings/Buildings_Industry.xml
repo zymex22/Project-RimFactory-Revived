@@ -56,7 +56,7 @@
     <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
     <size>(2,2)</size>
     <inspectorTabs>
-      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ITab_Bills</li>
     </inspectorTabs>
     <statBases>
       <WorkToBuild>1000</WorkToBuild>
@@ -128,7 +128,7 @@
     <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
     <size>(2,2)</size>
     <inspectorTabs>
-      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ITab_Bills</li>
     </inspectorTabs>
     <statBases>
       <WorkToBuild>1000</WorkToBuild>
@@ -201,7 +201,7 @@
     <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
     <size>(2,2)</size>
     <inspectorTabs>
-      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ITab_Bills</li>
     </inspectorTabs>
     <statBases>
       <WorkToBuild>1000</WorkToBuild>
@@ -289,7 +289,7 @@
     <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
     <size>(3,3)</size>
     <inspectorTabs>
-      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ITab_Bills</li>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
     <statBases>
@@ -375,7 +375,7 @@
     <designatorDropdown>PRF_IndustryGroup</designatorDropdown>
     <size>(3,3)</size>
     <inspectorTabs>
-      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ITab_Bills</li>
       <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
     </inspectorTabs>
     <statBases>
@@ -458,7 +458,7 @@
   <ThingDef Name="PRF_FurnaceBase" ParentName="PRF_IndustrialBase" Abstract="True">
     <staticSunShadowHeight>0.1</staticSunShadowHeight>
     <inspectorTabs>
-      <li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+      <li>ITab_Bills</li>
     </inspectorTabs>
     <statBases>
       <WorkToBuild>3500</WorkToBuild>

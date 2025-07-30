@@ -215,6 +215,7 @@ namespace ProjectRimFactory.SAL3.Things
                 if (Widgets.ButtonText(rect, "PRF_RecipeTab_Button_Forget".Translate()))
                 {
                     parrentDB.Saved_Recipes.Remove(recipe);
+                    --> We need to Notify the Subscribers
                 }
             }*/
             else if (recipes[recipe] == Enum_RecipeStatus.InProgress)
