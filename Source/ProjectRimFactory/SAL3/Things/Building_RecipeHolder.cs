@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ProjectRimFactory.Common;
 using Verse;
 
 namespace ProjectRimFactory.SAL3.Things
@@ -13,22 +14,19 @@ namespace ProjectRimFactory.SAL3.Things
         private RecipeDef workingRecipe;
         private float workAmount;
         public List<RecipeDef> Recipes = [];
-        private List<IRecipeSubscriber> recipeSubscribers = [];
+        private readonly List<IRecipeSubscriber> recipeSubscribers = [];
         
         //================================ Misc
 
         public void RegisterRecipeSubscriber(IRecipeSubscriber subscriber)
         {
-            Log.Message($"RegisterRecipeSubscriber called from {subscriber}");
             recipeSubscribers.Add(subscriber);
             subscriber.RecipesChanged(this);
         }
         public void DeregisterRecipeSubscriber(IRecipeSubscriber subscriber)
         {
-            Log.Message($"DeregisterRecipeSubscriber called from {subscriber}");
             recipeSubscribers.Remove(subscriber);
             subscriber.RecipesChanged(this);
-            
         }
         
         
@@ -115,7 +113,6 @@ namespace ProjectRimFactory.SAL3.Things
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            Log.Message("DeSpawn for DB");
             ResetProgress();
             // Do not remove ToList - It evaluates the enumerable
             base.DeSpawn(mode);
@@ -192,11 +189,11 @@ namespace ProjectRimFactory.SAL3.Things
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            Log.Message("SpawnSetup for DB");
             // Check for Null Ref issues in Saved or Queued recipes
             // (That can happen if Mods are Removed mid-Save or some mod makes a breaking change)
             Recipes.RemoveAll(recipeDef => recipeDef is null);
             queuedRecipes.RemoveAll(recipeDef => recipeDef is null);
+            Map.GetComponent<PRFMapComponent>().NotifyRecipeSubscriberOfProvider(Position, this);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectRimFactory.Common;
 using ProjectRimFactory.SAL3.Tools;
 using Verse;
 
@@ -10,31 +11,37 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
     {
         
         private CompRecipeImportRange compRecipeImportRange;
+        private List<IntVec3> importCells;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
             compRecipeImportRange = GetComp<CompRecipeImportRange>();
             RefreshRecipeImportRange();
+            Map.GetComponent<PRFMapComponent>().RegisterRecipeSubscriber(this);
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            base.DeSpawn(mode);
-            foreach (var holder in subscribedBills.Keys)
+            var keys = subscribedBills.Keys.ToArray();
+            foreach (var holder in keys)
             {
                 holder.DeregisterRecipeSubscriber(this);
             }
+            
+            Map.GetComponent<PRFMapComponent>().DeregisterRecipeSubscriber(this);
+            base.DeSpawn(mode);
         }
 
         private readonly Dictionary<Building_RecipeHolder, List<RecipeDef>> subscribedBills = new();
         private HashSet<RecipeDef> effectiveRecipes = [];
 
-        // TODO: This needs to be called when the compRecipeImportRange Changes -> Overclocking and so on
-        public void RefreshRecipeImportRange()
+        private void RefreshRecipeImportRange()
         {
-            var holders = (compRecipeImportRange?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this))
-                .Where(cell => cell.InBounds(Map)).Select(cell => cell.GetFirstThing<Building_RecipeHolder>(Map))
+            importCells =
+                (compRecipeImportRange?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)).Where(
+                    cell => cell.InBounds(Map)).ToList();
+            var holders = importCells.Select(cell => cell.GetFirstThing<Building_RecipeHolder>(Map))
                 .Where(holder => holder != null).ToList();
 
             var missingHolders = subscribedBills.Keys.Where(holder => !holders.Contains(holder)).ToList();
@@ -50,7 +57,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         }
         
         // TODO we need to call this with all buildingRecipeHolder's when The Research level changes depending on the ModExtension_Skills
-        // Not an issue for our own setup but for full functionality that is requiered
+        // Not an issue for our own setup but for full functionality that is required
         public void RecipesChanged(Building_RecipeHolder buildingRecipeHolder)
         {
             if (subscribedBills.Keys.Contains(buildingRecipeHolder))
@@ -125,6 +132,12 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             subscribedBills.Remove(buildingRecipeHolder);
             
             UpdateBills();
+        }
+
+        public void RecipeProviderSpawnedAt(IntVec3 providerLocation, Building_RecipeHolder buildingRecipeHolder)
+        {
+            if (!importCells.Contains(providerLocation)) return;
+            RecipesChanged(buildingRecipeHolder);
         }
     }
 }

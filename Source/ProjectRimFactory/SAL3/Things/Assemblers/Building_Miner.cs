@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using ProjectRimFactory.Common;
-using Verse;
+﻿using ProjectRimFactory.Common;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers;
 

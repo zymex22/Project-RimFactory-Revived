@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ProjectRimFactory.SAL3.Exposables;
 using Verse;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers
@@ -17,7 +16,6 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                 {
                     if (recipes.Contains(r) || !SatisfiesSkillRequirements(r)) continue;
                     recipes.Add(r);
-                    Log.Message($"Adding {r.label}");
                     yield return r;
                 }
             }
