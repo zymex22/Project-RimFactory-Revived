@@ -125,14 +125,22 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
 
         }
+        
         public override void ExposeData()
         {
             base.ExposeData();
-            //Scribe_Deep.Look(ref billStack, "bills", this);
+            // TODO Remove Once Saves have been upgraded from 2.9.0 (initial 1.6 Steam Release)
+            if (BillStack is null && Scribe.mode == LoadSaveMode.LoadingVars)
+            {
+                Scribe_Deep.Look(ref billStack, "bills", this);
+            }
             Scribe_Deep.Look(ref CurrentBillReport, "currentBillReport");
             Scribe_Collections.Look(ref ThingQueue, "thingQueue", LookMode.Deep);
             Scribe_Values.Look(ref allowForbidden, "allowForbidden");
             Scribe_Deep.Look(ref buildingPawn, "buildingPawn");
+            
+            // ThingQueue should not be null
+            ThingQueue ??= [];
         }
         public override IEnumerable<Gizmo> GetGizmos()
         {

@@ -144,6 +144,8 @@ namespace ProjectRimFactory.Common.BackCompatibility
                     return typeof(AutoMachineTool.SAL_TargetWorktable.Bill_ProductionWithUftPawnForbidded);
                 case "ProjectRimFactory.AutoMachineTool.PRF_SAL_Trarget+Bill_ProductionPawnForbidded":
                     return typeof(AutoMachineTool.SAL_TargetWorktable.Bill_ProductionPawnForbidded);
+                case "ProjectRimFactory.AutoMachineTool.Building_Miner":
+                    return typeof(SAL3.Things.Assemblers.Building_Miner);
             }
 
             return null;
