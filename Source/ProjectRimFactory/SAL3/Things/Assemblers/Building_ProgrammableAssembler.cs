@@ -207,6 +207,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
+            // Required before base SpawnSetup by some Children
+            AssemblerDefModExtension = def.GetModExtension<AssemblerDefModExtension>();
+            
             base.SpawnSetup(map, respawningAfterLoad);
             compOutputAdjustable = GetComp<CompOutputAdjustable>();
             MapManager = map.GetComponent<MapTickManager>();
@@ -222,7 +225,6 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             compPowerTrader = GetComp<CompPowerTrader>();
             compRefuelable = GetComp<CompRefuelable>();
             compFlick = GetComp<CompFlickable>();
-            AssemblerDefModExtension = def.GetModExtension<AssemblerDefModExtension>();
             prfGameComp = Current.Game.GetComponent<PRFGameComponent>();
 
             //Assign Pawn's mapIndexOrState to building's mapIndexOrState

@@ -2,6 +2,7 @@
 using ProjectRimFactory.SAL3.Things.Assemblers;
 using RimWorld;
 using System.Linq;
+using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
@@ -17,8 +18,11 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         {
             if (___billGiver is Building_ProgrammableAssembler assembler)
             {
+                
+                Log.Message("BillStack.AddBill called");
+                return true;
                 //Is an Assembler
-                return assembler.GetAllRecipes().Any(r => bill.recipe == r);
+                //return assembler.GetDynamicRecipes().Any(r => bill.recipe == r);
             }
             return true;
         }

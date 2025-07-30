@@ -1,5 +1,4 @@
-﻿using ProjectRimFactory.SAL3.Things.Assemblers;
-using RimWorld;
+﻿using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +13,26 @@ namespace ProjectRimFactory.SAL3.Things
         private RecipeDef workingRecipe;
         private float workAmount;
         public List<RecipeDef> Recipes = [];
+        private List<IRecipeSubscriber> recipeSubscribers = [];
+        
         //================================ Misc
+
+        public void RegisterRecipeSubscriber(IRecipeSubscriber subscriber)
+        {
+            Log.Message($"RegisterRecipeSubscriber called from {subscriber}");
+            recipeSubscribers.Add(subscriber);
+            subscriber.RecipesChanged(this);
+        }
+        public void DeregisterRecipeSubscriber(IRecipeSubscriber subscriber)
+        {
+            Log.Message($"DeregisterRecipeSubscriber called from {subscriber}");
+            recipeSubscribers.Remove(subscriber);
+            subscriber.RecipesChanged(this);
+            
+        }
+        
+        
+        
         private IEnumerable<Building_WorkTable> Tables => from IntVec3 cell in GetComp<CompRecipeImportRange>()?.RangeCells() ?? GenAdj.CellsAdjacent8Way(this)
                                                          where cell.InBounds(Map)
                                                          from Thing t in cell.GetThingList(Map)
@@ -23,6 +41,7 @@ namespace ProjectRimFactory.SAL3.Things
                                                          select building;
 
         private List<RecipeDef> queuedRecipes;
+        
                                 
 
         public List<RecipeDef> QueuedRecipes
@@ -96,24 +115,14 @@ namespace ProjectRimFactory.SAL3.Things
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
+            Log.Message("DeSpawn for DB");
             ResetProgress();
-            var mapBefore = Map;
             // Do not remove ToList - It evaluates the enumerable
-            var cells = GenAdj.CellsAdjacent8Way(this).ToList();
             base.DeSpawn(mode);
-            for (var i = 0; i < cells.Count; i++)
+            
+            foreach (var subscriber in recipeSubscribers)
             {
-                var things = mapBefore.thingGrid.ThingsListAt(cells[i]);
-                
-                for (var j = things.Count - 1; j >= 0; j--)
-                {
-                    if (things[j] is not Building_SmartAssembler assembler) continue;
-                    assembler.Notify_RecipeHolderRemoved();
-                    // break; // We can afford to be silly and check everything in this one cell.
-                    // despawning does not happen often, right?
-                    // maybe?
-                    break; // maybe not, who knows.
-                }
+                subscriber.RecipeProviderRemoved(this);
             }
         }
 
@@ -130,6 +139,10 @@ namespace ProjectRimFactory.SAL3.Things
                     {
                         // Encode recipe
                         Recipes.Add(workingRecipe);
+                        foreach (var recipeSubscriber in recipeSubscribers)
+                        {
+                            recipeSubscriber.RecipesChanged(this);
+                        }
                         ResetProgress();
                     }
                 }
@@ -179,7 +192,7 @@ namespace ProjectRimFactory.SAL3.Things
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
-            
+            Log.Message("SpawnSetup for DB");
             // Check for Null Ref issues in Saved or Queued recipes
             // (That can happen if Mods are Removed mid-Save or some mod makes a breaking change)
             Recipes.RemoveAll(recipeDef => recipeDef is null);
