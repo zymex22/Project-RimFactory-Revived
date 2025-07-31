@@ -5,11 +5,12 @@ using Verse;
 
 namespace ProjectRimFactory.Storage
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Building_AdvancedStorageUnitIOPort : Building_StorageUnitIOBase
     {
         protected override bool ShowLimitGizmo => false;
 
-        private List<Thing> placementQueue = [];
+        private readonly List<Thing> placementQueue = [];
 
         public void AddItemToQueue(Thing thing)
         {
@@ -49,7 +50,7 @@ namespace ProjectRimFactory.Storage
             return WorkPosition.GetFirstItem(map);
         }
 
-        public bool CanGetNewItem => GetStoredItem() == null && (powerComp?.PowerOn ?? false);
+        public bool CanGetNewItem => GetStoredItem() == null && (PowerTrader?.PowerOn ?? false);
 
         protected override bool IsAdvancedPort => true;
 
