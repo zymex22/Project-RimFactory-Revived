@@ -31,6 +31,7 @@ namespace ProjectRimFactory.Drones
                 {
                     return (int)Math.Ceiling(compPowerWorkSetting.GetRange());
                 }
+                DefModExtensionDroneStation ??= def.GetModExtension<DefModExtension_DroneStation>();
                 return DefModExtensionDroneStation.SquareJobRadius;
             }
         }
