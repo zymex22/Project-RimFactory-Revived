@@ -78,15 +78,12 @@ namespace ProjectRimFactory.AutoMachineTool
             if (PRFGameComponent.PRF_StaticPawn == null) PRFGameComponent.GenStaticPawn();
             PRFGameComponent.PRF_StaticJob ??= new Job(PRFDefOf.PRFStaticJob);
 
-            if (tb is null)
+            if (tb is null || tb.Destroyed)
             {
-                Log.Warning("PRF generalRelease null target");
+                Log.Warning("PRF GeneralRelease target null or destroyed");
                 return;
             }
-
-            /*Log.Message("pre release");
-            debugListReservations();
-            */
+            
             // SOS2 Can apparently make the map null ....
             if (map is null)
             {
