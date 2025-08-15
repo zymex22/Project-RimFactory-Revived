@@ -214,13 +214,19 @@ namespace ProjectRimFactory.Storage
             }
             ModExtensionCrate ??= def.GetModExtension<DefModExtension_Crate>();
             RefreshStorage();
-            foreach (var port in ports)
+            foreach (var port in ports.ToList())
             {
                 if (port is null || !port.Spawned) continue;
                 if (port.Map != map)
                 {
                     port.BoundStorageUnit = null;
                 }
+            }
+
+            // Remove destroyed ports from th linking
+            if (GravshipPlacementUtility.placingGravship)
+            {
+                ports.RemoveAll(port => port is null || port.Destroyed);  
             }
 
             def.building.groupingLabel = LabelCapNoCount;
