@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>RimFridge: Now with Shelves!</li>
+      <li>Simple Utilities: Fridge</li>
+    </mods>
+    <match Class="PatchOperationFindMod">
+      <mods>
+        <li>Vanilla Recycling Expanded</li>
+      </mods>
+      <match Class="PatchOperationSequence">
+        <success>Always</success>
+        <operations>
+          <li Class="PatchOperationAdd">
+            <xpath>/Defs/ThingDef[defName = "PRF_IOPort_IFridge"]/building/fixedStorageSettings/filter/categories</xpath>
+            <value>
+              <li MayRequire="Ludeon.RimWorld.Biotech">VRecyclingE_SpecializedPacks</li>
+            </value>
+          </li>
+        </operations>
+      </match>
+    </match>
+  </Operation>
+</Patch>

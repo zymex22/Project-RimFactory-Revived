@@ -51,6 +51,7 @@
 										</categories>
 										<thingDefs>
 											<li>Wort</li>
+											<li MayRequire="Ludeon.RimWorld.Biotech">Wastepack</li>
 										</thingDefs>
 										<specialFiltersToDisallow>
 											<li>AllowRotten</li>
