@@ -9,12 +9,10 @@ namespace ProjectRimFactory.Drones
 {
     public abstract class Building_WorkGiverDroneStation : Building_DroneStation
     {
-        public virtual IEnumerable<WorkTypeDef> WorkTypes => DefModExtensionDroneStation.workTypes;
-
-        public virtual Dictionary<WorkTypeDef, bool> WorkSettingsDict => WorkSettings;
+        public Dictionary<WorkTypeDef, bool> WorkSettingsDict => WorkSettings;
 
 
-        private Pawn_WorkSettings workSettings = null;
+        private Pawn_WorkSettings workSettings;
 
 
         //Try give Job to Spawned drone

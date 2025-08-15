@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ProjectRimFactory.Drones
 {
-    class DroneSkills
+    internal static class DroneSkills
     {
         /// <summary>
         /// 
@@ -53,7 +53,7 @@ namespace ProjectRimFactory.Drones
                     continue;
                 }
 
-                record.levelInt = ReserchSkillModifier.GetResearchSkillLevel(); //No Settings Found use the Reserch Directly
+                record.levelInt = ReserchSkillModifier.GetResearchSkillLevel(); //No Settings Found use the Research Directly
                 
             }
 

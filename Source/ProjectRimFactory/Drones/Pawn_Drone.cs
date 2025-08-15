@@ -1,5 +1,4 @@
 ﻿using ProjectRimFactory.Common;
-using ProjectRimFactory.SAL3;
 using ProjectRimFactory.SAL3.Tools;
 using RimWorld;
 using Verse;
