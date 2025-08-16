@@ -6,7 +6,7 @@ using Verse;
 
 namespace ProjectRimFactory.Common
 {
-    public abstract class PRF_Building : Building, IPRF_Building
+    public abstract class PRF_Building : Building, IPRF_Building, IProductionSettingsUser
     {
         // If something else wants to trade an item away, we don't
         //   know what we could do with it.
