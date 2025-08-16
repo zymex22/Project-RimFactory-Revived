@@ -9,29 +9,9 @@ using Verse;
 
 namespace ProjectRimFactory.Common
 {
-
-    public interface IPRF_SettingsContent
-    {
-        float ITab_Settings_Minimum_x { get; }
-        float ITab_Settings_Additional_y { get; }
-
-        //may need to pass some pos context
-        Listing_Standard ITab_Settings_AppendContent(Listing_Standard list, Rect parrent_rect);
-
-
-
-    }
-
-    public interface IPRF_SettingsContentLink
-    {
-        IPRF_SettingsContent PRF_SettingsContentOb { get; }
-    }
-
-
-
     /// <summary>
-    /// An ITab that contains multilpe settings, all in one place:
-    ///  * whether can output produced things to entire stockpile, or only one cell
+    /// An ITab that contains multiple settings, all in one place:
+    ///  * whether it can output produced things to entire stockpile, or only one cell
     ///  * whether to obey IProductLimitation limits on production/storing
     /// </summary>
     // ReSharper disable once ClassNeverInstantiated.Global
@@ -41,25 +21,17 @@ namespace ProjectRimFactory.Common
         private static readonly List<Func<Thing, bool>> ShowITabTests = [];
         private static readonly List<Func<Thing, float>> ExtraHeightRequests = [];
         private static readonly List<Action<Thing, Listing_Standard>> WindowContentDrawers = [];
-        public static void RegisterSetting(Func<Thing, bool> showResultTest, Func<Thing, float> extraHeightRequest,
-                                           Action<Thing, Listing_Standard> windowContents)
-        {
-            ShowITabTests.Add(showResultTest);
-            ExtraHeightRequests.Add(extraHeightRequest);
-            WindowContentDrawers.Add(windowContents);
-            // onOpen=null, etc.
-        }
-
-
-
+        
+        private IProductionSettingsUser ProductionSettingsUser => SelThing as IProductionSettingsUser;
+        private IPRF_SettingsContentLink PRfSettingsContent => SelThing as IPRF_SettingsContentLink;
+        private IPRF_Building PRfBuilding => SelThing as IPRF_Building;
+        private CompPowerWorkSetting CompPropertiesPowerWork => (SelThing as ThingWithComps)?.GetComp<CompPowerWorkSetting>();
+        private IProductLimitation Machine => SelThing as IProductLimitation;
+        private IPowerSupplyMachineHolder SupplyMachineHolder => SelThing as IPowerSupplyMachineHolder;
+        
         private Vector2 winSize = new(400f, 0f);
         private List<SlotGroup> groups;
-
-        public ITab_ProductionSettings()
-        {
-            labelKey = "PRFSettingsTab";
-        }
-
+        
         public override bool IsVisible
         {
             get
@@ -70,14 +42,14 @@ namespace ProjectRimFactory.Common
 
         private bool ShowProductLimit => Machine is { ProductLimitationDisable: false };
 
-        private bool ShowOutputToEntireStockpile => (PRFB != null &&
-                                                     ((PRFB.SettingsOptions & PRFBSetting.optionOutputToEntireStockpie) > 0) &&
+        private bool ShowOutputToEntireStockpile => (ProductionSettingsUser != null &&
+                                                     ((ProductionSettingsUser.SettingsOptions & PRFBSetting.optionOutputToEntireStockpie) > 0) &&
                                                      // Only output to stockpile option if belt is above ground!
-                                                     !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground)));
+                                                     !(ProductionSettingsUser is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground)));
 
-        private bool ShowObeysStorageFilter => (PRFB != null &&
-                                                (PRFB.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
-                                               !(PRFB is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
+        private bool ShowObeysStorageFilter => (ProductionSettingsUser != null &&
+                                                (ProductionSettingsUser.SettingsOptions & PRFBSetting.optionObeysStorageFilters) > 0) &&
+                                               !(ProductionSettingsUser is IBeltConveyorLinkable belt && !belt.CanSendToLevel(ConveyorLevel.Ground));
 
         private bool ShowForbidOnPlacingSetting => PRfBuilding != null;
 
@@ -87,23 +59,20 @@ namespace ProjectRimFactory.Common
 
         private bool ShowAreaSelectButton => SupplyMachineHolder != null;
 
-        private IProductLimitation Machine => SelThing as IProductLimitation;
-
-
-        private IPowerSupplyMachineHolder SupplyMachineHolder => SelThing as IPowerSupplyMachineHolder;
-
-        // private CompProperties_PowerWorkSetting compProperties_PowerWorkSetting { get => this.SelThing.GetComp<CompProperties_PowerWorkSetting>(); }
-
-
-        private IPRF_SettingsContentLink PRfSettingsContent => SelThing as IPRF_SettingsContentLink;
-
-        private IPRF_Building PRfBuilding => SelThing as IPRF_Building;
-
-        private PRF_Building PRFB => SelThing as PRF_Building;
-
-        private ThingWithComps SelThingWithComps => SelThing as ThingWithComps;
-
-        private CompPowerWorkSetting CompPropertiesPowerWork => SelThingWithComps?.GetComp<CompPowerWorkSetting>();
+        
+        public static void RegisterSetting(Func<Thing, bool> showResultTest, Func<Thing, float> extraHeightRequest,
+                                           Action<Thing, Listing_Standard> windowContents)
+        {
+            ShowITabTests.Add(showResultTest);
+            ExtraHeightRequests.Add(extraHeightRequest);
+            WindowContentDrawers.Add(windowContents);
+            // onOpen=null, etc.
+        }
+        
+        public ITab_ProductionSettings()
+        {
+            labelKey = "PRFSettingsTab";
+        }
 
         private static readonly TipSignal RotInputRangeTip = new("PRF_SettingsITab_TipSignal_RotInputRange".Translate());
 
@@ -140,7 +109,7 @@ namespace ProjectRimFactory.Common
             float minHeight = 70f; // if this starts too large, the window will be too high
             float inspectWindowHeight = 268f; // Note: at least one mod makes this larger - this may not be enough.
             if (UI.screenHeight > minHeight - inspectWindowHeight) maxHeight = UI.screenHeight - inspectWindowHeight;
-            winSize.y = Mathf.Clamp(winSize.y, minHeight, maxHeight); //Support for lower Resulutions (With that the Tab should always fit on the screen) 
+            winSize.y = Mathf.Clamp(winSize.y, minHeight, maxHeight); //Support for lower Resolutions (With that the Tab should always fit on the screen) 
 
             size = winSize;
             //Log.Message("Size is currently: " + size.x + "," + size.y);
@@ -178,9 +147,8 @@ namespace ProjectRimFactory.Common
         
         protected override void FillTab()
         {
-            Listing_Standard list = new Listing_Standard();
-            Rect inRect = new Rect(0f, 0f, winSize.x, winSize.y).ContractedBy(10f);
-            Rect inRect2;
+            var list = new Listing_Standard();
+            var inRect = new Rect(0f, 0f, winSize.x, winSize.y).ContractedBy(10f);
             bool doneSection = false;
 
             list.Begin(inRect);
@@ -190,7 +158,7 @@ namespace ProjectRimFactory.Common
                 doneSection = true;
                 list.Label("PRF_ITab_ProductionSettings_OutputSettings_Header".Translate());
 
-                list.Gap(12);
+                list.Gap();
             }
 
 
@@ -199,18 +167,18 @@ namespace ProjectRimFactory.Common
             {
                 var description = "PRF.Common.OutputToStockpileDesc".Translate();
                 var label = "PRF.Common.OutputToStockpile".Translate();
-                bool tmpB = PRFB.OutputToEntireStockpile;
+                bool tmpB = ProductionSettingsUser.OutputToEntireStockpile;
                 list.CheckboxLabeled(label, ref tmpB, description);
-                if (tmpB != PRFB.OutputToEntireStockpile)
-                    PRFB.OutputToEntireStockpile = tmpB;
+                if (tmpB != ProductionSettingsUser.OutputToEntireStockpile)
+                    ProductionSettingsUser.OutputToEntireStockpile = tmpB;
             }
             if (ShowObeysStorageFilter)
             {
-                bool tmpB = PRFB.ObeysStorageFilters;
+                bool tmpB = ProductionSettingsUser.ObeysStorageFilters;
                 list.CheckboxLabeled("PRF.Common.ObeysStorageFilters".Translate(), ref tmpB,
                     "PRF.Common.ObeysStorageFiltersDesc".Translate());
-                if (tmpB != PRFB.ObeysStorageFilters)
-                    PRFB.ObeysStorageFilters = tmpB;
+                if (tmpB != ProductionSettingsUser.ObeysStorageFilters)
+                    ProductionSettingsUser.ObeysStorageFilters = tmpB;
             }
             if (ShowForbidOnPlacingSetting)
             {
@@ -221,8 +189,8 @@ namespace ProjectRimFactory.Common
                     PRfBuilding.ForbidOnPlacingDefault = tmpB;
             }
 
-            //Registerd Settings
-            //Whats that?
+            //Registered Settings
+            //What's that?
             for (int i = 0; i < ShowITabTests.Count; i++)
             {
                 if (ShowITabTests[i]?.Invoke(SelThing) == true)
@@ -237,9 +205,10 @@ namespace ProjectRimFactory.Common
             }
 
             //ProductLimitation
-            if (Machine != null && !Machine.ProductLimitationDisable)
+            if (Machine is { ProductLimitationDisable: false })
             {
                 if (doneSection) list.GapLine();
+                // ReSharper disable once RedundantAssignment
                 doneSection = true;
                 var label = "PRF.AutoMachineTool.ProductLimitation.ValueLabel".Translate();
                 var labelTip = "PRF.AutoMachineTool.ProductLimitation.ValueLabelTip".Translate();
@@ -303,7 +272,7 @@ namespace ProjectRimFactory.Common
                 Machine.ProductLimitCount = limit;
             }
 
-            //Other Registerd settings (Drone Station)
+            //Other Registered settings (Drone Station)
             if (PRfSettingsContent != null)
             {
                 list = PRfSettingsContent.PRF_SettingsContentOb.ITab_Settings_AppendContent(list, inRect);
@@ -328,7 +297,7 @@ namespace ProjectRimFactory.Common
                 if (CompPropertiesPowerWork.rangeCells.NeedsRotate)
                 {
 
-                    inRect2 = inRect;
+                    var inRect2 = inRect;
                     inRect2.width = 30;
                     inRect2.height = 30;
                     // - 10 as a spacer
