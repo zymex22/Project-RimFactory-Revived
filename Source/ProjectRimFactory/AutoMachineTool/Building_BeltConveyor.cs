@@ -274,8 +274,11 @@ namespace ProjectRimFactory.AutoMachineTool
             var targets = AllNearbyLinkables().ToList();
             PatchStorageUtil.GetPRFMapComponent(Map).NextBeltCache.Clear();
             base.DeSpawn(mode);
-
-            targets.ForEach(x => x.Unlink(this));
+            
+            if (!GravshipUtility.generatingGravship)
+            {
+               targets.ForEach(x => x.Unlink(this));
+            }
             
         }
         // What does this even mean for a building, anyway?

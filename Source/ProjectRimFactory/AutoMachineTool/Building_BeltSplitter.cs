@@ -88,6 +88,7 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
             ShowProgressBar = false;
+            
             //outputLinks.Clear(); // TOD\O <) ??
             incomingLinks.Clear();
 
@@ -107,8 +108,11 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             base.DeSpawn(mode);
 
-            outputLinks.Clear();
-            incomingLinks.Clear();
+            if (!GravshipUtility.generatingGravship)
+            {
+                outputLinks.Clear();
+            }
+            incomingLinks.Clear(); 
         }
         /// <summary>
         /// If the graphic changes - for example, the number of arrows for output
