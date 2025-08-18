@@ -88,6 +88,25 @@ namespace ProjectRimFactory.AutoMachineTool
         {
             base.SpawnSetup(map, respawningAfterLoad);
             ShowProgressBar = false;
+
+            if (GravshipPlacementUtility.placingGravship)
+            {
+                var rotInCurrentLanding = Find.CurrentGravship.Rotation;
+                
+                OutputLink[] tempCopy =
+                [
+                    outputLinks.GetValueOrDefault(Rot4.North,null), outputLinks.GetValueOrDefault(Rot4.East,null), 
+                    outputLinks.GetValueOrDefault(Rot4.South,null), outputLinks.GetValueOrDefault(Rot4.West,null)
+                ];
+                outputLinks.Clear();
+                for (int i = 0; i < tempCopy.Length; i++)
+                {
+                    var link = tempCopy[i];
+                    if (link is null) continue;
+                    var newRot = new Rot4((i + rotInCurrentLanding.AsInt) % 4);
+                    outputLinks.Add(newRot, link);
+                }
+            }
             
             //outputLinks.Clear(); // TOD\O <) ??
             incomingLinks.Clear();
