@@ -134,6 +134,12 @@ public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawn
         {
             BoundStorageUnit = null;
         }
+        
+        // Unlink on destroyed linkedStorageParentBuilding when placing the Gravship
+        if ((linkedStorageParentBuilding?.Destroyed ?? false) && GravshipPlacementUtility.placingGravship)
+        {
+            BoundStorageUnit = null;
+        }
 
         def.building.groupingLabel = LabelCapNoCount;
     }
