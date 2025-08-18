@@ -106,6 +106,8 @@
     </costList>
     <building>
       <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+      <workTableRoomRole>Laboratory</workTableRoomRole>
+      <workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
     </building>
     <altitudeLayer>Building</altitudeLayer>
     <useHitPoints>True</useHitPoints>
