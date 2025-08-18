@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RimWorld;
 using UnityEngine;
 using Verse;
 using static ProjectRimFactory.AutoMachineTool.Ops;
@@ -145,8 +146,12 @@ namespace ProjectRimFactory.AutoMachineTool
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
-            Reset();
-            ClearActions();
+            if (!GravshipUtility.generatingGravship)
+            {
+                Reset();
+                ClearActions();
+            }
+            
             base.DeSpawn(mode);
         }
 
