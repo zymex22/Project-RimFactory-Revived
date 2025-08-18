@@ -69,6 +69,7 @@ namespace ProjectRimFactory
             {
                 if (comps[i] is CompPower cp)
                 {
+                    if (GravshipPlacementUtility.placingGravship) break;
                     cp.ConnectToTransmitter(conduit.TryGetComp<CompPower>());
                     break;
                 }
