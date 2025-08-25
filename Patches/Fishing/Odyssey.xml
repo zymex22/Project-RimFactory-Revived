@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+    <Operation Class="PatchOperationFindMod">
+        <mods>
+            <li>Odyssey</li>
+        </mods>
+        <match Class="PatchOperationSequence">
+            <success>Always</success>
+            <operations>
+                <li Class="PatchOperationAdd">
+                    <xpath>/Defs/ThingDef[defName = "PRF_T1_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+                    <value>
+                        <Fish_Salmon Weight="0.2" Count="2" />
+                        <Fish_Bass Weight="0.2" Count="2" />
+                        <Fish_Tilapia Weight="0.2" Count="2" />
+                        <Fish_Guppy Weight="0.2" Count="4" />
+                        <Fish_Catfish Weight="0.2" Count="2" />
+                        <Fish_Piranha Weight="0.1" Count="2" />
+                    </value>
+                </li>
+                <li Class="PatchOperationAdd">
+                    <xpath>/Defs/ThingDef[defName = "PRF_T2_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+                    <value>
+                        <Fish_Salmon Weight="0.2" Count="2" />
+                        <Fish_Bass Weight="0.2" Count="2" />
+                        <Fish_Cod Weight="0.2" Count="2" />
+                        <Fish_Bluefish Weight="0.1" Count="2" />
+                        <Fish_Frostfish Weight="0.2" Count="2" />
+                        <Fish_Catfish Weight="0.2" Count="2" />
+                        <Fish_Dogfish Weight="0.2" Count="2" />
+                        <Fish_Marlin Weight="0.2" Count="2" />
+                        <Fish_Tuna Weight="0.2" Count="2" />
+                        <Fish_Flounder Weight="0.2" Count="2" />
+                    </value>
+                </li>
+                <li Class="PatchOperationFindMod">
+                    <mods>
+                        <li>Biotech</li>
+                    </mods>
+                    <match Class="PatchOperationSequence">
+                        <success>Always</success>
+                        <operations>
+                            <li Class="PatchOperationAdd">
+                                <xpath>/Defs/ThingDef[defName = "PRF_T1_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+                                <value>
+                                    <Fish_Toxfish Weight="0.02" Count="1" />
+                                </value>
+                            </li>
+                            <li Class="PatchOperationAdd">
+                                <xpath>/Defs/ThingDef[defName = "PRF_T2_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+                                <value>
+                                    <Fish_Toxfish Weight="0.02" Count="1" />
+                                </value>
+                            </li>
+                        </operations>
+                    </match>
+                </li>
+            </operations>
+        </match>
+    </Operation>
+
+</Patch>

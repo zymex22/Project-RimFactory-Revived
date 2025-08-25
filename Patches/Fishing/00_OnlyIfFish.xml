@@ -9,6 +9,7 @@
 			<li>[RF] Fishing</li>
 			<li>Thanks For All The Fish</li>
 			<li>Vanilla Fishing Expanded</li>
+			<li>Odyssey</li>
 		</mods>
 		<match Class="PatchOperationSequence">
 			<success>Always</success>
@@ -30,7 +31,7 @@
 							<designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
 							<size>(5,5)</size>
 							<inspectorTabs>
-								<li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+								<li>ITab_Bills</li>
 							</inspectorTabs>
 							<statBases>
 								<WorkToBuild>2500</WorkToBuild>
@@ -110,7 +111,7 @@
 							<designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
 							<size>(5,5)</size>
 							<inspectorTabs>
-								<li>ProjectRimFactory.SAL3.UI.ITab_SAL3Bills</li>
+								<li>ITab_Bills</li>
 							</inspectorTabs>
 							<statBases>
 								<WorkToBuild>3000</WorkToBuild>
