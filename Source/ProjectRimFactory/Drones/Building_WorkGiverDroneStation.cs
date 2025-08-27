@@ -78,7 +78,7 @@ namespace ProjectRimFactory.Drones
 					break;
 				}
 				/*!PawnCanUseWorkGiver(pawn, workGiver) replace with the following subset*/
-				if (workGiver.def.workType != null && pawn.WorkTypeIsDisabled(workGiver.def.workType))
+				if ((workGiver.def.workType != null && pawn.WorkTypeIsDisabled(workGiver.def.workType)) || workGiver.ShouldSkip(pawn))
 				{
 					continue;
 				}
