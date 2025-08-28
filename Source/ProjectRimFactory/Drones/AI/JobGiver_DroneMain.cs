@@ -37,8 +37,7 @@ namespace ProjectRimFactory.Drones.AI
 
 
                 // So the station finds the best job for the pawn
-                result = b.TryIssueJobPackageDrone(drone, default, true).Job 
-                         ?? b.TryIssueJobPackageDrone(drone, default,false).Job;
+                result = drone.BaseStation.TryGiveJob(drone);
 
             }
             else
