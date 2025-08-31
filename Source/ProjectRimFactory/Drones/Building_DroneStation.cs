@@ -37,6 +37,7 @@ namespace ProjectRimFactory.Drones
         }
         
         private CompPowerWorkSetting compPowerWorkSetting;
+        internal ModExtension_Skills ModExtensionDroneSkills;
 
         private IEnumerable<IntVec3> StationRangeCells
         {
@@ -104,7 +105,7 @@ namespace ProjectRimFactory.Drones
 
         private static readonly Texture2D Cancel = ContentFinder<Texture2D>.Get("UI/Designators/Cancel");
         private bool lockdown;
-        private string droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate("PRFDroneStationUnrestricted".Translate());
+        private string droneAreaSelectorLabel = "PRFDroneStationSelectArea".Translate("PRFDroneStationUnrestricted".Translate());
         protected DefModExtension_DroneStation DefModExtensionDroneStation;
         protected List<Pawn_Drone> SpawnedDrones = [];
 
@@ -151,6 +152,7 @@ namespace ProjectRimFactory.Drones
             RefuelableComp = GetComp<CompRefuelable>();
             compPowerTrader = GetComp<CompPowerTrader>();
             DefModExtensionDroneStation = def.GetModExtension<DefModExtension_DroneStation>();
+            ModExtensionDroneSkills = def.GetModExtension<ModExtension_Skills>();
             compPowerWorkSetting = GetComp<CompPowerWorkSetting>();
             stationRangeCellsOld = StationRangeCells;
             //Setup Allowed Area
@@ -200,11 +202,11 @@ namespace ProjectRimFactory.Drones
         {
             if (area is null)
             {
-                droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate("PRFDroneStationUnrestricted".Translate());
+                droneAreaSelectorLabel = "PRFDroneStationSelectArea".Translate("PRFDroneStationUnrestricted".Translate());
                 return;
             }
 
-            droneAreaSelectorLable = "PRFDroneStationSelectArea".Translate(area.Label);
+            droneAreaSelectorLabel = "PRFDroneStationSelectArea".Translate(area.Label);
         }
 
         public override void DynamicDrawPhaseAt(DrawPhase phase, Vector3 drawLoc, bool flip = false)
@@ -266,33 +268,29 @@ namespace ProjectRimFactory.Drones
             //Return if not Spawned
             if (!Spawned) return;
 
-
-            //Should not draw much performance...
-            //To enhance performance we could add "this.IsHashIntervalTick(60)"
+            
             if (SpawnedDrones.Count > 0 && compPowerTrader?.PowerOn == false)
             {
                 for (var i = SpawnedDrones.Count - 1; i >= 0; i--)
                 {
                     SpawnedDrones[i].jobs.StartJob(new Job(PRFDefOf.PRFDrone_ReturnToStation, this), JobCondition.InterruptForced);
                 }
-                //return as there is nothing to do if its off....
+                //return as there is nothing to do if it's off....
                 return;
             }
-
-
-            //Update the Allowed Area Range on Power Change
+            
+            //Update the Allowed Area
             if (this.IsHashIntervalTick(60))
             {
                 //Update the Range
                 Update_droneAllowedArea_forDrones(DroneAllowedArea);
-
-                //TODO add cell calc
+                
                 CashedGetCoverageCells = StationRangeCells.ToList();
             }
 
-            //Search for Job
+            //Check if we should search for a Job
             if (!this.IsHashIntervalTick(60 + additionJobSearchTickDelay) || DronesLeft <= 0 || lockdown || compPowerTrader?.PowerOn == false) return;
-            //The issue appears to be 100% with TryGiveJob
+            
             var drone = MakeDrone();
             GenSpawn.Spawn(drone, Position, Map);
 
@@ -301,7 +299,7 @@ namespace ProjectRimFactory.Drones
             if (job != null)
             {
                 additionJobSearchTickDelay = 0; //Reset to 0 - found a job -> may find more
-                job.playerForced = true; // Why is that here? (included since the very beginning)
+                job.playerForced = true; // Allow higher Danger for the Job
                 //MakeDrone takes about 1ms
                     
                 drone.jobs.StartJob(job);
@@ -310,8 +308,7 @@ namespace ProjectRimFactory.Drones
             {
                 drone.Destroy();
                 Notify_DroneGained();
-                //Experimental Delay
-                //Add delay (limit to 300) i am well aware that this can be higher that 300 with the current code
+                //Add delay (limit to 300) effective limit is 510
                 if (additionJobSearchTickDelay < 300)
                 {
                     //Exponential delay
@@ -319,6 +316,7 @@ namespace ProjectRimFactory.Drones
                 }
             }
         }
+
         public void Notify_DroneMayBeLost(Pawn_Drone drone)
         {
             if (!SpawnedDrones.Contains(drone)) return;
@@ -460,7 +458,7 @@ namespace ProjectRimFactory.Drones
                 yield return new DroneAreaSelector()
                 {
                     icon = ContentFinder<Texture2D>.Get("UI/Designators/AreaAllowedExpand"),
-                    defaultLabel = droneAreaSelectorLable,
+                    defaultLabel = droneAreaSelectorLabel,
                     SelectAction = (a) =>
                     {
                         Update_droneAllowedArea_forDrones(a);
