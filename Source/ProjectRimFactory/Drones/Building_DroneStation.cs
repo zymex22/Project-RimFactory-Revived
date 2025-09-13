@@ -16,7 +16,7 @@ namespace ProjectRimFactory.Drones
     public abstract class Building_DroneStation : Building, IPowerSupplyMachineHolder, IDroneSeetingsITab, IPRF_SettingsContentLink
     {
         //Sleep Time List (Loaded on Spawn)
-        public string[] CachedSleepTimeList;
+        protected int[] CachedSleepTimeList;
 
         protected CompRefuelable RefuelableComp;
 
@@ -122,8 +122,7 @@ namespace ProjectRimFactory.Drones
         }
 
         public List<SkillRecord> DroneSettingsSkillDefs => GetDroneSkillsRecord;
-
-        public string[] GetSleepTimeList => CachedSleepTimeList;
+        public string[] GetSleepTimeList { get; private set; }
 
         public CompRefuelable CompRefuelable => RefuelableComp;
 
@@ -163,7 +162,8 @@ namespace ProjectRimFactory.Drones
                 Update_droneAllowedArea_forDrones(DroneAllowedArea);
             }
             //Load the SleepTimes from XML
-            CachedSleepTimeList = DefModExtensionDroneStation.Sleeptimes.Split(',');
+            CachedSleepTimeList = DefModExtensionDroneStation.GetSleepTimesInt();
+            GetSleepTimeList = DefModExtensionDroneStation.GetSleepTimesString();
 
             CashedGetCoverageCells = StationRangeCells.ToList();
 
