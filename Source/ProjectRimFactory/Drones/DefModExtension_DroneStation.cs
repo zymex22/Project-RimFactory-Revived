@@ -1,6 +1,5 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Verse;
 
@@ -16,17 +15,36 @@ namespace ProjectRimFactory.Drones
 
         private int spawnWithDrones = 0;
         private bool spawnWithFullDrones = false;
+        
+        public string[] GetSleepTimesString()
+        {
+            return Sleeptimes.Split(',');
+        }
 
+        public int[] GetSleepTimesInt()
+        {
+            var times = GetSleepTimesString();
+            var result = new List<int>();
+            for (var i = 0; i < times.Length; i++)
+            {
+                if (int.TryParse(times[i], out var number))
+                {
+                    result.Add(number);
+                }
+            }
+            return result.ToArray();
+        }
+        
         public string GetDescription(ThingDef def)
         {
             var propertiesRefuel = def.GetCompProperties<CompProperties_Refuelable>();
-            var maxdrones = maxNumDrones;
+            var maxDrones = maxNumDrones;
             if (propertiesRefuel != null)
             {
-                maxdrones = (int)propertiesRefuel.fuelCapacity;
+                maxDrones = (int)propertiesRefuel.fuelCapacity;
             }
 
-            var text = "PRF_UTD_DefModExtension_DroneStation_MaxDrones".Translate(maxdrones) + "\r\n";
+            var text = "PRF_UTD_DefModExtension_DroneStation_MaxDrones".Translate(maxDrones) + "\r\n";
             text += "PRF_UTD_DefModExtension_DroneStation_IncludedDrones".Translate(GetDronesOnSpawn(null, propertiesRefuel)) + "\r\n";
             if (Sleeptimes != "")
             {

@@ -41,7 +41,7 @@ namespace ProjectRimFactory.Drones
 
             base.SpawnSetup(map, respawningAfterLoad);
             skills = new Pawn_SkillTracker(this);
-            skillSettings = BaseStation.def.GetModExtension<ModExtension_Skills>();
+            skillSettings = BaseStation.ModExtensionDroneSkills;
             BaseStation.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills, BaseStation.GetDroneSkillsRecord, skillSettings, true);
 
             story = new Pawn_StoryTracker(this)
@@ -59,32 +59,25 @@ namespace ProjectRimFactory.Drones
             playerSettings.AreaRestrictionInPawnCurrentMap = BaseStation.DroneAllowedArea;
         }
 
-        protected override void Tick()
-        {
-            //This is an issue
-            //from what i understand base.base is not a option
-            //This means that i am limited in what i can remove
-
-            //JobTrackerTick is the biggest / only issue. its insanly high for some reason
-            base.Tick();
-            if (!Spawned) return;
-            if (Downed)
-            {
-                Kill(null);
-            }
-        }
-
         public override void TickLong()
         {
             base.TickLong();
             if (!Spawned) return;
             BaseStation.GetDroneSkillsRecord = DroneSkills.UpdateSkills(skills, BaseStation.GetDroneSkillsRecord, skillSettings, true);
         }
+        
+        // TODO We could experiment with increasing MinTickIntervalRate per default for drones
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
         {
             base.DeSpawn(mode);
             BaseStation?.Notify_DroneMayBeLost(this);
+        }
+
+        public override void Notify_Downed()
+        {
+            base.Notify_Downed();
+            Kill(null);
         }
 
         public override void ExposeData()
