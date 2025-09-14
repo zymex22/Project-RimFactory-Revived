@@ -537,7 +537,7 @@ namespace ProjectRimFactory.AutoMachineTool
                 // TODO: any way to make filter null unless it's actually needed?
                 //   maybe not?
                 filter = new ThingFilter();
-                filter.SetAllowAll(null);
+                filter.SetAllowAll(ThingFilterHelper.FilterConfigParentNoAnimalNoPlants);
             }
             // ReSharper disable once UnusedMember.Global
             public OutputLink()
@@ -615,7 +615,7 @@ namespace ProjectRimFactory.AutoMachineTool
             }
             public void CopyAllowancesFrom(ThingFilter o)
             {
-                if (filter == null) filter = new ThingFilter();
+                filter ??= new ThingFilter();
                 filter.CopyAllowancesFrom(o);
             }
             public void DoThingFilterConfigWindow(Rect r, ThingFilterUI.UIState uIState)
@@ -623,13 +623,13 @@ namespace ProjectRimFactory.AutoMachineTool
                 if (filter == null)
                 {
                     filter = new ThingFilter();
-                    filter.SetAllowAll(null);
+                    filter.SetAllowAll(ThingFilterHelper.FilterConfigParentNoAnimalNoPlants);
                 }
-                ThingFilterUI.DoThingFilterConfigWindow(r, uIState, filter);
+                ThingFilterUI.DoThingFilterConfigWindow(r, uIState, filter, ThingFilterHelper.FilterConfigParentNoAnimalNoPlants);
             }
             public IBeltConveyorLinkable link;
             public DirectionPriority Priority = DirectionPriority.Normal;
-            private ThingFilter filter = null;
+            private ThingFilter filter;
             private bool active = true;
             private IntVec3 position = IntVec3.Invalid;
             private Building_BeltSplitter parent;
@@ -643,12 +643,12 @@ namespace ProjectRimFactory.AutoMachineTool
             if (one.x == two.x)
             {
                 t = one.z - two.z;
-                return t == 1 || t == -1;
+                return t is 1 or -1;
             }
             if (one.z == two.z)
             {
                 t = one.x - two.x;
-                return t == 1 || t == -1;
+                return t is 1 or -1;
             }
             return false;
         }
