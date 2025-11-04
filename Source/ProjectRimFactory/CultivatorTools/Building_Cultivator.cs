@@ -87,7 +87,7 @@ namespace ProjectRimFactory.CultivatorTools
                 //Only Plant if seed is available
                 if (!SeedsPleaseSupport.TryPlantNew(plantDef, SeedsPleaseSupport.InputArea(this), Map)) return;
             }
-            if (plantDef.CanEverPlantAt(c, Map) && PlantUtility.AdjacentSowBlocker(plantDef, c, Map) == null)
+            if (plantDef.CanEverPlantAt(c, Map, checkMapTemperature: false) && PlantUtility.AdjacentSowBlocker(plantDef, c, Map) == null)
             {
                 GenPlace.TryPlaceThing(ThingMaker.MakeThing(plantDef), c, Map, ThingPlaceMode.Direct);
             }
