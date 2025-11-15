@@ -10,8 +10,9 @@ namespace ProjectRimFactory.Storage
     {
         //Select outputCell via CompOutputAdjustable or set it to 2 below current pos
         //Note: While 2 below the current post could be outside them map we probably don't need to handle this as that would be outside the build zone
-
-        private readonly IntVec3 outputCell = building.GetComp<CompOutputAdjustable>()?.CurrentCell ?? building.Position + new IntVec3(0, 0, -2);
+        
+        private readonly CompOutputAdjustable compOutputAdjustable = building.GetComp<CompOutputAdjustable>();
+        private IntVec3 OutputCell => compOutputAdjustable?.CurrentCell ?? building.Position + new IntVec3(0, 0, -2);
         private readonly Map map = building.Map;
 
         /// <summary>
@@ -19,16 +20,16 @@ namespace ProjectRimFactory.Storage
         /// 
         /// Note: There might be other cases to consider such as belts
         /// </summary>
-        /// <param name="intVec3"></param>
+        /// <param name="position"></param>
         /// <returns></returns>
-        private bool ValidatePos(IntVec3 intVec3 )
+        private bool ValidatePos(IntVec3 position)
         {
-            return !intVec3.GetThingList(map).Any(e => e is ILinkableStorageParent);
+            return !position.GetThingList(map).Any(e => e is ILinkableStorageParent);
         }
 
         public bool OutputItem(Thing item)
         {
-            return GenPlace.TryPlaceThing(item.SplitOff(item.stackCount), outputCell, map, ThingPlaceMode.Near,null, ValidatePos);
+            return GenPlace.TryPlaceThing(item.SplitOff(item.stackCount), OutputCell, map, ThingPlaceMode.Near,null, ValidatePos);
         }
 
     }
