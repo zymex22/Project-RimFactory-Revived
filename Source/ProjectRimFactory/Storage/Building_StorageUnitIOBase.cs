@@ -84,7 +84,7 @@ public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawn
     {
         get
         {
-            if (IOMode != StorageIOMode.Output || !OutputSettings.useMax) return false;
+            if (IOMode != StorageIOMode.Output || !OutputSettings.UseMax) return false;
             //Only get currentItem if needed
             var currentItem = WorkPosition.GetFirstItem(Map);
             if (currentItem != null)
@@ -107,12 +107,12 @@ public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawn
     }
     public override string GetInspectString()
     {
-        if (OutputSettings.useMin && OutputSettings.useMax) 
-            return base.GetInspectString() + "\n" + "IOPort_Minimum".Translate(OutputSettings.min) + "\n" + "IOPort_Maximum".Translate(OutputSettings.max);
-        if (OutputSettings.useMin && !OutputSettings.useMax) 
-            return base.GetInspectString() + "\n" + "IOPort_Minimum".Translate(OutputSettings.min);
-        if (!OutputSettings.useMin && OutputSettings.useMax) 
-            return base.GetInspectString() + "\n" + "IOPort_Maximum".Translate(OutputSettings.max);
+        if (OutputSettings.UseMin && OutputSettings.UseMax) 
+            return base.GetInspectString() + "\n" + "IOPort_Minimum".Translate(OutputSettings.Min) + "\n" + "IOPort_Maximum".Translate(OutputSettings.Max);
+        if (OutputSettings.UseMin && !OutputSettings.UseMax) 
+            return base.GetInspectString() + "\n" + "IOPort_Minimum".Translate(OutputSettings.Min);
+        if (!OutputSettings.UseMin && OutputSettings.UseMax) 
+            return base.GetInspectString() + "\n" + "IOPort_Maximum".Translate(OutputSettings.Max);
         return base.GetInspectString();
     }
 
@@ -238,7 +238,7 @@ public abstract class Building_StorageUnitIOBase : Building_Storage, IForbidPawn
         if (currentItem != null)
         {
             itemCandidates = itemCandidates.Where(currentItem.CanStackWith).ToList();
-            var minRequired = OutputSettings.useMin ? outputSettings.min : 0;
+            var minRequired = OutputSettings.UseMin ? outputSettings.Min : 0;
             var count = currentItem.stackCount;
             var i = 0;
             while (i < itemCandidates.Count && count < minRequired)

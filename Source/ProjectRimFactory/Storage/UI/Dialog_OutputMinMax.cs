@@ -6,100 +6,6 @@ namespace ProjectRimFactory.Storage.UI
 {
     public class Dialog_OutputMinMax : Window
     {
-        static class LimitUpdateRequest
-        {
-            private static Dialog_OutputMinMax parrent;
-            private const int gracePeriodMax = 75;
-            private static int gracePeriod = -1;
-            static string lastval = "";
-
-            static Predicate<bool> predicate = (d) => false;
-            /// <summary>
-            /// True  => min = max;
-            /// false => max = min;
-            /// </summary>
-            private static bool minIsMax = false;
-
-            public static void init(Dialog_OutputMinMax par, Predicate<bool> validator)
-            {
-                predicate = validator;
-                parrent = par;
-            }
-
-            public static void Update(bool dir, string buff)
-            {
-                if (gracePeriod == -1 || buff != lastval)
-                {
-                    gracePeriod = gracePeriodMax;
-                }
-                else
-                {
-                    if (dir != minIsMax)
-                    {
-                        //The Request is for a diffrent direction
-                        LostFocus();
-                    }
-                }
-                minIsMax = dir;
-                lastval = buff;
-            }
-
-            public enum LimitUpdateRequestFocus
-            {
-                max = 1,
-                min = 0,
-                undefined = -1
-            }
-            public static void CheckFocusLoss(LimitUpdateRequestFocus maxFocus)
-            {
-                if (gracePeriod == -1) return;
-                if (maxFocus >= 0 && ((int)maxFocus == 1 && minIsMax || (int)maxFocus == 0 && !minIsMax))
-                {
-                    //Still have correct focus
-                }
-                else
-                {
-                    LostFocus();
-                }
-            }
-            public static void LostFocus(bool force = false)
-            {
-                if (gracePeriod == -1 && !force) return;
-                gracePeriod = 1;
-                Tick();
-            }
-
-            public static void Tick()
-            {
-                if (gracePeriod >= 0) gracePeriod--;
-
-                if (gracePeriod == 0 && predicate(minIsMax))
-                {
-                    parrent?.OverrideBuffer(minIsMax);
-                }
-            }
-        }
-
-        public void OverrideBuffer(bool minIsMax)
-        {
-
-            if (minIsMax)
-            {
-                minBufferString = maxBufferString;
-            }
-            else
-            {
-                maxBufferString = minBufferString;
-            }
-        }
-
-        private string controlIdMinInput = null;
-        private string controlIdMaxInput = null;
-
-        protected OutputSettings outputSettings;
-        private const float TitleLabelHeight = 32f;
-        string minBufferString, maxBufferString;
-
         public Dialog_OutputMinMax(OutputSettings settings, Action postClose = null)
         {
             outputSettings = settings;
@@ -113,38 +19,120 @@ namespace ProjectRimFactory.Storage.UI
             forcePause = true;
             this.postClose = postClose;
         }
+        
+        private static string minBufferString;
+        private static string maxBufferString;
+        
+        private string controlIdMinInput = null;
+        private string controlIdMaxInput = null;
 
-        private Action postClose;
+        private static OutputSettings outputSettings;
+        private const float TitleLabelHeight = 32f;
+
+        private readonly Action postClose;
 
         public override Vector2 InitialSize => new(500f, 250f);
 
-        private bool validator(bool data)
+
+        private class GracefulInput(Action<int> applyChangeAction)
         {
-            if (maxBufferString.NullOrEmpty())
-            {
-                maxBufferString = "0";
-                outputSettings.max = 0;
-            }
-            if (minBufferString.NullOrEmpty())
-            {
-                minBufferString = "0";
-                outputSettings.min = 0;
-            }
+            private const int GracePeriod = 75;
+            private int remainingGracePeriod = -1;
 
-            return outputSettings.max < outputSettings.min;
+            public void UpdateValue(int value)
+            {
+                Value = value;
+                oldValue = Value;
+            }
+            
+            private bool ValueChanged => Value != oldValue;
+
+            private int oldValue = -1;
+            public int Value = -1;
+            
+            private void ApplyChange()
+            {
+                remainingGracePeriod = -1;
+                applyChangeAction.Invoke(Value);
+                Value = -1;
+            }
+            public void LostFocus()
+            {
+                if (!ValueChanged)
+                {
+                    return;
+                }
+                if (remainingGracePeriod > -1)
+                {
+                    remainingGracePeriod = 0;
+                }
+
+                if (remainingGracePeriod == 0)
+                {
+                    ApplyChange();
+                }
+                
+            }
+            
+            public void Tick()
+            {
+                if (!ValueChanged)
+                {
+                    return;
+                }
+                if (remainingGracePeriod == -1)
+                {
+                    remainingGracePeriod = GracePeriod;
+                }
+                
+
+                if (remainingGracePeriod > 0)
+                {
+                    remainingGracePeriod--;
+                }
+                
+                if (remainingGracePeriod == 0)
+                {
+                    ApplyChange();
+                }
+            }
+            
         }
-
+        
+        private readonly GracefulInput inputMaximum = new(i =>
+        {
+            if (i >= 0)
+            {
+                outputSettings.Max = i;
+                maxBufferString = null;
+                minBufferString = null;
+            }
+        });
+        private readonly GracefulInput inputMinimum = new(i =>
+        {
+            if (i >= 0)
+            {
+                outputSettings.Min = i;
+                maxBufferString = null;
+                minBufferString = null;
+            }
+        });
+        
+        
         public override void DoWindowContents(Rect rect)
         {
-            if (maxBufferString == null)
+            maxBufferString ??= outputSettings.Max.ToString();
+            minBufferString ??= outputSettings.Min.ToString();
+            if (inputMaximum.Value == -1)
             {
-                maxBufferString = outputSettings.max.ToString();
-            }
-            if (minBufferString == null)
+                inputMaximum.UpdateValue(outputSettings.Max) ;
+            } 
+            if (inputMinimum.Value == -1)
             {
-                minBufferString = outputSettings.min.ToString();
-            }
-            Listing_Standard list = new Listing_Standard(GameFont.Small)
+                inputMinimum.UpdateValue(outputSettings.Min);
+            } 
+            
+            var list = new Listing_Standard(GameFont.Small)
             {
                 ColumnWidth = rect.width
             };
@@ -152,15 +140,16 @@ namespace ProjectRimFactory.Storage.UI
             var focus = GUI.GetNameOfFocusedControl();
             if (focus == controlIdMaxInput)
             {
-                LimitUpdateRequest.CheckFocusLoss(LimitUpdateRequest.LimitUpdateRequestFocus.max);
+                inputMinimum.LostFocus();
             }
             else if (focus == controlIdMinInput)
             {
-                LimitUpdateRequest.CheckFocusLoss(LimitUpdateRequest.LimitUpdateRequestFocus.min);
+                inputMaximum.LostFocus();
             }
             else
             {
-                LimitUpdateRequest.CheckFocusLoss(LimitUpdateRequest.LimitUpdateRequestFocus.undefined);
+                inputMaximum.LostFocus();
+                inputMinimum.LostFocus();
             }
 
             list.Begin(rect);
@@ -171,64 +160,48 @@ namespace ProjectRimFactory.Storage.UI
             list.Gap();
             list.Gap();
             list.Gap();
-            list.CheckboxLabeled("SmartHopper_Minimum_Label".Translate(), ref outputSettings.useMin, outputSettings.minTooltip.Translate());
+            list.CheckboxLabeled("SmartHopper_Minimum_Label".Translate(), ref outputSettings.UseMin, outputSettings.MinTooltip.Translate());
             list.Gap();
             {
-                Rect rectLine = list.GetRect(Text.LineHeight);
-                Rect rectLeft = rectLine.LeftHalf().Rounded();
-                Rect rectRight = rectLine.RightHalf().Rounded();
-                TextAnchor anchorBuffer = Text.Anchor;
+                var rectLine = list.GetRect(Text.LineHeight);
+                var rectLeft = rectLine.LeftHalf().Rounded();
+                var rectRight = rectLine.RightHalf().Rounded();
+                var anchorBuffer = Text.Anchor;
                 Text.Anchor = TextAnchor.MiddleLeft;
                 Widgets.DrawHighlightIfMouseover(rectLine);
                 Widgets.Label(rectLeft, "SmartHopper_MinimumKeyword".Translate());
                 Text.Anchor = anchorBuffer;
-                Widgets.TextFieldNumeric(rectRight, ref outputSettings.min, ref minBufferString, 0);
+                Widgets.TextFieldNumeric(rectRight, ref inputMinimum.Value, ref minBufferString);
                 controlIdMinInput ??= "TextField" + rectRight.y.ToString("F0") + rectRight.x.ToString("F0");
             }
-            if (outputSettings.max < outputSettings.min && GUI.GetNameOfFocusedControl() == controlIdMinInput)
-            {
-                LimitUpdateRequest.Update(false, minBufferString);
-                //maxBufferString = minBufferString;
-            }
             list.Gap();
-            list.CheckboxLabeled("SmartHopper_Maximum_Label".Translate(), ref outputSettings.useMax, outputSettings.maxTooltip.Translate());
+            list.CheckboxLabeled("SmartHopper_Maximum_Label".Translate(), ref outputSettings.UseMax, outputSettings.MaxTooltip.Translate());
             list.Gap();
             {
-                Rect rectLine = list.GetRect(Text.LineHeight);
-                Rect rectLeft = rectLine.LeftHalf().Rounded();
-                Rect rectRight = rectLine.RightHalf().Rounded();
-                TextAnchor anchorBuffer = Text.Anchor;
+                var rectLine = list.GetRect(Text.LineHeight);
+                var rectLeft = rectLine.LeftHalf().Rounded();
+                var rectRight = rectLine.RightHalf().Rounded();
+                var anchorBuffer = Text.Anchor;
                 Text.Anchor = TextAnchor.MiddleLeft;
                 Widgets.DrawHighlightIfMouseover(rectLine);
                 Widgets.Label(rectLeft, "SmartHopper_MaximumKeyword".Translate());
                 Text.Anchor = anchorBuffer;
-                Widgets.TextFieldNumeric(rectRight, ref outputSettings.max, ref maxBufferString, 0);
+                Widgets.TextFieldNumeric(rectRight, ref inputMaximum.Value, ref maxBufferString);
                 controlIdMaxInput ??= "TextField" + rectRight.y.ToString("F0") + rectRight.x.ToString("F0");
             }
-            if (outputSettings.min > outputSettings.max && GUI.GetNameOfFocusedControl() == controlIdMaxInput)
-            {
-                LimitUpdateRequest.Update(true, maxBufferString);
-                //minBufferString = maxBufferString;
-            }
-            LimitUpdateRequest.Tick();
-
-
-
-
+            
+            inputMaximum.Tick();
+            inputMinimum.Tick();
+            
             list.End();
         }
 
         public override void PostClose()
         {
-            LimitUpdateRequest.LostFocus(maxBufferString.NullOrEmpty() || minBufferString.NullOrEmpty());
+            inputMaximum.LostFocus();
+            inputMinimum.LostFocus();
             base.PostClose();
-            this.postClose?.Invoke();
-        }
-
-        public override void PreOpen()
-        {
-            LimitUpdateRequest.init(this, validator);
-            base.PreOpen();
+            postClose?.Invoke();
         }
     }
 }

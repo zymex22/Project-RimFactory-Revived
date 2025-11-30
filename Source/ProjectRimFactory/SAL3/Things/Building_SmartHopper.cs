@@ -178,12 +178,12 @@ namespace ProjectRimFactory.SAL3.Things
 
         public override string GetInspectString()
         {
-            if (OutputSettings.useMin && OutputSettings.useMax)
-                return base.GetInspectString() + "\n" + "SmartHopper_Minimum".Translate(OutputSettings.min) + "\n" + "SmartHopper_Maximum".Translate(OutputSettings.max);
-            if (OutputSettings.useMin && !OutputSettings.useMax)
-                return base.GetInspectString() + "\n" + "SmartHopper_Minimum".Translate(OutputSettings.min);
-            if (!OutputSettings.useMin && OutputSettings.useMax)
-                return base.GetInspectString() + "\n" + "SmartHopper_Maximum".Translate(OutputSettings.max);
+            if (OutputSettings.UseMin && OutputSettings.UseMax)
+                return base.GetInspectString() + "\n" + "SmartHopper_Minimum".Translate(OutputSettings.Min) + "\n" + "SmartHopper_Maximum".Translate(OutputSettings.Max);
+            if (OutputSettings.UseMin && !OutputSettings.UseMax)
+                return base.GetInspectString() + "\n" + "SmartHopper_Minimum".Translate(OutputSettings.Min);
+            if (!OutputSettings.UseMin && OutputSettings.UseMax)
+                return base.GetInspectString() + "\n" + "SmartHopper_Maximum".Translate(OutputSettings.Max);
             
             return base.GetInspectString();
         }
@@ -196,7 +196,7 @@ namespace ProjectRimFactory.SAL3.Things
             foreach (var element in ThingsToSelect)
             {
                 var withinLimits = true;
-                if (OutputSettings.useMin) withinLimits = (element.stackCount >= OutputSettings.min);
+                if (OutputSettings.UseMin) withinLimits = (element.stackCount >= OutputSettings.Min);
 
                 if (element.def.category == ThingCategory.Item && settings.AllowedToAccept(element) && withinLimits)
                 {
@@ -210,11 +210,11 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 var forbidItem = true;
 
-                if (OutputSettings.useMin || OutputSettings.useMax)
+                if (OutputSettings.UseMin || OutputSettings.UseMax)
                 {
-                    if (OutputSettings.useMin && StoredThing.stackCount < OutputSettings.min)
+                    if (OutputSettings.UseMin && StoredThing.stackCount < OutputSettings.Min)
                         forbidItem = false;
-                    else if (OutputSettings.useMax && StoredThing.stackCount > OutputSettings.max)
+                    else if (OutputSettings.UseMax && StoredThing.stackCount > OutputSettings.Max)
                         forbidItem = false;
                 }
                 if (forbidItem)
@@ -232,7 +232,7 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 if (!StoredThing.CanStackWith(element)) return;
                 var num = Mathf.Min(element.stackCount, (StoredThing.def.stackLimit - StoredThing.stackCount));
-                if (OutputSettings.useMax) num = Mathf.Min(element.stackCount, Mathf.Min((StoredThing.def.stackLimit - StoredThing.stackCount), (OutputSettings.max - StoredThing.stackCount)));
+                if (OutputSettings.UseMax) num = Mathf.Min(element.stackCount, Mathf.Min((StoredThing.def.stackLimit - StoredThing.stackCount), (OutputSettings.Max - StoredThing.stackCount)));
 
                 if (num <= 0) return;
                 var t = element.SplitOff(num);
@@ -242,7 +242,7 @@ namespace ProjectRimFactory.SAL3.Things
             {
                 var num = element.stackCount;
 
-                if (OutputSettings.useMax) num = Mathf.Min(element.stackCount, OutputSettings.max);
+                if (OutputSettings.UseMax) num = Mathf.Min(element.stackCount, OutputSettings.Max);
                 if (num <= 0) return;
                 // if this is the entire stack, we just get the stack. Important for belts to do it this way:
                 var t = element.SplitOff(num);
