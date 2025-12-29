@@ -22,7 +22,7 @@ namespace ProjectRimFactory.Common
         /// <summary>
         /// WARNING MAY CONTAIN DUPLICATES
         /// A list of items a PRF building might want to use as input resources, either on the ground,
-        ///   in storage, or on coveyor belts.
+        ///   in storage, or on conveyor belts.
         /// </summary>
         /// <returns>The items in cell <paramref name="c"/> for use.</returns>
         /// <param name="c">Cell</param>
@@ -36,24 +36,20 @@ namespace ProjectRimFactory.Common
 
             if (!c.InBounds(map)) yield break;
             var thingList = map.thingGrid.ThingsListAt(c);
-            //Risk for duplicate entrys if a cell contins both a Item & a IThingHolder that holds said item
+            //Risk for duplicate entry's if a cell contains both an Item & a IThingHolder that holds said item
             for (int i = thingList.Count - 1; i >= 0; i--)
             {
-                Thing t = thingList[i];
-                if (t is Building && t is IThingHolder holder && !(t is Frame))
+                var t = thingList[i];
+                if (t is Building and IThingHolder holder and not Frame 
+                    && holder.GetDirectlyHeldThings() is ThingOwner<Thing> owner)
                 {
-                    if (holder.GetDirectlyHeldThings() is not ThingOwner<Thing> owner) continue;
-                    if (t is Building_BeltConveyor belt && belt.IsUnderground && !allowUGBelts)
+                    switch (t)
                     {
-                        // It the target is an Underground Belt & wen don't Explicitly allow that then don't place anything
-                        continue;
-                    }
-
-                    if (t is Building_BeltConveyorUGConnector { ToUnderground: true })
-                    {
-                        if (!allowUGEntranceConnector) {
-                            continue; // Don't allow Entrance unless specifically allowed
-                        }
+                        // If the target is an Underground Belt & when don't Explicitly allow that then don't place anything
+                        case Building_BeltConveyor { IsUnderground: true } when !allowUGBelts:
+                        // Don't allow Entrance unless specifically allowed
+                        case Building_BeltConveyorUGConnector { ToUnderground: true } when !allowUGEntranceConnector:
+                            continue;
                     }
 
                     // Exits should always be allowed
