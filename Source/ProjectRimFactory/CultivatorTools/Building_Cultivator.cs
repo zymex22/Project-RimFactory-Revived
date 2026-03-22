@@ -87,7 +87,12 @@ namespace ProjectRimFactory.CultivatorTools
                 //Only Plant if seed is available
                 if (!SeedsPleaseSupport.TryPlantNew(plantDef, SeedsPleaseSupport.InputArea(this), Map)) return;
             }
-            if (plantDef.CanEverPlantAt(c, Map) && PlantUtility.AdjacentSowBlocker(plantDef, c, Map) == null)
+            // checkMapTemperature is not the temperature at the cell, but the map global
+            // GrowthSeasonNow checks the temperature at the cell
+            if (plantDef.CanEverPlantAt(c, Map, checkMapTemperature: false) 
+                && PlantUtility.AdjacentSowBlocker(plantDef, c, Map) == null 
+                && PlantUtility.GrowthSeasonNow(c, Map, plantDef)
+                && (plantDef.plant.vacuumResistant ||  c.GetVacuum(Map) < 0.5f))
             {
                 GenPlace.TryPlaceThing(ThingMaker.MakeThing(plantDef), c, Map, ThingPlaceMode.Direct);
             }
