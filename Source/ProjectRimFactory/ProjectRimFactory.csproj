@@ -47,4 +47,30 @@
     </MonoDevelop>
   </ProjectExtensions>
 
+  <Target Name="SetSourceRevisionId" BeforeTargets="InitializeSourceControlInformation">
+    <!-- Use git describe with dirty detection if able -->
+    <Exec
+            Command="git describe --long --always --dirty --exclude=* --abbrev=10"
+            ConsoleToMSBuild="True"
+            ContinueOnError="WarnAndContinue"
+    >
+      <Output TaskParameter="ExitCode" PropertyName="BuildExitCode"/>
+      <Output Condition="'$(BuildExitCode)' == '0'" PropertyName="SourceRevisionId" TaskParameter="ConsoleOutput"/>
+    </Exec>
+  </Target>
+  
+  <!-- Update The Versions Using the Manifest.xml -->
+  <Target Name="SetVersion" BeforeTargets="InitializeSourceControlInformation">
+    <XmlPeek
+            XmlInputPath="../../About/Manifest.xml"
+            Query="//version/text()"
+            ContinueOnError="WarnAndContinue"
+    >
+      <Output PropertyName="AssemblyVersion" TaskParameter="Result"/>
+      <Output PropertyName="FileVersion" TaskParameter="Result"/>
+      <Output PropertyName="InformationalVersion" TaskParameter="Result"/>
+    </XmlPeek>
+  </Target>
+  
+
 </Project>

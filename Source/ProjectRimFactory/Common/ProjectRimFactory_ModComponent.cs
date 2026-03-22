@@ -18,7 +18,7 @@ namespace ProjectRimFactory.Common
                 this.Settings = GetSettings<ProjectRimFactory_ModSettings>();
                 this.HarmonyInstance = new Harmony("com.spdskatr.projectrimfactory");
                 this.HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
-                Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetName().Version} - Harmony patches successful");
+                Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} - Harmony patches successful");
                 availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
                 
                 ConditionalPatchHelper.InitHarmony(this.HarmonyInstance);
