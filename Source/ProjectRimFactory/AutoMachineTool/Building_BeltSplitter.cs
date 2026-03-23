@@ -200,8 +200,8 @@ namespace ProjectRimFactory.AutoMachineTool
             //   slow, and I'm sure there are no mistakes here?
             var previousDir = new Rot4(dest.AsInt);
             var prevPriority = outputLinks.TryGetValue(previousDir, null)?.Priority;
-            foreach (var priority in ((DirectionPriority[])Enum
-                     .GetValues(typeof(DirectionPriority))).Reverse())
+            foreach (var priority in ((IEnumerable<DirectionPriority>)((DirectionPriority[])Enum
+                         .GetValues(typeof(DirectionPriority)))).Reverse())
             {
                 // I will rotate counterclockwise because that is the "positive" direction
                 var nextDir = previousDir.RotateAsNew(RotationDirection.Counterclockwise);
