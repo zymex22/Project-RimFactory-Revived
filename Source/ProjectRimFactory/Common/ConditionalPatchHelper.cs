@@ -92,11 +92,6 @@ namespace ProjectRimFactory.Common
          AccessTools.Method(typeof(HarmonyPatches.Patch_Building_Storage_Accepts), "Prefix")
          );
 
-        private static readonly TogglePatch PatchStorageSettingsAllowedToAccept = new(
-         AccessTools.Method(typeof(StorageSettings), "AllowedToAccept", new Type[] { typeof(Thing) }),
-         AccessTools.Method(typeof(HarmonyPatches.Patch_StorageSettings_AllowedToAccept), "Prefix")
-         );
-
         private static readonly TogglePatch PatchForbidUtilityIsForbidden = new(
          AccessTools.Method(typeof(ForbidUtility), "IsForbidden", new Type[] { typeof(Thing), typeof(Pawn) }),
          AccessTools.Method(typeof(HarmonyPatches.Patch_ForbidUtility_IsForbidden), "Prefix")
@@ -119,7 +114,6 @@ namespace ProjectRimFactory.Common
             PatchFloatMenuMakerMapChoicesAtFor.PatchHandler(state);
             PatchBuildingStorageAccepts.PatchHandler(state);
             PatchForbidUtilityIsForbidden.PatchHandler(state);
-            PatchStorageSettingsAllowedToAccept.PatchHandler(state);
         }
 
         public static void Register(Building_MassStorageUnit building)
