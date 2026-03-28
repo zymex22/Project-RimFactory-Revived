@@ -44,6 +44,8 @@
       <LeatherAmount>25</LeatherAmount>
       <Mass>20</Mass>
       <FilthRate>0</FilthRate>
+      <ToxicResistance>1</ToxicResistance>
+      <ToxicEnvironmentResistance>1</ToxicEnvironmentResistance>
     </statBases>
     <inspectorTabs>
       <!-- 
