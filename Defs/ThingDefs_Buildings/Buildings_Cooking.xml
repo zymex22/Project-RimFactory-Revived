@@ -269,6 +269,7 @@
           <texPath>SAL3/AutoCookerPowerOff</texPath>
           <drawSize>(3,3)</drawSize>
         </powerOffGraphicData>
+        <MayCauseFoodPoisoning>false</MayCauseFoodPoisoning>
       </li>
       <li Class="ProjectRimFactory.Common.ModExtension_Skills">
         <SkillUsage>ThisOverrides</SkillUsage>
