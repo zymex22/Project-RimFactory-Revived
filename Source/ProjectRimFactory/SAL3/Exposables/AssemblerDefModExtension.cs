@@ -14,6 +14,7 @@ namespace ProjectRimFactory.SAL3.Exposables
         public List<RecipeEffecter> overrideRecipeEffecter = [];
         public EffecterDef defaultEffecter;
         public SoundDef defaultSound;
+        public readonly bool MayCauseFoodPoisoning = true;
 
         public GraphicData workingGraphicData;
         public GraphicData powerOffGraphicData;

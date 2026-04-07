@@ -429,26 +429,24 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             }
             // GenRecipe handles creating any bonus products
             if (def == PRFDefOf.PRF_Recycler) Patch_Thing_SmeltProducts.RecyclerProducingItems = true;
-            Patch_CompFoodPoisonable_Notify_RecipeProduced.AssemblerRefrence = this;
-            
-            
-            
-            
-            var products = GenRecipe.MakeRecipeProducts(CurrentBillReport.Bill.recipe, buildingPawn,
-                CurrentBillReport.Selected, 
-                ProjectSal_Utilities.CalculateDominantIngredient(CurrentBillReport.Bill.recipe, CurrentBillReport.Selected),
-                this).ToList();
-            
-            
-            // TODO I hope that works
-            def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(products, this, this, CurrentBillReport.Bill.recipe);
-            
-            foreach (var thing in products)
+
+            using (new Patch_CompFoodPoisonable_Notify_RecipeProduced.AssemblerRef(this))
             {
-                PostProcessRecipeProduct(thing);
-                ThingQueue.Add(thing);
+                var products = GenRecipe.MakeRecipeProducts(CurrentBillReport.Bill.recipe, buildingPawn,
+                    CurrentBillReport.Selected, 
+                    ProjectSal_Utilities.CalculateDominantIngredient(CurrentBillReport.Bill.recipe, CurrentBillReport.Selected),
+                    this).ToList();
+                
+                
+                // TODO I hope that works
+                def.GetModExtension<ModExtension_ModifyProduct>()?.ProcessProducts(products, this, this, CurrentBillReport.Bill.recipe);
+                
+                foreach (var thing in products)
+                {
+                    PostProcessRecipeProduct(thing);
+                    ThingQueue.Add(thing);
+                }
             }
-            Patch_CompFoodPoisonable_Notify_RecipeProduced.AssemblerRefrence = null;
             Patch_Thing_SmeltProducts.RecyclerProducingItems = false;
             
             // Consume the Input
@@ -666,6 +664,18 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         private bool AllowProductionThingQueue => ThingQueue.Count < MaxThingQueueCount;
 
         Map IAssemblerQueue.Map => Map;
+        
+        public float FoodPoisonChance
+        {
+            get
+            {
+                if (!AssemblerDefModExtension?.MayCauseFoodPoisoning ?? false) return 0f;
+                // Will not check the Output cell, I feel this would only allow gaming the system.
+                // The room of the Assembler should affect the chances
+                var room = RegionAndRoomQuery.RoomAt(Position, Map);
+                return room?.GetStat(RoomStatDefOf.FoodPoisonChance) ?? RoomStatDefOf.FoodPoisonChance.roomlessScore;
+            }
+        }
 
         [Unsaved]
         private Effecter effecter;
