@@ -63,8 +63,28 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         {
             try
             {
-                var p = PawnGenerator.GeneratePawn(PRFDefOf.PRFSlavePawn, Faction.OfPlayer);
+                var request = new PawnGenerationRequest(
+                    PRFDefOf.PRFSlavePawn, 
+                    Faction.OfPlayer,
+                    canGeneratePawnRelations: false,
+                    colonistRelationChanceFactor: 0f,
+                    allowAddictions: false,
+                    relationWithExtraPawnChanceFactor: 0f,
+                    fixedBiologicalAge: 20f,
+                    fixedGender: Gender.Male,
+                    forceBaselinerChance: 1f,
+                    maximumAgeTraits: 0,
+                    forceNoGear: true);
+                
+                var p = PawnGenerator.GeneratePawn(request);
                 p.Name = new NameTriple("...", Label ?? "SAL_Name".Translate(), "...");
+
+                if (p.gender == Gender.Female)
+                {
+                    Log.Error($"Pawn generated as Female, but that is not allowed");
+                    p.gender = Gender.Male;
+                }
+                
                 //Assign skills
                 foreach (var s in p.skills.skills)
                 {
@@ -221,8 +241,15 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             base.SpawnSetup(map, respawningAfterLoad);
             compOutputAdjustable = GetComp<CompOutputAdjustable>();
             MapManager = map.GetComponent<MapTickManager>();
+            if (buildingPawn.gender == Gender.Female)
+            {
+                // Existing Pawn should be regenerated
+                buildingPawn = null;
+            }
             if (buildingPawn == null)
+            {
                 DoPawn();
+            }
 
             buildingPawn?.skills.skills.ForEach(s =>
             {
