@@ -40,15 +40,27 @@
     <apparelAllowHeadgearChance>0</apparelAllowHeadgearChance>
     <techHediffsMoney>
       <min>0</min>
-      <max>35</max>
+      <max>0</max>
     </techHediffsMoney>
     <techHediffsTags>
       <li>Poor</li>
     </techHediffsTags>
-    <techHediffsChance>0.01</techHediffsChance>
+    <techHediffsChance>0.00</techHediffsChance>
     <apparelIgnoreSeasons>true</apparelIgnoreSeasons>
     <invNutrition>0.05</invNutrition>
     <initialWillRange>0~1</initialWillRange>
     <initialResistanceRange>10~17</initialResistanceRange>
+    <allowOldAgeInjuries>false</allowOldAgeInjuries>
+    <generateInitialNonFamilyRelations>false</generateInitialNonFamilyRelations>
+    <showInDebugSpawner>false</showInDebugSpawner>
+    <canArriveManhunter>false</canArriveManhunter>
+    <allowInMechClusters>false</allowInMechClusters>
+    <techHediffsMaxAmount>0</techHediffsMaxAmount>
+    <humanPregnancyChance>0</humanPregnancyChance>
+    <fixedGender>Male</fixedGender>
+    <immuneToGameConditionEffects>true</immuneToGameConditionEffects>
+    <nakedChance>1</nakedChance>
+    <chemicalAddictionChance>0</chemicalAddictionChance>
+    <combatEnhancingDrugsChance>0</combatEnhancingDrugsChance>
   </PawnKindDef>
 </Defs>
