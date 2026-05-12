@@ -241,12 +241,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             base.SpawnSetup(map, respawningAfterLoad);
             compOutputAdjustable = GetComp<CompOutputAdjustable>();
             MapManager = map.GetComponent<MapTickManager>();
-            if ((buildingPawn?.gender ?? Gender.Male) == Gender.Female)
-            {
-                // Existing Pawn should be regenerated
-                buildingPawn = null;
-            }
-            if (buildingPawn == null)
+            
+            // Generate Pawn if missing or impacted by #924 (second clause may be removed by next year) 
+            if (buildingPawn == null || buildingPawn.gender ==  Gender.Female)
             {
                 DoPawn();
             }
