@@ -60,39 +60,39 @@ class Patch_StorageSettings_AllowedToAccept
             {
                 // Insert Patch Here
                 // We are Just before the Return True
+                
+                // Create local Variable for "___owner is IForbidPawnInputItem storage"
                 yield return new CodeInstruction(OpCodes.Ldarg_0);
                 yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(StorageSettings), "owner"));
                 yield return new CodeInstruction(OpCodes.Isinst, typeof(IForbidPawnInputItem));
                 yield return new CodeInstruction(OpCodes.Stloc_1);
+                
+                // if not IForbidPawnInputItem return
                 yield return new CodeInstruction(OpCodes.Ldloc_1);
-                yield return new CodeInstruction(OpCodes.Brfalse_S, jumpMarker); // if not IForbidPawnInputItem return
-                    
+                yield return new CodeInstruction(OpCodes.Brfalse_S, jumpMarker); 
+                
+                // Skip if SkippAcceptsPatch
                 yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(PatchStorageUtil), "SkippAcceptsPatch"));
-                yield return new CodeInstruction(OpCodes.Brtrue_S, jumpMarker); // Skip if SkippAcceptsPatch
-                   
-                    
-                // I Hope that's right
+                yield return new CodeInstruction(OpCodes.Brtrue_S, jumpMarker); 
+                
+                // if not ForbidPawnInput return
                 yield return new CodeInstruction(OpCodes.Ldloc_1);
                 yield return new CodeInstruction(OpCodes.Callvirt, 
                     AccessTools.PropertyGetter(typeof(IForbidPawnInputItem), "ForbidPawnInput"));
-                yield return new CodeInstruction(OpCodes.Brfalse_S, jumpMarker); // if not ForbidPawnInput return
+                yield return new CodeInstruction(OpCodes.Brfalse_S, jumpMarker); 
                     
-                // now the Position check
-                // I Hope that's right
+                // storage.Position
                 yield return new CodeInstruction(OpCodes.Ldloc_1);
                 yield return new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(IHaulDestination), "get_Position"));
-                    
-                    
-                //yield return new CodeInstruction(OpCodes.Ldarg_1); // This should be the thing
-                //yield return new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(Thing), "get_Position"));
-                    
-                yield return new CodeInstruction(OpCodes.Ldarg_1); // This should be the thing
+                
+                // thing.Position
+                yield return new CodeInstruction(OpCodes.Ldarg_1);
                 yield return new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(Thing), "get_Position"));
                     
-                    
+                // Skip if pos is the same
                 yield return new CodeInstruction(OpCodes.Call,
                     AccessTools.Method(typeof(IntVec3), "op_Equality", new Type[] { typeof(IntVec3), typeof(IntVec3) }));
-                yield return new CodeInstruction(OpCodes.Brtrue_S, jumpMarker); // Skip if pos is the same
+                yield return new CodeInstruction(OpCodes.Brtrue_S, jumpMarker); 
 
                 yield return new CodeInstruction(OpCodes.Ldc_I4_0);
                 yield return new CodeInstruction(OpCodes.Ret);
