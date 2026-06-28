@@ -84,10 +84,11 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             mindist = float.MaxValue;
             closestPort = null;
 
-            if (pawn.Faction is not { IsPlayer: true }) return;
+            var pawnMap = pawn.Map;
+            if (pawn.Faction is not { IsPlayer: true } || pawnMap is null) return;
 
             //TODO: Not Optimal for the search. might need update
-            var closest = AdvancedIO_PatchHelper.GetClosestPort(pawn.Map, pawn.Position);
+            var closest = AdvancedIO_PatchHelper.GetClosestPort(pawnMap, pawn.Position);
             mindist = closest.Key;
             closestPort = closest.Value;
         }
