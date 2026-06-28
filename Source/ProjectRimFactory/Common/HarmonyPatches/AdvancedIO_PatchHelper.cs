@@ -10,7 +10,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
         /// <summary>
         /// Gets all Ports that could be used
-        /// They are Powerd, connected and the connected DSU is also powerd
+        /// They are Powered, connected and the connected DSU is also powered
         /// </summary>
         /// <param name="map"></param>
         /// <returns></returns>
@@ -69,7 +69,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
         /// <summary>
         /// Returns the Closest Port that can transport a specific thing
-        /// While being closer then a defined maxDistance
+        /// While being closer than a defined maxDistance
         /// </summary>
         /// <param name="map"></param>
         /// <param name="pawnPos"></param>
@@ -110,7 +110,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
 
         /// <summary>
         /// Calculates the Full Path Cost
-        /// But it can't see walls / Tarrain
+        /// But it can't see walls / Terrain
         /// This is cheap
         /// 1 Call ~ 0.2us
         /// </summary>
