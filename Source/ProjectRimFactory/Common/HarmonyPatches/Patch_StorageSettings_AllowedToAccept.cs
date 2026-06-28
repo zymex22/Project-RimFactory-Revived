@@ -38,9 +38,9 @@ class Patch_StorageSettings_AllowedToAccept
     ///    return false;
     ///}
     /// </summary>
-    static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+    static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions,ILGenerator generator)
     {
-            
+        generator.DeclareLocal(typeof(IForbidPawnInputItem));
         foreach (var instruction in instructions)
         {
                 
@@ -63,6 +63,8 @@ class Patch_StorageSettings_AllowedToAccept
                 yield return new CodeInstruction(OpCodes.Ldarg_0);
                 yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(StorageSettings), "owner"));
                 yield return new CodeInstruction(OpCodes.Isinst, typeof(IForbidPawnInputItem));
+                yield return new CodeInstruction(OpCodes.Stloc_1);
+                yield return new CodeInstruction(OpCodes.Ldloc_1);
                 yield return new CodeInstruction(OpCodes.Brfalse_S, jumpMarker); // if not IForbidPawnInputItem return
                     
                 yield return new CodeInstruction(OpCodes.Ldsfld, AccessTools.Field(typeof(PatchStorageUtil), "SkippAcceptsPatch"));
@@ -70,18 +72,14 @@ class Patch_StorageSettings_AllowedToAccept
                    
                     
                 // I Hope that's right
-                yield return new CodeInstruction(OpCodes.Ldarg_0);
-                yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(StorageSettings), "owner"));
-                yield return new CodeInstruction(OpCodes.Isinst, typeof(IForbidPawnInputItem));
+                yield return new CodeInstruction(OpCodes.Ldloc_1);
                 yield return new CodeInstruction(OpCodes.Callvirt, 
                     AccessTools.PropertyGetter(typeof(IForbidPawnInputItem), "ForbidPawnInput"));
                 yield return new CodeInstruction(OpCodes.Brfalse_S, jumpMarker); // if not ForbidPawnInput return
                     
                 // now the Position check
                 // I Hope that's right
-                yield return new CodeInstruction(OpCodes.Ldarg_0);
-                yield return new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(StorageSettings), "owner"));
-                yield return new CodeInstruction(OpCodes.Isinst, typeof(IForbidPawnInputItem));
+                yield return new CodeInstruction(OpCodes.Ldloc_1);
                 yield return new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(IHaulDestination), "get_Position"));
                     
                     
