@@ -1,7 +1,6 @@
 ﻿using ProjectRimFactory.Common;
 using System.Collections.Generic;
 using System.Linq;
-using ProjectRimFactory.SAL3.Tools;
 using Verse;
 
 namespace ProjectRimFactory.SAL3.Things.Assemblers
@@ -18,19 +17,20 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             base.SpawnSetup(map, respawningAfterLoad);
             RegisterRecipes();
         }
+        
+        public List<RecipeDef> Recipes = [];
 
         private void RegisterRecipes()
         {
-            def.recipes ??= [];
+            Recipes ??= [];
 
             var newRecipes = GetImportedRecipes();
 
             foreach (var recipe in newRecipes)
             {
-                if (def.recipes.Contains(recipe)) continue;
-                def.recipes.Add(recipe);
+                if (Recipes.Contains(recipe)) continue;
+                Recipes.Add(recipe);
             }
-            ReflectionUtility.AllRecipesCached.SetValue(def, null);
         }
 
         public new bool CurrentlyUsableForBills() => false;

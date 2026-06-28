@@ -95,7 +95,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
             if (removed.Count > 0)
             {
-                def.recipes.RemoveAll(recipe => removed.Contains(recipe));
+                Recipes.RemoveAll(recipe => removed.Contains(recipe));
                 
                 // ALl Bills + possible current
                 BillStack.Bills.RemoveAll(b => removed.Contains(b.recipe));
@@ -113,7 +113,7 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
             if (added.Count > 0)
             {
-                def.recipes.AddRange(added);
+                Recipes.AddRange(added);
             }
 
             if (added.Count > 0 || removed.Count > 0)
