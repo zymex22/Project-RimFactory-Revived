@@ -55,7 +55,6 @@ public class Patch_ITab_Bills_FillTab
                 instruction.operand = AccessTools.Method(typeof(Patch_ITab_Bills_FillTab), "GetAllRecipes", [typeof(Thing)]);
                 foundDef = false;
                 foundGetTabel  = false;
-                Log.Message($"Updated: {instruction.opcode} {instruction.operand}");
                 yield return instruction;
                 continue;
             } 
