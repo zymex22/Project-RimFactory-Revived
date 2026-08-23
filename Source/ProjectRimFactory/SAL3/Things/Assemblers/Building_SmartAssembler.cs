@@ -34,7 +34,6 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
         }
 
         private readonly Dictionary<Building_RecipeHolder, List<RecipeDef>> subscribedBills = new();
-        private HashSet<RecipeDef> effectiveRecipes = [];
 
         private void RefreshRecipeImportRange()
         {
@@ -43,13 +42,18 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     cell => cell.InBounds(Map)).ToList();
             var holders = importCells.Select(cell => cell.GetFirstThing<Building_RecipeHolder>(Map))
                 .Where(holder => holder != null).ToList();
-
             var missingHolders = subscribedBills.Keys.Where(holder => !holders.Contains(holder)).ToList();
-
             foreach (var holder in missingHolders)
             {
                 holder.DeregisterRecipeSubscriber(this);
+                subscribedBills.Remove(holder); // Actually remove the Holder and its Recipes
             }
+            if (missingHolders.Count > 0)
+            {
+                // For Removals, we have to manually call that.
+                UpdateBills();
+            }
+            
             foreach (var holder in holders)
             {
                 holder.RegisterRecipeSubscriber(this);
@@ -85,17 +89,20 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
                     if (newRecipes.Contains(recipe)) continue; // No Duplicates
                     if (!SatisfiesSkillRequirements(recipe)) continue; // Only stuff that we can do
                     
-                    if (!effectiveRecipes.Contains(recipe)) added.Add(recipe);
+                    if (!Recipes.Contains(recipe))
+                    {
+                        added.Add(recipe);
+                    }
+
                     newRecipes.Add(recipe);
                 }
             }
 
-            var removed = effectiveRecipes.Where(recipe => !newRecipes.Contains(recipe)).ToList();
-
+            var removed = Recipes.Where(recipe => !newRecipes.Contains(recipe)).ToList();
 
             if (removed.Count > 0)
             {
-                def.recipes.RemoveAll(recipe => removed.Contains(recipe));
+                Recipes.RemoveAll(recipe => removed.Contains(recipe));
                 
                 // ALl Bills + possible current
                 BillStack.Bills.RemoveAll(b => removed.Contains(b.recipe));
@@ -113,18 +120,13 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
 
             if (added.Count > 0)
             {
-                def.recipes.AddRange(added);
+                Recipes.AddRange(added);
             }
 
             if (added.Count > 0 || removed.Count > 0)
             {
                 ReflectionUtility.AllRecipesCached.SetValue(def, null);
             }
-            
-
-
-            // Update the new Effective List
-            effectiveRecipes = newRecipes;
         }
 
         public void RecipeProviderRemoved(Building_RecipeHolder buildingRecipeHolder)

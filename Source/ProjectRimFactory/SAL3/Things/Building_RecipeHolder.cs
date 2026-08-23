@@ -26,7 +26,6 @@ namespace ProjectRimFactory.SAL3.Things
         public void DeregisterRecipeSubscriber(IRecipeSubscriber subscriber)
         {
             recipeSubscribers.Remove(subscriber);
-            subscriber.RecipesChanged(this);
         }
         
         
