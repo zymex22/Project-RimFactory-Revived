@@ -18,21 +18,39 @@ namespace ProjectRimFactory.Storage.UI
             focusWhenOpened = true;
             forcePause = true;
             this.postClose = postClose;
+            inputMaximum = new GracefulInput(i =>
+            {
+                if (i >= 0)
+                {
+                    outputSettings.Max = i;
+                    maxBufferString = null;
+                    minBufferString = null;
+                }
+            });
+            inputMinimum = new GracefulInput(i =>
+            {
+                if (i >= 0)
+                {
+                    outputSettings.Min = i;
+                    maxBufferString = null;
+                    minBufferString = null;
+                }
+            });
+            
         }
         
-        private static string minBufferString;
-        private static string maxBufferString;
+        private string minBufferString;
+        private string maxBufferString;
         
         private string controlIdMinInput = null;
         private string controlIdMaxInput = null;
 
-        private static OutputSettings outputSettings;
+        private OutputSettings outputSettings;
         private const float TitleLabelHeight = 32f;
 
         private readonly Action postClose;
 
         public override Vector2 InitialSize => new(500f, 250f);
-
 
         private class GracefulInput(Action<int> applyChangeAction)
         {
@@ -98,25 +116,10 @@ namespace ProjectRimFactory.Storage.UI
             }
             
         }
-        
-        private readonly GracefulInput inputMaximum = new(i =>
-        {
-            if (i >= 0)
-            {
-                outputSettings.Max = i;
-                maxBufferString = null;
-                minBufferString = null;
-            }
-        });
-        private readonly GracefulInput inputMinimum = new(i =>
-        {
-            if (i >= 0)
-            {
-                outputSettings.Min = i;
-                maxBufferString = null;
-                minBufferString = null;
-            }
-        });
+
+        private readonly GracefulInput inputMaximum;
+
+        private readonly GracefulInput inputMinimum;
         
         
         public override void DoWindowContents(Rect rect)
