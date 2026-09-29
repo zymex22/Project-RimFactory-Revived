@@ -244,7 +244,6 @@ namespace ProjectRimFactory.Storage
             return outputUtil.OutputItem(item);
         }
 
-
         //TODO Why do we need to clear Items here?
         public void RefreshStorage(bool fullRefresh = false)
         {
@@ -258,10 +257,15 @@ namespace ProjectRimFactory.Storage
             var thisPos = Position;
             var thisMap = Map;
             if (!Spawned) return; // don't want to try getting lists of things when not on a map (see 155)
-            
+
+            var things = new List<Thing>();
+            var distinct = new HashSet<Thing>();
+
             foreach (var cell in AllSlotCells())
             {
-                var things = new List<Thing>(cell.GetThingList(thisMap));
+                things.Clear();
+                things.AddRange(cell.GetThingList(thisMap));
+
                 var cnt = things.Count;
                 for (var i = 0; i < cnt; i++)
                 {
@@ -273,7 +277,7 @@ namespace ProjectRimFactory.Storage
                     }
                     else
                     {
-                        if (StoredItems.Contains(item)) continue;
+                        if (!distinct.Add(item)) continue;
                         StoredItems.Add(item);
                         ItemCountsAdded(item.def, item.stackCount);
                         DeregisterDrawItem(item);
