@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!--Materials+ -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Materials+</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_FurnaceI"]/recipes</xpath>
+					<value>
+						<li>AM_MakeSlakedLime</li>
+						<li>AM_MakePlaster</li>
+						<li>AM_BakeMudBrick</li>
+						<li>AM_BakeClayBrick</li>
+						<li>AM_MakeBasicGlass</li>
+						<li>AM_MakeCoal</li>
+						<li>AM_MakeCoke</li>
+						<li>AM_MakeFlyAsh</li>
+						<li>AM_MakeCrystalGlass</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_FurnaceII"]/recipes</xpath>
+					<value>
+						<li>AM_MakeReinforcedGlass</li>
+						<li>AM_MakeConcrete</li>
+						<li>AM_MakeRConcrete</li>
+						<li>AM_MakeSlakedLime</li>
+						<li>AM_MakePlaster</li>
+						<li>AM_BakeMudBrick</li>
+						<li>AM_BakeClayBrick</li>
+						<li>AM_MakeBasicGlass</li>
+						<li>AM_MakeCoal</li>
+						<li>AM_MakeCoke</li>
+						<li>AM_MakeFlyAsh</li>
+						<li>AM_MakeCrystalGlass</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_FurnaceIII"]/recipes</xpath>
+					<value>
+						<li>AM_MakeReinforcedGlassBulk</li>
+						<li>AM_MakeConcreteBulk</li>
+						<li>AM_MakeRConcreteBulk</li>
+						<li>AM_MakeSlakedLime</li>
+						<li>AM_MakePlasterBulk</li>
+						<li>AM_BakeMudBrickBulk</li>
+						<li>AM_BakeClayBrickBulk</li>
+						<li>AM_MakeBasicGlassBulk</li>
+						<li>AM_MakeCoalBulk</li>
+						<li>AM_MakeCokeBulk</li>
+						<li>AM_MakeFlyAsh</li>
+						<li>AM_MakeCrystalGlassBulk</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_Recycler"]/recipes</xpath>
+					<value>
+						<li>AM_CrushSand</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

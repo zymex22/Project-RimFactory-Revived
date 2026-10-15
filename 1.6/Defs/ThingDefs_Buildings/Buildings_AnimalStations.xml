@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <!--====================Animal Base====================-->  <!-- This is a set of base values that can be overwrited by child defs by insert same tag and edit value -->
+  <ThingDef Name="PRF_AnimalBase" ParentName="PRF_BuildingBase" Abstract="True">    <!-- this is a base for assemblers and a child of PRF_BuildingBase -->
+    <!-- Abstract is set to True. This makes it so that the contents of this tag aren't instantiated, which in practice means the contents of it can only be inherited by other tags and won't be loaded into the game because its only purpose is in inheritance, in being a parent. -->
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>      <!-- structure HP -->
+      <Flammability>1.0</Flammability>      <!-- A thing with a Flammability of 0.0 won't start burning at all, while one with a Flammability of 1.0 will start burning very quickly. -->
+      <Beauty>-1</Beauty>      <!-- +is good -is bad ;) -->
+      <Mass>80</Mass>      <!-- mass in kg -->
+    </statBases>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>      <!-- Graphic_Multi, Graphic_Single chose that type texture used -->
+      <drawSize>(2,2)</drawSize>      <!-- Scale texture up/down to fit (x,y) -->
+    </graphicData>
+    <passability>Standable</passability>    <!-- Whether it’s traversable or not.  Standable, PassThroughOnly, Impassable -->
+    <fillPercent>0.9</fillPercent>    <!-- How much cover it will provide. 0.0 to 1.0 -->
+    <canOverlapZones>false</canOverlapZones>
+    <pathCost>70</pathCost>    <!-- how hard it is to walk through -->
+    <castEdgeShadows>true</castEdgeShadows>
+    <size>(2,2)</size>    <!-- Ingame cell/ground size (x,y) -->
+    <minifiedDef>MinifiedThing</minifiedDef>    <!-- Sets if a item should be moveable vanilla reinstall/uninstall -->
+    <blockLight>false</blockLight>    <!-- 	Whether this building can block light or not. -->
+    <blockWind>false</blockWind>    <!-- 	Whether this building can block wind or not. -->
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>    <!-- Show input/output cells when selected -->
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>    <!-- Ground type to build on -->
+    <surfaceType>Item</surfaceType>    <!-- What kind of object can be placed on building? -->
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>    <!-- Sets needed cunstruction skill to craft stuff -->
+    <tickerType>Normal</tickerType>    <!-- How often game will request readout on time/progress dosent affect speed (normal, long, rare, never) -->
+    <rotatable>false</rotatable>    <!-- allow rotation or not, can be used with or without Graphic_Multi  -->
+    <neverMultiSelect>true</neverMultiSelect>    <!-- Whether clicking twice on this thing won't select all similar things on screen. Defaults to False, making multiselecting a default behaviour. -->
+    <designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>    <!-- assign dropdown group -->
+    <staticSunShadowHeight>0.3</staticSunShadowHeight>    <!-- staticSunShadowHeight defines how much of a shadow the strucure casts (Range: 0.0 - 1.0) -->
+    <drawGUIOverlay>true</drawGUIOverlay>    <!-- Whether GUI will show up when you select this thing. -->
+    <comps>      <!-- 	A C# class describing what should happen when the thing is interacted with in a specific way. This class might need additional tags to work. -->
+      <li Class="CompProperties_Breakdownable"/>
+      <!-- Machines will need maintanance -->
+      <li Class="CompProperties_Flickable" />
+      <!-- Be able to power on/off -->
+    </comps>
+  </ThingDef>
+
+
+
+  <!--===================================== Animal Station Group / Drop Down =====================================-->
+  <DesignatorDropdownGroupDef>
+    <defName>PRF_AnimalStationsGroup</defName>    <!-- Create dropdown for animal station to group -->
+  </DesignatorDropdownGroupDef>
+
+  <!--===================================== Shearer T1 =====================================-->
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_Shearer</defName>
+    <label>shearer</label>
+    <description>A station with motion-detecting industrial-size shearing clippers. Swiftly and automatically extracts wool from your colony's animals.\n\nKeep it stocked with food to lure the animals in for processing. Drops the produce where the sheared creature is standing.</description>    <!-- use \n for next line -->
+    <thingClass>ProjectRimFactory.AnimalStation.Building_Shearer</thingClass>
+    <graphicData>
+      <texPath>Farm/Shearer</texPath>      <!-- path to texture -->
+      <drawSize>(2.1)</drawSize>      <!-- texture size -->
+      <!-- <shaderType>CutoutComplex</shaderType> -->      <!-- for mask to change color when stuffed -->
+      <!-- <color>(133,97,67,256)</color> -->      <!--change color on maske manually -->
+    </graphicData>
+    <passability>Standable</passability>    <!-- let pawn stand ontop -->
+    <altitudeLayer>Projectile</altitudeLayer>    <!-- will hide stuff under texture if "Gas" used -->
+    <statBases>
+      <Mass>50</Mass>      <!-- weight when minified -->
+      <MarketValue>1650</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>200</WorkToBuild>      <!-- time to build -->
+    </statBases>
+    <tickerType>Rare</tickerType>    <!-- Decides the tick type. Never, Normal(1 per 1 tick), Rare(1 per 250 tick), Long(x per xxx tick) -->
+    <size>(2,2)</size>
+    <costList>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <Hay>50</Hay>
+      <Steel>50</Steel>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+    </costList>
+    <comps>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>750</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_SecondLayer">        <!-- This is used when multiple textures want to be stacked -->
+        <graphicData>
+          <texPath>Farm/Floor2</texPath>          <!-- Path to second layer texture -->
+          <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
+          <drawSize>(2.1)</drawSize>
+        </graphicData>
+        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+        <altitudeLayer>Building</altitudeLayer>
+      </li>
+    </comps>
+    <building>
+      <preventDeteriorationInside>true</preventDeteriorationInside>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ai_chillDestination>false</ai_chillDestination>
+      <fixedStorageSettings>
+        <filter>
+          <categories>
+            <li>Foods</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter>
+          <thingDefs>
+            <li>Hay</li>
+          </thingDefs>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <placeWorkers>
+      <li>ProjectRimFactory.AnimalStation.PlaceWorker_ShowAdjacent</li>
+    </placeWorkers>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+    </inspectorTabs>
+    <researchPrerequisites>
+      <li>PRF_AnimalStations</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--===================================== Milker T1 =====================================-->
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_Milker</defName>
+    <label>milker</label>
+    <description>A station equipped with servo-motorized tubes, which seek out mammary glands to milk your farm animals.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the milked creature is standing.</description>
+    <thingClass>ProjectRimFactory.AnimalStation.Building_Milker</thingClass>
+    <graphicData>
+      <texPath>Farm/Milker</texPath>
+      <drawSize>(2.1)</drawSize>
+      <!-- <shaderType>CutoutComplex</shaderType> -->
+      <!-- <color>(133,97,67,256)</color> -->
+    </graphicData>
+    <passability>Standable</passability>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <statBases>
+      <Mass>50</Mass>
+      <MarketValue>1650</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>200</WorkToBuild>
+    </statBases>
+    <tickerType>Rare</tickerType>
+    <size>(2,2)</size>
+    <costList>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <Hay>50</Hay>
+      <Steel>50</Steel>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+    </costList>
+    <comps>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <!-- set output if thingclass allows it -->
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>750</basePowerConsumption>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_SecondLayer">        <!-- This is used when multiple textures want to be stacked -->
+        <graphicData>
+          <texPath>Farm/Floor2</texPath>          <!-- Path to second layer texture -->
+          <graphicClass>Graphic_Single</graphicClass>          <!-- Need to be set same as original type -->
+          <drawSize>(2.1)</drawSize>
+        </graphicData>
+        <!-- Set to what layer wanted, Projectile for top, building for bottom -->
+        <altitudeLayer>Building</altitudeLayer>
+      </li>
+    </comps>
+    <building>
+      <preventDeteriorationInside>true</preventDeteriorationInside>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ai_chillDestination>false</ai_chillDestination>
+      <fixedStorageSettings>
+        <filter>
+          <categories>
+            <li>Foods</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter>
+          <thingDefs>
+            <li>Hay</li>
+          </thingDefs>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <placeWorkers>
+      <li>ProjectRimFactory.AnimalStation.PlaceWorker_ShowAdjacent</li>
+    </placeWorkers>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+    </inspectorTabs>
+    <researchPrerequisites>
+      <li>PRF_AnimalStations</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--===================================== Generic Harvester T2 =====================================-->
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_GenericAnimalHarvester</defName>
+    <label>generic animal harvester</label>
+    <description>A sophisticated facility boasting a variety of tools to gently extract any kind of animal products, even from the more exotic species.\n\nKeep it stocked with food to lure animals in for processing. Drops the produce where the animal is standing.</description>
+    <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
+    <graphicData>
+      <texPath>Farm/Harvester</texPath>
+      <drawSize>(2.1)</drawSize>
+      <!-- <shaderType>CutoutComplex</shaderType> -->
+      <!-- <color>(133,97,67,256)</color> -->
+    </graphicData>
+    <passability>Standable</passability>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <statBases>
+      <Mass>50</Mass>
+      <MarketValue>2110</MarketValue>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>200</WorkToBuild>
+    </statBases>
+    <tickerType>Rare</tickerType>
+    <size>(2,2)</size>
+    <costList>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <Hay>50</Hay>
+      <Steel>75</Steel>
+      <PRF_RoboticArm>4</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+    </costList>
+    <comps>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <!-- set output if thingclass allows it -->
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>750</basePowerConsumption>
+      </li>
+    </comps>
+    <building>
+      <preventDeteriorationInside>true</preventDeteriorationInside>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ai_chillDestination>true</ai_chillDestination>
+      <fixedStorageSettings>
+        <filter>
+          <categories>
+            <li>Foods</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter>
+          <thingDefs>
+            <li>Hay</li>
+          </thingDefs>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <placeWorkers>
+      <li>ProjectRimFactory.AnimalStation.PlaceWorker_ShowAdjacent</li>
+    </placeWorkers>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+    </inspectorTabs>
+    <researchPrerequisites>
+      <li>PRF_AnimalStationsII</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+  </ThingDef>
+
+  <!--===================================== Spacer Harvester T3 =====================================-->
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_GenericAnimalHarvester_II</defName>
+    <label>spacer animal harvester</label>
+    <description>This is an advanced animal harvester that can harvest a wide range of products from animals, it has a front-facing pull zone that can be made larger with a power booster. If RimFridge is installed it will cool food to keep it from spoiling over time.</description>
+    <thingClass>ProjectRimFactory.AnimalStation.Building_GenericBodyResourceGatherer</thingClass>
+    <graphicData>
+      <texPath>Farm/HarvesterT3</texPath>
+      <drawSize>(2.1)</drawSize>
+    </graphicData>
+    <passability>Standable</passability>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <statBases>
+      <Mass>50</Mass>
+      <MarketValue>2530</MarketValue>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>500</WorkToBuild>
+    </statBases>
+    <tickerType>Rare</tickerType>
+    <size>(2,2)</size>
+    <costList>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <Hay>50</Hay>
+      <Steel>100</Steel>
+      <PRF_RoboticArm>4</PRF_RoboticArm>
+      <PRF_ElectronicChip_I>2</PRF_ElectronicChip_I>
+    </costList>
+    <comps>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <!-- set output if thingclass allows it -->
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>850</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Glower">
+        <glowRadius>6</glowRadius>
+        <glowColor>(115,198,206,0)</glowColor>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~3</floatrange_SpeedFactor>
+        <powerPerStepSpeed>1500</powerPerStepSpeed>
+        <powerStepFactor>3</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>1~4</floatrange_Range>
+        <powerPerStepRange>500</powerPerStepRange>
+        <allowManualRangeTypeChange>true</allowManualRangeTypeChange>
+        <rangeType>ProjectRimFactory.Common.RectRange</rangeType>
+      </li>
+    </comps>
+    <building>
+      <preventDeteriorationInside>true</preventDeteriorationInside>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ai_chillDestination>true</ai_chillDestination>
+      <fixedStorageSettings>
+        <filter>
+          <categories>
+            <li>Foods</li>
+          </categories>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter>
+          <thingDefs>
+            <li>Hay</li>
+          </thingDefs>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power boost -->
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+    </inspectorTabs>
+    <researchPrerequisites>
+      <li>PRF_AnimalStationsII</li>
+      <li>PRF_AutomaticFarmingIII</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+  </ThingDef>
+
+  <!--===================================== Animal Manager / Slaugter House T2 =====================================-->
+  <ThingDef ParentName="PRF_AnimalBase">
+    <defName>PRF_Slaughterhouse</defName>
+    <thingClass>ProjectRimFactory.AutoMachineTool.Building_Slaughterhouse</thingClass>
+    <label>advanced slaughterhouse</label>
+    <description>A state-of-the-art robotic slaughterhouse designed to harvest meat and other animal products from living animals. It will cut and collect with great precision and will deliver the final product after finishing its task.</description>
+    <designatorDropdown>PRF_AnimalStationsGroup</designatorDropdown>
+    <altitudeLayer>Building</altitudeLayer>
+    <tickerType>Never</tickerType>
+    <constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+    <statBases>
+      <Mass>70</Mass>
+      <MarketValue>2200</MarketValue>
+      <MaxHitPoints>200</MaxHitPoints>
+      <WorkToBuild>200</WorkToBuild>
+    </statBases>
+    <graphicData>
+      <texPath>Farm/Slaughter</texPath>
+      <drawSize>(3.5,3.4)</drawSize>
+      <drawRotated>false</drawRotated>      <!-- Can rotate ingame without rotate texture, will flip horizontaly only. -->
+    </graphicData>
+    <costList>
+      <PRF_RoboticArm>2</PRF_RoboticArm>
+      <PRF_MachineFrame_II>1</PRF_MachineFrame_II>
+      <Steel>120</Steel>
+      <Plasteel>10</Plasteel>
+      <PRF_ElectronicChip_I>1</PRF_ElectronicChip_I>
+    </costList>
+    <rotatable>true</rotatable>
+    <researchPrerequisites>
+      <li>PRF_AnimalStationsIII</li>
+    </researchPrerequisites>
+    <fillPercent>1</fillPercent>
+    <passability>Impassable</passability>
+    <size>(3,3)</size>
+    <coversFloor>true</coversFloor>
+    <staticSunShadowHeight>1.0</staticSunShadowHeight>
+    <building>
+      <canPlaceOverWall>true</canPlaceOverWall>
+    </building>
+    <comps>
+      <li Class="ProjectRimFactory.Common.CompProperties_CompOutputAdjustable">
+        <SupportDiagonal>true</SupportDiagonal>
+      </li>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>700</basePowerConsumption>
+        <shortCircuitInRain>false</shortCircuitInRain>
+      </li>
+      <li Class="CompProperties_HeatPusher">
+        <compClass>CompHeatPusherPowered</compClass>
+        <heatPerSecond>10</heatPerSecond>
+      </li>
+      <li Class="ProjectRimFactory.Common.CompProperties_PowerWorkSetting">
+        <!-- Speed Settings -->
+        <floatrange_SpeedFactor>1~2</floatrange_SpeedFactor>
+        <powerPerStepSpeed>1000</powerPerStepSpeed>
+        <powerStepFactor>4</powerStepFactor>
+        <!-- Range Settings -->
+        <floatrange_Range>3~6</floatrange_Range>
+        <powerPerStepRange>750</powerPerStepRange>
+        <rangeType>ProjectRimFactory.Common.FacingRectRange</rangeType>
+
+      </li>
+    </comps>
+    <inspectorTabs>
+      <li>ProjectRimFactory.Common.ITab_PowerSupply</li>      <!-- Power option tab -->
+      <li>ProjectRimFactory.Common.ITab_ProductionSettings</li>
+	  <li>ProjectRimFactory.AutoMachineTool.ITab_Slaughterhouse</li>
+    </inspectorTabs>
+    <modExtensions>
+    </modExtensions>
+  </ThingDef>
+
+
+</Defs>

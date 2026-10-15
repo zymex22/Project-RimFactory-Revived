@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<!-- Industrialisation -->
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Industrialisation</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_FurnaceIII"]/recipes</xpath>
+					<value>
+						<li>Ind_MakeHighGradeSteelEAF</li>
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_Recycler"]/recipes</xpath>
+					<value>
+						<li>Ind_MakeConcreteFromAny</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>
