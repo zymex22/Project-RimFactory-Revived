@@ -2,7 +2,6 @@
 using ProjectRimFactory.Storage;
 using RimWorld;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using Verse;
@@ -22,25 +21,29 @@ namespace ProjectRimFactory.Common.HarmonyPatches
         // ReSharper disable once UnusedMember.Local
         static MethodBase TargetMethod()
         {
-            var predicateClass = typeof(Building_Storage).GetNestedTypes(AccessTools.all)
-               .FirstOrDefault(t => t!.FullName!.Contains("d__54"));
-            if (predicateClass == null)
-            {
-                Log.Error("PRF Harmony Error - predicateClass == null for Patch_Building_Storage_GetGizmos.TargetMethod()");
-                return null;
-            }
-
-            var m = predicateClass.GetMethods(AccessTools.all)
-                                 .FirstOrDefault(t => t.Name.Contains("MoveNext"));
+            // Resolve the compiler-generated iterator by its source method instead of a
+            // hard-coded "<GetGizmos>d__54" name, which changes whenever RimWorld is recompiled.
+            var m = AccessTools.EnumeratorMoveNext(AccessTools.Method(typeof(Building_Storage), nameof(Building_Storage.GetGizmos)));
             if (m == null)
             {
-                Log.Error("PRF Harmony Error - m == null for Patch_Building_Storage_GetGizmos.TargetMethod()");
+                Log.Error("PRF Harmony Error - could not find Building_Storage.GetGizmos MoveNext for Patch_Building_Storage_GetGizmos.TargetMethod()");
             }
             return m;
         }
 
-        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions, MethodBase original)
         {
+            // The iterator stores the Building_Storage instance in its "<>4__this" field.
+            var thisField = AccessTools.Field(original.DeclaringType, "<>4__this");
+            if (thisField == null)
+            {
+                Log.Error("PRF Harmony Error - <>4__this not found for Patch_Building_Storage_GetGizmos.Transpiler()");
+                foreach (var instruction in instructions)
+                {
+                    yield return instruction;
+                }
+                yield break;
+            }
 
             bool foundGetNumSelected = false;
             object endJumpMarker = null;
@@ -48,28 +51,31 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             foreach (var instruction in instructions)
             {
                 //Used for refrence of the pos withing the IL
-                if (instruction.opcode == OpCodes.Callvirt
-                    && instruction.operand.ToString().Contains("get_NumSelected()"))
+                if ((instruction.opcode == OpCodes.Callvirt || instruction.opcode == OpCodes.Call)
+                    && instruction.operand is MethodInfo method && method.Name == "get_NumSelected")
                 {
                     foundGetNumSelected = true;
                 }
 
                 //Get the Jumpmarker for the End
-                if (foundGetNumSelected && endJumpMarker == null && instruction.opcode == OpCodes.Bne_Un)
+                if (foundGetNumSelected && endJumpMarker == null
+                    && (instruction.opcode == OpCodes.Bne_Un || instruction.opcode == OpCodes.Bne_Un_S))
                 {
                     endJumpMarker = instruction.operand;
                 }
 
-                if (!addedJump && foundGetNumSelected && instruction.opcode == OpCodes.Ldarg_0)
+                if (!addedJump && endJumpMarker != null && instruction.opcode == OpCodes.Ldarg_0)
                 {
-                    //Check if this is a PRF Storage Building
-                    yield return new CodeInstruction(OpCodes.Ldarg_0);
-                    yield return new CodeInstruction(OpCodes.Ldloc_2);
+                    //Check if this is a PRF Storage Building. The previous version pushed an extra
+                    //ldarg.0 here, leaving the stack unbalanced; Harmony 3 rejects that IL.
+                    //Labels on the original instruction move to the inserted check so jumps still land on it.
+                    yield return new CodeInstruction(OpCodes.Ldarg_0).MoveLabelsFrom(instruction);
+                    yield return new CodeInstruction(OpCodes.Ldfld, thisField);
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
                         typeof(Patch_Building_Storage_GetGizmos),
                         nameof(IsPRF_StorageBuilding)));
                     //Skip to the End if yes
-                    yield return new CodeInstruction(OpCodes.Brtrue_S, endJumpMarker);
+                    yield return new CodeInstruction(OpCodes.Brtrue, endJumpMarker);
                     addedJump = true;
                 }
 
@@ -77,6 +83,10 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 yield return instruction;
             }
 
+            if (!addedJump)
+            {
+                Log.Warning("Project Rimfactory - Patch_Building_Storage_GetGizmos found no injection point; storage item gizmos will not be hidden.");
+            }
         }
 
         /// <summary>

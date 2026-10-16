@@ -32,8 +32,11 @@ namespace ProjectRimFactory
             
             Arrow = ContentFinder<Texture2D>.Get("UI/Overlays/Arrow");
             // Initialize graphics for SpecialSculptures:
-            foreach (var s in Common.ProjectRimFactory_ModComponent.availableSpecialSculptures)
-                s.Init();
+            if (Common.ProjectRimFactory_ModComponent.availableSpecialSculptures != null)
+            {
+                foreach (var s in Common.ProjectRimFactory_ModComponent.availableSpecialSculptures)
+                    s.Init();
+            }
         }
 
         public static readonly Texture2D SplitterArrowUp;

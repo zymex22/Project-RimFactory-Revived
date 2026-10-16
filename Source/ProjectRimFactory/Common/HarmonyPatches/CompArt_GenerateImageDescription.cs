@@ -12,7 +12,7 @@ namespace ProjectRimFactory.Common.HarmonyPatches
     // ReSharper disable once UnusedType.Global
     public class CompArt_GenerateImageDescription
     {
-        public static bool Prefix(out TaggedString __result, CompArt __instance)
+        public static bool Prefix(ref TaggedString __result, CompArt __instance)
         {
             Thing t = __instance.parent;
             var specialSculptures = Current.Game.GetComponent<PRFGameComponent>().specialScupltures;
