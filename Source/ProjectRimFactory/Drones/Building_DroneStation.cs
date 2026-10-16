@@ -180,12 +180,16 @@ namespace ProjectRimFactory.Drones
             //need to take action to init droneSkillsRecord
             if (GetDroneSkillsRecord.Count == 0)
             {
-                var drone = MakeDrone();
-                GenSpawn.Spawn(drone, Position, Map);
-                drone.Destroy();
-
-                RefuelableComp?.Refuel(1);
-
+                //Spawning a pawn while the map is still loading runs the GameEnder checks (and mod patches on them)
+                //before every map is ready, which can throw and abort SpawnSetup. Wait until loading has finished.
+                if (respawningAfterLoad)
+                {
+                    LongEventHandler.ExecuteWhenFinished(InitDroneSkillsRecord);
+                }
+                else
+                {
+                    InitDroneSkillsRecord();
+                }
             }
             //Init the Designator default Label
             update_droneAreaSelectorLabel(DroneAllowedArea);
@@ -196,6 +200,19 @@ namespace ProjectRimFactory.Drones
             if (rangePowerSupplyMachine == null) return;
             MapManager.NextAction(rangePowerSupplyMachine.RefreshPowerStatus);
             MapManager.AfterAction(5, rangePowerSupplyMachine.RefreshPowerStatus);
+        }
+
+        /// <summary>
+        /// Spawns and destroys a temporary drone so droneSkillsRecord gets initialized
+        /// </summary>
+        private void InitDroneSkillsRecord()
+        {
+            if (!Spawned || GetDroneSkillsRecord.Count != 0) return;
+            var drone = MakeDrone();
+            GenSpawn.Spawn(drone, Position, Map);
+            drone.Destroy();
+
+            RefuelableComp?.Refuel(1);
         }
 
         private void update_droneAreaSelectorLabel(Area area)
