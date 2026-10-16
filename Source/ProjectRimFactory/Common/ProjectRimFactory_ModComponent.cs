@@ -17,11 +17,14 @@ namespace ProjectRimFactory.Common
                 ProjectRimFactory_ModSettings.LoadXml(content);
                 this.Settings = GetSettings<ProjectRimFactory_ModSettings>();
                 this.HarmonyInstance = new Harmony("com.spdskatr.projectrimfactory");
+                //Set these up before PatchAll: if any patch throws, the rest of this block is skipped,
+                //and storage buildings (ConditionalPatchHelper) and RS (sculptures) would hit null on spawn
+                ConditionalPatchHelper.InitHarmony(this.HarmonyInstance);
+                availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
+
                 this.HarmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
                 Log.Message($"Project RimFactory Core {typeof(ProjectRimFactory_ModComponent).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion} - Harmony patches successful");
-                availableSpecialSculptures = SpecialSculpture.LoadAvailableSpecialSculptures(content);
-                
-                ConditionalPatchHelper.InitHarmony(this.HarmonyInstance);
+
                 ConditionalPatchHelper.PatchReachabilityCanReach.PatchHandler(ProjectRimFactory_ModSettings.PRF_Patch_Reachability_CanReach);
             }
             catch (Exception ex)
