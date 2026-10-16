@@ -13,9 +13,11 @@ namespace ProjectRimFactory
         {
             if (!LoadedModManager.RunningModsListForReading.Any(mcp => mcp.PackageId == "Mehni.PickUpAndHaul")) return;
             var assemblyName = new AssemblyName("PRF_PUAH_Compatiblity_Assembly");
-            var ab = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
+            // .NET (RimWorld 1.7+) has no RunAndSave and no AppDomain.DefineDynamicAssembly.
+            var ab = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
             var mb = ab.DefineDynamicModule(assemblyName.Name);
-            var mehniIHoldMultipleThings = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes())
+            // GenTypes.AllTypes skips assemblies whose types cannot all be loaded, unlike Assembly.GetTypes().
+            var mehniIHoldMultipleThings = GenTypes.AllTypes
                 .FirstOrDefault(t => t.FullName == "IHoldMultipleThings.IHoldMultipleThings");
             if (mehniIHoldMultipleThings == null)
             {
@@ -23,10 +25,11 @@ namespace ProjectRimFactory
                 return;
             }
 
-            foreach (var storageType in AppDomain.CurrentDomain.GetAssemblies()
-                         .SelectMany(a => a.GetExportedTypes()) // GetTypes() more general, Exported is only publicly available types
+            foreach (var storageType in GenTypes.AllTypes
+                         .Where(t => t.IsPublic || t.IsNestedPublic) // only publicly available types can be derived from
                          .Where(t => typeof(Storage.Building_MassStorageUnit).IsAssignableFrom(t))
                          .Where(t => !t.IsAbstract)
+                         .ToList() // new types are defined inside the loop
                     )
             {
                 // Build a magic derived class that also implements Mehni's interface
