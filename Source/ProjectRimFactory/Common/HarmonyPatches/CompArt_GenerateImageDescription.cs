@@ -18,7 +18,12 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             var specialSculptures = Current.Game.GetComponent<PRFGameComponent>().specialScupltures;
             var sculpture = specialSculptures?.FirstOrDefault(x => x.currentInstances != null &&
                                             x.currentInstances.Contains(t));
-            if (sculpture == null) return true;
+            if (sculpture == null)
+            {
+                __result = "";
+                return true;
+            }
+
             __result = new TaggedString(sculpture.descKey.Translate());
             return false; // skip vanilla
         }
