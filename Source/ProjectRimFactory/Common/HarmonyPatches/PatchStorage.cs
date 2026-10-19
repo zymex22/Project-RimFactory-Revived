@@ -129,6 +129,24 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             return true;
         }
     }
+    
+    class Patch_CompAssignableToPawn_DrawGUIOverlay
+    {
+        // ReSharper disable once UnusedParameter.Local
+        // ReSharper disable once UnusedMember.Local
+        static bool Prefix(CompAssignableToPawn __instance)
+        {
+            if (__instance.parent.def.category == ThingCategory.Item)
+            {
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.parent.Map)?.ShouldHideItemsAtPos(__instance.parent.Position) ?? false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
 
     static class PatchStorageUtil
     {
