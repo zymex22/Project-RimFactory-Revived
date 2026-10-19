@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>[RF] Fishing</li>
+		</mods>
+		<match Class="PatchOperationSequence">
+			<success>Always</success>
+			<operations>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName = "PRF_T1_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+					<value>
+						<RawFish Weight="0.2" Count="2" />
+						<RawFishTiny Weight="0.1" Count="2" />
+						<Arapaima Weight="0.1" Count="2" />
+						<Salmon Weight="0.1" Count="2" />
+						<Piranha Weight="0.1" Count="2" />
+						<Sturgeon Weight="0.1" Count="2" />
+						<Bass Weight="0.1" Count="2" />
+						<Catfish Weight="0.2" Count="2" />
+						<Snail Weight="0.1" Count="2" />
+					</value>
+				</li>
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName = "PRF_T2_Aquaculture"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_ModifyProduct"]/bonusYields</xpath>
+					<value>
+						<RawFish Weight="0.2" Count="2" />
+						<RawFishTiny Weight="0.1" Count="2" />
+						<Bass Weight="0.1" Count="2" />
+						<Salmon Weight="0.1" Count="2" />
+						<Eel Weight="0.1" Count="2" />
+						<Jellyfish Weight="0.1" Count="2" />
+						<Pufferfish Weight="0.1" Count="2" />
+						<SeaCucumber Weight="0.1" Count="2" />
+						<Squid Weight="0.1" Count="2" />
+						<Lobster Weight="0.2" Count="2" />
+						<Crab Weight="0.1" Count="2" />
+						<Crayfish Weight="0.1" Count="2" />
+						<Snail Weight="0.1" Count="2" />
+						<Shrimp Weight="0.1" Count="2" />
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+
+</Patch>

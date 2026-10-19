@@ -299,64 +299,6 @@ namespace ProjectRimFactory.Storage
             //    }
             //}
         }
-        //-----------    For compatibility with Pick Up And Haul:    -----------
-        //                  (not used internally in any way)
-        // true if can store, capacity is how many can store (more than one stack possible)
-        public bool CapacityAt(Thing thing, IntVec3 cell, Map map, out int capacity)
-        {
-            //Some Sanity Checks
-            capacity = 0;
-            if (thing == null || map == null || map != Map || cell == null || !Spawned)
-            {
-                Log.Error("PRF DSU CapacityAt Sanity Check Error");
-                return false;
-            }
-            thing = thing.GetInnerIfMinified();
-
-            //Check if thing can be stored based upon the storgae settings
-            if (!Accepts(thing))
-            {
-                return false;
-            }
-
-            //TODO Check if we want to forbid access if power is off
-            //if (!GetComp<CompPowerTrader>().PowerOn) return false;
-
-            //Get List of items stored in the DSU
-            var storedItems = Position.GetThingList(Map).Where(t => t.def.category == ThingCategory.Item);
-
-            //Find the Stack size for the thing
-            var maxstacksize = thing.def.stackLimit;
-            //Get capacity of partial Stacks
-            //  So 45 Steel and 75 Steel and 11 Steel give 30+64 more capacity for steel
-            foreach (var partialStack in storedItems.Where(t => t.def == thing.def && t.stackCount < maxstacksize))
-            {
-                capacity += maxstacksize - partialStack.stackCount;
-            }
-
-            //capacity of empy slots
-            capacity += (MaxNumberItemsInternal - storedItems.Count()) * maxstacksize;
-
-            //Access point:
-            if (cell != Position)
-            {
-                var maybeThing = Map.thingGrid.ThingAt(cell, ThingCategory.Item);
-                if (maybeThing != null)
-                {
-                    if (maybeThing.def == thing.def) capacity += (thing.def.stackLimit - maybeThing.stackCount);
-                }
-                else
-                {
-                    capacity += thing.def.stackLimit;
-                }
-            }
-            return capacity > 0;
-        }
-        // ...The above? I think?  But without needing to know how many
-        public bool StackableAt(Thing thing, IntVec3 cell, Map map)
-        {
-            return CapacityAt(thing, cell, map, out _);
-        }
         
         /// <summary>
         /// Calls <see cref="RegisterNewItem"/> And <see cref="DeregisterDrawItem"/>

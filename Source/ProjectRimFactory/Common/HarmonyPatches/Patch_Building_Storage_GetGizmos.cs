@@ -63,7 +63,6 @@ namespace ProjectRimFactory.Common.HarmonyPatches
                 if (!addedJump && foundGetNumSelected && instruction.opcode == OpCodes.Ldarg_0)
                 {
                     //Check if this is a PRF Storage Building
-                    yield return new CodeInstruction(OpCodes.Ldarg_0);
                     yield return new CodeInstruction(OpCodes.Ldloc_2);
                     yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(
                         typeof(Patch_Building_Storage_GetGizmos),

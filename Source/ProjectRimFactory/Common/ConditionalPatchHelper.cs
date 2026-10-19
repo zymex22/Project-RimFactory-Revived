@@ -66,6 +66,11 @@ namespace ProjectRimFactory.Common
             AccessTools.Method(typeof(MinifiedThing), "Print", new Type[] { typeof(SectionLayer) }),
             AccessTools.Method(typeof(HarmonyPatches.Patch_MinifiedThing_Print), "Prefix")
             );
+        
+        private static readonly TogglePatch PatchCompAssignableToPawnDrawGUIOverlay = new(
+            AccessTools.Method(typeof(CompAssignableToPawn), "DrawGUIOverlay"),
+            AccessTools.Method(typeof(HarmonyPatches.Patch_CompAssignableToPawn_DrawGUIOverlay), "Prefix")
+            );
 
         private static readonly TogglePatch PatchThingPrint = new(
             AccessTools.Method(typeof(Thing), "Print", new Type[] { typeof(SectionLayer) }),
@@ -108,6 +113,7 @@ namespace ProjectRimFactory.Common
         {
             var state = BuildingMassStorages.Count > 0;
             PatchMinifiedThingPrint.PatchHandler(state);
+            PatchCompAssignableToPawnDrawGUIOverlay.PatchHandler(state);
             PatchThingPrint.PatchHandler(state);
             PatchThingWithCompsDrawGUIOverlay.PatchHandler(state);
             PatchThingDrawGUIOverlay.PatchHandler(state);

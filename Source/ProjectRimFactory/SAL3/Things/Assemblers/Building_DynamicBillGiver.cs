@@ -25,7 +25,9 @@ namespace ProjectRimFactory.SAL3.Things.Assemblers
             Recipes ??= [];
 
             var newRecipes = GetImportedRecipes();
-
+            
+            Recipes.AddRange(def.recipes ?? []);
+            
             foreach (var recipe in newRecipes)
             {
                 if (Recipes.Contains(recipe)) continue;
