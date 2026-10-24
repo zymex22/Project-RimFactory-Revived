@@ -5,6 +5,21 @@ using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
+    
+    class Patch_Building_Storage_HaulDestinationEnabled
+    {
+        // ReSharper disable once UnusedMember.Local
+        static bool Prefix(Building_Storage __instance, out bool __result)
+        {
+            __result = false;
+            if (!PatchStorageUtil.SkippAcceptsPatch && ((__instance as IForbidPawnInputItem)?.ForbidPawnInput ?? false))
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+    
     class Patch_ForbidUtility_IsForbidden
     {
         // ReSharper disable once UnusedMember.Local

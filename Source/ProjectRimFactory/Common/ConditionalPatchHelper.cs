@@ -101,6 +101,11 @@ namespace ProjectRimFactory.Common
          AccessTools.Method(typeof(ForbidUtility), "IsForbidden", new Type[] { typeof(Thing), typeof(Pawn) }),
          AccessTools.Method(typeof(HarmonyPatches.Patch_ForbidUtility_IsForbidden), "Prefix")
          );
+        
+        private static readonly TogglePatch PatchHaulDestinationEnabled = new(
+            AccessTools.Method(typeof(Building_Storage), "get_HaulDestinationEnabled"),
+            AccessTools.Method(typeof(HarmonyPatches.Patch_Building_Storage_HaulDestinationEnabled), "Prefix")
+        );
 
         public static void InitHarmony(Harmony harmony)
         {
@@ -120,6 +125,7 @@ namespace ProjectRimFactory.Common
             PatchFloatMenuMakerMapChoicesAtFor.PatchHandler(state);
             PatchBuildingStorageAccepts.PatchHandler(state);
             PatchForbidUtilityIsForbidden.PatchHandler(state);
+            PatchHaulDestinationEnabled.PatchHandler(state);
         }
 
         public static void Register(Building_MassStorageUnit building)
