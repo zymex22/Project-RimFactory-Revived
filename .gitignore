@@ -264,3 +264,6 @@ __pycache__/
 
 
 Assemblies/0Harmony.dll
+Assemblies/ProjectRimFactory.deps.json
+
+*.dds
