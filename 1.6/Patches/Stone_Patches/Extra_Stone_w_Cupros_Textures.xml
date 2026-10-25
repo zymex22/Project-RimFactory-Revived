@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>[K]Extra Stone(w/ Cupro's Textures)</li>
+		</mods>
+		<!-- What's the difference?  The w/ Cupro's Textures version renames three ores.
+      Andesite to Dark Andesite, Gabbro to Green Gabbro, Dunite to Vibrant Dunite. -->
+		<match Class="PatchOperationSequence">
+			<operations>
+				<!-- Remove/Exclude Extra Stones from Mark III -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName="PRF_DeepQuarry_mkIII"]/modExtensions/li[@Class="ProjectRimFactory.Common.ModExtension_Miner"]/excludeOres</xpath>
+					<value>
+						<li>ChunkDarkAndesite</li>
+						<li>ChunkAnorthosite</li>
+						<li>ChunkBasalt</li>
+						<li>ChunkBlueschist</li>
+						<li>ChunkChalk</li>
+						<li>ChunkCharnockite</li>
+						<li>ChunkCreoleMarble</li>
+						<li>ChunkDacite</li>
+						<li>ChunkVibrantDunite</li>
+						<li>ChunkEmperadordark</li>
+						<li>ChunkEtowahMarble</li>
+						<li>ChunkGreenGabbro</li>
+						<li>ChunkGreenSchist</li>
+						<li>ChunkJaspillite</li>
+						<li>ChunkLepidolite</li>
+						<li>ChunkLherzolite</li>
+						<li>ChunkLignite</li>
+						<li>ChunkMigmatite</li>
+						<li>ChunkMonzonite</li>
+						<li>ChunkObsidian</li>
+						<li>ChunkRhyolite</li>
+						<li>ChunkScoria</li>
+						<li>ChunkSerpentinite</li>
+						<li>ChunkSiltstone</li>
+						<li>ChunkSovite</li>
+						<li>ChunkThometzekite</li>
+					</value>
+				</li>
+				<!-- Define new recipes for excavating rocks from the mod -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs</xpath>
+					<value>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_DarkAndesite</defName>
+							<label>mine dark andesite</label>
+							<description>Mining dark andesite.</description>
+							<jobString>Mining dark andesite.</jobString>
+							<products>
+								<ChunkDarkAndesite>1</ChunkDarkAndesite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Anorthosite</defName>
+							<label>mine anorthosite</label>
+							<description>Mining anorthosite.</description>
+							<jobString>Mining anorthosite.</jobString>
+							<products>
+								<ChunkAnorthosite>1</ChunkAnorthosite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Basalt</defName>
+							<label>mine basalt</label>
+							<description>Mining basalt.</description>
+							<jobString>Mining basalt.</jobString>
+							<products>
+								<ChunkBasalt>1</ChunkBasalt>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Blueschist</defName>
+							<label>mine blueschist</label>
+							<description>Mining blueschist.</description>
+							<jobString>Mining blueschist.</jobString>
+							<products>
+								<ChunkBlueschist>1</ChunkBlueschist>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Chalk</defName>
+							<label>mine chalk</label>
+							<description>Mining chalk.</description>
+							<jobString>Mining chalk.</jobString>
+							<products>
+								<ChunkChalk>1</ChunkChalk>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Charnockite</defName>
+							<label>mine charnockite</label>
+							<description>Mining charnockite.</description>
+							<jobString>Mining charnockite.</jobString>
+							<products>
+								<ChunkCharnockite>1</ChunkCharnockite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_CreoleMarble</defName>
+							<label>mine creole marble</label>
+							<description>Mining creole marble.</description>
+							<jobString>Mining creole marble.</jobString>
+							<products>
+								<ChunkCreoleMarble>1</ChunkCreoleMarble>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Dacite</defName>
+							<label>mine dacite</label>
+							<description>Mining dacite.</description>
+							<jobString>Mining dacite.</jobString>
+							<products>
+								<ChunkDacite>1</ChunkDacite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_VibrantDunite</defName>
+							<label>mine vibrant dunite</label>
+							<description>Mining vibrant dunite.</description>
+							<jobString>Mining vibrant dunite.</jobString>
+							<products>
+								<ChunkVibrantDunite>1</ChunkVibrantDunite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Emperadordark</defName>
+							<label>mine emperadordark</label>
+							<description>Mining emperadordark.</description>
+							<jobString>Mining emperadordark.</jobString>
+							<products>
+								<ChunkEmperadordark>1</ChunkEmperadordark>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_EtowahMarble</defName>
+							<label>mine etowah marble</label>
+							<description>Mining etowah marble.</description>
+							<jobString>Mining etowah marble.</jobString>
+							<products>
+								<ChunkEtowahMarble>1</ChunkEtowahMarble>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_GreenGabbro</defName>
+							<label>mine green gabbro</label>
+							<description>Mining green gabbro.</description>
+							<jobString>Mining green gabbro.</jobString>
+							<products>
+								<ChunkGreenGabbro>1</ChunkGreenGabbro>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_GreenSchist</defName>
+							<label>mine green schist</label>
+							<description>Mining green schist.</description>
+							<jobString>Mining green schist.</jobString>
+							<products>
+								<ChunkGreenSchist>1</ChunkGreenSchist>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Jaspillite</defName>
+							<label>mine jaspillite</label>
+							<description>Mining jaspillite.</description>
+							<jobString>Mining jaspillite.</jobString>
+							<products>
+								<ChunkJaspillite>1</ChunkJaspillite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Lepidolite</defName>
+							<label>mine lepidolite</label>
+							<description>Mining lepidolite.</description>
+							<jobString>Mining lepidolite.</jobString>
+							<products>
+								<ChunkLepidolite>1</ChunkLepidolite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Lherzolite</defName>
+							<label>mine lherzolite</label>
+							<description>Mining lherzolite.</description>
+							<jobString>Mining lherzolite.</jobString>
+							<products>
+								<ChunkLherzolite>1</ChunkLherzolite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Lignite</defName>
+							<label>mine lignite</label>
+							<description>Mining lignite.</description>
+							<jobString>Mining lignite.</jobString>
+							<products>
+								<ChunkLignite>1</ChunkLignite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Migmatite</defName>
+							<label>mine migmatite</label>
+							<description>Mining migmatite.</description>
+							<jobString>Mining migmatite.</jobString>
+							<products>
+								<ChunkMigmatite>1</ChunkMigmatite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Monzonite</defName>
+							<label>mine monzonite</label>
+							<description>Mining monzonite.</description>
+							<jobString>Mining monzonite.</jobString>
+							<products>
+								<ChunkMonzonite>1</ChunkMonzonite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Obsidian</defName>
+							<label>mine obsidian</label>
+							<description>Mining obsidian.</description>
+							<jobString>Mining obsidian.</jobString>
+							<products>
+								<ChunkObsidian>1</ChunkObsidian>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Rhyolite</defName>
+							<label>mine rhyolite</label>
+							<description>Mining rhyolite.</description>
+							<jobString>Mining rhyolite.</jobString>
+							<products>
+								<ChunkRhyolite>1</ChunkRhyolite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Scoria</defName>
+							<label>mine scoria</label>
+							<description>Mining scoria.</description>
+							<jobString>Mining scoria.</jobString>
+							<products>
+								<ChunkScoria>1</ChunkScoria>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Serpentinite</defName>
+							<label>mine serpentinite</label>
+							<description>Mining serpentinite.</description>
+							<jobString>Mining serpentinite.</jobString>
+							<products>
+								<ChunkSerpentinite>1</ChunkSerpentinite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Siltstone</defName>
+							<label>mine siltstone</label>
+							<description>Mining siltstone.</description>
+							<jobString>Mining siltstone.</jobString>
+							<products>
+								<ChunkSiltstone>1</ChunkSiltstone>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Sovite</defName>
+							<label>mine sovite</label>
+							<description>Mining sovite.</description>
+							<jobString>Mining sovite.</jobString>
+							<products>
+								<ChunkSovite>1</ChunkSovite>
+							</products>
+						</RecipeDef>
+						<RecipeDef ParentName="PRF_MiningWork">
+							<defName>PRF_Excavate_Thometzekite</defName>
+							<label>mine thometzekite</label>
+							<description>Mining thometzekite.</description>
+							<jobString>Mining thometzekite.</jobString>
+							<products>
+								<ChunkThometzekite>1</ChunkThometzekite>
+							</products>
+						</RecipeDef>
+					</value>
+				</li>
+				<!-- Add the new recipes to the Mine Shaft for manual acquisition -->
+				<li Class="PatchOperationAdd">
+					<xpath>/Defs/ThingDef[defName = "PRF_MineShaft"]/recipes</xpath>
+					<value>
+						<li>PRF_Excavate_DarkAndesite</li>
+						<li>PRF_Excavate_Anorthosite</li>
+						<li>PRF_Excavate_Basalt</li>
+						<li>PRF_Excavate_Blueschist</li>
+						<li>PRF_Excavate_Chalk</li>
+						<li>PRF_Excavate_Charnockite</li>
+						<li>PRF_Excavate_CreoleMarble</li>
+						<li>PRF_Excavate_Dacite</li>
+						<li>PRF_Excavate_VibrantDunite</li>
+						<li>PRF_Excavate_Emperadordark</li>
+						<li>PRF_Excavate_EtowahMarble</li>
+						<li>PRF_Excavate_GreenGabbro</li>
+						<li>PRF_Excavate_GreenSchist</li>
+						<li>PRF_Excavate_Jaspillite</li>
+						<li>PRF_Excavate_Lepidolite</li>
+						<li>PRF_Excavate_Lherzolite</li>
+						<li>PRF_Excavate_Lignite</li>
+						<li>PRF_Excavate_Migmatite</li>
+						<li>PRF_Excavate_Monzonite</li>
+						<li>PRF_Excavate_Obsidian</li>
+						<li>PRF_Excavate_Rhyolite</li>
+						<li>PRF_Excavate_Scoria</li>
+						<li>PRF_Excavate_Serpentinite</li>
+						<li>PRF_Excavate_Siltstone</li>
+						<li>PRF_Excavate_Sovite</li>
+						<li>PRF_Excavate_Thometzekite</li>
+					</value>
+				</li>
+			</operations>
+		</match>
+	</Operation>
+</Patch>

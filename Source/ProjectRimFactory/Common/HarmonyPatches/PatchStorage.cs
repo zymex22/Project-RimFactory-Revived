@@ -5,6 +5,21 @@ using Verse;
 
 namespace ProjectRimFactory.Common.HarmonyPatches
 {
+    
+    class Patch_Building_Storage_HaulDestinationEnabled
+    {
+        // ReSharper disable once UnusedMember.Local
+        static bool Prefix(Building_Storage __instance, out bool __result)
+        {
+            __result = false;
+            if (!PatchStorageUtil.SkippAcceptsPatch && ((__instance as IForbidPawnInputItem)?.ForbidPawnInput ?? false))
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+    
     class Patch_ForbidUtility_IsForbidden
     {
         // ReSharper disable once UnusedMember.Local
@@ -129,6 +144,24 @@ namespace ProjectRimFactory.Common.HarmonyPatches
             return true;
         }
     }
+    
+    class Patch_CompAssignableToPawn_DrawGUIOverlay
+    {
+        // ReSharper disable once UnusedParameter.Local
+        // ReSharper disable once UnusedMember.Local
+        static bool Prefix(CompAssignableToPawn __instance)
+        {
+            if (__instance.parent.def.category == ThingCategory.Item)
+            {
+                if (PatchStorageUtil.GetPRFMapComponent(__instance.parent.Map)?.ShouldHideItemsAtPos(__instance.parent.Position) ?? false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
 
     static class PatchStorageUtil
     {

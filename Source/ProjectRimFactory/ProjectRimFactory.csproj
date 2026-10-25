@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>default</LangVersion>
   </PropertyGroup>
@@ -35,8 +35,8 @@
          Update this either in the GUI (nuget system) or from the command line:
          nuget restore
          -->
-    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4633" />
-    <PackageReference Include="Lib.Harmony" Version="2.4.2" PrivateAssets="All" />
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.7.4985-unstable" />
+    <PackageReference Include="Lib.Harmony" Version="3.0.0-rc.3" PrivateAssets="All" />
   </ItemGroup>
 
   <ProjectExtensions>
